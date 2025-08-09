@@ -2,9 +2,17 @@ version: '3.9'
 services:
   redis:
     image: redis:7-alpine
+    # Bind to localhost only to avoid external access
     ports:
-      - "6379:6379"
-    command: ["redis-server", "--appendonly", "yes"]
+      - "127.0.0.1:6379:6379"
+    # Secure defaults for dev: AOF enabled, protected-mode on, local bind, and a password
+    command: [
+      "redis-server",
+      "--appendonly", "yes",
+      "--protected-mode", "yes",
+      "--bind", "127.0.0.1",
+      "--requirepass", "devpass"
+    ]
     volumes:
       - redis-data:/data
 volumes:
