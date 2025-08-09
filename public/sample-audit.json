@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "url": "https://example.com/article",
+  "fetched_at": "2024-01-01T00:00:00.000Z",
+  "scores": {
+    "overall": 78,
+    "title_meta": 85,
+    "headings": 70,
+    "answerability": 75,
+    "structure": 80,
+    "schema": 60,
+    "images": 82,
+    "internal_links": 72
+  },
+  "stats": {
+    "word_count": 1320,
+    "reading_time_min": 6.6,
+    "images_count": 5,
+    "h2_count": 6,
+    "h3_count": 8,
+    "tables_count": 1,
+    "lists_count": 3
+  },
+  "detected": {
+    "title": "How to Choose the Best Coffee Grinder in 2024",
+    "meta_description": "Learn how to choose the best coffee grinder in 2024 with our expert guide covering burr types, grind settings, and budget tips.",
+    "canonical": "https://example.com/article",
+    "h1": "Best Coffee Grinder: The Ultimate 2024 Guide",
+    "h2": ["Why grind size matters", "Burr vs blade", "Top picks by budget"],
+    "h3": ["Flat vs conical", "Cleaning and maintenance"],
+    "json_ld_types": ["Article"],
+    "images": [
+      { "src": "https://example.com/img/1.jpg", "alt": "Coffee grinder on table" },
+      { "src": "https://example.com/img/2.jpg", "alt": "Burr grinder close-up" }
+    ],
+    "internal_links": [
+      { "href": "https://example.com/coffee-beans", "anchor": "best coffee beans" },
+      { "href": "https://example.com/brew-guide", "anchor": "brew guide" }
+    ]
+  },
+  "issues": [
+    {
+      "id": "schema_missing",
+      "category": "schema",
+      "severity": "low",
+      "found": "No FAQPage",
+      "why_it_matters": "FAQ rich results can improve SERP coverage and CTR.",
+      "recommendation": "Add FAQPage schema for the Q&A section.",
+      "snippet": "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": []\n}"
+    },
+    {
+      "id": "internal_links_low",
+      "category": "internal_links",
+      "severity": "medium",
+      "found": "2 internal links",
+      "why_it_matters": "Internal links distribute authority and context.",
+      "recommendation": "Add 2–3 more contextual internal links with descriptive anchors.",
+      "snippet": "<a href=\"/related\">Descriptive anchor</a>"
+    }
+  ],
+  "quick_wins": [
+    {
+      "issue_id": "internal_links_low",
+      "estimated_impact": "medium",
+      "action": "Add 2–3 more contextual internal links",
+      "snippet": "<a href=\"/related\">Descriptive anchor</a>"
+    }
+  ],
+  "gsc_insights": {
+    "available": true,
+    "top_queries": [
+      { "query": "best coffee grinder", "clicks": 12, "impressions": 340, "ctr": 0.035, "position": 9.2 },
+      { "query": "coffee grinder guide", "clicks": 5, "impressions": 120, "ctr": 0.041, "position": 12.7 }
+    ],
+    "ctr": 0.037,
+    "impressions": 460,
+    "clicks": 17
+  }
+}
+
+

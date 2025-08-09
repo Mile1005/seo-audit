@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Run {
+  id            String     @id @default(uuid())
+  pageUrl       String
+  targetKeyword String?
+  email         String?
+  status        String     @default("queued")
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  audit         Audit?
+}
+
+model Audit {
+  id        String   @id @default(uuid())
+  runId     String   @unique
+  json      String
+  createdAt DateTime @default(now())
+
+  run Run @relation(fields: [runId], references: [id])
+}
+
+
+
