@@ -6,22 +6,41 @@ import { parseHtml } from "../../../lib/parse";
 import { calculateAudit } from "../../../lib/heuristics";
 import { fetchGscInsightsForUrl } from "../../../lib/gsc";
 
+// Utility function to add HTTPS if missing
+function ensureHttps(url: string): string {
+  if (!url) return url;
+  
+  // Remove any leading/trailing whitespace
+  url = url.trim();
+  
+  // If it already has a protocol, return as is
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
+  // Add https:// prefix
+  return `https://${url}`;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const validatedData = StartAuditInput.parse(body);
     
+    // Ensure HTTPS is added to the URL
+    const pageUrl = ensureHttps(validatedData.pageUrl);
+    
     // Convert empty strings to undefined
     const email = validatedData.email === "" ? undefined : validatedData.email;
     const targetKeyword = validatedData.targetKeyword === "" ? undefined : validatedData.targetKeyword;
     
-    console.log("Starting audit for:", validatedData.pageUrl);
+    console.log("Starting audit for:", pageUrl);
     
     // Create run record
     const runId = crypto.randomUUID();
     await dbHelpers.createRun({
       id: runId,
-      pageUrl: validatedData.pageUrl,
+      pageUrl: pageUrl,
       targetKeyword,
       email,
       status: "running"
@@ -30,13 +49,13 @@ export async function POST(req: NextRequest) {
     try {
       // Process the audit immediately (synchronously)
       console.log("Fetching HTML...");
-      const html = await fetchHtml(validatedData.pageUrl);
+      const html = await fetchHtml(pageUrl);
       
       console.log("Parsing HTML...");
-      const parsed = parseHtml(html, validatedData.pageUrl);
+      const parsed = parseHtml(html, pageUrl);
       
       console.log("Calculating audit...");
-      const baseResult = calculateAudit(validatedData.pageUrl, parsed as any, { keyword: targetKeyword });
+      const baseResult = calculateAudit(pageUrl, parsed as any, { keyword: targetKeyword });
       
       // Try to get GSC insights
       let gsc_insights = { 
@@ -49,7 +68,7 @@ export async function POST(req: NextRequest) {
       
       try {
         console.log("Fetching GSC insights...");
-        gsc_insights = await fetchGscInsightsForUrl(validatedData.pageUrl, runId);
+        gsc_insights = await fetchGscInsightsForUrl(pageUrl, runId);
       } catch (gscError) {
         console.warn("GSC insights not available:", gscError);
       }

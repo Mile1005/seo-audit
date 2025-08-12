@@ -12,6 +12,22 @@ interface AuditRun {
   hasResults: boolean;
 }
 
+// Utility function to add HTTPS if missing
+function ensureHttps(url: string): string {
+  if (!url) return url;
+  
+  // Remove any leading/trailing whitespace
+  url = url.trim();
+  
+  // If it already has a protocol, return as is
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
+  // Add https:// prefix
+  return `https://${url}`;
+}
+
 export default function Page() {
   const [status, setStatus] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
@@ -114,8 +130,10 @@ export default function Page() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const rawPageUrl = (e.currentTarget.elements.namedItem("pageUrl") as HTMLInputElement).value;
+    
     const formData = {
-      pageUrl: (e.currentTarget.elements.namedItem("pageUrl") as HTMLInputElement).value,
+      pageUrl: ensureHttps(rawPageUrl),
       targetKeyword: (e.currentTarget.elements.namedItem("targetKeyword") as HTMLInputElement).value,
       email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement)?.value,
     };
@@ -197,8 +215,8 @@ export default function Page() {
                 <input
                   id="pageUrl"
                   name="pageUrl"
-                  type="url"
-                  placeholder="https://example.com/page"
+                  type="text"
+                  placeholder="example.com or https://example.com"
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
