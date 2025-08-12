@@ -9,13 +9,7 @@ const nextConfig = {
     ignoreBuildErrors: true, // For development speed
   },
   // Remove experimental features for faster startup
-  experimental: {},
-  // Turbopack configuration
-  turbo: {
-    rules: {
-      '*.js': ['typescript-transform'],
-    },
-  }
+  experimental: {}
 };
 
 export default nextConfig;
