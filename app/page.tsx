@@ -183,7 +183,8 @@ export default function Page() {
           <div className="bg-white rounded-xl shadow-lg p-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Start New Audit</h2>
             
-            {/* GSC Connection Status */}
+            {/* GSC Connection Status - Temporarily Hidden */}
+            {/* 
             <div className="mb-6 p-4 bg-gray-50 rounded-lg">
               <div className="flex items-center justify-between">
                 <div>
@@ -206,6 +207,7 @@ export default function Page() {
                 )}
               </div>
             </div>
+            */}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
