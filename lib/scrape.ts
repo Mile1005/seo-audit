@@ -1,6 +1,6 @@
 import { request } from "undici";
 
-const DEFAULT_TIMEOUT_MS = 15000;
+const DEFAULT_TIMEOUT_MS = 10000;
 
 function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
@@ -31,31 +31,50 @@ export async function fetchHtml(url: string): Promise<string> {
   let lastErr: any;
   while (attempt < maxAttempts) {
     try {
+      console.log(`Fetching URL: ${url} (attempt ${attempt + 1}/${maxAttempts})`);
+      
       const res = await request(url, {
         method: "GET",
         headers,
         maxRedirections: 3,
         headersTimeout: DEFAULT_TIMEOUT_MS,
-        bodyTimeout: DEFAULT_TIMEOUT_MS
+        bodyTimeout: DEFAULT_TIMEOUT_MS,
+        throwOnError: false
       });
+      
+      console.log(`Response status: ${res.statusCode}`);
+      
       if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) {
-        const contentType = res.headers["content-type"] as string | undefined;
-        // Basic charset handling: default utf-8 if unspecified
+        console.log('Successfully fetched HTML');
         const buffer = await res.body.arrayBuffer();
         const text = Buffer.from(buffer).toString("utf-8");
         return text;
       }
+      
       if (res.statusCode && (res.statusCode === 429 || res.statusCode >= 500)) {
+        console.log(`Server error ${res.statusCode}, retrying...`);
         const delay = Math.pow(2, attempt) * 1000;
         await sleep(delay);
         attempt++;
         continue;
       }
+      
       throw new Error(`HTTP ${res.statusCode}`);
+      
     } catch (err) {
+      console.error(`Fetch attempt ${attempt + 1} failed:`, err);
       lastErr = err;
-      const delay = Math.pow(2, attempt) * 1000;
-      await sleep(delay);
+      
+      // Special handling for connection reset errors
+      if (err instanceof Error && (err.message.includes('ECONNRESET') || err.message.includes('socket hang up'))) {
+        console.log('Connection reset detected, waiting longer before retry...');
+        const delay = Math.pow(2, attempt) * 2000; // Double the delay for connection errors
+        await sleep(delay);
+      } else {
+        const delay = Math.pow(2, attempt) * 1000;
+        await sleep(delay);
+      }
+      
       attempt++;
     }
   }

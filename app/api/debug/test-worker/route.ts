@@ -7,7 +7,8 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const { pageUrl, targetKeyword, email } = body;
 
-    // Create a new run
+    console.log("Debug: Creating test audit job");
+    
     const runId = crypto.randomUUID();
     await dbHelpers.createRun({
       id: runId,
@@ -16,7 +17,7 @@ export async function POST(req: NextRequest) {
       email
     });
 
-    // Add to queue
+    console.log("Debug: Enqueuing audit job");
     await enqueueAudit({
       runId,
       pageUrl,
@@ -24,23 +25,19 @@ export async function POST(req: NextRequest) {
       email
     });
 
-    return NextResponse.json({ 
+    console.log("Debug: Job enqueued successfully");
+
+    return NextResponse.json({
       runId,
       status: "queued",
-      message: "Audit queued for processing"
+      message: "Test audit job created and enqueued"
     });
 
   } catch (err) {
-    console.error("Error in debug run-now:", err);
+    console.error("Debug: Error in test worker:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Internal server error", details: (err as Error).message },
       { status: 500 }
     );
   }
 }
-
-
-
-
-
-
