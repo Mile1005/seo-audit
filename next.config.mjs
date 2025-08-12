@@ -8,8 +8,11 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true, // For development speed
   },
-  // Remove experimental features for faster startup
-  experimental: {}
+  experimental: {},
+  // Force fresh deployment - clear cache
+  generateBuildId: async () => {
+    return `build-${Date.now()}`;
+  }
 };
 
 export default nextConfig;
