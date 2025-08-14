@@ -78,6 +78,7 @@ export default function Page() {
 
     // Listen for messages from the popup window
     const handleMessage = (event: MessageEvent) => {
+      console.log('Received message event:', event.data);
       if (event.data.type === 'GSC_AUTH_SUCCESS') {
         console.log('GSC authentication successful via popup message');
         setIsGscAuthenticated(true);
@@ -137,6 +138,7 @@ export default function Page() {
             // Check if window is still open
             if (authWindow.closed) {
               clearInterval(checkAuth);
+              console.log('Auth window closed, checking status...');
               // Check authentication status after window closes
               await checkGscAuthStatus();
               return;
@@ -144,17 +146,19 @@ export default function Page() {
             
             const statusResponse = await fetch("/api/debug/gsc-config");
             const statusData = await statusResponse.json();
+            console.log('Polling GSC status:', statusData);
             
             if (statusData.hasTokens) {
               clearInterval(checkAuth);
               authWindow.close();
               setIsGscAuthenticated(true);
               setIsGscConnecting(false);
+              console.log('GSC authentication completed via polling');
             }
           } catch (error) {
             console.error("Error checking auth status:", error);
           }
-        }, 1000); // Check every second instead of every 2 seconds
+        }, 500); // Check every 500ms for faster response
 
         // Cleanup after 3 minutes (reduced from 5)
         setTimeout(() => {
