@@ -55,6 +55,7 @@ export default function Page() {
   const [isGscAuthenticated, setIsGscAuthenticated] = useState(false);
   const [isGscLoading, setIsGscLoading] = useState(true);
   const [isGscConnecting, setIsGscConnecting] = useState(false);
+  const [gscValidationData, setGscValidationData] = useState<any>(null);
 
   useEffect(() => {
     checkGscAuthStatus();
@@ -81,8 +82,11 @@ export default function Page() {
       console.log('Received message event:', event.data);
       if (event.data.type === 'GSC_AUTH_SUCCESS') {
         console.log('GSC authentication successful via popup message');
-        setIsGscAuthenticated(true);
         setIsGscConnecting(false);
+        // Immediately refresh the auth status to get the latest data
+        checkGscAuthStatus().then(() => {
+          console.log('Auth status refreshed after popup success');
+        });
       } else if (event.data.type === 'GSC_AUTH_ERROR') {
         console.error('GSC authentication failed via popup message:', event.data.error);
         setIsGscAuthenticated(false);
@@ -101,14 +105,14 @@ export default function Page() {
       const data = await response.json();
       console.log('GSC auth status check:', data);
       setIsGscAuthenticated(!!data.isAuthenticated);
+      setGscValidationData(data);
       if (!data.isAuthenticated) {
         setIsGscConnecting(false);
       }
-      // Store a descriptive message for the user if connected but no properties
-      (window as any).__gscValidation = data;
     } catch (error) {
       console.error("Error checking GSC status:", error);
       setIsGscAuthenticated(false);
+      setGscValidationData(null);
     } finally {
       setIsGscLoading(false);
     }
@@ -153,12 +157,38 @@ export default function Page() {
           return;
         }
         
-        // Poll for completion more frequently
-        const checkAuth = setInterval(async () => {
+        let pollInterval: NodeJS.Timeout | null = null;
+        let timeoutHandle: NodeJS.Timeout | null = null;
+        
+        // Function to clean up polling
+        const cleanupPolling = () => {
+          if (pollInterval) {
+            clearInterval(pollInterval);
+            pollInterval = null;
+          }
+          if (timeoutHandle) {
+            clearTimeout(timeoutHandle);
+            timeoutHandle = null;
+          }
+        };
+        
+        // Listen for postMessage success to stop polling immediately
+        const messageHandler = (event: MessageEvent) => {
+          if (event.data.type === 'GSC_AUTH_SUCCESS') {
+            console.log('PostMessage success received, stopping polling');
+            cleanupPolling();
+            // Don't set states here - let the main handleMessage do it
+          }
+        };
+        window.addEventListener('message', messageHandler);
+        
+        // Poll for completion more frequently as fallback
+        pollInterval = setInterval(async () => {
           try {
             // Check if window is still open
             if (authWindow.closed) {
-              clearInterval(checkAuth);
+              cleanupPolling();
+              window.removeEventListener('message', messageHandler);
               console.log('Auth window closed, checking status...');
               // Check authentication status after window closes
               await checkGscAuthStatus();
@@ -170,20 +200,24 @@ export default function Page() {
             console.log('Polling GSC status:', statusData);
             
             if (statusData.isAuthenticated) {
-              clearInterval(checkAuth);
+              cleanupPolling();
+              window.removeEventListener('message', messageHandler);
               authWindow.close();
               setIsGscAuthenticated(true);
               setIsGscConnecting(false);
+              // Update validation data
+              setGscValidationData(statusData);
               console.log('GSC authentication completed via polling');
             }
           } catch (error) {
             console.error("Error checking auth status:", error);
           }
-        }, 700);
+        }, 1000);
 
-        // Cleanup after 3 minutes (reduced from 5)
-        setTimeout(() => {
-          clearInterval(checkAuth);
+        // Cleanup after 3 minutes
+        timeoutHandle = setTimeout(() => {
+          cleanupPolling();
+          window.removeEventListener('message', messageHandler);
           if (!authWindow.closed) {
             authWindow.close();
           }
@@ -416,9 +450,9 @@ export default function Page() {
                     </svg>
                     Successfully connected to Google Search Console
                   </div>
-                  {(window as any).__gscValidation && !(window as any).__gscValidation.hasProperties && (
+                  {gscValidationData && !gscValidationData.hasProperties && (
                     <div className="text-xs text-yellow-700 bg-yellow-50 border border-yellow-200 p-2 rounded">
-                      {(window as any).__gscValidation.validationMessage || 'Connected, but this Google account has no Search Console properties. Add your site to GSC to see metrics.'}
+                      {gscValidationData.validationMessage || 'Connected, but this Google account has no Search Console properties. Add your site to GSC to see metrics.'}
                     </div>
                   )}
                   <p className="text-xs text-gray-500">
