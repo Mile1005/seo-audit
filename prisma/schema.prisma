@@ -1,6 +1,6 @@
-// Datasource for SQLite by default; can switch via DATABASE_URL
+// Datasource for PostgreSQL (Vercel Postgres)
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
