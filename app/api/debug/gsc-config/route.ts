@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { hasGscTokens } from "../../../../lib/gsc";
+import { hasGscTokens, validateGscTokens } from "../../../../lib/gsc";
 
 export async function GET(req: NextRequest) {
   try {
@@ -12,6 +12,10 @@ export async function GET(req: NextRequest) {
 
     // Check if we have any tokens stored in database
     const hasTokens = await hasGscTokens();
+    
+    // Validate the tokens to see if they're actually working
+    const tokenValidation = await validateGscTokens();
+    
     const isConfigured = !!(process.env.GSC_CLIENT_ID && process.env.GSC_CLIENT_SECRET);
 
     return NextResponse.json({
@@ -19,6 +23,8 @@ export async function GET(req: NextRequest) {
       config,
       isConfigured,
       hasTokens,
+      isAuthenticated: tokenValidation.isValid,
+      validationMessage: tokenValidation.message,
       expectedRedirectUri: "https://seo-audit-seven.vercel.app/api/auth/gsc/callback",
     });
   } catch (error) {

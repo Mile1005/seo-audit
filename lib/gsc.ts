@@ -175,3 +175,39 @@ export async function hasGscTokens(): Promise<boolean> {
     return false;
   }
 }
+
+// Helper function to validate GSC tokens and check if they're working
+export async function validateGscTokens(): Promise<{ isValid: boolean; message: string }> {
+  try {
+    const prisma = await getPrisma();
+    const tokenRecord = await (prisma as any).gscToken.findFirst();
+    
+    if (!tokenRecord) {
+      return { isValid: false, message: "No GSC tokens found" };
+    }
+
+    // Set up OAuth2 client
+    const oauth2Client = new google.auth.OAuth2(
+      process.env.GSC_CLIENT_ID,
+      process.env.GSC_CLIENT_SECRET,
+      process.env.GSC_REDIRECT_URI
+    );
+
+    // Set credentials
+    oauth2Client.setCredentials(tokenRecord.tokens as any);
+
+    // Try to make a simple API call to validate tokens
+    const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
+    
+    // This will throw an error if tokens are invalid
+    await searchConsole.sites.list();
+    
+    return { isValid: true, message: "GSC tokens are valid" };
+  } catch (error) {
+    console.error("Error validating GSC tokens:", error);
+    return { 
+      isValid: false, 
+      message: `Token validation failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+    };
+  }
+}

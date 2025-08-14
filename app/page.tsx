@@ -99,7 +99,8 @@ export default function Page() {
     try {
       const response = await fetch("/api/debug/gsc-config");
       const data = await response.json();
-      setIsGscAuthenticated(data.isConfigured && data.hasTokens);
+      console.log('GSC auth status check:', data);
+      setIsGscAuthenticated(data.isAuthenticated);
     } catch (error) {
       console.error("Error checking GSC status:", error);
       setIsGscAuthenticated(false);
@@ -148,7 +149,7 @@ export default function Page() {
             const statusData = await statusResponse.json();
             console.log('Polling GSC status:', statusData);
             
-            if (statusData.hasTokens) {
+            if (statusData.isAuthenticated) {
               clearInterval(checkAuth);
               authWindow.close();
               setIsGscAuthenticated(true);
