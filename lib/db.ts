@@ -2,7 +2,7 @@
 type PrismaClientType = any;
 let prismaInstance: PrismaClientType | undefined;
 
-async function getPrisma(): Promise<PrismaClientType> {
+export async function getPrisma(): Promise<PrismaClientType> {
   if (!prismaInstance) {
     const prismaModule = await import("@prisma/client");
     const PrismaClient = (prismaModule as any).PrismaClient || (prismaModule as any).default?.PrismaClient;

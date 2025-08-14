@@ -28,6 +28,13 @@ model Audit {
   createdAt DateTime @default(now())
 }
 
+model GscToken {
+  id        String   @id @default(uuid())
+  state     String   @unique
+  tokens    Json
+  createdAt DateTime @default(now())
+}
+
 enum RunStatus {
   queued
   running

@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { getPrisma } from "./db";
 
 // OAuth2 client setup with explicit redirect URI
 const redirectUri =
@@ -9,9 +10,6 @@ const oauth2Client = new google.auth.OAuth2(
   process.env.GSC_CLIENT_SECRET,
   redirectUri
 );
-
-// Store tokens in memory (in production, use a database)
-const tokenStore = new Map<string, any>();
 
 export async function getGscAuthUrl(state: string): Promise<string> {
   const scopes = ["https://www.googleapis.com/auth/webmasters.readonly"];
@@ -32,9 +30,20 @@ export async function getGscAuthUrl(state: string): Promise<string> {
 
 export async function handleGscCallback(code: string, state: string): Promise<boolean> {
   try {
+    console.log("GSC Callback: Getting tokens for state:", state);
     const { tokens } = await oauth2Client.getToken(code);
-    tokenStore.set(state, tokens);
+    console.log("GSC Callback: Tokens received, storing for state:", state);
+    
+    // Store tokens in database
+    const prisma = await getPrisma();
+    await (prisma as any).gscToken.upsert({
+      where: { state },
+      update: { tokens },
+      create: { state, tokens },
+    });
+    
     oauth2Client.setCredentials(tokens);
+    console.log("GSC Callback: Success! Tokens stored in database for state:", state);
     return true;
   } catch (error) {
     console.error("Error getting GSC tokens:", error);
@@ -44,9 +53,14 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
 
 export async function fetchGscInsightsForUrl(url: string, state?: string): Promise<any> {
   try {
-    // Check if we have tokens for this state
-    const tokens = tokenStore.get(state || 'default');
-    if (!tokens) {
+    // Get tokens from database
+    const prisma = await getPrisma();
+    const tokenRecord = await (prisma as any).gscToken.findFirst({
+      where: state ? { state } : undefined,
+      orderBy: { createdAt: 'desc' }
+    });
+    
+    if (!tokenRecord) {
       return {
         available: false,
         top_queries: [],
@@ -58,7 +72,7 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
     }
 
     // Set credentials
-    oauth2Client.setCredentials(tokens);
+    oauth2Client.setCredentials(tokenRecord.tokens as any);
 
     // Create Search Console API client
     const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
@@ -132,4 +146,16 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
 // Helper function to check if GSC is configured
 export function isGscConfigured(): boolean {
   return !!(process.env.GSC_CLIENT_ID && process.env.GSC_CLIENT_SECRET);
+}
+
+// Helper function to check if we have any tokens stored
+export async function hasGscTokens(): Promise<boolean> {
+  try {
+    const prisma = await getPrisma();
+    const tokenCount = await (prisma as any).gscToken.count();
+    return tokenCount > 0;
+  } catch (error) {
+    console.error("Error checking GSC tokens:", error);
+    return false;
+  }
 }

@@ -76,7 +76,16 @@ export default function Page() {
   const handleGscConnect = async () => {
     setIsGscConnecting(true);
     try {
-      const response = await fetch("/api/auth/gsc/url");
+      // Generate a unique state parameter
+      const state = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      
+      const response = await fetch("/api/auth/gsc/url", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ state }),
+      });
       const data = await response.json();
       
       if (data.authUrl) {
