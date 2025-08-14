@@ -58,6 +58,23 @@ export default function Page() {
 
   useEffect(() => {
     checkGscAuthStatus();
+    
+    // Check for URL parameters indicating GSC auth result
+    const urlParams = new URLSearchParams(window.location.search);
+    const gscSuccess = urlParams.get('gsc_success');
+    const gscError = urlParams.get('gsc_error');
+    
+    if (gscSuccess === 'true') {
+      console.log('GSC authentication successful');
+      setIsGscAuthenticated(true);
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else if (gscError) {
+      console.error('GSC authentication failed:', gscError);
+      setIsGscAuthenticated(false);
+      // Clean up URL
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
   }, []);
 
   const checkGscAuthStatus = async () => {

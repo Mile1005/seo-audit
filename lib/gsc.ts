@@ -31,8 +31,20 @@ export async function getGscAuthUrl(state: string): Promise<string> {
 export async function handleGscCallback(code: string, state: string): Promise<boolean> {
   try {
     console.log("GSC Callback: Getting tokens for state:", state);
+    console.log("GSC Callback: Environment check:", {
+      hasClientId: !!process.env.GSC_CLIENT_ID,
+      hasClientSecret: !!process.env.GSC_CLIENT_SECRET,
+      redirectUri: redirectUri
+    });
+    
     const { tokens } = await oauth2Client.getToken(code);
-    console.log("GSC Callback: Tokens received, storing for state:", state);
+    console.log("GSC Callback: Tokens received:", {
+      hasAccessToken: !!tokens.access_token,
+      hasRefreshToken: !!tokens.refresh_token,
+      expiresIn: tokens.expires_in
+    });
+    
+    console.log("GSC Callback: Storing tokens in database for state:", state);
     
     // Store tokens in database
     const prisma = await getPrisma();
@@ -47,6 +59,10 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
     return true;
   } catch (error) {
     console.error("Error getting GSC tokens:", error);
+    console.error("Error details:", {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
+    });
     return false;
   }
 }
