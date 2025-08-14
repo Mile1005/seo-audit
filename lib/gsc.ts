@@ -165,9 +165,13 @@ export function isGscConfigured(): boolean {
 }
 
 // Helper function to check if we have any tokens stored
-export async function hasGscTokens(): Promise<boolean> {
+export async function hasGscTokens(state?: string): Promise<boolean> {
   try {
     const prisma = await getPrisma();
+    if (state) {
+      const tokenCountForState = await (prisma as any).gscToken.count({ where: { state } });
+      return tokenCountForState > 0;
+    }
     const tokenCount = await (prisma as any).gscToken.count();
     return tokenCount > 0;
   } catch (error) {
@@ -177,17 +181,17 @@ export async function hasGscTokens(): Promise<boolean> {
 }
 
 // Helper function to validate GSC tokens and check if they're working
-export async function validateGscTokens(): Promise<{ isValid: boolean; message: string }> {
+export async function validateGscTokens(state?: string): Promise<{ isValid: boolean; message: string }> {
   try {
     const prisma = await getPrisma();
-    const tokenRecord = await (prisma as any).gscToken.findFirst();
+    const tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
     
     if (!tokenRecord) {
-      console.log("validateGscTokens: No token record found in database");
+      console.log("validateGscTokens: No token record found in database", { state });
       return { isValid: false, message: "No GSC tokens found" };
     }
 
-    console.log("validateGscTokens: Found token record, validating...");
+    console.log("validateGscTokens: Found token record, validating...", { state });
 
     // Set up OAuth2 client
     const oauth2Client = new google.auth.OAuth2(

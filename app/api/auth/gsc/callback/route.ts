@@ -59,7 +59,7 @@ export async function GET(req: NextRequest) {
 
     if (success) {
       console.log("GSC Callback: Success! Closing popup and notifying parent");
-      return new NextResponse(`
+      const responseHtml = `
         <!DOCTYPE html>
         <html>
         <head><title>GSC Auth Success</title></head>
@@ -72,8 +72,11 @@ export async function GET(req: NextRequest) {
           </script>
           <p>Authentication successful! You can close this window.</p>
         </body>
-        </html>
-      `, { headers: { 'Content-Type': 'text/html' } });
+        </html>`;
+      const res = new NextResponse(responseHtml, { headers: { 'Content-Type': 'text/html' } });
+      // Set identifying cookie for this state, expires in 30 days
+      res.headers.append('Set-Cookie', `gsc_state=${state}; Path=/; Max-Age=${30*24*60*60}; SameSite=Lax; Secure`);
+      return res;
     } else {
       console.error("GSC Callback: handleGscCallback returned false");
       return new NextResponse(`

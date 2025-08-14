@@ -97,10 +97,13 @@ export default function Page() {
 
   const checkGscAuthStatus = async () => {
     try {
-      const response = await fetch("/api/debug/gsc-config");
+      const response = await fetch("/api/debug/gsc-config", { cache: 'no-store' });
       const data = await response.json();
       console.log('GSC auth status check:', data);
-      setIsGscAuthenticated(data.isAuthenticated);
+      setIsGscAuthenticated(!!data.isAuthenticated);
+      if (!data.isAuthenticated) {
+        setIsGscConnecting(false);
+      }
     } catch (error) {
       console.error("Error checking GSC status:", error);
       setIsGscAuthenticated(false);
@@ -117,6 +120,7 @@ export default function Page() {
       const data = await response.json();
       console.log('GSC disconnect result:', data);
       setIsGscAuthenticated(false);
+      setIsGscConnecting(false);
     } catch (error) {
       console.error("Error disconnecting GSC:", error);
     }
@@ -143,6 +147,7 @@ export default function Page() {
         
         if (!authWindow) {
           alert("Please allow popups for this site to connect to Google Search Console");
+          setIsGscConnecting(false);
           return;
         }
         
@@ -158,7 +163,7 @@ export default function Page() {
               return;
             }
             
-            const statusResponse = await fetch("/api/debug/gsc-config");
+            const statusResponse = await fetch("/api/debug/gsc-config", { cache: 'no-store' });
             const statusData = await statusResponse.json();
             console.log('Polling GSC status:', statusData);
             
@@ -172,7 +177,7 @@ export default function Page() {
           } catch (error) {
             console.error("Error checking auth status:", error);
           }
-        }, 500); // Check every 500ms for faster response
+        }, 700);
 
         // Cleanup after 3 minutes (reduced from 5)
         setTimeout(() => {
