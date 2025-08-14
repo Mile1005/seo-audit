@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbHelpers } from "../../../lib/db";
-import { GetAuditResponse } from "../../../lib/schemas";
+import { dbHelpers } from "../../../../lib/db";
+import { GetAuditResponse } from "../../../../lib/schemas";
 import { z } from "zod";
 
 export const runtime = "nodejs";

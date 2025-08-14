@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { StartAuditRequest } from "../../../lib/schemas";
-import { dbHelpers } from "../../../lib/db";
-import { addAuditJob, isQueueConfigured } from "../../../lib/queue";
-import { fetchHtml } from "../../../lib/scrape";
-import { parseHtml } from "../../../lib/parse";
-import { calculateAudit } from "../../../lib/heuristics";
-import { fetchPageSpeed } from "../../../lib/psi";
-import { fetchGscInsightsForUrl } from "../../../lib/gsc";
+import { StartAuditRequest } from "../../../../lib/schemas";
+import { dbHelpers } from "../../../../lib/db";
+import { addAuditJob, isQueueConfigured } from "../../../../lib/queue";
+import { fetchHtml } from "../../../../lib/scrape";
+import { parseHtml } from "../../../../lib/parse";
+import { calculateAudit } from "../../../../lib/heuristics";
+import { fetchPageSpeed } from "../../../../lib/psi";
+import { fetchGscInsightsForUrl } from "../../../../lib/gsc";
 
 // Utility function to add HTTPS if missing
 function ensureHttps(url: string): string {

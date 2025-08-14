@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbHelpers } from "../../../lib/db";
+import { dbHelpers } from "../../../../lib/db";
 
 interface CrawlResponse {
   status: "queued" | "running" | "ready" | "failed";

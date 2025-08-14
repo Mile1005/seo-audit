@@ -300,7 +300,7 @@ export default function Page() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/audit.start", {
+      const response = await fetch("/api/audit/start", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

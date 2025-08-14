@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { AuditResult } from "../lib/heuristics";
+import { AuditResult } from "../../lib/heuristics";
 
 interface ReportBuilderProps {
   isOpen: boolean;

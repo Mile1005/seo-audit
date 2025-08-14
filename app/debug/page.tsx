@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { AuditResultV1 as AuditSchema, type AuditResultV1 } from "../../lib/schemas";
-import ScoreRings from "../../components/ScoreRings";
-import DetectedPanel from "../../components/DetectedPanel";
-import IssueList from "../../components/IssueList";
-import QuickWins from "../../components/QuickWins";
-import GscPanel from "../../components/GscPanel";
+import ScoreRings from "../../components/audit/ScoreRings";
+import DetectedPanel from "../../components/audit/DetectedPanel";
+import IssueList from "../../components/audit/IssueList";
+import QuickWins from "../../components/audit/QuickWins";
+import GscPanel from "../../components/gsc/GscPanel";
 
 export default function DebugPage() {
   const [result, setResult] = useState<AuditResultV1 | null>(null);

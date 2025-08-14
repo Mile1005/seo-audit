@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { AuditResult } from "../lib/heuristics";
+import { AuditResult } from "../../lib/heuristics";
 
 interface FixPackProps {
   isOpen: boolean;

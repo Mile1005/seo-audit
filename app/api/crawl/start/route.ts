@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { crawlQueue, isCrawlQueueConfigured } from "../../../lib/crawl-queue";
-import { miniCrawl } from "../../../lib/crawl";
-import { dbHelpers } from "../../../lib/db";
+import { crawlQueue, isCrawlQueueConfigured } from "../../../../lib/crawl-queue";
+import { miniCrawl } from "../../../../lib/crawl";
+import { dbHelpers } from "../../../../lib/db";
 
 // Input validation schema
 const StartCrawlRequest = z.object({

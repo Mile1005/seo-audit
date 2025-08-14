@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbHelpers } from "../../../lib/db";
-import { generateCrawlCSV } from "../../../lib/crawl";
+import { dbHelpers } from "../../../../lib/db";
+import { generateCrawlCSV } from "../../../../lib/crawl";
 
 export async function GET(request: NextRequest) {
   try {

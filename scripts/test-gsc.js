@@ -1,5 +1,5 @@
 // Simple test script to verify GSC configuration
-import { isGscConfigured, getGscAuthUrl } from './lib/gsc';
+import { isGscConfigured, getGscAuthUrl } from '../lib/gsc';
 
 console.log('🔍 Testing GSC Configuration...\n');
 

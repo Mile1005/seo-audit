@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { dbHelpers } from "../../../lib/db";
+import { dbHelpers } from "../../../../lib/db";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

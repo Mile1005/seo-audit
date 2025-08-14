@@ -3,9 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-const ReportBuilder = dynamic(() => import("../../../components/ReportBuilder"), { ssr: false });
-const FixPack = dynamic(() => import("../../../components/FixPack"), { ssr: false });
-import PerformancePanel from "../../../components/PerformancePanel";
+const ReportBuilder = dynamic(() => import("../../../components/common/ReportBuilder"), { ssr: false });
+const FixPack = dynamic(() => import("../../../components/common/FixPack"), { ssr: false });
+import PerformancePanel from "../../../components/audit/PerformancePanel";
 import { AuditResult } from "../../../lib/heuristics";
 
 interface AuditResponse {
@@ -649,7 +649,7 @@ function CrawlTab({ result }: { result: AuditResult }) {
     setCrawlStatus("idle");
 
     try {
-      const response = await fetch("/api/crawl.start", {
+      const response = await fetch("/api/crawl/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -678,7 +678,7 @@ function CrawlTab({ result }: { result: AuditResult }) {
 
   const pollCrawlStatus = async (id: string) => {
     try {
-      const response = await fetch(`/api/crawl.get?id=${id}`);
+      const response = await fetch(`/api/crawl/get?id=${id}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -704,7 +704,7 @@ function CrawlTab({ result }: { result: AuditResult }) {
     if (!crawlId) return;
 
     try {
-      const response = await fetch(`/api/crawl.export?id=${crawlId}`);
+      const response = await fetch(`/api/crawl/export?id=${crawlId}`);
 
       if (response.ok) {
         const blob = await response.blob();
@@ -1284,7 +1284,7 @@ export default function AuditPage() {
 
     const pollAudit = async () => {
       try {
-        const response = await fetch(`/api/audit.get?id=${id}`, { cache: "no-store" });
+        const response = await fetch(`/api/audit/get?id=${id}`, { cache: "no-store" });
         const data: AuditResponse = await response.json();
 
         if (response.ok) {
