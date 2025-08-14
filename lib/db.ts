@@ -58,6 +58,7 @@ export const dbHelpers = {
   },
 
   async getRunsByEmail(email: string, limit: number = 10, offset: number = 0) {
+    const prisma = await getPrisma();
     const [runs, total] = await Promise.all([
       prisma.run.findMany({
         where: { email },
