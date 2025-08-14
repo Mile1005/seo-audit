@@ -38,8 +38,9 @@ export async function POST(req: NextRequest) {
     const targetKeyword =
       validatedData.targetKeyword === "" ? undefined : validatedData.targetKeyword;
 
-    // DB usage can be disabled for serverless deployments (e.g., Vercel)
-    const useDb = process.env.DISABLE_DB !== "true";
+    // Use DB only when explicitly enabled AND a DATABASE_URL is present.
+    // On Vercel (no DB), this safely defaults to inline/serverless mode.
+    const useDb = process.env.DISABLE_DB !== "true" && !!process.env.DATABASE_URL;
 
     // Create run with status=queued (if DB enabled)
     const runId = crypto.randomUUID();
