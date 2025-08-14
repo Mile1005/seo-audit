@@ -13,7 +13,6 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Get the run and its associated audit
     const run = await dbHelpers.getRunWithAudit(runId);
 
     if (!run) {
@@ -23,26 +22,22 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // If audit is ready, return the results
     if (run.status === "ready" && run.audit) {
       return NextResponse.json({
-        status: "done",
+        status: "ready",
         result: JSON.parse(run.audit.json)
       });
     }
 
-    // If audit failed
     if (run.status === "failed") {
       return NextResponse.json({
-        status: "error",
+        status: "failed",
         error: "Audit processing failed"
       });
     }
 
-    // Still processing
     return NextResponse.json({
-      status: run.status,
-      message: `Audit is ${run.status}`
+      status: run.status
     });
 
   } catch (err) {

@@ -10,9 +10,10 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": false,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "types": ["vitest/globals"],
     "paths": {
       "@/lib/*": ["lib/*"],
       "@/components/*": ["components/*"]
