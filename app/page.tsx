@@ -77,26 +77,59 @@ export default function Page() {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
+    // Check localStorage for GSC auth completion (backup method)
+    const checkLocalStorageAuth = () => {
+      const gscAuthCompleted = localStorage.getItem('gsc_auth_completed');
+      if (gscAuthCompleted) {
+        console.log('Main window: Found GSC auth completion in localStorage');
+        localStorage.removeItem('gsc_auth_completed');
+        setIsGscConnecting(false);
+        checkGscAuthStatus().then(() => {
+          console.log('Main window: Auth status refreshed from localStorage signal');
+        });
+      }
+    };
+
+    // Check immediately and also set up periodic checking
+    checkLocalStorageAuth();
+    const storageCheckInterval = setInterval(checkLocalStorageAuth, 1000);
+    
+    // Clean up interval after 3 minutes
+    setTimeout(() => {
+      clearInterval(storageCheckInterval);
+    }, 180000);
+
     // Listen for messages from the popup window
     const handleMessage = (event: MessageEvent) => {
-      console.log('Received message event:', event.data);
-      if (event.data.type === 'GSC_AUTH_SUCCESS') {
-        console.log('GSC authentication successful via popup message');
-        setIsGscConnecting(false);
-        // Immediately refresh the auth status to get the latest data
-        checkGscAuthStatus().then(() => {
-          console.log('Auth status refreshed after popup success');
-        });
-      } else if (event.data.type === 'GSC_AUTH_ERROR') {
-        console.error('GSC authentication failed via popup message:', event.data.error);
-        setIsGscAuthenticated(false);
-        setIsGscConnecting(false);
-        alert(`Google Search Console authentication failed: ${event.data.error}`);
+      console.log('Main window: Received message event from origin:', event.origin);
+      console.log('Main window: Message data:', event.data);
+      
+      // Handle GSC auth messages
+      if (event.data && typeof event.data === 'object') {
+        if (event.data.type === 'GSC_AUTH_SUCCESS') {
+          console.log('Main window: GSC authentication successful via popup message');
+          setIsGscConnecting(false);
+          // Immediately refresh the auth status to get the latest data
+          checkGscAuthStatus().then(() => {
+            console.log('Main window: Auth status refreshed after popup success');
+          }).catch((error) => {
+            console.error('Main window: Error refreshing auth status:', error);
+          });
+        } else if (event.data.type === 'GSC_AUTH_ERROR') {
+          console.error('Main window: GSC authentication failed via popup message:', event.data.error);
+          setIsGscAuthenticated(false);
+          setIsGscConnecting(false);
+          alert(`Google Search Console authentication failed: ${event.data.error}`);
+        }
       }
     };
 
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    
+    return () => {
+      window.removeEventListener('message', handleMessage);
+      clearInterval(storageCheckInterval);
+    };
   }, []);
 
   const checkGscAuthStatus = async () => {
