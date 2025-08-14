@@ -1,9 +1,0 @@
-{
-  "functions": {
-    "api/**/*": {
-      "maxDuration": 60
-    }
-  }
-}
-
-
