@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { hasGscTokens, validateGscTokens } from "../../../../lib/gsc";
+import { getPrisma } from "../../../../lib/db";
 
 export async function GET(req: NextRequest) {
   try {
@@ -29,5 +30,20 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     return NextResponse.json({ error: "Failed to check GSC config" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const prisma = await getPrisma();
+    await (prisma as any).gscToken.deleteMany();
+    
+    return NextResponse.json({
+      message: "All GSC tokens cleared successfully",
+      cleared: true
+    });
+  } catch (error) {
+    console.error("Error clearing GSC tokens:", error);
+    return NextResponse.json({ error: "Failed to clear GSC tokens" }, { status: 500 });
   }
 }

@@ -183,8 +183,11 @@ export async function validateGscTokens(): Promise<{ isValid: boolean; message: 
     const tokenRecord = await (prisma as any).gscToken.findFirst();
     
     if (!tokenRecord) {
+      console.log("validateGscTokens: No token record found in database");
       return { isValid: false, message: "No GSC tokens found" };
     }
+
+    console.log("validateGscTokens: Found token record, validating...");
 
     // Set up OAuth2 client
     const oauth2Client = new google.auth.OAuth2(
@@ -200,11 +203,13 @@ export async function validateGscTokens(): Promise<{ isValid: boolean; message: 
     const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
     
     // This will throw an error if tokens are invalid
-    await searchConsole.sites.list();
+    const sitesResponse = await searchConsole.sites.list();
+    
+    console.log("validateGscTokens: API call successful, sites found:", sitesResponse.data.siteEntry?.length || 0);
     
     return { isValid: true, message: "GSC tokens are valid" };
   } catch (error) {
-    console.error("Error validating GSC tokens:", error);
+    console.error("validateGscTokens: Error validating GSC tokens:", error);
     return { 
       isValid: false, 
       message: `Token validation failed: ${error instanceof Error ? error.message : 'Unknown error'}` 

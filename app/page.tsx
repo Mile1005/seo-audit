@@ -109,6 +109,19 @@ export default function Page() {
     }
   };
 
+  const handleGscDisconnect = async () => {
+    try {
+      const response = await fetch("/api/debug/gsc-config", {
+        method: "DELETE"
+      });
+      const data = await response.json();
+      console.log('GSC disconnect result:', data);
+      setIsGscAuthenticated(false);
+    } catch (error) {
+      console.error("Error disconnecting GSC:", error);
+    }
+  };
+
   const handleGscConnect = async () => {
     setIsGscConnecting(true);
     try {
@@ -399,6 +412,12 @@ export default function Page() {
                   <p className="text-xs text-gray-500">
                     Your audit results will now include search analytics data when available.
                   </p>
+                  <button
+                    onClick={handleGscDisconnect}
+                    className="w-full bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    Disconnect Google Search Console
+                  </button>
                 </div>
               ) : (
                 <div className="space-y-3">
