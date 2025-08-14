@@ -1346,7 +1346,7 @@ export default function AuditPage() {
       }
     }, 2000);
     return () => clearInterval(interval);
-  }, [id, isSampleMode, isInline, isServerless]);
+  }, [id, isSampleMode, isInline, isServerless, isLoading]);
 
   if (error) {
     return (

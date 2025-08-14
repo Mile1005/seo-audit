@@ -359,7 +359,7 @@ export default function Page() {
                     )}
                   </button>
                   <p className="text-xs text-gray-500">
-                    This will open Google's authentication page in a new window.
+                    This will open Google&apos;s authentication page in a new window.
                   </p>
                 </div>
               )}
