@@ -15,10 +15,10 @@ export async function POST(req: NextRequest) {
 
     const authUrl = await getGscAuthUrl(state);
 
-    return NextResponse.json({
-      authUrl,
-      state,
-    });
+    const res = NextResponse.json({ authUrl, state });
+    // Persist state cookie for this session (10 minutes)
+    res.headers.append('Set-Cookie', `gsc_state=${state}; Path=/; Max-Age=${10*60}; SameSite=Lax; Secure`);
+    return res;
   } catch (error) {
     console.error("Error generating GSC auth URL:", error);
     return NextResponse.json({ error: "Failed to generate auth URL" }, { status: 500 });
@@ -40,10 +40,9 @@ export async function GET(req: NextRequest) {
 
     const authUrl = await getGscAuthUrl(state);
 
-    return NextResponse.json({
-      authUrl,
-      state,
-    });
+    const res = NextResponse.json({ authUrl, state });
+    res.headers.append('Set-Cookie', `gsc_state=${state}; Path=/; Max-Age=${10*60}; SameSite=Lax; Secure`);
+    return res;
   } catch (error) {
     console.error("Error generating GSC auth URL:", error);
     return NextResponse.json({ error: "Failed to generate auth URL" }, { status: 500 });
