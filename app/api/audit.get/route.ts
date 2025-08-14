@@ -12,8 +12,9 @@ const UUIDSchema = z.string().uuid("Invalid UUID format");
 
 export async function GET(req: NextRequest) {
   try {
-    // If DB is disabled (serverless inline mode), indicate processing instead of failing
-    if (process.env.DISABLE_DB === "true") {
+    // If DB is disabled (serverless inline mode) OR no DATABASE_URL is set,
+    // indicate processing instead of attempting to load Prisma.
+    if (process.env.DISABLE_DB === "true" || !process.env.DATABASE_URL) {
       return NextResponse.json({ status: "queued" });
     }
 

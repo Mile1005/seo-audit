@@ -1440,7 +1440,7 @@ export default function AuditPage() {
       return;
     }
 
-    // DB mode: poll API until ready/failed
+    // DB mode: poll API until ready/failed. If backend returns queued, keep waiting.
     pollAudit();
     const interval = setInterval(() => {
       if (isLoading) {
