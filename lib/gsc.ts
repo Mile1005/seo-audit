@@ -41,7 +41,7 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
     console.log("GSC Callback: Tokens received:", {
       hasAccessToken: !!tokens.access_token,
       hasRefreshToken: !!tokens.refresh_token,
-      expiresIn: tokens.expires_in
+      tokenType: tokens.token_type
     });
     
     console.log("GSC Callback: Storing tokens in database for state:", state);
