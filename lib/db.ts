@@ -4,7 +4,8 @@ let prismaInstance: PrismaClientType | undefined;
 
 async function getPrisma(): Promise<PrismaClientType> {
   if (!prismaInstance) {
-    const { PrismaClient } = await import("@prisma/client");
+    const prismaModule = await import("@prisma/client");
+    const PrismaClient = (prismaModule as any).PrismaClient || (prismaModule as any).default?.PrismaClient;
     const globalForPrisma = global as unknown as { prisma?: PrismaClientType };
     prismaInstance = globalForPrisma.prisma ?? new PrismaClient();
     if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prismaInstance;

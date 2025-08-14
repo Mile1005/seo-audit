@@ -1,11 +1,18 @@
 import { Worker } from "bullmq";
 import IORedis from "ioredis";
 import { dbHelpers } from "../lib/db";
-import { RunStatus } from "@prisma/client";
+// RunStatus enum - define locally since it's not exported from Prisma
+enum RunStatus {
+  queued = "queued",
+  running = "running",
+  ready = "ready",
+  failed = "failed"
+}
 import { fetchHtml } from "../lib/scrape";
 import { parseHtml } from "../lib/parse";
 import { calculateAudit } from "../lib/heuristics";
 import { fetchPageSpeed } from "../lib/psi";
+import { fetchGscInsightsForUrl } from "../lib/gsc";
 
 // Shared Redis connection
 const connection = new IORedis(process.env.REDIS_URL || "redis://localhost:6379", {
@@ -47,9 +54,20 @@ async function processJob(job: any) {
       console.log("PSI API key not provided - skipping performance analysis");
     }
 
+    // Fetch GSC data if available
+    let gscData = null;
+    try {
+      gscData = await fetchGscInsightsForUrl(pageUrl);
+      console.log("GSC data retrieved successfully");
+    } catch (error) {
+      console.warn("Failed to fetch GSC data:", error);
+      // Continue without GSC data - it's optional
+    }
+
     const auditResult = await calculateAudit(pageUrl, parsed, {
       targetKeyword,
       performance: performanceData || undefined,
+      gscInsights: gscData || undefined,
     });
 
     // Build final result with required fields

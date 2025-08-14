@@ -5,6 +5,8 @@ import { addAuditJob, isQueueConfigured } from "../../../lib/queue";
 import { fetchHtml } from "../../../lib/scrape";
 import { parseHtml } from "../../../lib/parse";
 import { calculateAudit } from "../../../lib/heuristics";
+import { fetchPageSpeed } from "../../../lib/psi";
+import { fetchGscInsightsForUrl } from "../../../lib/gsc";
 
 // Utility function to add HTTPS if missing
 function ensureHttps(url: string): string {
@@ -65,7 +67,27 @@ export async function POST(req: NextRequest) {
         }
         const html = await fetchHtml(pageUrl);
         const parsed = await parseHtml(html, pageUrl);
-        const auditResult = await calculateAudit(pageUrl, parsed, {});
+        
+        // Fetch PageSpeed Insights data if API key is available
+        let performanceData = null;
+        const psiApiKey = process.env.PSI_API_KEY;
+        if (psiApiKey) {
+          try {
+            console.log("Fetching PageSpeed Insights data");
+            performanceData = await fetchPageSpeed(pageUrl, psiApiKey);
+            console.log("PSI data retrieved successfully");
+          } catch (error) {
+            console.warn("Failed to fetch PSI data:", error);
+            // Continue without PSI data - it's optional
+          }
+        } else {
+          console.log("PSI API key not provided - skipping performance analysis");
+        }
+        
+        const auditResult = await calculateAudit(pageUrl, parsed, {
+          targetKeyword,
+          performance: performanceData || undefined,
+        });
         lastInlineResult = auditResult;
         if (useDb) {
           await dbHelpers.saveAudit({ id: crypto.randomUUID(), runId, json: auditResult });
@@ -87,7 +109,27 @@ export async function POST(req: NextRequest) {
         }
         const html = await fetchHtml(pageUrl);
         const parsed = await parseHtml(html, pageUrl);
-        const auditResult = await calculateAudit(pageUrl, parsed, {});
+        
+        // Fetch PageSpeed Insights data if API key is available
+        let performanceData = null;
+        const psiApiKey = process.env.PSI_API_KEY;
+        if (psiApiKey) {
+          try {
+            console.log("Fetching PageSpeed Insights data");
+            performanceData = await fetchPageSpeed(pageUrl, psiApiKey);
+            console.log("PSI data retrieved successfully");
+          } catch (error) {
+            console.warn("Failed to fetch PSI data:", error);
+            // Continue without PSI data - it's optional
+          }
+        } else {
+          console.log("PSI API key not provided - skipping performance analysis");
+        }
+        
+        const auditResult = await calculateAudit(pageUrl, parsed, {
+          targetKeyword,
+          performance: performanceData || undefined,
+        });
         lastInlineResult = auditResult;
         if (useDb) {
           await dbHelpers.saveAudit({ id: crypto.randomUUID(), runId, json: auditResult });

@@ -43,16 +43,90 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
 }
 
 export async function fetchGscInsightsForUrl(url: string, state?: string): Promise<any> {
-  // Simplified GSC implementation - returns basic structure
-  // In a full implementation, this would fetch real GSC data
-  return {
-    available: false,
-    top_queries: [],
-    ctr: null,
-    impressions: null,
-    clicks: null,
-    message: "GSC integration coming soon",
-  };
+  try {
+    // Check if we have tokens for this state
+    const tokens = tokenStore.get(state || 'default');
+    if (!tokens) {
+      return {
+        available: false,
+        top_queries: [],
+        ctr: null,
+        impressions: null,
+        clicks: null,
+        message: "GSC authentication required. Please authenticate first.",
+      };
+    }
+
+    // Set credentials
+    oauth2Client.setCredentials(tokens);
+
+    // Create Search Console API client
+    const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
+
+    // Extract domain from URL
+    const urlObj = new URL(url);
+    const domain = urlObj.hostname;
+
+    // Get the last 28 days of data
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 28);
+
+    console.log(`Fetching GSC data for ${domain} from ${startDate.toISOString()} to ${endDate.toISOString()}`);
+
+    // Fetch search analytics data
+    const response = await searchConsole.searchanalytics.query({
+      siteUrl: `sc-domain:${domain}`,
+      requestBody: {
+        startDate: startDate.toISOString().split('T')[0],
+        endDate: endDate.toISOString().split('T')[0],
+        dimensions: ['query'],
+        rowLimit: 10
+      }
+    });
+
+    const rows = response.data.rows || [];
+    
+    // Calculate totals
+    let totalClicks = 0;
+    let totalImpressions = 0;
+    const topQueries = rows.map((row: any) => {
+      totalClicks += row.clicks || 0;
+      totalImpressions += row.impressions || 0;
+      
+      return {
+        query: row.keys[0] || '',
+        clicks: row.clicks || 0,
+        impressions: row.impressions || 0,
+        ctr: row.ctr || 0,
+        position: row.position || 0
+      };
+    });
+
+    const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions) * 100 : 0;
+
+    return {
+      available: true,
+      top_queries: topQueries,
+      ctr: avgCtr,
+      impressions: totalImpressions,
+      clicks: totalClicks,
+      message: `Data for ${domain} (last 28 days)`,
+    };
+
+  } catch (error) {
+    console.error("Error fetching GSC data:", error);
+    
+    // Return error information
+    return {
+      available: false,
+      top_queries: [],
+      ctr: null,
+      impressions: null,
+      clicks: null,
+      message: `GSC error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    };
+  }
 }
 
 // Helper function to check if GSC is configured

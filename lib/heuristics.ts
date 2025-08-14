@@ -9,6 +9,20 @@ export interface AuditOptions {
     inp: number | null;
     notes: string[];
   };
+  gscInsights?: {
+    available: boolean;
+    top_queries: Array<{
+      query: string;
+      clicks: number;
+      impressions: number;
+      ctr: number;
+      position: number;
+    }>;
+    ctr: number | null;
+    impressions: number | null;
+    clicks: number | null;
+    message: string;
+  };
 }
 
 export interface AuditResult {
@@ -100,7 +114,7 @@ export function calculateAudit(
   parsed: ParsedHtml,
   opts: AuditOptions = {}
 ): AuditResult {
-  const { targetKeyword, performance } = opts;
+  const { targetKeyword, performance, gscInsights } = opts;
 
   // Calculate stats
   const wordCount = calculateWordCount(parsed.textBlocks);
@@ -175,7 +189,7 @@ export function calculateAudit(
       inp: null,
       notes: ["Performance data not available"],
     },
-    gsc_insights: {
+    gsc_insights: gscInsights || {
       available: false,
       top_queries: [],
       ctr: null,

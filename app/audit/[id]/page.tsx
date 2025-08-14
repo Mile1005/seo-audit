@@ -5,6 +5,7 @@ import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 const ReportBuilder = dynamic(() => import("../../../components/ReportBuilder"), { ssr: false });
 const FixPack = dynamic(() => import("../../../components/FixPack"), { ssr: false });
+import PerformancePanel from "../../../components/PerformancePanel";
 import { AuditResult } from "../../../lib/heuristics";
 
 interface AuditResponse {
@@ -151,110 +152,7 @@ function DetectedPanel({ detected }: { detected: AuditResult["detected"] }) {
   );
 }
 
-// Performance Panel Component
-function PerformancePanel({ performance }: { performance: AuditResult["performance"] }) {
-  const getLCPColor = (lcp: number | null) => {
-    if (lcp === null) return "text-gray-400";
-    if (lcp <= 2.5) return "text-green-600";
-    if (lcp <= 4.0) return "text-yellow-600";
-    return "text-red-600";
-  };
-
-  const getCLSColor = (cls: number | null) => {
-    if (cls === null) return "text-gray-400";
-    if (cls <= 0.1) return "text-green-600";
-    if (cls <= 0.25) return "text-yellow-600";
-    return "text-red-600";
-  };
-
-  const getINPColor = (inp: number | null) => {
-    if (inp === null) return "text-gray-400";
-    if (inp <= 200) return "text-green-600";
-    if (inp <= 500) return "text-yellow-600";
-    return "text-red-600";
-  };
-
-  const getLCPStatus = (lcp: number | null) => {
-    if (lcp === null) return "Not available";
-    if (lcp <= 2.5) return "Good";
-    if (lcp <= 4.0) return "Needs improvement";
-    return "Poor";
-  };
-
-  const getCLSStatus = (cls: number | null) => {
-    if (cls === null) return "Not available";
-    if (cls <= 0.1) return "Good";
-    if (cls <= 0.25) return "Needs improvement";
-    return "Poor";
-  };
-
-  const getINPStatus = (inp: number | null) => {
-    if (inp === null) return "Not available";
-    if (inp <= 200) return "Good";
-    if (inp <= 500) return "Needs improvement";
-    return "Poor";
-  };
-
-  return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Core Web Vitals</h3>
-
-      {performance.lcp === null && performance.cls === null && performance.inp === null ? (
-        <div className="text-center py-4">
-          <p className="text-gray-500">Performance data not available</p>
-          <p className="text-sm text-gray-400 mt-1">Add PSI_API_KEY to enable PageSpeed Insights</p>
-        </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div className="text-center p-3 border rounded-lg">
-              <div className={`text-2xl font-bold ${getLCPColor(performance.lcp)}`}>
-                {performance.lcp ? `${performance.lcp}s` : "N/A"}
-              </div>
-              <div className="text-sm font-medium text-gray-700">LCP</div>
-              <div className={`text-xs ${getLCPColor(performance.lcp)}`}>
-                {getLCPStatus(performance.lcp)}
-              </div>
-            </div>
-
-            <div className="text-center p-3 border rounded-lg">
-              <div className={`text-2xl font-bold ${getCLSColor(performance.cls)}`}>
-                {performance.cls ? performance.cls.toFixed(3) : "N/A"}
-              </div>
-              <div className="text-sm font-medium text-gray-700">CLS</div>
-              <div className={`text-xs ${getCLSColor(performance.cls)}`}>
-                {getCLSStatus(performance.cls)}
-              </div>
-            </div>
-
-            <div className="text-center p-3 border rounded-lg">
-              <div className={`text-2xl font-bold ${getINPColor(performance.inp)}`}>
-                {performance.inp ? `${performance.inp}ms` : "N/A"}
-              </div>
-              <div className="text-sm font-medium text-gray-700">INP</div>
-              <div className={`text-xs ${getINPColor(performance.inp)}`}>
-                {getINPStatus(performance.inp)}
-              </div>
-            </div>
-          </div>
-
-          {performance.notes.length > 0 && (
-            <div>
-              <h4 className="font-medium text-gray-700 mb-2">Performance Notes</h4>
-              <div className="space-y-1">
-                {performance.notes.map((note, index) => (
-                  <div key={index} className="text-sm text-gray-600 bg-gray-50 p-2 rounded">
-                    {note}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </>
-      )}
-    </div>
-  );
-}
+// PerformancePanel component is now imported from components
 
 // Issue List Component
 function IssueList({ issues }: { issues: AuditResult["issues"] }) {

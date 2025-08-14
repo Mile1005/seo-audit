@@ -2,7 +2,13 @@ import { Worker } from "bullmq";
 import IORedis from "ioredis";
 import { miniCrawl } from "../lib/crawl";
 import { dbHelpers } from "../lib/db";
-import { RunStatus } from "@prisma/client";
+// RunStatus enum - define locally since it's not exported from Prisma
+enum RunStatus {
+  queued = "queued",
+  running = "running",
+  ready = "ready",
+  failed = "failed"
+}
 
 // Shared Redis connection
 const connection = new IORedis(process.env.REDIS_URL || "redis://localhost:6379", {
