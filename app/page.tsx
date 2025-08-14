@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface FormErrors {
@@ -50,6 +50,67 @@ export default function Page() {
     targetKeyword: "",
     email: "",
   });
+
+  // GSC Authentication state
+  const [isGscAuthenticated, setIsGscAuthenticated] = useState(false);
+  const [isGscLoading, setIsGscLoading] = useState(true);
+  const [isGscConnecting, setIsGscConnecting] = useState(false);
+
+  useEffect(() => {
+    checkGscAuthStatus();
+  }, []);
+
+  const checkGscAuthStatus = async () => {
+    try {
+      const response = await fetch("/api/debug/gsc-config");
+      const data = await response.json();
+      setIsGscAuthenticated(data.isConfigured && data.hasTokens);
+    } catch (error) {
+      console.error("Error checking GSC status:", error);
+      setIsGscAuthenticated(false);
+    } finally {
+      setIsGscLoading(false);
+    }
+  };
+
+  const handleGscConnect = async () => {
+    setIsGscConnecting(true);
+    try {
+      const response = await fetch("/api/auth/gsc/url");
+      const data = await response.json();
+      
+      if (data.authUrl) {
+        // Open the auth URL in a new window
+        const authWindow = window.open(data.authUrl, "gsc-auth", "width=600,height=700");
+        
+        // Poll for completion
+        const checkAuth = setInterval(async () => {
+          try {
+            const statusResponse = await fetch("/api/debug/gsc-config");
+            const statusData = await statusResponse.json();
+            
+            if (statusData.hasTokens) {
+              clearInterval(checkAuth);
+              authWindow?.close();
+              setIsGscAuthenticated(true);
+            }
+          } catch (error) {
+            console.error("Error checking auth status:", error);
+          }
+        }, 2000);
+
+        // Cleanup after 5 minutes
+        setTimeout(() => {
+          clearInterval(checkAuth);
+          authWindow?.close();
+        }, 300000);
+      }
+    } catch (error) {
+      console.error("Error starting GSC auth:", error);
+    } finally {
+      setIsGscConnecting(false);
+    }
+  };
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -241,6 +302,69 @@ export default function Page() {
 
           {/* Features */}
           <div className="space-y-8">
+            {/* GSC Authentication Section */}
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Google Search Console</h3>
+                <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  isGscAuthenticated 
+                    ? "bg-green-100 text-green-800" 
+                    : "bg-gray-100 text-gray-800"
+                }`}>
+                  {isGscAuthenticated ? "Connected" : "Not Connected"}
+                </div>
+              </div>
+              
+              <p className="text-sm text-gray-600 mb-4">
+                Connect your Google Search Console to get search analytics data and insights for your audited pages.
+              </p>
+
+              {isGscLoading ? (
+                <div className="animate-pulse">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                </div>
+              ) : isGscAuthenticated ? (
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-green-600">
+                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    Successfully connected to Google Search Console
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Your audit results will now include search analytics data when available.
+                  </p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="flex items-center text-sm text-gray-600">
+                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                    Connect to get search analytics insights
+                  </div>
+                  <button
+                    onClick={handleGscConnect}
+                    disabled={isGscConnecting}
+                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {isGscConnecting ? (
+                      <div className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        Connecting...
+                      </div>
+                    ) : (
+                      "Connect Google Search Console"
+                    )}
+                  </button>
+                  <p className="text-xs text-gray-500">
+                    This will open Google's authentication page in a new window.
+                  </p>
+                </div>
+              )}
+            </div>
+
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-6">What We Analyze</h2>
               <div className="space-y-4">
