@@ -1,0 +1,36 @@
+// Datasource for SQLite by default; can switch via DATABASE_URL
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Prisma generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Run {
+  id            String   @id @default(uuid())
+  pageUrl       String
+  targetKeyword String?
+  email         String?
+  status        RunStatus @default(queued)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  audits        Audit[]
+}
+
+model Audit {
+  id        String   @id @default(uuid())
+  run       Run      @relation(fields: [runId], references: [id])
+  runId     String
+  json      Json     // JSON of AuditResultV1
+  createdAt DateTime @default(now())
+}
+
+enum RunStatus {
+  queued
+  running
+  ready
+  failed
+}

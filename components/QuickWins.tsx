@@ -31,5 +31,3 @@ export default function QuickWins({ items }: { items: QuickWin[] }) {
     </div>
   );
 }
-
-

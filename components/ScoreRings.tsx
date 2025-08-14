@@ -20,7 +20,7 @@ export default function ScoreRings({ scores }: { scores: Scores }) {
     ["structure", "Structure"],
     ["schema", "Schema"],
     ["images", "Images"],
-    ["internal_links", "Internal Links"]
+    ["internal_links", "Internal Links"],
   ];
 
   return (
@@ -39,7 +39,8 @@ function Ring({ label, value }: { label: string; value: number }) {
   const radius = 28;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (value / 100) * circumference;
-  const color = value >= 80 ? "stroke-emerald-500" : value >= 50 ? "stroke-amber-500" : "stroke-rose-500";
+  const color =
+    value >= 80 ? "stroke-emerald-500" : value >= 50 ? "stroke-amber-500" : "stroke-rose-500";
   return (
     <div className="flex items-center gap-3 p-3 border rounded">
       <svg width="72" height="72" className="shrink-0">
@@ -67,5 +68,3 @@ function Ring({ label, value }: { label: string; value: number }) {
     </div>
   );
 }
-
-

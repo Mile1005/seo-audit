@@ -61,5 +61,3 @@ export default function DetectedPanel({ result }: { result: any }) {
     </div>
   );
 }
-
-

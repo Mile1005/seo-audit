@@ -3,7 +3,14 @@ import React, { useMemo } from "react";
 
 type Issue = {
   id: string;
-  category: "title_meta" | "headings" | "answerability" | "structure" | "schema" | "images" | "internal_links";
+  category:
+    | "title_meta"
+    | "headings"
+    | "answerability"
+    | "structure"
+    | "schema"
+    | "images"
+    | "internal_links";
   severity: "low" | "medium" | "high";
   found: string;
   why_it_matters: string;
@@ -55,5 +62,3 @@ export default function IssueList({ issues }: { issues: Issue[] }) {
     </div>
   );
 }
-
-

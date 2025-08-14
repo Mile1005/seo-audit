@@ -10,8 +10,8 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": false,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
       "@/lib/*": ["lib/*"],
@@ -19,13 +19,8 @@
     },
     "allowJs": true,
     "esModuleInterop": true,
-    "plugins": [{"name": "next"}]
+    "plugins": [{ "name": "next" }]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

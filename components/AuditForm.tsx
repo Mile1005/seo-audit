@@ -6,12 +6,17 @@ export default function AuditForm() {
   const [status, setStatus] = useState<string | null>(null);
   const [result, setResult] = useState<any>(null);
 
-  const startAudit = async (formData: { pageUrl: string; targetKeyword: string; email?: string }) => {
+  const startAudit = async (formData: {
+    pageUrl: string;
+    targetKeyword: string;
+    email?: string;
+  }) => {
     setStatus("starting");
     setResult(null);
 
     try {
-      const res = await fetch("/api/audit/start", {  // Note: Use /api/audit/start for consistency
+      const res = await fetch("/api/audit/start", {
+        // Note: Use /api/audit/start for consistency
         method: "POST",
         body: JSON.stringify(formData),
         headers: { "Content-Type": "application/json" },
@@ -54,7 +59,8 @@ export default function AuditForm() {
     e.preventDefault();
     const formData = {
       pageUrl: (e.currentTarget.elements.namedItem("pageUrl") as HTMLInputElement).value,
-      targetKeyword: (e.currentTarget.elements.namedItem("targetKeyword") as HTMLInputElement).value,
+      targetKeyword: (e.currentTarget.elements.namedItem("targetKeyword") as HTMLInputElement)
+        .value,
       email: (e.currentTarget.elements.namedItem("email") as HTMLInputElement)?.value,
     };
     startAudit(formData);
@@ -66,7 +72,9 @@ export default function AuditForm() {
         <input name="pageUrl" placeholder="Page URL" required />
         <input name="targetKeyword" placeholder="Target Keyword" required />
         <input name="email" placeholder="Email (optional)" type="email" />
-        <button type="submit" disabled={status === "starting" || status === "queued"}>Start Audit</button>
+        <button type="submit" disabled={status === "starting" || status === "queued"}>
+          Start Audit
+        </button>
       </form>
 
       {status === "starting" && <p>Starting audit...</p>}

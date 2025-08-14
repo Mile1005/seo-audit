@@ -3,7 +3,67 @@
 @tailwind utilities;
 
 /* App-wide styles */
-.container-width { @apply max-w-5xl mx-auto px-4; }
-.card { @apply rounded-xl border bg-white shadow-sm; }
+.container-width {
+  @apply max-w-5xl mx-auto px-4;
+}
+.card {
+  @apply rounded-xl border bg-white shadow-sm;
+}
 
+/* Print styles for reports */
+@media print {
+  /* Hide non-printable elements */
+  .no-print {
+    display: none !important;
+  }
 
+  /* Ensure proper page breaks */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Optimize colors for printing */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Ensure background colors print */
+  .bg-blue-50,
+  .bg-green-50,
+  .bg-yellow-50,
+  .bg-red-50 {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Remove shadows and borders for cleaner print */
+  .shadow-xl,
+  .shadow-lg,
+  .shadow-md,
+  .shadow-sm {
+    box-shadow: none !important;
+  }
+
+  /* Ensure text is readable */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+
+  /* Optimize headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+
+  /* Prevent orphaned content */
+  p,
+  li {
+    page-break-inside: avoid;
+  }
+}

@@ -17,14 +17,10 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json({
       authUrl,
-      state
+      state,
     });
-
   } catch (error) {
     console.error("Error generating GSC auth URL:", error);
-    return NextResponse.json(
-      { error: "Failed to generate auth URL" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to generate auth URL" }, { status: 500 });
   }
 }

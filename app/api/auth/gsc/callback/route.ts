@@ -10,13 +10,13 @@ export async function GET(req: NextRequest) {
 
     if (error) {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}?gsc_error=${error}`
+        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}?gsc_error=${error}`
       );
     }
 
     if (!code || !state) {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}?gsc_error=missing_code_or_state`
+        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}?gsc_error=missing_code_or_state`
       );
     }
 
@@ -24,18 +24,17 @@ export async function GET(req: NextRequest) {
 
     if (success) {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}?gsc_success=true&state=${state}`
+        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}?gsc_success=true&state=${state}`
       );
     } else {
       return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}?gsc_error=auth_failed`
+        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}?gsc_error=auth_failed`
       );
     }
-
   } catch (error) {
     console.error("GSC callback error:", error);
     return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}?gsc_error=callback_error`
+      `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}?gsc_error=callback_error`
     );
   }
 }

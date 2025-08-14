@@ -5,5 +5,3 @@ export async function GET() {
   const runs = await dbHelpers.getRecentRuns();
   return NextResponse.json({ runs });
 }
-
-

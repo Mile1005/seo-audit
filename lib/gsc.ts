@@ -1,7 +1,8 @@
-import { google } from 'googleapis';
+import { google } from "googleapis";
 
 // OAuth2 client setup with explicit redirect URI
-const redirectUri = process.env.GSC_REDIRECT_URI || 'https://seo-audit-seven.vercel.app/api/auth/gsc/callback';
+const redirectUri =
+  process.env.GSC_REDIRECT_URI || "https://seo-audit-seven.vercel.app/api/auth/gsc/callback";
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.GSC_CLIENT_ID,
@@ -13,21 +14,19 @@ const oauth2Client = new google.auth.OAuth2(
 const tokenStore = new Map<string, any>();
 
 export async function getGscAuthUrl(state: string): Promise<string> {
-  const scopes = [
-    'https://www.googleapis.com/auth/webmasters.readonly'
-  ];
+  const scopes = ["https://www.googleapis.com/auth/webmasters.readonly"];
 
-  console.log('GSC Auth URL Generation:', {
-    clientId: process.env.GSC_CLIENT_ID ? 'Set' : 'Missing',
+  console.log("GSC Auth URL Generation:", {
+    clientId: process.env.GSC_CLIENT_ID ? "Set" : "Missing",
     redirectUri: redirectUri,
-    state: state
+    state: state,
   });
 
   return oauth2Client.generateAuthUrl({
-    access_type: 'offline',
+    access_type: "offline",
     scope: scopes,
     state: state,
-    redirect_uri: redirectUri // Explicitly set redirect URI
+    redirect_uri: redirectUri, // Explicitly set redirect URI
   });
 }
 
@@ -38,7 +37,7 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
     oauth2Client.setCredentials(tokens);
     return true;
   } catch (error) {
-    console.error('Error getting GSC tokens:', error);
+    console.error("Error getting GSC tokens:", error);
     return false;
   }
 }
@@ -52,7 +51,7 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
     ctr: null,
     impressions: null,
     clicks: null,
-    message: 'GSC integration coming soon'
+    message: "GSC integration coming soon",
   };
 }
 
@@ -60,5 +59,3 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
 export function isGscConfigured(): boolean {
   return !!(process.env.GSC_CLIENT_ID && process.env.GSC_CLIENT_SECRET);
 }
-
-

@@ -12,7 +12,7 @@ export const AuditResultV1 = z.object({
     structure: z.number().int().min(0).max(100),
     schema: z.number().int().min(0).max(100),
     images: z.number().int().min(0).max(100),
-    internal_links: z.number().int().min(0).max(100)
+    internal_links: z.number().int().min(0).max(100),
   }),
   stats: z.object({
     word_count: z.number().int().nonnegative(),
@@ -21,7 +21,7 @@ export const AuditResultV1 = z.object({
     h2_count: z.number().int().nonnegative(),
     h3_count: z.number().int().nonnegative(),
     tables_count: z.number().int().nonnegative(),
-    lists_count: z.number().int().nonnegative()
+    lists_count: z.number().int().nonnegative(),
   }),
   detected: z.object({
     title: z.string().nullable(),
@@ -32,7 +32,7 @@ export const AuditResultV1 = z.object({
     h3: z.array(z.string()),
     json_ld_types: z.array(z.string()),
     images: z.array(z.object({ src: z.string(), alt: z.string().nullable() })),
-    internal_links: z.array(z.object({ href: z.string(), anchor: z.string().nullable() }))
+    internal_links: z.array(z.object({ href: z.string(), anchor: z.string().nullable() })),
   }),
   issues: z.array(
     z.object({
@@ -44,13 +44,13 @@ export const AuditResultV1 = z.object({
         "structure",
         "schema",
         "images",
-        "internal_links"
+        "internal_links",
       ]),
       severity: z.enum(["low", "medium", "high"]),
       found: z.string(),
       why_it_matters: z.string(),
       recommendation: z.string(),
-      snippet: z.string().nullable()
+      snippet: z.string().nullable(),
     })
   ),
   quick_wins: z.array(
@@ -58,7 +58,7 @@ export const AuditResultV1 = z.object({
       issue_id: z.string(),
       estimated_impact: z.enum(["low", "medium", "high"]),
       action: z.string(),
-      snippet: z.string().nullable()
+      snippet: z.string().nullable(),
     })
   ),
   gsc_insights: z.object({
@@ -69,13 +69,13 @@ export const AuditResultV1 = z.object({
         clicks: z.number().int().nonnegative(),
         impressions: z.number().int().nonnegative(),
         ctr: z.number().nonnegative(),
-        position: z.number().nonnegative()
+        position: z.number().nonnegative(),
       })
     ),
     ctr: z.number().nullable(),
     impressions: z.number().int().nullable(),
-    clicks: z.number().int().nullable()
-  })
+    clicks: z.number().int().nullable(),
+  }),
 });
 
 // Explicit type definition to ensure all properties are required
@@ -115,7 +115,14 @@ export type AuditResultV1 = {
   };
   issues: {
     id: string;
-    category: "title_meta" | "headings" | "answerability" | "structure" | "schema" | "images" | "internal_links";
+    category:
+      | "title_meta"
+      | "headings"
+      | "answerability"
+      | "structure"
+      | "schema"
+      | "images"
+      | "internal_links";
     severity: "low" | "medium" | "high";
     found: string;
     why_it_matters: string;
@@ -143,10 +150,26 @@ export type AuditResultV1 = {
   };
 };
 
-export const StartAuditInput = z.object({
+export const StartAuditRequest = z.object({
   pageUrl: z.string().min(1, "URL is required"),
-  targetKeyword: z.string().optional().or(z.literal('')),
-  email: z.string().email().optional().or(z.literal(''))
+  targetKeyword: z.string().optional().or(z.literal("")),
+  email: z.string().email().optional().or(z.literal("")),
 });
 
+export const StartAuditResponse = z.object({
+  runId: z.string(),
+  status: z.literal("queued"),
+});
 
+export const GetAuditResponse = z.union([
+  z.object({
+    status: z.union([z.literal("queued"), z.literal("running"), z.literal("failed")]),
+  }),
+  z.object({
+    status: z.literal("ready"),
+    result: AuditResultV1,
+  }),
+]);
+
+// Legacy export for backward compatibility
+export const StartAuditInput = StartAuditRequest;
