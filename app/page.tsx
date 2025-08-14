@@ -75,6 +75,23 @@ export default function Page() {
       // Clean up URL
       window.history.replaceState({}, document.title, window.location.pathname);
     }
+
+    // Listen for messages from the popup window
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data.type === 'GSC_AUTH_SUCCESS') {
+        console.log('GSC authentication successful via popup message');
+        setIsGscAuthenticated(true);
+        setIsGscConnecting(false);
+      } else if (event.data.type === 'GSC_AUTH_ERROR') {
+        console.error('GSC authentication failed via popup message:', event.data.error);
+        setIsGscAuthenticated(false);
+        setIsGscConnecting(false);
+        alert(`Google Search Console authentication failed: ${event.data.error}`);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   const checkGscAuthStatus = async () => {
@@ -109,31 +126,47 @@ export default function Page() {
         // Open the auth URL in a new window
         const authWindow = window.open(data.authUrl, "gsc-auth", "width=600,height=700");
         
-        // Poll for completion
+        if (!authWindow) {
+          alert("Please allow popups for this site to connect to Google Search Console");
+          return;
+        }
+        
+        // Poll for completion more frequently
         const checkAuth = setInterval(async () => {
           try {
+            // Check if window is still open
+            if (authWindow.closed) {
+              clearInterval(checkAuth);
+              // Check authentication status after window closes
+              await checkGscAuthStatus();
+              return;
+            }
+            
             const statusResponse = await fetch("/api/debug/gsc-config");
             const statusData = await statusResponse.json();
             
             if (statusData.hasTokens) {
               clearInterval(checkAuth);
-              authWindow?.close();
+              authWindow.close();
               setIsGscAuthenticated(true);
+              setIsGscConnecting(false);
             }
           } catch (error) {
             console.error("Error checking auth status:", error);
           }
-        }, 2000);
+        }, 1000); // Check every second instead of every 2 seconds
 
-        // Cleanup after 5 minutes
+        // Cleanup after 3 minutes (reduced from 5)
         setTimeout(() => {
           clearInterval(checkAuth);
-          authWindow?.close();
-        }, 300000);
+          if (!authWindow.closed) {
+            authWindow.close();
+          }
+          setIsGscConnecting(false);
+        }, 180000);
       }
     } catch (error) {
       console.error("Error starting GSC auth:", error);
-    } finally {
       setIsGscConnecting(false);
     }
   };

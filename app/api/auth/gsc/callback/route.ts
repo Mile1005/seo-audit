@@ -18,36 +18,96 @@ export async function GET(req: NextRequest) {
 
     if (error) {
       console.error("GSC Callback: OAuth error from Google:", error);
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || "https://seo-audit-seven.vercel.app"}?gsc_error=${error}`
-      );
+      return new NextResponse(`
+        <!DOCTYPE html>
+        <html>
+        <head><title>GSC Auth Error</title></head>
+        <body>
+          <script>
+            if (window.opener) {
+              window.opener.postMessage({ type: 'GSC_AUTH_ERROR', error: '${error}' }, '*');
+            }
+            window.close();
+          </script>
+          <p>Authentication failed: ${error}</p>
+        </body>
+        </html>
+      `, { headers: { 'Content-Type': 'text/html' } });
     }
 
     if (!code || !state) {
       console.error("GSC Callback: Missing code or state:", { code: !!code, state: !!state });
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || "https://seo-audit-seven.vercel.app"}?gsc_error=missing_code_or_state`
-      );
+      return new NextResponse(`
+        <!DOCTYPE html>
+        <html>
+        <head><title>GSC Auth Error</title></head>
+        <body>
+          <script>
+            if (window.opener) {
+              window.opener.postMessage({ type: 'GSC_AUTH_ERROR', error: 'missing_code_or_state' }, '*');
+            }
+            window.close();
+          </script>
+          <p>Authentication failed: Missing required parameters</p>
+        </body>
+        </html>
+      `, { headers: { 'Content-Type': 'text/html' } });
     }
 
     console.log("GSC Callback: Calling handleGscCallback with state:", state);
     const success = await handleGscCallback(code, state);
 
     if (success) {
-      console.log("GSC Callback: Success! Redirecting to success page");
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || "https://seo-audit-seven.vercel.app"}?gsc_success=true&state=${state}`
-      );
+      console.log("GSC Callback: Success! Closing popup and notifying parent");
+      return new NextResponse(`
+        <!DOCTYPE html>
+        <html>
+        <head><title>GSC Auth Success</title></head>
+        <body>
+          <script>
+            if (window.opener) {
+              window.opener.postMessage({ type: 'GSC_AUTH_SUCCESS', state: '${state}' }, '*');
+            }
+            window.close();
+          </script>
+          <p>Authentication successful! You can close this window.</p>
+        </body>
+        </html>
+      `, { headers: { 'Content-Type': 'text/html' } });
     } else {
       console.error("GSC Callback: handleGscCallback returned false");
-      return NextResponse.redirect(
-        `${process.env.NEXT_PUBLIC_APP_URL || "https://seo-audit-seven.vercel.app"}?gsc_error=auth_failed`
-      );
+      return new NextResponse(`
+        <!DOCTYPE html>
+        <html>
+        <head><title>GSC Auth Error</title></head>
+        <body>
+          <script>
+            if (window.opener) {
+              window.opener.postMessage({ type: 'GSC_AUTH_ERROR', error: 'auth_failed' }, '*');
+            }
+            window.close();
+          </script>
+          <p>Authentication failed. Please try again.</p>
+        </body>
+        </html>
+      `, { headers: { 'Content-Type': 'text/html' } });
     }
   } catch (error) {
     console.error("GSC Callback: Unexpected error:", error);
-    return NextResponse.redirect(
-      `${process.env.NEXT_PUBLIC_APP_URL || "https://seo-audit-seven.vercel.app"}?gsc_error=callback_error`
-    );
+    return new NextResponse(`
+      <!DOCTYPE html>
+      <html>
+      <head><title>GSC Auth Error</title></head>
+      <body>
+        <script>
+          if (window.opener) {
+            window.opener.postMessage({ type: 'GSC_AUTH_ERROR', error: 'callback_error' }, '*');
+          }
+          window.close();
+        </script>
+        <p>Authentication failed due to an unexpected error.</p>
+      </body>
+      </html>
+    `, { headers: { 'Content-Type': 'text/html' } });
   }
 }
