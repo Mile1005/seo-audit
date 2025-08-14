@@ -16,12 +16,8 @@ export async function GET(req: NextRequest) {
       state
     };
 
-    // Check if we have any tokens stored in database
     const hasTokens = await hasGscTokens(state);
-    
-    // Validate the tokens to see if they're actually working
-    const tokenValidation = await validateGscTokens(state);
-    
+    const validation = await validateGscTokens(state);
     const isConfigured = !!(process.env.GSC_CLIENT_ID && process.env.GSC_CLIENT_SECRET);
 
     return NextResponse.json({
@@ -29,8 +25,9 @@ export async function GET(req: NextRequest) {
       config,
       isConfigured,
       hasTokens,
-      isAuthenticated: tokenValidation.isValid,
-      validationMessage: tokenValidation.message,
+      isAuthenticated: validation.isValid,
+      hasProperties: validation.hasProperties,
+      validationMessage: validation.message,
       expectedRedirectUri: "https://seo-audit-seven.vercel.app/api/auth/gsc/callback",
     });
   } catch (error) {
@@ -56,7 +53,6 @@ export async function DELETE(req: NextRequest) {
       cleared: true,
       state: state || null
     });
-    // Clear cookie
     res.headers.append('Set-Cookie', `gsc_state=; Path=/; Max-Age=0; SameSite=Lax; Secure`);
     return res;
   } catch (error) {

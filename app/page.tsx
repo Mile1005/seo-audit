@@ -104,6 +104,8 @@ export default function Page() {
       if (!data.isAuthenticated) {
         setIsGscConnecting(false);
       }
+      // Store a descriptive message for the user if connected but no properties
+      (window as any).__gscValidation = data;
     } catch (error) {
       console.error("Error checking GSC status:", error);
       setIsGscAuthenticated(false);
@@ -414,6 +416,11 @@ export default function Page() {
                     </svg>
                     Successfully connected to Google Search Console
                   </div>
+                  {(window as any).__gscValidation && !(window as any).__gscValidation.hasProperties && (
+                    <div className="text-xs text-yellow-700 bg-yellow-50 border border-yellow-200 p-2 rounded">
+                      {(window as any).__gscValidation.validationMessage || 'Connected, but this Google account has no Search Console properties. Add your site to GSC to see metrics.'}
+                    </div>
+                  )}
                   <p className="text-xs text-gray-500">
                     Your audit results will now include search analytics data when available.
                   </p>

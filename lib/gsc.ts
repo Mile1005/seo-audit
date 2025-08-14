@@ -69,13 +69,12 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
 
 export async function fetchGscInsightsForUrl(url: string, state?: string): Promise<any> {
   try {
-    // Get tokens from database
     const prisma = await getPrisma();
-    const tokenRecord = await (prisma as any).gscToken.findFirst({
-      where: state ? { state } : undefined,
-      orderBy: { createdAt: 'desc' }
-    });
-    
+    let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
+    if (!tokenRecord) {
+      tokenRecord = await (prisma as any).gscToken.findFirst({ orderBy: { createdAt: 'desc' } });
+    }
+
     if (!tokenRecord) {
       return {
         available: false,
@@ -87,26 +86,30 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
       };
     }
 
-    // Set credentials
     oauth2Client.setCredentials(tokenRecord.tokens as any);
-
-    // Create Search Console API client
     const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
 
-    // Extract domain from URL
-    const urlObj = new URL(url);
-    const domain = urlObj.hostname;
+    const siteUrl = await resolveSiteUrlForDomain(searchConsole, url);
+    if (!siteUrl) {
+      const urlObj = new URL(url);
+      return {
+        available: false,
+        top_queries: [],
+        ctr: null,
+        impressions: null,
+        clicks: null,
+        message: `This Google account has no Search Console property for ${urlObj.hostname}. Add the site in GSC to view metrics.`,
+      };
+    }
 
-    // Get the last 28 days of data
     const endDate = new Date();
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - 28);
 
-    console.log(`Fetching GSC data for ${domain} from ${startDate.toISOString()} to ${endDate.toISOString()}`);
+    console.log(`Fetching GSC data for ${siteUrl} from ${startDate.toISOString()} to ${endDate.toISOString()}`);
 
-    // Fetch search analytics data
     const response = await searchConsole.searchanalytics.query({
-      siteUrl: `sc-domain:${domain}`,
+      siteUrl,
       requestBody: {
         startDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0],
@@ -116,16 +119,14 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
     });
 
     const rows = response.data.rows || [];
-    
-    // Calculate totals
+
     let totalClicks = 0;
     let totalImpressions = 0;
     const topQueries = rows.map((row: any) => {
       totalClicks += row.clicks || 0;
       totalImpressions += row.impressions || 0;
-      
       return {
-        query: row.keys[0] || '',
+        query: row.keys?.[0] || '',
         clicks: row.clicks || 0,
         impressions: row.impressions || 0,
         ctr: row.ctr || 0,
@@ -133,7 +134,7 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
       };
     });
 
-    const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions) * 100 : 0;
+    const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions) : 0;
 
     return {
       available: true,
@@ -141,13 +142,11 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
       ctr: avgCtr,
       impressions: totalImpressions,
       clicks: totalClicks,
-      message: `Data for ${domain} (last 28 days)`,
+      message: `Data for ${siteUrl} (last 28 days)`,
     };
 
   } catch (error) {
     console.error("Error fetching GSC data:", error);
-    
-    // Return error information
     return {
       available: false,
       top_queries: [],
@@ -181,42 +180,69 @@ export async function hasGscTokens(state?: string): Promise<boolean> {
 }
 
 // Helper function to validate GSC tokens and check if they're working
-export async function validateGscTokens(state?: string): Promise<{ isValid: boolean; message: string }> {
+export async function validateGscTokens(state?: string): Promise<{ isValid: boolean; hasProperties: boolean; message: string }> {
   try {
     const prisma = await getPrisma();
-    const tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
-    
+    let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
+
+    // Fallback to latest token if no record for this state
     if (!tokenRecord) {
-      console.log("validateGscTokens: No token record found in database", { state });
-      return { isValid: false, message: "No GSC tokens found" };
+      tokenRecord = await (prisma as any).gscToken.findFirst({ orderBy: { createdAt: 'desc' } });
+      if (!tokenRecord) {
+        console.log("validateGscTokens: No token record found in database", { state });
+        return { isValid: false, hasProperties: false, message: "No GSC tokens found" };
+      }
     }
 
     console.log("validateGscTokens: Found token record, validating...", { state });
 
-    // Set up OAuth2 client
     const oauth2Client = new google.auth.OAuth2(
       process.env.GSC_CLIENT_ID,
       process.env.GSC_CLIENT_SECRET,
       process.env.GSC_REDIRECT_URI
     );
 
-    // Set credentials
     oauth2Client.setCredentials(tokenRecord.tokens as any);
 
-    // Try to make a simple API call to validate tokens
     const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
-    
-    // This will throw an error if tokens are invalid
+
     const sitesResponse = await searchConsole.sites.list();
-    
-    console.log("validateGscTokens: API call successful, sites found:", sitesResponse.data.siteEntry?.length || 0);
-    
-    return { isValid: true, message: "GSC tokens are valid" };
+    const siteCount = sitesResponse.data.siteEntry?.length || 0;
+    console.log("validateGscTokens: API call successful, sites found:", siteCount);
+
+    return { isValid: true, hasProperties: siteCount > 0, message: siteCount > 0 ? "GSC tokens are valid" : "Connected, but no properties found on this Google account" };
   } catch (error) {
     console.error("validateGscTokens: Error validating GSC tokens:", error);
-    return { 
-      isValid: false, 
-      message: `Token validation failed: ${error instanceof Error ? error.message : 'Unknown error'}` 
+    return {
+      isValid: false,
+      hasProperties: false,
+      message: `Token validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
     };
   }
+}
+
+// Choose a siteUrl for a given page URL by inspecting available properties
+async function resolveSiteUrlForDomain(searchConsole: any, pageUrl: string): Promise<string | null> {
+  const urlObj = new URL(pageUrl);
+  const hostname = urlObj.hostname.toLowerCase();
+  const rootDomain = hostname.replace(/^www\./, "");
+
+  const sitesResponse = await searchConsole.sites.list();
+  const entries: Array<{ siteUrl?: string }> = (sitesResponse.data.siteEntry || []) as any;
+
+  // Prefer domain property if present
+  const domainProp = entries.find(e => (e.siteUrl || "").toLowerCase() === `sc-domain:${rootDomain}`);
+  if (domainProp?.siteUrl) return domainProp.siteUrl;
+
+  // Try exact hostname URL-prefix
+  const urlPrefix = `https://${hostname}/`;
+  const urlProp = entries.find(e => (e.siteUrl || "").toLowerCase() === urlPrefix);
+  if (urlProp?.siteUrl) return urlProp.siteUrl;
+
+  // Try http version
+  const httpPrefix = `http://${hostname}/`;
+  const httpProp = entries.find(e => (e.siteUrl || "").toLowerCase() === httpPrefix);
+  if (httpProp?.siteUrl) return httpProp.siteUrl;
+
+  return null;
 }
