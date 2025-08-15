@@ -416,46 +416,45 @@ function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }
       <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 md:hidden opacity-100" />
       <div className="relative z-10">
-        <h3 className="text-xl font-semibold text-text-primary mb-6">Quick Wins ({quickWins.length})</h3>
-        <div className="space-y-3">
+        <h3 className="text-2xl font-bold text-accent-primary mb-8">Quick Wins ({quickWins.length})</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {quickWins.map((win, index) => (
             <motion.div
               key={`win-${index}`}
-              className={`p-4 rounded-lg border ${impactColors[win.estimated_impact]} flex flex-col md:flex-row md:items-start gap-3`}
+              className={`glass-card p-8 min-h-[180px] flex flex-col justify-between rounded-2xl shadow-lg border-2 border-accent-primary/30 relative group transition-shadow duration-200`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
               aria-label={`Quick Win ${index + 1}`}
             >
-              <div className="flex-1 min-w-0">
-                <h5 className="font-medium text-text-primary mb-2 break-words">{win.action}</h5>
-                {win.snippet && (
-                  <div className="mt-3 bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
-                    <p className="text-accent-primary text-sm font-medium mb-1">Code:</p>
-                    <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20 whitespace-pre-wrap md:whitespace-pre">
-                      <code>{win.snippet}</code>
-                    </pre>
-                  </div>
-                )}
-              </div>
+              <h4 className="text-xl font-semibold text-text-primary mb-2 flex items-center gap-2">
+                {win.action}
+                <span className={`ml-2 text-xs px-2 py-0.5 rounded-full bg-accent-primary/10 text-accent-primary font-semibold uppercase tracking-wide`}>{win.estimated_impact} impact</span>
+              </h4>
               {win.snippet && (
-                <button
-                  onClick={() => copyToClipboard(win.snippet || '', `win-${index}`)}
-                  className="mt-2 md:mt-0 md:ml-4 p-2 text-text-secondary hover:text-accent-primary transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
-                  title="Copy code"
-                  aria-label="Copy code snippet"
-                >
-                  {copiedId === `win-${index}` ? (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                      <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                    </svg>
-                  )}
-                </button>
+                <div className="mt-3 bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
+                  <p className="text-accent-primary text-sm font-medium mb-1">Code:</p>
+                  <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20 whitespace-pre-wrap md:whitespace-pre">
+                    <code>{win.snippet}</code>
+                  </pre>
+                  <button
+                    onClick={() => copyToClipboard(win.snippet || '', `win-${index}`)}
+                    className="mt-2 p-2 text-text-secondary hover:text-accent-primary transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+                    title="Copy code"
+                    aria-label="Copy code snippet"
+                  >
+                    {copiedId === `win-${index}` ? (
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    ) : (
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               )}
             </motion.div>
           ))}
