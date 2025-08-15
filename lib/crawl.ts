@@ -1,6 +1,7 @@
 import { fetch } from "undici";
 import * as cheerio from "cheerio";
 import { URL } from "url";
+import xml2js from "xml2js";
 
 export interface CrawlPage {
   url: string;
@@ -25,7 +26,7 @@ export interface CrawlPage {
 
 export interface CrawlResult {
   startUrl: string;
-  pages: CrawlPage[];
+  pages: (CrawlPage & { brokenLinks?: string[] })[];
   totalPages: number;
   successfulPages: number;
   failedPages: number;
@@ -37,7 +38,13 @@ export interface CrawlResult {
     missing_meta_descriptions: number;
     images_without_alt: number;
     pages_without_canonical: number;
+    broken_links: number;
+    duplicate_titles: string[];
+    duplicate_canonicals: string[];
   };
+  robotsTxt: { found: boolean; url: string; status?: number };
+  sitemapXml: { found: boolean; url: string; status?: number; urls?: string[] };
+  brokenLinks: { url: string; from: string }[];
   crawlTime: number;
   timestamp: string;
 }
@@ -58,7 +65,7 @@ export async function miniCrawl(
   options: CrawlOptions = {}
 ): Promise<CrawlResult> {
   const {
-    limit = 200,
+    limit = 30, // Enforce hard limit
     sameHostOnly = true,
     maxDepth = 5,
     timeout = 10000,
@@ -67,50 +74,89 @@ export async function miniCrawl(
 
   const startTime = Date.now();
   const visited = new Set<string>();
-  const queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
-  const pages: CrawlPage[] = [];
+  let queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
+  const pages: (CrawlPage & { brokenLinks?: string[] })[] = [];
   const baseHost = new URL(startUrl).hostname;
 
-  console.log(`Starting crawl of ${startUrl} (limit: ${limit}, maxDepth: ${maxDepth})`);
+  // robots.txt detection
+  const robotsUrl = new URL("/robots.txt", startUrl).origin + "/robots.txt";
+  let robotsStatus = 0;
+  let robotsFound = false;
+  try {
+    const robotsRes = await fetch(robotsUrl, { method: "GET", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout) });
+    robotsStatus = robotsRes.status;
+    robotsFound = robotsRes.status === 200;
+  } catch {}
+
+  // sitemap.xml detection and parsing
+  const sitemapUrl = new URL("/sitemap.xml", startUrl).origin + "/sitemap.xml";
+  let sitemapStatus = 0;
+  let sitemapFound = false;
+  let sitemapUrls: string[] = [];
+  try {
+    const sitemapRes = await fetch(sitemapUrl, { method: "GET", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout) });
+    sitemapStatus = sitemapRes.status;
+    sitemapFound = sitemapRes.status === 200;
+    if (sitemapFound) {
+      const xml = await sitemapRes.text();
+      const parsed = await xml2js.parseStringPromise(xml);
+      const urlset = parsed.urlset?.url || [];
+      sitemapUrls = urlset.map((u: any) => u.loc?.[0]).filter(Boolean).slice(0, limit);
+      // Prioritize sitemap URLs
+      queue = sitemapUrls.map((url) => ({ url, depth: 0 })).slice(0, limit);
+    }
+  } catch {}
+
+  const brokenLinks: { url: string; from: string }[] = [];
+  const titleMap: Record<string, string[]> = {};
+  const canonicalMap: Record<string, string[]> = {};
 
   while (queue.length > 0 && pages.length < limit) {
     const { url, depth } = queue.shift()!;
-
-    // Skip if already visited or too deep
-    if (visited.has(url) || depth > maxDepth) {
-      continue;
-    }
-
+    if (visited.has(url) || depth > maxDepth) continue;
     visited.add(url);
-
     try {
-      console.log(`Crawling ${url} (depth: ${depth})`);
       const page = await crawlPage(url, depth, timeout, userAgent);
-      pages.push(page);
-
+      // Broken link detection
+      const $ = cheerio.load(page.html || "");
+      const links = $("a[href]").map((_, el) => $(el).attr("href")).get().filter(Boolean);
+      const pageBroken: string[] = [];
+      for (const link of links) {
+        try {
+          const abs = new URL(link, url).href;
+          if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
+          if (!visited.has(abs)) {
+            const res = await fetch(abs, { method: "HEAD", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout / 2) });
+            if (res.status >= 400) {
+              brokenLinks.push({ url: abs, from: url });
+              pageBroken.push(abs);
+            }
+          }
+        } catch {}
+      }
+      // Track titles/canonicals
+      if (page.title) {
+        if (!titleMap[page.title]) titleMap[page.title] = [];
+        titleMap[page.title].push(url);
+      }
+      if (page.canonical) {
+        if (!canonicalMap[page.canonical]) canonicalMap[page.canonical] = [];
+        canonicalMap[page.canonical].push(url);
+      }
+      pages.push({ ...page, brokenLinks: pageBroken });
       // Extract links for next level if not at max depth
       if (depth < maxDepth && page.status === 200) {
-        const links = await extractLinks(url, page.html || "");
-
-        for (const link of links) {
-          const absoluteUrl = new URL(link, url).href;
-
-          // Filter by host if sameHostOnly is true
-          if (sameHostOnly && new URL(absoluteUrl).hostname !== baseHost) {
-            continue;
-          }
-
-          // Skip if already visited or in queue
-          if (!visited.has(absoluteUrl) && !queue.some((q) => q.url === absoluteUrl)) {
-            queue.push({ url: absoluteUrl, depth: depth + 1 });
+        const nextLinks = await extractLinks(url, page.html || "");
+        for (const link of nextLinks) {
+          const abs = new URL(link, url).href;
+          if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
+          if (!visited.has(abs) && !queue.some((q) => q.url === abs)) {
+            queue.push({ url: abs, depth: depth + 1 });
           }
         }
       }
-
-      // Add small delay to be polite
       await new Promise((resolve) => setTimeout(resolve, 100));
     } catch (error) {
-      console.error(`Error crawling ${url}:`, error);
       pages.push({
         url,
         depth,
@@ -130,17 +176,19 @@ export async function miniCrawl(
         images_total: 0,
         load_time_ms: 0,
         error: error instanceof Error ? error.message : "Unknown error",
+        brokenLinks: [],
       });
     }
   }
 
+  // Duplicate title/canonical detection
+  const duplicateTitles = Object.entries(titleMap).filter(([_, urls]) => urls.length > 1).map(([title]) => title);
+  const duplicateCanonicals = Object.entries(canonicalMap).filter(([_, urls]) => urls.length > 1).map(([canonical]) => canonical);
+
   const crawlTime = Date.now() - startTime;
   const successfulPages = pages.filter((p) => p.status === 200).length;
   const failedPages = pages.length - successfulPages;
-  const averageLoadTime =
-    pages.length > 0 ? pages.reduce((sum, p) => sum + p.load_time_ms, 0) / pages.length : 0;
-
-  // Calculate issues summary
+  const averageLoadTime = pages.length > 0 ? pages.reduce((sum, p) => sum + p.load_time_ms, 0) / pages.length : 0;
   const issues = {
     noindex_pages: pages.filter((p) => p.noindex).length,
     missing_titles: pages.filter((p) => !p.title).length,
@@ -148,6 +196,9 @@ export async function miniCrawl(
     missing_meta_descriptions: pages.filter((p) => !p.meta_description).length,
     images_without_alt: pages.reduce((sum, p) => sum + p.images_missing_alt, 0),
     pages_without_canonical: pages.filter((p) => !p.canonical).length,
+    broken_links: brokenLinks.length,
+    duplicate_titles: duplicateTitles,
+    duplicate_canonicals: duplicateCanonicals,
   };
 
   return {
@@ -158,6 +209,9 @@ export async function miniCrawl(
     failedPages,
     averageLoadTime,
     issues,
+    robotsTxt: { found: robotsFound, url: robotsUrl, status: robotsStatus },
+    sitemapXml: { found: sitemapFound, url: sitemapUrl, status: sitemapStatus, urls: sitemapUrls },
+    brokenLinks,
     crawlTime,
     timestamp: new Date().toISOString(),
   };

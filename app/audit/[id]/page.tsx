@@ -899,13 +899,11 @@ function ModernCompetitorsTab() {
 // Modern Crawl Tab Component
 function ModernCrawlTab({ result }: { result: AuditResult }) {
   const [startUrl, setStartUrl] = useState(result.url);
-  const [limit, setLimit] = useState(200);
+  const [limit, setLimit] = useState(30); // Enforce 30
   const [sameHostOnly, setSameHostOnly] = useState(true);
   const [maxDepth, setMaxDepth] = useState(5);
   const [crawlId, setCrawlId] = useState<string | null>(null);
-  const [crawlStatus, setCrawlStatus] = useState<
-    "idle" | "queued" | "running" | "ready" | "failed"
-  >("idle");
+  const [crawlStatus, setCrawlStatus] = useState<"idle" | "queued" | "running" | "ready" | "failed">("idle");
   const [crawlResult, setCrawlResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -913,25 +911,21 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
   const startCrawl = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!startUrl.trim()) return;
-
     setLoading(true);
     setError(null);
     setCrawlStatus("idle");
-
     try {
       const response = await fetch("/api/crawl/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           startUrl: startUrl.trim(),
-          limit,
+          limit: 30, // Enforce 30
           sameHostOnly,
           maxDepth,
         }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
         setCrawlId(data.crawlId);
         setCrawlStatus("queued");
@@ -950,16 +944,13 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
     try {
       const response = await fetch(`/api/crawl/get?id=${id}`);
       const data = await response.json();
-
       if (response.ok) {
         setCrawlStatus(data.status);
-
         if (data.status === "ready" && data.result) {
           setCrawlResult(data.result);
         } else if (data.status === "failed") {
           setError("Crawl failed");
         } else if (data.status === "queued" || data.status === "running") {
-          // Continue polling
           setTimeout(() => pollCrawlStatus(id), 2000);
         }
       } else {
@@ -972,10 +963,8 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
 
   const exportCSV = async () => {
     if (!crawlId) return;
-
     try {
       const response = await fetch(`/api/crawl/export?id=${crawlId}`);
-
       if (response.ok) {
         const blob = await response.blob();
         const url = URL.createObjectURL(blob);
@@ -992,251 +981,173 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "queued":
-        return "text-yellow-600";
-      case "running":
-        return "text-blue-600";
-      case "ready":
-        return "text-green-600";
-      case "failed":
-        return "text-red-600";
-      default:
-        return "text-gray-600";
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "queued":
-        return "Queued";
-      case "running":
-        return "Running";
-      case "ready":
-        return "Completed";
-      case "failed":
-        return "Failed";
-      default:
-        return "Idle";
-    }
-  };
-
+  // Responsive, modern UI
   return (
-    <motion.div 
-      className="glass-card p-6 animated-gradient-hover"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h3 className="text-xl font-semibold text-text-primary mb-6">Site Crawl</h3>
-      <form onSubmit={startCrawl} className="space-y-4">
+    <motion.div className="w-full max-w-4xl mx-auto p-4 md:p-8 glass-card-enhanced" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-8 text-center">Site Crawl (Beta)</h2>
+      <form onSubmit={startCrawl} className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <label htmlFor="startUrl" className="block text-sm font-medium text-text-secondary mb-1">
-            Start URL
-          </label>
+          <label className="block text-lg font-semibold mb-2">Start URL</label>
           <input
             type="url"
-            id="startUrl"
             value={startUrl}
             onChange={(e) => setStartUrl(e.target.value)}
             placeholder="https://example.com"
-            className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-bg-primary text-white focus:ring-2 focus:ring-accent-primary"
             required
           />
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label htmlFor="limit" className="block text-sm font-medium text-text-secondary mb-1">
-              Page Limit
-            </label>
-            <input
-              type="number"
-              id="limit"
-              value={limit}
-              onChange={(e) => setLimit(Number(e.target.value))}
-              min="1"
-              max="500"
-              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
-            />
+        <div className="flex flex-col gap-2">
+          <label className="block text-lg font-semibold mb-2">Options</label>
+          <div className="flex items-center gap-2">
+            <input type="number" value={limit} min={1} max={30} disabled className="w-20 px-2 py-1 rounded border border-gray-700 bg-gray-800 text-gray-400" />
+            <span className="text-sm text-text-secondary">Page Limit (max 30, free tier)</span>
           </div>
-          <div>
-            <label htmlFor="maxDepth" className="block text-sm font-medium text-text-secondary mb-1">
-              Max Depth
-            </label>
-            <input
-              type="number"
-              id="maxDepth"
-              value={maxDepth}
-              onChange={(e) => setMaxDepth(Number(e.target.value))}
-              min="1"
-              max="10"
-              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
-            />
+          <div className="flex items-center gap-2">
+            <input type="number" value={maxDepth} min={1} max={10} onChange={(e) => setMaxDepth(Number(e.target.value))} className="w-20 px-2 py-1 rounded border border-gray-700 bg-bg-primary text-white" />
+            <span className="text-sm text-text-secondary">Max Depth</span>
           </div>
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              id="sameHostOnly"
-              checked={sameHostOnly}
-              onChange={(e) => setSameHostOnly(e.target.checked)}
-              className="h-4 w-4 text-accent-primary focus:ring-accent-primary border-gray-700 rounded"
-            />
-            <label htmlFor="sameHostOnly" className="ml-2 block text-sm text-text-primary">
-              Same Host Only
-            </label>
+          <div className="flex items-center gap-2">
+            <input type="checkbox" checked={sameHostOnly} onChange={(e) => setSameHostOnly(e.target.checked)} className="h-4 w-4 text-accent-primary focus:ring-accent-primary border-gray-700 rounded" />
+            <span className="text-sm text-text-secondary">Same Host Only</span>
           </div>
         </div>
-
-        <button
-          type="submit"
-          disabled={loading || crawlStatus === "running"}
-          className="w-full md:w-auto px-6 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-        >
-          {loading ? "Starting..." : crawlStatus === "running" ? "Crawling..." : "Start Crawl"}
-        </button>
+        <div className="md:col-span-2 flex flex-col md:flex-row items-center gap-4 mt-4">
+          <button type="submit" disabled={loading || crawlStatus === "running"} className="px-8 py-3 bg-accent-primary text-white rounded-xl font-semibold text-lg hover:bg-accent-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all">{loading ? "Starting..." : crawlStatus === "running" ? "Crawling..." : "Start Crawl"}</button>
+          <div className="flex-1 text-right w-full md:w-auto">
+            <span className="text-sm text-text-secondary">Free tier: up to 30 pages per crawl</span>
+          </div>
+        </div>
+        {error && <div className="md:col-span-2 bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-red-400">{error}</div>}
       </form>
-
       {/* Status Display */}
       {crawlStatus !== "idle" && (
-        <motion.div 
-          className="glass-card p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
+        <motion.div className="glass-card p-6 mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
           <h3 className="text-xl font-semibold text-text-primary mb-6">Crawl Status</h3>
           <div className="flex items-center space-x-3">
-            <span className={`font-medium ${getStatusColor(crawlStatus)}`}>
-              {getStatusText(crawlStatus)}
-            </span>
-            {crawlStatus === "running" && (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-accent-primary"></div>
-            )}
+            <span className={`font-medium ${crawlStatus === "ready" ? "text-green-600" : crawlStatus === "failed" ? "text-red-600" : crawlStatus === "running" ? "text-blue-600" : "text-yellow-600"}`}>{crawlStatus.charAt(0).toUpperCase() + crawlStatus.slice(1)}</span>
+            {crawlStatus === "running" && <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-accent-primary"></div>}
           </div>
           {crawlId && <p className="text-sm text-text-secondary mt-2">Crawl ID: {crawlId}</p>}
         </motion.div>
       )}
-
-      {/* Error Display */}
-      {error && (
-        <motion.div 
-          className="glass-card p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-red-400">{error}</p>
-        </motion.div>
-      )}
-
       {/* Results Display */}
       {crawlResult && (
-        <motion.div 
-          className="space-y-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Summary Stats */}
-          <motion.div 
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-xl font-semibold text-text-primary mb-6">Crawl Summary</h3>
+        <motion.div className="space-y-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+          {/* robots.txt & sitemap.xml */}
+          <motion.div className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <h3 className="text-xl font-semibold text-text-primary mb-4">robots.txt & sitemap.xml</h3>
+            <div className="flex flex-col md:flex-row gap-4">
+              <div className="flex-1">
+                <div className="font-medium text-accent-primary">robots.txt:</div>
+                <a href={crawlResult.robotsTxt.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">{crawlResult.robotsTxt.url}</a>
+                <span className={`ml-2 text-xs px-2 py-0.5 rounded-full ${crawlResult.robotsTxt.found ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"}`}>{crawlResult.robotsTxt.found ? "Found" : "Not Found"}</span>
+              </div>
+              <div className="flex-1">
+                <div className="font-medium text-accent-primary">sitemap.xml:</div>
+                <a href={crawlResult.sitemapXml.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">{crawlResult.sitemapXml.url}</a>
+                <span className={`ml-2 text-xs px-2 py-0.5 rounded-full ${crawlResult.sitemapXml.found ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"}`}>{crawlResult.sitemapXml.found ? "Found" : "Not Found"}</span>
+                {crawlResult.sitemapXml.found && crawlResult.sitemapXml.urls && (
+                  <div className="mt-2 text-xs text-text-secondary">Sitemap URLs: {crawlResult.sitemapXml.urls.length}</div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+          {/* Crawl Summary */}
+          <motion.div className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <h3 className="text-xl font-semibold text-text-primary mb-4">Crawl Summary</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-accent-primary">{crawlResult.totalPages}</div>
-                <div className="text-sm text-text-secondary">Total Pages</div>
+              <div className="text-center"><div className="text-2xl font-bold text-accent-primary">{crawlResult.totalPages}</div><div className="text-sm text-text-secondary">Total Pages</div></div>
+              <div className="text-center"><div className="text-2xl font-bold text-green-600">{crawlResult.successfulPages}</div><div className="text-sm text-text-secondary">Successful</div></div>
+              <div className="text-center"><div className="text-2xl font-bold text-red-600">{crawlResult.failedPages}</div><div className="text-sm text-text-secondary">Failed</div></div>
+              <div className="text-center"><div className="text-2xl font-bold text-purple-600">{Math.round(crawlResult.averageLoadTime)}ms</div><div className="text-sm text-text-secondary">Avg Load Time</div></div>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+              <div className="text-center p-3 rounded-lg border border-red-500/30"><div className="text-xl font-bold text-red-600">{crawlResult.issues.noindex_pages}</div><div className="text-sm text-text-secondary">Noindex Pages</div></div>
+              <div className="text-center p-3 rounded-lg border border-orange-500/30"><div className="text-xl font-bold text-orange-600">{crawlResult.issues.missing_titles}</div><div className="text-sm text-text-secondary">Missing Titles</div></div>
+              <div className="text-center p-3 rounded-lg border border-yellow-500/30"><div className="text-xl font-bold text-yellow-600">{crawlResult.issues.missing_h1}</div><div className="text-sm text-text-secondary">Missing H1</div></div>
+              <div className="text-center p-3 rounded-lg border border-blue-500/30"><div className="text-xl font-bold text-blue-600">{crawlResult.issues.missing_meta_descriptions}</div><div className="text-sm text-text-secondary">Missing Meta Descriptions</div></div>
+              <div className="text-center p-3 rounded-lg border border-purple-500/30"><div className="text-xl font-bold text-purple-600">{crawlResult.issues.images_without_alt}</div><div className="text-sm text-text-secondary">Images Without Alt</div></div>
+              <div className="text-center p-3 rounded-lg border border-indigo-500/30"><div className="text-xl font-bold text-indigo-600">{crawlResult.issues.pages_without_canonical}</div><div className="text-sm text-text-secondary">Missing Canonical</div></div>
+              <div className="text-center p-3 rounded-lg border border-pink-500/30"><div className="text-xl font-bold text-pink-600">{crawlResult.issues.broken_links}</div><div className="text-sm text-text-secondary">Broken Links</div></div>
+            </div>
+            {/* Duplicates */}
+            {(crawlResult.issues.duplicate_titles.length > 0 || crawlResult.issues.duplicate_canonicals.length > 0) && (
+              <div className="mt-6">
+                <h4 className="text-lg font-semibold text-accent-secondary mb-2">Duplicate Issues</h4>
+                {crawlResult.issues.duplicate_titles.length > 0 && (
+                  <div className="mb-2 text-sm text-red-400">Duplicate Titles: {crawlResult.issues.duplicate_titles.join(", ")}</div>
+                )}
+                {crawlResult.issues.duplicate_canonicals.length > 0 && (
+                  <div className="mb-2 text-sm text-red-400">Duplicate Canonicals: {crawlResult.issues.duplicate_canonicals.join(", ")}</div>
+                )}
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">
-                  {crawlResult.successfulPages}
-                </div>
-                <div className="text-sm text-text-secondary">Successful</div>
+            )}
+          </motion.div>
+          {/* Broken Links */}
+          {crawlResult.brokenLinks && crawlResult.brokenLinks.length > 0 && (
+            <motion.div className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+              <h3 className="text-xl font-semibold text-text-primary mb-4">Broken Links</h3>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-bg-secondary">
+                      <th className="px-4 py-2 text-left">Broken URL</th>
+                      <th className="px-4 py-2 text-left">Found On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {crawlResult.brokenLinks.map((b: any, i: number) => (
+                      <tr key={i} className="border-b border-gray-700">
+                        <td className="px-4 py-2 text-red-400 break-all"><a href={b.url} target="_blank" rel="noopener noreferrer" className="underline">{b.url}</a></td>
+                        <td className="px-4 py-2 text-text-secondary break-all"><a href={b.from} target="_blank" rel="noopener noreferrer" className="underline">{b.from}</a></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-red-600">{crawlResult.failedPages}</div>
-                <div className="text-sm text-text-secondary">Failed</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">
-                  {Math.round(crawlResult.averageLoadTime)}ms
-                </div>
-                <div className="text-sm text-text-secondary">Avg Load Time</div>
-              </div>
+            </motion.div>
+          )}
+          {/* Per-page Details */}
+          <motion.div className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <h3 className="text-xl font-semibold text-text-primary mb-4">Per-Page Details</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs md:text-sm">
+                <thead>
+                  <tr className="bg-bg-secondary">
+                    <th className="px-2 py-1 text-left">URL</th>
+                    <th className="px-2 py-1 text-left">Status</th>
+                    <th className="px-2 py-1 text-left">Title</th>
+                    <th className="px-2 py-1 text-left">H1</th>
+                    <th className="px-2 py-1 text-left">Meta Desc</th>
+                    <th className="px-2 py-1 text-left">Canonical</th>
+                    <th className="px-2 py-1 text-left">Broken Links</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {crawlResult.pages.map((p: any, i: number) => (
+                    <tr key={i} className="border-b border-gray-700">
+                      <td className="px-2 py-1 break-all"><a href={p.url} target="_blank" rel="noopener noreferrer" className="underline text-accent-primary">{p.url}</a></td>
+                      <td className="px-2 py-1">{p.status}</td>
+                      <td className="px-2 py-1">{p.title || <span className="text-red-400">Missing</span>}</td>
+                      <td className="px-2 py-1">{p.h1_presence ? "Yes" : <span className="text-red-400">No</span>}</td>
+                      <td className="px-2 py-1">{p.meta_description ? "Yes" : <span className="text-red-400">No</span>}</td>
+                      <td className="px-2 py-1">{p.canonical ? "Yes" : <span className="text-red-400">No</span>}</td>
+                      <td className="px-2 py-1">{p.brokenLinks && p.brokenLinks.length > 0 ? p.brokenLinks.length : 0}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </motion.div>
-
-          {/* Issues Summary */}
-          <motion.div 
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-xl font-semibold text-text-primary mb-6">Issues Found</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="text-center p-3 rounded-lg border border-red-500/30">
-                <div className="text-xl font-bold text-red-600">
-                  {crawlResult.issues.noindex_pages}
-                </div>
-                <div className="text-sm text-text-secondary">Noindex Pages</div>
-              </div>
-              <div className="text-center p-3 rounded-lg border border-orange-500/30">
-                <div className="text-xl font-bold text-orange-600">
-                  {crawlResult.issues.missing_titles}
-                </div>
-                <div className="text-sm text-text-secondary">Missing Titles</div>
-              </div>
-              <div className="text-center p-3 rounded-lg border border-yellow-500/30">
-                <div className="text-xl font-bold text-yellow-600">
-                  {crawlResult.issues.missing_h1}
-                </div>
-                <div className="text-sm text-text-secondary">Missing H1</div>
-              </div>
-              <div className="text-center p-3 rounded-lg border border-blue-500/30">
-                <div className="text-xl font-bold text-blue-600">
-                  {crawlResult.issues.missing_meta_descriptions}
-                </div>
-                <div className="text-sm text-text-secondary">Missing Meta Descriptions</div>
-              </div>
-              <div className="text-center p-3 rounded-lg border border-purple-500/30">
-                <div className="text-xl font-bold text-purple-600">
-                  {crawlResult.issues.images_without_alt}
-                </div>
-                <div className="text-sm text-text-secondary">Images Without Alt</div>
-              </div>
-              <div className="text-center p-3 rounded-lg border border-indigo-500/30">
-                <div className="text-xl font-bold text-indigo-600">
-                  {crawlResult.issues.pages_without_canonical}
-                </div>
-                <div className="text-sm text-text-secondary">Missing Canonical</div>
-              </div>
-            </div>
-          </motion.div>
-
           {/* Export Button */}
-          <motion.div 
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <motion.div className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="flex justify-between items-center">
               <div>
                 <h3 className="text-xl font-semibold text-text-primary">Export Results</h3>
                 <p className="text-sm text-text-secondary">Download detailed crawl data as CSV</p>
               </div>
-              <button
-                onClick={exportCSV}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-              >
-                Export CSV
-              </button>
+              <button onClick={exportCSV} className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">Export CSV</button>
             </div>
           </motion.div>
         </motion.div>

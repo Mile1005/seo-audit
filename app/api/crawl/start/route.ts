@@ -20,11 +20,14 @@ interface StartCrawlResponse {
   message: string;
 }
 
+const HARD_LIMIT = 30;
+
 export async function POST(request: NextRequest) {
   try {
     // Parse and validate request body
     const body = await request.json();
-    const { startUrl, limit, sameHostOnly, maxDepth, timeout } = StartCrawlRequest.parse(body);
+    let { startUrl, limit, sameHostOnly, maxDepth, timeout } = StartCrawlRequest.parse(body);
+    limit = HARD_LIMIT; // Enforce hard limit
 
     // Generate unique crawl ID
     const crawlId = crypto.randomUUID();
@@ -53,7 +56,7 @@ export async function POST(request: NextRequest) {
         await dbHelpers.updateRunStatus(crawlId, "running");
       }
       const crawlResult = await miniCrawl(startUrl, {
-        limit: limit || 200,
+        limit,
         sameHostOnly: sameHostOnly !== false,
         maxDepth: maxDepth || 5,
         timeout: timeout || 10000,
