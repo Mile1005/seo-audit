@@ -947,7 +947,11 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
       if (response.ok) {
         setCrawlStatus(data.status);
         if (data.status === "ready" && data.result) {
-          setCrawlResult(data.result);
+          if (data.result.type === "crawl" && data.result.result) {
+            setCrawlResult(data.result.result);
+          } else {
+            setCrawlResult(data.result);
+          }
         } else if (data.status === "failed") {
           setError("Crawl failed");
         } else if (data.status === "queued" || data.status === "running") {
