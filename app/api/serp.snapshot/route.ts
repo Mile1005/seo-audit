@@ -6,8 +6,8 @@ import * as cheerio from "cheerio";
 
 // Input validation schema
 const SerpSnapshotRequest = z.object({
-  keyword: z.string().min(1).max(100),
-  country: z.string().optional().default("us"),
+  keyword: z.union([z.string(), z.array(z.string())]),
+  country: z.union([z.string(), z.array(z.string())]),
 });
 
 // Response types
