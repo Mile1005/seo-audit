@@ -1127,342 +1127,89 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
   );
 }
 
-// Modern AI Insights Tab Component
+// Modern AI Insights Tab Component (Perplexity-powered)
 function ModernAIInsightsTab({ result }: { result: AuditResult }) {
-  const [analysis, setAnalysis] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [aiStatus, setAiStatus] = useState<"idle" | "loading" | "ready" | "failed">("idle");
+  const [insights, setInsights] = useState([
+    { title: 'Top 5 SEO Fixes (Prioritized)', loading: false, error: '', result: '' },
+    { title: 'Competitor Gap Analysis', loading: false, error: '', result: '' },
+    { title: 'AI-Generated FAQ for Snippets', loading: false, error: '', result: '' },
+    { title: 'E-E-A-T & AI Search Rewrite', loading: false, error: '', result: '' },
+    { title: 'AI Chat Search Optimization Tips', loading: false, error: '', result: '' },
+  ]);
+  const [aiStatus, setAiStatus] = useState<'idle' | 'loading' | 'ready' | 'failed'>('idle');
 
-  // Combine all text content for analysis
   const getContentText = () => {
-    const textBlocks = result.detected.title || "";
-    const headings = [
-      result.detected.h1 || "",
-      ...(result.detected.h2 || []),
-      ...(result.detected.h3 || []),
-    ].join(" ");
-    const metaDesc = result.detected.meta_description || "";
-    const sampleContent = `
-      ${result.detected.title || "Sample Page Title"}
-      ${result.detected.meta_description || "This is a sample page with content about SEO best practices and digital marketing strategies."}
-      ${result.detected.h1 || "Main Page Heading"}
-      ${result.detected.h2.join(". ")}
-      ${result.detected.h3.join(". ")}
-    `;
-    return sampleContent.replace(/\s+/g, " ").trim();
+    return `Title: ${result.detected.title || ''}\nMeta: ${result.detected.meta_description || ''}\nH1: ${result.detected.h1 || ''}\nH2: ${(result.detected.h2 || []).join(' | ')}\nH3: ${(result.detected.h3 || []).join(' | ')}\n`;
   };
+  const metaDesc = result.detected.meta_description || '';
+  const introText = result.detected.h1 || '';
 
-  const runAIAnalysis = async () => {
-    setLoading(true);
-    setError(null);
-    setAiStatus("loading");
+  const prompts = [
+    `You are an expert SEO consultant. Analyze the following page content and provide the top 5 most impactful, actionable SEO improvements, prioritized by business value. For each, explain why it matters and how to implement it.\nContent:\n${getContentText()}`,
+    `Compare the following page's content and structure to the top 3 Google results for its main topic. What are the main gaps or missed opportunities? What should be added or improved to outrank them?\nContent:\n${getContentText()}`,
+    `Based on this page, generate 5 FAQ questions and answers that would help the page rank in Google's 'People Also Ask' and AI chat results. Make them unique and relevant.\nContent:\n${getContentText()}`,
+    `Rewrite the meta description and intro paragraph to maximize E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) and make it more likely to be recommended by AI search/chatbots.\nMeta Description: ${metaDesc}\nIntro: ${introText}`,
+    `What are 3 things this page can do to be more likely recommended by AI chatbots (like Perplexity, ChatGPT, Gemini) for its main topic? Be specific and actionable.\nContent:\n${getContentText()}`,
+  ];
+
+  const runAIInsights = async () => {
+    setAiStatus('loading');
+    setInsights((prev) => prev.map((i) => ({ ...i, loading: true, error: '', result: '' })));
     try {
-      const contentText = getContentText();
-      const headings = [
-        result.detected.h1 || "",
-        ...(result.detected.h2 || []),
-        ...(result.detected.h3 || []),
-      ].filter(Boolean);
-      const defaultTopics = [
-        "SEO", "Marketing", "Tech", "Business", "Health", "News", "Education", "Entertainment"
-      ];
-      const localAI = await import("../../../lib/ai/localAI");
-      const [
-        summary,
-        intent,
-        sentiment,
-        entities,
-        topic,
-        toxicity,
-        language,
-        paraphrase,
-        questions,
-        readability,
-        topicGaps
-      ] = await Promise.all([
-        localAI.summarize(contentText),
-        localAI.classifyIntent(contentText),
-        localAI.sentimentAnalysis(contentText),
-        localAI.extractEntities(contentText),
-        localAI.classifyTopic(contentText, defaultTopics),
-        localAI.detectToxicity(contentText),
-        localAI.detectLanguage(contentText),
-        localAI.paraphraseText(result.detected.meta_description || contentText),
-        localAI.generateQuestions(contentText),
-        Promise.resolve(localAI.computeReadability(contentText)),
-        localAI.suggestTopicGaps(headings, []) // competitorHeadings can be added later
-      ]);
-      setAnalysis({
-        summary,
-        intent,
-        sentiment,
-        entities,
-        topic,
-        toxicity,
-        language,
-        paraphrase,
-        questions,
-        readability,
-        topicGaps,
-      });
-      setAiStatus("ready");
-    } catch (err) {
-      setError("Failed to run AI analysis. Please try again.");
-      setAiStatus("failed");
-    } finally {
-      setLoading(false);
+      const results = await Promise.all(prompts.map(async (prompt, idx) => {
+        try {
+          const response = await fetch('/api/pplx-inference', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt }),
+          });
+          if (!response.ok) throw new Error('API error');
+          const data = await response.json();
+          const content = data.choices?.[0]?.message?.content || 'No result.';
+          return { ...insights[idx], loading: false, result: content, error: '' };
+        } catch (err) {
+          return { ...insights[idx], loading: false, result: '', error: 'Failed to load insight.' };
+        }
+      }));
+      setInsights(results);
+      setAiStatus('ready');
+    } catch {
+      setAiStatus('failed');
+      setInsights((prev) => prev.map((i) => ({ ...i, loading: false, error: 'Failed to load insight.' })));
     }
-  };
-
-  const getIntentColor = (intent: string) => {
-    switch (intent) {
-      case "informational":
-        return "text-blue-600";
-      case "commercial":
-        return "text-green-600";
-      case "educational":
-        return "text-purple-600";
-      case "transactional":
-        return "text-orange-600";
-      case "navigational":
-        return "text-gray-600";
-      case "entertainment":
-        return "text-pink-600";
-      default:
-        return "text-gray-600";
-    }
-  };
-
-  const getIntentIcon = (intent: string) => {
-    switch (intent) {
-      case "informational":
-        return "📊";
-      case "commercial":
-        return "💰";
-      case "educational":
-        return "📚";
-      case "transactional":
-        return "🛒";
-      case "navigational":
-        return "🧭";
-      case "entertainment":
-        return "🎮";
-      default:
-        return "📄";
-    }
-  };
-
-  const getRelevanceColor = (relevance: number) => {
-    if (relevance >= 0.8) return "text-green-600";
-    if (relevance >= 0.6) return "text-yellow-600";
-    return "text-red-600";
   };
 
   return (
-    <motion.div 
-      className="glass-card p-6 animated-gradient-hover"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <motion.div className="glass-card p-6 animated-gradient-hover" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-xl font-semibold text-text-primary">AI Content Analysis</h3>
-          <p className="text-sm text-text-secondary">
-            AI-powered insights using Hugging Face models (free tier)
-          </p>
+          <h3 className="text-xl font-semibold text-text-primary">AI SEO Insights (Powered by Perplexity)</h3>
+          <p className="text-sm text-text-secondary">Professional, actionable, and future-proof SEO advice</p>
         </div>
         <button
-          onClick={runAIAnalysis}
-          disabled={loading}
+          onClick={runAIInsights}
+          disabled={aiStatus === 'loading'}
           className="px-4 py-2 bg-accent-quinary text-white rounded-lg hover:bg-accent-quinary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
         >
-          {loading ? "Analyzing..." : "Run AI Analysis"}
+          {aiStatus === 'loading' ? 'Analyzing...' : 'Run AI Insights'}
         </button>
       </div>
-      {/* AI Status */}
-      <div className="flex items-center space-x-2">
-        <div
-          className={`w-2 h-2 rounded-full ${
-            aiStatus === "ready"
-              ? "bg-green-500"
-              : aiStatus === "loading"
-                ? "bg-yellow-500"
-                : aiStatus === "failed"
-                  ? "bg-red-500"
-                  : "bg-gray-400"
-          }`}
-        ></div>
+      <div className="flex items-center space-x-2 mb-6">
+        <div className={`w-2 h-2 rounded-full ${aiStatus === 'ready' ? 'bg-green-500' : aiStatus === 'loading' ? 'bg-yellow-500' : aiStatus === 'failed' ? 'bg-red-500' : 'bg-gray-400'}`}></div>
         <span className="text-sm text-text-secondary">
-          {aiStatus === "ready"
-            ? "AI Insights Ready"
-            : aiStatus === "loading"
-              ? "Running AI Analysis..."
-              : aiStatus === "failed"
-                ? "AI Analysis Failed"
-                : "Idle"}
+          {aiStatus === 'ready' ? 'AI Insights Ready' : aiStatus === 'loading' ? 'Running AI Analysis...' : aiStatus === 'failed' ? 'AI Analysis Failed' : 'Idle'}
         </span>
       </div>
-      {/* Error Display */}
-      {error && (
-        <motion.div 
-          className="glass-card p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-red-400">{error}</p>
-        </motion.div>
-      )}
-      {/* Analysis Results */}
-      {analysis && (
-        <motion.div 
-          className="space-y-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Summary */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Content Summary</h4>
-            <div className="bg-bg-secondary/50 p-4 rounded-lg">
-              <p className="text-text-primary leading-relaxed">{analysis.summary}</p>
-            </div>
+      <div className="space-y-6">
+        {insights.map((insight, idx) => (
+          <motion.div key={idx} className="glass-card p-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+            <h4 className="text-xl font-semibold text-text-primary mb-4">{insight.title}</h4>
+            {insight.loading && <div className="text-text-secondary">Loading...</div>}
+            {insight.error && <div className="text-red-400">{insight.error}</div>}
+            {insight.result && <pre className="whitespace-pre-wrap text-text-primary leading-relaxed">{insight.result}</pre>}
           </motion.div>
-          {/* Intent */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Content Intent</h4>
-            <div className="flex items-center space-x-3">
-              <span className="text-2xl">{getIntentIcon(analysis.intent.intent)}</span>
-              <div>
-                <div className={`font-semibold ${getIntentColor(analysis.intent.intent)}`}>
-                  {analysis.intent.intent.charAt(0).toUpperCase() + analysis.intent.intent.slice(1)}
-                </div>
-                <div className="text-sm text-text-secondary">
-                  Confidence: {Math.round(analysis.intent.confidence * 100)}%
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          {/* Sentiment */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Sentiment Analysis</h4>
-            <div className="flex items-center space-x-3">
-              <span className="text-2xl">
-                {analysis.sentiment[0]?.label === "POSITIVE" ? "😊" : analysis.sentiment[0]?.label === "NEGATIVE" ? "😞" : "😐"}
-              </span>
-              <div>
-                <div className="font-semibold">
-                  {analysis.sentiment[0]?.label}
-                </div>
-                <div className="text-sm text-text-secondary">
-                  Confidence: {Math.round((analysis.sentiment[0]?.score || 0) * 100)}%
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          {/* Entities/Keywords */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Keywords & Entities</h4>
-            <div className="flex flex-wrap gap-2">
-              {analysis.entities.map((ent: any, i: number) => (
-                <span key={i} className="px-3 py-1 bg-accent-primary/20 text-accent-primary text-xs rounded-full border border-accent-primary/30">
-                  {ent.word} <span className="text-xs text-text-secondary">({ent.entity_group || ent.entity})</span>
-                </span>
-              ))}
-            </div>
-          </motion.div>
-          {/* Topic Classification */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Topic Classification</h4>
-            <div className="flex flex-wrap gap-2">
-              {analysis.topic.labels?.map((label: string, i: number) => (
-                <span key={i} className="px-3 py-1 bg-accent-secondary/20 text-accent-secondary text-xs rounded-full border border-accent-secondary/30">
-                  {label}: {Math.round((analysis.topic.scores?.[i] || 0) * 100)}%
-                </span>
-              ))}
-            </div>
-          </motion.div>
-          {/* Toxicity */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Toxicity Detection</h4>
-            <div className="flex flex-wrap gap-2">
-              {Array.isArray(analysis.toxicity) ? (
-                analysis.toxicity.map((tox: any, i: number) => (
-                  <span key={i} className="px-3 py-1 bg-red-500/10 text-red-400 text-xs rounded-full border border-red-400/30">
-                    {tox.label}: {Math.round((tox.score || 0) * 100)}%
-                  </span>
-                ))
-              ) : (
-                <p className="text-text-secondary text-sm">Could not load toxicity data.</p>
-              )}
-            </div>
-          </motion.div>
-          {/* Language Detection */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Language Detection</h4>
-            <div className="flex flex-wrap gap-2">
-              {Array.isArray(analysis.language) ? (
-                analysis.language.map((lang: any, i: number) => (
-                  <span key={i} className="px-3 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-400/30">
-                    {lang.label}: {Math.round((lang.score || 0) * 100)}%
-                  </span>
-                ))
-              ) : (
-                <p className="text-text-secondary text-sm">Could not load language data.</p>
-              )}
-            </div>
-          </motion.div>
-          {/* Paraphrasing */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Meta Description Paraphrase</h4>
-            <div className="bg-bg-secondary/50 p-4 rounded-lg">
-              <p className="text-text-primary leading-relaxed">
-                {analysis.paraphrase && analysis.paraphrase[0]?.generated_text 
-                  ? analysis.paraphrase[0].generated_text 
-                  : "No paraphrase available."}
-              </p>
-            </div>
-          </motion.div>
-          {/* Question Generation */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">FAQ (Question Generation)</h4>
-            <ul className="list-disc pl-6">
-              {Array.isArray(analysis.questions) ? (
-                analysis.questions.map((q: any, i: number) => (
-                  <li key={i} className="mb-2 text-text-secondary">{q.generated_text}</li>
-                ))
-              ) : (
-                <p className="text-text-secondary text-sm">Could not generate questions.</p>
-              )}
-            </ul>
-          </motion.div>
-          {/* Readability */}
-          <motion.div className="glass-card p-6">
-            <h4 className="text-xl font-semibold text-text-primary mb-4">Readability Score</h4>
-            <div className="text-2xl font-bold text-accent-primary mb-2">{analysis.readability}</div>
-            <div className="text-sm text-text-secondary">Flesch-Kincaid Reading Ease (higher is easier to read, 60+ is good for most audiences)</div>
-          </motion.div>
-        </motion.div>
-      )}
-      {/* Loading State */}
-      {loading && (
-        <motion.div 
-          className="glass-card p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center space-x-3">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent-primary"></div>
-            <div>
-              <div className="font-medium text-text-primary">Running AI Analysis</div>
-              <div className="text-sm text-text-secondary">This may take a few moments on first run</div>
-            </div>
-          </div>
-        </motion.div>
-      )}
+        ))}
+      </div>
     </motion.div>
   );
 }
