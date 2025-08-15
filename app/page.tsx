@@ -9,7 +9,6 @@ import FeaturesSection from "../components/common/FeaturesSection";
 
 interface FormErrors {
   pageUrl?: string;
-  targetKeyword?: string;
   email?: string;
 }
 
@@ -45,7 +44,6 @@ export default function Page() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState({
     pageUrl: "",
-    targetKeyword: "",
     email: "",
   });
 
@@ -229,7 +227,6 @@ export default function Page() {
         },
         body: JSON.stringify({
           pageUrl: ensureHttps(data.pageUrl),
-          targetKeyword: data.targetKeyword.trim() || undefined,
           email: data.email.trim() || undefined,
         }),
       });

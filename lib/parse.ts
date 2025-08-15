@@ -23,6 +23,13 @@ export interface ParsedHtml {
   isCanonicalSelfReference: boolean;
   hasNoindex: boolean;
   hasNofollow: boolean;
+  // Accessibility/ARIA checks
+  accessibilityIssues: Array<{
+    type: string;
+    selector: string;
+    message: string;
+    snippet: string;
+  }>;
 }
 
 /**
@@ -205,6 +212,71 @@ export function parseHtml(html: string, baseUrl: string): ParsedHtml {
     }
   });
 
+  // Accessibility/ARIA checks
+  const accessibilityIssues: Array<{
+    type: string;
+    selector: string;
+    message: string;
+    snippet: string;
+  }> = [];
+
+  // Check for images missing alt (already done above, but add selector)
+  $("img").each((_, el) => {
+    const $img = $(el);
+    const src = $img.attr("src") || '';
+    const alt = $img.attr("alt");
+    if (!alt || alt.trim() === "") {
+      accessibilityIssues.push({
+        type: "missing-alt",
+        selector: `img[src='${src}']`,
+        message: "Image is missing alt text.",
+        snippet: $.html(el),
+      });
+    }
+  });
+
+  // Check for form elements missing label
+  $("input, select, textarea").each((_, el) => {
+    const $el = $(el);
+    const id = $el.attr("id");
+    const hasLabel = id && $(`label[for='${id}']`).length > 0;
+    if (!hasLabel) {
+      accessibilityIssues.push({
+        type: "missing-label",
+        selector: id ? `${el.tagName}[id='${id}']` : el.tagName,
+        message: "Form element is missing a label.",
+        snippet: $.html(el),
+      });
+    }
+  });
+
+  // Check for elements with invalid ARIA roles
+  $("[role]").each((_, el) => {
+    const $el = $(el);
+    const role = $el.attr("role");
+    const validRoles = [
+      "banner", "navigation", "main", "complementary", "contentinfo", "region", "form", "search", "alert", "dialog", "button", "checkbox", "grid", "link", "listbox", "menu", "menubar", "menuitem", "option", "progressbar", "radio", "radiogroup", "scrollbar", "slider", "spinbutton", "status", "switch", "tab", "tabpanel", "textbox", "timer", "tooltip", "tree", "treeitem"
+    ];
+    if (role && !validRoles.includes(role)) {
+      accessibilityIssues.push({
+        type: "invalid-role",
+        selector: `[role='${role}']`,
+        message: `Invalid ARIA role: ${role}`,
+        snippet: $.html(el),
+      });
+    }
+  });
+
+  // Check for missing main landmark
+  if ($("main").length === 0) {
+    accessibilityIssues.push({
+      type: "missing-main-landmark",
+      selector: "body",
+      message: "No <main> landmark found. Every page should have a <main> element.",
+      snippet: $.html("body"),
+    });
+  }
+
   return {
     title,
     metaDescription,
@@ -225,6 +297,7 @@ export function parseHtml(html: string, baseUrl: string): ParsedHtml {
     isCanonicalSelfReference,
     hasNoindex,
     hasNofollow,
+    accessibilityIssues,
   };
 }
 

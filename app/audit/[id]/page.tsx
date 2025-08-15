@@ -245,6 +245,7 @@ function ModernDetectedPanel({ detected }: { detected: AuditResult["detected"] }
 
 // Modern Issue List Component
 function ModernIssueList({ issues }: { issues: AuditResult["issues"] }) {
+  const [expanded, setExpanded] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const copyToClipboard = async (text: string, id: string) => {
@@ -272,13 +273,11 @@ function ModernIssueList({ issues }: { issues: AuditResult["issues"] }) {
     medium: "border-yellow-500/30 bg-yellow-500/10",
     low: "border-blue-500/30 bg-blue-500/10",
   };
-
   const severityLabels: Record<string, string> = {
     high: "High Priority",
     medium: "Medium Priority",
     low: "Low Priority",
   };
-
   const severityTextColors: Record<string, string> = {
     high: "text-red-400",
     medium: "text-yellow-400",
@@ -297,62 +296,88 @@ function ModernIssueList({ issues }: { issues: AuditResult["issues"] }) {
       <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       <div className="relative z-10">
         <h3 className="text-xl font-semibold text-text-primary mb-6">Issues Found ({issues.length})</h3>
-      <div className="space-y-6">
-        {severityOrder.map((severity) => {
-          const severityIssues = groupedIssues[severity];
-          if (!severityIssues) return null;
-
-          return (
-            <div key={severity} className="space-y-4">
-              <h4 className={`text-lg font-medium ${severityTextColors[severity]}`}>
-                {severityLabels[severity]} ({severityIssues.length})
-              </h4>
-              <div className="space-y-3">
-                {severityIssues.map((issue, index) => (
-                  <motion.div
-                    key={`${severity}-${index}`}
-                    className={`p-4 rounded-lg border ${severityColors[severity]} relative group`}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <div className="flex justify-between items-start">
-                                             <div className="flex-1">
-                         <h5 className="font-medium text-text-primary mb-2">{issue.found}</h5>
-                         <p className="text-text-secondary text-sm mb-3">{issue.why_it_matters}</p>
-                         {issue.recommendation && (
-                           <div className="bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
-                             <p className="text-accent-primary text-sm font-medium mb-1">Recommendation:</p>
-                             <p className="text-text-secondary text-sm">{issue.recommendation}</p>
-                           </div>
-                         )}
-                       </div>
-                       {issue.snippet && (
-                         <button
-                           onClick={() => copyToClipboard(issue.snippet || '', `${severity}-${index}`)}
-                           className="ml-4 p-2 text-text-secondary hover:text-accent-primary transition-colors"
-                           title="Copy code"
-                         >
-                          {copiedId === `${severity}-${index}` ? (
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+        <div className="space-y-6">
+          {severityOrder.map((severity) => {
+            const severityIssues = groupedIssues[severity];
+            if (!severityIssues) return null;
+            return (
+              <div key={severity} className="space-y-4">
+                <h4 className={`text-lg font-medium ${severityTextColors[severity]}`}>{severityLabels[severity]} ({severityIssues.length})</h4>
+                <div className="space-y-3">
+                  {severityIssues.map((issue, index) => {
+                    const isOpen = expanded === `${severity}-${index}`;
+                    return (
+                      <motion.div
+                        key={`${severity}-${index}`}
+                        className={`p-4 rounded-lg border ${severityColors[severity]} relative group transition-shadow duration-200 ${isOpen ? 'shadow-xl' : ''}`}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        tabIndex={0}
+                        aria-expanded={isOpen}
+                        aria-controls={`issue-details-${severity}-${index}`}
+                        onKeyDown={e => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            setExpanded(isOpen ? null : `${severity}-${index}`);
+                          }
+                        }}
+                      >
+                        <div className="flex justify-between items-center cursor-pointer" onClick={() => setExpanded(isOpen ? null : `${severity}-${index}`)}>
+                          <div className="flex-1">
+                            <h5 className="font-medium text-text-primary mb-1 flex items-center gap-2">
+                              {issue.found}
+                              <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-accent-primary/10 text-accent-primary font-semibold uppercase tracking-wide">{issue.category.replace('_', ' ')}</span>
+                            </h5>
+                          </div>
+                          <button
+                            aria-label={isOpen ? 'Collapse details' : 'Expand details'}
+                            className="ml-2 p-1 rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+                            tabIndex={-1}
+                          >
+                            <svg className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                              <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
-                          ) : (
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                            </svg>
-                          )}
-                        </button>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
+                          </button>
+                        </div>
+                        {isOpen && (
+                          <div id={`issue-details-${severity}-${index}`} className="mt-4 space-y-3 animate-fade-in">
+                            <div className="text-sm text-text-secondary"><strong>Why it matters:</strong> {issue.why_it_matters}</div>
+                            <div className="text-sm text-accent-primary"><strong>Recommendation:</strong> {issue.recommendation}</div>
+                            {issue.snippet && (
+                              <div className="bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
+                                <p className="text-accent-primary text-sm font-medium mb-1">Code Snippet:</p>
+                                <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20 whitespace-pre-wrap md:whitespace-pre">
+                                  <code>{issue.snippet}</code>
+                                </pre>
+                                <button
+                                  onClick={() => copyToClipboard(issue.snippet || '', `${severity}-${index}`)}
+                                  className="mt-2 p-2 text-text-secondary hover:text-accent-primary transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+                                  title="Copy code"
+                                  aria-label="Copy code snippet"
+                                >
+                                  {copiedId === `${severity}-${index}` ? (
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                  ) : (
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                      <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                                      <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                                    </svg>
+                                  )}
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
       </div>
     </motion.div>
   );
@@ -385,38 +410,41 @@ function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
+      aria-label="Quick Wins"
     >
-      {/* Gradient hover effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Always-on gradient for mobile, hover for desktop */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 md:opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/10 to-accent-secondary/10 md:hidden opacity-100" />
       <div className="relative z-10">
         <h3 className="text-xl font-semibold text-text-primary mb-6">Quick Wins ({quickWins.length})</h3>
-      <div className="space-y-3">
-        {quickWins.map((win, index) => (
-          <motion.div
-            key={`win-${index}`}
-            className={`p-4 rounded-lg border ${impactColors[win.estimated_impact]}`}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-          >
-            <div className="flex justify-between items-start">
-                             <div className="flex-1">
-                 <h5 className="font-medium text-text-primary mb-2">{win.action}</h5>
-                 {win.snippet && (
-                   <div className="mt-3 bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
-                     <p className="text-accent-primary text-sm font-medium mb-1">Code:</p>
-                     <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20">
-                       <code>{win.snippet}</code>
-                     </pre>
-                   </div>
-                 )}
-               </div>
-               {win.snippet && (
-                 <button
-                   onClick={() => copyToClipboard(win.snippet || '', `win-${index}`)}
-                   className="ml-4 p-2 text-text-secondary hover:text-accent-primary transition-colors"
-                   title="Copy code"
-                 >
+        <div className="space-y-3">
+          {quickWins.map((win, index) => (
+            <motion.div
+              key={`win-${index}`}
+              className={`p-4 rounded-lg border ${impactColors[win.estimated_impact]} flex flex-col md:flex-row md:items-start gap-3`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              aria-label={`Quick Win ${index + 1}`}
+            >
+              <div className="flex-1 min-w-0">
+                <h5 className="font-medium text-text-primary mb-2 break-words">{win.action}</h5>
+                {win.snippet && (
+                  <div className="mt-3 bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
+                    <p className="text-accent-primary text-sm font-medium mb-1">Code:</p>
+                    <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20 whitespace-pre-wrap md:whitespace-pre">
+                      <code>{win.snippet}</code>
+                    </pre>
+                  </div>
+                )}
+              </div>
+              {win.snippet && (
+                <button
+                  onClick={() => copyToClipboard(win.snippet || '', `win-${index}`)}
+                  className="mt-2 md:mt-0 md:ml-4 p-2 text-text-secondary hover:text-accent-primary transition-colors rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+                  title="Copy code"
+                  aria-label="Copy code snippet"
+                >
                   {copiedId === `win-${index}` ? (
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -429,10 +457,9 @@ function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }
                   )}
                 </button>
               )}
-            </div>
-          </motion.div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </motion.div>
   );
@@ -1278,6 +1305,78 @@ function ModernSkeletonLoader() {
   );
 }
 
+function AccessibilityIssuesPanel({ issues }: { issues: Array<{ type: string; selector: string; message: string; snippet: string }> }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+  if (!issues || issues.length === 0) return null;
+  return (
+    <motion.div
+      className="glass-card-enhanced p-6 relative overflow-hidden group mt-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
+        <h3 className="text-xl font-semibold text-text-primary mb-6">Accessibility & ARIA Issues ({issues.length})</h3>
+        <div className="space-y-3">
+          {issues.map((issue, idx) => {
+            const isOpen = expanded === idx;
+            return (
+              <motion.div
+                key={idx}
+                className={`p-4 rounded-lg border border-blue-500/30 bg-blue-500/10 relative group transition-shadow duration-200 ${isOpen ? 'shadow-xl' : ''}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                tabIndex={0}
+                aria-expanded={isOpen}
+                aria-controls={`aria-issue-details-${idx}`}
+                onKeyDown={e => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setExpanded(isOpen ? null : idx);
+                  }
+                }}
+              >
+                <div className="flex justify-between items-center cursor-pointer" onClick={() => setExpanded(isOpen ? null : idx)}>
+                  <div className="flex-1">
+                    <h5 className="font-medium text-text-primary mb-1 flex items-center gap-2">
+                      {issue.message}
+                      <span className="ml-2 text-xs px-2 py-0.5 rounded-full bg-accent-primary/10 text-accent-primary font-semibold uppercase tracking-wide">{issue.type.replace(/[-_]/g, ' ')}</span>
+                    </h5>
+                    <div className="text-xs text-text-secondary">Selector: <span className="font-mono">{issue.selector}</span></div>
+                  </div>
+                  <button
+                    aria-label={isOpen ? 'Collapse details' : 'Expand details'}
+                    className="ml-2 p-1 rounded focus:outline-none focus:ring-2 focus:ring-accent-primary"
+                    tabIndex={-1}
+                  >
+                    <svg className={`w-5 h-5 transition-transform duration-200 ${isOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                      <path d="M9 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                </div>
+                {isOpen && (
+                  <div id={`aria-issue-details-${idx}`} className="mt-4 space-y-2 animate-fade-in">
+                    <div className="text-sm text-text-secondary"><strong>Selector:</strong> <span className="font-mono">{issue.selector}</span></div>
+                    <div className="text-sm text-text-secondary"><strong>Message:</strong> {issue.message}</div>
+                    <div className="bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
+                      <p className="text-accent-primary text-sm font-medium mb-1">Code Snippet:</p>
+                      <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20 whitespace-pre-wrap md:whitespace-pre">
+                        <code>{issue.snippet}</code>
+                      </pre>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function AuditPageContent() {
   const params = useParams();
   const id = params.id as string;
@@ -1545,52 +1644,27 @@ function AuditPageContent() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-text-primary mb-2">SEO Audit Results</h1>
-              <p className="text-text-secondary">{result.url}</p>
-              <p className="text-sm text-text-secondary">
-                Audited on {new Date(result.fetched_at).toLocaleString()}
-              </p>
-              {isSampleMode && (
-                <motion.div 
-                  className="mt-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-accent-primary/20 text-accent-primary">
+          <div className="relative rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-accent-primary/80 to-accent-secondary/80 p-6 md:p-10 flex flex-col md:flex-row items-center md:items-end gap-4 md:gap-8 border border-accent-primary/30">
+            {/* SEO Icon */}
+            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 border-2 border-white/20 shadow-lg">
+              <svg className="w-10 h-10 md:w-14 md:h-14 text-white/90" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
+                <path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-white drop-shadow mb-2 tracking-tight">SEO Audit Results</h1>
+              <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white/90 font-medium text-sm md:text-base truncate max-w-xs md:max-w-md shadow">{result.url}</span>
+                <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white/80 font-medium text-xs md:text-sm shadow border border-white/20">Audited on {new Date(result.fetched_at).toLocaleString()}</span>
+                {isSampleMode && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-accent-primary/30 text-white shadow ml-2">
                     Sample Data
                   </span>
-                </motion.div>
-              )}
+                )}
+              </div>
             </div>
-            {isDevMode && (
-              <motion.div 
-                className="flex flex-col gap-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <button
-                  onClick={() => {
-                    const newUrl = isSampleMode
-                      ? window.location.pathname
-                      : `${window.location.pathname}?sample=true`;
-                    window.location.href = newUrl;
-                  }}
-                  className="px-3 py-1 text-xs bg-gray-700/20 text-text-secondary rounded border hover:bg-gray-700/30 transition-colors"
-                >
-                  {isSampleMode ? "Show Real Data" : "Show Sample Data"}
-                </button>
-                <a
-                  href="/"
-                  className="px-3 py-1 text-xs bg-accent-primary/20 text-accent-primary rounded border hover:bg-accent-primary/30 transition-colors text-center"
-                >
-                  New Audit
-                </a>
-              </motion.div>
-            )}
           </div>
         </motion.div>
 
@@ -1707,6 +1781,7 @@ function AuditPageContent() {
             >
               <ModernIssueList issues={result.issues} />
               <ModernQuickWins quickWins={result.quick_wins} />
+              <AccessibilityIssuesPanel issues={result.accessibility_issues} />
             </motion.div>
           </>
         )}

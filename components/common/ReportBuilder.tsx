@@ -238,6 +238,24 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
           </div>
         </div>
       </div>
+      {isOpen && (
+        <button
+          onClick={generateReport}
+          disabled={isGenerating}
+          className="fixed bottom-6 right-6 z-50 md:hidden flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 shadow-lg hover:bg-blue-700 text-white text-2xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+          aria-label="Generate Report"
+          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
+        >
+          {isGenerating ? (
+            <svg className="animate-spin w-8 h-8" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+            </svg>
+          ) : (
+            <span>📊</span>
+          )}
+        </button>
+      )}
     </div>
   );
 }

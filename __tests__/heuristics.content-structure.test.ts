@@ -26,6 +26,7 @@ test("content scoring - good word count gets high score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -60,6 +61,7 @@ test("image optimization scoring - images with alt text get high score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -91,6 +93,7 @@ test("schema markup scoring - presence of schema gets high score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });

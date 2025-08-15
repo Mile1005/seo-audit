@@ -100,6 +100,12 @@ export interface AuditResult {
     impressions: number | null;
     clicks: number | null;
   };
+  accessibility_issues: Array<{
+    type: string;
+    selector: string;
+    message: string;
+    snippet: string;
+  }>;
 }
 
 /**
@@ -196,6 +202,7 @@ export function calculateAudit(
       impressions: null,
       clicks: null,
     },
+    accessibility_issues: parsed.accessibilityIssues || [],
   };
 }
 

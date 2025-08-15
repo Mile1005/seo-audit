@@ -24,6 +24,7 @@ test("missing meta description triggers high severity issue with snippet", () =>
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -61,6 +62,7 @@ test("missing title triggers high severity issue", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -95,6 +97,7 @@ test("missing H1 triggers high severity issue", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -129,6 +132,7 @@ test("multiple H1s trigger medium severity issue", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -162,6 +166,7 @@ test("missing canonical URL triggers medium severity issue", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -196,6 +201,7 @@ test("noindex directive triggers high severity issue", () => {
     isCanonicalSelfReference: false,
     hasNoindex: true,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });

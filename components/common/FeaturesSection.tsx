@@ -99,7 +99,7 @@ export default function FeaturesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
         >
           {features.map((feature, index) => (
             <motion.div
@@ -109,20 +109,20 @@ export default function FeaturesSection() {
                 y: -10,
                 transition: { duration: 0.3 }
               }}
-              className="glass-card p-6 relative overflow-hidden group"
+              className="glass-card p-6 relative overflow-hidden group rounded-2xl shadow-lg"
+              aria-label={feature.title}
             >
-              {/* Gradient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
-              
+              {/* Always-on gradient for mobile, hover for desktop */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-20 md:opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
               {/* Icon */}
               <motion.div
                 className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 relative z-10`}
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.2 }}
+                aria-hidden="true"
               >
                 {feature.icon}
               </motion.div>
-
               {/* Content */}
               <div className="relative z-10">
                 <h3 className="text-xl font-semibold text-text-primary mb-3">
@@ -132,11 +132,13 @@ export default function FeaturesSection() {
                   {feature.description}
                 </p>
               </div>
-
               {/* Hover Effect */}
               <div className="absolute inset-0 border border-accent-primary/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
+          {/* Floating/fading accent for section depth */}
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-32 h-32 bg-accent-primary/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
+          <div className="absolute bottom-0 right-0 w-24 h-24 bg-accent-secondary/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true" />
         </motion.div>
 
         {/* Floating Elements */}

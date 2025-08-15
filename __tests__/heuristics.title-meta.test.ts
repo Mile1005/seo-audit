@@ -24,6 +24,7 @@ test("title length scoring - optimal length gets high score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -56,6 +57,7 @@ test("title length scoring - too short title gets low score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -88,6 +90,7 @@ test("title length scoring - too long title gets low score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
@@ -123,6 +126,7 @@ test("keyword inclusion in title improves score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   // Title without keyword
@@ -146,6 +150,7 @@ test("keyword inclusion in title improves score", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const resWithKeyword = calculateAudit(url, parsedWithKeyword, { targetKeyword });
@@ -183,6 +188,7 @@ test("meta description length scoring", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   // Short meta description
@@ -206,6 +212,7 @@ test("meta description length scoring", () => {
     isCanonicalSelfReference: false,
     hasNoindex: false,
     hasNofollow: false,
+    accessibilityIssues: [],
   };
   
   const resOptimal = calculateAudit(url, parsedOptimal, { targetKeyword: "SEO" });
