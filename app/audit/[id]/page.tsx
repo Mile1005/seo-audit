@@ -561,245 +561,337 @@ function ModernActionButtons({ result }: { result: AuditResult }) {
 }
 
 // Modern Competitors Tab Component
-function ModernCompetitorsTab({ result }: { result: AuditResult }) {
-  const [keyword, setKeyword] = useState("");
-  const [country, setCountry] = useState("us");
-  const [serpResults, setSerpResults] = useState<any[]>([]);
+function ModernCompetitorsTab() {
+  const [keywords, setKeywords] = useState<string[]>([""]);
+  const [countries, setCountries] = useState<string[]>(["us"]);
+  const [results, setResults] = useState<any>({});
+  const [usage, setUsage] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const MAX_KEYWORDS = 5;
+  const MAX_COUNTRIES = 2;
+  const countryOptions = [
+    { value: "us", label: "United States" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "ca", label: "Canada" },
+    { value: "au", label: "Australia" },
+    { value: "de", label: "Germany" },
+    { value: "fr", label: "France" },
+    { value: "es", label: "Spain" },
+    { value: "it", label: "Italy" },
+    { value: "nl", label: "Netherlands" },
+    { value: "jp", label: "Japan" },
+    { value: "br", label: "Brazil" },
+    { value: "mx", label: "Mexico" },
+    { value: "in", label: "India" },
+  ];
+
+  const handleKeywordChange = (i: number, value: string) => {
+    setKeywords((prev) => {
+      const next = [...prev];
+      next[i] = value;
+      return next;
+    });
+  };
+  const addKeyword = () => {
+    if (keywords.length < MAX_KEYWORDS) setKeywords((prev) => [...prev, ""]);
+  };
+  const removeKeyword = (i: number) => {
+    if (keywords.length > 1) setKeywords((prev) => prev.filter((_, idx) => idx !== i));
+  };
+  const handleCountryChange = (i: number, value: string) => {
+    setCountries((prev) => {
+      const next = [...prev];
+      next[i] = value;
+      return next;
+    });
+  };
+  const addCountry = () => {
+    if (countries.length < MAX_COUNTRIES) setCountries((prev) => [...prev, "us"]);
+  };
+  const removeCountry = (i: number) => {
+    if (countries.length > 1) setCountries((prev) => prev.filter((_, idx) => idx !== i));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!keyword.trim()) return;
-
     setLoading(true);
     setError(null);
-
+    setResults({});
+    setUsage(0);
     try {
       const response = await fetch("/api/serp.snapshot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ keyword: keyword.trim(), country }),
+        body: JSON.stringify({ keyword: keywords, country: countries }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        setSerpResults(data.results || []);
+        setResults(data.results || {});
+        setUsage(data.usage || 0);
       } else {
         setError(data.error || "Failed to fetch competitor data");
       }
-    } catch (error) {
+    } catch (err) {
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const getTitleLengthColor = (length: number) => {
-    if (length < 30) return "text-red-600";
-    if (length < 45) return "text-yellow-600";
-    if (length <= 60) return "text-green-600";
-    return "text-red-600";
-  };
-
-  const getTitleLengthStatus = (length: number) => {
-    if (length < 30) return "Too Short";
-    if (length < 45) return "Short";
-    if (length <= 60) return "Optimal";
-    return "Too Long";
-  };
-
-  const generateTitleSuggestions = (currentTitle: string, keyword: string) => {
-    const suggestions = [];
-
-    // Suggestion 1: Keyword first
-    suggestions.push(`${keyword} - ${currentTitle.split(" - ")[0] || "Complete Guide"}`);
-
-    // Suggestion 2: Brand + Keyword
-    const brand = currentTitle.split(" - ")[1] || "Your Brand";
-    suggestions.push(`${keyword} | ${brand}`);
-
-    // Suggestion 3: Question format
-    suggestions.push(`Best ${keyword} Guide: Complete Tutorial & Tips`);
-
-    // Suggestion 4: Number format
-    suggestions.push(`Top 10 ${keyword} Strategies for 2024`);
-
-    return suggestions.filter((s) => s.length >= 45 && s.length <= 60);
-  };
+  // Helper: Domain analysis from organic results
+  function getDomainStats(results: any[]) {
+    const domainMap: Record<string, { count: number; positions: number[] }> = {};
+    results.forEach((r: any) => {
+      try {
+        const url = new URL(r.url);
+        const domain = url.hostname.replace(/^www\./, "");
+        if (!domainMap[domain]) domainMap[domain] = { count: 0, positions: [] };
+        domainMap[domain].count++;
+        domainMap[domain].positions.push(r.position);
+      } catch {}
+    });
+    return Object.entries(domainMap)
+      .map(([domain, { count, positions }]) => ({
+        domain,
+        count,
+        avgPosition: positions.reduce((a, b) => a + b, 0) / positions.length,
+      }))
+      .sort((a, b) => a.avgPosition - b.avgPosition);
+  }
 
   return (
-    <motion.div 
-      className="glass-card p-6 animated-gradient-hover"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h3 className="text-xl font-semibold text-text-primary mb-6">Competitor Analysis</h3>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="keyword" className="block text-sm font-medium text-text-secondary mb-1">
-              Target Keyword
-            </label>
-            <input
-              type="text"
-              id="keyword"
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              placeholder="Enter your target keyword"
-              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
-              required
-            />
-          </div>
-          <div>
-            <label htmlFor="country" className="block text-sm font-medium text-text-secondary mb-1">
-              Country
-            </label>
-            <select
-              id="country"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
-            >
-              <option value="us">United States</option>
-              <option value="uk">United Kingdom</option>
-              <option value="ca">Canada</option>
-              <option value="au">Australia</option>
-              <option value="de">Germany</option>
-              <option value="fr">France</option>
-              <option value="es">Spain</option>
-              <option value="it">Italy</option>
-              <option value="nl">Netherlands</option>
-              <option value="jp">Japan</option>
-              <option value="br">Brazil</option>
-              <option value="mx">Mexico</option>
-              <option value="in">India</option>
-            </select>
-          </div>
-        </div>
-        <button
-          type="submit"
-          disabled={loading || !keyword.trim()}
-          className="w-full md:w-auto px-6 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-        >
-          {loading ? "Analyzing..." : "Analyze Competitors"}
-        </button>
-      </form>
-
-      {/* Error Display */}
-      {error && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mt-4">
-          <p className="text-red-400">{error}</p>
-        </div>
-      )}
-
-      {/* Results Table */}
-      {serpResults.length > 0 && (
-        <motion.div 
-          className="glass-card overflow-hidden"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="px-6 py-4 border-b border-gray-700">
-            <h3 className="text-xl font-semibold text-text-primary">
-              Top 10 Search Results for &quot;{keyword}&quot;
-            </h3>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-bg-primary">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Position
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Title
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    URL
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                    Length
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-bg-primary divide-y divide-gray-700">
-                {serpResults.map((result, index) => (
-                  <tr key={index} className="hover:bg-bg-secondary/20">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
-                      #{result.position}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-text-primary">
-                      <div className="max-w-md">
-                        <div className="font-medium text-accent-primary hover:text-accent-primary/90">
-                          <a href={result.url} target="_blank" rel="noopener noreferrer">
-                            {result.title}
-                          </a>
-                        </div>
-                        <div className="text-text-secondary mt-1 line-clamp-2">{result.description}</div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-text-secondary">
-                      <div className="max-w-xs truncate">{result.url}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className={`font-medium ${getTitleLengthColor(result.title.length)}`}>
-                        {result.title.length} chars
-                      </span>
-                      <div className="text-xs text-text-secondary">
-                        {getTitleLengthStatus(result.title.length)}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </motion.div>
-      )}
-
-      {/* Title Suggestions */}
-      {serpResults.length > 0 && result.detected.title && (
-        <motion.div 
-          className="glass-card p-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h3 className="text-xl font-semibold text-text-primary mb-6">
-            Title Optimization Suggestions
-          </h3>
-          <div className="space-y-4">
-            <div className="bg-bg-secondary/50 p-4 rounded-lg">
-              <h4 className="font-medium text-text-primary mb-2">Current Title</h4>
-              <p className="text-text-secondary">{result.detected.title}</p>
-              <p className={`text-sm mt-1 ${getTitleLengthColor(result.detected.title.length)}`}>
-                {result.detected.title.length} characters -{" "}
-                {getTitleLengthStatus(result.detected.title.length)}
-              </p>
+    <motion.div className="w-full max-w-7xl mx-auto p-4 md:p-8 glass-card-enhanced" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-8 text-center">Competitor Analysis</h2>
+      <form onSubmit={handleSubmit} className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <label className="block text-lg font-semibold mb-2">Target Keywords (max {MAX_KEYWORDS})</label>
+          {keywords.map((kw, i) => (
+            <div key={i} className="flex items-center mb-2 gap-2">
+              <input
+                type="text"
+                value={kw}
+                onChange={(e) => handleKeywordChange(i, e.target.value)}
+                placeholder="Enter keyword"
+                className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-bg-primary text-white focus:ring-2 focus:ring-accent-primary"
+                required
+                maxLength={100}
+              />
+              {keywords.length > 1 && (
+                <button type="button" onClick={() => removeKeyword(i)} className="text-red-400 px-2 py-1 rounded hover:bg-red-500/20">✕</button>
+              )}
             </div>
-
-            <div>
-              <h4 className="font-medium text-text-primary mb-2">Suggested Improvements</h4>
-              <div className="space-y-2">
-                {generateTitleSuggestions(result.detected.title, keyword).map(
-                  (suggestion, index) => (
-                    <div key={index} className="bg-accent-primary/20 p-3 rounded-lg border border-accent-primary/30">
-                      <p className="text-accent-primary font-medium">{suggestion}</p>
-                      <p className="text-sm text-accent-primary/90 mt-1">
-                        {suggestion.length} characters - Optimal
-                      </p>
+          ))}
+          {keywords.length < MAX_KEYWORDS && (
+            <button type="button" onClick={addKeyword} className="mt-2 px-4 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90">+ Add Keyword</button>
+          )}
+        </div>
+        <div>
+          <label className="block text-lg font-semibold mb-2">Countries (max {MAX_COUNTRIES})</label>
+          {countries.map((c, i) => (
+            <div key={i} className="flex items-center mb-2 gap-2">
+              <select
+                value={c}
+                onChange={(e) => handleCountryChange(i, e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-bg-primary text-white focus:ring-2 focus:ring-accent-primary"
+                required
+              >
+                {countryOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>{opt.label}</option>
+                ))}
+              </select>
+              {countries.length > 1 && (
+                <button type="button" onClick={() => removeCountry(i)} className="text-red-400 px-2 py-1 rounded hover:bg-red-500/20">✕</button>
+              )}
+            </div>
+          ))}
+          {countries.length < MAX_COUNTRIES && (
+            <button type="button" onClick={addCountry} className="mt-2 px-4 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90">+ Add Country</button>
+          )}
+        </div>
+        <div className="md:col-span-2 flex flex-col md:flex-row items-center gap-4 mt-4">
+          <button type="submit" disabled={loading} className="px-8 py-3 bg-accent-primary text-white rounded-xl font-semibold text-lg hover:bg-accent-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all">{loading ? "Analyzing..." : "Analyze Competitors"}</button>
+          <div className="flex-1 text-right w-full md:w-auto">
+            <span className="text-sm text-text-secondary">SERPAPI usage: <span className="font-bold text-accent-primary">{usage}</span> / 250</span>
+          </div>
+        </div>
+        {error && <div className="md:col-span-2 bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-red-400">{error}</div>}
+      </form>
+      {/* Results Display (advanced) */}
+      <div className="w-full overflow-x-auto">
+        {Object.keys(results).length > 0 && (
+          <div className="space-y-12">
+            {Object.entries(results).map(([key, data]: any) => (
+              <div key={key} className="glass-card p-6 mb-8">
+                <h3 className="text-2xl font-bold text-accent-primary mb-4">{key.replace(":", " — ").toUpperCase()}</h3>
+                {data.error ? (
+                  <div className="text-red-400">{data.error}: {data.details}</div>
+                ) : (
+                  <>
+                    {/* Organic Results Table */}
+                    <div className="overflow-x-auto mb-6">
+                      <table className="w-full text-sm">
+                        <thead>
+                          <tr className="bg-bg-secondary">
+                            <th className="px-4 py-2 text-left">#</th>
+                            <th className="px-4 py-2 text-left">Title</th>
+                            <th className="px-4 py-2 text-left">URL</th>
+                            <th className="px-4 py-2 text-left">Snippet</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {data.results?.map((r: any, i: number) => (
+                            <tr key={i} className="border-b border-gray-700 hover:bg-bg-secondary/20">
+                              <td className="px-4 py-2 font-bold text-accent-primary">#{r.position}</td>
+                              <td className="px-4 py-2"><a href={r.url} target="_blank" rel="noopener noreferrer" className="text-accent-primary hover:underline font-semibold">{r.title}</a></td>
+                              <td className="px-4 py-2 text-text-secondary max-w-xs truncate">{r.url}</td>
+                              <td className="px-4 py-2 text-text-secondary max-w-md truncate">{r.description}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
-                  )
+                    {/* Domain/Competitor Analysis */}
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-accent-secondary mb-2">Domain/Competitor Analysis</h4>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="bg-bg-secondary">
+                              <th className="px-4 py-2 text-left">Domain</th>
+                              <th className="px-4 py-2 text-left">Appearances</th>
+                              <th className="px-4 py-2 text-left">Avg. Position</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {getDomainStats(data.results || []).map((d, i) => (
+                              <tr key={i} className="border-b border-gray-700">
+                                <td className="px-4 py-2 font-medium text-accent-primary">{d.domain}</td>
+                                <td className="px-4 py-2">{d.count}</td>
+                                <td className="px-4 py-2">{d.avgPosition.toFixed(2)}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    {/* Featured Snippet */}
+                    {data.featured_snippet && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">Featured Snippet</h4>
+                        <div className="bg-accent-primary/10 border border-accent-primary/30 rounded-lg p-4">
+                          <div className="font-bold text-accent-primary mb-1">{data.featured_snippet.title}</div>
+                          <div className="text-text-secondary mb-1">{data.featured_snippet.snippet}</div>
+                          {data.featured_snippet.link && <a href={data.featured_snippet.link} target="_blank" rel="noopener noreferrer" className="text-accent-primary underline">{data.featured_snippet.link}</a>}
+                        </div>
+                      </div>
+                    )}
+                    {/* People Also Ask */}
+                    {data.people_also_ask && data.people_also_ask.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">People Also Ask</h4>
+                        <ul className="space-y-2">
+                          {data.people_also_ask.map((paa: any, i: number) => (
+                            <li key={i} className="bg-bg-secondary/50 border border-accent-primary/20 rounded-lg p-3">
+                              <div className="font-medium text-accent-primary mb-1">{paa.question}</div>
+                              <div className="text-text-secondary">{paa.snippet}</div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {/* Related Searches */}
+                    {data.related_searches && data.related_searches.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">Related Searches</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {data.related_searches.map((rel: any, i: number) => (
+                            <span key={i} className="px-3 py-1 bg-accent-secondary/10 text-accent-secondary text-xs rounded-full border border-accent-secondary/30">{rel.query || rel}</span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    {/* Ads */}
+                    {data.ads && data.ads.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">Ads</h4>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="bg-bg-secondary">
+                                <th className="px-4 py-2 text-left">Title</th>
+                                <th className="px-4 py-2 text-left">URL</th>
+                                <th className="px-4 py-2 text-left">Snippet</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {data.ads.map((ad: any, i: number) => (
+                                <tr key={i} className="border-b border-gray-700">
+                                  <td className="px-4 py-2 font-medium text-accent-primary">{ad.title}</td>
+                                  <td className="px-4 py-2 text-text-secondary max-w-xs truncate">{ad.link}</td>
+                                  <td className="px-4 py-2 text-text-secondary max-w-md truncate">{ad.snippet}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+                    {/* Local Results */}
+                    {data.local_results && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">Local Pack</h4>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="bg-bg-secondary">
+                                <th className="px-4 py-2 text-left">Name</th>
+                                <th className="px-4 py-2 text-left">Address</th>
+                                <th className="px-4 py-2 text-left">Rating</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {(data.local_results?.places || []).map((place: any, i: number) => (
+                                <tr key={i} className="border-b border-gray-700">
+                                  <td className="px-4 py-2 font-medium text-accent-primary">{place.title}</td>
+                                  <td className="px-4 py-2 text-text-secondary">{place.address}</td>
+                                  <td className="px-4 py-2 text-text-secondary">{place.rating}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+                    {/* Knowledge Graph */}
+                    {data.knowledge_graph && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">Knowledge Graph</h4>
+                        <div className="bg-accent-secondary/10 border border-accent-secondary/30 rounded-lg p-4">
+                          <div className="font-bold text-accent-secondary mb-1">{data.knowledge_graph.title}</div>
+                          <div className="text-text-secondary mb-1">{data.knowledge_graph.description}</div>
+                          {data.knowledge_graph.website && <a href={data.knowledge_graph.website} target="_blank" rel="noopener noreferrer" className="text-accent-secondary underline">{data.knowledge_graph.website}</a>}
+                        </div>
+                      </div>
+                    )}
+                    {/* Sitelinks */}
+                    {data.sitelinks && data.sitelinks.length > 0 && (
+                      <div className="mb-6">
+                        <h4 className="text-lg font-semibold text-accent-secondary mb-2">Sitelinks</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {data.sitelinks.map((sl: any, i: number) => (
+                            <a key={i} href={sl.link} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-accent-primary/10 text-accent-primary text-xs rounded-full border border-accent-primary/30 hover:bg-accent-primary/20 transition-colors">{sl.title || sl.link}</a>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
-            </div>
+            ))}
           </div>
-        </motion.div>
-      )}
+        )}
+      </div>
     </motion.div>
   );
 }
@@ -1796,7 +1888,7 @@ function AuditPageContent() {
           </>
         )}
 
-        {activeTab === "competitors" && <ModernCompetitorsTab result={result} />}
+        {activeTab === "competitors" && <ModernCompetitorsTab />}
 
         {activeTab === "crawl" && <ModernCrawlTab result={result} />}
 

@@ -22,8 +22,16 @@ interface SerpSnapshotResponse {
   keyword: string;
   country: string;
   results: SerpResult[];
+  ads?: any[];
+  featured_snippet?: any;
+  people_also_ask?: any[];
+  related_searches?: any[];
+  local_results?: any;
+  knowledge_graph?: any;
+  sitelinks?: any[];
   cached: boolean;
   timestamp: string;
+  usedFallback?: boolean;
 }
 
 // Simple in-memory cache (in production, use Redis)
@@ -140,7 +148,7 @@ function extractSerpResultsCheerio(html: string): SerpResult[] {
   return results;
 }
 
-async function fetchSerpApiFallback(keyword: string, country: string): Promise<SerpResult[]> {
+async function fetchSerpApiFallback(keyword: string, country: string, isBatch = false): Promise<any> {
   // Example: SerpAPI (https://serpapi.com/) - requires API key
   const SERPAPI_KEY = process.env.SERPAPI_KEY;
   if (!SERPAPI_KEY) throw new Error("No SERPAPI_KEY set in environment");
@@ -152,12 +160,12 @@ async function fetchSerpApiFallback(keyword: string, country: string): Promise<S
   // Type assertion for SerpAPI response
   const organicResults = (data as any).organic_results;
   if (!organicResults) throw new Error("No results from SerpAPI");
-  return organicResults.slice(0, 10).map((r: any, i: number) => ({
+  return { organic_results: organicResults.slice(0, 10).map((r: any, i: number) => ({
     title: r.title,
     url: r.link,
     description: r.snippet || "",
     position: i + 1,
-  }));
+  })), ads: (data as any).ads || [], featured_snippet: (data as any).featured_snippet || null, people_also_ask: (data as any).people_also_ask || [], related_searches: (data as any).related_searches || [], local_results: (data as any).local_results || null, knowledge_graph: (data as any).knowledge_graph || null, sitelinks: (data as any).sitelinks || [] };
 }
 
 /**
@@ -174,66 +182,79 @@ function isCacheValid(timestamp: number): boolean {
   return Date.now() - timestamp < CACHE_DURATION;
 }
 
+const MAX_KEYWORDS = 5;
+const MAX_COUNTRIES = 2;
+
 export async function POST(request: NextRequest) {
   try {
     // Parse and validate request body
     const body = await request.json();
-    const { keyword, country } = SerpSnapshotRequest.parse(body);
-
-    // Check cache first
-    const cacheKey = getCacheKey(keyword, country);
-    const cached = serpCache.get(cacheKey);
-    if (cached && isCacheValid(cached.timestamp)) {
-      return NextResponse.json({
-        ...cached.data,
-        cached: true,
-        timestamp: new Date().toISOString(),
-      });
+    let { keyword, country } = SerpSnapshotRequest.parse(body);
+    // Support batch: keyword and country can be arrays
+    const keywords = Array.isArray(keyword) ? keyword : keyword.split(/[,\n]+/).map((k: string) => k.trim()).filter(Boolean);
+    const countries = Array.isArray(country) ? country : [country];
+    if (keywords.length > MAX_KEYWORDS) {
+      return NextResponse.json({ error: `Max ${MAX_KEYWORDS} keywords allowed per analysis.` }, { status: 400 });
     }
-
-    let results: SerpResult[] = [];
-    let usedFallback = false;
-    const isServerless = !!process.env.VERCEL || !!process.env.NEXT_PUBLIC_DISABLE_PLAYWRIGHT;
-    if (isServerless) {
-      // On Vercel/serverless, skip Playwright and use SerpAPI directly
-      try {
-        results = await fetchSerpApiFallback(keyword, country);
-        usedFallback = true;
-      } catch (apiErr) {
-        console.error("SerpAPI failed:", apiErr);
-        throw new Error("SerpAPI failed. Check your API key or try again later.");
-      }
-    } else {
-      // Local/VPS: Try Playwright first, then fallback
-      try {
-        results = await fetchGoogleSerpPlaywright(keyword, country);
-      } catch (err) {
-        console.error("Playwright SERP fetch failed, falling back to SerpAPI:", err);
-        try {
-          results = await fetchSerpApiFallback(keyword, country);
-          usedFallback = true;
-        } catch (apiErr) {
-          console.error("SerpAPI fallback also failed:", apiErr);
-          throw new Error("Both Playwright and SerpAPI failed. Try again later or check your API key.");
+    if (countries.length > MAX_COUNTRIES) {
+      return NextResponse.json({ error: `Max ${MAX_COUNTRIES} countries allowed per analysis.` }, { status: 400 });
+    }
+    // Track usage
+    let usage = 0;
+    const results: Record<string, any> = {};
+    for (const kw of keywords) {
+      for (const c of countries) {
+        const cacheKey = getCacheKey(kw, c);
+        const cached = serpCache.get(cacheKey);
+        if (cached && isCacheValid(cached.timestamp)) {
+          results[`${kw}:${c}`] = { ...cached.data, cached: true, timestamp: new Date().toISOString() };
+        } else {
+          let serpData: any = {};
+          let usedFallback = false;
+          const isServerless = !!process.env.VERCEL || !!process.env.NEXT_PUBLIC_DISABLE_PLAYWRIGHT;
+          if (isServerless) {
+            try {
+              serpData = await fetchSerpApiFallback(kw, c, true);
+              usedFallback = true;
+            } catch (apiErr) {
+              results[`${kw}:${c}`] = { error: "SerpAPI failed", details: apiErr instanceof Error ? apiErr.message : apiErr };
+              continue;
+            }
+          } else {
+            try {
+              serpData = await fetchGoogleSerpPlaywright(kw, c);
+            } catch (err) {
+              try {
+                serpData = await fetchSerpApiFallback(kw, c, true);
+                usedFallback = true;
+              } catch (apiErr) {
+                results[`${kw}:${c}`] = { error: "Both Playwright and SerpAPI failed", details: apiErr instanceof Error ? apiErr.message : apiErr };
+                continue;
+              }
+            }
+          }
+          const response: SerpSnapshotResponse = {
+            keyword: kw,
+            country: c,
+            results: serpData.organic_results || [],
+            ads: serpData.ads || [],
+            featured_snippet: serpData.featured_snippet || null,
+            people_also_ask: serpData.people_also_ask || [],
+            related_searches: serpData.related_searches || [],
+            local_results: serpData.local_results || null,
+            knowledge_graph: serpData.knowledge_graph || null,
+            sitelinks: serpData.sitelinks || [],
+            cached: false,
+            timestamp: new Date().toISOString(),
+            usedFallback,
+          };
+          serpCache.set(cacheKey, { data: response, timestamp: Date.now() });
+          results[`${kw}:${c}`] = response;
+          usage++;
         }
       }
     }
-
-    const response: SerpSnapshotResponse = {
-      keyword,
-      country,
-      results,
-      cached: false,
-      timestamp: new Date().toISOString(),
-    };
-    serpCache.set(cacheKey, { data: response, timestamp: Date.now() });
-    if (serpCache.size > 100) {
-      const entries = Array.from(serpCache.entries());
-      entries.sort((a, b) => b[1].timestamp - a[1].timestamp);
-      const toDelete = entries.slice(100);
-      toDelete.forEach(([key]) => serpCache.delete(key));
-    }
-    return NextResponse.json({ ...response, usedFallback });
+    return NextResponse.json({ results, usage, keywords: keywords.length, countries: countries.length, maxKeywords: MAX_KEYWORDS, maxCountries: MAX_COUNTRIES });
   } catch (error) {
     console.error("SERP snapshot error:", error);
     if (error instanceof z.ZodError) {
