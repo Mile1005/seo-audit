@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 const ReportBuilder = dynamic(() => import("../../../components/common/ReportBuilder"), { ssr: false });
 const FixPack = dynamic(() => import("../../../components/common/FixPack"), { ssr: false });
@@ -14,8 +15,8 @@ interface AuditResponse {
   error?: string;
 }
 
-// Score Ring Component
-function ScoreRing({
+// Modern Score Ring Component
+function ModernScoreRing({
   score,
   label,
   size = "md",
@@ -31,13 +32,24 @@ function ScoreRing({
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   const getColor = (score: number) => {
-    if (score >= 80) return "#10B981"; // green
-    if (score >= 60) return "#F59E0B"; // yellow
-    return "#EF4444"; // red
+    if (score >= 80) return "#00ff88"; // green
+    if (score >= 60) return "#ffaa00"; // yellow
+    return "#ff4444"; // red
+  };
+
+  const getGlowColor = (score: number) => {
+    if (score >= 80) return "rgba(0, 255, 136, 0.3)";
+    if (score >= 60) return "rgba(255, 170, 0, 0.3)";
+    return "rgba(255, 68, 68, 0.3)";
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <motion.div 
+      className="flex flex-col items-center"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="relative">
         <svg
           width={radius * 2 + strokeWidth}
@@ -49,7 +61,7 @@ function ScoreRing({
             cx={radius + strokeWidth / 2}
             cy={radius + strokeWidth / 2}
             r={radius}
-            stroke="#E5E7EB"
+            stroke="#333333"
             strokeWidth={strokeWidth}
             fill="none"
           />
@@ -65,82 +77,88 @@ function ScoreRing({
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
             className="transition-all duration-1000 ease-out"
+            style={{ filter: `drop-shadow(0 0 8px ${getGlowColor(score)})` }}
           />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
           <span
-            className={`font-bold ${size === "sm" ? "text-sm" : size === "lg" ? "text-xl" : "text-lg"}`}
+            className={`font-bold text-text-primary ${size === "sm" ? "text-sm" : size === "lg" ? "text-xl" : "text-lg"}`}
           >
             {score}
           </span>
         </div>
       </div>
       <span
-        className={`mt-2 text-center font-medium ${size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"}`}
+        className={`mt-2 text-center font-medium text-text-secondary ${size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"}`}
       >
         {label}
       </span>
-    </div>
+    </motion.div>
   );
 }
 
-// Detected Panel Component
-function DetectedPanel({ detected }: { detected: AuditResult["detected"] }) {
+// Modern Detected Panel Component
+function ModernDetectedPanel({ detected }: { detected: AuditResult["detected"] }) {
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Detected Elements</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="text-xl font-semibold text-text-primary mb-6">Detected Elements</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
-          <h4 className="font-medium text-gray-700 mb-2">Page Elements</h4>
-          <div className="space-y-2 text-sm">
-            <div>
-              <span className="font-medium">Title:</span>
-              <span className="ml-2 text-gray-600">{detected.title || "Not found"}</span>
+          <h4 className="font-medium text-accent-primary mb-4">Page Elements</h4>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">Title:</span>
+              <span className="text-text-primary text-right max-w-xs truncate">{detected.title || "Not found"}</span>
             </div>
-            <div>
-              <span className="font-medium">Meta Description:</span>
-              <span className="ml-2 text-gray-600">{detected.meta_description || "Not found"}</span>
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">Meta Description:</span>
+              <span className="text-text-primary text-right max-w-xs truncate">{detected.meta_description || "Not found"}</span>
             </div>
-            <div>
-              <span className="font-medium">Canonical:</span>
-              <span className="ml-2 text-gray-600">{detected.canonical || "Not found"}</span>
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">Canonical:</span>
+              <span className="text-text-primary text-right max-w-xs truncate">{detected.canonical || "Not found"}</span>
             </div>
-            <div>
-              <span className="font-medium">H1:</span>
-              <span className="ml-2 text-gray-600">{detected.h1 || "Not found"}</span>
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">H1:</span>
+              <span className="text-text-primary text-right max-w-xs truncate">{detected.h1 || "Not found"}</span>
             </div>
           </div>
         </div>
         <div>
-          <h4 className="font-medium text-gray-700 mb-2">Content Structure</h4>
-          <div className="space-y-2 text-sm">
-            <div>
-              <span className="font-medium">H2 Headings:</span>
-              <span className="ml-2 text-gray-600">{detected.h2.length}</span>
+          <h4 className="font-medium text-accent-primary mb-4">Content Structure</h4>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">H2 Headings:</span>
+              <span className="text-text-primary">{detected.h2.length}</span>
             </div>
-            <div>
-              <span className="font-medium">H3 Headings:</span>
-              <span className="ml-2 text-gray-600">{detected.h3.length}</span>
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">H3 Headings:</span>
+              <span className="text-text-primary">{detected.h3.length}</span>
             </div>
-            <div>
-              <span className="font-medium">Images:</span>
-              <span className="ml-2 text-gray-600">{detected.images.length}</span>
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">Images:</span>
+              <span className="text-text-primary">{detected.images.length}</span>
             </div>
-            <div>
-              <span className="font-medium">Internal Links:</span>
-              <span className="ml-2 text-gray-600">{detected.internal_links.length}</span>
+            <div className="flex justify-between items-center py-2 border-b border-gray-700">
+              <span className="font-medium text-text-secondary">Internal Links:</span>
+              <span className="text-text-primary">{detected.internal_links.length}</span>
             </div>
           </div>
         </div>
       </div>
       {detected.json_ld_types.length > 0 && (
-        <div className="mt-4">
-          <h4 className="font-medium text-gray-700 mb-2">Schema Types</h4>
+        <div className="mt-6">
+          <h4 className="font-medium text-accent-primary mb-3">Schema Types</h4>
           <div className="flex flex-wrap gap-2">
             {detected.json_ld_types.map((type, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full"
+                className="px-3 py-1 bg-accent-primary/20 text-accent-primary text-xs rounded-full border border-accent-primary/30"
               >
                 {type}
               </span>
@@ -148,14 +166,12 @@ function DetectedPanel({ detected }: { detected: AuditResult["detected"] }) {
           </div>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
-// PerformancePanel component is now imported from components
-
-// Issue List Component
-function IssueList({ issues }: { issues: AuditResult["issues"] }) {
+// Modern Issue List Component
+function ModernIssueList({ issues }: { issues: AuditResult["issues"] }) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const copyToClipboard = async (text: string, id: string) => {
@@ -178,73 +194,94 @@ function IssueList({ issues }: { issues: AuditResult["issues"] }) {
   );
 
   const severityOrder = ["high", "medium", "low"];
-  const severityColors = {
-    high: "border-red-200 bg-red-50",
-    medium: "border-yellow-200 bg-yellow-50",
-    low: "border-blue-200 bg-blue-50",
+  const severityColors: Record<string, string> = {
+    high: "border-red-500/30 bg-red-500/10",
+    medium: "border-yellow-500/30 bg-yellow-500/10",
+    low: "border-blue-500/30 bg-blue-500/10",
   };
 
-  const severityLabels = {
+  const severityLabels: Record<string, string> = {
     high: "High Priority",
     medium: "Medium Priority",
     low: "Low Priority",
   };
 
-    return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Issues Found ({issues.length})</h3>
+  const severityTextColors: Record<string, string> = {
+    high: "text-red-400",
+    medium: "text-yellow-400",
+    low: "text-blue-400",
+  };
+
+  return (
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="text-xl font-semibold text-text-primary mb-6">Issues Found ({issues.length})</h3>
       <div className="space-y-6">
         {severityOrder.map((severity) => {
           const severityIssues = groupedIssues[severity];
           if (!severityIssues) return null;
 
           return (
-            <div key={severity}>
-              <h4
-                className={`font-medium mb-3 ${severity === "high" ? "text-red-700" : severity === "medium" ? "text-yellow-700" : "text-blue-700"}`}
-              >
-                {severityLabels[severity as keyof typeof severityLabels]} ({severityIssues.length})
+            <div key={severity} className="space-y-4">
+              <h4 className={`text-lg font-medium ${severityTextColors[severity]}`}>
+                {severityLabels[severity]} ({severityIssues.length})
               </h4>
               <div className="space-y-3">
-                {severityIssues.map((issue) => (
-                  <div
-                    key={issue.id}
-                    className={`border rounded-lg p-4 ${severityColors[severity as keyof typeof severityColors]}`}
+                {severityIssues.map((issue, index) => (
+                  <motion.div
+                    key={`${severity}-${index}`}
+                    className={`p-4 rounded-lg border ${severityColors[severity]} relative group`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <h5 className="font-medium text-gray-900">{issue.found}</h5>
-                      <span className="px-2 py-1 bg-white text-xs rounded-full font-medium capitalize">
-                        {issue.category.replace("_", " ")}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-2">{issue.why_it_matters}</p>
-                    <p className="text-sm font-medium text-gray-900 mb-3">{issue.recommendation}</p>
-                    {issue.snippet && (
-                      <div className="flex items-center justify-between">
-                        <code className="text-xs bg-white p-2 rounded border flex-1 mr-2 overflow-x-auto">
-                          {issue.snippet}
-                        </code>
-                        <button
-                          onClick={() => copyToClipboard(issue.snippet!, issue.id)}
-                          className="px-3 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50 transition-colors"
-                        >
-                          {copiedId === issue.id ? "Copied!" : "Copy"}
+                    <div className="flex justify-between items-start">
+                                             <div className="flex-1">
+                         <h5 className="font-medium text-text-primary mb-2">{issue.found}</h5>
+                         <p className="text-text-secondary text-sm mb-3">{issue.why_it_matters}</p>
+                         {issue.recommendation && (
+                           <div className="bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
+                             <p className="text-accent-primary text-sm font-medium mb-1">Recommendation:</p>
+                             <p className="text-text-secondary text-sm">{issue.recommendation}</p>
+                           </div>
+                         )}
+                       </div>
+                       {issue.snippet && (
+                         <button
+                           onClick={() => copyToClipboard(issue.snippet || '', `${severity}-${index}`)}
+                           className="ml-4 p-2 text-text-secondary hover:text-accent-primary transition-colors"
+                           title="Copy code"
+                         >
+                          {copiedId === `${severity}-${index}` ? (
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          ) : (
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                              <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                            </svg>
+                          )}
                         </button>
-                      </div>
-                    )}
-                  </div>
+                      )}
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           );
         })}
-        </div>
       </div>
-    );
-  }
+    </motion.div>
+  );
+}
 
-// Quick Wins Component
-function QuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }) {
+// Modern Quick Wins Component
+function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }) {
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const copyToClipboard = async (text: string, id: string) => {
@@ -258,56 +295,68 @@ function QuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }) {
   };
 
   const impactColors = {
-    high: "border-green-200 bg-green-50",
-    medium: "border-yellow-200 bg-yellow-50",
-    low: "border-blue-200 bg-blue-50",
+    high: "border-green-500/30 bg-green-500/10",
+    medium: "border-yellow-500/30 bg-yellow-500/10",
+    low: "border-blue-500/30 bg-blue-500/10",
   };
 
-    return (
-    <div className="bg-white rounded-lg shadow-sm border p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Wins ({quickWins.length})</h3>
+  return (
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="text-xl font-semibold text-text-primary mb-6">Quick Wins ({quickWins.length})</h3>
       <div className="space-y-3">
-        {quickWins.map((win) => (
-          <div
-            key={win.issue_id}
-            className={`border rounded-lg p-4 ${impactColors[win.estimated_impact]}`}
+        {quickWins.map((win, index) => (
+          <motion.div
+            key={`win-${index}`}
+            className={`p-4 rounded-lg border ${impactColors[win.estimated_impact]}`}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
           >
-            <div className="flex items-start justify-between mb-2">
-              <h5 className="font-medium text-gray-900">{win.action}</h5>
-              <span
-                className={`px-2 py-1 bg-white text-xs rounded-full font-medium capitalize ${
-                  win.estimated_impact === "high"
-                    ? "text-green-700"
-                    : win.estimated_impact === "medium"
-                      ? "text-yellow-700"
-                      : "text-blue-700"
-                }`}
-              >
-                {win.estimated_impact} impact
-              </span>
-            </div>
-            {win.snippet && (
-              <div className="flex items-center justify-between">
-                <code className="text-xs bg-white p-2 rounded border flex-1 mr-2 overflow-x-auto">
-                  {win.snippet}
-                </code>
-                <button
-                  onClick={() => copyToClipboard(win.snippet!, win.issue_id)}
-                  className="px-3 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50 transition-colors"
-                >
-                  {copiedId === win.issue_id ? "Copied!" : "Copy"}
+            <div className="flex justify-between items-start">
+                             <div className="flex-1">
+                 <h5 className="font-medium text-text-primary mb-2">{win.action}</h5>
+                 {win.snippet && (
+                   <div className="mt-3 bg-bg-secondary/50 p-3 rounded border border-accent-primary/20">
+                     <p className="text-accent-primary text-sm font-medium mb-1">Code:</p>
+                     <pre className="text-text-secondary text-sm overflow-x-auto p-2 rounded bg-bg-secondary/20">
+                       <code>{win.snippet}</code>
+                     </pre>
+                   </div>
+                 )}
+               </div>
+               {win.snippet && (
+                 <button
+                   onClick={() => copyToClipboard(win.snippet || '', `win-${index}`)}
+                   className="ml-4 p-2 text-text-secondary hover:text-accent-primary transition-colors"
+                   title="Copy code"
+                 >
+                  {copiedId === `win-${index}` ? (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  ) : (
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                      <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                    </svg>
+                  )}
                 </button>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          </motion.div>
         ))}
-        </div>
       </div>
-    );
-  }
+    </motion.div>
+  );
+}
 
-// Action Buttons Component
-function ActionButtons({ result }: { result: AuditResult }) {
+// Modern Action Buttons Component
+function ModernActionButtons({ result }: { result: AuditResult }) {
   const [showReportBuilder, setShowReportBuilder] = useState(false);
   const [showFixPack, setShowFixPack] = useState(false);
 
@@ -322,59 +371,62 @@ function ActionButtons({ result }: { result: AuditResult }) {
     URL.revokeObjectURL(url);
   };
 
-    return (
-    <>
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Actions</h3>
-        <div className="space-y-3">
-          <button
-            onClick={() => window.open(result.url, "_blank")}
-            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            View Page
-          </button>
-          <button
-            onClick={() => setShowReportBuilder(true)}
-            className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-          >
-            📊 Generate Report
-          </button>
-          <button
-            onClick={() => setShowFixPack(true)}
-            className="w-full px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
-          >
-            🔧 Copy Fix Pack
-          </button>
-          <button
-            onClick={downloadJSON}
-            className="w-full px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-          >
-            Download JSON
-          </button>
-          <button
-            onClick={() => {
-              const url = new URL(result.url);
-              window.open(
-                `https://search.google.com/test/rich-results?url=${encodeURIComponent(result.url)}`,
-                "_blank"
-              );
-            }}
-            className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-          >
-            Test Rich Results
-          </button>
-          <button
-            onClick={() => {
-              window.open(
-                `https://pagespeed.web.dev/?url=${encodeURIComponent(result.url)}`,
-                "_blank"
-              );
-            }}
-            className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-          >
-            PageSpeed Insights
-          </button>
-        </div>
+  return (
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="text-xl font-semibold text-text-primary mb-6">Actions</h3>
+      <div className="space-y-3">
+        <button
+          onClick={() => window.open(result.url, "_blank")}
+          className="w-full px-4 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 transition-colors"
+        >
+          View Page
+        </button>
+        <button
+          onClick={() => setShowReportBuilder(true)}
+          className="w-full px-4 py-2 bg-accent-secondary text-white rounded-lg hover:bg-accent-secondary/90 transition-colors"
+        >
+          📊 Generate Report
+        </button>
+        <button
+          onClick={() => setShowFixPack(true)}
+          className="w-full px-4 py-2 bg-accent-tertiary text-white rounded-lg hover:bg-accent-tertiary/90 transition-colors"
+        >
+          🔧 Copy Fix Pack
+        </button>
+        <button
+          onClick={downloadJSON}
+          className="w-full px-4 py-2 bg-text-primary text-white rounded-lg hover:bg-text-primary/90 transition-colors"
+        >
+          Download JSON
+        </button>
+        <button
+          onClick={() => {
+            const url = new URL(result.url);
+            window.open(
+              `https://search.google.com/test/rich-results?url=${encodeURIComponent(result.url)}`,
+              "_blank"
+            );
+          }}
+          className="w-full px-4 py-2 bg-accent-quaternary text-white rounded-lg hover:bg-accent-quaternary/90 transition-colors"
+        >
+          Test Rich Results
+        </button>
+        <button
+          onClick={() => {
+            window.open(
+              `https://pagespeed.web.dev/?url=${encodeURIComponent(result.url)}`,
+              "_blank"
+            );
+          }}
+          className="w-full px-4 py-2 bg-accent-quinary text-white rounded-lg hover:bg-accent-quinary/90 transition-colors"
+        >
+          PageSpeed Insights
+        </button>
       </div>
 
       {/* Report Builder Modal */}
@@ -390,12 +442,12 @@ function ActionButtons({ result }: { result: AuditResult }) {
       {showFixPack && (
         <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
       )}
-    </>
+    </motion.div>
   );
 }
 
-// Competitors Component
-function CompetitorsTab({ result }: { result: AuditResult }) {
+// Modern Competitors Tab Component
+function ModernCompetitorsTab({ result }: { result: AuditResult }) {
   const [keyword, setKeyword] = useState("");
   const [country, setCountry] = useState("us");
   const [serpResults, setSerpResults] = useState<any[]>([]);
@@ -464,119 +516,126 @@ function CompetitorsTab({ result }: { result: AuditResult }) {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Search Form */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Competitor Analysis</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="keyword" className="block text-sm font-medium text-gray-700 mb-1">
-                Target Keyword
-              </label>
-              <input
-                type="text"
-                id="keyword"
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                placeholder="Enter your target keyword"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
-                Country
-              </label>
-              <select
-                id="country"
-                value={country}
-                onChange={(e) => setCountry(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              >
-                <option value="us">United States</option>
-                <option value="uk">United Kingdom</option>
-                <option value="ca">Canada</option>
-                <option value="au">Australia</option>
-                <option value="de">Germany</option>
-                <option value="fr">France</option>
-                <option value="es">Spain</option>
-                <option value="it">Italy</option>
-                <option value="nl">Netherlands</option>
-                <option value="jp">Japan</option>
-                <option value="br">Brazil</option>
-                <option value="mx">Mexico</option>
-                <option value="in">India</option>
-              </select>
-              </div>
-            </div>
-          <button
-            type="submit"
-            disabled={loading || !keyword.trim()}
-            className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? "Analyzing..." : "Analyze Competitors"}
-          </button>
-        </form>
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="text-xl font-semibold text-text-primary mb-6">Competitor Analysis</h3>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="keyword" className="block text-sm font-medium text-text-secondary mb-1">
+              Target Keyword
+            </label>
+            <input
+              type="text"
+              id="keyword"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder="Enter your target keyword"
+              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
+              required
+            />
           </div>
+          <div>
+            <label htmlFor="country" className="block text-sm font-medium text-text-secondary mb-1">
+              Country
+            </label>
+            <select
+              id="country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
+            >
+              <option value="us">United States</option>
+              <option value="uk">United Kingdom</option>
+              <option value="ca">Canada</option>
+              <option value="au">Australia</option>
+              <option value="de">Germany</option>
+              <option value="fr">France</option>
+              <option value="es">Spain</option>
+              <option value="it">Italy</option>
+              <option value="nl">Netherlands</option>
+              <option value="jp">Japan</option>
+              <option value="br">Brazil</option>
+              <option value="mx">Mexico</option>
+              <option value="in">India</option>
+            </select>
+          </div>
+        </div>
+        <button
+          type="submit"
+          disabled={loading || !keyword.trim()}
+          className="w-full md:w-auto px-6 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          {loading ? "Analyzing..." : "Analyze Competitors"}
+        </button>
+      </form>
 
       {/* Error Display */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-600">{error}</p>
+        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mt-4">
+          <p className="text-red-400">{error}</p>
         </div>
       )}
 
       {/* Results Table */}
       {serpResults.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h3 className="text-lg font-semibold text-gray-900">
+        <motion.div 
+          className="glass-card overflow-hidden"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="px-6 py-4 border-b border-gray-700">
+            <h3 className="text-xl font-semibold text-text-primary">
               Top 10 Search Results for &quot;{keyword}&quot;
             </h3>
-                    </div>
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-bg-primary">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                     Position
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                     Title
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                     URL
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
                     Length
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-bg-primary divide-y divide-gray-700">
                 {serpResults.map((result, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <tr key={index} className="hover:bg-bg-secondary/20">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-primary">
                       #{result.position}
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-900">
+                    <td className="px-6 py-4 text-sm text-text-primary">
                       <div className="max-w-md">
-                        <div className="font-medium text-blue-600 hover:text-blue-800">
+                        <div className="font-medium text-accent-primary hover:text-accent-primary/90">
                           <a href={result.url} target="_blank" rel="noopener noreferrer">
                             {result.title}
                           </a>
-                  </div>
-                        <div className="text-gray-500 mt-1 line-clamp-2">{result.description}</div>
+                        </div>
+                        <div className="text-text-secondary mt-1 line-clamp-2">{result.description}</div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
+                    <td className="px-6 py-4 text-sm text-text-secondary">
                       <div className="max-w-xs truncate">{result.url}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <span className={`font-medium ${getTitleLengthColor(result.title.length)}`}>
                         {result.title.length} chars
                       </span>
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-text-secondary">
                         {getTitleLengthStatus(result.title.length)}
                       </div>
                     </td>
@@ -584,50 +643,55 @@ function CompetitorsTab({ result }: { result: AuditResult }) {
                 ))}
               </tbody>
             </table>
-              </div>
-            </div>
+          </div>
+        </motion.div>
       )}
 
       {/* Title Suggestions */}
       {serpResults.length > 0 && result.detected.title && (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">
+        <motion.div 
+          className="glass-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 className="text-xl font-semibold text-text-primary mb-6">
             Title Optimization Suggestions
           </h3>
-              <div className="space-y-4">
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium text-gray-900 mb-2">Current Title</h4>
-              <p className="text-gray-600">{result.detected.title}</p>
+          <div className="space-y-4">
+            <div className="bg-bg-secondary/50 p-4 rounded-lg">
+              <h4 className="font-medium text-text-primary mb-2">Current Title</h4>
+              <p className="text-text-secondary">{result.detected.title}</p>
               <p className={`text-sm mt-1 ${getTitleLengthColor(result.detected.title.length)}`}>
                 {result.detected.title.length} characters -{" "}
                 {getTitleLengthStatus(result.detected.title.length)}
               </p>
-                        </div>
+            </div>
 
             <div>
-              <h4 className="font-medium text-gray-900 mb-2">Suggested Improvements</h4>
+              <h4 className="font-medium text-text-primary mb-2">Suggested Improvements</h4>
               <div className="space-y-2">
                 {generateTitleSuggestions(result.detected.title, keyword).map(
                   (suggestion, index) => (
-                    <div key={index} className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                      <p className="text-blue-900 font-medium">{suggestion}</p>
-                      <p className="text-sm text-blue-700 mt-1">
+                    <div key={index} className="bg-accent-primary/20 p-3 rounded-lg border border-accent-primary/30">
+                      <p className="text-accent-primary font-medium">{suggestion}</p>
+                      <p className="text-sm text-accent-primary/90 mt-1">
                         {suggestion.length} characters - Optimal
                       </p>
-                      </div>
+                    </div>
                   )
                 )}
-                    </div>
-                  </div>
               </div>
             </div>
+          </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
 
-// Crawl Tab Component
-function CrawlTab({ result }: { result: AuditResult }) {
+// Modern Crawl Tab Component
+function ModernCrawlTab({ result }: { result: AuditResult }) {
   const [startUrl, setStartUrl] = useState(result.url);
   const [limit, setLimit] = useState(200);
   const [sameHostOnly, setSameHostOnly] = useState(true);
@@ -753,181 +817,213 @@ function CrawlTab({ result }: { result: AuditResult }) {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Crawl Form */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Site Crawl</h3>
-        <form onSubmit={startCrawl} className="space-y-4">
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <h3 className="text-xl font-semibold text-text-primary mb-6">Site Crawl</h3>
+      <form onSubmit={startCrawl} className="space-y-4">
+        <div>
+          <label htmlFor="startUrl" className="block text-sm font-medium text-text-secondary mb-1">
+            Start URL
+          </label>
+          <input
+            type="url"
+            id="startUrl"
+            value={startUrl}
+            onChange={(e) => setStartUrl(e.target.value)}
+            placeholder="https://example.com"
+            className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
+            required
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="startUrl" className="block text-sm font-medium text-gray-700 mb-1">
-              Start URL
+            <label htmlFor="limit" className="block text-sm font-medium text-text-secondary mb-1">
+              Page Limit
             </label>
             <input
-              type="url"
-              id="startUrl"
-              value={startUrl}
-              onChange={(e) => setStartUrl(e.target.value)}
-              placeholder="https://example.com"
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              required
+              type="number"
+              id="limit"
+              value={limit}
+              onChange={(e) => setLimit(Number(e.target.value))}
+              min="1"
+              max="500"
+              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
             />
-                      </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label htmlFor="limit" className="block text-sm font-medium text-gray-700 mb-1">
-                Page Limit
-              </label>
-              <input
-                type="number"
-                id="limit"
-                value={limit}
-                onChange={(e) => setLimit(Number(e.target.value))}
-                min="1"
-                max="500"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-                    </div>
-            <div>
-              <label htmlFor="maxDepth" className="block text-sm font-medium text-gray-700 mb-1">
-                Max Depth
-              </label>
-              <input
-                type="number"
-                id="maxDepth"
-                value={maxDepth}
-                onChange={(e) => setMaxDepth(Number(e.target.value))}
-                min="1"
-                max="10"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              />
-                </div>
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="sameHostOnly"
-                checked={sameHostOnly}
-                onChange={(e) => setSameHostOnly(e.target.checked)}
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <label htmlFor="sameHostOnly" className="ml-2 block text-sm text-gray-900">
-                Same Host Only
-              </label>
-              </div>
           </div>
+          <div>
+            <label htmlFor="maxDepth" className="block text-sm font-medium text-text-secondary mb-1">
+              Max Depth
+            </label>
+            <input
+              type="number"
+              id="maxDepth"
+              value={maxDepth}
+              onChange={(e) => setMaxDepth(Number(e.target.value))}
+              min="1"
+              max="10"
+              className="w-full px-3 py-2 bg-bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-primary focus:border-accent-primary text-text-primary"
+            />
+          </div>
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="sameHostOnly"
+              checked={sameHostOnly}
+              onChange={(e) => setSameHostOnly(e.target.checked)}
+              className="h-4 w-4 text-accent-primary focus:ring-accent-primary border-gray-700 rounded"
+            />
+            <label htmlFor="sameHostOnly" className="ml-2 block text-sm text-text-primary">
+              Same Host Only
+            </label>
+          </div>
+        </div>
 
-          <button
-            type="submit"
-            disabled={loading || crawlStatus === "running"}
-            className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? "Starting..." : crawlStatus === "running" ? "Crawling..." : "Start Crawl"}
-          </button>
-        </form>
-      </div>
+        <button
+          type="submit"
+          disabled={loading || crawlStatus === "running"}
+          className="w-full md:w-auto px-6 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          {loading ? "Starting..." : crawlStatus === "running" ? "Crawling..." : "Start Crawl"}
+        </button>
+      </form>
 
       {/* Status Display */}
       {crawlStatus !== "idle" && (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Crawl Status</h3>
+        <motion.div 
+          className="glass-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 className="text-xl font-semibold text-text-primary mb-6">Crawl Status</h3>
           <div className="flex items-center space-x-3">
             <span className={`font-medium ${getStatusColor(crawlStatus)}`}>
               {getStatusText(crawlStatus)}
             </span>
             {crawlStatus === "running" && (
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-accent-primary"></div>
             )}
           </div>
-          {crawlId && <p className="text-sm text-gray-600 mt-2">Crawl ID: {crawlId}</p>}
-        </div>
+          {crawlId && <p className="text-sm text-text-secondary mt-2">Crawl ID: {crawlId}</p>}
+        </motion.div>
       )}
 
       {/* Error Display */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-600">{error}</p>
-                </div>
+        <motion.div 
+          className="glass-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-red-400">{error}</p>
+        </motion.div>
       )}
 
       {/* Results Display */}
       {crawlResult && (
-        <div className="space-y-6">
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           {/* Summary Stats */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Crawl Summary</h3>
+          <motion.div 
+            className="glass-card p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-xl font-semibold text-text-primary mb-6">Crawl Summary</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{crawlResult.totalPages}</div>
-                <div className="text-sm text-gray-600">Total Pages</div>
-                </div>
+                <div className="text-2xl font-bold text-accent-primary">{crawlResult.totalPages}</div>
+                <div className="text-sm text-text-secondary">Total Pages</div>
+              </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-600">
                   {crawlResult.successfulPages}
                 </div>
-                <div className="text-sm text-gray-600">Successful</div>
-                </div>
+                <div className="text-sm text-text-secondary">Successful</div>
+              </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-red-600">{crawlResult.failedPages}</div>
-                <div className="text-sm text-gray-600">Failed</div>
-                </div>
+                <div className="text-sm text-text-secondary">Failed</div>
+              </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-600">
                   {Math.round(crawlResult.averageLoadTime)}ms
                 </div>
-                <div className="text-sm text-gray-600">Avg Load Time</div>
-                </div>
+                <div className="text-sm text-text-secondary">Avg Load Time</div>
               </div>
             </div>
+          </motion.div>
 
           {/* Issues Summary */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Issues Found</h3>
+          <motion.div 
+            className="glass-card p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3 className="text-xl font-semibold text-text-primary mb-6">Issues Found</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="text-center p-3 border rounded-lg">
+              <div className="text-center p-3 rounded-lg border border-red-500/30">
                 <div className="text-xl font-bold text-red-600">
                   {crawlResult.issues.noindex_pages}
-                  </div>
-                <div className="text-sm text-gray-600">Noindex Pages</div>
-                  </div>
-              <div className="text-center p-3 border rounded-lg">
+                </div>
+                <div className="text-sm text-text-secondary">Noindex Pages</div>
+              </div>
+              <div className="text-center p-3 rounded-lg border border-orange-500/30">
                 <div className="text-xl font-bold text-orange-600">
                   {crawlResult.issues.missing_titles}
                 </div>
-                <div className="text-sm text-gray-600">Missing Titles</div>
+                <div className="text-sm text-text-secondary">Missing Titles</div>
               </div>
-              <div className="text-center p-3 border rounded-lg">
+              <div className="text-center p-3 rounded-lg border border-yellow-500/30">
                 <div className="text-xl font-bold text-yellow-600">
                   {crawlResult.issues.missing_h1}
                 </div>
-                <div className="text-sm text-gray-600">Missing H1</div>
+                <div className="text-sm text-text-secondary">Missing H1</div>
               </div>
-              <div className="text-center p-3 border rounded-lg">
+              <div className="text-center p-3 rounded-lg border border-blue-500/30">
                 <div className="text-xl font-bold text-blue-600">
                   {crawlResult.issues.missing_meta_descriptions}
                 </div>
-                <div className="text-sm text-gray-600">Missing Meta Descriptions</div>
+                <div className="text-sm text-text-secondary">Missing Meta Descriptions</div>
               </div>
-              <div className="text-center p-3 border rounded-lg">
+              <div className="text-center p-3 rounded-lg border border-purple-500/30">
                 <div className="text-xl font-bold text-purple-600">
                   {crawlResult.issues.images_without_alt}
                 </div>
-                <div className="text-sm text-gray-600">Images Without Alt</div>
+                <div className="text-sm text-text-secondary">Images Without Alt</div>
               </div>
-              <div className="text-center p-3 border rounded-lg">
+              <div className="text-center p-3 rounded-lg border border-indigo-500/30">
                 <div className="text-xl font-bold text-indigo-600">
                   {crawlResult.issues.pages_without_canonical}
                 </div>
-                <div className="text-sm text-gray-600">Missing Canonical</div>
+                <div className="text-sm text-text-secondary">Missing Canonical</div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Export Button */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
+          <motion.div 
+            className="glass-card p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="flex justify-between items-center">
-                  <div>
-                <h3 className="text-lg font-semibold text-gray-900">Export Results</h3>
-                <p className="text-sm text-gray-600">Download detailed crawl data as CSV</p>
+              <div>
+                <h3 className="text-xl font-semibold text-text-primary">Export Results</h3>
+                <p className="text-sm text-text-secondary">Download detailed crawl data as CSV</p>
               </div>
               <button
                 onClick={exportCSV}
@@ -936,15 +1032,15 @@ function CrawlTab({ result }: { result: AuditResult }) {
                 Export CSV
               </button>
             </div>
-          </div>
-                  </div>
-                )}
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </motion.div>
   );
 }
 
-// AI Insights Tab Component
-function AIInsightsTab({ result }: { result: AuditResult }) {
+// Modern AI Insights Tab Component
+function ModernAIInsightsTab({ result }: { result: AuditResult }) {
   const [analysis, setAnalysis] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -1064,168 +1160,244 @@ function AIInsightsTab({ result }: { result: AuditResult }) {
   };
 
   return (
-    <div className="space-y-6">
-      {/* AI Analysis Header */}
-      <div className="bg-white rounded-lg shadow-sm border p-6">
-        <div className="flex items-center justify-between mb-4">
-                  <div>
-            <h3 className="text-lg font-semibold text-gray-900">AI Content Analysis</h3>
-            <p className="text-sm text-gray-600">
-              Local AI-powered insights using transformer models
-            </p>
-          </div>
-          <button
-            onClick={runAIAnalysis}
-            disabled={loading}
-            className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? "Analyzing..." : "Run AI Analysis"}
-          </button>
+    <motion.div 
+      className="glass-card p-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h3 className="text-xl font-semibold text-text-primary">AI Content Analysis</h3>
+          <p className="text-sm text-text-secondary">
+            Local AI-powered insights using transformer models
+          </p>
         </div>
+        <button
+          onClick={runAIAnalysis}
+          disabled={loading}
+          className="px-4 py-2 bg-accent-quinary text-white rounded-lg hover:bg-accent-quinary/90 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          {loading ? "Analyzing..." : "Run AI Analysis"}
+        </button>
+      </div>
 
-        {/* AI Status */}
-        <div className="flex items-center space-x-2">
-          <div
-            className={`w-2 h-2 rounded-full ${
-              aiStatus === "ready"
-                ? "bg-green-500"
-                : aiStatus === "loading"
-                  ? "bg-yellow-500"
-                  : aiStatus === "failed"
-                    ? "bg-red-500"
-                    : "bg-gray-400"
-            }`}
-          ></div>
-          <span className="text-sm text-gray-600">
-            {aiStatus === "ready"
-              ? "AI Models Ready"
+      {/* AI Status */}
+      <div className="flex items-center space-x-2">
+        <div
+          className={`w-2 h-2 rounded-full ${
+            aiStatus === "ready"
+              ? "bg-green-500"
               : aiStatus === "loading"
-                ? "Loading AI Models..."
+                ? "bg-yellow-500"
                 : aiStatus === "failed"
-                  ? "AI Models Unavailable"
-                  : "AI Models Not Loaded"}
-          </span>
-        </div>
+                  ? "bg-red-500"
+                  : "bg-gray-400"
+          }`}
+        ></div>
+        <span className="text-sm text-text-secondary">
+          {aiStatus === "ready"
+            ? "AI Models Ready"
+            : aiStatus === "loading"
+              ? "Loading AI Models..."
+              : aiStatus === "failed"
+                ? "AI Models Unavailable"
+                : "AI Models Not Loaded"}
+        </span>
       </div>
 
       {/* Error Display */}
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-red-600">{error}</p>
-                  </div>
-                )}
+        <motion.div 
+          className="glass-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-red-400">{error}</p>
+        </motion.div>
+      )}
 
       {/* Analysis Results */}
       {analysis && (
-        <div className="space-y-6">
+        <motion.div 
+          className="space-y-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           {/* Content Summary */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Content Summary</h4>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700 leading-relaxed">{analysis.summary}</p>
+          <motion.div 
+            className="glass-card p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Content Summary</h4>
+            <div className="bg-bg-secondary/50 p-4 rounded-lg">
+              <p className="text-text-primary leading-relaxed">{analysis.summary}</p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Intent Classification */}
-          <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h4 className="text-lg font-semibold text-gray-900 mb-4">Content Intent</h4>
+          <motion.div 
+            className="glass-card p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Content Intent</h4>
             <div className="flex items-center space-x-3">
               <span className="text-2xl">{getIntentIcon(analysis.intent.intent)}</span>
-                  <div>
+              <div>
                 <div className={`font-semibold ${getIntentColor(analysis.intent.intent)}`}>
                   {analysis.intent.intent.charAt(0).toUpperCase() + analysis.intent.intent.slice(1)}
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-text-secondary">
                   Confidence: {Math.round(analysis.intent.confidence * 100)}%
                 </div>
               </div>
             </div>
             <div className="mt-3">
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-gray-700 rounded-full h-2">
                 <div
-                  className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-accent-primary h-2 rounded-full transition-all duration-300"
                   style={{ width: `${analysis.intent.confidence * 100}%` }}
                 ></div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Topic Gap Suggestions */}
           {analysis.topicGaps.length > 0 && (
-            <div className="bg-white rounded-lg shadow-sm border p-6">
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Topic Gap Suggestions</h4>
+            <motion.div 
+              className="glass-card p-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h4 className="text-xl font-semibold text-text-primary mb-4">Topic Gap Suggestions</h4>
               <div className="space-y-4">
                 {analysis.topicGaps.map((gap: any, index: number) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h5 className="font-medium text-gray-900">{gap.topic}</h5>
+                  <motion.div 
+                    key={index}
+                    className="border border-gray-700 rounded-lg p-4"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                  >
+                    <div className="flex justify-between items-center mb-2">
+                      <h5 className="font-medium text-text-primary">{gap.topic}</h5>
                       <span className={`text-sm font-medium ${getRelevanceColor(gap.relevance)}`}>
                         {Math.round(gap.relevance * 100)}% relevance
-                        </span>
+                      </span>
                     </div>
-                    <p className="text-sm text-gray-600">{gap.reasoning}</p>
-                  </div>
-                      ))}
-                    </div>
-      </div>
-                )}
+                    <p className="text-sm text-text-secondary">{gap.reasoning}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           {/* AI Model Info */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="font-medium text-blue-900 mb-2">About Local AI</h4>
-            <p className="text-sm text-blue-700">
+          <motion.div 
+            className="glass-card p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h4 className="font-medium text-accent-primary mb-2">About Local AI</h4>
+            <p className="text-sm text-text-secondary">
               This analysis uses local transformer models running in your browser. No data is sent
               to external servers, ensuring privacy and security. Models are loaded on-demand and
               cached for faster subsequent analysis.
             </p>
-              </div>
-            </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {/* Loading State */}
       {loading && (
-        <div className="bg-white rounded-lg shadow-sm border p-6">
+        <motion.div 
+          className="glass-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex items-center space-x-3">
-            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600"></div>
+            <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-accent-primary"></div>
             <div>
-              <div className="font-medium text-gray-900">Running AI Analysis</div>
-              <div className="text-sm text-gray-600">This may take a few moments on first run</div>
-                  </div>
-                  </div>
-        </div>
-      )}
+              <div className="font-medium text-text-primary">Running AI Analysis</div>
+              <div className="text-sm text-text-secondary">This may take a few moments on first run</div>
+            </div>
           </div>
+        </motion.div>
+      )}
+    </motion.div>
   );
 }
 
-// Skeleton Loader Component
-function SkeletonLoader() {
+// Modern Skeleton Loader Component
+function ModernSkeletonLoader() {
   return (
-    <div className="animate-pulse">
-      <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-        <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
+    <motion.div 
+      className="animate-pulse"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="bg-bg-primary rounded-lg shadow-sm border p-6 mb-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="h-6 bg-gray-700 rounded w-1/3 mb-4"></div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[...Array(8)].map((_, i) => (
-            <div key={i} className="flex flex-col items-center">
-              <div className="w-20 h-20 bg-gray-200 rounded-full mb-2"></div>
-              <div className="h-4 bg-gray-200 rounded w-16"></div>
-            </div>
-                      ))}
-            </div>
-          </div>
-      <div className="space-y-6">
+            <motion.div 
+              key={i}
+              className="flex flex-col items-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <div className="w-20 h-20 bg-gray-700 rounded-full mb-2"></div>
+              <div className="h-4 bg-gray-700 rounded w-16"></div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+      <motion.div 
+        className="space-y-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg shadow-sm border p-6">
-            <div className="h-6 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <motion.div 
+            key={i}
+            className="bg-bg-primary rounded-lg shadow-sm border p-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+          >
+            <div className="h-6 bg-gray-700 rounded w-1/4 mb-4"></div>
             <div className="space-y-3">
               {[...Array(3)].map((_, j) => (
-                <div key={j} className="h-20 bg-gray-200 rounded"></div>
+                <motion.div 
+                  key={j}
+                  className="h-20 bg-gray-700 rounded"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: j * 0.1 }}
+                ></motion.div>
               ))}
-              </div>
-          </div>
+            </div>
+          </motion.div>
         ))}
-          </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -1350,92 +1522,147 @@ export default function AuditPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <motion.div 
+        className="min-h-screen bg-bg-primary py-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-            <h2 className="text-lg font-semibold text-red-800 mb-2">Error Loading Audit</h2>
-            <p className="text-red-600">{error}</p>
+          <motion.div 
+            className="bg-red-500/10 border border-red-500/30 rounded-lg p-6 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-lg font-semibold text-red-400 mb-2">Error Loading Audit</h2>
+            <p className="text-red-400">{error}</p>
             <button
               onClick={() => window.location.reload()}
-              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              className="mt-4 px-4 py-2 bg-red-500/20 text-white rounded-lg hover:bg-red-500/30 transition-colors"
             >
               Try Again
             </button>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (isLoading || !auditData) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <motion.div 
+        className="min-h-screen bg-bg-primary py-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-4xl mx-auto px-4">
-          <SkeletonLoader />
+          <ModernSkeletonLoader />
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (auditData.status === "failed") {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <motion.div 
+        className="min-h-screen bg-bg-primary py-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-            <h2 className="text-lg font-semibold text-red-800 mb-2">Audit Failed</h2>
-            <p className="text-red-600">The audit could not be completed. Please try again.</p>
-          <a
-            href="/"
-              className="mt-4 inline-block px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          <motion.div 
+            className="bg-red-500/10 border border-red-500/30 rounded-lg p-6 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-lg font-semibold text-red-400 mb-2">Audit Failed</h2>
+            <p className="text-red-400">The audit could not be completed. Please try again.</p>
+            <a
+              href="/"
+              className="mt-4 inline-block px-4 py-2 bg-red-500/20 text-white rounded-lg hover:bg-red-500/30 transition-colors"
             >
               Start New Audit
             </a>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   if (auditData.status !== "ready" || !auditData.result) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <motion.div 
+        className="min-h-screen bg-bg-primary py-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <div className="max-w-4xl mx-auto px-4">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 text-center">
+          <motion.div 
+            className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600 mx-auto mb-4"></div>
-            <h2 className="text-lg font-semibold text-yellow-800 mb-2">Processing Audit</h2>
-            <p className="text-yellow-600">
+            <h2 className="text-lg font-semibold text-yellow-400 mb-2">Processing Audit</h2>
+            <p className="text-yellow-400">
               Your audit is being processed. This may take a few minutes.
             </p>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   const result = auditData.result;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <motion.div 
+      className="min-h-screen bg-bg-primary py-12"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
-        <div className="mb-8">
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">SEO Audit Results</h1>
-              <p className="text-gray-600">{result.url}</p>
-              <p className="text-sm text-gray-500">
+              <h1 className="text-3xl font-bold text-text-primary mb-2">SEO Audit Results</h1>
+              <p className="text-text-secondary">{result.url}</p>
+              <p className="text-sm text-text-secondary">
                 Audited on {new Date(result.fetched_at).toLocaleString()}
               </p>
               {isSampleMode && (
-                <div className="mt-2">
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                <motion.div 
+                  className="mt-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-accent-primary/20 text-accent-primary">
                     Sample Data
                   </span>
-                </div>
+                </motion.div>
               )}
             </div>
             {isDevMode && (
-              <div className="flex flex-col gap-2">
+              <motion.div 
+                className="flex flex-col gap-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
                 <button
                   onClick={() => {
                     const newUrl = isSampleMode
@@ -1443,41 +1670,46 @@ export default function AuditPage() {
                       : `${window.location.pathname}?sample=true`;
                     window.location.href = newUrl;
                   }}
-                  className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded border hover:bg-gray-200 transition-colors"
+                  className="px-3 py-1 text-xs bg-gray-700/20 text-text-secondary rounded border hover:bg-gray-700/30 transition-colors"
                 >
                   {isSampleMode ? "Show Real Data" : "Show Sample Data"}
                 </button>
                 <a
                   href="/"
-                  className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded border hover:bg-blue-200 transition-colors text-center"
-          >
-            New Audit
-          </a>
-              </div>
+                  className="px-3 py-1 text-xs bg-accent-primary/20 text-accent-primary rounded border hover:bg-accent-primary/30 transition-colors text-center"
+                >
+                  New Audit
+                </a>
+              </motion.div>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Tab Navigation */}
-        <div className="mb-6">
-          <div className="border-b border-gray-200">
+        <motion.div 
+          className="mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="border-b border-gray-700">
             <nav className="-mb-px flex space-x-8">
-          <button
+              <button
                 onClick={() => setActiveTab("audit")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "audit"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "border-accent-primary text-accent-primary"
+                    : "border-transparent text-text-secondary hover:text-text-primary hover:border-gray-700"
                 }`}
               >
                 Audit Results
-            </button>
+              </button>
               <button
                 onClick={() => setActiveTab("competitors")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "competitors"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "border-accent-primary text-accent-primary"
+                    : "border-transparent text-text-secondary hover:text-text-primary hover:border-gray-700"
                 }`}
               >
                 Competitor Analysis
@@ -1486,8 +1718,8 @@ export default function AuditPage() {
                 onClick={() => setActiveTab("crawl")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "crawl"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "border-accent-primary text-accent-primary"
+                    : "border-transparent text-text-secondary hover:text-text-primary hover:border-gray-700"
                 }`}
               >
                 Site Crawl (Beta)
@@ -1496,61 +1728,81 @@ export default function AuditPage() {
                 onClick={() => setActiveTab("ai")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm ${
                   activeTab === "ai"
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    ? "border-accent-primary text-accent-primary"
+                    : "border-transparent text-text-secondary hover:text-text-primary hover:border-gray-700"
                 }`}
               >
                 AI Insights
               </button>
             </nav>
           </div>
-      </div>
+        </motion.div>
 
         {/* Tab Content */}
         {activeTab === "audit" && (
           <>
             {/* Score Rings */}
-            <div className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Overall Score</h2>
+            <motion.div 
+              className="bg-bg-primary rounded-lg shadow-sm border p-6 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl font-semibold text-text-primary mb-6">Overall Score</h2>
               <div className="flex justify-center mb-8">
-                <ScoreRing score={result.scores.overall} label="Overall" size="lg" />
-    </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <ScoreRing score={result.scores.title_meta} label="Title & Meta" />
-                <ScoreRing score={result.scores.headings} label="Headings" />
-                <ScoreRing score={result.scores.answerability} label="Content" />
-                <ScoreRing score={result.scores.structure} label="Structure" />
-                <ScoreRing score={result.scores.schema} label="Schema" />
-                <ScoreRing score={result.scores.images} label="Images" />
-                <ScoreRing score={result.scores.internal_links} label="Internal Links" />
+                <ModernScoreRing score={result.scores.overall} label="Overall" size="lg" />
               </div>
-            </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <ModernScoreRing score={result.scores.title_meta} label="Title & Meta" />
+                <ModernScoreRing score={result.scores.headings} label="Headings" />
+                <ModernScoreRing score={result.scores.answerability} label="Content" />
+                <ModernScoreRing score={result.scores.structure} label="Structure" />
+                <ModernScoreRing score={result.scores.schema} label="Schema" />
+                <ModernScoreRing score={result.scores.images} label="Images" />
+                <ModernScoreRing score={result.scores.internal_links} label="Internal Links" />
+              </div>
+            </motion.div>
 
             {/* Content Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-              <DetectedPanel detected={result.detected} />
-              <ActionButtons result={result} />
-            </div>
+            <motion.div 
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ModernDetectedPanel detected={result.detected} />
+              <ModernActionButtons result={result} />
+            </motion.div>
 
             {/* Performance Panel */}
-            <div className="mb-6">
+            <motion.div 
+              className="mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <PerformancePanel performance={result.performance} />
-            </div>
+            </motion.div>
 
             {/* Issues and Quick Wins */}
-            <div className="space-y-6">
-              <IssueList issues={result.issues} />
-              <QuickWins quickWins={result.quick_wins} />
-            </div>
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <ModernIssueList issues={result.issues} />
+              <ModernQuickWins quickWins={result.quick_wins} />
+            </motion.div>
           </>
         )}
 
-        {activeTab === "competitors" && <CompetitorsTab result={result} />}
+        {activeTab === "competitors" && <ModernCompetitorsTab result={result} />}
 
-        {activeTab === "crawl" && <CrawlTab result={result} />}
+        {activeTab === "crawl" && <ModernCrawlTab result={result} />}
 
-        {activeTab === "ai" && <AIInsightsTab result={result} />}
-      </div>
-    </div>
+        {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
+      </motion.div>
+    </motion.div>
   );
 }

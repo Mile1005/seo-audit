@@ -12,6 +12,8 @@ export default {
         'accent-primary': '#00d4ff',
         'accent-secondary': '#0099cc',
         'accent-tertiary': '#006699',
+        'accent-quaternary': '#ff6b35',
+        'accent-quinary': '#8b5cf6',
         'bg-primary': '#0a0a0a',
         'bg-secondary': '#111111',
         'bg-tertiary': '#1a1a1a',

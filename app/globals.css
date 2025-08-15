@@ -91,6 +91,10 @@ body {
   box-shadow: var(--glow-primary);
 }
 
+.glow-soft {
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
 .glow-text {
   text-shadow: 0 0 10px var(--accent-primary);
 }
