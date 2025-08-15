@@ -193,18 +193,29 @@ export async function POST(request: NextRequest) {
 
     let results: SerpResult[] = [];
     let usedFallback = false;
-    try {
-      // Try Playwright first
-      results = await fetchGoogleSerpPlaywright(keyword, country);
-    } catch (err) {
-      console.error("Playwright SERP fetch failed, falling back to SerpAPI:", err);
-      // Fallback to SerpAPI
+    const isServerless = !!process.env.VERCEL || !!process.env.NEXT_PUBLIC_DISABLE_PLAYWRIGHT;
+    if (isServerless) {
+      // On Vercel/serverless, skip Playwright and use SerpAPI directly
       try {
         results = await fetchSerpApiFallback(keyword, country);
         usedFallback = true;
       } catch (apiErr) {
-        console.error("SerpAPI fallback also failed:", apiErr);
-        throw new Error("Both Playwright and SerpAPI failed. Try again later or check your API key.");
+        console.error("SerpAPI failed:", apiErr);
+        throw new Error("SerpAPI failed. Check your API key or try again later.");
+      }
+    } else {
+      // Local/VPS: Try Playwright first, then fallback
+      try {
+        results = await fetchGoogleSerpPlaywright(keyword, country);
+      } catch (err) {
+        console.error("Playwright SERP fetch failed, falling back to SerpAPI:", err);
+        try {
+          results = await fetchSerpApiFallback(keyword, country);
+          usedFallback = true;
+        } catch (apiErr) {
+          console.error("SerpAPI fallback also failed:", apiErr);
+          throw new Error("Both Playwright and SerpAPI failed. Try again later or check your API key.");
+        }
       }
     }
 
