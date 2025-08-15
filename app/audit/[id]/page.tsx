@@ -928,8 +928,18 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
       const data = await response.json();
       if (response.ok) {
         setCrawlId(data.crawlId);
-        setCrawlStatus("queued");
-        pollCrawlStatus(data.crawlId);
+        // Inline mode: show result immediately if present
+        if (data.result) {
+          setCrawlStatus("ready");
+          if (data.result.type === "crawl" && data.result.result) {
+            setCrawlResult(data.result.result);
+          } else {
+            setCrawlResult(data.result);
+          }
+        } else {
+          setCrawlStatus("queued");
+          pollCrawlStatus(data.crawlId);
+        }
       } else {
         setError(data.error || "Failed to start crawl");
       }
