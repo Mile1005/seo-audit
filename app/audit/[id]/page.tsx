@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Component, ErrorInfo, ReactNode } from "react";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
@@ -8,6 +8,53 @@ const ReportBuilder = dynamic(() => import("../../../components/common/ReportBui
 const FixPack = dynamic(() => import("../../../components/common/FixPack"), { ssr: false });
 import PerformancePanel from "../../../components/audit/PerformancePanel";
 import { AuditResult } from "../../../lib/heuristics";
+
+// Error Boundary Component
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class ErrorBoundary extends Component<
+  { children: ReactNode; fallback?: ReactNode },
+  ErrorBoundaryState
+> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || (
+        <div className="min-h-screen bg-bg-primary flex items-center justify-center">
+          <div className="text-center p-8 glass-card max-w-md">
+            <h2 className="text-xl font-bold text-text-primary mb-4">Something went wrong</h2>
+            <p className="text-text-secondary mb-4">
+              {this.state.error?.message || 'An unexpected error occurred'}
+            </p>
+            <button 
+              onClick={() => this.setState({ hasError: false, error: null })}
+              className="btn-primary"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 interface AuditResponse {
   status: "queued" | "running" | "ready" | "failed";
@@ -1468,7 +1515,7 @@ function ModernSkeletonLoader() {
   );
 }
 
-export default function AuditPage() {
+function AuditPageContent() {
   const params = useParams();
   const id = params.id as string;
   const searchParams = new URLSearchParams(
@@ -1909,5 +1956,14 @@ export default function AuditPage() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+// Wrap the main component with ErrorBoundary
+export default function AuditPage() {
+  return (
+    <ErrorBoundary>
+      <AuditPageContent />
+    </ErrorBoundary>
   );
 }
