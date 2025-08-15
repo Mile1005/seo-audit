@@ -1493,7 +1493,8 @@ export default function AuditPage() {
 
   // Create floating particles
   useEffect(() => {
-    if (!particlesRef.current) return;
+    const particlesContainer = particlesRef.current;
+    if (!particlesContainer) return;
 
     // Create floating particles
     for (let i = 0; i < 15; i++) {
@@ -1504,12 +1505,12 @@ export default function AuditPage() {
       particle.style.animationDelay = Math.random() * 6 + 's';
       particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
       particle.style.opacity = '0.3';
-      particlesRef.current.appendChild(particle);
+      particlesContainer.appendChild(particle);
     }
 
     return () => {
-      if (particlesRef.current) {
-        particlesRef.current.innerHTML = '';
+      if (particlesContainer) {
+        particlesContainer.innerHTML = '';
       }
     };
   }, []);
