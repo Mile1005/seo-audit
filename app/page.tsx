@@ -286,6 +286,74 @@ export default function Page() {
 
       {/* Features Section */}
       <FeaturesSection />
+
+      {/* How It Works Section */}
+      <section className="container-width my-16">
+        <div className="glass-card-enhanced p-8 md:p-12 mb-12 shadow-xl">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-6">How It Works</h2>
+          <ol className="list-decimal list-inside text-lg text-text-secondary space-y-3">
+            <li><strong>Enter your page URL</strong> and (optionally) your email address above.</li>
+            <li><strong>Click Start</strong> to begin your AI-powered SEO audit.</li>
+            <li><strong>Our engine crawls your page</strong> and analyzes technical SEO, content, accessibility, and more.</li>
+            <li><strong>Get a detailed, actionable report</strong> with prioritized fixes, code snippets, and accessibility insights.</li>
+            <li><strong>Download, share, or export</strong> your results and track improvements over time.</li>
+          </ol>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="container-width my-16">
+        <div className="glass-card-enhanced p-8 md:p-12 shadow-xl">
+          <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-6">Frequently Asked Questions</h2>
+          <div className="space-y-6">
+            <details className="group rounded-lg border border-accent-primary/30 bg-bg-secondary/50 p-4 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-accent-primary flex items-center justify-between">
+                What is an AI SEO audit?
+                <span className="ml-2 text-accent-primary">+</span>
+              </summary>
+              <div className="mt-2 text-text-secondary">
+                An AI SEO audit uses artificial intelligence to analyze your website for technical, content, and accessibility issues, providing actionable recommendations to improve your search visibility and user experience.
+              </div>
+            </details>
+            <details className="group rounded-lg border border-accent-primary/30 bg-bg-secondary/50 p-4 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-accent-primary flex items-center justify-between">
+                What does this tool check for?
+                <span className="ml-2 text-accent-primary">+</span>
+              </summary>
+              <div className="mt-2 text-text-secondary">
+                We check for missing or weak meta tags, heading structure, content quality, schema markup, image alt text, internal links, accessibility/ARIA issues, and more. You get a prioritized list of fixes with code snippets and explanations.
+              </div>
+            </details>
+            <details className="group rounded-lg border border-accent-primary/30 bg-bg-secondary/50 p-4 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-accent-primary flex items-center justify-between">
+                Is this tool free?
+                <span className="ml-2 text-accent-primary">+</span>
+              </summary>
+              <div className="mt-2 text-text-secondary">
+                Yes! You can run unlimited audits for free. We believe in making advanced SEO and accessibility insights available to everyone.
+              </div>
+            </details>
+            <details className="group rounded-lg border border-accent-primary/30 bg-bg-secondary/50 p-4 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-accent-primary flex items-center justify-between">
+                How is this different from other SEO tools?
+                <span className="ml-2 text-accent-primary">+</span>
+              </summary>
+              <div className="mt-2 text-text-secondary">
+                Our audits are powered by AI, provide accessibility/ARIA checks, and deliver clear, actionable fixes with code snippets. The interface is modern, mobile-friendly, and designed for both beginners and experts.
+              </div>
+            </details>
+            <details className="group rounded-lg border border-accent-primary/30 bg-bg-secondary/50 p-4 transition-all">
+              <summary className="cursor-pointer text-lg font-semibold text-accent-primary flex items-center justify-between">
+                Will this tool help me rank higher on Google?
+                <span className="ml-2 text-accent-primary">+</span>
+              </summary>
+              <div className="mt-2 text-text-secondary">
+                While no tool can guarantee rankings, fixing the issues we identify will make your site more search-friendly, accessible, and user-focused—key factors for better SEO performance.
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
