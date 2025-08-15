@@ -62,7 +62,7 @@ body {
   backdrop-filter: blur(20px);
   border: 1.5px solid var(--accent-primary);
   border-radius: 16px;
-  box-shadow: 0 0 24px 2px var(--accent-primary), 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px 1px var(--accent-primary), 0 4px 16px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s, border-color 0.3s;
 }
 
@@ -72,7 +72,7 @@ body {
   backdrop-filter: blur(20px);
   border: 1.5px solid var(--accent-primary);
   border-radius: 16px;
-  box-shadow: 0 0 24px 2px var(--accent-primary), 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 8px 1px var(--accent-primary), 0 4px 16px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s, border-color 0.3s;
 }
 

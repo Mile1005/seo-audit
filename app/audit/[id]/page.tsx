@@ -1307,6 +1307,7 @@ function ModernSkeletonLoader() {
 
 function AccessibilityIssuesPanel({ issues }: { issues: Array<{ type: string; selector: string; message: string; snippet: string }> }) {
   const [expanded, setExpanded] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(20);
   if (!issues || issues.length === 0) return null;
   return (
     <motion.div
@@ -1320,7 +1321,7 @@ function AccessibilityIssuesPanel({ issues }: { issues: Array<{ type: string; se
       <div className="relative z-10">
         <h3 className="text-xl font-semibold text-text-primary mb-6">Accessibility & ARIA Issues ({issues.length})</h3>
         <div className="space-y-3">
-          {issues.map((issue, idx) => {
+          {issues.slice(0, visibleCount).map((issue, idx) => {
             const isOpen = expanded === idx;
             return (
               <motion.div
@@ -1372,6 +1373,16 @@ function AccessibilityIssuesPanel({ issues }: { issues: Array<{ type: string; se
             );
           })}
         </div>
+        {issues.length > visibleCount && (
+          <div className="flex justify-center mt-4">
+            <button
+              className="px-4 py-2 bg-accent-primary text-white rounded-lg hover:bg-accent-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary"
+              onClick={() => setVisibleCount(visibleCount + 20)}
+            >
+              Load more
+            </button>
+          </div>
+        )}
       </div>
     </motion.div>
   );
