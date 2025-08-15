@@ -42,7 +42,7 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card-enhanced p-6 animated-gradient-hover"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -52,7 +52,7 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {/* LCP */}
         <motion.div 
-          className="border border-gray-700 rounded-lg p-4 bg-bg-secondary/30"
+          className="border border-gray-700 rounded-lg p-4 bg-bg-secondary/30 fire-gradient-hover"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: 0.1 }}
@@ -72,7 +72,7 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
 
         {/* CLS */}
         <motion.div 
-          className="border border-gray-700 rounded-lg p-4 bg-bg-secondary/30"
+          className="border border-gray-700 rounded-lg p-4 bg-bg-secondary/30 fire-gradient-hover"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: 0.2 }}
@@ -92,7 +92,7 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
 
         {/* INP */}
         <motion.div 
-          className="border border-gray-700 rounded-lg p-4 bg-bg-secondary/30"
+          className="border border-gray-700 rounded-lg p-4 bg-bg-secondary/30 fire-gradient-hover"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: 0.3 }}
@@ -108,6 +108,11 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
           </div>
           <div className="text-sm text-text-secondary">Interaction to Next Paint</div>
           <div className="text-xs text-text-secondary mt-1">Target: ≤200ms</div>
+          {performance.inp === null && (
+            <div className="text-xs text-yellow-400 mt-2">
+              INP may be unavailable if there is not enough user input data or if PageSpeed Insights does not report it for this page.
+            </div>
+          )}
         </motion.div>
       </div>
 

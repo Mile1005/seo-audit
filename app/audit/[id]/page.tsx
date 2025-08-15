@@ -440,7 +440,7 @@ function ModernActionButtons({ result }: { result: AuditResult }) {
         </button>
         <button
           onClick={downloadJSON}
-          className="w-full px-4 py-2 bg-text-primary text-white rounded-lg hover:bg-text-primary/90 transition-colors"
+          className="btn-download-json"
         >
           Download JSON
         </button>
@@ -558,7 +558,7 @@ function ModernCompetitorsTab({ result }: { result: AuditResult }) {
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card p-6 animated-gradient-hover"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -859,7 +859,7 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card p-6 animated-gradient-hover"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -1202,7 +1202,7 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card p-6 animated-gradient-hover"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

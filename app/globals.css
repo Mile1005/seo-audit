@@ -83,6 +83,62 @@ body {
     0 0 20px rgba(0, 212, 255, 0.1);
 }
 
+/* Subtle Animated Gradient Hover */
+.animated-gradient-hover {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.animated-gradient-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 1;
+  pointer-events: none;
+  animation: gradientShift 8s linear infinite;
+}
+.animated-gradient-hover:hover::before {
+  opacity: 0.18;
+}
+.animated-gradient-hover > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Fire Animated Gradient Hover */
+.fire-gradient-hover {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+.fire-gradient-hover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #ff9800 0%, #ff3d00 50%, #ffd600 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 1;
+  pointer-events: none;
+  animation: fireGradient 3s linear infinite;
+}
+.fire-gradient-hover:hover::before {
+  opacity: 0.22;
+}
+.fire-gradient-hover > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes fireGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Gradient Text */
 .gradient-text {
   background: var(--gradient-primary);
@@ -238,6 +294,20 @@ body {
 .status-error {
   color: #ff4444;
   text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+/* Download JSON Button Style */
+.btn-download-json {
+  @apply w-full px-4 py-2 rounded-lg font-semibold transition-all duration-300;
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,212,255,0.08);
+}
+.btn-download-json:hover {
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,212,255,0.18);
 }
 
 /* Print styles for reports */
