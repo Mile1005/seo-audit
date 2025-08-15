@@ -193,7 +193,6 @@ export default function ModernForm({
             className="btn-primary w-full"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            disabled={isSubmitting}
           >
             {isSubmitting ? (
               <div className="flex items-center justify-center">

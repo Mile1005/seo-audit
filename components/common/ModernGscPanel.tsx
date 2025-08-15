@@ -155,7 +155,6 @@ export default function ModernGscPanel({
               className="btn-primary w-full"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              disabled={isConnecting}
             >
               {isConnecting ? (
                 <div className="flex items-center justify-center">

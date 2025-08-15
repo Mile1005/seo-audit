@@ -1802,7 +1802,7 @@ export default function AuditPage() {
         {activeTab === "crawl" && <ModernCrawlTab result={result} />}
 
         {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
