@@ -4,14 +4,14 @@ const HF_API_TOKEN = process.env.HF_API_TOKEN;
 
 const MODEL_ENDPOINTS: Record<string, string> = {
   'sentiment': 'https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment-latest',
-  'intent': 'https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment-latest',
-  'summarization': 'https://api-inference.huggingface.co/models/t5-small',
+  'intent': 'https://api-inference.huggingface.co/models/facebook/bart-large-mnli', // Using a zero-shot model for intent
+  'summarization': 'https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-12-6',
   'ner': 'https://api-inference.huggingface.co/models/dslim/bert-base-NER',
   'topic': 'https://api-inference.huggingface.co/models/facebook/bart-large-mnli',
-  'toxicity': 'https://api-inference.huggingface.co/models/martin-ha/toxic-comment-model',
+  'toxicity': 'https://api-inference.huggingface.co/models/unitary/toxic-bert',
   'language': 'https://api-inference.huggingface.co/models/papluca/xlm-roberta-base-language-detection',
   'paraphrase': 'https://api-inference.huggingface.co/models/tuner007/pegasus_paraphrase',
-  'question': 'https://api-inference.huggingface.co/models/t5-small',
+  'question': 'https://api-inference.huggingface.co/models/valhalla/t5-base-qg-hl', // Switched to a more reliable question generator
 };
 
 export async function POST(req: NextRequest) {
@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     // Prepare request body based on task type
     let body: any = { inputs: text };
     
-    if (task === 'topic' && labels) {
+    if ((task === 'topic' || task === 'intent') && labels) {
       body.parameters = { candidate_labels: labels };
     } else if (task === 'summarization') {
       body = { 

@@ -51,14 +51,19 @@ export async function classifyIntent(
     const response = await fetch("/api/ai-inference", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ task: "text-classification", text: truncatedText }),
+      body: JSON.stringify({ 
+        task: "intent", 
+        text: truncatedText,
+        labels: INTENT_CATEGORIES 
+      }),
     });
     const result = await response.json();
-    const score = result[0]?.score || 0.5;
-    const label = result[0]?.label || "POSITIVE";
-    // Simple mapping based on content analysis
-    const intent = mapToIntentCategory(truncatedText, score, label);
-    const confidence = Math.min(score * 1.2, 0.95); // Boost confidence slightly
+    
+    // For zero-shot, the result gives us scores for each label
+    const highestScoreIndex = result.scores.indexOf(Math.max(...result.scores));
+    const intent = result.labels[highestScoreIndex] || "informational";
+    const confidence = result.scores[highestScoreIndex] || 0.5;
+
     return { intent, confidence };
   } catch (error) {
     console.error("Intent classification error:", error);

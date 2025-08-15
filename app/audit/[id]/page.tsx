@@ -1388,38 +1388,54 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
           <motion.div className="glass-card p-6">
             <h4 className="text-xl font-semibold text-text-primary mb-4">Toxicity Detection</h4>
             <div className="flex flex-wrap gap-2">
-              {analysis.toxicity.map((tox: any, i: number) => (
-                <span key={i} className="px-3 py-1 bg-red-500/10 text-red-400 text-xs rounded-full border border-red-400/30">
-                  {tox.label}: {Math.round((tox.score || 0) * 100)}%
-                </span>
-              ))}
+              {Array.isArray(analysis.toxicity) ? (
+                analysis.toxicity.map((tox: any, i: number) => (
+                  <span key={i} className="px-3 py-1 bg-red-500/10 text-red-400 text-xs rounded-full border border-red-400/30">
+                    {tox.label}: {Math.round((tox.score || 0) * 100)}%
+                  </span>
+                ))
+              ) : (
+                <p className="text-text-secondary text-sm">Could not load toxicity data.</p>
+              )}
             </div>
           </motion.div>
           {/* Language Detection */}
           <motion.div className="glass-card p-6">
             <h4 className="text-xl font-semibold text-text-primary mb-4">Language Detection</h4>
             <div className="flex flex-wrap gap-2">
-              {analysis.language.map((lang: any, i: number) => (
-                <span key={i} className="px-3 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-400/30">
-                  {lang.label}: {Math.round((lang.score || 0) * 100)}%
-                </span>
-              ))}
+              {Array.isArray(analysis.language) ? (
+                analysis.language.map((lang: any, i: number) => (
+                  <span key={i} className="px-3 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-400/30">
+                    {lang.label}: {Math.round((lang.score || 0) * 100)}%
+                  </span>
+                ))
+              ) : (
+                <p className="text-text-secondary text-sm">Could not load language data.</p>
+              )}
             </div>
           </motion.div>
           {/* Paraphrasing */}
           <motion.div className="glass-card p-6">
             <h4 className="text-xl font-semibold text-text-primary mb-4">Meta Description Paraphrase</h4>
             <div className="bg-bg-secondary/50 p-4 rounded-lg">
-              <p className="text-text-primary leading-relaxed">{analysis.paraphrase[0]?.generated_text || "No paraphrase available."}</p>
+              <p className="text-text-primary leading-relaxed">
+                {analysis.paraphrase && analysis.paraphrase[0]?.generated_text 
+                  ? analysis.paraphrase[0].generated_text 
+                  : "No paraphrase available."}
+              </p>
             </div>
           </motion.div>
           {/* Question Generation */}
           <motion.div className="glass-card p-6">
             <h4 className="text-xl font-semibold text-text-primary mb-4">FAQ (Question Generation)</h4>
             <ul className="list-disc pl-6">
-              {analysis.questions.map((q: any, i: number) => (
-                <li key={i} className="mb-2 text-text-secondary">{q.generated_text}</li>
-              ))}
+              {Array.isArray(analysis.questions) ? (
+                analysis.questions.map((q: any, i: number) => (
+                  <li key={i} className="mb-2 text-text-secondary">{q.generated_text}</li>
+                ))
+              ) : (
+                <p className="text-text-secondary text-sm">Could not generate questions.</p>
+              )}
             </ul>
           </motion.div>
           {/* Readability */}
