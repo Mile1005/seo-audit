@@ -100,7 +100,7 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
         />
 
         {/* Modal */}
-        <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+        <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row md:max-h-[90vh] md:h-auto md:static h-[100dvh] md:h-auto">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b">
             <h2 className="text-xl font-semibold text-gray-900">SEO Report Builder</h2>
@@ -119,9 +119,9 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
             </button>
           </div>
 
-          <div className="flex h-[calc(90vh-120px)]">
+          <div className="flex-1 flex flex-col md:flex-row h-full">
             {/* Sidebar */}
-            <div className="w-80 border-r bg-gray-50 p-6 overflow-y-auto">
+            <div className="w-full md:w-80 border-b md:border-b-0 md:border-r bg-gray-50 p-4 md:p-6 overflow-y-auto">
               <div className="space-y-6">
                 {/* Sections */}
                 <div>
@@ -133,9 +133,9 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
                           type="checkbox"
                           checked={section.enabled}
                           onChange={() => toggleSection(section.id)}
-                          className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                          className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                         />
-                        <span className="ml-3 text-sm text-gray-700">{section.title}</span>
+                        <span className="ml-3 text-base md:text-sm text-gray-700">{section.title}</span>
                       </label>
                     ))}
                   </div>
@@ -146,21 +146,18 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
                   <h3 className="text-lg font-medium text-gray-900 mb-4">Branding</h3>
                   <div className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
                         Company Name
                       </label>
                       <input
                         type="text"
                         value={branding.companyName}
-                        onChange={(e) =>
-                          setBranding((prev) => ({ ...prev, companyName: e.target.value }))
-                        }
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        onChange={(e) => setBranding((prev) => ({ ...prev, companyName: e.target.value }))}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
                       />
                     </div>
-
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
                         Logo URL (optional)
                       </label>
                       <input
@@ -168,34 +165,29 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
                         value={branding.logo}
                         onChange={(e) => setBranding((prev) => ({ ...prev, logo: e.target.value }))}
                         placeholder="https://example.com/logo.png"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
                       />
                     </div>
-
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
                           Primary Color
                         </label>
                         <input
                           type="color"
                           value={branding.primaryColor}
-                          onChange={(e) =>
-                            setBranding((prev) => ({ ...prev, primaryColor: e.target.value }))
-                          }
+                          onChange={(e) => setBranding((prev) => ({ ...prev, primaryColor: e.target.value }))}
                           className="w-full h-10 border border-gray-300 rounded-md cursor-pointer"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
                           Secondary Color
                         </label>
                         <input
                           type="color"
                           value={branding.secondaryColor}
-                          onChange={(e) =>
-                            setBranding((prev) => ({ ...prev, secondaryColor: e.target.value }))
-                          }
+                          onChange={(e) => setBranding((prev) => ({ ...prev, secondaryColor: e.target.value }))}
                           className="w-full h-10 border border-gray-300 rounded-md cursor-pointer"
                         />
                       </div>
@@ -208,14 +200,14 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
                   <button
                     onClick={generateReport}
                     disabled={isGenerating}
-                    className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    className="w-full px-4 py-3 md:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-lg md:text-base"
                   >
                     {isGenerating ? "Generating..." : "Generate Report"}
                   </button>
                   <button
                     onClick={exportPDF}
                     disabled={isGenerating}
-                    className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                    className="w-full px-4 py-3 md:py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-lg md:text-base"
                   >
                     {isGenerating ? "Preparing..." : "Export PDF"}
                   </button>
@@ -224,9 +216,9 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
             </div>
 
             {/* Report Preview */}
-            <div className="flex-1 p-6 overflow-y-auto">
+            <div className="flex-1 p-4 md:p-6 overflow-y-auto">
               <div className="bg-white border rounded-lg">
-                <div ref={reportRef} className="p-8 print:p-0">
+                <div ref={reportRef} className="p-4 md:p-8 print:p-0">
                   <ReportContent
                     result={result}
                     sections={sections.filter((s) => s.enabled)}
