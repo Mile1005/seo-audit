@@ -65,6 +65,24 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
+/* Enhanced Glass Cards with Less Opacity */
+.glass-card-enhanced {
+  background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-enhanced:hover {
+  background: rgba(26, 26, 26, 0.6);
+  border-color: rgba(0, 212, 255, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(0, 212, 255, 0.1);
+}
+
 /* Gradient Text */
 .gradient-text {
   background: var(--gradient-primary);

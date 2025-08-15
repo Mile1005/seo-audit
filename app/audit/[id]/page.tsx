@@ -15,7 +15,7 @@ interface AuditResponse {
   error?: string;
 }
 
-// Modern Score Ring Component
+// Modern Score Ring Component with Animated Loading
 function ModernScoreRing({
   score,
   label,
@@ -29,7 +29,6 @@ function ModernScoreRing({
   const strokeWidth = size === "sm" ? 4 : size === "lg" ? 8 : 6;
   const circumference = 2 * Math.PI * radius;
   const strokeDasharray = circumference;
-  const strokeDashoffset = circumference - (score / 100) * circumference;
 
   const getColor = (score: number) => {
     if (score >= 80) return "#00ff88"; // green
@@ -65,8 +64,8 @@ function ModernScoreRing({
             strokeWidth={strokeWidth}
             fill="none"
           />
-          {/* Progress circle */}
-          <circle
+          {/* Animated Progress circle */}
+          <motion.circle
             cx={radius + strokeWidth / 2}
             cy={radius + strokeWidth / 2}
             r={radius}
@@ -74,25 +73,47 @@ function ModernScoreRing({
             strokeWidth={strokeWidth}
             fill="none"
             strokeDasharray={strokeDasharray}
-            strokeDashoffset={strokeDashoffset}
+            strokeDashoffset={circumference}
             strokeLinecap="round"
-            className="transition-all duration-1000 ease-out"
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset: circumference - (score / 100) * circumference }}
+            transition={{ 
+              duration: 2, 
+              ease: "easeOut",
+              delay: 0.5
+            }}
             style={{ filter: `drop-shadow(0 0 8px ${getGlowColor(score)})` }}
           />
         </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span
+        <motion.div 
+          className="absolute inset-0 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.span
             className={`font-bold text-text-primary ${size === "sm" ? "text-sm" : size === "lg" ? "text-xl" : "text-lg"}`}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ 
+              duration: 0.5, 
+              delay: 0.5,
+              type: "spring",
+              stiffness: 200
+            }}
           >
             {score}
-          </span>
-        </div>
+          </motion.span>
+        </motion.div>
       </div>
-      <span
+      <motion.span
         className={`mt-2 text-center font-medium text-text-secondary ${size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm"}`}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
       >
         {label}
-      </span>
+      </motion.span>
     </motion.div>
   );
 }
@@ -101,11 +122,15 @@ function ModernScoreRing({
 function ModernDetectedPanel({ detected }: { detected: AuditResult["detected"] }) {
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card-enhanced p-6 relative overflow-hidden group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
     >
+      {/* Gradient hover effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
       <h3 className="text-xl font-semibold text-text-primary mb-6">Detected Elements</h3>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
@@ -166,6 +191,7 @@ function ModernDetectedPanel({ detected }: { detected: AuditResult["detected"] }
           </div>
         </div>
       )}
+      </div>
     </motion.div>
   );
 }
@@ -214,12 +240,16 @@ function ModernIssueList({ issues }: { issues: AuditResult["issues"] }) {
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card-enhanced p-6 relative overflow-hidden group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
     >
-      <h3 className="text-xl font-semibold text-text-primary mb-6">Issues Found ({issues.length})</h3>
+      {/* Gradient hover effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
+        <h3 className="text-xl font-semibold text-text-primary mb-6">Issues Found ({issues.length})</h3>
       <div className="space-y-6">
         {severityOrder.map((severity) => {
           const severityIssues = groupedIssues[severity];
@@ -276,6 +306,7 @@ function ModernIssueList({ issues }: { issues: AuditResult["issues"] }) {
           );
         })}
       </div>
+      </div>
     </motion.div>
   );
 }
@@ -302,12 +333,16 @@ function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card-enhanced p-6 relative overflow-hidden group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
     >
-      <h3 className="text-xl font-semibold text-text-primary mb-6">Quick Wins ({quickWins.length})</h3>
+      {/* Gradient hover effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
+        <h3 className="text-xl font-semibold text-text-primary mb-6">Quick Wins ({quickWins.length})</h3>
       <div className="space-y-3">
         {quickWins.map((win, index) => (
           <motion.div
@@ -351,6 +386,7 @@ function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }
           </motion.div>
         ))}
       </div>
+      </div>
     </motion.div>
   );
 }
@@ -373,12 +409,16 @@ function ModernActionButtons({ result }: { result: AuditResult }) {
 
   return (
     <motion.div 
-      className="glass-card p-6"
+      className="glass-card-enhanced p-6 relative overflow-hidden group"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      whileHover={{ scale: 1.02 }}
     >
-      <h3 className="text-xl font-semibold text-text-primary mb-6">Actions</h3>
+      {/* Gradient hover effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative z-10">
+        <h3 className="text-xl font-semibold text-text-primary mb-6">Actions</h3>
       <div className="space-y-3">
         <button
           onClick={() => window.open(result.url, "_blank")}
@@ -442,6 +482,7 @@ function ModernActionButtons({ result }: { result: AuditResult }) {
       {showFixPack && (
         <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
       )}
+      </div>
     </motion.div>
   );
 }
@@ -1417,10 +1458,34 @@ export default function AuditPage() {
   const [isDevMode, setIsDevMode] = useState(false);
   const [activeTab, setActiveTab] = useState<"audit" | "competitors" | "crawl" | "ai">("audit");
   const inlineLoadedRef = useRef(false);
+  const particlesRef = useRef<HTMLDivElement>(null);
 
   // Detect dev mode
   useEffect(() => {
     setIsDevMode(process.env.NODE_ENV === "development");
+  }, []);
+
+  // Create floating particles
+  useEffect(() => {
+    if (!particlesRef.current) return;
+
+    // Create floating particles
+    for (let i = 0; i < 15; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 6 + 's';
+      particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      particle.style.opacity = '0.3';
+      particlesRef.current.appendChild(particle);
+    }
+
+    return () => {
+      if (particlesRef.current) {
+        particlesRef.current.innerHTML = '';
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -1622,13 +1687,20 @@ export default function AuditPage() {
   const result = auditData.result;
 
   return (
-    <motion.div 
-      className="min-h-screen bg-bg-primary py-12"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="relative min-h-screen overflow-hidden animated-bg">
+      {/* Animated Background Particles */}
+      <div ref={particlesRef} className="particles" />
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-bg-primary/30 via-transparent to-accent-primary/5" />
+      
+      <motion.div 
+        className="relative z-10 py-12"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="max-w-4xl mx-auto px-4">
         {/* Header */}
         <motion.div 
           className="mb-8"
@@ -1743,11 +1815,15 @@ export default function AuditPage() {
           <>
             {/* Score Rings */}
             <motion.div 
-              className="bg-bg-primary rounded-lg shadow-sm border p-6 mb-6"
+              className="glass-card-enhanced rounded-lg shadow-sm border p-6 mb-6 relative overflow-hidden group"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              whileHover={{ scale: 1.01 }}
             >
+              {/* Gradient hover effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-primary/5 to-accent-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative z-10">
               <h2 className="text-2xl font-semibold text-text-primary mb-6">Overall Score</h2>
               <div className="flex justify-center mb-8">
                 <ModernScoreRing score={result.scores.overall} label="Overall" size="lg" />
@@ -1760,6 +1836,7 @@ export default function AuditPage() {
                 <ModernScoreRing score={result.scores.schema} label="Schema" />
                 <ModernScoreRing score={result.scores.images} label="Images" />
                 <ModernScoreRing score={result.scores.internal_links} label="Internal Links" />
+              </div>
               </div>
             </motion.div>
 
@@ -1802,7 +1879,8 @@ export default function AuditPage() {
         {activeTab === "crawl" && <ModernCrawlTab result={result} />}
 
         {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
-      </div>
-    </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 }
