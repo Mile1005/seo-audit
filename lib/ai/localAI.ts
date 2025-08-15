@@ -1,15 +1,4 @@
-import {
-  pipeline,
-  AutoTokenizer,
-  AutoModelForSequenceClassification,
-  AutoModelForSeq2SeqLM,
-} from "@xenova/transformers";
-
-// Model loading states
-let summarizer: any = null;
-let intentClassifier: any = null;
-let modelsLoaded = false;
-let modelsLoading = false;
+// --- REMOVE ALL XENOVA/TRANSFORMERS IMPORTS AND MODEL LOADING ---
 
 // Intent categories for classification
 const INTENT_CATEGORIES = [
@@ -22,63 +11,22 @@ const INTENT_CATEGORIES = [
 ];
 
 /**
- * Initialize AI models (lazy loading)
- */
-async function initializeModels() {
-  if (modelsLoaded || modelsLoading) return;
-
-  modelsLoading = true;
-
-  try {
-    console.log("Loading AI models...");
-
-    // Load summarization model
-    summarizer = await pipeline("summarization", "Xenova/distilbart-cnn-12-6");
-
-    // Load intent classification model (using a general text classification model)
-    intentClassifier = await pipeline(
-      "text-classification",
-      "Xenova/distilbert-base-uncased-finetuned-sst-2-english"
-    );
-
-    modelsLoaded = true;
-    console.log("AI models loaded successfully");
-  } catch (error) {
-    console.error("Failed to load AI models:", error);
-    modelsLoaded = false;
-  } finally {
-    modelsLoading = false;
-  }
-}
-
-/**
- * Summarize text content
+ * Summarize text content using Hugging Face Inference API (proxied)
  */
 export async function summarize(text: string, maxLength: number = 150): Promise<string> {
   try {
-    await initializeModels();
-
-    if (!summarizer || !modelsLoaded) {
-      throw new Error("Summarization model not available");
-    }
-
-    // Clean and prepare text
     const cleanText = text.replace(/\s+/g, " ").trim();
     if (cleanText.length < 50) {
       return cleanText; // Return original if too short
     }
-
-    // Truncate if too long (models have input limits)
-    const truncatedText =
-      cleanText.length > 1000 ? cleanText.substring(0, 1000) + "..." : cleanText;
-
-    const result = await summarizer(truncatedText, {
-      max_length: maxLength,
-      min_length: 30,
-      do_sample: false,
+    const truncatedText = cleanText.length > 1000 ? cleanText.substring(0, 1000) + "..." : cleanText;
+    const response = await fetch("/api/ai-inference", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task: "summarization", text: truncatedText }),
     });
-
-    return result[0]?.summary_text || "Unable to generate summary";
+    const data = await response.json();
+    return data[0]?.summary_text || "Unable to generate summary";
   } catch (error) {
     console.error("Summarization error:", error);
     // Fallback: return first few sentences
@@ -89,37 +37,28 @@ export async function summarize(text: string, maxLength: number = 150): Promise<
 }
 
 /**
- * Classify content intent
+ * Classify content intent using Hugging Face Inference API (proxied)
  */
 export async function classifyIntent(
   text: string
 ): Promise<{ intent: string; confidence: number }> {
   try {
-    await initializeModels();
-
-    if (!intentClassifier || !modelsLoaded) {
-      throw new Error("Intent classification model not available");
-    }
-
-    // Clean and prepare text
     const cleanText = text.replace(/\s+/g, " ").trim();
     if (cleanText.length < 10) {
       return { intent: "informational", confidence: 0.5 };
     }
-
-    // Truncate if too long
     const truncatedText = cleanText.length > 500 ? cleanText.substring(0, 500) : cleanText;
-
-    const result = await intentClassifier(truncatedText);
-
-    // Map model output to our intent categories
+    const response = await fetch("/api/ai-inference", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ task: "text-classification", text: truncatedText }),
+    });
+    const result = await response.json();
     const score = result[0]?.score || 0.5;
     const label = result[0]?.label || "POSITIVE";
-
     // Simple mapping based on content analysis
     const intent = mapToIntentCategory(truncatedText, score, label);
     const confidence = Math.min(score * 1.2, 0.95); // Boost confidence slightly
-
     return { intent, confidence };
   } catch (error) {
     console.error("Intent classification error:", error);
@@ -319,17 +258,16 @@ function generateReasoning(
  * Check if AI models are available
  */
 export function isAIAvailable(): boolean {
-  return modelsLoaded;
+  // This function is no longer relevant as models are loaded via API
+  return true;
 }
 
 /**
  * Get AI loading status
  */
 export function getAILoadingStatus(): { loading: boolean; loaded: boolean } {
-  return {
-    loading: modelsLoading,
-    loaded: modelsLoaded,
-  };
+  // This function is no longer relevant as models are loaded via API
+  return { loading: false, loaded: true };
 }
 
 /**
@@ -371,4 +309,111 @@ export async function analyzeContent(
       aiAvailable: false,
     };
   }
+}
+
+/**
+ * Sentiment analysis (positive/negative/neutral)
+ */
+export async function sentimentAnalysis(text: string) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "sentiment", text }),
+  });
+  return await response.json();
+}
+
+/**
+ * Named Entity Recognition (keyword/entity extraction)
+ */
+export async function extractEntities(text: string) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "ner", text }),
+  });
+  return await response.json();
+}
+
+/**
+ * Topic classification (zero-shot)
+ * @param text
+ * @param labels array of candidate labels (topics)
+ */
+export async function classifyTopic(text: string, labels: string[]) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "topic", text, labels }),
+  });
+  return await response.json();
+}
+
+/**
+ * Toxicity detection
+ */
+export async function detectToxicity(text: string) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "toxicity", text }),
+  });
+  return await response.json();
+}
+
+/**
+ * Language detection
+ */
+export async function detectLanguage(text: string) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "language", text }),
+  });
+  return await response.json();
+}
+
+/**
+ * Paraphrasing
+ */
+export async function paraphraseText(text: string) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "paraphrase", text }),
+  });
+  return await response.json();
+}
+
+/**
+ * Question generation (FAQ)
+ */
+export async function generateQuestions(text: string) {
+  const response = await fetch("/api/ai-inference", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task: "question", text }),
+  });
+  return await response.json();
+}
+
+/**
+ * Readability score (Flesch-Kincaid)
+ */
+export function computeReadability(text: string) {
+  // Flesch-Kincaid Reading Ease
+  const sentences = text.split(/[.!?]+/).filter(Boolean).length || 1;
+  const words = text.split(/\s+/).filter(Boolean).length || 1;
+  const syllables = text.split(/\s+/).reduce((acc, word) => acc + countSyllables(word), 0) || 1;
+  // Flesch Reading Ease formula
+  const score = 206.835 - 1.015 * (words / sentences) - 84.6 * (syllables / words);
+  return Math.round(score * 10) / 10;
+}
+function countSyllables(word: string) {
+  word = word.toLowerCase();
+  if (word.length <= 3) return 1;
+  word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '');
+  word = word.replace(/^y/, '');
+  const matches = word.match(/[aeiouy]{1,2}/g);
+  return matches ? matches.length : 1;
 }

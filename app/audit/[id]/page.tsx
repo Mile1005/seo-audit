@@ -1096,27 +1096,13 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
       ...(result.detected.h3 || []),
     ].join(" ");
     const metaDesc = result.detected.meta_description || "";
-
-    // For demo purposes, create some sample content
     const sampleContent = `
-           ${result.detected.title || "Sample Page Title"}
-           
-           ${result.detected.meta_description || "This is a sample page with content about SEO best practices and digital marketing strategies."}
-           
-           ${result.detected.h1 || "Main Page Heading"}
-           
-           ${result.detected.h2.join(". ")}
-           
-           ${result.detected.h3.join(". ")}
-           
-           This page provides comprehensive information about search engine optimization techniques, 
-           content marketing strategies, and digital marketing best practices. It covers topics such as 
-           keyword research, on-page optimization, technical SEO, and performance monitoring.
-           
-           The content is designed to help website owners and marketers improve their online visibility 
-           and drive more organic traffic to their websites through effective SEO strategies.
-         `;
-
+      ${result.detected.title || "Sample Page Title"}
+      ${result.detected.meta_description || "This is a sample page with content about SEO best practices and digital marketing strategies."}
+      ${result.detected.h1 || "Main Page Heading"}
+      ${result.detected.h2.join(". ")}
+      ${result.detected.h3.join(". ")}
+    `;
     return sampleContent.replace(/\s+/g, " ").trim();
   };
 
@@ -1124,31 +1110,57 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
     setLoading(true);
     setError(null);
     setAiStatus("loading");
-
     try {
-      // Dynamic import to avoid SSR issues
-      const { analyzeContent, getAILoadingStatus } = await import("../../../lib/ai/localAI");
-
-      // Check AI status
-      const status = getAILoadingStatus();
-      if (!status.loaded && !status.loading) {
-        setAiStatus("loading");
-      }
-
       const contentText = getContentText();
       const headings = [
         result.detected.h1 || "",
         ...(result.detected.h2 || []),
         ...(result.detected.h3 || []),
       ].filter(Boolean);
-
-      // Run AI analysis
-      const aiAnalysis = await analyzeContent(contentText, headings);
-
-      setAnalysis(aiAnalysis);
-      setAiStatus(aiAnalysis.aiAvailable ? "ready" : "failed");
-    } catch (error) {
-      console.error("AI analysis error:", error);
+      const defaultTopics = [
+        "SEO", "Marketing", "Tech", "Business", "Health", "News", "Education", "Entertainment"
+      ];
+      const localAI = await import("../../../lib/ai/localAI");
+      const [
+        summary,
+        intent,
+        sentiment,
+        entities,
+        topic,
+        toxicity,
+        language,
+        paraphrase,
+        questions,
+        readability,
+        topicGaps
+      ] = await Promise.all([
+        localAI.summarize(contentText),
+        localAI.classifyIntent(contentText),
+        localAI.sentimentAnalysis(contentText),
+        localAI.extractEntities(contentText),
+        localAI.classifyTopic(contentText, defaultTopics),
+        localAI.detectToxicity(contentText),
+        localAI.detectLanguage(contentText),
+        localAI.paraphraseText(result.detected.meta_description || contentText),
+        localAI.generateQuestions(contentText),
+        Promise.resolve(localAI.computeReadability(contentText)),
+        localAI.suggestTopicGaps(headings, []) // competitorHeadings can be added later
+      ]);
+      setAnalysis({
+        summary,
+        intent,
+        sentiment,
+        entities,
+        topic,
+        toxicity,
+        language,
+        paraphrase,
+        questions,
+        readability,
+        topicGaps,
+      });
+      setAiStatus("ready");
+    } catch (err) {
       setError("Failed to run AI analysis. Please try again.");
       setAiStatus("failed");
     } finally {
@@ -1211,7 +1223,7 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
         <div>
           <h3 className="text-xl font-semibold text-text-primary">AI Content Analysis</h3>
           <p className="text-sm text-text-secondary">
-            Local AI-powered insights using transformer models
+            AI-powered insights using Hugging Face models (free tier)
           </p>
         </div>
         <button
@@ -1222,7 +1234,6 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
           {loading ? "Analyzing..." : "Run AI Analysis"}
         </button>
       </div>
-
       {/* AI Status */}
       <div className="flex items-center space-x-2">
         <div
@@ -1238,15 +1249,14 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
         ></div>
         <span className="text-sm text-text-secondary">
           {aiStatus === "ready"
-            ? "AI Models Ready"
+            ? "AI Insights Ready"
             : aiStatus === "loading"
-              ? "Loading AI Models..."
+              ? "Running AI Analysis..."
               : aiStatus === "failed"
-                ? "AI Models Unavailable"
-                : "AI Models Not Loaded"}
+                ? "AI Analysis Failed"
+                : "Idle"}
         </span>
       </div>
-
       {/* Error Display */}
       {error && (
         <motion.div 
@@ -1258,7 +1268,6 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
           <p className="text-red-400">{error}</p>
         </motion.div>
       )}
-
       {/* Analysis Results */}
       {analysis && (
         <motion.div 
@@ -1267,26 +1276,15 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Content Summary */}
-          <motion.div 
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          {/* Summary */}
+          <motion.div className="glass-card p-6">
             <h4 className="text-xl font-semibold text-text-primary mb-4">Content Summary</h4>
             <div className="bg-bg-secondary/50 p-4 rounded-lg">
               <p className="text-text-primary leading-relaxed">{analysis.summary}</p>
             </div>
           </motion.div>
-
-          {/* Intent Classification */}
-          <motion.div 
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          {/* Intent */}
+          <motion.div className="glass-card p-6">
             <h4 className="text-xl font-semibold text-text-primary mb-4">Content Intent</h4>
             <div className="flex items-center space-x-3">
               <span className="text-2xl">{getIntentIcon(analysis.intent.intent)}</span>
@@ -1299,64 +1297,92 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
                 </div>
               </div>
             </div>
-            <div className="mt-3">
-              <div className="w-full bg-gray-700 rounded-full h-2">
-                <div
-                  className="bg-accent-primary h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${analysis.intent.confidence * 100}%` }}
-                ></div>
+          </motion.div>
+          {/* Sentiment */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Sentiment Analysis</h4>
+            <div className="flex items-center space-x-3">
+              <span className="text-2xl">
+                {analysis.sentiment[0]?.label === "POSITIVE" ? "😊" : analysis.sentiment[0]?.label === "NEGATIVE" ? "😞" : "😐"}
+              </span>
+              <div>
+                <div className="font-semibold">
+                  {analysis.sentiment[0]?.label}
+                </div>
+                <div className="text-sm text-text-secondary">
+                  Confidence: {Math.round((analysis.sentiment[0]?.score || 0) * 100)}%
+                </div>
               </div>
             </div>
           </motion.div>
-
-          {/* Topic Gap Suggestions */}
-          {analysis.topicGaps.length > 0 && (
-            <motion.div 
-              className="glass-card p-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h4 className="text-xl font-semibold text-text-primary mb-4">Topic Gap Suggestions</h4>
-              <div className="space-y-4">
-                {analysis.topicGaps.map((gap: any, index: number) => (
-                  <motion.div 
-                    key={index}
-                    className="border border-gray-700 rounded-lg p-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <div className="flex justify-between items-center mb-2">
-                      <h5 className="font-medium text-text-primary">{gap.topic}</h5>
-                      <span className={`text-sm font-medium ${getRelevanceColor(gap.relevance)}`}>
-                        {Math.round(gap.relevance * 100)}% relevance
-                      </span>
-                    </div>
-                    <p className="text-sm text-text-secondary">{gap.reasoning}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          {/* AI Model Info */}
-          <motion.div 
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h4 className="font-medium text-accent-primary mb-2">About Local AI</h4>
-            <p className="text-sm text-text-secondary">
-              This analysis uses local transformer models running in your browser. No data is sent
-              to external servers, ensuring privacy and security. Models are loaded on-demand and
-              cached for faster subsequent analysis.
-            </p>
+          {/* Entities/Keywords */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Keywords & Entities</h4>
+            <div className="flex flex-wrap gap-2">
+              {analysis.entities.map((ent: any, i: number) => (
+                <span key={i} className="px-3 py-1 bg-accent-primary/20 text-accent-primary text-xs rounded-full border border-accent-primary/30">
+                  {ent.word} <span className="text-xs text-text-secondary">({ent.entity_group || ent.entity})</span>
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          {/* Topic Classification */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Topic Classification</h4>
+            <div className="flex flex-wrap gap-2">
+              {analysis.topic.labels?.map((label: string, i: number) => (
+                <span key={i} className="px-3 py-1 bg-accent-secondary/20 text-accent-secondary text-xs rounded-full border border-accent-secondary/30">
+                  {label}: {Math.round((analysis.topic.scores?.[i] || 0) * 100)}%
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          {/* Toxicity */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Toxicity Detection</h4>
+            <div className="flex flex-wrap gap-2">
+              {analysis.toxicity.map((tox: any, i: number) => (
+                <span key={i} className="px-3 py-1 bg-red-500/10 text-red-400 text-xs rounded-full border border-red-400/30">
+                  {tox.label}: {Math.round((tox.score || 0) * 100)}%
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          {/* Language Detection */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Language Detection</h4>
+            <div className="flex flex-wrap gap-2">
+              {analysis.language.map((lang: any, i: number) => (
+                <span key={i} className="px-3 py-1 bg-green-500/10 text-green-400 text-xs rounded-full border border-green-400/30">
+                  {lang.label}: {Math.round((lang.score || 0) * 100)}%
+                </span>
+              ))}
+            </div>
+          </motion.div>
+          {/* Paraphrasing */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Meta Description Paraphrase</h4>
+            <div className="bg-bg-secondary/50 p-4 rounded-lg">
+              <p className="text-text-primary leading-relaxed">{analysis.paraphrase[0]?.generated_text || "No paraphrase available."}</p>
+            </div>
+          </motion.div>
+          {/* Question Generation */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">FAQ (Question Generation)</h4>
+            <ul className="list-disc pl-6">
+              {analysis.questions.map((q: any, i: number) => (
+                <li key={i} className="mb-2 text-text-secondary">{q.generated_text}</li>
+              ))}
+            </ul>
+          </motion.div>
+          {/* Readability */}
+          <motion.div className="glass-card p-6">
+            <h4 className="text-xl font-semibold text-text-primary mb-4">Readability Score</h4>
+            <div className="text-2xl font-bold text-accent-primary mb-2">{analysis.readability}</div>
+            <div className="text-sm text-text-secondary">Flesch-Kincaid Reading Ease (higher is easier to read, 60+ is good for most audiences)</div>
           </motion.div>
         </motion.div>
       )}
-
       {/* Loading State */}
       {loading && (
         <motion.div 
