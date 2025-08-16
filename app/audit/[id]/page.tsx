@@ -8,6 +8,7 @@ const ReportBuilder = dynamic(() => import("../../../components/common/ReportBui
 const FixPack = dynamic(() => import("../../../components/common/FixPack"), { ssr: false });
 import PerformancePanel from "../../../components/audit/PerformancePanel";
 import { AuditResult } from "../../../lib/heuristics";
+import FuturisticProgressPanel from "../../../components/common/FuturisticProgressPanel";
 
 // Error Boundary Component
 interface ErrorBoundaryState {
@@ -1586,6 +1587,7 @@ function AuditPageContent() {
         transition={{ duration: 0.5 }}
       >
         <div className="max-w-4xl mx-auto px-4">
+          <FuturisticProgressPanel status="running" />
           <ModernSkeletonLoader />
         </div>
       </motion.div>
@@ -1630,18 +1632,8 @@ function AuditPageContent() {
         transition={{ duration: 0.5 }}
       >
         <div className="max-w-4xl mx-auto px-4">
-          <motion.div 
-            className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600 mx-auto mb-4"></div>
-            <h2 className="text-lg font-semibold text-yellow-400 mb-2">Processing Audit</h2>
-            <p className="text-yellow-400">
-              Your audit is being processed. This may take a few minutes.
-            </p>
-          </motion.div>
+          <FuturisticProgressPanel status="running" />
+          <ModernSkeletonLoader />
         </div>
       </motion.div>
     );
