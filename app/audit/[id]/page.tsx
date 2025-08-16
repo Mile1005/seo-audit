@@ -1854,10 +1854,6 @@ function AuditPageContent() {
               </ul>
             </motion.section>
             <ModernCrawlTab result={result} />
-            {/* Show progress panel if crawl is running/queued and no result yet */}
-            {activeTab === "crawl" && (crawlStatus === "queued" || crawlStatus === "running") && !crawlResult && (
-              <FuturisticProgressPanel status="running" />
-            )}
           </>
         )}
 
