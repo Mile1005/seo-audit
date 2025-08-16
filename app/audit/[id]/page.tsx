@@ -9,6 +9,7 @@ const FixPack = dynamic(() => import("../../../components/common/FixPack"), { ss
 import PerformancePanel from "../../../components/audit/PerformancePanel";
 import { AuditResult } from "../../../lib/heuristics";
 import FuturisticProgressPanel from "../../../components/common/FuturisticProgressPanel";
+import Modal from "../../../components/common/Modal";
 
 // Error Boundary Component
 interface ErrorBoundaryState {
@@ -1853,6 +1854,10 @@ function AuditPageContent() {
               </ul>
             </motion.section>
             <ModernCrawlTab result={result} />
+            {/* Show progress panel if crawl is running/queued and no result yet */}
+            {activeTab === "crawl" && (crawlStatus === "queued" || crawlStatus === "running") && !crawlResult && (
+              <FuturisticProgressPanel status="running" />
+            )}
           </>
         )}
 

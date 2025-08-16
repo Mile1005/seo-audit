@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AuditResult } from "../../lib/heuristics";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import Modal from "./Modal";
 
 interface ReportBuilderProps {
   isOpen: boolean;
@@ -65,17 +66,6 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
     );
   };
 
-  const generateReport = () => {
-    setIsGenerating(true);
-    // Small delay to show loading state
-    setTimeout(() => {
-      setIsGenerating(false);
-      if (reportRef.current) {
-        window.print();
-      }
-    }, 1000);
-  };
-
   const exportPDF = async () => {
     setIsGenerating(true);
     if (reportRef.current) {
@@ -101,75 +91,40 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
-      <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={onClose} />
-      {/* Modal content */}
-      <div className="relative w-full h-full max-w-6xl max-h-screen flex flex-col md:flex-row bg-white/95 rounded-xl shadow-2xl border border-accent-primary/30 animated-gradient-hover overflow-hidden">
-        {/* Header with close and PDF button */}
-        <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-white/90 border-b z-20">
-          <h2 className="text-xl font-bold text-gray-900">SEO Report Builder</h2>
-          <div className="flex gap-2">
-            <button
-              onClick={exportPDF}
-              disabled={isGenerating}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-base font-semibold"
-            >
-              {isGenerating ? "Generating PDF..." : "Generate Report as PDF"}
-            </button>
-            <button
-              onClick={onClose}
-              className="ml-2 text-gray-400 hover:text-gray-600 transition-colors text-2xl font-bold"
-              aria-label="Close report builder"
-            >
-              ×
-            </button>
-          </div>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="absolute top-4 right-4 z-20 text-gray-400 hover:text-gray-600 text-3xl font-bold bg-white/80 rounded-full p-2 shadow-lg"
+        aria-label="Close report preview"
+      >
+        ×
+      </button>
+      {/* Report Preview */}
+      <div className="relative flex flex-col items-center justify-center min-h-[60vh] p-4 md:p-8">
+        <div ref={reportRef} className="w-full max-w-2xl mx-auto bg-white border rounded-xl shadow-lg p-4 md:p-8 print:p-0">
+          <ReportContent
+            result={result}
+            sections={sections.filter((s) => s.enabled)}
+            branding={branding}
+          />
         </div>
-        {/* Sidebar */}
-        <div className="w-full md:w-80 pt-20 pb-6 px-6 bg-gray-50/90 border-b md:border-b-0 md:border-r overflow-y-auto max-h-full">
-          {/* Branding fields */}
-          <div className="space-y-6">
-            <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Branding</h3>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">Company Name</label>
-                  <input
-                    type="text"
-                    value={branding.companyName}
-                    onChange={(e) => setBranding((prev) => ({ ...prev, companyName: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
-                  />
-                </div>
-                <div>
-                  <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">Logo URL (optional)</label>
-                  <input
-                    type="url"
-                    value={branding.logo}
-                    onChange={(e) => setBranding((prev) => ({ ...prev, logo: e.target.value }))}
-                    placeholder="https://example.com/logo.png"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Report Preview */}
-        <div className="flex-1 pt-20 pb-6 px-6 overflow-y-auto bg-white/95 max-h-full">
-          <div className="bg-white border rounded-lg shadow-md">
-            <div ref={reportRef} className="p-4 md:p-8 print:p-0">
-              <ReportContent
-                result={result}
-                sections={sections.filter((s) => s.enabled)}
-                branding={branding}
-              />
-            </div>
-          </div>
-        </div>
+        {/* Floating Export Button */}
+        <button
+          onClick={exportPDF}
+          disabled={isGenerating}
+          className="fixed bottom-8 right-8 md:bottom-8 md:right-8 z-30 px-6 py-3 rounded-full bg-gradient-to-r from-accent-primary to-accent-secondary text-white text-lg font-bold shadow-lg hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary"
+          style={{ boxShadow: "0 4px 24px 0 rgba(0, 212, 255, 0.25)" }}
+        >
+          {isGenerating ? "Generating PDF..." : (
+            <span className="flex items-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              Download PDF
+            </span>
+          )}
+        </button>
       </div>
-    </div>
+    </Modal>
   );
 }
 
