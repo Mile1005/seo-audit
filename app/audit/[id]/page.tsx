@@ -1813,9 +1813,56 @@ function AuditPageContent() {
           </>
         )}
 
-        {activeTab === "competitors" && <ModernCompetitorsTab />}
+        {activeTab === "competitors" && (
+          <>
+            {/* Explanatory Section for Competitor Analysis */}
+            <motion.section
+              className="mb-8 glass-card-enhanced p-6 md:p-8 flex flex-col items-center text-center border-l-4 border-accent-primary/40 bg-bg-secondary/60"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              aria-label="About Competitor Analysis"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">What is Competitor Analysis?</h2>
+              <p className="text-base md:text-lg text-text-secondary max-w-2xl mb-2">
+                Instantly compare your website's search performance to top-ranking competitors for any keyword and country. Discover who dominates the SERP, analyze featured snippets, local packs, ads, and more. Uncover domain strengths, keyword gaps, and actionable opportunities to outrank your rivals.
+              </p>
+              <ul className="text-left text-sm md:text-base text-text-secondary max-w-2xl list-disc pl-5">
+                <li>Multi-keyword, multi-country support for global reach</li>
+                <li>Detailed SERP feature detection (snippets, PAA, local, ads, knowledge graph, sitelinks)</li>
+                <li>Competitor domain overlap, average position, and visibility metrics</li>
+                <li>All data visualized in a modern, full-width, accessible dashboard</li>
+              </ul>
+            </motion.section>
+            <ModernCompetitorsTab />
+          </>
+        )}
 
-        {activeTab === "crawl" && <ModernCrawlTab result={result} />}
+        {activeTab === "crawl" && (
+          <>
+            {/* Explanatory Section for Site Crawl (Beta) */}
+            <motion.section
+              className="mb-8 glass-card-enhanced p-6 md:p-8 flex flex-col items-center text-center border-l-4 border-accent-secondary/40 bg-bg-secondary/60"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              aria-label="About Site Crawl"
+            >
+              <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">What Does Site Crawl Do?</h2>
+              <p className="text-base md:text-lg text-text-secondary max-w-2xl mb-2">
+                Crawl up to 30 pages of your website for free—no setup required. Instantly detect technical SEO issues, broken links, missing meta tags, duplicate titles/canonicals, robots.txt and sitemap.xml status, and more. Get a clear, actionable overview of your site's health and indexability.
+              </p>
+              <ul className="text-left text-sm md:text-base text-text-secondary max-w-2xl list-disc pl-5">
+                <li>Checks robots.txt and sitemap.xml for crawlability</li>
+                <li>Finds broken links, missing/duplicate titles, meta descriptions, canonicals</li>
+                <li>Highlights accessibility and image alt issues</li>
+                <li>Exports results as CSV for further analysis</li>
+                <li>Mobile-optimized, accessible, and privacy-friendly</li>
+              </ul>
+            </motion.section>
+            <ModernCrawlTab result={result} />
+          </>
+        )}
 
         {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
         </div>
