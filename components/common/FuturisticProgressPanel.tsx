@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 
 const steps = [
   { icon: "🔄", text: "Initializing audit engine..." },
@@ -26,6 +27,7 @@ export default function FuturisticProgressPanel({ status = "running" }: { status
   const [currentStep, setCurrentStep] = useState(0);
   const [log, setLog] = useState([steps[0]]);
   const [tip, setTip] = useState(tips[Math.floor(Math.random() * tips.length)]);
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
 
   useEffect(() => {
     if (status !== "running") return;
@@ -53,24 +55,52 @@ export default function FuturisticProgressPanel({ status = "running" }: { status
           <span className="animate-pulse">🚀</span> Live Audit Progress
         </h3>
         <div className="bg-bg-secondary/60 rounded-lg p-4 mb-4 min-h-[100px] font-mono text-accent-primary text-sm shadow-inner futuristic-terminal">
-          <AnimatePresence>
-            {log.map((step, idx) => (
+          {isMobile ? (
+            <AnimatePresence mode="wait">
               <motion.div
-                key={idx}
-                initial={{ opacity: 0, x: 30 }}
+                key={currentStep}
+                initial={{ opacity: 0, x: 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -30 }}
+                exit={{ opacity: 0, x: -40 }}
                 transition={{ duration: 0.4 }}
-                className="flex items-center gap-2 mb-1"
+                className="flex flex-col items-center justify-center min-h-[80px]"
               >
-                <span className="text-lg">{step.icon}</span>
-                <span>{step.text}</span>
-                {idx === currentStep && status === "running" && (
-                  <span className="ml-2 animate-pulse text-accent-secondary">▌</span>
-                )}
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-2xl">{steps[currentStep].icon}</span>
+                  <span>{steps[currentStep].text}</span>
+                  {status === "running" && <span className="ml-2 animate-pulse text-accent-secondary">▌</span>}
+                </div>
+                {/* Progress dots */}
+                <div className="flex gap-1 mt-2 justify-center">
+                  {steps.map((_, idx) => (
+                    <span
+                      key={idx}
+                      className={`w-2 h-2 rounded-full ${idx === currentStep ? "bg-accent-primary" : "bg-gray-500/30"}`}
+                    />
+                  ))}
+                </div>
               </motion.div>
-            ))}
-          </AnimatePresence>
+            </AnimatePresence>
+          ) : (
+            <AnimatePresence>
+              {log.map((step, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -30 }}
+                  transition={{ duration: 0.4 }}
+                  className="flex items-center gap-2 mb-1"
+                >
+                  <span className="text-lg">{step.icon}</span>
+                  <span>{step.text}</span>
+                  {idx === currentStep && status === "running" && (
+                    <span className="ml-2 animate-pulse text-accent-secondary">▌</span>
+                  )}
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          )}
         </div>
         <div className="mt-2 text-accent-secondary text-xs md:text-sm italic flex items-center gap-2">
           <span className="text-accent-primary">✨</span> {tip}
