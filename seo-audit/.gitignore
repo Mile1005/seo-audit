@@ -6,5 +6,7 @@ coverage/
 pnpm-lock.yaml
 dist/
 *.db*
+tsconfig.tsbuildinfo
+*.tsbuildinfo
 
 
