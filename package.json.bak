@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"next": "^15.4.6",
+		"web-vitals": "^5.1.0"
+	},
+	"devDependencies": {
+		"typescript": "^5.9.2"
+	}
+}
