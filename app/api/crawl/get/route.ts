@@ -41,13 +41,7 @@ export async function GET(request: NextRequest) {
     if (run.status === "ready") {
       const audit = await dbHelpers.getAuditByRunId(id);
       if (audit) {
-        try {
-          const crawlData = JSON.parse(audit.json);
-          response.result = crawlData;
-        } catch (error) {
-          console.error("Error parsing crawl result:", error);
-          response.error = "Failed to parse crawl result";
-        }
+        response.result = audit.json;
       }
     } else if (run.status === "failed") {
       response.error = "Crawl failed";
