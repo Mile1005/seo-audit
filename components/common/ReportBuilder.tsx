@@ -101,132 +101,74 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      <div className="relative w-full max-w-6xl h-full md:h-[90vh] bg-white/90 rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden border border-accent-primary/30 animated-gradient-hover">
-        {/* Backdrop */}
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
-          onClick={onClose}
-        />
-
-        {/* Modal */}
-        <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row md:max-h-[90vh] md:h-auto md:static h-[100dvh] md:h-auto">
-          {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b">
-            <h2 className="text-xl font-semibold text-gray-900">SEO Report Builder</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm" onClick={onClose} />
+      {/* Modal content */}
+      <div className="relative w-full h-full max-w-6xl max-h-screen flex flex-col md:flex-row bg-white/95 rounded-xl shadow-2xl border border-accent-primary/30 animated-gradient-hover overflow-hidden">
+        {/* Header with close and PDF button */}
+        <div className="absolute top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-white/90 border-b z-20">
+          <h2 className="text-xl font-bold text-gray-900">SEO Report Builder</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={exportPDF}
+              disabled={isGenerating}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-base font-semibold"
+            >
+              {isGenerating ? "Generating PDF..." : "Generate Report as PDF"}
+            </button>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="ml-2 text-gray-400 hover:text-gray-600 transition-colors text-2xl font-bold"
+              aria-label="Close report builder"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              ×
             </button>
           </div>
-
-          <div className="flex-1 flex flex-col md:flex-row h-full">
-            {/* Sidebar */}
-            <div className="w-full md:w-80 border-b md:border-b-0 md:border-r bg-gray-50/90 p-4 md:p-6 overflow-y-auto max-h-60 md:max-h-full">
-              <div className="space-y-6">
-                {/* Sections */}
+        </div>
+        {/* Sidebar */}
+        <div className="w-full md:w-80 pt-20 pb-6 px-6 bg-gray-50/90 border-b md:border-b-0 md:border-r overflow-y-auto max-h-full">
+          {/* Branding fields */}
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">Branding</h3>
+              <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Report Sections</h3>
-                  <div className="space-y-3">
-                    {sections.map((section) => (
-                      <label key={section.id} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={section.enabled}
-                          onChange={() => toggleSection(section.id)}
-                          className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        />
-                        <span className="ml-3 text-base md:text-sm text-gray-700">{section.title}</span>
-                      </label>
-                    ))}
-                  </div>
+                  <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                  <input
+                    type="text"
+                    value={branding.companyName}
+                    onChange={(e) => setBranding((prev) => ({ ...prev, companyName: e.target.value }))}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
+                  />
                 </div>
-
-                {/* Branding */}
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Branding</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
-                        Company Name
-                      </label>
-                      <input
-                        type="text"
-                        value={branding.companyName}
-                        onChange={(e) => setBranding((prev) => ({ ...prev, companyName: e.target.value }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
-                        Logo URL (optional)
-                      </label>
-                      <input
-                        type="url"
-                        value={branding.logo}
-                        onChange={(e) => setBranding((prev) => ({ ...prev, logo: e.target.value }))}
-                        placeholder="https://example.com/logo.png"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="space-y-3">
-                  <button
-                    onClick={exportPDF}
-                    disabled={isGenerating}
-                    className="w-full px-4 py-3 md:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-lg md:text-base"
-                  >
-                    {isGenerating ? "Generating PDF..." : "Generate Report as PDF"}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Report Preview */}
-            <div className="flex-1 p-4 md:p-8 overflow-y-auto max-h-[80vh] bg-white/95">
-              <div className="bg-white border rounded-lg shadow-md">
-                <div ref={reportRef} className="p-4 md:p-8 print:p-0">
-                  <ReportContent
-                    result={result}
-                    sections={sections.filter((s) => s.enabled)}
-                    branding={branding}
+                  <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">Logo URL (optional)</label>
+                  <input
+                    type="url"
+                    value={branding.logo}
+                    onChange={(e) => setBranding((prev) => ({ ...prev, logo: e.target.value }))}
+                    placeholder="https://example.com/logo.png"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
                   />
                 </div>
               </div>
             </div>
           </div>
         </div>
+        {/* Report Preview */}
+        <div className="flex-1 pt-20 pb-6 px-6 overflow-y-auto bg-white/95 max-h-full">
+          <div className="bg-white border rounded-lg shadow-md">
+            <div ref={reportRef} className="p-4 md:p-8 print:p-0">
+              <ReportContent
+                result={result}
+                sections={sections.filter((s) => s.enabled)}
+                branding={branding}
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      {isOpen && (
-        <button
-          onClick={generateReport}
-          disabled={isGenerating}
-          className="fixed bottom-6 right-6 z-50 md:hidden flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 shadow-lg hover:bg-blue-700 text-white text-2xl font-bold transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
-          aria-label="Generate Report"
-          style={{ pointerEvents: isOpen ? 'auto' : 'none' }}
-        >
-          {isGenerating ? (
-            <svg className="animate-spin w-8 h-8" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-            </svg>
-          ) : (
-            <span>📊</span>
-          )}
-        </button>
-      )}
     </div>
   );
 }
