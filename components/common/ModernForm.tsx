@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import FuturisticProgressPanel from "./FuturisticProgressPanel";
 
 interface FormData {
   pageUrl: string;
@@ -186,6 +187,9 @@ export default function ModernForm({
               AI-powered
             </span>
           </motion.button>
+          {isSubmitting && (
+            <FuturisticProgressPanel status="running" />
+          )}
         </motion.div>
       </form>
       {/* Floating Elements */}
