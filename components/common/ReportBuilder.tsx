@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { AuditResult } from "../../lib/heuristics";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 interface ReportBuilderProps {
   isOpen: boolean;
@@ -19,8 +21,6 @@ interface ReportSection {
 interface BrandingOptions {
   companyName: string;
   logo: string;
-  primaryColor: string;
-  secondaryColor: string;
 }
 
 export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilderProps) {
@@ -35,8 +35,6 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
   const [branding, setBranding] = useState<BrandingOptions>({
     companyName: "SEO Audit Pro",
     logo: "",
-    primaryColor: "#3B82F6",
-    secondaryColor: "#1E40AF",
   });
 
   const [isGenerating, setIsGenerating] = useState(false);
@@ -78,21 +76,33 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
     }, 1000);
   };
 
-  const exportPDF = () => {
+  const exportPDF = async () => {
     setIsGenerating(true);
-    setTimeout(() => {
-      setIsGenerating(false);
-      if (reportRef.current) {
-        window.print();
+    if (reportRef.current) {
+      const input = reportRef.current;
+      try {
+        const canvas = await html2canvas(input, { scale: 2, useCORS: true });
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({ orientation: "portrait", unit: "pt", format: "a4" });
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pageWidth;
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save(`seo-audit-report-${new Date().toISOString().split("T")[0]}.pdf`);
+      } catch (err) {
+        alert("Failed to generate PDF. Please try again.");
       }
-    }, 1000);
+    }
+    setIsGenerating(false);
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex min-h-screen items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="relative w-full max-w-6xl h-full md:h-[90vh] bg-white/90 rounded-xl shadow-2xl flex flex-col md:flex-row overflow-hidden border border-accent-primary/30 animated-gradient-hover">
         {/* Backdrop */}
         <div
           className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
@@ -121,7 +131,7 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
 
           <div className="flex-1 flex flex-col md:flex-row h-full">
             {/* Sidebar */}
-            <div className="w-full md:w-80 border-b md:border-b-0 md:border-r bg-gray-50 p-4 md:p-6 overflow-y-auto">
+            <div className="w-full md:w-80 border-b md:border-b-0 md:border-r bg-gray-50/90 p-4 md:p-6 overflow-y-auto max-h-60 md:max-h-full">
               <div className="space-y-6">
                 {/* Sections */}
                 <div>
@@ -168,56 +178,25 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-base md:text-sm"
                       />
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
-                          Primary Color
-                        </label>
-                        <input
-                          type="color"
-                          value={branding.primaryColor}
-                          onChange={(e) => setBranding((prev) => ({ ...prev, primaryColor: e.target.value }))}
-                          className="w-full h-10 border border-gray-300 rounded-md cursor-pointer"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-base md:text-sm font-medium text-gray-700 mb-1">
-                          Secondary Color
-                        </label>
-                        <input
-                          type="color"
-                          value={branding.secondaryColor}
-                          onChange={(e) => setBranding((prev) => ({ ...prev, secondaryColor: e.target.value }))}
-                          className="w-full h-10 border border-gray-300 rounded-md cursor-pointer"
-                        />
-                      </div>
-                    </div>
                   </div>
                 </div>
 
                 {/* Actions */}
                 <div className="space-y-3">
                   <button
-                    onClick={generateReport}
+                    onClick={exportPDF}
                     disabled={isGenerating}
                     className="w-full px-4 py-3 md:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-lg md:text-base"
                   >
-                    {isGenerating ? "Generating..." : "Generate Report"}
-                  </button>
-                  <button
-                    onClick={exportPDF}
-                    disabled={isGenerating}
-                    className="w-full px-4 py-3 md:py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors text-lg md:text-base"
-                  >
-                    {isGenerating ? "Preparing..." : "Export PDF"}
+                    {isGenerating ? "Generating PDF..." : "Generate Report as PDF"}
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Report Preview */}
-            <div className="flex-1 p-4 md:p-6 overflow-y-auto">
-              <div className="bg-white border rounded-lg">
+            <div className="flex-1 p-4 md:p-8 overflow-y-auto max-h-[80vh] bg-white/95">
+              <div className="bg-white border rounded-lg shadow-md">
                 <div ref={reportRef} className="p-4 md:p-8 print:p-0">
                   <ReportContent
                     result={result}
@@ -274,15 +253,15 @@ function ReportContent({
       className="max-w-4xl mx-auto"
       style={
         {
-          "--primary-color": branding.primaryColor,
-          "--secondary-color": branding.secondaryColor,
+          "--primary-color": "#3B82F6", // Default primary color
+          "--secondary-color": "#1E40AF", // Default secondary color
         } as any
       }
     >
       {/* Header */}
       <div
         className="text-center mb-8 pb-6 border-b-2"
-        style={{ borderColor: branding.primaryColor }}
+        style={{ borderColor: "#3B82F6" }} // Default primary color
       >
         {branding.logo && (
           <Image
@@ -356,7 +335,7 @@ function ExecutiveSummary({
     <section className="mb-8">
       <h2
         className="text-2xl font-bold text-gray-900 mb-6"
-        style={{ color: branding.primaryColor }}
+        style={{ color: "#3B82F6" }} // Default primary color
       >
         Executive Summary
       </h2>
@@ -385,7 +364,7 @@ function ExecutiveSummary({
 
       <div
         className="bg-blue-50 p-4 rounded-lg border-l-4"
-        style={{ borderLeftColor: branding.primaryColor }}
+        style={{ borderLeftColor: "#3B82F6" }} // Default primary color
       >
         <h3 className="font-semibold text-gray-900 mb-2">Recommendations</h3>
         <p className="text-gray-700 text-sm">
@@ -402,7 +381,7 @@ function TechnicalSEO({ result, branding }: { result: AuditResult; branding: Bra
     <section className="mb-8">
       <h2
         className="text-2xl font-bold text-gray-900 mb-6"
-        style={{ color: branding.primaryColor }}
+        style={{ color: "#3B82F6" }} // Default primary color
       >
         Technical SEO Analysis
       </h2>
@@ -456,7 +435,7 @@ function ContentAnalysis({ result, branding }: { result: AuditResult; branding: 
     <section className="mb-8">
       <h2
         className="text-2xl font-bold text-gray-900 mb-6"
-        style={{ color: branding.primaryColor }}
+        style={{ color: "#3B82F6" }} // Default primary color
       >
         Content Analysis
       </h2>
@@ -506,7 +485,7 @@ function CompetitorAnalysis({
     <section className="mb-8">
       <h2
         className="text-2xl font-bold text-gray-900 mb-6"
-        style={{ color: branding.primaryColor }}
+        style={{ color: "#3B82F6" }} // Default primary color
       >
         Competitor Analysis
       </h2>
@@ -532,7 +511,7 @@ function PerformanceMetrics({
     <section className="mb-8">
       <h2
         className="text-2xl font-bold text-gray-900 mb-6"
-        style={{ color: branding.primaryColor }}
+        style={{ color: "#3B82F6" }} // Default primary color
       >
         Performance Metrics
       </h2>
