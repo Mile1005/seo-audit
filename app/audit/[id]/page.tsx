@@ -555,7 +555,9 @@ function ModernActionButtons({ result }: { result: AuditResult }) {
 
       {/* Fix Pack Modal */}
       {showFixPack && (
-        <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
+        <Modal isOpen={showFixPack} onClose={() => setShowFixPack(false)}>
+          <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
+        </Modal>
       )}
       </div>
     </motion.div>
@@ -1864,6 +1866,11 @@ function AuditPageContent() {
         {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
         </div>
       </motion.div>
+      {showFixPack && (
+        <Modal isOpen={showFixPack} onClose={() => setShowFixPack(false)}>
+          <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
+        </Modal>
+      )}
     </div>
   );
 }

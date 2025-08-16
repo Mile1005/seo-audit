@@ -270,114 +270,92 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex min-h-screen items-center justify-center p-4">
-        {/* Backdrop */}
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+    <div className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden border border-accent-primary/30 animated-gradient-hover">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6 border-b bg-white/90 sticky top-0 z-10">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-900">Fix Pack</h2>
+          <p className="text-sm text-gray-600">Copy-ready code snippets for implementation</p>
+        </div>
+        <button
           onClick={onClose}
-        />
-
-        {/* Modal */}
-        <div className="relative bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
-          {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b">
+          className="text-gray-400 hover:text-gray-600 transition-colors text-3xl font-bold bg-white/80 rounded-full p-2 shadow-lg"
+          aria-label="Close fix pack"
+        >
+          ×
+        </button>
+      </div>
+      {/* Content */}
+      <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+        {/* Summary */}
+        <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">Fix Pack</h2>
-              <p className="text-sm text-gray-600">Copy-ready code snippets for implementation</p>
+              <h3 className="font-semibold text-blue-900">Ready to Implement</h3>
+              <p className="text-sm text-blue-700">
+                {fixes.length} actionable fixes found for {result.url}
+              </p>
             </div>
             <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              onClick={copyAllFixes}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              {copiedId === "all" ? "Copied!" : "Copy All Fixes"}
             </button>
           </div>
-
-          {/* Content */}
-          <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
-            {/* Summary */}
-            <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-semibold text-blue-900">Ready to Implement</h3>
-                  <p className="text-sm text-blue-700">
-                    {fixes.length} actionable fixes found for {result.url}
-                  </p>
-                </div>
-                <button
-                  onClick={copyAllFixes}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  {copiedId === "all" ? "Copied!" : "Copy All Fixes"}
-                </button>
-              </div>
-            </div>
-
-            {/* Fixes List */}
-            <div className="space-y-4">
-              {fixes.map((fix) => (
-                <div key={fix.id} className="border rounded-lg overflow-hidden">
-                  {/* Fix Header */}
-                  <div className={`p-4 border-b ${getPriorityColor(fix.priority)}`}>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <span className="text-lg">{getTypeIcon(fix.type)}</span>
-                        <div>
-                          <h4 className="font-semibold">{fix.title}</h4>
-                          <p className="text-sm opacity-75">
-                            Priority: {fix.priority.charAt(0).toUpperCase() + fix.priority.slice(1)}
-                          </p>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => copyToClipboard(fix.content, fix.id)}
-                        className="px-3 py-1 bg-white border rounded-md hover:bg-gray-50 transition-colors text-sm"
-                      >
-                        {copiedId === fix.id ? "Copied!" : "Copy"}
-                      </button>
+        </div>
+        {/* Fixes List */}
+        <div className="space-y-4">
+          {fixes.map((fix) => (
+            <div key={fix.id} className="border rounded-lg overflow-hidden">
+              {/* Fix Header */}
+              <div className={`p-4 border-b ${getPriorityColor(fix.priority)}`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <span className="text-lg">{getTypeIcon(fix.type)}</span>
+                    <div>
+                      <h4 className="font-semibold">{fix.title}</h4>
+                      <p className="text-sm opacity-75">
+                        Priority: {fix.priority.charAt(0).toUpperCase() + fix.priority.slice(1)}
+                      </p>
                     </div>
                   </div>
-
-                  {/* Fix Content */}
-                  <div className="p-4 bg-gray-50">
-                    <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono bg-white p-3 rounded border overflow-x-auto">
-                      {fix.content}
-                    </pre>
-                  </div>
+                  <button
+                    onClick={() => copyToClipboard(fix.content, fix.id)}
+                    className="px-3 py-1 bg-white border rounded-md hover:bg-gray-50 transition-colors text-sm"
+                  >
+                    {copiedId === fix.id ? "Copied!" : "Copy"}
+                  </button>
                 </div>
-              ))}
-            </div>
-
-            {/* Empty State */}
-            {fixes.length === 0 && (
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">🎉</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Great Job!</h3>
-                <p className="text-gray-600">
-                  No critical fixes needed. Your page is well optimized!
-                </p>
               </div>
-            )}
-
-            {/* Implementation Tips */}
-            <div className="mt-8 p-4 bg-green-50 rounded-lg border border-green-200">
-              <h3 className="font-semibold text-green-900 mb-2">Implementation Tips</h3>
-              <ul className="text-sm text-green-700 space-y-1">
-                <li>• Start with high-priority fixes first</li>
-                <li>• Test changes in a staging environment</li>
-                <li>• Monitor search console after implementation</li>
-                <li>• Re-run the audit after making changes</li>
-              </ul>
+              {/* Fix Content */}
+              <div className="p-4 bg-gray-50">
+                <pre className="text-sm text-gray-800 whitespace-pre-wrap font-mono bg-white p-3 rounded border overflow-x-auto">
+                  {fix.content}
+                </pre>
+              </div>
             </div>
+          ))}
+        </div>
+        {/* Empty State */}
+        {fixes.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-6xl mb-4">🎉</div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">Great Job!</h3>
+            <p className="text-gray-600">
+              No critical fixes needed. Your page is well optimized!
+            </p>
           </div>
+        )}
+        {/* Implementation Tips */}
+        <div className="mt-8 p-4 bg-green-50 rounded-lg border border-green-200">
+          <h3 className="font-semibold text-green-900 mb-2">Implementation Tips</h3>
+          <ul className="text-sm text-green-700 space-y-1">
+            <li>• Start with high-priority fixes first</li>
+            <li>• Test changes in a staging environment</li>
+            <li>• Monitor search console after implementation</li>
+            <li>• Re-run the audit after making changes</li>
+          </ul>
         </div>
       </div>
     </div>
