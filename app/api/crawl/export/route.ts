@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-      const crawlData = JSON.parse(audit.json);
+      const crawlData = audit.json;
 
       // Generate CSV
       const csvContent = generateCrawlCSV(crawlData);

@@ -39,10 +39,7 @@ async function processCrawlJob(job: any) {
     await dbHelpers.saveAudit({
       id: resultId,
       runId: crawlId,
-      json: JSON.stringify({
-        type: "crawl",
-        ...crawlResult,
-      }),
+      json: { type: "crawl", ...crawlResult },
     });
 
     console.log(`Crawl ${crawlId} completed successfully, found ${crawlResult.totalPages} pages`);
