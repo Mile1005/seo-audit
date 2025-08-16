@@ -95,14 +95,15 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
       {/* Close button */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-20 text-gray-400 hover:text-gray-600 text-3xl font-bold bg-white/80 rounded-full p-2 shadow-lg"
+        className="absolute top-2 right-2 z-20 text-gray-400 hover:text-gray-600 text-3xl font-bold bg-white/80 rounded-full p-2 shadow-lg md:top-4 md:right-4"
         aria-label="Close report preview"
+        style={{ position: 'sticky', top: 0 }}
       >
         ×
       </button>
       {/* Report Preview */}
-      <div className="relative flex flex-col items-center justify-center min-h-[60vh] p-4 md:p-8">
-        <div ref={reportRef} className="w-full max-w-2xl mx-auto bg-white border rounded-xl shadow-lg p-4 md:p-8 print:p-0">
+      <div className="relative flex flex-col items-center justify-center w-full h-full min-h-[40vh] max-h-[90vh] p-2 md:p-8 overflow-y-auto">
+        <div ref={reportRef} className="w-full max-w-md md:max-w-2xl mx-auto bg-white border rounded-2xl shadow-lg p-4 md:p-8 print:p-0 overflow-y-auto max-h-[70vh] md:max-h-[75vh]">
           <ReportContent
             result={result}
             sections={sections.filter((s) => s.enabled)}
@@ -113,7 +114,7 @@ export default function ReportBuilder({ isOpen, onClose, result }: ReportBuilder
         <button
           onClick={exportPDF}
           disabled={isGenerating}
-          className="fixed bottom-8 right-8 md:bottom-8 md:right-8 z-30 px-6 py-3 rounded-full bg-gradient-to-r from-accent-primary to-accent-secondary text-white text-lg font-bold shadow-lg hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary"
+          className="fixed bottom-4 left-1/2 transform -translate-x-1/2 md:bottom-8 md:right-8 md:left-auto md:translate-x-0 z-30 px-6 py-3 rounded-full bg-gradient-to-r from-accent-primary to-accent-secondary text-white text-lg font-bold shadow-lg hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent-primary"
           style={{ boxShadow: "0 4px 24px 0 rgba(0, 212, 255, 0.25)" }}
         >
           {isGenerating ? "Generating PDF..." : (
