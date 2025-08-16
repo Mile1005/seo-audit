@@ -190,8 +190,16 @@ export async function POST(request: NextRequest) {
     // Parse and validate request body
     const body = await request.json();
     let { keyword, country } = SerpSnapshotRequest.parse(body);
+    // Log received keyword for debugging
+    console.log("Received keyword:", keyword);
     // Support batch: keyword and country can be arrays
-    const keywords = Array.isArray(keyword) ? keyword : keyword.split(/[,\n]+/).map((k: string) => k.trim()).filter(Boolean);
+    // Only split on commas or newlines, NOT spaces
+    const keywords = Array.isArray(keyword)
+      ? keyword
+      : keyword.split(/[\n,]+/).map((k: string) => k.trim()).filter(Boolean);
+    if (keywords.length === 0) {
+      return NextResponse.json({ error: "No valid keywords provided." }, { status: 400 });
+    }
     const countries = Array.isArray(country) ? country : [country];
     if (keywords.length > MAX_KEYWORDS) {
       return NextResponse.json({ error: `Max ${MAX_KEYWORDS} keywords allowed per analysis.` }, { status: 400 });
