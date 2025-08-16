@@ -40,6 +40,11 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
   const clsStatus = getCLSStatus(performance.cls);
   const inpStatus = getINPStatus(performance.inp);
 
+  const onlyLCP = performance.lcp !== null && performance.cls === null && performance.inp === null;
+  const onlyCLS = performance.cls !== null && performance.lcp === null && performance.inp === null;
+  const onlyINP = performance.inp !== null && performance.lcp === null && performance.cls === null;
+  const allMissing = performance.lcp === null && performance.cls === null && performance.inp === null;
+
   return (
     <motion.div 
       className="glass-card-enhanced p-6 animated-gradient-hover"
@@ -48,6 +53,18 @@ export default function PerformancePanel({ performance }: PerformancePanelProps)
       transition={{ duration: 0.5 }}
     >
       <h3 className="text-xl font-semibold text-text-primary mb-6">Core Web Vitals</h3>
+
+      {/* Warnings for partial/missing data */}
+      {allMissing && (
+        <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded">
+          Core Web Vitals data is not available for this page. This may be due to PageSpeed Insights API limitations, lack of real-user data, or a temporary API issue.
+        </div>
+      )}
+      {(onlyLCP || onlyCLS || onlyINP) && !allMissing && (
+        <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 text-yellow-700 rounded">
+          Only partial Core Web Vitals data is available. This is common for new or low-traffic pages, or if the API could not retrieve all metrics.
+        </div>
+      )}
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {/* LCP */}

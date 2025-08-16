@@ -4,6 +4,7 @@ import React from "react";
 import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import WebVitalsClient from "./WebVitalsClient";
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -26,6 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Analytics />
         <SpeedInsights />
+        {/* Add Web Vitals Client Collector */}
+        <WebVitalsClient />
       </body>
     </html>
   );

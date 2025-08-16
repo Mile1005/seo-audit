@@ -56,6 +56,16 @@ export interface PSIResponse {
   };
 }
 
+// In-memory cache for PSI results (simple, per-process)
+const psiCache = new Map<string, { result: PSIResult; timestamp: number }>();
+const PSI_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+// Monitoring for PSI API failures
+let psiFailureCount = 0;
+let psiFailureWindowStart = Date.now();
+const PSI_FAILURE_WINDOW = 10 * 60 * 1000; // 10 minutes
+const PSI_FAILURE_THRESHOLD = 5;
+
 /**
  * Fetches PageSpeed Insights data for a given URL
  * @param url - The URL to analyze
@@ -70,6 +80,14 @@ export async function fetchPageSpeed(url: string, key?: string): Promise<PSIResu
       inp: null,
       notes: ["PSI API key not provided - performance data unavailable"],
     };
+  }
+
+  // Check cache first
+  const cacheKey = `${url}|${key}`;
+  const now = Date.now();
+  const cached = psiCache.get(cacheKey);
+  if (cached && now - cached.timestamp < PSI_CACHE_TTL) {
+    return cached.result;
   }
 
   try {
@@ -106,15 +124,31 @@ export async function fetchPageSpeed(url: string, key?: string): Promise<PSIResu
     // Generate performance notes
     const notes = generatePerformanceNotes(data, lcp, cls, inp);
 
-    console.log(`PSI data retrieved: LCP=${lcp}s, CLS=${cls}, INP=${inp}ms`);
-
-    return {
+    const result: PSIResult = {
       lcp,
       cls,
       inp,
       notes,
     };
+
+    // Store in cache
+    psiCache.set(cacheKey, { result, timestamp: now });
+
+    console.log(`PSI data retrieved: LCP=${lcp}s, CLS=${cls}, INP=${inp}ms`);
+
+    return result;
   } catch (error) {
+    // Monitoring logic
+    const now = Date.now();
+    if (now - psiFailureWindowStart > PSI_FAILURE_WINDOW) {
+      psiFailureWindowStart = now;
+      psiFailureCount = 0;
+    }
+    psiFailureCount++;
+    if (psiFailureCount >= PSI_FAILURE_THRESHOLD) {
+      console.warn(`PSI API has failed ${psiFailureCount} times in the last 10 minutes. Check API quota or service health.`);
+      // In production, send alert to monitoring system here
+    }
     console.error("PageSpeed Insights error:", error);
     return {
       lcp: null,

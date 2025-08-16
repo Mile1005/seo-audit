@@ -67,7 +67,25 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
   }
 }
 
+// In-memory cache for GSC results (simple, per-process)
+const gscCache = new Map<string, { result: any; timestamp: number }>();
+const GSC_CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
+// Monitoring for GSC API failures
+let gscFailureCount = 0;
+let gscFailureWindowStart = Date.now();
+const GSC_FAILURE_WINDOW = 10 * 60 * 1000; // 10 minutes
+const GSC_FAILURE_THRESHOLD = 5;
+
 export async function fetchGscInsightsForUrl(url: string, state?: string): Promise<any> {
+  // Check cache first
+  const cacheKey = `${url}|${state || ''}`;
+  const now = Date.now();
+  const cached = gscCache.get(cacheKey);
+  if (cached && now - cached.timestamp < GSC_CACHE_TTL) {
+    return cached.result;
+  }
+
   try {
     const prisma = await getPrisma();
     let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
@@ -136,7 +154,7 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
 
     const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions) : 0;
 
-    return {
+    const result = {
       available: true,
       top_queries: topQueries,
       ctr: avgCtr,
@@ -145,7 +163,23 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
       message: `Data for ${siteUrl} (last 28 days)`,
     };
 
+    // Store in cache
+    gscCache.set(cacheKey, { result, timestamp: now });
+
+    return result;
+
   } catch (error) {
+    // Monitoring logic
+    const now = Date.now();
+    if (now - gscFailureWindowStart > GSC_FAILURE_WINDOW) {
+      gscFailureWindowStart = now;
+      gscFailureCount = 0;
+    }
+    gscFailureCount++;
+    if (gscFailureCount >= GSC_FAILURE_THRESHOLD) {
+      console.warn(`GSC API has failed ${gscFailureCount} times in the last 10 minutes. Check API quota or service health.`);
+      // In production, send alert to monitoring system here
+    }
     console.error("Error fetching GSC data:", error);
     return {
       available: false,

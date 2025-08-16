@@ -29,39 +29,69 @@ async function processJob(job: any) {
     await dbHelpers.updateRunStatus(runId, RunStatus.running);
     console.log(`Run ${runId} status set to running`);
 
-    // Pipeline: fetchHtml -> parseHtml -> calculateAudit
-    console.log(`Fetching HTML from ${pageUrl}`);
-    const html = await fetchHtml(pageUrl);
-
-    console.log("Parsing HTML content");
-    const parsed = await parseHtml(html, pageUrl);
-
-    console.log("Calculating audit results");
-
-    // Fetch PageSpeed Insights data if API key is available
-    let performanceData = null;
+    // Fetch HTML, PSI, and GSC in parallel
     const psiApiKey = process.env.PSI_API_KEY;
-    if (psiApiKey) {
-      try {
-        console.log("Fetching PageSpeed Insights data");
-        performanceData = await fetchPageSpeed(pageUrl, psiApiKey);
-        console.log("PSI data retrieved successfully");
-      } catch (error) {
-        console.warn("Failed to fetch PSI data:", error);
-        // Continue without PSI data - it's optional
-      }
-    } else {
-      console.log("PSI API key not provided - skipping performance analysis");
+    let html: string | null = null;
+    let performanceData: any = null;
+    let gscData: any = null;
+    let htmlError: Error | null = null;
+    let psiError: Error | null = null;
+    let gscError: Error | null = null;
+
+    await Promise.all([
+      (async () => {
+        try {
+          html = await fetchHtml(pageUrl);
+        } catch (err) {
+          htmlError = err as Error;
+        }
+      })(),
+      (async () => {
+        if (psiApiKey) {
+          try {
+            performanceData = await fetchPageSpeed(pageUrl, psiApiKey);
+          } catch (err) {
+            psiError = err as Error;
+          }
+        }
+      })(),
+      (async () => {
+        try {
+          gscData = await fetchGscInsightsForUrl(pageUrl);
+        } catch (err) {
+          gscError = err as Error;
+        }
+      })(),
+    ]);
+
+    if (!html) {
+      throw htmlError || new Error('Failed to fetch HTML');
     }
 
-    // Fetch GSC data if available
-    let gscData = null;
-    try {
-      gscData = await fetchGscInsightsForUrl(pageUrl);
-      console.log("GSC data retrieved successfully");
-    } catch (error) {
-      console.warn("Failed to fetch GSC data:", error);
-      // Continue without GSC data - it's optional
+    const parsed = await parseHtml(html, pageUrl);
+
+    // Fallback for performanceData if PSI failed
+    if (!performanceData) {
+      performanceData = {
+        lcp: null,
+        cls: null,
+        inp: null,
+        notes: [
+          psiError ? `PSI error: ${psiError.message}` : 'Performance data not available',
+        ],
+      };
+    }
+
+    // Fallback for gscData if GSC failed
+    if (!gscData) {
+      gscData = {
+        available: false,
+        top_queries: [],
+        ctr: null,
+        impressions: null,
+        clicks: null,
+        message: gscError ? `GSC error: ${gscError.message}` : 'GSC data not available',
+      };
     }
 
     const auditResult = await calculateAudit(pageUrl, parsed, {
