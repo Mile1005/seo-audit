@@ -1036,6 +1036,10 @@ function ModernCrawlTab({ result }: { result: AuditResult }) {
         </div>
         {error && <div className="md:col-span-2 bg-red-500/10 border border-red-500/30 rounded-lg p-4 text-red-400">{error}</div>}
       </form>
+      {/* Show progress panel while loading or crawl is queued/running and no result yet */}
+      {(loading || ((crawlStatus === "queued" || crawlStatus === "running") && !crawlResult)) && (
+        <FuturisticProgressPanel status="running" />
+      )}
       {/* Status Display */}
       {crawlStatus !== "idle" && (
         <motion.div className="glass-card p-6 mb-6" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
