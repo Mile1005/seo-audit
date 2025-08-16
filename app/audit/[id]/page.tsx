@@ -467,10 +467,7 @@ function ModernQuickWins({ quickWins }: { quickWins: AuditResult["quick_wins"] }
 }
 
 // Modern Action Buttons Component
-function ModernActionButtons({ result }: { result: AuditResult }) {
-  const [showReportBuilder, setShowReportBuilder] = useState(false);
-  const [showFixPack, setShowFixPack] = useState(false);
-
+function ModernActionButtons({ result, showReportBuilder, setShowReportBuilder, showFixPack, setShowFixPack }: { result: AuditResult, showReportBuilder: boolean, setShowReportBuilder: (v: boolean) => void, showFixPack: boolean, setShowFixPack: (v: boolean) => void }) {
   const downloadJSON = () => {
     const dataStr = JSON.stringify(result, null, 2);
     const dataBlob = new Blob([dataStr], { type: "application/json" });
@@ -543,22 +540,6 @@ function ModernActionButtons({ result }: { result: AuditResult }) {
           PageSpeed Insights
         </button>
       </div>
-
-      {/* Report Builder Modal */}
-      {showReportBuilder && (
-        <ReportBuilder
-          isOpen={showReportBuilder}
-          onClose={() => setShowReportBuilder(false)}
-          result={result}
-        />
-      )}
-
-      {/* Fix Pack Modal */}
-      {showFixPack && (
-        <Modal isOpen={showFixPack} onClose={() => setShowFixPack(false)}>
-          <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
-        </Modal>
-      )}
       </div>
     </motion.div>
   );
@@ -1429,6 +1410,8 @@ function AuditPageContent() {
   const [activeTab, setActiveTab] = useState<"audit" | "competitors" | "crawl" | "ai">("audit");
   const inlineLoadedRef = useRef(false);
   const particlesRef = useRef<HTMLDivElement>(null);
+  const [showReportBuilder, setShowReportBuilder] = useState(false);
+  const [showFixPack, setShowFixPack] = useState(false);
 
   // Detect dev mode
   useEffect(() => {
@@ -1785,7 +1768,13 @@ function AuditPageContent() {
               transition={{ duration: 0.5 }}
             >
               <ModernDetectedPanel detected={result.detected} />
-              <ModernActionButtons result={result} />
+              <ModernActionButtons 
+                result={result} 
+                showReportBuilder={showReportBuilder}
+                setShowReportBuilder={setShowReportBuilder}
+                showFixPack={showFixPack}
+                setShowFixPack={setShowFixPack}
+              />
             </motion.div>
 
             {/* Performance Panel */}
@@ -1866,6 +1855,12 @@ function AuditPageContent() {
         {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
         </div>
       </motion.div>
+      {/* Global Modals */}
+      {showReportBuilder && (
+        <Modal isOpen={showReportBuilder} onClose={() => setShowReportBuilder(false)}>
+          <ReportBuilder isOpen={showReportBuilder} onClose={() => setShowReportBuilder(false)} result={result} />
+        </Modal>
+      )}
       {showFixPack && (
         <Modal isOpen={showFixPack} onClose={() => setShowFixPack(false)}>
           <FixPack isOpen={showFixPack} onClose={() => setShowFixPack(false)} result={result} />
