@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 // Types
 interface Issue {
@@ -38,13 +40,15 @@ interface SEOData {
   };
 }
 
-type Tab = 'Overview' | 'Technical' | 'Content' | 'Images' | 'Links';
+type Tab = 'Overview' | 'Technical' | 'Content' | 'Images' | 'Links' | 'Performance' | 'Settings';
 
 const getScoreColor = (score: number) => {
-  if (score >= 80) return 'bg-green-500';
-  if (score >= 50) return 'bg-yellow-400';
-  return 'bg-red-500';
+  if (score >= 80) return '#22C55E'; // green
+  if (score >= 50) return '#eab308'; // yellow
+  return '#ef4444'; // red
 };
+
+const TABS: Tab[] = ['Overview', 'Technical', 'Content', 'Images', 'Links', 'Performance', 'Settings'];
 
 const Popup: React.FC = () => {
   const [seo, setSeo] = useState<SEOData | null>(null);
@@ -124,20 +128,37 @@ const Popup: React.FC = () => {
     URL.revokeObjectURL(url);
   };
 
+  // Score circles for overall and Core Web Vitals
+  const score = computeScore(seo);
+  const lcp = seo?.coreWebVitals.lcp ?? 0;
+  const cls = seo?.coreWebVitals.cls ?? 0;
+  const inp = seo?.coreWebVitals.inp ?? 0;
+
   return (
-    <div className="min-w-[400px] max-w-[600px] max-h-[600px] overflow-y-auto bg-white p-4 font-sans" style={{ fontFamily: 'Inter, sans-serif' }}>
-      <h2 className="text-xl font-bold mb-2">Instant AI SEO Analyzer</h2>
-      <div className="flex items-center mb-4">
-        <div className={`rounded-full w-12 h-12 flex items-center justify-center text-white text-lg font-bold ${getScoreColor(computeScore(seo))}`}>{computeScore(seo)}</div>
-        <div className="ml-4">
-          <div className="font-semibold">Overall SEO Score</div>
-          <div className="text-xs text-gray-500">(Higher is better)</div>
+    <div className="min-w-[400px] max-w-[600px] max-h-[600px] overflow-y-auto bg-[#111827] text-white p-4 font-sans rounded-lg shadow-xl" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <div className="flex items-center mb-4 gap-4">
+        <div className="w-20 h-20">
+          <CircularProgressbar
+            value={score}
+            text={`${score}`}
+            styles={buildStyles({
+              textColor: '#fff',
+              pathColor: getScoreColor(score),
+              trailColor: '#222',
+              textSize: '2.2rem',
+              strokeLinecap: 'round',
+            })}
+          />
         </div>
-        <button className="ml-auto px-3 py-1 bg-blue-500 text-white rounded text-xs" onClick={exportCSV}>Export CSV</button>
+        <div className="ml-4 flex-1">
+          <div className="text-2xl font-bold">Instant AI SEO Analyzer</div>
+          <div className="text-xs text-gray-400">Overall SEO Score</div>
+        </div>
+        <button className="ml-auto px-3 py-1 bg-green-600 hover:bg-green-500 text-white rounded text-xs font-semibold shadow" onClick={exportCSV}>Export CSV</button>
       </div>
-      <div className="flex border-b mb-2">
-        {(['Overview', 'Technical', 'Content', 'Images', 'Links'] as Tab[]).map(t => (
-          <button key={t} className={`flex-1 py-2 text-sm font-medium ${tab === t ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500'}`} onClick={() => setTab(t)}>{t}</button>
+      <div className="flex border-b border-gray-700 mb-2 gap-1">
+        {TABS.map(t => (
+          <button key={t} className={`flex-1 py-2 text-sm font-medium transition-colors ${tab === t ? 'border-b-2 border-green-500 text-green-400' : 'text-gray-400 hover:text-green-300'}`} onClick={() => setTab(t)}>{t}</button>
         ))}
       </div>
       {loading ? (
@@ -147,76 +168,48 @@ const Popup: React.FC = () => {
       ) : seo && (
         <div>
           {tab === 'Overview' && (
-            <div>
-              <div className="mb-2"><span className="font-semibold">Title:</span> {seo.page.title}</div>
-              <div className="mb-2"><span className="font-semibold">Meta Description:</span> {seo.page.metaDescription || <span className="text-red-500">Missing</span>}</div>
-              <div className="mb-2"><span className="font-semibold">Canonical:</span> {seo.page.canonical || <span className="text-yellow-500">Missing</span>}</div>
-              <div className="mb-2"><span className="font-semibold">Word Count:</span> {seo.wordCount}</div>
-              <div className="mb-2"><span className="font-semibold">Flesch-Kincaid:</span> {seo.readability.fleschKincaid?.toFixed(1) ?? 'N/A'}</div>
-              <div className="mb-2"><span className="font-semibold">Core Web Vitals:</span> LCP: {seo.coreWebVitals.lcp?.toFixed(0) ?? 'N/A'} ms, CLS: {seo.coreWebVitals.cls?.toFixed(2) ?? 'N/A'}, INP: {seo.coreWebVitals.inp?.toFixed(0) ?? 'N/A'}</div>
-            </div>
-          )}
-          {tab === 'Technical' && (
-            <div>
-              <div className="mb-2"><span className="font-semibold">Robots:</span> {seo.page.robots || 'N/A'}</div>
-              <div className="mb-2"><span className="font-semibold">Viewport:</span> {seo.page.viewport || 'N/A'}</div>
-              <div className="mb-2"><span className="font-semibold">Open Graph:</span> {Object.keys(seo.page.openGraph).length ? <ul className="ml-4 list-disc">{Object.entries(seo.page.openGraph).map(([k, v]) => <li key={k}>{k}: {v}</li>)}</ul> : 'None'}</div>
-              <div className="mb-2"><span className="font-semibold">Twitter Card:</span> {Object.keys(seo.page.twitterCard).length ? <ul className="ml-4 list-disc">{Object.entries(seo.page.twitterCard).map(([k, v]) => <li key={k}>{k}: {v}</li>)}</ul> : 'None'}</div>
-              <div className="mb-2"><span className="font-semibold">JSON-LD Types:</span> {seo.page.jsonLdTypes.length ? seo.page.jsonLdTypes.join(', ') : 'None'}</div>
-            </div>
-          )}
-          {tab === 'Content' && (
-            <div>
-              <div className="mb-2"><span className="font-semibold">Headings:</span> {Object.entries(seo.headingCounts).map(([tag, count]) => <span key={tag} className="inline-block mr-2">{tag}: {count}</span>)}</div>
-              <ul className="list-disc ml-4">
-                {seo.headings.map((h, i) => <li key={i}><span className="font-semibold">{h.tag}:</span> {h.text}</li>)}
+            <div className="space-y-2">
+              <div className="flex gap-4 justify-center my-4">
+                <div className="w-16 h-16">
+                  <CircularProgressbar value={lcp > 0 ? Math.max(0, Math.min(100, 100 - (lcp - 200) / 25)) : 0} text={'LCP'} styles={buildStyles({ pathColor: lcp <= 2500 ? '#22C55E' : lcp <= 4000 ? '#eab308' : '#ef4444', textColor: '#fff', trailColor: '#222', textSize: '1.2rem' })} />
+                </div>
+                <div className="w-16 h-16">
+                  <CircularProgressbar value={cls > 0 ? Math.max(0, Math.min(100, 100 - cls * 1000)) : 0} text={'CLS'} styles={buildStyles({ pathColor: cls <= 0.1 ? '#22C55E' : cls <= 0.25 ? '#eab308' : '#ef4444', textColor: '#fff', trailColor: '#222', textSize: '1.2rem' })} />
+                </div>
+                <div className="w-16 h-16">
+                  <CircularProgressbar value={inp > 0 ? Math.max(0, Math.min(100, 100 - (inp - 200) / 2)) : 0} text={'INP'} styles={buildStyles({ pathColor: inp <= 200 ? '#22C55E' : inp <= 500 ? '#eab308' : '#ef4444', textColor: '#fff', trailColor: '#222', textSize: '1.2rem' })} />
+                </div>
+              </div>
+              <div className="text-lg font-semibold">Quick Wins</div>
+              <ul className="mb-2 space-y-1">
+                {quickFixes.map((fix, i) => (
+                  <li key={i} className={`text-sm ${fix.impact === 'High' ? 'text-green-400' : fix.impact === 'Medium' ? 'text-yellow-400' : 'text-gray-300'}`}>{fix.suggestion} <span className="ml-2 text-xs">[{fix.impact}]</span></li>
+                ))}
+              </ul>
+              <div className="text-lg font-semibold">Issues</div>
+              <ul className="mb-2 space-y-1">
+                {issues.length === 0 ? <li className="text-green-600">No major issues detected!</li> : issues.map(issue => (
+                  <li key={issue.id} className={`text-sm ${issue.priority === 'High' ? 'text-red-400' : issue.priority === 'Medium' ? 'text-yellow-400' : 'text-gray-300'}`}>{issue.description} <span className="ml-2 text-xs">[{issue.priority}]</span></li>
+                ))}
               </ul>
             </div>
           )}
-          {tab === 'Images' && (
-            <div>
-              <div className="mb-2"><span className="font-semibold">Total Images:</span> {seo.images.length}</div>
-              <div className="mb-2"><span className="font-semibold">Missing Alt:</span> {seo.images.filter(img => !img.hasAlt).length}</div>
-              <ul className="list-disc ml-4">
-                {seo.images.slice(0, 10).map((img, i) => <li key={i}>{img.src} {img.alt ? <span className="text-green-600">(alt: {img.alt})</span> : <span className="text-red-500">(missing alt)</span>}</li>)}
-              </ul>
+          {/* TODO: Implement other tabs with modern card layouts, tooltips, and details */}
+          {tab === 'Settings' && (
+            <div className="space-y-4">
+              <div className="font-semibold text-lg">Settings</div>
+              <div>
+                <label className="text-xs mr-2">Analysis Depth:</label>
+                <select className="text-xs border rounded px-2 py-1 bg-gray-800 text-white" value={analysisDepth} onChange={e => setAnalysisDepth(e.target.value as any)}>
+                  <option value="basic">Basic</option>
+                  <option value="deep">Deep</option>
+                </select>
+              </div>
+              <div className="text-xs text-gray-400">More settings coming soon...</div>
             </div>
           )}
-          {tab === 'Links' && (
-            <div>
-              <div className="mb-2"><span className="font-semibold">Total Links:</span> {seo.links.length}</div>
-              <div className="mb-2"><span className="font-semibold">Internal:</span> {seo.links.filter(l => l.isInternal).length}</div>
-              <div className="mb-2"><span className="font-semibold">External:</span> {seo.links.filter(l => !l.isInternal).length}</div>
-              <ul className="list-disc ml-4">
-                {seo.links.slice(0, 10).map((l, i) => <li key={i}><a href={l.href} target="_blank" rel="noopener noreferrer" className="underline text-blue-600">{l.text || l.href}</a> <span className="text-xs text-gray-400">[{l.isInternal ? 'Internal' : 'External'}]</span></li>)}
-              </ul>
-            </div>
-          )}
-          {/* Issues & Quick Fixes */}
-          <div className="mt-4">
-            <h4 className="font-semibold mb-1">Issues</h4>
-            <ul className="mb-2">
-              {issues.length === 0 ? <li className="text-green-600">No major issues detected!</li> : issues.map(issue => (
-                <li key={issue.id} className={`text-sm ${issue.priority === 'High' ? 'text-red-600' : issue.priority === 'Medium' ? 'text-yellow-600' : 'text-gray-700'}`}>{issue.description} <span className="ml-2 text-xs">[{issue.priority}]</span></li>
-              ))}
-            </ul>
-            <h4 className="font-semibold mb-1">Quick Fixes</h4>
-            <ul>
-              {quickFixes.map((fix, i) => (
-                <li key={i} className={`text-sm ${fix.impact === 'High' ? 'text-red-600' : fix.impact === 'Medium' ? 'text-yellow-600' : 'text-gray-700'}`}>{fix.suggestion} <span className="ml-2 text-xs">[{fix.impact}]</span></li>
-              ))}
-            </ul>
-          </div>
         </div>
       )}
-      {/* Settings */}
-      <div className="mt-4 border-t pt-2 flex items-center">
-        <label className="text-xs mr-2">Analysis Depth:</label>
-        <select className="text-xs border rounded px-2 py-1" value={analysisDepth} onChange={e => setAnalysisDepth(e.target.value as any)}>
-          <option value="basic">Basic</option>
-          <option value="deep">Deep</option>
-        </select>
-      </div>
     </div>
   );
 };

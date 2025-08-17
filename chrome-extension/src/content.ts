@@ -189,8 +189,116 @@ function collectSEOData(): SEOData {
   };
 }
 
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'GET_SEO_DATA') {
-    sendResponse(collectSEOData());
+// Content script bootstrap for overlay/analysis
+import { analyzeDOM } from './analysis/analyzer';
+import { placeBadges, clearBadges } from './overlay/badges';
+import './overlay/index';
+
+let overlayVisible = false;
+let sidebarOpen = false;
+let lastResult = null;
+let overlayMounted = false;
+let lastUrl = location.href;
+let debounceTimer: number | null = null;
+
+function showOverlay(result) {
+  if (overlayMounted) return;
+  placeBadges(result.issues);
+  window.dispatchEvent(new CustomEvent('seo-audit-analysis', { detail: { result } }));
+  overlayVisible = true;
+  overlayMounted = true;
+  chrome.storage.sync.set({ overlayVisible: true });
+}
+function hideOverlay() {
+  clearBadges();
+  window.dispatchEvent(new CustomEvent('seo-audit-close-sidebar'));
+  overlayVisible = false;
+  overlayMounted = false;
+  chrome.storage.sync.set({ overlayVisible: false });
+}
+function toggleOverlay() {
+  if (overlayVisible) hideOverlay(); else showOverlay(lastResult || { issues: [] });
+}
+function openSidebar() {
+  window.dispatchEvent(new CustomEvent('seo-audit-open-sidebar'));
+  sidebarOpen = true;
+  chrome.storage.sync.set({ sidebarOpen: true });
+}
+function closeSidebar() {
+  window.dispatchEvent(new CustomEvent('seo-audit-close-sidebar'));
+  sidebarOpen = false;
+  chrome.storage.sync.set({ sidebarOpen: false });
+}
+function toggleSidebar() {
+  if (sidebarOpen) closeSidebar(); else openSidebar();
+}
+
+function debouncedAnalyze() {
+  if (debounceTimer) clearTimeout(debounceTimer);
+  debounceTimer = window.setTimeout(() => {
+    const result = analyzeDOM();
+    lastResult = result;
+    if (overlayVisible) {
+      clearBadges();
+      placeBadges(result.issues);
+      window.dispatchEvent(new CustomEvent('seo-audit-analysis', { detail: { result } }));
+    }
+  }, 400);
+}
+
+// Listen for ANALYZE message
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  if (msg && msg.type === 'ANALYZE') {
+    const result = analyzeDOM();
+    lastResult = result;
+    showOverlay(result);
+    openSidebar();
   }
 });
+
+// Hotkeys
+window.addEventListener('keydown', (e) => {
+  if (e.altKey && e.shiftKey && e.code === 'KeyO') {
+    toggleOverlay();
+  }
+  if (e.altKey && e.shiftKey && e.code === 'KeyS') {
+    toggleSidebar();
+  }
+});
+
+// Restore persisted state
+chrome.storage.sync.get(['overlayVisible', 'sidebarOpen'], (data) => {
+  overlayVisible = !!data.overlayVisible;
+  sidebarOpen = !!data.sidebarOpen;
+  if (overlayVisible) {
+    const result = analyzeDOM();
+    lastResult = result;
+    showOverlay(result);
+  }
+  if (sidebarOpen) openSidebar();
+});
+
+// MutationObserver for DOM changes (debounced)
+const observer = new MutationObserver(() => {
+  debouncedAnalyze();
+});
+observer.observe(document.body, { childList: true, subtree: true, attributes: true });
+
+// SPA navigation detection
+function onUrlChange() {
+  if (location.href !== lastUrl) {
+    lastUrl = location.href;
+    debouncedAnalyze();
+  }
+}
+const origPushState = history.pushState;
+history.pushState = function (...args) {
+  origPushState.apply(this, args);
+  onUrlChange();
+};
+const origReplaceState = history.replaceState;
+history.replaceState = function (...args) {
+  origReplaceState.apply(this, args);
+  onUrlChange();
+};
+window.addEventListener('popstate', onUrlChange);

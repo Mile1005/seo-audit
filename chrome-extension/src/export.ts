@@ -3,28 +3,49 @@ import { Issue, QuickWin } from './analyzer';
 
 export function exportSEOToCSV(seo: SEOData, issues: Issue[], quickWins: QuickWin[], url: string) {
   const rows: string[][] = [];
-  // Add SEO elements
-  rows.push(['Element', 'Status', 'Value', 'Recommendation', 'Priority']);
-  rows.push(['Title', seo.page.title ? 'OK' : 'Missing', seo.page.title || '', seo.page.title ? '' : 'Add a title tag', seo.page.title ? '' : 'High']);
-  rows.push(['Meta Description', seo.page.metaDescription ? 'OK' : 'Missing', seo.page.metaDescription || '', seo.page.metaDescription ? '' : 'Add a meta description', seo.page.metaDescription ? '' : 'High']);
-  rows.push(['Canonical', seo.page.canonical ? 'OK' : 'Missing', seo.page.canonical || '', seo.page.canonical ? '' : 'Add a canonical URL', seo.page.canonical ? '' : 'Medium']);
-  // Add issues
-  for (const issue of issues) {
-    rows.push(['Issue', 'Problem', '', issue.fix, issue.severity]);
-  }
-  // Add quick wins
-  for (const win of quickWins) {
-    rows.push(['Quick Win', 'Actionable', '', win.action, win.impact]);
-  }
-  // Add headings, images, links summary
-  rows.push(['Headings', 'Count', Object.entries(seo.headingCounts).map(([k,v])=>`${k}:${v}`).join('; '), '', '']);
-  rows.push(['Images', 'Total', String(seo.images.length), '', '']);
-  rows.push(['Images', 'Missing Alt', String(seo.images.filter(i=>!i.hasAlt).length), 'Add alt text', 'High']);
-  rows.push(['Links', 'Total', String(seo.links.length), '', '']);
-  rows.push(['Links', 'Internal', String(seo.links.filter(l=>l.isInternal).length), '', '']);
-  rows.push(['Links', 'External', String(seo.links.filter(l=>!l.isInternal).length), '', '']);
+  // Header
+  rows.push(['Element', 'Status', 'Value', 'Recommendation', 'Priority', 'Category']);
+  // Summary
+  rows.push(['Page Title', 'OK', seo.page.title, '', '', 'Summary']);
+  rows.push(['Meta Description', seo.page.metaDescription ? 'OK' : 'Missing', seo.page.metaDescription || '', seo.page.metaDescription ? '' : 'Add a meta description', seo.page.metaDescription ? '' : 'High', 'Summary']);
+  rows.push(['Canonical', seo.page.canonical ? 'OK' : 'Missing', seo.page.canonical || '', seo.page.canonical ? '' : 'Add a canonical URL', seo.page.canonical ? '' : 'Medium', 'Summary']);
+  rows.push(['Word Count', 'OK', String(seo.wordCount), '', '', 'Summary']);
+  rows.push(['Flesch-Kincaid', 'OK', String(seo.readability.fleschKincaid ?? ''), '', '', 'Summary']);
+  rows.push(['LCP', seo.coreWebVitals.lcp !== null ? 'OK' : 'Missing', String(seo.coreWebVitals.lcp ?? ''), '', '', 'Performance']);
+  rows.push(['CLS', seo.coreWebVitals.cls !== null ? 'OK' : 'Missing', String(seo.coreWebVitals.cls ?? ''), '', '', 'Performance']);
+  rows.push(['INP', seo.coreWebVitals.inp !== null ? 'OK' : 'Missing', String(seo.coreWebVitals.inp ?? ''), '', '', 'Performance']);
+  // Meta tags
+  Object.entries(seo.page.openGraph).forEach(([k, v]) => {
+    rows.push([`OpenGraph: ${k}`, 'OK', v, '', '', 'Meta']);
+  });
+  Object.entries(seo.page.twitterCard).forEach(([k, v]) => {
+    rows.push([`Twitter: ${k}`, 'OK', v, '', '', 'Meta']);
+  });
+  // Headings
+  Object.entries(seo.headingCounts).forEach(([tag, count]) => {
+    rows.push([`Heading ${tag}`, 'OK', String(count), '', '', 'Content']);
+  });
+  seo.headings.forEach(h => {
+    rows.push(['Heading', 'OK', `${h.tag}: ${h.text}`, '', '', 'Content']);
+  });
+  // Images
+  seo.images.forEach(img => {
+    rows.push(['Image', img.hasAlt ? 'OK' : 'Missing alt', img.src, img.hasAlt ? '' : 'Add alt text', img.hasAlt ? '' : 'High', 'Images']);
+  });
+  // Links
+  seo.links.forEach(link => {
+    rows.push(['Link', 'OK', `${link.href} (${link.text})`, '', '', link.isInternal ? 'Internal' : 'External']);
+  });
+  // Issues
+  issues.forEach(issue => {
+    rows.push(['Issue', 'Problem', '', issue.fix, issue.severity, 'Issues']);
+  });
+  // Quick Wins
+  quickWins.forEach(win => {
+    rows.push(['Quick Win', 'Actionable', '', win.action, win.impact, 'Quick Wins']);
+  });
   // CSV encoding
-  const csv = rows.map(r => r.map(v => '"' + (v || '').replace(/"/g, '""') + '"').join(',')).join('\n');
+  const csv = rows.map(r => r.map(v => '"' + (v || '').replace(/"/g, '""').replace(/\n/g, ' ') + '"').join(',')).join('\n');
   const ts = new Date().toISOString().replace(/[:.]/g, '-');
   const safeUrl = url.replace(/[^a-z0-9]/gi, '_').toLowerCase().slice(0, 40);
   const filename = `seo-analysis_${safeUrl}_${ts}.csv`;

@@ -4,25 +4,33 @@
   "description": "A Chrome Extension for instant client-side SEO analysis using AI.",
   "main": "dist/background.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack --mode production",
-    "dev": "cross-env NODE_ENV=development webpack --mode development --watch",
-    "zip": "zip -r instant-ai-seo-analyzer.zip dist"
+    "dev": "vite build --mode development --outDir dist --watch",
+    "build": "vite build --mode production --outDir dist",
+    "zip": "zip -r instant-ai-seo-analyzer.zip dist",
+    "make:icons": "ts-node scripts/make-icons.ts",
+    "verify:icons": "node -e \"const fs=require('fs'); ['16','48','128'].forEach(s=>{const p='dist/icon'+s+'.png'; const ok=fs.existsSync(p)&&fs.statSync(p).size>0; console.log(p, ok?'OK':'MISSING/0B')});\""
   },
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "preact": "^10.27.0",
+    "react-circular-progressbar": "^2.2.0",
+    "sharp": "^0.33.0"
+  },
   "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
     "@types/chrome": "^0.0.244",
+    "@types/node": "^20.0.0",
     "copy-webpack-plugin": "^12.0.0",
     "cross-env": "^7.0.3",
+    "css-loader": "^7.1.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.0.0",
     "webpack": "^5.0.0",
     "webpack-cli": "^5.0.0"
-  },
-  "dependencies": {
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
   }
 }
