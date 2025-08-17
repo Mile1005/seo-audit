@@ -16,9 +16,9 @@ steps:
 - name: Checkout
 uses: actions/checkout@v4
 with:
-fetch-depth: 0
-  - name: Set up Git identity
-    run: |
+fetch-depth: 0   - 
+name: Set up Git identity
+    run: 
       git config user.name "perplexity-bot"
       git config user.email "perplexity-bot@example.com"
 
@@ -50,14 +50,8 @@ fetch-depth: 0
             "default_title": "SEO Audit",
             "default_popup": "popup.html"
           },
-          "permissions": [
-            "storage",
-            "activeTab",
-            "scripting"
-          ],
-          "host_permissions": [
-            "<all_urls>"
-          ],
+          "permissions": ["storage","activeTab","scripting"],
+          "host_permissions": ["<all_urls>"],
           "background": {
             "service_worker": "background.js",
             "type": "module"
@@ -68,11 +62,7 @@ fetch-depth: 0
             "128": "icons/icon128.png"
           },
           "content_scripts": [
-            {
-              "matches": ["<all_urls>"],
-              "js": ["content.js"],
-              "run_at": "document_idle"
-            }
+            { "matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle" }
           ]
         }
         JSON
@@ -174,7 +164,6 @@ fetch-depth: 0
     shell: bash
     run: |
       BRANCH="${{ steps.seed.outputs.branch }}"
-      # Push branch (ignore error if already exists remotely)
       git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} "$BRANCH" || true
 
   - name: Open PR (idempotent)
@@ -200,3 +189,4 @@ fetch-depth: 0
         if (prs.data.length === 0) {
           await github.rest.pulls.create({ owner, repo, title, head, base, body, maintainer_can_modify: true });
         }
+        
