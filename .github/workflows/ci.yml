@@ -1,58 +1,88 @@
 name: CI
 on:
-  pull_request:
-  push:
-    branches: [ "main" ]
+pull_request:
+push:
+branches:
+- "main"
+- "ai/**"
 
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
+build-and-test:
+runs-on: ubuntu-latest
+strategy:
+matrix:
+node-version: [18.x, 20.x]
+steps:
+  - name: Checkout
+    uses: actions/checkout@v4
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  - name: Detect project at repo root
+    id: detect
+    shell: bash
+    run: |
+      if [ -f package.json ]; then
+        echo "has_root=true" >> "$GITHUB_OUTPUT"
+      else
+        echo "has_root=false" >> "$GITHUB_OUTPUT"
+      fi
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
+  - name: Setup Node
+    if: steps.detect.outputs.has_root == 'true'
+    uses: actions/setup-node@v4
+    with:
+      node-version: ${{ matrix.node-version }}
+      cache: npm
 
-      - name: Detect package manager
-        id: pm
-        shell: bash
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            echo "manager=pnpm" >> "$GITHUB_OUTPUT"
-          elif [ -f package-lock.json ]; then
-            echo "manager=npm" >> "$GITHUB_OUTPUT"
-          else
-            echo "manager=npm" >> "$GITHUB_OUTPUT"
-          fi
+  - name: Detect package manager
+    if: steps.detect.outputs.has_root == 'true'
+    id: pm
+    shell: bash
+    run: |
+      if [ -f pnpm-lock.yaml ]; then
+        echo "manager=pnpm" >> "$GITHUB_OUTPUT"
+      elif [ -f package-lock.json ]; then
+        echo "manager=npm" >> "$GITHUB_OUTPUT"
+      elif [ -f yarn.lock ]; then
+        echo "manager=yarn" >> "$GITHUB_OUTPUT"
+      else
+        echo "manager=npm" >> "$GITHUB_OUTPUT"
+      fi
 
-      - name: Install dependencies (pnpm)
-        if: steps.pm.outputs.manager == 'pnpm'
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-          pnpm install --frozen-lockfile || pnpm install
+  - name: Install deps (pnpm)
+    if: steps.detect.outputs.has_root == 'true' && steps.pm.outputs.manager == 'pnpm'
+    run: |
+      corepack enable
+      corepack prepare pnpm@latest --activate
+      pnpm install --frozen-lockfile || pnpm install
 
-      - name: Install dependencies (npm)
-        if: steps.pm.outputs.manager == 'npm'
-        run: |
-          npm ci || npm install
+  - name: Install deps (npm)
+    if: steps.detect.outputs.has_root == 'true' && steps.pm.outputs.manager == 'npm'
+    run: |
+      npm ci || npm install
 
-      - name: Lint (if script exists)
-        run: |
-          npm run -s lint || echo "no lint script"
+  - name: Install deps (yarn)
+    if: steps.detect.outputs.has_root == 'true' && steps.pm.outputs.manager == 'yarn'
+    run: |
+      corepack enable
+      corepack prepare yarn@stable --activate
+      yarn install --frozen-lockfile || yarn install
 
-      - name: Build (if script exists)
-        run: |
-          npm run -s build || echo "no build script"
+  - name: Lint (if script exists)
+    if: steps.detect.outputs.has_root == 'true'
+    run: |
+      npm run -s lint || echo "no lint script"
 
-      - name: Test (if script exists)
-        run: |
-          npm -s run test || echo "no test script"
+  - name: Build (if script exists)
+    if: steps.detect.outputs.has_root == 'true'
+    run: |
+      npm run -s build || echo "no build script"
+
+  - name: Test (if script exists)
+    if: steps.detect.outputs.has_root == 'true'
+    run: |
+      npm -s run test || echo "no test script"
+
+  - name: No root Node project detected — skipping
+    if: steps.detect.outputs.has_root != 'true'
+    run: echo "No package.json at repo root; skipping Node CI."
+    
