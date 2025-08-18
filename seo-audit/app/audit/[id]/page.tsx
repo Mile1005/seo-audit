@@ -1814,6 +1814,7 @@ function AuditPageContent() {
             >
               <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">What is Competitor Analysis?</h2>
               <p className="text-base md:text-lg text-text-secondary max-w-2xl mb-2">
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Instantly compare your website&#39;s search performance to top-ranking competitors for any keyword and country. Discover who dominates the SERP, analyze featured snippets, local packs, ads, and more. Uncover domain strengths, keyword gaps, and actionable opportunities to outrank your rivals.
               </p>
               <ul className="text-left text-sm md:text-base text-text-secondary max-w-2xl list-disc pl-5">
@@ -1839,6 +1840,7 @@ function AuditPageContent() {
             >
               <h2 className="text-2xl md:text-3xl font-bold gradient-text mb-2">What Does Site Crawl Do?</h2>
               <p className="text-base md:text-lg text-text-secondary max-w-2xl mb-2">
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Crawl up to 30 pages of your website for free—no setup required. Instantly detect technical SEO issues, broken links, missing meta tags, duplicate titles/canonicals, robots.txt and sitemap.xml status, and more. Get a clear, actionable overview of your site&#39;s health and indexability.
               </p>
               <ul className="text-left text-sm md:text-base text-text-secondary max-w-2xl list-disc pl-5">
