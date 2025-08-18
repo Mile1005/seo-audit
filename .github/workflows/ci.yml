@@ -13,76 +13,38 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x, 20.x]
+        workdir: ["./", "./seo-audit/"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect project at repo root
-        id: detect
-        shell: bash
-        run: |
-          if [ -f package.json ]; then
-            echo "has_root=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "has_root=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Setup Node
-        if: steps.detect.outputs.has_root == 'true'
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: npm
+          cache: 'pnpm'
 
-      - name: Detect package manager
-        if: steps.detect.outputs.has_root == 'true'
-        id: pm
-        shell: bash
-        run: |
-          if [ -f pnpm-lock.yaml ]; then
-            echo "manager=pnpm" >> "$GITHUB_OUTPUT"
-          elif [ -f package-lock.json ]; then
-            echo "manager=npm" >> "$GITHUB_OUTPUT"
-          elif [ -f yarn.lock ]; then
-            echo "manager=yarn" >> "$GITHUB_OUTPUT"
-          else
-            echo "manager=npm" >> "$GITHUB_OUTPUT"
-          fi
+      - name: Enable Corepack
+        run: corepack enable
 
-      - name: Install deps (pnpm)
-        if: steps.detect.outputs.has_root == 'true' && steps.pm.outputs.manager == 'pnpm'
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
-          pnpm install --frozen-lockfile || pnpm install
+      - name: Install pnpm
+        run: corepack prepare pnpm@latest --activate
 
-      - name: Install deps (npm)
-        if: steps.detect.outputs.has_root == 'true' && steps.pm.outputs.manager == 'npm'
-        run: |
-          npm ci || npm install
-
-      - name: Install deps (yarn)
-        if: steps.detect.outputs.has_root == 'true' && steps.pm.outputs.manager == 'yarn'
-        run: |
-          corepack enable
-          corepack prepare yarn@stable --activate
-          yarn install --frozen-lockfile || yarn install
+      - name: Install dependencies
+        working-directory: ${{ matrix.workdir }}
+        run: pnpm install --frozen-lockfile || pnpm install
 
       - name: Lint (if script exists)
-        if: steps.detect.outputs.has_root == 'true'
+        working-directory: ${{ matrix.workdir }}
         run: |
-          npm run -s lint || echo "no lint script"
+          if pnpm run | grep -q "lint"; then pnpm run lint; else echo "No lint script"; fi
 
       - name: Build (if script exists)
-        if: steps.detect.outputs.has_root == 'true'
+        working-directory: ${{ matrix.workdir }}
         run: |
-          npm run -s build || echo "no build script"
+          if pnpm run | grep -q "build"; then pnpm run build; else echo "No build script"; fi
 
       - name: Test (if script exists)
-        if: steps.detect.outputs.has_root == 'true'
+        working-directory: ${{ matrix.workdir }}
         run: |
-          npm -s run test || echo "no test script"
-
-      - name: No root Node project detected — skipping
-        if: steps.detect.outputs.has_root != 'true'
-        run: echo "No package.json at repo root; skipping Node CI."
+          if pnpm run | grep -q "test"; then pnpm run test; else echo "No test script"; fi
