@@ -22,16 +22,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
 
-      - name: Install pnpm (fallback for older runners)
-        run: npm install -g pnpm
-
-      - name: Prepare pnpm
-        run: corepack prepare pnpm@latest --activate
+      - name: Debug PATH and pnpm
+        run: |
+          echo $PATH
+          which pnpm || true
+          pnpm --version || true
 
       - name: Install dependencies
         working-directory: ${{ matrix.workdir }}
