@@ -1,3 +1,4 @@
+// Trigger CI: harmless comment
 "use client";
 
 import React, { useState, useEffect, useRef, Component, ErrorInfo, ReactNode } from "react";
