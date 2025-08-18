@@ -53,3 +53,6 @@ jobs:
         working-directory: ${{ matrix.workdir }}
         run: |
           if pnpm run | grep -q "test"; then pnpm run test; else echo "No test script"; fi
+
+      - name: Set dummy DATABASE_URL for Prisma
+        run: echo "DATABASE_URL=postgresql://user:pass@localhost:5432/db" >> $GITHUB_ENV
