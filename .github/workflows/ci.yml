@@ -10,6 +10,8 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
     strategy:
       matrix:
         node-version: [18.x, 20.x]
@@ -38,9 +40,6 @@ jobs:
       - name: Install dependencies
         working-directory: ${{ matrix.workdir }}
         run: pnpm install --frozen-lockfile || pnpm install
-
-      - name: Set dummy DATABASE_URL for Prisma
-        run: echo "DATABASE_URL=postgresql://user:pass@localhost:5432/db" >> $GITHUB_ENV
 
       - name: Lint (if script exists)
         working-directory: ${{ matrix.workdir }}
