@@ -1,3 +1,7 @@
+packages:
+  - 'seo-audit'
+  - 'chrome-extension'
+
 onlyBuiltDependencies:
   - '@prisma/client'
   - '@prisma/engines'
