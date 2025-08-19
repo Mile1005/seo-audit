@@ -1,31 +1,29 @@
-// Datasource for PostgreSQL (Vercel Postgres)
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Prisma generator
-generator client {
-  provider = "prisma-client-js"
-}
-
 model Run {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   pageUrl       String
   targetKeyword String?
   email         String?
   status        RunStatus @default(queued)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   audits        Audit[]
 }
 
 model Audit {
   id        String   @id @default(uuid())
-  run       Run      @relation(fields: [runId], references: [id])
   runId     String
-  json      Json     // JSON of AuditResultV1
+  json      Json
   createdAt DateTime @default(now())
+  run       Run      @relation(fields: [runId], references: [id])
 }
 
 model GscToken {
@@ -33,6 +31,34 @@ model GscToken {
   state     String   @unique
   tokens    Json
   createdAt DateTime @default(now())
+}
+
+model Domain {
+  id                String              @id @default(cuid())
+  url               String              @unique
+  createdAt         DateTime            @default(now())
+  rankSnapshots     RankSnapshot[]
+  backlinkSnapshots BacklinkSnapshot[]
+}
+
+model RankSnapshot {
+  id        String   @id @default(cuid())
+  domainId  String
+  keyword   String
+  position  Int
+  provider  String   @default("serpapi")
+  createdAt DateTime @default(now())
+  Domain    Domain   @relation(fields: [domainId], references: [id])
+}
+
+model BacklinkSnapshot {
+  id               String   @id @default(cuid())
+  domainId         String
+  totalBacklinks   Int
+  referringDomains Int
+  provider         String   @default("openlinkprofiler")
+  createdAt        DateTime @default(now())
+  Domain           Domain   @relation(fields: [domainId], references: [id])
 }
 
 enum RunStatus {
