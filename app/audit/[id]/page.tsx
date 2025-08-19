@@ -10,6 +10,9 @@ import PerformancePanel from "../../../components/audit/PerformancePanel";
 import { AuditResult } from "../../../lib/heuristics";
 import FuturisticProgressPanel from "../../../components/common/FuturisticProgressPanel";
 import Modal from "../../../components/common/Modal";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, BarChart, Bar, Legend } from 'recharts';
+import RankSnapshotSection from '../../../components/audit/RankSnapshot';
+import BacklinkSnapshotSection from '../../../components/audit/BacklinkSnapshot';
 
 // Error Boundary Component
 interface ErrorBoundaryState {
@@ -1393,6 +1396,75 @@ function AccessibilityIssuesPanel({ issues }: { issues: Array<{ type: string; se
   );
 }
 
+function ModernRankBacklinkTab({ domain }: { domain: string }) {
+  const [rank, setRank] = React.useState<any[]>([]);
+  const [backlinks, setBacklinks] = React.useState<any | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      setError(null);
+      try {
+        const [rankRes, backlinkRes] = await Promise.all([
+          fetch('/api/rank-tracking', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ domain, keyword: '' }) }),
+          fetch('/api/backlinks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ domain }) })
+        ]);
+        const rankData = await rankRes.json();
+        const backlinkData = await backlinkRes.json();
+        setRank(rankData.snapshots || []);
+        setBacklinks(backlinkData || null);
+      } catch (e: any) {
+        setError(e.message || 'Failed to load data');
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (domain) fetchData();
+  }, [domain]);
+
+  if (loading) return <div className="glass-card p-6 text-center">Loading rank & backlink data...</div>;
+  if (error) return <div className="glass-card p-6 text-center text-red-400">{error}</div>;
+
+  return (
+    <motion.div className="glass-card p-6 animated-gradient-hover" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <h3 className="text-xl font-semibold text-text-primary mb-4">Rank Tracking & Backlink Snapshot</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Rank Over Time</h4>
+          {rank.length > 0 ? (
+            <ResponsiveContainer width="100%" height={250}>
+              <LineChart data={rank} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="createdAt" tickFormatter={d => new Date(d).toLocaleDateString()} />
+                <YAxis reversed domain={['dataMin', 'dataMax']} />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="position" stroke="#3B82F6" name="Google Position" />
+              </LineChart>
+            </ResponsiveContainer>
+          ) : <div className="text-text-secondary">No rank data yet.</div>}
+        </div>
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Backlink Snapshot</h4>
+          {backlinks ? (
+            <BarChart width={300} height={250} data={[backlinks]}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="domain" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="totalBacklinks" fill="#10B981" name="Total Backlinks" />
+              <Bar dataKey="referringDomains" fill="#6366F1" name="Referring Domains" />
+            </BarChart>
+          ) : <div className="text-text-secondary">No backlink data yet.</div>}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function AuditPageContent() {
   const params = useParams();
   const id = params.id as string;
@@ -1407,7 +1479,7 @@ function AuditPageContent() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isDevMode, setIsDevMode] = useState(false);
-  const [activeTab, setActiveTab] = useState<"audit" | "competitors" | "crawl" | "ai">("audit");
+  const [activeTab, setActiveTab] = useState<"audit" | "competitors" | "crawl" | "ai" | "rank">("audit");
   const inlineLoadedRef = useRef(false);
   const particlesRef = useRef<HTMLDivElement>(null);
   const [showReportBuilder, setShowReportBuilder] = useState(false);
@@ -1726,6 +1798,12 @@ function AuditPageContent() {
               >
                 AI Insights
               </button>
+              <button
+                onClick={() => setActiveTab("rank")}
+                className={`py-2 px-1 border-b-2 font-medium text-sm ${activeTab === "rank" ? "border-accent-primary text-accent-primary" : "border-transparent text-text-secondary hover:text-text-primary hover:border-gray-700"}`}
+              >
+                Rank & Backlinks
+              </button>
             </nav>
           </div>
         </motion.div>
@@ -1855,6 +1933,18 @@ function AuditPageContent() {
         )}
 
         {activeTab === "ai" && <ModernAIInsightsTab result={result} />}
+        {activeTab === "rank" && (
+          <div className="space-y-12">
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Rank Tracking</h2>
+              <RankSnapshotSection domainId={result.domain_id || result.domainId || result.id} />
+            </section>
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Backlink Snapshot</h2>
+              <BacklinkSnapshotSection domainId={result.domain_id || result.domainId || result.id} />
+            </section>
+          </div>
+        )}
         </div>
       </motion.div>
       {/* Global Modals */}

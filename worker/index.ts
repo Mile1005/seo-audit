@@ -13,10 +13,76 @@ import { parseHtml } from "../lib/parse";
 import { calculateAudit } from "../lib/heuristics";
 import { fetchPageSpeed } from "../lib/psi";
 import { fetchGscInsightsForUrl } from "../lib/gsc";
+import { Queue } from "bullmq";
+import { fetchKeywordRank } from "../lib/rank";
+import { fetchBacklinkSnapshot } from "../lib/backlinks";
 
 // Shared Redis connection
 const connection = new IORedis(process.env.REDIS_URL || "redis://localhost:6379", {
   maxRetriesPerRequest: null,
+});
+
+const snapshotQueue = new Queue("snapshots", { connection });
+
+// Schedule daily snapshot jobs for all domains
+async function scheduleDailySnapshots() {
+  const prisma = await dbHelpers.getPrisma();
+  const domains = await prisma.domain.findMany();
+  for (const domain of domains) {
+    await snapshotQueue.add(
+      "rank-backlink-snapshot",
+      { domainId: domain.id, domainUrl: domain.url },
+      { repeat: { cron: "0 3 * * *" }, removeOnComplete: true, removeOnFail: true }
+    );
+  }
+}
+
+scheduleDailySnapshots().catch(console.error);
+
+// Worker for snapshot jobs
+const snapshotWorker = new Worker(
+  "snapshots",
+  async (job) => {
+    const { domainId, domainUrl } = job.data;
+    const prisma = await dbHelpers.getPrisma();
+    // Fetch all keywords for this domain (future: support multiple keywords)
+    const keywords = await prisma.rankSnapshot.findMany({
+      where: { domainId },
+      select: { keyword: true },
+      distinct: ["keyword"]
+    });
+    for (const { keyword } of keywords) {
+      try {
+        const { position, provider } = await fetchKeywordRank(domainUrl, keyword);
+        await prisma.rankSnapshot.create({
+          data: { domainId, keyword, position, provider },
+        });
+      } catch (e: any) {
+        if (e.message && e.message.toLowerCase().includes("quota")) {
+          console.warn(`[CRON] Quota reached for rank snapshot: ${domainUrl} ${keyword}`);
+        } else {
+          console.error(`[CRON] Error fetching rank for ${domainUrl} ${keyword}:`, e);
+        }
+      }
+    }
+    try {
+      const { totalBacklinks, referringDomains, provider } = await fetchBacklinkSnapshot(domainUrl);
+      await prisma.backlinkSnapshot.create({
+        data: { domainId, totalBacklinks, referringDomains, provider },
+      });
+    } catch (e: any) {
+      if (e.message && e.message.toLowerCase().includes("quota")) {
+        console.warn(`[CRON] Quota reached for backlink snapshot: ${domainUrl}`);
+      } else {
+        console.error(`[CRON] Error fetching backlinks for ${domainUrl}:`, e);
+      }
+    }
+  },
+  { connection, concurrency: 2 }
+);
+
+snapshotWorker.on("error", (error) => {
+  console.error("Snapshot worker error:", error);
 });
 
 async function processJob(job: any) {
