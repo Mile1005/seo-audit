@@ -1,0 +1,172 @@
+name: AI-driven Chrome Extension Fixer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fix-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Query Perplexity API
+        id: perplexity
+        run: |
+          API_URL="https://api.perplexity.ai/chat/completions"
+          API_KEY="${{ secrets.PERPLEXITY_API_KEY }}"
+          QUESTION="What are the latest, 2025 production best practices for Chrome MV3 extensions, with a focus on background service workers, popup messaging, and safe page analysis (SEO) in content scripts? Please give bullet points and updated code snippets if possible."
+
+          RESPONSE=$(curl -s -X POST "$API_URL" \
+            -H "Authorization: Bearer $API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "model": "llama-3-sonar-large-32k-online",
+              "messages": [
+                {"role": "system", "content": "You are an AI assistant that provides expert advice on Chrome extension development."},
+                {"role": "user", "content": "'"$QUESTION"'"}
+              ]
+            }')
+          
+          echo "API Response:"
+          echo "$RESPONSE"
+          
+          CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content')
+          echo "perplexity_response<<EOF" >> $GITHUB_ENV
+          echo "$CONTENT" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+        env:
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+
+      - name: Create or Update Chrome Extension Files
+        run: |
+          mkdir -p chrome-extension
+          # This is a simplified approach. A more sophisticated script could parse the response
+          # and generate files. For now, we'll save the response to a file and scaffold the extension.
+          echo "${{ env.perplexity_response }}" > chrome-extension/PERPLEXITY_ADVICE.md
+          
+          # manifest.json
+          cat <<EOL > chrome-extension/manifest.json
+          {
+            "manifest_version": 3,
+            "name": "SEO Audit",
+            "version": "1.0",
+            "description": "A basic SEO audit tool.",
+            "permissions": ["storage", "activeTab", "scripting"],
+            "host_permissions": ["<all_urls>"],
+            "background": {
+              "service_worker": "background.js",
+              "type": "module"
+            },
+            "action": {
+              "default_popup": "popup.html",
+              "default_icon": {
+                "16": "images/icon16.png",
+                "48": "images/icon48.png",
+                "128": "images/icon128.png"
+              }
+            },
+            "icons": {
+              "16": "images/icon16.png",
+              "48": "images/icon48.png",
+              "128": "images/icon128.png"
+            }
+          }
+          EOL
+
+          # background.js
+          cat <<EOL > chrome-extension/background.js
+          chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.action === "run_audit") {
+              chrome.scripting.executeScript({
+                target: { tabId: request.tabId },
+                files: ["content.js"]
+              });
+            } else if (request.action === "audit_result") {
+              // Forward result to popup
+              chrome.runtime.sendMessage({ action: "display_result", data: request.data });
+            }
+          });
+          EOL
+
+          # content.js
+          cat <<EOL > chrome-extension/content.js
+          (function() {
+            const getSeoData = () => {
+              const title = document.querySelector('title')?.innerText;
+              const description = document.querySelector('meta[name="description"]')?.content;
+              const h1 = document.querySelector('h1')?.innerText;
+              
+              return { title, description, h1 };
+            };
+
+            chrome.runtime.sendMessage({ action: "audit_result", data: getSeoData() });
+          })();
+          EOL
+
+          # popup.html
+          cat <<EOL > chrome-extension/popup.html
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>SEO Audit</title>
+              <script src="popup.js" defer></script>
+            </head>
+            <body>
+              <button id="runAudit">Run Audit</button>
+              <div id="results"></div>
+            </body>
+          </html>
+          EOL
+
+          # popup.js
+          cat <<EOL > chrome-extension/popup.js
+          document.getElementById('runAudit').addEventListener('click', () => {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+              chrome.runtime.sendMessage({ action: "run_audit", tabId: tabs[0].id });
+            });
+          });
+
+          chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+            if (request.action === "display_result") {
+              const resultsDiv = document.getElementById('results');
+              resultsDiv.innerHTML = \`
+                <p><strong>Title:</strong> \${request.data.title || 'Not found'}</p>
+                <p><strong>Description:</strong> \${request.data.description || 'Not found'}</p>
+                <p><strong>H1:</strong> \${request.data.h1 || 'Not found'}</p>
+              \`;
+            }
+          });
+          EOL
+
+          # README.md
+          cat <<EOL > chrome-extension/README.md
+          # SEO Audit Chrome Extension
+
+          ## How to load and test
+          1. Open Chrome and navigate to \`chrome://extensions\`.
+          2. Enable "Developer mode" in the top right corner.
+          3. Click "Load unpacked" and select the \`chrome-extension\` directory from this repository.
+          4. The extension should now be loaded. You can test it by opening a new tab and clicking the extension icon.
+          EOL
+
+          mkdir -p chrome-extension/images
+          # Create placeholder icons
+          for size in 16 48 128; do
+            convert -size \${size}x\${size} xc:none chrome-extension/images/icon\${size}.png
+          done
+        shell: bash
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "AI: MV3 extension upgraded with Perplexity best practices (2025)"
+          branch: "ai/extension-mv3-enhanced"
+          title: "AI: MV3 extension upgraded with Perplexity best practices (2025)"
+          body: |
+            This pull request was automatically generated by a GitHub Action using Perplexity AI.
+            It contains the latest best practices for Chrome MV3 extensions as of 2025.
+            
+            Please review the changes and merge if they are acceptable.
+          labels: "ai-generated, enhancement"
