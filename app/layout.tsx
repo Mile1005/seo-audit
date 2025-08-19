@@ -1,12 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import React from "react";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import WebVitalsClient from "./WebVitalsClient";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
@@ -19,15 +18,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <title>SEO Audit</title>
-      </head>
+    <html lang="en" className={inter.variable}>
       <body>
         {children}
         <Analytics />
         <SpeedInsights />
-        {/* Add Web Vitals Client Collector */}
         <WebVitalsClient />
       </body>
     </html>
