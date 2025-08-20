@@ -73,7 +73,7 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
     }
 
     // Schema markup
-    if (result.scores.schema < 80) {
+    if (result.scores?.schema < 80) {
       fixes.push({
         id: "schema-article",
         title: "Add Article Schema",

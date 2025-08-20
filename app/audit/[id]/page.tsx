@@ -1824,16 +1824,16 @@ function AuditPageContent() {
               <div className="relative z-10">
               <h2 className="text-2xl font-semibold text-text-primary mb-6">Overall Score</h2>
               <div className="flex justify-center mb-8">
-                <ModernScoreRing score={result.scores.overall} label="Overall" size="lg" />
+                <ModernScoreRing score={result.scores?.overall || 0} label="Overall" size="lg" />
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <ModernScoreRing score={result.scores.title_meta} label="Title & Meta" />
-                <ModernScoreRing score={result.scores.headings} label="Headings" />
-                <ModernScoreRing score={result.scores.answerability} label="Content" />
-                <ModernScoreRing score={result.scores.structure} label="Structure" />
-                <ModernScoreRing score={result.scores.schema} label="Schema" />
-                <ModernScoreRing score={result.scores.images} label="Images" />
-                <ModernScoreRing score={result.scores.internal_links} label="Internal Links" />
+                <ModernScoreRing score={result.scores?.title_meta || 0} label="Title & Meta" />
+                <ModernScoreRing score={result.scores?.headings || 0} label="Headings" />
+                <ModernScoreRing score={result.scores?.answerability || 0} label="Content" />
+                <ModernScoreRing score={result.scores?.structure || 0} label="Structure" />
+                <ModernScoreRing score={result.scores?.schema || 0} label="Schema" />
+                <ModernScoreRing score={result.scores?.images || 0} label="Images" />
+                <ModernScoreRing score={result.scores?.internal_links || 0} label="Internal Links" />
               </div>
               </div>
             </motion.div>
@@ -1937,11 +1937,24 @@ function AuditPageContent() {
           <div className="space-y-12">
             <section>
               <h2 className="text-2xl font-bold mb-4">Rank Tracking</h2>
-              <RankSnapshotSection domainId={result.domain_id || result.domainId || result.id} />
+              {(() => {
+                const domainId = result.domain_id || result.domainId || result.id || 'fallback-id';
+                console.log('Rank & Backlinks Debug:', {
+                  resultKeys: Object.keys(result),
+                  domain_id: result.domain_id,
+                  domainId: result.domainId,
+                  id: result.id,
+                  finalDomainId: domainId
+                });
+                return <RankSnapshotSection domainId={domainId} />;
+              })()}
             </section>
             <section>
               <h2 className="text-2xl font-bold mb-4">Backlink Snapshot</h2>
-              <BacklinkSnapshotSection domainId={result.domain_id || result.domainId || result.id} />
+              {(() => {
+                const domainId = result.domain_id || result.domainId || result.id || 'fallback-id';
+                return <BacklinkSnapshotSection domainId={domainId} />;
+              })()}
             </section>
           </div>
         )}
