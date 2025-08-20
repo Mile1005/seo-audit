@@ -97,8 +97,24 @@ export async function POST(req: NextRequest) {
         if (useDb) {
           await dbHelpers.updateRunStatus(runId, "failed");
         }
+        
+        // Provide more specific error messages
+        let errorMessage = "Audit processing failed";
+        if (e instanceof Error) {
+          if (e.message.includes("Failed to fetch HTML")) {
+            errorMessage = "Unable to access the website. The site may be down, blocking requests, or unreachable.";
+          } else if (e.message.includes("timeout")) {
+            errorMessage = "Request timed out. The website may be slow or experiencing issues.";
+          } else if (e.message.includes("fetch failed")) {
+            errorMessage = "Network error occurred while trying to access the website.";
+          } else {
+            errorMessage = e.message;
+          }
+        }
+        
         console.error("Inline audit processing failed:", e);
         inlineError = true;
+        lastInlineResult = { error: errorMessage, details: e instanceof Error ? e.message : String(e) };
       }
     } else if (isQueueConfigured()) {
       await addAuditJob({ runId, pageUrl, targetKeyword, email });
@@ -139,8 +155,24 @@ export async function POST(req: NextRequest) {
         if (useDb) {
           await dbHelpers.updateRunStatus(runId, "failed");
         }
+        
+        // Provide more specific error messages
+        let errorMessage = "Audit processing failed";
+        if (e instanceof Error) {
+          if (e.message.includes("Failed to fetch HTML")) {
+            errorMessage = "Unable to access the website. The site may be down, blocking requests, or unreachable.";
+          } else if (e.message.includes("timeout")) {
+            errorMessage = "Request timed out. The website may be slow or experiencing issues.";
+          } else if (e.message.includes("fetch failed")) {
+            errorMessage = "Network error occurred while trying to access the website.";
+          } else {
+            errorMessage = e.message;
+          }
+        }
+        
         console.error("Inline audit processing failed:", e);
         inlineError = true;
+        lastInlineResult = { error: errorMessage, details: e instanceof Error ? e.message : String(e) };
       }
     }
 
