@@ -21,18 +21,26 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
     async function fetchData() {
       setLoading(true);
       setError(null);
+      
+      console.log('BacklinkSnapshot: Fetching data for domainId:', domainId);
+      
       try {
         const res = await fetch(`/api/backlinks/${domainId}`);
+        console.log('BacklinkSnapshot: API response status:', res.status);
+        
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}: ${res.statusText}`);
         }
         const data = await res.json();
+        console.log('BacklinkSnapshot: API response data:', data);
+        
         if (data.error && res.status === 429) {
           setError('Quota reached, try again later');
         } else {
           setSnapshots(data);
         }
       } catch (e: any) {
+        console.error('BacklinkSnapshot: Error fetching data:', e);
         setError(e.message || 'Failed to load backlink data');
       } finally {
         setLoading(false);
@@ -94,6 +102,7 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
     return (
       <Card className="p-6 text-center">
         <div className="mb-4 text-gray-600">No backlink data available yet.</div>
+        <div className="mb-2 text-sm text-gray-500">Domain ID: {domainId}</div>
         <button 
           onClick={triggerBacklinkSnapshot}
           disabled={triggering}

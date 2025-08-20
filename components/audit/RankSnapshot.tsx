@@ -21,18 +21,26 @@ export default function RankSnapshotSection({ domainId }: { domainId: string }) 
     async function fetchData() {
       setLoading(true);
       setError(null);
+      
+      console.log('RankSnapshot: Fetching data for domainId:', domainId);
+      
       try {
         const res = await fetch(`/api/rank/${domainId}`);
+        console.log('RankSnapshot: API response status:', res.status);
+        
         if (!res.ok) {
           throw new Error(`HTTP ${res.status}: ${res.statusText}`);
         }
         const data = await res.json();
+        console.log('RankSnapshot: API response data:', data);
+        
         if (data.error && res.status === 429) {
           setError('Quota reached, try again later');
         } else {
           setSnapshots(data);
         }
       } catch (e: any) {
+        console.error('RankSnapshot: Error fetching data:', e);
         setError(e.message || 'Failed to load rank data');
       } finally {
         setLoading(false);
@@ -94,6 +102,7 @@ export default function RankSnapshotSection({ domainId }: { domainId: string }) 
     return (
       <Card className="p-6 text-center">
         <div className="mb-4 text-gray-600">No rank data available yet.</div>
+        <div className="mb-2 text-sm text-gray-500">Domain ID: {domainId}</div>
         <button 
           onClick={triggerRankSnapshot}
           disabled={triggering}
