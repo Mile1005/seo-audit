@@ -190,7 +190,7 @@ function ModernDetectedPanel({ detected }: { detected: AuditResult["detected"] }
           <div className="space-y-3 text-sm">
             <div className="flex justify-between items-center py-2 border-b border-gray-700">
               <span className="font-medium text-text-secondary">Title:</span>
-              <span className="text-text-primary text-right max-w-xs truncate">{detected.title || "Not found"}</span>
+              <span className="text-text-primary text-right max-w-xs truncate">{detected?.title || "Not found"}</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-gray-700">
               <span className="font-medium text-text-secondary">Meta Description:</span>
@@ -1174,7 +1174,7 @@ function ModernAIInsightsTab({ result }: { result: AuditResult }) {
   const [aiStatus, setAiStatus] = useState<'idle' | 'loading' | 'ready' | 'failed'>('idle');
 
   const getContentText = () => {
-    return `Title: ${result.detected.title || ''}\nMeta: ${result.detected.meta_description || ''}\nH1: ${result.detected.h1 || ''}\nH2: ${(result.detected.h2 || []).join(' | ')}\nH3: ${(result.detected.h3 || []).join(' | ')}\n`;
+    return `Title: ${result.detected?.title || ''}\nMeta: ${result.detected?.meta_description || ''}\nH1: ${result.detected?.h1 || ''}\nH2: ${(result.detected?.h2 || []).join(' | ')}\nH3: ${(result.detected?.h3 || []).join(' | ')}\n`;
   };
   const metaDesc = result.detected.meta_description || '';
   const introText = result.detected.h1 || '';
@@ -1938,22 +1938,30 @@ function AuditPageContent() {
             <section>
               <h2 className="text-2xl font-bold mb-4">Rank Tracking</h2>
               {(() => {
+                // Extract domain from the result object
+                const domain = result.url || result.domain || 'example.com';
                 const domainId = result.domain_id || result.domainId || result.id || 'fallback-id';
+                
                 console.log('Rank & Backlinks Debug:', {
                   resultKeys: Object.keys(result),
+                  url: result.url,
+                  domain: result.domain,
                   domain_id: result.domain_id,
                   domainId: result.domainId,
                   id: result.id,
-                  finalDomainId: domainId
+                  finalDomainId: domainId,
+                  finalDomain: domain
                 });
-                return <RankSnapshotSection domainId={domainId} />;
+                
+                return <RankSnapshotSection domainId={domainId} domain={domain} />;
               })()}
             </section>
             <section>
               <h2 className="text-2xl font-bold mb-4">Backlink Snapshot</h2>
               {(() => {
+                const domain = result.url || result.domain || 'example.com';
                 const domainId = result.domain_id || result.domainId || result.id || 'fallback-id';
-                return <BacklinkSnapshotSection domainId={domainId} />;
+                return <BacklinkSnapshotSection domainId={domainId} domain={domain} />;
               })()}
             </section>
           </div>

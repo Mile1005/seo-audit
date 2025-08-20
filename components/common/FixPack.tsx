@@ -24,8 +24,8 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
   const generateFixes = (): FixItem[] => {
     const fixes: FixItem[] = [];
 
-    // Title fixes
-    if (result.detected.title) {
+    // Title optimization
+    if (result.detected?.title) {
       const currentTitle = result.detected.title;
       if (currentTitle.length < 30) {
         fixes.push({
@@ -56,7 +56,7 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
         id: "meta-missing",
         title: "Add Meta Description",
         content: `<!-- Add a compelling meta description -->
-<meta name="description" content="${result.detected.title || "Your Page Title"} - Learn about ${result.detected.h1 || "this topic"} with expert insights, best practices, and actionable tips. Discover how to improve your results today." />`,
+<meta name="description" content="${result.detected?.title || "Your Page Title"} - Learn about ${result.detected?.h1 || "this topic"} with expert insights, best practices, and actionable tips. Discover how to improve your results today." />`,
         type: "meta",
         priority: "high",
       });
@@ -82,7 +82,7 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "${result.detected.title || "Your Page Title"}",
+  "headline": "${result.detected?.title || "Your Page Title"}",
   "description": "${result.detected.meta_description || "Page description"}",
   "image": "${result.url}/og-image.jpg",
   "author": {
@@ -174,7 +174,7 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
         id: "og-tags",
         title: "Add Open Graph Tags",
         content: `<!-- Add Open Graph tags for better social media sharing -->
-<meta property="og:title" content="${result.detected.title || "Your Page Title"}" />
+<meta property="og:title" content="${result.detected?.title || "Your Page Title"}" />
 <meta property="og:description" content="${result.detected.meta_description || "Page description"}" />
 <meta property="og:url" content="${result.url}" />
 <meta property="og:type" content="article" />
@@ -183,7 +183,7 @@ export default function FixPack({ isOpen, onClose, result }: FixPackProps) {
 
 <!-- Add Twitter Card tags -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="${result.detected.title || "Your Page Title"}" />
+<meta name="twitter:title" content="${result.detected?.title || "Your Page Title"}" />
 <meta name="twitter:description" content="${result.detected.meta_description || "Page description"}" />
 <meta name="twitter:image" content="${result.url}/twitter-image.jpg" />`,
         type: "general",

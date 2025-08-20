@@ -11,12 +11,18 @@ interface RankSnapshot {
   createdAt: string;
 }
 
-export default function RankSnapshotSection({ domainId }: { domainId: string }) {
+interface RankSnapshotSectionProps {
+  domainId: string;
+  domain: string;
+}
+
+export default function RankSnapshotSection({ domainId, domain }: RankSnapshotSectionProps) {
   const [snapshots, setSnapshots] = useState<RankSnapshot[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [triggering, setTriggering] = useState(false);
   const [hasAttemptedFetch, setHasAttemptedFetch] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   const fetchRankData = async () => {
     setLoading(true);
@@ -50,26 +56,50 @@ export default function RankSnapshotSection({ domainId }: { domainId: string }) 
   };
 
   const triggerRankSnapshot = async () => {
+    if (!keyword.trim()) {
+      setError('Please enter a keyword first');
+      return;
+    }
+    
     setTriggering(true);
     try {
-      console.log('RankSnapshot: Creating dummy snapshot for domainId:', domainId);
+      console.log('RankSnapshot: Creating real snapshot for domain:', domain, 'keyword:', keyword);
       
-      // For now, we'll create a dummy snapshot since we don't have real data
-      // In a real implementation, this would call the rank tracking API
-      const dummySnapshot: RankSnapshot = {
+      // Call the real rank tracking API
+      const response = await fetch('/api/rank-tracking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          domain: domain,
+          keyword: keyword.trim() 
+        })
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create rank snapshot');
+      }
+      
+      const data = await response.json();
+      console.log('RankSnapshot: API response:', data);
+      
+      // Create a snapshot from the API response
+      const newSnapshot: RankSnapshot = {
         id: crypto.randomUUID(),
         domainId,
-        keyword: 'sample keyword',
-        position: Math.floor(Math.random() * 100) + 1,
+        keyword: keyword.trim(),
+        position: data.position || 0,
         provider: 'SERPAPI',
         createdAt: new Date().toISOString()
       };
       
-      setSnapshots(prev => [dummySnapshot, ...prev]);
+      setSnapshots(prev => [newSnapshot, ...prev]);
       setError(null);
-      console.log('RankSnapshot: Dummy snapshot created successfully');
+      setKeyword(''); // Clear the input after success
+      console.log('RankSnapshot: Real snapshot created successfully');
+      
     } catch (e: any) {
-      console.error('RankSnapshot: Error creating dummy snapshot:', e);
+      console.error('RankSnapshot: Error creating snapshot:', e);
       setError(e.message || 'Failed to trigger rank snapshot');
     } finally {
       setTriggering(false);
@@ -96,6 +126,22 @@ export default function RankSnapshotSection({ domainId }: { domainId: string }) 
           <h3 className="text-2xl font-bold mb-4">Rank Tracking</h3>
           <div className="text-gray-600 mb-4">Ready to fetch rank tracking data</div>
           <div className="mb-2 text-sm text-gray-500">Domain ID: <code className="bg-gray-800 px-2 py-1 rounded">{domainId}</code></div>
+          <div className="mb-2 text-sm text-gray-500">Domain: <code className="bg-gray-800 px-2 py-1 rounded">{domain}</code></div>
+          
+          {/* Keyword Input */}
+          <div className="mb-4">
+            <label htmlFor="keyword" className="block text-sm font-medium text-gray-300 mb-2">
+              Enter keyword to track:
+            </label>
+            <input
+              id="keyword"
+              type="text"
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder="e.g., 'seo tools', 'website audit'"
+              className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+          </div>
         </div>
         
         <div className="flex gap-4 justify-center">
