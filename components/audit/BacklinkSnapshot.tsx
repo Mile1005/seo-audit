@@ -11,7 +11,12 @@ interface BacklinkSnapshot {
   createdAt: string;
 }
 
-export default function BacklinkSnapshotSection({ domainId }: { domainId: string }) {
+interface BacklinkSnapshotSectionProps {
+  domainId: string;
+  domain: string;
+}
+
+export default function BacklinkSnapshotSection({ domainId, domain }: BacklinkSnapshotSectionProps) {
   const [snapshots, setSnapshots] = useState<BacklinkSnapshot[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -52,24 +57,39 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
   const triggerBacklinkSnapshot = async () => {
     setTriggering(true);
     try {
-      console.log('BacklinkSnapshot: Creating dummy snapshot for domainId:', domainId);
+      console.log('BacklinkSnapshot: Creating real snapshot for domain:', domain);
       
-      // For now, we'll create a dummy snapshot since we don't have real data
-      // In a real implementation, this would call the backlink API
-      const dummySnapshot: BacklinkSnapshot = {
+      // Call the real backlinks API
+      const response = await fetch('/api/backlinks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domain: domain })
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create backlink snapshot');
+      }
+      
+      const data = await response.json();
+      console.log('BacklinkSnapshot: API response:', data);
+      
+      // Create a snapshot from the API response
+      const newSnapshot: BacklinkSnapshot = {
         id: crypto.randomUUID(),
         domainId,
-        totalBacklinks: Math.floor(Math.random() * 10000) + 100,
-        referringDomains: Math.floor(Math.random() * 500) + 10,
+        totalBacklinks: data.totalBacklinks || 0,
+        referringDomains: data.referringDomains || 0,
         provider: 'OpenLinkProfiler',
         createdAt: new Date().toISOString()
       };
       
-      setSnapshots(prev => [dummySnapshot, ...prev]);
+      setSnapshots(prev => [newSnapshot, ...prev]);
       setError(null);
-      console.log('BacklinkSnapshot: Dummy snapshot created successfully');
+      console.log('BacklinkSnapshot: Real snapshot created successfully');
+      
     } catch (e: any) {
-      console.error('BacklinkSnapshot: Error creating dummy snapshot:', e);
+      console.error('BacklinkSnapshot: Error creating snapshot:', e);
       setError(e.message || 'Failed to trigger backlink snapshot');
     } finally {
       setTriggering(false);
@@ -96,6 +116,7 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
           <h3 className="text-2xl font-bold mb-4">Backlink Snapshot</h3>
           <div className="text-gray-600 mb-4">Ready to fetch backlink data</div>
           <div className="mb-2 text-sm text-gray-500">Domain ID: <code className="bg-gray-800 px-2 py-1 rounded">{domainId}</code></div>
+          <div className="mb-2 text-sm text-gray-500">Domain: <code className="bg-gray-800 px-2 py-1 rounded">{domain}</code></div>
         </div>
         
         <div className="flex gap-4 justify-center">
