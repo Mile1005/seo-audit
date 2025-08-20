@@ -25,7 +25,7 @@ const MAX_RETRIES = 3;
 const BASE_DELAY = 1000; // 1 second
 
 // Timeout and redirect configuration
-const TIMEOUT = 12000; // 12 seconds
+const TIMEOUT = 15000; // 15 seconds (increased from 12)
 const MAX_REDIRECTS = 5;
 
 /**
@@ -40,72 +40,107 @@ export async function fetchHtml(url: string): Promise<string> {
     try {
       console.log(`Fetching HTML from ${url} (attempt ${attempt}/${MAX_RETRIES})`);
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: DEFAULT_HEADERS,
-        redirect: "follow",
-        signal: AbortSignal.timeout(TIMEOUT),
-      });
+      // Create a more robust timeout signal
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), TIMEOUT);
 
-      // Check for HTTP errors
-      if (!response.ok) {
-        const status = response.status;
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: DEFAULT_HEADERS,
+          redirect: "follow",
+          signal: controller.signal,
+        });
 
-        // Don't retry on 4xx errors (except 429)
-        if (status >= 400 && status < 500 && status !== 429) {
-          throw new Error(`HTTP ${status}: ${response.statusText}`);
-        }
+        clearTimeout(timeoutId);
 
-        // Retry on 429 (rate limit) and 5xx errors
-        if (status === 429 || status >= 500) {
-          throw new Error(`HTTP ${status}: ${response.statusText}`);
-        }
-      }
+        // Check for HTTP errors
+        if (!response.ok) {
+          const status = response.status;
+          const statusText = response.statusText;
 
-      // Get the response body as text
-      let html = await response.text();
+          // Don't retry on 4xx errors (except 429)
+          if (status >= 400 && status < 500 && status !== 429) {
+            throw new Error(`HTTP ${status}: ${statusText}`);
+          }
 
-      // Detect charset from Content-Type header
-      const contentType = response.headers.get("content-type");
-      let charset = "utf-8"; // default
-
-      if (contentType) {
-        const charsetMatch = contentType.match(/charset=([^;]+)/i);
-        if (charsetMatch) {
-          charset = charsetMatch[1].toLowerCase();
-        }
-      }
-
-      // If charset is not UTF-8, try to detect from meta tag
-      if (charset !== "utf-8" && charset !== "utf8") {
-        const metaCharsetMatch = html.match(/<meta[^>]*charset=["']?([^"'>]+)/i);
-        if (metaCharsetMatch) {
-          const metaCharset = metaCharsetMatch[1].toLowerCase();
-          if (metaCharset !== charset) {
-            console.log(`Charset mismatch: header=${charset}, meta=${metaCharset}`);
-            // Prefer meta charset over header charset
-            charset = metaCharset;
+          // Retry on 429 (rate limit) and 5xx errors
+          if (status === 429 || status >= 500) {
+            throw new Error(`HTTP ${status}: ${statusText}`);
           }
         }
-      }
 
-      // Convert to UTF-8 if needed
-      if (charset !== "utf-8" && charset !== "utf8") {
-        try {
-          const decoder = new TextDecoder(charset);
-          const encoder = new TextEncoder();
-          const bytes = encoder.encode(html);
-          html = decoder.decode(bytes);
-        } catch (error) {
-          console.warn(`Failed to convert charset ${charset}, using as-is:`, error);
+        // Get the response body as text
+        let html = await response.text();
+
+        // Validate that we got actual HTML content
+        if (!html || html.trim().length === 0) {
+          throw new Error("Empty response received");
         }
-      }
 
-      console.log(`Successfully fetched ${html.length} characters from ${url}`);
-      return html;
+        // Basic HTML validation
+        if (!html.includes('<html') && !html.includes('<!DOCTYPE')) {
+          console.warn(`Response from ${url} doesn't appear to be HTML. Content preview: ${html.substring(0, 200)}...`);
+          // Don't throw here, some sites might return content without HTML tags
+        }
+
+        // Detect charset from Content-Type header
+        const contentType = response.headers.get("content-type");
+        let charset = "utf-8"; // default
+
+        if (contentType) {
+          const charsetMatch = contentType.match(/charset=([^;]+)/i);
+          if (charsetMatch) {
+            charset = charsetMatch[1].toLowerCase();
+          }
+        }
+
+        // If charset is not UTF-8, try to detect from meta tag
+        if (charset !== "utf-8" && charset !== "utf8") {
+          const metaCharsetMatch = html.match(/<meta[^>]*charset=["']?([^"'>]+)/i);
+          if (metaCharsetMatch) {
+            const metaCharset = metaCharsetMatch[1].toLowerCase();
+            if (metaCharset !== charset) {
+              console.log(`Charset mismatch: header=${charset}, meta=${metaCharset}`);
+              // Prefer meta charset over header charset
+              charset = metaCharset;
+            }
+          }
+        }
+
+        // Convert to UTF-8 if needed
+        if (charset !== "utf-8" && charset !== "utf8") {
+          try {
+            const decoder = new TextDecoder(charset);
+            const encoder = new TextEncoder();
+            const bytes = encoder.encode(html);
+            html = decoder.decode(bytes);
+          } catch (error) {
+            console.warn(`Failed to convert charset ${charset}, using as-is:`, error);
+          }
+        }
+
+        console.log(`Successfully fetched ${html.length} characters from ${url}`);
+        return html;
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        throw fetchError;
+      }
     } catch (error) {
       lastError = error as Error;
-      console.warn(`Attempt ${attempt} failed for ${url}:`, error);
+      
+      // Provide more detailed error logging
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          console.warn(`Attempt ${attempt} failed for ${url}: Request timed out after ${TIMEOUT}ms`);
+        } else if (error.message.includes('fetch failed')) {
+          console.warn(`Attempt ${attempt} failed for ${url}: Network error - ${error.message}`);
+        } else {
+          console.warn(`Attempt ${attempt} failed for ${url}: ${error.message}`);
+        }
+      } else {
+        console.warn(`Attempt ${attempt} failed for ${url}: Unknown error:`, error);
+      }
 
       // Don't retry on the last attempt
       if (attempt === MAX_RETRIES) {
@@ -119,10 +154,19 @@ export async function fetchHtml(url: string): Promise<string> {
     }
   }
 
-  // All retries failed
-  throw new Error(
-    `Failed to fetch HTML from ${url} after ${MAX_RETRIES} attempts. Last error: ${lastError?.message}`
-  );
+  // All retries failed - provide more helpful error message
+  const errorDetails = lastError ? `: ${lastError.message}` : '';
+  const errorMessage = `Failed to fetch HTML from ${url} after ${MAX_RETRIES} attempts${errorDetails}`;
+  
+  // Log the final failure with context
+  console.error(`Final fetch failure for ${url}:`, {
+    attempts: MAX_RETRIES,
+    lastError: lastError?.message,
+    lastErrorName: lastError?.name,
+    url: url
+  });
+  
+  throw new Error(errorMessage);
 }
 
 /**
