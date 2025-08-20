@@ -13,45 +13,47 @@ interface BacklinkSnapshot {
 
 export default function BacklinkSnapshotSection({ domainId }: { domainId: string }) {
   const [snapshots, setSnapshots] = useState<BacklinkSnapshot[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [triggering, setTriggering] = useState(false);
+  const [hasAttemptedFetch, setHasAttemptedFetch] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      setError(null);
+  const fetchBacklinkData = async () => {
+    setLoading(true);
+    setError(null);
+    setHasAttemptedFetch(true);
+    
+    console.log('BacklinkSnapshot: Manually fetching data for domainId:', domainId);
+    
+    try {
+      const res = await fetch(`/api/backlinks/${domainId}`);
+      console.log('BacklinkSnapshot: API response status:', res.status);
+      console.log('BacklinkSnapshot: API response headers:', Object.fromEntries(res.headers.entries()));
       
-      console.log('BacklinkSnapshot: Fetching data for domainId:', domainId);
-      
-      try {
-        const res = await fetch(`/api/backlinks/${domainId}`);
-        console.log('BacklinkSnapshot: API response status:', res.status);
-        
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-        }
-        const data = await res.json();
-        console.log('BacklinkSnapshot: API response data:', data);
-        
-        if (data.error && res.status === 429) {
-          setError('Quota reached, try again later');
-        } else {
-          setSnapshots(data);
-        }
-      } catch (e: any) {
-        console.error('BacklinkSnapshot: Error fetching data:', e);
-        setError(e.message || 'Failed to load backlink data');
-      } finally {
-        setLoading(false);
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}: ${res.statusText}`);
       }
+      const data = await res.json();
+      console.log('BacklinkSnapshot: API response data:', data);
+      
+      if (data.error && res.status === 429) {
+        setError('Quota reached, try again later');
+      } else {
+        setSnapshots(data);
+      }
+    } catch (e: any) {
+      console.error('BacklinkSnapshot: Error fetching data:', e);
+      setError(e.message || 'Failed to load backlink data');
+    } finally {
+      setLoading(false);
     }
-    if (domainId) fetchData();
-  }, [domainId]);
+  };
 
   const triggerBacklinkSnapshot = async () => {
     setTriggering(true);
     try {
+      console.log('BacklinkSnapshot: Creating dummy snapshot for domainId:', domainId);
+      
       // For now, we'll create a dummy snapshot since we don't have real data
       // In a real implementation, this would call the backlink API
       const dummySnapshot: BacklinkSnapshot = {
@@ -65,7 +67,9 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
       
       setSnapshots(prev => [dummySnapshot, ...prev]);
       setError(null);
+      console.log('BacklinkSnapshot: Dummy snapshot created successfully');
     } catch (e: any) {
+      console.error('BacklinkSnapshot: Error creating dummy snapshot:', e);
       setError(e.message || 'Failed to trigger backlink snapshot');
     } finally {
       setTriggering(false);
@@ -84,34 +88,99 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
     </div>
   );
 
-  if (loading) return <Card className="p-6 text-center animate-pulse">Loading backlink data...</Card>;
+  // Show initial state with action buttons
+  if (!hasAttemptedFetch) {
+    return (
+      <Card className="p-6 text-center">
+        <div className="mb-6">
+          <h3 className="text-2xl font-bold mb-4">Backlink Snapshot</h3>
+          <div className="text-gray-600 mb-4">Ready to fetch backlink data</div>
+          <div className="mb-2 text-sm text-gray-500">Domain ID: <code className="bg-gray-800 px-2 py-1 rounded">{domainId}</code></div>
+        </div>
+        
+        <div className="flex gap-4 justify-center">
+          <button 
+            onClick={fetchBacklinkData}
+            className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 font-medium"
+          >
+            🔍 Fetch Backlink Data
+          </button>
+          <button 
+            onClick={triggerBacklinkSnapshot}
+            disabled={triggering}
+            className="px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 font-medium"
+          >
+            {triggering ? 'Creating...' : '➕ Create Sample Data'}
+          </button>
+        </div>
+        
+        <div className="mt-4 text-sm text-gray-500">
+          Click "Fetch Backlink Data" to load existing data from the database, or "Create Sample Data" to generate demo content.
+        </div>
+      </Card>
+    );
+  }
+
+  if (loading) return (
+    <Card className="p-6 text-center">
+      <div className="mb-4">
+        <h3 className="text-2xl font-bold mb-4">Backlink Snapshot</h3>
+        <div className="animate-pulse">Loading backlink data...</div>
+      </div>
+      <div className="text-sm text-gray-500">Domain ID: {domainId}</div>
+    </Card>
+  );
+  
   if (error) return (
-    <Card className="p-6 text-center text-red-400">
-      <div className="mb-4">{error}</div>
-      <button 
-        onClick={triggerBacklinkSnapshot}
-        disabled={triggering}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-      >
-        {triggering ? 'Triggering...' : 'Try Again'}
-      </button>
+    <Card className="p-6 text-center">
+      <div className="mb-4">
+        <h3 className="text-2xl font-bold mb-4">Backlink Snapshot</h3>
+        <div className="text-red-400 mb-4">{error}</div>
+      </div>
+      <div className="mb-2 text-sm text-gray-500">Domain ID: {domainId}</div>
+      <div className="flex gap-4 justify-center">
+        <button 
+          onClick={fetchBacklinkData}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+          🔄 Try Again
+        </button>
+        <button 
+          onClick={triggerBacklinkSnapshot}
+          disabled={triggering}
+          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
+        >
+          {triggering ? 'Creating...' : '➕ Create Sample Data'}
+        </button>
+      </div>
     </Card>
   );
   
   if (!snapshots.length) {
     return (
       <Card className="p-6 text-center">
-        <div className="mb-4 text-gray-600">No backlink data available yet.</div>
+        <div className="mb-4">
+          <h3 className="text-2xl font-bold mb-4">Backlink Snapshot</h3>
+          <div className="text-gray-600 mb-4">No backlink data available yet</div>
+        </div>
         <div className="mb-2 text-sm text-gray-500">Domain ID: {domainId}</div>
-        <button 
-          onClick={triggerBacklinkSnapshot}
-          disabled={triggering}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {triggering ? 'Triggering...' : 'Trigger First Snapshot'}
-        </button>
+        <div className="flex gap-4 justify-center">
+          <button 
+            onClick={fetchBacklinkData}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          >
+            🔄 Refresh Data
+          </button>
+          <button 
+            onClick={triggerBacklinkSnapshot}
+            disabled={triggering}
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50"
+          >
+            {triggering ? 'Creating...' : '➕ Create Sample Data'}
+          </button>
+        </div>
         <div className="mt-2 text-sm text-gray-500">
-          This will create a sample backlink entry for demonstration.
+          No data found in the database. Create sample data to see the interface in action.
         </div>
       </Card>
     );
@@ -127,14 +196,25 @@ export default function BacklinkSnapshotSection({ domainId }: { domainId: string
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h3 className="text-2xl font-bold">Backlink Snapshot</h3>
-        <button 
-          onClick={triggerBacklinkSnapshot}
-          disabled={triggering}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 text-sm"
-        >
-          {triggering ? 'Triggering...' : 'Add Snapshot'}
-        </button>
+        <div className="flex gap-2">
+          <button 
+            onClick={fetchBacklinkData}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+          >
+            🔄 Refresh
+          </button>
+          <button 
+            onClick={triggerBacklinkSnapshot}
+            disabled={triggering}
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 text-sm"
+          >
+            {triggering ? 'Creating...' : '➕ Add Data'}
+          </button>
+        </div>
       </div>
+      
+      <div className="text-sm text-gray-500">Domain ID: {domainId}</div>
+      
       {filterUI}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <Card className="p-6 flex flex-col items-center justify-center">
