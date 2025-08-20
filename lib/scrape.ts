@@ -25,7 +25,7 @@ const MAX_RETRIES = 3;
 const BASE_DELAY = 1000; // 1 second
 
 // Timeout and redirect configuration
-const TIMEOUT = 15000; // 15 seconds (increased from 12)
+const TIMEOUT = 10000; // 10 seconds (reduced for faster audits)
 const MAX_REDIRECTS = 5;
 
 /**

@@ -26,7 +26,7 @@ function ensureHttps(url: string): string {
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic"; // avoid static optimization
-export const maxDuration = 60; // Vercel function limit (seconds)
+export const maxDuration = 45; // Reduced from 60 to 45 seconds for Vercel
 
 export async function POST(req: NextRequest) {
   try {
@@ -65,19 +65,27 @@ export async function POST(req: NextRequest) {
         if (useDb) {
           await dbHelpers.updateRunStatus(runId, "running");
         }
+        
+        // Fetch HTML with shorter timeout
         const html = await fetchHtml(pageUrl);
         const parsed = await parseHtml(html, pageUrl);
         
-        // Fetch PageSpeed Insights data if API key is available
+        // Fetch PageSpeed Insights data with shorter timeout - make it optional
         let performanceData = null;
         const psiApiKey = process.env.PSI_API_KEY;
         if (psiApiKey) {
           try {
             console.log("Fetching PageSpeed Insights data");
-            performanceData = await fetchPageSpeed(pageUrl, psiApiKey);
+            // Use a shorter timeout for PSI to prevent overall timeout
+            const psiPromise = fetchPageSpeed(pageUrl, psiApiKey);
+            const timeoutPromise = new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('PSI timeout')), 20000) // 20 second timeout for PSI
+            );
+            
+            performanceData = await Promise.race([psiPromise, timeoutPromise]);
             console.log("PSI data retrieved successfully");
           } catch (error) {
-            console.warn("Failed to fetch PSI data:", error);
+            console.warn("Failed to fetch PSI data (continuing without it):", error);
             // Continue without PSI data - it's optional
           }
         } else {
@@ -123,19 +131,27 @@ export async function POST(req: NextRequest) {
         if (useDb) {
           await dbHelpers.updateRunStatus(runId, "running");
         }
+        
+        // Fetch HTML with shorter timeout
         const html = await fetchHtml(pageUrl);
         const parsed = await parseHtml(html, pageUrl);
         
-        // Fetch PageSpeed Insights data if API key is available
+        // Fetch PageSpeed Insights data with shorter timeout - make it optional
         let performanceData = null;
         const psiApiKey = process.env.PSI_API_KEY;
         if (psiApiKey) {
           try {
             console.log("Fetching PageSpeed Insights data");
-            performanceData = await fetchPageSpeed(pageUrl, psiApiKey);
+            // Use a shorter timeout for PSI to prevent overall timeout
+            const psiPromise = fetchPageSpeed(pageUrl, psiApiKey);
+            const timeoutPromise = new Promise((_, reject) => 
+              setTimeout(() => reject(new Error('PSI timeout')), 20000) // 20 second timeout for PSI
+            );
+            
+            performanceData = await Promise.race([psiPromise, timeoutPromise]);
             console.log("PSI data retrieved successfully");
           } catch (error) {
-            console.warn("Failed to fetch PSI data:", error);
+            console.warn("Failed to fetch PSI data (continuing without it):", error);
             // Continue without PSI data - it's optional
           }
         } else {
