@@ -23,10 +23,10 @@ export default function UserDashboard({ className = "" }: UserDashboardProps) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (session?.user?.id) {
+    if ((session?.user as any)?.id) {
       fetchUserAudits();
     }
-  }, [session?.user?.id]);
+  }, [(session?.user as any)?.id]);
 
   const fetchUserAudits = async () => {
     try {

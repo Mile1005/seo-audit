@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../lib/auth";
-import { dbHelpers } from "../../../../lib/db";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
@@ -11,13 +13,12 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const userId = session.user.id;
+    const userId = (session.user as any).id;
     const url = new URL(req.url);
     const limit = parseInt(url.searchParams.get("limit") || "10");
     const offset = parseInt(url.searchParams.get("offset") || "0");
 
     // Get user's audit runs
-    const prisma = await dbHelpers.getPrisma();
     const [runs, total] = await Promise.all([
       prisma.run.findMany({
         where: { userId },

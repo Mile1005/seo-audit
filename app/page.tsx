@@ -233,7 +233,7 @@ export default function Page() {
         body: JSON.stringify({
           pageUrl: ensureHttps(data.pageUrl),
           email: data.email.trim() || undefined,
-          userId: session?.user?.id,
+          userId: (session?.user as any)?.id,
         }),
       });
 
