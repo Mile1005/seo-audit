@@ -83,12 +83,21 @@ export default function Header() {
                 className="flex items-center space-x-3"
               >
                 <span className="text-sm text-gray-600">Welcome, Guest</span>
-                <a
-                  href="/auth/signin"
-                  className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-                >
-                  Sign In
-                </a>
+                <div className="flex items-center space-x-2">
+                  <a
+                    href="/auth/signin"
+                    className="text-blue-600 hover:text-blue-700 text-sm font-medium transition-colors duration-200"
+                  >
+                    Sign In
+                  </a>
+                  <span className="text-gray-300">|</span>
+                  <a
+                    href="/auth/register"
+                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-200"
+                  >
+                    Register
+                  </a>
+                </div>
               </motion.div>
             )}
           </div>
