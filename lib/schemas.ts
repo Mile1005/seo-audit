@@ -154,6 +154,7 @@ export const StartAuditRequest = z.object({
   pageUrl: z.string().min(1, "URL is required"),
   targetKeyword: z.string().optional().or(z.literal("")),
   email: z.string().email().optional().or(z.literal("")),
+  userId: z.string().optional(),
 });
 
 export const StartAuditResponse = z.object({

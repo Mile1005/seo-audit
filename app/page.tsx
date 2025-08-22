@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Header from "../components/common/Header";
 import Hero from "../components/common/Hero";
 import ModernForm from "../components/common/ModernForm";
 import ModernGscPanel from "../components/common/ModernGscPanel";
 import FeaturesSection from "../components/common/FeaturesSection";
+import LoginForm from "../components/auth/LoginForm";
+import UserDashboard from "../components/auth/UserDashboard";
 
 interface FormErrors {
   pageUrl?: string;
@@ -40,6 +44,7 @@ function isValidEmail(email: string): boolean {
 
 export default function Page() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState({
@@ -228,6 +233,7 @@ export default function Page() {
         body: JSON.stringify({
           pageUrl: ensureHttps(data.pageUrl),
           email: data.email.trim() || undefined,
+          userId: (session?.user as any)?.id,
         }),
       });
 
@@ -256,19 +262,70 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-bg-primary">
+      <Header />
+      
+      {/* Debug Info - Remove this later */}
+      <div className="bg-red-500 text-white p-4 text-center">
+        Debug: Status = {status}, Session = {session ? 'Yes' : 'No'}
+      </div>
+      
       {/* Hero Section */}
       <Hero 
         title="AI Visibility Audit"
         subtitle="Get comprehensive SEO analysis of your web pages with actionable insights and recommendations powered by artificial intelligence"
       >
-        <ModernForm
-          onSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          errors={errors}
-          formData={formData}
-          onInputChange={handleInputChange}
-        />
+        {status === "loading" ? (
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        ) : !session ? (
+          <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
+            {/* Login Form */}
+            <div className="w-full max-w-md">
+              <LoginForm />
+            </div>
+            
+            {/* Divider */}
+            <div className="hidden lg:flex flex-col items-center">
+              <div className="w-px h-32 bg-gray-300"></div>
+              <span className="text-gray-500 text-sm mt-4">OR</span>
+              <div className="w-px h-32 bg-gray-300"></div>
+            </div>
+            
+            {/* Audit Form for Guests */}
+            <div className="w-full max-w-md">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-4">Try Without Account</h3>
+                <p className="text-gray-300 mb-6">Run a quick audit without creating an account</p>
+                <ModernForm
+                  onSubmit={handleSubmit}
+                  isSubmitting={isSubmitting}
+                  errors={errors}
+                  formData={formData}
+                  onInputChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <ModernForm
+            onSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
+            errors={errors}
+            formData={formData}
+            onInputChange={handleInputChange}
+          />
+        )}
       </Hero>
+
+      {/* User Dashboard Section - Only show if authenticated */}
+      {session && (
+        <section className="py-20 bg-bg-secondary">
+          <div className="container-width">
+            <UserDashboard className="max-w-4xl mx-auto" />
+          </div>
+        </section>
+      )}
 
       {/* GSC Section */}
       <section className="py-20 bg-bg-secondary">

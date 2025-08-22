@@ -19,6 +19,7 @@ export const dbHelpers = {
     pageUrl: string;
     targetKeyword?: string;
     email?: string;
+    userId?: string;
     status?: string;
   }) {
     const prisma = await getPrisma();
@@ -28,6 +29,7 @@ export const dbHelpers = {
         pageUrl: data.pageUrl,
         targetKeyword: data.targetKeyword || null,
         email: data.email || null,
+        userId: data.userId || null,
         status: (data.status as any) || "queued",
       },
     });
