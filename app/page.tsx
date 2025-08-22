@@ -264,38 +264,63 @@ export default function Page() {
     <div className="min-h-screen bg-bg-primary">
       <Header />
       
-      {/* Authentication Section - Show login form if not authenticated */}
-      {status === "loading" ? (
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-        </div>
-      ) : !session ? (
-        <div className="flex items-center justify-center min-h-screen px-4">
-          <LoginForm />
-        </div>
-      ) : (
-        <>
-          {/* Hero Section */}
-          {/* User Dashboard Section */}
-          <section className="py-20 bg-bg-secondary">
-            <div className="container-width">
-              <UserDashboard className="max-w-4xl mx-auto" />
+      {/* Hero Section */}
+      <Hero 
+        title="AI Visibility Audit"
+        subtitle="Get comprehensive SEO analysis of your web pages with actionable insights and recommendations powered by artificial intelligence"
+      >
+        {status === "loading" ? (
+          <div className="flex items-center justify-center py-8">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        ) : !session ? (
+          <div className="flex flex-col lg:flex-row gap-8 items-center justify-center">
+            {/* Login Form */}
+            <div className="w-full max-w-md">
+              <LoginForm />
             </div>
-          </section>
+            
+            {/* Divider */}
+            <div className="hidden lg:flex flex-col items-center">
+              <div className="w-px h-32 bg-gray-300"></div>
+              <span className="text-gray-500 text-sm mt-4">OR</span>
+              <div className="w-px h-32 bg-gray-300"></div>
+            </div>
+            
+            {/* Audit Form for Guests */}
+            <div className="w-full max-w-md">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <h3 className="text-xl font-semibold text-white mb-4">Try Without Account</h3>
+                <p className="text-gray-300 mb-6">Run a quick audit without creating an account</p>
+                <ModernForm
+                  onSubmit={handleSubmit}
+                  isSubmitting={isSubmitting}
+                  errors={errors}
+                  formData={formData}
+                  onInputChange={handleInputChange}
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <ModernForm
+            onSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
+            errors={errors}
+            formData={formData}
+            onInputChange={handleInputChange}
+          />
+        )}
+      </Hero>
 
-          {/* Hero Section */}
-          <Hero 
-            title="AI Visibility Audit"
-            subtitle="Get comprehensive SEO analysis of your web pages with actionable insights and recommendations powered by artificial intelligence"
-          >
-            <ModernForm
-              onSubmit={handleSubmit}
-              isSubmitting={isSubmitting}
-              errors={errors}
-              formData={formData}
-              onInputChange={handleInputChange}
-            />
-          </Hero>
+      {/* User Dashboard Section - Only show if authenticated */}
+      {session && (
+        <section className="py-20 bg-bg-secondary">
+          <div className="container-width">
+            <UserDashboard className="max-w-4xl mx-auto" />
+          </div>
+        </section>
+      )}
 
       {/* GSC Section */}
       <section className="py-20 bg-bg-secondary">
@@ -381,8 +406,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-        </>
-      )}
     </div>
   );
 }
