@@ -264,6 +264,11 @@ export default function Page() {
     <div className="min-h-screen bg-bg-primary">
       <Header />
       
+      {/* Debug Info - Remove this later */}
+      <div className="bg-red-500 text-white p-4 text-center">
+        Debug: Status = {status}, Session = {session ? 'Yes' : 'No'}
+      </div>
+      
       {/* Hero Section */}
       <Hero 
         title="AI Visibility Audit"
