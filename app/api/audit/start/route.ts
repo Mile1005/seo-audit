@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
     const email = validatedData.email === "" ? undefined : validatedData.email;
     const targetKeyword =
       validatedData.targetKeyword === "" ? undefined : validatedData.targetKeyword;
+    const userId = validatedData.userId;
 
     // Use DB only when explicitly enabled AND a DATABASE_URL is present.
     // On Vercel (no DB), this safely defaults to inline/serverless mode.
@@ -52,6 +53,7 @@ export async function POST(req: NextRequest) {
         pageUrl,
         targetKeyword,
         email,
+        userId,
         status: "queued",
       });
     }

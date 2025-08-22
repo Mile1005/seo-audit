@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import WebVitalsClient from "./WebVitalsClient";
+import SessionProvider from "../components/auth/SessionProvider";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        {children}
+        <SessionProvider>
+          {children}
+        </SessionProvider>
         <Analytics />
         <SpeedInsights />
         <WebVitalsClient />

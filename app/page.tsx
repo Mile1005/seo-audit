@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Header from "../components/common/Header";
 import Hero from "../components/common/Hero";
 import ModernForm from "../components/common/ModernForm";
 import ModernGscPanel from "../components/common/ModernGscPanel";
 import FeaturesSection from "../components/common/FeaturesSection";
+import LoginForm from "../components/auth/LoginForm";
+import UserDashboard from "../components/auth/UserDashboard";
 
 interface FormErrors {
   pageUrl?: string;
@@ -40,6 +44,7 @@ function isValidEmail(email: string): boolean {
 
 export default function Page() {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [formData, setFormData] = useState({
@@ -228,6 +233,7 @@ export default function Page() {
         body: JSON.stringify({
           pageUrl: ensureHttps(data.pageUrl),
           email: data.email.trim() || undefined,
+          userId: session?.user?.id,
         }),
       });
 
@@ -256,19 +262,40 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-bg-primary">
-      {/* Hero Section */}
-      <Hero 
-        title="AI Visibility Audit"
-        subtitle="Get comprehensive SEO analysis of your web pages with actionable insights and recommendations powered by artificial intelligence"
-      >
-        <ModernForm
-          onSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          errors={errors}
-          formData={formData}
-          onInputChange={handleInputChange}
-        />
-      </Hero>
+      <Header />
+      
+      {/* Authentication Section - Show login form if not authenticated */}
+      {status === "loading" ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      ) : !session ? (
+        <div className="flex items-center justify-center min-h-screen px-4">
+          <LoginForm />
+        </div>
+      ) : (
+        <>
+          {/* Hero Section */}
+          {/* User Dashboard Section */}
+          <section className="py-20 bg-bg-secondary">
+            <div className="container-width">
+              <UserDashboard className="max-w-4xl mx-auto" />
+            </div>
+          </section>
+
+          {/* Hero Section */}
+          <Hero 
+            title="AI Visibility Audit"
+            subtitle="Get comprehensive SEO analysis of your web pages with actionable insights and recommendations powered by artificial intelligence"
+          >
+            <ModernForm
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              errors={errors}
+              formData={formData}
+              onInputChange={handleInputChange}
+            />
+          </Hero>
 
       {/* GSC Section */}
       <section className="py-20 bg-bg-secondary">
@@ -354,6 +381,8 @@ export default function Page() {
           </div>
         </div>
       </section>
+        </>
+      )}
     </div>
   );
 }
