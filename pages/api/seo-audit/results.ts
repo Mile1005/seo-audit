@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { performComprehensiveAudit } from '../../../lib/comprehensive-audit';
 // import { dbHelpers } from '../../../lib/db'; // Temporarily disabled for Vercel deployment
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -57,80 +58,55 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //     message: `Audit is ${run.status}`,
     //   });
     // } else {
-             // If database is disabled, we need to return a mock result since we can't access the previous response
-       // In a real implementation, you might want to store results in memory or use a different approach
-       const mockResult = {
-         url: "https://example.com",
-         scores: {
-           overall: 83.5,
-           performance: 100,
-           accessibility: 93,
-           seo: 92,
-           best_practices: 100
-         },
-         stats: {
-           internal_links: 19,
-           external_links: 11,
-           images_count: 2,
-           images_size: 102400,
-           scripts_count: 26,
-           scripts_size: 273056,
-           text_size: 4095,
-           text_rate: 0.04
-         },
-         h_tags: {
-           h1: ["Launch and Scale your Brand with AI"],
-           h2: [
-             "Tools for Your Business Success",
-             "How to Build Your Brand?",
-             "Trusted by Small Businesses",
-             "Get Your Free AI-Generated Brand"
-           ],
-           h3: [
-             "Logo Maker",
-             "Slogan Generator",
-             "Website Builder",
-             "Color Palette Generator",
-             "Business Name Generator",
-             "Icon Generator"
-           ]
-         },
-         issues: [
-           {
-             title: "Missing Meta Description",
-             description: "The page is missing a meta description tag.",
-             severity: "medium",
-             recommendation: "Add a compelling meta description between 150-160 characters."
-           },
-           {
-             title: "Slow Page Load Time",
-             description: "The page takes longer than 3 seconds to load.",
-             severity: "high",
-             recommendation: "Optimize images, minify CSS/JS, and use a CDN."
-           },
-           {
-             title: "Missing Alt Text",
-             description: "Some images are missing alt text attributes.",
-             severity: "medium",
-             recommendation: "Add descriptive alt text to all images for better accessibility."
-           }
-         ],
-         quick_wins: [
-           {
-             title: "Add Meta Description",
-             description: "Improve click-through rates from search results."
-           },
-           {
-             title: "Optimize Images",
-             description: "Reduce page load time and improve user experience."
-           },
-           {
-             title: "Add Alt Text",
-             description: "Improve accessibility and SEO for images."
-           }
-         ],
-         fetched_at: new Date().toISOString()
-       };
+      // If database is disabled, we need to return a comprehensive mock result
+      // In a real implementation, you might want to store results in memory or use a different approach
+      
+      // Mock HTML content for comprehensive audit
+      const mockHtml = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <title>Launch and Scale your Brand with AI</title>
+          <meta name="description" content="Create a name, design your logo, and launch your website - everything you need to build a brand and establish your online presence in minutes.">
+          <link rel="canonical" href="https://produkto.io/">
+          <meta property="og:title" content="Launch and Scale your Brand with AI">
+          <meta property="og:url" content="https://produkto.io/">
+          <meta property="og:description" content="Create a name, design your logo, and launch your website - everything you need to build a brand and establish your online presence in minutes.">
+          <meta property="og:image" content="https://produkto.io/og-image.jpg">
+          <meta name="twitter:card" content="summary_large_image">
+          <meta name="twitter:title" content="Launch and Scale your Brand with AI">
+          <meta name="twitter:description" content="Create a name, design your logo, and launch your website - everything you need to build a brand and establish your online presence in minutes.">
+        </head>
+        <body>
+          <main>
+            <h1>Launch and Scale your Brand with AI</h1>
+            <h2>Tools for Your Business Success</h2>
+            <h2>How to Build Your Brand?</h2>
+            <h2>Trusted by Small Businesses</h2>
+            <h2>Get Your Free AI-Generated Brand</h2>
+            <h3>Logo Maker</h3>
+            <h3>Slogan Generator</h3>
+            <h3>Website Builder</h3>
+            <h3>Color Palette Generator</h3>
+            <h3>Business Name Generator</h3>
+            <h3>Icon Generator</h3>
+            <h3>1. Select an industry</h3>
+            <h3>4. Select a logo</h3>
+            <h3>2. Enter a brand name</h3>
+            <h3>5. Generate your brand</h3>
+            <h3>3. Select a color palette</h3>
+            <h3>6. Launch your business</h3>
+            <p>Create a name, design your logo, and launch your website - everything you need to build a brand and establish your online presence in minutes.</p>
+            <img src="logo.png" alt="Brand Logo">
+            <a href="/tools">Tools</a>
+            <a href="/about">About</a>
+            <button>Get Started</button>
+          </main>
+        </body>
+        </html>
+      `;
+
+      const mockResult = performComprehensiveAudit(mockHtml, "https://produkto.io/");
       
       return res.status(200).json({
         status: "done",
