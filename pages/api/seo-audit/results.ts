@@ -57,39 +57,80 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     //     message: `Audit is ${run.status}`,
     //   });
     // } else {
-      // If database is disabled, we need to return a mock result since we can't access the previous response
-      // In a real implementation, you might want to store results in memory or use a different approach
-      const mockResult = {
-        url: "https://example.com",
-        scores: {
-          overall: 85
-        },
-        issues: [
-          {
-            title: "Missing Meta Description",
-            description: "The page is missing a meta description tag.",
-            severity: "medium",
-            recommendation: "Add a compelling meta description between 150-160 characters."
-          },
-          {
-            title: "Slow Page Load Time",
-            description: "The page takes longer than 3 seconds to load.",
-            severity: "high",
-            recommendation: "Optimize images, minify CSS/JS, and use a CDN."
-          }
-        ],
-        quick_wins: [
-          {
-            title: "Add Meta Description",
-            description: "Improve click-through rates from search results."
-          },
-          {
-            title: "Optimize Images",
-            description: "Reduce page load time and improve user experience."
-          }
-        ],
-        fetched_at: new Date().toISOString()
-      };
+             // If database is disabled, we need to return a mock result since we can't access the previous response
+       // In a real implementation, you might want to store results in memory or use a different approach
+       const mockResult = {
+         url: "https://example.com",
+         scores: {
+           overall: 83.5,
+           performance: 100,
+           accessibility: 93,
+           seo: 92,
+           best_practices: 100
+         },
+         stats: {
+           internal_links: 19,
+           external_links: 11,
+           images_count: 2,
+           images_size: 102400,
+           scripts_count: 26,
+           scripts_size: 273056,
+           text_size: 4095,
+           text_rate: 0.04
+         },
+         h_tags: {
+           h1: ["Launch and Scale your Brand with AI"],
+           h2: [
+             "Tools for Your Business Success",
+             "How to Build Your Brand?",
+             "Trusted by Small Businesses",
+             "Get Your Free AI-Generated Brand"
+           ],
+           h3: [
+             "Logo Maker",
+             "Slogan Generator",
+             "Website Builder",
+             "Color Palette Generator",
+             "Business Name Generator",
+             "Icon Generator"
+           ]
+         },
+         issues: [
+           {
+             title: "Missing Meta Description",
+             description: "The page is missing a meta description tag.",
+             severity: "medium",
+             recommendation: "Add a compelling meta description between 150-160 characters."
+           },
+           {
+             title: "Slow Page Load Time",
+             description: "The page takes longer than 3 seconds to load.",
+             severity: "high",
+             recommendation: "Optimize images, minify CSS/JS, and use a CDN."
+           },
+           {
+             title: "Missing Alt Text",
+             description: "Some images are missing alt text attributes.",
+             severity: "medium",
+             recommendation: "Add descriptive alt text to all images for better accessibility."
+           }
+         ],
+         quick_wins: [
+           {
+             title: "Add Meta Description",
+             description: "Improve click-through rates from search results."
+           },
+           {
+             title: "Optimize Images",
+             description: "Reduce page load time and improve user experience."
+           },
+           {
+             title: "Add Alt Text",
+             description: "Improve accessibility and SEO for images."
+           }
+         ],
+         fetched_at: new Date().toISOString()
+       };
       
       return res.status(200).json({
         status: "done",
