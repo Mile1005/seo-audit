@@ -3,7 +3,7 @@ import { fetchHtml } from '../../../lib/scrape';
 import { parseHtml } from '../../../lib/parse';
 import { calculateAudit } from '../../../lib/heuristics';
 import { fetchPageSpeed } from '../../../lib/psi';
-import { dbHelpers } from '../../../lib/db';
+// import { dbHelpers } from '../../../lib/db'; // Temporarily disabled for Vercel deployment
 
 // Utility function to add HTTPS if missing
 function ensureHttps(url: string): string {
@@ -40,24 +40,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const pageUrl = ensureHttps(url);
     const runId = crypto.randomUUID();
 
-    // Use DB only when explicitly enabled AND a DATABASE_URL is present
-    const useDb = process.env.DISABLE_DB !== "true" && !!process.env.DATABASE_URL;
+    // Temporarily disable database for Vercel deployment
+    const useDb = false; // process.env.DISABLE_DB !== "true" && !!process.env.DATABASE_URL;
 
     // Create run with status=queued (if DB enabled)
-    if (useDb) {
-      await dbHelpers.createRun({
-        id: runId,
-        pageUrl,
-        targetKeyword,
-        email,
-        status: "queued",
-      });
-    }
+    // if (useDb) {
+    //   await dbHelpers.createRun({
+    //     id: runId,
+    //     pageUrl,
+    //     targetKeyword,
+    //     email,
+    //     status: "queued",
+    //   });
+    // }
 
-    try {
-      if (useDb) {
-        await dbHelpers.updateRunStatus(runId, "running");
-      }
+          try {
+        // if (useDb) {
+        //   await dbHelpers.updateRunStatus(runId, "running");
+        // }
 
       console.log(`Starting SEO audit for: ${pageUrl}`);
 
@@ -93,15 +93,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       console.log(`SEO audit completed for: ${pageUrl}`);
 
-      // Save audit result to database if enabled
-      if (useDb) {
-        await dbHelpers.saveAudit({ 
-          id: crypto.randomUUID(), 
-          runId, 
-          json: auditResult 
-        });
-        await dbHelpers.updateRunStatus(runId, "ready");
-      }
+              // Save audit result to database if enabled
+        // if (useDb) {
+        //   await dbHelpers.saveAudit({ 
+        //     id: crypto.randomUUID(), 
+        //     runId, 
+        //     json: auditResult 
+        //   });
+        //   await dbHelpers.updateRunStatus(runId, "ready");
+        // }
 
       // Return the audit result immediately (inline processing)
       const response = {
@@ -114,12 +114,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       res.status(200).json(response);
 
-    } catch (e) {
-      console.error("SEO audit processing failed:", e);
-      
-      if (useDb) {
-        await dbHelpers.updateRunStatus(runId, "failed");
-      }
+          } catch (e) {
+        console.error("SEO audit processing failed:", e);
+        
+        // if (useDb) {
+        //   await dbHelpers.updateRunStatus(runId, "failed");
+        // }
 
       res.status(500).json({ 
         error: 'SEO audit failed',
