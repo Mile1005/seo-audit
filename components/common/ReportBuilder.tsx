@@ -271,7 +271,7 @@ function ExecutiveSummary({
   result: AuditResult;
   branding: BrandingOptions;
 }) {
-  const overallScore = result.scores.overall;
+  const overallScore = result.scores?.overall || 0;
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-600";
     if (score >= 60) return "text-yellow-600";
@@ -342,15 +342,15 @@ function TechnicalSEO({ result, branding }: { result: AuditResult; branding: Bra
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="text-center p-4 border rounded-lg">
-          <div className="text-2xl font-bold text-blue-600">{result.scores.title_meta}/100</div>
+          <div className="text-2xl font-bold text-blue-600">{result.scores?.title_meta || 0}/100</div>
           <div className="text-sm text-gray-600">Title & Meta</div>
         </div>
         <div className="text-center p-4 border rounded-lg">
-          <div className="text-2xl font-bold text-blue-600">{result.scores.structure}/100</div>
+          <div className="text-2xl font-bold text-blue-600">{result.scores?.structure || 0}/100</div>
           <div className="text-sm text-gray-600">Structure</div>
         </div>
         <div className="text-center p-4 border rounded-lg">
-          <div className="text-2xl font-bold text-blue-600">{result.scores.schema}/100</div>
+          <div className="text-2xl font-bold text-blue-600">{result.scores?.schema || 0}/100</div>
           <div className="text-sm text-gray-600">Schema</div>
         </div>
       </div>
@@ -400,15 +400,15 @@ function ContentAnalysis({ result, branding }: { result: AuditResult; branding: 
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Headings</span>
-              <span className="font-medium">{result.scores.headings}/100</span>
+              <span className="font-medium">{result.scores?.headings || 0}/100</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Content Quality</span>
-              <span className="font-medium">{result.scores.answerability}/100</span>
+              <span className="font-medium">{result.scores?.answerability || 0}/100</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Images</span>
-              <span className="font-medium">{result.scores.images}/100</span>
+              <span className="font-medium">{result.scores?.images || 0}/100</span>
             </div>
           </div>
         </div>
