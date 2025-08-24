@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:fast": "next dev --turbo",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "worker": "tsx worker/index.ts",
@@ -14,8 +14,7 @@
     "db:push": "prisma db push",
     "format": "prettier --write .",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit",
-    "postinstall": "prisma generate"
+    "typecheck": "tsc --noEmit"
   },
   "browserslist": [
     "last 2 Chrome versions",
