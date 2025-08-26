@@ -1,0 +1,8 @@
+apps/
+packages/shared/
+packages/prisma/
+chrome-extension/
+worker/
+*.log
+node_modules/
+.git/
