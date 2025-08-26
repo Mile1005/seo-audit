@@ -1,5 +1,5 @@
 
-import { dbHelpers } from "@repo/shared";
+import { dbHelpers } from "@repo/shared/server";
 
 export const runtime = "nodejs";
 

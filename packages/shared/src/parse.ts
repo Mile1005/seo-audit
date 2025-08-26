@@ -39,7 +39,29 @@ export interface ParsedHtml {
  * @returns ParsedHtml object with extracted data
  */
 export function parseHtml(html: string, baseUrl: string): ParsedHtml {
-	// ...existing code...
+	// TODO: Implement actual HTML parsing
+	return {
+		title: '',
+		metaDescription: '',
+		canonical: null,
+		h1: null,
+		h2: [],
+		h3: [],
+		images: [],
+		internalLinks: [],
+		jsonLdTypes: [],
+		textBlocks: [],
+		robots: null,
+		viewport: null,
+		tablesCount: 0,
+		listsCount: 0,
+		h1Count: 0,
+		mixedContentCandidates: [],
+		isCanonicalSelfReference: false,
+		hasNoindex: false,
+		hasNofollow: false,
+		accessibilityIssues: []
+	};
 }
 
 /**
@@ -49,7 +71,12 @@ export function parseHtml(html: string, baseUrl: string): ParsedHtml {
  * @returns Normalized absolute URL
  */
 function normalizeUrl(url: string, baseUrl: URL): string {
-	// ...existing code...
+	// TODO: Implement URL normalization
+	try {
+		return new URL(url, baseUrl).href;
+	} catch {
+		return url;
+	}
 }
 
 /**
@@ -58,7 +85,8 @@ function normalizeUrl(url: string, baseUrl: URL): string {
  * @returns Cleaned text
  */
 export function cleanText(text: string): string {
-	// ...existing code...
+	// TODO: Implement text cleaning
+	return text.trim().replace(/\s+/g, ' ');
 }
 
 /**
@@ -67,7 +95,8 @@ export function cleanText(text: string): string {
  * @returns Word count
  */
 export function calculateWordCount(textBlocks: string[]): number {
-	// ...existing code...
+	// TODO: Implement word count calculation
+	return textBlocks.join(' ').split(/\s+/).filter(word => word.length > 0).length;
 }
 
 /**
@@ -76,5 +105,6 @@ export function calculateWordCount(textBlocks: string[]): number {
  * @returns Reading time in minutes
  */
 export function calculateReadingTime(wordCount: number): number {
-	// ...existing code...
+	// Average reading speed is 200 words per minute
+	return Math.ceil(wordCount / 200);
 }

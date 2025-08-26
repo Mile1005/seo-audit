@@ -120,7 +120,58 @@ export function calculateAudit(
 	parsed: ParsedHtml,
 	opts: AuditOptions = {}
 ): AuditResult {
-	// ...existing code...
+	// TODO: Implement actual audit logic
+	return {
+		version: "1.0",
+		url: "",
+		fetched_at: new Date().toISOString(),
+		scores: {
+			overall: 100,
+			title_meta: 100,
+			headings: 100,
+			answerability: 100,
+			structure: 100,
+			schema: 100,
+			images: 100,
+			internal_links: 100
+		},
+		stats: {
+			word_count: 0,
+			reading_time_min: 0,
+			images_count: 0,
+			h2_count: 0,
+			h3_count: 0,
+			tables_count: 0,
+			lists_count: 0
+		},
+		detected: {
+			title: null,
+			meta_description: null,
+			canonical: null,
+			h1: null,
+			h2: [],
+			h3: [],
+			json_ld_types: [],
+			images: [],
+			internal_links: []
+		},
+		issues: [],
+		quick_wins: [],
+		performance: {
+			lcp: null,
+			cls: null,
+			inp: null,
+			notes: []
+		},
+		gsc_insights: {
+			available: false,
+			top_queries: [],
+			ctr: null,
+			impressions: null,
+			clicks: null
+		},
+		accessibility_issues: []
+	};
 }
 
 // Score calculation functions

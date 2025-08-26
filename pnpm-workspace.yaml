@@ -1,5 +1,6 @@
 packages:
-  - 'seo-audit'
+  - 'apps/*'
+  - 'packages/*'
   - 'chrome-extension'
 
 onlyBuiltDependencies:

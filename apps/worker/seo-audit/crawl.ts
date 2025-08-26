@@ -1,7 +1,6 @@
 import { Worker } from "bullmq";
 import IORedis from "ioredis";
-import { miniCrawl } from "@repo/shared";
-import { dbHelpers } from "@repo/shared";
+import { miniCrawl, dbHelpers } from "@repo/shared/server";
 import crypto from "crypto";
 enum RunStatus {
   queued = "queued",

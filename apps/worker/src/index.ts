@@ -1,6 +1,6 @@
 import { Worker } from 'bullmq';
 import IORedis from 'ioredis';
-import { dbHelpers, miniCrawl, calculateAudit } from '@repo/shared';
+import { dbHelpers, miniCrawl, calculateAudit } from '@repo/shared/server';
 
 const connection = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379', { maxRetriesPerRequest: null });
 
