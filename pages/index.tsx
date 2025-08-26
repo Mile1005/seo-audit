@@ -150,13 +150,13 @@ export default function HomePage() {
     <>
   <EnhancedHeader />
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden parallax-dots">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 bg-soft-radial" />
         {/* noise + parallax orbs */}
         <div className="absolute inset-0 bg-noise" />
         <motion.div aria-hidden className="pointer-events-none absolute -left-20 top-24 w-40 h-40 rounded-full bg-blue-200/40 blur-2xl" initial={{y:10}} animate={{y:[0,10,0]}} transition={{duration:8, repeat:Infinity}} />
         <motion.div aria-hidden className="pointer-events-none absolute right-[-60px] top-40 w-56 h-56 rounded-full bg-purple-200/40 blur-2xl" initial={{y:-10}} animate={{y:[0,-10,0]}} transition={{duration:10, repeat:Infinity}} />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-20">
+  <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-12 pb-12">
           <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="space-y-8">
             <h1 className="text-[42px] sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 leading-tight">
               Speed up{' '}
@@ -168,9 +168,7 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Start your analysis for free
             </p>
-            <div className="mx-auto max-w-md">
-              <Lottie animationData={heroAnim} loop className="w-full h-40" />
-            </div>
+            {/* Removed extra Lottie spacing to tighten hero */}
             <form onSubmit={handleHomeAudit} className="flex items-center justify-center max-w-2xl mx-auto">
               <div className="relative w-full">
                 <input
@@ -211,7 +209,7 @@ export default function HomePage() {
       </section>
 
   {/* Trust badges + logos */}
-  <section className="py-12 bg-white">
+  <section className="py-10 bg-white">
         <motion.div initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="flex items-center gap-4 justify-center">
@@ -224,14 +222,12 @@ export default function HomePage() {
             </div>
             <div className="text-center md:text-right text-gray-500 text-sm">Trusted by teams at</div>
           </div>
-          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center opacity-90">
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-6 items-center opacity-90">
             {[
               {src:'/brand/logo-acme.svg', alt:'Acme'},
               {src:'/brand/logo-hooli.svg', alt:'Hooli'},
               {src:'/brand/badge-g2.svg', alt:'G2'},
-              {src:'/brand/badge-capterra.svg', alt:'Capterra'},
-              {src:'/brand/logo-acme.svg', alt:'Acme 2'},
-              {src:'/brand/logo-hooli.svg', alt:'Hooli 2'}
+              {src:'/brand/badge-capterra.svg', alt:'Capterra'}
             ].map((l, i)=> (
               <div key={i} className="h-12 flex items-center justify-center">
                 <Image src={l.src} alt={l.alt} width={140} height={40} className="max-h-10 opacity-80 hover:opacity-100 transition-opacity" />
@@ -241,27 +237,6 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* KPI Marquee */}
-      <section className="py-6 bg-white/80">
-        <div className="overflow-hidden marquee-mask">
-          <div className="marquee-track">
-            {([
-              {src:'/brand/logo-acme.svg', alt:'Acme'},
-              {src:'/brand/logo-hooli.svg', alt:'Hooli'},
-              {src:'/brand/badge-g2.svg', alt:'G2'},
-              {src:'/brand/badge-capterra.svg', alt:'Capterra'},
-              {src:'/brand/logo-acme.svg', alt:'Acme 2'},
-              {src:'/brand/logo-hooli.svg', alt:'Hooli 2'},
-              {src:'/brand/logo-acme.svg', alt:'Acme'},
-              {src:'/brand/logo-hooli.svg', alt:'Hooli'},
-              {src:'/brand/badge-g2.svg', alt:'G2'},
-              {src:'/brand/badge-capterra.svg', alt:'Capterra'}
-            ] as const).map((l, i)=> (
-              <Image key={`${l.alt}-${i}`} src={l.src} alt={l.alt} width={140} height={40} sizes="(max-width: 768px) 120px, 140px" className="opacity-80 hover:opacity-100 transition-opacity" />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Features/Tabbed Tools Section */}
   <section className="py-20 bg-gradient-to-b from-gray-50 via-white to-blue-50/30">
@@ -364,81 +339,6 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Testimonials Section */}
-    <section className="py-20 bg-gray-50">
-        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">PEOPLE LOVE OUR SEO TOOLS</h2>
-            <p className="text-xl text-gray-600">Join thousands of satisfied customers who trust our SEO platform</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-700 mb-6 italic">
-                "This SEO audit tool helped us identify critical issues we never knew existed. Our organic traffic increased by 150% in just 3 months!"
-              </p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <div className="font-semibold text-gray-900">Sarah Johnson</div>
-                  <div className="text-sm text-gray-600">Marketing Director, TechCorp</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-700 mb-6 italic">
-                "The backlink analysis feature is incredible. We discovered high-quality link opportunities that our competitors were missing."
-              </p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <div className="font-semibold text-gray-900">Mike Chen</div>
-                  <div className="text-sm text-gray-600">SEO Specialist, Growth Agency</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-700 mb-6 italic">
-                "Best SEO tool I've used. The AI-powered insights are spot-on and the interface is incredibly user-friendly."
-              </p>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <div className="font-semibold text-gray-900">Emma Rodriguez</div>
-                  <div className="text-sm text-gray-600">Founder, E-commerce Store</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
       {/* FAQ Section */}
       <section className="py-20 bg-white">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -529,57 +429,3 @@ export default function HomePage() {
     </>
   );
 }
-      {/* Enhanced Stats Section */}
-      <section className="relative py-20 bg-gradient-to-br from-white via-blue-50 to-purple-50">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(147,51,234,0.05)_1px,transparent_0)] bg-[length:40px_40px]" />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-12">
-            <div className="space-y-4">
-              <h2 className="text-4xl font-bold text-gray-900">
-                USE the right data
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-              {[
-                { value: "1.50B", label: "Domains" },
-                { value: "8.62B", label: "Keywords" },
-                { value: "529B", label: "Backlinks" },
-                { value: "5.6B", label: "Keywords suggestions" },
-                { value: "230", label: "Countries" },
-                { value: "2.21B", label: "Google SERPs" }
-              ].map((stat, index) => (
-                <div key={index} className="text-center group">
-                  <div className="bg-white/60 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:scale-105">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">{stat.value}</div>
-                    <div className="text-gray-600">{stat.label}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* Enhanced Final CTA Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]" />
-          <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.1)_0%,transparent_50%)]" />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="space-y-8">
-            <h2 className="text-4xl font-bold text-white">
-              Try all paid features during 7 days for free
-            </h2>
-            <div>
-              <a
-                href="https://app.aiseoturbo.com/signup"
-                className="inline-flex items-center px-8 py-4 bg-white text-blue-600 font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-              >
-                Get access with no charges
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>

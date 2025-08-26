@@ -8,14 +8,14 @@ export default function Footer() {
 			<div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm text-gray-600">
 					<div>
-						<div className="flex items-center gap-2 mb-4">
+						<div className="flex items-center gap-2 mb-4 sm:justify-start justify-center">
 							<div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
 								<span className="text-white font-bold">A</span>
 							</div>
 							<span className="text-lg font-semibold text-gray-900">AISEO Turbo</span>
 						</div>
-						<p className="text-gray-500">AI‑powered SEO platform to analyze, monitor, and grow your organic traffic.</p>
-						<div className="flex gap-3 mt-4 opacity-80">
+						<p className="text-gray-500 text-center sm:text-left">AI‑powered SEO platform to analyze, monitor, and grow your organic traffic.</p>
+						<div className="flex gap-3 mt-4 opacity-80 justify-center sm:justify-start">
 							<Image src="/brand/badge-g2.svg" alt="G2" width={64} height={64} />
 							<Image src="/brand/badge-capterra.svg" alt="Capterra" width={96} height={64} />
 						</div>
