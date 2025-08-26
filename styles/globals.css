@@ -89,6 +89,29 @@ html {
   .container-padded {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
+  /* Hero noise overlay */
+  .bg-noise {
+    background-image: url('/brand/noise.svg');
+    background-repeat: repeat;
+    opacity: .35;
+    pointer-events: none;
+  }
+  /* Soft radial backdrop */
+  .bg-soft-radial {
+    background-image: radial-gradient(1200px 600px at 50% -10%, rgba(59,130,246,.18), transparent), radial-gradient(800px 400px at 90% 10%, rgba(124,58,237,.12), transparent), radial-gradient(600px 300px at 10% 20%, rgba(16,185,129,.10), transparent);
+  }
+  /* Marquee */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: flex; align-items: center; gap: 3rem; width: max-content;
+    animation: marquee 20s linear infinite;
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
   /* Button ripple effect */
   .ripple {
     position: relative;
@@ -122,6 +145,17 @@ html {
     animation: gradientShift 6s ease infinite;
     z-index: -1; border-radius: inherit;
   }
+  /* Tiny parallax dots utility (optional) */
+  .parallax-dots {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(59,130,246,0.15) 2px, transparent 3px),
+      radial-gradient(circle at 80% 60%, rgba(147,51,234,0.12) 2px, transparent 3px);
+    background-size: 1200px 800px, 1200px 800px;
+    background-attachment: fixed;
+  }
+  /* Prose tweaks */
+  .prose h2 { @apply text-3xl md:text-4xl font-bold text-gray-900; }
+  .prose p { @apply text-gray-700 leading-relaxed; }
 }
 
 /* Loading spinner */
