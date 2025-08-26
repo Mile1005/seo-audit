@@ -308,6 +308,81 @@ export default function SiteCrawlerPage() {
     );
   }
 
+  // Main form UI (this was missing!)
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <EnhancedHeader />
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="bg-white rounded-2xl shadow-xl p-12"
+          >
+            <div className="mb-8">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">SEO Site Crawler</h1>
+              <p className="text-lg text-gray-600">Analyze your website's structure, SEO, and performance</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
+                  Website URL
+                </label>
+                <input
+                  type="url"
+                  id="url"
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="https://example.com"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                  required
+                />
+                {errors.url && <p className="text-red-500 text-sm mt-1">{errors.url}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                  required
+                />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              </div>
+
+              {crawlError && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <p className="text-red-700">{crawlError}</p>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={isCrawling}
+                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-4 px-8 rounded-lg text-lg transition-colors duration-200"
+              >
+                {isCrawling ? "Starting Crawl..." : "Start SEO Crawl"}
+              </button>
+            </form>
+
+            <div className="mt-8 text-sm text-gray-500">
+              <p>We'll crawl up to 30 pages and analyze SEO factors, performance, and structure.</p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+
   // Fallback: If nothing else rendered, show a message
   return (
     <div style={{ padding: 40, textAlign: 'center', color: '#333' }}>
