@@ -1,7 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { crawlResults } from './start';
+import { generateCrawlCSV } from '../../../lib/crawl';
 
-// Simple CSV generation function
-function generateCrawlCSV(crawlData: any): string {
+// Simple CSV generation function for mock data
+function generateMockCSV(crawlData: any): string {
   const headers = [
     'URL', 'Status', 'Title', 'H1', 'Meta Description', 'Canonical',
     'Noindex', 'Internal Links', 'External Links', 'Load Time (ms)',
@@ -43,8 +45,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Missing crawl ID parameter' });
     }
     
-    // Mock crawl data (same as in get.ts)
-    const crawlData = {
+    // Check if we have real crawl data
+    const crawlData = crawlResults.get(id);
+    
+    if (crawlData && crawlData.status === 'completed' && crawlData.result) {
+      console.log('Exporting real crawl data');
+      
+      if (format === 'json') {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Disposition', `attachment; filename="crawl-${id}.json"`);
+        return res.status(200).send(JSON.stringify(crawlData.result, null, 2));
+      }
+      
+      // Use the real CSV generator from lib/crawl.ts
+      const csvContent = generateCrawlCSV(crawlData.result);
+      res.setHeader('Content-Type', 'text/csv');
+      res.setHeader('Content-Disposition', `attachment; filename="crawl-${id}.csv"`);
+      return res.status(200).send(csvContent);
+    }
+    
+    // Fallback to mock data
+    console.log('Exporting mock crawl data');
+    const mockData = {
       type: 'crawl',
       startUrl: 'https://example.com',
       totalPages: 3,
@@ -101,11 +123,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (format === 'json') {
       res.setHeader('Content-Type', 'application/json');
       res.setHeader('Content-Disposition', `attachment; filename="crawl-${id}.json"`);
-      return res.status(200).send(JSON.stringify(crawlData, null, 2));
+      return res.status(200).send(JSON.stringify(mockData, null, 2));
     }
     
     // Default to CSV
-    const csvContent = generateCrawlCSV(crawlData);
+    const csvContent = generateMockCSV(mockData);
     res.setHeader('Content-Type', 'text/csv');
     res.setHeader('Content-Disposition', `attachment; filename="crawl-${id}.csv"`);
     return res.status(200).send(csvContent);

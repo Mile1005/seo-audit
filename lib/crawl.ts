@@ -68,10 +68,10 @@ export async function miniCrawl(
   const {
     limit = 30, // Enforce hard limit
     sameHostOnly = true,
-    maxDepth = 5,
-    timeout = 10000,
-    userAgent = "SEO-Audit-Crawler/1.0",
-    crawlDelay = 0,
+    maxDepth = 3, // Reduced for better reliability
+    timeout = 15000, // Increased timeout
+    userAgent = "SEO-Audit-Crawler/2.0 (+https://seo-audit-seven.vercel.app)",
+    crawlDelay = 100,
   } = options;
 
   const startTime = Date.now();
@@ -79,27 +79,42 @@ export async function miniCrawl(
   let queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
   const pages: (CrawlPage & { brokenLinks?: string[]; og?: any; twitter?: any; structuredData?: any[] })[] = [];
   const baseHost = new URL(startUrl).hostname;
-  const concurrency = 5; // Number of concurrent fetches
+  const concurrency = 3; // Reduced concurrency for better reliability
   let active = 0;
   let shouldStop = false;
 
-  // robots.txt detection
+  console.log(`Starting crawl for ${startUrl} with options:`, { limit, maxDepth, timeout, concurrency });
+
+  // robots.txt detection with better error handling
   const robotsUrl = new URL("/robots.txt", startUrl).origin + "/robots.txt";
   let robotsStatus = 0;
   let robotsFound = false;
   try {
-    const robotsRes = await fetch(robotsUrl, { method: "GET", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout) });
+    console.log('Checking robots.txt:', robotsUrl);
+    const robotsRes = await fetch(robotsUrl, { 
+      method: "GET", 
+      headers: { "User-Agent": userAgent }, 
+      signal: AbortSignal.timeout(timeout / 2) 
+    });
     robotsStatus = robotsRes.status;
     robotsFound = robotsRes.status === 200;
-  } catch {}
+    console.log('Robots.txt result:', { found: robotsFound, status: robotsStatus });
+  } catch (err) {
+    console.log('Robots.txt check failed:', err instanceof Error ? err.message : 'Unknown error');
+  }
 
-  // sitemap.xml detection and parsing
+  // sitemap.xml detection and parsing with better error handling
   const sitemapUrl = new URL("/sitemap.xml", startUrl).origin + "/sitemap.xml";
   let sitemapStatus = 0;
   let sitemapFound = false;
   let sitemapUrls: string[] = [];
   try {
-    const sitemapRes = await fetch(sitemapUrl, { method: "GET", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout) });
+    console.log('Checking sitemap.xml:', sitemapUrl);
+    const sitemapRes = await fetch(sitemapUrl, { 
+      method: "GET", 
+      headers: { "User-Agent": userAgent }, 
+      signal: AbortSignal.timeout(timeout / 2) 
+    });
     sitemapStatus = sitemapRes.status;
     sitemapFound = sitemapRes.status === 200;
     if (sitemapFound) {
@@ -107,10 +122,15 @@ export async function miniCrawl(
       const parsed = await xml2js.parseStringPromise(xml);
       const urlset = parsed.urlset?.url || [];
       sitemapUrls = urlset.map((u: any) => u.loc?.[0]).filter(Boolean).slice(0, limit);
-      // Prioritize sitemap URLs
-      queue = sitemapUrls.map((url) => ({ url, depth: 0 })).slice(0, limit);
+      // Add sitemap URLs to queue but don't replace the start URL
+      const newUrls = sitemapUrls.filter(url => url !== startUrl);
+      queue.push(...newUrls.slice(0, limit - 1).map(url => ({ url, depth: 0 })));
+      console.log('Sitemap URLs found:', sitemapUrls.length, 'added to queue:', newUrls.length);
     }
-  } catch {}
+    console.log('Sitemap.xml result:', { found: sitemapFound, status: sitemapStatus, urls: sitemapUrls.length });
+  } catch (err) {
+    console.log('Sitemap.xml check failed:', err instanceof Error ? err.message : 'Unknown error');
+  }
 
   const brokenLinks: { url: string; from: string }[] = [];
   const titleMap: Record<string, string[]> = {};
@@ -118,41 +138,70 @@ export async function miniCrawl(
 
   async function crawlWorker() {
     while (true) {
-      if (shouldStop) return;
+      if (shouldStop || pages.length >= limit) {
+        console.log('Worker stopping: shouldStop=', shouldStop, 'pages.length=', pages.length, 'limit=', limit);
+        return;
+      }
+      
       let item: { url: string; depth: number } | undefined;
       // Lock queue
       if (queue.length > 0 && pages.length < limit) {
         item = queue.shift();
       } else {
+        console.log('Worker stopping: no more work. Queue length:', queue.length, 'Pages:', pages.length);
         break;
       }
+      
       if (!item) break;
       const { url, depth } = item;
-      if (visited.has(url) || depth > maxDepth) continue;
+      
+      if (visited.has(url) || depth > maxDepth) {
+        console.log(`Skipping ${url}: visited=${visited.has(url)}, depth=${depth}>${maxDepth}`);
+        continue;
+      }
+      
       visited.add(url);
+      
       try {
         const page = await crawlPage(url, depth, timeout, userAgent, true);
+        
         if (crawlDelay > 0) {
           await new Promise((resolve) => setTimeout(resolve, crawlDelay));
         }
-        // Broken link detection
-        const $ = cheerio.load(page.html || "");
-        const links = $("a[href]").map((_, el) => $(el).attr("href")).get().filter(Boolean);
-        const pageBroken: string[] = [];
-        for (const link of links) {
+        
+        // Simplified broken link detection (only for successful pages)
+        let pageBroken: string[] = [];
+        if (page.status === 200 && page.html && depth < maxDepth - 1) {
           try {
-            const abs = new URL(link, url).href;
-            if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
-            if (!visited.has(abs)) {
-              const res = await fetch(abs, { method: "HEAD", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout / 2) });
-              if (res.status >= 400) {
-                brokenLinks.push({ url: abs, from: url });
-                pageBroken.push(abs);
+            const $ = cheerio.load(page.html);
+            const links = $("a[href]").map((_, el) => $(el).attr("href")).get().filter(Boolean).slice(0, 10); // Limit link checking
+            
+            for (const link of links) {
+              try {
+                const abs = new URL(link, url).href;
+                if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
+                if (!visited.has(abs)) {
+                  // Quick HEAD request to check if link is broken
+                  const res = await fetch(abs, { 
+                    method: "HEAD", 
+                    headers: { "User-Agent": userAgent }, 
+                    signal: AbortSignal.timeout(timeout / 4) 
+                  });
+                  if (res.status >= 400) {
+                    brokenLinks.push({ url: abs, from: url });
+                    pageBroken.push(abs);
+                  }
+                }
+              } catch {
+                // Skip broken link check on error
               }
             }
-          } catch {}
+          } catch (err) {
+            console.log('Error during broken link check for', url, ':', err);
+          }
         }
-        // Track titles/canonicals
+        
+        // Track titles/canonicals for duplicate detection
         if (page.title) {
           if (!titleMap[page.title]) titleMap[page.title] = [];
           titleMap[page.title].push(url);
@@ -161,38 +210,65 @@ export async function miniCrawl(
           if (!canonicalMap[page.canonical]) canonicalMap[page.canonical] = [];
           canonicalMap[page.canonical].push(url);
         }
-        // Extract Open Graph, Twitter, and structured data
+        
+        // Extract Open Graph, Twitter, and structured data (simplified)
         const og: any = {};
         const twitter: any = {};
         const structuredData: any[] = [];
-        $("meta").each((_, el) => {
-          const prop = $(el).attr("property") || $(el).attr("name");
-          const content = $(el).attr("content");
-          if (prop && content) {
-            if (prop.startsWith("og:")) og[prop] = content;
-            if (prop.startsWith("twitter:")) twitter[prop] = content;
-          }
-        });
-        $("script[type='application/ld+json']").each((_, el) => {
+        
+        if (page.html && page.status === 200) {
           try {
-            const json = JSON.parse($(el).html() || "");
-            structuredData.push(json);
-          } catch {}
-        });
-        pages.push({ ...page, brokenLinks: pageBroken, og, twitter, structuredData });
-        // Extract links for next level if not at max depth
-        if (depth < maxDepth && page.status === 200) {
-          const nextLinks = await extractLinks(url, page.html || "");
-          for (const link of nextLinks) {
-            const abs = new URL(link, url).href;
-            if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
-            if (!visited.has(abs) && !queue.some((q) => q.url === abs)) {
-              queue.push({ url: abs, depth: depth + 1 });
-            }
+            const $ = cheerio.load(page.html);
+            $("meta").each((_, el) => {
+              const prop = $(el).attr("property") || $(el).attr("name");
+              const content = $(el).attr("content");
+              if (prop && content) {
+                if (prop.startsWith("og:")) og[prop] = content;
+                if (prop.startsWith("twitter:")) twitter[prop] = content;
+              }
+            });
+            $("script[type='application/ld+json']").each((_, el) => {
+              try {
+                const json = JSON.parse($(el).html() || "");
+                structuredData.push(json);
+              } catch {}
+            });
+          } catch (err) {
+            console.log('Error extracting metadata for', url, ':', err);
           }
         }
+        
+        pages.push({ ...page, brokenLinks: pageBroken, og, twitter, structuredData });
+        
+        // Extract links for next level if not at max depth and page was successful
+        if (depth < maxDepth && page.status === 200 && page.html && pages.length < limit) {
+          try {
+            const nextLinks = await extractLinks(url, page.html);
+            let addedLinks = 0;
+            for (const link of nextLinks) {
+              if (addedLinks >= 5) break; // Limit new links per page
+              try {
+                const abs = new URL(link, url).href;
+                if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
+                if (!visited.has(abs) && !queue.some((q) => q.url === abs)) {
+                  queue.push({ url: abs, depth: depth + 1 });
+                  addedLinks++;
+                }
+              } catch {
+                // Skip invalid URLs
+              }
+            }
+            console.log(`Added ${addedLinks} new links from ${url} to queue (queue size: ${queue.length})`);
+          } catch (err) {
+            console.log('Error extracting links from', url, ':', err);
+          }
+        }
+        
+        // Small delay between requests to be respectful
         await new Promise((resolve) => setTimeout(resolve, 100));
+        
       } catch (error) {
+        console.log('Error crawling page', url, ':', error);
         pages.push({
           url,
           depth,
@@ -219,6 +295,7 @@ export async function miniCrawl(
         });
       }
     }
+    console.log('Worker finished');
   }
 
   // Launch concurrent workers
@@ -269,14 +346,17 @@ async function crawlPage(
   depth: number,
   timeout: number,
   userAgent: string,
-  followRedirects = false
+  followRedirects = true
 ): Promise<CrawlPage & { html?: string }> {
   const startTime = Date.now();
 
   let response;
   let redirected = false;
   let finalUrl = url;
+  
   try {
+    console.log(`Crawling page: ${url} (depth: ${depth})`);
+    
     response = await fetch(url, {
       headers: {
         "User-Agent": userAgent,
@@ -285,15 +365,51 @@ async function crawlPage(
         "Accept-Encoding": "gzip, deflate",
         Connection: "keep-alive",
         "Upgrade-Insecure-Requests": "1",
+        "Cache-Control": "no-cache",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none"
       },
       signal: AbortSignal.timeout(timeout),
       redirect: followRedirects ? "follow" : "manual",
     });
+    
     if (response.url && response.url !== url) {
       redirected = true;
       finalUrl = response.url;
+      console.log(`Redirected: ${url} -> ${finalUrl}`);
     }
+    
+    // Check for successful response
+    if (!response.ok) {
+      console.log(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
+      return {
+        url: finalUrl,
+        depth,
+        status: response.status,
+        title: null,
+        h1_presence: false,
+        word_count: 0,
+        images_missing_alt: 0,
+        noindex: false,
+        canonical: null,
+        meta_description: null,
+        h1_count: 0,
+        h2_count: 0,
+        h3_count: 0,
+        internal_links: 0,
+        external_links: 0,
+        images_total: 0,
+        load_time_ms: Date.now() - startTime,
+        error: `HTTP ${response.status}: ${response.statusText}`,
+        html: "",
+      };
+    }
+    
   } catch (err) {
+    const loadTime = Date.now() - startTime;
+    console.log(`Error fetching ${url}:`, err instanceof Error ? err.message : 'Unknown error');
+    
     return {
       url,
       depth,
@@ -311,19 +427,48 @@ async function crawlPage(
       internal_links: 0,
       external_links: 0,
       images_total: 0,
-      load_time_ms: 0,
+      load_time_ms: loadTime,
       error: err instanceof Error ? err.message : "Unknown error",
       html: "",
     };
   }
 
   const loadTime = Date.now() - startTime;
-  const html = await response.text();
+  
+  let html = "";
+  try {
+    html = await response.text();
+  } catch (err) {
+    console.log(`Error reading response body for ${url}:`, err);
+    return {
+      url: finalUrl,
+      depth,
+      status: response.status,
+      title: null,
+      h1_presence: false,
+      word_count: 0,
+      images_missing_alt: 0,
+      noindex: false,
+      canonical: null,
+      meta_description: null,
+      h1_count: 0,
+      h2_count: 0,
+      h3_count: 0,
+      internal_links: 0,
+      external_links: 0,
+      images_total: 0,
+      load_time_ms: loadTime,
+      error: "Failed to read response body",
+      html: "",
+    };
+  }
+
   const $ = cheerio.load(html);
 
-  // Extract basic SEO data
+  // Extract basic SEO data with better error handling
   const title = $("title").text().trim() || null;
-  const h1Count = $("h1").length;
+  const h1Elements = $("h1");
+  const h1Count = h1Elements.length;
   const h1Presence = h1Count > 0;
   const h2Count = $("h2").length;
   const h3Count = $("h3").length;
@@ -334,30 +479,51 @@ async function crawlPage(
   const robots = $('meta[name="robots"]').attr("content") || "";
   const noindex = robots.toLowerCase().includes("noindex");
 
-  // Images
+  // Images with better counting
   const images = $("img");
   const imagesTotal = images.length;
-  const imagesMissingAlt = images.filter((_, img) => !$(img).attr("alt")).length;
-
-  // Links
-  const links = $("a[href]");
-  const internalLinks = links.filter((_, link) => {
-    const href = $(link).attr("href");
-    if (!href) return false;
-    try {
-      const linkUrl = new URL(href, url);
-      const pageUrl = new URL(url);
-      return linkUrl.hostname === pageUrl.hostname;
-    } catch {
-      return false;
+  let imagesMissingAlt = 0;
+  images.each((_, img) => {
+    const alt = $(img).attr("alt");
+    if (!alt || alt.trim() === "") {
+      imagesMissingAlt++;
     }
-  }).length;
+  });
 
-  const externalLinks = links.length - internalLinks;
+  // Links with better counting and validation
+  const links = $("a[href]");
+  let internalLinks = 0;
+  let externalLinks = 0;
+  
+  links.each((_, link) => {
+    const href = $(link).attr("href");
+    if (!href || href.trim() === "") return;
+    
+    try {
+      // Handle relative URLs and fragments
+      if (href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+        return; // Skip anchors and special schemes
+      }
+      
+      const linkUrl = new URL(href, finalUrl);
+      const pageUrl = new URL(finalUrl);
+      
+      if (linkUrl.hostname === pageUrl.hostname) {
+        internalLinks++;
+      } else {
+        externalLinks++;
+      }
+    } catch {
+      // Skip invalid URLs
+    }
+  });
 
-  // Word count (approximate)
+  // Word count (approximate, excluding script and style content)
+  $("script, style, nav, header, footer").remove();
   const text = $("body").text().replace(/\s+/g, " ").trim();
-  const wordCount = text.split(" ").filter((word) => word.length > 0).length;
+  const wordCount = text ? text.split(" ").filter((word) => word.length > 0).length : 0;
+
+  console.log(`Crawled ${finalUrl}: ${response.status}, title: "${title}", h1: ${h1Count}, words: ${wordCount}, images: ${imagesTotal}/${imagesMissingAlt} missing alt`);
 
   return {
     url: finalUrl,

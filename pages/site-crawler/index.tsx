@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 // import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import EnhancedHeader from "../../components/layout/EnhancedHeader";
@@ -26,6 +26,16 @@ export default function SiteCrawlerPage() {
   const [showDetails, setShowDetails] = useState(false);
   const [selectedPage, setSelectedPage] = useState<any>(null);
   const pollingRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup polling on component unmount
+  useEffect(() => {
+    return () => {
+      if (pollingRef.current) {
+        clearTimeout(pollingRef.current);
+        pollingRef.current = null;
+      }
+    };
+  }, []);
 
   const validateForm = () => {
     const newErrors: { url?: string; email?: string } = {};
@@ -79,20 +89,39 @@ export default function SiteCrawlerPage() {
       const response = await fetch(`/api/crawl/get?id=${id}`);
       const data = await response.json();
       setCrawlStatus(data.status);
-      if (response.ok && data.status === "ready" && data.result) {
-        setCrawlResult(data.result);
+      
+      if (response.ok) {
+        if (data.status === "completed" && data.result) {
+          setCrawlResult(data.result);
+          setIsCrawling(false);
+          setCrawlStatus("completed");
+          setCrawlId(id);
+          if (pollingRef.current) {
+            clearTimeout(pollingRef.current);
+            pollingRef.current = null;
+          }
+        } else if (data.status === "failed") {
+          setCrawlError(data.error || "Crawl failed");
+          setIsCrawling(false);
+          if (pollingRef.current) {
+            clearTimeout(pollingRef.current);
+            pollingRef.current = null;
+          }
+        } else if (data.status === "processing") {
+          // Continue polling for processing status
+          pollingRef.current = setTimeout(() => pollCrawlStatus(id), 3000);
+        }
+      } else {
+        setCrawlError("Failed to get crawl status");
         setIsCrawling(false);
-        setCrawlStatus("ready");
-        setCrawlId(id);
-      } else if (data.status === "failed") {
-        setCrawlError("Crawl failed.");
-        setIsCrawling(false);
-      } else if (data.status === "queued" || data.status === "running") {
-        pollingRef.current = setTimeout(() => pollCrawlStatus(id), 2000);
       }
-    } catch {
-      setCrawlError("Failed to get crawl status.");
+    } catch (error) {
+      setCrawlError("Network error while checking crawl status");
       setIsCrawling(false);
+      if (pollingRef.current) {
+        clearTimeout(pollingRef.current);
+        pollingRef.current = null;
+      }
     }
   };
 
@@ -112,7 +141,7 @@ export default function SiteCrawlerPage() {
     setSelectedPage(null);
   };
 
-  if (isCrawling || crawlStatus === "queued" || crawlStatus === "running") {
+  if (isCrawling || crawlStatus === "processing") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
         <EnhancedHeader />
