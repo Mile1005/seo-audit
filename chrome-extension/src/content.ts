@@ -1,3 +1,4 @@
+/// <reference types="chrome" />
 // Interfaces
 export interface LinkAnalysis {
   href: string;

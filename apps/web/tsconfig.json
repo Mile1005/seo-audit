@@ -1,0 +1,63 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@repo/shared": [
+        "../../packages/shared/src"
+      ],
+      "@repo/shared/*": [
+        "../../packages/shared/src/*"
+      ],
+      "@repo/prisma": [
+        "../../packages/prisma"
+      ],
+      "@repo/prisma/*": [
+        "../../packages/prisma/*"
+      ],
+      "@/auth": [
+        "src/auth.ts"
+      ],
+      "@/lib/prisma": [
+        "../../packages/prisma/src/client.ts"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/lib/*": [
+        "lib/*"
+      ],
+      "@/app/*": [
+        "app/*"
+      ],
+      "@/src/*": [
+        "src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

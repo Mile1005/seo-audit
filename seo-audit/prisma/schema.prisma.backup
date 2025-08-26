@@ -1,0 +1,43 @@
+// Datasource for PostgreSQL (Vercel Postgres)
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Prisma generator
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Run {
+  id            String   @id @default(uuid())
+  pageUrl       String
+  targetKeyword String?
+  email         String?
+  status        RunStatus @default(queued)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  audits        Audit[]
+}
+
+model Audit {
+  id        String   @id @default(uuid())
+  run       Run      @relation(fields: [runId], references: [id])
+  runId     String
+  json      Json     // JSON of AuditResultV1
+  createdAt DateTime @default(now())
+}
+
+model GscToken {
+  id        String   @id @default(uuid())
+  state     String   @unique
+  tokens    Json
+  createdAt DateTime @default(now())
+}
+
+enum RunStatus {
+  queued
+  running
+  ready
+  failed
+}

@@ -1,3 +1,4 @@
+/// <reference types="chrome" />
 import React, { useEffect, useState } from 'react';
 
 type Checks = {

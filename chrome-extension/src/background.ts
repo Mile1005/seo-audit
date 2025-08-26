@@ -1,3 +1,4 @@
+/// <reference types="chrome" />
 chrome.runtime.onInstalled.addListener(() => {
   // Optional: setup or log install
 });
