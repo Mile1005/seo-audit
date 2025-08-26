@@ -55,6 +55,7 @@ export interface CrawlOptions {
   maxDepth?: number;
   timeout?: number;
   userAgent?: string;
+  crawlDelay?: number;
 }
 
 /**

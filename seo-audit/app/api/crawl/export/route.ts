@@ -28,12 +28,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Crawl result not found" }, { status: 404 });
     }
 
+    const format = searchParams.get("format") || "csv";
     try {
       const crawlData = audit.json;
-
+      if (format === "json") {
+        return new NextResponse(JSON.stringify(crawlData), {
+          status: 200,
+          headers: {
+            "Content-Type": "application/json",
+            "Content-Disposition": `attachment; filename="crawl-${id}.json"`,
+            "Cache-Control": "no-cache",
+          },
+        });
+      }
       // Generate CSV
       const csvContent = generateCrawlCSV(crawlData);
-
       // Return CSV file
       return new NextResponse(csvContent, {
         status: 200,
@@ -44,8 +53,8 @@ export async function GET(request: NextRequest) {
         },
       });
     } catch (error) {
-      console.error("Error generating CSV:", error);
-      return NextResponse.json({ error: "Failed to generate CSV export" }, { status: 500 });
+      console.error("Error generating export:", error);
+      return NextResponse.json({ error: "Failed to generate export" }, { status: 500 });
     }
   } catch (error) {
     console.error("Export crawl error:", error);
