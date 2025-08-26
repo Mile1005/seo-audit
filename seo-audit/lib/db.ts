@@ -1,16 +1,16 @@
 // Lazy-load Prisma only when needed so deployments without DB don't require it
-type PrismaClientType = any;
-let prismaInstance: PrismaClientType | undefined;
+import { PrismaClient, type Run, type Audit, type Prisma } from '@prisma/client';
+let prismaInstance: PrismaClient | undefined;
 
-export async function getPrisma(): Promise<PrismaClientType> {
+export async function getPrisma(): Promise<PrismaClient> {
   if (!prismaInstance) {
     const prismaModule = await import("@prisma/client");
-    const PrismaClient = (prismaModule as any).PrismaClient || (prismaModule as any).default?.PrismaClient;
-    const globalForPrisma = global as unknown as { prisma?: PrismaClientType };
+    const PrismaClient = (prismaModule as { PrismaClient: typeof import('@prisma/client').PrismaClient }).PrismaClient || (prismaModule as { default?: { PrismaClient: typeof import('@prisma/client').PrismaClient } }).default?.PrismaClient;
+    const globalForPrisma = global as typeof global & { prisma?: PrismaClient };
     prismaInstance = globalForPrisma.prisma ?? new PrismaClient();
     if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prismaInstance;
   }
-  return prismaInstance as PrismaClientType;
+  return prismaInstance as PrismaClient;
 }
 
 export const dbHelpers = {
@@ -20,7 +20,7 @@ export const dbHelpers = {
     targetKeyword?: string;
     email?: string;
     status?: string;
-  }) {
+  }): Promise<Run | null> {
     const prisma = await getPrisma();
     await prisma.run.create({
       data: {
@@ -34,28 +34,28 @@ export const dbHelpers = {
     return prisma.run.findUnique({ where: { id: data.id } });
   },
 
-  async updateRunStatus(runId: string, status: string) {
+  async updateRunStatus(runId: string, status: string): Promise<Run> {
     const prisma = await getPrisma();
     return prisma.run.update({ where: { id: runId }, data: { status: status as any } });
   },
 
-  async getRun(runId: string) {
+  async getRun(runId: string): Promise<Run | null> {
     const prisma = await getPrisma();
     return prisma.run.findUnique({ where: { id: runId } });
   },
 
-  async getRunWithAudit(runId: string) {
+  async getRunWithAudit(runId: string): Promise<(Omit<Run, 'audits'> & { audits: Audit[]; audit: Audit | null }) | null> {
     const prisma = await getPrisma();
     const run = await prisma.run.findUnique({
       where: { id: runId },
       include: { audits: { orderBy: { createdAt: "desc" }, take: 1 } },
     });
-    if (!run) return null as any;
-    const audit = run.audits[0] || null;
+    if (!run) return null;
+    const audit: Audit | null = run.audits && run.audits.length > 0 ? run.audits[0] : null;
     return {
       ...run,
-      audit: audit,
-    } as any;
+      audit,
+    };
   },
 
   async getRunsByEmail(email: string, limit: number = 10, offset: number = 0) {
@@ -70,12 +70,12 @@ export const dbHelpers = {
       prisma.run.count({ where: { email } }),
     ]);
 
-    const runIds = runs.map((r: any) => r.id);
+  const runIds = runs.map((r) => r.id);
     const audits = await prisma.audit.findMany({
       where: { runId: { in: runIds } },
       select: { runId: true },
     });
-    const runIdHasAudit = new Set(audits.map((a: any) => a.runId));
+  const runIdHasAudit = new Set(audits.map((a) => a.runId));
 
     return {
       runs: runs.map((run: any) => ({
