@@ -9,6 +9,11 @@ import Footer from "../../components/layout/Footer";
 export const dynamic = 'force-dynamic';
 
 export default function SiteCrawlerPage() {
+  // DEBUG: Always render something to avoid blank page
+  if (typeof window !== "undefined") {
+    // eslint-disable-next-line no-console
+    console.log("SiteCrawlerPage loaded");
+  }
   // const router = useRouter();
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
@@ -302,4 +307,13 @@ export default function SiteCrawlerPage() {
       </div>
     );
   }
+
+  // Fallback: If nothing else rendered, show a message
+  return (
+    <div style={{ padding: 40, textAlign: 'center', color: '#333' }}>
+      <h1>SEO Site Crawler</h1>
+      <p>If you see this message, the main UI did not render. Please check your API endpoints and environment variables.</p>
+      <p>Try opening <code>/api/crawl/start</code> and <code>/api/crawl/get</code> directly in your browser to check for errors.</p>
+    </div>
+  );
 }
