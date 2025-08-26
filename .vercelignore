@@ -1,0 +1,7 @@
+apps-backup/
+packages-backup/
+chrome-extension/
+worker/
+*.log
+node_modules/
+.git/
