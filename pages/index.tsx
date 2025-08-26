@@ -1,13 +1,65 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 import EnhancedHeader from '../components/layout/EnhancedHeader';
 import Footer from '../components/layout/Footer';
+import nextDynamic from 'next/dynamic';
+import Image from 'next/image';
+import StickyAuditBar from '../components/StickyAuditBar';
+const Lottie = nextDynamic(() => import('lottie-react').then(m => m.default), { ssr: false });
+import heroAnim from '../lib/animations/hero.json';
 
 export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState(0);
+  const [homeUrl, setHomeUrl] = useState('');
+  const [homeError, setHomeError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const ensureHttps = (url: string) => {
+    if (!url) return url;
+    const trimmed = url.trim();
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    return `https://${trimmed}`;
+  };
+
+  const isValidDomainOrUrl = (value: string) => {
+  const v = value.trim();
+  // Accept either full URL or bare domain (handles IDN punycode too)
+  const urlRegex = /^(https?:\/\/)?((xn--)?[\w-]+\.)+[\w-]{2,}(\/[\w\-.\/?%&=]*)?$/i;
+  // Disallow spaces and invalid characters
+  if (!urlRegex.test(v)) return false;
+  // Guard against schemes like javascript:
+  if (/^\w+:/.test(v) && !/^https?:/i.test(v)) return false;
+  return true;
+  };
+
+  const handleHomeAudit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValidDomainOrUrl(homeUrl)) {
+      setHomeError('Enter a valid domain or URL (example.com or https://example.com)');
+      return;
+    }
+    setHomeError(null);
+    setSubmitting(true);
+    try {
+      const response = await fetch('/api/seo-audit/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: ensureHttps(homeUrl) })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error || 'Failed to start audit');
+      const auditId = data.auditId || data.id;
+      router.push(`/seo-audit/results?id=${auditId}`);
+    } catch (err) {
+      setHomeError('Failed to start audit. Please try again.');
+      setSubmitting(false);
+    }
+  };
   const tabs = [
     {
       id: 0,
@@ -79,10 +131,10 @@ export default function HomePage() {
     <>
   <EnhancedHeader />
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="space-y-8">
+          <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="space-y-8">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 leading-tight">
               Speed up{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -93,21 +145,28 @@ export default function HomePage() {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Start your analysis for free
             </p>
-            <div className="flex items-center justify-center max-w-2xl mx-auto">
-              <div className="relative w-full">
-                <input 
-                  type="text" 
-                  placeholder="Enter domain, keyword or URL here" 
-                  className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-full focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all shadow-lg"
-                />
-                <Link 
-                  href="/seo-audit"
-                  className="absolute right-2 top-2 px-8 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  Search
-                </Link>
-              </div>
+            <div className="mx-auto max-w-md">
+              <Lottie animationData={heroAnim} loop className="w-full h-40" />
             </div>
+            <form onSubmit={handleHomeAudit} className="flex items-center justify-center max-w-2xl mx-auto">
+              <div className="relative w-full">
+                <input
+                  type="text"
+                  value={homeUrl}
+                  onChange={(e)=>setHomeUrl(e.target.value)}
+                  placeholder="Enter domain or URL (example.com)"
+                  className={`w-full px-6 py-4 text-lg border-2 rounded-full focus:outline-none focus:ring-4 transition-all shadow-lg ${homeError ? 'border-red-400 focus:ring-red-100' : 'border-gray-200 focus:border-blue-500 focus:ring-blue-100'}`}
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="absolute right-2 top-2 px-8 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed ripple"
+                >
+                  {submitting ? 'Analyzing…' : 'Start audit'}
+                </button>
+              </div>
+            </form>
+            {homeError && <div className="text-red-600 text-sm -mt-4">{homeError}</div>}
             <div className="flex items-center justify-center gap-8 text-sm text-gray-500">
               <div className="flex items-center gap-2">
                 <div className="flex">
@@ -124,13 +183,44 @@ export default function HomePage() {
                 <div className="w-8 h-8 bg-gray-200 rounded flex items-center justify-center font-bold text-gray-600">C</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
+      </section>
+
+      {/* Trust badges + logos */}
+  <section className="py-10">
+        <motion.div initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="flex items-center gap-4 justify-center">
+              {["No credit card", "Free trial", "GDPR-ready"].map((b)=> (
+                <div key={b} className="inline-flex items-center gap-2 text-gray-600 text-sm bg-white border border-gray-200 rounded-full px-4 py-2 shadow-sm">
+                  <span className="inline-block w-2 h-2 rounded-full bg-green-500"/>
+                  {b}
+                </div>
+              ))}
+            </div>
+            <div className="text-center md:text-right text-gray-500 text-sm">Trusted by teams at</div>
+          </div>
+          <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center opacity-90">
+            {[
+              {src:'/brand/logo-acme.svg', alt:'Acme'},
+              {src:'/brand/logo-hooli.svg', alt:'Hooli'},
+              {src:'/brand/badge-g2.svg', alt:'G2'},
+              {src:'/brand/badge-capterra.svg', alt:'Capterra'},
+              {src:'/brand/logo-acme.svg', alt:'Acme 2'},
+              {src:'/brand/logo-hooli.svg', alt:'Hooli 2'}
+            ].map((l, i)=> (
+              <div key={i} className="h-12 flex items-center justify-center">
+                <Image src={l.src} alt={l.alt} width={140} height={40} className="max-h-10 opacity-80 hover:opacity-100 transition-opacity" />
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* Features/Tabbed Tools Section */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">MARKETING TOOLS TO SPEED UP SEO TASKS</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -140,7 +230,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               {tabs.map((tab) => (
-                <div key={tab.id} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                <div key={tab.id} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 tilt shimmer-border">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0">
                       {tab.icon}
@@ -169,7 +259,7 @@ export default function HomePage() {
             </div>
             {/* Illustration */}
             <div className="lg:pl-12">
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-12 text-white relative overflow-hidden">
+              <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-12 text-white relative overflow-hidden shimmer-border">
                 <div className="relative z-10">
                   <h3 className="text-3xl font-bold mb-6">Get Comprehensive SEO Insights</h3>
                   <p className="text-xl mb-8 text-blue-100">
@@ -201,12 +291,12 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Stats Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">USE THE RIGHT DATA</h2>
             <p className="text-xl text-gray-600">Powered by comprehensive SEO databases and real-time analysis</p>
@@ -237,12 +327,12 @@ export default function HomePage() {
               <div className="text-gray-600 font-medium">Google SERPs</div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Testimonials Section */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">PEOPLE LOVE OUR SEO TOOLS</h2>
             <p className="text-xl text-gray-600">Join thousands of satisfied customers who trust our SEO platform</p>
@@ -312,12 +402,12 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
             <p className="text-xl text-gray-600">Everything you need to know about our SEO audit tools</p>
@@ -360,7 +450,7 @@ export default function HomePage() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Final CTA Section */}
@@ -394,13 +484,13 @@ export default function HomePage() {
           >
             <Link
               href="/seo-audit"
-              className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+              className="px-8 py-4 bg-white text-blue-600 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block ripple"
             >
               Start Free SEO Audit
             </Link>
             <Link
               href="/site-crawler"
-              className="px-8 py-4 bg-transparent text-white border-2 border-white rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block"
+              className="px-8 py-4 bg-transparent text-white border-2 border-white rounded-xl font-semibold text-lg hover:bg-white hover:text-blue-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 inline-block ripple"
             >
               Explore All Tools
             </Link>
@@ -410,7 +500,8 @@ export default function HomePage() {
           </p>
         </div>
       </section>
-      <Footer />
+  <StickyAuditBar />
+  <Footer />
     </>
   );
 }

@@ -2,13 +2,15 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface DropdownItem {
 	label: string;
 	href: string;
 	description?: string;
-	icon?: string;
+	// simple inline icon SVG path (Heroicons outline paths)
+	iconPath?: string;
 }
 
 interface DropdownMenu {
@@ -20,11 +22,11 @@ const navigationMenus: DropdownMenu[] = [
 	{
 		label: 'Tools',
 		items: [
-			{ label: 'SEO Audit', href: '/seo-audit', description: 'Comprehensive website analysis' },
-			{ label: 'Site Crawler', href: '/site-crawler', description: 'Deep website crawling' },
-			{ label: 'Backlinks', href: '/backlinks', description: 'Backlink analysis & monitoring' },
-			{ label: 'Rank Tracker', href: '/rank-tracker', description: 'Keyword ranking tracking' },
-			{ label: 'Competitor Analysis', href: '/competitor-analysis', description: 'Competitor insights' }
+			{ label: 'SEO Audit', href: '/seo-audit', description: 'Comprehensive website analysis', iconPath: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+			{ label: 'Site Crawler', href: '/site-crawler', description: 'Deep website crawling', iconPath: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+			{ label: 'Backlinks', href: '/backlinks', description: 'Backlink analysis & monitoring', iconPath: 'M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1' },
+			{ label: 'Rank Tracker', href: '/rank-tracker', description: 'Keyword ranking tracking', iconPath: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6' },
+			{ label: 'Competitor Analysis', href: '/competitor-analysis', description: 'Competitor insights', iconPath: 'M3 7h18M3 12h18M3 17h18' }
 		]
 	},
 	{
@@ -92,24 +94,51 @@ const Dropdown: React.FC<DropdownProps> = ({ menu, isOpen, onClose }) => {
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -10 }}
 					transition={{ duration: 0.2 }}
-					className="absolute top-full left-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 py-4 z-50"
+					className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[720px] bg-white rounded-2xl shadow-2xl border border-gray-100 py-6 z-50"
 				>
-					<div className="px-4 py-2">
-						<h3 className="text-sm font-semibold text-gray-900 mb-3">{menu.label}</h3>
-						<div className="space-y-1">
-							{menu.items.map((item, index) => (
-								<Link
-									key={index}
-									href={item.href}
-									onClick={onClose}
-									className="block px-3 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-								>
-									<div className="font-medium">{item.label}</div>
-									{item.description && (
-										<div className="text-xs text-gray-500 mt-1">{item.description}</div>
-									)}
-								</Link>
-							))}
+					<div className="px-6">
+						<div className="grid grid-cols-3 gap-6">
+							<div className="col-span-2">
+								<h3 className="text-xs font-semibold text-gray-400 tracking-wider mb-3">{menu.label}</h3>
+								<div className="grid grid-cols-2 gap-2">
+									{menu.items.map((item, index) => (
+										<Link
+											key={index}
+											href={item.href}
+											onClick={onClose}
+											className="group flex items-start space-x-3 rounded-xl p-3 hover:bg-blue-50 transition-colors"
+										>
+											<div className="mt-0.5 w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm">
+												<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={item.iconPath || 'M4 6h16M4 12h16M4 18h16'} />
+												</svg>
+											</div>
+											<div>
+												<div className="font-semibold text-gray-900 group-hover:text-blue-700">{item.label}</div>
+												{item.description && <div className="text-xs text-gray-500 mt-0.5">{item.description}</div>}
+											</div>
+										</Link>
+									))}
+								</div>
+							</div>
+							<div className="col-span-1">
+								<div className="h-full rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 p-4 text-white flex flex-col justify-between shadow-lg overflow-hidden">
+									<div>
+										<div className="text-sm uppercase tracking-wider text-blue-100 mb-1">New</div>
+										<div className="font-semibold">AI SEO Audit</div>
+										<p className="text-xs text-blue-100 mt-2">Run a free audit and get prioritized issues and fixes.</p>
+									</div>
+									<div className="relative mt-3 mb-2 rounded-lg overflow-hidden">
+										<Image src="/brand/menu-illustration.svg" alt="SEO illustration" width={320} height={200} className="w-full h-24 object-cover opacity-90"/>
+									</div>
+									<Link href="/seo-audit" onClick={onClose} className="mt-3 inline-flex items-center text-sm font-medium bg-white text-blue-700 rounded-lg px-3 py-2 hover:bg-gray-50">
+										Start free audit
+										<svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+										</svg>
+									</Link>
+								</div>
+							</div>
 						</div>
 					</div>
 				</motion.div>
