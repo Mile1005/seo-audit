@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { crawlResults } from './start';
+import { getCrawlRecord } from '../../../lib/crawl-store';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Missing crawl ID parameter' });
     }
 
-    const data = crawlResults.get(id);
+  const data = await getCrawlRecord(id);
     if (!data) {
       // Not found yet: still processing/queued
       return res.status(202).json({ status: 'processing' });
@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // completed
-    const result = data.result!;
+  const result = data.result!;
     const transformed = {
       type: 'crawl',
       startUrl: result.startUrl,

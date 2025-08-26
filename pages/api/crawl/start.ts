@@ -1,8 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { miniCrawl, CrawlResult } from '../../../lib/crawl';
-
-// Global store for crawl results
-const crawlResults = new Map<string, { status: 'processing' | 'completed' | 'failed', result?: CrawlResult, error?: string }>();
+import { saveCrawlRecord } from '../../../lib/crawl-store';
 
 // Validate URL format
 function isValidUrl(url: string): boolean {
@@ -46,8 +44,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(400).json({ error: 'Invalid URL format' });
   }
 
+  // Decide effective mode: if Redis not configured, prefer sync to avoid serverless isolation
+  const hasRedis = Boolean(process.env.REDIS_URL || process.env.REDIS_REDIS_URL || process.env.REDIS_KV_URL);
+  const effectiveMode = (mode === 'auto' && !hasRedis) ? 'sync' : mode;
+
   // If mode is sync, try to finish within 15s budget
-  if (mode === 'sync') {
+  if (effectiveMode === 'sync') {
     const deadline = Date.now() + 15000; // 15s
     try {
       const result = await miniCrawl(startUrl, {
@@ -104,15 +106,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   console.log('Starting crawl for:', startUrl);
   
   // Store crawl as processing
-  crawlResults.set(crawlId, { status: 'processing' });
+  await saveCrawlRecord(crawlId, { status: 'processing' });
   
-  // Start crawling asynchronously with timeout
+  // If Redis is present, trigger a separate invocation to process the crawl
+  if (hasRedis && effectiveMode !== 'sync') {
+    try {
+      const proto = (req.headers['x-forwarded-proto'] as string) || 'https';
+      const host = req.headers.host || '';
+      const base = `${proto}://${host}`;
+      // Don't await; let Vercel invoke another function to do the work
+      fetch(`${base}/api/crawl/run`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: crawlId, url: startUrl, limit: Math.min(limit, 10) }),
+        // @ts-ignore keepalive available in edge/fetch; safe to include
+        keepalive: true,
+      }).catch(() => {});
+    } catch {
+      // If anything fails, fall back to inline async processing below
+    }
+  } else {
+  // Start crawling asynchronously with timeout (inline fallback)
   (async () => {
     const crawlTimeout = setTimeout(() => {
       console.log('Crawl timeout reached, setting to failed');
-      crawlResults.set(crawlId, { 
-        status: 'failed', 
-        error: 'Crawl timeout - took longer than 60 seconds'
+      // Fire and forget; ignore await inside timeout
+      saveCrawlRecord(crawlId, {
+        status: 'failed',
+        error: 'Crawl timeout - took longer than 60 seconds',
       });
     }, 60000); // 60 second timeout
 
@@ -137,9 +158,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
       
       // Store successful result
-      crawlResults.set(crawlId, { 
-        status: 'completed', 
-        result: crawlResult 
+      await saveCrawlRecord(crawlId, {
+        status: 'completed',
+        result: crawlResult,
       });
       
     } catch (crawlError) {
@@ -191,13 +212,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         timestamp: new Date().toISOString()
       };
       
-      crawlResults.set(crawlId, { 
-        status: 'failed', 
+      await saveCrawlRecord(crawlId, {
+        status: 'failed',
         result: fallbackResult,
-        error: crawlError instanceof Error ? crawlError.message : 'Unknown error'
+        error: crawlError instanceof Error ? crawlError.message : 'Unknown error',
       });
     }
   })();
+  }
   
   // Return crawl ID immediately for polling
   return res.status(200).json({ 
@@ -209,5 +231,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   
 }
 
-// Export the results store for access from other endpoints
-export { crawlResults };
