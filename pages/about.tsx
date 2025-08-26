@@ -39,7 +39,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section className="py-20 bg-white">
+  <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -47,17 +47,19 @@ export default function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">Our Mission</h2>
-              <p className="text-lg text-gray-600 mb-6">
+              <div className="prose prose-lg max-w-none">
+              <h2>Our Mission</h2>
+              <p>
                 At AISEO Turbo, we believe that every business deserves to be found online. 
                 Our mission is to democratize SEO by making advanced AI-powered tools accessible 
                 to everyone, from small businesses to enterprise organizations.
               </p>
-              <p className="text-lg text-gray-600">
+              <p>
                 We combine cutting-edge artificial intelligence with proven SEO strategies to 
                 deliver actionable insights that drive real results. Our platform helps you 
                 understand, optimize, and dominate search rankings.
               </p>
+              </div>
             </motion.div>
             
             <motion.div

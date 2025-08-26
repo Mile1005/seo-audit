@@ -10,6 +10,25 @@ import StickyAuditBar from '../components/StickyAuditBar';
 const Lottie = nextDynamic(() => import('lottie-react').then(m => m.default), { ssr: false });
 import heroAnim from '../lib/animations/hero.json';
 
+// Animated number counter
+function Counter({ target, suffix = '', className = '' }: { target: number; suffix?: string; className?: string }) {
+  const [value, setValue] = React.useState(0);
+  React.useEffect(() => {
+    let start: number | null = null;
+    const duration = 1200;
+    const step = (ts: number) => {
+      if (start === null) start = ts;
+      const p = Math.min(1, (ts - start) / duration);
+      setValue(target * p);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    const raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target]);
+  const formatted = target >= 100 ? Math.round(value).toLocaleString() : value.toFixed(1);
+  return <div className={className}>{formatted}{suffix}</div>;
+}
+
 export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
@@ -131,11 +150,15 @@ export default function HomePage() {
     <>
   <EnhancedHeader />
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 bg-soft-radial" />
+        {/* noise + parallax orbs */}
+        <div className="absolute inset-0 bg-noise" />
+        <motion.div aria-hidden className="pointer-events-none absolute -left-20 top-24 w-40 h-40 rounded-full bg-blue-200/40 blur-2xl" initial={{y:10}} animate={{y:[0,10,0]}} transition={{duration:8, repeat:Infinity}} />
+        <motion.div aria-hidden className="pointer-events-none absolute right-[-60px] top-40 w-56 h-56 rounded-full bg-purple-200/40 blur-2xl" initial={{y:-10}} animate={{y:[0,-10,0]}} transition={{duration:10, repeat:Infinity}} />
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-20">
           <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="space-y-8">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 leading-tight">
+            <h1 className="text-[42px] sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 leading-tight">
               Speed up{' '}
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 search marketing
@@ -187,8 +210,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust badges + logos */}
-  <section className="py-10">
+  {/* Trust badges + logos */}
+  <section className="py-12 bg-white">
         <motion.div initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="flex items-center gap-4 justify-center">
@@ -218,11 +241,33 @@ export default function HomePage() {
         </motion.div>
       </section>
 
+      {/* KPI Marquee */}
+      <section className="py-6 bg-white/80">
+        <div className="overflow-hidden marquee-mask">
+          <div className="marquee-track">
+            {([
+              {src:'/brand/logo-acme.svg', alt:'Acme'},
+              {src:'/brand/logo-hooli.svg', alt:'Hooli'},
+              {src:'/brand/badge-g2.svg', alt:'G2'},
+              {src:'/brand/badge-capterra.svg', alt:'Capterra'},
+              {src:'/brand/logo-acme.svg', alt:'Acme 2'},
+              {src:'/brand/logo-hooli.svg', alt:'Hooli 2'},
+              {src:'/brand/logo-acme.svg', alt:'Acme'},
+              {src:'/brand/logo-hooli.svg', alt:'Hooli'},
+              {src:'/brand/badge-g2.svg', alt:'G2'},
+              {src:'/brand/badge-capterra.svg', alt:'Capterra'}
+            ] as const).map((l, i)=> (
+              <Image key={`${l.alt}-${i}`} src={l.src} alt={l.alt} width={140} height={40} sizes="(max-width: 768px) 120px, 140px" className="opacity-80 hover:opacity-100 transition-opacity" />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features/Tabbed Tools Section */}
-      <section className="py-20 bg-gray-50">
+  <section className="py-20 bg-gradient-to-b from-gray-50 via-white to-blue-50/30">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">MARKETING TOOLS TO SPEED UP SEO TASKS</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">MARKETING TOOLS TO SPEED UP SEO TASKS</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Everything you need to optimize your website and improve search rankings with our comprehensive SEO toolkit
             </p>
@@ -230,7 +275,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               {tabs.map((tab) => (
-                <div key={tab.id} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 tilt shimmer-border">
+                <div key={tab.id} className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300 tilt shimmer-border">
                   <div className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0">
                       {tab.icon}
@@ -302,38 +347,27 @@ export default function HomePage() {
             <p className="text-xl text-gray-600">Powered by comprehensive SEO databases and real-time analysis</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">1.5B</div>
-              <div className="text-gray-600 font-medium">Domains</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">8.6B</div>
-              <div className="text-gray-600 font-medium">Keywords</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-purple-600 mb-2">529B</div>
-              <div className="text-gray-600 font-medium">Backlinks</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-orange-600 mb-2">5.6B</div>
-              <div className="text-gray-600 font-medium">Keyword Suggestions</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-red-600 mb-2">230</div>
-              <div className="text-gray-600 font-medium">Countries</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-indigo-600 mb-2">2.2B</div>
-              <div className="text-gray-600 font-medium">Google SERPs</div>
-            </div>
+            {[
+              { value: 1.5, suffix: 'B', color: 'text-blue-600', label: 'Domains' },
+              { value: 8.6, suffix: 'B', color: 'text-green-600', label: 'Keywords' },
+              { value: 529, suffix: 'B', color: 'text-purple-600', label: 'Backlinks' },
+              { value: 5.6, suffix: 'B', color: 'text-orange-600', label: 'Keyword Suggestions' },
+              { value: 230, suffix: '', color: 'text-red-600', label: 'Countries' },
+              { value: 2.2, suffix: 'B', color: 'text-indigo-600', label: 'Google SERPs' },
+            ].map((s, i) => (
+              <motion.div key={i} initial={{opacity:0,y:10}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.5, delay:i*0.05}} className="text-center">
+                <Counter target={s.value} suffix={s.suffix} className={`text-4xl font-bold mb-2 ${s.color}`} />
+                <div className="text-gray-600 font-medium">{s.label}</div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-gray-50">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+      <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">PEOPLE LOVE OUR SEO TOOLS</h2>
             <p className="text-xl text-gray-600">Join thousands of satisfied customers who trust our SEO platform</p>
           </div>
@@ -408,47 +442,37 @@ export default function HomePage() {
       {/* FAQ Section */}
       <section className="py-20 bg-white">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:0.6}} className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
             <p className="text-xl text-gray-600">Everything you need to know about our SEO audit tools</p>
           </div>
-          <div className="space-y-8">
-            <div className="border-b border-gray-200 pb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Who should use our SEO audit tool?</h3>
-              <p className="text-gray-600">
-                Our SEO audit tool is perfect for business owners, bloggers, digital marketers, web developers, SEO professionals, and basically anyone who wants to improve their website's search engine rankings and online visibility.
-              </p>
-            </div>
-            <div className="border-b border-gray-200 pb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">What's required to use our SEO tools?</h3>
-              <p className="text-gray-600">
-                All you need is a website URL to get started. Our tools work with any website regardless of the platform it's built on - WordPress, Shopify, Wix, custom HTML, or any other CMS.
-              </p>
-            </div>
-            <div className="border-b border-gray-200 pb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Do I need technical knowledge to use these tools?</h3>
-              <p className="text-gray-600">
-                Absolutely not. Our SEO audit tools are designed to be user-friendly and accessible to everyone. You'll get clear, actionable recommendations that don't require any technical expertise to understand or implement.
-              </p>
-            </div>
-            <div className="border-b border-gray-200 pb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">How long does an SEO audit take?</h3>
-              <p className="text-gray-600">
-                Most audits complete within 1-2 minutes. Larger websites with more pages may take up to 5 minutes. You'll receive a comprehensive report with detailed insights and actionable recommendations.
-              </p>
-            </div>
-            <div className="border-b border-gray-200 pb-8">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Is my data secure and private?</h3>
-              <p className="text-gray-600">
-                Yes, absolutely. We take data privacy seriously. Your website data is analyzed securely and is never shared with third parties. We only collect the information necessary to provide you with accurate SEO insights.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Can I use this for client websites?</h3>
-              <p className="text-gray-600">
-                Yes, you can use our SEO audit tools for client websites. Many SEO professionals and agencies use our platform to provide comprehensive audits and reports to their clients.
-              </p>
-            </div>
+          <div className="divide-y divide-gray-200 rounded-2xl border border-gray-200 overflow-hidden">
+            {[{
+              q: 'Who should use our SEO audit tool?',
+              a: "Our SEO audit tool is perfect for business owners, bloggers, digital marketers, web developers, SEO professionals, and basically anyone who wants to improve their website's search engine rankings and online visibility."
+            },{
+              q: "What's required to use our SEO tools?",
+              a: "All you need is a website URL to get started. Our tools work with any website regardless of the platform it's built on - WordPress, Shopify, Wix, custom HTML, or any other CMS."
+            },{
+              q: 'Do I need technical knowledge to use these tools?',
+              a: "Absolutely not. Our SEO audit tools are designed to be user-friendly and accessible to everyone. You'll get clear, actionable recommendations that don't require any technical expertise to understand or implement."
+            },{
+              q: 'How long does an SEO audit take?',
+              a: 'Most audits complete within 1-2 minutes. Larger websites with more pages may take up to 5 minutes. You\'ll receive a comprehensive report with detailed insights and actionable recommendations.'
+            },{
+              q: 'Is my data secure and private?',
+              a: 'Yes, absolutely. We take data privacy seriously. Your website data is analyzed securely and is never shared with third parties.'
+            }].map((item, idx) => (
+              <details key={idx} className="group open:bg-gray-50">
+                <summary className="cursor-pointer list-none px-6 py-5 flex items-center justify-between">
+                  <span className="text-lg font-semibold text-gray-900">{item.q}</span>
+                  <span className="ml-4 text-gray-400 group-open:rotate-180 transition-transform">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
+                  </span>
+                </summary>
+                <div className="px-6 pb-6 text-gray-600">{item.a}</div>
+              </details>
+            ))}
           </div>
         </motion.div>
       </section>

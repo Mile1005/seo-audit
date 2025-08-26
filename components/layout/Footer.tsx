@@ -1,32 +1,64 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
 	return (
-		<footer className="border-t border-white/20 dark:border-white/10 mt-16">
-			<div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 text-sm text-muted-foreground">
-				<div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+		<footer className="relative mt-20">
+			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/40 to-white pointer-events-none" />
+			<div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm text-gray-600">
 					<div>
-						<div className="font-semibold mb-2">Product</div>
-						<Link href="/features" className="block">Features</Link>
-						<Link href="/pricing" className="block">Pricing</Link>
+						<div className="flex items-center gap-2 mb-4">
+							<div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+								<span className="text-white font-bold">A</span>
+							</div>
+							<span className="text-lg font-semibold text-gray-900">AISEO Turbo</span>
+						</div>
+						<p className="text-gray-500">AI‑powered SEO platform to analyze, monitor, and grow your organic traffic.</p>
+						<div className="flex gap-3 mt-4 opacity-80">
+							<Image src="/brand/badge-g2.svg" alt="G2" width={64} height={64} />
+							<Image src="/brand/badge-capterra.svg" alt="Capterra" width={96} height={64} />
+						</div>
 					</div>
 					<div>
-						<div className="font-semibold mb-2">Company</div>
-						<Link href="/about" className="block">About</Link>
-						<Link href="/contact" className="block">Contact</Link>
+						<div className="font-semibold mb-3 text-gray-900">Product</div>
+						<ul className="space-y-2">
+							<li><Link href="/features" className="hover:text-blue-600">Features</Link></li>
+							<li><Link href="/pricing" className="hover:text-blue-600">Pricing</Link></li>
+							<li><Link href="/seo-audit" className="hover:text-blue-600">SEO Audit</Link></li>
+							<li><Link href="/rank-tracker" className="hover:text-blue-600">Rank Tracker</Link></li>
+						</ul>
 					</div>
 					<div>
-						<div className="font-semibold mb-2">Resources</div>
-						<Link href="/blog" className="block">Blog</Link>
+						<div className="font-semibold mb-3 text-gray-900">Company</div>
+						<ul className="space-y-2">
+							<li><Link href="/about" className="hover:text-blue-600">About</Link></li>
+							<li><Link href="/contact" className="hover:text-blue-600">Contact</Link></li>
+							<li><Link href="/careers" className="hover:text-blue-600">Careers</Link></li>
+						</ul>
 					</div>
 					<div>
-						<div className="font-semibold mb-2">Legal</div>
-						<Link href="/legal/privacy" className="block">Privacy</Link>
-						<Link href="/legal/terms" className="block">Terms</Link>
+						<div className="font-semibold mb-3 text-gray-900">Resources</div>
+						<ul className="space-y-2">
+							<li><Link href="/blog" className="hover:text-blue-600">Blog</Link></li>
+							<li><Link href="/docs" className="hover:text-blue-600">Docs</Link></li>
+							<li><Link href="/help" className="hover:text-blue-600">Help Center</Link></li>
+						</ul>
 					</div>
 				</div>
-				<div className="mt-8">© {new Date().getFullYear()} AISEO Turbo. All rights reserved.</div>
+				<div className="mt-10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+					<div>© {new Date().getFullYear()} AISEO Turbo. All rights reserved.</div>
+					<div className="space-x-4 mt-2 sm:mt-0">
+						<Link href="/legal/privacy" className="hover:text-blue-600">Privacy</Link>
+						<Link href="/legal/terms" className="hover:text-blue-600">Terms</Link>
+					</div>
+				</div>
 			</div>
 		</footer>
 	);
+}
+
+// Spacer to prevent sticky audit bar from overlapping footer on long pages
+export function BottomSpacer() {
+	return <div className="h-24" />;
 }
