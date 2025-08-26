@@ -1,5 +1,5 @@
 
-import { dbHelpers, addAuditJob } from "@repo/shared";
+import { dbHelpers, addAuditJob } from "@repo/shared/server";
 import { StartAuditRequest, StartAuditResponse } from "@repo/shared/schemas";
 import { randomUUID } from "crypto";
 

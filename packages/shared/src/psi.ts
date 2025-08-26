@@ -84,28 +84,37 @@ export async function fetchPageSpeed(
 	strategy: "mobile" | "desktop" = "mobile",
 	maxRetries = 2
 ): Promise<PSIResult> {
-	// ...existing code...
+	// TODO: Implement actual PSI API integration
+	return {
+		lcp: null,
+		cls: null,
+		inp: null,
+		notes: ['PSI integration not yet implemented']
+	};
 }
 
 /**
  * Extracts Largest Contentful Paint value from PSI response
  */
 function extractLCP(data: PSIResponse): number | null {
-	// ...existing code...
+	// TODO: Implement LCP extraction
+	return null;
 }
 
 /**
  * Extracts Cumulative Layout Shift value from PSI response
  */
 function extractCLS(data: PSIResponse): number | null {
-	// ...existing code...
+	// TODO: Implement CLS extraction
+	return null;
 }
 
 /**
  * Extracts Interaction to Next Paint value from PSI response
  */
 function extractINP(data: PSIResponse): number | null {
-	// ...existing code...
+	// TODO: Implement INP extraction
+	return null;
 }
 
 /**
@@ -117,5 +126,6 @@ function generatePerformanceNotes(
 	cls: number | null,
 	inp: number | null
 ): string[] {
-	// ...existing code...
+	// TODO: Implement performance notes generation
+	return ['Performance analysis not yet implemented'];
 }

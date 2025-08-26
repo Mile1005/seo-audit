@@ -1,5 +1,5 @@
 
-import { dbHelpers } from "@repo/shared";
+import { dbHelpers } from "@repo/shared/server";
 import { GetAuditResponse } from "@repo/shared/schemas";
 
 export const runtime = "nodejs";

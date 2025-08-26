@@ -1,5 +1,5 @@
 
-import { dbHelpers, miniCrawl } from "@repo/shared";
+import { miniCrawl, dbHelpers } from "@repo/shared/server";
 import { randomUUID } from "crypto";
 
 export const runtime = "nodejs";

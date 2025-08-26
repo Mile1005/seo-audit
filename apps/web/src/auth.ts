@@ -1,10 +1,12 @@
 import NextAuth from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { getPrismaSync } from "@repo/shared";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const authOptions = {
-  adapter: PrismaAdapter(getPrismaSync()),
+  adapter: PrismaAdapter(prisma),
   providers: [
     EmailProvider({
       server: process.env.AUTH_EMAIL_SERVER,
@@ -21,4 +23,4 @@ export const authOptions = {
   },
 };
 
-export const auth = NextAuth(authOptions);
+export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);

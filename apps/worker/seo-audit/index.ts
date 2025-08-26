@@ -1,11 +1,6 @@
 import { Worker } from "bullmq";
 import IORedis from "ioredis";
-import { dbHelpers } from "@repo/shared";
-import { fetchHtml } from "@repo/shared";
-import { parseHtml } from "@repo/shared";
-import { calculateAudit } from "@repo/shared";
-import { fetchPageSpeed } from "@repo/shared";
-import { fetchGscInsightsForUrl } from "@repo/shared";
+import { dbHelpers, fetchHtml, parseHtml, calculateAudit, fetchPageSpeed, fetchGscInsightsForUrl } from "@repo/shared/server";
 import crypto from "crypto";
 // RunStatus enum - define locally since it's not exported from Prisma
 enum RunStatus {

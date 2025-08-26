@@ -18,6 +18,8 @@ export async function getPrisma(): Promise<PrismaClient> {
 }
 
 export const dbHelpers = {
+  getPrisma,
+  
   async createRun(data: {
     id: string;
     pageUrl: string;
@@ -99,7 +101,6 @@ export const dbHelpers = {
     const prisma = await getPrisma();
     // Prisma's Json field requires a value that can be serialized to JSON
     // If the value is not a string/number/boolean/null/object/array, this will throw
-  // @ts-expect-error: Prisma InputJsonValue type is too strict, but this is safe and works at runtime
   return prisma.audit.create({ data: { id: data.id, runId: data.runId, json: data.json as any } });
   },
 
