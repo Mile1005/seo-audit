@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { crawlResults } from './start';
+import { getCrawlRecord } from '../../../lib/crawl-store';
 import { generateCrawlCSV } from '../../../lib/crawl';
 
 // Simple CSV generation function for mock data
@@ -45,10 +45,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Missing crawl ID parameter' });
     }
     
-    // Check if we have real crawl data
-    const crawlData = crawlResults.get(id);
+  // Check if we have real crawl data
+  const crawlData = await getCrawlRecord(id);
     
-    if (crawlData && crawlData.status === 'completed' && crawlData.result) {
+  if (crawlData && crawlData.status === 'completed' && crawlData.result) {
       console.log('Exporting real crawl data');
       
       if (format === 'json') {
@@ -62,7 +62,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.setHeader('Content-Type', 'text/csv');
       res.setHeader('Content-Disposition', `attachment; filename="crawl-${id}.csv"`);
       return res.status(200).send(csvContent);
-    }
+  }
     
     // Fallback to mock data
     console.log('Exporting mock crawl data');
