@@ -95,12 +95,12 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+        className="rounded-xl p-8 shadow-lg hover:shadow-xl transition-all border border-white/30 bg-white/40 backdrop-blur-md"
             >
               <div className="w-12 h-12 bg-blue-100 rounded-lg mb-4 flex items-center justify-center">
                 <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+              className="rounded-xl p-8 shadow-lg hover:shadow-xl transition-all border border-white/30 bg-white/40 backdrop-blur-md"
             >
               <div className="w-12 h-12 bg-purple-100 rounded-lg mb-4 flex items-center justify-center">
                 <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +136,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
+              className="rounded-xl p-8 shadow-lg hover:shadow-xl transition-all border border-white/30 bg-white/40 backdrop-blur-md"
             >
               <div className="w-12 h-12 bg-green-100 rounded-lg mb-4 flex items-center justify-center">
                 <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

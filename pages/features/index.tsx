@@ -19,6 +19,7 @@ const features = [
     ],
     colorFrom: 'from-blue-500',
     colorTo: 'to-indigo-600',
+    id: 'ai-analysis',
   },
   {
     title: 'Real-time Monitoring',
@@ -31,6 +32,7 @@ const features = [
     ],
     colorFrom: 'from-emerald-500',
     colorTo: 'to-teal-600',
+    id: 'monitoring',
   },
   {
     title: 'Custom Reports',
@@ -43,6 +45,7 @@ const features = [
     ],
     colorFrom: 'from-fuchsia-500',
     colorTo: 'to-purple-600',
+    id: 'reports',
   },
   {
     title: 'API Access',
@@ -55,6 +58,7 @@ const features = [
     ],
     colorFrom: 'from-amber-500',
     colorTo: 'to-orange-600',
+    id: 'api',
   },
   {
     title: 'White-label Solutions',
@@ -67,6 +71,7 @@ const features = [
     ],
     colorFrom: 'from-cyan-500',
     colorTo: 'to-sky-600',
+    id: 'white-label',
   },
 ];
 
@@ -76,7 +81,7 @@ export default function FeaturesPage() {
       <EnhancedHeader />
 
       {/* Hero */}
-      <section className="relative overflow-hidden pt-20 pb-14">
+  <section className="relative overflow-hidden pt-16 pb-10">
         <div className="absolute inset-0 bg-soft-radial" />
         <div className="absolute inset-0 bg-noise" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -104,11 +109,11 @@ export default function FeaturesPage() {
       </section>
 
       {/* Alternating features */}
-      <section id="sections" className="relative py-10">
+      <section id="sections" className="relative py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-20">
+          <div className="space-y-16">
             {features.map((f, idx) => (
-              <div key={f.title} className="relative">
+              <div key={f.title} id={f.id} className="relative scroll-mt-28">
                 {/* Section divider */}
                 {idx > 0 && (
                   <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-px h-10 bg-gradient-to-b from-transparent via-blue-200 to-transparent" />

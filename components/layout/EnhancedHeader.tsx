@@ -32,11 +32,11 @@ const navigationMenus: DropdownMenu[] = [
 	{
 		label: 'Features',
 		items: [
-			{ label: 'AI-Powered Analysis', href: '/features/ai-analysis', description: 'Advanced AI insights' },
-			{ label: 'Real-time Monitoring', href: '/features/monitoring', description: 'Live performance tracking' },
-			{ label: 'Custom Reports', href: '/features/reports', description: 'Personalized reporting' },
-			{ label: 'API Access', href: '/features/api', description: 'Developer API integration' },
-			{ label: 'White-label Solutions', href: '/features/white-label', description: 'Branded solutions' }
+			{ label: 'AI-Powered Analysis', href: '/features#ai-analysis', description: 'Advanced AI insights' },
+			{ label: 'Real-time Monitoring', href: '/features#monitoring', description: 'Live performance tracking' },
+			{ label: 'Custom Reports', href: '/features#reports', description: 'Personalized reporting' },
+			{ label: 'API Access', href: '/features#api', description: 'Developer API integration' },
+			{ label: 'White-label Solutions', href: '/features#white-label', description: 'Branded solutions' }
 		]
 	},
 	{
@@ -180,8 +180,9 @@ const EnhancedHeader: React.FC = () => {
 					<nav className="hidden lg:flex items-center space-x-8">
 						{navigationMenus.map((menu) => (
 							<div key={menu.label} className="relative">
-								<button
-									onClick={() => handleDropdownToggle(menu.label)}
+								<Link
+									href={menu.label === 'Features' ? '/features' : '#'}
+									onClick={(e) => { if (menu.label !== 'Features') { e.preventDefault(); handleDropdownToggle(menu.label); } }}
 									onMouseEnter={() => setActiveDropdown(menu.label)}
 									className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors rounded-lg hover:bg-gray-50"
 								>
@@ -194,7 +195,7 @@ const EnhancedHeader: React.FC = () => {
 									>
 										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
 									</svg>
-								</button>
+								</Link>
 								<Dropdown
 									menu={menu}
 									isOpen={activeDropdown === menu.label}
