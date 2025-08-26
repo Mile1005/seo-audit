@@ -55,6 +55,7 @@ export interface CrawlOptions {
   maxDepth?: number;
   timeout?: number;
   userAgent?: string;
+  crawlDelay?: number;
 }
 
 /**
@@ -70,13 +71,17 @@ export async function miniCrawl(
     maxDepth = 5,
     timeout = 10000,
     userAgent = "SEO-Audit-Crawler/1.0",
+    crawlDelay = 0,
   } = options;
 
   const startTime = Date.now();
   const visited = new Set<string>();
   let queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
-  const pages: (CrawlPage & { brokenLinks?: string[] })[] = [];
+  const pages: (CrawlPage & { brokenLinks?: string[]; og?: any; twitter?: any; structuredData?: any[] })[] = [];
   const baseHost = new URL(startUrl).hostname;
+  const concurrency = 5; // Number of concurrent fetches
+  let active = 0;
+  let shouldStop = false;
 
   // robots.txt detection
   const robotsUrl = new URL("/robots.txt", startUrl).origin + "/robots.txt";
@@ -111,75 +116,114 @@ export async function miniCrawl(
   const titleMap: Record<string, string[]> = {};
   const canonicalMap: Record<string, string[]> = {};
 
-  while (queue.length > 0 && pages.length < limit) {
-    const { url, depth } = queue.shift()!;
-    if (visited.has(url) || depth > maxDepth) continue;
-    visited.add(url);
-    try {
-      const page = await crawlPage(url, depth, timeout, userAgent);
-      // Broken link detection
-      const $ = cheerio.load(page.html || "");
-      const links = $("a[href]").map((_, el) => $(el).attr("href")).get().filter(Boolean);
-      const pageBroken: string[] = [];
-      for (const link of links) {
-        try {
-          const abs = new URL(link, url).href;
-          if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
-          if (!visited.has(abs)) {
-            const res = await fetch(abs, { method: "HEAD", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout / 2) });
-            if (res.status >= 400) {
-              brokenLinks.push({ url: abs, from: url });
-              pageBroken.push(abs);
+  async function crawlWorker() {
+    while (true) {
+      if (shouldStop) return;
+      let item: { url: string; depth: number } | undefined;
+      // Lock queue
+      if (queue.length > 0 && pages.length < limit) {
+        item = queue.shift();
+      } else {
+        break;
+      }
+      if (!item) break;
+      const { url, depth } = item;
+      if (visited.has(url) || depth > maxDepth) continue;
+      visited.add(url);
+      try {
+        const page = await crawlPage(url, depth, timeout, userAgent, true);
+        if (crawlDelay > 0) {
+          await new Promise((resolve) => setTimeout(resolve, crawlDelay));
+        }
+        // Broken link detection
+        const $ = cheerio.load(page.html || "");
+        const links = $("a[href]").map((_, el) => $(el).attr("href")).get().filter(Boolean);
+        const pageBroken: string[] = [];
+        for (const link of links) {
+          try {
+            const abs = new URL(link, url).href;
+            if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
+            if (!visited.has(abs)) {
+              const res = await fetch(abs, { method: "HEAD", headers: { "User-Agent": userAgent }, signal: AbortSignal.timeout(timeout / 2) });
+              if (res.status >= 400) {
+                brokenLinks.push({ url: abs, from: url });
+                pageBroken.push(abs);
+              }
+            }
+          } catch {}
+        }
+        // Track titles/canonicals
+        if (page.title) {
+          if (!titleMap[page.title]) titleMap[page.title] = [];
+          titleMap[page.title].push(url);
+        }
+        if (page.canonical) {
+          if (!canonicalMap[page.canonical]) canonicalMap[page.canonical] = [];
+          canonicalMap[page.canonical].push(url);
+        }
+        // Extract Open Graph, Twitter, and structured data
+        const og: any = {};
+        const twitter: any = {};
+        const structuredData: any[] = [];
+        $("meta").each((_, el) => {
+          const prop = $(el).attr("property") || $(el).attr("name");
+          const content = $(el).attr("content");
+          if (prop && content) {
+            if (prop.startsWith("og:")) og[prop] = content;
+            if (prop.startsWith("twitter:")) twitter[prop] = content;
+          }
+        });
+        $("script[type='application/ld+json']").each((_, el) => {
+          try {
+            const json = JSON.parse($(el).html() || "");
+            structuredData.push(json);
+          } catch {}
+        });
+        pages.push({ ...page, brokenLinks: pageBroken, og, twitter, structuredData });
+        // Extract links for next level if not at max depth
+        if (depth < maxDepth && page.status === 200) {
+          const nextLinks = await extractLinks(url, page.html || "");
+          for (const link of nextLinks) {
+            const abs = new URL(link, url).href;
+            if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
+            if (!visited.has(abs) && !queue.some((q) => q.url === abs)) {
+              queue.push({ url: abs, depth: depth + 1 });
             }
           }
-        } catch {}
-      }
-      // Track titles/canonicals
-      if (page.title) {
-        if (!titleMap[page.title]) titleMap[page.title] = [];
-        titleMap[page.title].push(url);
-      }
-      if (page.canonical) {
-        if (!canonicalMap[page.canonical]) canonicalMap[page.canonical] = [];
-        canonicalMap[page.canonical].push(url);
-      }
-      pages.push({ ...page, brokenLinks: pageBroken });
-      // Extract links for next level if not at max depth
-      if (depth < maxDepth && page.status === 200) {
-        const nextLinks = await extractLinks(url, page.html || "");
-        for (const link of nextLinks) {
-          const abs = new URL(link, url).href;
-          if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
-          if (!visited.has(abs) && !queue.some((q) => q.url === abs)) {
-            queue.push({ url: abs, depth: depth + 1 });
-          }
         }
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      } catch (error) {
+        pages.push({
+          url,
+          depth,
+          status: 0,
+          title: null,
+          h1_presence: false,
+          word_count: 0,
+          images_missing_alt: 0,
+          noindex: false,
+          canonical: null,
+          meta_description: null,
+          h1_count: 0,
+          h2_count: 0,
+          h3_count: 0,
+          internal_links: 0,
+          external_links: 0,
+          images_total: 0,
+          load_time_ms: 0,
+          error: error instanceof Error ? error.message : "Unknown error",
+          brokenLinks: [],
+          og: {},
+          twitter: {},
+          structuredData: [],
+        });
       }
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    } catch (error) {
-      pages.push({
-        url,
-        depth,
-        status: 0,
-        title: null,
-        h1_presence: false,
-        word_count: 0,
-        images_missing_alt: 0,
-        noindex: false,
-        canonical: null,
-        meta_description: null,
-        h1_count: 0,
-        h2_count: 0,
-        h3_count: 0,
-        internal_links: 0,
-        external_links: 0,
-        images_total: 0,
-        load_time_ms: 0,
-        error: error instanceof Error ? error.message : "Unknown error",
-        brokenLinks: [],
-      });
     }
   }
+
+  // Launch concurrent workers
+  const workers = Array.from({ length: concurrency }, () => crawlWorker());
+  await Promise.all(workers);
 
   // Duplicate title/canonical detection
   const duplicateTitles = Object.entries(titleMap).filter(([_, urls]) => urls.length > 1).map(([title]) => title);
@@ -224,21 +268,54 @@ async function crawlPage(
   url: string,
   depth: number,
   timeout: number,
-  userAgent: string
+  userAgent: string,
+  followRedirects = false
 ): Promise<CrawlPage & { html?: string }> {
   const startTime = Date.now();
 
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": userAgent,
-      Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "Accept-Language": "en-US,en;q=0.5",
-      "Accept-Encoding": "gzip, deflate",
-      Connection: "keep-alive",
-      "Upgrade-Insecure-Requests": "1",
-    },
-    signal: AbortSignal.timeout(timeout),
-  });
+  let response;
+  let redirected = false;
+  let finalUrl = url;
+  try {
+    response = await fetch(url, {
+      headers: {
+        "User-Agent": userAgent,
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        Connection: "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+      },
+      signal: AbortSignal.timeout(timeout),
+      redirect: followRedirects ? "follow" : "manual",
+    });
+    if (response.url && response.url !== url) {
+      redirected = true;
+      finalUrl = response.url;
+    }
+  } catch (err) {
+    return {
+      url,
+      depth,
+      status: 0,
+      title: null,
+      h1_presence: false,
+      word_count: 0,
+      images_missing_alt: 0,
+      noindex: false,
+      canonical: null,
+      meta_description: null,
+      h1_count: 0,
+      h2_count: 0,
+      h3_count: 0,
+      internal_links: 0,
+      external_links: 0,
+      images_total: 0,
+      load_time_ms: 0,
+      error: err instanceof Error ? err.message : "Unknown error",
+      html: "",
+    };
+  }
 
   const loadTime = Date.now() - startTime;
   const html = await response.text();
@@ -283,7 +360,7 @@ async function crawlPage(
   const wordCount = text.split(" ").filter((word) => word.length > 0).length;
 
   return {
-    url,
+    url: finalUrl,
     depth,
     status: response.status,
     title,
@@ -301,6 +378,7 @@ async function crawlPage(
     images_total: imagesTotal,
     load_time_ms: loadTime,
     html,
+    error: redirected ? `Redirected to ${finalUrl}` : undefined,
   };
 }
 

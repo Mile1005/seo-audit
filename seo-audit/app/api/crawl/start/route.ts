@@ -11,6 +11,8 @@ const StartCrawlRequest = z.object({
   sameHostOnly: z.boolean().optional().default(true),
   maxDepth: z.number().min(1).max(10).optional().default(5),
   timeout: z.number().min(1000).max(30000).optional().default(10000),
+  userAgent: z.string().max(200).optional(),
+  crawlDelay: z.number().min(0).max(10000).optional(),
 });
 
 // Response types
@@ -26,7 +28,7 @@ export async function POST(request: NextRequest) {
   try {
     // Parse and validate request body
     const body = await request.json();
-    let { startUrl, limit, sameHostOnly, maxDepth, timeout } = StartCrawlRequest.parse(body);
+  let { startUrl, limit, sameHostOnly, maxDepth, timeout, userAgent, crawlDelay } = StartCrawlRequest.parse(body);
     limit = HARD_LIMIT; // Enforce hard limit
 
     // Generate unique crawl ID
@@ -42,43 +44,45 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    if (isCrawlQueueConfigured() && useDb) {
-      // Add job to crawl queue
-      await crawlQueue.add(
-        "crawl",
-        { crawlId, startUrl, limit, sameHostOnly, maxDepth, timeout },
-        { jobId: crawlId, removeOnComplete: true, removeOnFail: false }
-      );
-      console.log(`Crawl job queued: ${crawlId} for ${startUrl}`);
-    } else {
-      // Inline crawl fallback
-      if (useDb) {
-        await dbHelpers.updateRunStatus(crawlId, "running");
-      }
-      const crawlResult = await miniCrawl(startUrl, {
-        limit,
-        sameHostOnly: sameHostOnly !== false,
-        maxDepth: maxDepth || 5,
-        timeout: timeout || 10000,
-      });
-      if (useDb) {
-        await dbHelpers.saveAudit({
-          id: crypto.randomUUID(),
-          runId: crawlId,
-          json: { type: "crawl", ...crawlResult },
-        });
-        await dbHelpers.updateRunStatus(crawlId, "ready");
-        console.log(`Crawl job completed inline: ${crawlId} for ${startUrl}`);
-      } else {
-        // Return inline response when DB is disabled
-        return NextResponse.json({
-          crawlId,
-          status: "ready",
-          message: `Crawl completed for ${startUrl}`,
-          result: { type: "crawl", ...crawlResult },
-        });
-      }
-    }
+        if (isCrawlQueueConfigured() && useDb) {
+          // Add job to crawl queue
+          await crawlQueue.add(
+            "crawl",
+            { crawlId, startUrl, limit, sameHostOnly, maxDepth, timeout, userAgent, crawlDelay },
+            { jobId: crawlId, removeOnComplete: true, removeOnFail: false }
+          );
+          console.log(`Crawl job queued: ${crawlId} for ${startUrl}`);
+        } else {
+          // Inline crawl fallback
+          if (useDb) {
+            await dbHelpers.updateRunStatus(crawlId, "running");
+          }
+          const crawlResult = await miniCrawl(startUrl, {
+            limit,
+            sameHostOnly: sameHostOnly !== false,
+            maxDepth,
+            timeout,
+            userAgent,
+            crawlDelay,
+          });
+          if (useDb) {
+            await dbHelpers.saveAudit({
+              id: crypto.randomUUID(),
+              runId: crawlId,
+              json: { type: "crawl", ...crawlResult },
+            });
+            await dbHelpers.updateRunStatus(crawlId, "ready");
+            console.log(`Crawl job completed inline: ${crawlId} for ${startUrl}`);
+          } else {
+            // Return inline response when DB is disabled
+            return NextResponse.json({
+              crawlId,
+              status: "ready",
+              message: `Crawl completed for ${startUrl}`,
+              result: { type: "crawl", ...crawlResult },
+            });
+          }
+        }
 
     const response: StartCrawlResponse = {
       crawlId,
