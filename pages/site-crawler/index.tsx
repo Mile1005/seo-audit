@@ -65,21 +65,25 @@ export default function SiteCrawlerPage() {
     setCrawlStatus(null);
     setCrawlId(null);
     try {
-      const response = await fetch("/api/crawl/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ startUrl: url.trim(), limit: 10 }),
+      const response = await fetch('/api/crawl/start', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ startUrl: url.trim(), limit: 10, mode: 'auto' }),
       });
       const data = await response.json();
-      if (response.ok && data.crawlId) {
+      if (response.ok && data.status === 'completed' && data.result) {
+        setCrawlResult(data.result);
+        setIsCrawling(false);
+        setCrawlStatus('completed');
+      } else if (response.ok && data.crawlId) {
         setCrawlId(data.crawlId);
+        setCrawlStatus('processing');
         pollCrawlStatus(data.crawlId);
       } else {
-        setCrawlError(data.error || "Failed to start crawl");
+        setCrawlError(data.error || 'Failed to start crawl');
         setIsCrawling(false);
       }
     } catch (error) {
-      setCrawlError("Network error. Please try again.");
+      setCrawlError('Network error. Please try again.');
       setIsCrawling(false);
     }
   };
@@ -631,7 +635,7 @@ export default function SiteCrawlerPage() {
             </form>
 
             <div className="mt-8 text-sm text-gray-500">
-              <p>We'll crawl up to 30 pages and analyze SEO factors, performance, and structure.</p>
+              <p>We'll crawl up to 10 pages and analyze SEO factors, performance, and structure.</p>
             </div>
           </motion.div>
         </div>
