@@ -22,7 +22,6 @@
     "last 2 Safari versions"
   ],
   "dependencies": {
-    "@next/font": "^14.2.15",
     "@prisma/client": "^6.14.0",
     "@typescript-eslint/parser": "^8.39.1",
     "@vercel/analytics": "^1.5.0",
