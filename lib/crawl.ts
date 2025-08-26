@@ -66,12 +66,12 @@ export async function miniCrawl(
   options: CrawlOptions = {}
 ): Promise<CrawlResult> {
   const {
-    limit = 30, // Enforce hard limit
+    limit = 10, // Reduced default limit for free tier
     sameHostOnly = true,
-    maxDepth = 3, // Reduced for better reliability
-    timeout = 15000, // Increased timeout
+    maxDepth = 2, // Reduced depth for faster completion
+    timeout = 10000, // Reduced timeout
     userAgent = "SEO-Audit-Crawler/2.0 (+https://seo-audit-seven.vercel.app)",
-    crawlDelay = 100,
+    crawlDelay = 50, // Reduced delay
   } = options;
 
   const startTime = Date.now();
@@ -79,7 +79,7 @@ export async function miniCrawl(
   let queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
   const pages: (CrawlPage & { brokenLinks?: string[]; og?: any; twitter?: any; structuredData?: any[] })[] = [];
   const baseHost = new URL(startUrl).hostname;
-  const concurrency = 3; // Reduced concurrency for better reliability
+  const concurrency = 2; // Further reduced concurrency for faster completion
   let active = 0;
   let shouldStop = false;
 
@@ -169,37 +169,12 @@ export async function miniCrawl(
           await new Promise((resolve) => setTimeout(resolve, crawlDelay));
         }
         
-        // Simplified broken link detection (only for successful pages)
+        // Simplified broken link detection (disabled for speed)
         let pageBroken: string[] = [];
-        if (page.status === 200 && page.html && depth < maxDepth - 1) {
-          try {
-            const $ = cheerio.load(page.html);
-            const links = $("a[href]").map((_, el) => $(el).attr("href")).get().filter(Boolean).slice(0, 10); // Limit link checking
-            
-            for (const link of links) {
-              try {
-                const abs = new URL(link, url).href;
-                if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
-                if (!visited.has(abs)) {
-                  // Quick HEAD request to check if link is broken
-                  const res = await fetch(abs, { 
-                    method: "HEAD", 
-                    headers: { "User-Agent": userAgent }, 
-                    signal: AbortSignal.timeout(timeout / 4) 
-                  });
-                  if (res.status >= 400) {
-                    brokenLinks.push({ url: abs, from: url });
-                    pageBroken.push(abs);
-                  }
-                }
-              } catch {
-                // Skip broken link check on error
-              }
-            }
-          } catch (err) {
-            console.log('Error during broken link check for', url, ':', err);
-          }
-        }
+        // Skip broken link detection to speed up crawling
+        // if (page.status === 200 && page.html && depth < maxDepth - 1) {
+        //   // Broken link detection code removed for performance
+        // }
         
         // Track titles/canonicals for duplicate detection
         if (page.title) {
@@ -246,7 +221,7 @@ export async function miniCrawl(
             const nextLinks = await extractLinks(url, page.html);
             let addedLinks = 0;
             for (const link of nextLinks) {
-              if (addedLinks >= 5) break; // Limit new links per page
+              if (addedLinks >= 3) break; // Limit new links per page to 3 for speed
               try {
                 const abs = new URL(link, url).href;
                 if (sameHostOnly && new URL(abs).hostname !== baseHost) continue;
@@ -265,7 +240,7 @@ export async function miniCrawl(
         }
         
         // Small delay between requests to be respectful
-        await new Promise((resolve) => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 50));
         
       } catch (error) {
         console.log('Error crawling page', url, ':', error);

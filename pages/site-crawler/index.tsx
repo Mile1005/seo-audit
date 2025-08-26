@@ -68,7 +68,7 @@ export default function SiteCrawlerPage() {
       const response = await fetch("/api/crawl/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ startUrl: url.trim(), limit: 30 }),
+        body: JSON.stringify({ startUrl: url.trim(), limit: 10 }),
       });
       const data = await response.json();
       if (response.ok && data.crawlId) {
@@ -175,7 +175,7 @@ export default function SiteCrawlerPage() {
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
                 </div>
                 <p className="text-lg text-gray-600 mb-8">
-                  Discovering pages and analyzing your website structure...
+                  Analyzing up to 10 pages and extracting SEO data...
                 </p>
               </div>
               <div className="space-y-4">
