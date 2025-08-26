@@ -203,46 +203,158 @@ export default function SiteCrawlerPage() {
                 </button>
               </div>
             </div>
-            {/* Table */}
-            <div className="overflow-x-auto bg-white rounded-2xl shadow-xl">
-              <table className="min-w-full text-sm border">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="px-2 py-2 border">URL</th>
-                    <th className="px-2 py-2 border">Status</th>
-                    <th className="px-2 py-2 border">Title</th>
-                    <th className="px-2 py-2 border">H1</th>
-                    <th className="px-2 py-2 border">Word Count</th>
-                    <th className="px-2 py-2 border">Images Missing Alt</th>
-                    <th className="px-2 py-2 border">Noindex</th>
-                    <th className="px-2 py-2 border">Canonical</th>
-                    <th className="px-2 py-2 border">Meta Description</th>
-                    <th className="px-2 py-2 border">Internal Links</th>
-                    <th className="px-2 py-2 border">External Links</th>
-                    <th className="px-2 py-2 border">Load Time (ms)</th>
-                    <th className="px-2 py-2 border">Error</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {crawlResult.pages.map((page: any, idx: number) => (
-                    <tr key={page.url} className="hover:bg-blue-50 cursor-pointer" onClick={() => handleShowDetails(page)}>
-                      <td className="px-2 py-1 border text-blue-700 underline max-w-xs truncate" title={page.url}>{page.url}</td>
-                      <td className={`px-2 py-1 border ${page.status === 200 ? 'text-green-600' : 'text-red-600'}`}>{page.status}</td>
-                      <td className="px-2 py-1 border max-w-xs truncate" title={page.title}>{page.title}</td>
-                      <td className="px-2 py-1 border">{page.h1_presence ? "Yes" : "No"}</td>
-                      <td className="px-2 py-1 border">{page.word_count}</td>
-                      <td className={`px-2 py-1 border ${page.images_missing_alt > 0 ? 'text-orange-600 font-bold' : ''}`}>{page.images_missing_alt}</td>
-                      <td className={`px-2 py-1 border ${page.noindex ? 'text-orange-600 font-bold' : ''}`}>{page.noindex ? "Yes" : "No"}</td>
-                      <td className="px-2 py-1 border max-w-xs truncate" title={page.canonical}>{page.canonical}</td>
-                      <td className="px-2 py-1 border max-w-xs truncate" title={page.meta_description}>{page.meta_description}</td>
-                      <td className="px-2 py-1 border">{page.internal_links}</td>
-                      <td className="px-2 py-1 border">{page.external_links}</td>
-                      <td className="px-2 py-1 border">{page.load_time_ms}</td>
-                      <td className="px-2 py-1 border text-red-600">{page.error || ""}</td>
+            {/* Superior Results Table */}
+            <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">Page Analysis Results</h3>
+                <p className="text-sm text-gray-600 mt-1">Click any row to view detailed information</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gradient-to-r from-gray-50 to-gray-100">
+                    <tr>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>🔗</span>
+                          <span>URL</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>📊</span>
+                          <span>Status</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>📝</span>
+                          <span>Title</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>📋</span>
+                          <span>H1</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>🖼️</span>
+                          <span>Images</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>🚫</span>
+                          <span>Noindex</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>📄</span>
+                          <span>Meta Desc</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>🔗</span>
+                          <span>Links</span>
+                        </div>
+                      </th>
+                      <th className="px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider border-b border-gray-200">
+                        <div className="flex items-center space-x-1">
+                          <span>⚡</span>
+                          <span>Load Time</span>
+                        </div>
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-100">
+                    {crawlResult.pages.map((page: any, idx: number) => (
+                      <tr 
+                        key={idx} 
+                        className="hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 cursor-pointer transition-all duration-200 group" 
+                        onClick={() => handleShowDetails(page)}
+                      >
+                        <td className="px-6 py-4 text-sm">
+                          <div className="flex items-center space-x-2">
+                            <div className={`w-3 h-3 rounded-full ${page.statusCode === 200 ? 'bg-green-400' : page.statusCode >= 400 ? 'bg-red-400' : 'bg-yellow-400'}`}></div>
+                            <span className="text-blue-600 font-medium truncate max-w-xs group-hover:text-blue-800">{page.url}</span>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
+                            page.statusCode === 200 ? 'bg-green-100 text-green-800' : 
+                            page.statusCode >= 400 ? 'bg-red-100 text-red-800' : 
+                            'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {page.statusCode}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="truncate max-w-xs">
+                            <span className="text-gray-900 font-medium">{page.title}</span>
+                            {!page.title && <span className="text-red-500 italic">Missing Title</span>}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
+                            page.h1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                          }`}>
+                            {page.h1 ? "✓ Present" : "✗ Missing"}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="flex items-center space-x-1">
+                            <span className="text-gray-900">{page.images_without_alt || 0}</span>
+                            {(page.images_without_alt || 0) > 0 && (
+                              <span className="text-red-500 text-xs">⚠️</span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <span className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
+                            page.noindex ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+                          }`}>
+                            {page.noindex ? "🚫 Yes" : "✓ No"}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="truncate max-w-xs">
+                            {page.meta_description ? (
+                              <span className="text-gray-900">{page.meta_description.substring(0, 50)}...</span>
+                            ) : (
+                              <span className="text-red-500 italic">Missing</span>
+                            )}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="flex space-x-3">
+                            <div className="flex items-center space-x-1">
+                              <span className="text-green-600">↗️</span>
+                              <span className="text-gray-900">{page.internal_links || 0}</span>
+                            </div>
+                            <div className="flex items-center space-x-1">
+                              <span className="text-blue-600">🔗</span>
+                              <span className="text-gray-900">{page.external_links || 0}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-sm">
+                          <div className="flex items-center space-x-2">
+                            <div className={`w-2 h-2 rounded-full ${
+                              page.load_time_ms < 200 ? 'bg-green-400' : 
+                              page.load_time_ms < 500 ? 'bg-yellow-400' : 
+                              'bg-red-400'
+                            }`}></div>
+                            <span className="text-gray-900 font-mono">{page.load_time_ms}ms</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
             {/* Details Modal */}
             {showDetails && selectedPage && (
@@ -271,34 +383,150 @@ export default function SiteCrawlerPage() {
                 </div>
               </div>
             )}
-            {/* Summary Stats */}
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-blue-50 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-2">SEO Issues</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>Noindex pages: <b>{crawlResult.issues.noindex_pages}</b></li>
-                  <li>Missing titles: <b>{crawlResult.issues.missing_titles}</b></li>
-                  <li>Missing H1: <b>{crawlResult.issues.missing_h1}</b></li>
-                  <li>Missing meta descriptions: <b>{crawlResult.issues.missing_meta_descriptions}</b></li>
-                  <li>Images without alt: <b>{crawlResult.issues.images_without_alt}</b></li>
-                  <li>Pages without canonical: <b>{crawlResult.issues.pages_without_canonical}</b></li>
-                  <li>Broken links: <b>{crawlResult.issues.broken_links}</b></li>
-                  <li>Duplicate titles: <b>{crawlResult.issues.duplicate_titles.length}</b></li>
-                  <li>Duplicate canonicals: <b>{crawlResult.issues.duplicate_canonicals.length}</b></li>
-                </ul>
+            {/* Enhanced Summary Stats */}
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* SEO Issues Card */}
+              <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl p-6 border border-red-100 shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-white text-lg">🚨</span>
+                  </div>
+                  <h3 className="font-bold text-lg text-red-900">SEO Issues</h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🚫 Noindex pages</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${crawlResult.issues.noindex_pages > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                      {crawlResult.issues.noindex_pages}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">📝 Missing titles</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${crawlResult.issues.missing_titles > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                      {crawlResult.issues.missing_titles}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">📋 Missing H1</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${crawlResult.issues.missing_h1 > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                      {crawlResult.issues.missing_h1}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">📄 Missing meta descriptions</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${crawlResult.issues.missing_meta_descriptions > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                      {crawlResult.issues.missing_meta_descriptions}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🖼️ Images without alt</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${crawlResult.issues.images_without_alt > 0 ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'}`}>
+                      {crawlResult.issues.images_without_alt}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🔗 Broken links</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${crawlResult.issues.broken_links > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}`}>
+                      {crawlResult.issues.broken_links}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="bg-purple-50 rounded-xl p-6">
-                <h3 className="font-bold text-lg mb-2">Crawl Info</h3>
-                <ul className="text-sm text-gray-700 space-y-1">
-                  <li>Start URL: <b>{crawlResult.startUrl}</b></li>
-                  <li>Total pages: <b>{crawlResult.totalPages}</b></li>
-                  <li>Successful: <b>{crawlResult.successfulPages}</b></li>
-                  <li>Failed: <b>{crawlResult.failedPages}</b></li>
-                  <li>Average load time: <b>{Math.round(crawlResult.averageLoadTime)} ms</b></li>
-                  <li>Crawl time: <b>{Math.round(crawlResult.crawlTime / 1000)}s</b></li>
-                  <li>Robots.txt: <b>{crawlResult.robotsTxt.found ? "Found" : "Not found"}</b></li>
-                  <li>Sitemap.xml: <b>{crawlResult.sitemapXml.found ? "Found" : "Not found"}</b></li>
-                </ul>
+
+              {/* Performance Card */}
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 border border-blue-100 shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-white text-lg">⚡</span>
+                  </div>
+                  <h3 className="font-bold text-lg text-blue-900">Performance</h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">📊 Total pages</span>
+                    <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                      {crawlResult.totalPages}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">✅ Successful</span>
+                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                      {crawlResult.successfulPages}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">❌ Failed</span>
+                    <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm font-medium">
+                      {crawlResult.failedPages}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">⚡ Avg load time</span>
+                    <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      crawlResult.averageLoadTime < 200 ? 'bg-green-100 text-green-800' :
+                      crawlResult.averageLoadTime < 500 ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-red-100 text-red-800'
+                    }`}>
+                      {Math.round(crawlResult.averageLoadTime)}ms
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">⏱️ Crawl time</span>
+                    <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+                      {Math.round(crawlResult.crawlTime / 1000)}s
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Technical SEO Card */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100 shadow-lg">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                    <span className="text-white text-lg">🔧</span>
+                  </div>
+                  <h3 className="font-bold text-lg text-green-900">Technical SEO</h3>
+                </div>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🌐 Start URL</span>
+                    <span className="text-xs text-blue-600 max-w-[120px] truncate" title={crawlResult.startUrl}>
+                      {crawlResult.startUrl.replace(/^https?:\/\//, '')}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🤖 Robots.txt</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      crawlResult.robotsTxt.found ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}>
+                      {crawlResult.robotsTxt.found ? "✓ Found" : "✗ Missing"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🗺️ Sitemap.xml</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      crawlResult.sitemapXml.found ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}>
+                      {crawlResult.sitemapXml.found ? "✓ Found" : "✗ Missing"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">📋 Duplicate titles</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      crawlResult.issues.duplicate_titles.length > 0 ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'
+                    }`}>
+                      {crawlResult.issues.duplicate_titles.length}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">🔗 Duplicate canonicals</span>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      crawlResult.issues.duplicate_canonicals.length > 0 ? 'bg-orange-100 text-orange-800' : 'bg-green-100 text-green-800'
+                    }`}>
+                      {crawlResult.issues.duplicate_canonicals.length}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
