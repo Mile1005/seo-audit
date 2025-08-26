@@ -1,17 +1,25 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { miniCrawl, CrawlResult } from '../../../lib/crawl';
 
-// Import functions with error handling
-let miniCrawl: any;
+// Global store for crawl results
+const crawlResults = new Map<string, { status: 'processing' | 'completed' | 'failed', result?: CrawlResult, error?: string }>();
 
-async function loadCrawler() {
+// Validate URL format
+function isValidUrl(url: string): boolean {
   try {
-    const crawlModule = await import('../../../lib/crawl');
-    miniCrawl = crawlModule.miniCrawl;
-    return true;
-  } catch (error) {
-    console.error('Failed to load crawler:', error);
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
     return false;
   }
+}
+
+// Clean URL by adding protocol if missing
+function cleanUrl(url: string): string {
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    return `https://${url}`;
+  }
+  return url;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -26,132 +34,115 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   
   try {
-    const { startUrl, limit = 30 } = req.body || {};
+    const { startUrl: rawUrl, limit = 30 } = req.body || {};
     console.log('Request body:', req.body);
     
-    if (!startUrl) {
+    if (!rawUrl) {
       return res.status(400).json({ error: 'Missing startUrl' });
+    }
+    
+    // Clean and validate URL
+    const startUrl = cleanUrl(rawUrl);
+    if (!isValidUrl(startUrl)) {
+      return res.status(400).json({ error: 'Invalid URL format' });
     }
     
     const crawlId = Math.random().toString(36).slice(2);
     console.log('Starting crawl for:', startUrl);
     
-    // Try to load and use real crawler
-    const crawlerLoaded = await loadCrawler();
+    // Store crawl as processing
+    crawlResults.set(crawlId, { status: 'processing' });
     
-    if (crawlerLoaded && miniCrawl) {
-      console.log('Using real crawler');
+    // Start crawling asynchronously
+    (async () => {
       try {
+        console.log('Using real crawler with enhanced options');
         const crawlResult = await miniCrawl(startUrl, { 
-          limit, 
+          limit: Math.min(limit, 50), // Cap at 50 pages for performance
           sameHostOnly: true, 
-          maxDepth: 5, 
-          timeout: 10000 
+          maxDepth: 3, // Reduce depth for reliability
+          timeout: 15000, // Increase timeout for better success rate
+          userAgent: 'SEO-Audit-Bot/2.0 (+https://seo-audit-seven.vercel.app)',
+          crawlDelay: 100 // Small delay between requests to be respectful
         });
         
-        console.log('Real crawl completed:', crawlResult);
-        
-        return res.status(200).json({ 
-          crawlId, 
-          status: 'ready', 
-          message: `Crawl completed for ${startUrl}`, 
-          result: crawlResult
+        console.log('Real crawl completed successfully:', {
+          startUrl,
+          totalPages: crawlResult.totalPages,
+          successfulPages: crawlResult.successfulPages,
+          failedPages: crawlResult.failedPages
         });
+        
+        // Store successful result
+        crawlResults.set(crawlId, { 
+          status: 'completed', 
+          result: crawlResult 
+        });
+        
       } catch (crawlError) {
         console.error('Real crawl failed:', crawlError);
-        // Fall back to mock if real crawl fails
+        
+        // Store error but create a fallback result with some real data
+        const fallbackResult: CrawlResult = {
+          startUrl,
+          pages: [{
+            url: startUrl,
+            depth: 0,
+            status: 0,
+            title: null,
+            h1_presence: false,
+            word_count: 0,
+            images_missing_alt: 0,
+            noindex: false,
+            canonical: null,
+            meta_description: null,
+            h1_count: 0,
+            h2_count: 0,
+            h3_count: 0,
+            internal_links: 0,
+            external_links: 0,
+            images_total: 0,
+            load_time_ms: 0,
+            error: crawlError instanceof Error ? crawlError.message : 'Crawl failed'
+          }],
+          totalPages: 1,
+          successfulPages: 0,
+          failedPages: 1,
+          averageLoadTime: 0,
+          issues: {
+            noindex_pages: 0,
+            missing_titles: 1,
+            missing_h1: 1,
+            missing_meta_descriptions: 1,
+            images_without_alt: 0,
+            pages_without_canonical: 1,
+            broken_links: 0,
+            duplicate_titles: [],
+            duplicate_canonicals: []
+          },
+          robotsTxt: { found: false, url: `${new URL(startUrl).origin}/robots.txt` },
+          sitemapXml: { found: false, url: `${new URL(startUrl).origin}/sitemap.xml` },
+          brokenLinks: [],
+          crawlTime: 0,
+          timestamp: new Date().toISOString()
+        };
+        
+        crawlResults.set(crawlId, { 
+          status: 'failed', 
+          result: fallbackResult,
+          error: crawlError instanceof Error ? crawlError.message : 'Unknown error'
+        });
       }
-    }
+    })();
     
-    // Fallback to enhanced mock data
-    console.log('Using enhanced mock response for:', startUrl);
-    
+    // Return crawl ID immediately for polling
     return res.status(200).json({ 
       crawlId, 
-      status: 'ready', 
-      message: `Mock crawl completed for ${startUrl}`, 
-      result: {
-        type: 'crawl',
-        startUrl: startUrl,
-        totalPages: 3,
-        successfulPages: 3,
-        failedPages: 0,
-        averageLoadTime: 245,
-        crawlTime: 3500,
-        pages: [
-          {
-            url: startUrl,
-            title: 'Home Page - Mock Title',
-            description: 'Mock page description for home page',
-            statusCode: 200,
-            h1: 'Welcome to Our Website',
-            meta_description: 'Mock meta description',
-            canonical: startUrl,
-            noindex: false,
-            internal_links: 5,
-            external_links: 2,
-            load_time_ms: 230,
-            images_without_alt: 0,
-            og: { title: 'Mock OG Title', description: 'Mock OG Description' },
-            twitter: { card: 'summary', title: 'Mock Twitter Title' },
-            structuredData: {}
-          },
-          {
-            url: `${startUrl}/about`,
-            title: 'About Us - Mock Title',
-            description: 'Mock about page description',
-            statusCode: 200,
-            h1: 'About Our Company',
-            meta_description: 'Learn more about our company',
-            canonical: `${startUrl}/about`,
-            noindex: false,
-            internal_links: 8,
-            external_links: 1,
-            load_time_ms: 255,
-            images_without_alt: 1,
-            og: { title: 'About Us', description: 'About our company' },
-            twitter: { card: 'summary' },
-            structuredData: {}
-          },
-          {
-            url: `${startUrl}/contact`,
-            title: 'Contact Us - Mock Title',
-            description: 'Get in touch with us',
-            statusCode: 200,
-            h1: 'Contact Information',
-            meta_description: 'Contact us for more information',
-            canonical: `${startUrl}/contact`,
-            noindex: false,
-            internal_links: 3,
-            external_links: 0,
-            load_time_ms: 250,
-            images_without_alt: 0,
-            og: { title: 'Contact Us', description: 'Get in touch' },
-            twitter: { card: 'summary' },
-            structuredData: {}
-          }
-        ],
-        issues: {
-          noindex_pages: 0,
-          missing_titles: 0,
-          missing_h1: 0,
-          missing_meta_descriptions: 0,
-          images_without_alt: 1,
-          pages_without_canonical: 0,
-          broken_links: 0,
-          duplicate_titles: [],
-          duplicate_canonicals: []
-        },
-        robotsTxt: {
-          found: true,
-          content: 'User-agent: *\nAllow: /'
-        },
-        sitemapXml: {
-          found: true,
-          urls: [startUrl, `${startUrl}/about`, `${startUrl}/contact`]
-        }
-      }
+      status: 'processing', 
+      message: `Crawl started for ${startUrl}. Use /api/crawl/get?id=${crawlId} to check status.`,
+      estimatedTime: '5-30 seconds'
     });
+    
   } catch (error) {
     console.error('API Error:', error);
     return res.status(500).json({ 
@@ -160,3 +151,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 }
+
+// Export the results store for access from other endpoints
+export { crawlResults };
