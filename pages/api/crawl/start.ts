@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   
   try {
-    const { startUrl: rawUrl, limit = 30 } = req.body || {};
+    const { startUrl: rawUrl, limit = 10 } = req.body || {};
     console.log('Request body:', req.body);
     
     if (!rawUrl) {
@@ -53,18 +53,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Store crawl as processing
     crawlResults.set(crawlId, { status: 'processing' });
     
-    // Start crawling asynchronously
+    // Start crawling asynchronously with timeout
     (async () => {
+      const crawlTimeout = setTimeout(() => {
+        console.log('Crawl timeout reached, setting to failed');
+        crawlResults.set(crawlId, { 
+          status: 'failed', 
+          error: 'Crawl timeout - took longer than 60 seconds'
+        });
+      }, 60000); // 60 second timeout
+
       try {
         console.log('Using real crawler with enhanced options');
         const crawlResult = await miniCrawl(startUrl, { 
-          limit: Math.min(limit, 50), // Cap at 50 pages for performance
+          limit: Math.min(limit, 10), // Cap at 10 pages for free tier
           sameHostOnly: true, 
-          maxDepth: 3, // Reduce depth for reliability
-          timeout: 15000, // Increase timeout for better success rate
+          maxDepth: 2, // Reduce depth further for faster completion
+          timeout: 10000, // Reduce timeout for faster response
           userAgent: 'SEO-Audit-Bot/2.0 (+https://seo-audit-seven.vercel.app)',
-          crawlDelay: 100 // Small delay between requests to be respectful
+          crawlDelay: 50 // Reduce delay for faster crawling
         });
+        
+        clearTimeout(crawlTimeout);
         
         console.log('Real crawl completed successfully:', {
           startUrl,
@@ -80,6 +90,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         });
         
       } catch (crawlError) {
+        clearTimeout(crawlTimeout);
         console.error('Real crawl failed:', crawlError);
         
         // Store error but create a fallback result with some real data
