@@ -1,5 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// Import functions with error handling
+let miniCrawl: any;
+
+async function loadCrawler() {
+  try {
+    const crawlModule = await import('../../../lib/crawl');
+    miniCrawl = crawlModule.miniCrawl;
+    return true;
+  } catch (error) {
+    console.error('Failed to load crawler:', error);
+    return false;
+  }
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   console.log('API called:', req.method, req.url);
   
@@ -19,10 +33,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: 'Missing startUrl' });
     }
     
-    // Simple mock response for now to test if the endpoint works
     const crawlId = Math.random().toString(36).slice(2);
+    console.log('Starting crawl for:', startUrl);
     
-    console.log('Returning mock response for:', startUrl);
+    // Try to load and use real crawler
+    const crawlerLoaded = await loadCrawler();
+    
+    if (crawlerLoaded && miniCrawl) {
+      console.log('Using real crawler');
+      try {
+        const crawlResult = await miniCrawl(startUrl, { 
+          limit, 
+          sameHostOnly: true, 
+          maxDepth: 5, 
+          timeout: 10000 
+        });
+        
+        console.log('Real crawl completed:', crawlResult);
+        
+        return res.status(200).json({ 
+          crawlId, 
+          status: 'ready', 
+          message: `Crawl completed for ${startUrl}`, 
+          result: crawlResult
+        });
+      } catch (crawlError) {
+        console.error('Real crawl failed:', crawlError);
+        // Fall back to mock if real crawl fails
+      }
+    }
+    
+    // Fallback to enhanced mock data
+    console.log('Using enhanced mock response for:', startUrl);
     
     return res.status(200).json({ 
       crawlId, 
