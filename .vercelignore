@@ -1,6 +1,5 @@
-apps/
-packages/shared/
-packages/prisma/
+apps-backup/
+packages-backup/
 chrome-extension/
 worker/
 *.log
