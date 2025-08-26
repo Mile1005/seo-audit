@@ -1,0 +1,10 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 64' width='192' height='128' role='img' aria-label='Capterra badge'>
+  <defs>
+    <linearGradient id='c' x1='0' x2='1'>
+      <stop offset='0' stop-color='#2b6cb0'/>
+      <stop offset='1' stop-color='#4299e1'/>
+    </linearGradient>
+  </defs>
+  <path d='M10 32L86 8 50 56z' fill='url(#c)'/>
+  <circle cx='24' cy='32' r='6' fill='#fff'/>
+</svg>
