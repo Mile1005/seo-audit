@@ -1,45 +1,10 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import EnhancedHeader from '../components/layout/EnhancedHeader';
 import Footer from '../components/layout/Footer';
 
 export const dynamic = 'force-dynamic';
-
-function StaticHeader() {
-  return (
-    <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Link href="/" className="text-2xl font-bold text-gray-900">
-              AISEO Turbo
-            </Link>
-          </div>
-          <nav className="hidden md:flex space-x-8">
-            <Link href="/seo-audit" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              SEO Audit
-            </Link>
-            <Link href="/site-crawler" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              Site Crawler
-            </Link>
-            <Link href="/backlinks" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              Backlinks
-            </Link>
-            <Link href="/rank-tracker" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              Rank Tracker
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </div>
-    </header>
-  );
-}
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState(0);
@@ -112,7 +77,7 @@ export default function HomePage() {
 
   return (
     <>
-      <StaticHeader />
+  <EnhancedHeader />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />

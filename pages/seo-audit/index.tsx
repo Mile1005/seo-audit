@@ -58,8 +58,8 @@ export default function SeoAuditPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Redirect to results page
-        router.push(`/seo-audit/results?id=${data.id}`);
+        const auditId = data.auditId || data.id;
+        router.push(`/seo-audit/results?id=${auditId}`);
       } else {
         throw new Error(data.error || "Failed to start audit");
       }
