@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import EnhancedHeader from "../../components/layout/EnhancedHeader";
 import Footer from "../../components/layout/Footer";
@@ -9,7 +9,7 @@ import Footer from "../../components/layout/Footer";
 export const dynamic = 'force-dynamic';
 
 export default function SiteCrawlerPage() {
-  const router = useRouter();
+  // const router = useRouter();
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [isCrawling, setIsCrawling] = useState(false);
