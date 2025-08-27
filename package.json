@@ -15,7 +15,7 @@
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
-  "resolutions": {
+  "overrides": {
     "nodemailer": "6.9.13"
   },
   "browserslist": [
