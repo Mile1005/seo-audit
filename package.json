@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:fast": "next dev --turbo",
-    "build": "next build",
+    "build": "cd seo-audit && npm install && npm run build",
     "start": "next start",
     "lint": "next lint",
     "worker": "tsx worker/index.ts",
