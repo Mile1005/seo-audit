@@ -70,12 +70,12 @@ export const dbHelpers = {
       prisma.run.count({ where: { email } }),
     ]);
 
-    const runIds = runs.map((r: any) => r.id);
+  const runIds = runs.map((r) => r.id);
     const audits = await prisma.audit.findMany({
       where: { runId: { in: runIds } },
       select: { runId: true },
     });
-    const runIdHasAudit = new Set(audits.map((a: any) => a.runId));
+  const runIdHasAudit = new Set(audits.map((a) => a.runId));
 
     return {
       runs: runs.map((run: any) => ({

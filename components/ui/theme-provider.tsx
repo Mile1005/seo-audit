@@ -1,76 +1,63 @@
 "use client";
-
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Theme } from "@/types/theme";
-import { getTheme, setTheme as saveTheme, resolveCssVars } from "@/lib/theme";
+type Mode = "light" | "dark";
+type ThemeContextValue = {
+  mode: Mode;
+  setMode: (m: Mode) => void;
+};
 
-interface ThemeProviderProps {
-  children: React.ReactNode;
-}
-
-const ThemeContext = createContext<Theme | undefined>(undefined);
+const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
+  return ctx;
 }
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme | undefined>(undefined);
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [mode, setModeState] = useState<Mode>("light");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const savedTheme = getTheme();
-    setTheme(savedTheme);
+    setMounted(true);
+    const saved = typeof window !== "undefined" ? (localStorage.getItem("theme-mode") as Mode | null) : null;
+    const preferredDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const nextMode: Mode = saved ?? (preferredDark ? "dark" : "light");
+    apply(nextMode);
   }, []);
 
-  useEffect(() => {
-    if (theme) {
-      saveTheme(theme);
-      const cssVars = resolveCssVars(theme);
-      Object.entries(cssVars).forEach(([key, value]) => {
-        document.documentElement.style.setProperty(key, value);
-      });
-      document.documentElement.classList.toggle("dark", theme.mode === "dark");
+  const apply = (m: Mode) => {
+    setModeState(m);
+    if (typeof document !== "undefined") {
+      document.documentElement.classList.toggle("dark", m === "dark");
     }
-  }, [theme]);
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("theme-mode", m);
+    }
+  };
 
-  if (!theme) {
-    return null; // Or a loading spinner
-  }
+  const setMode = (m: Mode) => apply(m);
+
+  if (!mounted) return null;
 
   return (
-    <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ mode, setMode }}>
+      {children}
+    </ThemeContext.Provider>
   );
 }
 
 export function ThemeSwitcher() {
-    const theme = useTheme();
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-
-    if (!isMounted) {
-        return null;
-    }
-
-    const toggleTheme = () => {
-        const newTheme = {
-            ...theme,
-            mode: theme.mode === 'light' ? 'dark' : 'light',
-        };
-        // In a real app, you'd call a function to update the theme state
-        // For now, we'll just log it.
-        console.log('Switching to', newTheme.mode, 'mode');
-    };
-
-    return (
-        <button onClick={toggleTheme} style={{ minWidth: '44px', minHeight: '44px' }}>
-            Switch to {theme.mode === 'light' ? 'dark' : 'light'} mode
-        </button>
-    );
+  const { mode, setMode } = useTheme();
+  return (
+    <button
+      type="button"
+      aria-label="Toggle color mode"
+      onClick={() => setMode(mode === "light" ? "dark" : "light")}
+      className="inline-flex items-center justify-center rounded-md border px-3 py-2 text-sm"
+      style={{ minWidth: 44, minHeight: 44 }}
+    >
+      {mode === "light" ? "Dark" : "Light"}
+    </button>
+  );
 }
