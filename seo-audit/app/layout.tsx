@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import WebVitalsClient from "./WebVitalsClient";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -12,19 +13,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SEO-Audit — AI Readiness Audit",
-  description: "Free AI Visibility Audit for your page. Analyze SEO readiness and get quick wins.",
-  metadataBase: new URL("https://example.com"),
+  title: "aiseoturbo.com — AI-Powered SEO Audits and Optimization",
+  description: "Instantly audit and improve your website's SEO with AI-driven insights. Get a free audit and actionable recommendations to boost your rankings and visibility.",
+  metadataBase: new URL("https://aiseoturbo.com"),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <title>SEO Audit</title>
+        <title>aiseoturbo.com</title>
       </head>
-      <body>
-        {children}
+      <body className={inter.variable}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
         {/* Add Web Vitals Client Collector */}
