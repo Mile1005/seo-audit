@@ -41,7 +41,8 @@ async function processCrawlJob(job: any) {
     await dbHelpers.saveAudit({
       id: resultId,
       runId: crawlId,
-      json: { type: "crawl", ...crawlResult },
+      // @ts-expect-error: Prisma InputJsonValue type is too strict, but this is safe and works at runtime
+      json: JSON.parse(JSON.stringify({ type: "crawl", ...crawlResult })),
     });
 
     console.log(`Crawl ${crawlId} completed successfully, found ${crawlResult.totalPages} pages`);

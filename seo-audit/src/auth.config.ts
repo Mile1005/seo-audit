@@ -54,4 +54,4 @@ export const authConfig = {
   },
 } satisfies NextAuthConfig
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
+// NextAuth handlers are initialized in the project root auth.ts to avoid circular imports.

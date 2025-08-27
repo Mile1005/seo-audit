@@ -3,12 +3,22 @@ import type { Config } from "tailwindcss";
 export default {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./lib/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
+        primary: "#3B82F6",
+        accent: "#8B5CF6",
         'accent-primary': '#00d4ff',
         'accent-secondary': '#0099cc',
         'accent-tertiary': '#006699',
@@ -20,6 +30,11 @@ export default {
         'text-primary': '#ffffff',
         'text-secondary': '#a0a0a0',
         'border-color': '#333333',
+      },
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
         'inter': ['Inter', 'sans-serif'],

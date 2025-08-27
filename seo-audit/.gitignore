@@ -1,4 +1,6 @@
-.env*
+# Ignore environment files with secrets
+.env
+apps/worker/.env
 .next/
 node_modules/
 coverage/
@@ -10,3 +12,4 @@ tsconfig.tsbuildinfo
 *.tsbuildinfo
 
 
+node_modules

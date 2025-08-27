@@ -1,0 +1,194 @@
+name: Perplexity Fixes
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analyze-and-fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+      statuses: write
+    env:
+      GH_TOKEN: ${{ secrets.AI_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git identity
+        run: |
+          git config user.name "perplexity-bot"
+          git config user.email "perplexity-bot@example.com"
+
+      - name: Create extension MV3 baseline branch and seed files
+        id: seed
+        shell: bash
+        run: |
+          set -e
+          BRANCH="ai/extension-mv3-baseline"
+          # Create or reuse the branch locally
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$BRANCH":"$BRANCH"
+            git checkout "$BRANCH"
+          else
+            git checkout -b "$BRANCH"
+          fi
+
+          mkdir -p chrome-extension
+
+          # Seed manifest.json only if missing
+          if [ ! -f chrome-extension/manifest.json ]; then
+            cat > chrome-extension/manifest.json <<'JSON'
+            {
+              "manifest_version": 3,
+              "name": "SEO Audit Helper",
+              "version": "0.1.0",
+              "description": "Assists with page-level SEO checks.",
+              "action": {
+                "default_title": "SEO Audit",
+                "default_popup": "popup.html"
+              },
+              "permissions": ["storage","activeTab","scripting"],
+              "host_permissions": ["<all_urls>"],
+              "background": {
+                "service_worker": "background.js",
+                "type": "module"
+              },
+              "icons": {
+                "16": "icons/icon16.png",
+                "48": "icons/icon48.png",
+                "128": "icons/icon128.png"
+              },
+              "content_scripts": [
+                { "matches": ["<all_urls>"], "js": ["content.js"], "run_at": "document_idle" }
+              ]
+            }
+            JSON
+          fi
+
+          # Seed minimal background, content, and popup if missing
+          [ -f chrome-extension/background.js ] || cat > chrome-extension/background.js <<'JS'
+          // MV3 service worker (module)
+          chrome.runtime.onInstalled.addListener(() => {
+            console.log("SEO Audit Helper installed");
+          });
+
+          chrome.action.onClicked.addListener(async (tab) => {
+            try {
+              if (!tab.id) return;
+              await chrome.scripting.executeScript({
+                target: { tabId: tab.id },
+                files: ["content.js"]
+              });
+            } catch (e) {
+              console.error("Injection failed:", e);
+            }
+          });
+
+          chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+            if (msg?.type === "PING") {
+              sendResponse({ ok: true, ts: Date.now() });
+              return true;
+            }
+          });
+          JS
+
+          [ -f chrome-extension/content.js ] || cat > chrome-extension/content.js <<'JS'
+          // content script sanity check
+          console.log("SEO Audit Helper content script loaded");
+          chrome.runtime.sendMessage({ type: "PING" }, (res) => {
+            console.log("Background response:", res);
+          });
+          JS
+
+          [ -f chrome-extension/popup.html ] || cat > chrome-extension/popup.html <<'HTML'
+          <!doctype html>
+          <html>
+            <head>
+              <meta charset="utf-8">
+              <title>SEO Audit</title>
+              <style>
+                body { font: 14px system-ui, sans-serif; margin: 12px; }
+                button { padding: 6px 10px; }
+                #status { margin-top: 8px; color: #0a0; }
+              </style>
+            </head>
+            <body>
+              <button id="ping">Ping</button>
+              <div id="status"></div>
+              <script type="module">
+                const btn = document.getElementById("ping");
+                const status = document.getElementById("status");
+                btn.addEventListener("click", () => {
+                  chrome.runtime.sendMessage({ type: "PING" }, (res) => {
+                    status.textContent = res ? "OK " + new Date(res.ts).toLocaleTimeString() : "No response";
+                  });
+                });
+              </script>
+            </body>
+          </html>
+          HTML
+
+          mkdir -p chrome-extension/icons
+          # Add tiny placeholder icons if none exist
+          if [ ! -f chrome-extension/icons/icon16.png ]; then
+            echo -n > chrome-extension/icons/icon16.png
+            echo -n > chrome-extension/icons/icon48.png
+            echo -n > chrome-extension/icons/icon128.png
+          fi
+
+          # Create README instructions (added once)
+          [ -f chrome-extension/README.md ] || cat > chrome-extension/README.md <<'MD'
+          Load in Chrome:
+          1) Build step not required yet (plain JS files).
+          2) Visit chrome://extensions, enable Developer mode.
+          3) Click "Load unpacked" and select the chrome-extension folder.
+          4) Pin the extension, click the icon, press "Ping", check console output.
+          Next PR will replace placeholders with TypeScript bundling and real logic.
+          MD
+
+          # Commit if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "feat(extension): add MV3 scaffold (background, content, popup)"
+          else
+            echo "No scaffold changes needed."
+          fi
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Push branch
+        if: steps.seed.outputs.branch != ''
+        shell: bash
+        run: |
+          BRANCH="${{ steps.seed.outputs.branch }}"
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} "$BRANCH" || true
+
+      - name: Open PR (idempotent)
+        if: steps.seed.outputs.branch != ''
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_TOKEN }}
+          script: |
+            const {owner, repo} = context.repo;
+            const head = 'ai/extension-mv3-baseline';
+            const base = 'main';
+            const title = 'AI: Extension MV3 baseline (scaffold)';
+            const body = [
+              'Adds a minimal Manifest V3 scaffold (service worker, content script, popup) to enable load-unpacked testing.',
+              '',
+              'Verification:',
+              '- chrome://extensions → Developer mode → Load unpacked → select chrome-extension/',
+              '- Open any page, click the extension icon, open DevTools → Console to see logs.',
+              '',
+              'Next PR: replace placeholders with TypeScript, proper bundling, refined permissions/host_permissions, and working SEO logic.'
+            ].join('\n');
+            const prs = await github.rest.pulls.list({ owner, repo, head: `${owner}:${head}`, state: 'open' });
+            if (prs.data.length === 0) {
+              await github.rest.pulls.create({ owner, repo, title, head, base, body, maintainer_can_modify: true });
+            }
+        
