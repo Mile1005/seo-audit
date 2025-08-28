@@ -44,7 +44,7 @@ export default function Header() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <ThemeSwitcher />
           <Link
-            href="/seo-audit"
+            href="/features/seo-audit"
             data-testid="cta-primary"
             className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-md hover:bg-primary/90 transition-colors"
           >

@@ -41,7 +41,7 @@ export default function EnhancedHeader() {
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <Link
-            href="/seo-audit"
+            href="/features/seo-audit"
             className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-md hover:bg-primary/90 transition-colors"
           >
             Start Free Audit
