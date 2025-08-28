@@ -34,6 +34,12 @@ export default function Header() {
               SEO Audit
             </Link>
             <Link
+              href="/features/site-crawler"
+              className="text-foreground/60 transition-colors hover:text-foreground/80"
+            >
+              Site Crawler
+            </Link>
+            <Link
               href="/contact"
               className="text-foreground/60 transition-colors hover:text-foreground/80"
             >
