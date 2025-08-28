@@ -14,7 +14,7 @@ const footerSections = [
   {
     title: "Product",
     links: [
-      { label: "SEO Audit", href: "/seo-audit" },
+      { label: "SEO Audit", href: "/features/seo-audit" },
       { label: "Competitor Analysis", href: "/features" },
       { label: "Rank Tracker", href: "/rank-tracker" },
       { label: "Site Crawler", href: "/site-crawler" }
@@ -122,7 +122,7 @@ export default function Footer() {
         <div className="py-8 border-t border-slate-800">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © 2025 AISEOTurbo. All rights reserved.
+              Â© 2025 AISEOTurbo. All rights reserved.
             </p>
             <div className="flex items-center space-x-6">
               <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
