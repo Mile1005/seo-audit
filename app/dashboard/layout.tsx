@@ -1,4 +1,4 @@
-import { auth } from "@/auth"
+// import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader"
 
@@ -8,6 +8,7 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   // Temporarily use mock session for homepage development
+  // const session = await auth()
   const session = {
     user: {
       id: "mock-user",

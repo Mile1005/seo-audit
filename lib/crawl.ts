@@ -76,12 +76,12 @@ export async function miniCrawl(
 
   const startTime = Date.now();
   const visited = new Set<string>();
-  let queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
+  const queue: Array<{ url: string; depth: number }> = [{ url: startUrl, depth: 0 }];
   const pages: (CrawlPage & { brokenLinks?: string[]; og?: any; twitter?: any; structuredData?: any[] })[] = [];
   const baseHost = new URL(startUrl).hostname;
   const concurrency = 2; // Further reduced concurrency for faster completion
-  let active = 0;
-  let shouldStop = false;
+  const active = 0;
+  const shouldStop = false;
 
   console.log(`Starting crawl for ${startUrl} with options:`, { limit, maxDepth, timeout, concurrency });
 
@@ -170,7 +170,7 @@ export async function miniCrawl(
         }
         
         // Simplified broken link detection (disabled for speed)
-        let pageBroken: string[] = [];
+        const pageBroken: string[] = [];
         // Skip broken link detection to speed up crawling
         // if (page.status === 200 && page.html && depth < maxDepth - 1) {
         //   // Broken link detection code removed for performance

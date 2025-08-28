@@ -4,7 +4,64 @@ import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown } from "lucide-react"
-import { DesktopDropdown } from "./desktop-dropdown"
+// import { DesktopDropdown } from "./desktop-dropdown"
+
+// Temporary inline dropdown component to fix TypeScript issues
+interface DropdownItem {
+  label: string
+  href: string
+  description?: string
+}
+
+interface DesktopDropdownProps {
+  items: DropdownItem[]
+  isOpen: boolean
+  onClose: () => void
+}
+
+function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        onClose()
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  return (
+    <motion.div
+      ref={dropdownRef}
+      initial={{ opacity: 0, y: -10, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -10, scale: 0.95 }}
+      transition={{ duration: 0.2 }}
+      className="absolute top-full left-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
+    >
+      {items.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className="block px-4 py-3 hover:bg-gray-50 transition-colors duration-150"
+          onClick={onClose}
+        >
+          <div className="font-medium text-gray-900">{item.label}</div>
+          {item.description && (
+            <div className="text-sm text-gray-500 mt-1">{item.description}</div>
+          )}
+        </Link>
+      ))}
+    </motion.div>
+  )
+}
 
 export interface NavigationItem {
   label: string

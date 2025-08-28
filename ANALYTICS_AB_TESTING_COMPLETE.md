@@ -162,6 +162,23 @@ npm run test:e2e tests/homepage-essential.spec.ts
 2. **Firefox Compatibility**: Fix timeout issues
 3. **Keyboard Navigation**: Ensure focus management works across browsers
 
+### Desktop Polish Specifications 🖥️
+**Layout & Spacing**:
+- All sections specify multi-column behavior at `lg+` breakpoints
+- Generous whitespace with max-width capped at 1400px to prevent edge stretching
+- Consistent grid systems across all homepage sections
+
+**Micro-Interactions**:
+- Hover effects on all interactive elements (buttons, cards, navigation)
+- Desktop-only parallax effects wrapped in `motion-safe` conditions
+- Reduced-motion accessibility compliance for all animations
+- Performance-optimized transitions using CSS transforms
+
+**Accessibility & Performance**:
+- Motion effects respect `prefers-reduced-motion` user preferences
+- Desktop enhancements degrade gracefully on mobile
+- Hover states provide clear visual feedback without breaking mobile touch
+
 ### Optional (Enhancement)
 1. **A/B Test Visibility**: Add server-side rendering for better test detection
 2. **Error Monitoring**: Integrate Sentry or similar for production error tracking

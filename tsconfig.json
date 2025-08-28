@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "Bundler",
@@ -14,15 +18,56 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/lib/*": ["lib/*"],
-      "@/components/*": ["components/*"],
-      "@/auth": ["auth"],
-      "@/auth/*": ["auth/*"]
+      "@/lib/*": [
+        "lib/*"
+      ],
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/auth": [
+        "auth"
+      ],
+      "@/auth/*": [
+        "auth/*"
+      ]
     },
     "allowJs": true,
     "esModuleInterop": true,
-    "plugins": [{ "name": "next" }]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components/**/*.ts", 
+    "components/**/*.tsx",
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
+    "pages/**/*.ts",
+    "pages/**/*.tsx",
+    "styles/**/*.ts",
+    "styles/**/*.tsx",
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "seo-audit/**/*",
+    "seo-audit/app/**/*",
+    "seo-audit/src/**/*",
+    "apps-backup/**/*",
+    "chrome-extension/**/*",
+    "worker/**/*",
+    "auth.ts.disabled",
+    "src/**/*",
+    "lib/theme.ts.disabled",
+    ".next/**/*",
+    "**/*.d.ts",
+    "**/route.ts",
+    "**/layout.tsx",
+    "**/page.tsx"
+  ]
 }

@@ -430,7 +430,7 @@ function performSEOChecks($: cheerio.CheerioAPI, title: string | null, metaDescr
   return { passed_checks: passedChecks, failed_checks: failedChecks };
 }
 
-function generateIssues($: cheerio.CheerioAPI, title: string | null, metaDescription: string | null, canonical: string | null, h1: string[], images: cheerio.Cheerio<cheerio.Element>) {
+function generateIssues($: cheerio.CheerioAPI, title: string | null, metaDescription: string | null, canonical: string | null, h1: string[], images: cheerio.Cheerio<any>) {
   const issues: Array<{
     title: string;
     description: string;

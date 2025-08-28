@@ -12,7 +12,7 @@ const TTL_SECONDS = 60 * 30; // 30 minutes
 const KEY = (id: string) => `crawl:${id}`;
 
 let redis: IORedis | null = null;
-let memoryStore = new Map<string, CrawlRecord>();
+const memoryStore = new Map<string, CrawlRecord>();
 
 function getRedisUrl(): string | null {
   return (

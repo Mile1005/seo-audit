@@ -118,6 +118,11 @@ export function ExitIntentModal({
     }
   }, [isVisible])
 
+  const handleClose = useCallback(() => {
+    setIsVisible(false)
+    onClose?.()
+  }, [onClose])
+
   // Escape key handler
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -136,12 +141,7 @@ export function ExitIntentModal({
       document.removeEventListener('keydown', handleEscape)
       document.body.style.overflow = 'unset'
     }
-  }, [isVisible])
-
-  const handleClose = () => {
-    setIsVisible(false)
-    onClose?.()
-  }
+  }, [isVisible, handleClose])
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
