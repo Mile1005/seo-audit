@@ -13,10 +13,10 @@ import {
 } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { MainLayout } from "../../../components/layout/main-layout";
-import HowAiWorks from "../../../components/features/ai-assistant/how-ai-works";
-import RecommendationTypes from "../../../components/features/ai-assistant/recommendation-types";
-import ImplementationGuides from "../../../components/features/ai-assistant/implementation-guides";
-import IndustrySpecialization from "../../../components/features/ai-assistant/industry-specialization";
+import HowAiWorks from "../../../components/features/ai-assistant/how-ai-works.tsx";
+import RecommendationTypes from "../../../components/features/ai-assistant/recommendation-types.tsx";
+import ImplementationGuides from "../../../components/features/ai-assistant/implementation-guides.tsx";
+import IndustrySpecialization from "../../../components/features/ai-assistant/industry-specialization.tsx";
 
 export default function AiAssistantPage() {
   const heroMetrics = [

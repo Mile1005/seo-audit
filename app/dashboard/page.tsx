@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { m as motion } from "framer-motion"
 import { Plus, FolderOpen, BarChart3 } from "lucide-react"
 import Link from "next/link"
+import { MainLayout } from '../../components/layout/main-layout'
 
 export default function DashboardPage() {
   // Minimal placeholder to avoid server-only auth/db in client boundary during homepage work.
@@ -13,7 +14,8 @@ export default function DashboardPage() {
   }, [])
 
   return (
-    <div className="space-y-8">
+    <MainLayout>
+      <div className="space-y-8">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-white mb-4">
           Welcome back
@@ -96,5 +98,6 @@ export default function DashboardPage() {
         </div>
       )}
     </div>
+    </MainLayout>
   )
 }

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { MainLayout } from '../../components/layout/main-layout'
 
 export const metadata: Metadata = {
   title: 'Terms of Service | AISEOTurbo',
@@ -8,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+    <MainLayout>
+      <div className="min-h-screen bg-background">{/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -155,5 +156,6 @@ export default function TermsPage() {
         </div>
       </section>
     </div>
+    </MainLayout>
   )
 }

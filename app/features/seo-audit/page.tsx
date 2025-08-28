@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star } from 'lucide-react'
+import { MainLayout } from '../../../components/layout/main-layout'
 
 // Import all feature components
 import AuditCategories from '../../../components/features/seo-audit/audit-categories'
@@ -67,8 +68,8 @@ export default function SEOAuditFeaturePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+    <MainLayout>
+      <div className="min-h-screen bg-background">{/* Hero Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 via-background to-muted/20">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -387,5 +388,6 @@ export default function SEOAuditFeaturePage() {
         </div>
       </section>
     </div>
+    </MainLayout>
   )
 }

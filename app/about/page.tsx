@@ -1,4 +1,5 @@
 ﻿import { Metadata } from 'next'
+import { MainLayout } from '../../components/layout/main-layout'
 
 export const metadata: Metadata = {
   title: 'About Us | AISEOTurbo - AI-Powered SEO Solutions',
@@ -8,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+    <MainLayout>
+      <div className="min-h-screen bg-background">{/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
         
@@ -119,5 +120,6 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
+    </MainLayout>
   )
 }
