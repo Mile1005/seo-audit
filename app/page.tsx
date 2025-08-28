@@ -8,6 +8,19 @@ import { PricingCards } from "@/components/pricing/pricing-cards"
 import { EmailCaptureInline } from "@/components/lead/email-capture-inline"
 import { ExitIntentModal } from "@/components/lead/exit-intent-modal"
 import { ContentGate } from "@/components/lead/content-gate"
+import { MainLayout } from "@/components/layout/main-layout"
+import { generateSEOMeta, generateStructuredData, pageSEO } from "@/lib/seo"
+import { Metadata } from 'next'
+
+// SEO metadata for the homepage
+export const metadata: Metadata = generateSEOMeta(pageSEO.home)
+
+// Structured data for the homepage
+const structuredData = {
+  website: generateStructuredData('website'),
+  organization: generateStructuredData('organization'),
+  product: generateStructuredData('product')
+}
 
 export default function Home() {
   // Sample content for the content gate
@@ -100,7 +113,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen">
+    <MainLayout>
       <HeroSection />
       <TrustLogos />
       <FeaturesShowcase />
@@ -165,6 +178,18 @@ export default function Home() {
 
       {/* Exit Intent Modal */}
       <ExitIntentModal isEnabled={true} />
-    </main>
+
+      {/* Structured Data */}
+      <script 
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            structuredData.website,
+            structuredData.organization,
+            structuredData.product
+          ])
+        }}
+      />
+    </MainLayout>
   );
 }

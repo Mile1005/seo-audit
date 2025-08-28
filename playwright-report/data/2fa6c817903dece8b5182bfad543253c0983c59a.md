@@ -1,0 +1,812 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8] [cursor=pointer]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - navigation [ref=e13]:
+      - generic [ref=e15]:
+        - link "AISEOTurbo" [ref=e17] [cursor=pointer]:
+          - /url: /
+        - button "Toggle navigation menu" [ref=e18] [cursor=pointer]:
+          - img [ref=e19] [cursor=pointer]
+    - main [ref=e20]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - img [ref=e31]
+            - generic [ref=e33]: AI-Powered SEO Analysis
+          - heading "Professional SEO Audits Made Simple" [level=1] [ref=e35]:
+            - text: Professional
+            - generic [ref=e36]: SEO Audits
+            - text: Made Simple
+        - paragraph [ref=e37]:
+          - text: Get actionable insights that
+          - generic [ref=e38]: boost your rankings
+          - text: and
+          - generic [ref=e39]: drive organic traffic
+          - text: . Join 1,000+ marketers who trust our AI-powered audits to identify critical SEO issues in minutes.
+        - generic [ref=e40]:
+          - button "Boost Your Rankings Now" [ref=e42] [cursor=pointer]
+          - button "See Live Demo" [ref=e43] [cursor=pointer]:
+            - img [ref=e44] [cursor=pointer]
+            - generic [ref=e46] [cursor=pointer]: See Live Demo
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e50]
+              - generic [ref=e52]: 47+
+            - paragraph [ref=e53]: SEO Checks
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - img [ref=e56]
+              - generic [ref=e59]: 3m
+            - paragraph [ref=e60]: Avg Audit Time
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - img [ref=e63]
+              - generic [ref=e68]: 1,000+
+            - paragraph [ref=e69]: Marketers
+      - generic [ref=e71]:
+        - paragraph [ref=e73]: Trusted by leading companies
+        - generic [ref=e77]:
+          - generic [ref=e79]: TechCrunch
+          - generic [ref=e81]: Forbes
+          - generic [ref=e83]: Entrepreneur
+          - generic [ref=e85]: Inc
+          - generic [ref=e87]: Product Hunt
+          - generic [ref=e89]: Mashable
+          - generic [ref=e91]: VentureBeat
+          - generic [ref=e93]: The Next Web
+          - generic [ref=e95]: TechCrunch
+          - generic [ref=e97]: Forbes
+          - generic [ref=e99]: Entrepreneur
+          - generic [ref=e101]: Inc
+          - generic [ref=e103]: Product Hunt
+          - generic [ref=e105]: Mashable
+          - generic [ref=e107]: VentureBeat
+          - generic [ref=e109]: The Next Web
+        - generic [ref=e110]:
+          - generic [ref=e111]:
+            - generic [ref=e112]:
+              - generic [ref=e113]: A
+              - generic [ref=e114]: B
+              - generic [ref=e115]: C
+              - generic [ref=e116]: D
+            - generic [ref=e117]:
+              - text: Join
+              - generic [ref=e118]: 1,000+ marketers
+          - generic [ref=e119]:
+            - img [ref=e120]
+            - img [ref=e122]
+            - img [ref=e124]
+            - img [ref=e126]
+            - img [ref=e128]
+            - generic [ref=e130]:
+              - generic [ref=e131]: 4.9/5
+              - text: from 500+ reviews
+      - generic [ref=e137]:
+        - generic [ref=e138]:
+          - generic [ref=e140]: ✨ Why Choose AI SEO Turbo
+          - heading "SEO Audits That Actually Drive Results" [level=2] [ref=e141]:
+            - generic [ref=e142]: SEO Audits That Actually
+            - generic [ref=e143]: Drive Results
+          - paragraph [ref=e144]: Stop wasting time on generic SEO tools. Get AI-powered insights that identify real opportunities and provide actionable steps to boost your organic traffic.
+        - generic [ref=e145]:
+          - generic [ref=e147] [cursor=pointer]:
+            - img [ref=e150] [cursor=pointer]
+            - generic [ref=e158] [cursor=pointer]:
+              - heading "AI-Powered Analysis" [level=3] [ref=e159] [cursor=pointer]
+              - paragraph [ref=e160] [cursor=pointer]: Get insights that human auditors miss
+              - button "Learn more" [ref=e161] [cursor=pointer]:
+                - generic [ref=e162] [cursor=pointer]: Learn more
+                - img [ref=e163] [cursor=pointer]
+          - generic [ref=e166] [cursor=pointer]:
+            - img [ref=e169] [cursor=pointer]
+            - generic [ref=e171] [cursor=pointer]:
+              - heading "3-Minute Audits" [level=3] [ref=e172] [cursor=pointer]
+              - paragraph [ref=e173] [cursor=pointer]: Complete comprehensive audits in minutes, not hours
+              - button "Learn more" [ref=e174] [cursor=pointer]:
+                - generic [ref=e175] [cursor=pointer]: Learn more
+                - img [ref=e176] [cursor=pointer]
+          - generic [ref=e179] [cursor=pointer]:
+            - img [ref=e182] [cursor=pointer]
+            - generic [ref=e186] [cursor=pointer]:
+              - heading "Priority-Based Fixes" [level=3] [ref=e187] [cursor=pointer]
+              - paragraph [ref=e188] [cursor=pointer]: Focus on changes that actually move rankings
+              - button "Learn more" [ref=e189] [cursor=pointer]:
+                - generic [ref=e190] [cursor=pointer]: Learn more
+                - img [ref=e191] [cursor=pointer]
+          - generic [ref=e194] [cursor=pointer]:
+            - img [ref=e197] [cursor=pointer]
+            - generic [ref=e200] [cursor=pointer]:
+              - heading "Traffic Impact Forecasts" [level=3] [ref=e201] [cursor=pointer]
+              - paragraph [ref=e202] [cursor=pointer]: See potential traffic gains before implementing
+              - button "Learn more" [ref=e203] [cursor=pointer]:
+                - generic [ref=e204] [cursor=pointer]: Learn more
+                - img [ref=e205] [cursor=pointer]
+          - generic [ref=e208] [cursor=pointer]:
+            - img [ref=e211] [cursor=pointer]
+            - generic [ref=e214] [cursor=pointer]:
+              - heading "Competitive Intelligence" [level=3] [ref=e215] [cursor=pointer]
+              - paragraph [ref=e216] [cursor=pointer]: Discover what top competitors are doing right
+              - button "Learn more" [ref=e217] [cursor=pointer]:
+                - generic [ref=e218] [cursor=pointer]: Learn more
+                - img [ref=e219] [cursor=pointer]
+          - generic [ref=e222] [cursor=pointer]:
+            - img [ref=e225] [cursor=pointer]
+            - generic [ref=e227] [cursor=pointer]:
+              - heading "Technical SEO Scanner" [level=3] [ref=e228] [cursor=pointer]
+              - paragraph [ref=e229] [cursor=pointer]: Catch technical issues killing your rankings
+              - button "Learn more" [ref=e230] [cursor=pointer]:
+                - generic [ref=e231] [cursor=pointer]: Learn more
+                - img [ref=e232] [cursor=pointer]
+          - generic [ref=e235] [cursor=pointer]:
+            - img [ref=e238] [cursor=pointer]
+            - generic [ref=e240] [cursor=pointer]:
+              - heading "Progress Tracking" [level=3] [ref=e241] [cursor=pointer]
+              - paragraph [ref=e242] [cursor=pointer]: Monitor improvements with before/after metrics
+              - button "Learn more" [ref=e243] [cursor=pointer]:
+                - generic [ref=e244] [cursor=pointer]: Learn more
+                - img [ref=e245] [cursor=pointer]
+          - generic [ref=e248] [cursor=pointer]:
+            - img [ref=e251] [cursor=pointer]
+            - generic [ref=e254] [cursor=pointer]:
+              - heading "Step-by-Step Guides" [level=3] [ref=e255] [cursor=pointer]
+              - paragraph [ref=e256] [cursor=pointer]: Get detailed instructions, not just problem lists
+              - button "Learn more" [ref=e257] [cursor=pointer]:
+                - generic [ref=e258] [cursor=pointer]: Learn more
+                - img [ref=e259] [cursor=pointer]
+        - generic [ref=e262]:
+          - heading "Ready to boost your SEO?" [level=3] [ref=e263]
+          - paragraph [ref=e264]: Join 1,000+ marketers who trust our AI-powered audits to identify critical issues and opportunities.
+          - generic [ref=e265]:
+            - button "Start Your Free Audit" [ref=e266] [cursor=pointer]
+            - button "View Sample Report" [ref=e267] [cursor=pointer]
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - generic [ref=e274]:
+            - img [ref=e275]
+            - generic [ref=e277]: Interactive Demo
+          - heading "See Your SEO Audit In Action" [level=2] [ref=e278]:
+            - generic [ref=e279]: See Your SEO Audit
+            - generic [ref=e280]: In Action
+          - paragraph [ref=e281]: Experience our AI-powered audit process with this interactive demo. See exactly what insights you'll get in under 3 minutes.
+        - generic [ref=e284]:
+          - generic [ref=e285]:
+            - heading "Enter Your Website URL" [level=3] [ref=e286]
+            - paragraph [ref=e287]: Try with any URL to see our audit process in action
+          - generic [ref=e288]:
+            - generic [ref=e289]:
+              - textbox "https://your-website.com" [ref=e290]
+              - button "Start Demo" [disabled] [ref=e291]:
+                - generic [ref=e292]: Start Demo
+                - img [ref=e293]
+            - generic [ref=e295]: "Try: \"shop.example.com\", \"blog.example.com\", or \"corp.example.com\""
+      - generic [ref=e298]:
+        - generic [ref=e299]:
+          - generic [ref=e301]: 📋
+          - generic [ref=e302]:
+            - heading "Free SEO Checklist" [level=4] [ref=e303]
+            - paragraph [ref=e304]: 47 proven optimization points
+        - generic [ref=e305]:
+          - heading "Get Your Free SEO Checklist" [level=3] [ref=e306]
+          - paragraph [ref=e307]: Join 10,000+ marketers getting actionable SEO insights delivered weekly
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - generic:
+              - img
+            - textbox "Enter your email address" [ref=e310]
+          - button "Get Free Checklist" [disabled] [ref=e311]:
+            - generic [ref=e312]: Get Free Checklist
+            - img [ref=e313]
+        - paragraph [ref=e316]: 📧 No spam, unsubscribe anytime • 🔒 Your data is secure
+      - generic [ref=e321]:
+        - generic [ref=e322]:
+          - generic [ref=e323]:
+            - img [ref=e324]
+            - generic [ref=e329]: Customer Success Stories
+          - heading "Real Results from Real Customers" [level=2] [ref=e330]:
+            - generic [ref=e331]: Real Results from
+            - generic [ref=e332]: Real Customers
+          - paragraph [ref=e333]: Join thousands of businesses that have transformed their SEO performance with actionable insights and measurable results.
+        - generic [ref=e334]:
+          - generic [ref=e336]:
+            - button "Pause carousel" [ref=e337] [cursor=pointer]:
+              - img [ref=e338] [cursor=pointer]
+            - generic [ref=e341]: 2 of 6
+          - region "Customer testimonials carousel" [ref=e342]:
+            - generic [ref=e344]:
+              - generic [ref=e346]:
+                - img [ref=e348]
+                - generic [ref=e351]:
+                  - img [ref=e352]
+                  - img [ref=e354]
+                  - img [ref=e356]
+                  - img [ref=e358]
+                  - img [ref=e360]
+                  - generic [ref=e362]: "5.0"
+                - blockquote [ref=e363]: "\"AISEOTurbo reduced our audit time from 6 hours to 20 minutes. Our team can now handle 3x more clients with the same resources.\""
+                - generic [ref=e365]:
+                  - generic [ref=e366]:
+                    - generic [ref=e367]: 300%
+                    - generic [ref=e368]: increase in client capacity
+                  - generic [ref=e370]: 📈
+                - generic [ref=e371]:
+                  - generic [ref=e375]: SC
+                  - generic [ref=e376]:
+                    - generic [ref=e377]: Sarah Chen
+                    - generic [ref=e378]: SEO Director
+                  - generic [ref=e379]:
+                    - generic [ref=e381]: DG
+                    - generic [ref=e382]: Digital Growth Agency
+              - generic [ref=e384]:
+                - img [ref=e386]
+                - generic [ref=e389]:
+                  - img [ref=e390]
+                  - img [ref=e392]
+                  - img [ref=e394]
+                  - img [ref=e396]
+                  - img [ref=e398]
+                  - generic [ref=e400]: "5.0"
+                - blockquote [ref=e401]: "\"We increased organic traffic by 180% in 4 months following AISeOTurbo's actionable recommendations. Game-changing insights.\""
+                - generic [ref=e403]:
+                  - generic [ref=e404]:
+                    - generic [ref=e405]: 180%
+                    - generic [ref=e406]: organic traffic growth
+                  - generic [ref=e408]: 📈
+                - generic [ref=e409]:
+                  - generic [ref=e413]: MR
+                  - generic [ref=e414]:
+                    - generic [ref=e415]: Marcus Rodriguez
+                    - generic [ref=e416]: Founder & CEO
+                  - generic [ref=e417]:
+                    - generic [ref=e419]: TS
+                    - generic [ref=e420]: TechFlow Solutions
+              - generic [ref=e422]:
+                - img [ref=e424]
+                - generic [ref=e427]:
+                  - img [ref=e428]
+                  - img [ref=e430]
+                  - img [ref=e432]
+                  - img [ref=e434]
+                  - img [ref=e436]
+                  - generic [ref=e438]: "5.0"
+                - blockquote [ref=e439]: "\"Our e-commerce sales jumped 85% after implementing the technical SEO fixes. The ROI was immediate and measurable.\""
+                - generic [ref=e441]:
+                  - generic [ref=e442]:
+                    - generic [ref=e443]: 85%
+                    - generic [ref=e444]: e-commerce sales increase
+                  - generic [ref=e446]: 📈
+                - generic [ref=e447]:
+                  - generic [ref=e451]: ET
+                  - generic [ref=e452]:
+                    - generic [ref=e453]: Emma Thompson
+                    - generic [ref=e454]: Head of Marketing
+                  - generic [ref=e455]:
+                    - generic [ref=e457]: SB
+                    - generic [ref=e458]: StyleCraft Boutique
+              - generic [ref=e460]:
+                - img [ref=e462]
+                - generic [ref=e465]:
+                  - img [ref=e466]
+                  - img [ref=e468]
+                  - img [ref=e470]
+                  - img [ref=e472]
+                  - img [ref=e474]
+                  - generic [ref=e476]: "5.0"
+                - blockquote [ref=e477]: "\"AISeOTurbo identified critical Core Web Vitals issues that our dev team missed. Page speed improved 60% and conversions followed.\""
+                - generic [ref=e479]:
+                  - generic [ref=e480]:
+                    - generic [ref=e481]: 60%
+                    - generic [ref=e482]: page speed improvement
+                  - generic [ref=e484]: 📈
+                - generic [ref=e485]:
+                  - generic [ref=e489]: DP
+                  - generic [ref=e490]:
+                    - generic [ref=e491]: David Park
+                    - generic [ref=e492]: Growth Marketing Manager
+                  - generic [ref=e493]:
+                    - generic [ref=e495]: CP
+                    - generic [ref=e496]: CloudSync Pro
+              - generic [ref=e498]:
+                - img [ref=e500]
+                - generic [ref=e503]:
+                  - img [ref=e504]
+                  - img [ref=e506]
+                  - img [ref=e508]
+                  - img [ref=e510]
+                  - img [ref=e512]
+                  - generic [ref=e514]: "5.0"
+                - blockquote [ref=e515]: "\"The competitive analysis feature helped us steal 40% market share from competitors. Our clients love the detailed reports.\""
+                - generic [ref=e517]:
+                  - generic [ref=e518]:
+                    - generic [ref=e519]: 40%
+                    - generic [ref=e520]: market share gained
+                  - generic [ref=e522]: 📈
+                - generic [ref=e523]:
+                  - generic [ref=e527]: LM
+                  - generic [ref=e528]:
+                    - generic [ref=e529]: Lisa Morgan
+                    - generic [ref=e530]: Digital Marketing Director
+                  - generic [ref=e531]:
+                    - generic [ref=e533]: PP
+                    - generic [ref=e534]: Peak Performance Agency
+              - generic [ref=e536]:
+                - img [ref=e538]
+                - generic [ref=e541]:
+                  - img [ref=e542]
+                  - img [ref=e544]
+                  - img [ref=e546]
+                  - img [ref=e548]
+                  - img [ref=e550]
+                  - generic [ref=e552]: "5.0"
+                - blockquote [ref=e553]: "\"Product page optimization suggestions increased our conversion rate by 45%. Every recommendation was data-driven and actionable.\""
+                - generic [ref=e555]:
+                  - generic [ref=e556]:
+                    - generic [ref=e557]: 45%
+                    - generic [ref=e558]: conversion rate boost
+                  - generic [ref=e560]: 📈
+                - generic [ref=e561]:
+                  - generic [ref=e565]: AK
+                  - generic [ref=e566]:
+                    - generic [ref=e567]: Alex Kim
+                    - generic [ref=e568]: E-commerce Manager
+                  - generic [ref=e569]:
+                    - generic [ref=e571]: GP
+                    - generic [ref=e572]: GearHub Pro
+            - generic [ref=e573]:
+              - button "Go to testimonial 1" [ref=e574] [cursor=pointer]
+              - button "Go to testimonial 2" [ref=e575] [cursor=pointer]
+              - button "Go to testimonial 3" [ref=e576] [cursor=pointer]
+              - button "Go to testimonial 4" [ref=e577] [cursor=pointer]
+              - button "Go to testimonial 5" [ref=e578] [cursor=pointer]
+              - button "Go to testimonial 6" [ref=e579] [cursor=pointer]
+        - generic [ref=e580]:
+          - generic [ref=e581]:
+            - generic [ref=e582]:
+              - img [ref=e583]
+              - generic [ref=e586]: Detailed Case Studies
+            - heading "Dive Deeper into Success Stories" [level=3] [ref=e587]:
+              - generic [ref=e588]: Dive Deeper into
+              - generic [ref=e589]: Success Stories
+            - paragraph [ref=e590]: Explore detailed breakdowns of how our customers achieved transformational SEO results.
+          - generic [ref=e591]:
+            - generic [ref=e593]:
+              - generic [ref=e594]:
+                - generic [ref=e595]:
+                  - generic [ref=e597]: Marketing Agency
+                  - heading "Digital Growth Agency" [level=3] [ref=e598]
+                  - paragraph [ref=e599]: Case study with Sarah Chen
+                - img [ref=e601]
+              - generic [ref=e604]:
+                - generic [ref=e605]:
+                  - generic [ref=e606]: Before
+                  - generic [ref=e607]: 6 hours per audit
+                - generic [ref=e608]:
+                  - generic [ref=e609]: After
+                  - generic [ref=e610]: 20 minutes per audit
+                - generic [ref=e612]:
+                  - generic [ref=e613]: Improvement
+                  - generic [ref=e614]: 95% time reduction
+              - generic [ref=e615]:
+                - img [ref=e616]
+                - generic [ref=e619]:
+                  - text: Achieved in
+                  - generic [ref=e620]: Within 30 days
+              - button "Read Full Case Study" [ref=e621] [cursor=pointer]:
+                - generic [ref=e622] [cursor=pointer]: Read Full Case Study
+                - img [ref=e623] [cursor=pointer]
+            - generic [ref=e626]:
+              - generic [ref=e627]:
+                - generic [ref=e628]:
+                  - generic [ref=e630]: Small Business
+                  - heading "TechFlow Solutions" [level=3] [ref=e631]
+                  - paragraph [ref=e632]: Case study with Marcus Rodriguez
+                - img [ref=e634]
+              - generic [ref=e637]:
+                - generic [ref=e638]:
+                  - generic [ref=e639]: Before
+                  - generic [ref=e640]: 2.5K monthly visits
+                - generic [ref=e641]:
+                  - generic [ref=e642]: After
+                  - generic [ref=e643]: 7K monthly visits
+                - generic [ref=e645]:
+                  - generic [ref=e646]: Improvement
+                  - generic [ref=e647]: 180% traffic increase
+              - generic [ref=e648]:
+                - img [ref=e649]
+                - generic [ref=e652]:
+                  - text: Achieved in
+                  - generic [ref=e653]: 4 months
+              - button "Read Full Case Study" [ref=e654] [cursor=pointer]:
+                - generic [ref=e655] [cursor=pointer]: Read Full Case Study
+                - img [ref=e656] [cursor=pointer]
+            - generic [ref=e659]:
+              - generic [ref=e660]:
+                - generic [ref=e661]:
+                  - generic [ref=e663]: E-commerce
+                  - heading "StyleCraft Boutique" [level=3] [ref=e664]
+                  - paragraph [ref=e665]: Case study with Emma Thompson
+                - img [ref=e667]
+              - generic [ref=e670]:
+                - generic [ref=e671]:
+                  - generic [ref=e672]: Before
+                  - generic [ref=e673]: $45K monthly revenue
+                - generic [ref=e674]:
+                  - generic [ref=e675]: After
+                  - generic [ref=e676]: $83K monthly revenue
+                - generic [ref=e678]:
+                  - generic [ref=e679]: Improvement
+                  - generic [ref=e680]: 85% revenue growth
+              - generic [ref=e681]:
+                - img [ref=e682]
+                - generic [ref=e685]:
+                  - text: Achieved in
+                  - generic [ref=e686]: 3 months
+              - button "Read Full Case Study" [ref=e687] [cursor=pointer]:
+                - generic [ref=e688] [cursor=pointer]: Read Full Case Study
+                - img [ref=e689] [cursor=pointer]
+      - generic [ref=e692]:
+        - generic [ref=e693]:
+          - heading "Exclusive Premium Content" [level=2] [ref=e694]:
+            - generic [ref=e695]: Exclusive
+            - generic [ref=e696]: Premium Content
+          - paragraph [ref=e697]: Unlock our most comprehensive SEO resources with your email
+        - generic [ref=e699]:
+          - generic [ref=e700]:
+            - generic [ref=e702]:
+              - img [ref=e704]
+              - generic [ref=e707]: Premium Checklist
+            - heading "47-Point SEO Audit Checklist" [level=3] [ref=e708]
+            - paragraph [ref=e709]: The complete technical SEO checklist used by 1000+ websites to increase organic traffic by 40% in 90 days.
+          - generic [ref=e711]:
+            - generic [ref=e713]: "This comprehensive checklist covers every aspect of technical SEO optimization: 1. TECHNICAL FOUNDATION • Site crawlability and indexation • XML sitemaps optimization • Robots.txt configuration • URL structure analysis 2. PAGE SPEED OPTIMIZATION • Core Web Vitals assessment • Image compression and formats • CSS and JavaScript optimization • Server response time analysis 3. MOBILE OPTIMIZATION • Mobile-first indexing readiness • Responsive design validation • Touch target sizing • Viewport configuration [Content continues below - unlock to see all 47 points...]"
+            - generic [ref=e715]:
+              - img [ref=e717]
+              - heading "Unlock This Premium Content" [level=4] [ref=e720]
+              - paragraph [ref=e721]: Enter your email to access this exclusive resource instantly
+              - generic [ref=e722]:
+                - textbox "Enter your email" [ref=e723]
+                - button "Unlock Content" [disabled] [ref=e724]:
+                  - img [ref=e725]
+                  - generic [ref=e728]: Unlock Content
+              - paragraph [ref=e729]: 🔒 Your email is secure • No spam ever
+      - generic [ref=e734]:
+        - generic [ref=e735]:
+          - generic [ref=e736]:
+            - img [ref=e737]
+            - generic [ref=e739]: ROI Calculator
+          - heading "Calculate Your SEO Investment ROI" [level=2] [ref=e740]:
+            - generic [ref=e741]: Calculate Your
+            - generic [ref=e742]: SEO Investment ROI
+          - paragraph [ref=e743]: See how much additional revenue you could generate with improved SEO performance. Based on real customer results.
+        - generic [ref=e745]:
+          - generic [ref=e747]:
+            - heading "Enter Your Current Metrics" [level=3] [ref=e748]
+            - generic [ref=e749]:
+              - generic [ref=e750]: Select Plan
+              - generic [ref=e751]:
+                - button "Pro $49/month" [ref=e752] [cursor=pointer]:
+                  - generic [ref=e753] [cursor=pointer]: Pro
+                  - generic [ref=e754] [cursor=pointer]: $49/month
+                - button "Agency $149/month" [ref=e755] [cursor=pointer]:
+                  - generic [ref=e756] [cursor=pointer]: Agency
+                  - generic [ref=e757] [cursor=pointer]: $149/month
+            - generic [ref=e758]:
+              - generic [ref=e759]:
+                - generic [ref=e760]: Monthly Organic Visits
+                - spinbutton "Monthly Organic Visits" [ref=e761]: "10000"
+              - generic [ref=e762]:
+                - generic [ref=e763]: Conversion Rate (%)
+                - spinbutton "Conversion Rate (%)" [ref=e764]: "2.5"
+              - generic [ref=e765]:
+                - generic [ref=e766]: Average Order Value ($)
+                - spinbutton "Average Order Value ($)" [ref=e767]: "100"
+            - generic [ref=e768]:
+              - heading "Conservative Estimates Based On Customer Data:" [level=4] [ref=e769]
+              - list [ref=e770]:
+                - listitem [ref=e771]: • 30% average increase in organic traffic
+                - listitem [ref=e772]: • 15% improvement in conversion rate
+                - listitem [ref=e773]: • Results typically seen within 3-6 months
+          - generic [ref=e775]:
+            - heading "Your Projected Results" [level=3] [ref=e776]
+            - generic [ref=e777]:
+              - generic [ref=e778]:
+                - generic [ref=e779]:
+                  - img [ref=e781]
+                  - generic [ref=e783]: $12,326
+                  - generic [ref=e784]: Monthly ROI
+                - generic [ref=e785]:
+                  - img [ref=e787]
+                  - generic [ref=e790]: "0.0"
+                  - generic [ref=e791]: Months to Payback
+              - generic [ref=e792]:
+                - heading "Revenue Projection" [level=4] [ref=e793]
+                - generic [ref=e794]:
+                  - generic [ref=e796]:
+                    - generic [ref=e797]: Current Monthly Revenue
+                    - generic [ref=e798]: $25,000
+                  - generic [ref=e802]:
+                    - generic [ref=e803]: Projected Monthly Revenue
+                    - generic [ref=e804]: $37,375
+                  - generic [ref=e808]:
+                    - generic [ref=e809]: Monthly Increase
+                    - generic [ref=e810]: $12,375
+              - generic [ref=e811]:
+                - generic [ref=e812]:
+                  - img [ref=e814]
+                  - heading "Annual Impact" [level=4] [ref=e817]
+                - generic [ref=e818]: $147,912
+                - generic [ref=e819]: Additional annual revenue after plan costs
+              - button "Start Achieving These Results" [ref=e820] [cursor=pointer]:
+                - img [ref=e821] [cursor=pointer]
+                - generic [ref=e825] [cursor=pointer]: Start Achieving These Results
+      - generic [ref=e830]:
+        - generic [ref=e831]:
+          - generic [ref=e832]:
+            - img [ref=e833]
+            - generic [ref=e835]: Simple, Transparent Pricing
+          - heading "Choose Your SEO Growth Plan" [level=2] [ref=e836]:
+            - generic [ref=e837]: Choose Your
+            - generic [ref=e838]: SEO Growth Plan
+          - paragraph [ref=e839]: Start free, upgrade as you grow. All plans include our core SEO audit engine with no hidden fees or usage limits.
+          - generic [ref=e840]:
+            - generic [ref=e841]: Monthly
+            - button "Toggle billing frequency" [ref=e842] [cursor=pointer]
+            - generic [ref=e845]: Annual
+        - generic [ref=e846]:
+          - generic [ref=e848]:
+            - generic [ref=e849]:
+              - img [ref=e852]
+              - heading "Free" [level=3] [ref=e854]
+              - paragraph [ref=e855]: Perfect for trying out our SEO audit capabilities
+              - generic [ref=e858]: Free
+            - generic [ref=e860]:
+              - generic [ref=e861]:
+                - img [ref=e863]
+                - generic [ref=e865]: 3 comprehensive SEO audits per month
+              - generic [ref=e866]:
+                - img [ref=e868]
+                - generic [ref=e870]: Basic technical analysis
+              - generic [ref=e871]:
+                - img [ref=e873]
+                - generic [ref=e875]: Core Web Vitals check
+              - generic [ref=e876]:
+                - img [ref=e878]
+                - generic [ref=e880]: Meta tags optimization
+              - generic [ref=e881]:
+                - img [ref=e883]
+                - generic [ref=e885]: Basic keyword insights
+              - generic [ref=e886]:
+                - img [ref=e888]
+                - generic [ref=e890]: PDF report export
+              - generic [ref=e891]:
+                - img [ref=e893]
+                - generic [ref=e895]: Email support
+            - generic [ref=e896]:
+              - heading "Plan Limits" [level=4] [ref=e897]
+              - generic [ref=e898]:
+                - generic [ref=e899]:
+                  - generic [ref=e900]: "Audits:"
+                  - generic [ref=e901]: 3 per month
+                - generic [ref=e902]:
+                  - generic [ref=e903]: "Sites:"
+                  - generic [ref=e904]: 1 website
+                - generic [ref=e905]:
+                  - generic [ref=e906]: "Reports:"
+                  - generic [ref=e907]: Basic reports
+                - generic [ref=e908]:
+                  - generic [ref=e909]: "Support:"
+                  - generic [ref=e910]: Email support
+            - button "Start Free for Free plan" [ref=e911] [cursor=pointer]:
+              - generic [ref=e912] [cursor=pointer]: Start Free
+              - img [ref=e913] [cursor=pointer]
+          - generic [ref=e915]:
+            - generic [ref=e917]: Most Popular
+            - generic [ref=e918]:
+              - generic [ref=e919]:
+                - img [ref=e922]
+                - heading "Pro" [level=3] [ref=e924]
+                - paragraph [ref=e925]: Advanced features for growing businesses and SEO professionals
+                - generic [ref=e927]:
+                  - generic [ref=e928]: $49
+                  - generic [ref=e929]: /month
+              - generic [ref=e931]:
+                - generic [ref=e932]:
+                  - img [ref=e934]
+                  - generic [ref=e936]: Unlimited SEO audits
+                - generic [ref=e937]:
+                  - img [ref=e939]
+                  - generic [ref=e941]: Advanced technical analysis
+                - generic [ref=e942]:
+                  - img [ref=e944]
+                  - generic [ref=e946]: Competitor analysis
+                - generic [ref=e947]:
+                  - img [ref=e949]
+                  - generic [ref=e951]: Keyword rank tracking
+                - generic [ref=e952]:
+                  - img [ref=e954]
+                  - generic [ref=e956]: Content optimization suggestions
+                - generic [ref=e957]:
+                  - img [ref=e959]
+                  - generic [ref=e961]: Local SEO insights
+                - generic [ref=e962]:
+                  - img [ref=e964]
+                  - generic [ref=e966]: White-label reports
+                - generic [ref=e967]:
+                  - img [ref=e969]
+                  - generic [ref=e971]: API access
+                - generic [ref=e972]:
+                  - img [ref=e974]
+                  - generic [ref=e976]: Priority support
+                - generic [ref=e977]:
+                  - img [ref=e979]
+                  - generic [ref=e981]: Weekly automated reports
+              - generic [ref=e982]:
+                - heading "Plan Limits" [level=4] [ref=e983]
+                - generic [ref=e984]:
+                  - generic [ref=e985]:
+                    - generic [ref=e986]: "Audits:"
+                    - generic [ref=e987]: Unlimited
+                  - generic [ref=e988]:
+                    - generic [ref=e989]: "Sites:"
+                    - generic [ref=e990]: 5 websites
+                  - generic [ref=e991]:
+                    - generic [ref=e992]: "Reports:"
+                    - generic [ref=e993]: Advanced reports
+                  - generic [ref=e994]:
+                    - generic [ref=e995]: "Support:"
+                    - generic [ref=e996]: Priority support
+              - button "Start Pro Trial for Pro plan" [ref=e997] [cursor=pointer]:
+                - generic [ref=e998] [cursor=pointer]: Start Pro Trial
+                - img [ref=e999] [cursor=pointer]
+          - generic [ref=e1002]:
+            - generic [ref=e1003]:
+              - img [ref=e1006]
+              - heading "Agency" [level=3] [ref=e1008]
+              - paragraph [ref=e1009]: Enterprise solution for agencies and large teams
+              - generic [ref=e1011]:
+                - generic [ref=e1012]: $149
+                - generic [ref=e1013]: /month
+            - generic [ref=e1015]:
+              - generic [ref=e1016]:
+                - img [ref=e1018]
+                - generic [ref=e1020]: Everything in Pro
+              - generic [ref=e1021]:
+                - img [ref=e1023]
+                - generic [ref=e1025]: Multi-client dashboard
+              - generic [ref=e1026]:
+                - img [ref=e1028]
+                - generic [ref=e1030]: Team collaboration tools
+              - generic [ref=e1031]:
+                - img [ref=e1033]
+                - generic [ref=e1035]: Custom branding
+              - generic [ref=e1036]:
+                - img [ref=e1038]
+                - generic [ref=e1040]: Advanced integrations
+              - generic [ref=e1041]:
+                - img [ref=e1043]
+                - generic [ref=e1045]: Dedicated account manager
+              - generic [ref=e1046]:
+                - img [ref=e1048]
+                - generic [ref=e1050]: Custom reporting
+              - generic [ref=e1051]:
+                - img [ref=e1053]
+                - generic [ref=e1055]: Phone & Slack support
+              - generic [ref=e1056]:
+                - img [ref=e1058]
+                - generic [ref=e1060]: Training & onboarding
+              - generic [ref=e1061]:
+                - img [ref=e1063]
+                - generic [ref=e1065]: SLA guarantees
+            - generic [ref=e1066]:
+              - heading "Plan Limits" [level=4] [ref=e1067]
+              - generic [ref=e1068]:
+                - generic [ref=e1069]:
+                  - generic [ref=e1070]: "Audits:"
+                  - generic [ref=e1071]: Unlimited
+                - generic [ref=e1072]:
+                  - generic [ref=e1073]: "Sites:"
+                  - generic [ref=e1074]: Unlimited
+                - generic [ref=e1075]:
+                  - generic [ref=e1076]: "Reports:"
+                  - generic [ref=e1077]: Custom reports
+                - generic [ref=e1078]:
+                  - generic [ref=e1079]: "Support:"
+                  - generic [ref=e1080]: Dedicated support
+            - button "Contact Sales for Agency plan" [ref=e1081] [cursor=pointer]:
+              - generic [ref=e1082] [cursor=pointer]: Contact Sales
+              - img [ref=e1083] [cursor=pointer]
+        - generic [ref=e1085]:
+          - paragraph [ref=e1086]: Not sure which plan is right for you?
+          - button "Schedule a Demo" [ref=e1087] [cursor=pointer]
+      - generic [ref=e1090]:
+        - generic [ref=e1091]:
+          - heading "Don't Miss SEO Updates" [level=3] [ref=e1092]
+          - paragraph [ref=e1093]: Join 10,000+ marketers getting weekly SEO insights and tips
+        - generic [ref=e1094]:
+          - generic [ref=e1095]:
+            - generic:
+              - img
+            - textbox "Enter your email address" [ref=e1096]
+          - button "Subscribe Now" [disabled] [ref=e1097]:
+            - generic [ref=e1098]: Subscribe Now
+            - img [ref=e1099]
+        - paragraph [ref=e1102]: 📧 No spam, unsubscribe anytime • 🔒 Your data is secure
+    - contentinfo [ref=e1103]:
+      - generic [ref=e1104]:
+        - generic [ref=e1106]:
+          - generic [ref=e1107]:
+            - link "AISEOTurbo" [ref=e1109] [cursor=pointer]:
+              - /url: /
+            - paragraph [ref=e1110]: Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations that drive real results.
+            - generic [ref=e1111]:
+              - link "Follow us on Twitter" [ref=e1112] [cursor=pointer]:
+                - /url: https://twitter.com/aiseoturbo
+                - img [ref=e1113] [cursor=pointer]
+              - link "Follow us on LinkedIn" [ref=e1115] [cursor=pointer]:
+                - /url: https://linkedin.com/company/aiseoturbo
+                - img [ref=e1116] [cursor=pointer]
+              - link "Follow us on GitHub" [ref=e1120] [cursor=pointer]:
+                - /url: https://github.com/aiseoturbo
+                - img [ref=e1121] [cursor=pointer]
+              - link "Follow us on YouTube" [ref=e1124] [cursor=pointer]:
+                - /url: https://youtube.com/aiseoturbo
+                - img [ref=e1125] [cursor=pointer]
+          - generic [ref=e1129]:
+            - generic [ref=e1130]:
+              - heading "Product" [level=3] [ref=e1131]
+              - list [ref=e1132]:
+                - listitem [ref=e1133]:
+                  - link "SEO Audit" [ref=e1134] [cursor=pointer]:
+                    - /url: /seo-audit
+                - listitem [ref=e1135]:
+                  - link "Competitor Analysis" [ref=e1136] [cursor=pointer]:
+                    - /url: /features
+                - listitem [ref=e1137]:
+                  - link "Rank Tracker" [ref=e1138] [cursor=pointer]:
+                    - /url: /rank-tracker
+                - listitem [ref=e1139]:
+                  - link "Site Crawler" [ref=e1140] [cursor=pointer]:
+                    - /url: /site-crawler
+            - generic [ref=e1141]:
+              - heading "Company" [level=3] [ref=e1142]
+              - list [ref=e1143]:
+                - listitem [ref=e1144]:
+                  - link "About Us" [ref=e1145] [cursor=pointer]:
+                    - /url: /about
+                - listitem [ref=e1146]:
+                  - link "Contact" [ref=e1147] [cursor=pointer]:
+                    - /url: /contact
+                - listitem [ref=e1148]:
+                  - link "Careers" [ref=e1149] [cursor=pointer]:
+                    - /url: /careers
+                - listitem [ref=e1150]:
+                  - link "Blog" [ref=e1151] [cursor=pointer]:
+                    - /url: /blog
+            - generic [ref=e1152]:
+              - heading "Resources" [level=3] [ref=e1153]
+              - list [ref=e1154]:
+                - listitem [ref=e1155]:
+                  - link "Documentation" [ref=e1156] [cursor=pointer]:
+                    - /url: /docs
+                - listitem [ref=e1157]:
+                  - link "Help Center" [ref=e1158] [cursor=pointer]:
+                    - /url: /help
+                - listitem [ref=e1159]:
+                  - link "Case Studies" [ref=e1160] [cursor=pointer]:
+                    - /url: /case-studies
+                - listitem [ref=e1161]:
+                  - link "Webinars" [ref=e1162] [cursor=pointer]:
+                    - /url: /webinars
+        - generic [ref=e1164]:
+          - paragraph [ref=e1165]: © 2025 AISEOTurbo. All rights reserved.
+          - generic [ref=e1166]:
+            - link "Privacy Policy" [ref=e1167] [cursor=pointer]:
+              - /url: /privacy
+            - link "Terms of Service" [ref=e1168] [cursor=pointer]:
+              - /url: /terms
+```

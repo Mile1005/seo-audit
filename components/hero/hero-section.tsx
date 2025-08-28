@@ -4,6 +4,8 @@ import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Play, Zap, Clock, Users } from "lucide-react"
 import { DesktopHeroMockup } from "./desktop-hero-mockup"
+import { HeroHeadlineAB, CTATextAB } from "@/components/ab/ab-slot"
+import { trackCTA, trackDemo } from "@/lib/analytics"
 
 export function HeroSection() {
   const containerVariants = {
@@ -38,7 +40,10 @@ export function HeroSection() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <section 
+      data-testid="hero-section"
+      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Gradient Orbs */}
@@ -78,14 +83,7 @@ export function HeroSection() {
                 <span className="text-cyan-300">AI-Powered SEO Analysis</span>
               </motion.div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
-                <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-                  AI-Powered SEO Audits{" "}
-                </span>
-                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                  That Actually Move the Needle
-                </span>
-              </h1>
+              <HeroHeadlineAB />
             </motion.div>
 
             {/* Subheadline */}
@@ -103,21 +101,18 @@ export function HeroSection() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-cyan-500/25 flex items-center justify-center space-x-2"
-                id="hero-start-audit-cta"
-              >
-                <span>Start Free Audit</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              <CTATextAB 
+                size="large"
+                onClick={() => trackCTA('Start Free Audit', 'hero')}
+              />
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 backdrop-blur-sm flex items-center justify-center space-x-2"
-                id="hero-demo-cta"
+                onClick={() => trackDemo('view_demo', 'hero')}
+                data-event="demo_click"
+                data-location="hero"
               >
                 <Play className="w-5 h-5" />
                 <span>See Live Demo</span>
