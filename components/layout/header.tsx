@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { ThemeSwitcher } from "../ui/theme-provider";
 
 export default function Header() {
