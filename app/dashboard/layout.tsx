@@ -7,10 +7,13 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await auth()
-  
-  if (!session?.user) {
-    redirect("/login")
+  // Temporarily use mock session for homepage development
+  const session = {
+    user: {
+      id: "mock-user",
+      email: "mock@example.com",
+      name: "Mock User",
+    }
   }
 
   return (
