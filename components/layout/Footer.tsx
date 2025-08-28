@@ -15,9 +15,10 @@ const footerSections = [
     title: "Product",
     links: [
       { label: "SEO Audit", href: "/features/seo-audit" },
-      { label: "Competitor Analysis", href: "/features" },
-      { label: "Rank Tracker", href: "/rank-tracker" },
-      { label: "Site Crawler", href: "/site-crawler" }
+      { label: "Competitor Analysis", href: "/features/competitor-analysis" },
+      { label: "Site Crawler", href: "/features/site-crawler" },
+      { label: "AI Assistant", href: "/features/ai-assistant" },
+      { label: "Keyword Tracking", href: "/features/keyword-tracking" }
     ]
   },
   {
