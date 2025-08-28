@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { ThemeSwitcher } from "../ui/theme-provider";
 
 export default function Header() {
@@ -28,6 +28,12 @@ export default function Header() {
               Features
             </Link>
             <Link
+              href="/features/seo-audit"
+              className="text-foreground/60 transition-colors hover:text-foreground/80"
+            >
+              SEO Audit
+            </Link>
+            <Link
               href="/contact"
               className="text-foreground/60 transition-colors hover:text-foreground/80"
             >
@@ -37,12 +43,13 @@ export default function Header() {
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <ThemeSwitcher />
-          <button
+          <Link
+            href="/seo-audit"
             data-testid="cta-primary"
-            className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-md"
+            className="px-4 py-2 text-sm font-semibold text-white bg-primary rounded-md hover:bg-primary/90 transition-colors"
           >
             Start Free Audit
-          </button>
+          </Link>
         </div>
       </div>
     </header>
