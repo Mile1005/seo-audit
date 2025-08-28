@@ -3,15 +3,15 @@
 import React, { useState } from "react";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../components/ui/button";
 import Link from "next/link";
 import { Search, Zap, Globe, BarChart3, Clock, ArrowRight, AlertCircle, CheckCircle, Loader2 } from "lucide-react";
-import { MainLayout } from "@/components/layout/main-layout";
-import CrawlCapabilities from "@/components/features/site-crawler/crawl-capabilities";
-import SiteArchitecture from "@/components/features/site-crawler/site-architecture";
-import IssueDetection from "@/components/features/site-crawler/issue-detection";
-import MonitoringFeatures from "@/components/features/site-crawler/monitoring-features";
-import IntegrationOptions from "@/components/features/site-crawler/integration-options";
+import { MainLayout } from "../../../components/layout/main-layout";
+import CrawlCapabilities from "../../../components/features/site-crawler/crawl-capabilities";
+import SiteArchitecture from "../../../components/features/site-crawler/site-architecture";
+import IssueDetection from "../../../components/features/site-crawler/issue-detection";
+import MonitoringFeatures from "../../../components/features/site-crawler/monitoring-features";
+import IntegrationOptions from "../../../components/features/site-crawler/integration-options";
 
 interface CrawlResult {
   startUrl: string;
