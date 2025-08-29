@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../../components/ui/button";
 import Link from "next/link";
-import { Search, Zap, Globe, BarChart3, Clock, ArrowRight, AlertCircle, CheckCircle, Loader2 } from "lucide-react";
+import { Search, Zap, Globe, BarChart3, Clock, ArrowRight, AlertCircle, CheckCircle, Loader2, Download } from "lucide-react";
 import { MainLayout } from "../../../components/layout/main-layout";
 import CrawlCapabilities from "../../../components/features/site-crawler/crawl-capabilities";
 import SiteArchitecture from "../../../components/features/site-crawler/site-architecture";
@@ -41,6 +41,81 @@ export default function SiteCrawlerPage() {
   const [crawlProgress, setCrawlProgress] = useState(0);
   const [crawlResult, setCrawlResult] = useState<CrawlResult | null>(null);
   const [crawlError, setCrawlError] = useState<string | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
+
+  // CSV Export function
+  const exportToCSV = async () => {
+    if (!crawlResult || !crawlResult.pages) {
+      return;
+    }
+
+    setIsExporting(true);
+
+    try {
+      // Define CSV headers
+      const headers = [
+        'URL',
+        'Title',
+        'H1 Present',
+        'Meta Description Present',
+        'Word Count',
+        'Total Images',
+        'Images Missing Alt',
+        'Load Time (ms)',
+        'Status Code'
+      ];
+
+      // Convert data to CSV format
+      const csvData = crawlResult.pages.map((page: any) => [
+        page.url || '',
+        page.title || 'Missing',
+        page.h1_presence ? 'Yes' : 'No',
+        page.meta_description ? 'Yes' : 'No',
+        page.word_count || 0,
+        page.images_total || 0,
+        page.images_missing_alt || 0,
+        page.load_time_ms || 0,
+        page.status || 'Unknown'
+      ]);
+
+      // Combine headers and data
+      const csvContent = [headers, ...csvData]
+        .map(row => row.map(field => {
+          // Escape quotes and wrap fields with commas/quotes in quotes
+          const escapedField = String(field).replace(/"/g, '""');
+          return escapedField.includes(',') || escapedField.includes('"') || escapedField.includes('\n') 
+            ? `"${escapedField}"` 
+            : escapedField;
+        }).join(','))
+        .join('\n');
+
+      // Create and download the CSV file
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        
+        // Generate filename with domain and timestamp
+        const domain = crawlResult.startUrl.replace(/^https?:\/\//, '').replace(/[^a-zA-Z0-9]/g, '_');
+        const timestamp = new Date().toISOString().slice(0, 19).replace(/[:-]/g, '');
+        link.setAttribute('download', `crawl_results_${domain}_${timestamp}.csv`);
+        
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Clean up
+        URL.revokeObjectURL(url);
+      }
+    } catch (error) {
+      console.error('Error exporting CSV:', error);
+    } finally {
+      setIsExporting(false);
+    }
+  };
   const [showResults, setShowResults] = useState(false);
 
   const progressMessages = [
@@ -82,19 +157,34 @@ export default function SiteCrawlerPage() {
         await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 400));
       }
 
-      // Call the API
+      // Call the API with enhanced error handling
       setCrawlProgress(95);
-      const response = await fetch('/api/crawl/start', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          startUrl: crawlUrl,
-          limit: pageLimit,
-          mode: 'sync'
-        })
-      });
+      
+      let response;
+      try {
+        response = await fetch('/api/crawl/start', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            startUrl: crawlUrl,
+            limit: pageLimit,
+            mode: 'sync'
+          }),
+          // Add timeout and signal for better reliability
+          signal: AbortSignal.timeout(30000) // 30 second timeout
+        });
+      } catch (fetchError) {
+        if (fetchError instanceof Error) {
+          if (fetchError.name === 'AbortError') {
+            throw new Error('Request timed out. Please try again.');
+          } else if (fetchError.message.includes('Failed to fetch')) {
+            throw new Error('Network error. Please check your connection and try again.');
+          }
+        }
+        throw new Error('Failed to connect to the crawler service. Please try again.');
+      }
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -102,9 +192,9 @@ export default function SiteCrawlerPage() {
         try {
           errorData = JSON.parse(errorText);
         } catch {
-          throw new Error(`Server error: ${response.status}`);
+          throw new Error(`Server error (${response.status}). Please try again later.`);
         }
-        throw new Error(errorData.error || 'Failed to crawl website');
+        throw new Error(errorData.error || `Failed to crawl website (${response.status})`);
       }
 
       const data = await response.json();
@@ -473,23 +563,16 @@ export default function SiteCrawlerPage() {
           </div>
         </section>
 
-        {/* Feature Sections */}
-        <CrawlCapabilities />
-        <IssueDetection />
-        <SiteArchitecture />
-        <MonitoringFeatures />
-        <IntegrationOptions />
-
-        {/* Results Section - Expandable */}
+        {/* Results Section - Appears directly under the form */}
         <AnimatePresence>
           {showResults && crawlResult && (
             <motion.section
-              id="crawl-results-section"
+              id="detailed-results"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5 }}
-              className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 border-t"
+              className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 border-t"
             >
               <div className="max-w-7xl mx-auto">
                 <motion.div
@@ -615,8 +698,19 @@ export default function SiteCrawlerPage() {
                       <BarChart3 className="w-5 h-5 mr-2" />
                       Get Full Report
                     </Button>
-                    <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-                      Export Results
+                    <Button 
+                      variant="outline" 
+                      size="lg" 
+                      className="text-lg px-8 py-6"
+                      onClick={exportToCSV}
+                      disabled={isExporting}
+                    >
+                      {isExporting ? (
+                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                      ) : (
+                        <Download className="w-5 h-5 mr-2" />
+                      )}
+                      {isExporting ? 'Generating CSV...' : 'Export Results CSV'}
                     </Button>
                   </div>
                   <Button 
@@ -634,7 +728,6 @@ export default function SiteCrawlerPage() {
 
                 {/* Detailed Results Table */}
                 <motion.div
-                  id="detailed-results"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
@@ -768,6 +861,13 @@ export default function SiteCrawlerPage() {
             </motion.section>
           )}
         </AnimatePresence>
+
+        {/* Feature Sections */}
+        <CrawlCapabilities />
+        <IssueDetection />
+        <SiteArchitecture />
+        <MonitoringFeatures />
+        <IntegrationOptions />
 
         {/* Final CTA Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
