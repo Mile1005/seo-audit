@@ -1,4 +1,4 @@
-﻿import { Metadata } from 'next'
+import { Metadata } from 'next'
 import { MainLayout } from '../../components/layout/main-layout'
 
 export const metadata: Metadata = {

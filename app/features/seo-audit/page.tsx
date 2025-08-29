@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2 } from 'lucide-react'
 import { MainLayout } from '../../../components/layout/main-layout'
+import { ApiErrorBoundary } from '../../../components/ui/error-boundary'
+import { useFormSubmission } from '../../../hooks/use-api'
+import { api, AuditResult, ApiResponse } from '../../../lib/api-client'
 
 // Import all feature components
 import AuditCategories from '../../../components/features/seo-audit/audit-categories'
@@ -11,24 +14,142 @@ import AuditPreview from '../../../components/features/seo-audit/audit-preview'
 import TechnicalBreakdown from '../../../components/features/seo-audit/technical-breakdown'
 import ResultsShowcase from '../../../components/features/seo-audit/results-showcase'
 
+// SEO Audit Result Interface
+interface SEOAuditResult {
+  auditId: string
+  status: 'completed' | 'processing' | 'failed'
+  url: string
+  score: number
+  timestamp: string
+  pageData: {
+    title: string | null
+    metaDescription: string | null
+    h1Count: number
+    h2Count: number
+    h3Count: number
+    wordCount: number
+    imagesTotal: number
+    imagesWithoutAlt: number
+    internalLinks: number
+    externalLinks: number
+    loadTime: number
+    canonical: string | null
+    noindex: boolean
+  }
+  issues: any
+  recommendations: Array<{
+    type: 'critical' | 'warning' | 'suggestion'
+    category: string
+    title: string
+    description: string
+    priority: number
+  }>
+  robotsTxt: any
+  sitemapXml: any
+  keyword?: string | null
+  email?: string | null
+  // Add comprehensive rawData structure
+  rawData?: {
+    url?: string
+    scores?: {
+      overall?: number
+      performance?: number
+      accessibility?: number
+      seo?: number
+      best_practices?: number
+    }
+    stats?: {
+      internal_links?: number
+      external_links?: number
+      images_count?: number
+      images_size?: number
+      scripts_count?: number
+      scripts_size?: number
+      text_size?: number
+      text_rate?: number
+      word_count?: number
+      reading_time_min?: number
+    }
+    h_tags?: {
+      h1?: string[]
+      h2?: string[]
+      h3?: string[]
+    }
+    social_meta?: {
+      og_title?: string | null
+      og_url?: string | null
+      og_description?: string | null
+      og_image?: string | null
+      twitter_card?: string | null
+      twitter_title?: string | null
+      twitter_description?: string | null
+    }
+    accessibility?: {
+      passed_checks?: string[]
+      failed_checks?: string[]
+    }
+    indexability?: {
+      passed_checks?: string[]
+      failed_checks?: string[]
+    }
+    seo_checks?: {
+      passed_checks?: string[]
+      failed_checks?: string[]
+    }
+    performance_metrics?: {
+      first_contentful_paint?: number
+      largest_contentful_paint?: number
+      total_blocking_time?: number
+      cumulative_layout_shift?: number
+      speed_index?: number
+      time_to_interactive?: number
+      max_potential_first_input_delay?: number
+    }
+    performance_opportunities?: string[]
+    performance_diagnostics?: string[]
+    issues?: Array<{
+      title?: string
+      description?: string
+      severity?: 'high' | 'medium' | 'low'
+      recommendation?: string
+    }>
+    quick_wins?: Array<{
+      title?: string
+      description?: string
+    }>
+    fetched_at?: string
+  }
+  // Support for new comprehensive results format
+  comprehensiveResults?: any
+}
+
 export default function SEOAuditFeaturePage() {
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [keyword, setKeyword] = useState("");
   const [errors, setErrors] = useState<{ url?: string; email?: string }>({});
+  const [auditResult, setAuditResult] = useState<SEOAuditResult | null>(null);
+  const [showResults, setShowResults] = useState(false);
+  
+  const { isSubmitting, submitError, submit } = useFormSubmission<any, SEOAuditResult>();
 
   const validateForm = () => {
     const newErrors: { url?: string; email?: string } = {};
 
     if (!url.trim()) {
       newErrors.url = "URL is required";
-    } else if (!url.match(/^https?:\/\/.+/)) {
-      newErrors.url = "Please enter a valid URL starting with http:// or https://";
+    } else {
+      const trimmedUrl = url.trim();
+      // More flexible URL validation - allow domains with or without protocol
+      const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i;
+      const domainPattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
+      
+      if (!urlPattern.test(trimmedUrl) && !domainPattern.test(trimmedUrl)) {
+        newErrors.url = "Please enter a valid URL (e.g., example.com, produkto.io, or https://youtube.com)";
+      }
     }
 
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+    if (email.trim() && !email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       newErrors.email = "Please enter a valid email address";
     }
 
@@ -39,32 +160,75 @@ export default function SEOAuditFeaturePage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
+    console.log('Form submitted!', { url, email, keyword });
+    
+    if (!validateForm()) {
+      console.log('Form validation failed');
+      return;
+    }
 
-    setIsAnalyzing(true);
+    setShowResults(false);
+    setAuditResult(null);
+    
+    console.log('Starting API call...');
     
     try {
-      const response = await fetch('/api/seo-audit/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url.trim(), email: email.trim() })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        // For now, just show success - in Phase 3 we'll add proper results handling
-        alert('SEO audit started! You will receive results via email.');
-        setUrl("");
-        setEmail("");
-      } else {
-        throw new Error('Failed to start audit');
-      }
+      const result = await submit(
+        (data) => {
+          console.log('API call data:', data);
+          return api.audit.start(data) as Promise<ApiResponse<SEOAuditResult>>;
+        },
+        { 
+          url: url.trim(), 
+          email: email.trim() || undefined,
+          keyword: keyword.trim() || undefined
+        },
+        (response) => {
+          console.log('Success callback called with response:', response);
+          
+          // Handle the fact that response might be the wrapped API response
+          const actualData = (response as any).data ? (response as any).data : response;
+          
+          console.log('Actual data:', actualData);
+          console.log('Data score:', actualData.score);
+          console.log('Data pageData exists?', !!actualData.pageData);
+          console.log('Data recommendations count:', actualData.recommendations?.length || 0);
+          
+          // Show rich results inline on the same page
+          setAuditResult(actualData);
+          setShowResults(true);
+          setUrl("");
+          setEmail("");
+          setKeyword("");
+          
+          // Smooth scroll to results section
+          setTimeout(() => {
+            const resultsSection = document.getElementById('audit-results');
+            if (resultsSection) {
+              resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 100);
+          
+          console.log('State updated with actual data');
+        }
+      );
+      console.log('Submit completed:', result);
     } catch (error) {
       console.error('Error starting audit:', error);
-      alert('Failed to start audit. Please try again.');
-    } finally {
-      setIsAnalyzing(false);
     }
+  };
+
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-600';
+    if (score >= 60) return 'text-yellow-600';
+    return 'text-red-600';
+  };
+
+  const getScoreLabel = (score: number) => {
+    if (score >= 80) return 'Excellent';
+    if (score >= 60) return 'Good';
+    if (score >= 40) return 'Needs Work';
+    return 'Poor';
   };
 
   return (
@@ -136,7 +300,7 @@ export default function SEOAuditFeaturePage() {
                     id="website-url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="https://example.com"
+                    placeholder="e.g., produkto.io, youtube.com, or https://example.com"
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                       errors.url ? 'border-red-500' : 'border-muted-foreground/20'
                     }`}
@@ -167,10 +331,10 @@ export default function SEOAuditFeaturePage() {
 
                 <button
                   type="submit"
-                  disabled={isAnalyzing}
+                  disabled={isSubmitting}
                   className="w-full bg-primary text-primary-foreground py-4 px-6 rounded-lg font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  {isAnalyzing ? (
+                  {isSubmitting ? (
                     <span className="flex items-center justify-center">
                       <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -194,6 +358,832 @@ export default function SEOAuditFeaturePage() {
           </div>
         </div>
       </section>
+
+      {/* Loading State */}
+      <AnimatePresence>
+        {isSubmitting && (
+          <motion.section
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30"
+          >
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                className="bg-background rounded-2xl shadow-xl p-8"
+              >
+                <div className="flex items-center justify-center mb-6">
+                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-4">
+                  Analyzing Your Website...
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  We're performing a comprehensive SEO audit with 47+ checks including:
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  {[
+                    "Page Speed Analysis",
+                    "Mobile Optimization",
+                    "Meta Tags Check",
+                    "Content Analysis",
+                    "Image Optimization",
+                    "Link Structure",
+                    "Technical SEO",
+                    "Accessibility Check"
+                  ].map((check, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                      <span className="text-muted-foreground">{check}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 text-sm text-muted-foreground">
+                  This usually takes 10-30 seconds...
+                </div>
+              </motion.div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
+
+      {/* Error State */}
+      <AnimatePresence>
+        {submitError && (
+          <motion.section
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="py-10 px-4 sm:px-6 lg:px-8"
+          >
+            <div className="max-w-4xl mx-auto">
+              <motion.div
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                className="bg-red-50 border border-red-200 rounded-2xl p-6 text-center"
+              >
+                <div className="flex items-center justify-center mb-4">
+                  <AlertTriangle className="w-6 h-6 text-red-500" />
+                </div>
+                <h3 className="text-lg font-semibold text-red-800 mb-2">
+                  Audit Failed
+                </h3>
+                <p className="text-red-600 mb-4">{submitError}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Try Again
+                </button>
+              </motion.div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
+
+      {/* Results Section */}
+      <AnimatePresence>
+        {showResults && auditResult && (
+          <motion.section
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 via-background to-muted/20"
+            id="audit-results"
+          >
+            <div className="max-w-7xl mx-auto">
+              {/* Header */}
+              <div className="text-center mb-12">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-4xl font-bold text-foreground mb-4"
+                >
+                  Comprehensive SEO Audit Results
+                </motion.h2>
+                <p className="text-xl text-muted-foreground">
+                  Analysis for {auditResult.url}
+                </p>
+                <p className="text-sm text-muted-foreground mt-2">
+                  Report Generated: {new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+              </div>
+
+              {/* Main Results Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                {/* Left Column - Website Snapshot */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="lg:col-span-1"
+                >
+                  <div className="bg-background rounded-2xl shadow-xl p-6 border">
+                    <h3 className="text-xl font-semibold text-foreground mb-4">Website Snapshot</h3>
+                    <div className="bg-muted/50 rounded-lg p-4 mb-4">
+                      <div className="text-sm text-muted-foreground mb-2">Website Preview</div>
+                      <div className="bg-background rounded border p-3">
+                        <div className="text-sm font-medium text-foreground truncate">
+                          {auditResult.url}
+                        </div>
+                      </div>
+                    </div>
+                    <button className="w-full bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                      Export PDF
+                    </button>
+                  </div>
+                </motion.div>
+
+                {/* Right Column - Overall Score */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="lg:col-span-2"
+                >
+                  <div className="bg-background rounded-2xl shadow-xl p-8 border">
+                    <div className="text-center mb-6">
+                      <div className={`text-6xl font-bold mb-4 ${getScoreColor(auditResult.score || 0)}`}>
+                        {auditResult.score || 0}/100
+                      </div>
+                      <h3 className="text-2xl font-semibold text-foreground mb-2">
+                        Overall Score
+                      </h3>
+                    </div>
+
+                    {/* Score Breakdown */}
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.scores && (
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-600">
+                            {(auditResult.comprehensiveResults || auditResult.rawData)?.scores?.performance || auditResult.score || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Performance</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-blue-600">
+                            {(auditResult.comprehensiveResults || auditResult.rawData)?.scores?.accessibility || auditResult.score || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Accessibility</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-purple-600">
+                            {(auditResult.comprehensiveResults || auditResult.rawData)?.scores?.seo || auditResult.score || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">SEO</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-orange-600">
+                            {(auditResult.comprehensiveResults || auditResult.rawData)?.scores?.best_practices || auditResult.score || 0}
+                          </div>
+                          <div className="text-sm text-muted-foreground">Best Practices</div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Detailed Statistics */}
+              {((auditResult.comprehensiveResults || auditResult.rawData)?.stats || auditResult.pageData) && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="text-2xl font-semibold text-foreground">Page Statistics</h3>
+                    <div className="text-2xl font-bold text-primary">
+                      {auditResult.score || 0}%
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.stats?.internal_links || auditResult.pageData?.internalLinks || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Internal Links</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.stats?.external_links || auditResult.pageData?.externalLinks || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">External Links</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.stats?.images_count || auditResult.pageData?.imagesTotal || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Images</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.stats?.word_count || auditResult.pageData?.wordCount || 0}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Word Count</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.stats?.reading_time_min || Math.round((auditResult.pageData?.loadTime || 0) / 1000) || 0}m
+                      </div>
+                      <div className="text-sm text-muted-foreground">Reading Time</div>
+                    </div>
+                  </div>
+                  
+                  {/* Additional Technical Statistics */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6 pt-6 border-t">
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.stats?.scripts_count || 'N/A'}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Scripts</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-foreground">
+                        {((auditResult.comprehensiveResults || auditResult.rawData)?.stats?.scripts_size ? 
+                          `${Math.round((auditResult.comprehensiveResults || auditResult.rawData)?.stats?.scripts_size / 1024)}KB` : 'N/A')}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Scripts Size</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-foreground">
+                        {((auditResult.comprehensiveResults || auditResult.rawData)?.stats?.images_size ? 
+                          `${Math.round((auditResult.comprehensiveResults || auditResult.rawData)?.stats?.images_size / 1024)}KB` : 'N/A')}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Images Size</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-lg font-bold text-foreground">
+                        {((auditResult.comprehensiveResults || auditResult.rawData)?.stats?.text_rate ? 
+                          `${Math.round((auditResult.comprehensiveResults || auditResult.rawData)?.stats?.text_rate * 100)}%` : 'N/A')}
+                      </div>
+                      <div className="text-xs text-muted-foreground">Text Rate</div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Social Media Meta Tags */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6">Social Media Meta Tags</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-lg font-semibold text-foreground mb-3">Open Graph</h4>
+                      <div className="space-y-2">
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">Title:</span>
+                          <p className="text-sm text-foreground">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.og_title || 'Not set'}</p>
+                        </div>
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">URL:</span>
+                          <p className="text-sm text-foreground truncate">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.og_url || 'Not set'}</p>
+                        </div>
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">Description:</span>
+                          <p className="text-sm text-foreground">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.og_description || 'Not set'}</p>
+                        </div>
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">Image:</span>
+                          <p className="text-sm text-foreground">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.og_image || 'Not set'}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-foreground mb-3">Twitter</h4>
+                      <div className="space-y-2">
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">Card Type:</span>
+                          <p className="text-sm text-foreground">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.twitter_card || 'Not set'}</p>
+                        </div>
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">Title:</span>
+                          <p className="text-sm text-foreground">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.twitter_title || 'Not set'}</p>
+                        </div>
+                        <div>
+                          <span className="text-sm font-medium text-muted-foreground">Description:</span>
+                          <p className="text-sm text-foreground">{(auditResult.comprehensiveResults || auditResult.rawData)?.social_meta?.twitter_description || 'Not set'}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Accessibility Checks */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6">Accessibility Audit</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-lg font-semibold text-green-600 mb-3 flex items-center">
+                        <CheckCircle className="w-5 h-5 mr-2" />
+                        Passed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.passed_checks?.length || 0})
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.passed_checks?.map((check, index) => (
+                          <div key={index} className="flex items-center">
+                            <div className="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <span className="text-sm text-foreground">{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-red-600 mb-3 flex items-center">
+                        <AlertTriangle className="w-5 h-5 mr-2" />
+                        Failed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.failed_checks?.length || 0})
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.failed_checks?.map((check, index) => (
+                          <div key={index} className="flex items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <span className="text-sm text-foreground">{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Indexability Checks */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6">Indexability Checks</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-lg font-semibold text-green-600 mb-3 flex items-center">
+                        <CheckCircle className="w-5 h-5 mr-2" />
+                        Passed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.passed_checks?.length || 0})
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.passed_checks?.map((check, index) => (
+                          <div key={index} className="flex items-center">
+                            <div className="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <span className="text-sm text-foreground">{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-red-600 mb-3 flex items-center">
+                        <AlertTriangle className="w-5 h-5 mr-2" />
+                        Failed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.failed_checks?.length || 0})
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.failed_checks?.map((check, index) => (
+                          <div key={index} className="flex items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <span className="text-sm text-foreground">{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* SEO Checks */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6">SEO Checks</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="text-lg font-semibold text-green-600 mb-3 flex items-center">
+                        <CheckCircle className="w-5 h-5 mr-2" />
+                        Passed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.passed_checks?.length || 0})
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.passed_checks?.map((check, index) => (
+                          <div key={index} className="flex items-center">
+                            <div className="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <span className="text-sm text-foreground">{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-red-600 mb-3 flex items-center">
+                        <AlertTriangle className="w-5 h-5 mr-2" />
+                        Failed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.failed_checks?.length || 0})
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.failed_checks?.map((check, index) => (
+                          <div key={index} className="flex items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <span className="text-sm text-foreground">{check}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Performance Metrics */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6">Performance Metrics</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="text-center p-4 bg-muted/30 rounded-lg">
+                      <div className="text-2xl font-bold text-blue-600">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.first_contentful_paint?.toFixed(1)}s
+                      </div>
+                      <div className="text-sm text-muted-foreground">First Contentful Paint</div>
+                      <div className="text-xs text-muted-foreground mt-1">Time to first content</div>
+                    </div>
+                    <div className="text-center p-4 bg-muted/30 rounded-lg">
+                      <div className="text-2xl font-bold text-green-600">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.largest_contentful_paint?.toFixed(1)}s
+                      </div>
+                      <div className="text-sm text-muted-foreground">Largest Contentful Paint</div>
+                      <div className="text-xs text-muted-foreground mt-1">Time to main content</div>
+                    </div>
+                    <div className="text-center p-4 bg-muted/30 rounded-lg">
+                      <div className="text-2xl font-bold text-orange-600">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.total_blocking_time}ms
+                      </div>
+                      <div className="text-sm text-muted-foreground">Total Blocking Time</div>
+                      <div className="text-xs text-muted-foreground mt-1">Time blocking main thread</div>
+                    </div>
+                    <div className="text-center p-4 bg-muted/30 rounded-lg">
+                      <div className="text-2xl font-bold text-purple-600">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.cumulative_layout_shift?.toFixed(3)}
+                      </div>
+                      <div className="text-sm text-muted-foreground">Cumulative Layout Shift</div>
+                      <div className="text-xs text-muted-foreground mt-1">Visual stability score</div>
+                    </div>
+                  </div>
+                  
+                  {/* Additional Performance Metrics */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 pt-6 border-t">
+                    <div className="text-center p-4 bg-muted/20 rounded-lg">
+                      <div className="text-lg font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.speed_index?.toFixed(1)}s
+                      </div>
+                      <div className="text-sm text-muted-foreground">Speed Index</div>
+                    </div>
+                    <div className="text-center p-4 bg-muted/20 rounded-lg">
+                      <div className="text-lg font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.time_to_interactive?.toFixed(1)}s
+                      </div>
+                      <div className="text-sm text-muted-foreground">Time to Interactive</div>
+                    </div>
+                    <div className="text-center p-4 bg-muted/20 rounded-lg">
+                      <div className="text-lg font-bold text-foreground">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_metrics?.max_potential_first_input_delay}ms
+                      </div>
+                      <div className="text-sm text-muted-foreground">Max Potential FID</div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Performance Opportunities */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_opportunities && (auditResult.comprehensiveResults || auditResult.rawData)?.performance_opportunities?.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
+                    <TrendingUp className="w-6 h-6 mr-3 text-orange-500" />
+                    Performance Opportunities
+                  </h3>
+                  <div className="space-y-3">
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_opportunities?.map((opportunity, index) => (
+                      <div key={index} className="flex items-start p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                        <div className="w-3 h-3 bg-orange-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
+                        <div className="flex-1">
+                          <span className="text-sm text-foreground font-medium">{opportunity}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Performance Diagnostics */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_diagnostics && (auditResult.comprehensiveResults || auditResult.rawData)?.performance_diagnostics?.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
+                    <BarChart className="w-6 h-6 mr-3 text-blue-500" />
+                    Performance Diagnostics
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_diagnostics?.map((diagnostic, index) => (
+                      <div key={index} className="flex items-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                        <div className="w-3 h-3 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
+                        <span className="text-sm text-foreground">{diagnostic}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* H Tags Section */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.1 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6">Heading Tags Analysis</h3>
+                  
+                  {/* H1 Tags */}
+                  {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1 && (auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
+                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-sm mr-2">H1</span>
+                        We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length} H1 tags on this page
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length !== 1 && (
+                          <AlertTriangle className="w-4 h-4 ml-2 text-orange-500" />
+                        )}
+                      </h4>
+                      {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length !== 1 && (
+                        <div className="mb-3 p-3 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
+                          <p className="text-sm text-orange-800 dark:text-orange-200">
+                            {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length === 0 
+                              ? "⚠️ No H1 tag found. Every page should have exactly one H1 tag."
+                              : `⚠️ Multiple H1 tags found (${(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length}). Pages should have exactly one H1 tag for optimal SEO.`
+                            }
+                          </p>
+                        </div>
+                      )}
+                      <div className="space-y-2">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.map((h1, index) => (
+                          <div key={index} className="bg-muted/50 rounded-lg p-3 border">
+                            <div className="flex items-start">
+                              <span className="text-sm font-medium text-muted-foreground mr-2">{index + 1}.</span>
+                              <div className="flex-1">
+                                <p className="text-foreground">{h1}</p>
+                                <div className="text-xs text-muted-foreground mt-1">
+                                  Length: {h1.length} characters
+                                  {h1.length < 20 && <span className="text-orange-600 ml-2">⚠️ Too short</span>}
+                                  {h1.length > 70 && <span className="text-orange-600 ml-2">⚠️ Too long</span>}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* H2 Tags */}
+                  {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2 && (auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
+                        <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-sm mr-2">H2</span>
+                        We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length} H2 tags on this page
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.map((h2, index) => (
+                          <div key={index} className="bg-muted/50 rounded-lg p-3 border">
+                            <div className="flex items-start">
+                              <span className="text-sm font-medium text-muted-foreground mr-2">{index + 1}.</span>
+                              <div className="flex-1">
+                                <p className="text-foreground">{h2}</p>
+                                <div className="text-xs text-muted-foreground mt-1">
+                                  Length: {h2.length} characters
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* H3 Tags */}
+                  {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3 && (auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length > 0 && (
+                    <div className="mb-6">
+                      <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
+                        <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-sm mr-2">H3</span>
+                        We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length} H3 tags on this page
+                      </h4>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.map((h3, index) => (
+                          <div key={index} className="bg-muted/50 rounded-lg p-3 border">
+                            <div className="flex items-start">
+                              <span className="text-sm font-medium text-muted-foreground mr-2">{index + 1}.</span>
+                              <div className="flex-1">
+                                <p className="text-foreground">{h3}</p>
+                                <div className="text-xs text-muted-foreground mt-1">
+                                  Length: {h3.length} characters
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Heading Structure Analysis */}
+                  <div className="mt-6 pt-6 border-t">
+                    <h4 className="text-lg font-semibold text-foreground mb-3">Heading Structure Summary</h4>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-600">
+                          {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length || 0}
+                        </div>
+                        <div className="text-sm text-muted-foreground">H1 Tags</div>
+                        {((auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length || 0) === 1 && (
+                          <div className="text-xs text-green-600 mt-1">✓ Perfect</div>
+                        )}
+                      </div>
+                      <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-green-600">
+                          {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length || 0}
+                        </div>
+                        <div className="text-sm text-muted-foreground">H2 Tags</div>
+                      </div>
+                      <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                        <div className="text-2xl font-bold text-purple-600">
+                          {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length || 0}
+                        </div>
+                        <div className="text-sm text-muted-foreground">H3 Tags</div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Detailed Issues Section */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.issues && (auditResult.comprehensiveResults || auditResult.rawData)?.issues?.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
+                    <AlertTriangle className="w-6 h-6 mr-3 text-red-500" />
+                    Issues Found ({(auditResult.comprehensiveResults || auditResult.rawData)?.issues?.length})
+                  </h3>
+                  <div className="space-y-4">
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.issues?.map((issue, index) => (
+                      <div key={index} className="border border-border rounded-lg p-6 bg-muted/30">
+                        <div className="flex items-start gap-4">
+                          <div className={`w-4 h-4 rounded-full mt-1 flex-shrink-0 ${
+                            issue.severity === 'high' ? 'bg-red-500' :
+                            issue.severity === 'medium' ? 'bg-orange-500' : 'bg-blue-500'
+                          }`}></div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <h4 className="font-semibold text-foreground">{issue.title}</h4>
+                              <span className={`px-2 py-1 text-xs rounded-full ${
+                                issue.severity === 'high' ? 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-200' :
+                                issue.severity === 'medium' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/20 dark:text-orange-200' : 
+                                'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-200'
+                              }`}>
+                                {issue.severity?.toUpperCase()}
+                              </span>
+                            </div>
+                            <p className="text-muted-foreground text-sm mb-3">{issue.description}</p>
+                            {issue.recommendation && (
+                              <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                                <p className="text-sm text-blue-800 dark:text-blue-200">
+                                  <strong>💡 Recommendation:</strong> {issue.recommendation}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Quick Wins Section */}
+              {(auditResult.comprehensiveResults || auditResult.rawData)?.quick_wins && (auditResult.comprehensiveResults || auditResult.rawData)?.quick_wins?.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.3 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
+                    <Zap className="w-6 h-6 mr-3 text-green-500" />
+                    Quick Wins & Easy Improvements
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.quick_wins?.map((win, index) => (
+                      <div key={index} className="border border-green-200 bg-green-50 dark:bg-green-900/20 dark:border-green-800 rounded-lg p-4">
+                        <div className="flex items-start gap-3">
+                          <div className="w-3 h-3 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-foreground mb-1">{win.title}</h4>
+                            <p className="text-muted-foreground text-sm">{win.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Fallback Recommendations for older format */}
+              {auditResult.recommendations && auditResult.recommendations.length > 0 && !auditResult.rawData?.quick_wins && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.2 }}
+                  className="bg-background rounded-2xl shadow-xl p-8 mb-8 border"
+                >
+                  <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
+                    <AlertTriangle className="w-6 h-6 mr-3 text-orange-500" />
+                    Key Recommendations
+                  </h3>
+                  <div className="space-y-3">
+                    {auditResult.recommendations.map((rec, index) => (
+                      <div key={index} className="flex items-start space-x-3 p-4 bg-muted/30 rounded-lg">
+                        <div className={`w-3 h-3 rounded-full mt-1 ${
+                          rec.type === 'critical' ? 'bg-red-500' :
+                          rec.type === 'warning' ? 'bg-orange-500' : 'bg-blue-500'
+                        }`} />
+                        <div>
+                          <div className="font-semibold text-foreground">{rec.title}</div>
+                          <div className="text-sm text-muted-foreground">{rec.description}</div>
+                          <div className="text-xs text-muted-foreground mt-1 capitalize">
+                            {rec.category} • {rec.type}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.3 }}
+                className="text-center"
+              >
+                <button
+                  onClick={() => {
+                    setShowResults(false);
+                    setAuditResult(null);
+                  }}
+                  className="bg-muted text-foreground px-8 py-3 rounded-lg hover:bg-muted/80 transition-colors mr-4"
+                >
+                  Audit Another Page
+                </button>
+                <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors">
+                  Export Detailed Report
+                </button>
+              </motion.div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
 
       {/* How It Works Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
