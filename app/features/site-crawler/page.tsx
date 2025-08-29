@@ -63,6 +63,17 @@ export default function SiteCrawlerPage() {
     setCrawlProgress(0);
     setShowResults(false);
     
+    // Auto-scroll to results section immediately
+    setTimeout(() => {
+      const resultsSection = document.getElementById('crawl-results-section');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }
+    }, 100);
+    
     try {
       // Simulate progressive loading with messages
       for (let i = 0; i < progressMessages.length; i++) {
@@ -85,17 +96,24 @@ export default function SiteCrawlerPage() {
         })
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to crawl website');
+        const errorText = await response.text();
+        let errorData;
+        try {
+          errorData = JSON.parse(errorText);
+        } catch {
+          throw new Error(`Server error: ${response.status}`);
+        }
+        throw new Error(errorData.error || 'Failed to crawl website');
       }
+
+      const data = await response.json();
 
       // Check if the result is completed or still processing
       if (data.status === 'completed' && data.result) {
         setCrawlProgress(100);
         
-        // Transform the data to match our interface
+        // Transform the data to match our interface - use the actual crawl result structure
         const result: CrawlResult = {
           startUrl: data.result.startUrl,
           totalPages: data.result.totalPages,
@@ -104,25 +122,48 @@ export default function SiteCrawlerPage() {
           averageLoadTime: data.result.averageLoadTime,
           crawlTime: data.result.crawlTime,
           pages: data.result.pages || [],
-          issues: {
-            missing_titles: data.result.pages?.filter((p: any) => !p.title || p.title === 'No Title').length || 0,
-            missing_h1: data.result.pages?.filter((p: any) => p.h1 === 'Missing').length || 0,
-            missing_meta_descriptions: data.result.pages?.filter((p: any) => !p.meta_description).length || 0,
-            images_without_alt: data.result.pages?.reduce((sum: number, p: any) => sum + (p.images_without_alt || 0), 0) || 0,
+          issues: data.result.issues || {
+            missing_titles: 0,
+            missing_h1: 0,
+            missing_meta_descriptions: 0,
+            images_without_alt: 0,
           },
-          robotsTxt: { found: true }, // Default values since the API doesn't return these
-          sitemapXml: { found: true },
-          brokenLinks: []
+          robotsTxt: data.result.robotsTxt || { found: false },
+          sitemapXml: data.result.sitemapXml || { found: false },
+          brokenLinks: data.result.brokenLinks || []
         };
         
         setCrawlResult(result);
         setShowResults(true);
+        
+        // Auto-scroll to detailed results after a brief delay
+        setTimeout(() => {
+          const detailedResults = document.getElementById('detailed-results');
+          if (detailedResults) {
+            detailedResults.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start' 
+            });
+          }
+        }, 500);
       } else {
         throw new Error('Crawl did not complete successfully');
       }
       
     } catch (error) {
+      console.error('Crawl error:', error);
       setCrawlError(error instanceof Error ? error.message : "An error occurred during crawling");
+      
+      // Auto-scroll to error message
+      setTimeout(() => {
+        const errorSection = document.getElementById('crawl-error-section');
+        if (errorSection) {
+          errorSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }, 100);
     } finally {
       setIsCrawling(false);
     }
@@ -331,7 +372,7 @@ export default function SiteCrawlerPage() {
                     </>
                   ) : isCrawling ? (
                     /* Loading State */
-                    <div className="text-center space-y-6">
+                    <div id="crawl-results-section" className="text-center space-y-6">
                       <div className="text-center mb-6">
                         <h3 className="text-lg font-semibold text-foreground mb-2">
                           Analyzing {crawlUrl}
@@ -418,7 +459,7 @@ export default function SiteCrawlerPage() {
 
                   {/* Error State */}
                   {crawlError && (
-                    <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                    <div id="crawl-error-section" className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                       <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
                         <AlertCircle className="w-4 h-4" />
                         <span className="text-sm font-medium">Error</span>
@@ -443,6 +484,7 @@ export default function SiteCrawlerPage() {
         <AnimatePresence>
           {showResults && crawlResult && (
             <motion.section
+              id="crawl-results-section"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -566,7 +608,7 @@ export default function SiteCrawlerPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="text-center space-y-4"
+                  className="text-center space-y-4 mb-12"
                 >
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="text-lg px-8 py-6">
@@ -588,6 +630,139 @@ export default function SiteCrawlerPage() {
                   >
                     Start New Crawl
                   </Button>
+                </motion.div>
+
+                {/* Detailed Results Table */}
+                <motion.div
+                  id="detailed-results"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="bg-card rounded-xl border shadow-sm overflow-hidden"
+                >
+                  <div className="px-6 py-4 border-b bg-muted/50">
+                    <h3 className="text-lg font-semibold text-foreground">Detailed Page Analysis</h3>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Complete breakdown of all crawled pages with SEO insights
+                    </p>
+                  </div>
+                  
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead className="bg-muted/30">
+                        <tr>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-foreground">Page URL</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-foreground">Title</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">H1</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Meta Desc</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Word Count</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Images</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Load Time</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        {crawlResult.pages?.map((page: any, index: number) => (
+                          <motion.tr
+                            key={page.url}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.05 }}
+                            className="hover:bg-muted/50 transition-colors"
+                          >
+                            <td className="px-6 py-4">
+                              <div className="max-w-xs">
+                                <a 
+                                  href={page.url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline truncate block"
+                                  title={page.url}
+                                >
+                                  {page.url.replace(/^https?:\/\//, '').substring(0, 50)}
+                                  {page.url.replace(/^https?:\/\//, '').length > 50 ? '...' : ''}
+                                </a>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4">
+                              <div className="max-w-xs">
+                                {page.title ? (
+                                  <span className="text-sm text-foreground" title={page.title}>
+                                    {page.title.substring(0, 40)}
+                                    {page.title.length > 40 ? '...' : ''}
+                                  </span>
+                                ) : (
+                                  <span className="text-sm text-red-500 flex items-center">
+                                    <AlertCircle className="w-3 h-3 mr-1" />
+                                    Missing
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              {page.h1_presence ? (
+                                <CheckCircle className="w-4 h-4 text-green-500 mx-auto" />
+                              ) : (
+                                <AlertCircle className="w-4 h-4 text-red-500 mx-auto" />
+                              )}
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              {page.meta_description ? (
+                                <CheckCircle className="w-4 h-4 text-green-500 mx-auto" />
+                              ) : (
+                                <AlertCircle className="w-4 h-4 text-red-500 mx-auto" />
+                              )}
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              <span className={`text-sm font-medium ${
+                                page.word_count > 300 ? 'text-green-600' : 
+                                page.word_count > 100 ? 'text-yellow-600' : 'text-red-600'
+                              }`}>
+                                {page.word_count || 0}
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              <div className="text-sm">
+                                <span className="text-foreground">{page.images_total || 0}</span>
+                                {page.images_missing_alt > 0 && (
+                                  <span className="text-red-500 ml-1">
+                                    ({page.images_missing_alt} w/o alt)
+                                  </span>
+                                )}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              <span className={`text-sm font-medium ${
+                                page.load_time_ms < 1000 ? 'text-green-600' :
+                                page.load_time_ms < 3000 ? 'text-yellow-600' : 'text-red-600'
+                              }`}>
+                                {page.load_time_ms}ms
+                              </span>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                              <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                                page.status === 200 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
+                                page.status >= 400 ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' :
+                                'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                              }`}>
+                                {page.status}
+                              </span>
+                            </td>
+                          </motion.tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  {crawlResult.pages && crawlResult.pages.length === 0 && (
+                    <div className="text-center py-12">
+                      <AlertCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                      <h3 className="text-lg font-medium text-foreground mb-2">No Pages Found</h3>
+                      <p className="text-muted-foreground">
+                        The crawler was unable to find any accessible pages on this website.
+                      </p>
+                    </div>
+                  )}
                 </motion.div>
               </div>
             </motion.section>
