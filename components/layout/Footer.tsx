@@ -1,64 +1,146 @@
-import Link from 'next/link';
-import Image from 'next/image';
+"use client"
+
+import React from "react"
+import Link from "next/link"
+import { motion } from "framer-motion"
+import { 
+  Twitter, 
+  Linkedin, 
+  Github, 
+  Youtube
+} from "lucide-react"
+
+const footerSections = [
+  {
+    title: "Product",
+    links: [
+      { label: "SEO Audit", href: "/features/seo-audit" },
+      { label: "Competitor Analysis", href: "/features/competitor-analysis" },
+      { label: "Site Crawler", href: "/features/site-crawler" },
+      { label: "AI Assistant", href: "/features/ai-assistant" },
+      { label: "Keyword Tracking", href: "/features/keyword-tracking" }
+    ]
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Contact", href: "/contact" },
+      { label: "Careers", href: "/careers" },
+      { label: "Blog", href: "/blog" }
+    ]
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Documentation", href: "/docs" },
+      { label: "Help Center", href: "/help" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Webinars", href: "/webinars" }
+    ]
+  }
+]
+
+const socialLinks = [
+  { name: "Twitter", href: "https://twitter.com/aiseoturbo", icon: Twitter },
+  { name: "LinkedIn", href: "https://linkedin.com/company/aiseoturbo", icon: Linkedin },
+  { name: "GitHub", href: "https://github.com/aiseoturbo", icon: Github },
+  { name: "YouTube", href: "https://youtube.com/aiseoturbo", icon: Youtube }
+]
 
 export default function Footer() {
-	return (
-		<footer className="relative mt-20">
-			<div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/40 to-white pointer-events-none" />
-			<div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-sm text-gray-600">
-					<div>
-						<div className="flex items-center gap-2 mb-4 sm:justify-start justify-center">
-							<div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-								<span className="text-white font-bold">A</span>
-							</div>
-							<span className="text-lg font-semibold text-gray-900">AISEO Turbo</span>
-						</div>
-						<p className="text-gray-500 text-center sm:text-left">AI‑powered SEO platform to analyze, monitor, and grow your organic traffic.</p>
-						<div className="flex gap-3 mt-4 opacity-80 justify-center sm:justify-start">
-							<Image src="/brand/badge-g2.svg" alt="G2" width={64} height={64} />
-							<Image src="/brand/badge-capterra.svg" alt="Capterra" width={96} height={64} />
-						</div>
-					</div>
-					<div>
-						<div className="font-semibold mb-3 text-gray-900">Product</div>
-						<ul className="space-y-2">
-							<li><Link href="/features" className="hover:text-blue-600">Features</Link></li>
-							<li><Link href="/pricing" className="hover:text-blue-600">Pricing</Link></li>
-							<li><Link href="/seo-audit" className="hover:text-blue-600">SEO Audit</Link></li>
-							<li><Link href="/rank-tracker" className="hover:text-blue-600">Rank Tracker</Link></li>
-						</ul>
-					</div>
-					<div>
-						<div className="font-semibold mb-3 text-gray-900">Company</div>
-						<ul className="space-y-2">
-							<li><Link href="/about" className="hover:text-blue-600">About</Link></li>
-							<li><Link href="/contact" className="hover:text-blue-600">Contact</Link></li>
-							<li><Link href="/careers" className="hover:text-blue-600">Careers</Link></li>
-						</ul>
-					</div>
-					<div>
-						<div className="font-semibold mb-3 text-gray-900">Resources</div>
-						<ul className="space-y-2">
-							<li><Link href="/blog" className="hover:text-blue-600">Blog</Link></li>
-							<li><Link href="/docs" className="hover:text-blue-600">Docs</Link></li>
-							<li><Link href="/help" className="hover:text-blue-600">Help Center</Link></li>
-						</ul>
-					</div>
-				</div>
-				<div className="mt-10 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-					<div>© {new Date().getFullYear()} AISEO Turbo. All rights reserved.</div>
-					<div className="space-x-4 mt-2 sm:mt-0">
-						<Link href="/legal/privacy" className="hover:text-blue-600">Privacy</Link>
-						<Link href="/legal/terms" className="hover:text-blue-600">Terms</Link>
-					</div>
-				</div>
-			</div>
-		</footer>
-	);
+  return (
+    <footer className="bg-slate-950 border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Main Footer Content */}
+        <div className="py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            {/* Company Info */}
+            <div className="lg:col-span-4 space-y-6">
+              <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
+                <Link 
+                  href="/" 
+                  className="text-3xl font-bold text-white hover:text-purple-400 transition-colors duration-200"
+                >
+                  AISEOTurbo
+                </Link>
+              </motion.div>
+              <p className="text-gray-400 text-lg leading-relaxed">
+                Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations that drive real results.
+              </p>
+              
+              {/* Social Links */}
+              <div className="flex items-center space-x-4">
+                {socialLinks.map((social) => {
+                  const Icon = social.icon
+                  return (
+                    <motion.a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      className="text-gray-400 hover:text-white transition-colors duration-200 p-2"
+                      aria-label={`Follow us on ${social.name}`}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </motion.a>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Footer Links */}
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {footerSections.map((section) => (
+                  <div key={section.title} className="space-y-4">
+                    <h3 className="text-lg font-semibold text-white">
+                      {section.title}
+                    </h3>
+                    <ul className="space-y-3">
+                      {section.links.map((link) => (
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
+                            className="text-gray-400 hover:text-white transition-colors duration-200"
+                          >
+                            {link.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Footer */}
+        <div className="py-8 border-t border-slate-800">
+          <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <p className="text-gray-400 text-sm">
+              Â© 2025 AISEOTurbo. All rights reserved.
+            </p>
+            <div className="flex items-center space-x-6">
+              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">
+                Terms of Service
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
 }
 
 // Spacer to prevent sticky audit bar from overlapping footer on long pages
 export function BottomSpacer() {
-	return <div className="h-24" />;
+  return <div className="h-24" />
 }

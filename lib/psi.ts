@@ -4,7 +4,13 @@ export interface PSIResult {
   lcp: number | null; // Largest Contentful Paint (seconds)
   cls: number | null; // Cumulative Layout Shift
   inp: number | null; // Interaction to Next Paint (milliseconds)
+  fcp: number | null; // First Contentful Paint (seconds)
+  tbt: number | null; // Total Blocking Time (milliseconds)
+  si: number | null; // Speed Index (seconds)
+  performanceScore: number | null; // Overall performance score (0-100)
   notes: string[]; // Performance notes and recommendations
+  opportunities: string[]; // Performance improvement opportunities
+  diagnostics: string[]; // Performance diagnostics
 }
 
 export interface PSIResponse {
@@ -89,7 +95,13 @@ export async function fetchPageSpeed(
       lcp: null,
       cls: null,
       inp: null,
+      fcp: null,
+      tbt: null,
+      si: null,
+      performanceScore: null,
       notes: ["PSI API key not provided - performance data unavailable"],
+      opportunities: [],
+      diagnostics: []
     };
   }
 
@@ -135,19 +147,31 @@ export async function fetchPageSpeed(
 
       const data = (await response.json()) as PSIResponse;
 
-      // Extract Core Web Vitals
+      // Extract Core Web Vitals and additional metrics
       const lcp = extractLCP(data);
       const cls = extractCLS(data);
       const inp = extractINP(data);
+      const fcp = extractFCP(data);
+      const tbt = extractTBT(data);
+      const si = extractSpeedIndex(data);
+      const performanceScore = extractPerformanceScore(data);
 
-      // Generate performance notes
+      // Generate performance notes, opportunities, and diagnostics
       const notes = generatePerformanceNotes(data, lcp, cls, inp);
+      const opportunities = generatePerformanceOpportunities(data, lcp, cls, inp, fcp, tbt, si);
+      const diagnostics = generatePerformanceDiagnostics(data, performanceScore);
 
       const result: PSIResult = {
         lcp,
         cls,
         inp,
+        fcp,
+        tbt,
+        si,
+        performanceScore,
         notes,
+        opportunities,
+        diagnostics
       };
 
       // Store in cache
@@ -179,11 +203,17 @@ export async function fetchPageSpeed(
           lcp: null,
           cls: null,
           inp: null,
+          fcp: null,
+          tbt: null,
+          si: null,
+          performanceScore: null,
           notes: [
             `PSI API error after ${maxRetries + 1} attempts: ${
               error instanceof Error ? error.message : "Unknown error"
             }`,
           ],
+          opportunities: [],
+          diagnostics: []
         };
       }
     }
@@ -193,12 +223,127 @@ export async function fetchPageSpeed(
     lcp: null,
     cls: null,
     inp: null,
+    fcp: null,
+    tbt: null,
+    si: null,
+    performanceScore: null,
     notes: [
       `PSI API error: ${
         lastError instanceof Error ? lastError.message : "Unknown error"
       }`,
     ],
+    opportunities: [],
+    diagnostics: []
   };
+}
+
+/**
+ * Extracts First Contentful Paint value from PSI response
+ */
+function extractFCP(data: PSIResponse): number | null {
+  if (data.lighthouseResult?.audits?.["first-contentful-paint"]?.numericValue) {
+    return data.lighthouseResult.audits["first-contentful-paint"].numericValue / 1000; // Convert to seconds
+  }
+  return null;
+}
+
+/**
+ * Extracts Total Blocking Time value from PSI response
+ */
+function extractTBT(data: PSIResponse): number | null {
+  if (data.lighthouseResult?.audits?.["total-blocking-time"]?.numericValue) {
+    return data.lighthouseResult.audits["total-blocking-time"].numericValue; // Already in milliseconds
+  }
+  return null;
+}
+
+/**
+ * Extracts Speed Index value from PSI response
+ */
+function extractSpeedIndex(data: PSIResponse): number | null {
+  if (data.lighthouseResult?.audits?.["speed-index"]?.numericValue) {
+    return data.lighthouseResult.audits["speed-index"].numericValue / 1000; // Convert to seconds
+  }
+  return null;
+}
+
+/**
+ * Extracts Performance Score from PSI response
+ */
+function extractPerformanceScore(data: PSIResponse): number | null {
+  if (data.lighthouseResult?.categories?.performance?.score !== undefined) {
+    return Math.round(data.lighthouseResult.categories.performance.score * 100);
+  }
+  return null;
+}
+
+/**
+ * Generates performance improvement opportunities
+ */
+function generatePerformanceOpportunities(
+  data: PSIResponse,
+  lcp: number | null,
+  cls: number | null,
+  inp: number | null,
+  fcp: number | null,
+  tbt: number | null,
+  si: number | null
+): string[] {
+  const opportunities: string[] = [];
+
+  // Check each metric and suggest improvements
+  if (lcp && lcp > 2.5) {
+    opportunities.push(`Optimize Largest Contentful Paint: currently ${lcp.toFixed(2)}s, target ≤2.5s`);
+  }
+  
+  if (cls && cls > 0.1) {
+    opportunities.push(`Reduce Cumulative Layout Shift: currently ${cls.toFixed(3)}, target ≤0.1`);
+  }
+  
+  if (inp && inp > 200) {
+    opportunities.push(`Improve Interaction to Next Paint: currently ${inp}ms, target ≤200ms`);
+  }
+  
+  if (fcp && fcp > 1.8) {
+    opportunities.push(`Optimize First Contentful Paint: currently ${fcp.toFixed(2)}s, target ≤1.8s`);
+  }
+  
+  if (tbt && tbt > 200) {
+    opportunities.push(`Reduce Total Blocking Time: currently ${tbt}ms, target ≤200ms`);
+  }
+  
+  if (si && si > 3.4) {
+    opportunities.push(`Improve Speed Index: currently ${si.toFixed(2)}s, target ≤3.4s`);
+  }
+
+  return opportunities;
+}
+
+/**
+ * Generates performance diagnostics
+ */
+function generatePerformanceDiagnostics(
+  data: PSIResponse,
+  performanceScore: number | null
+): string[] {
+  const diagnostics: string[] = [];
+
+  if (performanceScore !== null) {
+    if (performanceScore >= 90) {
+      diagnostics.push("Performance is excellent - maintain current optimization level");
+    } else if (performanceScore >= 70) {
+      diagnostics.push("Performance is good - minor optimizations could improve score");
+    } else if (performanceScore >= 50) {
+      diagnostics.push("Performance needs improvement - focus on Core Web Vitals optimization");
+    } else {
+      diagnostics.push("Performance is poor - comprehensive optimization required");
+    }
+  }
+
+  // Add general diagnostics
+  diagnostics.push("Consider optimizing images, enabling compression, and reducing JavaScript execution time");
+
+  return diagnostics;
 }
 
 /**

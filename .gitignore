@@ -1,5 +1,6 @@
 # Ignore environment files with secrets
 .env
+.env.local
 apps/worker/.env
 .next/
 node_modules/
@@ -13,3 +14,4 @@ tsconfig.tsbuildinfo
 
 
 node_modules
+.vercel

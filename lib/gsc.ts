@@ -1,5 +1,5 @@
 import { google } from "googleapis";
-import { getPrisma } from "./db";
+import { prisma } from "./db";
 
 // OAuth2 client setup with explicit redirect URI
 const redirectUri =
@@ -47,7 +47,6 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
     console.log("GSC Callback: Storing tokens in database for state:", state);
     
     // Store tokens in database
-    const prisma = await getPrisma();
     await (prisma as any).gscToken.upsert({
       where: { state },
       update: { tokens },
@@ -87,7 +86,6 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
   }
 
   try {
-    const prisma = await getPrisma();
     let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
     if (!tokenRecord) {
       tokenRecord = await (prisma as any).gscToken.findFirst({ orderBy: { createdAt: 'desc' } });
@@ -200,7 +198,6 @@ export function isGscConfigured(): boolean {
 // Helper function to check if we have any tokens stored
 export async function hasGscTokens(state?: string): Promise<boolean> {
   try {
-    const prisma = await getPrisma();
     if (state) {
       const tokenCountForState = await (prisma as any).gscToken.count({ where: { state } });
       return tokenCountForState > 0;
@@ -216,7 +213,6 @@ export async function hasGscTokens(state?: string): Promise<boolean> {
 // Helper function to validate GSC tokens and check if they're working
 export async function validateGscTokens(state?: string): Promise<{ isValid: boolean; hasProperties: boolean; message: string }> {
   try {
-    const prisma = await getPrisma();
     let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
 
     // Fallback to latest token if no record for this state
