@@ -17,19 +17,19 @@ export class DB {
   // Audit operations
   async createAudit(data: {
     id: string;
-    url: string;
-    userId: string;
-    score?: number;
-    data?: any;
+    runId: string;
+    json: any;
+    projectId?: string;
+    createdBy?: string;
   }): Promise<Audit | null> {
     try {
       return await prisma.audit.create({
         data: {
           id: data.id,
-          url: data.url,
-          userId: data.userId,
-          score: data.score || null,
-          data: data.data || null,
+          runId: data.runId,
+          json: data.json,
+          projectId: data.projectId || null,
+          createdBy: data.createdBy || null,
         },
       });
     } catch {
@@ -46,7 +46,7 @@ export class DB {
 
   async getAuditsByUser(userId: string, limit = 10): Promise<Audit[]> {
     return prisma.audit.findMany({
-      where: { userId },
+      where: { createdBy: userId },
       orderBy: { createdAt: 'desc' },
       take: limit,
     });
@@ -70,16 +70,13 @@ export class DB {
   }
 
   async updateAudit(id: string, data: {
-    score?: number;
-    data?: any;
+    json?: any;
   }): Promise<Audit | null> {
     try {
       return await prisma.audit.update({
         where: { id },
         data: {
-          score: data.score,
-          data: data.data,
-          updatedAt: new Date(),
+          json: data.json,
         },
       });
     } catch {
@@ -96,17 +93,13 @@ export class DB {
   }
 
   async getUserAuditStats(userId: string) {
-    const [totalAudits, avgScore] = await Promise.all([
-      prisma.audit.count({ where: { userId } }),
-      prisma.audit.aggregate({
-        where: { userId, score: { not: null } },
-        _avg: { score: true }
-      })
-    ]);
+    const totalAudits = await prisma.audit.count({ 
+      where: { createdBy: userId } 
+    });
 
     return {
       totalAudits,
-      averageScore: avgScore._avg.score ? Math.round(avgScore._avg.score) : null,
+      averageScore: null, // Score is no longer in the schema
     };
   }
 }

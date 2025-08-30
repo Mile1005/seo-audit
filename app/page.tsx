@@ -1,16 +1,20 @@
 import { HeroSection } from "@/components/hero/hero-section"
 import { TrustLogos } from "@/components/hero/trust-logos"
-import { FeaturesShowcase } from "@/components/features/features-showcase"
-import { InteractiveDemo } from "@/components/demo/interactive-demo"
-import { TestimonialsCarousel } from "@/components/testimonials/testimonials-carousel"
-import { ROICalculator } from "@/components/pricing/roi-calculator"
-import { PricingCards } from "@/components/pricing/pricing-cards"
 import { EmailCaptureInline } from "@/components/lead/email-capture-inline"
 import { ExitIntentModal } from "@/components/lead/exit-intent-modal"
 import { ContentGate } from "@/components/lead/content-gate"
 import { MainLayout } from "@/components/layout/main-layout"
 import { generateSEOMeta, generateStructuredData, pageSEO } from "@/lib/seo"
 import { Metadata } from 'next'
+
+// Dynamic imports for heavy components to improve initial page load
+import { 
+  DynamicFeaturesShowcase,
+  DynamicInteractiveDemo,
+  DynamicTestimonialsCarousel,
+  DynamicROICalculator,
+  DynamicPricingCards 
+} from "@/components/dynamic/heavy-components"
 
 // SEO metadata for the homepage
 export const metadata: Metadata = generateSEOMeta(pageSEO.home)
@@ -116,8 +120,8 @@ export default function Home() {
     <MainLayout>
       <HeroSection />
       <TrustLogos />
-      <FeaturesShowcase />
-      <InteractiveDemo />
+      <DynamicFeaturesShowcase />
+      <DynamicInteractiveDemo />
       
       {/* Mid-page Email Capture */}
       <section className="py-16 bg-slate-950">
@@ -135,7 +139,7 @@ export default function Home() {
         </div>
       </section>
 
-      <TestimonialsCarousel />
+      <DynamicTestimonialsCarousel />
       
       {/* Content Gate Demo */}
       <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-950">
@@ -159,8 +163,8 @@ export default function Home() {
         </div>
       </section>
 
-      <ROICalculator />
-      <PricingCards />
+      <DynamicROICalculator />
+      <DynamicPricingCards />
       
       {/* Footer Email Capture */}
       <section className="py-16 bg-slate-900">

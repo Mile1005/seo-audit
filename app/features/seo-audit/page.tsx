@@ -8,11 +8,13 @@ import { ApiErrorBoundary } from '../../../components/ui/error-boundary'
 import { useFormSubmission } from '../../../hooks/use-api'
 import { api, AuditResult, ApiResponse } from '../../../lib/api-client'
 
-// Import all feature components
-import AuditCategories from '../../../components/features/seo-audit/audit-categories'
-import AuditPreview from '../../../components/features/seo-audit/audit-preview'
-import TechnicalBreakdown from '../../../components/features/seo-audit/technical-breakdown'
-import ResultsShowcase from '../../../components/features/seo-audit/results-showcase'
+// Dynamic imports for feature components
+import { 
+  DynamicAuditCategories,
+  DynamicAuditPreview,
+  DynamicTechnicalBreakdown,
+  DynamicResultsShowcase 
+} from '../../../components/dynamic/feature-components'
 
 // SEO Audit Result Interface
 interface SEOAuditResult {
@@ -1614,16 +1616,16 @@ export default function SEOAuditFeaturePage() {
       </section>
 
       {/* Audit Categories */}
-      <AuditCategories />
+      <DynamicAuditCategories />
 
       {/* Technical Deep Dive */}
-      <TechnicalBreakdown />
+      <DynamicTechnicalBreakdown />
 
       {/* Interactive Preview */}
-      <AuditPreview />
+      <DynamicAuditPreview />
 
       {/* Customer Results */}
-      <ResultsShowcase />
+      <DynamicResultsShowcase />
 
       {/* Why Choose Us */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
