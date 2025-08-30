@@ -111,7 +111,7 @@ export default function CompetitorAnalysisPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
                 >
                   Outsmart Your{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
@@ -151,10 +151,10 @@ export default function CompetitorAnalysisPage() {
                         <div className="text-lg font-bold text-foreground mb-1">
                           {metric.value}
                         </div>
-                        <div className="text-xs text-muted-foreground mb-1">
+                        <div className="text-xs text-muted-foreground/80 mb-1">
                           {metric.title}
                         </div>
-                        <div className="text-xs text-green-600 font-medium">
+                        <div className="text-xs text-green-400 font-medium bg-green-950/20 px-2 py-1 rounded">
                           {metric.change}
                         </div>
                       </motion.div>
@@ -223,7 +223,7 @@ export default function CompetitorAnalysisPage() {
                           </div>
                           <div>
                             <div className="font-medium text-foreground">{competitor.name}</div>
-                            <div className="text-xs text-muted-foreground">
+                            <div className="text-xs text-muted-foreground/80">
                               {competitor.keywords} keywords
                             </div>
                           </div>
@@ -244,12 +244,12 @@ export default function CompetitorAnalysisPage() {
                   {/* Summary Stats */}
                   <div className="mt-6 pt-4 border-t grid grid-cols-2 gap-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-purple-600">247</div>
-                      <div className="text-xs text-muted-foreground">Opportunities Found</div>
+                      <div className="text-2xl font-bold text-purple-400">247</div>
+                      <div className="text-xs text-muted-foreground/80">Opportunities Found</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">+12</div>
-                      <div className="text-xs text-muted-foreground">Avg. Rank Improvement</div>
+                      <div className="text-2xl font-bold text-green-400">+12</div>
+                      <div className="text-xs text-muted-foreground/80">Avg. Rank Improvement</div>
                     </div>
                   </div>
                 </div>
@@ -283,7 +283,7 @@ export default function CompetitorAnalysisPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl lg:text-4xl font-bold text-foreground mb-6"
+              className="text-3xl lg:text-4xl font-bold text-white mb-6"
             >
               <Trophy className="w-8 h-8 inline mr-3 text-yellow-500" />
               Success Stories
@@ -307,15 +307,15 @@ export default function CompetitorAnalysisPage() {
               className="grid md:grid-cols-3 gap-8 mb-12"
             >
               <div className="text-center">
-                <div className="text-4xl font-bold text-purple-600 mb-2">300%</div>
+                <div className="text-4xl font-bold text-purple-400 mb-2">300%</div>
                 <div className="text-muted-foreground">Traffic Increase</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-green-600 mb-2">15</div>
+                <div className="text-4xl font-bold text-green-400 mb-2">15</div>
                 <div className="text-muted-foreground">Avg. Rank Improvement</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">89%</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">89%</div>
                 <div className="text-muted-foreground">Customer Success Rate</div>
               </div>
             </motion.div>

@@ -154,10 +154,13 @@ export default function GapAnalysis() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center space-x-2">
               <Globe className="w-4 h-4 text-muted-foreground" />
+              <label htmlFor="competitor-selector" className="sr-only">Select competitor to analyze</label>
               <select 
+                id="competitor-selector"
                 value={selectedCompetitor}
                 onChange={(e) => setSelectedCompetitor(e.target.value)}
                 className="bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                aria-label="Select competitor to analyze"
               >
                 {competitors.map(competitor => (
                   <option key={competitor} value={competitor}>{competitor}</option>

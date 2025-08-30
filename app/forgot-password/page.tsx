@@ -161,7 +161,7 @@ export default function ForgotPasswordPage() {
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} action="/api/auth/forgot-password" method="post" className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
               Email Address

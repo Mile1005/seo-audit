@@ -41,7 +41,7 @@ export function CreateProjectForm({ onProjectCreated }: CreateProjectFormProps) 
         <CardTitle>Create New Project</CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} action="/api/projects" method="POST" className="space-y-4">
           <div>
             <Label htmlFor="project-name">Project Name</Label>
             <Input

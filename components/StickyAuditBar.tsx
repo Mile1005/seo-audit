@@ -68,7 +68,7 @@ export default function StickyAuditBar() {
         >
           <div className="max-w-3xl mx-auto px-4">
             <div className="bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-3">
-              <form onSubmit={submit} className="flex items-center gap-2">
+              <form onSubmit={submit} action="/api/audit" method="POST" className="flex items-center gap-2">
                 <input
                   type="text"
                   className="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"

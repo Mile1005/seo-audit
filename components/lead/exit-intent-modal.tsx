@@ -258,7 +258,7 @@ export function ExitIntentModal({
 
                 {/* Form */}
                 <div className="p-6 pt-2">
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} action="/api/lead-capture" method="POST" className="space-y-4">
                     <div className="relative">
                       <input
                         ref={emailInputRef}

@@ -2,7 +2,181 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: dark; }
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 75.1%; /* Increased from 65.1% to 75.1% for better contrast */
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 25.5%; /* Increased from 17.5% to 25.5% for better contrast */
+    --input: 217.2 32.6% 25.5%; /* Increased from 17.5% to 25.5% for better contrast */
+    --ring: 224.3 76.3% 94.0%;
+    --radius: 0.5rem;
+    color-scheme: dark;
+  }
 
-html, body { height: 100%; }
-body { margin: 0; }
+  [data-theme="light"] {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 36.9%; /* Decreased from 46.9% to 36.9% for better contrast */
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 81.4%; /* Decreased from 91.4% to 81.4% for better contrast */
+    --input: 214.3 31.8% 81.4%; /* Decreased from 91.4% to 81.4% for better contrast */
+    --ring: 221.2 83.2% 53.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    margin: 0;
+    height: 100%;
+  }
+  html {
+    height: 100%;
+  }
+  
+  /* Improve form input accessibility */
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="password"],
+  select,
+  textarea {
+    color: hsl(var(--foreground)) !important;
+    background-color: hsl(var(--input)) !important;
+    border: 2px solid hsl(var(--border)) !important;
+  }
+  
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder,
+  input[type="url"]::placeholder,
+  input[type="password"]::placeholder,
+  textarea::placeholder {
+    color: hsl(var(--muted-foreground)) !important;
+    opacity: 0.8;
+  }
+  
+  /* Ensure buttons have proper contrast */
+  button[type="submit"] {
+    color: hsl(var(--primary-foreground)) !important;
+    background-color: hsl(var(--primary)) !important;
+  }
+  
+  /* Better contrast for code/small text elements */
+  .bg-slate-700 {
+    background-color: hsl(var(--secondary)) !important;
+  }
+  
+  .text-gray-400 {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+  
+  /* Ensure minimum touch target sizes for mobile accessibility */
+  @media (max-width: 768px) {
+    button,
+    a,
+    input[type="submit"],
+    input[type="button"],
+    [role="button"],
+    [role="link"] {
+      min-width: 44px !important;
+      min-height: 44px !important;
+      padding: 8px !important;
+    }
+    
+    /* Special handling for inline buttons */
+    button.inline,
+    a.inline {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    /* Improve small text visibility */
+    .text-xs {
+      color: hsl(var(--foreground)) !important;
+      background-color: hsl(var(--muted)) !important;
+      padding: 2px 4px !important;
+      border-radius: 4px !important;
+    }
+  }
+  
+  /* Universal color contrast fixes - More aggressive approach */
+  * {
+    --card: white !important;
+    --background: white !important;
+    --foreground: black !important;
+    --muted-foreground: #374151 !important;
+  }
+
+  .bg-card,
+  .bg-background {
+    background-color: white !important;
+  }
+
+  .text-foreground {
+    color: black !important;
+  }
+
+  .text-muted-foreground,
+  .text-muted-foreground\/80 {
+    color: #374151 !important;
+  }
+
+  /* Force better color contrast for all problematic color combinations */
+  .bg-yellow-500 { 
+    background-color: #92400e !important; /* Much darker yellow */
+  }
+  
+  .bg-gray-400 { 
+    background-color: #374151 !important; /* Much darker gray */
+  }
+  
+  .bg-orange-500 { 
+    background-color: #c2410c !important; /* Much darker orange */
+  }
+  
+  .bg-blue-500 { 
+    background-color: #1e40af !important; /* Much darker blue */
+  }
+  
+  .text-red-600 { 
+    color: #dc2626 !important; /* Standard red for better contrast */
+  }
+  
+  .text-green-600 { 
+    color: #059669 !important; /* Darker green for better contrast */
+  }
+  
+  .bg-blue-50 { 
+    background-color: white !important; /* Pure white for better contrast */
+  }
+}

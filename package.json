@@ -14,14 +14,22 @@
     "worker:crawl": "tsx worker/crawl.ts",
     "format": "prettier --write .",
     "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ci": "playwright test --reporter=html",
+    "test:accessibility": "playwright test tests/accessibility.spec.ts",
+    "test:accessibility:ci": "playwright test tests/accessibility.spec.ts --reporter=html",
+    "type-check": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "analyze": "node scripts/bundle-analyzer.js",
     "analyze:build": "npm run build && npm run analyze",
     "perf:audit": "npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json",
-    "perf:budget": "npx bundlesize"
+    "perf:budget": "npx bundlesize",
+    "lhci": "lhci autorun",
+    "audit": "npm audit --audit-level=high"
   },
   "browserslist": [
     "last 2 Chrome versions",
@@ -77,6 +85,7 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.2.1",
     "@types/nodemailer": "^7.0.1",
@@ -85,6 +94,7 @@
     "@types/xml2js": "^0.4.14",
     "@vitest/coverage-v8": "^3.2.4",
     "autoprefixer": "^10.4.21",
+    "axe-core": "^4.10.3",
     "eslint": "^8.57.1",
     "eslint-config-next": "15.4.6",
     "postcss": "^8.5.6",

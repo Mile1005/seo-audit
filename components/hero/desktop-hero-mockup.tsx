@@ -33,7 +33,7 @@ export function DesktopHeroMockup() {
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             </div>
             <div className="flex-1 mx-4">
-              <div className="bg-slate-700 rounded-md px-3 py-1 text-xs text-gray-400 max-w-xs">
+              <div className="bg-slate-600 rounded-md px-3 py-1 text-xs text-gray-200 max-w-xs">
                 aiseoturbo.com/audit
               </div>
             </div>

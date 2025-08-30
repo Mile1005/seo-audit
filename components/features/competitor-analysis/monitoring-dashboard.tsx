@@ -218,10 +218,13 @@ export default function MonitoringDashboard() {
             
             <div className="flex items-center space-x-2">
               <Calendar className="w-4 h-4 text-muted-foreground" />
+              <label htmlFor="monitoring-time-range" className="sr-only">Select time range for monitoring</label>
               <select 
+                id="monitoring-time-range"
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value)}
                 className="bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                aria-label="Select time range for monitoring dashboard"
               >
                 {timeRanges.map(range => (
                   <option key={range.value} value={range.value}>{range.label}</option>

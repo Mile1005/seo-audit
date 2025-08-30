@@ -160,7 +160,7 @@ export function ContentGate({
                     </p>
 
                     {/* Email Form */}
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} action="/api/lead-capture" method="POST" className="space-y-4">
                       <input
                         ref={emailInputRef}
                         type="email"

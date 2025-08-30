@@ -98,10 +98,13 @@ export default function SerpComparison() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center space-x-2">
               <Search className="w-4 h-4 text-muted-foreground" />
+              <label htmlFor="keyword-selector" className="sr-only">Select keyword to analyze</label>
               <select 
+                id="keyword-selector"
                 value={selectedKeyword}
                 onChange={(e) => setSelectedKeyword(e.target.value)}
                 className="bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                aria-label="Select keyword to analyze"
               >
                 {keywords.map(keyword => (
                   <option key={keyword} value={keyword}>{keyword}</option>
@@ -111,10 +114,13 @@ export default function SerpComparison() {
             
             <div className="flex items-center space-x-2">
               <Calendar className="w-4 h-4 text-muted-foreground" />
+              <label htmlFor="time-range-selector" className="sr-only">Select time range</label>
               <select 
+                id="time-range-selector"
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value)}
                 className="bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+                aria-label="Select time range for analysis"
               >
                 <option value="7d">Last 7 days</option>
                 <option value="30d">Last 30 days</option>

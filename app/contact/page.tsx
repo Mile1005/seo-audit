@@ -36,7 +36,7 @@ export default function ContactPage() {
                 Send us a Message
               </h2>
               
-              <form className="space-y-6">
+              <form action="/api/contact" method="POST" className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">

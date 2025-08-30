@@ -292,7 +292,7 @@ export default function SEOAuditFeaturePage() {
                 <p className="text-muted-foreground">Get comprehensive analysis in minutes</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} action="/api/audit" method="post" className="space-y-6">
                 <div>
                   <label htmlFor="website-url" className="block text-sm font-medium text-foreground mb-2">
                     Website URL
