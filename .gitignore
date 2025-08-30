@@ -1,17 +1,37 @@
-# Ignore environment files with secrets
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production build
+.next/
+dist/
+build/
+
+# Environment files with secrets
 .env
 .env.local
-apps/worker/.env
-.next/
-node_modules/
-coverage/
+.env.production
+.env.development
+
+# Logs
 *.log
-pnpm-lock.yaml
-dist/
-*.db*
-tsconfig.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database files
+*.db
+*.sqlite
+
+# TypeScript build cache
 *.tsbuildinfo
+tsconfig.tsbuildinfo
 
+# Test artifacts
+coverage/
+test-results/
+playwright-report/
 
-node_modules
+# Vercel
 .vercel
