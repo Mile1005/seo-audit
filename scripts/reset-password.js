@@ -1,8 +1,8 @@
 // Password Reset Script for test@example.com
-// Run this in Node.js to reset the password
+// Run this with: node scripts/reset-password.cjs
 
-const bcrypt = require('bcryptjs');
-const { PrismaClient } = require('@prisma/client');
+import bcrypt from 'bcryptjs';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
