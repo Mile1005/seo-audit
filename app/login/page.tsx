@@ -47,18 +47,33 @@ function LoginContent() {
     setError('')
     
     try {
+      console.log("🔐 Login attempt:", { email: formData.email })
+      
       const result = await signIn('credentials', {
         email: formData.email,
         password: formData.password,
         redirect: false,
       })
       
+      console.log("🔐 Login result:", result)
+      
       if (result?.error) {
+        console.error("❌ Login error:", result.error)
         setError('Invalid email or password')
-      } else {
+      } else if (result?.ok) {
+        console.log("✅ Login successful, redirecting to:", returnUrl)
+        
+        // Verify session was created
+        const session = await getSession()
+        console.log("📱 Session after login:", session)
+        
         router.push(returnUrl)
+      } else {
+        console.log("❓ Unexpected login result:", result)
+        setError('Login failed - please try again')
       }
     } catch (error) {
+      console.error("❌ Login exception:", error)
       setError('Failed to sign in')
     } finally {
       setLoading(false)

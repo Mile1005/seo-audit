@@ -10,7 +10,11 @@ import { BarChart3, Globe, Search, TrendingUp } from 'lucide-react';
 export default function DashboardPage() {
   const { data: session, status } = useSession();
 
+  console.log("🏠 Dashboard: Session status:", status)
+  console.log("🏠 Dashboard: Session data:", session)
+
   if (status === 'loading') {
+    console.log("⏳ Dashboard: Loading session...")
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
@@ -19,8 +23,11 @@ export default function DashboardPage() {
   }
 
   if (!session) {
+    console.log("❌ Dashboard: No session found, redirecting to login")
     redirect('/login');
   }
+
+  console.log("✅ Dashboard: Session found, rendering dashboard for:", session.user?.email)
 
   return (
     <MainLayout>
