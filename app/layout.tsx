@@ -2,8 +2,10 @@ import "./globals.css";
 import type { Metadata } from "next";
 import React from "react";
 import { AuthProvider } from "../components/auth/auth-provider";
-import { PerformanceInitializer } from "@/components/performance/performance-initializer";
-import { ComponentPreloader } from "@/components/performance/component-preloader";
+import { PerformanceInitializer } from "../components/performance/performance-initializer";
+import { ComponentPreloader } from "../components/performance/component-preloader";
+import { ServiceWorkerProvider } from "../components/performance/service-worker-provider";
+import { ResourcePreloader } from "../components/performance/resource-preloader";
 
 export const metadata: Metadata = {
   title: "AI SEO Turbo - AI-Powered SEO Audits That Move the Needle",
@@ -88,6 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <PerformanceInitializer />
         <ComponentPreloader strategy="idle" />
+        <ServiceWorkerProvider />
+        <ResourcePreloader resources={[]} />
         <AuthProvider>
           {children}
         </AuthProvider>

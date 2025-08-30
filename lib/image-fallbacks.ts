@@ -3,6 +3,32 @@
  * Creates optimized SVG fallbacks for missing images
  */
 
+// Main function to create appropriate fallback
+export const createImageFallback = (type: 'hero' | 'mobile' | 'general', width = 800, height = 600) => {
+  switch (type) {
+    case 'hero':
+      return generateHeroDashboardFallback(width, height);
+    case 'mobile':
+      return generateMobileAuditFallback(width, height);
+    default:
+      return generateGeneralFallback(width, height);
+  }
+};
+
+// Generate general fallback
+export const generateGeneralFallback = (width = 800, height = 600) => {
+  return `data:image/svg+xml;base64,${btoa(`
+    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#f3f4f6"/>
+      <rect x="20%" y="30%" width="60%" height="40%" rx="8" fill="#e5e7eb"/>
+      <circle cx="50%" cy="50%" r="30" fill="#d1d5db"/>
+      <text x="50%" y="75%" text-anchor="middle" fill="#6b7280" font-family="Arial, sans-serif" font-size="14">
+        Image Loading...
+      </text>
+    </svg>
+  `)}`; 
+};
+
 // Generate hero dashboard fallback SVG
 export const generateHeroDashboardFallback = (width = 1200, height = 750) => {
   return `data:image/svg+xml;base64,${btoa(`

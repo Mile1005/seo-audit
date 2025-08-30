@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { initializePerformanceMonitoring } from '@/lib/performance';
+import { CoreWebVitalsOptimizer } from './core-web-vitals-optimizer';
 
 /**
  * Performance monitoring initializer component
@@ -60,8 +61,8 @@ export function PerformanceInitializer() {
     };
   }, []);
 
-  // This component doesn't render anything
-  return null;
+  // Render Core Web Vitals optimizer for advanced optimization
+  return <CoreWebVitalsOptimizer />;
 }
 
 export default PerformanceInitializer;
