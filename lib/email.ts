@@ -1,7 +1,19 @@
 import { Resend } from 'resend'
 
-// Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialize Resend lazily to avoid build-time errors
+let resend: Resend | null = null
+
+const getResendClient = () => {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.warn('⚠️  RESEND_API_KEY not found. Email functionality will be disabled.')
+      return null
+    }
+    resend = new Resend(apiKey)
+  }
+  return resend
+}
 
 // Create a transporter for development and production
 const createTransporter = () => {
@@ -13,8 +25,14 @@ const createTransporter = () => {
         console.log('To:', options.to)
         console.log('Subject:', options.subject)
         
+        const resendClient = getResendClient()
+        if (!resendClient) {
+          console.error('❌ Resend API key not configured')
+          throw new Error('Resend API key not configured')
+        }
+        
         try {
-          const result = await resend.emails.send({
+          const result = await resendClient.emails.send({
             from: options.from,
             to: options.to,
             subject: options.subject,
@@ -33,7 +51,12 @@ const createTransporter = () => {
   // For production, use Resend directly
   return {
     sendMail: async (options: any) => {
-      return await resend.emails.send({
+      const resendClient = getResendClient()
+      if (!resendClient) {
+        throw new Error('Resend API key not configured')
+      }
+      
+      return await resendClient.emails.send({
         from: options.from,
         to: options.to,
         subject: options.subject,
