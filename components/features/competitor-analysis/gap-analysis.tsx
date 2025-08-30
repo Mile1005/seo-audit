@@ -244,7 +244,12 @@ export default function GapAnalysis() {
               </div>
             </div>
 
-            <div className="overflow-x-auto">
+            <div 
+              className="overflow-x-auto" 
+              tabIndex={0}
+              role="region"
+              aria-label="Keyword gap analysis table"
+            >
               <table className="w-full">
                 <thead className="bg-muted/50">
                   <tr>

@@ -179,4 +179,83 @@
   .bg-blue-50 { 
     background-color: white !important; /* Pure white for better contrast */
   }
+
+  /* Fix link contrast and styling issues from accessibility tests */
+  .text-blue-600 {
+    color: #1d4ed8 !important; /* Darker blue for better contrast */
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+    text-decoration-thickness: 1px !important;
+  }
+
+  .text-blue-600:hover {
+    color: #1e40af !important; /* Even darker on hover */
+    text-decoration-thickness: 2px !important;
+  }
+
+  /* Fix feature card text contrast */
+  .text-card-foreground {
+    color: #1e293b !important; /* Dark slate for better contrast on white backgrounds */
+  }
+
+  /* Fix feature card headings contrast */
+  .text-xl.font-semibold.leading-none.tracking-tight {
+    color: #0f172a !important; /* Near black for maximum contrast */
+  }
+
+  /* Fix CTA section on muted background */
+  .bg-muted\/30 {
+    background-color: #f8fafc !important; /* Lighter background for better contrast */
+  }
+
+  .bg-muted\/30 h2 {
+    color: #0f172a !important; /* Dark text on light background */
+  }
+
+  .bg-muted\/30 .border-border {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #1e293b !important;
+  }
+
+  /* Fix scrollable table accessibility */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .overflow-x-auto:focus {
+    outline: 2px solid #1d4ed8 !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Fix primary badge contrast */
+  .bg-primary\/10 {
+    background-color: #1e40af !important; /* Dark blue background */
+  }
+
+  .text-primary {
+    color: #ffffff !important; /* White text on dark background */
+  }
+
+  /* Fix colored text contrast issues */
+  .text-purple-400 {
+    color: #6b21a8 !important; /* Much darker purple for better contrast */
+  }
+
+  .text-green-400 {
+    color: #059669 !important; /* Much darker green for better contrast */
+  }
+
+  .text-green-600 {
+    color: #047857 !important; /* Even darker green for small text */
+  }
+
+  /* Fix green badge backgrounds */
+  .bg-green-950\/20 {
+    background-color: #047857 !important; /* Dark green background */
+  }
+
+  .bg-green-950\/20 .text-green-400 {
+    color: #ffffff !important; /* White text on dark green background */
+  }
 }

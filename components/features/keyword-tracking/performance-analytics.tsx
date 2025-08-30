@@ -277,7 +277,12 @@ export default function PerformanceAnalytics() {
         >
           <h3 className="text-xl font-semibold text-foreground mb-6">Top Performing Keywords</h3>
           
-          <div className="overflow-x-auto">
+          <div 
+            className="overflow-x-auto" 
+            tabIndex={0}
+            role="region"
+            aria-label="Performance analytics table"
+          >
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border">

@@ -1,0 +1,45 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mobile Phone Frame -->
+  <rect x="200" y="50" width="200" height="300" rx="25" fill="url(#mobileGradient)" stroke="#334155" stroke-width="3"/>
+  
+  <!-- Screen -->
+  <rect x="220" y="80" width="160" height="240" rx="15" fill="#0f172a"/>
+  
+  <!-- Status Bar -->
+  <rect x="230" y="95" width="140" height="15" rx="2" fill="#1e293b"/>
+  <circle cx="360" cy="102" r="3" fill="#22c55e"/>
+  <rect x="240" y="100" width="20" height="5" rx="1" fill="#64748b"/>
+  
+  <!-- Header -->
+  <rect x="230" y="120" width="140" height="25" rx="3" fill="#1e293b"/>
+  <rect x="240" y="127" width="60" height="11" rx="2" fill="#06b6d4"/>
+  
+  <!-- SEO Score Circle -->
+  <circle cx="310" cy="180" r="25" fill="none" stroke="#22c55e" stroke-width="4"/>
+  <text x="310" y="185" text-anchor="middle" fill="#22c55e" font-family="Arial" font-size="18" font-weight="bold">95</text>
+  <text x="310" y="200" text-anchor="middle" fill="#94a3b8" font-family="Arial" font-size="8">SEO Score</text>
+  
+  <!-- Metrics List -->
+  <rect x="240" y="220" width="120" height="8" rx="2" fill="#334155"/>
+  <rect x="240" y="235" width="100" height="8" rx="2" fill="#334155"/>
+  <rect x="240" y="250" width="110" height="8" rx="2" fill="#334155"/>
+  <rect x="240" y="265" width="90" height="8" rx="2" fill="#334155"/>
+  
+  <!-- Action Button -->
+  <rect x="240" y="285" width="120" height="20" rx="10" fill="#06b6d4"/>
+  <text x="300" y="297" text-anchor="middle" fill="white" font-family="Arial" font-size="10">View Details</text>
+  
+  <!-- Background Pattern -->
+  <defs>
+    <linearGradient id="mobileGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#475569;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="1" fill="#334155" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#dots)"/>
+</svg>

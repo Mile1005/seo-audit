@@ -27,8 +27,8 @@ export function PerformanceInitializer() {
     if (typeof window !== 'undefined') {
       // Preload critical images
       const criticalImages = [
-        '/images/hero/hero-laptop-dashboard.webp',
-        '/images/mockups/mobile-audit-interface.webp',
+        '/images/hero/hero-laptop-dashboard.svg',
+        '/images/mockups/mobile-audit-interface.svg',
       ];
       
       criticalImages.forEach(src => {

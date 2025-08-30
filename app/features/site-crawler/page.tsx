@@ -740,7 +740,12 @@ export default function SiteCrawlerPage() {
                     </p>
                   </div>
                   
-                  <div className="overflow-x-auto">
+                  <div 
+                    className="overflow-x-auto" 
+                    tabIndex={0}
+                    role="region"
+                    aria-label="Crawl results table"
+                  >
                     <table className="w-full">
                       <thead className="bg-muted/30">
                         <tr>

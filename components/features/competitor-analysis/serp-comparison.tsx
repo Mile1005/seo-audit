@@ -194,7 +194,12 @@ export default function SerpComparison() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
+          <div 
+            className="overflow-x-auto" 
+            tabIndex={0}
+            role="region"
+            aria-label="SERP comparison table"
+          >
             <table className="w-full">
               <thead className="bg-muted/50">
                 <tr>

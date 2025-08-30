@@ -12,9 +12,11 @@ const mobileDevices = [
 
 mobileDevices.forEach(device => {
   test.describe(`Mobile Testing - ${device.name}`, () => {
-    test.use({ ...device });
 
     test(`Homepage mobile experience on ${device.name}`, async ({ page }) => {
+      // Configure viewport for this device
+      await page.setViewportSize(device.viewport);
+
       await page.goto('http://localhost:3000');
       await page.waitForLoadState('networkidle');
       

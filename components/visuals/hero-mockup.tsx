@@ -44,7 +44,7 @@ export function HeroMockup({
               <div className="relative w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
                 {/* Optimized Hero Image */}
                 <HeroImage
-                  src="/images/hero/hero-laptop-dashboard.webp"
+                  src="/images/hero/hero-laptop-dashboard.svg"
                   alt="AISEOTurbo dashboard interface showing comprehensive SEO audit results with actionable insights and performance metrics"
                   priority={priority}
                   className="object-cover object-top"
@@ -164,7 +164,7 @@ export function HeroMockup({
           <div className="relative w-full h-full bg-black rounded-[20px] overflow-hidden">
             {/* Optimized Mobile Image */}
             <HeroImage
-              src="/images/mockups/mobile-audit-interface.webp"
+              src="/images/mockups/mobile-audit-interface.svg"
               alt="Mobile SEO audit interface showing quick insights and optimization recommendations"
               sizes="(max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
               className="object-cover object-top"

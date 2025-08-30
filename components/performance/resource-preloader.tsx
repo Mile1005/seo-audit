@@ -36,7 +36,7 @@ const CRITICAL_RESOURCES: PreloadResource[] = [
   
   // Hero images
   {
-    href: '/images/hero/hero-laptop-dashboard.jpg',
+    href: '/images/hero/hero-laptop-dashboard.svg',
     as: 'image',
     fetchPriority: 'high'
   }
