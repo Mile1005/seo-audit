@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import React from "react";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { AuthProvider } from "../components/auth/auth-provider";
 
 export const metadata: Metadata = {
   title: "AI SEO Turbo - AI-Powered SEO Audits That Move the Needle",
@@ -84,7 +84,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
