@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useState } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { Play, Pause, Maximize2 } from "lucide-react"
+import { HeroImage } from "@/components/ui/optimized-image"
 
 export interface HeroMockupProps {
   className?: string
@@ -42,19 +42,13 @@ export function HeroMockup({
             <div className="relative w-full h-full bg-black rounded-2xl overflow-hidden">
               {/* Screen Content */}
               <div className="relative w-full h-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-                {/* TODO: Replace with hero-laptop-dashboard.webp */}
-                <Image
+                {/* Optimized Hero Image */}
+                <HeroImage
                   src="/images/hero/hero-laptop-dashboard.webp"
                   alt="AISEOTurbo dashboard interface showing comprehensive SEO audit results with actionable insights and performance metrics"
-                  fill
                   priority={priority}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                   className="object-cover object-top"
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                  onError={() => {
-                    console.log("Hero mockup image failed to load, using placeholder")
-                  }}
+                  fill
                 />
                 
                 {/* Fallback content when image fails to load */}
@@ -67,9 +61,6 @@ export function HeroMockup({
                     <p className="text-gray-300 text-sm">
                       Comprehensive SEO insights and actionable recommendations
                     </p>
-                    <div className="mt-4 text-xs text-gray-400">
-                      TODO: Replace with hero-laptop-dashboard.webp
-                    </div>
                   </div>
                 </div>
               </div>
@@ -171,18 +162,13 @@ export function HeroMockup({
       >
         <div className="relative aspect-[9/16] bg-slate-900 rounded-3xl p-1 shadow-2xl">
           <div className="relative w-full h-full bg-black rounded-[20px] overflow-hidden">
-            {/* TODO: Replace with mobile-audit-interface.webp */}
-            <Image
+            {/* Optimized Mobile Image */}
+            <HeroImage
               src="/images/mockups/mobile-audit-interface.webp"
               alt="Mobile SEO audit interface showing quick insights and optimization recommendations"
-              fill
               sizes="(max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
               className="object-cover object-top"
-              placeholder="blur"
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              onError={() => {
-                console.log("Mobile mockup image failed to load, using placeholder")
-              }}
+              fill
             />
             
             {/* Fallback content */}

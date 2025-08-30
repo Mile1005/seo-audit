@@ -1,0 +1,4 @@
+# Hero Dashboard Fallback Image
+# This is a placeholder for the hero dashboard fallback image
+# The actual fallback is generated dynamically via SVG in the component
+# If you have a static fallback image, replace this file with hero-laptop-dashboard-fallback.jpg

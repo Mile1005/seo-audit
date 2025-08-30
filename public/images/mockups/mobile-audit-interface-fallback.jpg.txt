@@ -1,0 +1,4 @@
+# Mobile Audit Interface Fallback Image  
+# This is a placeholder for the mobile audit interface fallback image
+# The actual fallback is generated dynamically via SVG in the component
+# If you have a static fallback image, replace this file with mobile-audit-interface-fallback.jpg

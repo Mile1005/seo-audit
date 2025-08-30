@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import React from "react";
 import { AuthProvider } from "../components/auth/auth-provider";
+import { PerformanceInitializer } from "@/components/performance/performance-initializer";
 
 export const metadata: Metadata = {
   title: "AI SEO Turbo - AI-Powered SEO Audits That Move the Needle",
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <PerformanceInitializer />
         <AuthProvider>
           {children}
         </AuthProvider>

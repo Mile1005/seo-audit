@@ -17,7 +17,11 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "analyze": "node scripts/bundle-analyzer.js",
+    "analyze:build": "npm run build && npm run analyze",
+    "perf:audit": "npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json",
+    "perf:budget": "npx bundlesize"
   },
   "browserslist": [
     "last 2 Chrome versions",
