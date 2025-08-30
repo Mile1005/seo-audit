@@ -1,0 +1,166 @@
+// Datasource for PostgreSQL (Vercel Postgres)
+datasource db {
+	provider = "postgresql"
+	url      = env("DATABASE_URL")
+}
+
+// Prisma generator
+generator client {
+	provider = "prisma-client-js"
+}
+
+// Auth.js Models
+model Account {
+	id                String  @id @default(cuid())
+	userId            String
+	type              String
+	provider          String
+	providerAccountId String
+	refresh_token     String? @db.Text
+	access_token      String? @db.Text
+	expires_at        Int?
+	token_type        String?
+	scope             String?
+	id_token          String? @db.Text
+	session_state     String?
+
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@unique([provider, providerAccountId])
+}
+
+model Session {
+	id           String   @id @default(cuid())
+	sessionToken String   @unique
+	userId       String
+	expires      DateTime
+	user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+	id            String    @id @default(cuid())
+	name          String?
+	email         String    @unique
+	emailVerified DateTime?
+	image         String?
+	createdAt     DateTime  @default(now())
+	updatedAt     DateTime  @updatedAt
+
+	accounts      Account[]
+	sessions      Session[]
+	projects      Project[]     @relation("ProjectOwner")
+	memberships   ProjectMember[]
+	audits        Audit[]
+	crawls        Crawl[]
+}
+
+model VerificationToken {
+	identifier String
+	token      String   @unique
+	expires    DateTime
+
+	@@unique([identifier, token])
+}
+
+// Project and Multi-tenancy Models
+model Project {
+	id        String   @id @default(cuid())
+	name      String
+	ownerId   String
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+	owner     User           @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+	members   ProjectMember[]
+	audits    Audit[]
+	crawls    Crawl[]
+	@@index([ownerId])
+	@@unique([ownerId, name])
+}
+
+model ProjectMember {
+	id        String   @id @default(cuid())
+	projectId String
+	userId    String
+	role      ProjectRole @default(MEMBER)
+	createdAt DateTime @default(now())
+
+	project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+		@@unique([projectId, userId])
+		@@index([userId])
+}
+
+enum ProjectRole {
+	OWNER
+	ADMIN
+	MEMBER
+	VIEWER
+}
+
+// Updated existing models to include project relationships
+model Run {
+	id            String   @id @default(uuid())
+	pageUrl       String
+	targetKeyword String?
+	email         String?
+	status        RunStatus @default(queued)
+	createdAt     DateTime @default(now())
+	updatedAt     DateTime @updatedAt
+	audits        Audit[]
+}
+
+model Audit {
+	id        String   @id @default(uuid())
+	run       Run      @relation(fields: [runId], references: [id])
+	runId     String
+	json      Json     // JSON of AuditResultV1
+	createdAt DateTime @default(now())
+  
+	// New fields for multi-tenancy
+	projectId String?
+	createdBy String?
+  
+	project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	user      User?    @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+	@@index([projectId, createdAt])
+}
+
+model Crawl {
+	id        String   @id @default(uuid())
+	startUrl  String
+	results   Json
+	status    CrawlStatus @default(queued)
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+  
+	// Multi-tenancy fields
+	projectId String?
+	createdBy String?
+  
+	project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	user      User?    @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+	@@index([projectId, createdAt])
+}
+
+enum CrawlStatus {
+	queued
+	running
+	completed
+	failed
+}
+
+model GscToken {
+	id        String   @id @default(uuid())
+	state     String   @unique
+	tokens    Json
+	createdAt DateTime @default(now())
+}
+
+enum RunStatus {
+	queued
+	running
+	ready
+	failed
+}
