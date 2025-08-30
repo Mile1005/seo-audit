@@ -260,7 +260,7 @@ export default function SignupPage() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="pl-10 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
+                      className="pl-10 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50 text-gray-900"
                       placeholder="John Doe"
                     />
                   </div>
@@ -281,7 +281,7 @@ export default function SignupPage() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="pl-10 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
+                      className="pl-10 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50 text-gray-900"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -302,7 +302,7 @@ export default function SignupPage() {
                       required
                       value={formData.password}
                       onChange={handleInputChange}
-                      className="pl-10 pr-12 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
+                      className="pl-10 pr-12 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50 text-gray-900"
                       placeholder="Minimum 8 characters"
                     />
                     <button
@@ -330,7 +330,7 @@ export default function SignupPage() {
                       required
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="pl-10 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
+                      className="pl-10 w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50 text-gray-900"
                       placeholder="Confirm your password"
                     />
                   </div>
@@ -347,7 +347,7 @@ export default function SignupPage() {
                     type="text"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50"
+                    className="w-full px-3 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50/50 text-gray-900"
                     placeholder="Your company name"
                   />
                 </div>

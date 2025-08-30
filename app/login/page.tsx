@@ -31,6 +31,8 @@ function LoginContent() {
       })
       if (result?.error) {
         setError('Failed to sign in with Google')
+      } else if (result?.ok) {
+        router.push(returnUrl)
       }
     } catch (error) {
       setError('Failed to sign in with Google')
