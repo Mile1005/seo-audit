@@ -203,10 +203,10 @@ export default function AlertSystem() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case "critical": return "text-red-600 bg-red-100 dark:bg-red-900/30 border-red-200 dark:border-red-800";
-      case "high": return "text-orange-600 bg-orange-100 dark:bg-orange-900/30 border-orange-200 dark:border-orange-800";
-      case "medium": return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30 border-yellow-200 dark:border-yellow-800";
-      case "low": return "text-green-600 bg-green-100 dark:bg-green-900/30 border-green-200 dark:border-green-800";
+      case "critical": return "text-red-400 bg-red-500/10 border-red-500/20";
+      case "high": return "text-orange-400 bg-orange-500/10 border-orange-500/20";
+      case "medium": return "text-yellow-400 bg-yellow-500/10 border-yellow-500/20";
+      case "low": return "text-green-400 bg-green-500/10 border-green-500/20";
       default: return "text-muted-foreground bg-muted border-border";
     }
   };
@@ -461,7 +461,7 @@ export default function AlertSystem() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <div className="bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-xl p-8 border border-orange-200 dark:border-orange-800">
+          <div className="bg-card border rounded-xl p-8">
             <Zap className="w-16 h-16 text-orange-600 mx-auto mb-6" />
             <h3 className="text-2xl font-bold text-foreground mb-4">
               Never Miss Critical SEO Changes

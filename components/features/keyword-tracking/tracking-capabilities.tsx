@@ -328,7 +328,7 @@ export default function TrackingCapabilities() {
           transition={{ duration: 0.6 }}
           className="text-center mt-12"
         >
-          <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl p-8 border border-green-200 dark:border-green-800">
+          <div className="bg-card border rounded-xl p-8">
             <h3 className="text-xl font-bold text-foreground mb-4">
               Ready to Start Tracking?
             </h3>

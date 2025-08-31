@@ -150,10 +150,10 @@ export default function SerpFeatures() {
 
   const getOpportunityColor = (opportunity: string) => {
     switch (opportunity) {
-      case "Critical": return "text-red-600 bg-red-100 dark:bg-red-900/30";
-      case "High": return "text-orange-600 bg-orange-100 dark:bg-orange-900/30";
-      case "Medium": return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30";
-      case "Low": return "text-green-600 bg-green-100 dark:bg-green-900/30";
+      case "Critical": return "text-red-400 bg-red-500/10";
+      case "High": return "text-orange-400 bg-orange-500/10";
+      case "Medium": return "text-yellow-400 bg-yellow-500/10";
+      case "Low": return "text-green-400 bg-green-500/10";
       default: return "text-muted-foreground bg-muted";
     }
   };
@@ -326,7 +326,7 @@ export default function SerpFeatures() {
           
           <div className="bg-muted/30 rounded-lg p-6 space-y-4">
             {/* Featured Snippet Example */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg border p-4">
+            <div className="bg-card rounded-lg border p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <BookOpen className="w-4 h-4 text-blue-600" />
                 <span className="text-xs text-muted-foreground">Featured Snippet</span>
@@ -339,7 +339,7 @@ export default function SerpFeatures() {
             </div>
 
             {/* Local Pack Example */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg border p-4">
+            <div className="bg-card rounded-lg border p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <MapPin className="w-4 h-4 text-green-600" />
                 <span className="text-xs text-muted-foreground">Local Pack</span>
@@ -373,7 +373,7 @@ export default function SerpFeatures() {
             </div>
 
             {/* People Also Ask Example */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg border p-4">
+            <div className="bg-card rounded-lg border p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <MessageSquare className="w-4 h-4 text-purple-600" />
                 <span className="text-xs text-muted-foreground">People Also Ask</span>
@@ -395,7 +395,7 @@ export default function SerpFeatures() {
           transition={{ duration: 0.6 }}
           className="text-center mt-12"
         >
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
+          <div className="bg-card border rounded-xl p-8">
             <h3 className="text-xl font-bold text-foreground mb-4">
               Maximize Your SERP Features Presence
             </h3>

@@ -93,7 +93,7 @@ export default function KeywordTrackingPage() {
                 className="space-y-8"
               >
                 <div className="space-y-6">
-                  <div className="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-green-900/30 rounded-full text-green-700 dark:text-green-400 text-sm font-medium">
+                  <div className="inline-flex items-center px-4 py-2 bg-green-500/10 rounded-full text-green-400 text-sm font-medium">
                     <BarChart3 className="w-4 h-4 mr-2" />
                     Real-Time Ranking Intelligence
                   </div>
@@ -271,7 +271,7 @@ export default function KeywordTrackingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl p-12 border border-green-200 dark:border-green-800"
+              className="bg-card border rounded-2xl p-12"
             >
               <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <TrendingUp className="w-8 h-8 text-white" />

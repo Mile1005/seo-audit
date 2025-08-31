@@ -549,7 +549,7 @@ export default function SiteCrawlerPage() {
 
                   {/* Error State */}
                   {crawlError && (
-                    <div id="crawl-error-section" className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                    <div id="crawl-error-section" className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
                       <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
                         <AlertCircle className="w-4 h-4" />
                         <span className="text-sm font-medium">Error</span>
@@ -572,7 +572,7 @@ export default function SiteCrawlerPage() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.5 }}
-              className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50/50 to-purple-50/50 dark:from-blue-900/20 dark:to-purple-900/20 border-t"
+              className="py-12 px-4 sm:px-6 lg:px-8 bg-card border-t"
             >
               <div className="max-w-7xl mx-auto">
                 <motion.div
@@ -839,9 +839,9 @@ export default function SiteCrawlerPage() {
                             </td>
                             <td className="px-6 py-4 text-center">
                               <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                                page.status === 200 ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' :
-                                page.status >= 400 ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' :
-                                'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
+                                page.status === 200 ? 'bg-green-500/10 text-green-400' :
+                                page.status >= 400 ? 'bg-red-500/10 text-red-400' :
+                                'bg-yellow-500/10 text-yellow-400'
                               }`}>
                                 {page.status}
                               </span>
@@ -875,7 +875,7 @@ export default function SiteCrawlerPage() {
         <IntegrationOptions />
 
         {/* Final CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-card border-t">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

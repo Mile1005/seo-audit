@@ -424,7 +424,7 @@ export default function SEOAuditFeaturePage() {
               <motion.div
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1 }}
-                className="bg-red-50 border border-red-200 rounded-2xl p-6 text-center"
+                className="bg-red-500/10 border border-red-500/20 rounded-2xl p-6 text-center"
               >
                 <div className="flex items-center justify-center mb-4">
                   <AlertTriangle className="w-6 h-6 text-red-500" />
@@ -1002,7 +1002,7 @@ export default function SEOAuditFeaturePage() {
                   </h3>
                   <div className="space-y-3">
                     {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_opportunities?.map((opportunity, index) => (
-                      <div key={index} className="flex items-start p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg border border-orange-200 dark:border-orange-800">
+                      <div key={index} className="flex items-start p-4 bg-orange-500/10 rounded-lg border border-orange-500/20">
                         <div className="w-3 h-3 bg-orange-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
                         <div className="flex-1">
                           <span className="text-sm text-foreground font-medium">{opportunity}</span>
@@ -1027,7 +1027,7 @@ export default function SEOAuditFeaturePage() {
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_diagnostics?.map((diagnostic, index) => (
-                      <div key={index} className="flex items-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                      <div key={index} className="flex items-center p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
                         <div className="w-3 h-3 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
                         <span className="text-sm text-foreground">{diagnostic}</span>
                       </div>
@@ -1050,14 +1050,14 @@ export default function SEOAuditFeaturePage() {
                   {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1 && (auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length > 0 && (
                     <div className="mb-6">
                       <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
-                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-sm mr-2">H1</span>
+                        <span className="bg-blue-500/10 text-blue-400 px-2 py-1 rounded text-sm mr-2">H1</span>
                         We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length} H1 tags on this page
                         {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length !== 1 && (
                           <AlertTriangle className="w-4 h-4 ml-2 text-orange-500" />
                         )}
                       </h4>
                       {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length !== 1 && (
-                        <div className="mb-3 p-3 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
+                        <div className="mb-3 p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
                           <p className="text-sm text-orange-800 dark:text-orange-200">
                             {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length === 0 
                               ? "⚠️ No H1 tag found. Every page should have exactly one H1 tag."
@@ -1090,7 +1090,7 @@ export default function SEOAuditFeaturePage() {
                   {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2 && (auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length > 0 && (
                     <div className="mb-6">
                       <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
-                        <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-sm mr-2">H2</span>
+                        <span className="bg-green-500/10 text-green-400 px-2 py-1 rounded text-sm mr-2">H2</span>
                         We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length} H2 tags on this page
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
@@ -1115,7 +1115,7 @@ export default function SEOAuditFeaturePage() {
                   {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3 && (auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length > 0 && (
                     <div className="mb-6">
                       <h4 className="text-lg font-semibold text-foreground mb-3 flex items-center">
-                        <span className="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-sm mr-2">H3</span>
+                        <span className="bg-purple-500/10 text-purple-400 px-2 py-1 rounded text-sm mr-2">H3</span>
                         We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length} H3 tags on this page
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
@@ -1140,23 +1140,23 @@ export default function SEOAuditFeaturePage() {
                   <div className="mt-6 pt-6 border-t">
                     <h4 className="text-lg font-semibold text-foreground mb-3">Heading Structure Summary</h4>
                     <div className="grid grid-cols-3 gap-4">
-                      <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-blue-600">
+                      <div className="text-center p-4 bg-blue-500/10 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-400">
                           {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length || 0}
                         </div>
                         <div className="text-sm text-muted-foreground">H1 Tags</div>
                         {((auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.length || 0) === 1 && (
-                          <div className="text-xs text-green-600 mt-1">✓ Perfect</div>
+                          <div className="text-xs text-green-400 mt-1">✓ Perfect</div>
                         )}
                       </div>
-                      <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-green-600">
+                      <div className="text-center p-4 bg-green-500/10 rounded-lg">
+                        <div className="text-2xl font-bold text-green-400">
                           {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length || 0}
                         </div>
                         <div className="text-sm text-muted-foreground">H2 Tags</div>
                       </div>
-                      <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
-                        <div className="text-2xl font-bold text-purple-600">
+                      <div className="text-center p-4 bg-purple-500/10 rounded-lg">
+                        <div className="text-2xl font-bold text-purple-400">
                           {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length || 0}
                         </div>
                         <div className="text-sm text-muted-foreground">H3 Tags</div>
@@ -1192,7 +1192,7 @@ export default function SEOAuditFeaturePage() {
                       initial={{ opacity: 0, scale: 0 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.7 }}
-                      className="ml-auto bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 px-3 py-1 rounded-full text-sm font-medium"
+                      className="ml-auto bg-red-500/10 text-red-400 px-3 py-1 rounded-full text-sm font-medium"
                     >
                       {(auditResult.comprehensiveResults || auditResult.rawData)?.issues?.length} issues
                     </motion.div>
@@ -1205,7 +1205,7 @@ export default function SEOAuditFeaturePage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1.4 + index * 0.1 }}
-                        className="group border border-red-200 dark:border-red-800 rounded-xl p-6 bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
+                        className="group border border-red-500/20 rounded-xl p-6 bg-red-500/10 hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
                       >
                         <div className="flex items-start gap-4">
                           <motion.div 

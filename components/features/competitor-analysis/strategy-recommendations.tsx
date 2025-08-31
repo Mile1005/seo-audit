@@ -185,9 +185,9 @@ export default function StrategyRecommendations() {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400";
-      case "medium": return "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400";
-      case "low": return "bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400";
+      case "high": return "bg-red-500/10 text-red-400 border-red-500/20";
+      case "medium": return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+      case "low": return "bg-green-500/10 text-green-400 border-green-500/20";
       default: return "bg-muted text-muted-foreground border-border";
     }
   };
@@ -433,7 +433,7 @@ export default function StrategyRecommendations() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-12 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-8 border border-purple-200 dark:border-purple-800"
+          className="mt-12 bg-card border rounded-xl p-8"
         >
           <div className="text-center">
             <h3 className="text-xl font-bold text-foreground mb-4">
