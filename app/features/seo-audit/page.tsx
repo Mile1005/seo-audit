@@ -1205,9 +1205,9 @@ export default function SEOAuditFeaturePage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1.4 + index * 0.1 }}
-                        className="group border border-red-500/20 rounded-xl p-6 bg-red-500/10 hover:shadow-lg transition-all duration-300 hover:scale-[1.01]"
+                        className="group border border-red-500/20 rounded-xl p-4 sm:p-6 bg-red-500/10 hover:shadow-lg transition-all duration-300 hover:scale-[1.01] overflow-hidden"
                       >
-                        <div className="flex items-start gap-4">
+                        <div className="flex flex-col sm:flex-row items-start gap-4">
                           <motion.div 
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
@@ -1220,7 +1220,7 @@ export default function SEOAuditFeaturePage() {
                             <AlertTriangle className="w-5 h-5 text-white" />
                           </motion.div>
                           
-                          <div className="flex-1 min-w-0">
+                          <div className="flex-1 min-w-0 w-full">
                             <div className="flex items-start justify-between mb-3">
                               <div className="flex-1">
                                 <div className="flex items-center gap-3 mb-2">
@@ -1247,8 +1247,8 @@ export default function SEOAuditFeaturePage() {
                                       <Target className="w-4 h-4 text-red-600" />
                                       <span className="text-sm font-medium text-red-700 dark:text-red-300">Problem Location:</span>
                                     </div>
-                                    <div className="bg-gray-100 dark:bg-gray-700 rounded p-3">
-                                      <code className="text-xs text-gray-800 dark:text-gray-200 font-mono break-all">
+                                    <div className="bg-card rounded p-3">
+                                      <code className="text-xs text-foreground font-mono break-words">
                                         {issue.location}
                                       </code>
                                     </div>
@@ -1257,13 +1257,13 @@ export default function SEOAuditFeaturePage() {
                                 
                                 {/* Affected Elements */}
                                 {issue.selector && (
-                                  <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-700 mb-4">
+                                  <div className="bg-orange-500/10 rounded-lg p-4 border border-orange-500/20 mb-4">
                                     <div className="flex items-center gap-2 mb-2">
-                                      <Search className="w-4 h-4 text-orange-600" />
-                                      <span className="text-sm font-medium text-orange-700 dark:text-orange-300">Affected Element:</span>
+                                      <Search className="w-4 h-4 text-orange-400" />
+                                      <span className="text-sm font-medium text-orange-400">Affected Element:</span>
                                     </div>
                                     <div className="bg-card rounded p-3">
-                                      <code className="text-xs text-gray-800 dark:text-gray-200 font-mono break-all">
+                                      <code className="text-xs text-foreground font-mono break-words">
                                         {issue.selector}
                                       </code>
                                     </div>
@@ -1275,13 +1275,13 @@ export default function SEOAuditFeaturePage() {
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div className="bg-red-500/10 rounded-lg p-4 border border-red-500/20">
                                       <div className="text-sm font-medium text-red-400 mb-2">Current (Problematic):</div>
-                                      <div className="text-xs text-red-400 font-mono bg-card p-3 rounded break-all">
+                                      <div className="text-xs text-red-400 font-mono bg-card p-3 rounded break-words overflow-hidden">
                                         {issue.current_value}
                                       </div>
                                     </div>
                                     <div className="bg-green-500/10 rounded-lg p-4 border border-green-500/20">
                                       <div className="text-sm font-medium text-green-400 mb-2">Expected:</div>
-                                      <div className="text-xs text-green-400 font-mono bg-card p-3 rounded break-all">
+                                      <div className="text-xs text-green-400 font-mono bg-card p-3 rounded break-words overflow-hidden">
                                         {issue.expected_value}
                                       </div>
                                     </div>
@@ -1407,12 +1407,12 @@ export default function SEOAuditFeaturePage() {
                                 
                                 {/* Enhanced Location Information */}
                                 {win.location && (
-                                  <div className="bg-card rounded-lg p-3 border border-green-200 dark:border-green-700 mb-3">
+                                  <div className="bg-card rounded-lg p-3 border border-green-500/20 mb-3">
                                     <div className="flex items-center gap-2 mb-2">
-                                      <Target className="w-4 h-4 text-green-600" />
-                                      <span className="text-sm font-medium text-green-700 dark:text-green-300">Found at:</span>
+                                      <Target className="w-4 h-4 text-green-400" />
+                                      <span className="text-sm font-medium text-green-400">Found at:</span>
                                     </div>
-                                    <code className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded font-mono break-all">
+                                    <code className="text-xs bg-card text-foreground px-2 py-1 rounded font-mono break-words">
                                       {win.location}
                                     </code>
                                   </div>
@@ -1420,12 +1420,12 @@ export default function SEOAuditFeaturePage() {
                                 
                                 {/* Specific Element/Selector Information */}
                                 {win.selector && (
-                                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-700 mb-3">
+                                  <div className="bg-blue-500/10 rounded-lg p-3 border border-blue-500/20 mb-3">
                                     <div className="flex items-center gap-2 mb-2">
-                                      <Search className="w-4 h-4 text-blue-600" />
-                                      <span className="text-sm font-medium text-blue-700 dark:text-blue-300">Element:</span>
+                                      <Search className="w-4 h-4 text-blue-400" />
+                                      <span className="text-sm font-medium text-blue-400">Element:</span>
                                     </div>
-                                    <code className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-2 py-1 rounded font-mono break-all">
+                                    <code className="text-xs bg-card text-foreground px-2 py-1 rounded font-mono break-words">
                                       {win.selector}
                                     </code>
                                   </div>
@@ -1434,15 +1434,15 @@ export default function SEOAuditFeaturePage() {
                                 {/* Current vs Recommended Values */}
                                 {win.current_value && win.recommended_value && (
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                                    <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-3 border border-red-200 dark:border-red-700">
-                                      <div className="text-sm font-medium text-red-700 dark:text-red-300 mb-1">Current:</div>
-                                      <div className="text-xs text-red-600 dark:text-red-400 font-mono bg-card p-2 rounded break-all">
+                                    <div className="bg-red-500/10 rounded-lg p-3 border border-red-500/20">
+                                      <div className="text-sm font-medium text-red-400 mb-1">Current:</div>
+                                      <div className="text-xs text-red-400 font-mono bg-card p-2 rounded break-words overflow-hidden">
                                         {win.current_value}
                                       </div>
                                     </div>
-                                    <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-200 dark:border-green-700">
-                                      <div className="text-sm font-medium text-green-700 dark:text-green-300 mb-1">Recommended:</div>
-                                      <div className="text-xs text-green-600 dark:text-green-400 font-mono bg-card p-2 rounded break-all">
+                                    <div className="bg-green-500/10 rounded-lg p-3 border border-green-500/20">
+                                      <div className="text-sm font-medium text-green-400 mb-1">Recommended:</div>
+                                      <div className="text-xs text-green-400 font-mono bg-card p-2 rounded break-words overflow-hidden">
                                         {win.recommended_value}
                                       </div>
                                     </div>
