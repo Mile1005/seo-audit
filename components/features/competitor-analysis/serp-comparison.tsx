@@ -219,7 +219,7 @@ export default function SerpComparison() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.6 + index * 0.05 }}
                     className={`border-b hover:bg-muted/30 transition-colors ${
-                      competitor.name === "yoursite.com" ? "bg-blue-50 dark:bg-blue-900/20" : ""
+                      competitor.name === "yoursite.com" ? "bg-primary/10 border-primary/20" : ""
                     }`}
                   >
                     <td className="p-4">
@@ -279,7 +279,7 @@ export default function SerpComparison() {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="mt-8 grid md:grid-cols-2 gap-8"
         >
-          <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+          <div className="bg-card border rounded-xl p-6">
             <div className="flex items-center mb-4">
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3">
                 <TrendingUp className="w-4 h-4 text-white" />
@@ -295,7 +295,7 @@ export default function SerpComparison() {
             </Button>
           </div>
 
-          <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+          <div className="bg-card border rounded-xl p-6">
             <div className="flex items-center mb-4">
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                 <Eye className="w-4 h-4 text-white" />

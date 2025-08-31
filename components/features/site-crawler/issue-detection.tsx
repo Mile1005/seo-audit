@@ -24,8 +24,8 @@ export default function IssueDetection() {
       title: "Critical Issues",
       count: 12,
       color: "text-red-500",
-      bgColor: "bg-red-50 dark:bg-red-900/20",
-      borderColor: "border-red-200 dark:border-red-800",
+      bgColor: "bg-red-500/10",
+      borderColor: "border-red-500/20",
       issues: [
         "404 Error Pages",
         "Broken Internal Links", 
@@ -38,8 +38,8 @@ export default function IssueDetection() {
       title: "High Priority",
       count: 28,
       color: "text-orange-500",
-      bgColor: "bg-orange-50 dark:bg-orange-900/20",
-      borderColor: "border-orange-200 dark:border-orange-800",
+      bgColor: "bg-orange-500/10",
+      borderColor: "border-orange-500/20",
       issues: [
         "Slow Loading Pages",
         "Missing Meta Descriptions",
@@ -52,8 +52,8 @@ export default function IssueDetection() {
       title: "Medium Priority",
       count: 45,
       color: "text-yellow-500",
-      bgColor: "bg-yellow-50 dark:bg-yellow-900/20",
-      borderColor: "border-yellow-200 dark:border-yellow-800",
+      bgColor: "bg-yellow-500/10",
+      borderColor: "border-yellow-500/20",
       issues: [
         "Missing Alt Text",
         "Long Page Titles",
@@ -66,8 +66,8 @@ export default function IssueDetection() {
       title: "Optimized",
       count: 156,
       color: "text-green-500",
-      bgColor: "bg-green-50 dark:bg-green-900/20",
-      borderColor: "border-green-200 dark:border-green-800",
+      bgColor: "bg-green-500/10",
+      borderColor: "border-green-500/20",
       issues: [
         "Proper Title Tags",
         "Optimized Images",
@@ -259,14 +259,14 @@ export default function IssueDetection() {
                 <XCircle className="w-5 h-5 text-red-500 mr-2" />
                 Critical Issue Found
               </h4>
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-4">
-                <div className="text-sm font-medium text-red-800 dark:text-red-200 mb-2">
+              <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-4">
+                <div className="text-sm font-medium text-red-400 mb-2">
                   404 Error on Important Page
                 </div>
-                <div className="text-sm text-red-600 dark:text-red-300 mb-3">
+                <div className="text-sm text-red-300 mb-3">
                   /products/featured-item  Returns 404 status
                 </div>
-                <div className="text-xs text-red-500 dark:text-red-400">
+                <div className="text-xs text-red-400">
                   Found on 12 pages  High traffic page  SEO impact: High
                 </div>
               </div>
@@ -277,11 +277,11 @@ export default function IssueDetection() {
                 <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
                 Suggested Solution
               </h4>
-              <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
-                <div className="text-sm font-medium text-green-800 dark:text-green-200 mb-2">
+              <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                <div className="text-sm font-medium text-green-400 mb-2">
                   Immediate Action Required
                 </div>
-                <ul className="text-sm text-green-600 dark:text-green-300 space-y-1">
+                <ul className="text-sm text-green-300 space-y-1">
                   <li> Check if page should exist or redirect</li>
                   <li> Update internal links pointing to this URL</li>
                   <li> Consider 301 redirect if content moved</li>

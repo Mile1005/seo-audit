@@ -117,9 +117,9 @@ export default function GapAnalysis() {
 
   const getOpportunityColor = (opportunity: string) => {
     switch (opportunity) {
-      case "high": return "text-green-600 bg-green-100 dark:bg-green-900/30";
-      case "medium": return "text-yellow-600 bg-yellow-100 dark:bg-yellow-900/30";
-      case "low": return "text-red-600 bg-red-100 dark:bg-red-900/30";
+      case "high": return "text-green-400 bg-green-500/10";
+      case "medium": return "text-yellow-400 bg-yellow-500/10";
+      case "low": return "text-red-400 bg-red-500/10";
       default: return "text-muted-foreground bg-muted";
     }
   };
@@ -295,9 +295,9 @@ export default function GapAnalysis() {
                       </td>
                       <td className="p-4 text-center">
                         <div className={`text-xs px-2 py-1 rounded-full ${
-                          gap.difficulty < 30 ? "bg-green-100 text-green-700 dark:bg-green-900/30" :
-                          gap.difficulty < 60 ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30" :
-                          "bg-red-100 text-red-700 dark:bg-red-900/30"
+                          gap.difficulty < 30 ? "bg-green-500/10 text-green-400" :
+                          gap.difficulty < 60 ? "bg-yellow-500/10 text-yellow-400" :
+                          "bg-red-500/10 text-red-400"
                         }`}>
                           {gap.difficulty}%
                         </div>
@@ -388,7 +388,7 @@ export default function GapAnalysis() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800"
+          className="mt-12 bg-card border rounded-xl p-8"
         >
           <div className="text-center">
             <h3 className="text-xl font-bold text-foreground mb-4">

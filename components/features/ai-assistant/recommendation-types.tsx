@@ -174,9 +174,9 @@ export default function RecommendationTypes() {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400";
-      case "medium": return "bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400";
-      case "low": return "bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400";
+      case "high": return "bg-red-500/10 text-red-400 border-red-500/20";
+      case "medium": return "bg-yellow-500/10 text-yellow-400 border-yellow-500/20";
+      case "low": return "bg-green-500/10 text-green-400 border-green-500/20";
       default: return "bg-muted text-muted-foreground";
     }
   };
@@ -329,7 +329,7 @@ export default function RecommendationTypes() {
                 )}
 
                 {(rec as any).contentStrategy && (
-                  <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mb-4 border border-green-200 dark:border-green-800">
+                  <div className="bg-green-500/10 rounded-lg p-4 mb-4 border border-green-500/20">
                     <h5 className="text-sm font-medium text-green-800 dark:text-green-400 mb-2">
                       Content Strategy
                     </h5>
@@ -340,7 +340,7 @@ export default function RecommendationTypes() {
                 )}
 
                 {(rec as any).strategicFocus && (
-                  <div className="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 mb-4 border border-purple-200 dark:border-purple-800">
+                  <div className="bg-purple-500/10 rounded-lg p-4 mb-4 border border-purple-500/20">
                     <h5 className="text-sm font-medium text-purple-800 dark:text-purple-400 mb-2">
                       Strategic Focus
                     </h5>
@@ -379,7 +379,7 @@ export default function RecommendationTypes() {
           transition={{ duration: 0.6 }}
           className="text-center mt-12"
         >
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800">
+          <div className="bg-card border rounded-xl p-8">
             <h3 className="text-xl font-bold text-foreground mb-4">
               Get Personalized Recommendations
             </h3>
