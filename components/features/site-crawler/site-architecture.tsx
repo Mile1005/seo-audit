@@ -292,17 +292,17 @@ export default function SiteArchitecture() {
             <div className="bg-card rounded-xl p-6 border">
               <h4 className="text-lg font-semibold text-foreground mb-4">URL Pattern Analysis</h4>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-green-500/10 rounded-lg">
                   <span className="text-sm font-mono">/products/category/item</span>
-                  <span className="text-xs text-green-600 font-medium">Optimized</span>
+                  <span className="text-xs text-green-400 font-medium">Optimized</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-yellow-500/10 rounded-lg">
                   <span className="text-sm font-mono">/page.php?id=123&cat=5</span>
-                  <span className="text-xs text-yellow-600 font-medium">Needs Work</span>
+                  <span className="text-xs text-yellow-400 font-medium">Needs Work</span>
                 </div>
-                <div className="flex items-center justify-between p-3 bg-red-50 dark:bg-red-900/20 rounded-lg">
+                <div className="flex items-center justify-between p-3 bg-red-500/10 rounded-lg">
                   <span className="text-sm font-mono">/very/deep/nested/structure/page</span>
-                  <span className="text-xs text-red-600 font-medium">Too Deep</span>
+                  <span className="text-xs text-red-400 font-medium">Too Deep</span>
                 </div>
               </div>
             </div>

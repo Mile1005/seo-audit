@@ -189,9 +189,9 @@ export default function IntegrationOptions() {
         >
           {/* Background decoration */}
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-32 h-32 rounded-full bg-white/20 -translate-x-1/2 -translate-y-1/2" />
-            <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-white/20 translate-x-1/2 translate-y-1/2" />
-            <div className="absolute top-1/2 left-1/2 w-24 h-24 rounded-full bg-white/20 -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute top-0 left-0 w-32 h-32 rounded-full bg-primary/20 -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-primary/20 translate-x-1/2 translate-y-1/2" />
+            <div className="absolute top-1/2 left-1/2 w-24 h-24 rounded-full bg-primary/20 -translate-x-1/2 -translate-y-1/2" />
           </div>
           
           <div className="relative z-10">
@@ -200,7 +200,7 @@ export default function IntegrationOptions() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ type: "spring", damping: 15, stiffness: 300, delay: 1 }}
-              className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6"
+              className="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center mx-auto mb-6"
             >
               <Rocket className="w-10 h-10" />
             </motion.div>
@@ -238,7 +238,7 @@ export default function IntegrationOptions() {
               <Button 
                 size="lg" 
                 variant="secondary" 
-                className="text-lg px-8 py-6 bg-white text-primary hover:bg-white/90"
+                className="text-lg px-8 py-6 bg-primary text-white hover:bg-primary/90"
               >
                 <Target className="w-5 h-5 mr-2" />
                 Start Free Crawl
