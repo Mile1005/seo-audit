@@ -59,7 +59,7 @@ export default function AiAssistantPage() {
                 className="space-y-8"
               >
                 <div className="space-y-6">
-                  <div className="inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-700 dark:text-blue-400 text-sm font-medium">
+                  <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium">
                     <Brain className="w-4 h-4 mr-2" />
                     AI-Powered SEO Intelligence
                   </div>
@@ -112,7 +112,7 @@ export default function AiAssistantPage() {
                   {/* Chat Header */}
                   <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 text-white">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                         <Brain className="w-5 h-5" />
                       </div>
                       <div>
@@ -217,7 +217,7 @@ export default function AiAssistantPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-12 border border-blue-200 dark:border-blue-800"
+              className="bg-card rounded-2xl p-12 border"
             >
               <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Zap className="w-8 h-8 text-white" />

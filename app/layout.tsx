@@ -23,6 +23,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   openGraph: {
     title: "AI SEO Turbo - AI-Powered SEO Audits",
     description: "Get actionable SEO insights that boost rankings and drive organic traffic in minutes.",

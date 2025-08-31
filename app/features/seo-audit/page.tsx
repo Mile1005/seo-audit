@@ -1242,7 +1242,7 @@ export default function SEOAuditFeaturePage() {
                                 
                                 {/* Specific Location Information */}
                                 {issue.location && (
-                                  <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-red-200 dark:border-red-700 mb-4">
+                                  <div className="bg-card rounded-lg p-4 border border-red-200 dark:border-red-700 mb-4">
                                     <div className="flex items-center gap-2 mb-2">
                                       <Target className="w-4 h-4 text-red-600" />
                                       <span className="text-sm font-medium text-red-700 dark:text-red-300">Problem Location:</span>
@@ -1262,7 +1262,7 @@ export default function SEOAuditFeaturePage() {
                                       <Search className="w-4 h-4 text-orange-600" />
                                       <span className="text-sm font-medium text-orange-700 dark:text-orange-300">Affected Element:</span>
                                     </div>
-                                    <div className="bg-white dark:bg-gray-800 rounded p-3">
+                                    <div className="bg-card rounded p-3">
                                       <code className="text-xs text-gray-800 dark:text-gray-200 font-mono break-all">
                                         {issue.selector}
                                       </code>
@@ -1275,13 +1275,13 @@ export default function SEOAuditFeaturePage() {
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-4 border border-red-200 dark:border-red-700">
                                       <div className="text-sm font-medium text-red-700 dark:text-red-300 mb-2">Current (Problematic):</div>
-                                      <div className="text-xs text-red-600 dark:text-red-400 font-mono bg-white dark:bg-gray-800 p-3 rounded break-all">
+                                      <div className="text-xs text-red-600 dark:text-red-400 font-mono bg-card p-3 rounded break-all">
                                         {issue.current_value}
                                       </div>
                                     </div>
                                     <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-700">
                                       <div className="text-sm font-medium text-green-700 dark:text-green-300 mb-2">Expected:</div>
-                                      <div className="text-xs text-green-600 dark:text-green-400 font-mono bg-white dark:bg-gray-800 p-3 rounded break-all">
+                                      <div className="text-xs text-green-600 dark:text-green-400 font-mono bg-card p-3 rounded break-all">
                                         {issue.expected_value}
                                       </div>
                                     </div>
@@ -1407,7 +1407,7 @@ export default function SEOAuditFeaturePage() {
                                 
                                 {/* Enhanced Location Information */}
                                 {win.location && (
-                                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 border border-green-200 dark:border-green-700 mb-3">
+                                  <div className="bg-card rounded-lg p-3 border border-green-200 dark:border-green-700 mb-3">
                                     <div className="flex items-center gap-2 mb-2">
                                       <Target className="w-4 h-4 text-green-600" />
                                       <span className="text-sm font-medium text-green-700 dark:text-green-300">Found at:</span>
@@ -1436,13 +1436,13 @@ export default function SEOAuditFeaturePage() {
                                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
                                     <div className="bg-red-50 dark:bg-red-900/20 rounded-lg p-3 border border-red-200 dark:border-red-700">
                                       <div className="text-sm font-medium text-red-700 dark:text-red-300 mb-1">Current:</div>
-                                      <div className="text-xs text-red-600 dark:text-red-400 font-mono bg-white dark:bg-gray-800 p-2 rounded break-all">
+                                      <div className="text-xs text-red-600 dark:text-red-400 font-mono bg-card p-2 rounded break-all">
                                         {win.current_value}
                                       </div>
                                     </div>
                                     <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-200 dark:border-green-700">
                                       <div className="text-sm font-medium text-green-700 dark:text-green-300 mb-1">Recommended:</div>
-                                      <div className="text-xs text-green-600 dark:text-green-400 font-mono bg-white dark:bg-gray-800 p-2 rounded break-all">
+                                      <div className="text-xs text-green-600 dark:text-green-400 font-mono bg-card p-2 rounded break-all">
                                         {win.recommended_value}
                                       </div>
                                     </div>

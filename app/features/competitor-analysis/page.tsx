@@ -208,8 +208,8 @@ export default function CompetitorAnalysisPage() {
                         transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                         className={`flex items-center justify-between p-3 rounded-lg border transition-all duration-200 ${
                           competitor.name === "yoursite.com" 
-                            ? "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800" 
-                            : "bg-background hover:shadow-sm"
+                            ? "bg-card border-primary/20 ring-1 ring-primary/20" 
+                            : "bg-card hover:shadow-sm"
                         }`}
                       >
                         <div className="flex items-center space-x-3">
@@ -276,7 +276,7 @@ export default function CompetitorAnalysisPage() {
         <StrategyRecommendations />
 
         {/* Success Stories Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-background to-background border-t">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
