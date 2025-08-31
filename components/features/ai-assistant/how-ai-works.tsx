@@ -140,7 +140,7 @@ export default function HowAiWorks() {
                 >
                   <div className={`p-6 rounded-xl border-2 transition-all duration-300 ${
                     isActive 
-                      ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20 shadow-lg" 
+                      ? "border-primary bg-primary/10 shadow-lg" 
                       : "border-border bg-card hover:border-blue-300 hover:shadow-md"
                   }`}>
                     <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 ${

@@ -197,9 +197,9 @@ worker.postMessage(data);`,
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case "Beginner": return "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400";
-      case "Intermediate": return "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400";
-      case "Advanced": return "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400";
+      case "Beginner": return "bg-green-500/10 text-green-400";
+      case "Intermediate": return "bg-yellow-500/10 text-yellow-400";
+      case "Advanced": return "bg-red-500/10 text-red-400";
       default: return "bg-muted text-muted-foreground";
     }
   };
@@ -396,7 +396,7 @@ worker.postMessage(data);`,
             </div>
 
             {/* Completion CTA */}
-            <div className="mt-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+            <div className="mt-8 p-6 bg-green-500/10 rounded-lg border border-green-500/20">
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-semibold text-green-800 dark:text-green-400 mb-1">

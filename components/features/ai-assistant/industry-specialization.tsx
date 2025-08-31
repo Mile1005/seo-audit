@@ -359,7 +359,7 @@ export default function IndustrySpecialization() {
             </div>
 
             {/* Case Study */}
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border border-blue-200 dark:border-blue-800 p-8">
+            <div className="bg-card border rounded-xl p-8">
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <h3 className="text-xl font-semibold text-foreground mb-4">
@@ -386,7 +386,7 @@ export default function IndustrySpecialization() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: index * 0.1 }}
-                        className="flex items-center space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg"
+                        className="flex items-center space-x-3 p-3 bg-card rounded-lg"
                       >
                         <TrendingUp className="w-4 h-4 text-green-600" />
                         <span className="text-foreground">{result}</span>
@@ -429,7 +429,7 @@ export default function IndustrySpecialization() {
           transition={{ duration: 0.6 }}
           className="text-center mt-16"
         >
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-8 border border-purple-200 dark:border-purple-800">
+          <div className="bg-card border rounded-xl p-8">
             <h3 className="text-2xl font-bold text-foreground mb-4">
               Get Industry-Specific Recommendations
             </h3>

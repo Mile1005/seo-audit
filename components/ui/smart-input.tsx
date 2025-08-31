@@ -85,7 +85,7 @@ export const SmartInput: React.FC<SmartInputProps> = ({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           className={cn(
-            "w-full px-3 py-3 border rounded-xl transition-all duration-200 bg-white/90 text-gray-900 placeholder-gray-500",
+            "w-full px-3 py-3 border rounded-xl transition-all duration-200 bg-background text-foreground placeholder-muted-foreground",
             "focus:outline-none focus:ring-2 focus:border-transparent",
             Icon && "pl-10",
             isPassword && "pr-12",

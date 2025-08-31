@@ -107,10 +107,10 @@ export default function PerformanceAnalytics() {
 
   const getMetricColor = (color: string) => {
     switch (color) {
-      case "blue": return "text-blue-600 bg-blue-100 dark:bg-blue-900/30";
-      case "green": return "text-green-600 bg-green-100 dark:bg-green-900/30";
-      case "purple": return "text-purple-600 bg-purple-100 dark:bg-purple-900/30";
-      case "orange": return "text-orange-600 bg-orange-100 dark:bg-orange-900/30";
+      case "blue": return "text-blue-400 bg-blue-500/10";
+      case "green": return "text-green-400 bg-green-500/10";
+      case "purple": return "text-purple-400 bg-purple-500/10";
+      case "orange": return "text-orange-400 bg-orange-500/10";
       default: return "text-muted-foreground bg-muted";
     }
   };
@@ -390,7 +390,7 @@ export default function PerformanceAnalytics() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-8 border border-purple-200 dark:border-purple-800">
+          <div className="bg-card border rounded-xl p-8">
             <Zap className="w-16 h-16 text-purple-600 mx-auto mb-6" />
             <h3 className="text-2xl font-bold text-foreground mb-4">
               Advanced Performance Analytics

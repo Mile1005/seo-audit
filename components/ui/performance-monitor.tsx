@@ -45,10 +45,10 @@ export function PerformanceMonitorDisplay({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'good': return 'text-green-500 bg-green-50 border-green-200';
-      case 'needs-improvement': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-      case 'poor': return 'text-red-500 bg-red-50 border-red-200';
-      default: return 'text-gray-500 bg-gray-50 border-gray-200';
+      case 'good': return 'text-green-400 bg-green-500/10 border-green-500/20';
+      case 'needs-improvement': return 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20';
+      case 'poor': return 'text-red-400 bg-red-500/10 border-red-500/20';
+      default: return 'text-muted-foreground bg-muted border-border';
     }
   };
 

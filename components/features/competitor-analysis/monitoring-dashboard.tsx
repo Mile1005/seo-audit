@@ -452,7 +452,7 @@ export default function MonitoringDashboard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-8 border border-blue-200 dark:border-blue-800"
+          className="mt-12 bg-card border rounded-xl p-8"
         >
           <div className="text-center">
             <h3 className="text-xl font-bold text-foreground mb-4">
