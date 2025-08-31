@@ -1383,7 +1383,7 @@ export default function SEOAuditFeaturePage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1.5 + index * 0.1 }}
-                        className="group border border-green-200 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 dark:border-green-800 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
+                        className="group border border-green-500/20 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-[1.02]"
                       >
                         <div className="flex items-start gap-4">
                           <motion.div 

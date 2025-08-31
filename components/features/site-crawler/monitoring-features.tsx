@@ -236,7 +236,7 @@ export default function MonitoringFeatures() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-2xl p-8"
+          className="bg-gradient-to-r from-indigo-500/10 to-blue-500/10 rounded-2xl p-8"
         >
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>

@@ -263,7 +263,7 @@ export default function SiteArchitecture() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8"
+          className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8"
         >
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>

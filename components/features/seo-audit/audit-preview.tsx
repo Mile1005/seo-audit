@@ -110,7 +110,7 @@ export default function AuditPreview() {
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="text-center mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg"
+              className="text-center mb-6 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg"
             >
               <div className="text-3xl font-bold text-blue-600 mb-1">78</div>
               <div className="text-sm text-muted-foreground">Overall SEO Score</div>
