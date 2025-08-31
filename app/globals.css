@@ -130,92 +130,17 @@
   }
   
   /* Universal color contrast fixes - More aggressive approach */
-  * {
-    --card: white !important;
-    --background: white !important;
-    --foreground: black !important;
-    --muted-foreground: #374151 !important;
-  }
-
-  .bg-card,
-  .bg-background {
-    background-color: white !important;
-  }
-
-  .text-foreground {
-    color: black !important;
-  }
-
-  .text-muted-foreground,
-  .text-muted-foreground\/80 {
-    color: #374151 !important;
-  }
-
-  /* Force better color contrast for all problematic color combinations */
-  .bg-yellow-500 { 
-    background-color: #92400e !important; /* Much darker yellow */
-  }
+  /* REMOVED: Aggressive overrides that destroyed the design */
   
-  .bg-gray-400 { 
-    background-color: #374151 !important; /* Much darker gray */
-  }
-  
-  .bg-orange-500 { 
-    background-color: #c2410c !important; /* Much darker orange */
-  }
-  
-  .bg-blue-500 { 
-    background-color: #1e40af !important; /* Much darker blue */
-  }
-  
-  .text-red-600 { 
-    color: #dc2626 !important; /* Standard red for better contrast */
-  }
-  
-  .text-green-600 { 
-    color: #059669 !important; /* Darker green for better contrast */
-  }
-  
-  .bg-blue-50 { 
-    background-color: white !important; /* Pure white for better contrast */
-  }
-
-  /* Fix link contrast and styling issues from accessibility tests */
+  /* Keep only minimal, specific fixes for accessibility without destroying design */
   .text-blue-600 {
-    color: #1d4ed8 !important; /* Darker blue for better contrast */
     text-decoration: underline !important;
     text-underline-offset: 2px !important;
     text-decoration-thickness: 1px !important;
   }
 
   .text-blue-600:hover {
-    color: #1e40af !important; /* Even darker on hover */
     text-decoration-thickness: 2px !important;
-  }
-
-  /* Fix feature card text contrast */
-  .text-card-foreground {
-    color: #1e293b !important; /* Dark slate for better contrast on white backgrounds */
-  }
-
-  /* Fix feature card headings contrast */
-  .text-xl.font-semibold.leading-none.tracking-tight {
-    color: #0f172a !important; /* Near black for maximum contrast */
-  }
-
-  /* Fix CTA section on muted background */
-  .bg-muted\/30 {
-    background-color: #f8fafc !important; /* Lighter background for better contrast */
-  }
-
-  .bg-muted\/30 h2 {
-    color: #0f172a !important; /* Dark text on light background */
-  }
-
-  .bg-muted\/30 .border-border {
-    background-color: #ffffff !important;
-    color: #0f172a !important;
-    border-color: #1e293b !important;
   }
 
   /* Fix scrollable table accessibility */
@@ -224,38 +149,7 @@
   }
 
   .overflow-x-auto:focus {
-    outline: 2px solid #1d4ed8 !important;
+    outline: 2px solid hsl(var(--primary)) !important;
     outline-offset: 2px !important;
-  }
-
-  /* Fix primary badge contrast */
-  .bg-primary\/10 {
-    background-color: #1e40af !important; /* Dark blue background */
-  }
-
-  .text-primary {
-    color: #ffffff !important; /* White text on dark background */
-  }
-
-  /* Fix colored text contrast issues */
-  .text-purple-400 {
-    color: #6b21a8 !important; /* Much darker purple for better contrast */
-  }
-
-  .text-green-400 {
-    color: #059669 !important; /* Much darker green for better contrast */
-  }
-
-  .text-green-600 {
-    color: #047857 !important; /* Even darker green for small text */
-  }
-
-  /* Fix green badge backgrounds */
-  .bg-green-950\/20 {
-    background-color: #047857 !important; /* Dark green background */
-  }
-
-  .bg-green-950\/20 .text-green-400 {
-    color: #ffffff !important; /* White text on dark green background */
   }
 }
