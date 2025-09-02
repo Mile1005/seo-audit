@@ -9,9 +9,13 @@ const nextConfig = {
     ignoreBuildErrors: true, // For development speed
   },
   experimental: {
-    // Enable optimizations available in Next.js 14
+    // Enable optimizations available in Next.js 14+
     // optimizeCss: true, // Temporarily disabled due to critters dependency issue
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
+  
+  // External packages optimization
+  serverExternalPackages: ['sharp'],
   
   // Image optimization configuration
   images: {
@@ -114,17 +118,66 @@ const nextConfig = {
       config.externals.push('_http_common');
     }
     
-    // Bundle optimization
+    // Bundle optimization for production
     if (!dev) {
+      // Enhanced tree shaking
+      config.optimization.usedExports = true;
+      config.optimization.sideEffects = false;
+      
+      // Better chunk splitting to reduce unused code
       config.optimization.splitChunks = {
         chunks: 'all',
+        minSize: 20000,
+        maxSize: 244000,
         cacheGroups: {
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+          },
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
+            priority: -10,
             chunks: 'all',
+            maxSize: 244000, // Split large vendor chunks
+          },
+          // Split React libraries
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: 'react-vendor',
+            chunks: 'all',
+            priority: 10,
+          },
+          // Split animation libraries
+          animations: {
+            test: /[\\/]node_modules[\\/](framer-motion|@emotion)[\\/]/,
+            name: 'animations',
+            chunks: 'all',
+            priority: 5,
+          },
+          // Split UI libraries
+          ui: {
+            test: /[\\/]node_modules[\\/](lucide-react|@headlessui)[\\/]/,
+            name: 'ui-vendor',
+            chunks: 'all',
+            priority: 5,
           },
         },
+      };
+      
+      // Enable module concatenation for better tree shaking
+      config.optimization.concatenateModules = true;
+      
+      // Better dead code elimination
+      config.optimization.innerGraph = true;
+      config.optimization.providedExports = true;
+      
+      // Remove development-only code
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        // Remove development modules in production
+        'framer-motion/dev': false,
       };
     }
     

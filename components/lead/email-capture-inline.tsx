@@ -129,9 +129,9 @@ export function EmailCaptureInline({
 
       {/* Header */}
       <div className="text-center mb-6">
-        <h3 className="text-xl lg:text-2xl font-bold text-white mb-2">
+        <h2 className="text-xl lg:text-2xl font-bold text-white mb-2">
           {title}
-        </h3>
+        </h2>
         <p className="text-gray-300 text-sm lg:text-base">
           {description}
         </p>
