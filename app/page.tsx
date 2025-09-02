@@ -40,7 +40,7 @@ const DynamicPricingCards = dynamic(() => import("@/components/dynamic/heavy-com
   loading: () => <div className="h-64 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading pricing...</span></div>
 })
 
-// SEO metadata for the homepage
+// SEO metadata for the homepage - Force deployment
 export const metadata: Metadata = generateSEOMeta(pageSEO.home)
 
 // Structured data for the homepage

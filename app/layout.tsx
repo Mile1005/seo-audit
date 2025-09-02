@@ -2,11 +2,6 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import React from "react";
 import { AuthProvider } from "../components/auth/auth-provider";
-import { PerformanceInitializer } from "../components/performance/performance-initializer";
-import { ComponentPreloader } from "../components/performance/component-preloader";
-import { ServiceWorkerProvider } from "../components/performance/service-worker-provider";
-import { ResourcePreloader } from "../components/performance/resource-preloader-optimized";
-import { CSSOptimizer } from "../components/performance/css-optimizer";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -155,11 +150,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        <PerformanceInitializer />
-        <CSSOptimizer />
-        <ComponentPreloader strategy="idle" />
-        <ServiceWorkerProvider />
-        <ResourcePreloader resources={[]} enabled={true} />
         <AuthProvider>
           {children}
         </AuthProvider>
