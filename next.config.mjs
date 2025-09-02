@@ -29,6 +29,8 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', 'framer-motion', 'next-auth'],
     esmExternals: true,
+    // Mobile-specific performance optimizations  
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP'],
   },
   
   // Performance optimization
@@ -89,10 +91,11 @@ const nextConfig = {
   // Build optimization
   webpack: (config, { dev, isServer }) => {
     if (!dev && !isServer) {
-      // Aggressive bundle splitting for performance
+      // Aggressive bundle splitting for mobile performance
       config.optimization.splitChunks = {
         chunks: 'all',
-        maxSize: 200000, // Smaller chunks for better loading
+        maxSize: 150000, // Even smaller chunks for mobile
+        minSize: 20000,
         cacheGroups: {
           framework: {
             chunks: 'all',
@@ -101,20 +104,39 @@ const nextConfig = {
             priority: 40,
             enforce: true,
           },
+          // Separate heavy libraries
+          animations: {
+            test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
+            name: 'animations',
+            priority: 35,
+            enforce: true,
+          },
+          icons: {
+            test: /[\\/]node_modules[\\/](lucide-react)[\\/]/,
+            name: 'icons',
+            priority: 33,
+            enforce: true,
+          },
           lib: {
             test: /[\\/]node_modules[\\/]/,
             name: 'lib',
             priority: 30,
             minChunks: 1,
             reuseExistingChunk: true,
+            maxSize: 100000, // Smaller lib chunks
           },
           commons: {
             name: 'commons',
             minChunks: 2,
             priority: 20,
+            maxSize: 80000,
           },
         },
       }
+      
+      // Mobile-specific optimizations
+      config.optimization.usedExports = true
+      config.optimization.sideEffects = false
     }
 
     return config
