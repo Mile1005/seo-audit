@@ -248,13 +248,6 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
-  // Handle touch events for better mobile compatibility
-  const handleTouchStart = (e: React.TouchEvent) => {
-    // Prevent any interference with touch events
-    e.stopPropagation()
-    handleMobileMenuToggle()
-  }
-
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
   }
@@ -352,7 +345,6 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={handleMobileMenuToggle}
-            onTouchStart={handleTouchStart}
             className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 z-[90] relative"
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
@@ -392,22 +384,15 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed top-16 left-0 right-0 bottom-0 bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl z-[80] overflow-y-auto w-screen"
+              className="fixed top-16 left-0 right-0 bottom-0 bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl z-[80] overflow-y-auto w-screen"
               style={{
                 backdropFilter: 'blur(20px) saturate(180%)',
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
               }}
             >
-              {/* Mobile Header with X Button */}
-              <div className="flex items-center justify-between p-6 border-b border-slate-700/30 bg-slate-800/20 backdrop-blur-md">
-                <span className="text-2xl font-bold text-white drop-shadow-lg">Navigation</span>
-                <button
-                  onClick={closeMobileMenu}
-                  className="p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 text-gray-300 hover:text-white hover:bg-slate-700/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm"
-                  aria-label="Close menu"
-                >
-                  <X className="w-7 h-7" />
-                </button>
+              {/* Mobile Header - No duplicate X button */}
+              <div className="flex items-center justify-center p-6 border-b border-slate-700/20 bg-slate-800/10 backdrop-blur-md">
+                <span className="text-2xl font-bold text-white/80 drop-shadow-lg">Navigation</span>
               </div>
 
               {/* Mobile Navigation Links */}
