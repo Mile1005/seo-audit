@@ -14,6 +14,11 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   
+  // Target modern browsers to reduce polyfills and legacy code
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
   // External packages optimization
   serverExternalPackages: ['sharp'],
   
@@ -135,6 +140,16 @@ const nextConfig = {
           },
         },
       };
+      
+      // Exclude polyfills for modern browsers
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'core-js': false,
+        'regenerator-runtime': false,
+      };
+      
+      // Set target for modern browsers
+      config.target = 'web';
     }
     
     return config;
