@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('❌ Error creating test user:', error)
     return NextResponse.json(
-      { message: 'Failed to create test user', error: error.message },
+      { message: 'Failed to create test user', error: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }

@@ -4,10 +4,19 @@ import { MainLayout } from "@/components/layout/main-layout"
 import { generateSEOMeta, generateStructuredData, pageSEO } from "@/lib/seo"
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
+import { headers } from 'next/headers'
+
+// Mobile detection utility
+function isMobileDevice() {
+  if (typeof window !== 'undefined') {
+    return window.innerWidth < 768
+  }
+  return false
+}
 
 // Lazy load heavy components for better Core Web Vitals (with SSR enabled for server components)
 const EmailCaptureInline = dynamic(() => import("@/components/lead/email-capture-inline").then(mod => ({ default: mod.EmailCaptureInline })), {
-  loading: () => <div className="h-16 bg-gray-100 animate-pulse rounded" />
+  loading: () => <div className="h-16 bg-gray-100 dark:bg-gray-800 animate-pulse rounded" />
 })
 
 const ExitIntentModal = dynamic(() => import("@/components/lead/exit-intent-modal").then(mod => ({ default: mod.ExitIntentModal })), {
@@ -18,13 +27,13 @@ const ContentGate = dynamic(() => import("@/components/lead/content-gate").then(
   loading: () => <div className="h-8" />
 })
 
-// Extremely lazy load heavy showcase components - only when needed
+// Mobile-optimized: Load components only when visible or needed
 const DynamicFeaturesShowcase = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicFeaturesShowcase })), {
-  loading: () => <div className="h-64 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading features...</span></div>
+  loading: () => <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading features...</span></div>
 })
 
 const DynamicInteractiveDemo = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicInteractiveDemo })), {
-  loading: () => <div className="h-96 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading demo...</span></div>
+  loading: () => <div className="h-96 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading demo...</span></div>
 })
 
 const DynamicTestimonialsCarousel = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicTestimonialsCarousel })), {

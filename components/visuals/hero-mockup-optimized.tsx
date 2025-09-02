@@ -38,17 +38,15 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
             </div>
           </div>
 
-          {/* Main Content Area - Fixed dimensions to prevent layout shift */}
-          <div className="relative bg-white rounded-lg overflow-hidden w-full h-0 pb-[62.5%]">
+          {/* Main Content Area */}
+          <div className="relative bg-white rounded-lg overflow-hidden" style={{ aspectRatio: '16/10' }}>
             {/* Dashboard Content */}
             <HeroImage
               src="/images/dashboard-preview.webp"
               alt="SEO Audit Dashboard showing comprehensive website analysis results"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="w-full h-full object-cover"
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              width={1200}
-              height={750}
             />
 
             {/* Status Overlay */}

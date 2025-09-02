@@ -414,3 +414,5 @@ export function InteractiveDemo() {
     </section>
   )
 }
+
+export default InteractiveDemo

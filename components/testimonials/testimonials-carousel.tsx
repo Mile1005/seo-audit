@@ -254,3 +254,5 @@ export function TestimonialsCarousel() {
     </section>
   )
 }
+
+export default TestimonialsCarousel

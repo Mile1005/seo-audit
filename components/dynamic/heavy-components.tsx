@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 // Extremely lazy load all heavy components with proper loading states
 export const DynamicFeaturesShowcase = dynamic(
-  () => import("@/components/features/features-showcase").then(mod => ({ default: mod.FeaturesShowcase })),
+  () => import("../features/features-showcase"),
   {
     loading: () => (
       <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
@@ -16,7 +16,7 @@ export const DynamicFeaturesShowcase = dynamic(
 )
 
 export const DynamicInteractiveDemo = dynamic(
-  () => import("@/components/demo/interactive-demo").then(mod => ({ default: mod.InteractiveDemo })),
+  () => import("../demo/interactive-demo"),
   {
     loading: () => (
       <div className="h-96 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
@@ -28,7 +28,7 @@ export const DynamicInteractiveDemo = dynamic(
 )
 
 export const DynamicTestimonialsCarousel = dynamic(
-  () => import("@/components/testimonials/testimonials-carousel").then(mod => ({ default: mod.TestimonialsCarousel })),
+  () => import("../testimonials/testimonials-carousel"),
   {
     loading: () => (
       <div className="h-48 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
@@ -40,7 +40,7 @@ export const DynamicTestimonialsCarousel = dynamic(
 )
 
 export const DynamicROICalculator = dynamic(
-  () => import("@/components/pricing/roi-calculator").then(mod => ({ default: mod.ROICalculator })),
+  () => import("../pricing/roi-calculator"),
   {
     loading: () => (
       <div className="h-80 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
@@ -52,7 +52,7 @@ export const DynamicROICalculator = dynamic(
 )
 
 export const DynamicPricingCards = dynamic(
-  () => import("@/components/pricing/pricing-cards").then(mod => ({ default: mod.PricingCards })),
+  () => import("../pricing/pricing-cards"),
   {
     loading: () => (
       <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">

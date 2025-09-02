@@ -232,10 +232,10 @@ export function AdaptiveNavigation() {
           </div>
         </div>
 
-        {/* Mobile Menu - Fixed height to prevent layout shift */}
+        {/* Mobile Menu */}
         <div className={`md:hidden transition-all duration-300 overflow-hidden ${
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`} style={{ minHeight: isOpen ? '200px' : '0px' }}>
+        }`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/50 rounded-b-lg">
             {navigationData.map((section) => (
               <div key={section.label}>
@@ -253,7 +253,7 @@ export function AdaptiveNavigation() {
                     
                     <div className={`pl-4 transition-all duration-200 overflow-hidden ${
                       openDropdown === section.label ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`} style={{ minHeight: openDropdown === section.label ? '120px' : '0px' }}>
+                    }`}>
                       {section.items.map((item) => (
                         <Link
                           key={item.href}

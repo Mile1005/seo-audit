@@ -338,3 +338,5 @@ export function ROICalculator() {
     </section>
   )
 }
+
+export default ROICalculator

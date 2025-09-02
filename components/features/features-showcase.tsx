@@ -119,3 +119,5 @@ export function FeaturesShowcase() {
     </section>
   )
 }
+
+export default FeaturesShowcase

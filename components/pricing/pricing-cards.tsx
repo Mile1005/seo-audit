@@ -299,3 +299,5 @@ export function PricingCards() {
     </section>
   )
 }
+
+export default PricingCards

@@ -4,6 +4,8 @@
     esmExternals: true,
     // Aggressive bundle splitting for better performance
     bundlePagesExternals: true,
+    // Mobile-specific optimizations
+    optimizeServerReact: true,
   },
   
   // Performance optimization

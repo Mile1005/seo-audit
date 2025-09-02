@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
+import { motion } from "framer-motion"
 import { Play, Pause, Maximize2, Minimize2 } from "lucide-react"
 import { HeroImage } from "@/components/ui/optimized-image"
 
