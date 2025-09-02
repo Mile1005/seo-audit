@@ -56,8 +56,6 @@
   "exclude": [
     "node_modules",
     "seo-audit/**/*",
-    "seo-audit/app/**/*",
-    "seo-audit/src/**/*",
     "apps-backup/**/*",
     "chrome-extension/**/*",
     "worker/**/*",
@@ -65,9 +63,6 @@
     "src/**/*",
     "lib/theme.ts.disabled",
     ".next/**/*",
-    "**/*.d.ts",
-    "**/route.ts",
-    "**/layout.tsx",
-    "**/page.tsx"
+    "**/*.d.ts"
   ]
 }

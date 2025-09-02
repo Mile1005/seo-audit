@@ -18,10 +18,10 @@ import {
   Zap
 } from "lucide-react";
 import { MainLayout } from "../../../components/layout/main-layout";
-import SerpComparison from "../../../components/features/competitor-analysis/serp-comparison.tsx";
-import GapAnalysis from "../../../components/features/competitor-analysis/gap-analysis.tsx";
-import MonitoringDashboard from "../../../components/features/competitor-analysis/monitoring-dashboard.tsx";
-import StrategyRecommendations from "../../../components/features/competitor-analysis/strategy-recommendations.tsx";
+import SerpComparison from "../../../components/features/competitor-analysis/serp-comparison";
+import GapAnalysis from "../../../components/features/competitor-analysis/gap-analysis";
+import MonitoringDashboard from "../../../components/features/competitor-analysis/monitoring-dashboard";
+import StrategyRecommendations from "../../../components/features/competitor-analysis/strategy-recommendations";
 
 export default function CompetitorAnalysisPage() {
   const [selectedCompetitor, setSelectedCompetitor] = useState("competitor1");

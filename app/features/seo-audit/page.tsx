@@ -812,7 +812,7 @@ export default function SEOAuditFeaturePage() {
                         Passed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.passed_checks?.length || 0})
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.passed_checks?.map((check, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.passed_checks?.map((check: any, index: number) => (
                           <div key={index} className="flex items-center">
                             <div className="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
                             <span className="text-sm text-foreground">{check}</span>
@@ -826,7 +826,7 @@ export default function SEOAuditFeaturePage() {
                         Failed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.failed_checks?.length || 0})
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.failed_checks?.map((check, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.accessibility?.failed_checks?.map((check: any, index: number) => (
                           <div key={index} className="flex items-center">
                             <div className="w-3 h-3 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
                             <span className="text-sm text-foreground">{check}</span>
@@ -854,7 +854,7 @@ export default function SEOAuditFeaturePage() {
                         Passed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.passed_checks?.length || 0})
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.passed_checks?.map((check, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.passed_checks?.map((check: any, index: number) => (
                           <div key={index} className="flex items-center">
                             <div className="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
                             <span className="text-sm text-foreground">{check}</span>
@@ -868,7 +868,7 @@ export default function SEOAuditFeaturePage() {
                         Failed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.failed_checks?.length || 0})
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.failed_checks?.map((check, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.indexability?.failed_checks?.map((check: any, index: number) => (
                           <div key={index} className="flex items-center">
                             <div className="w-3 h-3 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
                             <span className="text-sm text-foreground">{check}</span>
@@ -896,7 +896,7 @@ export default function SEOAuditFeaturePage() {
                         Passed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.passed_checks?.length || 0})
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.passed_checks?.map((check, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.passed_checks?.map((check: any, index: number) => (
                           <div key={index} className="flex items-center">
                             <div className="w-3 h-3 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
                             <span className="text-sm text-foreground">{check}</span>
@@ -910,7 +910,7 @@ export default function SEOAuditFeaturePage() {
                         Failed Checks ({(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.failed_checks?.length || 0})
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.failed_checks?.map((check, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.seo_checks?.failed_checks?.map((check: any, index: number) => (
                           <div key={index} className="flex items-center">
                             <div className="w-3 h-3 bg-red-500 rounded-full mr-3 flex-shrink-0"></div>
                             <span className="text-sm text-foreground">{check}</span>
@@ -999,7 +999,7 @@ export default function SEOAuditFeaturePage() {
                     Performance Opportunities
                   </h3>
                   <div className="space-y-3">
-                    {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_opportunities?.map((opportunity, index) => (
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_opportunities?.map((opportunity: any, index: number) => (
                       <div key={index} className="flex items-start p-4 bg-orange-500/10 rounded-lg border border-orange-500/20">
                         <div className="w-3 h-3 bg-orange-500 rounded-full mr-3 mt-2 flex-shrink-0"></div>
                         <div className="flex-1">
@@ -1024,7 +1024,7 @@ export default function SEOAuditFeaturePage() {
                     Performance Diagnostics
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_diagnostics?.map((diagnostic, index) => (
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.performance_diagnostics?.map((diagnostic: any, index: number) => (
                       <div key={index} className="flex items-center p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
                         <div className="w-3 h-3 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
                         <span className="text-sm text-foreground">{diagnostic}</span>
@@ -1065,7 +1065,7 @@ export default function SEOAuditFeaturePage() {
                         </div>
                       )}
                       <div className="space-y-2">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.map((h1, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h1?.map((h1: any, index: number) => (
                           <div key={index} className="bg-muted/50 rounded-lg p-3 border">
                             <div className="flex items-start">
                               <span className="text-sm font-medium text-muted-foreground mr-2">{index + 1}.</span>
@@ -1092,7 +1092,7 @@ export default function SEOAuditFeaturePage() {
                         We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.length} H2 tags on this page
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.map((h2, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h2?.map((h2: any, index: number) => (
                           <div key={index} className="bg-muted/50 rounded-lg p-3 border">
                             <div className="flex items-start">
                               <span className="text-sm font-medium text-muted-foreground mr-2">{index + 1}.</span>
@@ -1117,7 +1117,7 @@ export default function SEOAuditFeaturePage() {
                         We found {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.length} H3 tags on this page
                       </h4>
                       <div className="space-y-2 max-h-64 overflow-y-auto">
-                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.map((h3, index) => (
+                        {(auditResult.comprehensiveResults || auditResult.rawData)?.h_tags?.h3?.map((h3: any, index: number) => (
                           <div key={index} className="bg-muted/50 rounded-lg p-3 border">
                             <div className="flex items-start">
                               <span className="text-sm font-medium text-muted-foreground mr-2">{index + 1}.</span>
@@ -1197,7 +1197,7 @@ export default function SEOAuditFeaturePage() {
                   </motion.h3>
                   
                   <div className="space-y-6">
-                    {(auditResult.comprehensiveResults || auditResult.rawData)?.issues?.map((issue, index) => (
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.issues?.map((issue: any, index: number) => (
                       <motion.div 
                         key={index} 
                         initial={{ opacity: 0, x: -20 }}
@@ -1375,7 +1375,7 @@ export default function SEOAuditFeaturePage() {
                   </motion.h3>
                   
                   <div className="space-y-4">
-                    {(auditResult.comprehensiveResults || auditResult.rawData)?.quick_wins?.map((win, index) => (
+                    {(auditResult.comprehensiveResults || auditResult.rawData)?.quick_wins?.map((win: any, index: number) => (
                       <motion.div 
                         key={index} 
                         initial={{ opacity: 0, x: -20 }}

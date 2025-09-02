@@ -14,10 +14,10 @@ import {
 } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { MainLayout } from "../../../components/layout/main-layout";
-import TrackingCapabilities from "../../../components/features/keyword-tracking/tracking-capabilities.tsx";
-import SerpFeatures from "../../../components/features/keyword-tracking/serp-features.tsx";
-import PerformanceAnalytics from "../../../components/features/keyword-tracking/performance-analytics.tsx";
-import AlertSystem from "../../../components/features/keyword-tracking/alert-system.tsx";
+import TrackingCapabilities from "../../../components/features/keyword-tracking/tracking-capabilities";
+import SerpFeatures from "../../../components/features/keyword-tracking/serp-features";
+import PerformanceAnalytics from "../../../components/features/keyword-tracking/performance-analytics";
+import AlertSystem from "../../../components/features/keyword-tracking/alert-system";
 
 export default function KeywordTrackingPage() {
   const heroMetrics = [
