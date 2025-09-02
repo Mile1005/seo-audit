@@ -246,7 +246,6 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
   }
 
   const handleMobileMenuToggle = () => {
-    console.log('Mobile menu toggle clicked', { isMobileMenuOpen, scrollY: window.scrollY })
     // Force close any open dropdowns when opening mobile menu
     setActiveDropdown(null)
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -388,7 +387,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed inset-0 bg-slate-900/70 backdrop-blur-xl shadow-2xl z-[105] overflow-y-auto"
+              className="fixed inset-0 bg-slate-900/95 backdrop-blur-xl shadow-2xl z-[105] overflow-y-auto"
               style={{
                 backdropFilter: 'blur(20px) saturate(180%)',
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
@@ -398,8 +397,8 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               }}
             >
               {/* Mobile Header - No duplicate X button */}
-              <div className="flex items-center justify-center p-6 border-b border-slate-700/20 bg-slate-800/10 backdrop-blur-md">
-                <span className="text-2xl font-bold text-white/80 drop-shadow-lg">Navigation</span>
+              <div className="flex items-center justify-center p-6 border-b border-slate-700/30 bg-slate-800/80 backdrop-blur-md">
+                <span className="text-2xl font-bold text-white drop-shadow-lg">Navigation</span>
               </div>
 
               {/* Mobile Navigation Links */}
@@ -416,7 +415,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
                       </Link>
                     ) : (
                       <>
-                        <div className="text-lg font-bold text-white px-4 py-2 border-b border-slate-700/30 pb-3 bg-slate-800/20 rounded-t-xl backdrop-blur-sm">
+                        <div className="text-lg font-bold text-white px-4 py-2 border-b border-slate-700/30 pb-3 bg-slate-800/60 rounded-t-xl backdrop-blur-sm">
                           {section.label}
                         </div>
                         {section.items && (
@@ -446,7 +445,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
                 ))}
 
                 {/* Mobile CTA Section */}
-                <div className="pt-6 border-t border-slate-700/30 space-y-4 bg-slate-800/10 rounded-xl p-6 backdrop-blur-sm">
+                <div className="pt-6 border-t border-slate-700/30 space-y-4 bg-slate-800/70 rounded-xl p-6 backdrop-blur-sm">
                   <Link
                     href="/login"
                     onClick={closeMobileMenu}
