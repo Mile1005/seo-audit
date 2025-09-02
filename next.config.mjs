@@ -9,8 +9,9 @@ const nextConfig = {
     ignoreBuildErrors: true, // For development speed
   },
   experimental: {
-    // Keep only essential optimizations for compatibility
-    optimizePackageImports: ['lucide-react'],
+    // Enable optimizations available in Next.js 14
+    // optimizeCss: true, // Temporarily disabled due to critters dependency issue
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   
   // External packages optimization
@@ -117,46 +118,23 @@ const nextConfig = {
       config.externals.push('_http_common');
     }
     
-    // Bundle optimization for production
+    // Simple bundle optimization to reduce unused JavaScript
     if (!dev) {
-      // Enhanced tree shaking
+      // Enable tree shaking
       config.optimization.usedExports = true;
       config.optimization.sideEffects = false;
       
-      // Better chunk splitting to reduce unused code
+      // Basic chunk splitting
       config.optimization.splitChunks = {
         chunks: 'all',
-        minSize: 20000,
-        maxSize: 200000, // Reduced max size to prevent build issues
         cacheGroups: {
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-          },
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            priority: -10,
             chunks: 'all',
-            maxSize: 200000, // Reduced to prevent lambda size issues
-          },
-          // Split React libraries
-          react: {
-            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-            name: 'react-vendor',
-            chunks: 'all',
-            priority: 10,
           },
         },
       };
-      
-      // Enable module concatenation for better tree shaking
-      config.optimization.concatenateModules = true;
-      
-      // Better dead code elimination - but less aggressive
-      config.optimization.innerGraph = true;
-      config.optimization.providedExports = true;
     }
     
     return config;
