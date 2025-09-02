@@ -185,34 +185,37 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
       // Store current scroll position
       const scrollY = window.scrollY
       
-      // Prevent body scroll without changing position
+      // Modern approach: Use viewport units and prevent scroll without position changes
       document.body.style.overflow = 'hidden'
-      document.body.style.height = '100vh'
+      document.body.style.position = 'relative' // Keep natural flow
+      
+      // Store scroll position in CSS custom property for mobile menu positioning
+      document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`)
+      
+      // Add specific class to prevent scroll on mobile devices
+      document.body.classList.add('mobile-menu-open')
       
       // Focus first focusable element
       const firstFocusable = mobileMenuRef.current?.querySelector(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       ) as HTMLElement
       firstFocusable?.focus()
-
-      // Store scroll position for restoration
-      document.body.dataset.scrollY = scrollY.toString()
     } else {
-      // Restore body scroll without changing scroll position
+      // Restore body scroll and properties
       document.body.style.overflow = ''
-      document.body.style.height = ''
+      document.body.style.position = ''
       
-      // Restore scroll position
-      const scrollY = parseInt(document.body.dataset.scrollY || '0')
-      window.scrollTo(0, scrollY)
-      delete document.body.dataset.scrollY
+      // Remove CSS custom property and class
+      document.documentElement.style.removeProperty('--scroll-y')
+      document.body.classList.remove('mobile-menu-open')
     }
 
     return () => {
       // Cleanup on unmount
       document.body.style.overflow = ''
-      document.body.style.height = ''
-      delete document.body.dataset.scrollY
+      document.body.style.position = ''
+      document.documentElement.style.removeProperty('--scroll-y')
+      document.body.classList.remove('mobile-menu-open')
     }
   }, [isMobileMenuOpen])
 
@@ -243,6 +246,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
   }
 
   const handleMobileMenuToggle = () => {
+    console.log('Mobile menu toggle clicked', { isMobileMenuOpen, scrollY: window.scrollY })
     // Force close any open dropdowns when opening mobile menu
     setActiveDropdown(null)
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -256,13 +260,13 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
         isScrolled 
           ? 'bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg' 
           : 'bg-transparent'
       } ${className}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[110]">
         <div className="flex items-center justify-between h-16">
           
           {/* Logo */}
@@ -345,7 +349,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={handleMobileMenuToggle}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 z-[90] relative"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 z-[110] relative"
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
             style={{ touchAction: 'manipulation' }}
@@ -369,7 +373,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[70]"
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[95]"
               style={{
                 backdropFilter: 'blur(8px) saturate(120%)',
                 WebkitBackdropFilter: 'blur(8px) saturate(120%)',
@@ -377,17 +381,20 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               onClick={closeMobileMenu}
             />
 
-            {/* Mobile Menu Dropdown - Fixed to viewport */}
+            {/* Mobile Menu Dropdown - Viewport positioned */}
             <motion.div
               ref={mobileMenuRef}
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed top-16 left-0 right-0 bottom-0 bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl z-[80] overflow-y-auto w-screen"
+              className="fixed inset-0 bg-slate-900/70 backdrop-blur-xl shadow-2xl z-[105] overflow-y-auto"
               style={{
                 backdropFilter: 'blur(20px) saturate(180%)',
                 WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+                paddingTop: '4rem', // Space for fixed navigation
+                height: '100vh',
+                width: '100vw'
               }}
             >
               {/* Mobile Header - No duplicate X button */}

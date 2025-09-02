@@ -152,4 +152,17 @@
     outline: 2px solid hsl(var(--primary)) !important;
     outline-offset: 2px !important;
   }
+
+  /* Mobile menu scroll lock */
+  body.mobile-menu-open {
+    overflow: hidden !important;
+    position: relative !important;
+    touch-action: pan-y !important; /* Allow touch actions only for vertical panning in menu */
+  }
+
+  /* Ensure mobile menu button remains interactive */
+  body.mobile-menu-open button[aria-label="Toggle navigation menu"] {
+    touch-action: manipulation !important;
+    pointer-events: auto !important;
+  }
 }
