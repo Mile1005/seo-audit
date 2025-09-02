@@ -3,33 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Critical performance optimizations for mobile */
-@media (max-width: 768px) {
-  /* Reduce animations on mobile to improve performance */
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-  
-  /* Optimize heavy effects on mobile */
-  .blur-3xl {
-    filter: blur(20px) !important;
-  }
-  
-  /* Simplify gradients on mobile */
-  .bg-gradient-to-br,
-  .bg-gradient-to-r {
-    background: rgb(2 6 23) !important; /* fallback solid color */
-  }
-  
-  /* Reduce transform complexity */
-  .transform-gpu {
-    transform: none !important;
-  }
-}
-
 @layer base {
   :root {
     --background: 222.2 84% 4.9%;

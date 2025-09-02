@@ -2,66 +2,42 @@ import { HeroSection } from "@/components/hero/hero-section"
 import { TrustLogos } from "@/components/hero/trust-logos"
 import { MainLayout } from "@/components/layout/main-layout"
 import { generateSEOMeta, generateStructuredData, pageSEO } from "@/lib/seo"
-import { MobileOptimizedLoader, MobilePerformanceWrapper } from "@/components/performance/mobile-optimized-loader"
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { headers } from 'next/headers'
 
-// Dynamic hero with mobile optimization
-const OptimizedHeroSection = dynamic(() => import("@/components/hero/mobile-optimized-hero").then(mod => ({ default: mod.MobileOptimizedHero })), {
-  loading: () => (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-                Professional SEO
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Audit Tool
-              </span>
-            </h1>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-})
-
-// Ultra-aggressive mobile optimizations - only load above-the-fold initially
+// Lazy load heavy components for better Core Web Vitals
 const EmailCaptureInline = dynamic(() => import("@/components/lead/email-capture-inline").then(mod => ({ default: mod.EmailCaptureInline })), {
   loading: () => <div className="h-16 bg-gray-100 dark:bg-gray-800 animate-pulse rounded" />
 })
 
 const ExitIntentModal = dynamic(() => import("@/components/lead/exit-intent-modal").then(mod => ({ default: mod.ExitIntentModal })), {
-  loading: () => null
+  loading: () => <div className="h-8" />
 })
 
 const ContentGate = dynamic(() => import("@/components/lead/content-gate").then(mod => ({ default: mod.ContentGate })), {
-  loading: () => null
+  loading: () => <div className="h-8" />
 })
 
-// Heavy components with mobile-optimized loading
+// Heavy components
 const DynamicFeaturesShowcase = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicFeaturesShowcase })), {
-  loading: () => <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg" />
+  loading: () => <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading features...</span></div>
 })
 
 const DynamicInteractiveDemo = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicInteractiveDemo })), {
-  loading: () => <div className="h-96 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg" />
+  loading: () => <div className="h-96 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading demo...</span></div>
 })
 
 const DynamicTestimonialsCarousel = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicTestimonialsCarousel })), {
-  loading: () => <div className="h-48 bg-gray-50 animate-pulse rounded-lg" />
+  loading: () => <div className="h-48 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading testimonials...</span></div>
 })
 
 const DynamicROICalculator = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicROICalculator })), {
-  loading: () => <div className="h-80 bg-gray-50 animate-pulse rounded-lg" />
+  loading: () => <div className="h-80 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading calculator...</span></div>
 })
 
 const DynamicPricingCards = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicPricingCards })), {
-  loading: () => <div className="h-64 bg-gray-50 animate-pulse rounded-lg" />
+  loading: () => <div className="h-64 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading pricing...</span></div>
 })
 
 // SEO metadata for the homepage
@@ -166,39 +142,28 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <OptimizedHeroSection />
+      <HeroSection />
       <TrustLogos />
-      
-      {/* Mobile-optimized component loading */}
-      <MobileOptimizedLoader priority="medium" threshold={0.1} rootMargin="100px">
-        <DynamicFeaturesShowcase />
-      </MobileOptimizedLoader>
-      
-      <MobileOptimizedLoader priority="low" threshold={0.1} rootMargin="50px">
-        <DynamicInteractiveDemo />
-      </MobileOptimizedLoader>
+      <DynamicFeaturesShowcase />
+      <DynamicInteractiveDemo />
       
       {/* Mid-page Email Capture */}
       <section className="py-16 bg-slate-950">
         <div className="container mx-auto px-4">
-          <MobilePerformanceWrapper>
-            <EmailCaptureInline
-              source="mid-page"
-              variant="accent"
-              className="max-w-lg mx-auto"
-              offer={{
-                title: "Free SEO Checklist",
-                description: "47 proven optimization points",
-                icon: <div className="text-blue-400">📋</div>
-              }}
-            />
-          </MobilePerformanceWrapper>
+          <EmailCaptureInline
+            source="mid-page"
+            variant="accent"
+            className="max-w-lg mx-auto"
+            offer={{
+              title: "Free SEO Checklist",
+              description: "47 proven optimization points",
+              icon: <div className="text-blue-400">📋</div>
+            }}
+          />
         </div>
       </section>
 
-      <MobileOptimizedLoader priority="low" threshold={0.1}>
-        <DynamicTestimonialsCarousel />
-      </MobileOptimizedLoader>
+      <DynamicTestimonialsCarousel />
       
       {/* Content Gate Demo */}
       <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-950">
@@ -218,40 +183,29 @@ export default function Home() {
             </p>
           </div>
           
-          <MobilePerformanceWrapper>
-            <ContentGate content={sampleContent} />
-          </MobilePerformanceWrapper>
+          <ContentGate content={sampleContent} />
         </div>
       </section>
 
-      <MobileOptimizedLoader priority="low" threshold={0.1}>
-        <DynamicROICalculator />
-      </MobileOptimizedLoader>
-      
-      <MobileOptimizedLoader priority="low" threshold={0.1}>
-        <DynamicPricingCards />
-      </MobileOptimizedLoader>
+      <DynamicROICalculator />
+      <DynamicPricingCards />
       
       {/* Footer Email Capture */}
       <section className="py-16 bg-slate-900">
         <div className="container mx-auto px-4">
-          <MobilePerformanceWrapper>
-            <EmailCaptureInline
-              source="footer"
-              title="Don't Miss SEO Updates"
-              description="Join 10,000+ marketers getting weekly SEO insights and tips"
-              ctaText="Subscribe Now"
-              variant="minimal"
-              className="max-w-2xl mx-auto"
-            />
-          </MobilePerformanceWrapper>
+          <EmailCaptureInline
+            source="footer"
+            title="Don't Miss SEO Updates"
+            description="Join 10,000+ marketers getting weekly SEO insights and tips"
+            ctaText="Subscribe Now"
+            variant="minimal"
+            className="max-w-2xl mx-auto"
+          />
         </div>
       </section>
 
       {/* Exit Intent Modal */}
-      <MobilePerformanceWrapper>
-        <ExitIntentModal isEnabled={true} />
-      </MobilePerformanceWrapper>
+      <ExitIntentModal isEnabled={true} />
 
       {/* Structured Data */}
       <script 
