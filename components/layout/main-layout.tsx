@@ -40,7 +40,7 @@ export function MainLayout({ children, className = "" }: MainLayoutProps) {
         <AdaptiveNavigation />
         
         {/* Main Content with top padding for fixed nav */}
-        <main className="pt-16">
+        <main id="main-content" className="pt-16" role="main">
           {children}
         </main>
         

@@ -121,7 +121,7 @@ export function EmailCaptureInline({
             {offer.icon || <Download className="w-5 h-5 text-blue-400" />}
           </div>
           <div className="flex-1">
-            <h4 className="font-semibold text-white text-sm">{offer.title}</h4>
+            <div className="font-semibold text-white text-sm">{offer.title}</div>
             <p className="text-xs text-gray-400">{offer.description}</p>
           </div>
         </div>
@@ -154,7 +154,9 @@ export function EmailCaptureInline({
               focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500
               ${styles.input}
             `}
+            aria-label={placeholder}
             aria-describedby="email-error"
+            aria-invalid={result && !result.success ? 'true' : 'false'}
             disabled={isSubmitting}
           />
         </div>

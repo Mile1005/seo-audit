@@ -181,8 +181,12 @@ export default function PricingPage() {
                   onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
                   className={`relative w-16 h-8 rounded-full transition-colors duration-300 ${
                     billingCycle === 'yearly' ? 'bg-gradient-to-r from-purple-600 to-pink-600' : 'bg-slate-600'
-                  }`}
+                  } p-2`}
+                  style={{ minWidth: '44px', minHeight: '44px' }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label={`Switch to ${billingCycle === 'monthly' ? 'yearly' : 'monthly'} billing`}
+                  role="switch"
+                  aria-checked={billingCycle === 'yearly'}
                 >
                   <motion.div
                     className="absolute top-1 w-6 h-6 bg-white rounded-full shadow-lg"
