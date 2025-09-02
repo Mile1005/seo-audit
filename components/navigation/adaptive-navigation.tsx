@@ -182,37 +182,37 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
   // Handle mobile menu focus trap and touch events
   useEffect(() => {
     if (isMobileMenuOpen) {
-      // Prevent body scroll and horizontal overflow
+      // Store current scroll position
+      const scrollY = window.scrollY
+      
+      // Prevent body scroll without changing position
       document.body.style.overflow = 'hidden'
-      document.body.style.position = 'fixed'
-      document.body.style.width = '100%'
-      document.body.style.top = `-${window.scrollY}px`
+      document.body.style.height = '100vh'
       
       // Focus first focusable element
       const firstFocusable = mobileMenuRef.current?.querySelector(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
       ) as HTMLElement
       firstFocusable?.focus()
+
+      // Store scroll position for restoration
+      document.body.dataset.scrollY = scrollY.toString()
     } else {
-      // Restore body scroll and remove positioning
-      const scrollY = document.body.style.top
+      // Restore body scroll without changing scroll position
       document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.width = ''
-      document.body.style.top = ''
+      document.body.style.height = ''
       
       // Restore scroll position
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1)
-      }
+      const scrollY = parseInt(document.body.dataset.scrollY || '0')
+      window.scrollTo(0, scrollY)
+      delete document.body.dataset.scrollY
     }
 
     return () => {
       // Cleanup on unmount
       document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.body.style.width = ''
-      document.body.style.top = ''
+      document.body.style.height = ''
+      delete document.body.dataset.scrollY
     }
   }, [isMobileMenuOpen])
 
