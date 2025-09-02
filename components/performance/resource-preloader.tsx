@@ -18,23 +18,7 @@ interface ResourcePreloaderProps {
 
 // Critical resources that should be preloaded immediately
 const CRITICAL_RESOURCES: PreloadResource[] = [
-  // Fonts
-  {
-    href: '/_next/static/fonts/inter-var.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-    fetchPriority: 'high'
-  },
-  
-  // Critical CSS
-  {
-    href: '/_next/static/css/app.css',
-    as: 'style',
-    fetchPriority: 'high'
-  },
-  
-  // Hero images
+  // Hero images (only preload existing ones)
   {
     href: '/images/hero/hero-laptop-dashboard.svg',
     as: 'image',
@@ -42,13 +26,10 @@ const CRITICAL_RESOURCES: PreloadResource[] = [
   }
 ];
 
-// DNS prefetch domains
+// DNS prefetch domains (only essential ones)
 const DNS_PREFETCH_DOMAINS = [
   'fonts.googleapis.com',
-  'fonts.gstatic.com',
-  'vercel.app',
-  'vercel.com',
-  'cdn.jsdelivr.net'
+  'fonts.gstatic.com'
 ];
 
 // Preconnect domains (more important than prefetch)
@@ -61,7 +42,7 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
   useEffect(() => {
     if (!enabled || typeof window === 'undefined') return;
 
-    // Create preload links
+    // Create preload links with error handling
     const createPreloadLink = (resource: PreloadResource) => {
       const link = document.createElement('link');
       link.rel = 'preload';
@@ -72,6 +53,11 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
       if (resource.crossOrigin) link.crossOrigin = resource.crossOrigin;
       if (resource.fetchPriority) link.setAttribute('fetchpriority', resource.fetchPriority);
       if (resource.media) link.media = resource.media;
+      
+      // Add error handling to avoid console errors
+      link.onerror = () => {
+        console.warn(`[Preloader] Failed to preload resource: ${resource.href}`);
+      };
       
       return link;
     };

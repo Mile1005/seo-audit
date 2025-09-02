@@ -62,7 +62,10 @@ export function CoreWebVitalsOptimizer() {
         });
       }
 
-      console.log(`[Web Vitals] ${metric.name}:`, Math.round(metric.value));
+      // Only log in development for debugging
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[Web Vitals] ${metric.name}:`, Math.round(metric.value));
+      }
     };
 
     // Register observers
@@ -183,12 +186,14 @@ const optimizeLCP = () => {
           lcpElement.fetchPriority = 'high';
         }
         
-        console.log('[LCP Optimizer] Image optimized:', lcpElement.src);
+        if (process.env.NODE_ENV === 'development') {
+          console.log('[LCP Optimizer] Image optimized:', lcpElement.src);
+        }
       }
       
-      // Preload LCP resource if it's not already preloaded
+      // Preload LCP resource if it's not already preloaded (only in production)
       const src = lcpElement.src || lcpElement.currentSrc;
-      if (src && !document.querySelector(`link[href="${src}"]`)) {
+      if (src && !document.querySelector(`link[href="${src}"]`) && process.env.NODE_ENV === 'production') {
         const preloadLink = document.createElement('link');
         preloadLink.rel = 'preload';
         preloadLink.as = lcpElement.tagName === 'IMG' ? 'image' : 'fetch';
@@ -264,18 +269,24 @@ const optimizeCLS = () => {
 const optimizeINP = () => {
   if (typeof window === 'undefined') return;
 
-  // Break up long tasks
+  // Break up long tasks (only warn for very long tasks in production)
   const longTaskObserver = new PerformanceObserver((list) => {
     for (const entry of list.getEntries()) {
-      console.warn('[INP Optimizer] Long task detected:', {
-        duration: Math.round(entry.duration),
-        startTime: Math.round(entry.startTime)
-      });
+      // Only warn for tasks longer than 100ms (instead of 50ms default)
+      if (entry.duration > 100) {
+        console.warn('[INP Optimizer] Long task detected:', {
+          duration: Math.round(entry.duration),
+          startTime: Math.round(entry.startTime)
+        });
+      }
     }
   });
 
   try {
-    longTaskObserver.observe({ type: 'longtask', buffered: true });
+    // Only monitor in production to reduce development noise
+    if (process.env.NODE_ENV === 'production') {
+      longTaskObserver.observe({ type: 'longtask', buffered: true });
+    }
   } catch (error) {
     console.warn('[INP Optimizer] PerformanceObserver not supported');
   }

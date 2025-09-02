@@ -1,0 +1,16 @@
+{
+  "name": "AI SEO Turbo",
+  "short_name": "SEO Turbo",
+  "description": "AI-powered SEO audit tool that provides actionable insights to boost search rankings and organic traffic",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

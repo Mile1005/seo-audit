@@ -8,10 +8,8 @@ const STATIC_ASSETS = [
   '/',
   '/manifest.json',
   '/favicon.ico',
-  '/_next/static/css/',
-  '/_next/static/chunks/',
-  '/images/hero/',
-  '/images/mockups/',
+  '/images/hero/hero-laptop-dashboard.svg',
+  '/robots.txt'
 ];
 
 // API endpoints to cache

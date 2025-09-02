@@ -1,11 +1,17 @@
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import React from "react";
 import { AuthProvider } from "../components/auth/auth-provider";
 import { PerformanceInitializer } from "../components/performance/performance-initializer";
 import { ComponentPreloader } from "../components/performance/component-preloader";
 import { ServiceWorkerProvider } from "../components/performance/service-worker-provider";
 import { ResourcePreloader } from "../components/performance/resource-preloader";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "AI SEO Turbo - AI-Powered SEO Audits That Move the Needle",
@@ -22,11 +28,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://aiseoturbo.com"),
   alternates: {
     canonical: "/",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   openGraph: {
     title: "AI SEO Turbo - AI-Powered SEO Audits",
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="manifest" href="/manifest.json" />
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-VL8V8L4G7X"></script>
         <script
@@ -108,7 +110,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PerformanceInitializer />
         <ComponentPreloader strategy="idle" />
         <ServiceWorkerProvider />
-        <ResourcePreloader resources={[]} />
+        <ResourcePreloader resources={[]} enabled={false} />
         <AuthProvider>
           {children}
         </AuthProvider>

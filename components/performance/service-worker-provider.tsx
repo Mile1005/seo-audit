@@ -19,8 +19,10 @@ export function ServiceWorkerProvider() {
   });
 
   useEffect(() => {
-    // Check if service workers are supported
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+    // Only register service worker in production
+    if (typeof window !== 'undefined' && 
+        'serviceWorker' in navigator && 
+        process.env.NODE_ENV === 'production') {
       setSwStats(prev => ({ ...prev, isSupported: true }));
       registerServiceWorker();
     }
