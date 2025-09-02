@@ -130,7 +130,7 @@ export function HeroMockup({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handlePlayToggle}
-              className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-colors duration-200"
+              className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label={isPlaying ? "Pause animation" : "Play animation"}
             >
               {isPlaying ? (
@@ -144,7 +144,7 @@ export function HeroMockup({
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={handleFullscreen}
-              className="bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition-colors duration-200"
+              className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label="View fullscreen"
             >
               <Maximize2 className="w-4 h-4" />

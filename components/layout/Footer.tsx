@@ -127,10 +127,10 @@ export default function Footer() {
               Â© 2025 AISEOTurbo. All rights reserved.
             </p>
             <div className="flex items-center space-x-6">
-              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm">
+              <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm py-2 px-1 min-h-[44px] min-w-[44px] flex items-center">
                 Privacy Policy
               </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm">
+              <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm py-2 px-1 min-h-[44px] min-w-[44px] flex items-center">
                 Terms of Service
               </Link>
             </div>

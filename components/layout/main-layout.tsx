@@ -36,11 +36,19 @@ export function MainLayout({ children, className = "" }: MainLayoutProps) {
   return (
     <VariantProvider>
       <div className={`min-h-screen bg-slate-950 ${className}`}>
+        {/* Screen reader announcements region */}
+        <div 
+          id="announcements" 
+          aria-live="polite" 
+          aria-atomic="true" 
+          className="sr-only"
+        ></div>
+        
         {/* Navigation */}
         <AdaptiveNavigation />
         
         {/* Main Content with top padding for fixed nav */}
-        <main id="main-content" className="pt-16" role="main">
+        <main id="main-content" className="pt-16" tabIndex={-1} role="main">
           {children}
         </main>
         

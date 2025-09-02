@@ -223,7 +223,7 @@ export default function SignupPage() {
                 whileTap={{ scale: 0.98 }}
                 onClick={handleGoogleSignUp}
                 disabled={loading}
-                className="w-full bg-background border-2 border-border text-foreground py-3 px-4 rounded-xl font-medium hover:border-primary hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-3 mb-6 min-h-[44px]"
+                className="w-full bg-white border-2 border-gray-300 text-gray-700 py-3 px-4 rounded-xl font-medium hover:border-blue-500 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-3 mb-6 min-h-[44px]"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -240,7 +240,7 @@ export default function SignupPage() {
                   <div className="w-full border-t border-gray-200" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-4 bg-background text-foreground font-medium">Or continue with email</span>
+                  <span className="px-4 bg-white text-gray-700 font-medium">Or continue with email</span>
                 </div>
               </div>
 
@@ -260,7 +260,7 @@ export default function SignupPage() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="pl-10 w-full px-3 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
+                      className="pl-10 w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 placeholder:text-gray-500"
                       placeholder="John Doe"
                     />
                   </div>
@@ -281,7 +281,7 @@ export default function SignupPage() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="pl-10 w-full px-3 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
+                      className="pl-10 w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 placeholder:text-gray-500"
                       placeholder="john@company.com"
                     />
                   </div>
@@ -302,7 +302,7 @@ export default function SignupPage() {
                       required
                       value={formData.password}
                       onChange={handleInputChange}
-                      className="pl-10 pr-12 w-full px-3 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
+                      className="pl-10 pr-12 w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 placeholder:text-gray-500"
                       placeholder="Minimum 8 characters"
                     />
                     <button
@@ -332,7 +332,7 @@ export default function SignupPage() {
                       required
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
-                      className="pl-10 w-full px-3 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
+                      className="pl-10 w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 placeholder:text-gray-500"
                       placeholder="Confirm your password"
                     />
                   </div>
@@ -349,7 +349,7 @@ export default function SignupPage() {
                     type="text"
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-3 border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
+                    className="w-full px-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 placeholder:text-gray-500"
                     placeholder="Your company name"
                   />
                 </div>

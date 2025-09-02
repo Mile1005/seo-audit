@@ -99,7 +99,7 @@ export function TestimonialsCarousel() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={togglePlayPause}
-                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200"
+                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label={isPlaying ? "Pause carousel" : "Play carousel"}
               >
                 {isPlaying ? (
@@ -121,7 +121,7 @@ export function TestimonialsCarousel() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={goToPrevious}
-                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200"
+                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Previous testimonial"
               >
                 <ChevronLeft className="w-5 h-5 text-white" />
@@ -131,7 +131,7 @@ export function TestimonialsCarousel() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={goToNext}
-                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200"
+                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 aria-label="Next testimonial"
               >
                 <ChevronRight className="w-5 h-5 text-white" />
