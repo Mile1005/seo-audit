@@ -1,19 +1,4 @@
-/** @type   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'next-auth'],
-    esmExternals: true,
-    // Aggressive bundle splitting for better performance
-    bundlePagesExternals: true,
-  },
-  
-  // Performance optimization
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
-    reactRemoveProperties: process.env.NODE_ENV === 'production' ? { properties: ['^data-testid$'] } : false,
-  },
-  
-  // External packages optimization  
-  serverExternalPackages: ['sharp', '@prisma/client'],).NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
   poweredByHeader: false,
@@ -25,8 +10,9 @@ const nextConfig = {
   },
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'next-auth'],
+    optimizePackageImports: ['lucide-react', 'framer-motion', '@prisma/client', 'next-auth'],
     esmExternals: true,
+    serverComponentsExternalPackages: ['@prisma/client'],
   },
   
   // Performance optimization
@@ -36,7 +22,7 @@ const nextConfig = {
   },
   
   // External packages optimization
-  serverExternalPackages: ['sharp', '@prisma/client'],
+  serverExternalPackages: ['sharp'],
   
   // Image optimization
   images: {

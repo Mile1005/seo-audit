@@ -102,52 +102,73 @@
       animation: none;
     }
   }
-
-  /* Improve form input accessibility */
-  input[type="text"],
-  input[type="email"],
-  input[type="url"],
-  input[type="password"],
-  select,
-  textarea {
-    color: hsl(var(--foreground)) !important;
-    background-color: hsl(var(--input)) !important;
-    border: 2px solid hsl(var(--border)) !important;
+}
   }
   
-  input[type="text"]::placeholder,
-  input[type="email"]::placeholder,
-  input[type="url"]::placeholder,
-  input[type="password"]::placeholder,
-  textarea::placeholder {
-    color: hsl(var(--muted-foreground)) !important;
-    opacity: 0.8;
-  }
-  
-  /* Ensure buttons have proper contrast */
-  button[type="submit"] {
-    color: hsl(var(--primary-foreground)) !important;
-    background-color: hsl(var(--primary)) !important;
-  }
-  
-  /* Better contrast for code/small text elements */
-  .bg-slate-700 {
-    background-color: hsl(var(--secondary)) !important;
-  }
-  
-  .text-gray-400 {
-    color: hsl(var(--muted-foreground)) !important;
-  }
-
   /* Ensure minimum touch target sizes for mobile accessibility */
   @media (max-width: 768px) {
     button,
     a,
+    input[type="submit"],
     input[type="button"],
-    input[type="submit"] {
-      min-height: 44px;
-      min-width: 44px;
-      padding: 12px;
+    [role="button"],
+    [role="link"] {
+      min-width: 44px !important;
+      min-height: 44px !important;
+      padding: 8px !important;
     }
+    
+    /* Special handling for inline buttons */
+    button.inline,
+    a.inline {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    /* Improve small text visibility */
+    .text-xs {
+      color: hsl(var(--foreground)) !important;
+      background-color: hsl(var(--muted)) !important;
+      padding: 2px 4px !important;
+      border-radius: 4px !important;
+    }
+  }
+  
+  /* Universal color contrast fixes - More aggressive approach */
+  /* REMOVED: Aggressive overrides that destroyed the design */
+  
+  /* Keep only minimal, specific fixes for accessibility without destroying design */
+  .text-blue-600 {
+    text-decoration: underline !important;
+    text-underline-offset: 2px !important;
+    text-decoration-thickness: 1px !important;
+  }
+
+  .text-blue-600:hover {
+    text-decoration-thickness: 2px !important;
+  }
+
+  /* Fix scrollable table accessibility */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .overflow-x-auto:focus {
+    outline: 2px solid hsl(var(--primary)) !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Mobile menu scroll lock */
+  body.mobile-menu-open {
+    overflow: hidden !important;
+    position: relative !important;
+    touch-action: pan-y !important; /* Allow touch actions only for vertical panning in menu */
+  }
+
+  /* Ensure mobile menu button remains interactive */
+  body.mobile-menu-open button[aria-label="Toggle navigation menu"] {
+    touch-action: manipulation !important;
+    pointer-events: auto !important;
   }
 }
