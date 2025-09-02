@@ -29,7 +29,11 @@
     "perf:audit": "npx lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json",
     "perf:budget": "npx bundlesize",
     "lhci": "lhci autorun",
-    "audit": "npm audit --audit-level=high"
+    "audit": "npm audit --audit-level=high",
+    "mobile:audit": "npx lighthouse http://localhost:3000 --form-factor=mobile --only-categories=performance --view",
+    "mobile:optimize": "node scripts/mobile-optimizer.js",
+    "mobile:test": "npm run build && npm run mobile:audit",
+    "perf:mobile": "npm run build && npx lighthouse http://localhost:3000 --form-factor=mobile --output=json --output-path=./mobile-lighthouse.json"
   },
   "browserslist": [
     "last 1 Chrome versions",

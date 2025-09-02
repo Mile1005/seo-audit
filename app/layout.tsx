@@ -5,7 +5,8 @@ import { AuthProvider } from "../components/auth/auth-provider";
 import { PerformanceInitializer } from "../components/performance/performance-initializer";
 import { ComponentPreloader } from "../components/performance/component-preloader";
 import { ServiceWorkerProvider } from "../components/performance/service-worker-provider";
-import { ResourcePreloader } from "../components/performance/resource-preloader";
+import { ResourcePreloader } from "../components/performance/resource-preloader-optimized";
+import { CSSOptimizer } from "../components/performance/css-optimizer";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -89,18 +90,58 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VL8V8L4G7X"></script>
+        
+        {/* DNS prefetch for critical domains */}
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        
+        {/* Preconnect for analytics (higher priority than prefetch) */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        
+        {/* Delayed Google Analytics - Load after page is interactive */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-VL8V8L4G7X');
+              
+              // Defer analytics loading until after page is interactive
+              function loadAnalytics() {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-VL8V8L4G7X';
+                document.head.appendChild(script);
+                
+                script.onload = function() {
+                  gtag('js', new Date());
+                  gtag('config', 'G-VL8V8L4G7X', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    // Reduce data collection for better performance
+                    anonymize_ip: true,
+                    send_page_view: false // Manual control
+                  });
+                  
+                  // Send initial pageview
+                  gtag('event', 'page_view', {
+                    page_title: document.title,
+                    page_location: window.location.href,
+                    page_path: window.location.pathname
+                  });
+                };
+              }
+              
+              // Load analytics after page is interactive
+              if (document.readyState === 'complete') {
+                loadAnalytics();
+              } else {
+                window.addEventListener('load', loadAnalytics);
+              }
             `,
           }}
         />
+        
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -115,9 +156,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to main content
         </a>
         <PerformanceInitializer />
+        <CSSOptimizer />
         <ComponentPreloader strategy="idle" />
         <ServiceWorkerProvider />
-        <ResourcePreloader resources={[]} enabled={false} />
+        <ResourcePreloader resources={[]} enabled={true} />
         <AuthProvider>
           {children}
         </AuthProvider>

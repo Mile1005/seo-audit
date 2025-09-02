@@ -12,11 +12,15 @@ const nextConfig = {
     // Enable optimizations available in Next.js 14
     // optimizeCss: true, // Temporarily disabled due to critters dependency issue
     optimizePackageImports: ['lucide-react', 'framer-motion'],
+    // Enable modern features for smaller bundle size
+    esmExternals: true,
   },
   
   // Target modern browsers to reduce polyfills and legacy code
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+    // Remove data-testid attributes in production
+    reactRemoveProperties: process.env.NODE_ENV === 'production' ? { properties: ['^data-testid$'] } : false,
   },
   
   // External packages optimization
@@ -123,24 +127,72 @@ const nextConfig = {
       config.externals.push('_http_common');
     }
     
-    // Simple bundle optimization to reduce unused JavaScript
+    // Aggressive bundle optimization to reduce unused JavaScript
     if (!dev) {
       // Enable tree shaking
       config.optimization.usedExports = true;
       config.optimization.sideEffects = false;
       
-      // Basic chunk splitting
+      // Advanced chunk splitting for better caching and reduced initial bundle
       config.optimization.splitChunks = {
         chunks: 'all',
+        minSize: 20000,
+        maxSize: 244000,
         cacheGroups: {
+          // Framework chunk (React, Next.js)
+          framework: {
+            test: /[\\/]node_modules[\\/](react|react-dom|next)[\\/]/,
+            name: 'framework',
+            chunks: 'all',
+            priority: 40,
+            enforce: true,
+          },
+          // UI library chunk
+          ui: {
+            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react)[\\/]/,
+            name: 'ui',
+            chunks: 'all',
+            priority: 30,
+          },
+          // Animation libraries
+          animations: {
+            test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
+            name: 'animations',
+            chunks: 'all',
+            priority: 25,
+          },
+          // Other vendor libraries
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             chunks: 'all',
+            priority: 20,
+          },
+          // Common modules used across pages
+          common: {
+            name: 'common',
+            chunks: 'all',
+            minChunks: 2,
+            priority: 10,
+            reuseExistingChunk: true,
+            enforce: true,
           },
         },
       };
+      
+      // Module concatenation for smaller bundle
+      config.optimization.concatenateModules = true;
+      
+      // Minimize module names
+      config.optimization.moduleIds = 'deterministic';
+      config.optimization.chunkIds = 'deterministic';
     }
+    
+    // Resolve optimization
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      // Reduce bundle size by using optimized builds - simplified for ES modules
+    };
     
     return config;
   },

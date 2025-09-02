@@ -42,12 +42,31 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
   useEffect(() => {
     if (!enabled || typeof window === 'undefined') return;
 
+    // Mobile-optimized resource loading strategy
+    const isMobile = window.innerWidth <= 768;
+    const connection = (navigator as any).connection;
+    const isSlowConnection = connection && (connection.effectiveType === '2g' || connection.effectiveType === '3g');
+
+    // Reduce resource loading on mobile and slow connections
+    if (isMobile || isSlowConnection) {
+      // Only load critical resources on mobile/slow connections
+      const criticalOnly = CRITICAL_RESOURCES.slice(0, 1); // Further reduce
+      criticalOnly.forEach(resource => createPreloadLink(resource));
+      return;
+    }
+
     // Create preload links with error handling
     const createPreloadLink = (resource: PreloadResource) => {
+      // Avoid duplicate preload links
+      if (document.querySelector(`link[rel="preload"][href="${resource.href}"]`)) {
+        return;
+      }
+
       const link = document.createElement('link');
       link.rel = 'preload';
       link.href = resource.href;
       link.as = resource.as;
+      link.dataset.autoPreload = 'true';
       
       if (resource.type) link.type = resource.type;
       if (resource.crossOrigin) link.crossOrigin = resource.crossOrigin;
@@ -83,12 +102,14 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
     
     // Add critical resources first
     CRITICAL_RESOURCES.forEach(resource => {
-      fragment.appendChild(createPreloadLink(resource));
+      const link = createPreloadLink(resource);
+      if (link) fragment.appendChild(link);
     });
     
     // Add custom resources
     resources.forEach(resource => {
-      fragment.appendChild(createPreloadLink(resource));
+      const link = createPreloadLink(resource);
+      if (link) fragment.appendChild(link);
     });
     
     // Add DNS prefetch links

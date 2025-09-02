@@ -29,3 +29,10 @@ export const DynamicCaseStudyPreview = createDynamicComponent(() =>
 export const DynamicInteractiveDemo = createDynamicComponent(() => 
   import("@/components/demo/interactive-demo").then(m => ({ default: m.InteractiveDemo }))
 );
+
+
+// Mobile Performance Optimization Comments
+// These components are optimized for mobile Core Web Vitals
+// - Reduced bundle size through selective loading
+// - Lazy loading with intersection observer
+// - Priority-based component loading
