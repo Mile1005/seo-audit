@@ -1,20 +1,43 @@
 import { HeroSection } from "@/components/hero/hero-section"
 import { TrustLogos } from "@/components/hero/trust-logos"
-import { EmailCaptureInline } from "@/components/lead/email-capture-inline"
-import { ExitIntentModal } from "@/components/lead/exit-intent-modal"
-import { ContentGate } from "@/components/lead/content-gate"
 import { MainLayout } from "@/components/layout/main-layout"
 import { generateSEOMeta, generateStructuredData, pageSEO } from "@/lib/seo"
 import { Metadata } from 'next'
+import dynamic from 'next/dynamic'
 
-// Dynamic imports for heavy components to improve initial page load
-import { 
-  DynamicFeaturesShowcase,
-  DynamicInteractiveDemo,
-  DynamicTestimonialsCarousel,
-  DynamicROICalculator,
-  DynamicPricingCards 
-} from "@/components/dynamic/heavy-components"
+// Lazy load heavy components for better Core Web Vitals (with SSR enabled for server components)
+const EmailCaptureInline = dynamic(() => import("@/components/lead/email-capture-inline").then(mod => ({ default: mod.EmailCaptureInline })), {
+  loading: () => <div className="h-16 bg-gray-100 animate-pulse rounded" />
+})
+
+const ExitIntentModal = dynamic(() => import("@/components/lead/exit-intent-modal").then(mod => ({ default: mod.ExitIntentModal })), {
+  loading: () => <div className="h-8" />
+})
+
+const ContentGate = dynamic(() => import("@/components/lead/content-gate").then(mod => ({ default: mod.ContentGate })), {
+  loading: () => <div className="h-8" />
+})
+
+// Extremely lazy load heavy showcase components - only when needed
+const DynamicFeaturesShowcase = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicFeaturesShowcase })), {
+  loading: () => <div className="h-64 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading features...</span></div>
+})
+
+const DynamicInteractiveDemo = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicInteractiveDemo })), {
+  loading: () => <div className="h-96 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading demo...</span></div>
+})
+
+const DynamicTestimonialsCarousel = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicTestimonialsCarousel })), {
+  loading: () => <div className="h-48 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading testimonials...</span></div>
+})
+
+const DynamicROICalculator = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicROICalculator })), {
+  loading: () => <div className="h-80 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading calculator...</span></div>
+})
+
+const DynamicPricingCards = dynamic(() => import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicPricingCards })), {
+  loading: () => <div className="h-64 bg-gray-50 animate-pulse rounded-lg flex items-center justify-center"><span className="text-gray-400">Loading pricing...</span></div>
+})
 
 // SEO metadata for the homepage
 export const metadata: Metadata = generateSEOMeta(pageSEO.home)

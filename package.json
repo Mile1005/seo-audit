@@ -59,6 +59,7 @@
     "cheerio": "^1.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "critters": "^0.0.25",
     "dotenv": "^16.6.1",
     "framer-motion": "^12.23.12",
     "googleapis": "^155.0.1",

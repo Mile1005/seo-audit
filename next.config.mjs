@@ -1,55 +1,42 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false, // Disable for faster dev startup
+  reactStrictMode: false,
   poweredByHeader: false,
   eslint: {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true, // For development speed
+    ignoreBuildErrors: true,
   },
   experimental: {
-    // Enable optimizations available in Next.js 14
-    // optimizeCss: true, // Temporarily disabled due to critters dependency issue
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-    // Enable modern features for smaller bundle size
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', 'framer-motion', 'next-auth'],
     esmExternals: true,
   },
   
-  // Target modern browsers to reduce polyfills and legacy code
+  // Performance optimization
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-    // Remove data-testid attributes in production
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
     reactRemoveProperties: process.env.NODE_ENV === 'production' ? { properties: ['^data-testid$'] } : false,
   },
   
   // External packages optimization
-  serverExternalPackages: ['sharp'],
+  serverExternalPackages: ['sharp', '@prisma/client'],
   
-  // Image optimization configuration
+  // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000, // 1 year cache
+    minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.vercel.app',
-      },
-      {
-        protocol: 'https', 
-        hostname: '**.amazonaws.com',
-      }
-    ],
   },
 
-  // Performance optimizations
+  // Performance
   compress: true,
   
-  // Headers for better caching
+  // Security and caching headers
   async headers() {
     return [
       {
@@ -69,41 +56,7 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/manifest.json',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/manifest+json',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/css/(.*)',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'text/css',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      {
-        source: '/images/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
+      // Cache static assets aggressively
       {
         source: '/_next/static/(.*)',
         headers: [
@@ -113,89 +66,42 @@ const nextConfig = {
           },
         ],
       },
-    ];
+    ]
   },
-  
-  // Force fresh deployment - clear cache
-  generateBuildId: async () => {
-    return `build-${Date.now()}`;
-  },
-  
-  // Enhanced webpack config for performance
-  webpack: (config, { isServer, dev }) => {
-    if (isServer) {
-      config.externals.push('_http_common');
-    }
-    
-    // Aggressive bundle optimization to reduce unused JavaScript
-    if (!dev) {
-      // Enable tree shaking
-      config.optimization.usedExports = true;
-      config.optimization.sideEffects = false;
-      
-      // Advanced chunk splitting for better caching and reduced initial bundle
+
+  // Build optimization
+  webpack: (config, { dev, isServer }) => {
+    if (!dev && !isServer) {
+      // Aggressive bundle splitting for performance
       config.optimization.splitChunks = {
         chunks: 'all',
-        minSize: 20000,
-        maxSize: 244000,
+        maxSize: 200000, // Smaller chunks for better loading
         cacheGroups: {
-          // Framework chunk (React, Next.js)
           framework: {
-            test: /[\\/]node_modules[\\/](react|react-dom|next)[\\/]/,
-            name: 'framework',
             chunks: 'all',
+            name: 'framework',
+            test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
             priority: 40,
             enforce: true,
           },
-          // UI library chunk
-          ui: {
-            test: /[\\/]node_modules[\\/](@radix-ui|lucide-react)[\\/]/,
-            name: 'ui',
-            chunks: 'all',
-            priority: 30,
-          },
-          // Animation libraries
-          animations: {
-            test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
-            name: 'animations',
-            chunks: 'all',
-            priority: 25,
-          },
-          // Other vendor libraries
-          vendor: {
+          lib: {
             test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
+            name: 'lib',
+            priority: 30,
+            minChunks: 1,
+            reuseExistingChunk: true,
+          },
+          commons: {
+            name: 'commons',
+            minChunks: 2,
             priority: 20,
           },
-          // Common modules used across pages
-          common: {
-            name: 'common',
-            chunks: 'all',
-            minChunks: 2,
-            priority: 10,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
         },
-      };
-      
-      // Module concatenation for smaller bundle
-      config.optimization.concatenateModules = true;
-      
-      // Minimize module names
-      config.optimization.moduleIds = 'deterministic';
-      config.optimization.chunkIds = 'deterministic';
+      }
     }
-    
-    // Resolve optimization
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      // Reduce bundle size by using optimized builds - simplified for ES modules
-    };
-    
-    return config;
-  },
-};
 
-export default nextConfig;
+    return config
+  },
+}
+
+export default nextConfig
