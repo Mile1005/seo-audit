@@ -8,13 +8,17 @@ import { ApiErrorBoundary } from '../../../components/ui/error-boundary'
 import { useFormSubmission } from '../../../hooks/use-api'
 import { api, AuditResult, ApiResponse } from '../../../lib/api-client'
 
-// Dynamic imports for feature components
-import { 
-  DynamicAuditCategories,
-  DynamicAuditPreview,
-  DynamicTechnicalBreakdown,
-  DynamicResultsShowcase 
-} from '../../../components/dynamic/feature-components'
+// Dynamic imports for feature components - temporarily using static imports for build stability
+import AuditCategories from '../../../components/features/seo-audit/audit-categories'
+import AuditPreview from '../../../components/features/seo-audit/audit-preview'
+import TechnicalBreakdown from '../../../components/features/seo-audit/technical-breakdown'
+import ResultsShowcase from '../../../components/features/seo-audit/results-showcase'
+
+// Temporary aliases for compatibility
+const DynamicAuditCategories = AuditCategories
+const DynamicAuditPreview = AuditPreview
+const DynamicTechnicalBreakdown = TechnicalBreakdown
+const DynamicResultsShowcase = ResultsShowcase
 
 // SEO Audit Result Interface
 interface SEOAuditResult {

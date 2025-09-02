@@ -9,9 +9,8 @@ const nextConfig = {
     ignoreBuildErrors: true, // For development speed
   },
   experimental: {
-    // Enable optimizations available in Next.js 14+
-    // optimizeCss: true, // Temporarily disabled due to critters dependency issue
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    // Keep only essential optimizations for compatibility
+    optimizePackageImports: ['lucide-react'],
   },
   
   // External packages optimization
@@ -128,7 +127,7 @@ const nextConfig = {
       config.optimization.splitChunks = {
         chunks: 'all',
         minSize: 20000,
-        maxSize: 244000,
+        maxSize: 200000, // Reduced max size to prevent build issues
         cacheGroups: {
           default: {
             minChunks: 2,
@@ -140,7 +139,7 @@ const nextConfig = {
             name: 'vendors',
             priority: -10,
             chunks: 'all',
-            maxSize: 244000, // Split large vendor chunks
+            maxSize: 200000, // Reduced to prevent lambda size issues
           },
           // Split React libraries
           react: {
@@ -149,36 +148,15 @@ const nextConfig = {
             chunks: 'all',
             priority: 10,
           },
-          // Split animation libraries
-          animations: {
-            test: /[\\/]node_modules[\\/](framer-motion|@emotion)[\\/]/,
-            name: 'animations',
-            chunks: 'all',
-            priority: 5,
-          },
-          // Split UI libraries
-          ui: {
-            test: /[\\/]node_modules[\\/](lucide-react|@headlessui)[\\/]/,
-            name: 'ui-vendor',
-            chunks: 'all',
-            priority: 5,
-          },
         },
       };
       
       // Enable module concatenation for better tree shaking
       config.optimization.concatenateModules = true;
       
-      // Better dead code elimination
+      // Better dead code elimination - but less aggressive
       config.optimization.innerGraph = true;
       config.optimization.providedExports = true;
-      
-      // Remove development-only code
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        // Remove development modules in production
-        'framer-motion/dev': false,
-      };
     }
     
     return config;
