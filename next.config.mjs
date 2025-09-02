@@ -140,16 +140,6 @@ const nextConfig = {
           },
         },
       };
-      
-      // Exclude polyfills for modern browsers
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'core-js': false,
-        'regenerator-runtime': false,
-      };
-      
-      // Set target for modern browsers
-      config.target = 'web';
     }
     
     return config;

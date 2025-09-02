@@ -32,10 +32,10 @@
     "audit": "npm audit --audit-level=high"
   },
   "browserslist": [
-    "chrome >= 91",
-    "firefox >= 90", 
-    "safari >= 14",
-    "edge >= 91"
+    "last 1 Chrome versions",
+    "last 1 Firefox versions",
+    "last 1 Edge versions",
+    "last 1 Safari versions"
   ],
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
