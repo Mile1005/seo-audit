@@ -16,6 +16,7 @@ import {
   Plus
 } from "lucide-react";
 import { Button } from "../../ui/button";
+import { handleCTAClick } from "@/lib/cta-utils";
 
 export default function GapAnalysis() {
   const [selectedCompetitor, setSelectedCompetitor] = useState("semrush.com");
@@ -399,11 +400,18 @@ export default function GapAnalysis() {
               personalized action plan to capture this missed traffic.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg">
+              <Button 
+                size="lg"
+                onClick={() => handleCTAClick('START_AUDIT', 'Generate Action Plan', 'gap-analysis')}
+              >
                 <Zap className="w-4 h-4 mr-2" />
                 Generate Action Plan
               </Button>
-              <Button variant="outline" size="lg">
+              <Button 
+                variant="outline" 
+                size="lg"
+                onClick={() => handleCTAClick('FEATURES', 'Prioritize Opportunities', 'gap-analysis')}
+              >
                 <Target className="w-4 h-4 mr-2" />
                 Prioritize Opportunities
               </Button>

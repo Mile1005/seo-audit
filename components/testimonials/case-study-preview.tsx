@@ -3,6 +3,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, TrendingUp, Clock } from "lucide-react"
+import { handleCTAClick } from "@/lib/cta-utils"
 import { type Testimonial } from "../../data/testimonials"
 
 interface CaseStudyPreviewProps {
@@ -104,7 +105,8 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
       </div>
 
       {/* CTA */}
-      <motion.button
+      <motion.a
+        href="/blog"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className="
@@ -112,14 +114,14 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
           text-white rounded-lg py-3 px-4 flex items-center justify-center space-x-2 
           transition-all duration-200 group-hover:bg-purple-500/10
         "
-        onClick={() => {
-          // Placeholder - in a real app this would navigate to the case study
-          console.log(`Navigate to: ${caseStudy.link}`)
+        onClick={(e) => {
+          e.preventDefault()
+          handleCTAClick('/blog', 'Read Full Case Study', 'case-study-preview')
         }}
       >
         <span className="font-medium">Read Full Case Study</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-      </motion.button>
+      </motion.a>
     </motion.div>
   )
 }

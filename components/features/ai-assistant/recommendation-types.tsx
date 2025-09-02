@@ -16,6 +16,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Button } from "../../ui/button";
+import { handleCTAClick } from "@/lib/cta-utils";
 
 export default function RecommendationTypes() {
   const [activeCategory, setActiveCategory] = useState("technical");
@@ -322,9 +323,11 @@ export default function RecommendationTypes() {
                         Copy Code
                       </Button>
                     </div>
-                    <pre className="text-sm text-gray-300 overflow-x-auto">
-                      <code>{(rec as any).codeSnippet}</code>
-                    </pre>
+                    <div className="overflow-x-auto max-w-full">
+                      <pre className="text-sm text-gray-300 whitespace-pre-wrap break-words min-w-0">
+                        <code className="block">{(rec as any).codeSnippet}</code>
+                      </pre>
+                    </div>
                   </div>
                 )}
 
@@ -357,10 +360,17 @@ export default function RecommendationTypes() {
                     <span>Estimated completion: {rec.timeframe}</span>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Button variant="outline" size="sm">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => handleCTAClick('FEATURES', 'View Details', 'ai-recommendations')}
+                    >
                       View Details
                     </Button>
-                    <Button size="sm">
+                    <Button 
+                      size="sm"
+                      onClick={() => handleCTAClick('START_AUDIT', 'Implement Now', 'ai-recommendations')}
+                    >
                       <Zap className="w-3 h-3 mr-1" />
                       Implement Now
                     </Button>

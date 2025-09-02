@@ -174,14 +174,19 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
       setIsScrolled(window.scrollY > 20)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    // Use passive listeners for better performance and ensure mobile compatibility
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Handle mobile menu focus trap
+  // Handle mobile menu focus trap and touch events
   useEffect(() => {
     if (isMobileMenuOpen) {
+      // Prevent body scroll and horizontal overflow
       document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.width = '100%'
+      document.body.style.top = `-${window.scrollY}px`
       
       // Focus first focusable element
       const firstFocusable = mobileMenuRef.current?.querySelector(
@@ -189,11 +194,25 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
       ) as HTMLElement
       firstFocusable?.focus()
     } else {
-      document.body.style.overflow = 'unset'
+      // Restore body scroll and remove positioning
+      const scrollY = document.body.style.top
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
+      
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
     }
 
     return () => {
-      document.body.style.overflow = 'unset'
+      // Cleanup on unmount
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
+      document.body.style.top = ''
     }
   }, [isMobileMenuOpen])
 
@@ -224,7 +243,16 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
   }
 
   const handleMobileMenuToggle = () => {
+    // Force close any open dropdowns when opening mobile menu
+    setActiveDropdown(null)
     setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  // Handle touch events for better mobile compatibility
+  const handleTouchStart = (e: React.TouchEvent) => {
+    // Prevent any interference with touch events
+    e.stopPropagation()
+    handleMobileMenuToggle()
   }
 
   const closeMobileMenu = () => {
@@ -235,7 +263,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
         isScrolled 
           ? 'bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg' 
           : 'bg-transparent'
@@ -324,9 +352,11 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={handleMobileMenuToggle}
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950"
+            onTouchStart={handleTouchStart}
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 z-[90] relative"
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
+            style={{ touchAction: 'manipulation' }}
           >
             {isMobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -337,71 +367,80 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop - Fixed to viewport */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[70]"
+              style={{
+                backdropFilter: 'blur(8px) saturate(120%)',
+                WebkitBackdropFilter: 'blur(8px) saturate(120%)',
+              }}
               onClick={closeMobileMenu}
             />
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Dropdown - Fixed to viewport */}
             <motion.div
               ref={mobileMenuRef}
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-slate-900 border-l border-slate-800 shadow-2xl z-50 overflow-y-auto"
+              initial={{ opacity: 0, y: -20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="fixed top-16 left-0 right-0 bottom-0 bg-slate-900/95 backdrop-blur-xl border-b border-slate-700/50 shadow-2xl z-[80] overflow-y-auto w-screen"
+              style={{
+                backdropFilter: 'blur(20px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+              }}
             >
-              {/* Mobile Header */}
-              <div className="flex items-center justify-between p-4 border-b border-slate-800">
-                <span className="text-xl font-bold text-white">Menu</span>
+              {/* Mobile Header with X Button */}
+              <div className="flex items-center justify-between p-6 border-b border-slate-700/30 bg-slate-800/20 backdrop-blur-md">
+                <span className="text-2xl font-bold text-white drop-shadow-lg">Navigation</span>
                 <button
                   onClick={closeMobileMenu}
-                  className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="p-3 rounded-xl bg-slate-800/30 border border-slate-700/30 text-gray-300 hover:text-white hover:bg-slate-700/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-sm"
                   aria-label="Close menu"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-7 h-7" />
                 </button>
               </div>
 
               {/* Mobile Navigation Links */}
-              <div className="p-4 space-y-6">
+              <div className="p-6 space-y-6">
                 {navigationData.map((section) => (
                   <div key={section.label} className="space-y-3">
                     {section.href ? (
                       <Link
                         href={section.href}
                         onClick={closeMobileMenu}
-                        className="block text-lg font-semibold text-white hover:text-purple-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg px-3 py-2"
+                        className="block text-lg font-semibold text-white hover:text-purple-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl px-4 py-3 hover:bg-slate-800/40 hover:backdrop-blur-md border border-transparent hover:border-slate-700/30"
                       >
                         {section.label}
                       </Link>
                     ) : (
                       <>
-                        <div className="text-lg font-semibold text-white px-3 py-2">
+                        <div className="text-lg font-bold text-white px-4 py-2 border-b border-slate-700/30 pb-3 bg-slate-800/20 rounded-t-xl backdrop-blur-sm">
                           {section.label}
                         </div>
                         {section.items && (
-                          <div className="space-y-1 ml-4">
+                          <div className="space-y-1 ml-2">
                             {section.items.map((item) => (
                               <Link
                                 key={item.href}
                                 href={item.href}
                                 onClick={closeMobileMenu}
-                                className="block group"
+                                className="block group rounded-xl hover:bg-slate-800/30 hover:backdrop-blur-md transition-all duration-200 border border-transparent hover:border-slate-700/20"
                               >
-                                <div className="text-gray-300 group-hover:text-white font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg px-3 py-2">
+                                <div className="text-gray-300 group-hover:text-white font-medium px-4 py-3">
                                   {item.label}
                                 </div>
                                 {item.description && (
-                                  <div className="text-sm text-gray-500 group-hover:text-gray-400 px-3 pb-2">
+                                  <div className="text-sm text-gray-500 group-hover:text-gray-400 px-4 pb-3 -mt-2">
                                     {item.description}
                                   </div>
                                 )}
@@ -415,18 +454,18 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
                 ))}
 
                 {/* Mobile CTA Section */}
-                <div className="pt-6 border-t border-slate-800 space-y-4">
+                <div className="pt-6 border-t border-slate-700/30 space-y-4 bg-slate-800/10 rounded-xl p-6 backdrop-blur-sm">
                   <Link
                     href="/login"
                     onClick={closeMobileMenu}
-                    className="block w-full text-center py-3 px-4 border border-slate-700 rounded-lg text-gray-300 hover:text-white hover:border-slate-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="block w-full text-center py-3 px-4 border border-slate-700/50 rounded-xl text-gray-300 hover:text-white hover:border-slate-600 hover:bg-slate-800/40 hover:backdrop-blur-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/signup"
                     onClick={closeMobileMenu}
-                    className="block w-full text-center py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg"
+                    className="block w-full text-center py-3 px-4 bg-gradient-to-r from-purple-600/90 to-pink-600/90 backdrop-blur-md text-white rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-lg border border-purple-500/20"
                   >
                     Start Free Trial
                   </Link>

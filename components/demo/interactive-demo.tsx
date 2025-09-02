@@ -13,6 +13,7 @@ import {
   Zap
 } from "lucide-react"
 import { sampleAudits, progressSteps, type SampleAuditData } from "./sample-data"
+import { handleCTAClick } from "@/lib/cta-utils"
 
 type DemoStep = 'input' | 'progress' | 'results'
 
@@ -379,15 +380,20 @@ export function InteractiveDemo() {
                       This is just a preview. Get your full audit with detailed recommendations.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <motion.button
+                      <motion.a
+                        href="/dashboard"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center justify-center space-x-2"
                         id="demo-start-real-audit-cta"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleCTAClick('START_AUDIT', 'Get Your Real Audit', 'interactive-demo')
+                        }}
                       >
                         <TrendingUp className="w-4 h-4" />
                         <span>Get Your Real Audit</span>
-                      </motion.button>
+                      </motion.a>
                       
                       <motion.button
                         whileHover={{ scale: 1.05 }}

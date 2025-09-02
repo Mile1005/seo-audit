@@ -215,8 +215,8 @@ worker.postMessage(data);`,
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30 overflow-hidden">
+      <div className="max-w-7xl mx-auto overflow-hidden">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -294,7 +294,7 @@ worker.postMessage(data);`,
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-card rounded-xl border p-8"
+            className="bg-card rounded-xl border p-8 overflow-hidden"
           >
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -325,14 +325,14 @@ worker.postMessage(data);`,
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-8 overflow-hidden">
               {currentSteps.map((step, index) => (
                 <motion.div
                   key={step.step}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="flex space-x-6"
+                  className="flex space-x-6 min-w-0"
                 >
                   {/* Step Number */}
                   <div className="flex-shrink-0">
@@ -345,7 +345,7 @@ worker.postMessage(data);`,
                   </div>
 
                   {/* Step Content */}
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0 overflow-hidden">
                     <div className="flex items-center justify-between mb-2">
                       <h4 className="text-lg font-semibold text-foreground">{step.title}</h4>
                       <span className="text-sm text-muted-foreground flex items-center">
@@ -357,7 +357,7 @@ worker.postMessage(data);`,
                     <p className="text-muted-foreground mb-4">{step.description}</p>
 
                     {/* Code Block */}
-                    <div className="bg-slate-900 rounded-lg overflow-hidden mb-4">
+                    <div className="bg-slate-900 rounded-lg overflow-hidden mb-4 max-w-full">
                       <div className="flex items-center justify-between p-3 bg-slate-800">
                         <div className="flex items-center space-x-2">
                           <Terminal className="w-4 h-4 text-gray-400" />
@@ -368,9 +368,11 @@ worker.postMessage(data);`,
                           Copy
                         </Button>
                       </div>
-                      <pre className="p-4 text-sm text-gray-300 overflow-x-auto">
-                        <code>{step.code}</code>
-                      </pre>
+                      <div className="overflow-x-auto max-w-full">
+                        <pre className="p-4 text-sm text-gray-300 whitespace-pre-wrap break-words min-w-0">
+                          <code className="block">{step.code}</code>
+                        </pre>
+                      </div>
                     </div>
 
                     {/* Tools & Resources */}

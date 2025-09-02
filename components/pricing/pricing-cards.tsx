@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Check, Star, Zap, Crown, ArrowRight } from "lucide-react"
 import { pricingPlans, formatCurrency, calculateSavings, type PricingPlan } from "../../data/pricing"
+import { handleCTAClick } from "@/lib/cta-utils"
 
 export function PricingCards() {
   const [isAnnual, setIsAnnual] = useState(false)
@@ -245,7 +246,8 @@ export function PricingCards() {
                 </div>
 
                 {/* CTA Button */}
-                <motion.button
+                <motion.a
+                  href={plan.id === 'free' ? '/signup' : '/pricing'}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className={`
@@ -260,10 +262,15 @@ export function PricingCards() {
                   `}
                   data-testid={`cta-${plan.id}`}
                   aria-label={`${plan.ctaText} for ${plan.name} plan`}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const destination = plan.id === 'free' ? 'FREE_TRIAL' : 'PRICING'
+                    handleCTAClick(destination, plan.ctaText, 'pricing-cards')
+                  }}
                 >
                   <span>{plan.ctaText}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                </motion.button>
+                </motion.a>
               </div>
             </motion.div>
           ))}

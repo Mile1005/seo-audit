@@ -4,6 +4,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { FeatureCard } from "./feature-card"
 import { features } from "../../data/features"
+import { handleCTAClick } from "@/lib/cta-utils"
 
 export function FeaturesShowcase() {
   return (
@@ -84,23 +85,33 @@ export function FeaturesShowcase() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.a
+                href="/dashboard"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-cyan-500/25"
+                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-cyan-500/25 inline-flex items-center justify-center"
                 id="features-start-audit-cta"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleCTAClick('START_AUDIT', 'Start Your Free Audit', 'features-showcase')
+                }}
               >
                 Start Your Free Audit
-              </motion.button>
+              </motion.a>
               
-              <motion.button
+              <motion.a
+                href="/demo"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200 backdrop-blur-sm"
+                className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200 backdrop-blur-sm inline-flex items-center justify-center"
                 id="features-view-demo-cta"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleCTAClick('/demo', 'View Sample Report', 'features-showcase')
+                }}
               >
                 View Sample Report
-              </motion.button>
+              </motion.a>
             </div>
           </div>
         </motion.div>

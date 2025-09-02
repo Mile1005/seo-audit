@@ -1,6 +1,7 @@
 "use client"
 
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useState, useEffect } from "react"
+import { handleCTAClick } from "@/lib/cta-utils"
 import { useVariant } from '@/lib/ab'
 import { track } from '@/lib/analytics'
 
@@ -23,26 +24,34 @@ export function ABSlot({
   dataTestId 
 }: ABSlotProps) {
   const variant = useVariant(testId)
+  const [isHydrated, setIsHydrated] = useState(false)
+  
+  // Fix hydration mismatch by waiting for client-side hydration
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
   
   // Track exposure to this variant
   React.useEffect(() => {
-    if (trackExposure && typeof window !== 'undefined') {
+    if (trackExposure && typeof window !== 'undefined' && isHydrated) {
       track('ab_exposure', {
         test_id: testId,
         variant: variant,
         timestamp: Date.now()
       })
     }
-  }, [testId, variant, trackExposure])
+  }, [testId, variant, trackExposure, isHydrated])
 
-  const content = variants[variant] || variants.control || Object.values(variants)[0]
+  // Always render control variant during SSR to prevent hydration mismatch
+  const displayVariant = isHydrated ? variant : 'control'
+  const content = variants[displayVariant] || variants.control || Object.values(variants)[0]
 
   return (
     <div 
       className={className}
-      data-testid={dataTestId || `ab-${testId}-${variant}`}
+      data-testid={dataTestId || `ab-${testId}-${displayVariant}`}
       data-ab-test={testId}
-      data-ab-variant={variant}
+      data-ab-variant={displayVariant}
     >
       {content}
     </div>
@@ -105,6 +114,14 @@ export function CTATextAB({
     transition-all duration-200 font-semibold shadow-lg hover:shadow-xl
   `.trim()
 
+  const handleClick = (e: React.MouseEvent, variant: string) => {
+    e.preventDefault()
+    // Call the provided onClick for analytics tracking
+    if (onClick) onClick()
+    // Navigate to the audit page
+    handleCTAClick('START_AUDIT', `CTA Variant: ${variant}`, 'hero')
+  }
+
   return (
     <ABSlot
       testId="cta_text"
@@ -112,34 +129,37 @@ export function CTATextAB({
       dataTestId="cta-button"
       variants={{
         control: (
-          <button
+          <a
+            href="/dashboard"
             className={buttonClasses}
-            onClick={onClick}
+            onClick={(e) => handleClick(e, 'control')}
             data-event="cta_click"
             data-cta-variant="control"
           >
             Start Free Audit
-          </button>
+          </a>
         ),
         urgent: (
-          <button
+          <a
+            href="/dashboard"
             className={buttonClasses}
-            onClick={onClick}
+            onClick={(e) => handleClick(e, 'urgent')}
             data-event="cta_click"
             data-cta-variant="urgent"
           >
             Get Instant SEO Report →
-          </button>
+          </a>
         ),
         benefit_focused: (
-          <button
+          <a
+            href="/dashboard"
             className={buttonClasses}
-            onClick={onClick}
+            onClick={(e) => handleClick(e, 'benefit_focused')}
             data-event="cta_click"
             data-cta-variant="benefit_focused"
           >
             Boost Your Rankings Now
-          </button>
+          </a>
         )
       }}
     />

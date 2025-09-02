@@ -6,6 +6,7 @@ import { ArrowRight, Play, Zap, Clock, Users } from "lucide-react"
 import { DesktopHeroMockup } from "./desktop-hero-mockup"
 import { HeroHeadlineAB, CTATextAB } from "@/components/ab/ab-slot"
 import { trackCTA, trackDemo } from "@/lib/analytics"
+import { handleCTAClick } from "@/lib/cta-utils"
 
 export function HeroSection() {
   const containerVariants = {
@@ -106,17 +107,22 @@ export function HeroSection() {
                 onClick={() => trackCTA('Start Free Audit', 'hero')}
               />
 
-              <motion.button
+              <motion.a
+                href="/demo"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="group bg-white/5 hover:bg-white/10 border border-white/20 hover:border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 backdrop-blur-sm flex items-center justify-center space-x-2"
-                onClick={() => trackDemo('view_demo', 'hero')}
+                onClick={(e) => {
+                  e.preventDefault()
+                  trackDemo('view_demo', 'hero')
+                  handleCTAClick('/demo', 'See Live Demo', 'hero')
+                }}
                 data-event="demo_click"
                 data-location="hero"
               >
                 <Play className="w-5 h-5" />
                 <span>See Live Demo</span>
-              </motion.button>
+              </motion.a>
             </motion.div>
 
             {/* KPI Counters */}
