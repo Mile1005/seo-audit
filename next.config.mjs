@@ -1,21 +1,4 @@
-/** @type   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'next-auth'],
-    esmExternals: true,
-    // Aggressive bundle splitting for better performance
-    bundlePagesExternals: true,
-    // Mobile-specific optimizations
-    optimizeServerReact: true,
-  },
-  
-  // Performance optimization
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
-    reactRemoveProperties: process.env.NODE_ENV === 'production' ? { properties: ['^data-testid$'] } : false,
-  },
-  
-  // External packages optimization  
-  serverExternalPackages: ['sharp', '@prisma/client'],).NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
   poweredByHeader: false,
@@ -25,59 +8,169 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  
+  // EMERGENCY: Ultra-aggressive performance optimizations
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion', 'next-auth'],
+    optimizePackageImports: [
+      'lucide-react', 
+      'framer-motion', 
+      'next-auth',
+      'clsx',
+      'class-variance-authority',
+      '@radix-ui/react-label',
+      '@radix-ui/react-slot'
+    ],
     esmExternals: true,
-    // Mobile-specific performance optimizations  
-    webVitalsAttribution: ['CLS', 'LCP', 'FCP'],
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB', 'INP'],
+    optimizeServerReact: true,
+    // EMERGENCY: Disable trace profiling for faster builds
+    swcTraceProfiling: false,
+    // EMERGENCY: Enable more aggressive tree shaking
+    swcMinify: true,
   },
   
-  // Performance optimization
+  // Images optimization
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
+  },
+  
+  // Advanced performance optimization
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
     reactRemoveProperties: process.env.NODE_ENV === 'production' ? { properties: ['^data-testid$'] } : false,
   },
   
-  // External packages optimization
-  serverExternalPackages: ['sharp', '@prisma/client'],
-  
-  // Image optimization
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 31536000,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  // Advanced webpack optimization for performance
+  webpack: (config, { dev, isServer }) => {
+    if (!dev) {
+      // Enhanced code splitting for maximum performance
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+        splitChunks: {
+          chunks: 'all',
+          minSize: 15000, // Smaller minimum size
+          maxSize: 40000, // Much smaller max size for better caching
+          maxInitialRequests: 10, // Allow more initial chunks
+          maxAsyncRequests: 15, // Allow more async chunks
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            
+            // React framework - keep minimal
+            react: {
+              name: 'react',
+              test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+              priority: 50,
+              enforce: true,
+              chunks: 'all',
+              maxSize: 35000,
+            },
+            
+            // Next.js framework
+            nextjs: {
+              name: 'nextjs',
+              test: /[\\/]node_modules[\\/]next[\\/]/,
+              priority: 45,
+              chunks: 'all',
+              maxSize: 30000,
+            },
+            
+            // Split framer-motion aggressively - it's heavy
+            framerMotion: {
+              name: 'framer-motion',
+              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+              priority: 40,
+              reuseExistingChunk: true,
+              chunks: 'async', // Only load when needed
+              maxSize: 25000,
+            },
+            
+            // Icons in separate tiny chunk
+            icons: {
+              name: 'icons',
+              test: /[\\/]node_modules[\\/]lucide-react[\\/]/,
+              priority: 35,
+              reuseExistingChunk: true,
+              chunks: 'async',
+              maxSize: 15000,
+            },
+            
+            // Auth libraries - separate chunk
+            auth: {
+              name: 'auth',
+              test: /[\\/]node_modules[\\/](next-auth|@auth)[\\/]/,
+              priority: 30,
+              reuseExistingChunk: true,
+              chunks: 'async',
+              maxSize: 20000,
+            },
+            
+            // Radix UI components
+            radix: {
+              name: 'radix',
+              test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+              priority: 25,
+              chunks: 'async',
+              maxSize: 15000,
+            },
+            
+            // Utility libraries - minimal initial (fix size conflict)
+            utils: {
+              name: 'utils',
+              test: /[\\/]node_modules[\\/](clsx|class-variance-authority|tailwind-merge)[\\/]/,
+              priority: 20,
+              reuseExistingChunk: true,
+              chunks: 'initial',
+              maxSize: 15000, // Increased to avoid conflict
+              minSize: 8000,  // Reduced to avoid conflict
+            },
+            
+            // Split other vendors more aggressively
+            vendor1: {
+              name: 'vendor1',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 15,
+              reuseExistingChunk: true,
+              chunks: 'initial',
+              maxSize: 25000,
+              minSize: 10000,
+            },
+            
+            vendor2: {
+              name: 'vendor2',
+              test: /[\\/]node_modules[\\/]/,
+              priority: 10,
+              reuseExistingChunk: true,
+              chunks: 'async',
+              maxSize: 25000,
+              minSize: 10000,
+            },
+          },
+        },
+        
+        // Additional optimizations for bundle size
+        minimize: true,
+        concatenateModules: true,
+        
+        // Tree shaking improvements
+        providedExports: true,
+        usedExports: true,
+        sideEffects: false,
+      }
+    }
+    
+    return config
   },
-
-  // Performance
-  compress: true,
   
-  // Security and caching headers
+  // Caching headers
   async headers() {
     return [
       {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
-          },
-        ],
-      },
-      // Cache static assets aggressively
-      {
-        source: '/_next/static/(.*)',
+        source: '/_next/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
@@ -86,60 +179,6 @@ const nextConfig = {
         ],
       },
     ]
-  },
-
-  // Build optimization
-  webpack: (config, { dev, isServer }) => {
-    if (!dev && !isServer) {
-      // Aggressive bundle splitting for mobile performance
-      config.optimization.splitChunks = {
-        chunks: 'all',
-        maxSize: 150000, // Even smaller chunks for mobile
-        minSize: 20000,
-        cacheGroups: {
-          framework: {
-            chunks: 'all',
-            name: 'framework',
-            test: /(?<!node_modules.*)[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|use-subscription)[\\/]/,
-            priority: 40,
-            enforce: true,
-          },
-          // Separate heavy libraries
-          animations: {
-            test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
-            name: 'animations',
-            priority: 35,
-            enforce: true,
-          },
-          icons: {
-            test: /[\\/]node_modules[\\/](lucide-react)[\\/]/,
-            name: 'icons',
-            priority: 33,
-            enforce: true,
-          },
-          lib: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'lib',
-            priority: 30,
-            minChunks: 1,
-            reuseExistingChunk: true,
-            maxSize: 100000, // Smaller lib chunks
-          },
-          commons: {
-            name: 'commons',
-            minChunks: 2,
-            priority: 20,
-            maxSize: 80000,
-          },
-        },
-      }
-      
-      // Mobile-specific optimizations
-      config.optimization.usedExports = true
-      config.optimization.sideEffects = false
-    }
-
-    return config
   },
 }
 

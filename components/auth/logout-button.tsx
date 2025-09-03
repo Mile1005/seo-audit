@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { LogOut, User } from 'lucide-react'
 import { useAuth } from '../../hooks/use-auth'
+import Image from 'next/image'
 
 interface LogoutButtonProps {
   variant?: 'button' | 'menu-item'
@@ -60,9 +61,11 @@ export function UserInfo() {
     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
       <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center">
         {user.image ? (
-          <img 
+          <Image 
             src={user.image} 
             alt={user.name || 'User'} 
+            width={40}
+            height={40}
             className="w-10 h-10 rounded-full object-cover"
           />
         ) : (

@@ -206,4 +206,5 @@ export function preloadNonCriticalCSS() {
   });
 }
 
-export default { injectCriticalCSS, preloadNonCriticalCSS };
+const CriticalCSSUtils = { injectCriticalCSS, preloadNonCriticalCSS };
+export default CriticalCSSUtils;

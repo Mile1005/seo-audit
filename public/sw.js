@@ -1,28 +1,38 @@
-const CACHE_NAME = 'seo-audit-v1';
-const STATIC_CACHE = 'seo-audit-static-v1';
-const DYNAMIC_CACHE = 'seo-audit-dynamic-v1';
-const API_CACHE = 'seo-audit-api-v1';
+const CACHE_NAME = 'seo-audit-v1.1';
+const STATIC_CACHE = 'seo-audit-static-v1.1';
+const DYNAMIC_CACHE = 'seo-audit-dynamic-v1.1';
+const API_CACHE = 'seo-audit-api-v1.1';
+const IMAGES_CACHE = 'seo-audit-images-v1.1';
 
-// Assets to cache immediately
+// Critical assets to cache immediately for maximum performance
 const STATIC_ASSETS = [
   '/',
   '/manifest.json',
   '/favicon.ico',
+  '/robots.txt',
+  // Critical images
   '/images/hero/hero-laptop-dashboard.svg',
-  '/robots.txt'
+  '/logo.svg',
+  // Critical CSS chunks
+  '/_next/static/css/',
+  // Critical JS chunks
+  '/_next/static/chunks/webpack.js',
+  '/_next/static/chunks/main.js'
 ];
 
-// API endpoints to cache
+// API endpoints to cache aggressively
 const CACHEABLE_APIS = [
   '/api/seo-audit/get',
   '/api/ops/health',
   '/api/ops/metrics',
+  '/api/auth/session',
+  '/api/case-studies'
 ];
 
-// Cache strategies
+// Performance-first cache strategies
 const CACHE_STRATEGIES = {
   CACHE_FIRST: 'cache-first',
-  NETWORK_FIRST: 'network-first',
+  NETWORK_FIRST: 'network-first', 
   STALE_WHILE_REVALIDATE: 'stale-while-revalidate',
   NETWORK_ONLY: 'network-only',
   CACHE_ONLY: 'cache-only'

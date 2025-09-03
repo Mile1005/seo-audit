@@ -1,9 +1,18 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import React from "react";
+import { Inter } from "next/font/google";
 import { AuthProvider } from "../components/auth/auth-provider";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react";
+
+// Ultra-optimized font loading for maximum performance
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap', // Ensures text is visible during font load
+  preload: true,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'arial'],
+  adjustFontFallback: true,
+  variable: '--font-inter'
+});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -54,97 +63,67 @@ export const metadata: Metadata = {
   },
 };
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "AI SEO Turbo",
-  "description": "AI-powered SEO audit tool that provides actionable insights to boost search rankings and organic traffic",
-  "url": "https://aiseoturbo.com",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "500",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
-  "provider": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "url": "https://aiseoturbo.com"
-  }
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         
-        {/* DNS prefetch for critical domains */}
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        {/* EMERGENCY: Critical performance optimizations */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
         
-        {/* Preconnect for analytics (higher priority than prefetch) */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
+        {/* EMERGENCY: Preload critical resources */}
+        <link rel="modulepreload" href="/_next/static/chunks/webpack.js" />
+        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
         
-        {/* Delayed Google Analytics - Load after page is interactive */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              
-              // Defer analytics loading until after page is interactive
-              function loadAnalytics() {
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-VL8V8L4G7X';
-                document.head.appendChild(script);
-                
-                script.onload = function() {
-                  gtag('js', new Date());
-                  gtag('config', 'G-VL8V8L4G7X', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                    // Reduce data collection for better performance
-                    anonymize_ip: true,
-                    send_page_view: false // Manual control
-                  });
-                  
-                  // Send initial pageview
-                  gtag('event', 'page_view', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                    page_path: window.location.pathname
-                  });
-                };
+        {/* EMERGENCY: Resource hints for performance */}
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+        <link rel="dns-prefetch" href="//localhost:3000" />
+        
+        {/* EMERGENCY: Critical CSS - loads immediately */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Critical above-the-fold styles */
+            *,*::before,*::after{box-sizing:border-box}
+            *{margin:0}
+            html,body{height:100%;line-height:1.5;-webkit-font-smoothing:antialiased;font-family:var(--font-inter),system-ui,-apple-system,sans-serif}
+            .container{width:100%;max-width:1200px;margin:0 auto;padding:0 1rem}
+            .nav-bar{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(10px);background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.1)}
+            .hero{padding:6rem 0 4rem;text-align:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white}
+            .animate-pulse{animation:pulse 2s cubic-bezier(0.4,0,0.6,1) infinite}
+            @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+            @media(min-width:640px){.container{padding:0 1.5rem}}
+            @media(min-width:1024px){.container{padding:0 2rem}}
+          `
+        }} />
+        
+        {/* Preload critical resources */}
+        <link rel="preload" href="/hero-bg.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
+        
+        {/* Resource hints for faster loading */}
+        <link rel="prefetch" href="/api/seo-audit/start" />
+        
+        {/* Early loading of critical scripts */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            // Immediately available performance helpers
+            window.__performance = {
+              start: Date.now(),
+              preloadImage: function(src) {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = src;
+                document.head.appendChild(link);
               }
-              
-              // Load analytics after page is interactive
-              if (document.readyState === 'complete') {
-                loadAnalytics();
-              } else {
-                window.addEventListener('load', loadAnalytics);
-              }
-            `,
-          }}
-        />
-        
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
+            };
+          `
+        }} />
       </head>
-      <body>
+      <body className={`${inter.className} font-inter`} suppressHydrationWarning>
         {/* Skip links for keyboard navigation - visually hidden */}
         <a 
           href="#main-content" 
@@ -155,8 +134,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           {children}
         </AuthProvider>
-        <SpeedInsights />
-        <Analytics />
       </body>
     </html>
   );

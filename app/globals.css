@@ -48,10 +48,9 @@
     --border: 214.3 31.8% 81.4%;
     --input: 214.3 31.8% 81.4%;
     --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }

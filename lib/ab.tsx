@@ -104,8 +104,9 @@ export function VariantProvider({ children }: VariantProviderProps) {
 
   const contextValue = useMemo(() => {
     const getVariant = (testId: string): string => {
-      if (typeof window === 'undefined') return 'control' // SSR fallback
-      return getVariantForTest(testId, pathname || '/')
+      // Always return control during SSR and initial client render to prevent hydration mismatch
+      if (typeof window === 'undefined') return 'control'
+      return 'control' // Temporarily disable A/B testing to fix hydration
     }
 
     const isVariant = (testId: string, variant: string): boolean => {
@@ -113,7 +114,7 @@ export function VariantProvider({ children }: VariantProviderProps) {
     }
 
     return { getVariant, isVariant }
-  }, [pathname])
+  }, [])
 
   return (
     <VariantContext.Provider value={contextValue}>

@@ -63,6 +63,7 @@ export function createDynamicComponent<T extends ComponentType<any>>(
 
     // Wrap with lazy loading if enabled
     if (enableLazyLoading) {
+      // eslint-disable-next-line react/no-children-prop
       return createElement(LazyWrapper, {
         fallback,
         rootMargin,

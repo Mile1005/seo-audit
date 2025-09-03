@@ -131,6 +131,7 @@ export function OptimizedImage({
     <Image
       {...config}
       {...props}
+      alt={alt || ''}
       className={cn(
         'transition-opacity duration-300',
         isLoaded ? 'opacity-100' : 'opacity-0',
@@ -152,6 +153,7 @@ export function OptimizedImage({
         <Image
           {...config}
           {...props}
+          alt={alt || ''}
           fill
           className={cn(
             'object-cover transition-opacity duration-300',

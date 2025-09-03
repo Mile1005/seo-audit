@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cache & Service Worker Cleaner</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .button {
+            background: #007cba;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .button:hover {
+            background: #005a8b;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-left: 4px solid #007cba;
+            margin: 20px 0;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧹 Cache & Service Worker Cleaner for localhost:3000</h1>
+    
+    <div class="info">
+        <strong>Instructions:</strong>
+        <ol>
+            <li>Open this page in the same browser you're using for localhost:3000</li>
+            <li>Click the buttons below to clean cache and service workers</li>
+            <li>After cleaning, go back to localhost:3000 and hard refresh (Ctrl+Shift+R)</li>
+        </ol>
+    </div>
+
+    <button class="button" onclick="clearCache()">🗑️ Clear All Cache</button>
+    <button class="button" onclick="unregisterServiceWorkers()">⚙️ Unregister Service Workers</button>
+    <button class="button" onclick="clearLocalStorage()">💾 Clear Local Storage</button>
+    <button class="button" onclick="clearAll()">🚀 Clear Everything</button>
+
+    <div id="results"></div>
+
+    <script>
+        const log = (message, type = 'info') => {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerHTML = `${new Date().toLocaleTimeString()}: ${message}`;
+            results.appendChild(div);
+        };
+
+        async function clearCache() {
+            try {
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    log(`Found ${cacheNames.length} caches`);
+                    
+                    for (const cacheName of cacheNames) {
+                        await caches.delete(cacheName);
+                        log(`Deleted cache: ${cacheName}`, 'success');
+                    }
+                    log('All caches cleared!', 'success');
+                } else {
+                    log('Cache API not supported', 'error');
+                }
+            } catch (error) {
+                log(`Error clearing cache: ${error.message}`, 'error');
+            }
+        }
+
+        async function unregisterServiceWorkers() {
+            try {
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    log(`Found ${registrations.length} service workers`);
+                    
+                    for (const registration of registrations) {
+                        await registration.unregister();
+                        log(`Unregistered service worker: ${registration.scope}`, 'success');
+                    }
+                    log('All service workers unregistered!', 'success');
+                } else {
+                    log('Service Worker API not supported', 'error');
+                }
+            } catch (error) {
+                log(`Error unregistering service workers: ${error.message}`, 'error');
+            }
+        }
+
+        function clearLocalStorage() {
+            try {
+                const localStorageSize = Object.keys(localStorage).length;
+                const sessionStorageSize = Object.keys(sessionStorage).length;
+                
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                log(`Cleared ${localStorageSize} localStorage items and ${sessionStorageSize} sessionStorage items`, 'success');
+            } catch (error) {
+                log(`Error clearing storage: ${error.message}`, 'error');
+            }
+        }
+
+        async function clearAll() {
+            log('Starting complete cleanup...', 'info');
+            await clearCache();
+            await unregisterServiceWorkers();
+            clearLocalStorage();
+            log('🎉 Complete cleanup finished! Now go to localhost:3000 and hard refresh (Ctrl+Shift+R)', 'success');
+        }
+
+        // Auto-detect and show current state
+        window.onload = async () => {
+            log('Cache & Service Worker Cleaner loaded');
+            
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                log(`Current caches: ${cacheNames.length > 0 ? cacheNames.join(', ') : 'None'}`);
+            }
+            
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                log(`Active service workers: ${registrations.length > 0 ? registrations.map(r => r.scope).join(', ') : 'None'}`);
+            }
+        };
+    </script>
+</body>
+</html>

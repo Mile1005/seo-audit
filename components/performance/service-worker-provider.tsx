@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 interface SwStats {
   isSupported: boolean;
@@ -38,9 +38,10 @@ export function ServiceWorkerProvider() {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const registerServiceWorker = async () => {
+  const registerServiceWorker = useCallback(async () => {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js', {
         scope: '/'
@@ -79,7 +80,7 @@ export function ServiceWorkerProvider() {
     } catch (error) {
       console.error('[SW] Service Worker registration failed:', error);
     }
-  };
+  }, []);
 
   const getCacheStats = async (): Promise<Record<string, number>> => {
     if (!navigator.serviceWorker.controller) return {};
@@ -101,7 +102,7 @@ export function ServiceWorkerProvider() {
     });
   };
 
-  const clearCache = async () => {
+  const clearCache = useCallback(async () => {
     if (!navigator.serviceWorker.controller) return;
 
     navigator.serviceWorker.controller.postMessage({ type: 'CLEAR_CACHE' });
@@ -111,7 +112,7 @@ export function ServiceWorkerProvider() {
       const stats = await getCacheStats();
       setSwStats(prev => ({ ...prev, cacheStats: stats }));
     }, 1000);
-  };
+  }, []);
 
   const preloadRoutes = (routes: string[]) => {
     if (!navigator.serviceWorker.controller) return;
@@ -132,6 +133,7 @@ export function ServiceWorkerProvider() {
         getCacheStats
       };
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swStats]);
 
   return null; // This is a utility component
