@@ -26,8 +26,6 @@ const nextConfig = {
     optimizeServerReact: true,
     // EMERGENCY: Disable trace profiling for faster builds
     swcTraceProfiling: false,
-    // EMERGENCY: Enable more aggressive tree shaking
-    swcMinify: true,
   },
   
   // Images optimization
