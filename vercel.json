@@ -1,15 +1,5 @@
 {
-  "buildCommand": "pnpm run build",
-  "installCommand": "pnpm install",
   "framework": "nextjs",
-  "env": {
-    "PRISMA_GENERATE_SKIP_AUTOINSTALL": "true",
-    "SKIP_ENV_VALIDATION": "true"
-  },
-  "functions": {
-    "app/api/**/*.ts": {
-      "maxDuration": 30
-    }
-  },
-  "crons": []
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install"
 }
