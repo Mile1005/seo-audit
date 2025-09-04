@@ -4,6 +4,9 @@ import React from "react";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "../components/auth/auth-provider";
 
+// Force dynamic rendering to avoid Vercel lambda routing issues
+export const dynamic = 'force-dynamic';
+
 // Ultra-optimized font loading for maximum performance
 const inter = Inter({ 
   subsets: ["latin"],

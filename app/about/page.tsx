@@ -1,6 +1,9 @@
 import { Metadata } from 'next'
 import { MainLayout } from '../../components/layout/main-layout'
 
+// Force dynamic rendering to fix Vercel lambda routing
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'About Us | AISEOTurbo - AI-Powered SEO Solutions',
   description: 'Learn about AISEOTurbo mission to revolutionize SEO with cutting-edge AI technology. Meet our team and discover our commitment to helping businesses succeed online.',
