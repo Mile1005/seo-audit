@@ -7,7 +7,7 @@ export const DynamicFeaturesShowcase = dynamic(
   () => import("../features/features-showcase"),
   {
     loading: () => (
-      <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="h-64 bg-gray-900 dark:bg-gray-900 animate-pulse rounded-lg flex items-center justify-center">
         <span className="text-gray-400">Loading features...</span>
       </div>
     ),
@@ -19,7 +19,7 @@ export const DynamicInteractiveDemo = dynamic(
   () => import("../demo/interactive-demo"),
   {
     loading: () => (
-      <div className="h-96 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="h-96 bg-gray-900 dark:bg-gray-900 animate-pulse rounded-lg flex items-center justify-center">
         <span className="text-gray-400">Loading demo...</span>
       </div>
     ),
@@ -31,7 +31,7 @@ export const DynamicTestimonialsCarousel = dynamic(
   () => import("../testimonials/testimonials-carousel"),
   {
     loading: () => (
-      <div className="h-48 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="h-48 bg-gray-900 dark:bg-gray-900 animate-pulse rounded-lg flex items-center justify-center">
         <span className="text-gray-400">Loading testimonials...</span>
       </div>
     ),
@@ -43,7 +43,7 @@ export const DynamicROICalculator = dynamic(
   () => import("../pricing/roi-calculator"),
   {
     loading: () => (
-      <div className="h-80 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="h-80 bg-gray-900 dark:bg-gray-900 animate-pulse rounded-lg flex items-center justify-center">
         <span className="text-gray-400">Loading calculator...</span>
       </div>
     ),
@@ -55,7 +55,7 @@ export const DynamicPricingCards = dynamic(
   () => import("../pricing/pricing-cards"),
   {
     loading: () => (
-      <div className="h-64 bg-gray-50 dark:bg-gray-800 animate-pulse rounded-lg flex items-center justify-center">
+      <div className="h-64 bg-gray-900 dark:bg-gray-900 animate-pulse rounded-lg flex items-center justify-center">
         <span className="text-gray-400">Loading pricing...</span>
       </div>
     ),

@@ -21,7 +21,7 @@ import {
 const EmailCaptureInline = dynamic(() => 
   import("@/components/lead/email-capture-inline").then(mod => ({ default: mod.EmailCaptureInline })), 
   { 
-    loading: () => <div className="h-16 bg-gray-100/50 dark:bg-gray-800/50 animate-pulse rounded" />
+    loading: () => <div className="h-16 bg-gray-900 dark:bg-gray-900 animate-pulse rounded" />
   }
 )
 
