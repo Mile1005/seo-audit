@@ -66,7 +66,7 @@ export default function CompetitorAnalysisPage() {
 
   return (
     <MainLayout>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}
@@ -94,11 +94,11 @@ export default function CompetitorAnalysisPage() {
                 ease: "easeInOut",
                 delay: 5
               }}
-              className="absolute bottom-20 right-10 w-60 h-60 bg-gradient-to-br from-blue-400/10 to-cyan-600/10 rounded-full blur-3xl"
+              className="absolute bottom-20 right-10 w-60 h-60 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"
             />
           </div>
 
-          <div className="max-w-7xl mx-auto relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <motion.div

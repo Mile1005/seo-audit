@@ -165,6 +165,10 @@ export function AdaptiveNavigation() {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
+    // Reset dropdown when closing menu
+    if (isOpen) {
+      setOpenDropdown(null)
+    }
   }
 
   const closeMenu = () => {
@@ -300,11 +304,11 @@ export function AdaptiveNavigation() {
                   <div>
                     <button
                       onClick={() => toggleDropdown(section.label)}
-                      className="text-slate-300 hover:text-white block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200"
+                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-all duration-200 rounded-md flex items-center justify-between"
                     >
-                      {section.label}
-                      <ChevronDown className={`inline ml-1 h-4 w-4 transition-transform duration-200 ${
-                        openDropdown === section.label ? 'rotate-180' : ''
+                      <span>{section.label}</span>
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${
+                        openDropdown === section.label ? 'rotate-180 text-blue-400' : 'text-slate-400'
                       }`} />
                     </button>
                     

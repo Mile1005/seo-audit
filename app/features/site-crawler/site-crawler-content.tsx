@@ -284,7 +284,7 @@ export default function SiteCrawlerPage() {
 
   return (
     <MainLayout>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}
@@ -299,24 +299,23 @@ export default function SiteCrawlerPage() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"
+              className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
             />
             <motion.div
               animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, -8, 0],
+                scale: [1.2, 1, 1.2],
+                rotate: [0, -5, 0],
               }}
               transition={{
                 duration: 25,
                 repeat: Infinity,
-                ease: "easeInOut",
-                delay: 5
+                ease: "easeInOut"
               }}
-              className="absolute bottom-20 right-10 w-60 h-60 bg-gradient-to-br from-green-400/10 to-blue-600/10 rounded-full blur-3xl"
+              className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
             />
           </div>
 
-          <div className="max-w-7xl mx-auto relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <motion.div
