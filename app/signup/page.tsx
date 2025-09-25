@@ -79,16 +79,14 @@ export default function SignupPage() {
     setLoading(true);
     setError('');
     try {
-      const result = await signIn('google', {
+      // For Google OAuth, let NextAuth handle the redirect automatically
+      // This will redirect the user to Google's OAuth page
+      await signIn('google', {
         callbackUrl: '/onboarding',
-        redirect: false,
       });
-      if (result?.error) {
-        setError('Failed to sign up with Google');
-      }
     } catch (error) {
+      console.error('Google sign-up error:', error);
       setError('Failed to sign up with Google');
-    } finally {
       setLoading(false);
     }
   };

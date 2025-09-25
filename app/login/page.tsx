@@ -26,18 +26,14 @@ function LoginContent() {
     setLoading(true);
     setError('');
     try {
-      const result = await signIn('google', {
+      // For Google OAuth, let NextAuth handle the redirect automatically
+      // This will redirect the user to Google's OAuth page
+      await signIn('google', {
         callbackUrl: returnUrl,
-        redirect: false,
       });
-      if (result?.error) {
-        setError('Failed to sign in with Google');
-      } else if (result?.ok) {
-        router.push(returnUrl);
-      }
     } catch (error) {
+      console.error('Google sign-in error:', error);
       setError('Failed to sign in with Google');
-    } finally {
       setLoading(false);
     }
   };
