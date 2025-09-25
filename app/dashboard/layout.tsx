@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSession, signOut } from 'next-auth/react'
 import { 
   HomeIcon, 
   FolderIcon, 
@@ -38,7 +39,9 @@ const navigation = [
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { data: session } = useSession()
 
   return (
     <div className={`min-h-screen bg-slate-50 ${darkMode ? 'dark' : ''}`}>
@@ -192,14 +195,59 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               </button>
 
               {/* User profile */}
-              <div className="flex items-center space-x-3">
+              <div className="relative flex items-center space-x-3">
                 <div className="hidden sm:block text-right">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white">Admin User</p>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">admin@aiseoturbo.com</p>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white">
+                    {session?.user?.name || 'User'}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    {session?.user?.email || 'No email'}
+                  </p>
                 </div>
-                <button className="flex items-center p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                  <UserCircleIcon className="w-8 h-8 text-slate-400" />
+                <button 
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  {session?.user?.image ? (
+                    <img 
+                      src={session.user.image} 
+                      alt="Profile" 
+                      className="w-8 h-8 rounded-full"
+                    />
+                  ) : (
+                    <UserCircleIcon className="w-8 h-8 text-slate-400" />
+                  )}
                 </button>
+                
+                {/* User dropdown menu */}
+                {userMenuOpen && (
+                  <div className="absolute right-0 top-12 w-48 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-2 z-50">
+                    <Link 
+                      href="/dashboard/settings" 
+                      className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Settings
+                    </Link>
+                    <Link 
+                      href="/dashboard/profile" 
+                      className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <hr className="my-2 border-slate-200 dark:border-slate-700" />
+                    <button
+                      onClick={() => {
+                        setUserMenuOpen(false)
+                        signOut({ callbackUrl: '/' })
+                      }}
+                      className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
