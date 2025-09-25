@@ -60,6 +60,20 @@ model User {
 	role          UserRole  @default(USER)
 	status        UserStatus @default(ACTIVE)
 	lastLoginAt   DateTime?
+	
+	// Profile fields
+	company       String?
+	timezone      String?   @default("UTC")
+	bio           String?
+	website       String?
+	
+	// Settings
+	emailNotifications    Boolean @default(true)
+	marketingEmails       Boolean @default(false)
+	dataSharing          Boolean @default(false)
+	twoFactorEnabled     Boolean @default(false)
+	twoFactorSecret      String?
+	
 	createdAt     DateTime  @default(now())
 	updatedAt     DateTime  @updatedAt
 
