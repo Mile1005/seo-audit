@@ -1,6 +1,6 @@
-// Datasource for SQLite (Local Development) - Will switch to PostgreSQL for production
+// Datasource - PostgreSQL for production, SQLite for local development
 datasource db {
-	provider = "sqlite"
+	provider = "postgresql"
 	url      = env("DATABASE_URL")
 }
 
