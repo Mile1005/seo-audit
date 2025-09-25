@@ -1,4 +1,4 @@
-// Datasource for SQLite (Local Development)
+// Datasource for SQLite (Local Development) - Will switch to PostgreSQL for production
 datasource db {
 	provider = "sqlite"
 	url      = env("DATABASE_URL")
@@ -8,6 +8,10 @@ datasource db {
 generator client {
 	provider = "prisma-client-js"
 }
+
+// ============================================
+// USER MANAGEMENT & AUTHENTICATION MODELS
+// ============================================
 
 // Auth.js Models
 model Account {
@@ -23,10 +27,13 @@ model Account {
 	scope             String?
 	id_token          String?
 	session_state     String?
+	createdAt         DateTime @default(now())
+	updatedAt         DateTime @updatedAt
 
 	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
 	@@unique([provider, providerAccountId])
+	@@index([userId])
 }
 
 model Session {
@@ -34,7 +41,12 @@ model Session {
 	sessionToken String   @unique
 	userId       String
 	expires      DateTime
-	user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+	createdAt    DateTime @default(now())
+	updatedAt    DateTime @updatedAt
+
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@index([userId])
 }
 
 model User {
@@ -45,112 +57,782 @@ model User {
 	image         String?
 	password      String?   // For credentials-based auth
 	emailVerificationSentAt DateTime?
+	role          UserRole  @default(USER)
+	status        UserStatus @default(ACTIVE)
+	lastLoginAt   DateTime?
 	createdAt     DateTime  @default(now())
 	updatedAt     DateTime  @updatedAt
 
-	accounts      Account[]
-	sessions      Session[]
-	projects      Project[]     @relation("ProjectOwner")
-	memberships   ProjectMember[]
-	audits        Audit[]
-	crawls        Crawl[]
+	// Relationships
+	accounts        Account[]
+	sessions        Session[]
+	ownedProjects   Project[]     @relation("ProjectOwner")
+	projectMembers  ProjectMember[]
+	subscriptions   Subscription[]
+	teamMembers     TeamMember[]
+	audits          SiteAudit[]   @relation("AuditCreator")
+	reports         Report[]      @relation("ReportCreator")
+	apiKeys         ApiKey[]
+	userUsage       UserUsage?
+
+	@@index([email])
+	@@index([status])
 }
 
 model VerificationToken {
 	identifier String
 	token      String   @unique
 	expires    DateTime
+	createdAt  DateTime @default(now())
 
 	@@unique([identifier, token])
 }
 
-// Project and Multi-tenancy Models
-model Project {
+// ============================================
+// SUBSCRIPTION & BILLING MODELS
+// ============================================
+
+model Subscription {
+	id                    String            @id @default(cuid())
+	userId                String
+	stripeCustomerId      String?           @unique
+	stripeSubscriptionId  String?           @unique
+	stripePriceId         String?
+	plan                  SubscriptionPlan  @default(FREE)
+	status                SubscriptionStatus @default(ACTIVE)
+	currentPeriodStart    DateTime?
+	currentPeriodEnd      DateTime?
+	trialEndsAt           DateTime?
+	canceledAt            DateTime?
+	createdAt             DateTime          @default(now())
+	updatedAt             DateTime          @updatedAt
+
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@index([userId])
+	@@index([status])
+	@@index([plan])
+}
+
+// ============================================
+// TEAM & PROJECT MANAGEMENT MODELS
+// ============================================
+
+model Team {
 	id        String   @id @default(cuid())
 	name      String
+	slug      String   @unique
 	ownerId   String
+	plan      SubscriptionPlan @default(FREE)
+	status    TeamStatus @default(ACTIVE)
 	createdAt DateTime @default(now())
 	updatedAt DateTime @updatedAt
 
-	owner     User           @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-	members   ProjectMember[]
-	audits    Audit[]
-	crawls    Crawl[]
+	members   TeamMember[]
+	projects  Project[]
+
 	@@index([ownerId])
-	@@unique([ownerId, name])
+	@@index([slug])
+}
+
+model TeamMember {
+	id        String   @id @default(cuid())
+	teamId    String
+	userId    String
+	role      TeamRole @default(MEMBER)
+	invitedAt DateTime @default(now())
+	joinedAt  DateTime?
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+
+	team Team @relation(fields: [teamId], references: [id], onDelete: Cascade)
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@unique([teamId, userId])
+	@@index([userId])
+}
+
+model Project {
+	id          String        @id @default(cuid())
+	name        String
+	domain      String
+	description String?
+	ownerId     String
+	teamId      String?
+	status      ProjectStatus @default(ACTIVE)
+	settings    Json?
+	createdAt   DateTime      @default(now())
+	updatedAt   DateTime      @updatedAt
+
+	// Relationships
+	owner           User            @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+	team            Team?           @relation(fields: [teamId], references: [id], onDelete: SetNull)
+	members         ProjectMember[]
+	keywords        Keyword[]
+	keywordGroups   KeywordGroup[]
+	keywordSuggestions KeywordSuggestion[]
+	rankingAlerts   RankingAlert[]
+	siteAudits      SiteAudit[]
+	backlinks       Backlink[]
+	referringDomains ReferringDomain[]
+	linkProspects   LinkProspect[]
+	outreachCampaigns OutreachCampaign[]
+	backlinkMonitors BacklinkMonitor[]
+	disavowFiles    DisavowFile[]
+	competitors     Competitor[]
+	reports         Report[]
+	crawls          Crawl[]
+
+	@@unique([ownerId, domain])
+	@@index([ownerId])
+	@@index([teamId])
+	@@index([domain])
+	@@index([status])
 }
 
 model ProjectMember {
-	id        String   @id @default(cuid())
+	id        String      @id @default(cuid())
 	projectId String
 	userId    String
-	role      ProjectRole @default(MEMBER)
-	createdAt DateTime @default(now())
+	role      ProjectRole @default(VIEWER)
+	createdAt DateTime    @default(now())
+	updatedAt DateTime    @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@unique([projectId, userId])
+	@@index([userId])
+}
+
+// ============================================
+// KEYWORD TRACKING MODELS
+// ============================================
+
+model Keyword {
+	id             String        @id @default(cuid())
+	projectId      String
+	keyword        String
+	country        String        @default("US")
+	language       String        @default("en")
+	device         DeviceType    @default(DESKTOP)
+	searchVolume   Int?
+	difficulty     Float?        // 0-100 scale
+	cpc            Float?        // Cost per click
+	competition    Float?
+	intent         SearchIntent?
+	status         KeywordStatus @default(ACTIVE)
+	
+	// Enhanced fields for keyword research
+	trend          Json?         // Search volume trend data
+	seasonality    Json?         // Seasonal patterns
+	lastChecked    DateTime?
+	
+	createdAt      DateTime      @default(now())
+	updatedAt      DateTime      @updatedAt
+
+	project         Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	positions       KeywordPosition[]
+	serpResults     SerpResult[]
+	groupMemberships KeywordGroupMembership[]
+	competitors     KeywordCompetitor[]
+	alerts          RankingAlert[]
+
+	@@unique([keyword, projectId, country, device])
+	@@index([projectId])
+	@@index([difficulty])
+	@@index([searchVolume])
+}
+
+model KeywordGroup {
+	id          String   @id @default(cuid())
+	projectId   String
+	name        String
+	description String?
+	color       String?  // Hex color for UI grouping
+	
+	createdAt   DateTime @default(now())
+	updatedAt   DateTime @updatedAt
+	
+	project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	memberships KeywordGroupMembership[]
+	
+	@@unique([name, projectId])
+	@@index([projectId])
+}
+
+model KeywordGroupMembership {
+	id          String   @id @default(cuid())
+	keywordId   String
+	groupId     String
+	
+	createdAt   DateTime @default(now())
+	
+	keyword     Keyword      @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+	group       KeywordGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+	
+	@@unique([keywordId, groupId])
+	@@index([keywordId])
+	@@index([groupId])
+}
+
+model KeywordCompetitor {
+	id          String   @id @default(cuid())
+	keywordId   String
+	domain      String
+	url         String?
+	position    Int
+	title       String?
+	description String?
+	
+	// Competitor metrics
+	domainRating Float?  // Domain authority/rating
+	backlinks   Int?
+	
+	checkedAt   DateTime @default(now())
+	
+	keyword     Keyword  @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+	
+	@@index([keywordId])
+	@@index([domain])
+	@@index([position])
+}
+
+model KeywordSuggestion {
+	id          String   @id @default(cuid())
+	projectId   String
+	keyword     String
+	source      String   // "related", "questions", "autocomplete", "competitor"
+	searchVolume Int?
+	difficulty  Float?
+	relevanceScore Float? // 0-1 relevance to seed keyword
+	seedKeyword String   // Original keyword that generated this suggestion
+	status      String   @default("pending") // pending, added, rejected
+	
+	createdAt   DateTime @default(now())
+	
+	project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	
+	@@unique([keyword, seedKeyword, projectId])
+	@@index([projectId])
+	@@index([searchVolume])
+	@@index([status])
+}
+
+model RankingAlert {
+	id          String   @id @default(cuid())
+	projectId   String
+	keywordId   String?
+	type        String   // "position_change", "new_ranking", "lost_ranking", "competitor_change"
+	threshold   Int?     // position threshold for alerts
+	isActive    Boolean  @default(true)
+	
+	// Alert settings
+	emailEnabled Boolean @default(true)
+	slackEnabled Boolean @default(false)
+	webhookUrl   String?
+	
+	createdAt   DateTime @default(now())
+	updatedAt   DateTime @updatedAt
+	lastTriggered DateTime?
+	
+	project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	keyword     Keyword? @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+	
+	@@index([projectId])
+	@@index([keywordId])
+	@@index([isActive])
+}
+
+model KeywordPosition {
+	id           String   @id @default(cuid())
+	keywordId    String
+	position     Int?     // null if not in top 100
+	url          String?
+	title        String?
+	description  String?
+	
+	// Enhanced SERP features
+	featured     Boolean  @default(false)
+	localPack    Boolean  @default(false)
+	serpFeatures Json?    // detailed SERP features data
+	
+	// Position tracking
+	previousRank Int?
+	changeType   RankChange?
+	change       Int?     // position change from previous check
+	
+	// Geographic and device context
+	location     String   @default("US")
+	device       DeviceType @default(DESKTOP)
+	
+	checkedAt    DateTime @default(now())
+	createdAt    DateTime @default(now())
+
+	keyword Keyword @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+
+	@@index([keywordId, checkedAt])
+	@@index([checkedAt])
+	@@index([position])
+}
+
+model SerpResult {
+	id          String     @id @default(cuid())
+	keywordId   String
+	position    Int
+	url         String
+	title       String
+	description String?
+	domain      String
+	type        SerpType   @default(ORGANIC)
+	
+	// Enhanced SERP data
+	features    Json?      // SERP features (snippets, images, etc.)
+	metrics     Json?      // Domain metrics, backlinks, etc.
+	
+	// Geographic and device context
+	location    String     @default("US")
+	device      DeviceType @default(DESKTOP)
+	
+	checkedAt   DateTime   @default(now())
+	createdAt   DateTime   @default(now())
+
+	keyword Keyword @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+
+	@@index([keywordId, checkedAt])
+	@@index([domain])
+	@@index([position])
+}
+
+// ============================================
+// SITE AUDIT MODELS
+// ============================================
+
+model SiteAudit {
+	id           String      @id @default(cuid())
+	projectId    String
+	createdBy    String
+	url          String
+	status       AuditStatus @default(PENDING)
+	overallScore Int?
+	summary      Json?
+	createdAt    DateTime    @default(now())
+	updatedAt    DateTime    @updatedAt
+	completedAt  DateTime?
+
+	project Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	creator User      @relation("AuditCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+	issues  AuditIssue[]
+	pages   AuditPage[]
+
+	@@index([projectId, createdAt])
+	@@index([status])
+}
+
+model AuditIssue {
+	id          String        @id @default(cuid())
+	auditId     String
+	type        IssueType
+	severity    IssueSeverity
+	title       String
+	description String
+	element     String?
+	page        String?
+	count       Int           @default(1)
+	fixed       Boolean       @default(false)
+	fixedAt     DateTime?
+	createdAt   DateTime      @default(now())
+
+	audit SiteAudit @relation(fields: [auditId], references: [id], onDelete: Cascade)
+
+	@@index([auditId, severity])
+	@@index([type])
+	@@index([fixed])
+}
+
+model AuditPage {
+	id             String   @id @default(cuid())
+	auditId        String
+	url            String
+	statusCode     Int
+	title          String?
+	metaDescription String?
+	h1             String?
+	wordCount      Int?
+	loadTime       Float?
+	size           Int?
+	internalLinks  Int      @default(0)
+	externalLinks  Int      @default(0)
+	images         Int      @default(0)
+	issues         Json?
+	createdAt      DateTime @default(now())
+
+	audit SiteAudit @relation(fields: [auditId], references: [id], onDelete: Cascade)
+
+	@@unique([auditId, url])
+	@@index([auditId])
+	@@index([statusCode])
+}
+
+// ============================================
+// BACKLINK MODELS
+// ============================================
+
+model Backlink {
+	id            String         @id @default(cuid())
+	projectId     String
+	sourceUrl     String
+	sourceDomain  String
+	targetUrl     String
+	anchorText    String?
+	linkType      LinkType       @default(FOLLOW)
+	status        BacklinkStatus @default(ACTIVE)
+	domainRating  Int?
+	pageRating    Int?
+	traffic       Int?
+	isToxic       Boolean        @default(false)
+	toxicScore    Float?         // 0-100 toxicity score
+	linkStrength  LinkStrength   @default(NORMAL)
+	context       String?        // surrounding text context
+	altText       String?        // for image links
+	isInternal    Boolean        @default(false)
+	isNofollow    Boolean        @default(false)
+	isSponsored   Boolean        @default(false)
+	isUGC         Boolean        @default(false)
+	httpStatus    Int?           // HTTP status of source page
+	lastChecked   DateTime?
+	firstSeen     DateTime
+	lastSeen      DateTime
+	createdAt     DateTime       @default(now())
+	updatedAt     DateTime       @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+	@@unique([projectId, sourceUrl, targetUrl])
+	@@index([projectId, status])
+	@@index([sourceDomain])
+	@@index([lastSeen])
+	@@index([isToxic])
+	@@index([domainRating])
+}
+
+model ReferringDomain {
+	id             String         @id @default(cuid())
+	projectId      String
+	domain         String
+	domainRating   Int?
+	pageRating     Int?
+	backlinkCount  Int            @default(0)
+	traffic        Int?
+	category       String?        // website category/niche
+	language       String?        // primary language
+	country        String?        // primary country
+	isToxic        Boolean        @default(false)
+	toxicScore     Float?         // 0-100 toxicity score
+	trustFlow      Int?           // Majestic metric
+	citationFlow   Int?           // Majestic metric
+	status         DomainStatus   @default(ACTIVE)
+	emailContacts  Json?          // array of found email contacts
+	socialProfiles Json?          // social media profiles
+	technologies   Json?          // detected technologies
+	lastChecked    DateTime?
+	firstSeen      DateTime
+	lastSeen       DateTime
+	createdAt      DateTime       @default(now())
+	updatedAt      DateTime       @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+	@@unique([projectId, domain])
+	@@index([projectId])
+	@@index([domain])
+	@@index([domainRating])
+	@@index([isToxic])
+	@@index([category])
+}
+
+model LinkProspect {
+	id              String          @id @default(cuid())
+	projectId       String
+	domain          String
+	url             String?
+	contactEmail    String?
+	contactName     String?
+	outreachStatus  OutreachStatus  @default(NOT_CONTACTED)
+	priority        ProspectPriority @default(MEDIUM)
+	domainRating    Int?
+	traffic         Int?
+	relevanceScore  Float?          // 0-1 relevance to project
+	notes           String?
+	lastContactedAt DateTime?
+	nextFollowupAt  DateTime?
+	responseAt      DateTime?
+	linkedAt        DateTime?       // when they linked to us
+	createdAt       DateTime        @default(now())
+	updatedAt       DateTime        @updatedAt
+
+	project         Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	outreachCampaigns OutreachCampaignProspect[]
+
+	@@unique([projectId, domain])
+	@@index([projectId])
+	@@index([outreachStatus])
+	@@index([priority])
+	@@index([nextFollowupAt])
+}
+
+model OutreachCampaign {
+	id           String         @id @default(cuid())
+	projectId    String
+	name         String
+	description  String?
+	emailSubject String
+	emailTemplate String
+	status       CampaignStatus @default(DRAFT)
+	targetCount  Int            @default(0)
+	sentCount    Int            @default(0)
+	responseCount Int           @default(0)
+	linkCount    Int            @default(0)
+	startedAt    DateTime?
+	completedAt  DateTime?
+	createdAt    DateTime       @default(now())
+	updatedAt    DateTime       @updatedAt
 
 	project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-	user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+	prospects OutreachCampaignProspect[]
 
-		@@unique([projectId, userId])
-		@@index([userId])
+	@@index([projectId])
+	@@index([status])
 }
 
-enum ProjectRole {
-	OWNER
-	ADMIN
-	MEMBER
-	VIEWER
+model OutreachCampaignProspect {
+	id           String         @id @default(cuid())
+	campaignId   String
+	prospectId   String
+	status       OutreachStatus @default(NOT_CONTACTED)
+	sentAt       DateTime?
+	openedAt     DateTime?
+	repliedAt    DateTime?
+	linkedAt     DateTime?
+	bounced      Boolean        @default(false)
+	notes        String?
+	createdAt    DateTime       @default(now())
+	updatedAt    DateTime       @updatedAt
+
+	campaign OutreachCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+	prospect LinkProspect     @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+
+	@@unique([campaignId, prospectId])
+	@@index([campaignId])
+	@@index([prospectId])
+	@@index([status])
 }
 
-// Updated existing models to include project relationships
+model BacklinkMonitor {
+	id           String           @id @default(cuid())
+	projectId    String
+	name         String
+	isActive     Boolean          @default(true)
+	checkInterval Int             @default(24) // hours
+	alertOnNew   Boolean          @default(true)
+	alertOnLost  Boolean          @default(true)
+	alertOnToxic Boolean          @default(true)
+	emailEnabled Boolean          @default(true)
+	slackWebhook String?
+	lastChecked  DateTime?
+	createdAt    DateTime         @default(now())
+	updatedAt    DateTime         @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+	@@index([projectId])
+	@@index([isActive])
+	@@index([lastChecked])
+}
+
+model DisavowFile {
+	id          String   @id @default(cuid())
+	projectId   String
+	filename    String
+	content     String   // the actual disavow file content
+	domains     Int      @default(0) // number of domains in file
+	urls        Int      @default(0) // number of URLs in file
+	uploadedToGSC Boolean @default(false)
+	uploadedAt  DateTime?
+	createdAt   DateTime @default(now())
+	updatedAt   DateTime @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+	@@index([projectId])
+	@@index([uploadedToGSC])
+}
+
+// ============================================
+// COMPETITOR ANALYSIS MODELS
+// ============================================
+
+model Competitor {
+	id        String           @id @default(cuid())
+	projectId String
+	domain    String
+	name      String?
+	status    CompetitorStatus @default(ACTIVE)
+	createdAt DateTime         @default(now())
+	updatedAt DateTime         @updatedAt
+
+	project   Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	metrics   CompetitorMetric[]
+	keywords  CompetitorKeyword[]
+	backlinks CompetitorBacklink[]
+
+	@@unique([projectId, domain])
+	@@index([projectId])
+	@@index([domain])
+}
+
+model CompetitorMetric {
+	id           String   @id @default(cuid())
+	competitorId String
+	type         MetricType
+	value        Float
+	change       Float?
+	checkedAt    DateTime @default(now())
+	createdAt    DateTime @default(now())
+
+	competitor Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+
+	@@index([competitorId, type, checkedAt])
+}
+
+model CompetitorKeyword {
+	id           String   @id @default(cuid())
+	competitorId String
+	keyword      String
+	position     Int
+	url          String?
+	traffic      Int?
+	checkedAt    DateTime @default(now())
+	createdAt    DateTime @default(now())
+
+	competitor Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+
+	@@index([competitorId, keyword])
+	@@index([competitorId, position])
+}
+
+model CompetitorBacklink {
+	id            String   @id @default(cuid())
+	competitorId  String
+	sourceUrl     String
+	sourceDomain  String
+	anchorText    String?
+	domainRating  Int?
+	traffic       Int?
+	checkedAt     DateTime @default(now())
+	createdAt     DateTime @default(now())
+
+	competitor Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+
+	@@index([competitorId, sourceDomain])
+}
+
+// ============================================
+// REPORTING MODELS
+// ============================================
+
+model Report {
+	id          String       @id @default(cuid())
+	projectId   String
+	createdBy   String
+	name        String
+	type        ReportType
+	frequency   ReportFrequency?
+	recipients  String?      // JSON string for array of recipients
+	config      Json?
+	data        Json?
+	status      ReportStatus @default(DRAFT)
+	scheduledAt DateTime?
+	sentAt      DateTime?
+	createdAt   DateTime     @default(now())
+	updatedAt   DateTime     @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	creator User    @relation("ReportCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+
+	@@index([projectId, type])
+	@@index([status])
+	@@index([scheduledAt])
+}
+
+// ============================================
+// CRAWLING & DATA COLLECTION MODELS
+// ============================================
+
+model Crawl {
+	id        String      @id @default(cuid())
+	projectId String
+	startUrl  String
+	status    CrawlStatus @default(QUEUED)
+	pages     Int         @default(0)
+	errors    Int         @default(0)
+	settings  Json?
+	results   Json?
+	startedAt DateTime?
+	completedAt DateTime?
+	createdAt DateTime    @default(now())
+	updatedAt DateTime    @updatedAt
+
+	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+	@@index([projectId, status])
+	@@index([status])
+}
+
+model ApiKey {
+	id        String       @id @default(cuid())
+	userId    String
+	name      String
+	key       String       @unique
+	provider  ApiProvider
+	encrypted String
+	status    ApiKeyStatus @default(ACTIVE)
+	lastUsed  DateTime?
+	createdAt DateTime     @default(now())
+	updatedAt DateTime     @updatedAt
+
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@index([userId])
+	@@index([provider])
+	@@index([status])
+}
+
+// ============================================
+// LEGACY MODELS (for backward compatibility)
+// ============================================
+
 model Run {
-	id            String   @id @default(uuid())
+	id            String    @id @default(uuid())
 	pageUrl       String
 	targetKeyword String?
 	email         String?
-	status        RunStatus @default(queued)
-	createdAt     DateTime @default(now())
-	updatedAt     DateTime @updatedAt
-	audits        Audit[]
+	status        RunStatus @default(QUEUED)
+	createdAt     DateTime  @default(now())
+	updatedAt     DateTime  @updatedAt
+
+	audits Audit[]
 }
 
 model Audit {
 	id        String   @id @default(uuid())
-	run       Run      @relation(fields: [runId], references: [id])
 	runId     String
-	json      Json     // JSON of AuditResultV1
+	json      Json
 	createdAt DateTime @default(now())
-  
-	// New fields for multi-tenancy
-	projectId String?
-	createdBy String?
-  
-	project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
-	user      User?    @relation(fields: [createdBy], references: [id], onDelete: SetNull)
-	@@index([projectId, createdAt])
-}
 
-model Crawl {
-	id        String   @id @default(uuid())
-	startUrl  String
-	results   Json
-	status    CrawlStatus @default(queued)
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
-  
-	// Multi-tenancy fields
-	projectId String?
-	createdBy String?
-  
-	project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
-	user      User?    @relation(fields: [createdBy], references: [id], onDelete: SetNull)
-	@@index([projectId, createdAt])
-}
+	run Run @relation(fields: [runId], references: [id], onDelete: Cascade)
 
-enum CrawlStatus {
-	queued
-	running
-	completed
-	failed
+	@@index([runId])
 }
 
 model GscToken {
@@ -160,9 +842,349 @@ model GscToken {
 	createdAt DateTime @default(now())
 }
 
+// ============================================
+// LIGHTWEIGHT PERSISTED AUDIT RESULT MODELS (Phase 4)
+// These are separate from the richer crawl/audit domain models above and
+// store the unified on-demand page audit results returned by the public API.
+// We intentionally keep them minimal & append-only for historical tracking.
+// ============================================
+
+model AuditRun {
+	id          String   @id                 // We reuse the externally exposed auditId (uuid generated in API layer)
+	url         String
+	status      String   @default("completed") // 'processing' | 'completed' | 'failed' (string for forward compatibility)
+	score       Int?
+	error       String?
+	startedAt   DateTime @default(now())
+	completedAt DateTime?
+	result      Json?                        // Full unified result payload (compressed JSON structure)
+	createdAt   DateTime @default(now())
+	updatedAt   DateTime @updatedAt
+
+	issues      AuditIssueSnapshot[]
+	publicShares PublicShare[]
+
+	@@index([url])
+	@@index([status])
+	@@index([createdAt])
+}
+
+model AuditIssueSnapshot {
+	id          String   @id @default(cuid())
+	auditRunId  String
+	severity    String
+	title       String
+	description String?
+	category    String?
+	type        String?
+	location    String?
+	selector    String?
+	createdAt   DateTime @default(now())
+
+	auditRun AuditRun @relation(fields: [auditRunId], references: [id], onDelete: Cascade)
+
+	@@index([auditRunId])
+	@@index([severity])
+	@@index([category])
+}
+
+// Public share tokens for read-only access
+model PublicShare {
+	id         String   @id @default(cuid())
+	auditRunId String
+	token      String   @unique
+	createdAt  DateTime @default(now())
+	expiresAt  DateTime?
+
+	auditRun AuditRun @relation(fields: [auditRunId], references: [id], onDelete: Cascade)
+
+	@@index([auditRunId])
+	@@index([token])
+}
+
+// ============================================
+// RECURRING AUDIT SCHEDULING (Phase 9)
+// Simple scheduler table; in-memory cron will poll for due records and fire audits.
+// ============================================
+model RecurringAudit {
+	id          String          @id @default(cuid())
+	url         String
+	frequency   RecurringFrequency
+	lastRunAt   DateTime?
+	nextRunAt   DateTime?       // precomputed for faster scanning
+	isActive    Boolean         @default(true)
+	createdAt   DateTime        @default(now())
+	updatedAt   DateTime        @updatedAt
+
+	@@index([isActive, nextRunAt])
+	@@index([url])
+}
+
+// Quota tracking per user (Phase 11)
+model UserUsage {
+	userId              String   @id
+	auditsThisMonth     Int      @default(0)
+	siteCrawlsThisMonth Int      @default(0)
+	monthKey            String   // e.g. '2025-09'
+	updatedAt           DateTime @updatedAt
+	createdAt           DateTime @default(now())
+
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@index([monthKey])
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum UserRole {
+	USER
+	ADMIN
+	SUPER_ADMIN
+}
+
+enum UserStatus {
+	ACTIVE
+	SUSPENDED
+	DELETED
+}
+
+enum SubscriptionPlan {
+	FREE
+	STARTER
+	PROFESSIONAL
+	ENTERPRISE
+}
+
+enum SubscriptionStatus {
+	ACTIVE
+	CANCELED
+	PAST_DUE
+	UNPAID
+	INCOMPLETE
+}
+
+enum TeamRole {
+	OWNER
+	ADMIN
+	MEMBER
+}
+
+enum TeamStatus {
+	ACTIVE
+	SUSPENDED
+	DELETED
+}
+
+enum ProjectRole {
+	OWNER
+	ADMIN
+	MEMBER
+	VIEWER
+}
+
+enum ProjectStatus {
+	ACTIVE
+	PAUSED
+	ARCHIVED
+}
+
+enum DeviceType {
+	DESKTOP
+	MOBILE
+	TABLET
+}
+
+enum SearchIntent {
+	INFORMATIONAL
+	NAVIGATIONAL
+	TRANSACTIONAL
+	COMMERCIAL
+}
+
+enum KeywordStatus {
+	ACTIVE
+	PAUSED
+	DELETED
+}
+
+enum RankChange {
+	UP
+	DOWN
+	NEW
+	SAME
+	LOST
+}
+
+enum SerpType {
+	ORGANIC
+	PAID
+	FEATURED_SNIPPET
+	PEOPLE_ALSO_ASK
+	LOCAL_PACK
+	IMAGE
+	VIDEO
+	NEWS
+	SHOPPING
+}
+
+enum AuditStatus {
+	PENDING
+	RUNNING
+	COMPLETED
+	FAILED
+	CANCELED
+}
+
+enum IssueType {
+	TECHNICAL
+	CONTENT
+	META
+	STRUCTURE
+	PERFORMANCE
+	ACCESSIBILITY
+	MOBILE
+}
+
+enum IssueSeverity {
+	CRITICAL
+	HIGH
+	MEDIUM
+	LOW
+	INFO
+}
+
+enum LinkType {
+	FOLLOW
+	NOFOLLOW
+	SPONSORED
+	UGC
+}
+
+enum BacklinkStatus {
+	ACTIVE
+	LOST
+	REDIRECT
+	BROKEN
+}
+
+enum CompetitorStatus {
+	ACTIVE
+	PAUSED
+	DELETED
+}
+
+enum MetricType {
+	ORGANIC_TRAFFIC
+	ORGANIC_KEYWORDS
+	BACKLINKS
+	REFERRING_DOMAINS
+	DOMAIN_RATING
+	PAGE_RATING
+}
+
+enum ReportType {
+	KEYWORD_RANKING
+	SITE_AUDIT
+	BACKLINK_ANALYSIS
+	COMPETITOR_ANALYSIS
+	CUSTOM
+}
+
+enum ReportFrequency {
+	DAILY
+	WEEKLY
+	MONTHLY
+	QUARTERLY
+}
+
+enum ReportStatus {
+	DRAFT
+	SCHEDULED
+	GENERATING
+	SENT
+	FAILED
+}
+
+enum CrawlStatus {
+	QUEUED
+	RUNNING
+	COMPLETED
+	FAILED
+	CANCELED
+}
+
+enum ApiProvider {
+	GOOGLE_SEARCH_CONSOLE
+	GOOGLE_ANALYTICS
+	GOOGLE_PAGESPEED
+	OPENAI
+	DATAFORSEO
+	SERPAPI
+	MOZ
+	AHREFS
+}
+
+enum ApiKeyStatus {
+	ACTIVE
+	EXPIRED
+	INVALID
+	SUSPENDED
+}
+
 enum RunStatus {
-	queued
-	running
-	ready
-	failed
+	QUEUED
+	RUNNING
+	READY
+	FAILED
+}
+
+enum LinkStrength {
+	WEAK
+	NORMAL
+	STRONG
+	VERY_STRONG
+}
+
+enum DomainStatus {
+	ACTIVE
+	EXPIRED
+	SUSPENDED
+	REDIRECTED
+	BROKEN
+}
+
+enum OutreachStatus {
+	NOT_CONTACTED
+	SENT
+	OPENED
+	REPLIED
+	INTERESTED
+	NOT_INTERESTED
+	BOUNCED
+	LINKED
+	BLOCKED
+}
+
+enum ProspectPriority {
+	LOW
+	MEDIUM
+	HIGH
+	CRITICAL
+}
+
+enum CampaignStatus {
+	DRAFT
+	SCHEDULED
+	ACTIVE
+	PAUSED
+	COMPLETED
+	ARCHIVED
+}
+
+// Frequency for recurring audits
+enum RecurringFrequency {
+	DAILY
+	WEEKLY
 }

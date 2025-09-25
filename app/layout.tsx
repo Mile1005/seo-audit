@@ -103,11 +103,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }} />
         
         {/* Preload critical resources */}
-        <link rel="preload" href="/hero-bg.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/hero/hero-laptop-dashboard.svg" as="image" type="image/svg+xml" />
         <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
         
-        {/* Resource hints for faster loading */}
-        <link rel="prefetch" href="/api/seo-audit/start" />
+        {/* Resource hints for faster loading - removed API prefetch that causes 405 errors */}
         
         {/* Early loading of critical scripts */}
         <script dangerouslySetInnerHTML={{

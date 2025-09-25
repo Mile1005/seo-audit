@@ -27,6 +27,8 @@ export interface ComprehensiveAuditResult {
     text_rate: number;
     word_count: number;
     reading_time_min: number;
+  tables_count?: number;
+  lists_count?: number;
   };
   
   // H Tags Analysis
@@ -110,6 +112,9 @@ export interface ComprehensiveAuditResult {
     effort?: string;
     category?: string;
   }>;
+  json_ld_types?: string[];
+  tables_count?: number;
+  lists_count?: number;
 }
 
 export async function performComprehensiveAudit(html: string, baseUrl: string): Promise<ComprehensiveAuditResult> {
@@ -152,6 +157,22 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
   
   // Calculate text statistics
   const textBlocks = $("body").text();
+  // Structured data (JSON-LD) types
+  const jsonLdTypes: string[] = [];
+  $("script[type='application/ld+json']").each((_, el) => {
+    try {
+      const json = JSON.parse($(el).contents().text());
+      if (Array.isArray(json)) {
+        json.forEach(item => { if (item['@type']) jsonLdTypes.push(String(item['@type'])); });
+      } else if (json && json['@type']) {
+        jsonLdTypes.push(String(json['@type']));
+      }
+    } catch {/* ignore malformed */}
+  });
+
+  // Count tables & lists
+  const tablesCount = $("table").length;
+  const listsCount = $("ul,ol").length;
   const textSize = textBlocks.length;
   const wordCount = textBlocks.split(/\s+/).filter(word => word.length > 0).length;
   const readingTimeMin = Math.ceil(wordCount / 200);
@@ -246,7 +267,7 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
   }
   
   // Generate issues
-  const issues = generateIssues($, title, metaDescription, canonical, h1, images);
+  const issues = generateIssues($, title, metaDescription, canonical, h1, images, baseUrl, baseUrlObj, allLinks);
   
   // Generate quick wins
   const quickWins = generateQuickWins(issues);
@@ -268,7 +289,9 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
       text_size: textSize,
       text_rate: textRate,
       word_count: wordCount,
-      reading_time_min: readingTimeMin
+      reading_time_min: readingTimeMin,
+      tables_count: tablesCount,
+      lists_count: listsCount
     },
     h_tags: {
       h1,
@@ -283,7 +306,10 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
     performance_opportunities: performanceOpportunities,
     performance_diagnostics: performanceDiagnostics,
     issues,
-    quick_wins: quickWins
+    quick_wins: quickWins,
+    json_ld_types: jsonLdTypes,
+    tables_count: tablesCount,
+    lists_count: listsCount
   };
 }
 
@@ -515,7 +541,17 @@ function performSEOChecks($: cheerio.CheerioAPI, title: string | null, metaDescr
   return { passed_checks: passedChecks, failed_checks: failedChecks };
 }
 
-function generateIssues($: cheerio.CheerioAPI, title: string | null, metaDescription: string | null, canonical: string | null, h1: string[], images: cheerio.Cheerio<any>) {
+function generateIssues(
+  $: cheerio.CheerioAPI, 
+  title: string | null, 
+  metaDescription: string | null, 
+  canonical: string | null, 
+  h1: string[], 
+  images: cheerio.Cheerio<any>,
+  baseUrl: string,
+  baseUrlObj: URL,
+  allLinks: cheerio.Cheerio<any>
+) {
   const issues: Array<{
     title: string;
     description: string;
@@ -747,6 +783,194 @@ function generateIssues($: cheerio.CheerioAPI, title: string | null, metaDescrip
     });
   }
   
+  // Additional comprehensive SEO issues
+  
+  // Check for missing robots meta tag
+  const robotsMeta = $('meta[name="robots"]').attr("content");
+  if (!robotsMeta) {
+    issues.push({
+      title: "Missing Robots Meta Tag",
+      description: "No robots meta tag found. This gives you no control over how search engines index this page.",
+      severity: "low",
+      recommendation: "Add a robots meta tag to control indexing: <meta name=\"robots\" content=\"index,follow\">",
+      location: "<head> section",
+      selector: "meta[name=\"robots\"]",
+      current_value: "Not found",
+      expected_value: "<meta name=\"robots\" content=\"index,follow\">",
+      impact: "medium",
+      effort: "2 minutes",
+      category: "Technical SEO"
+    });
+  }
+  
+  // Check for missing viewport meta tag
+  const viewportMeta = $('meta[name="viewport"]').attr("content");
+  if (!viewportMeta) {
+    issues.push({
+      title: "Missing Viewport Meta Tag",
+      description: "No viewport meta tag found. This affects mobile usability and responsive design.",
+      severity: "high",
+      recommendation: "Add viewport meta tag: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+      location: "<head> section",
+      selector: "meta[name=\"viewport\"]",
+      current_value: "Not found",
+      expected_value: "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
+      impact: "high",
+      effort: "2 minutes",
+      category: "Mobile Optimization"
+    });
+  }
+  
+  // Check for missing Open Graph tags
+  const ogTitle = $('meta[property="og:title"]').attr("content");
+  const ogDescription = $('meta[property="og:description"]').attr("content");
+  const ogImage = $('meta[property="og:image"]').attr("content");
+  
+  if (!ogTitle) {
+    issues.push({
+      title: "Missing Open Graph Title",
+      description: "No Open Graph title found. This affects how your content appears when shared on social media.",
+      severity: "medium",
+      recommendation: "Add Open Graph title: <meta property=\"og:title\" content=\"Your Page Title\">",
+      location: "<head> section",
+      selector: "meta[property=\"og:title\"]",
+      current_value: "Not found",
+      expected_value: "<meta property=\"og:title\" content=\"Your Page Title\">",
+      impact: "medium",
+      effort: "3 minutes",
+      category: "Social Media"
+    });
+  }
+  
+  if (!ogDescription) {
+    issues.push({
+      title: "Missing Open Graph Description",
+      description: "No Open Graph description found. This affects social media previews.",
+      severity: "medium",
+      recommendation: "Add Open Graph description: <meta property=\"og:description\" content=\"Your page description\">",
+      location: "<head> section",
+      selector: "meta[property=\"og:description\"]",
+      current_value: "Not found",
+      expected_value: "<meta property=\"og:description\" content=\"Description\">",
+      impact: "medium",
+      effort: "3 minutes",
+      category: "Social Media"
+    });
+  }
+  
+  if (!ogImage) {
+    issues.push({
+      title: "Missing Open Graph Image",
+      description: "No Open Graph image found. Social media shares will not display an attractive preview image.",
+      severity: "medium",
+      recommendation: "Add Open Graph image: <meta property=\"og:image\" content=\"https://example.com/image.jpg\">",
+      location: "<head> section",
+      selector: "meta[property=\"og:image\"]",
+      current_value: "Not found",
+      expected_value: "<meta property=\"og:image\" content=\"https://example.com/image.jpg\">",
+      impact: "medium",
+      effort: "10 minutes",
+      category: "Social Media"
+    });
+  }
+  
+  // Check for heading structure issues
+  if (h1.length === 0) {
+    issues.push({
+      title: "Missing H1 Tag",
+      description: "No H1 heading found. H1 tags are crucial for SEO and document structure.",
+      severity: "high",
+      recommendation: "Add an H1 tag with your main page topic: <h1>Your Main Heading</h1>",
+      location: "<body> content",
+      selector: "h1",
+      current_value: "0 H1 tags found",
+      expected_value: "1 H1 tag with primary keyword",
+      impact: "high",
+      effort: "5 minutes",
+      category: "Content Structure"
+    });
+  } else if (h1.length > 1) {
+    issues.push({
+      title: "Multiple H1 Tags",
+      description: `${h1.length} H1 tags found. Pages should typically have only one H1 tag.`,
+      severity: "medium",
+      recommendation: "Use only one H1 tag per page and convert others to H2 or H3 as appropriate.",
+      location: "<body> content",
+      selector: "h1",
+      current_value: `${h1.length} H1 tags`,
+      expected_value: "1 H1 tag",
+      impact: "medium",
+      effort: "10 minutes",
+      category: "Content Structure"
+    });
+  }
+  
+  // Check for missing structured data
+  const jsonLd = $('script[type="application/ld+json"]');
+  if (jsonLd.length === 0) {
+    issues.push({
+      title: "Missing Structured Data",
+      description: "No structured data (JSON-LD) found. This limits rich snippet opportunities in search results.",
+      severity: "medium",
+      recommendation: "Implement appropriate structured data markup for your content type (Article, Product, Organization, etc.)",
+      location: "<head> or <body> section",
+      selector: "script[type=\"application/ld+json\"]",
+      current_value: "No structured data found",
+      expected_value: "JSON-LD structured data for content type",
+      impact: "medium",
+      effort: "30 minutes",
+      category: "Rich Snippets"
+    });
+  }
+  
+  // Check for missing alt text on images (using existing images variable)
+  const imagesWithoutAltText = images.filter((_, el) => !$(el).attr('alt') || $(el).attr('alt')?.trim() === '');
+  if (imagesWithoutAltText.length > 0) {
+    issues.push({
+      title: "Images Missing Alt Text",
+      description: `${imagesWithoutAltText.length} images found without alt text. This affects accessibility and SEO.`,
+      severity: "medium",
+      recommendation: "Add descriptive alt text to all images: <img src=\"image.jpg\" alt=\"Descriptive text\">",
+      location: "Throughout page content",
+      selector: "img",
+      current_value: `${imagesWithoutAltText.length} images without alt text`,
+      expected_value: "All images have descriptive alt text",
+      impact: "medium",
+      effort: "20 minutes",
+      category: "Accessibility"
+    });
+  }
+  
+  // Check for external links without rel attributes (using existing allLinks)
+  const externalLinksNoRel = allLinks.filter((_, el) => {
+    const href = $(el).attr('href');
+    if (!href) return false;
+    try {
+      const url = new URL(href, baseUrl);
+      const isExternal = url.hostname !== baseUrlObj.hostname;
+      const hasRel = $(el).attr('rel');
+      return isExternal && !hasRel;
+    } catch {
+      return false;
+    }
+  });
+  
+  if (externalLinksNoRel.length > 0) {
+    issues.push({
+      title: "External Links Without Rel Attributes",
+      description: `${externalLinksNoRel.length} external links without rel attributes. This can affect link equity and security.`,
+      severity: "low",
+      recommendation: "Add appropriate rel attributes to external links: rel=\"noopener\" or rel=\"nofollow\" as needed.",
+      location: "Throughout page content",
+      selector: "a[href]",
+      current_value: `${externalLinksNoRel.length} external links without rel`,
+      expected_value: "All external links have appropriate rel attributes",
+      impact: "low",
+      effort: "15 minutes",
+      category: "Link Optimization"
+    });
+  }
+  
   return issues;
 }
 
@@ -782,7 +1006,7 @@ function generateQuickWins(issues: Array<{
     return aEffort - bEffort;
   });
   
-  return sortedQuickWins.slice(0, 6).map(issue => ({
+  return sortedQuickWins.slice(0, 12).map(issue => ({
     title: issue.title,
     description: issue.recommendation,
     location: issue.location,

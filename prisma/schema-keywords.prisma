@@ -1,0 +1,157 @@
+// Add keyword research and tracking tables to the existing schema
+
+model Keyword {
+  id          String   @id @default(cuid())
+  keyword     String
+  searchVolume Int?
+  difficulty  Float?   // 0-100 scale
+  cpc         Float?   // Cost per click
+  intent      String?  // commercial, informational, navigational, transactional
+  country     String   @default("US")
+  language    String   @default("en")
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lastChecked DateTime?
+  
+  // Relations
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  groupId     String?
+  group       KeywordGroup? @relation(fields: [groupId], references: [id])
+  rankings    Ranking[]
+  competitors KeywordCompetitor[]
+  
+  @@unique([keyword, projectId, country, language])
+  @@index([projectId])
+  @@index([difficulty])
+  @@index([searchVolume])
+}
+
+model KeywordGroup {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  color       String?  // Hex color for UI grouping
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Relations
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  keywords    Keyword[]
+  
+  @@unique([name, projectId])
+  @@index([projectId])
+}
+
+model Ranking {
+  id          String   @id @default(cuid())
+  position    Int?     // null if not in top 100
+  previousPosition Int?
+  change      Int?     // position change from previous check
+  url         String?  // ranking URL
+  title       String?  // page title
+  description String?  // meta description
+  
+  // SERP Features
+  serpFeatures Json?   // featured snippets, local pack, etc.
+  
+  // Geographic and device data
+  location    String   @default("US")
+  device      String   @default("desktop") // desktop, mobile, tablet
+  
+  // Metadata
+  checkedAt   DateTime @default(now())
+  
+  // Relations
+  keywordId   String
+  keyword     Keyword  @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+  
+  @@index([keywordId])
+  @@index([checkedAt])
+  @@index([position])
+}
+
+model KeywordCompetitor {
+  id          String   @id @default(cuid())
+  domain      String
+  url         String?
+  position    Int
+  title       String?
+  description String?
+  
+  // Competitor metrics
+  domainRating Float?  // Domain authority/rating
+  backlinks   Int?
+  
+  // Metadata
+  checkedAt   DateTime @default(now())
+  
+  // Relations
+  keywordId   String
+  keyword     Keyword  @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+  
+  @@index([keywordId])
+  @@index([domain])
+  @@index([position])
+}
+
+model KeywordSuggestion {
+  id          String   @id @default(cuid())
+  keyword     String
+  source      String   // "related", "questions", "autocomplete", "competitor"
+  searchVolume Int?
+  difficulty  Float?
+  relevanceScore Float? // 0-1 relevance to seed keyword
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  seedKeyword String   // Original keyword that generated this suggestion
+  
+  // Relations
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@unique([keyword, seedKeyword, projectId])
+  @@index([projectId])
+  @@index([searchVolume])
+}
+
+model RankingAlert {
+  id          String   @id @default(cuid())
+  type        String   // "position_change", "new_ranking", "lost_ranking", "competitor_change"
+  threshold   Int?     // position threshold for alerts
+  isActive    Boolean  @default(true)
+  
+  // Alert settings
+  emailEnabled Boolean @default(true)
+  slackEnabled Boolean @default(false)
+  webhookUrl   String?
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  lastTriggered DateTime?
+  
+  // Relations
+  keywordId   String?
+  keyword     Keyword? @relation(fields: [keywordId], references: [id], onDelete: Cascade)
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  @@index([projectId])
+  @@index([isActive])
+}
+
+// Add relations to existing Project model
+model Project {
+  // ... existing fields ...
+  keywords          Keyword[]
+  keywordGroups     KeywordGroup[]
+  keywordSuggestions KeywordSuggestion[]
+  rankingAlerts     RankingAlert[]
+}
