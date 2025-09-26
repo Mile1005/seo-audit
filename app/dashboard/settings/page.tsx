@@ -28,7 +28,7 @@ export default function SettingsPage() {
   const { data: session, update } = useSession()
   const [tab, setTab] = useState<Tab>('profile')
   const [loading, setLoading] = useState(false)
-  const [profile, setProfile] = useState({ name: '', email: '' })
+  const [profile, setProfile] = useState({ name: '', email: '', hasPassword: false })
   const [prefs, setPrefs] = useState<Preferences>({ company: '', timezone: 'UTC' })
   const [pwd, setPwd] = useState({ current: '', next: '', confirm: '' })
   const [twoFA, setTwoFA] = useState<TwoFAState>({ enabled: false, secret: '', qr: '', token: '' })
@@ -45,7 +45,7 @@ export default function SettingsPage() {
         ])
         if (uRes.ok) {
           const { user } = await uRes.json()
-          setProfile({ name: user?.name || '', email: user?.email || '' })
+          setProfile({ name: user?.name || '', email: user?.email || '', hasPassword: !!user?.hasPassword })
         }
         if (pRes.ok) {
           const { preferences } = await pRes.json()
@@ -90,6 +90,7 @@ export default function SettingsPage() {
       if (!r.ok) throw new Error((await r.json()).error || 'Update failed')
       const { user } = await r.json()
       await update({ name: user.name })
+      setProfile(p => ({ ...p, name: user.name }))
       toast.success('Profile updated')
     } catch (e: any) {
       toast.error(e?.message || 'Error updating profile')
@@ -319,42 +320,57 @@ export default function SettingsPage() {
         {tab === 'security' && (
           <div className="space-y-8">
             <h2 className="text-xl font-semibold text-slate-900">Security</h2>
-            <div className="bg-slate-50 p-6 rounded-lg space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Current Password</label>
-                <input
-                  type="password"
-                  value={pwd.current}
-                  onChange={(e) => setPwd({ ...pwd, current: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg"
-                />
+            {profile.hasPassword ? (
+              <div className="bg-slate-50 p-6 rounded-lg space-y-4 border border-slate-200">
+                <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wide">Password</h3>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="md:col-span-1 space-y-1">
+                    <label className="block text-sm font-medium text-slate-700">Current</label>
+                    <input
+                      type="password"
+                      value={pwd.current}
+                      onChange={(e) => setPwd({ ...pwd, current: e.target.value })}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-sm font-medium text-slate-700">New</label>
+                    <input
+                      type="password"
+                      value={pwd.next}
+                      onChange={(e) => setPwd({ ...pwd, next: e.target.value })}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="block text-sm font-medium text-slate-700">Confirm</label>
+                    <input
+                      type="password"
+                      value={pwd.confirm}
+                      onChange={(e) => setPwd({ ...pwd, confirm: e.target.value })}
+                      className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    onClick={changePassword}
+                    disabled={loading}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+                  >
+                    Change Password
+                  </button>
+                </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">New Password</label>
-                <input
-                  type="password"
-                  value={pwd.next}
-                  onChange={(e) => setPwd({ ...pwd, next: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg"
-                />
+            ) : (
+              <div className="bg-slate-50 p-6 rounded-lg border border-slate-200 flex items-center justify-between">
+                <div>
+                  <h3 className="text-sm font-semibold text-slate-800 uppercase tracking-wide">Password</h3>
+                  <p className="text-sm text-slate-600 mt-1 max-w-md">Your account uses Google sign in. Password management is handled by your Google Account.</p>
+                </div>
+                <span className="text-xs font-medium bg-green-100 text-green-700 px-2 py-1 rounded">Google OAuth</span>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Confirm New Password</label>
-                <input
-                  type="password"
-                  value={pwd.confirm}
-                  onChange={(e) => setPwd({ ...pwd, confirm: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg"
-                />
-              </div>
-              <button
-                onClick={changePassword}
-                disabled={loading}
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
-              >
-                Change Password
-              </button>
-            </div>
+            )}
 
             <div className="bg-slate-50 p-6 rounded-lg">
               <h3 className="text-lg font-medium text-slate-900 mb-2">Two-Factor Authentication</h3>
