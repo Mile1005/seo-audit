@@ -1,7 +1,6 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
-import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma"
 import bcrypt from "bcryptjs"
 
@@ -16,20 +15,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      // Explicitly set redirect URI to prevent any mismatch
-      redirectProxyUrl: `${process.env.NEXTAUTH_URL || 'https://www.aiseoturbo.com'}/api/auth/callback/google`,
       authorization: {
         params: {
           prompt: "consent",
           access_type: "offline",
           response_type: "code",
-          // Force the exact redirect URI that we expect
-          redirect_uri: `${process.env.NEXTAUTH_URL || 'https://www.aiseoturbo.com'}/api/auth/callback/google`,
         },
       },
     }),
@@ -93,39 +87,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("🔐 SignIn callback:", {
-        user: user?.email,
-        account: account?.provider,
-        profile: profile?.email,
-        accountDetails: account ? {
-          provider: account.provider,
-          type: account.type,
-          providerAccountId: account.providerAccountId,
-        } : null
-      })
-      
-      // Log the exact redirect URI being used
-      const expectedRedirectUri = `${process.env.NEXTAUTH_URL || 'https://www.aiseoturbo.com'}/api/auth/callback/google`
-      console.log("🔗 Expected redirect URI:", expectedRedirectUri)
-      console.log("🌐 Current NEXTAUTH_URL:", process.env.NEXTAUTH_URL)
-      
       return true
     },
     session: async ({ session, token }) => {
-      console.log("📱 Session callback:", {
-        sessionUser: session?.user?.email,
-        tokenSub: token.sub
-      })
       if (session?.user && token.sub) {
         session.user.id = token.sub
       }
       return session
     },
     jwt: async ({ user, token }) => {
-      console.log("🎫 JWT callback:", {
-        user: user?.email,
-        tokenSub: token.sub
-      })
       if (user) {
         token.uid = user.id
       }
