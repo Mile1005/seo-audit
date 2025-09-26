@@ -47,8 +47,14 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     Google({
       clientId: GOOGLE_CLIENT_ID || 'missing-google-client-id',
       clientSecret: GOOGLE_CLIENT_SECRET || 'missing-google-client-secret',
-      // Remove custom params temporarily to reduce invalid_grant surface (Google sometimes invalidates when misaligned)
-      // If offline access refresh tokens needed later, we can re-introduce with care.
+      authorization: {
+        params: {
+          prompt: 'consent',
+          access_type: 'offline',
+          response_type: 'code',
+          scope: 'openid email profile'
+        }
+      }
     }),
     Credentials({
       name: "credentials",
@@ -176,6 +182,14 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         user: message.user?.email,
         provider: (message.account as any)?.provider,
       })
+      // Trim image if Google returned huge data URI (should normally be https URL)
+      if (message.user && (message.user as any).image && typeof (message.user as any).image === 'string') {
+        const img = (message.user as any).image as string
+        if (img.startsWith('data:') && img.length > MAX_INLINE_IMAGE_LENGTH) {
+          console.warn('⚠️ Trimming large data URI image from signIn event', img.length)
+          ;(message.user as any).image = null
+        }
+      }
     },
     async session(message) {
       console.log('🟢 NextAuth event session:', {
