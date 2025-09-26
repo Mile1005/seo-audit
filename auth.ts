@@ -1,8 +1,8 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 import Credentials from "next-auth/providers/credentials"
-import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma"
+import { safeDbOperation } from "./lib/db-health"
 import bcrypt from "bcryptjs"
 
 // Log environment status once on startup
@@ -16,7 +16,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  // Use JWT strategy to avoid database issues during OAuth callback
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -89,26 +92,75 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
+      // For OAuth providers, ensure user exists in database (but don't fail if DB is down)
+      if (account?.provider === 'google' && user?.email) {
+        await safeDbOperation(async () => {
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email! }
+          })
+          
+          if (!existingUser) {
+            // Create user in database
+            console.log(`Creating new user: ${user.email}`)
+            await prisma.user.create({
+              data: {
+                email: user.email!,
+                name: user.name,
+                image: user.image,
+                emailVerified: new Date(),
+              }
+            })
+          } else if (!existingUser.image && user.image) {
+            // Update image if user doesn't have one
+            console.log(`Updating user image: ${user.email}`)
+            await prisma.user.update({
+              where: { email: user.email! },
+              data: { image: user.image }
+            })
+          }
+        })
+      }
       return true
     },
     session: async ({ session, token }) => {
       if (session?.user && token.sub) {
         session.user.id = token.sub
+        
+        // Fetch fresh user data from database
+        if (session.user.email) {
+          const dbUser = await safeDbOperation(async () => {
+            return await prisma.user.findUnique({
+              where: { email: session.user.email! },
+              select: {
+                id: true,
+                name: true,
+                email: true,
+                image: true,
+              }
+            })
+          })
+          
+          if (dbUser) {
+            session.user.id = dbUser.id
+            session.user.name = dbUser.name
+            session.user.image = dbUser.image
+          }
+        }
       }
       return session
     },
-    jwt: async ({ user, token }) => {
+    jwt: async ({ user, token, account }) => {
       if (user) {
         token.uid = user.id
+        token.email = user.email
+        token.name = user.name
+        token.picture = user.image
       }
       return token
     },
   },
   pages: {
     signIn: '/login',
-  },
-  session: {
-    strategy: 'jwt',
   },
   debug: true, // Enable debug logging for production
   trustHost: true,
