@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import speakeasy from 'speakeasy'
 import QRCode from 'qrcode'
-import { getRedis } from '@/lib/redis'
+import { safeGet, safeSet, safeDel } from '@/lib/redis'
 
 // Keys
 function keyStatus(email: string) {
@@ -18,8 +18,7 @@ export async function GET() {
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-    const redis = getRedis()
-    const statusRaw = await redis.get(keyStatus(session.user.email))
+    const statusRaw = await safeGet(keyStatus(session.user.email))
     const status = statusRaw ? JSON.parse(statusRaw) : { enabled: false }
     return NextResponse.json({ enabled: !!status.enabled })
   } catch (error) {
@@ -39,7 +38,6 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { action, token } = body
     const email = session.user.email
-    const redis = getRedis()
 
     if (action === 'setup') {
       // Generate a new secret
@@ -53,7 +51,7 @@ export async function POST(request: NextRequest) {
       const qrCodeUrl = await QRCode.toDataURL(secret.otpauth_url!)
 
       // Store the temporary secret (TTL 10 minutes)
-      await redis.set(keyTmp(email), secret.base32, 'EX', 600)
+      await safeSet(keyTmp(email), secret.base32, 600)
 
       // Also return it to the client for immediate verification
       return NextResponse.json({
@@ -67,8 +65,8 @@ export async function POST(request: NextRequest) {
       const { secret } = body
       
       if (!secret || !token) {
-        // Try to use temporary secret from Redis if not provided
-        const tmp = await redis.get(keyTmp(email))
+        // Try to use temporary secret from storage if not provided
+        const tmp = await safeGet(keyTmp(email))
         if (!tmp) {
           return NextResponse.json({ error: 'Secret and token are required' }, { status: 400 })
         }
@@ -87,10 +85,10 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'Invalid token' }, { status: 400 })
       }
 
-      // Persist 2FA status and secret in Redis
-      await redis.set(keyStatus(email), JSON.stringify({ enabled: true, secret: body.secret }))
+      // Persist 2FA status and secret in storage
+      await safeSet(keyStatus(email), JSON.stringify({ enabled: true, secret: body.secret }))
       // Clear temporary secret
-      await redis.del(keyTmp(email))
+      await safeDel(keyTmp(email))
 
       return NextResponse.json({ 
         message: '2FA enabled successfully',
@@ -106,9 +104,9 @@ export async function POST(request: NextRequest) {
       }
 
       // In a real implementation, verify the password here
-      // Disable 2FA in Redis
-      await redis.set(keyStatus(email), JSON.stringify({ enabled: false }))
-      await redis.del(keyTmp(email))
+      // Disable 2FA in storage
+      await safeSet(keyStatus(email), JSON.stringify({ enabled: false }))
+      await safeDel(keyTmp(email))
 
       return NextResponse.json({ 
         message: '2FA disabled successfully',

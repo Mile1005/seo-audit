@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
-import { getRedis } from '@/lib/redis'
+import { safeGet, safeSet } from '@/lib/redis'
 
 // In-memory fallback (per server instance) if Redis unavailable
 const memoryStore = new Map<string, { company: string; timezone: string }>()
@@ -10,8 +10,7 @@ export async function GET() {
   if (!session?.user?.email) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const key = `user:prefs:${session.user.email}`
   try {
-    const redis = getRedis()
-    const prefs = await redis.get(key)
+    const prefs = await safeGet(key)
     return NextResponse.json({
       preferences: prefs ? JSON.parse(prefs) : memoryStore.get(key) || { company: '', timezone: 'UTC' }
     })
@@ -35,8 +34,7 @@ export async function PUT(req: NextRequest) {
   const key = `user:prefs:${session.user.email}`
   memoryStore.set(key, { company, timezone })
   try {
-    const redis = getRedis()
-    await redis.set(key, JSON.stringify({ company, timezone }))
+    await safeSet(key, JSON.stringify({ company, timezone }))
     return NextResponse.json({ ok: true, persisted: true })
   } catch (e) {
     return NextResponse.json({ ok: true, persisted: false, fallback: true })
