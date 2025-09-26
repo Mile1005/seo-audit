@@ -5,12 +5,29 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma"
 import bcrypt from "bcryptjs"
 
+// Log environment status once on startup
+if (process.env.NODE_ENV === 'production') {
+  console.log('🔑 Auth Environment Check:', {
+    hasGoogleId: !!process.env.GOOGLE_CLIENT_ID,
+    hasGoogleSecret: !!process.env.GOOGLE_CLIENT_SECRET,
+    hasAuthSecret: !!(process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET),
+    nextauthUrl: process.env.NEXTAUTH_URL,
+  })
+}
+
 export const { auth, handlers, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code",
+        },
+      },
     }),
     Credentials({
       name: "credentials",
@@ -108,4 +125,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   },
   debug: true, // Enable debug logging for production
   trustHost: true,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
 })
