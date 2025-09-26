@@ -47,14 +47,20 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     Google({
       clientId: GOOGLE_CLIENT_ID || 'missing-google-client-id',
       clientSecret: GOOGLE_CLIENT_SECRET || 'missing-google-client-secret',
-      authorization: {
-        params: {
-          prompt: 'consent',
-          access_type: 'offline',
-          response_type: 'code',
-          scope: 'openid email profile'
+      // Provide a minimal profile transform to avoid huge images / unexpected fields
+      profile(profile) {
+        const image = typeof profile.picture === 'string' && profile.picture.length < MAX_INLINE_IMAGE_LENGTH
+          ? profile.picture
+          : null
+        return {
+          id: profile.sub || profile.id,
+            // fallback to name or email local part
+          name: profile.name || (profile.email ? profile.email.split('@')[0] : 'User'),
+          email: profile.email,
+          image,
+          emailVerified: null,
         }
-      }
+      },
     }),
     Credentials({
       name: "credentials",
@@ -204,5 +210,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     strategy: 'jwt',
   },
   debug: true, // Enable debug logging for production
+  // trustHost helps NextAuth accept the host header behind proxies (Vercel) and can reduce host mismatch issues
+  trustHost: true,
   secret: AUTH_SECRET || 'development-fallback-secret-do-not-use-in-prod',
 })
