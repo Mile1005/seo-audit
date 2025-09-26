@@ -23,6 +23,9 @@ const GOOGLE_CLIENT_SECRET = requireEnv('GOOGLE_CLIENT_SECRET')
 const AUTH_SECRET = requireEnv('AUTH_SECRET', true) || requireEnv('NEXTAUTH_SECRET', true)
 const NEXTAUTH_URL = requireEnv('NEXTAUTH_URL', true)
 
+// Max length for inline avatar (roughly keeps JWT well under cookie limits)
+const MAX_INLINE_IMAGE_LENGTH = 1200
+
 if (process.env.NODE_ENV === 'production') {
   // One-time summary log (without secrets)
   console.log('🔎 Auth env summary', {
@@ -136,6 +139,12 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (session?.user && token.sub) {
         session.user.id = token.sub
       }
+      // Propagate only safe, small image (avoid huge base64 in cookie)
+      if (token.image && typeof token.image === 'string') {
+        session.user.image = token.image
+      } else if (session.user.image && (session.user.image as string).length > MAX_INLINE_IMAGE_LENGTH) {
+        delete (session.user as any).image
+      }
       return session
     },
     jwt: async ({ user, token }) => {
@@ -145,6 +154,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       })
       if (user) {
         token.uid = user.id
+        // Only keep minimal fields
+        token.name = user.name
+        token.email = user.email
+        if ((user as any).image && typeof (user as any).image === 'string') {
+          const img = (user as any).image as string
+          if (img.length <= MAX_INLINE_IMAGE_LENGTH) {
+            ;(token as any).image = img
+          } else {
+            console.warn('⚠️ Trimming large user.image from JWT (length)', img.length)
+            ;(token as any).image = null
+          }
+        }
       }
       return token
     },
