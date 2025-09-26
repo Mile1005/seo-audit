@@ -89,9 +89,15 @@ export default function SettingsPage() {
       })
       if (!r.ok) throw new Error((await r.json()).error || 'Update failed')
       const { user } = await r.json()
+      
+      // Update session and local state
       await update({ name: user.name })
       setProfile(p => ({ ...p, name: user.name }))
-      toast.success('Profile updated')
+      
+      // Force page refresh to ensure data is updated
+      setTimeout(() => window.location.reload(), 1000)
+      
+      toast.success('Profile updated successfully!')
     } catch (e: any) {
       toast.error(e?.message || 'Error updating profile')
     } finally {
@@ -126,8 +132,14 @@ export default function SettingsPage() {
       const r = await fetch('/api/user/photo', { method: 'POST', body: fd })
       if (!r.ok) throw new Error((await r.json()).error || 'Upload failed')
       const { user } = await r.json()
+      
+      // Update session and refresh page data
       await update({ image: user.image })
-      toast.success('Photo updated')
+      
+      // Force page refresh to show new photo
+      window.location.reload()
+      
+      toast.success('Photo updated successfully!')
     } catch (e: any) {
       toast.error(e?.message || 'Error uploading photo')
     } finally {
@@ -162,10 +174,15 @@ export default function SettingsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'setup' }),
       })
-      if (!r.ok) throw new Error('2FA setup failed')
+      if (!r.ok) {
+        const error = await r.json()
+        throw new Error(error.error || '2FA setup failed')
+      }
       const data = await r.json()
       setTwoFA((prev) => ({ ...prev, secret: data.secret, qr: data.qrCode }))
+      toast.success('2FA setup initialized! Scan the QR code with your authenticator app.')
     } catch (e: any) {
+      console.error('2FA setup error:', e)
       toast.error(e?.message || 'Error setting up 2FA')
     } finally {
       setLoading(false)
@@ -173,7 +190,7 @@ export default function SettingsPage() {
   }
 
   async function verify2FA() {
-    if (!twoFA.secret || !twoFA.token) return toast.error('Enter the 2FA code')
+    if (!twoFA.secret || !twoFA.token) return toast.error('Enter the 6-digit code from your authenticator app')
     setLoading(true)
     try {
       const r = await fetch('/api/user/2fa', {
@@ -181,10 +198,14 @@ export default function SettingsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action: 'verify', secret: twoFA.secret, token: twoFA.token }),
       })
-      if (!r.ok) throw new Error((await r.json()).error || 'Verification failed')
+      if (!r.ok) {
+        const error = await r.json()
+        throw new Error(error.error || 'Verification failed')
+      }
       setTwoFA({ enabled: true, secret: '', qr: '', token: '' })
-      toast.success('2FA enabled')
+      toast.success('2FA enabled successfully! Your account is now more secure.')
     } catch (e: any) {
+      console.error('2FA verification error:', e)
       toast.error(e?.message || 'Error verifying 2FA')
     } finally {
       setLoading(false)
@@ -221,58 +242,65 @@ export default function SettingsPage() {
         {tab === 'profile' && (
           <div className="space-y-6">
             <h2 className="text-xl font-semibold text-slate-900">Profile Information</h2>
-            <div className="flex items-center space-x-6">
-              <div className="relative">
+            <div className="flex items-center space-x-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+              <div className="relative group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 {session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt="Profile"
-                    className="w-20 h-20 rounded-full object-cover"
+                    className="w-24 h-24 rounded-full object-cover ring-4 ring-white shadow-lg"
                   />
                 ) : (
-                  <div className="w-20 h-20 bg-slate-200 rounded-full flex items-center justify-center">
-                    <UserCircleIcon className="w-12 h-12 text-slate-400" />
+                  <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center ring-4 ring-white shadow-lg">
+                    <span className="text-white text-xl font-bold">{session?.user?.name?.[0]?.toUpperCase() || 'U'}</span>
                   </div>
                 )}
                 <button
                   onClick={() => fileRef.current?.click()}
                   disabled={loading}
-                  className="absolute bottom-0 right-0 bg-blue-600 text-white p-2 rounded-full disabled:opacity-50"
+                  className="absolute bottom-0 right-0 bg-blue-600 text-white p-2.5 rounded-full disabled:opacity-50 hover:bg-blue-700 transition-colors shadow-lg group-hover:scale-110 transition-transform"
                   aria-label="Change profile photo"
                 >
                   <CameraIcon className="w-4 h-4" />
                 </button>
               </div>
-              <div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">{session?.user?.name || 'Your Name'}</h3>
+                <p className="text-gray-600 mb-4">{session?.user?.email}</p>
                 <button
                   onClick={() => fileRef.current?.click()}
                   disabled={loading}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+                  className="bg-blue-600 text-white px-6 py-2.5 rounded-lg disabled:opacity-50 hover:bg-blue-700 transition-colors font-medium shadow-sm"
                 >
-                  Change Photo
+                  {loading ? 'Uploading...' : 'Change Photo'}
                 </button>
-                <p className="text-sm text-slate-500 mt-1">JPG, GIF or PNG. Max size 2MB.</p>
+                <p className="text-sm text-gray-500 mt-2">JPG, GIF or PNG. Max size 2MB.</p>
                 <input ref={fileRef} className="hidden" type="file" accept="image/*" onChange={uploadPhoto} />
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">Full Name</label>
                 <input
                   value={profile.name}
                   onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white shadow-sm"
+                  placeholder="Enter your full name"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">Email Address</label>
                 <input
                   value={profile.email}
                   disabled
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg bg-slate-50 text-slate-500"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50 text-gray-500 shadow-sm"
                 />
+                <p className="text-xs text-gray-500 mt-2 flex items-center">
+                  <CheckIcon className="w-3 h-3 mr-1" />
+                  Email cannot be changed
+                </p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-2">Company</label>
