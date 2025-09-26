@@ -5,31 +5,47 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma"
 import bcrypt from "bcryptjs"
 
-function requireEnv(name: string) {
+// NOTE: Extra defensive logging to surface root cause of `invalid_grant` / Configuration errors in production.
+// Common causes we will highlight: redirect URI mismatch, missing env vars, host mismatch (www vs apex), reused code.
+
+function requireEnv(name: string, optional = false) {
   const v = process.env[name]
-  if (!v) {
+  if (!v && !optional) {
     console.error(`❌ Missing required env var: ${name}`)
   }
   return v
 }
 
+// Gather env vars (we log them in a sanitized way once)
 const GOOGLE_CLIENT_ID = requireEnv('GOOGLE_CLIENT_ID')
 const GOOGLE_CLIENT_SECRET = requireEnv('GOOGLE_CLIENT_SECRET')
-const AUTH_SECRET = requireEnv('AUTH_SECRET')
+// Support both AUTH_SECRET and NEXTAUTH_SECRET just in case only one is set
+const AUTH_SECRET = requireEnv('AUTH_SECRET', true) || requireEnv('NEXTAUTH_SECRET', true)
+const NEXTAUTH_URL = requireEnv('NEXTAUTH_URL', true)
+
+if (process.env.NODE_ENV === 'production') {
+  // One-time summary log (without secrets)
+  console.log('🔎 Auth env summary', {
+    hasGoogleId: !!GOOGLE_CLIENT_ID,
+    hasGoogleSecret: !!GOOGLE_CLIENT_SECRET,
+    hasSecret: !!AUTH_SECRET,
+    nextauthUrl: NEXTAUTH_URL,
+  })
+}
+
+function mask(v?: string | null) {
+  if (!v) return v
+  return v.slice(0, 4) + '...' + v.slice(-4)
+}
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
-      clientId: GOOGLE_CLIENT_ID || 'invalid',
-      clientSecret: GOOGLE_CLIENT_SECRET || 'invalid',
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
+      clientId: GOOGLE_CLIENT_ID || 'missing-google-client-id',
+      clientSecret: GOOGLE_CLIENT_SECRET || 'missing-google-client-secret',
+      // Remove custom params temporarily to reduce invalid_grant surface (Google sometimes invalidates when misaligned)
+      // If offline access refresh tokens needed later, we can re-introduce with care.
     }),
     Credentials({
       name: "credentials",
@@ -96,7 +112,21 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         account: account?.provider,
         profile: profile?.email 
       })
+      if (!AUTH_SECRET) {
+        console.error('❌ AUTH_SECRET (or NEXTAUTH_SECRET) missing. Sessions will fail.')
+      }
+      if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
+        console.error('❌ Google OAuth credentials missing. Google sign-in will not work.')
+      }
       return true
+    },
+    async redirect({ url, baseUrl }) {
+      try {
+        if (NEXTAUTH_URL && !baseUrl.includes(new URL(NEXTAUTH_URL).host)) {
+          console.warn('⚠️ Host mismatch (baseUrl vs NEXTAUTH_URL)', { baseUrl, NEXTAUTH_URL })
+        }
+      } catch {}
+      return url.startsWith('/') ? `${baseUrl}${url}` : url
     },
     session: async ({ session, token }) => {
       console.log("📱 Session callback:", { 
@@ -119,6 +149,19 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       return token
     },
   },
+  events: {
+    async signIn(message) {
+      console.log('🟢 NextAuth event signIn:', {
+        user: message.user?.email,
+        provider: (message.account as any)?.provider,
+      })
+    },
+    async session(message) {
+      console.log('🟢 NextAuth event session:', {
+        user: message.session?.user?.email,
+      })
+    }
+  },
   pages: {
     signIn: '/login',
   },
@@ -126,5 +169,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     strategy: 'jwt',
   },
   debug: true, // Enable debug logging for production
-  secret: AUTH_SECRET,
+  secret: AUTH_SECRET || 'development-fallback-secret-do-not-use-in-prod',
 })
