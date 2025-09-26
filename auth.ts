@@ -5,12 +5,24 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./lib/prisma"
 import bcrypt from "bcryptjs"
 
+function requireEnv(name: string) {
+  const v = process.env[name]
+  if (!v) {
+    console.error(`❌ Missing required env var: ${name}`)
+  }
+  return v
+}
+
+const GOOGLE_CLIENT_ID = requireEnv('GOOGLE_CLIENT_ID')
+const GOOGLE_CLIENT_SECRET = requireEnv('GOOGLE_CLIENT_SECRET')
+const AUTH_SECRET = requireEnv('AUTH_SECRET')
+
 export const { auth, handlers, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: GOOGLE_CLIENT_ID || 'invalid',
+      clientSecret: GOOGLE_CLIENT_SECRET || 'invalid',
       authorization: {
         params: {
           prompt: "consent",
@@ -114,4 +126,5 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     strategy: 'jwt',
   },
   debug: true, // Enable debug logging for production
+  secret: AUTH_SECRET,
 })
