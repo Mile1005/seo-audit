@@ -286,7 +286,7 @@ export default function SettingsPage() {
                 <input
                   value={profile.name}
                   onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white shadow-sm"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-900 shadow-sm"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -303,19 +303,20 @@ export default function SettingsPage() {
                 </p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Company</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">Company</label>
                 <input
                   value={prefs.company}
                   onChange={(e) => setPrefs({ ...prefs, company: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-900 shadow-sm"
+                  placeholder="Enter your company"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">Timezone</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-3">Timezone</label>
                 <select
                   value={prefs.timezone}
                   onChange={(e) => setPrefs({ ...prefs, timezone: e.target.value })}
-                  className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-900 shadow-sm"
                 >
                   <option value="UTC">UTC</option>
                   <option value="America/New_York">Eastern Time</option>
@@ -330,7 +331,7 @@ export default function SettingsPage() {
               <button
                 onClick={savePrefs}
                 disabled={loading}
-                className="px-4 py-2 border border-slate-300 rounded-lg disabled:opacity-50"
+                className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
               >
                 Save Preferences
               </button>
