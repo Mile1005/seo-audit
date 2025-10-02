@@ -14,6 +14,8 @@ import {
 } from '@heroicons/react/24/outline'
 import { MetricWidget, ProgressBar, StatusBadge, Sparkline } from '@/components/dashboard/MetricWidget'
 import { useProjects, useProjectOverview } from '../../hooks/useApi'
+import DashboardEmptyState from './DashboardEmptyState'
+import LatestAuditWidget from './LatestAuditWidget'
 
 export default function DashboardOverview() {
   const [loading, setLoading] = useState(true)
@@ -154,6 +156,21 @@ export default function DashboardOverview() {
 
   const isDataLoading = loading
 
+  // Check if user has any meaningful data
+  const hasProjects = stats?.projects > 0
+  const hasAudits = stats?.audits?.total > 0
+  const hasAnyData = hasProjects || hasAudits || (stats?.keywords?.total > 0) || (stats?.backlinks?.total > 0)
+
+  // Show empty state for first-time users
+  if (!loading && !hasAnyData) {
+    return <DashboardEmptyState 
+      hasAudits={hasAudits}
+      hasProjects={hasProjects}
+      gscConnected={gscConnected}
+      onGscConnect={handleGscConnect}
+    />
+  }
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -291,6 +308,13 @@ export default function DashboardOverview() {
           </div>
         </MetricWidget>
       </div>
+
+      {/* Latest Audit Widget */}
+      {stats?.audits?.latest && (
+        <div className="max-w-4xl">
+          <LatestAuditWidget audit={stats.audits.latest} />
+        </div>
+      )}
 
       {/* Quick Actions & Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -71,7 +71,7 @@ import { CrawledPagesAnalysis } from '../../../components/audit/CrawledPagesAnal
 // Unified comprehensive audit page. Legacy variants (simple/new/comprehensive) removed (Phase A consolidation).
 export default function ComprehensiveAuditPage() {
   const [url, setUrl] = useState('')
-  const { data: result, error, loading: isLoading, status, start, reset } = useAudit()
+  const { data: result, error, loading: isLoading, status, start, reset, loadCached, isCached } = useAudit()
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     coreWebVitals: true,
     technicalSEO: false,
@@ -79,6 +79,19 @@ export default function ComprehensiveAuditPage() {
     performance: false,
     recommendations: true
   })
+
+  // Load cached audit and URL params on mount
+  useEffect(() => {
+    // Check for URL params (auto-fill from projects)
+    const params = new URLSearchParams(window.location.search)
+    const domainParam = params.get('domain')
+    if (domainParam) {
+      setUrl(domainParam)
+    }
+
+    // Load cached audit results
+    loadCached()
+  }, [loadCached])
 
   // Debug logging for audit results
   React.useEffect(() => {
@@ -90,10 +103,11 @@ export default function ComprehensiveAuditPage() {
         hasComprehensiveResults: !!result.comprehensiveResults,
         performanceOpportunities: result.comprehensiveResults?.performance_opportunities?.length || 0,
         issues: result.comprehensiveResults?.issues?.length || 0,
-        quickWins: result.comprehensiveResults?.quick_wins?.length || 0
+        quickWins: result.comprehensiveResults?.quick_wins?.length || 0,
+        isCached
       })
     }
-  }, [result])
+  }, [result, isCached])
 
   const handleStartAudit = () => {
     const normalized = normalizeUrl(url)
@@ -294,6 +308,19 @@ export default function ComprehensiveAuditPage() {
         )}
         {result && (
           <div className="space-y-6">
+            {isCached && (
+              <Alert>
+                <Clock className="h-4 w-4" />
+                <AlertDescription className="flex items-center justify-between">
+                  <span>Showing cached audit results. Run a new audit to get fresh data.</span>
+                  <Button size="sm" variant="outline" onClick={() => { reset(); loadCached(); }}>
+                    <RefreshCw className="h-3 w-3 mr-1" />
+                    Reload Cache
+                  </Button>
+                </AlertDescription>
+              </Alert>
+            )}
+            
             <ScoreSummary result={result as AuditResultUnified} />
 
             {/* Detailed Analysis Tabs */}

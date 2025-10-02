@@ -106,10 +106,25 @@ export async function GET(req: NextRequest) {
         where: { projectId: firstProject.id },
         orderBy: { createdAt: 'desc' },
         select: {
+          id: true,
           createdAt: true,
           overallScore: true,
           summary: true,
-          status: true
+          status: true,
+          url: true,
+          completedAt: true,
+          issues: {
+            take: 5,
+            orderBy: { severity: 'desc' },
+            select: {
+              id: true,
+              title: true,
+              description: true,
+              severity: true,
+              type: true,
+              fixed: true
+            }
+          }
         }
       })
 
@@ -117,6 +132,7 @@ export async function GET(req: NextRequest) {
       let healthScore = 75 // Default estimate
       let criticalIssues = 0
       let warnings = 0
+      let latestAuditDetails = null
 
       if (lastAudit) {
         healthScore = lastAudit.overallScore || healthScore
@@ -125,6 +141,20 @@ export async function GET(req: NextRequest) {
           const summary = lastAudit.summary as any
           criticalIssues = summary.criticalIssues || summary.errors || 0
           warnings = summary.warnings || 0
+
+          // Extract comprehensive results for display
+          latestAuditDetails = {
+            id: lastAudit.id,
+            url: lastAudit.url,
+            score: lastAudit.overallScore,
+            completedAt: lastAudit.completedAt || lastAudit.createdAt,
+            status: lastAudit.status,
+            topIssues: lastAudit.issues,
+            quickWins: summary.quickWins || 0,
+            totalIssues: summary.totalIssues || 0,
+            pageData: summary.pageData || null,
+            recommendations: summary.recommendations || []
+          }
         }
       }
 
@@ -153,7 +183,8 @@ export async function GET(req: NextRequest) {
           total: auditsCount,
           critical_issues: criticalIssues,
           warnings: warnings,
-          last_audit_date: lastAudit?.createdAt || null
+          last_audit_date: lastAudit?.createdAt || null,
+          latest: latestAuditDetails
         },
         traffic: {
           organic_visitors: Math.floor(keywordsCount * 35), // Rough estimate

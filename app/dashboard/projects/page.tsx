@@ -250,7 +250,7 @@ export default function ProjectsPage() {
                     </div>
                     
                     <div className="flex gap-2">
-                      <Link href={`/dashboard/audit?project=${project?.id}`} className="flex-1">
+                      <Link href={`/dashboard/audit?domain=${encodeURIComponent(project?.domain || '')}`} className="flex-1">
                         <Button size="sm" className="w-full">
                           <Settings className="h-4 w-4 mr-2" />
                           SEO Audit

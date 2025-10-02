@@ -8,6 +8,8 @@ interface UseAuditReturn {
   status: 'idle' | 'processing' | 'completed' | 'failed';
   start: (url: string) => Promise<void>;
   reset: () => void;
+  loadCached: () => boolean;
+  isCached: boolean;
 }
 
 export function useAudit(): UseAuditReturn {
@@ -16,6 +18,7 @@ export function useAudit(): UseAuditReturn {
   const [status, setStatus] = useState<'idle' | 'processing' | 'completed' | 'failed'>('idle');
   const cancelRef = useRef(false);
   const [loading, setLoading] = useState(false);
+  const [isCached, setIsCached] = useState(false);
 
   const poll = useCallback(async (auditId: string, attempt = 0) => {
     if (cancelRef.current) return;
@@ -26,6 +29,27 @@ export function useAudit(): UseAuditReturn {
         setData(json.data);
         setStatus('completed');
         setLoading(false);
+        
+        // Save audit results to database
+        try {
+          await fetch('/api/audits/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ auditResult: json.data })
+          });
+        } catch (saveError) {
+          console.warn('Failed to save audit to database:', saveError);
+          // Non-fatal, continue
+        }
+        
+        // Save to localStorage for immediate persistence
+        try {
+          localStorage.setItem('lastAuditResult', JSON.stringify(json.data));
+          localStorage.setItem('lastAuditTimestamp', new Date().toISOString());
+        } catch (storageError) {
+          console.warn('Failed to save audit to localStorage:', storageError);
+        }
+        
         return;
       }
       if (json.status === 'failed') {
@@ -73,13 +97,32 @@ export function useAudit(): UseAuditReturn {
     }
   }, [poll]);
 
+  const loadCached = useCallback(() => {
+    try {
+      const cached = localStorage.getItem('lastAuditResult');
+      const timestamp = localStorage.getItem('lastAuditTimestamp');
+      
+      if (cached) {
+        const parsedData = JSON.parse(cached);
+        setData(parsedData);
+        setStatus('completed');
+        setIsCached(true);
+        return true;
+      }
+    } catch (e) {
+      console.warn('Failed to load cached audit:', e);
+    }
+    return false;
+  }, []);
+
   const reset = () => {
     cancelRef.current = true;
     setData(null);
     setError(null);
     setStatus('idle');
     setLoading(false);
+    setIsCached(false);
   };
 
-  return { data, error, loading, status, start, reset };
+  return { data, error, loading, status, start, reset, loadCached, isCached };
 }
