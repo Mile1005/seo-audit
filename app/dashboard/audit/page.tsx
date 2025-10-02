@@ -179,8 +179,8 @@ export default function ComprehensiveAuditPage() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Professional SEO Audit</h1>
-          <p className="text-blue-700 dark:text-blue-300 font-medium text-lg">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Professional SEO Audit</h1>
+          <p className="text-blue-700 dark:text-blue-300 font-medium text-base sm:text-lg">
             Comprehensive SEO analysis with Core Web Vitals, ARIA compliance, and actionable insights
           </p>
         </div>
@@ -199,7 +199,7 @@ export default function ComprehensiveAuditPage() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="url">Website URL</Label>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <Input
                   id="url"
                   placeholder="https://example.com or example.com"
@@ -207,62 +207,65 @@ export default function ComprehensiveAuditPage() {
                   onChange={(e) => setUrl(e.target.value)}
                   disabled={isLoading}
                   onKeyDown={(e) => { if (e.key === 'Enter' && !isLoading) handleStartAudit() }}
-                  className="flex-1"
+                  className="flex-1 w-full"
                 />
-                <Button
-                  onClick={handleStartAudit}
-                  disabled={isLoading || !url.trim()}
-                  className="px-6"
-                >
-                  {isLoading ? (
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    onClick={handleStartAudit}
+                    disabled={isLoading || !url.trim()}
+                    className="flex-1 sm:flex-none whitespace-nowrap"
+                  >
+                    {isLoading ? (
+                      <>
+                        <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Zap className="h-4 w-4 mr-2" />
+                        {status === 'completed' ? 'Run Again' : 'Start Professional Audit'}
+                      </>
+                    )}
+                  </Button>
+                  {status === 'completed' && (
                     <>
-                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                      Processing...
-                    </>
-                  ) : (
-                    <>
-                      <Zap className="h-4 w-4 mr-2" />
-                      {status === 'completed' ? 'Run Again' : 'Start Professional Audit'}
+                      <Button variant="outline" onClick={() => { reset(); setUrl('') }} disabled={isLoading} className="flex-1 sm:flex-none">New</Button>
+                      <Button 
+                        variant="outline" 
+                        onClick={async () => {
+                          if (!result?.auditId) return;
+                          try {
+                            const response = await fetch(`/api/seo-audit/export/pdf?auditId=${result.auditId}`);
+                            const htmlContent = await response.text();
+                            
+                            // Create a new window with the HTML content for PDF printing
+                            const printWindow = window.open('', '_blank');
+                            if (printWindow) {
+                              printWindow.document.write(htmlContent);
+                              printWindow.document.close();
+                              
+                              // Wait for content to load, then trigger print
+                              printWindow.onload = () => {
+                                setTimeout(() => {
+                                  printWindow.print();
+                                  printWindow.close();
+                                }, 500);
+                              };
+                            }
+                          } catch (error) {
+                            console.error('Export failed:', error);
+                            alert('Failed to export PDF. Please try again.');
+                          }
+                        }} 
+                        disabled={isLoading || !result?.auditId}
+                        className="flex-1 sm:flex-none whitespace-nowrap"
+                      >
+                        <Download className="h-4 w-4 mr-2" />
+                        Export PDF
+                      </Button>
                     </>
                   )}
-                </Button>
-                {status === 'completed' && (
-                  <>
-                    <Button variant="outline" onClick={() => { reset(); setUrl('') }} disabled={isLoading}>New</Button>
-                    <Button 
-                      variant="outline" 
-                      onClick={async () => {
-                        if (!result?.auditId) return;
-                        try {
-                          const response = await fetch(`/api/seo-audit/export/pdf?auditId=${result.auditId}`);
-                          const htmlContent = await response.text();
-                          
-                          // Create a new window with the HTML content for PDF printing
-                          const printWindow = window.open('', '_blank');
-                          if (printWindow) {
-                            printWindow.document.write(htmlContent);
-                            printWindow.document.close();
-                            
-                            // Wait for content to load, then trigger print
-                            printWindow.onload = () => {
-                              setTimeout(() => {
-                                printWindow.print();
-                                printWindow.close();
-                              }, 500);
-                            };
-                          }
-                        } catch (error) {
-                          console.error('Export failed:', error);
-                          alert('Failed to export PDF. Please try again.');
-                        }
-                      }} 
-                      disabled={isLoading || !result?.auditId}
-                    >
-                      <Download className="h-4 w-4 mr-2" />
-                      Export PDF
-                    </Button>
-                  </>
-                )}
+                </div>
               </div>
             </div>
 
@@ -325,15 +328,15 @@ export default function ComprehensiveAuditPage() {
 
             {/* Detailed Analysis Tabs */}
             <Tabs defaultValue="overview" className="w-full" aria-label="Audit result sections">
-              <TabsList className="grid w-full grid-cols-8" role="tablist">
-                <TabsTrigger value="overview" aria-label="Overview tab" aria-expanded="true">Overview</TabsTrigger>
-                <TabsTrigger value="core-web-vitals" aria-label="Core Web Vitals tab" aria-expanded="false">Core Web Vitals</TabsTrigger>
-                <TabsTrigger value="seo" aria-label="Technical SEO tab" aria-expanded="false">Technical SEO</TabsTrigger>
-                <TabsTrigger value="accessibility" aria-label="Accessibility tab" aria-expanded="false">Accessibility</TabsTrigger>
-                <TabsTrigger value="performance" aria-label="Performance tab" aria-expanded="false">Performance</TabsTrigger>
-                <TabsTrigger value="pages" aria-label="Crawled Pages tab" aria-expanded="false">Pages</TabsTrigger>
-                <TabsTrigger value="recommendations" aria-label="Recommendations tab" aria-expanded="false">Recommendations</TabsTrigger>
-                <TabsTrigger value="history" aria-label="History tab" aria-expanded="false">History</TabsTrigger>
+              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1" role="tablist">
+                <TabsTrigger value="overview" aria-label="Overview tab" aria-expanded="true" className="text-xs sm:text-sm">Overview</TabsTrigger>
+                <TabsTrigger value="core-web-vitals" aria-label="Core Web Vitals tab" aria-expanded="false" className="text-xs sm:text-sm">Core Web Vitals</TabsTrigger>
+                <TabsTrigger value="seo" aria-label="Technical SEO tab" aria-expanded="false" className="text-xs sm:text-sm">Technical SEO</TabsTrigger>
+                <TabsTrigger value="accessibility" aria-label="Accessibility tab" aria-expanded="false" className="text-xs sm:text-sm">Accessibility</TabsTrigger>
+                <TabsTrigger value="performance" aria-label="Performance tab" aria-expanded="false" className="text-xs sm:text-sm">Performance</TabsTrigger>
+                <TabsTrigger value="pages" aria-label="Crawled Pages tab" aria-expanded="false" className="text-xs sm:text-sm">Pages</TabsTrigger>
+                <TabsTrigger value="recommendations" aria-label="Recommendations tab" aria-expanded="false" className="text-xs sm:text-sm">Recommendations</TabsTrigger>
+                <TabsTrigger value="history" aria-label="History tab" aria-expanded="false" className="text-xs sm:text-sm">History</TabsTrigger>
               </TabsList>
 
               {/* Overview Tab - Redesigned for Better Readability */}
@@ -504,7 +507,7 @@ export default function ComprehensiveAuditPage() {
                         {result.comprehensiveResults?.seo_checks?.passed_checks?.map((check, index) => (
                           <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-green-100">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -525,7 +528,7 @@ export default function ComprehensiveAuditPage() {
                         {result.comprehensiveResults?.seo_checks?.failed_checks?.map((check, index) => (
                           <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-red-100">
                             <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -547,7 +550,7 @@ export default function ComprehensiveAuditPage() {
                         <h4 className="font-semibold mb-3 text-slate-900 dark:text-white">H1 Tags ({result.comprehensiveResults?.h_tags?.h1?.length || 0})</h4>
                         <div className="space-y-2">
                           {result.comprehensiveResults?.h_tags?.h1?.map((h1, index) => (
-                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
+                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 break-words">
                               {h1}
                             </div>
                           )) || <div className="text-sm text-red-600 dark:text-red-400 font-medium">No H1 tags found</div>}
@@ -557,7 +560,7 @@ export default function ComprehensiveAuditPage() {
                         <h4 className="font-semibold mb-3 text-slate-900 dark:text-white">H2 Tags ({result.comprehensiveResults?.h_tags?.h2?.length || 0})</h4>
                         <div className="space-y-2 max-h-64 overflow-y-auto">
                           {result.comprehensiveResults?.h_tags?.h2?.slice(0, 5).map((h2, index) => (
-                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
+                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 break-words">
                               {h2}
                             </div>
                           )) || <div className="text-sm text-slate-500 dark:text-slate-400">No H2 tags found</div>}
@@ -572,7 +575,7 @@ export default function ComprehensiveAuditPage() {
                         <h4 className="font-semibold mb-3 text-slate-900 dark:text-white">H3 Tags ({result.comprehensiveResults?.h_tags?.h3?.length || 0})</h4>
                         <div className="space-y-2 max-h-64 overflow-y-auto">
                           {result.comprehensiveResults?.h_tags?.h3?.slice(0, 5).map((h3, index) => (
-                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
+                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 break-words">
                               {h3}
                             </div>
                           )) || <div className="text-sm text-slate-500 dark:text-slate-400">No H3 tags found</div>}
@@ -688,7 +691,7 @@ export default function ComprehensiveAuditPage() {
                         {result.comprehensiveResults?.accessibility?.passed_checks?.map((check, index) => (
                           <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-green-100">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -709,7 +712,7 @@ export default function ComprehensiveAuditPage() {
                         {result.comprehensiveResults?.accessibility?.failed_checks?.map((check, index) => (
                           <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-red-100">
                             <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -731,7 +734,7 @@ export default function ComprehensiveAuditPage() {
                         {result.comprehensiveResults?.indexability?.passed_checks?.map((check, index) => (
                           <div key={index} className="flex items-center gap-2 text-sm p-2 bg-white rounded border border-green-100">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-slate-900">{check}</span>
+                            <span className="text-slate-900 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -750,7 +753,7 @@ export default function ComprehensiveAuditPage() {
                         {result.comprehensiveResults?.indexability?.failed_checks?.map((check, index) => (
                           <div key={index} className="flex items-center gap-2 text-sm p-2 bg-white rounded border border-red-100">
                             <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                            <span className="text-slate-900">{check}</span>
+                            <span className="text-slate-900 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -899,16 +902,16 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-4">
                         {result.recommendations.map((rec, index) => (
-                          <div key={index} className="flex items-start gap-4 p-4 bg-white rounded-xl border border-purple-100 hover:shadow-md transition-shadow">
+                          <div key={index} className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-white rounded-xl border border-purple-100 hover:shadow-md transition-shadow">
                             <Badge variant={
                               rec.type === 'critical' ? 'destructive' : 
                               rec.type === 'warning' ? 'default' : 'secondary'
-                            } className="mt-1">
+                            } className="mt-1 shrink-0">
                               {rec.type}
                             </Badge>
-                            <div className="flex-1">
-                              <h4 className="font-semibold text-slate-900 mb-2">{rec.title}</h4>
-                              <p className="text-sm text-slate-700 leading-relaxed mb-3">{rec.description}</p>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-slate-900 mb-2 break-words">{rec.title}</h4>
+                              <p className="text-sm text-slate-700 leading-relaxed mb-3 break-words">{rec.description}</p>
                               <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
                                 {rec.category}
                               </Badge>
