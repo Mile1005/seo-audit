@@ -3,7 +3,7 @@ import { prisma } from "./db";
 
 // OAuth2 client setup with explicit redirect URI
 const redirectUri =
-  process.env.GSC_REDIRECT_URI || "https://seo-audit-seven.vercel.app/api/auth/gsc/callback";
+  process.env.GSC_REDIRECT_URI || `${process.env.NEXTAUTH_URL}/api/gsc/callback`;
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.GSC_CLIENT_ID,
@@ -14,18 +14,23 @@ const oauth2Client = new google.auth.OAuth2(
 export async function getGscAuthUrl(state: string): Promise<string> {
   const scopes = ["https://www.googleapis.com/auth/webmasters.readonly"];
 
-  console.log("GSC Auth URL Generation:", {
-    clientId: process.env.GSC_CLIENT_ID ? "Set" : "Missing",
+  console.log("🔐 GSC Auth URL Generation:", {
+    hasClientId: !!process.env.GSC_CLIENT_ID,
+    hasClientSecret: !!process.env.GSC_CLIENT_SECRET,
     redirectUri: redirectUri,
-    state: state,
+    stateLength: state.length,
   });
 
-  return oauth2Client.generateAuthUrl({
+  const authUrl = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
     state: state,
-    redirect_uri: redirectUri, // Explicitly set redirect URI
+    prompt: "consent", // Force consent screen to ensure refresh token
   });
+
+  console.log("✅ Generated Auth URL:", authUrl.substring(0, 100) + "...");
+
+  return authUrl;
 }
 
 export async function handleGscCallback(code: string, state: string): Promise<boolean> {
