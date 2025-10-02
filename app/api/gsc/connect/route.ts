@@ -3,6 +3,9 @@ import { auth } from '@/auth'
 import { getGscAuthUrl } from '@/lib/gsc'
 import crypto from 'crypto'
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic'
+
 /**
  * GET /api/gsc/connect
  * Initiates the Google Search Console OAuth flow

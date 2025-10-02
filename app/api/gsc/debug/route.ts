@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic'
+
 /**
  * GET /api/gsc/debug
  * Debug endpoint to check GSC OAuth configuration

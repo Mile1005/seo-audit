@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
+import { prisma } from '@/lib/db'
+
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic'
+
+/**
+ * GET /api/gsc/status { NextRequest, NextResponse } from 'next/server'
+import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 
 /**
