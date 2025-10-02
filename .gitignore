@@ -33,6 +33,16 @@ coverage/
 test-results/
 playwright-report/
 
+# Performance reports and audits
+lighthouse*.json
+*-performance*.json
+chromewebdata*.html
+*.report.html
+
+# Temporary files
+.perplexity*
+cache-cleaner.html
+
 # Vercel
 .vercel
 .env*.local
