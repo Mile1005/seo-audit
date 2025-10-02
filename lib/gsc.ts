@@ -2,12 +2,23 @@ import { google } from "googleapis";
 import { prisma } from "./db";
 
 // OAuth2 client setup with explicit redirect URI
+// We use the same Google OAuth client as NextAuth (GOOGLE_CLIENT_ID)
 const redirectUri =
   process.env.GSC_REDIRECT_URI || `${process.env.NEXTAUTH_URL}/api/gsc/callback`;
 
+// Use GOOGLE_CLIENT_ID (same as login OAuth) or fall back to GSC_CLIENT_ID
+const clientId = process.env.GOOGLE_CLIENT_ID || process.env.GSC_CLIENT_ID;
+const clientSecret = process.env.GOOGLE_CLIENT_SECRET || process.env.GSC_CLIENT_SECRET;
+
+if (!clientId || !clientSecret) {
+  console.error('❌ GSC Configuration Error: Missing Google OAuth credentials!');
+  console.error('Required: GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET');
+  throw new Error('GSC OAuth not configured - missing client credentials');
+}
+
 const oauth2Client = new google.auth.OAuth2(
-  process.env.GSC_CLIENT_ID,
-  process.env.GSC_CLIENT_SECRET,
+  clientId,
+  clientSecret,
   redirectUri
 );
 
@@ -15,8 +26,9 @@ export async function getGscAuthUrl(state: string): Promise<string> {
   const scopes = ["https://www.googleapis.com/auth/webmasters.readonly"];
 
   console.log("🔐 GSC Auth URL Generation:", {
-    hasClientId: !!process.env.GSC_CLIENT_ID,
-    hasClientSecret: !!process.env.GSC_CLIENT_SECRET,
+    hasClientId: !!clientId,
+    clientIdSource: process.env.GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : 'GSC_CLIENT_ID',
+    hasClientSecret: !!clientSecret,
     redirectUri: redirectUri,
     stateLength: state.length,
   });
@@ -37,8 +49,9 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
   try {
     console.log("GSC Callback: Getting tokens for state:", state);
     console.log("GSC Callback: Environment check:", {
-      hasClientId: !!process.env.GSC_CLIENT_ID,
-      hasClientSecret: !!process.env.GSC_CLIENT_SECRET,
+      hasClientId: !!clientId,
+      clientIdSource: process.env.GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : 'GSC_CLIENT_ID',
+      hasClientSecret: !!clientSecret,
       redirectUri: redirectUri
     });
     
