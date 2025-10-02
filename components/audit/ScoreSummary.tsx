@@ -87,25 +87,25 @@ export const ScoreSummary = ({ result }: Props) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <svg className="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
-              SEO Audit Results
+              <span className="truncate">SEO Audit Results</span>
             </h2>
-            <div className="flex items-center gap-3 mt-2">
-              <p className="text-sm text-slate-600 dark:text-slate-400">{result.url}</p>
-              <span className="text-xs text-slate-500 dark:text-slate-500">•</span>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 text-xs sm:text-sm">
+              <p className="text-slate-600 dark:text-slate-400 truncate max-w-[200px] sm:max-w-none">{result.url}</p>
+              <span className="text-xs text-slate-500 dark:text-slate-500 hidden sm:inline">•</span>
+              <p className="text-slate-600 dark:text-slate-400 whitespace-nowrap">
                 Completed: {new Date().toLocaleDateString()}
               </p>
-              <span className="text-xs text-slate-500 dark:text-slate-500">•</span>
-              <p className="text-sm text-slate-600 dark:text-slate-400">ID: {result.auditId.slice(0, 8)}</p>
+              <span className="text-xs text-slate-500 dark:text-slate-500 hidden sm:inline">•</span>
+              <p className="text-slate-600 dark:text-slate-400 whitespace-nowrap">ID: {result.auditId.slice(0, 8)}</p>
             </div>
           </div>
-          <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2">
+          <button className="w-full sm:w-auto px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2 whitespace-nowrap">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>

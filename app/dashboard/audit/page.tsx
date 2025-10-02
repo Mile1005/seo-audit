@@ -176,7 +176,7 @@ export default function ComprehensiveAuditPage() {
   }
 
   return (
-      <div className="space-y-6">
+      <div className="space-y-6 max-w-full overflow-x-hidden">
         {/* Header */}
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">Professional SEO Audit</h1>
@@ -328,16 +328,18 @@ export default function ComprehensiveAuditPage() {
 
             {/* Detailed Analysis Tabs */}
             <Tabs defaultValue="overview" className="w-full" aria-label="Audit result sections">
-              <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-1" role="tablist">
-                <TabsTrigger value="overview" aria-label="Overview tab" aria-expanded="true" className="text-xs sm:text-sm">Overview</TabsTrigger>
-                <TabsTrigger value="core-web-vitals" aria-label="Core Web Vitals tab" aria-expanded="false" className="text-xs sm:text-sm">Core Web Vitals</TabsTrigger>
-                <TabsTrigger value="seo" aria-label="Technical SEO tab" aria-expanded="false" className="text-xs sm:text-sm">Technical SEO</TabsTrigger>
-                <TabsTrigger value="accessibility" aria-label="Accessibility tab" aria-expanded="false" className="text-xs sm:text-sm">Accessibility</TabsTrigger>
-                <TabsTrigger value="performance" aria-label="Performance tab" aria-expanded="false" className="text-xs sm:text-sm">Performance</TabsTrigger>
-                <TabsTrigger value="pages" aria-label="Crawled Pages tab" aria-expanded="false" className="text-xs sm:text-sm">Pages</TabsTrigger>
-                <TabsTrigger value="recommendations" aria-label="Recommendations tab" aria-expanded="false" className="text-xs sm:text-sm">Recommendations</TabsTrigger>
-                <TabsTrigger value="history" aria-label="History tab" aria-expanded="false" className="text-xs sm:text-sm">History</TabsTrigger>
-              </TabsList>
+              <div className="w-full overflow-x-auto -mx-2 px-2 pb-2">
+                <TabsList className="inline-flex w-auto min-w-full lg:grid lg:w-full lg:grid-cols-8 gap-1" role="tablist">
+                  <TabsTrigger value="overview" aria-label="Overview tab" aria-expanded="true" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Overview</TabsTrigger>
+                  <TabsTrigger value="core-web-vitals" aria-label="Core Web Vitals tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Core Web Vitals</TabsTrigger>
+                  <TabsTrigger value="seo" aria-label="Technical SEO tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Technical SEO</TabsTrigger>
+                  <TabsTrigger value="accessibility" aria-label="Accessibility tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Accessibility</TabsTrigger>
+                  <TabsTrigger value="performance" aria-label="Performance tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Performance</TabsTrigger>
+                  <TabsTrigger value="pages" aria-label="Crawled Pages tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Pages</TabsTrigger>
+                  <TabsTrigger value="recommendations" aria-label="Recommendations tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">Recommendations</TabsTrigger>
+                  <TabsTrigger value="history" aria-label="History tab" aria-expanded="false" className="text-xs sm:text-sm whitespace-nowrap flex-shrink-0">History</TabsTrigger>
+                </TabsList>
+              </div>
 
               {/* Overview Tab - Redesigned for Better Readability */}
               <TabsContent value="overview" className="space-y-8">
