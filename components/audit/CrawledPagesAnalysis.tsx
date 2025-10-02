@@ -207,11 +207,11 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
               />
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value as any)}
-              className="px-3 py-2 border border-slate-300 dark:border-slate-500 rounded-lg bg-white dark:bg-slate-600 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-slate-300 dark:border-slate-500 rounded-lg bg-white dark:bg-slate-600 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm whitespace-nowrap"
             >
               <option value="all">All Pages</option>
               <option value="errors">With Errors</option>
@@ -221,7 +221,7 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="px-3 py-2 border border-slate-300 dark:border-slate-500 rounded-lg bg-white dark:bg-slate-600 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-3 py-2 border border-slate-300 dark:border-slate-500 rounded-lg bg-white dark:bg-slate-600 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm whitespace-nowrap"
             >
               <option value="issues">Sort by Issues</option>
               <option value="url">Sort by URL</option>
@@ -394,11 +394,11 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                               <div key={index} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
                                 {getIssueIcon(issue.type)}
                                 <div className="flex-1 min-w-0">
-                                  <div className="flex items-start justify-between mb-1">
-                                    <h6 className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
+                                    <h6 className="text-sm font-medium text-slate-900 dark:text-slate-100 break-words">
                                       {issue.title}
                                     </h6>
-                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                    <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
                                       <Badge className={`text-xs ${
                                         issue.impact === 'high' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' :
                                         issue.impact === 'medium' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400' :
@@ -411,7 +411,7 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                                       </Badge>
                                     </div>
                                   </div>
-                                  <p className="text-sm text-slate-600 dark:text-slate-300">{issue.description}</p>
+                                  <p className="text-sm text-slate-600 dark:text-slate-300 break-words">{issue.description}</p>
                                   {issue.count && (
                                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                       Affects {issue.count} elements
