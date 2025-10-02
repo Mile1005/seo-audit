@@ -120,14 +120,13 @@ export interface ApiResponse<T> {
   }
 }
 
-// Fetcher function
+// Fetcher function - Uses NextAuth session automatically via cookies
 const fetcher = async (url: string) => {
   const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
-      // Add auth headers when implementing authentication
-      'x-user-id': 'demo-user' // For development
-    }
+    },
+    credentials: 'include', // Include cookies for NextAuth session
   })
   
   if (!res.ok) {

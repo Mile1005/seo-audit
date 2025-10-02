@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +19,7 @@ interface Project {
 }
 
 export default function ProjectsPage() {
+  const { data: session, status } = useSession();
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -26,23 +28,25 @@ export default function ProjectsPage() {
     domain: ''
   });
 
-  // Load projects on component mount
+  // Load projects when session is ready
   useEffect(() => {
-    loadProjects();
-  }, []);
+    if (status === 'authenticated') {
+      loadProjects();
+    }
+  }, [status]);
 
   const loadProjects = async () => {
     try {
-      const response = await fetch('/api/projects?page=1&limit=10', {
-        headers: {
-          'x-user-id': 'demo-user'
-        }
-      });
+      const response = await fetch('/api/projects?page=1&limit=10');
       if (response.ok) {
         const result = await response.json();
+        console.log('Projects API Response:', result); // Debug log
         if (result.success) {
+          console.log('Setting projects:', result.data); // Debug log
           setProjects(result.data || []);
         }
+      } else if (response.status === 401) {
+        console.error('Unauthorized - please log in');
       }
     } catch (error) {
       console.error('Error loading projects:', error);
@@ -61,18 +65,20 @@ export default function ProjectsPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-user-id': 'demo-user'
         },
         body: JSON.stringify({
-          name: newProject.name,
-          domain: newProject.domain.replace(/^https?:\/\//, '').replace(/\/$/, ''),
+          name: newProject.name.trim(),
+          domain: newProject.domain.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
         })
       });
 
       const result = await response.json();
+      console.log('Create Project Response:', result); // Debug log
       
       if (result.success) {
-        setProjects(prev => [result.data.project, ...prev]);
+        console.log('Created project:', result.data); // Debug log
+        // Add the newly created project to the list
+        setProjects(prev => [result.data, ...prev]);
         setNewProject({ name: '', domain: '' });
         setShowCreateForm(false);
       } else {
@@ -87,27 +93,52 @@ export default function ProjectsPage() {
   };
 
   const deleteProject = async (projectId: string) => {
-    if (!confirm('Are you sure you want to delete this project?')) return;
+    if (!confirm('Are you sure you want to delete this project? This action cannot be undone.')) return;
 
     try {
       const response = await fetch(`/api/projects/${projectId}`, {
         method: 'DELETE',
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Remove project from list
         setProjects(prev => prev.filter(p => p.id !== projectId));
+        alert('Project deleted successfully');
       } else {
-        alert('Error deleting project');
+        alert('Error deleting project: ' + (result.error || 'Unknown error'));
       }
     } catch (error) {
       console.error('Error deleting project:', error);
-      alert('Error deleting project');
+      alert('Error deleting project. Please try again.');
     }
   };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString();
   };
+
+  // Show loading state while checking authentication
+  if (status === 'loading') {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+
+  // Redirect to login if not authenticated
+  if (status === 'unauthenticated') {
+    return (
+      <div className="text-center py-12">
+        <h2 className="text-xl font-semibold mb-4">Please log in to view your projects</h2>
+        <Link href="/login">
+          <Button>Go to Login</Button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

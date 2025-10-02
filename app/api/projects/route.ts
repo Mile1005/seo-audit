@@ -1,16 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
+import { auth } from '@/auth'
 
 const prisma = new PrismaClient()
 
 // GET /api/projects - List user's projects
 export async function GET(req: NextRequest) {
   try {
+    const session = await auth()
+    
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
     // Parse query parameters
     const url = new URL(req.url)
     const page = parseInt(url.searchParams.get('page') || '1')
     const limit = parseInt(url.searchParams.get('limit') || '10')
-    const userId = req.headers.get('x-user-id') || 'demo-user'
+    const userId = session.user.id
     
     // Get projects from database
     const projects = await prisma.project.findMany({
@@ -68,31 +78,23 @@ export async function GET(req: NextRequest) {
 // POST /api/projects - Create new project
 export async function POST(req: NextRequest) {
   try {
+    const session = await auth()
+    
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      )
+    }
+
     const body = await req.json()
-    const userId = req.headers.get('x-user-id') || 'demo-user'
+    const userId = session.user.id
     
     if (!body.name || !body.domain) {
       return NextResponse.json(
         { success: false, error: 'Name and domain are required' },
         { status: 400 }
       )
-    }
-
-    // Ensure user exists
-    let user = await prisma.user.findUnique({
-      where: { id: userId }
-    })
-
-    if (!user) {
-      // Create demo user if doesn't exist
-      user = await prisma.user.create({
-        data: {
-          id: userId,
-          name: 'Demo User',
-          email: 'demo@example.com',
-          role: 'USER'
-        }
-      })
     }
 
     // Create project in database
