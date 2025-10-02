@@ -13,7 +13,6 @@ import {
   UsersIcon,
   DocumentTextIcon,
   Cog6ToothIcon,
-  BellIcon,
   UserCircleIcon,
   Bars3Icon,
   XMarkIcon,
@@ -21,6 +20,7 @@ import {
   MoonIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
+import { NotificationDropdown } from '@/components/notifications/NotificationDropdown'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -207,10 +207,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               </button>
 
               {/* Notifications */}
-              <button className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
-                <BellIcon className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-              </button>
+              <NotificationDropdown />
 
               {/* User profile */}
               <div ref={userMenuRef} className="relative flex items-center space-x-3">

@@ -89,6 +89,7 @@ model User {
 	apiKeys         ApiKey[]
 	userUsage       UserUsage?
 	gscTokens       GscToken[]    // Google Search Console tokens
+	notifications   Notification[]
 
 	@@index([email])
 	@@index([status])
@@ -101,6 +102,29 @@ model VerificationToken {
 	createdAt  DateTime @default(now())
 
 	@@unique([identifier, token])
+}
+
+// ============================================
+// NOTIFICATION SYSTEM
+// ============================================
+
+model Notification {
+	id        String           @id @default(cuid())
+	userId    String
+	type      NotificationType
+	title     String
+	message   String
+	data      Json?            // Additional data (e.g., project ID, audit ID)
+	read      Boolean          @default(false)
+	readAt    DateTime?
+	createdAt DateTime         @default(now())
+	updatedAt DateTime         @updatedAt
+
+	user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+	@@index([userId])
+	@@index([read])
+	@@index([createdAt])
 }
 
 // ============================================
@@ -969,6 +993,20 @@ enum UserStatus {
 	ACTIVE
 	SUSPENDED
 	DELETED
+}
+
+enum NotificationType {
+	AUDIT_COMPLETED
+	AUDIT_FAILED
+	KEYWORD_RANK_CHANGE
+	NEW_BACKLINK
+	LOST_BACKLINK
+	CRITICAL_ISSUE
+	REPORT_READY
+	GSC_CONNECTED
+	GSC_DISCONNECTED
+	PROJECT_CREATED
+	SYSTEM_ALERT
 }
 
 enum SubscriptionPlan {

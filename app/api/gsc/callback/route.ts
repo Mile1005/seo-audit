@@ -87,6 +87,23 @@ export async function GET(req: NextRequest) {
       data: { userId }
     })
 
+    // Create a notification for successful GSC connection
+    try {
+      await (prisma as any).notification.create({
+        data: {
+          userId,
+          type: 'GSC_CONNECTED',
+          title: 'Google Search Console Connected',
+          message: 'You can now view your Google Search Console data in your dashboard.',
+          data: { timestamp: new Date().toISOString() }
+        }
+      })
+      console.log('✅ Created GSC connection notification')
+    } catch (notifError) {
+      console.error('⚠️ Failed to create notification:', notifError)
+      // Don't fail the whole flow if notification fails
+    }
+
     console.log('✅ GSC connected successfully for user:', user.email)
 
     // Redirect back to dashboard with success message
