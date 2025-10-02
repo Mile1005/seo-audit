@@ -534,50 +534,50 @@ export default function ComprehensiveAuditPage() {
                 </div>
 
                 {/* Heading Structure */}
-                <Card className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 border-2 border-blue-200">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2 text-blue-900">
-                      <FileText className="h-5 w-5 text-blue-600" />
+                <Card className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700">
+                  <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+                    <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-white">
+                      <FileText className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                       Heading Structure Analysis
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="pt-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <div>
-                        <h4 className="font-medium mb-2 text-slate-900">H1 Tags ({result.comprehensiveResults?.h_tags?.h1?.length || 0})</h4>
-                        <div className="space-y-1">
+                        <h4 className="font-semibold mb-3 text-slate-900 dark:text-white">H1 Tags ({result.comprehensiveResults?.h_tags?.h1?.length || 0})</h4>
+                        <div className="space-y-2">
                           {result.comprehensiveResults?.h_tags?.h1?.map((h1, index) => (
-                            <div key={index} className="text-sm p-2 bg-white rounded border border-blue-100">
+                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
                               {h1}
                             </div>
-                          )) || <div className="text-sm text-red-500">No H1 tags found</div>}
+                          )) || <div className="text-sm text-red-600 dark:text-red-400 font-medium">No H1 tags found</div>}
                         </div>
                       </div>
                       <div>
-                        <h4 className="font-medium mb-2 text-slate-900">H2 Tags ({result.comprehensiveResults?.h_tags?.h2?.length || 0})</h4>
-                        <div className="space-y-1 max-h-32 overflow-y-auto">
+                        <h4 className="font-semibold mb-3 text-slate-900 dark:text-white">H2 Tags ({result.comprehensiveResults?.h_tags?.h2?.length || 0})</h4>
+                        <div className="space-y-2 max-h-64 overflow-y-auto">
                           {result.comprehensiveResults?.h_tags?.h2?.slice(0, 5).map((h2, index) => (
-                            <div key={index} className="text-sm p-2 bg-white rounded border border-blue-100">
+                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
                               {h2}
                             </div>
-                          )) || <div className="text-sm text-slate-500">No H2 tags found</div>}
+                          )) || <div className="text-sm text-slate-500 dark:text-slate-400">No H2 tags found</div>}
                           {(result.comprehensiveResults?.h_tags?.h2?.length || 0) > 5 && (
-                            <div className="text-xs text-slate-500">
+                            <div className="text-xs text-slate-600 dark:text-slate-400 font-medium p-2">
                               ... and {(result.comprehensiveResults?.h_tags?.h2?.length || 0) - 5} more
                             </div>
                           )}
                         </div>
                       </div>
                       <div>
-                        <h4 className="font-medium mb-2 text-slate-900">H3 Tags ({result.comprehensiveResults?.h_tags?.h3?.length || 0})</h4>
-                        <div className="space-y-1 max-h-32 overflow-y-auto">
+                        <h4 className="font-semibold mb-3 text-slate-900 dark:text-white">H3 Tags ({result.comprehensiveResults?.h_tags?.h3?.length || 0})</h4>
+                        <div className="space-y-2 max-h-64 overflow-y-auto">
                           {result.comprehensiveResults?.h_tags?.h3?.slice(0, 5).map((h3, index) => (
-                            <div key={index} className="text-sm p-2 bg-white rounded border border-blue-100">
+                            <div key={index} className="text-sm p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100">
                               {h3}
                             </div>
-                          )) || <div className="text-sm text-slate-500">No H3 tags found</div>}
+                          )) || <div className="text-sm text-slate-500 dark:text-slate-400">No H3 tags found</div>}
                           {(result.comprehensiveResults?.h_tags?.h3?.length || 0) > 5 && (
-                            <div className="text-xs text-slate-500">
+                            <div className="text-xs text-slate-600 dark:text-slate-400 font-medium p-2">
                               ... and {(result.comprehensiveResults?.h_tags?.h3?.length || 0) - 5} more
                             </div>
                           )}
@@ -589,62 +589,72 @@ export default function ComprehensiveAuditPage() {
 
                 {/* Social Media Meta Tags */}
                 {result.comprehensiveResults?.social_meta && (
-                  <Card className="bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100 border-2 border-purple-200">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-purple-900">
-                        <Share className="h-5 w-5 text-purple-600" />
+                  <Card className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700">
+                    <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+                      <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-white">
+                        <Share className="h-5 w-5 text-purple-600 dark:text-purple-400" />
                         Social Media Meta Tags
                       </CardTitle>
                     </CardHeader>
-                    <CardContent>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="bg-white p-4 rounded-lg border border-purple-100">
-                          <h4 className="font-medium mb-2 text-slate-900">Open Graph</h4>
-                          <div className="space-y-2 text-sm">
-                            <div className="flex justify-between">
-                              <span>og:title:</span>
-                              <span className={result.comprehensiveResults.social_meta.og_title ? 'text-green-500' : 'text-red-500'}>
+                    <CardContent className="pt-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="bg-slate-50 dark:bg-slate-800 p-5 rounded-lg border border-slate-200 dark:border-slate-700">
+                          <h4 className="font-semibold mb-4 text-slate-900 dark:text-white flex items-center gap-2">
+                            <svg className="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M22.675 0h-21.35C.597 0 0 .596 0 1.326v21.348C0 23.404.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.403 24 24 23.404 24 22.674V1.326C24 .596 23.403 0 22.675 0"/>
+                            </svg>
+                            Open Graph
+                          </h4>
+                          <div className="space-y-3 text-sm">
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">og:title:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.og_title ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.og_title ? '✓' : '✗'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span>og:description:</span>
-                              <span className={result.comprehensiveResults.social_meta.og_description ? 'text-green-500' : 'text-red-500'}>
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">og:description:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.og_description ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.og_description ? '✓' : '✗'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span>og:image:</span>
-                              <span className={result.comprehensiveResults.social_meta.og_image ? 'text-green-500' : 'text-red-500'}>
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">og:image:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.og_image ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.og_image ? '✓' : '✗'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span>og:url:</span>
-                              <span className={result.comprehensiveResults.social_meta.og_url ? 'text-green-500' : 'text-red-500'}>
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">og:url:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.og_url ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.og_url ? '✓' : '✗'}
                               </span>
                             </div>
                           </div>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-purple-100">
-                          <h4 className="font-medium mb-2 text-slate-900">Twitter</h4>
-                          <div className="space-y-2 text-sm">
-                            <div className="flex justify-between">
-                              <span>twitter:card:</span>
-                              <span className={result.comprehensiveResults.social_meta.twitter_card ? 'text-green-500' : 'text-red-500'}>
+                        <div className="bg-slate-50 dark:bg-slate-800 p-5 rounded-lg border border-slate-200 dark:border-slate-700">
+                          <h4 className="font-semibold mb-4 text-slate-900 dark:text-white flex items-center gap-2">
+                            <svg className="w-5 h-5 text-sky-600" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                            Twitter
+                          </h4>
+                          <div className="space-y-3 text-sm">
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">twitter:card:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.twitter_card ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.twitter_card ? '✓' : '✗'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span>twitter:title:</span>
-                              <span className={result.comprehensiveResults.social_meta.twitter_title ? 'text-green-500' : 'text-red-500'}>
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">twitter:title:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.twitter_title ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.twitter_title ? '✓' : '✗'}
                               </span>
                             </div>
-                            <div className="flex justify-between">
-                              <span>twitter:description:</span>
-                              <span className={result.comprehensiveResults.social_meta.twitter_description ? 'text-green-500' : 'text-red-500'}>
+                            <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-900 rounded">
+                              <span className="font-medium text-slate-700 dark:text-slate-300">twitter:description:</span>
+                              <span className={`font-bold ${result.comprehensiveResults.social_meta.twitter_description ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                                 {result.comprehensiveResults.social_meta.twitter_description ? '✓' : '✗'}
                               </span>
                             </div>
@@ -829,11 +839,37 @@ export default function ComprehensiveAuditPage() {
               {/* Crawled Pages Tab */}
               <TabsContent value="pages" className="space-y-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Crawled Pages Analysis</h2>
-                  <p className="text-slate-600">Comprehensive analysis of all discovered pages, their SEO status, and performance metrics.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Page Analysis</h2>
+                  <p className="text-slate-600 dark:text-slate-400">Detailed analysis of the audited page including SEO issues, content metrics, and performance.</p>
                 </div>
                 
-                <CrawledPagesAnalysis />
+                <CrawledPagesAnalysis pages={[{
+                  url: result.url,
+                  title: result.pageData.title,
+                  statusCode: 200,
+                  crawlTime: new Date(result.timestamp).toISOString(),
+                  titleLength: result.pageData.title.length,
+                  wordCount: result.comprehensiveResults.stats.word_count,
+                  headings: {
+                    h1: result.comprehensiveResults.h_tags.h1.length,
+                    h2: result.comprehensiveResults.h_tags.h2.length,
+                    h3: result.comprehensiveResults.h_tags.h3.length
+                  },
+                  metaDescription: result.pageData.metaDescription,
+                  metaDescriptionLength: result.pageData.metaDescription.length,
+                  internalLinks: result.pageData.internalLinks,
+                  externalLinks: result.pageData.externalLinks,
+                  images: result.pageData.imagesTotal,
+                  loadTime: result.comprehensiveResults.performance_metrics?.speed_index ? result.comprehensiveResults.performance_metrics.speed_index / 1000 : undefined,
+                  issues: result.comprehensiveResults.issues?.map(issue => ({
+                    type: issue.severity === 'high' ? 'error' as const : issue.severity === 'medium' ? 'warning' as const : 'notice' as const,
+                    category: issue.category || 'SEO',
+                    title: issue.title,
+                    description: issue.description,
+                    impact: issue.severity as 'high' | 'medium' | 'low',
+                    count: 1
+                  })) || []
+                }]} />
               </TabsContent>
 
               {/* Recommendations Tab */}
