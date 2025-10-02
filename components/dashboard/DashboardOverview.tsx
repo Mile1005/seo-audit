@@ -21,12 +21,79 @@ export default function DashboardOverview() {
   const { overview, isLoading: overviewLoading } = useProjectOverview(firstProject?.id || '')
   
   const [loading, setLoading] = useState(true)
+  const [gscConnected, setGscConnected] = useState(false)
+  const [gscLoading, setGscLoading] = useState(false)
+  const [gscError, setGscError] = useState<string | null>(null)
 
   // Simulate data loading for demo
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500)
     return () => clearTimeout(timer)
   }, [])
+
+  // Check GSC connection status
+  useEffect(() => {
+    checkGscStatus()
+  }, [])
+
+  const checkGscStatus = async () => {
+    try {
+      const response = await fetch('/api/gsc/status')
+      if (response.ok) {
+        const data = await response.json()
+        setGscConnected(data.connected)
+      }
+    } catch (error) {
+      console.error('Failed to check GSC status:', error)
+    }
+  }
+
+  const handleGscConnect = async () => {
+    setGscLoading(true)
+    setGscError(null)
+    
+    try {
+      const response = await fetch('/api/gsc/connect')
+      const data = await response.json()
+      
+      if (data.success && data.authUrl) {
+        // Redirect to Google OAuth
+        window.location.href = data.authUrl
+      } else {
+        setGscError(data.error || 'Failed to initiate connection')
+      }
+    } catch (error) {
+      console.error('GSC Connect error:', error)
+      setGscError('Network error. Please try again.')
+    } finally {
+      setGscLoading(false)
+    }
+  }
+
+  const handleGscDisconnect = async () => {
+    if (!confirm('Are you sure you want to disconnect Google Search Console?')) {
+      return
+    }
+    
+    setGscLoading(true)
+    
+    try {
+      const response = await fetch('/api/gsc/status', { method: 'DELETE' })
+      const data = await response.json()
+      
+      if (data.success) {
+        setGscConnected(false)
+        alert('Google Search Console disconnected successfully')
+      } else {
+        alert('Failed to disconnect: ' + data.error)
+      }
+    } catch (error) {
+      console.error('GSC Disconnect error:', error)
+      alert('Network error. Please try again.')
+    } finally {
+      setGscLoading(false)
+    }
+  }
 
   // Use real data if available, fallback to mock data
   const data = overview || {
@@ -261,23 +328,60 @@ export default function DashboardOverview() {
         </div>
       </div>
 
-      {/* Google Integration Placeholder */}
-      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl border border-blue-200 dark:border-blue-800 p-6">
+      {/* Google Search Console Integration */}
+      <div className={`bg-gradient-to-r rounded-xl border p-6 ${
+        gscConnected 
+          ? 'from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-emerald-200 dark:border-emerald-800'
+          : 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-800'
+      }`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-lg flex items-center justify-center shadow-sm">
-              <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-emerald-500 rounded"></div>
+              {gscConnected ? (
+                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-emerald-500 rounded"></div>
+              )}
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Google Integration</h3>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                Google Search Console
+                {gscConnected && <span className="ml-2 text-sm font-normal text-emerald-600 dark:text-emerald-400">● Connected</span>}
+              </h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Connect Google Search Console and PageSpeed Insights for real-time data
+                {gscConnected 
+                  ? 'Access real-time search analytics and performance data'
+                  : 'Connect to view search analytics, impressions, and click data'
+                }
               </p>
+              {gscError && (
+                <p className="text-sm text-red-600 dark:text-red-400 mt-1">
+                  {gscError}
+                </p>
+              )}
             </div>
           </div>
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-            Connect
-          </button>
+          <div className="flex gap-2">
+            {gscConnected ? (
+              <button 
+                onClick={handleGscDisconnect}
+                disabled={gscLoading}
+                className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium disabled:opacity-50"
+              >
+                {gscLoading ? 'Disconnecting...' : 'Disconnect'}
+              </button>
+            ) : (
+              <button 
+                onClick={handleGscConnect}
+                disabled={gscLoading}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50"
+              >
+                {gscLoading ? 'Connecting...' : 'Connect'}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
