@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { Lightbulb, TrendingUp, ChevronDown, ChevronUp, Clock, Code, ExternalLink } from 'lucide-react';
 import { Badge } from '../ui/badge';
@@ -259,9 +260,17 @@ export const PerformanceOpportunities = ({ opportunities }: Props) => {
             const implementation = o.implementation!;
             
             return (
-              <div key={i} className="border rounded-xl overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border-blue-200 dark:border-blue-800">
-                <button
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.1 }}
+                className="border rounded-xl overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-xl transition-all duration-300"
+              >
+                <motion.button
                   onClick={() => toggleExpanded(i)}
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
                   className="w-full flex items-start gap-4 p-4 text-left hover:bg-blue-100 dark:hover:bg-blue-900/20 transition-colors"
                 >
                   <TrendingUp className="h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" />
@@ -299,10 +308,17 @@ export const PerformanceOpportunities = ({ opportunities }: Props) => {
                       <span className="text-blue-600 dark:text-blue-400 font-medium">Click to see implementation steps</span>
                     </div>
                   </div>
-                </button>
+                </motion.button>
                 
+                <AnimatePresence>
                 {isExpanded && (
-                  <div className="border-t border-blue-200 dark:border-blue-800 bg-white dark:bg-slate-800 p-4">
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="border-t border-blue-200 dark:border-blue-800 bg-white dark:bg-slate-800 p-4"
+                  >
                     <div className="space-y-4">
                       {/* Implementation Steps */}
                       <div>
@@ -366,9 +382,10 @@ export const PerformanceOpportunities = ({ opportunities }: Props) => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { AlertTriangle, Filter } from 'lucide-react';
 import { Badge } from '../ui/badge';
@@ -69,22 +70,27 @@ export const IssuesList = ({ issues }: Props) => {
           </div>
           <div className="flex flex-wrap gap-3 items-center">
             {['high','medium','low'].map(sev => (
-              <Button 
-                key={sev} 
-                type="button" 
-                size="sm" 
-                variant={selectedSeverities.includes(sev)?'default':'outline'} 
-                onClick={()=>toggleSeverity(sev)} 
-                className={`text-xs font-medium capitalize ${
-                  selectedSeverities.includes(sev) 
-                    ? sev === 'high' ? 'bg-red-500 hover:bg-red-600 text-white' :
-                      sev === 'medium' ? 'bg-orange-500 hover:bg-orange-600 text-white' :
-                      'bg-blue-500 hover:bg-blue-600 text-white'
-                    : 'border-slate-300 dark:border-slate-500 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-600'
-                }`}
+              <motion.div
+                key={sev}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {sev}
-              </Button>
+                <Button 
+                  type="button" 
+                  size="sm" 
+                  variant={selectedSeverities.includes(sev)?'default':'outline'} 
+                  onClick={()=>toggleSeverity(sev)} 
+                  className={`text-xs font-medium capitalize transition-all duration-200 ${
+                    selectedSeverities.includes(sev) 
+                      ? sev === 'high' ? 'bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/30' :
+                        sev === 'medium' ? 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/30' :
+                        'bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30'
+                      : 'border-slate-300 dark:border-slate-500 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-600'
+                  }`}
+                >
+                  {sev}
+                </Button>
+              </motion.div>
             ))}
             <div className="h-6 w-px bg-slate-300 dark:bg-slate-600 mx-2" />
             <select 
@@ -121,18 +127,36 @@ export const IssuesList = ({ issues }: Props) => {
         </div>
 
         <div className="space-y-4">
-          {sortedIssues.map((issue,i)=> {
-            const getSeverityStyles = (severity: string) => {
-              switch(severity) {
-                case 'high': return 'bg-red-500 text-white';
-                case 'medium': return 'bg-orange-500 text-white';
-                case 'low': return 'bg-blue-500 text-white';
-                default: return 'bg-slate-500 text-white';
-              }
-            };
-            
-            return (
-              <div key={i} className="flex items-start gap-4 p-5 border border-slate-200 dark:border-slate-600 rounded-xl hover:shadow-md transition-all duration-200 bg-white dark:bg-slate-700/50">
+          <AnimatePresence mode="popLayout">
+            {sortedIssues.map((issue,i)=> {
+              const getSeverityStyles = (severity: string) => {
+                switch(severity) {
+                  case 'high': return 'bg-red-500 text-white';
+                  case 'medium': return 'bg-orange-500 text-white';
+                  case 'low': return 'bg-blue-500 text-white';
+                  default: return 'bg-slate-500 text-white';
+                }
+              };
+              
+              return (
+                <motion.div 
+                  key={`${issue.title}-${i}`}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
+                  transition={{ 
+                    duration: 0.3, 
+                    delay: i * 0.05,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  whileHover={{ 
+                    y: -4,
+                    scale: 1.01,
+                    transition: { duration: 0.2 }
+                  }}
+                  className="flex items-start gap-4 p-5 border border-slate-200 dark:border-slate-600 rounded-xl hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-500/50 transition-all duration-300 bg-white dark:bg-slate-700/50 cursor-pointer group"
+                >
                 <div className={`px-3 py-1.5 rounded-full text-xs font-semibold flex-shrink-0 ${getSeverityStyles(issue.severity || 'medium')}`}>
                   {(issue.severity || 'medium').toUpperCase()}
                 </div>
@@ -169,9 +193,10 @@ export const IssuesList = ({ issues }: Props) => {
                     {issue.effort && <Badge variant="outline" className="text-xs font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">{issue.effort} effort</Badge>}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
+          </AnimatePresence>
         </div>
       </CardContent>
     </Card>

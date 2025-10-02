@@ -1,4 +1,5 @@
 "use client";
+import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
 import { Star, CheckCircle } from 'lucide-react';
 import { Badge } from '../ui/badge';
@@ -21,10 +22,32 @@ export const QuickWinsList = ({ quickWins }: Props) => {
       <CardContent>
         <div className="space-y-4">
           {quickWins.map((win,i)=>(
-            <div key={i} className="flex items-start gap-4 p-4 bg-white dark:bg-slate-700 rounded-xl border border-green-100 dark:border-green-700 hover:shadow-md transition-shadow">
-              <Badge variant="secondary" className="mt-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200">
-                Quick Win
-              </Badge>
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, x: -20, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.4, 
+                delay: i * 0.1,
+                type: "spring",
+                stiffness: 80
+              }}
+              whileHover={{ 
+                scale: 1.02,
+                y: -5,
+                boxShadow: "0 20px 40px rgba(34, 197, 94, 0.2)",
+                transition: { duration: 0.2 }
+              }}
+              className="flex items-start gap-4 p-4 bg-white dark:bg-slate-700 rounded-xl border border-green-100 dark:border-green-700 hover:border-green-400 dark:hover:border-green-500 transition-all duration-300 cursor-pointer group"
+            >
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.2 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Badge variant="secondary" className="mt-1 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200 shadow-lg shadow-green-500/20">
+                  Quick Win
+                </Badge>
+              </motion.div>
               <div className="flex-1">
                 <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">{win.title}</h4>
                 <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed mb-3">{win.description}</p>
@@ -45,7 +68,7 @@ export const QuickWinsList = ({ quickWins }: Props) => {
                   {win.category && <Badge variant="outline" className="bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-600">{win.category}</Badge>}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </CardContent>
