@@ -199,19 +199,19 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold">Backlink Analysis</h1>
           <p className="text-muted-foreground">
             Comprehensive backlink profile analysis and monitoring
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button onClick={generateMockData} variant="outline" size="sm">
+        <div className="flex flex-wrap gap-2">
+          <Button onClick={generateMockData} variant="outline" size="sm" className="whitespace-nowrap">
             <RefreshCw className="h-4 w-4 mr-2" />
             Generate Mock Data
           </Button>
-          <Button onClick={fetchBacklinks} variant="outline" size="sm">
+          <Button onClick={fetchBacklinks} variant="outline" size="sm" className="whitespace-nowrap">
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
@@ -286,13 +286,13 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
       )}
 
       <Tabs defaultValue="overview" className="space-y-4">
-        <div className="overflow-x-auto">
-          <TabsList className="inline-flex w-auto">
-            <TabsTrigger value="overview" className="whitespace-nowrap">Overview</TabsTrigger>
-            <TabsTrigger value="backlinks" className="whitespace-nowrap">Backlinks</TabsTrigger>
-            <TabsTrigger value="domains" className="whitespace-nowrap">Referring Domains</TabsTrigger>
-            <TabsTrigger value="toxic" className="whitespace-nowrap">Toxic Analysis</TabsTrigger>
-            <TabsTrigger value="prospects" className="whitespace-nowrap">Link Prospects</TabsTrigger>
+        <div className="w-full overflow-x-auto pb-2">
+          <TabsList className="inline-flex min-w-full sm:min-w-0">
+            <TabsTrigger value="overview" className="whitespace-nowrap flex-shrink-0">Overview</TabsTrigger>
+            <TabsTrigger value="backlinks" className="whitespace-nowrap flex-shrink-0">Backlinks</TabsTrigger>
+            <TabsTrigger value="domains" className="whitespace-nowrap flex-shrink-0">Referring Domains</TabsTrigger>
+            <TabsTrigger value="toxic" className="whitespace-nowrap flex-shrink-0">Toxic Analysis</TabsTrigger>
+            <TabsTrigger value="prospects" className="whitespace-nowrap flex-shrink-0">Link Prospects</TabsTrigger>
           </TabsList>
         </div>
 
