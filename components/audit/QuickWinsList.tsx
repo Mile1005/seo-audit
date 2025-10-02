@@ -9,14 +9,23 @@ interface Props { quickWins: QuickWin[] }
 export const QuickWinsList = ({ quickWins }: Props) => {
   if (!quickWins || quickWins.length === 0) return null;
   return (
-    <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200 dark:from-green-900/10 dark:via-emerald-900/10 dark:to-green-900/10 dark:border-green-700">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900 dark:text-green-100">
-          <div className="p-2 bg-green-500 rounded-lg">
-            <Star className="h-5 w-5 text-white" />
-          </div>
-          Quick Wins ({quickWins.length})
-        </CardTitle>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
+    >
+      <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200 dark:from-green-900/10 dark:via-emerald-900/10 dark:to-green-900/10 dark:border-green-700">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900 dark:text-green-100">
+            <motion.div 
+              className="p-2 bg-green-500 rounded-lg"
+              whileHover={{ rotate: 360, scale: 1.1 }}
+              transition={{ duration: 0.6, type: "spring" }}
+            >
+              <Star className="h-5 w-5 text-white" />
+            </motion.div>
+            Quick Wins ({quickWins.length})
+          </CardTitle>
         <CardDescription className="text-green-800 dark:text-green-200">Low-effort, high-impact improvements you can implement quickly</CardDescription>
       </CardHeader>
       <CardContent>
@@ -48,17 +57,20 @@ export const QuickWinsList = ({ quickWins }: Props) => {
                   Quick Win
                 </Badge>
               </motion.div>
-              <div className="flex-1">
-                <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2">{win.title}</h4>
-                <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed mb-3">{win.description}</p>
+              <div className="flex-1 min-w-0">
+                <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 break-words">{win.title}</h4>
+                <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed mb-3 break-words">{win.description}</p>
                 {win.current_value && win.recommended_value && (
-                  <div className="mt-3 p-3 bg-slate-50 dark:bg-slate-600 rounded-lg border border-slate-200 dark:border-slate-500 text-sm">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                      <span className="font-medium text-slate-700 dark:text-slate-200">Current:</span>
-                      <span className="font-mono text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded text-xs">{win.current_value}</span>
-                      <span className="text-slate-400">→</span>
-                      <span className="font-medium text-slate-700 dark:text-slate-200">Recommended:</span>
-                      <span className="font-mono text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded text-xs">{win.recommended_value}</span>
+                  <div className="mt-3 p-3 bg-slate-50 dark:bg-slate-600 rounded-lg border border-slate-200 dark:border-slate-500 text-sm overflow-hidden">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-slate-700 dark:text-slate-200 text-xs">Current:</span>
+                        <span className="font-mono text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded text-xs break-all">{win.current_value}</span>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-slate-700 dark:text-slate-200 text-xs">Recommended:</span>
+                        <span className="font-mono text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded text-xs break-all">{win.recommended_value}</span>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -73,5 +85,6 @@ export const QuickWinsList = ({ quickWins }: Props) => {
         </div>
       </CardContent>
     </Card>
+    </motion.div>
   );
 };

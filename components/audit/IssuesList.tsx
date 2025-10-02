@@ -52,12 +52,21 @@ export const IssuesList = ({ issues }: Props) => {
   if (!issues || issues.length === 0) return null;
 
   return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
+    >
     <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 border-2 border-red-200 dark:from-red-900/10 dark:via-rose-900/10 dark:to-red-900/10 dark:border-red-700">
       <CardHeader className="pb-4">
         <CardTitle className="text-lg font-bold flex items-center gap-3 text-red-900 dark:text-red-100">
-          <div className="p-2 bg-red-500 rounded-lg">
+          <motion.div 
+            className="p-2 bg-red-500 rounded-lg"
+            whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
+            transition={{ duration: 0.5 }}
+          >
             <AlertTriangle className="h-5 w-5 text-white" />
-          </div>
+          </motion.div>
           All Issues ({issues.length})
         </CardTitle>
       </CardHeader>
@@ -155,35 +164,44 @@ export const IssuesList = ({ issues }: Props) => {
                     scale: 1.01,
                     transition: { duration: 0.2 }
                   }}
-                  className="flex items-start gap-4 p-5 border border-slate-200 dark:border-slate-600 rounded-xl hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-500/50 transition-all duration-300 bg-white dark:bg-slate-700/50 cursor-pointer group"
+                  className="flex flex-col p-5 border border-slate-200 dark:border-slate-600 rounded-xl hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-500/50 transition-all duration-300 bg-white dark:bg-slate-700/50 cursor-pointer group"
                 >
-                <div className={`px-3 py-1.5 rounded-full text-xs font-semibold flex-shrink-0 ${getSeverityStyles(issue.severity || 'medium')}`}>
-                  {(issue.severity || 'medium').toUpperCase()}
+                <div className="flex items-start gap-3 mb-3">
+                  <motion.div 
+                    className={`px-3 py-1.5 rounded-full text-xs font-semibold flex-shrink-0 ${getSeverityStyles(issue.severity || 'medium')}`}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
+                  >
+                    {(issue.severity || 'medium').toUpperCase()}
+                  </motion.div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-slate-900 dark:text-slate-100 text-base leading-tight mb-2">{issue.title}</h4>
-                  <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed mb-3">{issue.description}</p>
+                  <h4 className="font-semibold text-slate-900 dark:text-slate-100 text-base leading-tight mb-2 break-words">{issue.title}</h4>
+                  <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed mb-3 break-words">{issue.description}</p>
                   {issue.recommendation && (
                     <div className="mt-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
                       <div className="flex items-start gap-2">
                         <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-white text-xs font-bold">!</span>
                         </div>
-                        <div>
+                        <div className="flex-1 min-w-0">
                           <strong className="text-blue-800 dark:text-blue-200 text-sm">Recommendation:</strong>
-                          <p className="text-blue-700 dark:text-blue-300 text-sm mt-1 leading-relaxed">{issue.recommendation}</p>
+                          <p className="text-blue-700 dark:text-blue-300 text-sm mt-1 leading-relaxed break-words">{issue.recommendation}</p>
                         </div>
                       </div>
                     </div>
                   )}
                   {issue.current_value && issue.expected_value && (
-                    <div className="mt-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm">
-                        <span className="font-medium text-slate-600 dark:text-slate-300">Current:</span>
-                        <span className="font-mono text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded text-xs break-all">{issue.current_value}</span>
-                        <span className="text-slate-400 mx-1">→</span>
-                        <span className="font-medium text-slate-600 dark:text-slate-300">Expected:</span>
-                        <span className="font-mono text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded text-xs break-all">{issue.expected_value}</span>
+                    <div className="mt-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 overflow-hidden">
+                      <div className="flex flex-col gap-2 text-sm">
+                        <div className="flex flex-col gap-1">
+                          <span className="font-medium text-slate-600 dark:text-slate-300 text-xs">Current:</span>
+                          <span className="font-mono text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded text-xs break-all">{issue.current_value}</span>
+                        </div>
+                        <div className="flex flex-col gap-1">
+                          <span className="font-medium text-slate-600 dark:text-slate-300 text-xs">Expected:</span>
+                          <span className="font-mono text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded text-xs break-all">{issue.expected_value}</span>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -200,5 +218,6 @@ export const IssuesList = ({ issues }: Props) => {
         </div>
       </CardContent>
     </Card>
+    </motion.div>
   );
 };
