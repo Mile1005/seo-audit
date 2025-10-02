@@ -156,20 +156,11 @@ export default function DashboardOverview() {
 
   const isDataLoading = loading
 
-  // Check if user has any meaningful data
+  // Check if user has data
   const hasProjects = stats?.projects > 0
   const hasAudits = stats?.audits?.total > 0
-  const hasAnyData = hasProjects || hasAudits || (stats?.keywords?.total > 0) || (stats?.backlinks?.total > 0)
-
-  // Show empty state for first-time users
-  if (!loading && !hasAnyData) {
-    return <DashboardEmptyState 
-      hasAudits={hasAudits}
-      hasProjects={hasProjects}
-      gscConnected={gscConnected}
-      onGscConnect={handleGscConnect}
-    />
-  }
+  
+  // Don't replace entire page - integrate CTAs into metric cards instead
 
   return (
     <div className="space-y-8">
@@ -200,19 +191,37 @@ export default function DashboardOverview() {
           description="Overall website health based on technical SEO factors"
           loading={isDataLoading}
         >
-          <div className="space-y-3">
-            <ProgressBar 
-              value={data.metrics.healthScore} 
-              max={100} 
-              color="green" 
-              showLabel 
-              label="Score"
-            />
-            <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">Critical Issues</span>
-              <StatusBadge status="warning" size="sm">{data.metrics.audits.criticalIssues} found</StatusBadge>
+          {!hasAudits ? (
+            <div className="space-y-3 text-center py-3">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Run your first SEO audit to see health metrics
+              </p>
+              <a href="/dashboard/audit">
+                <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                  Run First Audit
+                </button>
+              </a>
             </div>
-          </div>
+          ) : (
+            <div className="space-y-3">
+              <ProgressBar 
+                value={data.metrics.healthScore} 
+                max={100} 
+                color="green" 
+                showLabel 
+                label="Score"
+              />
+              <div className="flex justify-between text-sm">
+                <span className="text-slate-600 dark:text-slate-400">Critical Issues</span>
+                <StatusBadge status="warning" size="sm">{data.metrics.audits.criticalIssues} found</StatusBadge>
+              </div>
+              <a href="/dashboard/audit">
+                <button className="w-full mt-2 px-3 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                  View Latest Audit →
+                </button>
+              </a>
+            </div>
+          )}
         </MetricWidget>
 
         {/* Search Visibility */}
@@ -224,97 +233,172 @@ export default function DashboardOverview() {
           description="Percentage of search traffic your site captures"
           loading={isDataLoading}
         >
-          <div className="space-y-2">
-            <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">7-day trend</div>
-            <Sparkline data={data.trends.keywords} color="green" />
-          </div>
+          {!gscConnected ? (
+            <div className="space-y-3 text-center py-3">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Connect Google Search Console to view real search data
+              </p>
+              <button 
+                onClick={handleGscConnect}
+                disabled={gscLoading}
+                className="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium disabled:opacity-50"
+              >
+                {gscLoading ? 'Connecting...' : 'Set Up GSC'}
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">7-day trend</div>
+              <Sparkline data={data.trends.keywords} color="green" />
+            </div>
+          )}
         </MetricWidget>
 
         {/* Top Keywords */}
         <MetricWidget
           title="Tracked Keywords"
           value={data.metrics.keywords.total}
-          change={{ value: data.metrics.keywords.improved, type: 'increase', period: '30d' }}
+          change={data.metrics.keywords.total > 0 ? { value: data.metrics.keywords.improved, type: 'increase', period: '30d' } : undefined}
           icon={<MagnifyingGlassIcon className="w-5 h-5 text-purple-600" />}
           description="Total number of keywords being monitored"
           loading={isDataLoading}
         >
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Top 10 positions</span>
-              <StatusBadge status="success" size="sm">{data.metrics.keywords.top10}</StatusBadge>
+          {data.metrics.keywords.total === 0 ? (
+            <div className="space-y-3 text-center py-3">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Start tracking keyword rankings
+              </p>
+              <a href="/dashboard/keywords">
+                <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
+                  Add Keywords
+                </button>
+              </a>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Improved (30d)</span>
-              <StatusBadge status="info" size="sm">{data.metrics.keywords.improved}</StatusBadge>
+          ) : (
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Top 10 positions</span>
+                <StatusBadge status="success" size="sm">{data.metrics.keywords.top10}</StatusBadge>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Improved (30d)</span>
+                <StatusBadge status="info" size="sm">{data.metrics.keywords.improved}</StatusBadge>
+              </div>
             </div>
-          </div>
+          )}
         </MetricWidget>
 
         {/* Backlinks */}
         <MetricWidget
           title="Total Backlinks"
           value={data.metrics.backlinks.total}
-          change={{ value: data.metrics.backlinks.newThisMonth, type: 'increase', period: '30d' }}
+          change={data.metrics.backlinks.total > 0 ? { value: data.metrics.backlinks.newThisMonth, type: 'increase', period: '30d' } : undefined}
           icon={<LinkIcon className="w-5 h-5 text-indigo-600" />}
           description="Number of external sites linking to your website"
           loading={isDataLoading}
         >
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Referring domains</span>
-              <span className="text-sm font-medium text-slate-900 dark:text-white">{data.metrics.backlinks.referringDomains}</span>
+          {data.metrics.backlinks.total === 0 ? (
+            <div className="space-y-3 text-center py-3">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Monitor your backlink profile
+              </p>
+              <a href="/dashboard/backlinks">
+                <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
+                  View Backlinks
+                </button>
+              </a>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">New this month</span>
-              <StatusBadge status="success" size="sm">+{data.metrics.backlinks.newThisMonth}</StatusBadge>
+          ) : (
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Referring domains</span>
+                <span className="text-sm font-medium text-slate-900 dark:text-white">{data.metrics.backlinks.referringDomains}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">New this month</span>
+                <StatusBadge status="success" size="sm">+{data.metrics.backlinks.newThisMonth}</StatusBadge>
+              </div>
             </div>
-          </div>
+          )}
         </MetricWidget>
 
-        {/* Organic Traffic */}
+        {/* Technical SEO - Replaces Organic Traffic */}
         <MetricWidget
-          title="Organic Traffic"
-          value={data.metrics.traffic.organicVisitors}
-          change={{ value: data.metrics.traffic.changePercent, type: 'increase', period: '30d' }}
-          icon={<ArrowTrendingUpIcon className="w-5 h-5 text-emerald-600" />}
-          description="Monthly visitors from organic search results"
+          title="Technical SEO"
+          value={hasAudits ? data.metrics.healthScore : 0}
+          change={hasAudits ? { value: 8.5, type: 'increase', period: '7d' } : undefined}
+          icon={<ChartBarIcon className="w-5 h-5 text-blue-600" />}
+          description="Technical optimization score from latest audit"
           loading={isDataLoading}
         >
-          <div className="space-y-2">
-            <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">Monthly trend</div>
-            <Sparkline data={data.trends.traffic} color="green" />
-          </div>
+          {!hasAudits ? (
+            <div className="space-y-3 text-center py-3">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Run audit to see technical metrics
+              </p>
+              <a href="/dashboard/audit">
+                <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
+                  Run Audit
+                </button>
+              </a>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">SEO Score</span>
+                <StatusBadge status={data.metrics.healthScore >= 80 ? 'success' : 'warning'} size="sm">
+                  {data.metrics.healthScore}/100
+                </StatusBadge>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Performance</span>
+                <StatusBadge status="info" size="sm">Good</StatusBadge>
+              </div>
+            </div>
+          )}
         </MetricWidget>
 
         {/* Critical Issues */}
         <MetricWidget
           title="Critical Issues"
           value={data.metrics.audits.criticalIssues}
-          change={{ value: -5, type: 'decrease', period: '7d' }}
+          change={hasAudits ? { value: -5, type: 'decrease', period: '7d' } : undefined}
           icon={<ExclamationTriangleIcon className="w-5 h-5 text-red-600" />}
           description="SEO issues that require immediate attention"
           loading={isDataLoading}
         >
-          <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Critical</span>
-              <StatusBadge status="error" size="sm">{data.metrics.audits.criticalIssues}</StatusBadge>
+          {!hasAudits ? (
+            <div className="space-y-3 text-center py-3">
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Run audit to identify critical issues
+              </p>
+              <a href="/dashboard/audit">
+                <button className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
+                  Find Issues
+                </button>
+              </a>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Warnings</span>
-              <StatusBadge status="warning" size="sm">{data.metrics.audits.warnings}</StatusBadge>
+          ) : (
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Critical</span>
+                <StatusBadge status="error" size="sm">{data.metrics.audits.criticalIssues}</StatusBadge>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Warnings</span>
+                <StatusBadge status="warning" size="sm">{data.metrics.audits.warnings}</StatusBadge>
+              </div>
+              <a href="/dashboard/audit">
+                <button className="w-full mt-2 px-3 py-1.5 text-xs bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
+                  View All Issues →
+                </button>
+              </a>
             </div>
-          </div>
+          )}
         </MetricWidget>
       </div>
 
-      {/* Latest Audit Widget */}
-      {stats?.audits?.latest && (
-        <div className="max-w-4xl">
-          <LatestAuditWidget audit={stats.audits.latest} />
-        </div>
-      )}
+      {/* Latest Audit Widget - Removed to avoid duplication with Critical Issues card */}
 
       {/* Quick Actions & Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

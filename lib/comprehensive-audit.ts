@@ -208,18 +208,16 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
   
   if (psiApiKey && psiApiKey !== 'your-psi-api-key') {
     try {
-      // Fetch both mobile and desktop PSI data
-      const [mobileData, desktopData] = await Promise.allSettled([
+      // Fetch ONLY mobile data for faster audits (was fetching both mobile AND desktop - too slow!)
+      const mobileData = await Promise.race([
         fetchPageSpeed(baseUrl, psiApiKey, 'mobile'),
-        fetchPageSpeed(baseUrl, psiApiKey, 'desktop')
-      ]);
+        new Promise((_, reject) => setTimeout(() => reject(new Error('PSI timeout')), 8000)) // 8s timeout
+      ]) as any;
       
-      // Use mobile data as primary, fallback to desktop
-      const psiData = mobileData.status === 'fulfilled' ? mobileData.value : 
-                     (desktopData.status === 'fulfilled' ? desktopData.value : null);
+      const psiData = mobileData;
       
-      if (psiData) {
-        console.log('PSI data retrieved successfully');
+      if (psiData && !psiData.message) {
+        console.log('✅ PSI data retrieved successfully');
         
         // Use real PSI data for all performance metrics
         performanceMetrics = {
@@ -228,7 +226,7 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
           total_blocking_time: psiData.tbt || 100,
           cumulative_layout_shift: psiData.cls || 0.1,
           speed_index: psiData.si || 2.0,
-          time_to_interactive: 3.0, // TTI not directly available from PSI, estimate based on other metrics
+          time_to_interactive: 3.0,
           max_potential_first_input_delay: psiData.inp || 200,
           performance_score: psiData.performanceScore || 70
         };
