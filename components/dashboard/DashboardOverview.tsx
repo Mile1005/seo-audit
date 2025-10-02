@@ -16,20 +16,33 @@ import { MetricWidget, ProgressBar, StatusBadge, Sparkline } from '@/components/
 import { useProjects, useProjectOverview } from '../../hooks/useApi'
 
 export default function DashboardOverview() {
-  const { projects, isLoading: projectsLoading } = useProjects(1, 1)
-  const firstProject = projects[0]
-  const { overview, isLoading: overviewLoading } = useProjectOverview(firstProject?.id || '')
-  
   const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState<any>(null)
   const [gscConnected, setGscConnected] = useState(false)
   const [gscLoading, setGscLoading] = useState(false)
   const [gscError, setGscError] = useState<string | null>(null)
 
-  // Simulate data loading for demo
+  // Fetch real dashboard stats
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500)
-    return () => clearTimeout(timer)
+    fetchDashboardStats()
   }, [])
+
+  const fetchDashboardStats = async () => {
+    setLoading(true)
+    try {
+      const response = await fetch('/api/dashboard/stats')
+      if (response.ok) {
+        const data = await response.json()
+        if (data.success) {
+          setStats(data.stats)
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch dashboard stats:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // Check GSC connection status
   useEffect(() => {
@@ -95,23 +108,51 @@ export default function DashboardOverview() {
     }
   }
 
-  // Use real data if available, fallback to mock data
-  const data = overview || {
+  // Transform real stats into display format
+  const data = stats ? {
     metrics: {
-      healthScore: 87,
-      searchVisibility: 12.4,
-      keywords: { total: 1247, improved: 374 },
-      backlinks: { total: 8200, newThisMonth: 820 },
-      traffic: { organicVisitors: 45200, changePercent: 8.7 },
-      audits: { criticalIssues: 23 }
+      healthScore: stats.health_score,
+      searchVisibility: stats.search_visibility,
+      keywords: {
+        total: stats.keywords.total,
+        improved: stats.keywords.improved,
+        top10: stats.keywords.top10
+      },
+      backlinks: {
+        total: stats.backlinks.total,
+        newThisMonth: stats.backlinks.new_this_month,
+        referringDomains: stats.backlinks.referring_domains
+      },
+      traffic: {
+        organicVisitors: stats.traffic.organic_visitors,
+        changePercent: stats.traffic.change_percent
+      },
+      audits: {
+        criticalIssues: stats.audits.critical_issues,
+        warnings: stats.audits.warnings,
+        total: stats.audits.total
+      }
     },
     trends: {
       keywords: [45, 52, 48, 61, 55, 67, 72, 58, 63, 71, 69, 76],
       traffic: [1200, 1350, 1180, 1420, 1380, 1650, 1480, 1590, 1720, 1650, 1780, 1850]
     }
+  } : {
+    metrics: {
+      healthScore: 0,
+      searchVisibility: 0,
+      keywords: { total: 0, improved: 0, top10: 0 },
+      backlinks: { total: 0, newThisMonth: 0, referringDomains: 0 },
+      traffic: { organicVisitors: 0, changePercent: 0 },
+      audits: { criticalIssues: 0, warnings: 0, total: 0 }
+    },
+    trends: {
+      keywords: [],
+      traffic: []
+    }
   }
 
-  const isDataLoading = loading || projectsLoading || overviewLoading
+  const isDataLoading = loading
 
   return (
     <div className="space-y-8">
@@ -184,11 +225,11 @@ export default function DashboardOverview() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-sm text-slate-600 dark:text-slate-400">Top 10 positions</span>
-              <StatusBadge status="success" size="sm">124</StatusBadge>
+              <StatusBadge status="success" size="sm">{data.metrics.keywords.top10}</StatusBadge>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Position 1-3</span>
-              <StatusBadge status="info" size="sm">89</StatusBadge>
+              <span className="text-sm text-slate-600 dark:text-slate-400">Improved (30d)</span>
+              <StatusBadge status="info" size="sm">{data.metrics.keywords.improved}</StatusBadge>
             </div>
           </div>
         </MetricWidget>
@@ -205,7 +246,7 @@ export default function DashboardOverview() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <span className="text-sm text-slate-600 dark:text-slate-400">Referring domains</span>
-              <span className="text-sm font-medium text-slate-900 dark:text-white">1.2K</span>
+              <span className="text-sm font-medium text-slate-900 dark:text-white">{data.metrics.backlinks.referringDomains}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-slate-600 dark:text-slate-400">New this month</span>
@@ -240,12 +281,12 @@ export default function DashboardOverview() {
         >
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">High priority</span>
-              <StatusBadge status="error" size="sm">8</StatusBadge>
+              <span className="text-sm text-slate-600 dark:text-slate-400">Critical</span>
+              <StatusBadge status="error" size="sm">{data.metrics.audits.criticalIssues}</StatusBadge>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-slate-600 dark:text-slate-400">Medium priority</span>
-              <StatusBadge status="warning" size="sm">15</StatusBadge>
+              <span className="text-sm text-slate-600 dark:text-slate-400">Warnings</span>
+              <StatusBadge status="warning" size="sm">{data.metrics.audits.warnings}</StatusBadge>
             </div>
           </div>
         </MetricWidget>
