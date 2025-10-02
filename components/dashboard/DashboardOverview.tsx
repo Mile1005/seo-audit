@@ -20,6 +20,7 @@ import LatestAuditWidget from './LatestAuditWidget'
 export default function DashboardOverview() {
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState<any>(null)
+  const [recentActivity, setRecentActivity] = useState<any[]>([])
   const [gscConnected, setGscConnected] = useState(false)
   const [gscLoading, setGscLoading] = useState(false)
   const [gscError, setGscError] = useState<string | null>(null)
@@ -37,6 +38,43 @@ export default function DashboardOverview() {
         const data = await response.json()
         if (data.success) {
           setStats(data.stats)
+          
+          // Process recent activity from API data
+          const activities = []
+          
+          // Add recent audits
+          if (data.recentActivity?.audits && data.recentActivity.audits.length > 0) {
+            for (const audit of data.recentActivity.audits) {
+              const timeAgo = getTimeAgo(new Date(audit.createdAt))
+              activities.push({
+                type: audit.status === 'COMPLETED' ? 'audit-completed' : 'audit-started',
+                message: audit.status === 'COMPLETED' 
+                  ? `Site audit completed${audit.overallScore ? ` with score ${audit.overallScore}/100` : ''}`
+                  : 'Site audit in progress',
+                timestamp: timeAgo
+              })
+            }
+          }
+          
+          // Add backlink activity
+          if (data.stats?.backlinks?.new_this_month > 0) {
+            activities.push({
+              type: 'backlinks',
+              message: `${data.stats.backlinks.new_this_month} new backlinks detected this month`,
+              timestamp: 'This month'
+            })
+          }
+          
+          // Add keyword improvements
+          if (data.stats?.keywords?.improved > 0) {
+            activities.push({
+              type: 'keyword-improvement',
+              message: `${data.stats.keywords.improved} keywords improved`,
+              timestamp: 'Last 30 days'
+            })
+          }
+          
+          setRecentActivity(activities.slice(0, 5))
         }
       }
     } catch (error) {
@@ -44,6 +82,21 @@ export default function DashboardOverview() {
     } finally {
       setLoading(false)
     }
+  }
+  
+  // Helper function to format time ago
+  const getTimeAgo = (date: Date) => {
+    const now = new Date()
+    const diffMs = now.getTime() - date.getTime()
+    const diffMins = Math.floor(diffMs / 60000)
+    const diffHours = Math.floor(diffMs / 3600000)
+    const diffDays = Math.floor(diffMs / 86400000)
+    
+    if (diffMins < 60) return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`
+    if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`
+    if (diffDays === 1) return 'Yesterday'
+    if (diffDays < 7) return `${diffDays} days ago`
+    return date.toLocaleDateString()
   }
 
   // Check GSC connection status
@@ -358,38 +411,42 @@ export default function DashboardOverview() {
           )}
         </MetricWidget>
 
-        {/* Critical Issues */}
+        {/* All Issues */}
         <MetricWidget
-          title="Critical Issues"
-          value={data.metrics.audits.criticalIssues}
+          title="SEO Issues"
+          value={data.metrics.audits.total}
           change={hasAudits ? { value: -5, type: 'decrease', period: '7d' } : undefined}
           icon={<ExclamationTriangleIcon className="w-5 h-5 text-red-600" />}
-          description="SEO issues that require immediate attention"
+          description="Issues found in latest audit"
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Run audit to identify critical issues
+                Run audit to identify SEO issues
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
-                  Find Issues
+                  Run First Audit
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Critical</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Critical</span>
                 <StatusBadge status="error" size="sm">{data.metrics.audits.criticalIssues}</StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Warnings</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Warnings</span>
                 <StatusBadge status="warning" size="sm">{data.metrics.audits.warnings}</StatusBadge>
               </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Notices</span>
+                <StatusBadge status="info" size="sm">{Math.max(0, data.metrics.audits.total - data.metrics.audits.criticalIssues - data.metrics.audits.warnings)}</StatusBadge>
+              </div>
               <a href="/dashboard/audit">
-                <button className="w-full mt-2 px-3 py-1.5 text-xs bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
+                <button className="w-full mt-3 px-3 py-2 text-xs font-medium bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
                   View All Issues →
                 </button>
               </a>
@@ -406,35 +463,41 @@ export default function DashboardOverview() {
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Quick Actions</h3>
           <div className="space-y-3">
-            <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center">
-                  <DocumentMagnifyingGlassIcon className="w-4 h-4 text-blue-600" />
+            <a href="/dashboard/audit" className="block">
+              <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-900/40 transition-colors">
+                    <DocumentMagnifyingGlassIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">Run Site Audit</span>
                 </div>
-                <span className="text-sm font-medium text-slate-900 dark:text-white">Run Site Audit</span>
-              </div>
-              <span className="text-xs text-slate-500 dark:text-slate-400">Free</span>
-            </button>
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Free</span>
+              </button>
+            </a>
             
-            <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center">
-                  <MagnifyingGlassIcon className="w-4 h-4 text-emerald-600" />
+            <a href="/dashboard/keywords" className="block">
+              <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all group">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/40 transition-colors">
+                    <MagnifyingGlassIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">Add Keywords</span>
                 </div>
-                <span className="text-sm font-medium text-slate-900 dark:text-white">Add Keywords</span>
-              </div>
-              <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Pro</span>
-            </button>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Pro</span>
+              </button>
+            </a>
             
-            <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center">
-                  <UsersIcon className="w-4 h-4 text-purple-600" />
+            <a href="/dashboard/competitors" className="block">
+              <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all group">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-900/40 transition-colors">
+                    <UsersIcon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">Analyze Competitors</span>
                 </div>
-                <span className="text-sm font-medium text-slate-900 dark:text-white">Analyze Competitors</span>
-              </div>
-              <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Pro</span>
-            </button>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Pro</span>
+              </button>
+            </a>
           </div>
         </div>
 
@@ -442,37 +505,34 @@ export default function DashboardOverview() {
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Recent Activity</h3>
           <div className="space-y-4">
-            <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-emerald-500 rounded-full mt-2"></div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-900 dark:text-white">Site audit completed</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">2 hours ago</p>
+            {recentActivity && recentActivity.length > 0 ? (
+              recentActivity.map((activity: any, index: number) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <div className={`w-2 h-2 rounded-full mt-2 ${
+                    activity.type === 'audit-completed' ? 'bg-emerald-500' :
+                    activity.type === 'backlinks' ? 'bg-blue-500' :
+                    activity.type === 'keyword-improvement' ? 'bg-yellow-500' :
+                    activity.type === 'critical-issue' ? 'bg-red-500' :
+                    'bg-slate-400'
+                  }`}></div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-slate-900 dark:text-white">{activity.message}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">{activity.timestamp}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-6">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  No recent activity. Run your first audit to get started!
+                </p>
+                <a href="/dashboard/audit" className="inline-block mt-3">
+                  <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                    Run First Audit
+                  </button>
+                </a>
               </div>
-            </div>
-            
-            <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-900 dark:text-white">15 new backlinks detected</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">6 hours ago</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-900 dark:text-white">Keyword ranking improved</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">1 day ago</p>
-              </div>
-            </div>
-            
-            <div className="flex items-start space-x-3">
-              <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-900 dark:text-white">3 critical issues found</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">2 days ago</p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
