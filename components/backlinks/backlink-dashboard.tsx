@@ -286,13 +286,15 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
       )}
 
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="backlinks">Backlinks</TabsTrigger>
-          <TabsTrigger value="domains">Referring Domains</TabsTrigger>
-          <TabsTrigger value="toxic">Toxic Analysis</TabsTrigger>
-          <TabsTrigger value="prospects">Link Prospects</TabsTrigger>
-        </TabsList>
+        <div className="overflow-x-auto">
+          <TabsList className="inline-flex w-auto">
+            <TabsTrigger value="overview" className="whitespace-nowrap">Overview</TabsTrigger>
+            <TabsTrigger value="backlinks" className="whitespace-nowrap">Backlinks</TabsTrigger>
+            <TabsTrigger value="domains" className="whitespace-nowrap">Referring Domains</TabsTrigger>
+            <TabsTrigger value="toxic" className="whitespace-nowrap">Toxic Analysis</TabsTrigger>
+            <TabsTrigger value="prospects" className="whitespace-nowrap">Link Prospects</TabsTrigger>
+          </TabsList>
+        </div>
 
         <TabsContent value="overview" className="space-y-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -556,12 +558,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex gap-4">
-                  <Button>
+                <div className="flex flex-wrap gap-3">
+                  <Button className="whitespace-nowrap">
                     <Download className="h-4 w-4 mr-2" />
                     Generate Disavow File
                   </Button>
-                  <Button variant="outline">
+                  <Button variant="outline" className="whitespace-nowrap">
                     <Shield className="h-4 w-4 mr-2" />
                     Bulk Mark as Safe
                   </Button>
@@ -587,12 +589,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="flex gap-4">
-                  <Button>
+                <div className="flex flex-wrap gap-3">
+                  <Button className="whitespace-nowrap">
                     <Target className="h-4 w-4 mr-2" />
                     Find New Prospects
                   </Button>
-                  <Button variant="outline">
+                  <Button variant="outline" className="whitespace-nowrap">
                     <Mail className="h-4 w-4 mr-2" />
                     Start Outreach Campaign
                   </Button>
