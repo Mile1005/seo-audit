@@ -472,8 +472,8 @@ export default function ComprehensiveAuditPage() {
               {/* Core Web Vitals Tab */}
               <TabsContent value="core-web-vitals" className="space-y-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Core Web Vitals Analysis</h2>
-                  <p className="text-slate-600 dark:text-slate-300">Essential performance metrics that impact user experience and SEO rankings.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Core Web Vitals Analysis</h2>
+                  <p className="text-slate-600 dark:text-slate-400">Essential performance metrics that impact user experience and SEO rankings.</p>
                 </div>
                 
                 {result.comprehensiveResults?.performance_metrics && (
@@ -484,8 +484,8 @@ export default function ComprehensiveAuditPage() {
               {/* Technical SEO Tab */}
               <TabsContent value="seo" className="space-y-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2">Technical SEO Analysis</h2>
-                  <p className="text-slate-600 dark:text-slate-300">On-page SEO factors, meta tags, and technical implementation review.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Technical SEO Analysis</h2>
+                  <p className="text-slate-600 dark:text-slate-400">On-page SEO factors, meta tags, and technical implementation review.</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -669,8 +669,8 @@ export default function ComprehensiveAuditPage() {
               {/* Accessibility Tab */}
               <TabsContent value="accessibility" className="space-y-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Accessibility Analysis</h2>
-                  <p className="text-slate-600">ARIA attributes, accessibility standards, and user experience evaluation.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Accessibility Analysis</h2>
+                  <p className="text-slate-600 dark:text-slate-400">ARIA attributes, accessibility standards, and user experience evaluation.</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -762,8 +762,8 @@ export default function ComprehensiveAuditPage() {
               {/* Performance Tab */}
               <TabsContent value="performance" className="space-y-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Performance Analysis</h2>
-                  <p className="text-slate-600">Detailed performance metrics, resource analysis, and optimization opportunities.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Performance Analysis</h2>
+                  <p className="text-slate-600 dark:text-slate-400">Detailed performance metrics, resource analysis, and optimization opportunities.</p>
                 </div>
 
                 {/* Performance Diagnostics */}
@@ -875,8 +875,8 @@ export default function ComprehensiveAuditPage() {
               {/* Recommendations Tab */}
               <TabsContent value="recommendations" className="space-y-8">
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold text-slate-900 mb-2">SEO Recommendations</h2>
-                  <p className="text-slate-600">Actionable improvements to boost your search engine rankings and user experience.</p>
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">SEO Recommendations</h2>
+                  <p className="text-slate-600 dark:text-slate-400">Actionable improvements to boost your search engine rankings and user experience.</p>
                 </div>
 
                 {/* Quick Wins */}
