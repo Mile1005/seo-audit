@@ -92,10 +92,10 @@ export const HeadingStructure = ({ h, stats }: Props) => {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10 border-2 border-purple-200 dark:border-purple-800">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-semibold flex items-center gap-3">
-          <div className="p-2 bg-purple-500 rounded-lg">
+    <Card className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700">
+      <CardHeader className="pb-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+        <CardTitle className="text-lg font-bold flex items-center gap-3 text-slate-900 dark:text-white">
+          <div className="p-2 bg-blue-600 rounded-lg">
             <FileText className="h-5 w-5 text-white" />
           </div>
           Heading Structure Analysis

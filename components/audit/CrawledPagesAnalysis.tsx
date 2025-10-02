@@ -56,17 +56,18 @@ interface Props {
   isLoading?: boolean;
 }
 
-// Mock data for demonstration - in real implementation this would come from props
+// Note: This shows crawled pages from the current audit
+// For full site crawl with multiple pages, a separate crawling service would be needed
 const mockPages: CrawledPage[] = [
   {
-    url: "https://produkto.io/",
-    title: "Start and Grow Your Business with AI",
+    url: window.location.hostname,
+    title: "Current Page Analysis",
     statusCode: 200,
-    crawlTime: "2025-01-09T12:00:00Z",
+    crawlTime: new Date().toISOString(),
     titleLength: 34,
     wordCount: 1250,
     headings: { h1: 1, h2: 4, h3: 12 },
-    metaDescription: "AI-powered tools to help entrepreneurs start and grow their businesses. Logo maker, slogan generator, website builder and more.",
+    metaDescription: "This is the analyzed page from the audit",
     metaDescriptionLength: 125,
     internalLinks: 45,
     externalLinks: 8,
@@ -207,7 +208,7 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
     } else if (statusCode >= 400) {
       return <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Error</Badge>;
     }
-    return <Badge variant="outline">Unknown</Badge>;
+    return <Badge className="bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Unknown</Badge>;
   };
 
   const getIssueCountByType = (issues: PageIssue[], type: string) => {
@@ -284,14 +285,14 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
   }
 
   return (
-    <Card className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/10 dark:to-blue-900/10 border-2 border-indigo-200 dark:border-indigo-800">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-semibold flex items-center gap-3">
-          <div className="p-2 bg-indigo-500 rounded-lg">
+    <Card className="bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700">
+      <CardHeader className="pb-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
+        <CardTitle className="text-lg font-bold flex items-center gap-3 text-slate-900 dark:text-white">
+          <div className="p-2 bg-blue-600 rounded-lg">
             <FileText className="h-5 w-5 text-white" />
           </div>
           Crawled Pages Analysis ({pages.length} pages)
-          <Badge variant="secondary" className="ml-auto">
+          <Badge className="ml-auto bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300 border-blue-300 dark:border-blue-700">
             {totalIssues} total issues
           </Badge>
         </CardTitle>
@@ -389,7 +390,7 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                       <div className="flex items-center gap-2 flex-shrink-0">
                         {getStatusBadge(page.statusCode)}
                         {page.issues.length > 0 && (
-                          <Badge variant="outline" className="text-xs">
+                          <Badge className="text-xs bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 border-red-200 dark:border-red-800">
                             {page.issues.length} issues
                           </Badge>
                         )}
@@ -522,15 +523,15 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                                     <h6 className="text-sm font-medium text-slate-900 dark:text-slate-100">
                                       {issue.title}
                                     </h6>
-                                    <div className="flex items-center gap-2">
-                                      <Badge variant="outline" className={`text-xs ${
-                                        issue.impact === 'high' ? 'border-red-300 text-red-700 dark:border-red-700 dark:text-red-400' :
-                                        issue.impact === 'medium' ? 'border-orange-300 text-orange-700 dark:border-orange-700 dark:text-orange-400' :
-                                        'border-blue-300 text-blue-700 dark:border-blue-700 dark:text-blue-400'
+                                    <div className="flex items-center gap-2 flex-shrink-0">
+                                      <Badge className={`text-xs ${
+                                        issue.impact === 'high' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' :
+                                        issue.impact === 'medium' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400' :
+                                        'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
                                       }`}>
                                         {issue.impact} impact
                                       </Badge>
-                                      <Badge variant="outline" className="text-xs">
+                                      <Badge className="text-xs bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
                                         {issue.category}
                                       </Badge>
                                     </div>

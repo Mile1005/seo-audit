@@ -1,247 +1,167 @@
 "use client";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/card';
-import { Button } from '../ui/button';
-import { Progress } from '../ui/progress';
-import { Award, Download, Share } from 'lucide-react';
 import { AuditResultUnified } from '../../lib/types/audit';
 
 interface Props { result: AuditResultUnified }
 
-function scoreColor(score: number){
-  if (score >= 90) return 'text-green-500';
-  if (score >= 70) return 'text-yellow-500';
-  return 'text-red-500';
+function scoreColor(score: number) {
+  if (score >= 90) return { stroke: '#0CCE6B', text: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-900/20', label: 'Excellent' };
+  if (score >= 50) return { stroke: '#FFA400', text: 'text-orange-500', bg: 'bg-orange-50 dark:bg-orange-900/20', label: 'Good' };
+  return { stroke: '#FF4E42', text: 'text-red-500', bg: 'bg-red-50 dark:bg-red-900/20', label: 'Poor' };
 }
+
+export const ScoreRing = ({ score, label, size = 120 }: { score: number; label: string; size?: number }) => {
+  const { stroke, text, bg, label: status } = scoreColor(score);
+  const circumference = 2 * Math.PI * 45;
+  const strokeDashoffset = circumference - (score / 100) * circumference;
+  
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <div className="relative" style={{ width: size, height: size }}>
+        {/* Background Circle */}
+        <svg className="transform -rotate-90" width={size} height={size}>
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={45}
+            stroke="#E5E7EB"
+            strokeWidth="8"
+            fill="none"
+          />
+          {/* Progress Circle */}
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={45}
+            stroke={stroke}
+            strokeWidth="8"
+            fill="none"
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            className="transition-all duration-1000 ease-out"
+          />
+        </svg>
+        {/* Score Text */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className={`text-3xl font-bold ${text}`}>{score}</span>
+        </div>
+      </div>
+      <div className="text-center">
+        <div className="text-sm font-semibold text-slate-900 dark:text-white">{label}</div>
+        <div className={`text-xs font-medium px-3 py-1 rounded-full ${bg} ${text} mt-1`}>
+          {status}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const ScoreSummary = ({ result }: Props) => {
   const s = result.comprehensiveResults.scores;
-  
-  const getScoreStatus = (score: number) => {
-    if (score >= 90) return { label: 'Excellent', color: 'text-green-600', bg: 'bg-green-100 dark:bg-green-900/30' };
-    if (score >= 70) return { label: 'Good', color: 'text-yellow-600', bg: 'bg-yellow-100 dark:bg-yellow-900/30' };
-    return { label: 'Needs Improvement', color: 'text-red-600', bg: 'bg-red-100 dark:bg-red-900/30' };
-  };
-
-  const overallStatus = getScoreStatus(result.score);
-
-  const handleExportPDF = async () => {
-    try {
-      // Create a comprehensive PDF report
-      const printWindow = window.open('', '_blank');
-      if (!printWindow) return;
-      
-      const reportContent = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>SEO Audit Report - ${result.url}</title>
-          <style>
-            body { font-family: Arial, sans-serif; margin: 40px; color: #333; }
-            .header { text-align: center; border-bottom: 2px solid #3b82f6; padding-bottom: 20px; margin-bottom: 30px; }
-            .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 30px 0; }
-            .score-card { border: 1px solid #ddd; padding: 20px; text-align: center; border-radius: 8px; }
-            .score-large { font-size: 48px; font-weight: bold; color: #3b82f6; }
-            .issues { margin: 30px 0; }
-            .issue { margin: 15px 0; padding: 15px; background: #f8f9fa; border-left: 4px solid #dc3545; }
-            .recommendation { margin: 15px 0; padding: 15px; background: #f0f9ff; border-left: 4px solid #3b82f6; }
-          </style>
-        </head>
-        <body>
-          <div class="header">
-            <h1>SEO Audit Report</h1>
-            <h2>${result.url}</h2>
-            <p>Generated on ${new Date().toLocaleDateString()}</p>
-            <div class="score-large">${result.score}/100</div>
-            <p><strong>Overall Status:</strong> ${overallStatus.label}</p>
-          </div>
-          
-          <div class="score-grid">
-            <div class="score-card">
-              <h3>SEO</h3>
-              <div style="font-size: 32px; font-weight: bold; color: #3b82f6;">${s.seo || 0}</div>
-            </div>
-            <div class="score-card">
-              <h3>Performance</h3>
-              <div style="font-size: 32px; font-weight: bold; color: #3b82f6;">${s.performance || 0}</div>
-            </div>
-            <div class="score-card">
-              <h3>Accessibility</h3>
-              <div style="font-size: 32px; font-weight: bold; color: #3b82f6;">${s.accessibility || 0}</div>
-            </div>
-            <div class="score-card">
-              <h3>Best Practices</h3>
-              <div style="font-size: 32px; font-weight: bold; color: #3b82f6;">${s.best_practices || 0}</div>
-            </div>
-          </div>
-
-          <div class="issues">
-            <h2>Issues Found (${result.comprehensiveResults.issues?.length || 0})</h2>
-            ${result.comprehensiveResults.issues?.map(issue => `
-              <div class="issue">
-                <h4>${issue.title}</h4>
-                <p>${issue.description}</p>
-                ${issue.recommendation ? `<p><strong>Recommendation:</strong> ${issue.recommendation}</p>` : ''}
-              </div>
-            `).join('') || '<p>No issues found.</p>'}
-          </div>
-
-          <div class="issues">
-            <h2>Quick Wins (${result.comprehensiveResults.quick_wins?.length || 0})</h2>
-            ${result.comprehensiveResults.quick_wins?.map(win => `
-              <div class="recommendation">
-                <h4>${win.title}</h4>
-                <p>${win.description}</p>
-              </div>
-            `).join('') || '<p>No quick wins identified.</p>'}
-          </div>
-        </body>
-        </html>
-      `;
-      
-      printWindow.document.write(reportContent);
-      printWindow.document.close();
-      printWindow.focus();
-      printWindow.print();
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error generating PDF report. Please try again.');
-    }
-  };
-
-  const handleShare = async () => {
-    const shareData = {
-      title: `SEO Audit Report - ${result.url}`,
-      text: `SEO Score: ${result.score}/100 - ${overallStatus.label}. Issues found: ${result.comprehensiveResults.issues?.length || 0}, Quick wins: ${result.comprehensiveResults.quick_wins?.length || 0}`,
-      url: window.location.href
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(shareData);
-      } else {
-        // Fallback for browsers that don't support Web Share API
-        await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n${shareData.url}`);
-        alert('Report summary copied to clipboard!');
-      }
-    } catch (error) {
-      console.error('Error sharing:', error);
-      // Final fallback - create shareable URL
-      const mailtoLink = `mailto:?subject=${encodeURIComponent(shareData.title)}&body=${encodeURIComponent(shareData.text + '\n\n' + shareData.url)}`;
-      window.open(mailtoLink);
-    }
-  };
+  const overallStatus = scoreColor(result.score);
 
   return (
-    <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border-2 border-blue-200 dark:border-blue-800 overflow-hidden">
-      <CardHeader className="pb-4">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-blue-500 rounded-xl">
-              <Award className="h-6 w-6 text-white" />
+    <div className="space-y-6">
+      {/* Main Score Card */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-8 shadow-lg">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <svg className="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              SEO Audit Results
+            </h2>
+            <div className="flex items-center gap-3 mt-2">
+              <p className="text-sm text-slate-600 dark:text-slate-400">{result.url}</p>
+              <span className="text-xs text-slate-500 dark:text-slate-500">•</span>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Completed: {new Date().toLocaleDateString()}
+              </p>
+              <span className="text-xs text-slate-500 dark:text-slate-500">•</span>
+              <p className="text-sm text-slate-600 dark:text-slate-400">ID: {result.auditId.slice(0, 8)}</p>
+            </div>
+          </div>
+          <button className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+            Share
+          </button>
+        </div>
+
+        {/* Overall Score - Large */}
+        <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-xl p-8 mb-6 border border-slate-200 dark:border-slate-700">
+          <div className="flex flex-col items-center">
+            <ScoreRing score={result.score} label="" size={160} />
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-4">Overall SEO Score</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 text-center max-w-md">
+              {result.score >= 90 ? 'Excellent performance with room for optimization.' :
+               result.score >= 50 ? 'Good performance with some areas to improve.' :
+               'Significant improvements needed for better SEO performance.'}
+            </p>
+          </div>
+        </div>
+
+        {/* Individual Scores - Lighthouse Style */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <ScoreRing score={s.seo || 0} label="SEO" size={110} />
+          <ScoreRing score={s.performance || 0} label="Performance" size={110} />
+          <ScoreRing score={s.accessibility || 0} label="Accessibility" size={110} />
+          <ScoreRing score={s.best_practices || 0} label="Best Practices" size={110} />
+        </div>
+      </div>
+
+      {/* Quick Summary Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-200 dark:border-green-800 rounded-xl p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-green-500 rounded-lg">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
             </div>
             <div>
-              <CardTitle className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                SEO Audit Results
-              </CardTitle>
-              <CardDescription className="text-slate-800 dark:text-slate-200 mt-1 font-medium">
-                {result.url}
-              </CardDescription>
-              <div className="flex items-center gap-4 mt-2 text-sm text-slate-700 dark:text-slate-300 font-medium">
-                <span>Completed: {new Date(result.timestamp).toLocaleDateString()}</span>
-                <span>•</span>
-                <span>ID: {result.auditId.slice(0, 8)}</span>
+              <div className="text-3xl font-bold text-green-700 dark:text-green-400">
+                {result.comprehensiveResults.accessibility?.passed_checks?.length || 0}
               </div>
+              <div className="text-sm font-medium text-green-600 dark:text-green-300">Excellent Areas</div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              className="bg-green-600 text-white border-green-600 hover:bg-green-700 hover:border-green-700 font-medium"
-              onClick={handleShare}
-            >
-              <Share className="h-4 w-4 mr-2" />
-              Share
-            </Button>
-          </div>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Overall Score Highlight */}
-        <div className="text-center p-6 bg-white dark:bg-slate-800 rounded-2xl border shadow-sm">
-          <div className="mb-4">
-            <div className={`text-6xl font-bold ${overallStatus.color} mb-2`}>
-              {result.score}
-            </div>
-            <div className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold ${overallStatus.bg} ${overallStatus.color}`}>
-              {overallStatus.label}
-            </div>
-          </div>
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">Overall SEO Score</h3>
-          <Progress value={result.score} className="mt-3 h-3 bg-slate-200 dark:bg-slate-700" />
-          <p className="text-sm text-slate-800 dark:text-slate-200 mt-2 font-medium">
-            {result.score >= 90 && "Outstanding! Your site follows SEO best practices."}
-            {result.score >= 70 && result.score < 90 && "Good performance with room for optimization."}
-            {result.score < 70 && "Several opportunities for improvement identified."}
-          </p>
         </div>
 
-        {/* Detailed Scores Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { key: 'seo', label: 'SEO', icon: '🎯' },
-            { key: 'performance', label: 'Performance', icon: '⚡' },
-            { key: 'accessibility', label: 'Accessibility', icon: '♿' },
-            { key: 'best_practices', label: 'Best Practices', icon: '✅' }
-          ].map(({ key, label, icon }) => {
-            const score = (s as any)[key] || 0;
-            const status = getScoreStatus(score);
-            
-            return (
-              <div key={key} className="p-4 bg-white dark:bg-slate-800 rounded-xl border hover:shadow-md transition-shadow">
-                <div className="text-center">
-                  <div className="text-2xl mb-2">{icon}</div>
-                  <div className={`text-3xl font-bold ${status.color} mb-1`}>
-                    {score}
-                  </div>
-                  <div className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
-                    {label}
-                  </div>
-                  <Progress value={score} className="h-2 bg-slate-200 dark:bg-slate-700" />
-                  <div className={`text-xs mt-2 px-2 py-1 rounded-full ${status.bg} ${status.color}`}>
-                    {status.label}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Quick Summary */}
-        <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border">
-          <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-3">Quick Summary</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div className="text-center">
-              <div className="text-lg font-bold text-green-600 dark:text-green-400">
-                {Object.values(s).filter(score => score >= 90).length}
-              </div>
-              <div className="text-slate-800 dark:text-slate-200 font-medium">Excellent Areas</div>
+        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-200 dark:border-yellow-800 rounded-xl p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-yellow-500 rounded-lg">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
             </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-yellow-600 dark:text-yellow-400">
-                {Object.values(s).filter(score => score >= 70 && score < 90).length}
+            <div>
+              <div className="text-3xl font-bold text-yellow-700 dark:text-yellow-400">
+                {result.comprehensiveResults.seo_checks?.failed_checks?.length || 0}
               </div>
-              <div className="text-slate-800 dark:text-slate-200 font-medium">Good Areas</div>
-            </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-red-600 dark:text-red-400">
-                {Object.values(s).filter(score => score < 70).length}
-              </div>
-              <div className="text-slate-800 dark:text-slate-200 font-medium">Needs Attention</div>
+              <div className="text-sm font-medium text-yellow-600 dark:text-yellow-300">Good Areas</div>
             </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+
+        <div className="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl p-6">
+          <div className="flex items-center gap-3">
+            <div className="p-3 bg-red-500 rounded-lg">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-red-700 dark:text-red-400">
+                {result.comprehensiveResults.issues?.filter(i => i.severity === 'high').length || 0}
+              </div>
+              <div className="text-sm font-medium text-red-600 dark:text-red-300">Needs Attention</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
