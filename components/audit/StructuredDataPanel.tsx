@@ -1,3 +1,5 @@
+"use client";
+import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '../ui/card'
 import { Badge } from '../ui/badge'
 import { AuditResultUnified } from '@/lib/types/audit'
@@ -32,9 +34,17 @@ export function StructuredDataPanel({ result }: StructuredDataPanelProps) {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            className="p-4 bg-white dark:bg-slate-800 rounded-xl border hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
+          >
             <h4 className="text-base font-bold mb-3 flex items-center gap-2 text-slate-900 dark:text-slate-100">
-              <LinkIcon className="h-5 w-5 text-blue-500" />
+              <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                <LinkIcon className="h-5 w-5 text-blue-500" />
+              </motion.div>
               Link Distribution
             </h4>
             <div className="space-y-2">
@@ -52,11 +62,19 @@ export function StructuredDataPanel({ result }: StructuredDataPanelProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            className="p-4 bg-white dark:bg-slate-800 rounded-xl border hover:border-purple-400 dark:hover:border-purple-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
+          >
             <h4 className="text-base font-bold mb-3 flex items-center gap-2 text-slate-900 dark:text-slate-100">
-              <Table className="h-5 w-5 text-purple-500" />
+              <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                <Table className="h-5 w-5 text-purple-500" />
+              </motion.div>
               Content Structure
             </h4>
             <div className="space-y-2">
@@ -74,11 +92,19 @@ export function StructuredDataPanel({ result }: StructuredDataPanelProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            whileHover={{ y: -5, scale: 1.02 }}
+            className="p-4 bg-white dark:bg-slate-800 rounded-xl border hover:border-green-400 dark:hover:border-green-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
+          >
             <h4 className="text-base font-bold mb-3 flex items-center gap-2 text-slate-900 dark:text-slate-100">
-              <ListOrdered className="h-5 w-5 text-green-500" />
+              <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
+                <ListOrdered className="h-5 w-5 text-green-500" />
+              </motion.div>
               Image Accessibility
             </h4>
             <div className="space-y-2">
@@ -104,7 +130,7 @@ export function StructuredDataPanel({ result }: StructuredDataPanelProps) {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         <div className="p-4 bg-white dark:bg-slate-800 rounded-xl border">
@@ -115,9 +141,17 @@ export function StructuredDataPanel({ result }: StructuredDataPanelProps) {
           {jsonTypes.length > 0 ? (
             <div className="flex flex-wrap gap-2">
               {jsonTypes.map((t, i) => (
-                <Badge key={i} className="bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-700">
-                  {t}
-                </Badge>
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
+                  <Badge className="bg-emerald-100 text-emerald-800 border-emerald-300 dark:bg-emerald-900/30 dark:text-emerald-200 dark:border-emerald-700 cursor-pointer">
+                    {t}
+                  </Badge>
+                </motion.div>
               ))}
             </div>
           ) : (

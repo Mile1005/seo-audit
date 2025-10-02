@@ -1,4 +1,5 @@
 "use client";
+import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { FileText, CheckCircle, AlertTriangle, Info, ChevronRight } from 'lucide-react';
 import { Badge } from '../ui/badge';
@@ -126,23 +127,32 @@ export const HeadingStructure = ({ h, stats }: Props) => {
 
         {/* Heading Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{h.h1.length}</div>
-            <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">H1 Tags</div>
-            {h.h1.length === 1 && <CheckCircle className="h-4 w-4 text-green-500 mx-auto mt-1" />}
-          </div>
-          <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{h.h2.length}</div>
-            <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">H2 Tags</div>
-          </div>
-          <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{h.h3.length}</div>
-            <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">H3 Tags</div>
-          </div>
-          <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{stats.word_count.toLocaleString()}</div>
-            <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">Words</div>
-          </div>
+          {[
+            { value: h.h1.length, label: 'H1 Tags', showCheck: h.h1.length === 1 },
+            { value: h.h2.length, label: 'H2 Tags', showCheck: false },
+            { value: h.h3.length, label: 'H3 Tags', showCheck: false },
+            { value: stats.word_count.toLocaleString(), label: 'Words', showCheck: false }
+          ].map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              whileHover={{ y: -5, scale: 1.05 }}
+              className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
+            >
+              <motion.div 
+                className="text-2xl font-bold text-slate-900 dark:text-slate-100"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 200 }}
+              >
+                {stat.value}
+              </motion.div>
+              <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">{stat.label}</div>
+              {stat.showCheck && <CheckCircle className="h-4 w-4 text-green-500 mx-auto mt-1" />}
+            </motion.div>
+          ))}
         </div>
 
         {/* Content Metrics */}
@@ -213,7 +223,14 @@ export const HeadingStructure = ({ h, stats }: Props) => {
           <div className="space-y-3 max-h-80 overflow-y-auto">
             {/* H1 Headings */}
             {h.h1.map((heading, index) => (
-              <div key={`h1-${index}`} className="flex items-start gap-3 p-3 bg-white dark:bg-slate-700 rounded-lg border-l-4 border-purple-500">
+              <motion.div 
+                key={`h1-${index}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-start gap-3 p-3 bg-white dark:bg-slate-700 rounded-lg border-l-4 border-purple-500 hover:shadow-md transition-shadow cursor-pointer"
+              >
                 <Badge className="bg-purple-500 text-white font-bold">H1</Badge>
                 <div className="flex-1">
                   <span className="text-sm font-semibold text-slate-900 dark:text-slate-100">{heading}</span>
@@ -221,12 +238,19 @@ export const HeadingStructure = ({ h, stats }: Props) => {
                     Primary page title • {heading.length} characters
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
 
             {/* H2 Headings */}
             {h.h2.map((heading, index) => (
-              <div key={`h2-${index}`} className="flex items-start gap-3 p-3 bg-white dark:bg-slate-700 rounded-lg border-l-4 border-blue-500 ml-4">
+              <motion.div 
+                key={`h2-${index}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: (h.h1.length + index) * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-start gap-3 p-3 bg-white dark:bg-slate-700 rounded-lg border-l-4 border-blue-500 ml-4 hover:shadow-md transition-shadow cursor-pointer"
+              >
                 <Badge className="bg-blue-500 text-white font-bold">H2</Badge>
                 <div className="flex-1">
                   <span className="text-sm text-slate-900 dark:text-slate-100">{heading}</span>
@@ -234,12 +258,19 @@ export const HeadingStructure = ({ h, stats }: Props) => {
                     Section heading • {heading.length} characters
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
 
             {/* H3 Headings (show first 5) */}
             {h.h3.slice(0, 5).map((heading, index) => (
-              <div key={`h3-${index}`} className="flex items-start gap-3 p-3 bg-white dark:bg-slate-700 rounded-lg border-l-4 border-cyan-500 ml-8">
+              <motion.div 
+                key={`h3-${index}`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: (h.h1.length + h.h2.length + index) * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-start gap-3 p-3 bg-white dark:bg-slate-700 rounded-lg border-l-4 border-cyan-500 ml-8 hover:shadow-md transition-shadow cursor-pointer"
+              >
                 <Badge className="bg-cyan-500 text-white font-bold">H3</Badge>
                 <div className="flex-1">
                   <span className="text-sm text-slate-800 dark:text-slate-100">{heading}</span>
@@ -247,7 +278,7 @@ export const HeadingStructure = ({ h, stats }: Props) => {
                     Subsection • {heading.length} characters
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
             
             {h.h3.length > 5 && (

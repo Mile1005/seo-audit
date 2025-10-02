@@ -1,6 +1,8 @@
 "use client";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { Link as LinkIcon, CheckCircle, XCircle } from 'lucide-react';
+import { Link as LinkIcon, CheckCircle, XCircle, Copy, Check } from 'lucide-react';
 import { ComprehensiveResults } from '../../lib/types/audit';
 
 interface Props { social: ComprehensiveResults['social_meta'] }
@@ -45,14 +47,23 @@ export const SocialMetaPanel = ({ social }: Props) => {
             </div>
           </div>
           <div className="space-y-2">
-            {entries.slice(0, 3).map(([k,v]) => (
-              <div key={k} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            {entries.slice(0, 3).map(([k,v], index) => (
+              <motion.div 
+                key={k}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all duration-300 cursor-pointer"
+              >
                 <div className="flex items-center gap-3">
-                  {v ? (
-                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                  ) : (
-                    <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
-                  )}
+                  <motion.div whileHover={{ scale: 1.2, rotate: 360 }} transition={{ duration: 0.3 }}>
+                    {v ? (
+                      <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+                    )}
+                  </motion.div>
                   <span className="font-medium text-slate-900 dark:text-white">{k}</span>
                 </div>
                 <span className={`text-sm font-medium truncate max-w-[250px] text-right ${
@@ -60,7 +71,7 @@ export const SocialMetaPanel = ({ social }: Props) => {
                 }`}>
                   {v || 'Missing'}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -83,14 +94,23 @@ export const SocialMetaPanel = ({ social }: Props) => {
             </div>
           </div>
           <div className="space-y-2">
-            {entries.slice(3).map(([k,v]) => (
-              <div key={k} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+            {entries.slice(3).map(([k,v], index) => (
+              <motion.div 
+                key={k}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: (index + 3) * 0.1 }}
+                whileHover={{ scale: 1.02, x: 5 }}
+                className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-sky-400 dark:hover:border-sky-500 hover:shadow-md transition-all duration-300 cursor-pointer"
+              >
                 <div className="flex items-center gap-3">
-                  {v ? (
-                    <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
-                  ) : (
-                    <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
-                  )}
+                  <motion.div whileHover={{ scale: 1.2, rotate: 360 }} transition={{ duration: 0.3 }}>
+                    {v ? (
+                      <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                    ) : (
+                      <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+                    )}
+                  </motion.div>
                   <span className="font-medium text-slate-900 dark:text-white">{k}</span>
                 </div>
                 <span className={`text-sm font-medium truncate max-w-[250px] text-right ${
@@ -98,7 +118,7 @@ export const SocialMetaPanel = ({ social }: Props) => {
                 }`}>
                   {v || 'Missing'}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
