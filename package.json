@@ -12,6 +12,7 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:reset": "prisma migrate reset",
     "seed": "tsx scripts/seed-database.ts",
+    "reseed": "tsx scripts/reseed-database.ts",
     "start": "next start",
     "lint": "next lint",
     "worker": "tsx worker/index.ts",
