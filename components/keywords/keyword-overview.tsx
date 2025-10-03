@@ -484,6 +484,36 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
 
       {/* Traffic Analytics */}
       <TrafficAnalytics keywordId={keyword.id} keyword={keyword.keyword} currentRank={5} />
+
+      {/* Demo Data Disclaimer */}
+      <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50">
+        <CardContent className="p-6">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-blue-500 rounded-lg flex-shrink-0">
+              <svg className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="flex-1">
+              <h4 className="text-lg font-bold text-slate-900 mb-2">📊 Demo Data Notice</h4>
+              <p className="text-slate-700 mb-3">
+                The data displayed above is <strong>demonstration data</strong> designed to showcase the platform's capabilities. 
+                This includes keyword metrics, competitor analysis, SERP features, location tracking, traffic analytics, and alerts.
+              </p>
+              <p className="text-slate-700 mb-4">
+                For <strong>real-time, accurate data</strong> from Google Search Console, Google Analytics, and live SERP tracking, 
+                please upgrade to our <strong className="text-blue-600">PRO plan</strong>.
+              </p>
+              <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+                Upgrade to PRO for Real Data
+              </button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
