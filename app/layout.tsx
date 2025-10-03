@@ -72,18 +72,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="manifest" href="/manifest.json" />
         
-        {/* EMERGENCY: Critical performance optimizations */}
+        {/* Critical performance optimizations */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
         
-        {/* EMERGENCY: Preload critical resources */}
-        <link rel="modulepreload" href="/_next/static/chunks/webpack.js" />
-        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
-        
-        {/* EMERGENCY: Resource hints for performance */}
+        {/* Resource hints for performance */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
-        <link rel="dns-prefetch" href="//localhost:3000" />
         
         {/* EMERGENCY: Critical CSS - loads immediately */}
         <style dangerouslySetInnerHTML={{
@@ -102,9 +97,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `
         }} />
         
-        {/* Preload critical resources */}
-        <link rel="preload" href="/images/hero/hero-laptop-dashboard.svg" as="image" type="image/svg+xml" />
-        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
+        {/* Preload critical resources with proper priority */}
+        <link rel="preload" href="/images/hero/hero-laptop-dashboard.svg" as="image" type="image/svg+xml" fetchPriority="high" />
+        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" fetchPriority="high" />
         
         {/* Resource hints for faster loading - removed API prefetch that causes 405 errors */}
         

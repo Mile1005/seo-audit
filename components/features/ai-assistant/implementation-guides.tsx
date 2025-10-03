@@ -88,7 +88,7 @@ getTTFB(console.log);`,
         title: "Optimize Largest Contentful Paint (LCP)",
         description: "Improve loading performance of the largest visible element",
         code: `<!-- Preload critical resources -->
-<link rel="preload" href="/hero-image.webp" as="image">
+<link rel="preload" href="/hero-image.webp" as="image" fetchpriority="high">
 <link rel="preload" href="/critical.css" as="style">
 
 <!-- Optimize images -->

@@ -148,131 +148,168 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 animate-in fade-in duration-500">
+      {/* Header - Beautiful Gradient */}
+      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-100">
         <div>
-          <h2 className="text-2xl font-bold">Keyword Rankings</h2>
-          <p className="text-muted-foreground">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <TrendingUp className="h-6 w-6 text-green-600" />
+            Keyword Rankings
+          </h2>
+          <p className="text-slate-600 mt-1">
             Track your keyword positions and performance over time
           </p>
         </div>
-        <Button onClick={loadKeywordRankings}>
+        <Button 
+          onClick={loadKeywordRankings}
+          className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white shadow-md hover:shadow-lg transition-all duration-200"
+        >
           <Calendar className="h-4 w-4 mr-2" />
           Refresh Rankings
         </Button>
       </div>
 
-      {/* Statistics Cards */}
+      {/* Statistics Cards - Premium Design */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <Target className="h-4 w-4 text-blue-500" />
-              <span className="text-sm font-medium">Total Keywords</span>
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-blue-50 to-white">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-2 bg-blue-500 rounded-lg shadow-md">
+                <Target className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Total Keywords</span>
             </div>
-            <p className="text-2xl font-bold">{keywords.length}</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-4xl font-black text-blue-600">{keywords.length}</p>
+            <p className="text-sm text-slate-500 font-medium mt-2">
               {rankedKeywords.length} ranked
             </p>
           </CardContent>
         </Card>
         
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-green-500" />
-              <span className="text-sm font-medium">Page 1 Rankings</span>
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-green-50 to-white">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-2 bg-green-500 rounded-lg shadow-md">
+                <TrendingUp className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Page 1 Rankings</span>
             </div>
-            <p className="text-2xl font-bold">{topKeywords}</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-4xl font-black text-green-600">{topKeywords}</p>
+            <p className="text-sm text-slate-500 font-medium mt-2">
               Top 10 positions
             </p>
           </CardContent>
         </Card>
         
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <Eye className="h-4 w-4 text-orange-500" />
-              <span className="text-sm font-medium">Avg Position</span>
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-orange-50 to-white">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-2 bg-orange-500 rounded-lg shadow-md">
+                <Eye className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Avg Position</span>
             </div>
-            <p className="text-2xl font-bold">{avgPosition || 'N/A'}</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-4xl font-black text-orange-600">{avgPosition || 'N/A'}</p>
+            <p className="text-sm text-slate-500 font-medium mt-2">
               For ranked keywords
             </p>
           </CardContent>
         </Card>
         
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-purple-500" />
-              <span className="text-sm font-medium">Improvements</span>
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-purple-50 to-white">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-2 bg-purple-500 rounded-lg shadow-md">
+                <TrendingUp className="h-4 w-4 text-white" />
+              </div>
+              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Improvements</span>
             </div>
-            <p className="text-2xl font-bold">{improvedKeywords}</p>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-4xl font-black text-purple-600">{improvedKeywords}</p>
+            <p className="text-sm text-slate-500 font-medium mt-2">
               Keywords moved up
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Filter Buttons */}
-      <div className="flex gap-2">
+      {/* Filter Buttons - Modern Pill Design */}
+      <div className="flex gap-2 flex-wrap">
         <Button
           variant={filterStatus === 'all' ? 'default' : 'outline'}
           onClick={() => setFilterStatus('all')}
+          className={filterStatus === 'all' 
+            ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md hover:shadow-lg' 
+            : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+          }
         >
           All Keywords ({keywords.length})
         </Button>
         <Button
           variant={filterStatus === 'ranked' ? 'default' : 'outline'}
           onClick={() => setFilterStatus('ranked')}
+          className={filterStatus === 'ranked' 
+            ? 'bg-gradient-to-r from-green-600 to-green-700 text-white shadow-md hover:shadow-lg' 
+            : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+          }
         >
           Ranked ({rankedKeywords.length})
         </Button>
         <Button
           variant={filterStatus === 'unranked' ? 'default' : 'outline'}
           onClick={() => setFilterStatus('unranked')}
+          className={filterStatus === 'unranked' 
+            ? 'bg-gradient-to-r from-orange-600 to-orange-700 text-white shadow-md hover:shadow-lg' 
+            : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+          }
         >
           Unranked ({keywords.length - rankedKeywords.length})
         </Button>
       </div>
 
-      {/* Rankings Table */}
+      {/* Rankings Table - Premium Design */}
       {filteredKeywords.length > 0 ? (
-        <Card>
-          <CardHeader>
-            <CardTitle>Keyword Rankings</CardTitle>
-            <CardDescription>
+        <Card className="border-0 shadow-lg bg-white">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
+            <CardTitle className="text-slate-900 flex items-center gap-2">
+              <Target className="h-5 w-5 text-blue-600" />
+              Keyword Rankings
+            </CardTitle>
+            <CardDescription className="text-slate-600">
               Current positions and changes for your tracked keywords
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-3">
               {filteredKeywords.map((keyword) => (
                 <div
                   key={keyword.id}
-                  className="p-4 border rounded-lg hover:border-gray-300 transition-colors"
+                  className="p-5 bg-white border-2 border-slate-100 rounded-xl hover:border-blue-200 hover:shadow-md transition-all duration-200"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center">
                     <div className="md:col-span-2">
-                      <h4 className="font-medium">{keyword.keyword}</h4>
-                      <div className="flex gap-2 mt-1">
+                      <h4 className="font-semibold text-slate-900">{keyword.keyword}</h4>
+                      <div className="flex gap-2 mt-2">
                         <Badge 
                           variant={getPositionBadgeVariant(keyword.position)}
-                          className="text-xs"
+                          className={`text-xs font-semibold ${
+                            !keyword.position 
+                              ? 'bg-slate-200 text-slate-700 border-2 border-slate-300' 
+                              : keyword.position <= 3 
+                              ? 'bg-green-500 text-white' 
+                              : keyword.position <= 10 
+                              ? 'bg-blue-500 text-white' 
+                              : 'bg-orange-100 text-orange-700 border-2 border-orange-300'
+                          }`}
                         >
                           {getPositionBadge(keyword.position)}
                         </Badge>
                         {keyword.featured && (
-                          <Badge variant="secondary" className="text-xs">
+                          <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700 font-semibold">
                             Featured
                           </Badge>
                         )}
                         {keyword.localPack && (
-                          <Badge variant="secondary" className="text-xs">
+                          <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700 font-semibold">
                             Local Pack
                           </Badge>
                         )}
@@ -282,29 +319,29 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
                     <div className="text-center">
                       <div className="flex items-center justify-center gap-2">
                         {getChangeIcon(keyword.changeType, keyword.position, keyword.previousRank)}
-                        <span className={`font-bold text-lg ${getPositionColor(keyword.position)}`}>
+                        <span className={`font-bold text-2xl ${getPositionColor(keyword.position)}`}>
                           {keyword.position || 'NR'}
                         </span>
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-slate-500 font-medium mt-1">
                         Current Position
                       </p>
                     </div>
                     
                     <div className="text-center">
-                      <p className="font-semibold">
+                      <p className="font-semibold text-slate-700 text-lg">
                         {keyword.previousRank || 'N/A'}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-slate-500 font-medium mt-1">
                         Previous
                       </p>
                     </div>
                     
                     <div className="text-center">
-                      <p className="font-semibold">
+                      <p className="font-semibold text-slate-700 text-lg">
                         {keyword.searchVolume ? keyword.searchVolume.toLocaleString() : 'N/A'}
                       </p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-slate-500 font-medium mt-1">
                         Volume
                       </p>
                     </div>
@@ -313,29 +350,29 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
                       {keyword.difficulty && (
                         <Progress 
                           value={keyword.difficulty} 
-                          className="w-16 h-2 mx-auto" 
+                          className="w-20 h-2.5 mx-auto" 
                         />
                       )}
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Difficulty
+                      <p className="text-xs text-slate-500 font-medium mt-1">
+                        Difficulty: {keyword.difficulty}%
                       </p>
                     </div>
                     
                     <div className="text-center">
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-xs text-slate-600 font-medium">
                         {new Date(keyword.checkedAt).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
                   
                   {keyword.url && (
-                    <div className="mt-3 pt-3 border-t">
-                      <p className="text-sm text-muted-foreground truncate">
-                        <strong>URL:</strong> {keyword.url}
+                    <div className="mt-4 pt-4 border-t border-slate-100">
+                      <p className="text-sm text-slate-600 truncate">
+                        <strong className="text-slate-900">URL:</strong> {keyword.url}
                       </p>
                       {keyword.title && (
-                        <p className="text-sm text-muted-foreground truncate mt-1">
-                          <strong>Title:</strong> {keyword.title}
+                        <p className="text-sm text-slate-600 truncate mt-1">
+                          <strong className="text-slate-900">Title:</strong> {keyword.title}
                         </p>
                       )}
                     </div>
@@ -346,7 +383,7 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
           </CardContent>
         </Card>
       ) : (
-        <Card>
+        <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-blue-50">
           <CardContent className="p-12 text-center">
             <Target className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">No rankings found</h3>

@@ -42,12 +42,12 @@ export default function KeywordsPage() {
       </div>
       
       <div className="w-full">
-        <div className="flex space-x-1 bg-muted p-1 rounded-lg mb-6">
+        <div className="flex space-x-2 bg-white border-2 border-slate-200 p-1.5 rounded-xl mb-6 shadow-sm">
           <button 
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
               activeTab === 'research' 
-                ? 'bg-background text-foreground shadow-sm' 
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
             onClick={() => setActiveTab('research')}
           >
@@ -55,10 +55,10 @@ export default function KeywordsPage() {
             Research
           </button>
           <button 
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
               activeTab === 'rankings' 
-                ? 'bg-background text-foreground shadow-sm' 
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
             onClick={() => setActiveTab('rankings')}
           >
@@ -66,10 +66,10 @@ export default function KeywordsPage() {
             Rankings
           </button>
           <button 
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
               activeTab === 'opportunities' 
-                ? 'bg-background text-foreground shadow-sm' 
-                : 'text-muted-foreground hover:text-foreground'
+                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
             onClick={() => setActiveTab('opportunities')}
           >
