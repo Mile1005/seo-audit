@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { seedKeyword } from '@/lib/seed-keyword';
 
 const prisma = new PrismaClient();
 
@@ -125,6 +126,18 @@ export async function POST(request: NextRequest) {
           },
           create: keywordData
         });
+
+        // 🌱 AUTO-SEED: Generate realistic demo data for the new keyword
+        // This populates 90 days of position history, competitors, location data, SERP features, and alerts
+        const basePosition = 5 + Math.floor(Math.random() * 10); // Random starting position 5-15
+        await seedKeyword(
+          prisma,
+          savedKeyword.id,
+          savedKeyword.keyword,
+          projectId,
+          savedKeyword.searchVolume || 1000,
+          basePosition
+        );
         
         allKeywords.push({
           id: savedKeyword.id,

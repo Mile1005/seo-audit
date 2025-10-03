@@ -220,7 +220,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
               <div className="p-2 bg-white/20 backdrop-blur-sm rounded-lg">
                 <Eye className="h-6 w-6 text-white" />
               </div>
-              {summary.impressionsChange !== 0 && (
+              {summary && summary.impressionsChange !== 0 && (
                 <Badge className={summary.impressionsChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
                   {summary.impressionsChange > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
                   {Math.abs(summary.impressionsChange)}%
@@ -229,7 +229,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
             </div>
             <p className="text-xs text-blue-100 mb-1">Total Impressions</p>
             <p className="text-3xl font-bold text-white mb-2">
-              {summary.totalImpressions.toLocaleString()}
+              {summary && summary.totalImpressions ? summary.totalImpressions.toLocaleString() : '0'}
             </p>
             <div className="flex items-center gap-2 text-xs text-blue-100">
               <Progress value={75} className="h-1 bg-blue-400" />
@@ -243,7 +243,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
               <div className="p-2 bg-white/20 backdrop-blur-sm rounded-lg">
                 <MousePointer className="h-6 w-6 text-white" />
               </div>
-              {summary.clicksChange !== 0 && (
+              {summary && summary.clicksChange !== 0 && (
                 <Badge className={summary.clicksChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
                   {summary.clicksChange > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
                   {Math.abs(summary.clicksChange)}%
@@ -252,12 +252,12 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
             </div>
             <p className="text-xs text-purple-100 mb-1">Total Clicks</p>
             <p className="text-3xl font-bold text-white mb-2">
-              {summary.totalClicks.toLocaleString()}
+              {summary && summary.totalClicks ? summary.totalClicks.toLocaleString() : '0'}
             </p>
             <div className="flex items-center gap-2 text-xs text-purple-100">
-              <span>CTR: {summary.averageCTR.toFixed(2)}%</span>
+              <span>CTR: {summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : '0.00'}%</span>
               <span>•</span>
-              <span>Avg Pos: {summary.averagePosition.toFixed(1)}</span>
+              <span>Avg Pos: {summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : '0.0'}</span>
             </div>
           </div>
 
@@ -267,7 +267,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
               <div className="p-2 bg-white/20 backdrop-blur-sm rounded-lg">
                 <DollarSign className="h-6 w-6 text-white" />
               </div>
-              {summary.revenueChange !== 0 && (
+              {summary && summary.revenueChange !== 0 && (
                 <Badge className={summary.revenueChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
                   {summary.revenueChange > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
                   {Math.abs(summary.revenueChange)}%
@@ -276,11 +276,11 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
             </div>
             <p className="text-xs text-green-100 mb-1">Total Revenue</p>
             <p className="text-3xl font-bold text-white mb-2">
-              ${(summary.totalRevenue / 1000).toFixed(1)}K
+              ${summary && summary.totalRevenue ? (summary.totalRevenue / 1000).toFixed(1) : '0.0'}K
             </p>
             <div className="flex items-center gap-2 text-xs text-green-100">
               <Target className="h-3 w-3" />
-              <span>{summary.totalConversions} conversions</span>
+              <span>{summary && summary.totalConversions ? summary.totalConversions : 0} conversions</span>
             </div>
           </div>
         </div>

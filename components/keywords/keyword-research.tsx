@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Search, TrendingUp, Target, BarChart3, Download, Plus, Star, Crown, Zap, ArrowLeft } from 'lucide-react';
+import { Search, TrendingUp, Target, BarChart3, Download, Plus, Star, Crown, Zap, ArrowLeft, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -172,6 +172,34 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
     setSelectedKeyword(null);
   };
 
+  // Handle keyword deletion
+  const handleDeleteKeyword = async (keywordId: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent row click
+    
+    if (!confirm('Are you sure you want to delete this keyword? All associated data will be removed.')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/keywords/${keywordId}`, {
+        method: 'DELETE',
+        headers: {
+          'x-user-id': 'demo-user'
+        }
+      });
+
+      if (response.ok) {
+        // Remove keyword from state
+        setKeywords(prev => prev.filter(k => k.id !== keywordId));
+      } else {
+        alert('Failed to delete keyword');
+      }
+    } catch (error) {
+      console.error('Error deleting keyword:', error);
+      alert('Error deleting keyword');
+    }
+  };
+
   // Show detailed overview if a keyword is selected
   if (viewMode === 'overview' && selectedKeyword) {
     return (
@@ -238,7 +266,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
               value={keywordInput}
               onChange={(e) => setKeywordInput(e.target.value)}
               placeholder="seo audit&#10;keyword research&#10;best seo tools&#10;how to do keyword research"
-              className="min-h-[140px] w-full p-4 border-2 border-slate-300 rounded-xl resize-y focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-slate-50 text-slate-900 placeholder:text-slate-500 font-medium hover:bg-white"
+              className="min-h-[140px] w-full p-4 border-2 border-slate-300 rounded-xl resize-y focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 placeholder:opacity-100 font-medium hover:bg-white"
               maxLength={isPremium ? 10000 : 1000}
             />
             <div className="flex justify-between items-center text-sm">
@@ -355,6 +383,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                     <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">CPC</th>
                     <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Intent</th>
                     <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Competition</th>
+                    <th className="text-center p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -409,6 +438,15 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                           <Progress value={keyword.competition * 100} className="w-20 h-2" />
                           <span className="text-sm font-semibold text-slate-700">{Math.round(keyword.competition * 100)}%</span>
                         </div>
+                      </td>
+                      <td className="p-4 text-center">
+                        <button
+                          onClick={(e) => handleDeleteKeyword(keyword.id, e)}
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
+                          title="Delete keyword"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
                       </td>
                     </tr>
                   ))}
