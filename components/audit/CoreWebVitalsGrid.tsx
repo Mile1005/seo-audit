@@ -1,5 +1,4 @@
 "use client";
-import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { Zap, Monitor, Layers, Clock, Users, BarChart3 } from 'lucide-react';
@@ -90,72 +89,39 @@ const MetricCard = ({ title, icon, value, ratingKey, raw, info, index }: MetricC
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ 
-        duration: 0.5, 
-        delay: index * 0.1,
-        type: "spring",
-        stiffness: 100
-      }}
-      whileHover={{ 
-        y: -8, 
-        scale: 1.03,
-        transition: { duration: 0.2 }
-      }}
-      className="cursor-pointer"
-    >
-      <Card className={`${getCardStyle(r)} ${getHoverGlow(r)} transition-all duration-300 hover:shadow-2xl group`}>
+    <div className="cursor-pointer">
+      <Card className={`${getCardStyle(r)} ${getHoverGlow(r)} transition-shadow duration-200 hover:shadow-lg`}>
         <CardHeader className="pb-4">
           <CardTitle className={`text-lg font-bold flex items-center gap-3 ${getTitleColor(r)}`}>
-            <motion.div 
-              className={`p-2 ${getIconColor(r)} rounded-lg`}
-              whileHover={{ 
-                scale: 1.1, 
-                rotate: 5,
-                transition: { duration: 0.2 }
-              }}
-            >
+            <div className={`p-2 ${getIconColor(r)} rounded-lg`}>
               <div className="text-white">{icon}</div>
-            </motion.div>
-            <span className="group-hover:text-opacity-80 transition-all duration-200">{title}</span>
+            </div>
+            <span>{title}</span>
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <motion.div 
-            className={`text-3xl font-bold ${r ? color(r) : 'text-blue-600 dark:text-blue-400'}`}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}
-          >
+          <div className={`text-3xl font-bold ${r ? color(r) : 'text-blue-600 dark:text-blue-400'}`}>
             {value}
-          </motion.div>
+          </div>
           <div className="flex justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 + 0.3, duration: 0.3 }}
-            >
-              {r ? (
-                <Badge 
-                  variant={badgeVariant(r)} 
-                  className="text-sm font-medium px-3 py-1 capitalize"
-                >
-                  {r === 'needs-improvement' ? 'Needs Improvement' : r}
-                </Badge>
-              ) : (
-                <Badge 
-                  variant="outline" 
-                  className="text-sm font-medium px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700"
-                >
-                  Informational
-                </Badge>
-              )}
-            </motion.div>
+            {r ? (
+              <Badge 
+                variant={badgeVariant(r)} 
+                className="text-sm font-medium px-3 py-1 capitalize"
+              >
+                {r === 'needs-improvement' ? 'Needs Improvement' : r}
+              </Badge>
+            ) : (
+              <Badge 
+                variant="outline" 
+                className="text-sm font-medium px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700"
+              >
+                Informational
+              </Badge>
+            )}
           </div>
         </CardContent>
       </Card>
-    </motion.div>
+    </div>
   );
 };

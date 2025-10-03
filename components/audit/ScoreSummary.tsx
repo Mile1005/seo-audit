@@ -1,5 +1,4 @@
 "use client";
-import { motion } from 'framer-motion';
 import { AuditResultUnified } from '../../lib/types/audit';
 
 interface Props { result: AuditResultUnified }
@@ -16,13 +15,7 @@ export const ScoreRing = ({ score, label, size = 120 }: { score: number; label: 
   const strokeDashoffset = circumference - (score / 100) * circumference;
   
   return (
-    <motion.div 
-      className="flex flex-col items-center gap-3"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-      whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-    >
+    <div className="flex flex-col items-center gap-3">
       <div className="relative" style={{ width: size, height: size }}>
         {/* Background Circle */}
         <svg className="transform -rotate-90" width={size} height={size}>
@@ -34,8 +27,8 @@ export const ScoreRing = ({ score, label, size = 120 }: { score: number; label: 
             strokeWidth="8"
             fill="none"
           />
-          {/* Progress Circle with Animation */}
-          <motion.circle
+          {/* Progress Circle */}
+          <circle
             cx={size / 2}
             cy={size / 2}
             r={45}
@@ -43,34 +36,23 @@ export const ScoreRing = ({ score, label, size = 120 }: { score: number; label: 
             strokeWidth="8"
             fill="none"
             strokeDasharray={circumference}
-            initial={{ strokeDashoffset: circumference }}
-            animate={{ strokeDashoffset: strokeDashoffset }}
-            transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+            strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
+            style={{ transition: 'stroke-dashoffset 0.8s ease-out' }}
           />
         </svg>
-        {/* Score Text with Count-up Animation */}
-        <motion.div 
-          className="absolute inset-0 flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
+        {/* Score Text */}
+        <div className="absolute inset-0 flex items-center justify-center">
           <span className={`text-3xl font-bold ${text}`}>{score}</span>
-        </motion.div>
+        </div>
       </div>
-      <motion.div 
-        className="text-center"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.3 }}
-      >
+      <div className="text-center">
         <div className="text-sm font-semibold text-slate-900 dark:text-white">{label}</div>
         <div className={`text-xs font-medium px-3 py-1 rounded-full ${bg} ${text} mt-1`}>
           {status}
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
@@ -81,12 +63,7 @@ export const ScoreSummary = ({ result }: Props) => {
   return (
     <div className="space-y-6">
       {/* Main Score Card */}
-      <motion.div 
-        className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-700 p-8 shadow-lg transition-shadow duration-200">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
           <div className="flex-1 min-w-0">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -133,17 +110,11 @@ export const ScoreSummary = ({ result }: Props) => {
           <ScoreRing score={s.accessibility || 0} label="Accessibility" size={110} />
           <ScoreRing score={s.best_practices || 0} label="Best Practices" size={110} />
         </div>
-      </motion.div>
+      </div>
 
       {/* Quick Summary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <motion.div 
-          className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-200 dark:border-green-800 rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          whileHover={{ y: -5 }}
-        >
+        <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border-2 border-green-200 dark:border-green-800 rounded-xl p-6 hover:shadow-lg transition-all duration-200 cursor-pointer">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-green-500 rounded-lg">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -157,15 +128,9 @@ export const ScoreSummary = ({ result }: Props) => {
               <div className="text-sm font-medium text-green-600 dark:text-green-300">Excellent Areas</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-200 dark:border-yellow-800 rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          whileHover={{ y: -5 }}
-        >
+        <div className="bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 border-2 border-yellow-200 dark:border-yellow-800 rounded-xl p-6 hover:shadow-lg transition-all duration-200 cursor-pointer">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-yellow-500 rounded-lg">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -179,15 +144,9 @@ export const ScoreSummary = ({ result }: Props) => {
               <div className="text-sm font-medium text-yellow-600 dark:text-yellow-300">Good Areas</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          whileHover={{ y: -5 }}
-        >
+        <div className="bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 border-2 border-red-200 dark:border-red-800 rounded-xl p-6 hover:shadow-lg transition-all duration-200 cursor-pointer">
           <div className="flex items-center gap-3">
             <div className="p-3 bg-red-500 rounded-lg">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -201,7 +160,7 @@ export const ScoreSummary = ({ result }: Props) => {
               <div className="text-sm font-medium text-red-600 dark:text-red-300">Needs Attention</div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
