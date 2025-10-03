@@ -348,7 +348,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                       Pos: {day.averagePosition}
                     </Badge>
                     <Badge className="bg-green-100 text-green-700">
-                      ${(day.revenue / 1000).toFixed(1)}K
+                      ${day && day.revenue ? (day.revenue / 1000).toFixed(1) : '0.0'}K
                     </Badge>
                   </div>
                 </div>
@@ -367,22 +367,22 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600">Average CTR</span>
-                <span className="font-bold text-slate-900">{summary.averageCTR.toFixed(2)}%</span>
+                <span className="font-bold text-slate-900">{summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : '0.00'}%</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600">Average Position</span>
-                <span className="font-bold text-slate-900">#{summary.averagePosition.toFixed(1)}</span>
+                <span className="font-bold text-slate-900">#{summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : '0.0'}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600">Conversion Rate</span>
                 <span className="font-bold text-slate-900">
-                  {((summary.totalConversions / summary.totalClicks) * 100).toFixed(2)}%
+                  {summary && summary.totalConversions && summary.totalClicks ? ((summary.totalConversions / summary.totalClicks) * 100).toFixed(2) : '0.00'}%
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600">Revenue per Click</span>
                 <span className="font-bold text-slate-900">
-                  ${(summary.totalRevenue / summary.totalClicks).toFixed(2)}
+                  ${summary && summary.totalRevenue && summary.totalClicks ? (summary.totalRevenue / summary.totalClicks).toFixed(2) : '0.00'}
                 </span>
               </div>
             </div>
