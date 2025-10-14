@@ -19,21 +19,12 @@ export const metadata: Metadata = {
     description: 'Transparent pricing for powerful SEO audit tools. Start free or choose Pro plans with advanced features, unlimited audits, and priority support.',
     url: 'https://aiseoturbo.com/pricing',
     siteName: 'AISEOTurbo',
-    type: 'website',
-    images: [
-      {
-        url: '/api/og?title=SEO%20Audit%20Pricing%20Plans&description=Transparent%20pricing%20for%20powerful%20SEO%20tools',
-        width: 1200,
-        height: 630,
-        alt: 'AISEOTurbo Pricing Plans'
-      }
-    ]
+    type: 'website'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'SEO Audit Pricing Plans | AISEOTurbo',
-    description: 'Transparent pricing for powerful SEO audit tools. Start free or choose Pro plans with advanced features.',
-    images: ['/api/og?title=SEO%20Audit%20Pricing%20Plans&description=Transparent%20pricing%20for%20powerful%20SEO%20tools']
+    description: 'Transparent pricing for powerful SEO audit tools. Start free or choose Pro plans with advanced features.'
   },
   robots: {
     index: true,

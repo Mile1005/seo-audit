@@ -40,7 +40,6 @@ export const metadata: Metadata = generateSEOMeta({
     "SaaS marketing ROI"
   ],
   canonical: "/case-studies/cloudsync-pro",
-  ogImage: "/images/case-studies/cloudsync-pro-hero.jpg",
   ogType: "article",
   twitterCard: "summary_large_image"
 })
@@ -51,7 +50,6 @@ const structuredData = {
   "@type": "Article",
   "headline": "CloudSync Pro: B2B Lead Generation Success - 350% Qualified Leads Increase",
   "description": "Comprehensive B2B SEO case study showing how CloudSync Pro transformed their lead generation with AI-powered content and keyword strategies.",
-  "image": "/images/case-studies/cloudsync-pro-hero.jpg",
   "datePublished": "2024-10-14",
   "dateModified": "2024-10-14",
   "author": {

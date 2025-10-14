@@ -42,7 +42,6 @@ export const metadata: Metadata = generateSEOMeta({
     "local search ranking improvement"
   ],
   canonical: "/case-studies/peak-performance",
-  ogImage: "/images/case-studies/peak-performance-hero.jpg",
   ogType: "article",
   twitterCard: "summary_large_image"
 })
@@ -53,7 +52,6 @@ const structuredData = {
   "@type": "Article",
   "headline": "Peak Performance: Local SEO Domination - Local Pack #1 for 15 Services",
   "description": "Comprehensive local SEO case study showing how Peak Performance became the dominant local service provider through strategic local optimization.",
-  "image": "/images/case-studies/peak-performance-hero.jpg",
   "datePublished": "2024-10-14",
   "dateModified": "2024-10-14",
   "author": {

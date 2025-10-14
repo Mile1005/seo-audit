@@ -42,7 +42,6 @@ export const metadata: Metadata = generateSEOMeta({
     "specialized retail marketing"
   ],
   canonical: "/case-studies/gearhub-pro",
-  ogImage: "/images/case-studies/gearhub-pro-hero.jpg",
   ogType: "article",
   twitterCard: "summary_large_image"
 })
@@ -53,7 +52,6 @@ const structuredData = {
   "@type": "Article",
   "headline": "GearHub Pro: Niche E-commerce Leadership - 290% Conversion Increase",
   "description": "Comprehensive niche e-commerce case study showing how GearHub Pro became the go-to resource in their specialized market through strategic SEO optimization.",
-  "image": "/images/case-studies/gearhub-pro-hero.jpg",
   "datePublished": "2024-10-14",
   "dateModified": "2024-10-14",
   "author": {

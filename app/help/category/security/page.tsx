@@ -157,7 +157,7 @@ export default function SecurityPrivacyCategoryPage() {
               <h3 className="text-xl font-bold text-white mb-6">Security Resources</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Link
-                  href="/security"
+                  href="/help/category/security"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>

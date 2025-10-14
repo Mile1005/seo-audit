@@ -39,7 +39,6 @@ export const metadata: Metadata = generateSEOMeta({
     "large scale SEO implementation"
   ],
   canonical: "/case-studies/techflow-solutions",
-  ogImage: "/images/case-studies/techflow-solutions-hero.jpg",
   ogType: "article",
   twitterCard: "summary_large_image"
 })
@@ -50,7 +49,6 @@ const structuredData = {
   "@type": "Article",
   "headline": "TechFlow Solutions: Enterprise SEO Transformation - 520% Traffic Increase",
   "description": "Comprehensive enterprise SEO case study showing how TechFlow Solutions achieved remarkable results with AI-powered optimization.",
-  "image": "/images/case-studies/techflow-solutions-hero.jpg",
   "datePublished": "2024-10-14",
   "dateModified": "2024-10-14",
   "author": {

@@ -44,8 +44,8 @@ const footerSections = [
 const socialLinks = [
   { name: "Twitter", href: "https://twitter.com/aiseoturbo", icon: Twitter },
   { name: "LinkedIn", href: "https://linkedin.com/company/aiseoturbo", icon: Linkedin },
-  { name: "GitHub", href: "https://github.com/aiseoturbo", icon: Github },
-  { name: "YouTube", href: "https://youtube.com/aiseoturbo", icon: Youtube }
+  { name: "GitHub", href: "https://github.com/aiseoturbo", icon: Github }
+  // YouTube channel will be added when available
 ]
 
 export default function Footer() {

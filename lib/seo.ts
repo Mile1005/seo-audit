@@ -27,8 +27,8 @@ const defaultSEO: SEOConfig = {
     'AI SEO tools'
   ],
   ogType: 'website',
-  twitterCard: 'summary_large_image',
-  ogImage: '/images/og-default.webp'
+  twitterCard: 'summary_large_image'
+  // ogImage will be set per page if needed
 }
 
 /**

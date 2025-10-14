@@ -40,7 +40,6 @@ export const metadata: Metadata = generateSEOMeta({
     "product ranking improvement"
   ],
   canonical: "/case-studies/stylecraft-boutique",
-  ogImage: "/images/case-studies/stylecraft-boutique-hero.jpg",
   ogType: "article",
   twitterCard: "summary_large_image"
 })
@@ -51,7 +50,6 @@ const structuredData = {
   "@type": "Article",
   "headline": "StyleCraft Boutique: E-commerce SEO Success - 420% Conversion Increase",
   "description": "Comprehensive e-commerce SEO case study showing how StyleCraft Boutique transformed their online retail performance with AI-powered optimization.",
-  "image": "/images/case-studies/stylecraft-boutique-hero.jpg",
   "datePublished": "2024-10-14",
   "dateModified": "2024-10-14",
   "author": {

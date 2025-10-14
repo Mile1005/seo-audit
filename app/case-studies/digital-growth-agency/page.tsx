@@ -37,7 +37,6 @@ export const metadata: Metadata = generateSEOMeta({
     "keyword ranking improvement"
   ],
   canonical: "/case-studies/digital-growth-agency",
-  ogImage: "/images/case-studies/digital-growth-agency-hero.jpg",
   ogType: "article",
   twitterCard: "summary_large_image"
 })
@@ -48,7 +47,6 @@ const structuredData = {
   "@type": "Article",
   "headline": "Digital Growth Agency: 340% Traffic Increase with AI SEO Turbo",
   "description": "How Digital Growth Agency achieved 340% organic traffic growth using AI-powered SEO tools and automation.",
-  "image": "/images/case-studies/digital-growth-agency-hero.jpg",
   "datePublished": "2024-10-14",
   "dateModified": "2024-10-14",
   "author": {
