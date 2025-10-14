@@ -153,7 +153,7 @@ export default function APIIntegrationsCategoryPage() {
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-orange-400 transition-colors" />
                 </Link>
                 <Link
-                  href="/api/status"
+                  href="/status"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
