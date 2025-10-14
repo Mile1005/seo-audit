@@ -423,7 +423,7 @@ export default function PageCrawlerPage() {
       </div>
 
       {activeTab === 'new' && (
-        <Card>
+        <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Globe className="h-5 w-5" />
@@ -528,7 +528,7 @@ export default function PageCrawlerPage() {
         <div className="space-y-6">
           {/* Crawl History List */}
           {!currentResult && (
-            <Card>
+            <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
               <CardHeader>
                 <CardTitle>Recent Crawls</CardTitle>
                 <CardDescription>View and analyze your previous page crawls</CardDescription>
@@ -617,7 +617,7 @@ export default function PageCrawlerPage() {
 
               {/* Summary Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="border-slate-200 dark:border-slate-700">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Total Pages
@@ -630,7 +630,7 @@ export default function PageCrawlerPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200 dark:border-slate-700">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Pages with Issues
@@ -643,7 +643,7 @@ export default function PageCrawlerPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200 dark:border-slate-700">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-semibold uppercase tracking-wide">
                       Avg. Word Count
@@ -656,7 +656,7 @@ export default function PageCrawlerPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-slate-200 dark:border-slate-700">
+                <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Images w/o Alt
@@ -671,7 +671,7 @@ export default function PageCrawlerPage() {
               </div>
 
               {/* Issue Summary */}
-              <Card className="border-slate-200 dark:border-slate-700">
+              <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
@@ -703,7 +703,7 @@ export default function PageCrawlerPage() {
               </Card>
 
               {/* Filters and Search */}
-              <Card>
+              <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
                 <CardHeader>
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <CardTitle className="flex items-center gap-2">

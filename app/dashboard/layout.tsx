@@ -64,7 +64,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }, [userMenuOpen])
 
   return (
-    <div className={`min-h-screen bg-slate-50 ${darkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 ${darkMode ? 'dark' : ''}`}>
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
