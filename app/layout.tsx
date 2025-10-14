@@ -76,6 +76,133 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://www.aiseoturbo.com/#organization",
+    "name": "AISEOTurbo",
+    "legalName": "AISEOTurbo",
+    "alternateName": "AI SEO Turbo",
+    "url": "https://www.aiseoturbo.com",
+    "logo": "https://www.aiseoturbo.com/logo.png",
+    "image": "https://www.aiseoturbo.com/logo.png",
+    "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes. Get actionable insights to boost rankings and drive organic traffic with comprehensive website audits.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "0",
+      "highPrice": "99",
+      "url": "https://www.aiseoturbo.com/pricing"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "email": "support@aiseoturbo.com",
+        "availableLanguage": ["en", "mk", "sq"],
+        "areaServed": "Worldwide"
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "email": "sales@aiseoturbo.com",
+        "availableLanguage": ["en", "mk", "sq"],
+        "areaServed": "Worldwide"
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "Billing Support",
+        "email": "billing@aiseoturbo.com",
+        "availableLanguage": ["en", "mk", "sq"],
+        "areaServed": "Worldwide"
+      }
+    ],
+    "sameAs": [
+      "https://linkedin.com/company/aiseoturbo",
+      "https://x.com/AiSEOTurbo",
+      "https://www.instagram.com/aiseoturbo/",
+      "https://github.com/Aiseoturbo"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Mile Stoev",
+      "url": "https://www.linkedin.com/in/milestoev/",
+      "jobTitle": "Founder & CEO",
+      "sameAs": [
+        "https://x.com/MILE100EV",
+        "https://github.com/Mile1005"
+      ]
+    },
+    "foundingDate": "2025-09",
+    "foundingLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MK",
+        "addressLocality": "Skopje",
+        "addressRegion": "Macedonia"
+      }
+    },
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 10
+    },
+    "knowsAbout": [
+      "SEO",
+      "Technical SEO",
+      "Website Audits",
+      "Search Engine Optimization",
+      "AI-powered SEO Tools",
+      "SEO Analytics",
+      "On-page SEO",
+      "SEO Optimization"
+    ],
+    "featureList": [
+      "Comprehensive SEO Audits",
+      "Technical SEO Analysis",
+      "On-page SEO Optimization",
+      "Actionable Insights",
+      "AI-powered Recommendations",
+      "Fast Results in Minutes",
+      "100+ SEO Checks",
+      "Automated SEO Reports"
+    ],
+    "slogan": "AI-Powered SEO Audits That Drive Results",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1000",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  };
+
+  // WebSite Schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.aiseoturbo.com/#website",
+    "url": "https://www.aiseoturbo.com",
+    "name": "AISEOTurbo",
+    "description": "AI-powered SEO audit platform for marketers",
+    "publisher": {
+      "@id": "https://www.aiseoturbo.com/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://www.aiseoturbo.com/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": "en-US"
+  };
+
   return (
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
@@ -84,6 +211,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Favicon and Touch Icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        
+        {/* Schema.org Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         
         {/* Critical performance optimizations */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

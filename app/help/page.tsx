@@ -31,6 +31,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { StructuredData, generateBreadcrumbSchema } from '../../components/seo/StructuredData'
 
 const helpCategories = [
   {
@@ -189,6 +190,12 @@ export default function HelpPage() {
   const filteredQuickHelp = selectedCategory === "all" 
     ? quickHelp 
     : quickHelp.filter(item => item.type === selectedCategory)
+
+  // Breadcrumb schema for help page
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "https://www.aiseoturbo.com" },
+    { name: "Help Center", url: "https://www.aiseoturbo.com/help" }
+  ])
 
   return (
     <MainLayout>
@@ -518,6 +525,9 @@ export default function HelpPage() {
           </div>
         </section>
       </div>
+
+      {/* Breadcrumb Schema */}
+      <StructuredData data={breadcrumbSchema} />
     </MainLayout>
   )
 }

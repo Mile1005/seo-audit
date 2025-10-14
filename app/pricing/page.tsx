@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle, Zap, Star, Crown, Users, Clock, Shield, Phone,
 import { EmailCaptureInline } from "../../components/lead/email-capture-inline"
 import { handleCTAClick } from "../../lib/cta-utils"
 import { MainLayout } from "../../components/layout/main-layout"
+import { StructuredData, generateProductSchema, generateFAQSchema } from "../../components/seo/StructuredData"
 
 const pricingPlans = [
   {
@@ -129,6 +130,26 @@ const faqs = [
 export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  // Generate Product schemas for all pricing plans
+  const productSchemas = pricingPlans.map(plan => 
+    generateProductSchema({
+      name: `AISEOTurbo ${plan.name} Plan`,
+      description: plan.description,
+      price: String(plan.price.monthly),
+      currency: "USD",
+      url: "https://www.aiseoturbo.com/pricing",
+      features: plan.features
+    })
+  )
+
+  // Generate FAQ schema from pricing FAQs
+  const faqSchema = generateFAQSchema(
+    faqs.map(faq => ({
+      question: faq.question,
+      answer: faq.answer
+    }))
+  )
 
   return (
     <MainLayout>
@@ -541,6 +562,10 @@ export default function PricingPage() {
           </div>
         </section>
       </div>
+
+      {/* Structured Data */}
+      <StructuredData data={productSchemas} />
+      <StructuredData data={faqSchema} />
     </MainLayout>
   )
 }

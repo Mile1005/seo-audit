@@ -7,6 +7,7 @@ import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { headers } from 'next/headers'
 import Head from 'next/head'
+import { StructuredData, generateServiceSchema } from "@/components/seo/StructuredData"
 
 // Optimized dynamic imports with better loading states
 // Import our optimized skeletons
@@ -80,6 +81,15 @@ const structuredData = {
   organization: generateStructuredData('organization'),
   product: generateStructuredData('product')
 }
+
+// Service schema for SEO audit service
+const serviceSchema = generateServiceSchema({
+  name: "AI-Powered SEO Audit Service",
+  description: "Comprehensive AI-driven SEO analysis and optimization recommendations for websites. Our advanced algorithms analyze 100+ SEO factors to provide actionable insights for improving search rankings.",
+  provider: "AISEOTurbo",
+  serviceType: "SEO Audit & Analysis",
+  areaServed: "Worldwide"
+})
 
 export default function Home() {
   // Sample content for the content gate
@@ -274,6 +284,9 @@ export default function Home() {
           ])
         }}
       />
+      
+      {/* Service Schema */}
+      <StructuredData data={serviceSchema} />
     </MainLayout>
   );
 }
