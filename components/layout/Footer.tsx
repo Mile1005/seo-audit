@@ -2,6 +2,7 @@
 
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { 
   Twitter, 
@@ -70,9 +71,15 @@ export default function Footer() {
               <motion.div whileHover={{ scale: 1.05 }} className="inline-block">
                 <Link 
                   href="/" 
-                  className="text-3xl font-bold text-white hover:text-purple-400 transition-colors duration-200"
+                  className="flex items-center hover:opacity-80 transition-opacity duration-200"
                 >
-                  AISEOTurbo
+                  <Image 
+                    src="/logo.png" 
+                    alt="AISEOTurbo Logo" 
+                    width={200} 
+                    height={53}
+                    className="h-12 w-auto"
+                  />
                 </Link>
               </motion.div>
               <p className="text-gray-400 text-lg leading-relaxed">

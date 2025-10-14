@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X, ChevronDown } from "lucide-react"
 
 // Lightweight dropdown component with CSS transitions
@@ -186,8 +187,15 @@ export function AdaptiveNavigation() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0">
-              <Link href="/" className="text-2xl font-bold text-white">
-                AI SEO Turbo
+              <Link href="/" className="flex items-center">
+                <Image 
+                  src="/logo.png" 
+                  alt="AISEOTurbo Logo" 
+                  width={180} 
+                  height={48}
+                  priority
+                  className="h-10 w-auto"
+                />
               </Link>
             </div>
           </div>
@@ -204,9 +212,16 @@ export function AdaptiveNavigation() {
           <div className="flex-shrink-0">
             <Link 
               href="/" 
-              className="text-2xl font-bold text-white hover:text-blue-400 transition-colors duration-200"
+              className="flex items-center hover:opacity-80 transition-opacity duration-200"
             >
-              AI SEO Turbo
+              <Image 
+                src="/logo.png" 
+                alt="AISEOTurbo Logo" 
+                width={180} 
+                height={48}
+                priority
+                className="h-10 w-auto"
+              />
             </Link>
           </div>
 

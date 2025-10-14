@@ -46,12 +46,21 @@ export const metadata: Metadata = {
     siteName: "AI SEO Turbo",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "AISEOTurbo - AI-Powered SEO Audits",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "AI SEO Turbo - AI-Powered SEO Audits",
     description: "Get actionable SEO insights that boost rankings and drive organic traffic in minutes.",
     creator: "@aiseoturbo",
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
