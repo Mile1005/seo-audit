@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion'
 
 const logos = [
-  { name: 'Google', width: '120px' },
-  { name: 'Microsoft', width: '100px' },
-  { name: 'Amazon', width: '140px' },
-  { name: 'Apple', width: '80px' },
-  { name: 'Meta', width: '130px' },
-  { name: 'Netflix', width: '110px' }
+  { name: 'Shopify Stores', width: '120px' },
+  { name: 'Local Businesses', width: '130px' },
+  { name: 'E-commerce Brands', width: '140px' },
+  { name: 'Marketing Agencies', width: '140px' },
+  { name: 'SaaS Companies', width: '120px' },
+  { name: 'Content Publishers', width: '130px' }
 ]
 
 export function TrustLogos() {
@@ -26,7 +26,7 @@ export function TrustLogos() {
           className="text-center mb-8"
         >
           <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-6">
-            Trusted by industry leaders
+            Trusted by businesses worldwide
           </h3>
         </motion.div>
 
