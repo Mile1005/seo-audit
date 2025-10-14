@@ -76,10 +76,10 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Organization Schema
+  // Organization Schema - Company/Business Entity
   const organizationSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "Organization",
     "@id": "https://www.aiseoturbo.com/#organization",
     "name": "AISEOTurbo",
     "legalName": "AISEOTurbo",
@@ -87,15 +87,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "url": "https://www.aiseoturbo.com",
     "logo": "https://www.aiseoturbo.com/logo.png",
     "image": "https://www.aiseoturbo.com/logo.png",
-    "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes. Get actionable insights to boost rankings and drive organic traffic with comprehensive website audits.",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web Browser",
-    "offers": {
-      "@type": "AggregateOffer",
-      "priceCurrency": "USD",
-      "lowPrice": "0",
-      "highPrice": "99",
-      "url": "https://www.aiseoturbo.com/pricing"
+    "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes.",
+    "slogan": "AI-Powered SEO Audits That Drive Results",
+    "foundingDate": "2025-09",
+    "foundingLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MK",
+        "addressLocality": "Skopje",
+        "addressRegion": "Macedonia"
+      }
+    },
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "minValue": 1,
+      "maxValue": 10
     },
     "contactPoint": [
       {
@@ -120,12 +127,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         "areaServed": "Worldwide"
       }
     ],
-    "sameAs": [
-      "https://linkedin.com/company/aiseoturbo",
-      "https://x.com/AiSEOTurbo",
-      "https://www.instagram.com/aiseoturbo/",
-      "https://github.com/Aiseoturbo"
-    ],
     "founder": {
       "@type": "Person",
       "name": "Mile Stoev",
@@ -136,21 +137,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         "https://github.com/Mile1005"
       ]
     },
-    "foundingDate": "2025-09",
-    "foundingLocation": {
-      "@type": "Place",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "MK",
-        "addressLocality": "Skopje",
-        "addressRegion": "Macedonia"
-      }
-    },
-    "numberOfEmployees": {
-      "@type": "QuantitativeValue",
-      "minValue": 1,
-      "maxValue": 10
-    },
+    "sameAs": [
+      "https://linkedin.com/company/aiseoturbo",
+      "https://x.com/AiSEOTurbo",
+      "https://www.instagram.com/aiseoturbo/",
+      "https://github.com/Aiseoturbo"
+    ],
     "knowsAbout": [
       "SEO",
       "Technical SEO",
@@ -160,7 +152,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "SEO Analytics",
       "On-page SEO",
       "SEO Optimization"
-    ],
+    ]
+  };
+
+  // SoftwareApplication Schema - The Product
+  const softwareApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": "https://www.aiseoturbo.com/#software",
+    "name": "AISEOTurbo Platform",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "url": "https://www.aiseoturbo.com",
+    "image": "https://www.aiseoturbo.com/logo.png",
+    "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes. Get actionable insights to boost rankings and drive organic traffic with comprehensive website audits.",
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "lowPrice": "0",
+      "highPrice": "99",
+      "url": "https://www.aiseoturbo.com/pricing"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "1000",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
     "featureList": [
       "Comprehensive SEO Audits",
       "Technical SEO Analysis",
@@ -171,13 +190,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "100+ SEO Checks",
       "Automated SEO Reports"
     ],
-    "slogan": "AI-Powered SEO Audits That Drive Results",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "1000",
-      "bestRating": "5",
-      "worstRating": "1"
+    "author": {
+      "@id": "https://www.aiseoturbo.com/#organization"
+    },
+    "provider": {
+      "@id": "https://www.aiseoturbo.com/#organization"
     }
   };
 
@@ -216,6 +233,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
         />
         <script
           type="application/ld+json"
