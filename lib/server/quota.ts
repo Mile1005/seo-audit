@@ -6,7 +6,7 @@ import { prisma } from '../prisma'
 
 const FREE_LIMITS = {
   AUDIT: 30,
-  SITE_CRAWL: 2,
+  SITE_CRAWL: 5, // Increased from 2 to 5 for dashboard page crawler
 }
 
 function currentMonthKey(date = new Date()) {

@@ -17,7 +17,8 @@ import {
   Bars3Icon,
   XMarkIcon,
   SunIcon,
-  MoonIcon
+  MoonIcon,
+  GlobeAltIcon
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import { NotificationDropdown } from '@/components/notifications/NotificationDropdown'
@@ -31,6 +32,7 @@ const navigation = [
   { name: 'Projects', href: '/dashboard/projects', icon: FolderIcon },
   { name: 'Keywords', href: '/dashboard/keywords', icon: MagnifyingGlassIcon },
   { name: 'Site Audit', href: '/dashboard/audit', icon: DocumentMagnifyingGlassIcon },
+  { name: 'Page Crawler', href: '/dashboard/page-crawler', icon: GlobeAltIcon },
   { name: 'Backlinks', href: '/dashboard/backlinks', icon: LinkIcon },
   { name: 'Competitors', href: '/dashboard/competitors', icon: UsersIcon },
   { name: 'Reports', href: '/dashboard/reports', icon: DocumentTextIcon },

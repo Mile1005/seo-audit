@@ -817,6 +817,7 @@ model Crawl {
 	errors    Int         @default(0)
 	settings  Json?
 	results   Json?
+	type      String?     @default("STANDARD") // STANDARD, DASHBOARD
 	startedAt DateTime?
 	completedAt DateTime?
 	createdAt DateTime    @default(now())
@@ -826,6 +827,7 @@ model Crawl {
 
 	@@index([projectId, status])
 	@@index([status])
+	@@index([type])
 }
 
 model ApiKey {
