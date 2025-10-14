@@ -22,6 +22,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 import { NotificationDropdown } from '@/components/notifications/NotificationDropdown'
+import { useTheme } from '@/components/ui/theme-provider'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -40,10 +41,10 @@ const navigation = [
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const pathname = usePathname()
   const { data: session } = useSession()
+  const { mode, setMode } = useTheme()
   const userMenuRef = useRef<HTMLDivElement>(null)
 
   // Close user menu when clicking outside
@@ -64,7 +65,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }, [userMenuOpen])
 
   return (
-    <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 ${darkMode ? 'dark' : ''}`}>
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -198,10 +199,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="flex items-center space-x-4">
               {/* Dark mode toggle */}
               <button
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
-                {darkMode ? (
+                {mode === 'dark' ? (
                   <SunIcon className="w-5 h-5" />
                 ) : (
                   <MoonIcon className="w-5 h-5" />

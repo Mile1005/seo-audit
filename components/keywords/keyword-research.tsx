@@ -151,7 +151,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
           {children}
         </div>
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded">
-          <div className="bg-white p-2 rounded-lg shadow-lg text-center">
+          <div className="bg-white dark:bg-slate-800 p-2 rounded-lg shadow-lg text-center">
             <Crown className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
             <p className="text-xs font-semibold">Premium Feature</p>
             <p className="text-xs text-gray-600">{feature}</p>
@@ -207,7 +207,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
         <Button 
           variant="outline" 
           onClick={handleBackToList}
-          className="flex items-center gap-2 bg-white hover:bg-blue-50 border-2 border-blue-200 text-blue-700 font-semibold shadow-md hover:shadow-lg transition-all duration-200 px-6 py-2.5"
+          className="flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 font-semibold shadow-md hover:shadow-lg transition-all duration-200 px-6 py-2.5"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Keywords
@@ -220,13 +220,13 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header with subtle gradient */}
-      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100">
+      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-xl border border-blue-100 dark:border-blue-800">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <Search className="h-6 w-6 text-blue-600" />
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Search className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             Keyword Research
           </h2>
-          <p className="text-sm text-slate-600 mt-1">Discover and analyze keywords for your SEO strategy</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Discover and analyze keywords for your SEO strategy</p>
         </div>
         <div className="flex items-center gap-3">
           <Badge 
@@ -248,15 +248,15 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
       </div>
 
       {/* Research Input - Beautiful Semrush Style */}
-      <Card className="border-0 shadow-lg bg-white overflow-hidden transition-all duration-300 hover:shadow-xl">
-        <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-lg bg-white dark:bg-slate-800 overflow-hidden transition-all duration-300 hover:shadow-xl">
+        <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10 border-b border-slate-200 dark:border-slate-700">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-blue-600 rounded-lg">
               <Search className="h-5 w-5 text-white" />
             </div>
             Research Keywords
           </CardTitle>
-          <CardDescription className="text-slate-600">
+          <CardDescription className="text-slate-600 dark:text-slate-400">
             Enter keywords to research (one per line, up to {isPremium ? '1000' : '100'} keywords)
           </CardDescription>
         </CardHeader>
@@ -266,7 +266,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
               value={keywordInput}
               onChange={(e) => setKeywordInput(e.target.value)}
               placeholder="seo audit&#10;keyword research&#10;best seo tools&#10;how to do keyword research"
-              className="min-h-[140px] w-full p-4 border-2 border-slate-300 rounded-xl resize-y focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 placeholder:opacity-100 font-medium hover:bg-white"
+              className="min-h-[140px] w-full p-4 border-2 border-slate-300 dark:border-slate-600 rounded-xl resize-y focus:border-blue-500 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 transition-all duration-200 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 placeholder:opacity-100 font-medium hover:bg-white dark:hover:bg-slate-600"
               maxLength={isPremium ? 10000 : 1000}
             />
             <div className="flex justify-between items-center text-sm">
@@ -323,8 +323,8 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                 <Search className="h-12 w-12 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Start Your Keyword Research</h3>
-            <p className="text-slate-600 text-center max-w-md mb-6 leading-relaxed">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">Start Your Keyword Research</h3>
+            <p className="text-slate-600 dark:text-slate-400 text-center max-w-md mb-6 leading-relaxed">
               Enter keywords above to discover search volume, difficulty, CPC, and actionable insights to boost your SEO strategy.
             </p>
             <div className="flex flex-wrap gap-2 justify-center mb-4">
@@ -345,16 +345,16 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
 
       {/* Keywords Results - Premium Semrush Table */}
       {keywords.length > 0 && (
-        <Card className="border-0 shadow-xl bg-white overflow-hidden animate-in slide-in-from-bottom duration-500">
-          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200 pb-4">
+        <Card className="border-0 shadow-xl bg-white dark:bg-slate-800 overflow-hidden animate-in slide-in-from-bottom duration-500">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10 border-b border-slate-200 dark:border-slate-700 pb-4">
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-slate-900 text-xl flex items-center gap-2">
+                <CardTitle className="text-slate-900 dark:text-slate-100 text-xl flex items-center gap-2">
                   <div className="p-1.5 bg-green-500 rounded-lg">
                     <BarChart3 className="h-4 w-4 text-white" />
                   </div>
                   Researched Keywords 
-                  <span className="inline-flex items-center justify-center px-3 py-1 text-sm font-bold text-green-700 bg-green-100 rounded-full">
+                  <span className="inline-flex items-center justify-center px-3 py-1 text-sm font-bold text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/20 rounded-full">
                     {keywords.length}
                   </span>
                 </CardTitle>
@@ -365,7 +365,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="flex items-center gap-2 bg-white border-slate-300 text-slate-700 hover:bg-slate-50 shadow-sm transition-all duration-200 hover:shadow-md"
+                className="flex items-center gap-2 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm transition-all duration-200 hover:shadow-md"
               >
                 <Download className="h-4 w-4" />
                 Export CSV
@@ -375,14 +375,14 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-slate-50 border-b-2 border-slate-200">
+                <thead className="bg-slate-50 dark:bg-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
                   <tr>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Keyword</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Volume</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Difficulty</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">CPC</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Intent</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Competition</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Keyword</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Volume</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Difficulty</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">CPC</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Intent</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Competition</th>
                     <th className="text-center p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -394,7 +394,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                       onClick={() => handleKeywordClick(keyword)}
                       style={{ animationDelay: `${index * 50}ms` }}
                     >
-                      <td className="p-4 font-semibold text-blue-600 group-hover:text-blue-800 transition-colors">
+                      <td className="p-4 font-semibold text-blue-600 dark:text-blue-400">
                         <div className="flex items-center gap-2">
                           <Search className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                           {keyword.keyword}
@@ -404,20 +404,20 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                         <span className={`font-bold text-lg ${getVolumeColor(keyword.searchVolume)}`}>
                           {formatNumber(keyword.searchVolume)}
                         </span>
-                        <p className="text-xs text-slate-500">searches/mo</p>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">searches/mo</p>
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <div className={`w-3 h-3 rounded-full ${getDifficultyColor(keyword.difficulty)} shadow-sm`}></div>
                           <div>
-                            <span className="font-bold text-slate-900">{Math.round(keyword.difficulty)}%</span>
-                            <p className="text-xs text-slate-500">{getDifficultyLabel(keyword.difficulty)}</p>
+                            <span className="font-bold text-slate-900 dark:text-slate-100">{Math.round(keyword.difficulty)}%</span>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">{getDifficultyLabel(keyword.difficulty)}</p>
                           </div>
                         </div>
                       </td>
                       <td className="p-4">
-                        <span className="font-bold text-slate-900 text-lg">${keyword.cpc.toFixed(2)}</span>
-                        <p className="text-xs text-slate-500">per click</p>
+                        <span className="font-bold text-slate-900 dark:text-slate-100 text-lg">${keyword.cpc.toFixed(2)}</span>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">per click</p>
                       </td>
                       <td className="p-4">
                         <Badge 

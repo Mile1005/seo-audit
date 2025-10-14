@@ -207,13 +207,13 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header - Beautiful Gradient */}
-      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-purple-50 to-orange-50 rounded-xl border border-purple-100">
+      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-purple-50 to-orange-50 dark:from-purple-900/10 dark:to-orange-900/10 rounded-xl border border-purple-100 dark:border-purple-800">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <Lightbulb className="h-6 w-6 text-purple-600" />
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <Lightbulb className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             Keyword Opportunities
           </h2>
-          <p className="text-slate-600 mt-1">
+          <p className="text-slate-600 dark:text-slate-400 mt-1">
             Discover high-potential keywords for your SEO strategy
           </p>
         </div>
@@ -228,55 +228,55 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
 
       {/* Statistics Cards - Premium Design */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-blue-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-blue-500 rounded-lg shadow-md">
                 <Lightbulb className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Total Opportunities</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Total Opportunities</span>
             </div>
-            <p className="text-4xl font-black text-blue-600">{opportunities.length}</p>
+            <p className="text-4xl font-black text-blue-600 dark:text-blue-400">{opportunities.length}</p>
           </CardContent>
         </Card>
         
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-yellow-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-yellow-50 to-white dark:from-yellow-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-yellow-500 rounded-lg shadow-md">
                 <Star className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Quick Wins</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Quick Wins</span>
             </div>
-            <p className="text-4xl font-black text-yellow-600">
+            <p className="text-4xl font-black text-yellow-600 dark:text-yellow-400">
               {opportunities.filter(o => o.opportunityType === 'quick-win').length}
             </p>
           </CardContent>
         </Card>
         
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-green-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-green-50 to-white dark:from-green-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-green-500 rounded-lg shadow-md">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">High Volume</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">High Volume</span>
             </div>
-            <p className="text-4xl font-black text-green-600">
+            <p className="text-4xl font-black text-green-600 dark:text-green-400">
               {opportunities.filter(o => o.opportunityType === 'high-volume').length}
             </p>
           </CardContent>
         </Card>
         
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-purple-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-purple-500 rounded-lg shadow-md">
                 <Target className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Avg Score</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Avg Score</span>
             </div>
-            <p className="text-4xl font-black text-purple-600">
+            <p className="text-4xl font-black text-purple-600 dark:text-purple-400">
               {opportunities.length > 0 
                 ? Math.round(opportunities.reduce((sum, o) => sum + o.opportunityScore, 0) / opportunities.length)
                 : 0
@@ -296,7 +296,7 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
             disabled={type.count === 0}
             className={selectedType === type.value 
               ? 'bg-gradient-to-r from-purple-600 to-orange-600 text-white shadow-md hover:shadow-lg' 
-              : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 disabled:opacity-50 disabled:cursor-not-allowed'
+              : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600 disabled:opacity-50 disabled:cursor-not-allowed'
             }
           >
             {type.label} ({type.count})
@@ -306,13 +306,13 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
 
       {/* Opportunities List - Premium Design */}
       {filteredOpportunities.length > 0 ? (
-        <Card className="border-0 shadow-lg bg-white">
-          <CardHeader className="bg-gradient-to-r from-slate-50 to-purple-50 border-b border-slate-200">
-            <CardTitle className="text-slate-900 flex items-center gap-2">
-              <Lightbulb className="h-5 w-5 text-purple-600" />
+        <Card className="border-0 shadow-lg bg-white dark:bg-slate-800">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-purple-50 dark:from-slate-900/10 dark:to-purple-900/10 border-b border-slate-200 dark:border-slate-700">
+            <CardTitle className="text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Lightbulb className="h-5 w-5 text-purple-600 dark:text-purple-400" />
               Keyword Opportunities
             </CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardDescription className="text-slate-600 dark:text-slate-400">
               Prioritized list of keywords with the highest potential impact
             </CardDescription>
           </CardHeader>
@@ -321,12 +321,12 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
               {filteredOpportunities.map((opportunity) => (
                 <div
                   key={opportunity.id}
-                  className="p-5 bg-white border-2 border-slate-100 rounded-xl hover:border-purple-200 hover:shadow-md transition-all duration-200"
+                  className="p-5 bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-xl hover:border-purple-200 dark:hover:border-purple-700 hover:shadow-md transition-all duration-200"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-6 gap-4 items-start">
                     <div className="lg:col-span-2">
                       <div className="flex items-center gap-2 mb-2">
-                        <h4 className="font-semibold text-slate-900">{opportunity.keyword}</h4>
+                        <h4 className="font-semibold text-slate-900 dark:text-slate-100">{opportunity.keyword}</h4>
                         <Badge 
                           variant={getScoreBadgeVariant(opportunity.opportunityScore)}
                           className={`text-xs font-bold ${
@@ -362,7 +362,7 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-slate-600">
+                      <p className="text-sm text-slate-600 dark:text-slate-400">
                         {opportunity.reasoning}
                       </p>
                     </div>
@@ -407,7 +407,7 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
                   </div>
                   
                   <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <div className="flex gap-4 text-sm text-slate-600 font-medium">
+                    <div className="flex gap-4 text-sm text-slate-600 dark:text-slate-400 font-medium">
                       <span>Device: {opportunity.device}</span>
                       <span>Location: {opportunity.country}</span>
                       {opportunity.intent && (
@@ -429,13 +429,13 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
           </CardContent>
         </Card>
       ) : (
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-purple-50">
+        <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-purple-50 dark:from-slate-900/10 dark:to-purple-900/10">
           <CardContent className="p-12 text-center">
             <div className="animate-bounce mb-4">
-              <Lightbulb className="h-12 w-12 text-purple-400 mx-auto" />
+              <Lightbulb className="h-12 w-12 text-purple-400 dark:text-purple-300 mx-auto" />
             </div>
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">No opportunities found</h3>
-            <p className="text-slate-600 mb-4">
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">No opportunities found</h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-4">
               {selectedType === 'all' 
                 ? 'No keyword opportunities detected. Add more keywords to analyze potential opportunities.'
                 : `No ${getOpportunityLabel(selectedType).toLowerCase()} opportunities found. Try a different filter or add more keywords.`

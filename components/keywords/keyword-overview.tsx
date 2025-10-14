@@ -113,21 +113,21 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
       {/* Key Metrics Grid - Premium Cards with Animations */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Volume */}
-        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-blue-50 to-white overflow-hidden group">
+        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-900/10 overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
           <CardHeader className="pb-3 relative">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Volume</CardTitle>
+              <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Volume</CardTitle>
               <div className="p-2 bg-blue-500 rounded-lg shadow-md">
                 <Eye className="h-4 w-4 text-white" />
               </div>
             </div>
           </CardHeader>
           <CardContent className="relative">
-            <div className="text-4xl font-black text-blue-600 mb-1">
+            <div className="text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">
               {keyword.searchVolume.toLocaleString()}
             </div>
-            <p className="text-xs text-slate-500 font-medium mb-3">Monthly searches</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mb-3">Monthly searches</p>
             <div className="flex items-center gap-1.5 bg-green-50 px-2 py-1 rounded-full w-fit">
               <TrendingUp className="h-3.5 w-3.5 text-green-600" />
               <span className="text-xs text-green-700 font-bold">+5% this month</span>
@@ -185,11 +185,11 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
         </Card>
 
         {/* CPC */}
-        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-green-50 to-white overflow-hidden group">
+        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-green-50 to-white dark:from-green-900/10 dark:to-gray-900/10 overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-green-500/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
           <CardHeader className="pb-3 relative">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-sm font-semibold text-slate-600 uppercase tracking-wide">CPC</CardTitle>
+              <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">CPC</CardTitle>
               <div className="p-2 bg-green-500 rounded-lg shadow-md">
                 <DollarSign className="h-4 w-4 text-white" />
               </div>
@@ -209,14 +209,14 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
 
       {/* Trend Chart - Beautiful Interactive */}
       <Card className="border-0 shadow-xl bg-white overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+        <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10 border-b border-slate-200 dark:border-slate-700">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md">
               <TrendingUp className="h-5 w-5 text-white" />
             </div>
             Search Trend
           </CardTitle>
-          <CardDescription className="text-slate-600">12-month search volume trend with interactive visualization</CardDescription>
+          <CardDescription className="text-slate-600 dark:text-slate-400">12-month search volume trend with interactive visualization</CardDescription>
         </CardHeader>
         <CardContent className="p-8">
           <div className="h-64 flex items-end justify-between gap-2 px-2">
@@ -287,16 +287,16 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
                 return (
                   <div 
                     key={index} 
-                    className="group flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-blue-50 rounded-xl hover:from-blue-100 hover:to-purple-100 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md border border-transparent hover:border-blue-200"
+                    className="group flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10 rounded-xl hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md border border-transparent hover:border-blue-200 dark:hover:border-blue-700"
                   >
                     <div className="flex-1">
-                      <p className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">{variation}</p>
+                      <p className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">{variation}</p>
                       <div className="flex items-center gap-4 mt-1.5">
-                        <span className="text-xs font-medium text-slate-600 flex items-center gap-1">
+                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1">
                           <Eye className="h-3 w-3" />
                           {volume.toLocaleString()}
                         </span>
-                        <span className="text-xs font-medium text-slate-600 flex items-center gap-1">
+                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1">
                           <Target className="h-3 w-3" />
                           {kd}% KD
                         </span>
@@ -351,15 +351,15 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
                 return (
                   <div 
                     key={index} 
-                    className="group flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-purple-50 rounded-xl hover:from-purple-100 hover:to-blue-100 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md border border-transparent hover:border-purple-200"
+                    className="group flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-purple-50 dark:from-slate-900/10 dark:to-purple-900/10 rounded-xl hover:from-purple-100 hover:to-blue-100 dark:hover:from-purple-900/20 dark:hover:to-blue-900/20 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md border border-transparent hover:border-purple-200 dark:hover:border-purple-700"
                   >
                     <div className="flex-1">
-                      <p className="font-semibold text-slate-900 group-hover:text-purple-700 transition-colors flex items-start gap-2">
+                      <p className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors flex items-start gap-2">
                         <span className="text-purple-500 mt-1">❓</span>
                         {question}
                       </p>
                       <div className="flex items-center gap-2 mt-2 ml-6">
-                        <span className="text-xs font-medium text-slate-600 bg-white px-2 py-1 rounded-full flex items-center gap-1">
+                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 px-2 py-1 rounded-full flex items-center gap-1">
                           <Eye className="h-3 w-3" />
                           {volume.toLocaleString()} searches/mo
                         </span>
@@ -381,14 +381,14 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
 
       {/* Keyword Strategy - Premium Design */}
       <Card className="border-0 shadow-xl bg-gradient-to-br from-green-50 via-white to-blue-50 overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300" onClick={() => setIsStrategyModalOpen(true)}>
-        <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 border-b border-green-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+        <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 border-b border-green-100 dark:border-green-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg shadow-md">
               <Target className="h-5 w-5 text-white" />
             </div>
             Keyword Strategy
           </CardTitle>
-          <CardDescription className="text-slate-600 font-medium">Get topics, pillar and subpages automatically - Click to view full strategy</CardDescription>
+          <CardDescription className="text-slate-600 dark:text-slate-400 font-medium">Get topics, pillar and subpages automatically - Click to view full strategy</CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">

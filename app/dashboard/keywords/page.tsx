@@ -42,7 +42,7 @@ export default function KeywordsPage() {
       </div>
       
       <div className="w-full">
-        <div className="flex space-x-2 bg-white border-2 border-slate-200 p-1.5 rounded-xl mb-6 shadow-sm">
+        <div className="flex space-x-2 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-1.5 rounded-xl mb-6 shadow-sm">
           <button 
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
               activeTab === 'research' 

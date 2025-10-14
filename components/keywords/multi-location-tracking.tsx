@@ -254,13 +254,13 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
         <div className="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50 border-b-2 border-slate-200">
+              <thead className="bg-slate-50 dark:bg-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 uppercase">Location</th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 uppercase">Device</th>
-                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 uppercase">Rank</th>
-                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 uppercase">Change</th>
-                  <th className="px-4 py-3 text-right text-xs font-bold text-slate-600 uppercase">Search Volume</th>
+                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Location</th>
+                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Device</th>
+                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Rank</th>
+                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Change</th>
+                  <th className="px-4 py-3 text-right text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Search Volume</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200">

@@ -495,9 +495,9 @@ export default function ComprehensiveAuditPage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* SEO Checks */}
-                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200">
+                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 dark:from-green-900/10 dark:via-emerald-900/10 dark:to-green-900/10 border-2 border-green-200 dark:border-green-700">
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900">
+                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900 dark:text-green-100">
                         <div className="p-2 bg-green-500 rounded-lg">
                           <CheckCircle className="h-5 w-5 text-white" />
                         </div>
@@ -507,18 +507,18 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-3">
                         {result.comprehensiveResults?.seo_checks?.passed_checks?.map((check, index) => (
-                          <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-green-100">
+                          <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg border border-green-100 dark:border-green-800">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 dark:text-slate-100 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 border-2 border-red-200">
+                  <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 dark:from-red-900/10 dark:via-rose-900/10 dark:to-red-900/10 border-2 border-red-200 dark:border-red-700">
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-red-900">
+                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-red-900 dark:text-red-100">
                         <div className="p-2 bg-red-500 rounded-lg">
                           <XCircle className="h-5 w-5 text-white" />
                         </div>
@@ -528,9 +528,9 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-3">
                         {result.comprehensiveResults?.seo_checks?.failed_checks?.map((check, index) => (
-                          <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-red-100">
+                          <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg border border-red-100 dark:border-red-800">
                             <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 dark:text-slate-100 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -679,9 +679,9 @@ export default function ComprehensiveAuditPage() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200">
+                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 dark:from-green-900/10 dark:via-emerald-900/10 dark:to-green-900/10 border-2 border-green-200 dark:border-green-700">
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900">
+                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900 dark:text-green-100">
                         <div className="p-2 bg-green-500 rounded-lg">
                           <CheckCircle className="h-5 w-5 text-white" />
                         </div>
@@ -691,18 +691,18 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-3">
                         {result.comprehensiveResults?.accessibility?.passed_checks?.map((check, index) => (
-                          <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-green-100">
+                          <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg border border-green-100 dark:border-green-800">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 dark:text-slate-100 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 border-2 border-red-200">
+                  <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 dark:from-red-900/10 dark:via-rose-900/10 dark:to-red-900/10 border-2 border-red-200 dark:border-red-700">
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-red-900">
+                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-red-900 dark:text-red-100">
                         <div className="p-2 bg-red-500 rounded-lg">
                           <XCircle className="h-5 w-5 text-white" />
                         </div>
@@ -712,9 +712,9 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-3">
                         {result.comprehensiveResults?.accessibility?.failed_checks?.map((check, index) => (
-                          <div key={index} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-red-100">
+                          <div key={index} className="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg border border-red-100 dark:border-red-800">
                             <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                            <span className="text-sm font-medium text-slate-900 break-words">{check}</span>
+                            <span className="text-sm font-medium text-slate-900 dark:text-slate-100 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -724,9 +724,9 @@ export default function ComprehensiveAuditPage() {
 
                 {/* Indexability */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200">
+                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 dark:from-green-900/10 dark:via-emerald-900/10 dark:to-green-900/10 border-2 border-green-200 dark:border-green-700">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-green-900">
+                      <CardTitle className="flex items-center gap-2 text-green-900 dark:text-green-100">
                         <CheckCircle className="h-5 w-5 text-green-500" />
                         Indexability Passed ({result.comprehensiveResults?.indexability?.passed_checks?.length || 0})
                       </CardTitle>
@@ -734,18 +734,18 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-2">
                         {result.comprehensiveResults?.indexability?.passed_checks?.map((check, index) => (
-                          <div key={index} className="flex items-center gap-2 text-sm p-2 bg-white rounded border border-green-100">
+                          <div key={index} className="flex items-center gap-2 text-sm p-2 bg-white dark:bg-slate-800 rounded border border-green-100 dark:border-green-800">
                             <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
-                            <span className="text-slate-900 break-words">{check}</span>
+                            <span className="text-slate-900 dark:text-slate-100 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 border-2 border-red-200">
+                  <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 dark:from-red-900/10 dark:via-rose-900/10 dark:to-red-900/10 border-2 border-red-200 dark:border-red-700">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-red-900">
+                      <CardTitle className="flex items-center gap-2 text-red-900 dark:text-red-100">
                         <XCircle className="h-5 w-5 text-red-500" />
                         Indexability Issues ({result.comprehensiveResults?.indexability?.failed_checks?.length || 0})
                       </CardTitle>
@@ -753,9 +753,9 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-2">
                         {result.comprehensiveResults?.indexability?.failed_checks?.map((check, index) => (
-                          <div key={index} className="flex items-center gap-2 text-sm p-2 bg-white rounded border border-red-100">
+                          <div key={index} className="flex items-center gap-2 text-sm p-2 bg-white dark:bg-slate-800 rounded border border-red-100 dark:border-red-800">
                             <XCircle className="h-4 w-4 text-red-500 flex-shrink-0" />
-                            <span className="text-slate-900 break-words">{check}</span>
+                            <span className="text-slate-900 dark:text-slate-100 break-words">{check}</span>
                           </div>
                         ))}
                       </div>
@@ -818,9 +818,9 @@ export default function ComprehensiveAuditPage() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 border-2 border-green-200">
+                  <Card className="bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 dark:from-green-900/10 dark:via-emerald-900/10 dark:to-green-900/10 border-2 border-green-200 dark:border-green-700">
                     <CardHeader className="pb-4">
-                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900">
+                      <CardTitle className="text-lg font-bold flex items-center gap-3 text-green-900 dark:text-green-100">
                         <div className="p-2 bg-green-500 rounded-lg">
                           <ImageIcon className="h-5 w-5 text-white" />
                         </div>
@@ -829,12 +829,12 @@ export default function ComprehensiveAuditPage() {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div className="space-y-2">
-                        <div className="text-green-700 font-medium text-sm">Images Count:</div>
-                        <div className="text-2xl font-bold text-green-900">{result.comprehensiveResults?.stats?.images_count || 0}</div>
+                        <div className="text-green-700 dark:text-green-300 font-medium text-sm">Images Count:</div>
+                        <div className="text-2xl font-bold text-green-900 dark:text-green-100">{result.comprehensiveResults?.stats?.images_count || 0}</div>
                       </div>
                       <div className="space-y-2">
-                        <div className="text-green-700 font-medium text-sm">Images Size:</div>
-                        <div className="text-xl font-bold text-green-900">{formatBytes(result.comprehensiveResults?.stats?.images_size || 0)}</div>
+                        <div className="text-green-700 dark:text-green-300 font-medium text-sm">Images Size:</div>
+                        <div className="text-xl font-bold text-green-900 dark:text-green-100">{formatBytes(result.comprehensiveResults?.stats?.images_size || 0)}</div>
                       </div>
                     </CardContent>
                   </Card>
@@ -892,7 +892,7 @@ export default function ComprehensiveAuditPage() {
 
                 {/* Structured Recommendations */}
                 {result.recommendations && result.recommendations.length > 0 && (
-                  <Card className="bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 border-2 border-purple-200">
+                  <Card className="bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 dark:from-purple-900/10 dark:via-indigo-900/10 dark:to-purple-900/10 border-2 border-purple-200 dark:border-purple-700">
                     <CardHeader className="pb-4">
                       <CardTitle className="text-lg font-bold flex items-center gap-3 text-purple-900">
                         <div className="p-2 bg-purple-500 rounded-lg">
@@ -904,7 +904,7 @@ export default function ComprehensiveAuditPage() {
                     <CardContent>
                       <div className="space-y-4">
                         {result.recommendations.map((rec, index) => (
-                          <div key={index} className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-white rounded-xl border border-purple-100 hover:shadow-md transition-shadow">
+                          <div key={index} className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-purple-100 dark:border-purple-800 hover:shadow-md transition-shadow">
                             <Badge variant={
                               rec.type === 'critical' ? 'destructive' : 
                               rec.type === 'warning' ? 'default' : 'secondary'
@@ -912,9 +912,9 @@ export default function ComprehensiveAuditPage() {
                               {rec.type}
                             </Badge>
                             <div className="flex-1 min-w-0">
-                              <h4 className="font-semibold text-slate-900 mb-2 break-words">{rec.title}</h4>
-                              <p className="text-sm text-slate-700 leading-relaxed mb-3 break-words">{rec.description}</p>
-                              <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+                              <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-2 break-words">{rec.title}</h4>
+                              <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3 break-words">{rec.description}</p>
+                              <Badge variant="outline" className="bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700">
                                 {rec.category}
                               </Badge>
                             </div>

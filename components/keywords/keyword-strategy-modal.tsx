@@ -160,17 +160,17 @@ PRO TIPS
       {/* Modal */}
       <div className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300">
         {/* Header */}
-        <div className="p-6 pb-4 bg-gradient-to-r from-green-50 to-blue-50 border-b border-green-100">
+        <div className="p-6 pb-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 border-b border-green-100 dark:border-green-800">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <div className="p-2 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg shadow-md">
                   <Target className="h-5 w-5 text-white" />
                 </div>
                 Keyword Strategy
               </h2>
-              <p className="text-slate-600 font-medium mt-1">
-                Complete content strategy for "<span className="font-semibold text-green-700">{baseKeyword}</span>"
+              <p className="text-slate-600 dark:text-slate-400 font-medium mt-1">
+                Complete content strategy for "<span className="font-semibold text-green-700 dark:text-green-300">{baseKeyword}</span>"
               </p>
             </div>
             <div className="flex items-center gap-2">

@@ -150,13 +150,13 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       {/* Header - Beautiful Gradient */}
-      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-100">
+      <div className="flex items-center justify-between p-6 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 rounded-xl border border-green-100 dark:border-green-800">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
-            <TrendingUp className="h-6 w-6 text-green-600" />
+          <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+            <TrendingUp className="h-6 w-6 text-green-600 dark:text-green-400" />
             Keyword Rankings
           </h2>
-          <p className="text-slate-600 mt-1">
+          <p className="text-slate-600 dark:text-slate-400 mt-1">
             Track your keyword positions and performance over time
           </p>
         </div>
@@ -171,61 +171,61 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
 
       {/* Statistics Cards - Premium Design */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-blue-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-blue-500 rounded-lg shadow-md">
                 <Target className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Total Keywords</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Total Keywords</span>
             </div>
-            <p className="text-4xl font-black text-blue-600">{keywords.length}</p>
-            <p className="text-sm text-slate-500 font-medium mt-2">
+            <p className="text-4xl font-black text-blue-600 dark:text-blue-400">{keywords.length}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2">
               {rankedKeywords.length} ranked
             </p>
           </CardContent>
         </Card>
         
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-green-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-green-50 to-white dark:from-green-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-green-500 rounded-lg shadow-md">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Page 1 Rankings</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Page 1 Rankings</span>
             </div>
-            <p className="text-4xl font-black text-green-600">{topKeywords}</p>
-            <p className="text-sm text-slate-500 font-medium mt-2">
+            <p className="text-4xl font-black text-green-600 dark:text-green-400">{topKeywords}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2">
               Top 10 positions
             </p>
           </CardContent>
         </Card>
         
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-orange-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-orange-50 to-white dark:from-orange-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-orange-500 rounded-lg shadow-md">
                 <Eye className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Avg Position</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Avg Position</span>
             </div>
-            <p className="text-4xl font-black text-orange-600">{avgPosition || 'N/A'}</p>
-            <p className="text-sm text-slate-500 font-medium mt-2">
+            <p className="text-4xl font-black text-orange-600 dark:text-orange-400">{avgPosition || 'N/A'}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2">
               For ranked keywords
             </p>
           </CardContent>
         </Card>
         
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-purple-50 to-white">
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/10 dark:to-gray-900/10">
           <CardContent className="p-6">
             <div className="flex items-center gap-2 mb-3">
               <div className="p-2 bg-purple-500 rounded-lg shadow-md">
                 <TrendingUp className="h-4 w-4 text-white" />
               </div>
-              <span className="text-sm font-semibold text-slate-600 uppercase tracking-wide">Improvements</span>
+              <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">Improvements</span>
             </div>
-            <p className="text-4xl font-black text-purple-600">{improvedKeywords}</p>
-            <p className="text-sm text-slate-500 font-medium mt-2">
+            <p className="text-4xl font-black text-purple-600 dark:text-purple-400">{improvedKeywords}</p>
+            <p className="text-sm text-slate-500 dark:text-slate-400 font-medium mt-2">
               Keywords moved up
             </p>
           </CardContent>
@@ -239,7 +239,7 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
           onClick={() => setFilterStatus('all')}
           className={filterStatus === 'all' 
             ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md hover:shadow-lg' 
-            : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+            : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
           }
         >
           All Keywords ({keywords.length})
@@ -249,7 +249,7 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
           onClick={() => setFilterStatus('ranked')}
           className={filterStatus === 'ranked' 
             ? 'bg-gradient-to-r from-green-600 to-green-700 text-white shadow-md hover:shadow-lg' 
-            : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+            : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
           }
         >
           Ranked ({rankedKeywords.length})
@@ -259,7 +259,7 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
           onClick={() => setFilterStatus('unranked')}
           className={filterStatus === 'unranked' 
             ? 'bg-gradient-to-r from-orange-600 to-orange-700 text-white shadow-md hover:shadow-lg' 
-            : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300'
+            : 'bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
           }
         >
           Unranked ({keywords.length - rankedKeywords.length})
@@ -268,13 +268,13 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
 
       {/* Rankings Table - Premium Design */}
       {filteredKeywords.length > 0 ? (
-        <Card className="border-0 shadow-lg bg-white">
-          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 border-b border-slate-200">
-            <CardTitle className="text-slate-900 flex items-center gap-2">
-              <Target className="h-5 w-5 text-blue-600" />
+        <Card className="border-0 shadow-lg bg-white dark:bg-slate-800">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10 border-b border-slate-200 dark:border-slate-700">
+            <CardTitle className="text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Target className="h-5 w-5 text-blue-600 dark:text-blue-400" />
               Keyword Rankings
             </CardTitle>
-            <CardDescription className="text-slate-600">
+            <CardDescription className="text-slate-600 dark:text-slate-400">
               Current positions and changes for your tracked keywords
             </CardDescription>
           </CardHeader>
@@ -283,11 +283,11 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
               {filteredKeywords.map((keyword) => (
                 <div
                   key={keyword.id}
-                  className="p-5 bg-white border-2 border-slate-100 rounded-xl hover:border-blue-200 hover:shadow-md transition-all duration-200"
+                  className="p-5 bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-slate-700 rounded-xl hover:border-blue-200 dark:hover:border-blue-700 hover:shadow-md transition-all duration-200"
                 >
                   <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-center">
                     <div className="md:col-span-2">
-                      <h4 className="font-semibold text-slate-900">{keyword.keyword}</h4>
+                      <h4 className="font-semibold text-slate-900 dark:text-slate-100">{keyword.keyword}</h4>
                       <div className="flex gap-2 mt-2">
                         <Badge 
                           variant={getPositionBadgeVariant(keyword.position)}
@@ -329,19 +329,19 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
                     </div>
                     
                     <div className="text-center">
-                      <p className="font-semibold text-slate-700 text-lg">
+                      <p className="font-semibold text-slate-700 dark:text-slate-300 text-lg">
                         {keyword.previousRank || 'N/A'}
                       </p>
-                      <p className="text-xs text-slate-500 font-medium mt-1">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">
                         Previous
                       </p>
                     </div>
                     
                     <div className="text-center">
-                      <p className="font-semibold text-slate-700 text-lg">
+                      <p className="font-semibold text-slate-700 dark:text-slate-300 text-lg">
                         {keyword.searchVolume ? keyword.searchVolume.toLocaleString() : 'N/A'}
                       </p>
-                      <p className="text-xs text-slate-500 font-medium mt-1">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-1">
                         Volume
                       </p>
                     </div>
@@ -366,13 +366,13 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
                   </div>
                   
                   {keyword.url && (
-                    <div className="mt-4 pt-4 border-t border-slate-100">
-                      <p className="text-sm text-slate-600 truncate">
-                        <strong className="text-slate-900">URL:</strong> {keyword.url}
+                    <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
+                      <p className="text-sm text-slate-600 dark:text-slate-400 truncate">
+                        <strong className="text-slate-900 dark:text-slate-100">URL:</strong> {keyword.url}
                       </p>
                       {keyword.title && (
-                        <p className="text-sm text-slate-600 truncate mt-1">
-                          <strong className="text-slate-900">Title:</strong> {keyword.title}
+                        <p className="text-sm text-slate-600 dark:text-slate-400 truncate mt-1">
+                          <strong className="text-slate-900 dark:text-slate-100">Title:</strong> {keyword.title}
                         </p>
                       )}
                     </div>
