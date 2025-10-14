@@ -1,0 +1,27 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Circular background -->
+  <circle cx="32" cy="32" r="32" fill="#1e40af"/>
+  
+  <!-- AI/SEO Symbol - Stylized "A" with circular orbit -->
+  <g transform="translate(32, 32)">
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="4" fill="#60a5fa"/>
+    
+    <!-- Orbit rings -->
+    <circle cx="0" cy="0" r="16" stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.6"/>
+    <circle cx="0" cy="0" r="22" stroke="#60a5fa" stroke-width="1.5" fill="none" opacity="0.4"/>
+    
+    <!-- Stylized "A" shape -->
+    <path d="M -8 10 L 0 -10 L 8 10 M -6 4 L 6 4" 
+          stroke="#ffffff" 
+          stroke-width="3" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          fill="none"/>
+    
+    <!-- Small accent dots -->
+    <circle cx="16" cy="-4" r="2" fill="#60a5fa"/>
+    <circle cx="-16" cy="4" r="2" fill="#60a5fa"/>
+    <circle cx="4" cy="18" r="2" fill="#3b82f6"/>
+  </g>
+</svg>
