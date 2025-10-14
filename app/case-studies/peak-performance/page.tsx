@@ -1,0 +1,545 @@
+import { MainLayout } from "@/components/layout/main-layout"
+import { generateSEOMeta } from "@/lib/seo"
+import { Metadata } from 'next'
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import {
+  TrendingUp,
+  Users,
+  Target,
+  ArrowRight,
+  CheckCircle,
+  Star,
+  Calendar,
+  Award,
+  BarChart3,
+  Zap,
+  Globe,
+  ArrowLeft,
+  Share2,
+  Download,
+  ExternalLink,
+  MapPin,
+  Phone,
+  Building,
+  Trophy,
+  ShoppingCart,
+  Package
+} from "lucide-react"
+
+// SEO metadata
+export const metadata: Metadata = generateSEOMeta({
+  title: "Peak Performance: Local SEO Domination - Local Pack #1 for 15 Services | Case Study",
+  description: "How Peak Performance achieved local pack #1 ranking for 15 services, 310% phone call increase, and 290% ROI through comprehensive local SEO optimization.",
+  keywords: [
+    "local SEO case study",
+    "local pack ranking success",
+    "Google local pack domination",
+    "local service SEO",
+    "local business optimization",
+    "Google My Business optimization",
+    "local citation building",
+    "local search ranking improvement"
+  ],
+  canonical: "/case-studies/peak-performance",
+  ogImage: "/images/case-studies/peak-performance-hero.jpg",
+  ogType: "article",
+  twitterCard: "summary_large_image"
+})
+
+// Structured Data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Peak Performance: Local SEO Domination - Local Pack #1 for 15 Services",
+  "description": "Comprehensive local SEO case study showing how Peak Performance became the dominant local service provider through strategic local optimization.",
+  "image": "/images/case-studies/peak-performance-hero.jpg",
+  "datePublished": "2024-10-14",
+  "dateModified": "2024-10-14",
+  "author": {
+    "@type": "Organization",
+    "name": "AI SEO Turbo"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AI SEO Turbo",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.aiseoturbo.com/case-studies/peak-performance"
+  },
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Local SEO"
+    },
+    {
+      "@type": "Thing",
+      "name": "Google Local Pack"
+    },
+    {
+      "@type": "Thing",
+      "name": "Local Business Marketing"
+    }
+  ]
+}
+
+const challengePoints = [
+  "Invisible in local search results despite excellent service reputation",
+  "Poor Google Business Profile optimization and incomplete information",
+  "Limited local citation presence across online directories",
+  "Inconsistent NAP (Name, Address, Phone) data across platforms",
+  "Lack of local content and community engagement"
+]
+
+const solutionSteps = [
+  {
+    title: "Google Business Profile Optimization",
+    description: "Complete GBP setup, optimization, and ongoing management",
+    icon: MapPin
+  },
+  {
+    title: "Local Citation Building",
+    description: "Comprehensive local citation audit and acquisition strategy",
+    icon: Building
+  },
+  {
+    title: "Local Content Strategy",
+    description: "Location-specific content creation and community engagement",
+    icon: Target
+  },
+  {
+    title: "Local Technical SEO",
+    description: "Schema markup, local structured data, and mobile optimization",
+    icon: Trophy
+  }
+]
+
+const results = [
+  {
+    metric: "Local Traffic",
+    value: "+190%",
+    description: "Increase in local search traffic",
+    icon: TrendingUp
+  },
+  {
+    metric: "Phone Calls",
+    value: "+310%",
+    description: "More customer phone inquiries",
+    icon: Phone
+  },
+  {
+    metric: "Local Rankings",
+    value: "#1 in 15",
+    description: "Services ranking #1 locally",
+    icon: Trophy
+  },
+  {
+    metric: "Customer Acquisition",
+    value: "+280%",
+    description: "New customer growth",
+    icon: Users
+  }
+]
+
+const timeline = [
+  {
+    month: "Month 1",
+    title: "Local SEO Foundation",
+    description: "GBP optimization, citation audit, and local keyword research",
+    results: ["GBP fully optimized", "Citation gaps identified", "Local keyword strategy developed"]
+  },
+  {
+    month: "Month 2",
+    title: "Citation & Content Building",
+    description: "Citation acquisition and local content creation",
+    results: ["50+ new citations acquired", "Local content published", "NAP consistency achieved"]
+  },
+  {
+    month: "Month 3",
+    title: "Optimization & Domination",
+    description: "Advanced local SEO tactics and performance monitoring",
+    results: ["Local pack #1 for 15 services", "310% call increase", "190% traffic growth"]
+  }
+]
+
+export default function PeakPerformanceCaseStudy() {
+  return (
+    <MainLayout>
+      {/* Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+      {/* Hero Section */}
+      <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
+              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                Home
+              </Link>
+              <span className="text-gray-600" aria-hidden="true">/</span>
+              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
+                Case Studies
+              </Link>
+              <span className="text-gray-600" aria-hidden="true">/</span>
+              <span className="text-white">Peak Performance</span>
+            </nav>
+
+            {/* Hero Content */}
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-orange-500/10 rounded-full mb-6">
+                <MapPin className="w-10 h-10 text-orange-400" aria-hidden="true" />
+              </div>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
+                  Peak Performance
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent">
+                  Local SEO Domination
+                </span>
+              </h1>
+              <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+                How a local service business went from invisible to dominating their market,
+                achieving #1 local pack ranking for 15 services and 310% more customer calls.
+              </p>
+
+              {/* Key Metrics */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                {results.map((result) => (
+                  <div key={result.metric} className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                    <result.icon className="w-8 h-8 text-orange-400 mx-auto mb-2" aria-hidden="true" />
+                    <div className="text-2xl font-bold text-orange-400 mb-1">{result.value}</div>
+                    <div className="text-sm text-gray-400">{result.metric}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/features/seo-audit">
+                  <Button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-orange-600/25 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105 border border-orange-500/20">
+                    <Target className="w-5 h-5 mr-2" aria-hidden="true" />
+                    Dominate Your Local Market
+                  </Button>
+                </Link>
+                <Button variant="outline" className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
+                  <Share2 className="w-5 h-5 mr-2" aria-hidden="true" />
+                  Share This Success Story
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Challenge Section */}
+      <section className="py-20 bg-slate-950">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-6">
+                  The Challenge: Invisible in Local Search
+                </h2>
+                <p className="text-gray-400 mb-6 leading-relaxed">
+                  Peak Performance was a highly-rated local service business with excellent customer
+                  reviews and quality work. However, they were completely invisible in local search
+                  results, missing out on potential customers searching for their services nearby.
+                </p>
+                <ul className="space-y-3" role="list">
+                  {challengePoints.map((point, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0" aria-hidden="true"></div>
+                      <span className="text-gray-300">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-700">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-red-400 mb-2">Page 3+</div>
+                  <div className="text-gray-400 mb-4">Local Pack Ranking</div>
+                  <div className="text-4xl font-bold text-red-400 mb-2">15</div>
+                  <div className="text-gray-400">Monthly Local Leads</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Section */}
+      <section className="py-20 bg-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl font-bold text-white mb-6">
+              The Solution: Comprehensive Local SEO Strategy
+            </h2>
+            <p className="text-xl text-gray-400 leading-relaxed">
+              Peak Performance implemented a complete local SEO strategy using AI SEO Turbo's
+              specialized local search optimization and Google Business Profile management tools.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {solutionSteps.map((step, index) => (
+              <div key={index} className="bg-slate-800/50 rounded-xl p-8 border border-slate-700 hover:border-slate-600 transition-colors">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <step.icon className="w-6 h-6 text-orange-400" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                    <p className="text-gray-400 leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline Section */}
+      <section className="py-20 bg-slate-950">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-6">
+                3-Month Local Domination Journey
+              </h2>
+              <p className="text-xl text-gray-400">
+                From local obscurity to market leadership
+              </p>
+            </div>
+
+            <div className="space-y-8">
+              {timeline.map((phase, index) => (
+                <div key={index} className="flex gap-8">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 bg-gradient-to-r from-orange-600 to-red-600 rounded-full flex items-center justify-center">
+                      <span className="text-white font-bold">{phase.month.split(' ')[1]}</span>
+                    </div>
+                  </div>
+                  <div className="flex-1 bg-slate-800/50 rounded-xl p-8 border border-slate-700">
+                    <h3 className="text-xl font-bold text-white mb-3">{phase.title}</h3>
+                    <p className="text-gray-400 mb-4">{phase.description}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {phase.results.map((result, resultIndex) => (
+                        <div key={resultIndex} className="flex items-center gap-2">
+                          <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                          <span className="text-gray-300 text-sm">{result}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonial Section */}
+      <section className="py-20 bg-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700">
+              <div className="text-center mb-8">
+                <Star className="w-12 h-12 text-yellow-400 mx-auto mb-4" aria-hidden="true" />
+                <blockquote className="text-2xl text-white font-medium mb-6 leading-relaxed">
+                  "We went from being invisible to dominating our local market. AI SEO Turbo's local SEO
+                  insights were game-changing. We're now the first result that customers see when they
+                  search for our services, and our phone hasn't stopped ringing."
+                </blockquote>
+                <div className="flex items-center justify-center gap-4">
+                  <div className="w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center">
+                    <span className="text-orange-400 font-bold">JW</span>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-white font-semibold">Jennifer Walsh</div>
+                    <div className="text-gray-400">Marketing Director, Peak Performance</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Local SEO Achievements Section */}
+      <section className="py-20 bg-slate-950">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-white mb-6">
+                Local SEO Achievements
+              </h2>
+              <p className="text-xl text-gray-400">
+                Local search optimizations that transformed their market presence
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-700">
+                <h3 className="text-xl font-bold text-white mb-4">Local Search Performance</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-gray-300">#1 local pack ranking for 15 services</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-gray-300">310% increase in phone calls</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-gray-300">190% local search traffic growth</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-slate-800/50 rounded-xl p-8 border border-slate-700">
+                <h3 className="text-xl font-bold text-white mb-4">Local Presence Optimization</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-gray-300">Fully optimized Google Business Profile</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-gray-300">150+ local citations acquired</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" aria-hidden="true" />
+                    <span className="text-gray-300">Local schema markup implemented</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* ROI Calculator */}
+            <div className="bg-gradient-to-r from-orange-900/20 to-red-900/20 rounded-xl p-8 border border-orange-500/20">
+              <h3 className="text-2xl font-bold text-white mb-6 text-center">Local Business ROI Impact</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-orange-400 mb-2">290%</div>
+                  <div className="text-gray-400">Overall ROI</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-red-400 mb-2">$95K</div>
+                  <div className="text-gray-400">Additional Annual Revenue</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-green-400 mb-2">2 months</div>
+                  <div className="text-gray-400">ROI Payback Period</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Related Case Studies */}
+      <section className="py-20 bg-slate-900">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-white mb-6">
+              More Local Business Success Stories
+            </h2>
+            <p className="text-gray-400 mb-12">
+              See how other local businesses achieved remarkable results with AI SEO Turbo
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Link href="/case-studies/stylecraft-boutique" className="group">
+                <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-slate-600 transition-all duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-pink-500/10 rounded-lg flex items-center justify-center">
+                      <ShoppingCart className="w-6 h-6 text-pink-400" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white group-hover:text-pink-400 transition-colors">
+                        StyleCraft Boutique
+                      </h3>
+                      <p className="text-gray-400 text-sm">E-commerce SEO Success</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-4">
+                    420% conversion increase for fashion retailer
+                  </p>
+                  <div className="flex items-center text-pink-400 text-sm font-medium">
+                    Read Case Study
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+
+              <Link href="/case-studies/gearhub-pro" className="group">
+                <div className="bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-slate-600 transition-all duration-300">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 bg-orange-500/10 rounded-lg flex items-center justify-center">
+                      <Package className="w-6 h-6 text-orange-400" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white group-hover:text-orange-400 transition-colors">
+                        GearHub Pro
+                      </h3>
+                      <p className="text-gray-400 text-sm">Niche E-commerce Leadership</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-400 text-sm mb-4">
+                    290% conversion increase for specialty retailer
+                  </p>
+                  <div className="flex items-center text-orange-400 text-sm font-medium">
+                    Read Case Study
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-b from-slate-950 to-slate-900">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-orange-500/10 rounded-full mb-6">
+              <MapPin className="w-8 h-8 text-orange-400" aria-hidden="true" />
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Ready to Dominate Your Local Market?
+            </h2>
+            <p className="text-gray-400 mb-8 leading-relaxed text-lg">
+              Join Peak Performance and other local businesses achieving remarkable local SEO
+              results with AI-powered local search optimization.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/features/seo-audit">
+                <Button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg shadow-orange-600/25 hover:shadow-xl hover:shadow-orange-500/30 hover:scale-105 border border-orange-500/20">
+                  <Target className="w-5 h-5 mr-2" aria-hidden="true" />
+                  Get Your Local SEO Audit
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline" className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 px-8 py-4 rounded-lg font-semibold transition-all duration-300">
+                  <Users className="w-5 h-5 mr-2" aria-hidden="true" />
+                  Talk to Local SEO Experts
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </MainLayout>
+  )
+}
