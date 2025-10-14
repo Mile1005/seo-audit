@@ -99,7 +99,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* Preload critical resources with proper priority */}
         <link rel="preload" href="/images/hero/hero-laptop-dashboard.svg" as="image" type="image/svg+xml" fetchPriority="high" />
-        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" fetchPriority="high" />
         
         {/* Resource hints for faster loading - removed API prefetch that causes 405 errors */}
         

@@ -6,6 +6,7 @@ import { LazyWrapper } from "@/components/performance/LazyWrapper"
 import { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import { headers } from 'next/headers'
+import Head from 'next/head'
 
 // Optimized dynamic imports with better loading states
 // Import our optimized skeletons
@@ -172,6 +173,9 @@ export default function Home() {
 
   return (
     <MainLayout>
+      <Head>
+        <link rel="preload" href="/images/hero/hero-laptop-dashboard.svg" as="image" type="image/svg+xml" fetchPriority="high" />
+      </Head>
       <HeroSection />
       <TrustLogos />
       
