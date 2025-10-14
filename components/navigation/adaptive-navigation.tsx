@@ -164,17 +164,18 @@ export function AdaptiveNavigation() {
     setIsMounted(true)
   }, [])
 
-  // Close dropdown on scroll
+  // Close dropdown on scroll (only on desktop, not when mobile menu is open)
   useEffect(() => {
     const handleScroll = () => {
-      if (openDropdown) {
+      // Only close dropdown on scroll if we're on desktop (mobile menu is closed)
+      if (openDropdown && !isOpen) {
         setOpenDropdown(null)
       }
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [openDropdown])
+  }, [openDropdown, isOpen])
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
@@ -333,7 +334,11 @@ export function AdaptiveNavigation() {
                 {section.items ? (
                   <div>
                     <button
-                      onClick={() => toggleDropdown(section.label)}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        toggleDropdown(section.label)
+                      }}
                       className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-all duration-200 rounded-md flex items-center justify-between"
                     >
                       <span>{section.label}</span>
