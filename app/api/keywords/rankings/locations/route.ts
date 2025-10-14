@@ -3,6 +3,9 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 // GET /api/keywords/rankings/locations - Fetch rankings by location and device
 export async function GET(request: NextRequest) {
   try {

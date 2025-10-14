@@ -3,6 +3,9 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 // GET /api/keywords/serp-features - Fetch SERP features for a keyword
 export async function GET(request: NextRequest) {
   try {
