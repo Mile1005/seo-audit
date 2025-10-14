@@ -645,12 +645,12 @@ export default function PageCrawlerPage() {
 
                 <Card className="border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
+                    <CardTitle className="text-sm font-semibold uppercase tracking-wide">
                       Avg. Word Count
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <div className="text-3xl font-bold">
                       {Math.round(currentResult.results.summary.averageWordCount)}
                     </div>
                   </CardContent>
@@ -673,7 +673,7 @@ export default function PageCrawlerPage() {
               {/* Issue Summary */}
               <Card className="border-slate-200 dark:border-slate-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-white">
+                  <CardTitle className="flex items-center gap-2">
                     <AlertTriangle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                     Issue Summary
                   </CardTitle>
@@ -681,19 +681,19 @@ export default function PageCrawlerPage() {
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Missing Titles</span>
+                      <span className="text-sm font-medium">Missing Titles</span>
                       <span className="text-2xl font-bold text-red-600 dark:text-red-400">
                         {currentResult.results.summary.missingTitles}
                       </span>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Missing H1</span>
+                      <span className="text-sm font-medium">Missing H1</span>
                       <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                         {currentResult.results.summary.missingH1}
                       </span>
                     </div>
                     <div className="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Missing Meta Desc</span>
+                      <span className="text-sm font-medium">Missing Meta Desc</span>
                       <span className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                         {currentResult.results.summary.missingMetaDesc}
                       </span>
@@ -799,14 +799,14 @@ export default function PageCrawlerPage() {
                                   {page.h1Count ? (
                                     <>
                                       <CheckCircle className="h-4 w-4 text-green-600" />
-                                      <span className="text-sm font-medium text-slate-900 dark:text-white">
+                                      <span className="text-sm font-semibold">
                                         {page.h1Count}
                                       </span>
                                     </>
                                   ) : (
                                     <>
                                       <XCircle className="h-4 w-4 text-red-600" />
-                                      <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                                      <span className="text-sm font-medium text-muted-foreground">
                                         0
                                       </span>
                                     </>
@@ -814,13 +814,13 @@ export default function PageCrawlerPage() {
                                 </div>
                               </td>
                               <td className="px-4 py-3 text-center">
-                                <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                                <span className="text-sm font-semibold">
                                   {page.wordCount?.toLocaleString() || 0}
                                 </span>
                               </td>
                               <td className="px-4 py-3 text-center">
                                 <div className="flex items-center justify-center gap-1">
-                                  <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                                  <span className="text-sm font-semibold">
                                     {page.images || 0}
                                   </span>
                                   {(page.imagesWithoutAlt || 0) > 0 && (
@@ -870,20 +870,20 @@ export default function PageCrawlerPage() {
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
                                       <div>
-                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">H1 Count</span>
-                                        <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{page.h1Count || 0}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">H1 Count</span>
+                                        <p className="text-lg font-bold mt-1">{page.h1Count || 0}</p>
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">H2 Count</span>
-                                        <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{page.h2Count || 0}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">H2 Count</span>
+                                        <p className="text-lg font-bold mt-1">{page.h2Count || 0}</p>
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Internal Links</span>
-                                        <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{page.internalLinkCount || 0}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">Internal Links</span>
+                                        <p className="text-lg font-bold mt-1">{page.internalLinkCount || 0}</p>
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Crawled</span>
-                                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">{new Date(page.fetchedAt).toLocaleString()}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">Crawled</span>
+                                        <p className="text-sm font-semibold mt-1">{new Date(page.fetchedAt).toLocaleString()}</p>
                                       </div>
                                     </div>
                                   </div>
