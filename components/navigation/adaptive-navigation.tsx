@@ -164,6 +164,18 @@ export function AdaptiveNavigation() {
     setIsMounted(true)
   }, [])
 
+  // Close dropdown on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (openDropdown) {
+        setOpenDropdown(null)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [openDropdown])
+
   const toggleMenu = () => {
     setIsOpen(!isOpen)
     // Reset dropdown when closing menu
@@ -231,7 +243,10 @@ export function AdaptiveNavigation() {
               {navigationData.map((section) => (
                 <div key={section.label} className="relative">
                   {section.items ? (
-                    <div className="relative">
+                    <div 
+                      className="relative"
+                      onMouseLeave={() => setOpenDropdown(null)}
+                    >
                       <button
                         onClick={() => toggleDropdown(section.label)}
                         onMouseEnter={() => setOpenDropdown(section.label)}
