@@ -18,7 +18,7 @@ export default function CompetitorAnalysisGuidePage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/category/seo-tools-&-features" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/help/category/seo-tools-features" className="text-gray-400 hover:text-white transition-colors">
                 SEO Tools & Features
               </Link>
               <span className="text-gray-600">/</span>

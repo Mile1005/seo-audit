@@ -157,7 +157,7 @@ export default function GettingStartedCategoryPage() {
               <h3 className="text-xl font-bold text-white mb-6">Related Categories</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Link
-                  href="/help/category/seo-tools-&-features"
+                  href="/help/category/seo-tools-features"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
@@ -167,7 +167,7 @@ export default function GettingStartedCategoryPage() {
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-blue-400 transition-colors" />
                 </Link>
                 <Link
-                  href="/help/category/account-&-billing"
+                  href="/help/category/account-billing"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>

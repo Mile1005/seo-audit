@@ -18,7 +18,7 @@ export default function AuthenticationPage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/category/api-&-integrations" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/help/category/api-integrations" className="text-gray-400 hover:text-white transition-colors">
                 API & Integrations
               </Link>
               <span className="text-gray-600">/</span>
@@ -441,7 +441,7 @@ $response = curl_exec($ch);`}
                     Contact Developer Support
                   </Link>
                   <Link
-                    href="/help/category/api-&-integrations"
+                    href="/help/category/api-integrations"
                     className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
                     View All API Articles

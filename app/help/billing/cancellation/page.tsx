@@ -18,7 +18,7 @@ export default function CancellationPage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/category/account-&-billing" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/help/category/account-billing" className="text-gray-400 hover:text-white transition-colors">
                 Account & Billing
               </Link>
               <span className="text-gray-600">/</span>
