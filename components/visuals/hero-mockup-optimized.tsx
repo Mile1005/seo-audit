@@ -42,7 +42,7 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
           <div className="relative bg-white rounded-lg overflow-hidden" style={{ aspectRatio: '16/10' }}>
             {/* Dashboard Content */}
             <HeroImage
-              src="/images/dashboard-preview.webp"
+              src="/images/hero/hero-laptop-dashboard.svg"
               alt="SEO Audit Dashboard showing comprehensive website analysis results"
               className="w-full h-full object-cover"
               priority

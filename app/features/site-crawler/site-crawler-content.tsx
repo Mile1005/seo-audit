@@ -902,7 +902,7 @@ export default function SiteCrawlerPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <Button asChild size="lg" className="text-lg px-8 py-6">
-                <Link href="#start">
+                <Link href="/login">
                   <Globe className="w-5 h-5 mr-2" />
                   Start Crawling Now
                   <ArrowRight className="w-5 h-5 ml-2" />

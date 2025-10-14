@@ -327,7 +327,7 @@ export default function CompetitorAnalysisPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <Button asChild size="lg" className="text-lg px-8 py-6">
-                <Link href="#analyze">
+                <Link href="/login">
                   <Users className="w-5 h-5 mr-2" />
                   Start Your Success Story
                   <ArrowRight className="w-5 h-5 ml-2" />
