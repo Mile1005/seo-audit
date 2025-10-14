@@ -1,5 +1,6 @@
 // Phase 10: lightweight page audit (subset)
 // Extract meta title, description, headings, word count, images alt ratio, internal link count
+import * as cheerio from 'cheerio'
 
 export interface LightPageAuditResult {
   title?: string
@@ -13,26 +14,47 @@ export interface LightPageAuditResult {
 }
 
 export function lightPageAudit(html: string, origin: string): LightPageAuditResult {
-  // naive regex/DOM hybrid using DOMParser via JSDOM-like fallback; to avoid heavy deps, crude extraction
-  // If cheerio or JSDOM is added later, replace this.
-  const doc = new DOMParser().parseFromString(html, 'text/html')
-  const title = doc.querySelector('title')?.textContent?.trim()
-  const metaDescription = doc.querySelector('meta[name="description"]')?.getAttribute('content') || undefined
-  const h1Count = doc.querySelectorAll('h1').length
-  const h2Count = doc.querySelectorAll('h2').length
-  const text = doc.body?.textContent || ''
-  const wordCount = text.split(/\s+/).filter(Boolean).length
-  const images = Array.from(doc.querySelectorAll('img'))
-  const imagesWithoutAlt = images.filter(i=>!i.getAttribute('alt')).length
-  const internalLinkCount = Array.from(doc.querySelectorAll('a'))
-    .filter(a => {
-      const href = a.getAttribute('href') || ''
-      if (!href) return false
-      if (href.startsWith('#')) return false
-      try {
-        const u = new URL(href, origin)
-        return u.origin === origin
-      } catch { return false }
-    }).length
-  return { title, metaDescription, h1Count, h2Count, wordCount, images: images.length, imagesWithoutAlt, internalLinkCount }
+  const $ = cheerio.load(html)
+  
+  // Extract title and meta description
+  const title = $('title').first().text().trim() || undefined
+  const metaDescription = $('meta[name="description"]').attr('content')?.trim() || 
+                          $('meta[property="og:description"]').attr('content')?.trim() || 
+                          undefined
+  
+  // Count headings
+  const h1Count = $('h1').length
+  const h2Count = $('h2').length
+  
+  // Calculate word count from body text
+  const bodyText = $('body').text() || ''
+  const wordCount = bodyText.split(/\s+/).filter(Boolean).length
+  
+  // Count images and images without alt text
+  const allImages = $('img')
+  const images = allImages.length
+  const imagesWithoutAlt = allImages.filter((_, el) => !$(el).attr('alt')).length
+  
+  // Count internal links
+  const internalLinkCount = $('a[href]').filter((_, el) => {
+    const href = $(el).attr('href') || ''
+    if (!href || href.startsWith('#')) return false
+    try {
+      const u = new URL(href, origin)
+      return u.origin === origin
+    } catch { 
+      return false 
+    }
+  }).length
+  
+  return { 
+    title, 
+    metaDescription, 
+    h1Count, 
+    h2Count, 
+    wordCount, 
+    images, 
+    imagesWithoutAlt, 
+    internalLinkCount 
+  }
 }

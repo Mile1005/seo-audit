@@ -617,35 +617,35 @@ export default function PageCrawlerPage() {
 
               {/* Summary Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card>
+                <Card className="border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Total Pages
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
                       {currentResult.results.summary.totalPages}
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Pages with Issues
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-orange-600">
+                    <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">
                       {currentResult.results.summary.pagesWithIssues}
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Avg. Word Count
                     </CardTitle>
                   </CardHeader>
@@ -671,30 +671,30 @@ export default function PageCrawlerPage() {
               </div>
 
               {/* Issue Summary */}
-              <Card>
+              <Card className="border-slate-200 dark:border-slate-700">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <AlertTriangle className="h-5 w-5 text-orange-600" />
+                  <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-white">
+                    <AlertTriangle className="h-5 w-5 text-orange-600 dark:text-orange-400" />
                     Issue Summary
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                      <span className="text-sm text-slate-600 dark:text-slate-400">Missing Titles</span>
-                      <span className="text-lg font-bold text-slate-900 dark:text-white">
+                    <div className="flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Missing Titles</span>
+                      <span className="text-2xl font-bold text-red-600 dark:text-red-400">
                         {currentResult.results.summary.missingTitles}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                      <span className="text-sm text-slate-600 dark:text-slate-400">Missing H1</span>
-                      <span className="text-lg font-bold text-slate-900 dark:text-white">
+                    <div className="flex items-center justify-between p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg">
+                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Missing H1</span>
+                      <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                         {currentResult.results.summary.missingH1}
                       </span>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-lg">
-                      <span className="text-sm text-slate-600 dark:text-slate-400">Missing Meta Desc</span>
-                      <span className="text-lg font-bold text-slate-900 dark:text-white">
+                    <div className="flex items-center justify-between p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                      <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Missing Meta Desc</span>
+                      <span className="text-2xl font-bold text-yellow-600 dark:text-yellow-400">
                         {currentResult.results.summary.missingMetaDesc}
                       </span>
                     </div>
@@ -795,20 +795,38 @@ export default function PageCrawlerPage() {
                                 </Badge>
                               </td>
                               <td className="px-4 py-3 text-center">
-                                {page.h1Count ? (
-                                  <CheckCircle className="h-4 w-4 text-green-600 mx-auto" />
-                                ) : (
-                                  <XCircle className="h-4 w-4 text-red-600 mx-auto" />
-                                )}
-                              </td>
-                              <td className="px-4 py-3 text-center text-sm">
-                                {page.wordCount || 0}
+                                <div className="flex items-center justify-center gap-2">
+                                  {page.h1Count ? (
+                                    <>
+                                      <CheckCircle className="h-4 w-4 text-green-600" />
+                                      <span className="text-sm font-medium text-slate-900 dark:text-white">
+                                        {page.h1Count}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <XCircle className="h-4 w-4 text-red-600" />
+                                      <span className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                                        0
+                                      </span>
+                                    </>
+                                  )}
+                                </div>
                               </td>
                               <td className="px-4 py-3 text-center">
-                                <div className="flex items-center justify-center gap-1 text-sm">
-                                  <span>{page.images || 0}</span>
+                                <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                                  {page.wordCount?.toLocaleString() || 0}
+                                </span>
+                              </td>
+                              <td className="px-4 py-3 text-center">
+                                <div className="flex items-center justify-center gap-1">
+                                  <span className="text-sm font-semibold text-slate-900 dark:text-white">
+                                    {page.images || 0}
+                                  </span>
                                   {(page.imagesWithoutAlt || 0) > 0 && (
-                                    <span className="text-red-600">({page.imagesWithoutAlt})</span>
+                                    <span className="text-xs font-medium text-red-600 dark:text-red-400">
+                                      ({page.imagesWithoutAlt} no alt)
+                                    </span>
                                   )}
                                 </div>
                               </td>
