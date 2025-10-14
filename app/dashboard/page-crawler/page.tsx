@@ -656,14 +656,14 @@ export default function PageCrawlerPage() {
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="border-slate-200 dark:border-slate-700">
                   <CardHeader className="pb-3">
-                    <CardTitle className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                    <CardTitle className="text-sm font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">
                       Images w/o Alt
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold text-red-600">
+                    <div className="text-3xl font-bold text-red-600 dark:text-red-400">
                       {currentResult.results.summary.imagesWithoutAlt}
                     </div>
                   </CardContent>
@@ -870,20 +870,20 @@ export default function PageCrawlerPage() {
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
                                       <div>
-                                        <span className="text-xs text-slate-600 dark:text-slate-400">H1 Count</span>
-                                        <p className="text-sm font-medium">{page.h1Count || 0}</p>
+                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">H1 Count</span>
+                                        <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{page.h1Count || 0}</p>
                                       </div>
                                       <div>
-                                        <span className="text-xs text-slate-600 dark:text-slate-400">H2 Count</span>
-                                        <p className="text-sm font-medium">{page.h2Count || 0}</p>
+                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">H2 Count</span>
+                                        <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{page.h2Count || 0}</p>
                                       </div>
                                       <div>
-                                        <span className="text-xs text-slate-600 dark:text-slate-400">Internal Links</span>
-                                        <p className="text-sm font-medium">{page.internalLinkCount || 0}</p>
+                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Internal Links</span>
+                                        <p className="text-lg font-bold text-slate-900 dark:text-white mt-1">{page.internalLinkCount || 0}</p>
                                       </div>
                                       <div>
-                                        <span className="text-xs text-slate-600 dark:text-slate-400">Crawled</span>
-                                        <p className="text-xs">{new Date(page.fetchedAt).toLocaleString()}</p>
+                                        <span className="text-xs font-medium text-slate-600 dark:text-slate-400 uppercase">Crawled</span>
+                                        <p className="text-sm font-semibold text-slate-700 dark:text-slate-300 mt-1">{new Date(page.fetchedAt).toLocaleString()}</p>
                                       </div>
                                     </div>
                                   </div>

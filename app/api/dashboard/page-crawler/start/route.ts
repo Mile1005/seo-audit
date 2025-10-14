@@ -110,11 +110,17 @@ export async function POST(req: NextRequest) {
         
         while (queue.length && pages.length < maxPages) {
           const currentJob = getCrawl(id)
-          if (currentJob?.cancelled) break
+          if (currentJob?.cancelled) {
+            console.log(`[dashboard-crawl] ${id} cancelled`)
+            break
+          }
           
           const { url: current, depth } = queue.shift()!
           if (visited.has(current)) continue
           visited.add(current)
+          
+          console.log(`[dashboard-crawl] ${id} processing ${pages.length +1}/${maxPages}: ${current} (depth: ${depth})`)
+
           
           let status = 0
           let html = ''
@@ -228,17 +234,22 @@ export async function POST(req: NextRequest) {
               
               for (const link of candidate) {
                 if (visited.has(link)) continue
-                if (queue.length + pages.length >= maxPages) break
-                queue.push({ url: link, depth: depth + 1 })
+                // Don't stop adding to queue - let the main loop handle maxPages limit
+                if (pages.length >= maxPages) break
+                if (!queue.find(q => q.url === link)) { // Avoid duplicates in queue
+                  queue.push({ url: link, depth: depth + 1 })
+                }
               }
             } catch { /* fallback to previous extraction skipped */ }
           }
           
           updateCrawl(id, job => { 
             job.queued = queue.length 
+            job.progress = Math.round((job.processed / maxPages) * 100)
           })
         }
 
+        console.log(`[dashboard-crawl] ${id} completed: ${pages.length} pages crawled (max: ${maxPages}), queue remaining: ${queue.length}`)
         completeCrawl(id)
         if (userId) incrementUsage(userId, 'SITE_CRAWL').catch(() => {})
         
