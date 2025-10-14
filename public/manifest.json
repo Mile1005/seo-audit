@@ -1,6 +1,6 @@
 {
-  "name": "AI SEO Turbo",
-  "short_name": "SEO Turbo",
+  "name": "AISEOTurbo",
+  "short_name": "AISEOTurbo",
   "description": "AI-powered SEO audit tool that provides actionable insights to boost search rankings and organic traffic",
   "start_url": "/",
   "display": "standalone",
@@ -9,8 +9,21 @@
   "icons": [
     {
       "src": "/favicon.ico",
-      "sizes": "32x32",
-      "type": "image/x-icon"
+      "sizes": "32x32 48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "500x133",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
