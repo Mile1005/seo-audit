@@ -420,7 +420,7 @@ export default function SecurityBestPracticesPage() {
                   <div className="bg-slate-900/50 rounded-lg p-4">
                     <div className="text-red-400 font-medium mb-2">Report the incident</div>
                     <p className="text-gray-300 text-sm">
-                      Contact our security team immediately at <a href="mailto:security@seoaudit.com" className="text-blue-400 hover:text-blue-300">security@seoaudit.com</a>
+                      Contact our security team immediately at <a href="mailto:support@aiseoturbo.com" className="text-blue-400 hover:text-blue-300">support@aiseoturbo.com</a>
                       with details about the suspected breach. We'll help you secure your account and investigate.
                     </p>
                   </div>

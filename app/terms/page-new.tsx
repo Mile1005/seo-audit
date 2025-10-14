@@ -162,7 +162,7 @@ export default function TermsPage() {
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>If you have any questions about these Terms of Service, please contact us at:</p>
                     <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                      <p><strong>Email:</strong> legal@aiseoturbo.com</p>
+                      <p><strong>Email:</strong> <a href="mailto:support@aiseoturbo.com" className="text-primary hover:underline">support@aiseoturbo.com</a></p>
                       <p><strong>Address:</strong> Legal Department, AISEOTurbo</p>
                     </div>
                   </div>

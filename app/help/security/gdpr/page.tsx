@@ -457,7 +457,7 @@ export default function GDPRPage() {
                     <div>
                       <h4 className="text-white font-medium">Contact our Data Protection Officer</h4>
                       <p className="text-gray-300 text-sm">
-                        Email: <a href="mailto:dpo@seoaudit.com" className="text-blue-400 hover:text-blue-300">dpo@seoaudit.com</a>
+                        Email: <a href="mailto:support@aiseoturbo.com" className="text-blue-400 hover:text-blue-300">support@aiseoturbo.com</a>
                       </p>
                     </div>
                   </div>

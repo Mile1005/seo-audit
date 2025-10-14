@@ -210,7 +210,7 @@ export default function PrivacyPage() {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <h4 className="font-semibold text-foreground mb-2">Email</h4>
-                          <p>privacy@aiseoturbo.com</p>
+                          <a href="mailto:support@aiseoturbo.com" className="text-primary hover:underline">support@aiseoturbo.com</a>
                         </div>
                         <div>
                           <h4 className="font-semibold text-foreground mb-2">Response Time</h4>

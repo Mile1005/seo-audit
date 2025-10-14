@@ -38,6 +38,14 @@ const footerSections = [
       { label: "Case Studies", href: "/case-studies" },
     
     ]
+  },
+  {
+    title: "Contact",
+    links: [
+      { label: "Support", href: "mailto:support@aiseoturbo.com" },
+      { label: "Sales", href: "mailto:sales@aiseoturbo.com" },
+      { label: "Billing", href: "mailto:billing@aiseoturbo.com" }
+    ]
   }
 ]
 

@@ -126,8 +126,32 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">Email</h3>
-                    <p className="text-muted-foreground">hello@aiseoturbo.com</p>
+                    <h3 className="font-semibold text-foreground">General Inquiries</h3>
+                    <a href="mailto:support@aiseoturbo.com" className="text-muted-foreground hover:text-primary transition-colors">support@aiseoturbo.com</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
+                  <div className="w-12 h-12 bg-blue-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Sales & Partnerships</h3>
+                    <a href="mailto:sales@aiseoturbo.com" className="text-muted-foreground hover:text-primary transition-colors">sales@aiseoturbo.com</a>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4 p-4 rounded-lg hover:bg-muted/50 transition-colors">
+                  <div className="w-12 h-12 bg-amber-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Billing & Payments</h3>
+                    <a href="mailto:billing@aiseoturbo.com" className="text-muted-foreground hover:text-primary transition-colors">billing@aiseoturbo.com</a>
                   </div>
                 </div>
 
