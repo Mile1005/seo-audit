@@ -359,7 +359,7 @@ export default function HelpPage() {
                   </div>
 
                   <Link
-                    href={`/help/category/${category.title.toLowerCase().replace(/\s+/g, '-')}`}
+                    href={`/help/category/${category.title.toLowerCase().replace(/\s+&\s+/g, '-').replace(/\s+/g, '-')}`}
                     className="inline-flex items-center gap-2 mt-6 text-blue-400 hover:text-blue-300 font-medium group/link"
                   >
                     View all articles
