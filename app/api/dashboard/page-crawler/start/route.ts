@@ -8,6 +8,10 @@ import { performComprehensiveAudit } from '../../../../../lib/comprehensive-audi
 import { prisma } from '../../../../../lib/prisma'
 import * as cheerio from 'cheerio'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 interface QueueItem { url: string; depth: number }
 
 // Dashboard Page Crawler - Enhanced version with up to 100 pages

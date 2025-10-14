@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '../../../../../auth'
 import { prisma } from '../../../../../lib/prisma'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 // Get list of user's crawls
 export async function GET(req: NextRequest) {
   try {

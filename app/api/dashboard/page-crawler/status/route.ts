@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCrawl } from '../../../../../lib/server/crawl-store'
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+
 // Get crawl status and progress
 export async function GET(req: NextRequest) {
   try {
