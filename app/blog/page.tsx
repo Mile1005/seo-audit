@@ -8,6 +8,7 @@ import Link from 'next/link'
 const blogPosts = [
   {
     id: 1,
+    slug: 'complete-seo-audit-checklist-2025',
     title: 'Complete SEO Audit Checklist for 2025',
     excerpt: 'A comprehensive 47-point checklist to audit your website for SEO issues and opportunities. Used by 1000+ websites to increase organic traffic.',
     content: 'Learn the essential steps to perform a thorough SEO audit that will boost your search rankings...',
@@ -23,6 +24,7 @@ const blogPosts = [
   },
   {
     id: 2,
+    slug: 'ai-powered-seo-future',
     title: 'AI-Powered SEO: The Future is Here',
     excerpt: 'Discover how artificial intelligence is revolutionizing search engine optimization and how to leverage AI for better rankings.',
     content: 'Artificial intelligence is transforming the SEO landscape. Here\'s how to stay ahead...',
@@ -38,6 +40,7 @@ const blogPosts = [
   },
   {
     id: 3,
+    slug: 'core-web-vitals-optimization-guide',
     title: 'Core Web Vitals Optimization Guide',
     excerpt: 'Master Google Core Web Vitals with our step-by-step guide to improve page speed and user experience.',
     content: 'Core Web Vitals are crucial for SEO success. Learn how to optimize each metric...',
@@ -53,6 +56,7 @@ const blogPosts = [
   },
   {
     id: 4,
+    slug: 'technical-seo-best-practices-2025',
     title: 'Technical SEO Best Practices',
     excerpt: 'Essential technical SEO strategies that every website owner should implement to improve search visibility.',
     content: 'Technical SEO forms the foundation of your organic search success...',
@@ -68,6 +72,7 @@ const blogPosts = [
   },
   {
     id: 5,
+    slug: 'local-seo-strategies-that-work',
     title: 'Local SEO Strategies That Work',
     excerpt: 'Boost your local search rankings with these proven strategies for local businesses and service providers.',
     content: 'Local SEO is essential for businesses serving specific geographic areas...',
@@ -83,6 +88,7 @@ const blogPosts = [
   },
   {
     id: 6,
+    slug: 'content-seo-creating-search-friendly-content',
     title: 'Content SEO: Creating Search-Friendly Content',
     excerpt: 'Learn how to create content that both users and search engines love with our comprehensive content SEO guide.',
     content: 'Content is king, but only when it\'s optimized for search engines and users...',
@@ -258,7 +264,7 @@ export default function BlogPage() {
                       </div>
                       
                       <Link 
-                        href={`/blog/${featuredPost.id}`}
+                        href={`/blog/${featuredPost.slug}`}
                         className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25"
                       >
                         Read Full Article
@@ -342,7 +348,7 @@ export default function BlogPage() {
                     </div>
                     
                     <Link 
-                      href={`/blog/${post.id}`}
+                      href={`/blog/${post.slug}`}
                       className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300 font-medium transition-colors"
                     >
                       Read More

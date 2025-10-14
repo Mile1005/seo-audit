@@ -34,10 +34,9 @@ const footerSections = [
   {
     title: "Resources",
     links: [
-      { label: "Documentation", href: "/docs" },
       { label: "Help Center", href: "/help" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Webinars", href: "/webinars" }
+    
     ]
   }
 ]

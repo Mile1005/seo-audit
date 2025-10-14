@@ -516,10 +516,10 @@ export default function WebhooksPage() {
                     Contact Developer Support
                   </Link>
                   <Link
-                    href="/docs/api/webhooks"
+                    href="/help/category/api-&-integrations"
                     className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
-                    Webhook Documentation
+                    View All API Articles
                   </Link>
                 </div>
               </div>
