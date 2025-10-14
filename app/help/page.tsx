@@ -64,9 +64,9 @@ const helpCategories = [
     color: "from-purple-500 to-violet-500",
     articles: [
       { title: "Upgrading your plan", href: "/help/billing/upgrade-plan", time: "4 min" },
-      { title: "Managing payment methods", href: "/help/billing/payment-methods", time: "3 min" },
-      { title: "Understanding your invoice", href: "/help/billing/invoices", time: "5 min" },
-      { title: "Cancellation and refunds", href: "/help/billing/cancellation", time: "6 min" }
+      { title: "Managing payment methods", href: "/help/billing/payment-methods", time: "5 min" },
+      { title: "Understanding your invoice", href: "/help/billing/invoices", time: "4 min" },
+      { title: "Cancellation and refunds", href: "/help/billing/cancellation", time: "5 min" }
     ]
   },
   {
@@ -75,10 +75,8 @@ const helpCategories = [
     icon: Database,
     color: "from-orange-500 to-red-500",
     articles: [
-      { title: "API authentication", href: "/help/api/authentication", time: "8 min" },
-      { title: "WordPress plugin setup", href: "/help/integrations/wordpress", time: "10 min" },
-      { title: "Google Analytics integration", href: "/help/integrations/google-analytics", time: "7 min" },
-      { title: "Webhook configuration", href: "/help/api/webhooks", time: "12 min" }
+      { title: "API authentication", href: "/help/api/authentication", time: "6 min" },
+      { title: "Webhook configuration", href: "/help/api/webhooks", time: "7 min" }
     ]
   },
   {
@@ -87,10 +85,9 @@ const helpCategories = [
     icon: Settings,
     color: "from-yellow-500 to-amber-500",
     articles: [
-      { title: "Audit not completing", href: "/help/troubleshooting/audit-issues", time: "6 min" },
-      { title: "Login and access problems", href: "/help/troubleshooting/login-issues", time: "4 min" },
-      { title: "Data synchronization issues", href: "/help/troubleshooting/sync-issues", time: "8 min" },
-      { title: "Performance optimization", href: "/help/troubleshooting/performance", time: "10 min" }
+      { title: "Login and access problems", href: "/help/troubleshooting/login-issues", time: "6 min" },
+      { title: "Data synchronization issues", href: "/help/troubleshooting/sync-issues", time: "5 min" },
+      { title: "Performance optimization", href: "/help/troubleshooting/performance", time: "6 min" }
     ]
   },
   {
@@ -99,9 +96,9 @@ const helpCategories = [
     icon: Shield,
     color: "from-indigo-500 to-purple-500",
     articles: [
-      { title: "Two-factor authentication", href: "/help/security/2fa", time: "5 min" },
-      { title: "Data privacy policy", href: "/help/security/privacy", time: "8 min" },
-      { title: "GDPR compliance", href: "/help/security/gdpr", time: "6 min" },
+      { title: "Two-factor authentication", href: "/help/security/two-factor-authentication", time: "7 min" },
+      { title: "Privacy settings", href: "/help/security/privacy", time: "8 min" },
+      { title: "GDPR compliance", href: "/help/security/gdpr", time: "10 min" },
       { title: "Security best practices", href: "/help/security/best-practices", time: "9 min" }
     ]
   }
