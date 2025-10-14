@@ -167,7 +167,7 @@ export default function AccountBillingCategoryPage() {
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-green-400 transition-colors" />
                 </Link>
                 <Link
-                  href="/help/category/security-&-privacy"
+                  href="/help/category/security"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
