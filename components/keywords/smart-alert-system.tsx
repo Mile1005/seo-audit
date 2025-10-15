@@ -147,21 +147,21 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
       case 'critical':
-        return 'bg-red-100 text-red-700 border-red-300';
+        return 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700';
       case 'warning':
-        return 'bg-yellow-100 text-yellow-700 border-yellow-300';
+        return 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 border-yellow-300 dark:border-yellow-700';
       case 'info':
-        return 'bg-blue-100 text-blue-700 border-blue-300';
+        return 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700';
       default:
-        return 'bg-slate-100 text-slate-700 border-slate-300';
+        return 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600';
     }
   };
 
   if (loading) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-rose-50 to-red-50 border-b border-rose-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 dark:from-rose-900/10 dark:via-gray-900/10 dark:to-red-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-rose-50 to-red-50 dark:from-rose-900/10 dark:to-red-900/10 border-b border-rose-100 dark:border-rose-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-rose-500 to-red-600 rounded-lg shadow-md">
               <Bell className="h-5 w-5 text-white" />
             </div>
@@ -180,9 +180,9 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
 
   if (error) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-rose-50 to-red-50 border-b border-rose-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 dark:from-rose-900/10 dark:via-gray-900/10 dark:to-red-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-rose-50 to-red-50 dark:from-rose-900/10 dark:to-red-900/10 border-b border-rose-100 dark:border-rose-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-rose-500 to-red-600 rounded-lg shadow-md">
               <Bell className="h-5 w-5 text-white" />
             </div>
@@ -192,7 +192,7 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
         <CardContent className="p-6">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <p className="text-slate-700 mb-4">{error}</p>
+            <p className="text-slate-700 dark:text-slate-300 mb-4">{error}</p>
             <button
               onClick={fetchAlerts}
               className="px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors"
@@ -209,23 +209,23 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
   const warningAlerts = alerts.filter(a => a.severity === 'warning').length;
 
   return (
-    <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-rose-50 to-red-50 border-b border-rose-100">
+    <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 dark:from-rose-900/10 dark:via-gray-900/10 dark:to-red-900/10 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-rose-50 to-red-50 dark:from-rose-900/10 dark:to-red-900/10 border-b border-rose-100 dark:border-rose-800">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="flex items-center gap-2 text-slate-900">
+            <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
               <div className="p-2 bg-gradient-to-br from-rose-500 to-red-600 rounded-lg shadow-md">
                 <Bell className="h-5 w-5 text-white" />
               </div>
               Smart Alert System
             </CardTitle>
-            <CardDescription className="text-slate-600 font-medium mt-1">
+            <CardDescription className="text-slate-600 dark:text-slate-400 font-medium mt-1">
               Real-time monitoring and instant notifications for "{keyword}"
             </CardDescription>
           </div>
           <button
             onClick={() => setShowConfig(!showConfig)}
-            className="flex items-center gap-2 px-4 py-2 bg-white border-2 border-slate-200 rounded-lg hover:border-rose-300 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-600 rounded-lg hover:border-rose-300 dark:hover:border-rose-500 transition-colors text-slate-700 dark:text-slate-300"
           >
             <Settings className="h-4 w-4" />
             <span className="text-sm font-medium">Configure</span>
@@ -236,48 +236,48 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
       <CardContent className="p-6">
         {/* Alert Summary */}
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-red-50 rounded-xl border-2 border-red-200 p-4">
+          <div className="bg-red-50 dark:bg-red-900/10 rounded-xl border-2 border-red-200 dark:border-red-800 p-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertTriangle className="h-5 w-5 text-red-600" />
-              <h5 className="font-bold text-slate-900">Critical</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Critical</h5>
             </div>
             <p className="text-3xl font-bold text-red-600">{criticalAlerts}</p>
-            <p className="text-xs text-slate-600 mt-1">Requires immediate attention</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Requires immediate attention</p>
           </div>
 
-          <div className="bg-yellow-50 rounded-xl border-2 border-yellow-200 p-4">
+          <div className="bg-yellow-50 dark:bg-yellow-900/10 rounded-xl border-2 border-yellow-200 dark:border-yellow-800 p-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertCircle className="h-5 w-5 text-yellow-600" />
-              <h5 className="font-bold text-slate-900">Warnings</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Warnings</h5>
             </div>
             <p className="text-3xl font-bold text-yellow-600">{warningAlerts}</p>
-            <p className="text-xs text-slate-600 mt-1">Monitor closely</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Monitor closely</p>
           </div>
 
-          <div className="bg-blue-50 rounded-xl border-2 border-blue-200 p-4">
+          <div className="bg-blue-50 dark:bg-blue-900/10 rounded-xl border-2 border-blue-200 dark:border-blue-800 p-4">
             <div className="flex items-center gap-2 mb-2">
               <Activity className="h-5 w-5 text-blue-600" />
-              <h5 className="font-bold text-slate-900">Active Alerts</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Active Alerts</h5>
             </div>
             <p className="text-3xl font-bold text-blue-600">{configs.filter(c => c.isActive).length}</p>
-            <p className="text-xs text-slate-600 mt-1">Out of {configs.length} configured</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Out of {configs.length} configured</p>
           </div>
         </div>
 
         {/* Alert Configuration Panel */}
         {showConfig && (
-          <div className="mb-6 bg-white rounded-2xl border-2 border-slate-200 p-6 animate-in slide-in-from-top duration-300">
-            <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <div className="mb-6 bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-600 p-6 animate-in slide-in-from-top duration-300">
+            <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
               <Settings className="h-5 w-5 text-rose-600" />
               Alert Configuration
             </h3>
             <div className="space-y-4">
               {configs.map((config) => (
-                <div key={config.id} className="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                <div key={config.id} className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 border border-slate-200 dark:border-slate-600">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex-1">
-                      <h4 className="font-semibold text-slate-900">{config.type.replace(/_/g, ' ').toUpperCase()}</h4>
-                      <p className="text-xs text-slate-600 mt-1">
+                      <h4 className="font-semibold text-slate-900 dark:text-slate-100">{config.type.replace(/_/g, ' ').toUpperCase()}</h4>
+                      <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                         Threshold: {config.threshold} {config.type.includes('ranking') ? 'positions' : '%'}
                       </p>
                     </div>
@@ -289,10 +289,10 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                   </div>
 
                   {config.isActive && (
-                    <div className="flex items-center gap-4 mt-3 pt-3 border-t border-slate-200">
+                    <div className="flex items-center gap-4 mt-3 pt-3 border-t border-slate-200 dark:border-slate-600">
                       <div className="flex items-center gap-2">
-                        <Mail className="h-4 w-4 text-slate-600" />
-                        <span className="text-xs text-slate-600">Email</span>
+                        <Mail className="h-4 w-4 text-slate-600 dark:text-slate-400" />
+                        <span className="text-xs text-slate-600 dark:text-slate-400">Email</span>
                         <Switch
                           checked={config.emailEnabled}
                           onCheckedChange={() => toggleAlertConfig(config.id, 'emailEnabled')}
@@ -300,8 +300,8 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                         />
                       </div>
                       <div className="flex items-center gap-2">
-                        <MessageSquare className="h-4 w-4 text-slate-600" />
-                        <span className="text-xs text-slate-600">Slack</span>
+                        <MessageSquare className="h-4 w-4 text-slate-600 dark:text-slate-400" />
+                        <span className="text-xs text-slate-600 dark:text-slate-400">Slack</span>
                         <Switch
                           checked={config.slackEnabled}
                           onCheckedChange={() => toggleAlertConfig(config.id, 'slackEnabled')}
@@ -317,8 +317,8 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
         )}
 
         {/* Recent Alerts */}
-        <div className="bg-white rounded-2xl border-2 border-slate-200 p-6">
-          <h3 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-600 p-6">
+          <h3 className="font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
             <Clock className="h-5 w-5 text-rose-600" />
             Recent Alerts
           </h3>
@@ -326,8 +326,8 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
           {alerts.length === 0 ? (
             <div className="text-center py-8">
               <Bell className="h-12 w-12 text-slate-400 mx-auto mb-3" />
-              <p className="text-slate-600 mb-1">No alerts yet</p>
-              <p className="text-xs text-slate-500">You'll be notified when important changes occur</p>
+              <p className="text-slate-600 dark:text-slate-400 mb-1">No alerts yet</p>
+              <p className="text-xs text-slate-500 dark:text-slate-500">You'll be notified when important changes occur</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -341,7 +341,7 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                     className={`rounded-xl border-2 p-4 ${severityClass} transition-all duration-200`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-white/50 rounded-lg">
+                      <div className="p-2 bg-white/50 dark:bg-slate-700/50 rounded-lg">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="flex-1">
@@ -353,12 +353,12 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                         </div>
                         <p className="text-sm mb-2">{alert.description}</p>
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2 text-xs">
+                          <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-400">
                             <Clock className="h-3 w-3" />
                             <span>{new Date(alert.timestamp).toLocaleString()}</span>
                           </div>
                           {alert.actionable && alert.actionText && (
-                            <button className="text-xs font-medium underline hover:no-underline">
+                            <button className="text-xs font-medium underline hover:no-underline text-rose-600 dark:text-rose-400">
                               {alert.actionText}
                             </button>
                           )}

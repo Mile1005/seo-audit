@@ -108,21 +108,21 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'present':
-        return 'bg-green-100 text-green-700';
+        return 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300';
       case 'opportunity':
-        return 'bg-yellow-100 text-yellow-700';
+        return 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300';
       case 'absent':
-        return 'bg-slate-100 text-slate-600';
+        return 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300';
       default:
-        return 'bg-slate-100 text-slate-600';
+        return 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300';
     }
   };
 
   if (loading) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-amber-50 via-white to-yellow-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 border-b border-amber-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-amber-50 via-white to-yellow-50 dark:from-amber-900/10 dark:via-gray-900/10 dark:to-yellow-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/10 dark:to-yellow-900/10 border-b border-amber-100 dark:border-amber-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-lg shadow-md">
               <Award className="h-5 w-5 text-white" />
             </div>
@@ -132,7 +132,7 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
         <CardContent className="p-6">
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-amber-600" />
-            <span className="ml-3 text-slate-600">Loading SERP features...</span>
+            <span className="ml-3 text-slate-600 dark:text-slate-400">Loading SERP features...</span>
           </div>
         </CardContent>
       </Card>
@@ -141,9 +141,9 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
 
   if (error) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-amber-50 via-white to-yellow-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 border-b border-amber-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-amber-50 via-white to-yellow-50 dark:from-amber-900/10 dark:via-gray-900/10 dark:to-yellow-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/10 dark:to-yellow-900/10 border-b border-amber-100 dark:border-amber-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-lg shadow-md">
               <Award className="h-5 w-5 text-white" />
             </div>
@@ -170,15 +170,15 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
   const opportunityFeatures = features.filter(f => f.status === 'opportunity').length;
 
   return (
-    <Card className="border-0 shadow-xl bg-gradient-to-br from-amber-50 via-white to-yellow-50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 border-b border-amber-100">
-        <CardTitle className="flex items-center gap-2 text-slate-900">
+    <Card className="border-0 shadow-xl bg-gradient-to-br from-amber-50 via-white to-yellow-50 dark:from-amber-900/10 dark:via-gray-900/10 dark:to-yellow-900/10 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/10 dark:to-yellow-900/10 border-b border-amber-100 dark:border-amber-800">
+        <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
           <div className="p-2 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-lg shadow-md">
             <Award className="h-5 w-5 text-white" />
           </div>
           SERP Features Analysis
         </CardTitle>
-        <CardDescription className="text-slate-600 font-medium">
+        <CardDescription className="text-slate-600 dark:text-slate-400 font-medium">
           Dominate search results with feature optimization for "{keyword}"
         </CardDescription>
       </CardHeader>
@@ -214,31 +214,31 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
               <button
                 key={feature.id}
                 onClick={() => setSelectedFeature(isSelected ? null : feature.id)}
-                className={`text-left bg-white rounded-xl border-2 ${
-                  isSelected ? 'border-amber-400 shadow-lg' : 'border-slate-200 hover:border-amber-300'
+                className={`text-left bg-white dark:bg-slate-800 rounded-xl border-2 ${
+                  isSelected ? 'border-amber-400 shadow-lg' : 'border-slate-200 dark:border-slate-600 hover:border-amber-300 dark:hover:border-amber-500'
                 } transition-all duration-200 overflow-hidden`}
               >
                 <div className="p-4">
                   <div className="flex items-start gap-3">
                     <div className={`p-3 rounded-lg ${
                       feature.status === 'present'
-                        ? 'bg-green-100'
+                        ? 'bg-green-100 dark:bg-green-900/20'
                         : feature.status === 'opportunity'
-                        ? 'bg-yellow-100'
-                        : 'bg-slate-100'
+                        ? 'bg-yellow-100 dark:bg-yellow-900/20'
+                        : 'bg-slate-100 dark:bg-slate-700'
                     }`}>
                       <Icon className={`h-6 w-6 ${
                         feature.status === 'present'
-                          ? 'text-green-600'
+                          ? 'text-green-600 dark:text-green-400'
                           : feature.status === 'opportunity'
-                          ? 'text-yellow-600'
-                          : 'text-slate-400'
+                          ? 'text-yellow-600 dark:text-yellow-400'
+                          : 'text-slate-400 dark:text-slate-300'
                       }`} />
                     </div>
                     
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-bold text-slate-900">{feature.name}</h4>
+                        <h4 className="font-bold text-slate-900 dark:text-slate-100">{feature.name}</h4>
                         {getStatusIcon(feature.status)}
                       </div>
                       
@@ -249,22 +249,22 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
                       </Badge>
 
                       {feature.position !== undefined && feature.status === 'present' && (
-                        <p className="text-xs text-slate-600 mt-2">
+                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
                           Position: #{feature.position}
                           {feature.yourRank && ` • Your Rank: #${feature.yourRank}`}
                         </p>
                       )}
 
                       {feature.description && (
-                        <p className="text-xs text-slate-600 mt-2">{feature.description}</p>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">{feature.description}</p>
                       )}
                     </div>
                   </div>
                 </div>
 
                 {isSelected && feature.description && (
-                  <div className="border-t border-slate-200 bg-slate-50 p-4 animate-in slide-in-from-top duration-300">
-                    <p className="text-sm text-slate-700">{feature.description}</p>
+                  <div className="border-t border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 p-4 animate-in slide-in-from-top duration-300">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">{feature.description}</p>
                   </div>
                 )}
               </button>
@@ -274,31 +274,31 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
 
         {/* Summary Stats */}
         <div className="grid grid-cols-3 gap-4">
-          <div className="bg-green-50 rounded-xl border-2 border-green-200 p-4">
+          <div className="bg-green-50 dark:bg-green-900/10 rounded-xl border-2 border-green-200 dark:border-green-800 p-4">
             <div className="flex items-center gap-2 mb-2">
-              <CheckCircle2 className="h-5 w-5 text-green-600" />
-              <h5 className="font-bold text-slate-900">Active</h5>
+              <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Active</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900">{presentFeatures}</p>
-            <p className="text-xs text-slate-600 mt-1">Features present in SERP</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">{presentFeatures}</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Features present in SERP</p>
           </div>
 
-          <div className="bg-yellow-50 rounded-xl border-2 border-yellow-200 p-4">
+          <div className="bg-yellow-50 dark:bg-yellow-900/10 rounded-xl border-2 border-yellow-200 dark:border-yellow-800 p-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertCircle className="h-5 w-5 text-yellow-600" />
-              <h5 className="font-bold text-slate-900">Opportunities</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Opportunities</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900">{opportunityFeatures}</p>
-            <p className="text-xs text-slate-600 mt-1">Features you can target</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">{opportunityFeatures}</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Features you can target</p>
           </div>
 
-          <div className="bg-slate-50 rounded-xl border-2 border-slate-200 p-4">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-600 p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Target className="h-5 w-5 text-slate-600" />
-              <h5 className="font-bold text-slate-900">Total</h5>
+              <Target className="h-5 w-5 text-slate-600 dark:text-slate-400" />
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Total</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900">{features.length}</p>
-            <p className="text-xs text-slate-600 mt-1">SERP features analyzed</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">{features.length}</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">SERP features analyzed</p>
           </div>
         </div>
       </CardContent>

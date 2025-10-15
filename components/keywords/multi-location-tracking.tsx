@@ -104,9 +104,9 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
   if (loading) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 border-b border-teal-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-teal-900/10 dark:via-gray-900/10 dark:to-cyan-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/10 dark:to-cyan-900/10 border-b border-teal-100 dark:border-teal-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg shadow-md">
               <Globe className="h-5 w-5 text-white" />
             </div>
@@ -125,9 +125,9 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
   if (error) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 border-b border-teal-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-teal-900/10 dark:via-gray-900/10 dark:to-cyan-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/10 dark:to-cyan-900/10 border-b border-teal-100 dark:border-teal-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg shadow-md">
               <Globe className="h-5 w-5 text-white" />
             </div>
@@ -137,7 +137,7 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
         <CardContent className="p-6">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <p className="text-slate-700 mb-4">{error}</p>
+            <p className="text-slate-700 dark:text-slate-300 mb-4">{error}</p>
             <button
               onClick={fetchLocationData}
               className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
@@ -152,9 +152,9 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
   if (rankings.length === 0) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 border-b border-teal-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-teal-900/10 dark:via-gray-900/10 dark:to-cyan-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/10 dark:to-cyan-900/10 border-b border-teal-100 dark:border-teal-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg shadow-md">
               <Globe className="h-5 w-5 text-white" />
             </div>
@@ -164,8 +164,8 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
         <CardContent className="p-6">
           <div className="text-center py-12">
             <Globe className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-            <p className="text-slate-700 mb-2">No location data available yet</p>
-            <p className="text-sm text-slate-600">
+            <p className="text-slate-700 dark:text-slate-300 mb-2">No location data available yet</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
               Location rankings will appear here once tracking data is collected
             </p>
           </div>
@@ -175,15 +175,15 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
   }
 
   return (
-    <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 border-b border-teal-100">
-        <CardTitle className="flex items-center gap-2 text-slate-900">
+    <Card className="border-0 shadow-xl bg-gradient-to-br from-teal-50 via-white to-cyan-50 dark:from-teal-900/10 dark:via-gray-900/10 dark:to-cyan-900/10 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-teal-50 to-cyan-50 dark:from-teal-900/10 dark:to-cyan-900/10 border-b border-teal-100 dark:border-teal-800">
+        <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
           <div className="p-2 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-lg shadow-md">
             <Globe className="h-5 w-5 text-white" />
           </div>
           Multi-Location & Device Tracking
         </CardTitle>
-        <CardDescription className="text-slate-600 font-medium">
+        <CardDescription className="text-slate-600 dark:text-slate-400 font-medium">
           Track rankings across 190+ countries, 2500+ cities, and all device types for "{keyword}"
         </CardDescription>
       </CardHeader>
@@ -226,7 +226,7 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
         {/* Device Filter */}
         <div className="flex flex-wrap items-center gap-2 mb-6">
-          <span className="text-sm text-slate-600 font-medium">Filter by Device:</span>
+          <span className="text-sm text-slate-600 dark:text-slate-400 font-medium">Filter by Device:</span>
           <div className="flex gap-2">
             {[
               { value: 'all', label: 'All Devices', icon: <Globe className="h-4 w-4" /> },
@@ -240,7 +240,7 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   selectedDevice === device.value
                     ? 'bg-teal-600 text-white shadow-md'
-                    : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-teal-300'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600'
                 }`}
               >
                 {device.icon}
@@ -251,7 +251,7 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
         </div>
 
         {/* Rankings Table */}
-        <div className="bg-white rounded-2xl border-2 border-slate-200 overflow-hidden">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-700 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-slate-50 dark:bg-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
@@ -263,22 +263,22 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
                   <th className="px-4 py-3 text-right text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Search Volume</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                 {filteredRankings.map((ranking, idx) => {
                   const change = ranking.rank - ranking.previousRank;
                   const changeAbs = Math.abs(change);
                   
                   return (
-                    <tr key={idx} className="hover:bg-slate-50 transition-colors">
+                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
                           <MapPin className="h-4 w-4 text-teal-600" />
                           <div>
-                            <p className="font-semibold text-slate-900">
+                            <p className="font-semibold text-slate-900 dark:text-slate-100">
                               {ranking.country}
                             </p>
                             {ranking.city && (
-                              <p className="text-xs text-slate-600">{ranking.city}</p>
+                              <p className="text-xs text-slate-600 dark:text-slate-400">{ranking.city}</p>
                             )}
                           </div>
                         </div>
@@ -326,7 +326,7 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
                       <td className="px-4 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <Eye className="h-4 w-4 text-slate-400" />
-                          <span className="font-semibold text-slate-900">
+                          <span className="font-semibold text-slate-900 dark:text-slate-100">
                             {ranking.searchVolume.toLocaleString()}
                           </span>
                         </div>
@@ -341,35 +341,35 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
         {/* Summary Stats */}
         <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl border-2 border-slate-200 p-4">
+          <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
             <div className="flex items-center gap-2 mb-2">
               <Globe className="h-5 w-5 text-teal-600" />
-              <h5 className="font-bold text-slate-900">Total Locations</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Total Locations</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900">{filteredRankings.length}</p>
-            <p className="text-xs text-slate-600 mt-1">Across {selectedDevice === 'all' ? 'all devices' : selectedDevice}</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">{filteredRankings.length}</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Across {selectedDevice === 'all' ? 'all devices' : selectedDevice}</p>
           </div>
           
-          <div className="bg-white rounded-xl border-2 border-slate-200 p-4">
+          <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
             <div className="flex items-center gap-2 mb-2">
               <BarChart3 className="h-5 w-5 text-blue-600" />
-              <h5 className="font-bold text-slate-900">Average Rank</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Average Rank</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900">
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
               #{(filteredRankings.reduce((sum, r) => sum + r.rank, 0) / filteredRankings.length).toFixed(1)}
             </p>
-            <p className="text-xs text-slate-600 mt-1">Across tracked locations</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Across tracked locations</p>
           </div>
           
-          <div className="bg-white rounded-xl border-2 border-slate-200 p-4">
+          <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
             <div className="flex items-center gap-2 mb-2">
               <Search className="h-5 w-5 text-green-600" />
-              <h5 className="font-bold text-slate-900">Total Search Volume</h5>
+              <h5 className="font-bold text-slate-900 dark:text-slate-100">Total Search Volume</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900">
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
               {(filteredRankings.reduce((sum, r) => sum + r.searchVolume, 0) / 1000).toFixed(1)}K
             </p>
-            <p className="text-xs text-slate-600 mt-1">Combined monthly searches</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Combined monthly searches</p>
           </div>
         </div>
       </CardContent>

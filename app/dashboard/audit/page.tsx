@@ -776,7 +776,7 @@ export default function ComprehensiveAuditPage() {
 
                 {/* Resource Analysis */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  <Card className="bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 border-2 border-blue-200">
+                  <Card className="border-2 border-blue-200 dark:border-blue-700">
                     <CardHeader className="pb-4">
                       <CardTitle className="text-lg font-bold flex items-center gap-3 text-blue-900">
                         <div className="p-2 bg-blue-500 rounded-lg">
@@ -797,7 +797,7 @@ export default function ComprehensiveAuditPage() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-gradient-to-br from-purple-50 via-violet-50 to-purple-100 border-2 border-purple-200">
+                  <Card className="border-2 border-purple-200 dark:border-purple-700">
                     <CardHeader className="pb-4">
                       <CardTitle className="text-lg font-bold flex items-center gap-3 text-purple-900">
                         <div className="p-2 bg-purple-500 rounded-lg">

@@ -38,8 +38,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setMode = (m: Mode) => apply(m);
 
-  if (!mounted) return null;
-
   return (
     <ThemeContext.Provider value={{ mode, setMode }}>
       {children}

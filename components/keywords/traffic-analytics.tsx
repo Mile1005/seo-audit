@@ -104,9 +104,9 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
   if (loading) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 border-b border-indigo-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 dark:from-indigo-900/10 dark:via-gray-900/10 dark:to-blue-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/10 dark:to-blue-900/10 border-b border-indigo-100 dark:border-indigo-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg shadow-md">
               <Activity className="h-5 w-5 text-white" />
             </div>
@@ -116,7 +116,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
         <CardContent className="p-6">
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
-            <span className="ml-3 text-slate-600">Loading traffic data...</span>
+            <span className="ml-3 text-slate-600 dark:text-slate-400">Loading traffic data...</span>
           </div>
         </CardContent>
       </Card>
@@ -125,9 +125,9 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
   if (error) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 border-b border-indigo-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 dark:from-indigo-900/10 dark:via-gray-900/10 dark:to-blue-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/10 dark:to-blue-900/10 border-b border-indigo-100 dark:border-indigo-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg shadow-md">
               <Activity className="h-5 w-5 text-white" />
             </div>
@@ -137,7 +137,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
         <CardContent className="p-6">
           <div className="text-center py-12">
             <AlertCircle className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <p className="text-slate-700 mb-4">{error}</p>
+            <p className="text-slate-700 dark:text-slate-300 mb-4">{error}</p>
             <button
               onClick={fetchTrafficData}
               className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
@@ -152,9 +152,9 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
   if (!summary || trafficData.length === 0) {
     return (
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 overflow-hidden">
-        <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 border-b border-indigo-100">
-          <CardTitle className="flex items-center gap-2 text-slate-900">
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 dark:from-indigo-900/10 dark:via-gray-900/10 dark:to-blue-900/10 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/10 dark:to-blue-900/10 border-b border-indigo-100 dark:border-indigo-800">
+          <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg shadow-md">
               <Activity className="h-5 w-5 text-white" />
             </div>
@@ -164,8 +164,8 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
         <CardContent className="p-6">
           <div className="text-center py-12">
             <Activity className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-            <p className="text-slate-700 mb-2">No traffic data available yet</p>
-            <p className="text-sm text-slate-600">
+            <p className="text-slate-700 dark:text-slate-300 mb-2">No traffic data available yet</p>
+            <p className="text-sm text-slate-600 dark:text-slate-400">
               Traffic analytics will appear here once position data is collected
             </p>
           </div>
@@ -175,15 +175,15 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
   }
 
   return (
-    <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 overflow-hidden">
-      <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 border-b border-indigo-100">
-        <CardTitle className="flex items-center gap-2 text-slate-900">
+    <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-50 via-white to-blue-50 dark:from-indigo-900/10 dark:via-gray-900/10 dark:to-blue-900/10 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/10 dark:to-blue-900/10 border-b border-indigo-100 dark:border-indigo-800">
+        <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
           <div className="p-2 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg shadow-md">
             <Activity className="h-5 w-5 text-white" />
           </div>
           Traffic Analytics & Revenue
         </CardTitle>
-        <CardDescription className="text-slate-600 font-medium">
+        <CardDescription className="text-slate-600 dark:text-slate-400 font-medium">
           Real-time traffic data, click-through rates, and revenue projections for "{keyword}"
         </CardDescription>
       </CardHeader>
@@ -201,7 +201,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   timeRange === range
                     ? 'bg-indigo-600 text-white shadow-md'
-                    : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-indigo-300'
+                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-600 hover:border-indigo-300 dark:hover:border-indigo-500'
                 }`}
               >
                 {range === '7d' && 'Last 7 Days'}
@@ -286,37 +286,37 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
         </div>
 
         {/* Traffic Chart */}
-        <div className="bg-white rounded-2xl border-2 border-slate-200 p-6 mb-6">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl border-2 border-slate-200 dark:border-slate-600 p-6 mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="font-bold text-slate-900 flex items-center gap-2">
+            <h4 className="font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
               <LineChart className="h-5 w-5 text-indigo-600" />
               Impressions & Clicks Trend
             </h4>
             <div className="flex items-center gap-3 text-xs">
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 rounded-full bg-indigo-500"></div>
-                <span className="text-slate-600">Impressions</span>
+                <span className="text-slate-600 dark:text-slate-400">Impressions</span>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-                <span className="text-slate-600">Clicks</span>
+                <span className="text-slate-600 dark:text-slate-400">Clicks</span>
               </div>
             </div>
           </div>
 
           <div className="space-y-2">
             {trafficData.map((day, idx) => (
-              <div key={idx} className="group hover:bg-slate-50 rounded-lg p-3 transition-colors">
+              <div key={idx} className="group hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg p-3 transition-colors">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xs text-slate-600 w-24">{day.date}</span>
+                  <span className="text-xs text-slate-600 dark:text-slate-400 w-24">{day.date}</span>
                   <div className="flex-1 flex items-center gap-2">
                     {/* Impressions Bar */}
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs text-slate-600">Impressions</span>
-                        <span className="text-xs font-bold text-indigo-700">{day.impressions.toLocaleString()}</span>
+                        <span className="text-xs text-slate-600 dark:text-slate-400">Impressions</span>
+                        <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300">{day.impressions.toLocaleString()}</span>
                       </div>
-                      <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div className="h-2 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-indigo-400 to-indigo-600 transition-all duration-300"
                           style={{ width: `${(day.impressions / maxImpressions) * 100}%` }}
@@ -327,10 +327,10 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                     {/* Clicks Bar */}
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs text-slate-600">Clicks</span>
-                        <span className="text-xs font-bold text-purple-700">{day.clicks.toLocaleString()}</span>
+                        <span className="text-xs text-slate-600 dark:text-slate-400">Clicks</span>
+                        <span className="text-xs font-bold text-purple-700 dark:text-purple-300">{day.clicks.toLocaleString()}</span>
                       </div>
-                      <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+                      <div className="h-2 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-purple-400 to-purple-600 transition-all duration-300"
                           style={{ width: `${(day.clicks / maxClicks) * 100}%` }}
@@ -341,13 +341,13 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
                   {/* Metrics */}
                   <div className="flex items-center gap-3">
-                    <Badge className="bg-blue-100 text-blue-700">
+                    <Badge className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300">
                       CTR: {day.ctr}%
                     </Badge>
-                    <Badge className="bg-slate-100 text-slate-700">
+                    <Badge className="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
                       Pos: {day.averagePosition}
                     </Badge>
-                    <Badge className="bg-green-100 text-green-700">
+                    <Badge className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300">
                       ${day && day.revenue ? (day.revenue / 1000).toFixed(1) : '0.0'}K
                     </Badge>
                   </div>
@@ -359,29 +359,29 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
         {/* Performance Insights */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white rounded-xl border-2 border-slate-200 p-6">
-            <h5 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+          <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-600 p-6">
+            <h5 className="font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-indigo-600" />
               Performance Summary
             </h5>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600">Average CTR</span>
-                <span className="font-bold text-slate-900">{summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : '0.00'}%</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">Average CTR</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">{summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : '0.00'}%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600">Average Position</span>
-                <span className="font-bold text-slate-900">#{summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : '0.0'}</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">Average Position</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">#{summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : '0.0'}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600">Conversion Rate</span>
-                <span className="font-bold text-slate-900">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Conversion Rate</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">
                   {summary && summary.totalConversions && summary.totalClicks ? ((summary.totalConversions / summary.totalClicks) * 100).toFixed(2) : '0.00'}%
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600">Revenue per Click</span>
-                <span className="font-bold text-slate-900">
+                <span className="text-sm text-slate-600 dark:text-slate-400">Revenue per Click</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">
                   ${summary && summary.totalRevenue && summary.totalClicks ? (summary.totalRevenue / summary.totalClicks).toFixed(2) : '0.00'}
                 </span>
               </div>

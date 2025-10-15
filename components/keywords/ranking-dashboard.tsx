@@ -383,7 +383,7 @@ export function RankingDashboard({ projectId }: RankingDashboardProps) {
           </CardContent>
         </Card>
       ) : (
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-blue-50">
+        <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10">
           <CardContent className="p-12 text-center">
             <Target className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">No rankings found</h3>

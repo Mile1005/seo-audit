@@ -158,7 +158,7 @@ PRO TIPS
       />
       
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300">
+      <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300">
         {/* Header */}
         <div className="p-6 pb-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 border-b border-green-100 dark:border-green-800">
           <div className="flex items-center justify-between">
@@ -217,38 +217,38 @@ PRO TIPS
             </div>
 
             {/* Supporting Keywords */}
-            <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200">
+            <div className="group p-6 bg-white dark:bg-slate-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-5 h-5 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full shadow-md"></div>
-                <span className="font-bold text-slate-900 text-xl">Supporting Keywords</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-xl">Supporting Keywords</span>
               </div>
-              <p className="text-sm text-slate-600 font-medium mb-3">
-                <span className="text-2xl font-black text-blue-600">{strategy.supportingKeywords.length}</span> related terms
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-3">
+                <span className="text-2xl font-black text-blue-600 dark:text-blue-400">{strategy.supportingKeywords.length}</span> related terms
               </p>
-              <Badge className="bg-blue-100 text-blue-700 border-0 px-3 py-1.5 text-xs font-bold">
+              <Badge className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-0 px-3 py-1.5 text-xs font-bold">
                 SECONDARY TARGETS
               </Badge>
-              <div className="mt-4 pt-4 border-t border-slate-200">
-                <p className="text-xs text-slate-500">
+              <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-600">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Create 5-10 blog posts. Target: 800-1,500 words each
                 </p>
               </div>
             </div>
 
             {/* Long-tail */}
-            <div className="group p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200">
+            <div className="group p-6 bg-white dark:bg-slate-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-5 h-5 bg-gradient-to-br from-slate-300 to-slate-400 rounded-full shadow-md"></div>
-                <span className="font-bold text-slate-900 text-xl">Long-tail</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-xl">Long-tail</span>
               </div>
-              <p className="text-sm text-slate-600 font-medium mb-3">
-                <span className="text-2xl font-black text-green-600">{strategy.longTailKeywords.length}</span> opportunities
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-3">
+                <span className="text-2xl font-black text-green-600 dark:text-green-400">{strategy.longTailKeywords.length}</span> opportunities
               </p>
-              <Badge className="bg-green-100 text-green-700 border-0 px-3 py-1.5 text-xs font-bold">
+              <Badge className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-0 px-3 py-1.5 text-xs font-bold">
                 EASY WINS
               </Badge>
-              <div className="mt-4 pt-4 border-t border-slate-200">
-                <p className="text-xs text-slate-500">
+              <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-600">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   FAQ sections, mini-posts. Target: 300-800 words
                 </p>
               </div>
@@ -259,23 +259,23 @@ PRO TIPS
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-5 w-5 text-blue-600" />
-              <h3 className="text-lg font-bold text-slate-900">Supporting Keywords ({strategy.supportingKeywords.length})</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Supporting Keywords ({strategy.supportingKeywords.length})</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {strategy.supportingKeywords.map((keyword, index) => (
                 <div
                   key={index}
-                  className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-blue-100 hover:border-blue-300 transition-all duration-200 group cursor-pointer"
+                  className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 rounded-xl border-2 border-blue-100 dark:border-blue-800 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-200 group cursor-pointer"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">
+                    <span className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
                       {keyword}
                     </span>
                     <Badge className="bg-blue-500 text-white border-0 text-xs font-bold">
                       Article {index + 1}
                     </Badge>
                   </div>
-                  <p className="text-xs text-slate-600 mt-2">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-2">
                     Create dedicated article • Link to pillar content
                   </p>
                 </div>
@@ -287,15 +287,15 @@ PRO TIPS
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Zap className="h-5 w-5 text-green-600" />
-              <h3 className="text-lg font-bold text-slate-900">Long-tail Opportunities ({strategy.longTailKeywords.length})</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Long-tail Opportunities ({strategy.longTailKeywords.length})</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {strategy.longTailKeywords.map((keyword, index) => (
                 <div
                   key={index}
-                  className="px-3 py-2 bg-green-50 rounded-lg border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all duration-200 cursor-pointer"
+                  className="px-3 py-2 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-200 dark:border-green-800 hover:border-green-400 dark:hover:border-green-600 hover:bg-green-100 dark:hover:bg-green-900/20 transition-all duration-200 cursor-pointer"
                 >
-                  <span className="text-sm font-medium text-slate-800">
+                  <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
                     {keyword}
                   </span>
                 </div>
@@ -304,41 +304,41 @@ PRO TIPS
           </div>
 
           {/* Implementation Guide */}
-          <div className="p-6 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl border-2 border-blue-200">
+          <div className="p-6 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border-2 border-blue-200 dark:border-blue-800">
             <div className="flex items-start gap-3">
               <div className="p-2 bg-blue-600 rounded-lg">
                 <Lightbulb className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="font-bold text-slate-900 mb-3 text-lg">Implementation Strategy</h4>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-3 text-lg">Implementation Strategy</h4>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
                     <Badge className="bg-blue-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 1</Badge>
-                    <p className="text-sm text-slate-700">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
                       <strong>Pillar Content:</strong> Create comprehensive guide targeting "{strategy.mainKeyword}" (2,000+ words with H2/H3 structure)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Badge className="bg-purple-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 2</Badge>
-                    <p className="text-sm text-slate-700">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
                       <strong>Supporting Articles:</strong> Write 5-10 blog posts targeting supporting keywords (800-1,500 words each)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Badge className="bg-green-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 3</Badge>
-                    <p className="text-sm text-slate-700">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
                       <strong>Long-tail Content:</strong> Add FAQ sections, mini-guides, and question-based content (300-800 words)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Badge className="bg-orange-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 4</Badge>
-                    <p className="text-sm text-slate-700">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
                       <strong>Internal Linking:</strong> Link all supporting and long-tail content back to your pillar article
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <Badge className="bg-red-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 5</Badge>
-                    <p className="text-sm text-slate-700">
+                    <p className="text-sm text-slate-700 dark:text-slate-300">
                       <strong>Monitor & Optimize:</strong> Track rankings monthly and update content based on performance
                     </p>
                   </div>
@@ -349,9 +349,9 @@ PRO TIPS
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
-          <p className="text-sm text-slate-600">
-            <span className="font-bold text-green-700">{strategy.supportingKeywords.length + strategy.longTailKeywords.length + 1}</span> total keywords in strategy
+        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-700 border-t border-slate-200 dark:border-slate-600 flex items-center justify-between">
+          <p className="text-sm text-slate-600 dark:text-slate-400">
+            <span className="font-bold text-green-700 dark:text-green-300">{strategy.supportingKeywords.length + strategy.longTailKeywords.length + 1}</span> total keywords in strategy
           </p>
           <div className="flex gap-2">
             <Button variant="outline" onClick={onClose}>

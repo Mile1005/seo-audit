@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { TrendingUp, TrendingDown, Target, DollarSign, Eye, Zap, Globe, Lightbulb, Search } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -39,6 +39,32 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
   const [isVariationsModalOpen, setIsVariationsModalOpen] = useState(false);
   const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
   const [isStrategyModalOpen, setIsStrategyModalOpen] = useState(false);
+  const [isChartAnimated, setIsChartAnimated] = useState(false);
+  const chartRef = useRef<HTMLDivElement>(null);
+
+  // Animation effect for trend chart
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isChartAnimated) {
+            setIsChartAnimated(true);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    if (chartRef.current) {
+      observer.observe(chartRef.current);
+    }
+
+    return () => {
+      if (chartRef.current) {
+        observer.unobserve(chartRef.current);
+      }
+    };
+  }, [isChartAnimated]);
 
   const getDifficultyLevel = (difficulty: number) => {
     if (difficulty < 30) return { label: 'Very Easy', color: 'text-green-600', bgColor: 'bg-green-100' };
@@ -50,11 +76,11 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
 
   const getIntentColor = (intent?: string) => {
     switch (intent) {
-      case 'COMMERCIAL': return 'bg-blue-100 text-blue-700';
-      case 'INFORMATIONAL': return 'bg-purple-100 text-purple-700';
-      case 'NAVIGATIONAL': return 'bg-green-100 text-green-700';
-      case 'TRANSACTIONAL': return 'bg-orange-100 text-orange-700';
-      default: return 'bg-gray-100 text-gray-700';
+      case 'COMMERCIAL': return 'bg-white/90 text-blue-700 border-blue-300 shadow-sm';
+      case 'INFORMATIONAL': return 'bg-white/90 text-purple-700 border-purple-300 shadow-sm';
+      case 'NAVIGATIONAL': return 'bg-white/90 text-green-700 border-green-300 shadow-sm';
+      case 'TRANSACTIONAL': return 'bg-white/90 text-orange-700 border-orange-300 shadow-sm';
+      default: return 'bg-white/90 text-gray-700 border-gray-300 shadow-sm';
     }
   };
 
@@ -89,7 +115,7 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
               <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
                 <Search className="h-8 w-8 text-white" />
               </div>
-              <h2 className="text-4xl font-bold text-white">
+              <h2 className="text-3xl font-bold text-white">
                 {keyword.keyword}
               </h2>
             </div>
@@ -104,8 +130,8 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
               <span className="text-sm">Updated {new Date(keyword.createdAt).toLocaleDateString()}</span>
             </div>
           </div>
-          <Badge className={`${getIntentColor(keyword.intent)} text-base px-5 py-2.5 font-semibold shadow-lg`}>
-            {keyword.intent || 'Unknown'} Intent
+          <Badge className={`${getIntentColor(keyword.intent)} text-xs px-3 py-1.5 font-medium border rounded-full`}>
+            {keyword.intent ? keyword.intent.charAt(0).toUpperCase() + keyword.intent.slice(1).toLowerCase() : 'Unknown'} Intent
           </Badge>
         </div>
       </div>
@@ -136,7 +162,7 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
         </Card>
 
         {/* Global Volume */}
-        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-purple-50 to-white overflow-hidden group">
+        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-purple-50 to-white dark:from-purple-900/10 dark:to-gray-900/10 overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
           <CardHeader className="pb-3 relative">
             <div className="flex items-center justify-between">
@@ -162,7 +188,7 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
         </Card>
 
         {/* Keyword Difficulty */}
-        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-orange-50 to-white overflow-hidden group">
+        <Card className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 bg-gradient-to-br from-orange-50 to-white dark:from-orange-900/10 dark:to-gray-900/10 overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
           <CardHeader className="pb-3 relative">
             <div className="flex items-center justify-between">
@@ -208,7 +234,7 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
       </div>
 
       {/* Trend Chart - Beautiful Interactive */}
-      <Card className="border-0 shadow-xl bg-white overflow-hidden">
+      <Card className="border-0 shadow-xl bg-white dark:bg-slate-800 overflow-hidden">
         <CardHeader className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-900/10 dark:to-blue-900/10 border-b border-slate-200 dark:border-slate-700">
           <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md">
@@ -219,19 +245,25 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
           <CardDescription className="text-slate-600 dark:text-slate-400">12-month search volume trend with interactive visualization</CardDescription>
         </CardHeader>
         <CardContent className="p-8">
-          <div className="h-64 flex items-end justify-between gap-2 px-2">
+          <div ref={chartRef} className="h-64 flex items-end justify-between gap-2 px-2">
             {trendData.map((point, index) => {
               const height = (point.value / Math.max(...trendData.map(d => d.value))) * 100;
+              const pixelHeight = Math.max(8, (point.value / Math.max(...trendData.map(d => d.value))) * 256);
+              const animatedHeight = isChartAnimated ? pixelHeight : 0;
               const isHighest = point.value === Math.max(...trendData.map(d => d.value));
               return (
                 <div key={index} className="flex-1 flex flex-col items-center gap-2 group">
                   <div 
-                    className={`w-full rounded-t-lg transition-all duration-300 cursor-pointer shadow-md hover:shadow-xl ${
+                    className={`w-full rounded-t-lg transition-all duration-1000 ease-out cursor-pointer shadow-md hover:shadow-xl ${
                       isHighest 
                         ? 'bg-gradient-to-t from-green-500 to-green-400' 
                         : 'bg-gradient-to-t from-blue-500 to-blue-400'
                     } hover:from-purple-500 hover:to-purple-400 group-hover:scale-105`}
-                    style={{ height: `${height}%`, minHeight: '8px' }}
+                    style={{ 
+                      height: `${animatedHeight}px`, 
+                      minHeight: '8px',
+                      transitionDelay: `${index * 100}ms`
+                    }}
                     title={`${Math.round(point.value).toLocaleString()} searches`}
                   />
                   <div className="opacity-0 group-hover:opacity-100 transition-opacity absolute -mt-16 bg-slate-900 text-white px-3 py-2 rounded-lg shadow-xl text-xs font-semibold whitespace-nowrap">
@@ -260,9 +292,9 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
       {/* Keyword Ideas - Premium Design */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Keyword Variations */}
-        <Card className="border-0 shadow-xl bg-white overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-          <CardHeader className="bg-gradient-to-r from-yellow-50 to-orange-50 border-b border-yellow-100">
-            <CardTitle className="flex items-center gap-2 text-lg text-slate-900">
+        <Card className="border-0 shadow-xl bg-white dark:bg-slate-800 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+          <CardHeader className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-900/10 dark:to-orange-900/10 border-b border-yellow-100 dark:border-yellow-800">
+            <CardTitle className="flex items-center gap-2 text-lg text-slate-900 dark:text-slate-100">
               <div className="p-2 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg shadow-md">
                 <Zap className="h-5 w-5 text-white" />
               </div>
@@ -325,9 +357,9 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
         </Card>
 
         {/* Questions */}
-        <Card className="border-0 shadow-xl bg-white overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-          <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 border-b border-blue-100">
-            <CardTitle className="flex items-center gap-2 text-lg text-slate-900">
+        <Card className="border-0 shadow-xl bg-white dark:bg-slate-800 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+          <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10 border-b border-blue-100 dark:border-blue-800">
+            <CardTitle className="flex items-center gap-2 text-lg text-slate-900 dark:text-slate-100">
               <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-md">
                 <Lightbulb className="h-5 w-5 text-white" />
               </div>
@@ -380,7 +412,7 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
       </div>
 
       {/* Keyword Strategy - Premium Design */}
-      <Card className="border-0 shadow-xl bg-gradient-to-br from-green-50 via-white to-blue-50 overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300" onClick={() => setIsStrategyModalOpen(true)}>
+      <Card className="border-0 shadow-xl bg-gradient-to-br from-green-50 via-white to-blue-50 dark:from-green-900/10 dark:via-gray-900/10 dark:to-blue-900/10 overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300" onClick={() => setIsStrategyModalOpen(true)}>
         <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/10 dark:to-blue-900/10 border-b border-green-100 dark:border-green-800">
           <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-slate-100">
             <div className="p-2 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg shadow-md">
@@ -402,35 +434,35 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
                 <span className="text-xs text-blue-100">Primary focus</span>
               </div>
             </div>
-            <div className="group p-5 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200">
+            <div className="group p-5 bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200 dark:border-slate-700">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-4 h-4 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full shadow-md"></div>
-                <span className="font-bold text-slate-900 text-lg">Supporting keywords</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-lg">Supporting keywords</span>
               </div>
-              <p className="text-sm text-slate-600 font-medium">10 related terms</p>
-              <div className="mt-3 pt-3 border-t border-slate-200">
-                <span className="text-xs text-slate-500">Secondary targets</span>
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">10 related terms</p>
+              <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+                <span className="text-xs text-slate-500 dark:text-slate-400">Secondary targets</span>
               </div>
             </div>
-            <div className="group p-5 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200">
+            <div className="group p-5 bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200 dark:border-slate-700">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-4 h-4 bg-gradient-to-br from-slate-300 to-slate-400 rounded-full shadow-md"></div>
-                <span className="font-bold text-slate-900 text-lg">Long-tail</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-lg">Long-tail</span>
               </div>
-              <p className="text-sm text-slate-600 font-medium">25+ opportunities</p>
-              <div className="mt-3 pt-3 border-t border-slate-200">
-                <span className="text-xs text-slate-500">Easy wins</span>
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">25+ opportunities</p>
+              <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-700">
+                <span className="text-xs text-slate-500 dark:text-slate-400">Easy wins</span>
               </div>
             </div>
           </div>
-          <div className="mt-6 p-4 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl border border-blue-200">
+          <div className="mt-6 p-4 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl border border-blue-200 dark:border-blue-700">
             <div className="flex items-start gap-3">
               <div className="p-2 bg-blue-600 rounded-lg">
                 <Lightbulb className="h-4 w-4 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="font-semibold text-slate-900 mb-1">Pro Tip</h4>
-                <p className="text-sm text-slate-700">Start with your main keyword, create pillar content, then target supporting keywords in related articles. Finally, capture long-tail variations for quick wins.</p>
+                <h4 className="font-semibold text-slate-900 dark:text-slate-100 mb-1">Pro Tip</h4>
+                <p className="text-sm text-slate-700 dark:text-slate-300">Start with your main keyword, create pillar content, then target supporting keywords in related articles. Finally, capture long-tail variations for quick wins.</p>
               </div>
               <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold text-sm transition-colors duration-200 shadow-md whitespace-nowrap">
                 View Full Strategy →
@@ -486,7 +518,7 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
       <TrafficAnalytics keywordId={keyword.id} keyword={keyword.keyword} currentRank={5} />
 
       {/* Demo Data Disclaimer */}
-      <Card className="border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50">
+      <Card className="border-2 border-blue-200 dark:border-blue-800 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/10 dark:to-purple-900/10">
         <CardContent className="p-6">
           <div className="flex items-start gap-4">
             <div className="p-3 bg-blue-500 rounded-lg flex-shrink-0">
@@ -495,14 +527,14 @@ export function KeywordOverview({ keyword, projectId, variations = [], questions
               </svg>
             </div>
             <div className="flex-1">
-              <h4 className="text-lg font-bold text-slate-900 mb-2">📊 Demo Data Notice</h4>
-              <p className="text-slate-700 mb-3">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">📊 Demo Data Notice</h4>
+              <p className="text-slate-700 dark:text-slate-300 mb-3">
                 The data displayed above is <strong>demonstration data</strong> designed to showcase the platform's capabilities. 
                 This includes keyword metrics, competitor analysis, SERP features, location tracking, traffic analytics, and alerts.
               </p>
-              <p className="text-slate-700 mb-4">
+              <p className="text-slate-700 dark:text-slate-300 mb-4">
                 For <strong>real-time, accurate data</strong> from Google Search Console, Google Analytics, and live SERP tracking, 
-                please upgrade to our <strong className="text-blue-600">PRO plan</strong>.
+                please upgrade to our <strong className="text-blue-600 dark:text-blue-400">PRO plan</strong>.
               </p>
               <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

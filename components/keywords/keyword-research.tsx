@@ -315,7 +315,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
 
       {/* Empty State - Beautiful Illustration */}
       {keywords.length === 0 && !isLoading && (
-        <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-hidden">
+        <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-blue-900/10 dark:via-gray-900/10 dark:to-purple-900/10 overflow-hidden">
           <CardContent className="flex flex-col items-center justify-center py-16 px-8">
             <div className="relative mb-6">
               <div className="absolute inset-0 bg-blue-400 rounded-full blur-2xl opacity-20 animate-pulse"></div>
@@ -328,17 +328,17 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
               Enter keywords above to discover search volume, difficulty, CPC, and actionable insights to boost your SEO strategy.
             </p>
             <div className="flex flex-wrap gap-2 justify-center mb-4">
-              <Badge className="bg-blue-100 text-blue-700 border-0 px-3 py-1.5 hover:bg-blue-200 transition-colors cursor-pointer">
+              <Badge className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-0 px-3 py-1.5 hover:bg-blue-200 dark:hover:bg-blue-800/30 transition-colors cursor-pointer">
                 SEO audit
               </Badge>
-              <Badge className="bg-purple-100 text-purple-700 border-0 px-3 py-1.5 hover:bg-purple-200 transition-colors cursor-pointer">
+              <Badge className="bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border-0 px-3 py-1.5 hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors cursor-pointer">
                 keyword research
               </Badge>
-              <Badge className="bg-green-100 text-green-700 border-0 px-3 py-1.5 hover:bg-green-200 transition-colors cursor-pointer">
+              <Badge className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-0 px-3 py-1.5 hover:bg-green-200 dark:hover:bg-green-800/30 transition-colors cursor-pointer">
                 best seo tools
               </Badge>
             </div>
-            <p className="text-xs text-slate-500">Click examples to try them out</p>
+            <p className="text-xs text-slate-500 dark:text-slate-500">Click examples to try them out</p>
           </CardContent>
         </Card>
       )}
