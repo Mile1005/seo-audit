@@ -5,9 +5,12 @@ import { MainLayout } from '../../components/layout/main-layout'
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'About Us | AISEOTurbo - AI-Powered SEO Solutions',
+  title: 'About Us - SEO Experts & AI Innovation | AI SEO Turbo',
   description: 'Learn about AISEOTurbo mission to revolutionize SEO with cutting-edge AI technology. Meet our team and discover our commitment to helping businesses succeed online.',
   keywords: ['about aiseoturbo', 'seo company', 'ai seo team', 'seo experts'],
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/about'
+  }
 }
 
 export default function AboutPage() {

@@ -25,23 +25,32 @@ import {
 } from "lucide-react"
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "TechFlow Solutions: Enterprise SEO Transformation - 520% Traffic Increase | Case Study",
-  description: "How TechFlow Solutions achieved 520% organic traffic growth, 200+ keywords in top 5, and 680% ROI through comprehensive enterprise SEO with AI SEO Turbo.",
+export const metadata: Metadata = {
+  title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+  description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ enterprise keywords in top 5, 680% ROI with AI-powered technical SEO and content optimization.',
   keywords: [
-    "enterprise SEO case study",
-    "SaaS SEO success",
-    "520% traffic increase",
-    "technical SEO audit",
-    "enterprise website optimization",
-    "AI-powered SEO transformation",
-    "B2B SEO results",
-    "large scale SEO implementation"
+    'enterprise SEO case study',
+    'SaaS SEO success',
+    'technical SEO enterprise',
+    'enterprise traffic growth',
+    'B2B SEO results',
+    'enterprise keyword ranking',
+    'SaaS SEO ROI'
   ],
-  canonical: "/case-studies/techflow-solutions",
-  ogType: "article",
-  twitterCard: "summary_large_image"
-})
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
+  },
+  openGraph: {
+    title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+    description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ enterprise keywords in top 5, 680% ROI with AI-powered technical SEO and content optimization.',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+    description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ enterprise keywords in top 5, 680% ROI with AI-powered technical SEO and content optimization.',
+  }
+}
 
 // Structured Data for SEO
 const structuredData = {

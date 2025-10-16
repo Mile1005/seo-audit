@@ -26,23 +26,32 @@ import {
 } from "lucide-react"
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "StyleCraft Boutique: E-commerce SEO Success - 420% Conversion Increase | Case Study",
-  description: "How StyleCraft Boutique achieved 420% conversion increase, 300+ product pages ranked, and 380% ROI through AI-powered e-commerce SEO optimization.",
+export const metadata: Metadata = {
+  title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+  description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
   keywords: [
-    "e-commerce SEO case study",
-    "fashion boutique SEO success",
-    "420% conversion increase",
-    "product page optimization",
-    "online retail SEO",
-    "e-commerce traffic growth",
-    "shopping cart optimization",
-    "product ranking improvement"
+    'ecommerce SEO case study',
+    'product page optimization',
+    'online store SEO',
+    'fashion boutique SEO',
+    'conversion rate optimization',
+    'product ranking SEO',
+    'retail SEO success'
   ],
-  canonical: "/case-studies/stylecraft-boutique",
-  ogType: "article",
-  twitterCard: "summary_large_image"
-})
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique'
+  },
+  openGraph: {
+    title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
+  }
+}
 
 // Structured Data for SEO
 const structuredData = {

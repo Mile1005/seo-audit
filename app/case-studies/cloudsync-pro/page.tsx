@@ -26,23 +26,32 @@ import {
 } from "lucide-react"
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "CloudSync Pro: B2B Lead Generation Success - 350% Qualified Leads Increase | Case Study",
-  description: "How CloudSync Pro achieved 350% qualified leads increase, 180+ long-tail keywords, and 520% ROI through advanced B2B SEO and content strategy.",
+export const metadata: Metadata = {
+  title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
+  description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
   keywords: [
-    "B2B lead generation case study",
-    "SaaS SEO success",
-    "350% qualified leads increase",
-    "B2B keyword research",
-    "enterprise lead generation",
-    "long-tail keyword optimization",
-    "B2B content marketing",
-    "SaaS marketing ROI"
+    'B2B lead generation case study',
+    'SaaS SEO success',
+    'qualified leads SEO',
+    'B2B keyword strategy',
+    'enterprise lead generation',
+    'SaaS traffic growth',
+    'content marketing SEO'
   ],
-  canonical: "/case-studies/cloudsync-pro",
-  ogType: "article",
-  twitterCard: "summary_large_image"
-})
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro'
+  },
+  openGraph: {
+    title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
+    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
+    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
+  }
+}
 
 // Structured Data for SEO
 const structuredData = {

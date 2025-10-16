@@ -1,5 +1,5 @@
 import { MainLayout } from "@/components/layout/main-layout"
-import { generateSEOMeta } from "@/lib/seo"
+import { generateSEOMeta, pageSEO } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -15,12 +15,7 @@ import {
 } from "lucide-react"
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "Case Studies - AI SEO Turbo Success Stories",
-  description: "See how businesses achieved remarkable SEO results with AI SEO Turbo. Real case studies showing traffic growth, ranking improvements, and ROI.",
-  keywords: ["SEO case studies", "success stories", "SEO results", "traffic growth", "ranking improvement"],
-  canonical: "/case-studies"
-})
+export const metadata: Metadata = generateSEOMeta(pageSEO['case-studies'])
 
 const caseStudies = [
   {

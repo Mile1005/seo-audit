@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'SEO Audit Pricing Plans | AISEOTurbo',
     description: 'Transparent pricing for powerful SEO audit tools. Start free or choose Pro plans with advanced features, unlimited audits, and priority support.',
-    url: 'https://aiseoturbo.com/pricing',
+    url: 'https://www.aiseoturbo.com/pricing',
     siteName: 'AISEOTurbo',
     type: 'website'
   },
@@ -38,6 +38,6 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://aiseoturbo.com/pricing'
+    canonical: 'https://www.aiseoturbo.com/pricing'
   }
 }

@@ -25,7 +25,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "AI SEO Turbo - AI-Powered SEO Audits That Move the Needle",
+  title: "SEO Audit Tool - Boost Rankings Fast | AI SEO Turbo",
   description: "Get actionable SEO insights that boost rankings and drive organic traffic. Join 1,000+ marketers using our AI-powered audits to identify critical issues in minutes.",
   keywords: "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
   authors: [{ name: "AI SEO Turbo" }],
@@ -36,14 +36,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://aiseoturbo.com"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL("https://www.aiseoturbo.com"),
   openGraph: {
     title: "AI SEO Turbo - AI-Powered SEO Audits",
     description: "Get actionable SEO insights that boost rankings and drive organic traffic in minutes.",
-    url: "https://aiseoturbo.com",
+    url: "https://www.aiseoturbo.com",
     siteName: "AI SEO Turbo",
     locale: "en_US",
     type: "website",

@@ -28,23 +28,32 @@ import {
 } from "lucide-react"
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "GearHub Pro: Niche E-commerce Leadership - 290% Conversion Increase | Case Study",
-  description: "How GearHub Pro achieved 380% traffic growth, 250+ niche keywords ranked, and 410% ROI through specialized niche market SEO and content strategy.",
+export const metadata: Metadata = {
+  title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+  description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
   keywords: [
-    "niche e-commerce case study",
-    "specialty retail SEO success",
-    "niche market SEO",
-    "specialized product SEO",
-    "niche keyword optimization",
-    "specialty e-commerce growth",
-    "niche market domination",
-    "specialized retail marketing"
+    'outdoor gear SEO case study',
+    'niche e-commerce optimization',
+    'specialty retail SEO',
+    'outdoor equipment keywords',
+    'hiking gear SEO',
+    'camping equipment optimization',
+    'niche market conversion SEO'
   ],
-  canonical: "/case-studies/gearhub-pro",
-  ogType: "article",
-  twitterCard: "summary_large_image"
-})
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/case-studies/gearhub-pro'
+  },
+  openGraph: {
+    title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
+  }
+}
 
 // Structured Data for SEO
 const structuredData = {

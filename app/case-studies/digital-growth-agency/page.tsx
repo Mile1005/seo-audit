@@ -23,23 +23,32 @@ import {
 import { notFound } from 'next/navigation'
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "Digital Growth Agency: 340% Traffic Increase with AI SEO Turbo | Case Study",
-  description: "How Digital Growth Agency achieved 340% organic traffic growth, 150+ keywords in top 10, and 450% ROI using AI SEO Turbo. Real results in 6 months.",
+export const metadata: Metadata = {
+  title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
+  description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ keywords ranked in top 10, 450% ROI with AI SEO Turbo. Proven SEO strategy results.',
   keywords: [
-    "digital marketing agency SEO case study",
-    "340% traffic increase",
-    "AI SEO results",
-    "agency workflow optimization",
-    "SEO automation success",
-    "client retention improvement",
-    "organic traffic growth",
-    "keyword ranking improvement"
+    'digital marketing agency SEO case study',
+    'SEO traffic growth',
+    'organic traffic increase',
+    'SEO ROI case study',
+    'keyword ranking success',
+    'SEO agency results',
+    'AI SEO case study'
   ],
-  canonical: "/case-studies/digital-growth-agency",
-  ogType: "article",
-  twitterCard: "summary_large_image"
-})
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency'
+  },
+  openGraph: {
+    title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
+    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ keywords ranked in top 10, 450% ROI with AI SEO Turbo. Proven SEO strategy results.',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
+    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ keywords ranked in top 10, 450% ROI with AI SEO Turbo. Proven SEO strategy results.',
+  }
+}
 
 // Structured Data for SEO
 const structuredData = {

@@ -99,9 +99,9 @@ export default function OnboardingPage() {
             >
               <Zap className="w-12 h-12 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">
               Welcome to AI SEO Turbo! 🎉
-            </h2>
+            </h1>
             <p className="text-lg text-gray-600 mb-8">
               You're about to join thousands of marketers who've boosted their SEO performance. Let's get you set up for success!
             </p>

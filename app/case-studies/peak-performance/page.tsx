@@ -28,23 +28,32 @@ import {
 } from "lucide-react"
 
 // SEO metadata
-export const metadata: Metadata = generateSEOMeta({
-  title: "Peak Performance: Local SEO Domination - Local Pack #1 for 15 Services | Case Study",
-  description: "How Peak Performance achieved local pack #1 ranking for 15 services, 310% phone call increase, and 290% ROI through comprehensive local SEO optimization.",
+export const metadata: Metadata = {
+  title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+  description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
   keywords: [
-    "local SEO case study",
-    "local pack ranking success",
-    "Google local pack domination",
-    "local service SEO",
-    "local business optimization",
-    "Google My Business optimization",
-    "local citation building",
-    "local search ranking improvement"
+    'fitness app SEO case study',
+    'mobile app optimization',
+    'app store SEO',
+    'fitness user acquisition',
+    'mobile keyword strategy',
+    'app download growth',
+    'fitness marketing SEO'
   ],
-  canonical: "/case-studies/peak-performance",
-  ogType: "article",
-  twitterCard: "summary_large_image"
-})
+  alternates: {
+    canonical: 'https://www.aiseoturbo.com/case-studies/peak-performance'
+  },
+  openGraph: {
+    title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
+    type: 'article',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
+  }
+}
 
 // Structured Data for SEO
 const structuredData = {
