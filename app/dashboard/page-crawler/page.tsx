@@ -390,7 +390,7 @@ export default function PageCrawlerPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Page Crawler</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Page Crawler - Deep Website Analysis Tool</h1>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
           Crawl and analyze up to 100 pages of your website with comprehensive SEO insights
         </p>

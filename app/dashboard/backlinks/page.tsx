@@ -48,7 +48,7 @@ export default function BacklinksPage() {
     return (
       <div className="space-y-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Backlinks</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Backlinks Analysis - Monitor Link Building Performance</h1>
           <p className="mt-2 text-slate-600 dark:text-slate-400">
             Monitor your backlink profile and link building opportunities
           </p>
@@ -78,7 +78,7 @@ export default function BacklinksPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Backlinks</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Backlinks Analysis - Monitor Link Building Performance</h1>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
           Monitor your backlink profile and link building opportunities
         </p>

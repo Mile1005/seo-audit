@@ -201,7 +201,8 @@ export const pageSEO = {
   blog: {
     title: 'SEO Blog - Tips & Strategies | AI SEO Turbo',
     description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn from expert insights on technical SEO, content optimization, and search engine algorithms.',
-    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization']
+    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization'],
+    canonical: 'https://www.aiseoturbo.com/blog'
   },
 
   help: {
@@ -231,12 +232,14 @@ export const pageSEO = {
   careers: {
     title: 'Careers - Join SEO Experts Team | AI SEO Turbo',
     description: 'Join our mission to revolutionize SEO with AI. We\'re looking for talented individuals passionate about search engine optimization and cutting-edge technology.',
-    keywords: ['careers', 'jobs', 'SEO', 'AI', 'technology', 'remote work']
+    keywords: ['careers', 'jobs', 'SEO', 'AI', 'technology', 'remote work'],
+    canonical: 'https://www.aiseoturbo.com/careers'
   },
 
   'case-studies': {
     title: 'SEO Case Studies - Real Results | AI SEO Turbo',
     description: 'See how businesses achieved remarkable SEO results with AI SEO Turbo. Real case studies showing traffic growth, ranking improvements, and ROI.',
-    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'traffic growth']
+    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'traffic growth'],
+    canonical: 'https://www.aiseoturbo.com/case-studies'
   }
 }

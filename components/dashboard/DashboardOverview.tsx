@@ -220,7 +220,7 @@ export default function DashboardOverview() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Dashboard Overview</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">SEO Dashboard - Monitor & Optimize Performance</h1>
           <p className="mt-2 text-slate-600 dark:text-slate-400">
             Monitor your SEO performance and track key metrics
           </p>
