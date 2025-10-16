@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 
 // Simple wrapper to prevent lambda tracing issues while preserving your original design
 const SEOAuditContent = dynamic(() => import('./seo-audit-original'), {
-  ssr: false,
   loading: () => (
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
       <div className="text-center">

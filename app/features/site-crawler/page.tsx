@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 
 // Dynamically import the content to prevent lambda tracing issues
 const SiteCrawlerContent = dynamic(() => import('./site-crawler-content'), {
-  ssr: false,
   loading: () => (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <div className="text-center">
