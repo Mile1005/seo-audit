@@ -1,5 +1,6 @@
 import React from 'react'
 import { prisma } from '../../../lib/prisma'
+import { Metadata } from 'next'
 
 interface SharePageProps { params: { token: string } }
 
@@ -14,6 +15,32 @@ async function getData(token: string) {
   if (!share) return null
   if (share.expiresAt && new Date(share.expiresAt) < new Date()) return null
   return share
+}
+
+export async function generateMetadata({ params }: SharePageProps): Promise<Metadata> {
+  const data = await getData(params.token)
+  if (!data) {
+    return {
+      title: 'SEO Audit Report - Link Invalid | AI SEO Turbo',
+      description: 'This shared SEO audit link is invalid or has expired.',
+      robots: 'noindex, nofollow'
+    }
+  }
+  
+  const run = data.auditRun
+  const url = run.url
+  const score = run.score || 'N/A'
+  
+  return {
+    title: `SEO Audit Report for ${url} - Score: ${score} | AI SEO Turbo`,
+    description: `Comprehensive SEO audit results for ${url} with performance, accessibility, and best practices analysis. Generated on ${new Date(run.createdAt).toLocaleDateString()}.`,
+    keywords: 'SEO audit, website analysis, performance score, accessibility check, SEO report',
+    openGraph: {
+      title: `SEO Audit Report - ${url}`,
+      description: `SEO audit results with score ${score} for ${url}`,
+      type: 'website'
+    }
+  }
 }
 
 export default async function SharePage({ params }: SharePageProps) {

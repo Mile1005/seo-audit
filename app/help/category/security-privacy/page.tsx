@@ -82,9 +82,9 @@ export default function SecurityPrivacyCategoryPage() {
                 </div>
               </div>
 
-              <p className="text-xl text-gray-400 mb-8">
+              <h2 className="text-xl text-gray-400 mb-8">
                 Protect your account and data with comprehensive security guides and privacy controls.
-              </p>
+              </h2>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">

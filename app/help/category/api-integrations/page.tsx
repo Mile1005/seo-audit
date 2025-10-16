@@ -68,9 +68,9 @@ export default function APIIntegrationsCategoryPage() {
                 </div>
               </div>
 
-              <p className="text-xl text-gray-400 mb-8">
+              <h2 className="text-xl text-gray-400 mb-8">
                 Connect AISEOTurbo with your tools and automate workflows using our API and integrations.
-              </p>
+              </h2>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">
                 <div className="flex items-center gap-2">
