@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Competitor Analysis Guide - Spy on Competitors | AI SEO Turbo',
+  title: 'Competitor Analysis - Spy on Competitors | AI SEO Turbo',
   description: 'Master competitor analysis with AI SEO Turbo. Learn to identify competitors, analyze their strategies, find keyword opportunities, and gain competitive advantage.',
   keywords: ['competitor analysis', 'SEO spying', 'competitor research', 'keyword opportunities', 'competitive intelligence', 'SEO strategy'],
   alternates: {

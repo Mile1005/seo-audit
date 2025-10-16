@@ -26,7 +26,7 @@ import {
 
 // SEO metadata
 export const metadata: Metadata = {
-  title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+  title: 'Enterprise SaaS SEO - 520% Traffic Growth | AI SEO Turbo',
   description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ enterprise keywords in top 5, 680% ROI with AI-powered technical SEO and content optimization.',
   keywords: [
     'enterprise SEO case study',

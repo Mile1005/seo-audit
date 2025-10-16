@@ -27,7 +27,7 @@ import {
 
 // SEO metadata
 export const metadata: Metadata = {
-  title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+  title: 'E-commerce SEO - 420% Sales Growth | AI SEO Turbo',
   description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
   keywords: [
     'ecommerce SEO case study',

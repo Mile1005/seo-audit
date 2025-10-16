@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Upgrade Subscription Guide - Pro Plan Benefits | AI SEO Turbo',
+  title: 'Upgrade to Pro Plan - Subscription Guide | AI SEO Turbo',
   description: 'Learn how to upgrade your AI SEO Turbo subscription to Pro plan. Unlock advanced features, unlimited audits, priority support, and premium SEO tools.',
   keywords: ['upgrade plan', 'pro subscription', 'premium features', 'unlimited audits', 'priority support', 'SEO tools upgrade'],
   alternates: {

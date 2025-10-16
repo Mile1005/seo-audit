@@ -29,7 +29,7 @@ import {
 
 // SEO metadata
 export const metadata: Metadata = {
-  title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+  title: 'Fitness App SEO - 280% User Growth | AI SEO Turbo',
   description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
   keywords: [
     'fitness app SEO case study',

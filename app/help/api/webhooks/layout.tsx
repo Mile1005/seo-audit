@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Webhooks Integration Guide - Real-time SEO Notifications | AI SEO Turbo',
+  title: 'Webhooks Setup - Real-time SEO Alerts | AI SEO Turbo',
   description: 'Set up webhooks for real-time SEO notifications and automated workflows. Learn how to configure webhook endpoints for audit completions, ranking changes, and performance alerts.',
   keywords: ['webhooks', 'API integration', 'real-time notifications', 'SEO automation', 'webhook endpoints', 'audit notifications', 'ranking alerts'],
   alternates: {

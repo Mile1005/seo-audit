@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Account Cancellation Guide - Cancel Subscription | AI SEO Turbo',
+  title: 'Account Cancellation - Cancel Subscription | AI SEO Turbo',
   description: 'Learn how to cancel your AI SEO Turbo subscription safely. Understand cancellation policies, data retention, and account closure procedures.',
   keywords: ['cancel subscription', 'account cancellation', 'cancel AI SEO Turbo', 'subscription cancellation', 'account closure', 'billing cancellation'],
   alternates: {

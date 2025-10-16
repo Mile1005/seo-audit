@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 
-export const metadata: Metadata = generateSEOMeta(pageSEO['features/seo-audit'])
+export const metadata: Metadata = generateSEOMeta(pageSEO['forgot-password'])
 
-export default function SEOAuditLayout({
+export default function ForgotPasswordLayout({
   children,
 }: {
   children: React.ReactNode

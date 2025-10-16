@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Dashboard Setup Guide - Configure AI SEO Turbo | AI SEO Turbo',
+  title: 'Dashboard Setup - Configure AI SEO Turbo | AI SEO Turbo',
   description: 'Complete guide to setting up your AI SEO Turbo dashboard. Learn to configure projects, customize layouts, and optimize your SEO workflow.',
   keywords: ['dashboard setup', 'SEO dashboard', 'project configuration', 'workflow setup', 'dashboard customization', 'SEO tools setup'],
   alternates: {

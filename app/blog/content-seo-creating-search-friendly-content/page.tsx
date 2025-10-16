@@ -3,7 +3,7 @@ import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
 
 export const metadata: Metadata = generateSEOMeta({
-  title: 'Content SEO: Creating Search-Friendly Content | AI SEO Turbo Blog',
+  title: 'Content SEO: Search-Friendly Content | AI SEO Turbo Blog',
   description: 'Learn how to create content that ranks well in search engines and provides value to your audience.',
   canonical: 'https://www.aiseoturbo.com/blog/content-seo-creating-search-friendly-content',
   ogType: 'article',

@@ -27,7 +27,7 @@ import {
 
 // SEO metadata
 export const metadata: Metadata = {
-  title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
+  title: 'B2B SaaS SEO - 350% Lead Generation | AI SEO Turbo',
   description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
   keywords: [
     'B2B lead generation case study',

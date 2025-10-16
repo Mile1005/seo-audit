@@ -29,7 +29,7 @@ import {
 
 // SEO metadata
 export const metadata: Metadata = {
-  title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+  title: 'Outdoor Gear SEO - 290% Conversions | AI SEO Turbo',
   description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
   keywords: [
     'outdoor gear SEO case study',

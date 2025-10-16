@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Security Best Practices - Protect Your Account | AI SEO Turbo',
+  title: 'Security Best Practices - Account Protection | AI SEO Turbo',
   description: 'Essential security best practices for AI SEO Turbo users. Learn to protect your account, use strong passwords, enable 2FA, and secure your SEO data.',
   keywords: ['security best practices', 'account protection', 'password security', 'data protection', 'account safety', 'security tips'],
   alternates: {

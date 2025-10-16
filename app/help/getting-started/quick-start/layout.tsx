@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Quick Start Guide - Get Started with AI SEO Turbo | AI SEO Turbo',
+  title: 'Quick Start - Get Started with AI SEO Turbo | AI SEO Turbo',
   description: 'Complete quick start guide for AI SEO Turbo. Learn to create account, run first audit, and optimize your website in minutes with step-by-step instructions.',
   keywords: ['quick start', 'getting started', 'SEO tutorial', 'first steps', 'beginner guide', 'SEO setup', 'account setup'],
   alternates: {
