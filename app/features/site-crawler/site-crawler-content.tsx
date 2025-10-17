@@ -867,8 +867,8 @@ export default function SiteCrawlerPage() {
         </AnimatePresence>
 
         {/* Feature Sections */}
-        <CrawlCapabilities />
         <IssueDetection />
+        <CrawlCapabilities />
         <SiteArchitecture />
         <MonitoringFeatures />
         <IntegrationOptions />

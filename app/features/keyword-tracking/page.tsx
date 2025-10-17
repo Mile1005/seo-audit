@@ -258,8 +258,8 @@ export default function KeywordTrackingPage() {
         </section>
 
         {/* Feature Sections */}
-        <TrackingCapabilities />
         <SerpFeatures />
+        <TrackingCapabilities />
         <PerformanceAnalytics />
         <AlertSystem />
 

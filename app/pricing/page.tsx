@@ -382,63 +382,7 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="relative py-20">
-          <div className="container mx-auto px-6">
-            <motion.div 
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                  Trusted by 10,000+ Businesses
-                </span>
-              </h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                See how our AI-powered SEO audits have transformed businesses worldwide
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.name}
-                  className="bg-slate-800/60 backdrop-blur-xl border border-slate-600/50 rounded-2xl p-8 hover:bg-slate-800/80 transition-all duration-300"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <div className="flex items-center gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-slate-300 mb-6 leading-relaxed">"{testimonial.content}"</p>
-                  
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
-                      <span className="text-white font-semibold text-lg">
-                        {testimonial.name.split(' ').map(n => n[0]).join('')}
-                      </span>
-                    </div>
-                    <div>
-                      <div className="text-white font-semibold">{testimonial.name}</div>
-                      <div className="text-slate-400 text-sm">{testimonial.role}, {testimonial.company}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
+        {/* FAQ Section - MOVED FIRST */}
         <section className="relative py-20">
           <div className="container mx-auto px-6">
             <motion.div 
@@ -495,6 +439,62 @@ export default function PricingPage() {
                       <p className="text-slate-300 leading-relaxed">{faq.answer}</p>
                     </div>
                   </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials - MOVED SECOND */}
+        <section className="relative py-20">
+          <div className="container mx-auto px-6">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
+                  Trusted by 10,000+ Businesses
+                </span>
+              </h2>
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+                See how our AI-powered SEO audits have transformed businesses worldwide
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={testimonial.name}
+                  className="bg-slate-800/60 backdrop-blur-xl border border-slate-600/50 rounded-2xl p-8 hover:bg-slate-800/80 transition-all duration-300"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -5 }}
+                >
+                  <div className="flex items-center gap-1 mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-slate-300 mb-6 leading-relaxed">"{testimonial.content}"</p>
+                  
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
+                      <span className="text-white font-semibold text-lg">
+                        {testimonial.name.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                    <div>
+                      <div className="text-white font-semibold">{testimonial.name}</div>
+                      <div className="text-slate-400 text-sm">{testimonial.role}, {testimonial.company}</div>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>

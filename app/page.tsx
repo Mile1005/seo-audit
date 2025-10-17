@@ -193,60 +193,7 @@ export default function Home() {
       {/* SEO-Optimized Content Section */}
       <section className="py-20 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
-              AI SEO Audit Tool That <span className="text-blue-600">Delivers Results</span>
-            </h2>
-            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
-              Stop guessing what hurts your SEO. Our AI-powered audit tool analyzes 47+ technical factors, 
-              identifies critical issues, and provides actionable recommendations that actually move the needle.
-            </p>
-          </div>
-
-          {/* Key Benefits Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
-              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">47-Point Analysis</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">Comprehensive technical SEO audit covering every critical factor</p>
-            </div>
-
-            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
-              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">AI-Powered</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">Advanced algorithms that rival expert SEO consultants</p>
-            </div>
-
-            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
-              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Actionable Fixes</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">Prioritized recommendations that actually improve rankings</p>
-            </div>
-
-            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
-              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Real Results</h3>
-              <p className="text-slate-600 dark:text-slate-400 text-sm">Average 300% traffic increase in first 90 days</p>
-            </div>
-          </div>
-
-          {/* Why Choose Us Section */}
+          {/* Why Choose Us Section - MOVED FIRST */}
           <div className="mb-16">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -292,7 +239,61 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Success Story */}
+          {/* AI SEO Audit Tool That Delivers Results - MOVED SECOND */}
+          <div className="mb-16">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+                AI SEO Audit Tool That <span className="text-blue-600">Delivers Results</span>
+              </h2>
+              <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+                Stop guessing what hurts your SEO. Our AI-powered audit tool analyzes 47+ technical factors, 
+                identifies critical issues, and provides actionable recommendations that actually move the needle.
+              </p>
+            </div>
+
+            {/* Key Benefits Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">47-Point Analysis</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">Comprehensive technical SEO audit covering every critical factor</p>
+              </div>
+
+              <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">AI-Powered</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">Advanced algorithms that rival expert SEO consultants</p>
+              </div>
+
+              <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Actionable Fixes</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">Prioritized recommendations that actually improve rankings</p>
+              </div>
+
+              <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Real Results</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">Average 300% traffic increase in first 90 days</p>
+              </div>
+            </div>
+          </div>
           <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl mb-16">
             <div className="text-center max-w-3xl mx-auto">
               <h3 className="text-2xl font-semibold text-blue-900 dark:text-blue-100 mb-4">

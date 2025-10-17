@@ -30,7 +30,7 @@ import {
 // SEO metadata
 export const metadata: Metadata = {
   title: 'Outdoor Gear SEO - 290% Conversions | AI SEO Turbo',
-  description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
+  description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
   keywords: [
     'outdoor gear SEO case study',
     'niche e-commerce optimization',
@@ -45,13 +45,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
-    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
+    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
-    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion rate increase with specialized outdoor equipment SEO.',
+    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
   }
 }
 

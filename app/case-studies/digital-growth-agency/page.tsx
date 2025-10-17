@@ -25,7 +25,7 @@ import { notFound } from 'next/navigation'
 // SEO metadata
 export const metadata: Metadata = {
   title: 'Digital Agency SEO - 340% Traffic Growth | AI SEO Turbo',
-  description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ keywords ranked in top 10, 450% ROI with AI SEO Turbo. Proven SEO strategy results.',
+  description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
   keywords: [
     'digital marketing agency SEO case study',
     'SEO traffic growth',
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
-    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ keywords ranked in top 10, 450% ROI with AI SEO Turbo. Proven SEO strategy results.',
+    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
-    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ keywords ranked in top 10, 450% ROI with AI SEO Turbo. Proven SEO strategy results.',
+    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
   }
 }
 

@@ -267,7 +267,7 @@ export default function BlogPage() {
                         href={`/blog/${featuredPost.slug}`}
                         className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25"
                       >
-                        Read Full Article
+                        Read: {featuredPost.title}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Link>
                     </div>
@@ -351,7 +351,7 @@ export default function BlogPage() {
                       href={`/blog/${post.slug}`}
                       className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300 font-medium transition-colors"
                     >
-                      Read More
+                      Read: {post.title}
                       <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
                   </div>

@@ -9,6 +9,24 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
+  // Redirects configuration - handle non-www to www
+  async redirects() {
+    return [
+      // Redirect non-www to www for SEO consistency
+      {
+        source: '/:path((?!_next).*)',
+        has: [
+          {
+            type: 'host',
+            value: 'aiseoturbo.com',
+          },
+        ],
+        destination: 'https://www.aiseoturbo.com/:path',
+        permanent: true, // 301 permanent redirect
+      },
+    ]
+  },
+
   // Security headers configuration
   async headers() {
     return [

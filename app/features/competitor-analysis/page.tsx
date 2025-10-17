@@ -270,8 +270,8 @@ export default function CompetitorAnalysisPage() {
         </section>
 
         {/* Feature Sections */}
-        <SerpComparison />
         <GapAnalysis />
+        <SerpComparison />
         <MonitoringDashboard />
         <StrategyRecommendations />
 

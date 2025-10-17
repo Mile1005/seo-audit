@@ -170,7 +170,7 @@ export function generateStructuredData(type: 'website' | 'organization' | 'produ
 export const pageSEO = {
   home: {
     title: 'AI SEO Audit Tool - Boost Rankings 300% Faster',
-    description: 'Transform your SEO with AI-powered audits that identify 47+ critical issues. Join 10,000+ marketers using data-driven insights to skyrocket organic traffic and dominate search results.',
+    description: 'Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.',
     keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis']
   },
   
@@ -218,13 +218,13 @@ export const pageSEO = {
   
   pricing: {
     title: 'SEO Audit Pricing - Plans From $29/month | AI SEO Turbo',
-    description: 'Choose the perfect SEO audit plan for your business. Start with our free plan or upgrade to Pro for advanced features and priority support.',
+    description: 'Choose the perfect SEO audit plan for your business. Free plan with analysis, Pro plans from $29/month with advanced features and priority support.',
     keywords: ['SEO audit pricing', 'SEO tools cost', 'website audit plans']
   },
   
   about: {
     title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
-    description: 'Meet the SEO experts and AI engineers behind AI SEO Turbo. Learn how our 10+ years of combined experience helps 10,000+ businesses achieve 300% traffic growth through AI-powered optimization.',
+    description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
     keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists']
   },
   
@@ -236,7 +236,7 @@ export const pageSEO = {
 
   blog: {
     title: 'SEO Blog - Tips & Strategies | AI SEO Turbo',
-    description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn from expert insights on technical SEO, content optimization, and algorithms.',
+    description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn expert insights on technical SEO, content optimization, and algorithms.',
     keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization'],
     canonical: 'https://www.aiseoturbo.com/blog'
   },
@@ -296,13 +296,13 @@ export const pageSEO = {
 
   community: {
     title: 'SEO Community - Connect & Learn | AI SEO Turbo',
-    description: 'Join the AI SEO Turbo community to connect with SEO professionals, share insights, learn from experts, and stay updated with the latest SEO trends.',
+    description: 'Join the AI SEO Turbo community to connect with professionals, share insights, learn from experts, and stay updated with SEO trends.',
     keywords: ['SEO community', 'SEO professionals', 'SEO networking', 'SEO insights']
   },
 
   demo: {
     title: 'Free SEO Audit Demo - Try AI Analysis Tool Online',
-    description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ technical checks, competitor insights, and actionable recommendations that boost rankings.',
+    description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ checks, competitor insights, and actionable recommendations.',
     keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker']
   },
 

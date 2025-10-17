@@ -28,7 +28,7 @@ import {
 // SEO metadata
 export const metadata: Metadata = {
   title: 'B2B SaaS SEO - 350% Lead Generation | AI SEO Turbo',
-  description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
+  description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
   keywords: [
     'B2B lead generation case study',
     'SaaS SEO success',
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
-    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
+    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
-    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ long-tail keywords ranked, 350% qualified leads increase with AI-powered content and keyword strategy.',
+    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
   }
 }
 

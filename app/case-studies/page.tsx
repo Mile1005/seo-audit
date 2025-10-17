@@ -240,6 +240,15 @@ export default function CaseStudiesPage() {
       {/* Case Studies Grid */}
       <section className="py-20 bg-slate-950">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Real Results from Real Businesses
+            </h2>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+              Discover how companies across industries achieved exceptional growth with AI SEO Turbo
+            </p>
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {caseStudies.map((study) => (
               <div key={study.id} className="bg-slate-900/50 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-700 transition-all duration-300 group">

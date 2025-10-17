@@ -30,7 +30,7 @@ import {
 // SEO metadata
 export const metadata: Metadata = {
   title: 'Fitness App SEO - 280% User Growth | AI SEO Turbo',
-  description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
+  description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
   keywords: [
     'fitness app SEO case study',
     'mobile app optimization',
@@ -45,13 +45,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
-    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
+    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
-    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition increase with mobile SEO and app store optimization.',
+    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
   }
 }
 

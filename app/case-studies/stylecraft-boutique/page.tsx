@@ -28,7 +28,7 @@ import {
 // SEO metadata
 export const metadata: Metadata = {
   title: 'E-commerce SEO - 420% Sales Growth | AI SEO Turbo',
-  description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
+  description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
   keywords: [
     'ecommerce SEO case study',
     'product page optimization',
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
-    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
+    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
     type: 'article',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
-    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ product pages ranked, 420% conversion increase with AI-powered product SEO optimization.',
+    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
   }
 }
 
