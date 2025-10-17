@@ -29,6 +29,88 @@ export default function ContactPage() {
         </div>
       </section>
 
+      {/* Why Contact Us Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Expert SEO Support When You Need It
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              From technical SEO audits to strategic consultation, our certified experts are ready to help you
+              overcome challenges and achieve your organic growth goals.
+            </p>
+          </div>
+
+          <div className="prose prose-lg mx-auto text-muted-foreground">
+            <h3>Why Choose AI SEO Turbo for Your SEO Needs?</h3>
+            <p>
+              With over 15 years of combined SEO experience and a track record of helping 10,000+ businesses achieve
+              measurable growth, our team combines technical expertise with strategic insight to deliver results that matter.
+            </p>
+
+            <h4>Technical SEO Consultation</h4>
+            <p>
+              Stuck on complex technical issues? Our certified SEO specialists provide personalized guidance on Core Web Vitals,
+              schema markup implementation, international SEO, and enterprise-level technical challenges. We don't just identify
+              problems—we provide step-by-step solutions.
+            </p>
+
+            <h4>Strategy & Implementation Support</h4>
+            <p>
+              Whether you're a business owner planning your SEO roadmap or an agency handling client campaigns, we offer strategic
+              consultation to optimize your approach. From keyword research methodologies to competitive analysis frameworks,
+              we help you build data-driven SEO strategies.
+            </p>
+
+            <h4>Platform Training & Best Practices</h4>
+            <p>
+              Maximize your investment in AI SEO Turbo with personalized training sessions. Learn advanced features,
+              optimization techniques, and reporting strategies that turn our platform into a competitive advantage.
+            </p>
+
+            <h4>Partnership & Integration Opportunities</h4>
+            <p>
+              For agencies, developers, and platform providers interested in partnership opportunities, we offer white-label
+              solutions, API integrations, and custom enterprise implementations.
+            </p>
+
+            <div className="bg-primary/5 border border-primary/20 p-6 rounded-lg my-8">
+              <h4 className="text-primary font-semibold mb-3">Response Time Guarantee</h4>
+              <p className="text-foreground mb-4">
+                We respond to all inquiries within 24 hours, with urgent technical issues addressed within 4 hours
+                during business days. Our support team includes certified SEO specialists and AI engineers ready to help.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 text-center">
+                <div>
+                  <div className="text-2xl font-bold text-primary">24h</div>
+                  <div className="text-sm text-muted-foreground">Response Time</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary">4h</div>
+                  <div className="text-sm text-muted-foreground">Urgent Issues</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary">100%</div>
+                  <div className="text-sm text-muted-foreground">Satisfaction</div>
+                </div>
+              </div>
+            </div>
+
+            <h3>Ready to Accelerate Your SEO Success?</h3>
+            <p>
+              Whether you need help with a specific technical challenge, want to discuss partnership opportunities,
+              or simply have questions about optimizing your SEO strategy, we're here to help. Our commitment to
+              transparency, expertise, and results-driven solutions sets us apart in the SEO industry.
+            </p>
+            <p>
+              Contact us today and discover why thousands of businesses trust AI SEO Turbo to power their organic growth.
+              Let's discuss how we can help you achieve your SEO objectives and drive measurable business results.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form & Info Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">

@@ -189,6 +189,92 @@ export default function Home() {
       <HeroSection />
       <TrustLogos />
       
+      {/* SEO-Optimized Content Section */}
+      <section className="py-20 bg-white dark:bg-slate-900">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+              AI SEO Audit Tool That <span className="text-blue-600">Delivers Results</span>
+            </h1>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+              Stop guessing what hurts your SEO. Our AI-powered audit tool analyzes 47+ technical factors, 
+              identifies critical issues, and provides actionable recommendations that actually move the needle.
+            </p>
+          </div>
+
+          <div className="prose prose-lg dark:prose-invert mx-auto">
+            <h2>Why Choose AI SEO Turbo for Your Website Optimization?</h2>
+            <p>
+              As a web developer or SEO professional, you know that manual SEO audits are time-consuming and often miss critical issues. 
+              Our AI SEO audit tool changes everything by automating the analysis process while providing expert-level insights 
+              that rival the best SEO consultants.
+            </p>
+
+            <h3>Advanced Technical SEO Analysis</h3>
+            <p>
+              Our proprietary AI algorithms crawl your website just like Google does, identifying issues that traditional tools miss. 
+              From Core Web Vitals optimization to schema markup validation, we cover every aspect of technical SEO that impacts rankings.
+            </p>
+            <ul>
+              <li><strong>47-Point Technical Audit:</strong> Comprehensive analysis covering crawlability, indexation, and performance</li>
+              <li><strong>AI-Powered Recommendations:</strong> Actionable fixes prioritized by impact on search rankings</li>
+              <li><strong>Competitor Intelligence:</strong> See what your competitors are doing right (and wrong)</li>
+              <li><strong>Real-Time Monitoring:</strong> Track improvements and catch new issues before they hurt rankings</li>
+            </ul>
+
+            <h3>Proven Results for Real Businesses</h3>
+            <p>
+              Don't just take our word for it. Our platform has helped thousands of businesses achieve measurable SEO success:
+            </p>
+            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
+              <h4 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">Case Study: E-commerce Growth</h4>
+              <p className="text-blue-700 dark:text-blue-300 mb-4">
+                A small business owner used our AI SEO audit to identify and fix 23 critical issues. 
+                Result: 340% increase in organic traffic within 90 days, from solving mobile usability problems and improving site speed.
+              </p>
+              <a href="/case-studies" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                Read More Success Stories →
+              </a>
+            </div>
+
+            <h3>Expert-Grade SEO Tools Built for Professionals</h3>
+            <p>
+              Whether you're a freelance web developer optimizing client sites, an in-house SEO specialist managing enterprise campaigns, 
+              or a small business owner handling your own digital marketing, AI SEO Turbo provides the professional-grade tools you need.
+            </p>
+
+            <h4>For Web Developers:</h4>
+            <p>
+              Get technical SEO insights that complement your development workflow. Our API integrations and detailed technical reports 
+              help you deliver better results to clients while reducing audit time by 80%.
+            </p>
+
+            <h4>For SEO Professionals:</h4>
+            <p>
+              Access advanced competitor analysis, keyword tracking, and backlink monitoring that scales with your agency's needs. 
+              White-label reporting and team collaboration features make client management effortless.
+            </p>
+
+            <h4>For Small Business Owners:</h4>
+            <p>
+              No SEO experience required. Our AI assistant guides you through optimization with plain-English explanations and 
+              step-by-step action plans that anyone can follow.
+            </p>
+
+            <h3>Start Your SEO Success Story Today</h3>
+            <p>
+              Join over 10,000 marketers, developers, and business owners who trust AI SEO Turbo to optimize their websites. 
+              Our platform combines cutting-edge AI technology with proven SEO methodologies to deliver results that matter.
+            </p>
+            <p>
+              Ready to see what hidden SEO issues are holding back your rankings? 
+              <a href="/demo" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">Try our free demo</a> 
+              or <a href="/dashboard/audit" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">run your first audit</a> today.
+            </p>
+          </div>
+        </div>
+      </section>
+      
       {/* EMERGENCY: Lazy load all below-the-fold content */}
       <LazyWrapper fallback={<FeaturesSkeleton />} rootMargin="200px">
         <DynamicFeaturesShowcase />

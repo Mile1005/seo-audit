@@ -234,8 +234,20 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
-      <LoginContent />
-    </Suspense>
+    <MainLayout>
+      {/* Server-rendered SEO content */}
+      <div className="sr-only">
+        <h2>Secure Account Access</h2>
+        <p>Sign in to your AI SEO Turbo account to access advanced SEO tools and analytics.</p>
+        <h2>Authentication Options</h2>
+        <p>Choose from Google OAuth or email/password authentication for secure access.</p>
+        <h2>Account Security Features</h2>
+        <p>Our platform includes two-factor authentication and secure password recovery options.</p>
+      </div>
+      
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+        <LoginContent />
+      </Suspense>
+    </MainLayout>
   );
 }

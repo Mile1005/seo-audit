@@ -50,8 +50,79 @@ export default async function SharePage({ params }: SharePageProps) {
   const scores = run.result?.comprehensiveResults?.scores || run.result?.scores || {}
   const issues = run.result?.comprehensiveResults?.issues || []
   const quick = run.result?.comprehensiveResults?.quick_wins || []
+
   return (
-    <div className="p-8 max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background">
+      {/* Comprehensive SEO Report Introduction */}
+      <section className="bg-slate-900/50 border-b border-slate-800 py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="prose prose-lg prose-invert mx-auto">
+            <h1>Shared SEO Audit Report</h1>
+            <p>
+              This comprehensive SEO audit report has been shared with you by an AI SEO Turbo user. The report provides
+              detailed insights into the website's search engine optimization performance, identifying both opportunities
+              for improvement and critical issues that may be impacting search rankings.
+            </p>
+
+            <h2>Understanding SEO Audit Reports</h2>
+            <p>
+              SEO audits analyze websites across multiple dimensions to determine how well they perform in search engine
+              results. Our AI-powered analysis goes beyond basic checklists, providing actionable insights backed by
+              machine learning and industry expertise.
+            </p>
+
+            <h3>What This Report Includes:</h3>
+            <ul>
+              <li><strong>Performance Scores:</strong> Overall SEO health across five key categories</li>
+              <li><strong>Quick Wins:</strong> High-impact improvements that can be implemented immediately</li>
+              <li><strong>Detailed Issues:</strong> Comprehensive list of problems with severity levels and solutions</li>
+              <li><strong>Technical Analysis:</strong> Crawlability, indexation, and technical SEO factors</li>
+              <li><strong>Content Optimization:</strong> Recommendations for improving content quality and relevance</li>
+            </ul>
+
+            <h3>How to Interpret the Scores:</h3>
+            <p>
+              Scores range from 0-100, with higher scores indicating better SEO performance. Each category represents
+              a different aspect of search engine optimization:
+            </p>
+
+            <h4>Score Categories:</h4>
+            <ul>
+              <li><strong>Overall:</strong> Combined performance across all SEO factors</li>
+              <li><strong>Performance:</strong> Page speed, Core Web Vitals, and technical performance</li>
+              <li><strong>Accessibility:</strong> Website usability and accessibility compliance</li>
+              <li><strong>SEO:</strong> On-page optimization, meta tags, and search engine signals</li>
+              <li><strong>Best Practices:</strong> Modern web standards and SEO best practices</li>
+            </ul>
+
+            <h3>Issue Severity Levels:</h3>
+            <p>
+              Issues are categorized by severity to help prioritize fixes:
+            </p>
+            <ul>
+              <li><strong>Critical:</strong> Major issues that significantly impact search rankings</li>
+              <li><strong>High:</strong> Important problems that should be addressed promptly</li>
+              <li><strong>Medium:</strong> Moderate issues that improve SEO when fixed</li>
+              <li><strong>Low:</strong> Minor optimizations that provide incremental benefits</li>
+            </ul>
+
+            <h2>About AI SEO Turbo</h2>
+            <p>
+              AI SEO Turbo is an advanced SEO analysis platform that combines artificial intelligence with deep industry
+              expertise. Our platform helps SEO professionals, agencies, and website owners optimize their online presence
+              and improve search engine rankings.
+            </p>
+
+            <p>
+              This shared report was generated using our comprehensive audit tools, which analyze websites using the same
+              methodology that powers our full platform. While this is a read-only view, you can sign up for a free account
+              to run your own audits and access additional features.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div className="p-8 max-w-4xl mx-auto space-y-6">
       <header>
         <h1 className="text-3xl font-bold">SEO Audit (Shared)</h1>
         <p className="text-sm text-muted-foreground">Read-only view. Generated {new Date(run.createdAt).toLocaleString()} for {run.url}</p>
@@ -78,6 +149,7 @@ export default async function SharePage({ params }: SharePageProps) {
           {issues.length>50 && <li className="text-xs text-muted-foreground">Truncated to first 50 issues.</li>}
         </ul>
       </section>
+    </div>
     </div>
   )
 }

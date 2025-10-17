@@ -154,6 +154,115 @@ export default function StatusPage() {
           </div>
         </section>
 
+        {/* Status Content Section */}
+        <section className="py-20 bg-slate-900">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="prose prose-lg prose-invert mx-auto">
+              <h2>Committed to Reliability & Transparency</h2>
+              <p>
+                At AI SEO Turbo, we understand that your SEO success depends on reliable tools and services you can count on.
+                That's why we've built our infrastructure with enterprise-grade reliability and maintain complete transparency
+                about our system performance and any issues that may arise.
+              </p>
+
+              <h3>Industry-Leading Uptime Standards</h3>
+              <p>
+                We maintain 99.9% uptime across all our services, with most services achieving 99.99% availability.
+                This level of reliability ensures that you can run SEO audits, monitor rankings, and access your data
+                whenever you need it, without worrying about service interruptions.
+              </p>
+
+              <h4>Our Reliability Commitment:</h4>
+              <ul>
+                <li><strong>99.9% Service Availability:</strong> Enterprise-grade infrastructure with automatic failover</li>
+                <li><strong>Real-Time Monitoring:</strong> 24/7 system monitoring with instant alerts for any issues</li>
+                <li><strong>Automatic Scaling:</strong> Our systems automatically scale to handle increased demand</li>
+                <li><strong>Data Redundancy:</strong> Multiple backups ensure your data is always safe and accessible</li>
+                <li><strong>Global CDN:</strong> Fast loading times worldwide through our content delivery network</li>
+              </ul>
+
+              <h3>Transparent Communication</h3>
+              <p>
+                We believe in complete transparency with our users. When issues occur (which is rare), we provide
+                immediate updates through multiple channels. Our status page is updated in real-time, and we send
+                email notifications for any service disruptions or maintenance activities.
+              </p>
+
+              <h4>How We Keep You Informed:</h4>
+              <ul>
+                <li><strong>Real-Time Status Updates:</strong> This page updates automatically as soon as we detect any changes</li>
+                <li><strong>Email Notifications:</strong> Critical updates sent to all registered users</li>
+                <li><strong>Incident Post-Mortems:</strong> Detailed analysis of any incidents with prevention measures</li>
+                <li><strong>Maintenance Scheduling:</strong> Advance notice of planned maintenance windows</li>
+                <li><strong>Community Updates:</strong> Real-time updates in our Discord community</li>
+              </ul>
+
+              <h3>Proactive Maintenance & Improvements</h3>
+              <p>
+                Rather than waiting for issues to occur, we perform regular maintenance and implement continuous improvements
+                to ensure optimal performance. Our development team works around the clock to enhance features, fix bugs,
+                and optimize performance before they impact users.
+              </p>
+
+              <h4>Our Maintenance Philosophy:</h4>
+              <ul>
+                <li><strong>Zero-Downtime Deployments:</strong> All updates deployed without service interruption</li>
+                <li><strong>Performance Optimization:</strong> Continuous monitoring and improvement of response times</li>
+                <li><strong>Security Updates:</strong> Regular security patches and vulnerability assessments</li>
+                <li><strong>Feature Enhancements:</strong> Regular releases of new features and improvements</li>
+                <li><strong>Database Optimization:</strong> Regular maintenance to ensure fast query performance</li>
+              </ul>
+
+              <h3>What Our Uptime Means for Your SEO</h3>
+              <p>
+                Reliable service isn't just about availability—it's about ensuring your SEO efforts can continue uninterrupted.
+                Whether you're running weekly audits, monitoring daily ranking changes, or analyzing competitor strategies,
+                you need tools that work when you do.
+              </p>
+
+              <div className="bg-green-900/30 border border-green-500/30 p-6 rounded-lg my-8">
+                <h4 className="text-green-200 font-semibold mb-3">Why Reliability Matters</h4>
+                <p className="text-green-100 mb-4">
+                  "During a critical algorithm update, I needed to run multiple audits quickly. AI SEO Turbo's reliability
+                  gave me the confidence to focus on strategy rather than worrying about tool availability." - Sarah Mitchell, Enterprise SEO Manager
+                </p>
+                <p className="text-green-100">
+                  "I've tried other SEO tools that went down during peak usage times. AI SEO Turbo's consistent uptime
+                  has become essential to my workflow." - James Rodriguez, Freelance SEO Consultant
+                </p>
+              </div>
+
+              <h3>Built for Enterprise Reliability</h3>
+              <p>
+                Our infrastructure is designed to handle the demands of enterprise users while maintaining the flexibility
+                that smaller businesses need. From multi-region data centers to automatic load balancing, every aspect of
+                our system is optimized for maximum uptime and performance.
+              </p>
+
+              <h4>Enterprise-Grade Features:</h4>
+              <ul>
+                <li><strong>Multi-Region Deployment:</strong> Services distributed across multiple data centers</li>
+                <li><strong>Automatic Failover:</strong> Instant switching to backup systems if issues occur</li>
+                <li><strong>Load Balancing:</strong> Traffic automatically distributed for optimal performance</li>
+                <li><strong>Database Clustering:</strong> Redundant database systems for maximum data safety</li>
+                <li><strong>24/7 Monitoring:</strong> Round-the-clock monitoring by our DevOps team</li>
+              </ul>
+
+              <h3>Your Success is Our Priority</h3>
+              <p>
+                We measure our success by your success. That's why we invest heavily in infrastructure, monitoring,
+                and support systems that ensure AI SEO Turbo is always available when you need it. Our commitment
+                to reliability is backed by our 99.9% uptime guarantee and our dedication to transparent communication.
+              </p>
+              <p>
+                If you ever experience any issues or have questions about our service status, don't hesitate to
+                contact our support team. We're here to ensure your SEO efforts are supported by the most reliable
+                tools in the industry.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Service Status */}
         <section className="py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

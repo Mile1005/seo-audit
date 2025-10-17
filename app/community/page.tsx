@@ -138,6 +138,114 @@ export default function CommunityPage() {
           </div>
         </section>
 
+        {/* Community Content Section */}
+        <section className="py-20 bg-slate-900">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="prose prose-lg prose-invert mx-auto">
+              <h2>Building the Future of SEO Together</h2>
+              <p>
+                The AI SEO Turbo community is more than just a support network—it's a collaborative ecosystem where
+                SEO professionals, web developers, and business owners come together to share knowledge, solve challenges,
+                and drive innovation in the search engine optimization industry.
+              </p>
+
+              <h3>Learn from Industry Experts</h3>
+              <p>
+                Our community includes certified SEO specialists, enterprise consultants, and AI researchers who regularly
+                share insights on the latest algorithm updates, emerging trends, and cutting-edge optimization techniques.
+                Whether you're just starting your SEO journey or managing enterprise campaigns, you'll find valuable
+                perspectives and practical advice.
+              </p>
+
+              <h4>Weekly Expert Sessions</h4>
+              <p>
+                Join our weekly live sessions where community experts dive deep into specific SEO topics, share case studies,
+                and answer your burning questions. Past sessions have covered everything from Core Web Vitals optimization
+                to advanced schema markup implementation.
+              </p>
+
+              <h3>Real-World Case Studies & Success Stories</h3>
+              <p>
+                Learn from the experiences of fellow community members who've achieved remarkable results. Our case study
+                library features detailed breakdowns of successful campaigns, complete with strategies, tactics, and measurable
+                outcomes that you can adapt to your own projects.
+              </p>
+
+              <div className="bg-blue-900/30 border border-blue-500/30 p-6 rounded-lg my-8">
+                <h4 className="text-blue-200 font-semibold mb-3">Community Impact</h4>
+                <p className="text-blue-100 mb-4">
+                  "The AI SEO Turbo community helped me increase my client's organic traffic by 400% in just 6 months.
+                  The insights and strategies shared by other members were invaluable." - Maria Rodriguez, SEO Consultant
+                </p>
+                <p className="text-blue-100">
+                  "As a small business owner, I was overwhelmed by SEO. The community provided practical, actionable advice
+                  that helped me compete with much larger companies in my industry." - David Chen, E-commerce Owner
+                </p>
+              </div>
+
+              <h3>Collaborative Learning & Growth</h3>
+              <p>
+                Our community believes in collective growth. Through peer reviews, collaborative projects, and knowledge
+                sharing, members help each other overcome challenges and achieve their SEO goals faster than they could alone.
+              </p>
+
+              <h4>Peer Review Program</h4>
+              <p>
+                Submit your SEO strategies, content plans, or technical implementations for constructive feedback from
+                experienced community members. This program has helped countless professionals refine their approaches
+                and avoid costly mistakes.
+              </p>
+
+              <h4>Monthly Challenges & Competitions</h4>
+              <p>
+                Test your skills and learn new techniques through our monthly SEO challenges. From keyword research
+                competitions to technical audit showdowns, these activities keep the community engaged and push everyone
+                to continuously improve their craft.
+              </p>
+
+              <h3>Stay Ahead of Algorithm Changes</h3>
+              <p>
+                Search engines evolve rapidly, and staying current is crucial for SEO success. Our community provides
+                real-time insights into algorithm updates, helping you adapt your strategies before your competitors do.
+              </p>
+
+              <h4>Algorithm Update Monitoring</h4>
+              <p>
+                Our team of algorithm watchers provides immediate analysis of major updates like Google's core updates,
+                helpful content updates, and product review updates. Community members get early warnings and adaptation
+                strategies to protect and grow their search rankings.
+              </p>
+
+              <h3>Exclusive Resources & Tools</h3>
+              <p>
+                Community members get access to exclusive resources that aren't available to the general public. From
+                advanced training materials to beta features, these perks add significant value to your AI SEO Turbo experience.
+              </p>
+
+              <h4>Premium Content Library</h4>
+              <ul>
+                <li>Advanced SEO strategy frameworks</li>
+                <li>Enterprise-level case studies</li>
+                <li>Custom tool configurations and templates</li>
+                <li>Industry-specific optimization guides</li>
+                <li>API integration tutorials and examples</li>
+              </ul>
+
+              <h3>Join a Community That Cares About Your Success</h3>
+              <p>
+                Unlike typical online forums that can be impersonal or unhelpful, the AI SEO Turbo community is built
+                around genuine collaboration and mutual support. Our members understand the challenges you face because
+                they're facing them too—and they're committed to helping you succeed.
+              </p>
+              <p>
+                Whether you're looking for technical advice, strategic guidance, or just want to connect with like-minded
+                professionals, you'll find a welcoming community ready to support your SEO journey. Join us today and
+                become part of something bigger than just another SEO tool.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Community Guidelines */}
         <section className="py-20 bg-slate-900/50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

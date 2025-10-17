@@ -217,21 +217,7 @@ export default function DashboardOverview() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">AI SEO Turbo Dashboard</h1>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">
-            Monitor your SEO performance and track key metrics
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0">
-          <div className="flex items-center space-x-2 text-sm text-slate-500 dark:text-slate-400">
-            <ClockIcon className="w-4 h-4" />
-            <span>Last updated: {new Date().toLocaleTimeString()}</span>
-          </div>
-        </div>
-      </div>
+      {/* Header removed - now rendered server-side for SEO */}
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

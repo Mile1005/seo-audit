@@ -38,6 +38,77 @@ export default function ForgotPasswordPage() {
 
   return (
     <MainLayout>
+      {/* Server-rendered SEO content */}
+      <div className="sr-only">
+        <h2>Password Security Best Practices</h2>
+        <p>Learn about secure password management and account recovery procedures.</p>
+        <h2>Account Recovery Process</h2>
+        <p>Step-by-step guide to resetting your password and regaining account access.</p>
+        <h2>Security Support</h2>
+        <p>Get help with account security issues and password management.</p>
+      </div>
+      
+      {/* Account Security Introduction */}
+      <section className="bg-slate-900/50 border-b border-slate-800 py-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="prose prose-lg prose-invert mx-auto">
+            <h1>Secure Account Recovery</h1>
+            <p>
+              Account security is paramount when working with SEO tools that handle sensitive website data and competitive intelligence.
+              Our password reset process ensures that only authorized users can regain access to their accounts.
+            </p>
+
+            <h2>Why Secure Password Recovery Matters</h2>
+            <p>
+              SEO professionals often work with confidential client data, competitive analysis, and strategic business information.
+              A compromised account could expose sensitive SEO strategies, keyword research, and performance data to unauthorized parties.
+            </p>
+
+            <h3>Our Security Measures:</h3>
+            <ul>
+              <li><strong>Encrypted Communications:</strong> All password reset emails are sent over secure, encrypted channels</li>
+              <li><strong>Time-Limited Tokens:</strong> Reset links expire after a short period for security</li>
+              <li><strong>Account Verification:</strong> Multiple verification steps ensure legitimate account recovery</li>
+              <li><strong>Activity Monitoring:</strong> Suspicious activity is automatically flagged and investigated</li>
+            </ul>
+
+            <h3>Password Security Best Practices</h3>
+            <p>
+              While we help you recover access to your account, maintaining strong password hygiene is crucial for long-term security:
+            </p>
+
+            <h4>Strong Password Guidelines:</h4>
+            <ul>
+              <li>Use at least 12 characters with a mix of uppercase, lowercase, numbers, and symbols</li>
+              <li>Avoid common words, personal information, or predictable patterns</li>
+              <li>Use unique passwords for different services</li>
+              <li>Consider using a reputable password manager</li>
+              <li>Enable two-factor authentication when available</li>
+            </ul>
+
+            <h4>Account Protection Tips:</h4>
+            <ul>
+              <li>Never share your login credentials with others</li>
+              <li>Log out of shared or public computers</li>
+              <li>Monitor your account activity regularly</li>
+              <li>Report suspicious activity immediately</li>
+              <li>Keep your recovery email address current</li>
+            </ul>
+
+            <h2>Getting Help with Account Issues</h2>
+            <p>
+              If you're having trouble with the password reset process or suspect your account may be compromised,
+              our support team is available to assist you. We can help verify your identity and restore secure access to your account.
+            </p>
+
+            <p>
+              Remember, account security is a shared responsibility. By following best practices and promptly reporting
+              any security concerns, you help maintain the integrity of your SEO data and protect your competitive advantage.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <div className="flex items-center justify-center min-h-[80vh] py-12 px-4">
         <div className="w-full max-w-md bg-slate-900 rounded-2xl shadow-2xl p-8 border border-slate-800 text-white relative">
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded">Skip to main content</a>

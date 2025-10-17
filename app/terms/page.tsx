@@ -58,6 +58,101 @@ export default function TermsPage() {
           </div>
         </section>
 
+        {/* Comprehensive Terms Introduction */}
+        <section className="py-16 px-4 bg-slate-800/30">
+          <div className="container mx-auto max-w-4xl">
+            <div className="prose prose-lg prose-invert mx-auto">
+              <h2>Terms of Service for AI-Powered SEO Tools</h2>
+              <p>
+                Welcome to AI SEO Turbo. These Terms of Service ("Terms") govern your use of our AI-powered search engine
+                optimization platform, including our website, mobile applications, and related services (collectively, the "Service").
+                By accessing or using our Service, you agree to be bound by these Terms.
+              </p>
+
+              <p>
+                Our platform leverages advanced artificial intelligence and machine learning technologies to provide comprehensive
+                SEO analysis, competitor intelligence, and optimization recommendations. These Terms ensure fair use of our
+                technology while protecting both users and our intellectual property.
+              </p>
+
+              <h3>Understanding AI-Generated SEO Insights</h3>
+              <p>
+                AI SEO Turbo uses sophisticated algorithms to analyze websites, search engine results, and user behavior patterns.
+                While our AI systems are highly accurate and continuously improved, SEO analysis involves inherent uncertainties
+                related to search engine algorithms, which can change without notice.
+              </p>
+
+              <h4>Service Limitations & Disclaimers:</h4>
+              <ul>
+                <li><strong>AI Accuracy:</strong> Our AI provides insights based on available data and current SEO best practices</li>
+                <li><strong>Search Engine Independence:</strong> We do not control or guarantee search engine ranking outcomes</li>
+                <li><strong>Algorithm Changes:</strong> Search engines may modify their algorithms, affecting the relevance of our recommendations</li>
+                <li><strong>Third-Party Data:</strong> Some insights rely on publicly available data from various sources</li>
+                <li><strong>Professional Judgment:</strong> Users should combine our AI insights with their own SEO expertise</li>
+              </ul>
+
+              <h3>Acceptable Use & Fair Usage Policy</h3>
+              <p>
+                Our service is designed for legitimate SEO professionals, agencies, and website owners. We maintain strict
+                usage policies to ensure fair access and prevent abuse of our AI systems.
+              </p>
+
+              <h4>Permitted Uses:</h4>
+              <ul>
+                <li>Analyzing websites you own or have permission to audit</li>
+                <li>Competitor analysis for legitimate business intelligence</li>
+                <li>Educational and professional SEO research</li>
+                <li>Generating reports for clients with proper authorization</li>
+                <li>Internal business optimization and strategy development</li>
+              </ul>
+
+              <h4>Prohibited Activities:</h4>
+              <ul>
+                <li>Using the service for illegal activities or violating applicable laws</li>
+                <li>Attempting to reverse engineer or copy our AI algorithms</li>
+                <li>Excessive API calls that disrupt service availability</li>
+                <li>Sharing login credentials or circumventing access controls</li>
+                <li>Using automated tools to bypass rate limits or usage restrictions</li>
+                <li>Generating misleading or fraudulent SEO reports</li>
+              </ul>
+
+              <h3>Data Ownership & Intellectual Property</h3>
+              <p>
+                Understanding data ownership is crucial when using AI-powered SEO tools. Our service processes various types
+                of data, and these Terms clarify ownership rights and usage permissions.
+              </p>
+
+              <h4>Your Data Rights:</h4>
+              <ul>
+                <li><strong>Website Content:</strong> You retain full ownership of content submitted for analysis</li>
+                <li><strong>Generated Reports:</strong> You own the reports generated from your account</li>
+                <li><strong>Account Data:</strong> You control your account information and usage history</li>
+                <li><strong>Export Rights:</strong> You may export your data in standard formats</li>
+              </ul>
+
+              <h4>Our Intellectual Property:</h4>
+              <ul>
+                <li><strong>AI Algorithms:</strong> Our proprietary machine learning models and algorithms</li>
+                <li><strong>Platform Technology:</strong> The underlying software and infrastructure</li>
+                <li><strong>Branding & Content:</strong> Our trademarks, logos, and marketing materials</li>
+                <li><strong>Analysis Methodology:</strong> Our unique approach to SEO analysis and recommendations</li>
+              </ul>
+
+              <h2>Service Level Agreements & Performance</h2>
+              <p>
+                We strive to provide reliable, high-performance SEO analysis tools. Our service level commitments ensure
+                that you can depend on our platform for critical business decisions.
+              </p>
+
+              <p>
+                While we aim for 99.9% uptime, SEO analysis involves complex computations and external data dependencies
+                that may occasionally affect performance. We provide transparent status updates and maintenance schedules
+                to minimize disruptions to your workflow.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Content Section */}
         <section className="py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">

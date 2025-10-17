@@ -122,6 +122,70 @@ export default function CareersPage() {
         </div>
       </section>
 
+      {/* Comprehensive Careers Introduction */}
+      <section className="py-16 px-4 bg-slate-800/30">
+        <div className="container mx-auto max-w-4xl">
+          <div className="prose prose-lg prose-invert mx-auto">
+            <h2>Careers in AI-Powered SEO: Shape the Future of Digital Marketing</h2>
+            <p>
+              At AI SEO Turbo, we're not just building tools – we're pioneering the next generation of search engine optimization.
+              Our team combines deep technical expertise with cutting-edge artificial intelligence to solve complex SEO challenges
+              that traditional tools simply can't address.
+            </p>
+
+            <p>
+              Join a company that's at the forefront of the SEO revolution. We're developing machine learning models that understand
+              search intent, predict algorithm changes, and provide actionable insights that drive real business results. If you're
+              passionate about technology, data, and digital marketing, this is your opportunity to work on problems that matter.
+            </p>
+
+            <h3>Why Work in AI-Powered SEO?</h3>
+            <p>
+              The SEO industry is undergoing a dramatic transformation. Traditional keyword research and link building are being
+              augmented by sophisticated AI systems that can analyze user behavior, predict search trends, and optimize content
+              at scale. Working at AI SEO Turbo means being part of this transformation.
+            </p>
+
+            <h4>Growth Opportunities in a Booming Industry:</h4>
+            <ul>
+              <li><strong>AI & Machine Learning:</strong> Work with state-of-the-art ML models for natural language processing and predictive analytics</li>
+              <li><strong>Big Data Processing:</strong> Handle massive datasets from web crawls, search engine results, and user behavior analytics</li>
+              <li><strong>Full-Stack Development:</strong> Build scalable web applications that serve millions of SEO professionals worldwide</li>
+              <li><strong>Product Strategy:</strong> Shape the future of SEO tools and influence how businesses approach digital marketing</li>
+            </ul>
+
+            <h3>Our Technology Stack & Innovation Focus</h3>
+            <p>
+              We use modern technologies and frameworks to build robust, scalable solutions. Our engineering team works with
+              React, Next.js, TypeScript, Python, and cutting-edge AI frameworks. We believe in staying current with technology
+              trends while maintaining high standards for code quality and system reliability.
+            </p>
+
+            <h4>Technical Challenges We Solve:</h4>
+            <ul>
+              <li>Real-time web crawling and content analysis at scale</li>
+              <li>Machine learning model training for SEO pattern recognition</li>
+              <li>Distributed data processing for large website audits</li>
+              <li>Advanced natural language processing for content optimization</li>
+              <li>Predictive analytics for search trend forecasting</li>
+            </ul>
+
+            <h2>Company Culture: Innovation, Collaboration, Impact</h2>
+            <p>
+              We foster a culture where innovation thrives through collaboration. Our small, focused team operates with complete
+              transparency and flat hierarchies. Every team member has direct access to leadership and can influence product
+              direction. We believe that the best ideas come from diverse perspectives and open communication.
+            </p>
+
+            <p>
+              Remote-first since day one, we've built a distributed team that spans multiple time zones. This global perspective
+              enriches our understanding of international SEO challenges and helps us build tools that work for businesses worldwide.
+              Our asynchronous communication culture ensures that everyone can contribute effectively, regardless of location.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Values Section */}
       <section className="py-20 bg-slate-950">
         <div className="container mx-auto px-4">

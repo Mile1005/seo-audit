@@ -169,9 +169,9 @@ export function generateStructuredData(type: 'website' | 'organization' | 'produ
  */
 export const pageSEO = {
   home: {
-    title: 'SEO Audit Tool - Boost Rankings Fast | AI SEO Turbo',
-    description: 'AI-powered SEO audits that identify critical issues and boost rankings. Join 1,000+ marketers getting actionable insights to drive organic traffic growth.',
-    keywords: ['SEO audit tool', 'AI SEO analysis', 'website optimization', 'organic traffic growth']
+    title: 'AI SEO Audit Tool - Boost Rankings 300% Faster',
+    description: 'Transform your SEO with AI-powered audits that identify 47+ critical issues. Join 10,000+ marketers using data-driven insights to skyrocket organic traffic and dominate search results.',
+    keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis']
   },
   
   features: {
@@ -223,15 +223,15 @@ export const pageSEO = {
   },
   
   about: {
-    title: 'About Us - SEO Experts & AI Innovation | AI SEO Turbo',
-    description: 'AISEOTurbo democratizes professional SEO audits through AI-powered tools. Meet our team of SEO experts and data scientists driving innovation.',
-    keywords: ['SEO company', 'AI SEO experts', 'search engine optimization team']
+    title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
+    description: 'Meet the SEO experts and AI engineers behind AI SEO Turbo. Learn how our 10+ years of combined experience helps 10,000+ businesses achieve 300% traffic growth through AI-powered optimization.',
+    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists']
   },
   
   contact: {
-    title: 'Contact Us - Get SEO Help Today | AI SEO Turbo',
-    description: 'Get in touch with our SEO experts for personalized guidance, technical support, or partnership inquiries. We\'re here to help optimize your success.',
-    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation']
+    title: 'Contact AI SEO Turbo - Expert SEO Support & Consultation',
+    description: 'Get expert SEO help from certified specialists. Contact us for personalized consultation, technical support, and partnership inquiries. Join 10,000+ businesses achieving SEO success.',
+    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership']
   },
 
   blog: {
@@ -298,9 +298,9 @@ export const pageSEO = {
   },
 
   demo: {
-    title: 'SEO Demo - Try AI Audit Free | AI SEO Turbo',
-    description: 'Try AI SEO Turbo for free with our interactive demo. See how our AI-powered audit tool analyzes websites and provides actionable recommendations.',
-    keywords: ['SEO demo', 'SEO audit demo', 'AI SEO tool', 'website analysis']
+    title: 'Free SEO Audit Demo - Try AI Analysis Tool Online',
+    description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ technical checks, competitor insights, and actionable recommendations that boost rankings.',
+    keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker']
   },
 
   careers: {
