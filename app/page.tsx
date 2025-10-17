@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import { headers } from 'next/headers'
 import Head from 'next/head'
 import { StructuredData, generateServiceSchema } from "@/components/seo/StructuredData"
+import { CheckCircle, ArrowRight } from 'lucide-react'
 
 // Optimized dynamic imports with better loading states
 // Import our optimized skeletons
@@ -191,86 +192,164 @@ export default function Home() {
       
       {/* SEO-Optimized Content Section */}
       <section className="py-20 bg-white dark:bg-slate-900">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
               AI SEO Audit Tool That <span className="text-blue-600">Delivers Results</span>
-            </h1>
+            </h2>
             <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
               Stop guessing what hurts your SEO. Our AI-powered audit tool analyzes 47+ technical factors, 
               identifies critical issues, and provides actionable recommendations that actually move the needle.
             </p>
           </div>
 
-          <div className="prose prose-lg dark:prose-invert mx-auto">
-            <h2>Why Choose AI SEO Turbo for Your Website Optimization?</h2>
-            <p>
-              As a web developer or SEO professional, you know that manual SEO audits are time-consuming and often miss critical issues. 
-              Our AI SEO audit tool changes everything by automating the analysis process while providing expert-level insights 
-              that rival the best SEO consultants.
-            </p>
-
-            <h3>Advanced Technical SEO Analysis</h3>
-            <p>
-              Our proprietary AI algorithms crawl your website just like Google does, identifying issues that traditional tools miss. 
-              From Core Web Vitals optimization to schema markup validation, we cover every aspect of technical SEO that impacts rankings.
-            </p>
-            <ul>
-              <li><strong>47-Point Technical Audit:</strong> Comprehensive analysis covering crawlability, indexation, and performance</li>
-              <li><strong>AI-Powered Recommendations:</strong> Actionable fixes prioritized by impact on search rankings</li>
-              <li><strong>Competitor Intelligence:</strong> See what your competitors are doing right (and wrong)</li>
-              <li><strong>Real-Time Monitoring:</strong> Track improvements and catch new issues before they hurt rankings</li>
-            </ul>
-
-            <h3>Proven Results for Real Businesses</h3>
-            <p>
-              Don't just take our word for it. Our platform has helped thousands of businesses achieve measurable SEO success:
-            </p>
-            <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg my-8">
-              <h4 className="text-blue-800 dark:text-blue-200 font-semibold mb-2">Case Study: E-commerce Growth</h4>
-              <p className="text-blue-700 dark:text-blue-300 mb-4">
-                A small business owner used our AI SEO audit to identify and fix 23 critical issues. 
-                Result: 340% increase in organic traffic within 90 days, from solving mobile usability problems and improving site speed.
-              </p>
-              <a href="/case-studies" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
-                Read More Success Stories →
-              </a>
+          {/* Key Benefits Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+              <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">47-Point Analysis</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">Comprehensive technical SEO audit covering every critical factor</p>
             </div>
 
-            <h3>Expert-Grade SEO Tools Built for Professionals</h3>
-            <p>
-              Whether you're a freelance web developer optimizing client sites, an in-house SEO specialist managing enterprise campaigns, 
-              or a small business owner handling your own digital marketing, AI SEO Turbo provides the professional-grade tools you need.
+            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+              <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">AI-Powered</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">Advanced algorithms that rival expert SEO consultants</p>
+            </div>
+
+            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Actionable Fixes</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">Prioritized recommendations that actually improve rankings</p>
+            </div>
+
+            <div className="text-center p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">Real Results</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">Average 300% traffic increase in first 90 days</p>
+            </div>
+          </div>
+
+          {/* Why Choose Us Section */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+                Why Choose AI SEO Turbo?
+              </h2>
+              <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                Join thousands of businesses using our AI-powered platform to achieve measurable SEO success
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-4">
+                  Advanced Technical SEO Analysis
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 mb-6">
+                  Our proprietary AI algorithms crawl your website just like Google does, identifying issues that traditional tools miss.
+                </p>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-slate-700 dark:text-slate-300">47-Point Technical Audit covering all critical factors</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-slate-700 dark:text-slate-300">AI-Powered recommendations prioritized by impact</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-slate-700 dark:text-slate-300">Competitor intelligence and market insights</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-8 rounded-2xl">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">300%</div>
+                  <div className="text-slate-600 dark:text-slate-400 mb-6">Average traffic increase in 90 days</div>
+                  <div className="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">10,000+</div>
+                  <div className="text-slate-600 dark:text-slate-400">Businesses optimized</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Success Story */}
+          <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl mb-16">
+            <div className="text-center max-w-3xl mx-auto">
+              <h3 className="text-2xl font-semibold text-blue-900 dark:text-blue-100 mb-4">
+                Real Results from Real Businesses
+              </h3>
+              <p className="text-blue-800 dark:text-blue-200 mb-6">
+                A small business owner used our AI SEO audit to identify and fix 23 critical issues.
+                Result: <span className="font-bold">340% increase in organic traffic within 90 days</span>,
+                from solving mobile usability problems and improving site speed.
+              </p>
+              <a href="/case-studies" className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium">
+                Read More Success Stories
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Professional Tools Section */}
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Expert-Grade SEO Tools for Professionals
+            </h2>
+            <p className="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+              Whether you're a developer, SEO specialist, or business owner, we provide the tools you need to succeed.
             </p>
 
-            <h4>For Web Developers:</h4>
-            <p>
-              Get technical SEO insights that complement your development workflow. Our API integrations and detailed technical reports 
-              help you deliver better results to clients while reducing audit time by 80%.
-            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-slate-900 dark:text-white mb-2">For Developers</h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">API integrations and technical reports that complement your workflow</p>
+              </div>
 
-            <h4>For SEO Professionals:</h4>
-            <p>
-              Access advanced competitor analysis, keyword tracking, and backlink monitoring that scales with your agency's needs. 
-              White-label reporting and team collaboration features make client management effortless.
-            </p>
+              <div className="p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-slate-900 dark:text-white mb-2">For SEO Specialists</h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">Advanced competitor analysis and enterprise-scale monitoring</p>
+              </div>
 
-            <h4>For Small Business Owners:</h4>
-            <p>
-              No SEO experience required. Our AI assistant guides you through optimization with plain-English explanations and 
-              step-by-step action plans that anyone can follow.
-            </p>
-
-            <h3>Start Your SEO Success Story Today</h3>
-            <p>
-              Join over 10,000 marketers, developers, and business owners who trust AI SEO Turbo to optimize their websites. 
-              Our platform combines cutting-edge AI technology with proven SEO methodologies to deliver results that matter.
-            </p>
-            <p>
-              Ready to see what hidden SEO issues are holding back your rankings? 
-              <a href="/demo" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">Try our free demo</a> 
-              or <a href="/dashboard/audit" className="text-blue-600 dark:text-blue-400 hover:underline font-medium">run your first audit</a> today.
-            </p>
+              <div className="p-6 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h4 className="font-semibold text-slate-900 dark:text-white mb-2">For Business Owners</h4>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">No SEO experience required - AI guides you to success</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

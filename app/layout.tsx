@@ -4,6 +4,8 @@ import React from "react";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "../components/auth/auth-provider";
 import { ThemeProvider } from "../components/ui/theme-provider";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 // Force dynamic rendering to avoid Vercel lambda routing issues
 export const dynamic = 'force-dynamic';
@@ -304,6 +306,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </ThemeProvider>
         </AuthProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

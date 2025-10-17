@@ -30,9 +30,9 @@ export default function ContactPage() {
       </section>
 
       {/* Why Contact Us Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-12">
+      <section className="py-20 bg-background">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Expert SEO Support When You Need It
             </h2>
@@ -42,71 +42,130 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="prose prose-lg mx-auto text-muted-foreground">
-            <h3>Why Choose AI SEO Turbo for Your SEO Needs?</h3>
-            <p>
-              With over 15 years of combined SEO experience and a track record of helping 10,000+ businesses achieve
-              measurable growth, our team combines technical expertise with strategic insight to deliver results that matter.
-            </p>
-
-            <h4>Technical SEO Consultation</h4>
-            <p>
-              Stuck on complex technical issues? Our certified SEO specialists provide personalized guidance on Core Web Vitals,
-              schema markup implementation, international SEO, and enterprise-level technical challenges. We don't just identify
-              problems—we provide step-by-step solutions.
-            </p>
-
-            <h4>Strategy & Implementation Support</h4>
-            <p>
-              Whether you're a business owner planning your SEO roadmap or an agency handling client campaigns, we offer strategic
-              consultation to optimize your approach. From keyword research methodologies to competitive analysis frameworks,
-              we help you build data-driven SEO strategies.
-            </p>
-
-            <h4>Platform Training & Best Practices</h4>
-            <p>
-              Maximize your investment in AI SEO Turbo with personalized training sessions. Learn advanced features,
-              optimization techniques, and reporting strategies that turn our platform into a competitive advantage.
-            </p>
-
-            <h4>Partnership & Integration Opportunities</h4>
-            <p>
-              For agencies, developers, and platform providers interested in partnership opportunities, we offer white-label
-              solutions, API integrations, and custom enterprise implementations.
-            </p>
-
-            <div className="bg-primary/5 border border-primary/20 p-6 rounded-lg my-8">
-              <h4 className="text-primary font-semibold mb-3">Response Time Guarantee</h4>
-              <p className="text-foreground mb-4">
-                We respond to all inquiries within 24 hours, with urgent technical issues addressed within 4 hours
-                during business days. Our support team includes certified SEO specialists and AI engineers ready to help.
-              </p>
-              <div className="grid md:grid-cols-3 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-primary">24h</div>
-                  <div className="text-sm text-muted-foreground">Response Time</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary">4h</div>
-                  <div className="text-sm text-muted-foreground">Urgent Issues</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary">100%</div>
-                  <div className="text-sm text-muted-foreground">Satisfaction</div>
-                </div>
+          {/* Service Types Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <div className="text-center p-6 bg-muted/30 rounded-xl hover:bg-muted/50 transition-all duration-200">
+              <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg className="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
               </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Technical SEO</h3>
+              <p className="text-muted-foreground text-sm">Core Web Vitals, schema markup, and technical challenges</p>
             </div>
 
-            <h3>Ready to Accelerate Your SEO Success?</h3>
-            <p>
-              Whether you need help with a specific technical challenge, want to discuss partnership opportunities,
-              or simply have questions about optimizing your SEO strategy, we're here to help. Our commitment to
-              transparency, expertise, and results-driven solutions sets us apart in the SEO industry.
-            </p>
-            <p>
-              Contact us today and discover why thousands of businesses trust AI SEO Turbo to power their organic growth.
-              Let's discuss how we can help you achieve your SEO objectives and drive measurable business results.
-            </p>
+            <div className="text-center p-6 bg-muted/30 rounded-xl hover:bg-muted/50 transition-all duration-200">
+              <div className="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg className="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Strategy Support</h3>
+              <p className="text-muted-foreground text-sm">SEO roadmaps and competitive analysis frameworks</p>
+            </div>
+
+            <div className="text-center p-6 bg-muted/30 rounded-xl hover:bg-muted/50 transition-all duration-200">
+              <div className="w-14 h-14 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg className="w-7 h-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Platform Training</h3>
+              <p className="text-muted-foreground text-sm">Maximize ROI with personalized training sessions</p>
+            </div>
+
+            <div className="text-center p-6 bg-muted/30 rounded-xl hover:bg-muted/50 transition-all duration-200">
+              <div className="w-14 h-14 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg className="w-7 h-7 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Partnerships</h3>
+              <p className="text-muted-foreground text-sm">White-label solutions and API integrations</p>
+            </div>
+          </div>
+
+          {/* Why Choose Us */}
+          <div className="mb-16">
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-foreground mb-4">Why Choose AI SEO Turbo?</h3>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                15+ years of combined experience helping 10,000+ businesses achieve measurable SEO growth
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Certified SEO Specialists</h4>
+                    <p className="text-muted-foreground text-sm">Personalized guidance from experts with proven track records</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Fast Response Times</h4>
+                    <p className="text-muted-foreground text-sm">24h for inquiries, 4h for urgent technical issues</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Step-by-Step Solutions</h4>
+                    <p className="text-muted-foreground text-sm">We don't just identify problems—we provide actionable fixes</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                    <svg className="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Results-Driven Approach</h4>
+                    <p className="text-muted-foreground text-sm">Focus on strategies that deliver measurable business impact</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-2xl border border-border">
+                <h4 className="text-xl font-semibold text-foreground mb-6 text-center">Response Time Guarantee</h4>
+                <div className="grid grid-cols-3 gap-4 text-center mb-6">
+                  <div className="bg-white dark:bg-slate-800 p-4 rounded-xl">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">24h</div>
+                    <div className="text-xs text-muted-foreground">General Response</div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800 p-4 rounded-xl">
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-400 mb-1">4h</div>
+                    <div className="text-xs text-muted-foreground">Urgent Issues</div>
+                  </div>
+                  <div className="bg-white dark:bg-slate-800 p-4 rounded-xl">
+                    <div className="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-1">100%</div>
+                    <div className="text-xs text-muted-foreground">Satisfaction</div>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground text-center">
+                  Our support team includes certified SEO specialists and AI engineers ready to help you succeed
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

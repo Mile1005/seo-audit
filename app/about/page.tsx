@@ -35,26 +35,61 @@ export default function AboutPage() {
       {/* Story Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-8 text-center">Our Story</h2>
-            <div className="prose prose-lg mx-auto text-muted-foreground">
-              <p className="text-lg leading-relaxed mb-6">
-                Founded in 2023 by a team of seasoned SEO professionals and AI engineers, AI SEO Turbo was born from a simple observation:
-                traditional SEO audits were too slow, too expensive, and often missed critical technical issues that could make or break search rankings.
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Our Story</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                How AI SEO Turbo was born from a simple observation about the SEO industry
               </p>
-              <p className="text-lg leading-relaxed mb-6">
-                Our founders, with over 15 years of combined experience in enterprise SEO and software development, recognized that artificial intelligence
-                could revolutionize the SEO industry. What once took days of manual analysis could be accomplished in minutes with machine learning algorithms
-                that never tire, never miss details, and continuously learn from millions of websites.
-              </p>
-              <p className="text-lg leading-relaxed mb-6">
-                Today, AI SEO Turbo serves over 10,000 businesses worldwide, from local mom-and-pop shops to Fortune 500 enterprises.
-                Our AI-powered platform has helped clients achieve an average of 300% increase in organic traffic within the first 90 days of implementation.
-              </p>
-              <p className="text-lg leading-relaxed">
-                We're not just another SEO tool—we're your AI-powered growth partner, combining human expertise with cutting-edge technology
-                to deliver results that matter to your bottom line.
-              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h3 className="text-2xl font-semibold text-foreground mb-4">The Problem We Solved</h3>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Traditional SEO audits were too slow, too expensive, and often missed critical technical issues that could make or break search rankings.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-muted-foreground">Days of manual analysis required</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-muted-foreground">Thousands of dollars in consulting fees</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                    <span className="text-muted-foreground">Critical issues often missed</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-2xl">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">15+</div>
+                  <div className="text-muted-foreground mb-6">Years Combined Experience</div>
+                  <div className="text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2">10,000+</div>
+                  <div className="text-muted-foreground">Businesses Served Worldwide</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-2xl">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">Our Mission</h3>
+                  <p className="text-muted-foreground">
+                    Democratize SEO insights and help businesses of all sizes succeed online through cutting-edge AI technology.
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">Our Vision</h3>
+                  <p className="text-muted-foreground">
+                    Become the world's most trusted AI-powered SEO platform, making professional-grade optimization accessible to everyone.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

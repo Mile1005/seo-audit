@@ -122,66 +122,113 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Comprehensive Careers Introduction */}
-      <section className="py-16 px-4 bg-slate-800/30">
-        <div className="container mx-auto max-w-4xl">
-          <div className="prose prose-lg prose-invert mx-auto">
-            <h2>Careers in AI-Powered SEO: Shape the Future of Digital Marketing</h2>
-            <p>
-              At AI SEO Turbo, we're not just building tools – we're pioneering the next generation of search engine optimization.
-              Our team combines deep technical expertise with cutting-edge artificial intelligence to solve complex SEO challenges
-              that traditional tools simply can't address.
-            </p>
+      {/* Why Join Us Section */}
+      <section className="py-20 bg-slate-800/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Shape the Future of SEO
+              </h2>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                Join a company pioneering AI-powered SEO solutions. We're not just building tools – we're revolutionizing how businesses approach search optimization.
+              </p>
+            </div>
 
-            <p>
-              Join a company that's at the forefront of the SEO revolution. We're developing machine learning models that understand
-              search intent, predict algorithm changes, and provide actionable insights that drive real business results. If you're
-              passionate about technology, data, and digital marketing, this is your opportunity to work on problems that matter.
-            </p>
+            <div className="grid lg:grid-cols-2 gap-12 mb-16">
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-6">Why AI-Powered SEO?</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                      <Zap className="w-4 h-4 text-blue-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Cutting-Edge Technology</h4>
+                      <p className="text-gray-400">Work with state-of-the-art ML models and AI frameworks</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                      <Target className="w-4 h-4 text-green-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Real Impact</h4>
+                      <p className="text-gray-400">Solve complex problems that affect millions of businesses</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                      <Users className="w-4 h-4 text-purple-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Global Scale</h4>
+                      <p className="text-gray-400">Build tools used by businesses worldwide</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            <h3>Why Work in AI-Powered SEO?</h3>
-            <p>
-              The SEO industry is undergoing a dramatic transformation. Traditional keyword research and link building are being
-              augmented by sophisticated AI systems that can analyze user behavior, predict search trends, and optimize content
-              at scale. Working at AI SEO Turbo means being part of this transformation.
-            </p>
+              <div className="bg-gradient-to-br from-blue-900/20 to-purple-900/20 border border-slate-700 rounded-2xl p-8">
+                <h3 className="text-xl font-semibold text-white mb-6">Industry Growth</h3>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">AI in SEO Market</span>
+                    <span className="text-green-400 font-semibold">$45B by 2027</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Job Growth Rate</span>
+                    <span className="text-blue-400 font-semibold">+300% in 5 years</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Remote Work</span>
+                    <span className="text-purple-400 font-semibold">100% Flexible</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <h4>Growth Opportunities in a Booming Industry:</h4>
-            <ul>
-              <li><strong>AI & Machine Learning:</strong> Work with state-of-the-art ML models for natural language processing and predictive analytics</li>
-              <li><strong>Big Data Processing:</strong> Handle massive datasets from web crawls, search engine results, and user behavior analytics</li>
-              <li><strong>Full-Stack Development:</strong> Build scalable web applications that serve millions of SEO professionals worldwide</li>
-              <li><strong>Product Strategy:</strong> Shape the future of SEO tools and influence how businesses approach digital marketing</li>
-            </ul>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
+                <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                </div>
+                <h4 className="text-white font-semibold mb-2">AI/ML Engineers</h4>
+                <p className="text-gray-400 text-sm">Build next-gen SEO algorithms</p>
+              </div>
 
-            <h3>Our Technology Stack & Innovation Focus</h3>
-            <p>
-              We use modern technologies and frameworks to build robust, scalable solutions. Our engineering team works with
-              React, Next.js, TypeScript, Python, and cutting-edge AI frameworks. We believe in staying current with technology
-              trends while maintaining high standards for code quality and system reliability.
-            </p>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
+                <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h4 className="text-white font-semibold mb-2">Full-Stack Devs</h4>
+                <p className="text-gray-400 text-sm">Scale our platform globally</p>
+              </div>
 
-            <h4>Technical Challenges We Solve:</h4>
-            <ul>
-              <li>Real-time web crawling and content analysis at scale</li>
-              <li>Machine learning model training for SEO pattern recognition</li>
-              <li>Distributed data processing for large website audits</li>
-              <li>Advanced natural language processing for content optimization</li>
-              <li>Predictive analytics for search trend forecasting</li>
-            </ul>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
+                <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h4 className="text-white font-semibold mb-2">SEO Specialists</h4>
+                <p className="text-gray-400 text-sm">Drive organic growth strategies</p>
+              </div>
 
-            <h2>Company Culture: Innovation, Collaboration, Impact</h2>
-            <p>
-              We foster a culture where innovation thrives through collaboration. Our small, focused team operates with complete
-              transparency and flat hierarchies. Every team member has direct access to leadership and can influence product
-              direction. We believe that the best ideas come from diverse perspectives and open communication.
-            </p>
-
-            <p>
-              Remote-first since day one, we've built a distributed team that spans multiple time zones. This global perspective
-              enriches our understanding of international SEO challenges and helps us build tools that work for businesses worldwide.
-              Our asynchronous communication culture ensures that everyone can contribute effectively, regardless of location.
-            </p>
+              <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
+                <div className="w-12 h-12 bg-orange-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <h4 className="text-white font-semibold mb-2">Product Managers</h4>
+                <p className="text-gray-400 text-sm">Shape the future of SEO tools</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

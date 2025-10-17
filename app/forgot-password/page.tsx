@@ -52,7 +52,7 @@ export default function ForgotPasswordPage() {
       <section className="bg-slate-900/50 border-b border-slate-800 py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="prose prose-lg prose-invert mx-auto">
-            <h1>Secure Account Recovery</h1>
+            <h2>Secure Account Recovery</h2>
             <p>
               Account security is paramount when working with SEO tools that handle sensitive website data and competitive intelligence.
               Our password reset process ensures that only authorized users can regain access to their accounts.
@@ -117,7 +117,7 @@ export default function ForgotPasswordPage() {
               <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold mb-4">Check Your Email! <span aria-hidden>📧</span></h1>
+              <h2 className="text-3xl font-bold mb-4">Check Your Email! <span aria-hidden>📧</span></h2>
               <p className="text-gray-300 mb-6">We've sent a password reset link to:</p>
               <div className="bg-slate-800 rounded-xl p-4 mb-8">
                 <p className="font-semibold text-blue-200">{email}</p>

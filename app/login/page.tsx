@@ -228,6 +228,161 @@ function LoginContent() {
           </div>
         </div>
       </div>
+
+      {/* Benefits Section */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-white mb-4">Access Your SEO Dashboard</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Sign in to unlock powerful SEO tools and insights that help you optimize your website for better search rankings.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">Real-Time Analytics</h3>
+            <p className="text-gray-400 text-sm">
+              Monitor your website's performance metrics, Core Web Vitals, and SEO health in real-time with our comprehensive dashboard.
+            </p>
+          </div>
+
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">AI-Powered Insights</h3>
+            <p className="text-gray-400 text-sm">
+              Get intelligent recommendations powered by machine learning to fix SEO issues and improve your search rankings automatically.
+            </p>
+          </div>
+
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+            <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
+              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">Secure & Reliable</h3>
+            <p className="text-gray-400 text-sm">
+              Your data is protected with enterprise-grade security, two-factor authentication, and encrypted connections for peace of mind.
+            </p>
+          </div>
+        </div>
+
+        {/* What You Get Section */}
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8">
+          <h2 className="text-2xl font-bold text-white mb-6">What You Get With Your Account</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Comprehensive SEO Audits</h3>
+                <p className="text-gray-400 text-sm">Run unlimited audits to identify and fix technical SEO issues across your entire website.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Keyword Tracking</h3>
+                <p className="text-gray-400 text-sm">Monitor your keyword rankings and discover new opportunities to improve your visibility.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Competitor Analysis</h3>
+                <p className="text-gray-400 text-sm">Compare your performance against competitors and learn from their strategies.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Backlink Monitoring</h3>
+                <p className="text-gray-400 text-sm">Track your backlink profile, identify toxic links, and discover link-building opportunities.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Performance Tracking</h3>
+                <p className="text-gray-400 text-sm">Monitor page speed, Core Web Vitals, and mobile usability to ensure optimal user experience.</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-white font-semibold mb-1">Custom Reports</h3>
+                <p className="text-gray-400 text-sm">Generate professional SEO reports in PDF format to share with your team and clients.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Security Features */}
+        <div className="mt-12 bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-800/50 rounded-2xl p-8">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-1">Enterprise-Grade Security</h2>
+              <p className="text-gray-300">Your account and data are protected by industry-leading security measures</p>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="bg-slate-900/50 rounded-xl p-4">
+              <h3 className="text-white font-semibold mb-2">🔐 Two-Factor Authentication</h3>
+              <p className="text-gray-400 text-sm">Add an extra layer of security with 2FA protection for your account.</p>
+            </div>
+            <div className="bg-slate-900/50 rounded-xl p-4">
+              <h3 className="text-white font-semibold mb-2">🔒 SSL Encryption</h3>
+              <p className="text-gray-400 text-sm">All data transmitted between your browser and our servers is encrypted.</p>
+            </div>
+            <div className="bg-slate-900/50 rounded-xl p-4">
+              <h3 className="text-white font-semibold mb-2">🛡️ SOC 2 Compliant</h3>
+              <p className="text-gray-400 text-sm">We follow strict security standards to protect your sensitive information.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </MainLayout>
   );
 }

@@ -483,6 +483,209 @@ export default function SignupPage() {
           )}
         </div>
       </div>
+
+      {/* Benefits Section - Only show on step 1 */}
+      {currentStep === 1 && (
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white mb-4">Start Your SEO Journey Today</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Join thousands of marketers and businesses who trust AI SEO Turbo to optimize their websites and improve search rankings.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Instant Setup</h3>
+              <p className="text-gray-400 text-sm">
+                Get started in minutes with our simple onboarding process and immediate access to all features.
+              </p>
+            </div>
+
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">No Credit Card</h3>
+              <p className="text-gray-400 text-sm">
+                Start with our free plan - no credit card required. Upgrade anytime when you're ready to scale.
+              </p>
+            </div>
+
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">Cancel Anytime</h3>
+              <p className="text-gray-400 text-sm">
+                No long-term contracts or commitments. Cancel your subscription anytime with just one click.
+              </p>
+            </div>
+
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white mb-2">24/7 Support</h3>
+              <p className="text-gray-400 text-sm">
+                Get help whenever you need it with our responsive support team and extensive documentation.
+              </p>
+            </div>
+          </div>
+
+          {/* What You'll Get Section */}
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mb-12">
+            <h2 className="text-2xl font-bold text-white mb-6">Everything You Need to Succeed</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">AI-Powered SEO Analysis</h3>
+                  <p className="text-gray-400 text-sm">Get intelligent insights and recommendations powered by advanced machine learning algorithms.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Technical SEO Audits</h3>
+                  <p className="text-gray-400 text-sm">Comprehensive website crawling to identify broken links, duplicate content, and technical issues.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Keyword Research Tools</h3>
+                  <p className="text-gray-400 text-sm">Discover high-value keywords, track rankings, and identify content opportunities to drive traffic.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Competitor Analysis</h3>
+                  <p className="text-gray-400 text-sm">Analyze competitor strategies, backlink profiles, and keyword targeting to stay ahead.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Backlink Monitoring</h3>
+                  <p className="text-gray-400 text-sm">Track your backlink profile, identify toxic links, and discover new link-building opportunities.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Performance Tracking</h3>
+                  <p className="text-gray-400 text-sm">Monitor page speed, Core Web Vitals, and mobile usability for optimal user experience.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">Content Optimization</h3>
+                  <p className="text-gray-400 text-sm">Get recommendations to optimize your content for target keywords and improve readability.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">White-Label Reports</h3>
+                  <p className="text-gray-400 text-sm">Generate professional, branded SEO reports in PDF format for clients and stakeholders.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="w-6 h-6 bg-green-600/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-4 h-4 text-green-400" />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">API Access</h3>
+                  <p className="text-gray-400 text-sm">Integrate SEO data into your existing tools and workflows with our powerful REST API.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Success Stories */}
+          <div className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-800/50 rounded-2xl p-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-bold text-white mb-2">Join Successful Companies</h2>
+              <p className="text-gray-300">See how businesses like yours are achieving SEO success</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-slate-900/50 rounded-xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="text-3xl font-bold text-blue-400">157%</div>
+                  <div className="text-sm text-gray-400">increase</div>
+                </div>
+                <p className="text-white font-semibold mb-2">Organic Traffic Growth</p>
+                <p className="text-gray-400 text-sm">
+                  "AI SEO Turbo helped us identify and fix critical issues that were holding back our rankings. Within 3 months, our organic traffic more than doubled."
+                </p>
+                <p className="text-blue-400 text-sm mt-3 font-medium">- Sarah M., Marketing Director</p>
+              </div>
+
+              <div className="bg-slate-900/50 rounded-xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="text-3xl font-bold text-green-400">$50K+</div>
+                  <div className="text-sm text-gray-400">saved</div>
+                </div>
+                <p className="text-white font-semibold mb-2">Agency Cost Reduction</p>
+                <p className="text-gray-400 text-sm">
+                  "We replaced expensive agency fees with AI SEO Turbo and got better results. The platform pays for itself many times over."
+                </p>
+                <p className="text-green-400 text-sm mt-3 font-medium">- Mike Chen, E-commerce Owner</p>
+              </div>
+
+              <div className="bg-slate-900/50 rounded-xl p-6">
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="text-3xl font-bold text-purple-400">#1</div>
+                  <div className="text-sm text-gray-400">rankings</div>
+                </div>
+                <p className="text-white font-semibold mb-2">Top Position Achieved</p>
+                <p className="text-gray-400 text-sm">
+                  "Using the keyword research and content optimization tools, we achieved #1 rankings for our most valuable keywords in competitive industries."
+                </p>
+                <p className="text-purple-400 text-sm mt-3 font-medium">- Jessica T., SEO Consultant</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 }
