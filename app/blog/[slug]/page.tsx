@@ -825,6 +825,676 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           </div>
         </article>
 
+        {/* Additional SEO Content Section */}
+        <section className="py-16 bg-slate-950">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Core Web Vitals specific content */}
+            {post.slug === 'core-web-vitals-optimization-guide' && (
+              <>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-white mb-4">Why Core Web Vitals Matter for SEO</h2>
+                  <p className="text-gray-400 max-w-3xl mx-auto">
+                    Google uses Core Web Vitals as ranking factors in its Page Experience update. Optimizing these metrics is essential for maintaining competitive search rankings and providing excellent user experience.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-6 mb-16">
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">LCP Optimization</h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      Largest Contentful Paint measures loading performance. Target under 2.5 seconds for optimal user experience and SEO rankings.
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>Image optimization and compression</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>CDN implementation for faster delivery</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>Remove render-blocking resources</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">FID Improvement</h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      First Input Delay tracks interactivity. Keep it under 100ms to ensure users can interact with your page immediately.
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>Minimize JavaScript execution time</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>Break up long tasks into smaller chunks</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>Use web workers for heavy computations</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">CLS Stability</h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      Cumulative Layout Shift measures visual stability. Maintain a score of 0.1 or less to prevent frustrating layout shifts.
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-400 mt-1">✓</span>
+                        <span>Set explicit dimensions for media</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-400 mt-1">✓</span>
+                        <span>Reserve space for dynamic content</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-purple-400 mt-1">✓</span>
+                        <span>Avoid inserting content above viewport</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-900/40 to-purple-900/40 border border-blue-800/50 rounded-2xl p-8">
+                  <h2 className="text-2xl font-bold text-white mb-6">Tools for Measuring Core Web Vitals</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-slate-900/50 rounded-xl p-6">
+                      <h3 className="text-white font-semibold mb-3">Google PageSpeed Insights</h3>
+                      <p className="text-gray-400 text-sm mb-3">
+                        Free tool that provides both lab and field data for Core Web Vitals. Get detailed recommendations for improvements and see how real users experience your site.
+                      </p>
+                      <p className="text-blue-400 text-sm">Measures: LCP, FID, CLS, and more</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-6">
+                      <h3 className="text-white font-semibold mb-3">Chrome User Experience Report</h3>
+                      <p className="text-gray-400 text-sm mb-3">
+                        Real-world performance data from actual Chrome users. This data directly impacts your Core Web Vitals assessment in Google Search Console.
+                      </p>
+                      <p className="text-green-400 text-sm">Source: Real user metrics (RUM)</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-6">
+                      <h3 className="text-white font-semibold mb-3">Google Search Console</h3>
+                      <p className="text-gray-400 text-sm mb-3">
+                        View Core Web Vitals reports for your entire website. Identify pages that need improvement and track your progress over time with official Google data.
+                      </p>
+                      <p className="text-purple-400 text-sm">Includes: Mobile & Desktop reports</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-6">
+                      <h3 className="text-white font-semibold mb-3">AI SEO Turbo Performance Analyzer</h3>
+                      <p className="text-gray-400 text-sm mb-3">
+                        Comprehensive performance testing integrated with SEO audits. Get actionable recommendations specifically tailored to improve your Core Web Vitals scores.
+                      </p>
+                      <p className="text-orange-400 text-sm">Automated: Continuous monitoring</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Technical SEO specific content */}
+            {post.slug === 'technical-seo-best-practices-2025' && (
+              <>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-white mb-4">Master Technical SEO in 2025</h2>
+                  <p className="text-gray-400 max-w-3xl mx-auto">
+                    Technical SEO forms the foundation of your website's search engine performance. Without proper technical optimization, even the best content strategies will fail to achieve their full potential in search rankings.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Site Architecture</h3>
+                    <p className="text-gray-400 text-sm">
+                      Logical site structure with clear hierarchies, clean URLs, and optimal page depth for better crawlability and indexing.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">XML Sitemaps</h3>
+                    <p className="text-gray-400 text-sm">
+                      Comprehensive sitemaps that help search engines discover and crawl all important pages on your website efficiently.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">HTTPS Security</h3>
+                    <p className="text-gray-400 text-sm">
+                      SSL certificates and HTTPS implementation for secure connections, user trust, and improved search engine rankings.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Mobile-First</h3>
+                    <p className="text-gray-400 text-sm">
+                      Responsive design and mobile optimization for Google's mobile-first indexing and better mobile user experience.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mb-12">
+                  <h2 className="text-2xl font-bold text-white mb-6">Common Technical SEO Issues and Solutions</h2>
+                  <div className="space-y-6">
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-red-600/20 rounded-lg flex items-center justify-center">
+                        <span className="text-red-400 font-bold">✕</span>
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold mb-2">Issue: Duplicate Content</h3>
+                        <p className="text-gray-400 text-sm mb-2">Multiple URLs serving the same content confuses search engines and dilutes ranking potential.</p>
+                        <p className="text-green-400 text-sm"><strong>Solution:</strong> Implement canonical tags, 301 redirects, and consistent internal linking.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-red-600/20 rounded-lg flex items-center justify-center">
+                        <span className="text-red-400 font-bold">✕</span>
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold mb-2">Issue: Broken Links (404 Errors)</h3>
+                        <p className="text-gray-400 text-sm mb-2">Dead links create poor user experience and waste crawl budget.</p>
+                        <p className="text-green-400 text-sm"><strong>Solution:</strong> Regular link audits, fix or redirect broken URLs, maintain proper redirects.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-red-600/20 rounded-lg flex items-center justify-center">
+                        <span className="text-red-400 font-bold">✕</span>
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold mb-2">Issue: Slow Page Speed</h3>
+                        <p className="text-gray-400 text-sm mb-2">Slow loading times hurt user experience and search rankings significantly.</p>
+                        <p className="text-green-400 text-sm"><strong>Solution:</strong> Optimize images, enable compression, minify code, use CDN, implement caching.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <div className="flex-shrink-0 w-8 h-8 bg-red-600/20 rounded-lg flex items-center justify-center">
+                        <span className="text-red-400 font-bold">✕</span>
+                      </div>
+                      <div>
+                        <h3 className="text-white font-semibold mb-2">Issue: Missing Structured Data</h3>
+                        <p className="text-gray-400 text-sm mb-2">Without schema markup, search engines miss opportunities for rich results.</p>
+                        <p className="text-green-400 text-sm"><strong>Solution:</strong> Implement JSON-LD schema for articles, products, reviews, and local business.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-blue-900/40 to-indigo-900/40 border border-blue-800/50 rounded-2xl p-8">
+                  <h2 className="text-2xl font-bold text-white mb-4">Technical SEO Audit Checklist</h2>
+                  <p className="text-gray-300 mb-6">Use this comprehensive checklist to audit your website's technical SEO health:</p>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 className="text-white font-semibold mb-4">Crawlability & Indexing</h3>
+                      <ul className="space-y-2 text-gray-300 text-sm">
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 mt-1">□</span>
+                          <span>Check robots.txt configuration</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 mt-1">□</span>
+                          <span>Submit XML sitemap to search engines</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 mt-1">□</span>
+                          <span>Fix crawl errors in Search Console</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 mt-1">□</span>
+                          <span>Review indexation status</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-blue-400 mt-1">□</span>
+                          <span>Implement canonical tags properly</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-white font-semibold mb-4">Performance & UX</h3>
+                      <ul className="space-y-2 text-gray-300 text-sm">
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">□</span>
+                          <span>Optimize Core Web Vitals scores</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">□</span>
+                          <span>Ensure mobile-friendly design</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">□</span>
+                          <span>Fix mixed content warnings</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">□</span>
+                          <span>Test site speed across devices</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <span className="text-green-400 mt-1">□</span>
+                          <span>Implement HTTPS site-wide</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Local SEO specific content */}
+            {post.slug === 'local-seo-strategies-that-work' && (
+              <>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-white mb-4">Dominate Local Search Results</h2>
+                  <p className="text-gray-400 max-w-3xl mx-auto">
+                    Local SEO is critical for businesses serving specific geographic areas. With 46% of all Google searches having local intent, optimizing for local search can dramatically increase foot traffic and phone inquiries.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-6 mb-16">
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-red-600 to-orange-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Google Business Profile</h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      Your Google Business Profile is the foundation of local SEO. Complete optimization increases visibility in local pack and map results.
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-400 mt-1">✓</span>
+                        <span>Claim and verify your listing</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-400 mt-1">✓</span>
+                        <span>Add high-quality photos and videos</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-400 mt-1">✓</span>
+                        <span>Post regular updates and offers</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-red-400 mt-1">✓</span>
+                        <span>Respond to all customer reviews</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Local Citations</h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      Consistent NAP (Name, Address, Phone) information across the web builds trust and authority for local search rankings.
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>List on major directories (Yelp, Yellow Pages)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>Ensure NAP consistency everywhere</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>Target industry-specific directories</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-blue-400 mt-1">✓</span>
+                        <span>Clean up duplicate listings</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Reviews & Reputation</h3>
+                    <p className="text-gray-400 text-sm mb-4">
+                      Customer reviews are a major local ranking factor and influence consumer decisions significantly.
+                    </p>
+                    <ul className="text-sm text-gray-400 space-y-2">
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>Encourage satisfied customers to review</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>Respond to all reviews promptly</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>Address negative feedback professionally</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>Monitor multiple review platforms</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mb-12">
+                  <h2 className="text-2xl font-bold text-white mb-6">Local SEO Ranking Factors</h2>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+                        <span className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">1</span>
+                        Google Business Profile Signals (25%)
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-3">Profile completeness, categories, keywords in business title, reviews, photos, and regular posts all contribute to local rankings.</p>
+                      <div className="bg-slate-800/50 rounded-lg p-4">
+                        <p className="text-sm text-gray-300"><strong className="text-white">Pro Tip:</strong> Businesses with complete profiles are 2.7x more likely to be considered reputable by consumers.</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+                        <span className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">2</span>
+                        Link Signals (17%)
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-3">Inbound links from local websites, quality and quantity of linking domains, and anchor text relevance impact rankings.</p>
+                      <div className="bg-slate-800/50 rounded-lg p-4">
+                        <p className="text-sm text-gray-300"><strong className="text-white">Pro Tip:</strong> Focus on getting links from local chambers of commerce, news sites, and business associations.</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+                        <span className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">3</span>
+                        Review Signals (15%)
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-3">Review quantity, review velocity, review diversity across platforms, and review sentiment all influence local pack rankings.</p>
+                      <div className="bg-slate-800/50 rounded-lg p-4">
+                        <p className="text-sm text-gray-300"><strong className="text-white">Pro Tip:</strong> Aim for 3-5 new reviews per month for optimal ranking impact and customer trust.</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+                        <span className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center text-white font-bold text-sm">4</span>
+                        On-Page Signals (14%)
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-3">NAP consistency, location keywords in titles/headers, proper schema markup, and mobile optimization affect visibility.</p>
+                      <div className="bg-slate-800/50 rounded-lg p-4">
+                        <p className="text-sm text-gray-300"><strong className="text-white">Pro Tip:</strong> Include city names and "near me" variations naturally in your content and metadata.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-red-900/40 to-orange-900/40 border border-red-800/50 rounded-2xl p-8">
+                  <h2 className="text-2xl font-bold text-white mb-4">Local SEO Success Metrics</h2>
+                  <p className="text-gray-300 mb-6">Track these key performance indicators to measure your local SEO effectiveness:</p>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="bg-slate-900/50 rounded-xl p-4 text-center">
+                      <div className="text-3xl font-bold text-red-400 mb-2">Local Pack</div>
+                      <p className="text-gray-400 text-sm">Rankings in Google's local 3-pack for target keywords and service areas</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-4 text-center">
+                      <div className="text-3xl font-bold text-orange-400 mb-2">GBP Insights</div>
+                      <p className="text-gray-400 text-sm">Views, clicks, calls, and direction requests from your Google Business Profile</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-4 text-center">
+                      <div className="text-3xl font-bold text-yellow-400 mb-2">Conversions</div>
+                      <p className="text-gray-400 text-sm">Phone calls, form submissions, and foot traffic from local search traffic</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Content SEO specific content */}
+            {post.slug === 'content-seo-creating-search-friendly-content' && (
+              <>
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-white mb-4">Creating Content That Ranks and Converts</h2>
+                  <p className="text-gray-400 max-w-3xl mx-auto">
+                    Content SEO combines the art of writing compelling copy with the science of search optimization. Learn how to create content that satisfies both users and search engines for maximum visibility and engagement.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Keyword Research</h3>
+                    <p className="text-gray-400 text-sm">
+                      Foundation of content SEO. Identify high-value keywords with good search volume and reasonable competition.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Search Intent</h3>
+                    <p className="text-gray-400 text-sm">
+                      Match content to user intent: informational, navigational, commercial, or transactional queries.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Content Quality</h3>
+                    <p className="text-gray-400 text-sm">
+                      E-E-A-T principles: Experience, Expertise, Authoritativeness, and Trustworthiness in every piece.
+                    </p>
+                  </div>
+
+                  <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6">
+                    <div className="w-12 h-12 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Optimization</h3>
+                    <p className="text-gray-400 text-sm">
+                      Strategic placement of keywords in titles, headers, meta descriptions, and naturally throughout content.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mb-12">
+                  <h2 className="text-2xl font-bold text-white mb-6">Content SEO Best Practices Checklist</h2>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 bg-blue-600/20 rounded-lg p-3">Before Writing</h3>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+                          <span><strong className="text-white">Research target keywords</strong> - Use tools to find high-value keywords with good search volume</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                          <span><strong className="text-white">Analyze search intent</strong> - Understand what users really want when searching</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+                          <span><strong className="text-white">Study competitors</strong> - Review top-ranking content for your target keywords</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
+                          <span><strong className="text-white">Create content outline</strong> - Plan structure with H2, H3 hierarchy</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 bg-green-600/20 rounded-lg p-3">While Writing</h3>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+                          <span><strong className="text-white">Compelling headline</strong> - Include primary keyword, make it click-worthy</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                          <span><strong className="text-white">Strong introduction</strong> - Hook readers, include keyword in first 100 words</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+                          <span><strong className="text-white">Scannable format</strong> - Use headers, bullet points, short paragraphs</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
+                          <span><strong className="text-white">Natural keyword usage</strong> - Include variations, avoid stuffing</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 bg-purple-600/20 rounded-lg p-3">After Writing</h3>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+                          <span><strong className="text-white">Optimize meta data</strong> - Write compelling title tag and meta description</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                          <span><strong className="text-white">Add internal links</strong> - Link to relevant pages on your site</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+                          <span><strong className="text-white">Optimize images</strong> - Add alt text, compress file sizes</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
+                          <span><strong className="text-white">Add schema markup</strong> - Implement Article schema for better SERP appearance</span>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="text-white font-semibold mb-4 bg-orange-600/20 rounded-lg p-3">After Publishing</h3>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+                          <span><strong className="text-white">Promote content</strong> - Share on social media, email newsletters</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</span>
+                          <span><strong className="text-white">Build backlinks</strong> - Reach out for guest posts, partnerships</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</span>
+                          <span><strong className="text-white">Monitor performance</strong> - Track rankings, traffic, engagement</span>
+                        </li>
+                        <li className="flex items-start gap-3 text-gray-300">
+                          <span className="flex-shrink-0 w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center text-white text-xs font-bold">4</span>
+                          <span><strong className="text-white">Update regularly</strong> - Refresh content every 6-12 months</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-purple-800/50 rounded-2xl p-8">
+                  <h2 className="text-2xl font-bold text-white mb-4">Content Types That Perform Best</h2>
+                  <p className="text-gray-300 mb-6">Different content formats serve different purposes in your content SEO strategy:</p>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="bg-slate-900/50 rounded-xl p-5">
+                      <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                        <span className="text-2xl">📝</span> How-To Guides
+                      </h3>
+                      <p className="text-gray-400 text-sm">Step-by-step tutorials that solve specific problems. High engagement and shareability.</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-5">
+                      <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                        <span className="text-2xl">📊</span> Data Studies
+                      </h3>
+                      <p className="text-gray-400 text-sm">Original research and statistics. Excellent for earning authoritative backlinks.</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-5">
+                      <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                        <span className="text-2xl">✅</span> Checklists
+                      </h3>
+                      <p className="text-gray-400 text-sm">Actionable lists that provide quick value. High bookmark and return rates.</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-5">
+                      <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                        <span className="text-2xl">🎯</span> Case Studies
+                      </h3>
+                      <p className="text-gray-400 text-sm">Real-world results and social proof. Builds trust and demonstrates expertise.</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-5">
+                      <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                        <span className="text-2xl">📈</span> Ultimate Guides
+                      </h3>
+                      <p className="text-gray-400 text-sm">Comprehensive resources (2000+ words). Strong for competitive keywords.</p>
+                    </div>
+                    <div className="bg-slate-900/50 rounded-xl p-5">
+                      <h3 className="text-white font-semibold mb-2 flex items-center gap-2">
+                        <span className="text-2xl">❓</span> FAQ Pages
+                      </h3>
+                      <p className="text-gray-400 text-sm">Answer common questions. Great for voice search and featured snippets.</p>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <section className="py-20 bg-slate-900/50">

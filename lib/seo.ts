@@ -311,7 +311,7 @@ export const pageSEO = {
   },
 
   'case-studies': {
-    title: 'SEO Case Studies - Real Results & Success Stories | AI SEO Turbo',
+    title: 'SEO Success Stories & Case Studies | AI SEO Turbo',
     description: 'Explore real SEO success stories and case studies. See how businesses achieved significant traffic growth and ranking improvements using AI SEO Turbo.',
     keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'website optimization case studies'],
     canonical: 'https://www.aiseoturbo.com/case-studies'
