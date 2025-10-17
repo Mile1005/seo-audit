@@ -132,7 +132,7 @@ export default function SEOAuditWalkthroughPage() {
               </div>
 
               {/* Step-by-step Guide */}
-              <h2 className="text-2xl font-bold text-white mb-6">Step-by-step walkthrough</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Step-by-step walkthrough</h3>
 
               <div className="space-y-8">
 
@@ -291,7 +291,7 @@ export default function SEOAuditWalkthroughPage() {
               </div>
 
               {/* Common Issues */}
-              <h2 className="text-2xl font-bold text-white mb-6">Common issues and solutions</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Common issues and solutions</h3>
 
               <div className="space-y-4">
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">

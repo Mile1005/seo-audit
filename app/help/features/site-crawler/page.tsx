@@ -144,7 +144,7 @@ export default function SiteCrawlerConfigurationPage() {
               </div>
 
               {/* Configuration Options */}
-              <h2 className="text-2xl font-bold text-white mb-6">Crawler configuration options</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Crawler configuration options</h3>
 
               <div className="space-y-8">
 
@@ -264,7 +264,7 @@ export default function SiteCrawlerConfigurationPage() {
               </div>
 
               {/* Best Practices */}
-              <h2 className="text-2xl font-bold text-white mb-6">Crawler best practices</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Crawler best practices</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
@@ -297,7 +297,7 @@ export default function SiteCrawlerConfigurationPage() {
               </div>
 
               {/* Troubleshooting */}
-              <h2 className="text-2xl font-bold text-white mb-6">Troubleshooting crawler issues</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Troubleshooting crawler issues</h3>
 
               <div className="space-y-4">
                 <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">

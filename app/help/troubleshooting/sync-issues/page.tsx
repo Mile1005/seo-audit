@@ -153,7 +153,7 @@ export default function SyncIssuesPage() {
               </div>
 
               {/* Common Sync Issues */}
-              <h2 className="text-2xl font-bold text-white mb-6">Common sync problems</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Common sync problems</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -302,7 +302,7 @@ export default function SyncIssuesPage() {
               </div>
 
               {/* Advanced Troubleshooting */}
-              <h2 className="text-2xl font-bold text-white mb-6">Advanced troubleshooting</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Advanced troubleshooting</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -365,7 +365,7 @@ export default function SyncIssuesPage() {
               </div>
 
               {/* Sync Status Dashboard */}
-              <h2 className="text-2xl font-bold text-white mb-6">Checking sync status</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Checking sync status</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <h3 className="text-white font-semibold mb-4">How to check your sync status:</h3>
@@ -413,7 +413,7 @@ export default function SyncIssuesPage() {
               </div>
 
               {/* Prevention */}
-              <h2 className="text-2xl font-bold text-white mb-6">Preventing sync issues</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Preventing sync issues</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">

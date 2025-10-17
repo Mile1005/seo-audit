@@ -120,7 +120,7 @@ export default function CompetitorAnalysisGuidePage() {
               </div>
 
               {/* Step-by-step Guide */}
-              <h2 className="text-2xl font-bold text-white mb-6">How to perform competitor analysis</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How to perform competitor analysis</h3>
 
               <div className="space-y-8">
 
@@ -290,7 +290,7 @@ export default function CompetitorAnalysisGuidePage() {
               </div>
 
               {/* Best Practices */}
-              <h2 className="text-2xl font-bold text-white mb-6">Best practices for competitor analysis</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Best practices for competitor analysis</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">

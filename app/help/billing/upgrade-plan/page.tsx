@@ -125,7 +125,7 @@ export default function UpgradePlanPage() {
               </div>
 
               {/* Plan Comparison */}
-              <h2 className="text-2xl font-bold text-white mb-6">Plan comparison</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Plan comparison</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="overflow-x-auto">
@@ -181,7 +181,7 @@ export default function UpgradePlanPage() {
               </div>
 
               {/* How to Upgrade */}
-              <h2 className="text-2xl font-bold text-white mb-6">How to upgrade your plan</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How to upgrade your plan</h3>
 
               <div className="space-y-8">
 
@@ -268,7 +268,7 @@ export default function UpgradePlanPage() {
               </div>
 
               {/* Billing Information */}
-              <h2 className="text-2xl font-bold text-white mb-6">Billing and pricing details</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Billing and pricing details</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
@@ -317,7 +317,7 @@ export default function UpgradePlanPage() {
               </div>
 
               {/* Need Help Deciding */}
-              <h2 className="text-2xl font-bold text-white mb-6">Need help choosing the right plan?</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Need help choosing the right plan?</h3>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
                 <p className="text-gray-300 mb-4">

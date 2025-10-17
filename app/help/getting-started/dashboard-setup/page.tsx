@@ -338,7 +338,7 @@ export default function DashboardSetupPage() {
               </div>
 
               {/* Next Steps */}
-              <h2 className="text-2xl font-bold text-white mt-12 mb-6">Next steps</h2>
+              <h3 className="text-2xl font-bold text-white mt-12 mb-6">Next steps</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Link 
                   href="/help/getting-started/first-audit"

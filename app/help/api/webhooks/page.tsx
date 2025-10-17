@@ -125,7 +125,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Setting Up Webhooks */}
-              <h2 className="text-2xl font-bold text-white mb-6">Setting up webhooks</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Setting up webhooks</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -221,7 +221,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Webhook Events */}
-              <h2 className="text-2xl font-bold text-white mb-6">Available webhook events</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Available webhook events</h3>
 
               <div className="space-y-4 mb-8">
 
@@ -293,7 +293,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Webhook Payload */}
-              <h2 className="text-2xl font-bold text-white mb-6">Webhook payload format</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Webhook payload format</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <h3 className="text-white font-semibold mb-4">All webhooks send JSON payloads with this structure:</h3>
@@ -342,7 +342,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Security & Verification */}
-              <h2 className="text-2xl font-bold text-white mb-6">Security & verification</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Security & verification</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
@@ -387,7 +387,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Handling Webhooks */}
-              <h2 className="text-2xl font-bold text-white mb-6">Handling webhook requests</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Handling webhook requests</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <h3 className="text-white font-semibold mb-4">Best practices for webhook endpoints:</h3>
@@ -433,7 +433,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Testing Webhooks */}
-              <h2 className="text-2xl font-bold text-white mb-6">Testing webhooks</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Testing webhooks</h3>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -468,7 +468,7 @@ export default function WebhooksPage() {
               </div>
 
               {/* Troubleshooting */}
-              <h2 className="text-2xl font-bold text-white mb-6">Troubleshooting</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Troubleshooting</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 

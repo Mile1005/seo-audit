@@ -124,7 +124,7 @@ export default function CancellationPage() {
               </div>
 
               {/* How to Cancel */}
-              <h2 className="text-2xl font-bold text-white mb-6">How to cancel your subscription</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How to cancel your subscription</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -198,7 +198,7 @@ export default function CancellationPage() {
               </div>
 
               {/* What Happens After Cancellation */}
-              <h2 className="text-2xl font-bold text-white mb-6">What happens after cancellation</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">What happens after cancellation</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -233,7 +233,7 @@ export default function CancellationPage() {
               </div>
 
               {/* Data Retention */}
-              <h2 className="text-2xl font-bold text-white mb-6">Data retention after cancellation</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Data retention after cancellation</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -262,7 +262,7 @@ export default function CancellationPage() {
               </div>
 
               {/* Reactivation */}
-              <h2 className="text-2xl font-bold text-white mb-6">Can I reactivate my account?</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Can I reactivate my account?</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -294,7 +294,7 @@ export default function CancellationPage() {
               </div>
 
               {/* Refund Policy */}
-              <h2 className="text-2xl font-bold text-white mb-6">Refund policy</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Refund policy</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
@@ -332,7 +332,7 @@ export default function CancellationPage() {
               </div>
 
               {/* Alternative Options */}
-              <h2 className="text-2xl font-bold text-white mb-6">Alternative options to cancellation</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Alternative options to cancellation</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 

@@ -178,7 +178,7 @@ export default function SEOScoresPage() {
               </div>
 
               {/* Score Categories */}
-              <h2 className="text-2xl font-bold text-white mb-6">Score breakdown by category</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Score breakdown by category</h3>
               
               <div className="space-y-6">
                 
@@ -349,7 +349,7 @@ export default function SEOScoresPage() {
               </div>
 
               {/* How Scores Are Calculated */}
-              <h2 className="text-2xl font-bold text-white mt-12 mb-6">How we calculate your scores</h2>
+              <h3 className="text-2xl font-bold text-white mt-12 mb-6">How we calculate your scores</h3>
               
               <div className="bg-blue-900/20 border border-blue-600/30 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4 mb-6">
@@ -399,7 +399,7 @@ export default function SEOScoresPage() {
               </div>
 
               {/* Improving Your Scores */}
-              <h2 className="text-2xl font-bold text-white mb-6">How to improve your scores</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How to improve your scores</h3>
               
               <div className="space-y-6">
                 <div className="bg-green-900/20 border border-green-600/30 rounded-xl p-6">
@@ -476,7 +476,7 @@ export default function SEOScoresPage() {
               </div>
 
               {/* Next Steps */}
-              <h2 className="text-2xl font-bold text-white mt-12 mb-6">Next steps</h2>
+              <h3 className="text-2xl font-bold text-white mt-12 mb-6">Next steps</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Link 
                   href="/help/features/seo-audit"

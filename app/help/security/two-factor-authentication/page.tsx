@@ -122,7 +122,7 @@ export default function TwoFactorAuthPage() {
               </div>
 
               {/* Setting Up 2FA */}
-              <h2 className="text-2xl font-bold text-white mb-6">Setting up two-factor authentication</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Setting up two-factor authentication</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -236,7 +236,7 @@ export default function TwoFactorAuthPage() {
               </div>
 
               {/* Using 2FA */}
-              <h2 className="text-2xl font-bold text-white mb-6">How two-factor authentication works</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How two-factor authentication works</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
@@ -281,7 +281,7 @@ export default function TwoFactorAuthPage() {
               </div>
 
               {/* Managing 2FA */}
-              <h2 className="text-2xl font-bold text-white mb-6">Managing your 2FA settings</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Managing your 2FA settings</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -344,7 +344,7 @@ export default function TwoFactorAuthPage() {
               </div>
 
               {/* Troubleshooting 2FA */}
-              <h2 className="text-2xl font-bold text-white mb-6">Troubleshooting 2FA issues</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Troubleshooting 2FA issues</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -415,7 +415,7 @@ export default function TwoFactorAuthPage() {
               </div>
 
               {/* Security Best Practices */}
-              <h2 className="text-2xl font-bold text-white mb-6">2FA security best practices</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">2FA security best practices</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">

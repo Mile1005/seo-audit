@@ -144,7 +144,7 @@ export default function AIAssistantBestPracticesPage() {
               </div>
 
               {/* Best Practices */}
-              <h2 className="text-2xl font-bold text-white mb-6">Best practices for AI interactions</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Best practices for AI interactions</h3>
 
               <div className="space-y-8">
 
@@ -293,7 +293,7 @@ export default function AIAssistantBestPracticesPage() {
               </div>
 
               {/* Common Question Types */}
-              <h2 className="text-2xl font-bold text-white mb-6">Effective question types</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Effective question types</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
@@ -326,7 +326,7 @@ export default function AIAssistantBestPracticesPage() {
               </div>
 
               {/* Understanding AI Limitations */}
-              <h2 className="text-2xl font-bold text-white mb-6">Understanding AI limitations</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Understanding AI limitations</h3>
 
               <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">

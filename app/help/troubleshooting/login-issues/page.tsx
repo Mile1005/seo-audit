@@ -285,7 +285,7 @@ export default function LoginIssuesPage() {
               </div>
 
               {/* Password Reset */}
-              <h2 className="text-2xl font-bold text-white mb-6">Password reset process</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Password reset process</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
@@ -344,7 +344,7 @@ export default function LoginIssuesPage() {
               </div>
 
               {/* Email Issues */}
-              <h2 className="text-2xl font-bold text-white mb-6">Didn't receive reset email?</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Didn't receive reset email?</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -379,7 +379,7 @@ export default function LoginIssuesPage() {
               </div>
 
               {/* Account Recovery */}
-              <h2 className="text-2xl font-bold text-white mb-6">Account recovery</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Account recovery</h3>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">

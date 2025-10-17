@@ -191,7 +191,7 @@ export default function SecurityBestPracticesPage() {
               </div>
 
               {/* Data Protection */}
-              <h2 className="text-2xl font-bold text-white mb-6">Data protection and privacy</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Data protection and privacy</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -254,7 +254,7 @@ export default function SecurityBestPracticesPage() {
               </div>
 
               {/* API Security */}
-              <h2 className="text-2xl font-bold text-white mb-6">API security best practices</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">API security best practices</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
@@ -304,7 +304,7 @@ export default function SecurityBestPracticesPage() {
               </div>
 
               {/* Device and Network Security */}
-              <h2 className="text-2xl font-bold text-white mb-6">Device and network security</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Device and network security</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -379,7 +379,7 @@ export default function SecurityBestPracticesPage() {
               </div>
 
               {/* Incident Response */}
-              <h2 className="text-2xl font-bold text-white mb-6">What to do if you suspect a security breach</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">What to do if you suspect a security breach</h3>
 
               <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
@@ -429,7 +429,7 @@ export default function SecurityBestPracticesPage() {
               </div>
 
               {/* Security Checklist */}
-              <h2 className="text-2xl font-bold text-white mb-6">Security checklist</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Security checklist</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">

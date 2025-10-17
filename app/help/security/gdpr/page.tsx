@@ -131,7 +131,7 @@ export default function GDPRPage() {
               </div>
 
               {/* Your GDPR Rights */}
-              <h2 className="text-2xl font-bold text-white mb-6">Your GDPR rights</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Your GDPR rights</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -310,7 +310,7 @@ export default function GDPRPage() {
               </div>
 
               {/* How We Comply */}
-              <h2 className="text-2xl font-bold text-white mb-6">How we ensure GDPR compliance</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How we ensure GDPR compliance</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -369,7 +369,7 @@ export default function GDPRPage() {
               </div>
 
               {/* Data Breach Notification */}
-              <h2 className="text-2xl font-bold text-white mb-6">Data breach notification</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Data breach notification</h3>
 
               <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -405,7 +405,7 @@ export default function GDPRPage() {
               </div>
 
               {/* International Data Transfers */}
-              <h2 className="text-2xl font-bold text-white mb-6">International data transfers</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">International data transfers</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
@@ -447,7 +447,7 @@ export default function GDPRPage() {
               </div>
 
               {/* Exercising Your Rights */}
-              <h2 className="text-2xl font-bold text-white mb-6">How to exercise your GDPR rights</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How to exercise your GDPR rights</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
@@ -497,7 +497,7 @@ export default function GDPRPage() {
               </div>
 
               {/* Complaints */}
-              <h2 className="text-2xl font-bold text-white mb-6">Making a complaint</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Making a complaint</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-4">

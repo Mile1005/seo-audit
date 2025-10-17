@@ -182,7 +182,7 @@ export default function InvoicesPage() {
               </div>
 
               {/* Invoice Information */}
-              <h2 className="text-2xl font-bold text-white mb-6">What invoices include</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">What invoices include</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -219,7 +219,7 @@ export default function InvoicesPage() {
               </div>
 
               {/* Invoice Retention */}
-              <h2 className="text-2xl font-bold text-white mb-6">Invoice retention & availability</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Invoice retention & availability</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -242,7 +242,7 @@ export default function InvoicesPage() {
               </div>
 
               {/* Automatic Invoicing */}
-              <h2 className="text-2xl font-bold text-white mb-6">Automatic invoicing</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Automatic invoicing</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -270,7 +270,7 @@ export default function InvoicesPage() {
               </div>
 
               {/* Tax Information */}
-              <h2 className="text-2xl font-bold text-white mb-6">Tax information</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Tax information</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
@@ -306,7 +306,7 @@ export default function InvoicesPage() {
               </div>
 
               {/* Missing Invoice */}
-              <h2 className="text-2xl font-bold text-white mb-6">Can't find an invoice?</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Can't find an invoice?</h3>
 
               <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">

@@ -153,7 +153,7 @@ export default function PerformancePage() {
               </div>
 
               {/* Common Performance Issues */}
-              <h2 className="text-2xl font-bold text-white mb-6">Common performance problems</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Common performance problems</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -304,7 +304,7 @@ export default function PerformancePage() {
               </div>
 
               {/* Platform-Specific Issues */}
-              <h2 className="text-2xl font-bold text-white mb-6">Platform-specific optimizations</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Platform-specific optimizations</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -367,7 +367,7 @@ export default function PerformancePage() {
               </div>
 
               {/* Performance Monitoring */}
-              <h2 className="text-2xl font-bold text-white mb-6">Monitoring performance</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Monitoring performance</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <h3 className="text-white font-semibold mb-4">Tools to monitor and diagnose performance:</h3>
@@ -417,7 +417,7 @@ export default function PerformancePage() {
               </div>
 
               {/* Pro Tips */}
-              <h2 className="text-2xl font-bold text-white mb-6">Advanced performance tips</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Advanced performance tips</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
@@ -465,7 +465,7 @@ export default function PerformancePage() {
               </div>
 
               {/* When to Contact Support */}
-              <h2 className="text-2xl font-bold text-white mb-6">When to contact support</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">When to contact support</h3>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">

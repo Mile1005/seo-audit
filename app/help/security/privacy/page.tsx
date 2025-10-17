@@ -157,7 +157,7 @@ export default function PrivacyPage() {
               </div>
 
               {/* Privacy Controls */}
-              <h2 className="text-2xl font-bold text-white mb-6">Managing your privacy settings</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Managing your privacy settings</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -305,7 +305,7 @@ export default function PrivacyPage() {
               </div>
 
               {/* Privacy Rights */}
-              <h2 className="text-2xl font-bold text-white mb-6">Your privacy rights</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Your privacy rights</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
@@ -358,7 +358,7 @@ export default function PrivacyPage() {
               </div>
 
               {/* Data Security */}
-              <h2 className="text-2xl font-bold text-white mb-6">How we protect your data</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">How we protect your data</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -417,7 +417,7 @@ export default function PrivacyPage() {
               </div>
 
               {/* Privacy Policy */}
-              <h2 className="text-2xl font-bold text-white mb-6">Privacy policy and legal compliance</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Privacy policy and legal compliance</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">

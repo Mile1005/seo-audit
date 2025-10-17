@@ -169,7 +169,7 @@ export default function AuthenticationPage() {
               </div>
 
               {/* Using API Keys */}
-              <h2 className="text-2xl font-bold text-white mb-6">Using API keys in requests</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Using API keys in requests</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <h3 className="text-white font-semibold mb-4">Include the API key in your request headers:</h3>
@@ -204,7 +204,7 @@ export default function AuthenticationPage() {
               </div>
 
               {/* Code Examples */}
-              <h2 className="text-2xl font-bold text-white mb-6">Code examples</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Code examples</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -287,7 +287,7 @@ $response = curl_exec($ch);`}
               </div>
 
               {/* API Key Management */}
-              <h2 className="text-2xl font-bold text-white mb-6">Managing API keys</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Managing API keys</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -346,7 +346,7 @@ $response = curl_exec($ch);`}
               </div>
 
               {/* Security Best Practices */}
-              <h2 className="text-2xl font-bold text-white mb-6">Security best practices</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Security best practices</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
@@ -399,7 +399,7 @@ $response = curl_exec($ch);`}
               </div>
 
               {/* Rate Limiting */}
-              <h2 className="text-2xl font-bold text-white mb-6">Rate limiting</h2>
+              <h3 className="text-2xl font-bold text-white mb-6">Rate limiting</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
