@@ -274,21 +274,24 @@ export const pageSEO = {
     title: 'Login - Access Your SEO Dashboard | AI SEO Turbo',
     description: 'Sign in to your AI SEO Turbo account to access comprehensive SEO audits, analytics dashboard, and optimization tools for your websites.',
     keywords: ['login', 'sign in', 'SEO dashboard', 'account access'],
-    canonical: 'https://www.aiseoturbo.com/login'
+    canonical: 'https://www.aiseoturbo.com/login',
+    noIndex: true
   },
 
   signup: {
     title: 'Sign Up - Start Your SEO Journey | AI SEO Turbo',
     description: 'Create your free AI SEO Turbo account and start optimizing your website with AI-powered SEO audits, competitor analysis, and expert recommendations.',
     keywords: ['sign up', 'register', 'SEO tools', 'free account'],
-    canonical: 'https://www.aiseoturbo.com/signup'
+    canonical: 'https://www.aiseoturbo.com/signup',
+    noIndex: true
   },
 
   'forgot-password': {
     title: 'Reset Password - Account Recovery | AI SEO Turbo',
     description: 'Reset your AI SEO Turbo account password securely. Regain access to your SEO dashboard, audits, and optimization tools quickly and safely.',
     keywords: ['reset password', 'forgot password', 'account recovery'],
-    canonical: 'https://www.aiseoturbo.com/forgot-password'
+    canonical: 'https://www.aiseoturbo.com/forgot-password',
+    noIndex: true
   },
 
   community: {
