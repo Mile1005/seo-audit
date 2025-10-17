@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'SEO Audit Pricing - Free & Pro Plans | AI SEO Turbo',
-  description: 'Choose the perfect SEO audit plan for your business. Free plan available with comprehensive SEO analysis. Pro plans starting at $29/month with advanced features and priority support.',
+  description: 'Choose the perfect SEO audit plan for your business. Free plan with comprehensive analysis. Pro plans starting at $29/month with advanced features and support.',
   keywords: [
     'SEO audit pricing',
     'SEO tools pricing', 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'AISEOTurbo Team' }],
   openGraph: {
     title: 'SEO Audit Pricing - Free & Pro Plans | AI SEO Turbo',
-    description: 'Transparent pricing for powerful SEO audit tools. Start free or choose Pro plans with advanced features, unlimited audits, and priority support.',
+    description: 'Transparent pricing for SEO audit tools. Start free or choose Pro plans with advanced features, unlimited audits, and priority support.',
     url: 'https://www.aiseoturbo.com/pricing',
     siteName: 'AISEOTurbo',
     type: 'website'

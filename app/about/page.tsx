@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'About Us - SEO Experts & AI Innovation | AI SEO Turbo',
-  description: 'Learn about AISEOTurbo mission to revolutionize SEO with cutting-edge AI technology. Meet our team and discover our commitment to helping businesses succeed online.',
+  description: 'Learn about our mission to revolutionize SEO with AI technology. Meet the team committed to helping businesses succeed online with cutting-edge tools.',
   keywords: ['about aiseoturbo', 'seo company', 'ai seo team', 'seo experts'],
   alternates: {
     canonical: 'https://www.aiseoturbo.com/about'
