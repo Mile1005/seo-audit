@@ -83,7 +83,7 @@ export default function AccountBillingCategoryPage() {
               </div>
 
               <h2 className="text-xl text-gray-400 mb-8">
-                Manage your subscription, payments, and account settings with detailed guides.
+                Manage subscriptions, payments, and account settings.
               </h2>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">

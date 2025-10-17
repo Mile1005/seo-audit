@@ -83,7 +83,7 @@ export default function GettingStartedCategoryPage() {
               </div>
 
               <h2 className="text-xl text-gray-400 mb-8">
-                Learn the basics and set up your account with step-by-step guides for new users.
+                Learn the basics and set up your account with step-by-step guides.
               </h2>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">

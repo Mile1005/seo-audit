@@ -83,7 +83,7 @@ export default function SEOToolsFeaturesCategoryPage() {
               </div>
 
               <h2 className="text-xl text-gray-400 mb-8">
-                Master our AI-powered SEO toolkit with detailed guides and tutorials for every feature.
+                Complete guides to every AI SEO tool and feature.
               </h2>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">

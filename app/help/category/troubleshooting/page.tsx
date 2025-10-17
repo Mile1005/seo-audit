@@ -76,7 +76,7 @@ export default function TroubleshootingCategoryPage() {
               </div>
 
               <h2 className="text-xl text-gray-400 mb-8">
-                Resolve common issues and errors with step-by-step troubleshooting guides.
+                Resolve common issues with step-by-step guides.
               </h2>
 
               {/* Comprehensive Troubleshooting Introduction */}
