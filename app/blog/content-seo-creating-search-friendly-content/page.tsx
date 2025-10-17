@@ -13,7 +13,7 @@ export const metadata: Metadata = generateSEOMeta({
 const post = {
   id: '6',
   slug: 'content-seo-creating-search-friendly-content',
-  title: 'Content SEO: Creating Search-Friendly Content That Ranks & Converts in 2025',
+  title: 'Content SEO: Ranking Content That Converts',
   excerpt: 'Master content SEO with our complete guide. Learn keyword research, user intent, content structure, and best practices for creating content that ranks in Google and converts visitors.',
   content: `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">

@@ -13,7 +13,7 @@ export const metadata: Metadata = generateSEOMeta({
 const post = {
   id: '3',
   slug: 'core-web-vitals-optimization-guide',
-  title: 'Core Web Vitals Optimization Guide: Master Google\'s Performance Metrics in 2025',
+  title: 'Core Web Vitals: Master Google Performance Metrics',
   excerpt: 'Master Google Core Web Vitals with our comprehensive step-by-step guide to improve page speed, user experience, and SEO rankings. Learn LCP, FID, and CLS optimization strategies.',
   content: `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">

@@ -13,7 +13,7 @@ export const metadata: Metadata = generateSEOMeta({
 const post = {
   id: '5',
   slug: 'local-seo-strategies-that-work',
-  title: 'Local SEO Strategies That Work: Complete 2025 Guide for Local Businesses',
+  title: 'Local SEO Strategies for Local Businesses',
   excerpt: 'Dominate local search results with proven Local SEO strategies. Master Google Business Profile, local citations, reviews, and location-based keywords to attract nearby customers.',
   content: `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">

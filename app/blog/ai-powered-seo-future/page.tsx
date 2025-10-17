@@ -13,7 +13,7 @@ export const metadata: Metadata = generateSEOMeta({
 const post = {
   id: '2',
   slug: 'ai-powered-seo-future',
-  title: 'AI-Powered SEO: The Future is Here - How to Leverage AI for Better Rankings in 2025',
+  title: 'AI-Powered SEO: The Future is Here Now',
   excerpt: 'Discover how artificial intelligence is revolutionizing SEO. Learn how Google\'s AI algorithms work, practical AI tools for optimization, and strategies to leverage AI for competitive advantage and better rankings.',
   content: `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">

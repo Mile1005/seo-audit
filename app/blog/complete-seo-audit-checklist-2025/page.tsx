@@ -13,7 +13,7 @@ export const metadata: Metadata = generateSEOMeta({
 const post = {
   id: '1',
   slug: 'complete-seo-audit-checklist-2025',
-  title: 'Complete SEO Audit Checklist for 2025: 47-Point Framework to Maximize Rankings',
+  title: 'Complete SEO Audit Checklist: 47-Point Framework',
   excerpt: 'A comprehensive 47-point SEO audit checklist to identify technical issues, on-page problems, content gaps, and off-page opportunities. Used by 1000+ websites to increase organic traffic and rankings.',
   content: `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">
