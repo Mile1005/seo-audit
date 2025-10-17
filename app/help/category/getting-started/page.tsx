@@ -103,172 +103,406 @@ export default function GettingStartedCategoryPage() {
         {/* SEO Content Section */}
         <section className="py-20 bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="prose prose-lg prose-invert mx-auto">
-              <h2>Your Complete Guide to Getting Started with AI SEO Turbo</h2>
-              <p>
-                Welcome to AI SEO Turbo! Whether you're new to SEO or an experienced professional looking to enhance your toolkit,
-                this comprehensive guide will help you get up and running quickly. Our AI-powered platform makes advanced SEO
-                analysis accessible to everyone, from beginners to enterprise teams.
-              </p>
+            <div className="space-y-12">
+              {/* Main Intro */}
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-4">Your Complete Guide to Getting Started with AI SEO Turbo</h2>
+                <p className="text-gray-300 text-lg">
+                  Welcome to AI SEO Turbo! Whether you're new to SEO or an experienced professional looking to enhance your toolkit,
+                  this comprehensive guide will help you get up and running quickly. Our AI-powered platform makes advanced SEO
+                  analysis accessible to everyone, from beginners to enterprise teams.
+                </p>
+              </div>
 
-              <h3>Understanding AI SEO Turbo's Value Proposition</h3>
-              <p>
-                Before diving into the technical details, it's important to understand what makes AI SEO Turbo different from
-                traditional SEO tools. Our platform combines artificial intelligence with proven SEO methodologies to deliver
-                insights that would typically require years of experience to develop.
-              </p>
+              {/* Value Proposition */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Understanding AI SEO Turbo's Value Proposition</h3>
+                <p className="text-gray-300 mb-6">
+                  Before diving into the technical details, it's important to understand what makes AI SEO Turbo different from
+                  traditional SEO tools. Our platform combines artificial intelligence with proven SEO methodologies to deliver
+                  insights that would typically require years of experience to develop.
+                </p>
 
-              <h4>What Sets Us Apart:</h4>
-              <ul>
-                <li><strong>AI-Powered Analysis:</strong> Machine learning algorithms that continuously learn and improve</li>
-                <li><strong>47-Point Technical Audits:</strong> Comprehensive analysis covering every aspect of SEO</li>
-                <li><strong>Actionable Recommendations:</strong> Clear, prioritized fixes with expected impact</li>
-                <li><strong>Real-Time Monitoring:</strong> Continuous tracking of your SEO performance</li>
-                <li><strong>Expert-Level Insights:</strong> Professional-grade analysis at any skill level</li>
-              </ul>
+                <div className="bg-gradient-to-r from-green-600/10 to-emerald-600/10 border border-green-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    ✨ What Sets Us Apart
+                  </h4>
+                  <div className="space-y-3">
+                    <div className="flex gap-3">
+                      <span className="text-green-400">✓</span>
+                      <p className="text-gray-300"><strong>AI-Powered Analysis:</strong> Machine learning algorithms that continuously learn</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400">✓</span>
+                      <p className="text-gray-300"><strong>47-Point Audits:</strong> Comprehensive analysis covering every aspect of SEO</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400">✓</span>
+                      <p className="text-gray-300"><strong>Actionable Recommendations:</strong> Clear, prioritized fixes with expected impact</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400">✓</span>
+                      <p className="text-gray-300"><strong>Real-Time Monitoring:</strong> Continuous tracking of your SEO performance</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-green-400">✓</span>
+                      <p className="text-gray-300"><strong>Expert-Level Insights:</strong> Professional-grade analysis at any skill level</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Creating Your Account</h3>
-              <p>
-                Getting started is simple and takes less than 2 minutes. Choose the plan that best fits your needs and start
-                optimizing immediately.
-              </p>
+              {/* Account Creation */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Creating Your Account</h3>
+                <p className="text-gray-300 mb-6">
+                  Getting started is simple and takes less than 2 minutes. Choose the plan that best fits your needs and start
+                  optimizing immediately.
+                </p>
 
-              <h4>Account Setup Steps:</h4>
-              <ol>
-                <li><strong>Choose Your Plan:</strong> Select from Free, Pro, Agency, or Enterprise plans</li>
-                <li><strong>Create Account:</strong> Sign up with email or social authentication</li>
-                <li><strong>Verify Email:</strong> Confirm your email address for security</li>
-                <li><strong>Complete Profile:</strong> Add your website and business information</li>
-                <li><strong>Connect Integrations:</strong> Link Google Search Console, Google Analytics, etc.</li>
-              </ol>
+                <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🚀 Account Setup Steps
+                  </h4>
+                  <ol className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-blue-400 font-bold min-w-fit">1.</span>
+                      <p className="text-gray-300"><strong>Choose Your Plan:</strong> Select from Free, Pro, Agency, or Enterprise plans</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400 font-bold min-w-fit">2.</span>
+                      <p className="text-gray-300"><strong>Create Account:</strong> Sign up with email or social authentication</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400 font-bold min-w-fit">3.</span>
+                      <p className="text-gray-300"><strong>Verify Email:</strong> Confirm your email address for security</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400 font-bold min-w-fit">4.</span>
+                      <p className="text-gray-300"><strong>Complete Profile:</strong> Add your website and business information</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400 font-bold min-w-fit">5.</span>
+                      <p className="text-gray-300"><strong>Connect Integrations:</strong> Link Google Search Console, Google Analytics</p>
+                    </li>
+                  </ol>
+                </div>
+              </div>
 
-              <h3>Your First SEO Audit</h3>
-              <p>
-                Running your first audit is the best way to see AI SEO Turbo in action. Our platform will analyze your website
-                and provide detailed insights within minutes.
-              </p>
+              {/* First Audit */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Your First SEO Audit</h3>
+                <p className="text-gray-300 mb-6">
+                  Running your first audit is the best way to see AI SEO Turbo in action. Our platform will analyze your website
+                  and provide detailed insights within minutes.
+                </p>
 
-              <h4>How to Run Your First Audit:</h4>
-              <ul>
-                <li><strong>Navigate to Dashboard:</strong> Access your dashboard after logging in</li>
-                <li><strong>Click "Run Audit":</strong> Find the audit button in the main navigation</li>
-                <li><strong>Enter Website URL:</strong> Provide your domain or specific page URL</li>
-                <li><strong>Configure Settings:</strong> Choose crawl depth and analysis options</li>
-                <li><strong>Start Analysis:</strong> Click start and wait for AI-powered results</li>
-              </ul>
+                <div className="bg-cyan-600/10 border border-cyan-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🔍 How to Run Your First Audit
+                  </h4>
+                  <ol className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400 font-bold min-w-fit">1.</span>
+                      <p className="text-gray-300"><strong>Navigate to Dashboard:</strong> Access your dashboard after logging in</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400 font-bold min-w-fit">2.</span>
+                      <p className="text-gray-300"><strong>Click "Run Audit":</strong> Find the audit button in the main navigation</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400 font-bold min-w-fit">3.</span>
+                      <p className="text-gray-300"><strong>Enter Website URL:</strong> Provide your domain or specific page URL</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400 font-bold min-w-fit">4.</span>
+                      <p className="text-gray-300"><strong>Configure Settings:</strong> Choose crawl depth and analysis options</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400 font-bold min-w-fit">5.</span>
+                      <p className="text-gray-300"><strong>Start Analysis:</strong> Click start and wait for AI-powered results</p>
+                    </li>
+                  </ol>
+                </div>
+              </div>
 
-              <h3>Understanding Your Audit Results</h3>
-              <p>
-                Our audit results are designed to be clear and actionable, even for SEO beginners. Each issue includes
-                an explanation, severity level, and step-by-step fix instructions.
-              </p>
+              {/* Audit Results */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Understanding Your Audit Results</h3>
+                <p className="text-gray-300 mb-6">
+                  Our audit results are designed to be clear and actionable, even for SEO beginners. Each issue includes
+                  an explanation, severity level, and step-by-step fix instructions.
+                </p>
 
-              <h4>Reading Your Audit Report:</h4>
-              <ul>
-                <li><strong>Overall Score:</strong> Your website's SEO health on a 0-100 scale</li>
-                <li><strong>Issue Categories:</strong> Critical, Warning, and Notice level problems</li>
-                <li><strong>Priority Recommendations:</strong> Most impactful fixes to implement first</li>
-                <li><strong>Technical Details:</strong> Specific code changes and implementations</li>
-                <li><strong>Progress Tracking:</strong> Monitor improvements over time</li>
-              </ul>
+                <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
+                  <h4 className="text-white font-semibold mb-4 flex items-center gap-2">📊 Reading Your Audit Report</h4>
+                  <div className="space-y-3">
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400">→</span>
+                      <p className="text-gray-300"><strong>Overall Score:</strong> Your website's SEO health on a 0-100 scale</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400">→</span>
+                      <p className="text-gray-300"><strong>Issue Categories:</strong> Critical, Warning, and Notice level problems</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400">→</span>
+                      <p className="text-gray-300"><strong>Priority Recommendations:</strong> Most impactful fixes to implement first</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400">→</span>
+                      <p className="text-gray-300"><strong>Technical Details:</strong> Specific code changes and implementations</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400">→</span>
+                      <p className="text-gray-300"><strong>Progress Tracking:</strong> Monitor improvements over time</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Setting Up Keyword Tracking</h3>
-              <p>
-                Keyword tracking helps you monitor your search engine rankings and identify optimization opportunities.
-              </p>
+              {/* Keyword Tracking */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Setting Up Keyword Tracking</h3>
+                <p className="text-gray-300 mb-6">
+                  Keyword tracking helps you monitor your search engine rankings and identify optimization opportunities.
+                </p>
 
-              <h4>Keyword Setup Process:</h4>
-              <ol>
-                <li><strong>Access Keywords Section:</strong> Navigate to the Keywords tab in your dashboard</li>
-                <li><strong>Add Target Keywords:</strong> Enter keywords relevant to your business</li>
-                <li><strong>Set Location Targeting:</strong> Choose geographic areas for local SEO</li>
-                <li><strong>Configure Alerts:</strong> Set up notifications for ranking changes</li>
-                <li><strong>Monitor Performance:</strong> Track rankings and search volume trends</li>
-              </ol>
+                <div className="bg-purple-600/10 border border-purple-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    📈 Keyword Setup Process
+                  </h4>
+                  <ol className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">1.</span>
+                      <p className="text-gray-300"><strong>Access Keywords Section:</strong> Navigate to the Keywords tab</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">2.</span>
+                      <p className="text-gray-300"><strong>Add Target Keywords:</strong> Enter keywords relevant to your business</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">3.</span>
+                      <p className="text-gray-300"><strong>Set Location Targeting:</strong> Choose geographic areas for local SEO</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">4.</span>
+                      <p className="text-gray-300"><strong>Configure Alerts:</strong> Set up notifications for ranking changes</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">5.</span>
+                      <p className="text-gray-300"><strong>Monitor Performance:</strong> Track rankings and search volume trends</p>
+                    </li>
+                  </ol>
+                </div>
+              </div>
 
-              <h3>Connecting External Accounts</h3>
-              <p>
-                Integrating with Google Search Console, Google Analytics, and other tools provides richer insights and
-                more accurate analysis.
-              </p>
+              {/* Integrations */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Connecting External Accounts</h3>
+                <p className="text-gray-300 mb-6">
+                  Integrating with Google Search Console, Google Analytics, and other tools provides richer insights and
+                  more accurate analysis.
+                </p>
 
-              <h4>Recommended Integrations:</h4>
-              <ul>
-                <li><strong>Google Search Console:</strong> Import search data and verify ownership</li>
-                <li><strong>Google Analytics:</strong> Access traffic and conversion metrics</li>
-                <li><strong>Google Business Profile:</strong> Monitor local search performance</li>
-                <li><strong>Webmaster Tools:</strong> Connect Bing Webmaster Tools for comprehensive coverage</li>
-                <li><strong>CMS Platforms:</strong> Direct integration with WordPress, Shopify, and others</li>
-              </ul>
+                <div className="bg-orange-600/10 border border-orange-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🔗 Recommended Integrations
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300"><strong>Google Search Console:</strong> Import search data and verify ownership</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300"><strong>Google Analytics:</strong> Access traffic and conversion metrics</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300"><strong>Google Business Profile:</strong> Monitor local search performance</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300"><strong>Webmaster Tools:</strong> Connect Bing Webmaster Tools</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300"><strong>CMS Platforms:</strong> Direct integration with WordPress, Shopify</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h3>Building Your SEO Strategy</h3>
-              <p>
-                With your audit results and keyword data, you can now build a comprehensive SEO strategy.
-              </p>
+              {/* Strategy */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Building Your SEO Strategy</h3>
+                <p className="text-gray-300 mb-6">
+                  With your audit results and keyword data, you can now build a comprehensive SEO strategy.
+                </p>
 
-              <h4>Strategic Planning Steps:</h4>
-              <ul>
-                <li><strong>Identify Quick Wins:</strong> Focus on high-impact, low-effort fixes first</li>
-                <li><strong>Set Realistic Goals:</strong> Establish measurable SEO objectives</li>
-                <li><strong>Create Content Calendar:</strong> Plan content around target keywords</li>
-                <li><strong>Monitor Competitors:</strong> Analyze competitor strategies and opportunities</li>
-                <li><strong>Track Progress:</strong> Use our dashboard to monitor improvements</li>
-              </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">🎯</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Quick Wins</h4>
+                      <p className="text-gray-300 text-sm">Focus on high-impact, low-effort fixes first</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📊</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Set Goals</h4>
+                      <p className="text-gray-300 text-sm">Establish measurable SEO objectives</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📝</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Content Calendar</h4>
+                      <p className="text-gray-300 text-sm">Plan content around target keywords</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">⚔️</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Monitor Competitors</h4>
+                      <p className="text-gray-300 text-sm">Analyze strategies and find opportunities</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Maximizing Your Plan Benefits</h3>
-              <p>
-                Each AI SEO Turbo plan includes specific features and limits. Understanding your plan helps you make
-                the most of your investment.
-              </p>
+              {/* Plan Benefits */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Maximizing Your Plan Benefits</h3>
+                <p className="text-gray-300 mb-6">
+                  Each AI SEO Turbo plan includes specific features and limits. Understanding your plan helps you make
+                  the most of your investment.
+                </p>
 
-              <h4>Plan Optimization Tips:</h4>
-              <ul>
-                <li><strong>Free Plan:</strong> Perfect for testing - upgrade when you need more audits</li>
-                <li><strong>Pro Plan:</strong> Ideal for small businesses and freelancers</li>
-                <li><strong>Agency Plan:</strong> Built for SEO agencies managing multiple clients</li>
-                <li><strong>Enterprise Plan:</strong> Custom solutions for large organizations</li>
-              </ul>
+                <div className="bg-gradient-to-r from-pink-600/10 to-rose-600/10 border border-pink-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    💡 Plan Optimization Tips
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-white font-semibold mb-1">🆓 Free Plan</p>
+                      <p className="text-gray-300 text-sm">Perfect for testing - upgrade when needed</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-white font-semibold mb-1">⭐ Pro Plan</p>
+                      <p className="text-gray-300 text-sm">Ideal for small businesses and freelancers</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-white font-semibold mb-1">🏢 Agency Plan</p>
+                      <p className="text-gray-300 text-sm">Built for SEO agencies managing clients</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-white font-semibold mb-1">🚀 Enterprise</p>
+                      <p className="text-gray-300 text-sm">Custom solutions for large organizations</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Getting Help and Support</h3>
-              <p>
-                Our comprehensive support system ensures you never get stuck. From detailed documentation to personal
-                assistance, we're here to help you succeed.
-              </p>
+              {/* Support */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Getting Help and Support</h3>
+                <p className="text-gray-300 mb-6">
+                  Our comprehensive support system ensures you never get stuck. From detailed documentation to personal
+                  assistance, we're here to help you succeed.
+                </p>
 
-              <h4>Support Resources:</h4>
-              <ul>
-                <li><strong>Help Center:</strong> Comprehensive guides and tutorials</li>
-                <li><strong>Video Tutorials:</strong> Step-by-step visual guides</li>
-                <li><strong>Community Forum:</strong> Connect with other users and experts</li>
-                <li><strong>Live Chat:</strong> Instant support for urgent questions</li>
-                <li><strong>Email Support:</strong> Detailed assistance for complex issues</li>
-              </ul>
+                <div className="grid grid-cols-1 gap-3">
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📚</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Help Center</h4>
+                      <p className="text-gray-300 text-sm">Comprehensive guides and tutorials</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">🎥</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Video Tutorials</h4>
+                      <p className="text-gray-300 text-sm">Step-by-step visual guides</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">👥</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Community Forum</h4>
+                      <p className="text-gray-300 text-sm">Connect with other users and experts</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">💬</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Live Chat</h4>
+                      <p className="text-gray-300 text-sm">Instant support for urgent questions</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📧</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Email Support</h4>
+                      <p className="text-gray-300 text-sm">Detailed assistance for complex issues</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Measuring Success and ROI</h3>
-              <p>
-                Track your SEO progress and demonstrate the value of your optimization efforts.
-              </p>
+              {/* Success Metrics */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Measuring Success and ROI</h3>
+                <p className="text-gray-300 mb-6">
+                  Track your SEO progress and demonstrate the value of your optimization efforts.
+                </p>
 
-              <h4>Key Metrics to Monitor:</h4>
-              <ul>
-                <li><strong>Organic Traffic:</strong> Monitor increases in search-driven visits</li>
-                <li><strong>Keyword Rankings:</strong> Track position improvements for target terms</li>
-                <li><strong>Conversion Rates:</strong> Measure improvements in goal completions</li>
-                <li><strong>Technical Health:</strong> Monitor audit score improvements</li>
-                <li><strong>ROI Calculation:</strong> Compare SEO investment to revenue impact</li>
-              </ul>
+                <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    📈 Key Metrics to Monitor
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">▲</span>
+                      <p className="text-gray-300"><strong>Organic Traffic:</strong> Monitor increases in search-driven visits</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">▲</span>
+                      <p className="text-gray-300"><strong>Keyword Rankings:</strong> Track position improvements for target terms</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">▲</span>
+                      <p className="text-gray-300"><strong>Conversion Rates:</strong> Measure improvements in goal completions</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">▲</span>
+                      <p className="text-gray-300"><strong>Technical Health:</strong> Monitor audit score improvements</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">▲</span>
+                      <p className="text-gray-300"><strong>ROI Calculation:</strong> Compare SEO investment to revenue impact</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h2>Your SEO Success Journey Begins Now</h2>
-              <p>
-                Congratulations on taking the first step toward better SEO performance! AI SEO Turbo provides everything
-                you need to optimize your website, track your progress, and achieve measurable results. Whether you're
-                just starting your SEO journey or looking to enhance your existing strategy, our platform grows with you.
-              </p>
-              <p>
-                Remember: SEO is a long-term investment that compounds over time. Consistent use of AI SEO Turbo,
-                combined with implementation of our recommendations, will lead to sustainable growth in organic traffic
-                and search rankings. Start small, stay consistent, and watch your SEO performance soar.
-              </p>
+              {/* Closing CTA */}
+              <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700/50">
+                <h3 className="text-2xl font-bold text-white mb-4">Your SEO Success Journey Begins Now</h3>
+                <p className="text-gray-300 mb-4">
+                  Congratulations on taking the first step toward better SEO performance! AI SEO Turbo provides everything
+                  you need to optimize your website, track your progress, and achieve measurable results. Whether you're
+                  just starting your SEO journey or looking to enhance your existing strategy, our platform grows with you.
+                </p>
+                <p className="text-gray-300">
+                  Remember: SEO is a long-term investment that compounds over time. Consistent use of AI SEO Turbo,
+                  combined with implementation of our recommendations, will lead to sustainable growth in organic traffic
+                  and search rankings. Start small, stay consistent, and watch your SEO performance soar.
+                </p>
+              </div>
             </div>
           </div>
         </section>

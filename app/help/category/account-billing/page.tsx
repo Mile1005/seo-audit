@@ -103,137 +103,293 @@ export default function AccountBillingCategoryPage() {
         {/* SEO Content Section */}
         <section className="py-20 bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="prose prose-lg prose-invert mx-auto">
-              <h2>Master Your AI SEO Turbo Account & Billing</h2>
-              <p>
-                Managing your AI SEO Turbo account and billing doesn't have to be complicated. Our comprehensive billing system
-                is designed to be transparent, flexible, and user-friendly, whether you're a freelancer, agency, or enterprise team.
-              </p>
+            <div className="space-y-12">
+              {/* Main Intro */}
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-4">Master Your AI SEO Turbo Account & Billing</h2>
+                <p className="text-gray-300 text-lg">
+                  Managing your AI SEO Turbo account and billing doesn't have to be complicated. Our comprehensive billing system
+                  is designed to be transparent, flexible, and user-friendly, whether you're a freelancer, agency, or enterprise team.
+                </p>
+              </div>
 
-              <h3>Understanding Our Pricing Structure</h3>
-              <p>
-                AI SEO Turbo offers flexible pricing plans designed to scale with your business needs. From individual freelancers
-                to enterprise teams, we provide the right tools at the right price point.
-              </p>
+              {/* Pricing Structure */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Understanding Our Pricing Structure</h3>
+                <p className="text-gray-300 mb-6">
+                  AI SEO Turbo offers flexible pricing plans designed to scale with your business needs. From individual freelancers
+                  to enterprise teams, we provide the right tools at the right price point.
+                </p>
 
-              <h4>Plan Types and Features:</h4>
-              <ul>
-                <li><strong>Free Plan:</strong> Perfect for trying our tools with 3 audits per month and basic features</li>
-                <li><strong>Pro Plan ($49/month):</strong> Unlimited audits, advanced features, and priority support</li>
-                <li><strong>Agency Plan ($149/month):</strong> Team collaboration, white-label reporting, and API access</li>
-                <li><strong>Enterprise Plan:</strong> Custom solutions with dedicated support and advanced integrations</li>
-              </ul>
+                <div className="bg-gradient-to-r from-purple-600/10 to-violet-600/10 border border-purple-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    💳 Plan Types and Features
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-slate-800/50 rounded-lg p-4">
+                      <h5 className="text-white font-semibold mb-2">🆓 Free Plan</h5>
+                      <p className="text-gray-300 text-sm">Perfect for trying our tools with 3 audits per month and basic features</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-4">
+                      <h5 className="text-white font-semibold mb-2">⭐ Pro Plan ($49/month)</h5>
+                      <p className="text-gray-300 text-sm">Unlimited audits, advanced features, and priority support</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-4">
+                      <h5 className="text-white font-semibold mb-2">🏢 Agency Plan ($149/month)</h5>
+                      <p className="text-gray-300 text-sm">Team collaboration, white-label reporting, and API access</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded-lg p-4">
+                      <h5 className="text-white font-semibold mb-2">🚀 Enterprise Plan</h5>
+                      <p className="text-gray-300 text-sm">Custom solutions with dedicated support and advanced integrations</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Billing Cycles and Payment Options</h3>
-              <p>
-                We offer flexible billing options to match your business preferences and cash flow needs.
-              </p>
+              {/* Billing & Payments */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Billing Cycles and Payment Options</h3>
+                <p className="text-gray-300 mb-6">
+                  We offer flexible billing options to match your business preferences and cash flow needs.
+                </p>
 
-              <h4>Payment Methods:</h4>
-              <ul>
-                <li><strong>Credit Cards:</strong> Visa, MasterCard, American Express, and Discover</li>
-                <li><strong>PayPal:</strong> Secure PayPal payments for added protection</li>
-                <li><strong>Bank Transfers:</strong> ACH and wire transfers for enterprise customers</li>
-                <li><strong>Digital Wallets:</strong> Apple Pay, Google Pay, and other modern payment options</li>
-              </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
+                    <h4 className="text-blue-300 font-semibold mb-3 flex items-center gap-2">💳 Payment Methods</h4>
+                    <ul className="space-y-2">
+                      <li className="text-gray-300 text-sm">✓ Credit Cards (Visa, MC, Amex, Discover)</li>
+                      <li className="text-gray-300 text-sm">✓ PayPal secure payments</li>
+                      <li className="text-gray-300 text-sm">✓ Bank Transfers (ACH & Wire)</li>
+                      <li className="text-gray-300 text-sm">✓ Digital Wallets (Apple Pay, Google Pay)</li>
+                    </ul>
+                  </div>
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-3 flex items-center gap-2">📅 Billing Cycles</h4>
+                    <ul className="space-y-2">
+                      <li className="text-gray-300 text-sm">✓ Monthly - No long-term commitment</li>
+                      <li className="text-gray-300 text-sm">✓ Annual - Save 20% with prepayment</li>
+                      <li className="text-gray-300 text-sm">✓ Quarterly - Balance flexibility and savings</li>
+                      <li className="text-gray-300 text-sm">✓ Custom - Enterprise billing options</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Billing Cycles:</h4>
-              <ul>
-                <li><strong>Monthly Billing:</strong> Pay month-to-month with no long-term commitment</li>
-                <li><strong>Annual Billing:</strong> Save 20% with annual prepayment</li>
-                <li><strong>Custom Cycles:</strong> Quarterly or custom billing for enterprise accounts</li>
-              </ul>
+              {/* Subscription Management */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Managing Your Subscription</h3>
+                <p className="text-gray-300 mb-6">
+                  Our dashboard makes it easy to manage your subscription, update payment methods, and monitor usage.
+                </p>
 
-              <h3>Managing Your Subscription</h3>
-              <p>
-                Our dashboard makes it easy to manage your subscription, update payment methods, and monitor usage.
-              </p>
+                <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
+                  <h4 className="text-white font-semibold mb-4 flex items-center gap-2">🎛️ Subscription Management Features</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400 font-bold min-w-fit">→</span>
+                      <p className="text-gray-300"><strong>Plan Upgrades:</strong> Instantly upgrade to access more features</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400 font-bold min-w-fit">→</span>
+                      <p className="text-gray-300"><strong>Downgrades:</strong> Flexible downgrades with prorated billing</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400 font-bold min-w-fit">→</span>
+                      <p className="text-gray-300"><strong>Usage Monitoring:</strong> Real-time tracking of your usage</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <span className="text-indigo-400 font-bold min-w-fit">→</span>
+                      <p className="text-gray-300"><strong>Billing History:</strong> Complete invoice history with PDFs</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Subscription Management Features:</h4>
-              <ul>
-                <li><strong>Plan Upgrades:</strong> Instantly upgrade to access more features and higher limits</li>
-                <li><strong>Downgrades:</strong> Flexible downgrades with prorated billing</li>
-                <li><strong>Usage Monitoring:</strong> Real-time tracking of audits, API calls, and feature usage</li>
-                <li><strong>Billing History:</strong> Complete invoice history with downloadable PDFs</li>
-              </ul>
+              {/* Invoice Understanding */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Understanding Your Invoice</h3>
+                <p className="text-gray-300 mb-6">
+                  Our invoices are designed to be clear and detailed, helping you understand exactly what you're paying for.
+                </p>
 
-              <h3>Understanding Your Invoice</h3>
-              <p>
-                Our invoices are designed to be clear and detailed, helping you understand exactly what you're paying for.
-              </p>
+                <div className="bg-orange-600/10 border border-orange-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    📄 Invoice Breakdown
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">•</span>
+                      <p className="text-gray-300"><strong>Base Subscription:</strong> Your plan's monthly or annual fee</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">•</span>
+                      <p className="text-gray-300"><strong>Overage Charges:</strong> Additional fees for usage beyond limits</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">•</span>
+                      <p className="text-gray-300"><strong>Add-on Services:</strong> Custom audits, priority support, features</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">•</span>
+                      <p className="text-gray-300"><strong>Taxes:</strong> Applicable sales tax based on your location</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">•</span>
+                      <p className="text-gray-300"><strong>Discounts:</strong> Annual savings, promotional credits, bonuses</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Invoice Breakdown:</h4>
-              <ul>
-                <li><strong>Base Subscription:</strong> Your plan's monthly or annual fee</li>
-                <li><strong>Overage Charges:</strong> Additional fees for usage beyond plan limits</li>
-                <li><strong>Add-on Services:</strong> Custom audits, priority support, or premium features</li>
-                <li><strong>Taxes:</strong> Applicable sales tax based on your billing address</li>
-                <li><strong>Discounts:</strong> Annual plan savings, promotional credits, or referral bonuses</li>
-              </ul>
+              {/* Security & Trust */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Payment Security and Trust</h3>
+                <p className="text-gray-300 mb-6">
+                  Your payment information is protected by industry-leading security measures and trusted payment processors.
+                </p>
 
-              <h3>Payment Security and Trust</h3>
-              <p>
-                Your payment information is protected by industry-leading security measures and trusted payment processors.
-              </p>
+                <div className="bg-gradient-to-r from-red-600/10 to-pink-600/10 border border-red-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🔒 Security Features
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex gap-2">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>PCI Compliance:</strong> PCI DSS compliant systems</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>SSL Encryption:</strong> 256-bit encryption</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>Fraud Protection:</strong> Advanced detection systems</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>Data Privacy:</strong> Payment info never stored</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Security Features:</h4>
-              <ul>
-                <li><strong>PCI Compliance:</strong> All payments processed through PCI DSS compliant systems</li>
-                <li><strong>SSL Encryption:</strong> 256-bit SSL encryption for all payment data</li>
-                <li><strong>Fraud Protection:</strong> Advanced fraud detection and prevention systems</li>
-                <li><strong>Data Privacy:</strong> Payment information never stored on our servers</li>
-              </ul>
+              {/* Cancellation & Refunds */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Cancellation and Refund Policy</h3>
+                <p className="text-gray-300 mb-6">
+                  We want you to be completely satisfied with AI SEO Turbo. Our cancellation and refund policies are designed
+                  to be fair and customer-friendly.
+                </p>
 
-              <h3>Cancellation and Refund Policy</h3>
-              <p>
-                We want you to be completely satisfied with AI SEO Turbo. Our cancellation and refund policies are designed
-                to be fair and customer-friendly.
-              </p>
+                <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    ✅ Refund Policy
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">→</span>
+                      <p className="text-gray-300"><strong>30-Day Guarantee:</strong> Full refund within 30 days of signup</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">→</span>
+                      <p className="text-gray-300"><strong>Pro-Rated Refunds:</strong> Partial refunds for mid-cycle cancellations</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">→</span>
+                      <p className="text-gray-300"><strong>Account Credits:</strong> Credits for service issues or disputes</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-emerald-400">→</span>
+                      <p className="text-gray-300"><strong>Flexible Terms:</strong> No contracts or cancellation fees</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Refund Policy:</h4>
-              <ul>
-                <li><strong>30-Day Money-Back Guarantee:</strong> Full refund within 30 days of signup</li>
-                <li><strong>Pro-Rated Refunds:</strong> Partial refunds for mid-cycle cancellations</li>
-                <li><strong>Account Credits:</strong> Credits for service issues or billing disputes</li>
-                <li><strong>Flexible Terms:</strong> No long-term contracts or cancellation fees</li>
-              </ul>
+              {/* Support */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Getting Help with Billing</h3>
+                <p className="text-gray-300 mb-6">
+                  Our billing support team is available to help with any questions or issues you may encounter.
+                </p>
 
-              <h3>Getting Help with Billing</h3>
-              <p>
-                Our billing support team is available to help with any questions or issues you may encounter.
-              </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">💬</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">24/7 Chat Support</h4>
+                      <p className="text-gray-300 text-sm">Instant help for billing questions</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📧</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Email Support</h4>
+                      <p className="text-gray-300 text-sm">Detailed assistance for complex issues</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📚</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Knowledge Base</h4>
+                      <p className="text-gray-300 text-sm">Self-service articles and guides</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">☎️</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Phone Support</h4>
+                      <p className="text-gray-300 text-sm">Direct support for enterprise customers</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Support Options:</h4>
-              <ul>
-                <li><strong>24/7 Chat Support:</strong> Instant help for billing questions</li>
-                <li><strong>Email Support:</strong> Detailed assistance for complex billing issues</li>
-                <li><strong>Knowledge Base:</strong> Self-service articles and troubleshooting guides</li>
-                <li><strong>Phone Support:</strong> Direct phone support for enterprise customers</li>
-              </ul>
+              {/* Enterprise */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Enterprise Billing Solutions</h3>
+                <p className="text-gray-300 mb-6">
+                  For large organizations and agencies, we offer customized billing solutions and enterprise agreements.
+                </p>
 
-              <h3>Enterprise Billing Solutions</h3>
-              <p>
-                For large organizations and agencies, we offer customized billing solutions and enterprise agreements.
-              </p>
+                <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🏆 Enterprise Features
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex gap-2">
+                      <span className="text-indigo-400">⭐</span>
+                      <p className="text-gray-300"><strong>Custom Contracts:</strong> Tailored agreements</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-indigo-400">⭐</span>
+                      <p className="text-gray-300"><strong>Volume Discounts:</strong> Reduced rates</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-indigo-400">⭐</span>
+                      <p className="text-gray-300"><strong>Dedicated Support:</strong> Account managers</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-indigo-400">⭐</span>
+                      <p className="text-gray-300"><strong>Custom Integrations:</strong> Bespoke solutions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Enterprise Features:</h4>
-              <ul>
-                <li><strong>Custom Contracts:</strong> Tailored agreements for your specific needs</li>
-                <li><strong>Volume Discounts:</strong> Reduced rates for high-volume usage</li>
-                <li><strong>Dedicated Support:</strong> Priority support with dedicated account managers</li>
-                <li><strong>Custom Integrations:</strong> Bespoke integrations and API solutions</li>
-              </ul>
-
-              <h2>Making the Most of Your AI SEO Turbo Investment</h2>
-              <p>
-                Understanding your billing and account management options helps you maximize the value you get from AI SEO Turbo.
-                Whether you're just getting started or managing a team of SEO professionals, our flexible pricing and comprehensive
-                support ensure you have the tools you need to succeed.
-              </p>
-              <p>
-                Ready to optimize your SEO workflow? Explore our detailed guides below or contact our billing team if you have
-                any questions about your account or subscription.
-              </p>
+              {/* Closing CTA */}
+              <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700/50">
+                <h3 className="text-2xl font-bold text-white mb-4">Making the Most of Your AI SEO Turbo Investment</h3>
+                <p className="text-gray-300 mb-4">
+                  Understanding your billing and account management options helps you maximize the value you get from AI SEO Turbo.
+                  Whether you're just getting started or managing a team of SEO professionals, our flexible pricing and comprehensive
+                  support ensure you have the tools you need to succeed.
+                </p>
+                <p className="text-gray-300">
+                  Ready to optimize your SEO workflow? Explore our detailed guides below or contact our billing team if you have
+                  any questions about your account or subscription.
+                </p>
+              </div>
             </div>
           </div>
         </section>
