@@ -103,128 +103,282 @@ export default function SEOToolsFeaturesCategoryPage() {
         {/* SEO Content Section */}
         <section className="py-20 bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="prose prose-lg prose-invert mx-auto">
-              <h2>Master AI-Powered SEO Tools & Features</h2>
-              <p>
-                AI SEO Turbo provides a comprehensive suite of AI-powered tools designed to give you a competitive edge
-                in search engine optimization. Whether you're a beginner or an experienced SEO professional, our platform
-                offers the features and insights you need to drive organic growth.
-              </p>
+            <div className="space-y-12">
+              {/* Main Intro */}
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-4">Master AI-Powered SEO Tools & Features</h2>
+                <p className="text-gray-300 text-lg">
+                  AI SEO Turbo provides a comprehensive suite of AI-powered tools designed to give you a competitive edge
+                  in search engine optimization. Whether you're a beginner or an experienced SEO professional, our platform
+                  offers the features and insights you need to drive organic growth.
+                </p>
+              </div>
 
-              <h3>Comprehensive SEO Audit Suite</h3>
-              <p>
-                Our flagship SEO audit tool goes beyond basic checklists, providing AI-driven analysis that identifies
-                critical issues and opportunities. The 47-point technical audit covers everything from crawlability and
-                indexation to performance optimization and content gaps.
-              </p>
-              <ul>
-                <li><strong>Technical SEO Analysis:</strong> Core Web Vitals, mobile optimization, schema markup validation</li>
-                <li><strong>Content Optimization:</strong> Keyword gap analysis, content depth assessment, semantic SEO</li>
-                <li><strong>Link Profile Audit:</strong> Backlink quality analysis, toxic link detection, internal linking opportunities</li>
-                <li><strong>Competitor Intelligence:</strong> Comparative analysis, opportunity identification, market positioning</li>
-              </ul>
+              {/* SEO Audit Suite */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Comprehensive SEO Audit Suite</h3>
+                <p className="text-gray-300 mb-6">
+                  Our flagship SEO audit tool goes beyond basic checklists, providing AI-driven analysis that identifies
+                  critical issues and opportunities. The 47-point technical audit covers everything from crawlability and
+                  indexation to performance optimization and content gaps.
+                </p>
 
-              <h3>Advanced Site Crawling Technology</h3>
-              <p>
-                Our intelligent site crawler mimics how search engines discover and analyze your website. Unlike traditional
-                crawlers, our AI-powered system understands context, identifies patterns, and provides actionable insights
-                about your site's structure and performance.
-              </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
+                    <h4 className="text-white font-semibold mb-2">🔍 Technical SEO Analysis</h4>
+                    <p className="text-gray-300 text-sm">Core Web Vitals, mobile optimization, schema markup validation</p>
+                  </div>
+                  <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
+                    <h4 className="text-white font-semibold mb-2">📝 Content Optimization</h4>
+                    <p className="text-gray-300 text-sm">Keyword gap analysis, content depth assessment, semantic SEO</p>
+                  </div>
+                  <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
+                    <h4 className="text-white font-semibold mb-2">🔗 Link Profile Audit</h4>
+                    <p className="text-gray-300 text-sm">Backlink quality analysis, toxic link detection, internal linking opportunities</p>
+                  </div>
+                  <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
+                    <h4 className="text-white font-semibold mb-2">⚔️ Competitor Intelligence</h4>
+                    <p className="text-gray-300 text-sm">Comparative analysis, opportunity identification, market positioning</p>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Key Crawling Features:</h4>
-              <ul>
-                <li>Broken link detection and reporting</li>
-                <li>Internal linking structure analysis</li>
-                <li>Page depth and navigation optimization</li>
-                <li>Duplicate content identification</li>
-                <li>XML sitemap validation and optimization</li>
-              </ul>
+              {/* Site Crawling */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Advanced Site Crawling Technology</h3>
+                <p className="text-gray-300 mb-6">
+                  Our intelligent site crawler mimics how search engines discover and analyze your website. Unlike traditional
+                  crawlers, our AI-powered system understands context, identifies patterns, and provides actionable insights
+                  about your site's structure and performance.
+                </p>
 
-              <h3>AI-Powered Keyword Research & Tracking</h3>
-              <p>
-                Stay ahead of the competition with our advanced keyword research tools. Our AI analyzes search intent,
-                competition levels, and historical performance data to identify high-value keywords that drive conversions.
-              </p>
+                <div className="bg-gradient-to-r from-cyan-600/10 to-blue-600/10 border border-cyan-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🕷️ Key Crawling Features
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400">✓</span>
+                      <p className="text-gray-300">Broken link detection and reporting</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400">✓</span>
+                      <p className="text-gray-300">Internal linking structure analysis</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400">✓</span>
+                      <p className="text-gray-300">Page depth and navigation optimization</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400">✓</span>
+                      <p className="text-gray-300">Duplicate content identification</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-cyan-400">✓</span>
+                      <p className="text-gray-300">XML sitemap validation and optimization</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Keyword Research Capabilities:</h4>
-              <ul>
-                <li>Search volume and competition analysis</li>
-                <li>Long-tail keyword discovery</li>
-                <li>Seasonal trend identification</li>
-                <li>SERP feature opportunities</li>
-                <li>Competitor keyword gap analysis</li>
-              </ul>
+              {/* Keyword Research */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">AI-Powered Keyword Research & Tracking</h3>
+                <p className="text-gray-300 mb-6">
+                  Stay ahead of the competition with our advanced keyword research tools. Our AI analyzes search intent,
+                  competition levels, and historical performance data to identify high-value keywords that drive conversions.
+                </p>
 
-              <h3>Real-Time Performance Monitoring</h3>
-              <p>
-                Track your SEO progress with comprehensive dashboards and automated reporting. Our platform monitors
-                ranking changes, traffic fluctuations, and algorithmic updates to keep you informed and proactive.
-              </p>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📊</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Search Volume & Competition</h4>
+                      <p className="text-gray-300 text-sm">Accurate data on keyword difficulty and search trends</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">🎯</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Long-tail Keyword Discovery</h4>
+                      <p className="text-gray-300 text-sm">Find high-converting, low-competition keywords</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📈</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Seasonal Trend Identification</h4>
+                      <p className="text-gray-300 text-sm">Capitalize on seasonal search opportunities</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">✨</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">SERP Feature Opportunities</h4>
+                      <p className="text-gray-300 text-sm">Identify snippets, PAA, and rich results opportunities</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">⚔️</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Competitor Keyword Gap Analysis</h4>
+                      <p className="text-gray-300 text-sm">Find keywords competitors rank for that you don't</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Monitoring Features:</h4>
-              <ul>
-                <li>Daily ranking position tracking</li>
-                <li>Organic traffic trend analysis</li>
-                <li>Core Web Vitals monitoring</li>
-                <li>Algorithm update impact assessment</li>
-                <li>Custom alert system for significant changes</li>
-              </ul>
+              {/* Performance Monitoring */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Real-Time Performance Monitoring</h3>
+                <p className="text-gray-300 mb-6">
+                  Track your SEO progress with comprehensive dashboards and automated reporting. Our platform monitors
+                  ranking changes, traffic fluctuations, and algorithmic updates to keep you informed and proactive.
+                </p>
 
-              <h3>Competitor Analysis & Intelligence</h3>
-              <p>
-                Understand your competitive landscape with detailed competitor analysis. Our AI identifies their strengths,
-                weaknesses, and strategies, helping you develop data-driven approaches to gain market share.
-              </p>
+                <div className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 border border-purple-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    📊 Monitoring Features
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">Daily Tracking</span>
+                      <p className="text-gray-300">Real-time ranking position tracking across all keywords</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">Traffic Analysis</span>
+                      <p className="text-gray-300">Organic traffic trend analysis and anomaly detection</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">Core Web Vitals</span>
+                      <p className="text-gray-300">Continuous monitoring of performance metrics</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">Algorithm Updates</span>
+                      <p className="text-gray-300">Impact assessment during Google algorithm updates</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-purple-400 font-bold min-w-fit">Smart Alerts</span>
+                      <p className="text-gray-300">Custom alert system for significant changes</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Competitor Insights:</h4>
-              <ul>
-                <li>Backlink profile comparison</li>
-                <li>Content strategy analysis</li>
-                <li>Keyword targeting overlap</li>
-                <li>Technical SEO benchmarking</li>
-                <li>Market positioning assessment</li>
-              </ul>
+              {/* Competitor Analysis */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Competitor Analysis & Intelligence</h3>
+                <p className="text-gray-300 mb-6">
+                  Understand your competitive landscape with detailed competitor analysis. Our AI identifies their strengths,
+                  weaknesses, and strategies, helping you develop data-driven approaches to gain market share.
+                </p>
 
-              <h3>Intelligent Content Optimization</h3>
-              <p>
-                Optimize your content for better search performance with AI-powered recommendations. Our platform analyzes
-                content quality, relevance, and engagement factors to improve your on-page SEO.
-              </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-2">🔗 Backlink Comparison</h4>
+                    <p className="text-gray-300 text-sm">Analyze competitor backlink profiles and find link opportunities</p>
+                  </div>
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-2">📄 Content Strategy</h4>
+                    <p className="text-gray-300 text-sm">Understand what content topics competitors target</p>
+                  </div>
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-2">🎯 Keyword Overlap</h4>
+                    <p className="text-gray-300 text-sm">See which keywords you're competing for with rivals</p>
+                  </div>
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-2">⚙️ Technical Benchmarking</h4>
+                    <p className="text-gray-300 text-sm">Compare technical SEO performance against competitors</p>
+                  </div>
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-2">📍 Market Positioning</h4>
+                    <p className="text-gray-300 text-sm">Understand your position in the competitive landscape</p>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Content Optimization Tools:</h4>
-              <ul>
-                <li>Readability and engagement analysis</li>
-                <li>Topic clustering and content gaps</li>
-                <li>Title and meta description optimization</li>
-                <li>Internal linking suggestions</li>
-                <li>Content freshness monitoring</li>
-              </ul>
+              {/* Content Optimization */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Intelligent Content Optimization</h3>
+                <p className="text-gray-300 mb-6">
+                  Optimize your content for better search performance with AI-powered recommendations. Our platform analyzes
+                  content quality, relevance, and engagement factors to improve your on-page SEO.
+                </p>
 
-              <h3>Enterprise-Grade Reporting & Collaboration</h3>
-              <p>
-                Scale your SEO efforts with advanced reporting and team collaboration features. Generate professional
-                reports, share insights with stakeholders, and coordinate team efforts across large organizations.
-              </p>
+                <div className="bg-gradient-to-r from-orange-600/10 to-red-600/10 border border-orange-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    ✍️ Content Optimization Tools
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300">Readability and engagement analysis for better UX</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300">Topic clustering and content gap identification</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300">Title and meta description optimization suggestions</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300">Internal linking suggestions based on content relevance</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-orange-400">→</span>
+                      <p className="text-gray-300">Content freshness monitoring and update recommendations</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Reporting Capabilities:</h4>
-              <ul>
-                <li>White-label reporting options</li>
-                <li>Custom dashboard creation</li>
-                <li>Team collaboration tools</li>
-                <li>API access for integrations</li>
-                <li>Automated report scheduling</li>
-              </ul>
+              {/* Enterprise Reporting */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Enterprise-Grade Reporting & Collaboration</h3>
+                <p className="text-gray-300 mb-6">
+                  Scale your SEO efforts with advanced reporting and team collaboration features. Generate professional
+                  reports, share insights with stakeholders, and coordinate team efforts across large organizations.
+                </p>
 
-              <h2>Getting Started with AI SEO Turbo</h2>
-              <p>
-                Ready to transform your SEO strategy with AI-powered tools? Our platform is designed to be accessible
-                to users at all skill levels while providing the depth and sophistication that enterprise teams require.
-              </p>
-              <p>
-                Start with our comprehensive guides below to master each feature and unlock the full potential of
-                your SEO efforts. Whether you're optimizing a single website or managing a portfolio of client sites,
-                AI SEO Turbo provides the tools and insights you need to succeed.
-              </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">📋 White-Label Reports</h4>
+                    <p className="text-gray-300 text-sm">Custom branded reports for client delivery</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">📊 Custom Dashboards</h4>
+                    <p className="text-gray-300 text-sm">Create personalized views of your SEO metrics</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">👥 Team Collaboration</h4>
+                    <p className="text-gray-300 text-sm">Coordinate efforts and share insights with teams</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">🔗 API Access</h4>
+                    <p className="text-gray-300 text-sm">Integrate with your existing tools and workflows</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">⏰ Automated Reports</h4>
+                    <p className="text-gray-300 text-sm">Schedule and automate report generation</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Getting Started */}
+              <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700/50">
+                <h3 className="text-2xl font-bold text-white mb-4">Getting Started with AI SEO Turbo</h3>
+                <p className="text-gray-300 mb-4">
+                  Ready to transform your SEO strategy with AI-powered tools? Our platform is designed to be accessible
+                  to users at all skill levels while providing the depth and sophistication that enterprise teams require.
+                </p>
+                <p className="text-gray-300">
+                  Start with our comprehensive guides below to master each feature and unlock the full potential of
+                  your SEO efforts. Whether you're optimizing a single website or managing a portfolio of client sites,
+                  AI SEO Turbo provides the tools and insights you need to succeed.
+                </p>
+              </div>
             </div>
           </div>
         </section>

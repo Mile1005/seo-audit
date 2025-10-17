@@ -89,159 +89,364 @@ export default function APIIntegrationsCategoryPage() {
         {/* SEO Content Section */}
         <section className="py-20 bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="prose prose-lg prose-invert mx-auto">
-              <h2>AI SEO Turbo API: Power Your Applications with AI-Driven SEO Intelligence</h2>
-              <p>
-                Our comprehensive API suite enables developers, agencies, and enterprises to integrate AI-powered SEO
-                capabilities directly into their applications, workflows, and platforms. From automated audits to real-time
-                keyword tracking, our APIs provide the same advanced intelligence that powers our dashboard.
-              </p>
+            <div className="space-y-12">
+              {/* Main Intro */}
+              <div>
+                <h2 className="text-3xl font-bold text-white mb-4">AI SEO Turbo API: Power Your Applications</h2>
+                <p className="text-gray-300 text-lg">
+                  Our comprehensive API suite enables developers, agencies, and enterprises to integrate AI-powered SEO
+                  capabilities directly into their applications, workflows, and platforms. From automated audits to real-time
+                  keyword tracking, our APIs provide the same advanced intelligence that powers our dashboard.
+                </p>
+              </div>
 
-              <h3>Getting Started with AI SEO Turbo API</h3>
-              <p>
-                Integrating with our API is straightforward, whether you're building custom SEO tools, automating client
-                workflows, or creating white-label solutions. Our RESTful API follows industry standards and includes
-                comprehensive documentation and SDKs.
-              </p>
+              {/* Getting Started */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Getting Started with AI SEO Turbo API</h3>
+                <p className="text-gray-300 mb-6">
+                  Integrating with our API is straightforward, whether you're building custom SEO tools, automating client
+                  workflows, or creating white-label solutions. Our RESTful API follows industry standards and includes
+                  comprehensive documentation and SDKs.
+                </p>
 
-              <h4>API Access Requirements:</h4>
-              <ul>
-                <li><strong>API Key:</strong> Secure API key authentication for all requests</li>
-                <li><strong>Rate Limits:</strong> Generous rate limits starting at 1,000 requests per hour</li>
-                <li><strong>HTTPS Only:</strong> All API communication secured with TLS 1.3</li>
-                <li><strong>JSON Format:</strong> Consistent JSON request/response format</li>
-              </ul>
+                <div className="bg-gradient-to-r from-blue-600/10 to-cyan-600/10 border border-blue-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🔑 API Access Requirements
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-blue-400">✓</span>
+                      <p className="text-gray-300"><strong>API Key:</strong> Secure API key authentication for all requests</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400">✓</span>
+                      <p className="text-gray-300"><strong>Rate Limits:</strong> Generous rate limits starting at 1,000 requests/hour</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400">✓</span>
+                      <p className="text-gray-300"><strong>HTTPS Only:</strong> All API communication secured with TLS 1.3</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-blue-400">✓</span>
+                      <p className="text-gray-300"><strong>JSON Format:</strong> Consistent JSON request/response format</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h3>Core API Endpoints</h3>
-              <p>
-                Our API provides access to all major SEO analysis and tracking features through well-documented endpoints.
-              </p>
+              {/* Core Endpoints */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Core API Endpoints</h3>
+                <p className="text-gray-300 mb-6">
+                  Our API provides access to all major SEO analysis and tracking features through well-documented endpoints.
+                </p>
 
-              <h4>SEO Audit API:</h4>
-              <ul>
-                <li><strong>Site Audit:</strong> Comprehensive technical SEO analysis with 47+ checks</li>
-                <li><strong>Page Analysis:</strong> Individual page SEO evaluation and recommendations</li>
-                <li><strong>Crawler Control:</strong> Customizable crawling parameters and depth control</li>
-                <li><strong>Report Generation:</strong> Automated PDF and JSON report creation</li>
-              </ul>
+                <div className="space-y-4">
+                  {/* Audit API */}
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
+                    <h4 className="text-white font-semibold mb-3 flex items-center gap-2">🔍 SEO Audit API</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="flex gap-2">
+                        <span className="text-indigo-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Site Audit:</strong> Technical SEO with 47+ checks</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-indigo-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Page Analysis:</strong> Individual page evaluation</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-indigo-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Crawler Control:</strong> Customizable parameters</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-indigo-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Reports:</strong> Automated PDF & JSON creation</p>
+                      </div>
+                    </div>
+                  </div>
 
-              <h4>Keyword Research API:</h4>
-              <ul>
-                <li><strong>Keyword Discovery:</strong> Volume, competition, and trend analysis</li>
-                <li><strong>SERP Analysis:</strong> Search results examination and opportunity identification</li>
-                <li><strong>Competitor Keywords:</strong> Analyze competitor keyword strategies</li>
-                <li><strong>Long-tail Suggestions:</strong> AI-powered long-tail keyword generation</li>
-              </ul>
+                  {/* Keyword API */}
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
+                    <h4 className="text-white font-semibold mb-3 flex items-center gap-2">📊 Keyword Research API</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="flex gap-2">
+                        <span className="text-emerald-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Discovery:</strong> Volume & competition analysis</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-emerald-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>SERP Analysis:</strong> Results examination</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-emerald-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Competitor Keywords:</strong> Strategy analysis</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-emerald-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Long-tail:</strong> AI-powered suggestions</p>
+                      </div>
+                    </div>
+                  </div>
 
-              <h4>Backlink Analysis API:</h4>
-              <ul>
-                <li><strong>Backlink Discovery:</strong> Comprehensive backlink profile analysis</li>
-                <li><strong>Link Quality Scoring:</strong> Toxic link detection and quality assessment</li>
-                <li><strong>Competitor Backlinks:</strong> Compare backlink profiles across domains</li>
-                <li><strong>Link Monitoring:</strong> Real-time backlink acquisition tracking</li>
-              </ul>
+                  {/* Backlink API */}
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
+                    <h4 className="text-white font-semibold mb-3 flex items-center gap-2">🔗 Backlink Analysis API</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="flex gap-2">
+                        <span className="text-orange-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Discovery:</strong> Profile analysis</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-orange-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Quality Scoring:</strong> Toxic detection</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-orange-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Competitor Compare:</strong> Profile comparison</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <span className="text-orange-400">→</span>
+                        <p className="text-gray-300 text-sm"><strong>Monitoring:</strong> Real-time tracking</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h3>Advanced Integration Features</h3>
-              <p>
-                For enterprise and agency clients, we offer advanced integration capabilities that go beyond basic API access.
-              </p>
+              {/* Advanced Features */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Advanced Integration Features</h3>
+                <p className="text-gray-300 mb-6">
+                  Enterprise and agency clients can access advanced integration capabilities beyond basic API access.
+                </p>
 
-              <h4>Webhook Integrations:</h4>
-              <ul>
-                <li><strong>Real-time Notifications:</strong> Instant alerts for audit completions and ranking changes</li>
-                <li><strong>Automated Workflows:</strong> Trigger actions based on SEO events</li>
-                <li><strong>Custom Callbacks:</strong> Define custom webhook endpoints for your applications</li>
-                <li><strong>Retry Logic:</strong> Automatic retry for failed webhook deliveries</li>
-              </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-purple-600/10 border border-purple-500/30 rounded-lg p-5">
+                    <h4 className="text-purple-300 font-semibold mb-3 flex items-center gap-2">⚡ Webhooks</h4>
+                    <ul className="space-y-2">
+                      <li className="text-gray-300 text-sm">Real-time notifications</li>
+                      <li className="text-gray-300 text-sm">Automated workflows</li>
+                      <li className="text-gray-300 text-sm">Custom callbacks</li>
+                      <li className="text-gray-300 text-sm">Automatic retry logic</li>
+                    </ul>
+                  </div>
+                  <div className="bg-pink-600/10 border border-pink-500/30 rounded-lg p-5">
+                    <h4 className="text-pink-300 font-semibold mb-3 flex items-center gap-2">🏷️ White-Label</h4>
+                    <ul className="space-y-2">
+                      <li className="text-gray-300 text-sm">Custom branding</li>
+                      <li className="text-gray-300 text-sm">API reselling</li>
+                      <li className="text-gray-300 text-sm">Custom domains</li>
+                      <li className="text-gray-300 text-sm">Priority support</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
 
-              <h4>White-label Solutions:</h4>
-              <ul>
-                <li><strong>Custom Branding:</strong> Remove AI SEO Turbo branding from reports and interfaces</li>
-                <li><strong>API Reselling:</strong> Resell our API under your own branding</li>
-                <li><strong>Custom Domains:</strong> Host solutions on your own domains</li>
-                <li><strong>Priority Support:</strong> Dedicated support for white-label partners</li>
-              </ul>
+              {/* SDKs */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">SDKs and Development Tools</h3>
+                <p className="text-gray-300 mb-6">
+                  Speed up integration with official SDKs for popular programming languages.
+                </p>
 
-              <h3>SDKs and Development Tools</h3>
-              <p>
-                Speed up your integration with our official SDKs and development tools for popular programming languages.
-              </p>
+                <div className="bg-gradient-to-r from-cyan-600/10 to-blue-600/10 border border-cyan-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    💻 Available SDKs
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="flex gap-2">
+                      <span className="text-cyan-400 font-bold min-w-fit">JS</span>
+                      <p className="text-gray-300">JavaScript/Node.js with TypeScript support</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-cyan-400 font-bold min-w-fit">PY</span>
+                      <p className="text-gray-300">Python with async/await support</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-cyan-400 font-bold min-w-fit">PHP</span>
+                      <p className="text-gray-300">Framework-agnostic with Laravel integration</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-cyan-400 font-bold min-w-fit">JAVA</span>
+                      <p className="text-gray-300">Enterprise SDK with Spring Boot support</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-cyan-400 font-bold min-w-fit">GO</span>
+                      <p className="text-gray-300">High-performance for concurrent requests</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <span className="text-cyan-400 font-bold min-w-fit">RUBY</span>
+                      <p className="text-gray-300">Rails integration with ActiveSupport</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Available SDKs:</h4>
-              <ul>
-                <li><strong>JavaScript/Node.js:</strong> Complete SDK with TypeScript support</li>
-                <li><strong>Python:</strong> Async/await support and comprehensive error handling</li>
-                <li><strong>PHP:</strong> Framework-agnostic library with Laravel integration</li>
-                <li><strong>Java:</strong> Enterprise-grade SDK with Spring Boot support</li>
-                <li><strong>Go:</strong> High-performance SDK optimized for concurrent requests</li>
-                <li><strong>Ruby:</strong> Rails integration with ActiveSupport compatibility</li>
-              </ul>
+              {/* Rate Limits */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">API Rate Limits and Quotas</h3>
+                <p className="text-gray-300 mb-6">
+                  Flexible rate limiting ensures fair access while allowing high-volume usage for enterprise applications.
+                </p>
 
-              <h3>API Rate Limits and Quotas</h3>
-              <p>
-                Our flexible rate limiting ensures fair access while allowing high-volume usage for enterprise applications.
-              </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
+                    <h4 className="text-blue-300 font-semibold mb-3">🆓 Free Tier</h4>
+                    <div className="text-gray-300 text-sm space-y-1">
+                      <div>100 req/hour</div>
+                      <div>1,000 req/month</div>
+                    </div>
+                  </div>
+                  <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
+                    <h4 className="text-emerald-300 font-semibold mb-3">⭐ Pro Tier</h4>
+                    <div className="text-gray-300 text-sm space-y-1">
+                      <div>1,000 req/hour</div>
+                      <div>50,000 req/month</div>
+                    </div>
+                  </div>
+                  <div className="bg-purple-600/10 border border-purple-500/30 rounded-lg p-5">
+                    <h4 className="text-purple-300 font-semibold mb-3">🏢 Agency</h4>
+                    <div className="text-gray-300 text-sm space-y-1">
+                      <div>5,000 req/hour</div>
+                      <div>250,000 req/month</div>
+                    </div>
+                  </div>
+                  <div className="bg-pink-600/10 border border-pink-500/30 rounded-lg p-5">
+                    <h4 className="text-pink-300 font-semibold mb-3">🚀 Enterprise</h4>
+                    <div className="text-gray-300 text-sm space-y-1">
+                      <div>Custom limits</div>
+                      <div>Dedicated infrastructure</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Rate Limit Tiers:</h4>
-              <ul>
-                <li><strong>Free Tier:</strong> 100 requests/hour, 1,000/month</li>
-                <li><strong>Pro Tier:</strong> 1,000 requests/hour, 50,000/month</li>
-                <li><strong>Agency Tier:</strong> 5,000 requests/hour, 250,000/month</li>
-                <li><strong>Enterprise Tier:</strong> Custom limits with dedicated infrastructure</li>
-              </ul>
+              {/* Security */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Security and Compliance</h3>
+                <p className="text-gray-300 mb-6">
+                  Enterprise-grade security ensures your data and API communications are protected at all times.
+                </p>
 
-              <h3>Security and Compliance</h3>
-              <p>
-                Enterprise-grade security ensures your data and API communications are protected at all times.
-              </p>
+                <div className="bg-gradient-to-r from-red-600/10 to-orange-600/10 border border-red-500/30 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    🔒 Security Features
+                  </h4>
+                  <ul className="space-y-3">
+                    <li className="flex gap-3">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>OAuth 2.0:</strong> Secure authentication with refresh tokens</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>Key Rotation:</strong> Automatic key rotation for security</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>Audit Logging:</strong> Complete API usage logs</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>GDPR Compliance:</strong> Data processing compliance</p>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-red-400">✓</span>
+                      <p className="text-gray-300"><strong>SOC 2 Type II:</strong> Certified standards</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
 
-              <h4>Security Features:</h4>
-              <ul>
-                <li><strong>OAuth 2.0:</strong> Secure authentication with refresh token support</li>
-                <li><strong>API Key Rotation:</strong> Automatic key rotation for enhanced security</li>
-                <li><strong>Audit Logging:</strong> Complete API usage logs for compliance</li>
-                <li><strong>GDPR Compliance:</strong> Data processing compliant with privacy regulations</li>
-                <li><strong>SOC 2 Type II:</strong> Certified security and compliance standards</li>
-              </ul>
+              {/* Developer Resources */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">API Documentation and Support</h3>
+                <p className="text-gray-300 mb-6">
+                  Comprehensive documentation and dedicated support ensure successful integrations.
+                </p>
 
-              <h3>API Documentation and Support</h3>
-              <p>
-                Comprehensive documentation and dedicated support ensure successful integrations.
-              </p>
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">📖</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Interactive API Explorer</h4>
+                      <p className="text-gray-300 text-sm">Test endpoints directly in your browser</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">💡</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Code Examples</h4>
+                      <p className="text-gray-300 text-sm">Sample implementations in multiple languages</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">🎥</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Video Tutorials</h4>
+                      <p className="text-gray-300 text-sm">Step-by-step integration guides</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">👥</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">Community Forums</h4>
+                      <p className="text-gray-300 text-sm">Developer-to-developer support</p>
+                    </div>
+                  </div>
+                  <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
+                    <span className="text-2xl">🎧</span>
+                    <div>
+                      <h4 className="text-white font-semibold mb-1">24/7 Support</h4>
+                      <p className="text-gray-300 text-sm">Technical support for integration issues</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Developer Resources:</h4>
-              <ul>
-                <li><strong>Interactive API Explorer:</strong> Test endpoints directly in your browser</li>
-                <li><strong>Code Examples:</strong> Sample implementations in multiple languages</li>
-                <li><strong>Video Tutorials:</strong> Step-by-step integration guides</li>
-                <li><strong>Community Forums:</strong> Developer-to-developer support and discussions</li>
-                <li><strong>24/7 Support:</strong> Technical support for API integration issues</li>
-              </ul>
+              {/* Use Cases */}
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-6">Use Cases and Success Stories</h3>
+                <p className="text-gray-300 mb-6">
+                  See how organizations are leveraging our API to build innovative SEO solutions.
+                </p>
 
-              <h3>Use Cases and Success Stories</h3>
-              <p>
-                See how organizations are leveraging our API to build innovative SEO solutions.
-              </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">🏢 SEO Agencies</h4>
+                    <p className="text-gray-300 text-sm">Automate audits and reporting workflows</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">📝 CMS Platforms</h4>
+                    <p className="text-gray-300 text-sm">Built-in SEO analysis for CMS</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">🛒 E-commerce</h4>
+                    <p className="text-gray-300 text-sm">Automated product page optimization</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">🤖 Marketing Automation</h4>
+                    <p className="text-gray-300 text-sm">SEO-triggered campaign optimization</p>
+                  </div>
+                  <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
+                    <h4 className="text-indigo-300 font-semibold mb-2">👁️ Competitor Monitoring</h4>
+                    <p className="text-gray-300 text-sm">Automated competitive intelligence</p>
+                  </div>
+                </div>
+              </div>
 
-              <h4>Popular Use Cases:</h4>
-              <ul>
-                <li><strong>SEO Agencies:</strong> Automate client audits and reporting workflows</li>
-                <li><strong>CMS Platforms:</strong> Built-in SEO analysis for content management systems</li>
-                <li><strong>E-commerce Platforms:</strong> Automated product page optimization</li>
-                <li><strong>Marketing Automation:</strong> SEO-triggered campaign optimization</li>
-                <li><strong>Competitor Monitoring:</strong> Automated competitive intelligence gathering</li>
-              </ul>
-
-              <h2>Building the Future of SEO Automation</h2>
-              <p>
-                Our API empowers developers and organizations to create innovative SEO solutions that were previously
-                impossible. Whether you're building the next generation of SEO tools or integrating AI-powered analysis
-                into existing platforms, AI SEO Turbo API provides the foundation you need.
-              </p>
-              <p>
-                Ready to start building? Explore our comprehensive documentation and SDKs below, or contact our developer
-                relations team for personalized integration support.
-              </p>
+              {/* Closing CTA */}
+              <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700/50">
+                <h3 className="text-2xl font-bold text-white mb-4">Building the Future of SEO Automation</h3>
+                <p className="text-gray-300 mb-4">
+                  Our API empowers developers and organizations to create innovative SEO solutions that were previously
+                  impossible. Whether you're building the next generation of SEO tools or integrating AI-powered analysis
+                  into existing platforms, AI SEO Turbo API provides the foundation you need.
+                </p>
+                <p className="text-gray-300">
+                  Ready to start building? Explore our comprehensive documentation and SDKs below, or contact our developer
+                  relations team for personalized integration support.
+                </p>
+              </div>
             </div>
           </div>
         </section>
