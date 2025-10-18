@@ -11,12 +11,29 @@ const logos = [
   { name: 'Content Publishers', width: '130px' }
 ]
 
+// CSS animation style for better performance (runs on GPU)
+const carouselStyle = `
+  @keyframes carousel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  .carousel-container {
+    animation: carousel 30s linear infinite;
+  }
+  
+  .carousel-container:hover {
+    animation-play-state: paused;
+  }
+`
+
 export function TrustLogos() {
   // Duplicate logos for seamless loop
   const duplicatedLogos = [...logos, ...logos]
 
   return (
     <section className="py-12 bg-slate-950/50 border-t border-slate-800/50">
+      <style>{carouselStyle}</style>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div 
@@ -30,36 +47,27 @@ export function TrustLogos() {
           </h3>
         </motion.div>
 
-        {/* Animated Logo Carousel */}
+        {/* Animated Logo Carousel - Using CSS for better performance */}
         <div className="relative overflow-hidden">
-          <div className="flex items-center" style={{ width: '200%' }}>
-            <motion.div
-              animate={{ x: [0, -50 + '%'] }}
-              transition={{
-                duration: 30,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              className="flex items-center space-x-8"
-            >
+          <div className="flex items-center carousel-container" style={{ width: '200%' }}>
+            <div className="flex items-center space-x-8">
               {duplicatedLogos.map((logo, index) => (
-                <motion.div
+                <div
                   key={`${logo.name}-${index}`}
-                  className="flex-shrink-0"
+                  className="flex-shrink-0 group"
                   style={{ width: logo.width } as React.CSSProperties}
-                  whileHover={{ scale: 1.1 }}
                 >
                   <div
-                    className="flex-shrink-0 flex items-center justify-center h-12 opacity-60 hover:opacity-80 transition-opacity"
+                    className="flex-shrink-0 flex items-center justify-center h-12 opacity-60 group-hover:opacity-80 transition-opacity cursor-pointer"
                     style={{ width: logo.width } as React.CSSProperties}
                   >
                     <div className="w-full h-8 bg-gradient-to-r from-gray-600 to-gray-400 rounded flex items-center justify-center text-xs font-semibold text-white">
                       {logo.name}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
