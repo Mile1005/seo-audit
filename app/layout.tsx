@@ -308,11 +308,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         
         {/* Defer non-critical styles to prevent render blocking */}
         <link 
-          rel="stylesheet" 
-          href="/_next/static/css/globals.css" 
-          media="print"
-          onLoad={(e: any) => e.media = "all"}
-        />
+  rel="stylesheet"
+  href="/_next/static/css/globals.css"
+  media="all" 
+/>
+<noscript>
+  <link rel="stylesheet" href="/_next/static/css/globals.css" />
+</noscript>
         <noscript>
           <link rel="stylesheet" href="/_next/static/css/globals.css" />
         </noscript>
