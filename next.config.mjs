@@ -9,7 +9,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   
-  // Redirects configuration - handle non-www to www
+  // Redirects configuration - handle non-www to www and index pages
   async redirects() {
     return [
       // Redirect non-www to www for SEO consistency
@@ -22,6 +22,24 @@ const nextConfig = {
           },
         ],
         destination: 'https://www.aiseoturbo.com/:path',
+        permanent: true, // 301 permanent redirect
+      },
+      // Redirect /index.html to root
+      {
+        source: '/index.html',
+        destination: '/',
+        permanent: true, // 301 permanent redirect
+      },
+      // Redirect /index.php to root
+      {
+        source: '/index.php',
+        destination: '/',
+        permanent: true, // 301 permanent redirect
+      },
+      // Redirect /index to root
+      {
+        source: '/index',
+        destination: '/',
         permanent: true, // 301 permanent redirect
       },
     ]
@@ -69,6 +87,36 @@ const nextConfig = {
   // Basic images optimization only
   images: {
     formats: ['image/avif', 'image/webp'],
+  },
+  
+  // Webpack optimization for reducing HTTP requests
+  webpack: (config, { isServer }) => {
+    config.optimization = {
+      ...config.optimization,
+      // Enable code splitting optimization
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          // Bundle React and Next.js runtime together
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true,
+            name: 'common',
+          },
+          // Vendor libraries
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            minChunks: 1,
+            priority: -10,
+            name: 'vendors',
+            reuseExistingChunk: true,
+            maxSize: 250000, // Combine smaller vendor chunks
+          },
+        },
+      },
+    }
+    return config
   },
 }
 

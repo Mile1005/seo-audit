@@ -4,8 +4,15 @@ import React from "react";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "../components/auth/auth-provider";
 import { ThemeProvider } from "../components/ui/theme-provider";
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import dynamicImport from 'next/dynamic';
+
+// Lazy load Vercel monitoring scripts (not critical for page render)
+const Analytics = dynamicImport(() => import('@vercel/analytics/react').then(mod => ({ default: mod.Analytics })), { 
+  ssr: false 
+});
+const SpeedInsights = dynamicImport(() => import('@vercel/speed-insights/next').then(mod => ({ default: mod.SpeedInsights })), { 
+  ssr: false 
+});
 
 // Force dynamic rendering to avoid Vercel lambda routing issues
 export const dynamic = 'force-dynamic';
@@ -306,6 +313,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </ThemeProvider>
         </AuthProvider>
+        {/* Defer non-critical analytics scripts to reduce initial page requests */}
         <Analytics />
         <SpeedInsights />
       </body>
