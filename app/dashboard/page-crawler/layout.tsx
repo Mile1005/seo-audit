@@ -8,10 +8,5 @@ export default function PageCrawlerLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <>
-      <h1 className="sr-only">Page Crawler Dashboard</h1>
-      {children}
-    </>
-  )
+  return children
 }

@@ -10,18 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Security Best Practices - Protect Your Account | AI SEO Turbo',
     description: 'Essential security best practices for AI SEO Turbo users. Learn to protect your account, use strong passwords, enable 2FA, and secure your SEO data.',
-    url: 'https://www.aiseoturbo.com/help/security/best-practices',
     type: 'article',
-    locale: 'en_US',
-    siteName: 'AISEOTurbo',
-    images: [
-      {
-        url: 'https://www.aiseoturbo.com/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'AISEOTurbo - AI-Powered SEO Audits',
-      }
-    ]
   },
   twitter: {
     card: 'summary_large_image',

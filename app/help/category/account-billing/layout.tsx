@@ -10,18 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Account & Billing - Subscription Management | AI SEO Turbo',
     description: 'Complete guide to account management and billing for AI SEO Turbo. Learn about subscriptions, payments, invoices, and account settings.',
-    url: 'https://www.aiseoturbo.com/help/category/account-billing',
     type: 'article',
-    locale: 'en_US',
-    siteName: 'AISEOTurbo',
-    images: [
-      {
-        url: 'https://www.aiseoturbo.com/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'AISEOTurbo - AI-Powered SEO Audits',
-      }
-    ]
   },
   twitter: {
     card: 'summary_large_image',

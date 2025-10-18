@@ -54,7 +54,6 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
       description: seo.description,
       url: canonical,
       type: seo.ogType,
-      locale: 'en_US',
       images: [
         {
           url: ogImageUrl,
@@ -220,22 +219,19 @@ export const pageSEO = {
   pricing: {
     title: 'SEO Audit Pricing - Plans From $29/month | AI SEO Turbo',
     description: 'Choose the perfect SEO audit plan for your business. Free plan with analysis, Pro plans from $29/month with advanced features and priority support.',
-    keywords: ['SEO audit pricing', 'SEO tools cost', 'website audit plans'],
-    canonical: 'https://www.aiseoturbo.com/pricing'
+    keywords: ['SEO audit pricing', 'SEO tools cost', 'website audit plans']
   },
   
   about: {
     title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
     description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
-    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists'],
-    canonical: 'https://www.aiseoturbo.com/about'
+    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists']
   },
   
   contact: {
     title: 'Contact AI SEO Turbo - Expert SEO Support & Consultation',
     description: 'Get expert SEO help from certified specialists. Contact us for personalized consultation, technical support, and partnership inquiries. Join 10,000+ businesses achieving SEO success.',
-    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership'],
-    canonical: 'https://www.aiseoturbo.com/contact'
+    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership']
   },
 
   blog: {
@@ -301,15 +297,13 @@ export const pageSEO = {
   community: {
     title: 'SEO Community - Connect & Learn | AI SEO Turbo',
     description: 'Join the AI SEO Turbo community to connect with professionals, share insights, learn from experts, and stay updated with SEO trends.',
-    keywords: ['SEO community', 'SEO professionals', 'SEO networking', 'SEO insights'],
-    canonical: 'https://www.aiseoturbo.com/community'
+    keywords: ['SEO community', 'SEO professionals', 'SEO networking', 'SEO insights']
   },
 
   demo: {
     title: 'Free SEO Audit Demo - Try AI Analysis Tool Online',
     description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ checks, competitor insights, and actionable recommendations.',
-    keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker'],
-    canonical: 'https://www.aiseoturbo.com/demo'
+    keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker']
   },
 
   careers: {

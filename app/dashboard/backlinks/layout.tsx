@@ -8,10 +8,5 @@ export default function BacklinksLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <>
-      <h1 className="sr-only">Backlinks Dashboard</h1>
-      {children}
-    </>
-  )
+  return children
 }

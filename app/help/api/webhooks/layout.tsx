@@ -10,18 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Webhooks Integration Guide - Real-time SEO Notifications | AI SEO Turbo',
     description: 'Set up webhooks for real-time SEO notifications and workflows. Learn to configure webhook endpoints for audit completions, ranking changes, and alerts.',
-    url: 'https://www.aiseoturbo.com/help/api/webhooks',
     type: 'article',
-    locale: 'en_US',
-    siteName: 'AISEOTurbo',
-    images: [
-      {
-        url: 'https://www.aiseoturbo.com/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'AISEOTurbo - AI-Powered SEO Audits',
-      }
-    ]
   },
   twitter: {
     card: 'summary_large_image',

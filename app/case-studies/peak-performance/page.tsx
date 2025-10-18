@@ -46,18 +46,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
     description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
-    url: 'https://www.aiseoturbo.com/case-studies/peak-performance',
     type: 'article',
-    locale: 'en_US',
-    siteName: 'AISEOTurbo',
-    images: [
-      {
-        url: 'https://www.aiseoturbo.com/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'AISEOTurbo - AI-Powered SEO Audits',
-      }
-    ]
   },
   twitter: {
     card: 'summary_large_image',

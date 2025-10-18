@@ -10,22 +10,6 @@ export const metadata: Metadata = {
   keywords: ['about aiseoturbo', 'seo company', 'ai seo team', 'seo experts'],
   alternates: {
     canonical: 'https://www.aiseoturbo.com/about'
-  },
-  openGraph: {
-    title: 'About Us - SEO Experts & AI Innovation | AI SEO Turbo',
-    description: 'Learn about our mission to revolutionize SEO with AI technology. Meet the team committed to helping businesses succeed online with cutting-edge tools.',
-    url: 'https://www.aiseoturbo.com/about',
-    type: 'website',
-    locale: 'en_US',
-    siteName: 'AISEOTurbo',
-    images: [
-      {
-        url: 'https://www.aiseoturbo.com/logo.png',
-        width: 1200,
-        height: 630,
-        alt: 'AISEOTurbo - AI-Powered SEO Audits',
-      }
-    ]
   }
 }
 
