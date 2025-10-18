@@ -10,7 +10,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Dashboard Setup Guide - Configure AI SEO Turbo | AI SEO Turbo',
     description: 'Complete guide to setting up your AI SEO Turbo dashboard. Learn to configure projects, customize layouts, and optimize your SEO workflow.',
+    url: 'https://www.aiseoturbo.com/help/getting-started/dashboard-setup',
     type: 'article',
+    locale: 'en_US',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',

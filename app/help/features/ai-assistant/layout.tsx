@@ -10,7 +10,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AI Assistant Guide - Smart SEO Recommendations | AI SEO Turbo',
     description: 'Master the AI assistant feature in AI SEO Turbo. Learn best practices for SEO recommendations, content optimization, and automated insights.',
+    url: 'https://www.aiseoturbo.com/help/features/ai-assistant',
     type: 'article',
+    locale: 'en_US',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',

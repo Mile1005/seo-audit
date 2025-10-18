@@ -18,8 +18,17 @@ export const metadata: Metadata = {
     title: 'SEO Audit Pricing - Free & Pro Plans | AI SEO Turbo',
     description: 'Choose the perfect SEO plan. Free plan with analysis. Pro plans start at $29/month with advanced features.',
     url: 'https://www.aiseoturbo.com/pricing',
+    type: 'website',
+    locale: 'en_US',
     siteName: 'AISEOTurbo',
-    type: 'website'
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',

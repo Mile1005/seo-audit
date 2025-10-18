@@ -10,7 +10,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Login Issues - Fix Account Access Problems | AI SEO Turbo',
     description: 'Solve login problems with AI SEO Turbo. Learn to fix password issues, account lockouts, email verification problems, and access your account.',
+    url: 'https://www.aiseoturbo.com/help/troubleshooting/login-issues',
     type: 'article',
+    locale: 'en_US',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',

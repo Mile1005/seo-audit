@@ -10,7 +10,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fix Audit Issues - Troubleshoot SEO Audits | AI SEO Turbo',
     description: 'Solve common SEO audit problems in AI SEO Turbo. Learn to fix stuck audits, timeouts, incomplete scans, and other audit-related issues.',
+    url: 'https://www.aiseoturbo.com/help/troubleshooting/audit-issues',
     type: 'article',
+    locale: 'en_US',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',

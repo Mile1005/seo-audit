@@ -11,6 +11,17 @@ export const metadata: Metadata = {
     title: 'SEO Community - Connect & Learn | AI SEO Turbo',
     description: 'Join the AI SEO Turbo community to connect with SEO professionals, share insights, learn from experts, and stay updated with latest trends.',
     type: 'website',
+    locale: 'en_US',
+    url: 'https://www.aiseoturbo.com/community',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',

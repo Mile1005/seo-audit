@@ -7,6 +7,22 @@ export const metadata: Metadata = {
   keywords: ['contact aiseoturbo', 'seo consultation', 'seo support', 'seo experts contact'],
   alternates: {
     canonical: 'https://www.aiseoturbo.com/contact'
+  },
+  openGraph: {
+    title: 'Contact Us - Get SEO Help Today | AI SEO Turbo',
+    description: 'Get in touch with AISEOTurbo for expert SEO consultation and support. We are here to help optimize your website and boost your search rankings.',
+    url: 'https://www.aiseoturbo.com/contact',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   }
 }
 

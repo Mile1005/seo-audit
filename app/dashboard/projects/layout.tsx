@@ -8,5 +8,10 @@ export default function ProjectsLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children
+  return (
+    <>
+      <h1 className="sr-only">Projects - Manage SEO Audits</h1>
+      {children}
+    </>
+  )
 }

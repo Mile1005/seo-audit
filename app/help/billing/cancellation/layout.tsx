@@ -10,7 +10,18 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Account Cancellation Guide - Cancel Subscription | AI SEO Turbo',
     description: 'Learn how to cancel your AI SEO Turbo subscription safely. Understand cancellation policies, data retention, and account closure procedures.',
+    url: 'https://www.aiseoturbo.com/help/billing/cancellation',
     type: 'article',
+    locale: 'en_US',
+    siteName: 'AISEOTurbo',
+    images: [
+      {
+        url: 'https://www.aiseoturbo.com/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'AISEOTurbo - AI-Powered SEO Audits',
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
