@@ -79,22 +79,162 @@ const nextConfig = {
         ],
       },
       {
-        // Image cache headers - set expires for all image types
-        source: '/.*\\.(gif|jpe?g|jpg|png|webp|svg|ico|avif)$',
+        // Image cache headers - gif files
+        source: '/:path*\\.gif',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable', // 1 year cache with immutable flag
+            value: 'public, max-age=31536000, immutable',
           },
           {
             key: 'Expires',
-            value: 'Wed, 18 Oct 2026 00:00:00 GMT', // 1 year cache expiry
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
           },
         ],
       },
       {
-        // Font cache headers
-        source: '/.*\\.(woff|woff2|ttf|otf|eot)$',
+        // Image cache headers - jpg/jpeg files
+        source: '/:path*\\.(jpg|jpeg)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Image cache headers - png files
+        source: '/:path*\\.png',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Image cache headers - webp files
+        source: '/:path*\\.webp',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Image cache headers - svg files
+        source: '/:path*\\.svg',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Image cache headers - ico files
+        source: '/:path*\\.ico',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Image cache headers - avif files
+        source: '/:path*\\.avif',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Font cache headers - woff files
+        source: '/:path*\\.woff',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Font cache headers - woff2 files
+        source: '/:path*\\.woff2',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Font cache headers - ttf files
+        source: '/:path*\\.ttf',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Font cache headers - otf files
+        source: '/:path*\\.otf',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+          },
+        ],
+      },
+      {
+        // Font cache headers - eot files
+        source: '/:path*\\.eot',
         headers: [
           {
             key: 'Cache-Control',
