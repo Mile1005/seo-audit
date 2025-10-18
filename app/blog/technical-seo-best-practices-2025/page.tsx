@@ -4,7 +4,7 @@ import BlogPostClient from '../[slug]/blog-post-client'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'Technical SEO Best Practices 2025 | AI SEO Turbo Blog',
-  description: 'Stay ahead of the curve with the latest technical SEO best practices for 2025.',
+  description: 'Master technical SEO in 2025 with our complete guide covering site speed, mobile-first indexing, structured data, crawlability, and best practices.',
   canonical: 'https://www.aiseoturbo.com/blog/technical-seo-best-practices-2025',
   ogType: 'article',
   keywords: ['Technical SEO', 'Best Practices', '2025', 'Optimization']
