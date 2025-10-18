@@ -232,10 +232,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="manifest" href="/manifest.json" />
         
-        {/* LCP Optimization: Resource hints for faster font/image loading */}
+        {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
         <link rel="preconnect" href="https://images.unsplash.com" />
         
         {/* Favicon and Touch Icons - SVG scales better for larger display */}

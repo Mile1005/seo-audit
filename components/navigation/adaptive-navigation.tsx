@@ -208,8 +208,8 @@ export function AdaptiveNavigation() {
                 <Image 
                   src="/logo.png" 
                   alt="AISEOTurbo Logo" 
-                  width={500} 
-                  height={133}
+                  width={180} 
+                  height={48}
                   priority
                   className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
                 />
@@ -234,8 +234,8 @@ export function AdaptiveNavigation() {
               <Image 
                 src="/logo.png" 
                 alt="AISEOTurbo Logo" 
-                width={500} 
-                height={133}
+                width={180} 
+                height={48}
                 priority
                 className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
               />

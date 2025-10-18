@@ -76,8 +76,8 @@ export default function Footer() {
                   <Image 
                     src="/logo.png" 
                     alt="AISEOTurbo Logo" 
-                    width={400} 
-                    height={106}
+                    width={200} 
+                    height={53}
                     className="h-16 sm:h-20 md:h-24 w-auto"
                   />
                 </Link>
