@@ -9,23 +9,24 @@ import { trackCTA, trackDemo } from "@/lib/analytics"
 import { handleCTAClick } from "@/lib/cta-utils"
 
 export function HeroSection() {
+  // Reduced animation complexity for faster mobile rendering
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
+        duration: 0.4,  // Reduced from 0.6ms
+        staggerChildren: 0.05  // Reduced from 0.1ms - faster cascade
       }
     }
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },  // Reduced Y offset from 30
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 }
+      transition: { duration: 0.4 }  // Reduced from 0.6ms
     }
   }
 
