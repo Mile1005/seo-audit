@@ -45,7 +45,7 @@ const nextConfig = {
     ]
   },
 
-  // Security headers configuration
+  // Security and caching headers configuration
   async headers() {
     return [
       {
@@ -75,6 +75,34 @@ const nextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=(), ambient-light-sensor=(), autoplay=(), encrypted-media=(), fullscreen=(self), picture-in-picture=()',
+          },
+        ],
+      },
+      {
+        // Image cache headers - set expires for all image types
+        source: '/.*\\.(gif|jpe?g|jpg|png|webp|svg|ico|avif)$',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable', // 1 year cache with immutable flag
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT', // 1 year cache expiry
+          },
+        ],
+      },
+      {
+        // Font cache headers
+        source: '/.*\\.(woff|woff2|ttf|otf|eot)$',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Expires',
+            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
           },
         ],
       },
