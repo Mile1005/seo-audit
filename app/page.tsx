@@ -24,7 +24,8 @@ import {
 const EmailCaptureInline = dynamic(() => 
   import("@/components/lead/email-capture-inline").then(mod => ({ default: mod.EmailCaptureInline })), 
   { 
-    loading: () => <div className="h-16 bg-gray-900 dark:bg-gray-900 animate-pulse rounded" />
+    loading: () => <div className="h-16 bg-gray-900 dark:bg-gray-900 animate-pulse rounded" />,
+    ssr: false  // Defer to client-side to reduce server bundle
   }
 )
 
@@ -32,45 +33,52 @@ const EmailCaptureInline = dynamic(() =>
 const DynamicFeaturesShowcase = dynamic(() => 
   import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicFeaturesShowcase })), 
   {
-    loading: () => <FeaturesSkeleton />
+    loading: () => <FeaturesSkeleton />,
+    ssr: false  // Client-side only - reduces initial server payload
   }
 )
 
 const DynamicInteractiveDemo = dynamic(() => 
   import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicInteractiveDemo })), 
   {
-    loading: () => <DemoSkeleton />
+    loading: () => <DemoSkeleton />,
+    ssr: false  // Client-side only
   }
 )
 
 const DynamicTestimonialsCarousel = dynamic(() => 
   import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicTestimonialsCarousel })), 
   {
-    loading: () => <TestimonialsSkeleton />
+    loading: () => <TestimonialsSkeleton />,
+    ssr: false  // Client-side only
   }
 )
 
 const DynamicROICalculator = dynamic(() => 
   import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicROICalculator })), 
   {
-    loading: () => <ROISkeleton />
+    loading: () => <ROISkeleton />,
+    ssr: false  // Client-side only
   }
 )
 
 const DynamicPricingCards = dynamic(() => 
   import("@/components/dynamic/heavy-components").then(mod => ({ default: mod.DynamicPricingCards })), 
   {
-    loading: () => <PricingSkeleton />
+    loading: () => <PricingSkeleton />,
+    ssr: false  // Client-side only
   }
 )
 
 // EMERGENCY: Load modals only when actually needed (not on page load)
 const ExitIntentModal = dynamic(() => 
-  import("@/components/lead/exit-intent-modal").then(mod => ({ default: mod.ExitIntentModal }))
+  import("@/components/lead/exit-intent-modal").then(mod => ({ default: mod.ExitIntentModal })),
+  { ssr: false }  // Client-side only - modals not needed on server
 )
 
 const ContentGate = dynamic(() => 
-  import("@/components/lead/content-gate").then(mod => ({ default: mod.ContentGate }))
+  import("@/components/lead/content-gate").then(mod => ({ default: mod.ContentGate })),
+  { ssr: false }  // Client-side only
 )
 
 // SEO metadata for the homepage - Force deployment
