@@ -4,7 +4,7 @@ import { CheckCircle, Search, TrendingUp, Shield, Zap, Users } from 'lucide-reac
 
 export const metadata: Metadata = {
   title: 'SEO Features - Complete Audit Tools | AI SEO Turbo',
-  description: 'Discover all the powerful features of AI SEO Turbo including comprehensive SEO audits, competitor analysis, real-time monitoring, and AI-powered recommendations.',
+  description: 'AI SEO Turbo features: comprehensive audits, competitor analysis, real-time monitoring, and AI recommendations.',
   keywords: 'SEO features, SEO audit, competitor analysis, keyword research, technical SEO, performance optimization',
 };
 
