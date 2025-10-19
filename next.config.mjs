@@ -302,6 +302,10 @@ const nextConfig = {
   },
 }
 
+const withBundleAnalyzer = (await import('@next/bundle-analyzer')).default({
+  enabled: process.env.ANALYZE === 'true',
+})
+
 const withMDX = (await import('@next/mdx')).default({
   extension: /\.mdx?$/,
   options: {
@@ -310,4 +314,4 @@ const withMDX = (await import('@next/mdx')).default({
   },
 })
 
-export default withMDX(nextConfig)
+export default withBundleAnalyzer(withMDX(nextConfig))

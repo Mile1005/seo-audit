@@ -1,11 +1,16 @@
 "use client";
 
 import { useState, useEffect } from 'react'
-import BacklinkDashboard from '../../../components/backlinks/backlink-dashboard'
+import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Plus, Link } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+
+const BacklinkDashboard = dynamic(
+  () => import('../../../components/backlinks/backlink-dashboard'),
+  { ssr: false, loading: () => <div>Loading backlinks dashboard...</div> }
+)
 
 export default function BacklinksPage() {
   const router = useRouter()

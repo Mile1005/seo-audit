@@ -232,10 +232,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="manifest" href="/manifest.json" />
         
-        {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
+  {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Favicon and Touch Icons - SVG scales better for larger display */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -258,9 +257,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         
-        {/* Critical performance optimizations - Google Fonts only */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+  {/* Critical performance optimizations - Google Fonts only (deduplicated) */}
         
         {/* Resource hints for performance */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
