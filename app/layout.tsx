@@ -258,10 +258,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         
-        {/* Critical performance optimizations */}
+        {/* Critical performance optimizations - Google Fonts only */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
         
         {/* Resource hints for performance */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
