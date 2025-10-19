@@ -24,6 +24,9 @@
       "@/components/*": [
         "components/*"
       ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
       "@/auth": [
         "auth"
       ],

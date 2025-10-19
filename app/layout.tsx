@@ -232,9 +232,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="manifest" href="/manifest.json" />
         
-  {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* LCP OPTIMIZATION: Preload hero images */}
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/images/hero/hero-mobile-portrait.webp"
+          media="(max-width: 1024px)"
+          type="image/webp"
+        />
+        <link 
+          rel="preload" 
+          as="image"
+          href="/images/hero/hero-mobile-portrait.jpg"
+          media="(max-width: 1024px)"
+        />
+        <link 
+          rel="preload" 
+          as="image"
+          href="/images/hero/hero-desktop-landscape.webp"
+          media="(min-width: 1025px)"
+          type="image/webp"
+        />
         
         {/* Favicon and Touch Icons - SVG scales better for larger display */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -257,7 +279,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
         
-  {/* Critical performance optimizations - Google Fonts only (deduplicated) */}
+        {/* Critical performance optimizations - Google Fonts only (deduplicated) */}
         
         {/* Resource hints for performance */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
@@ -265,17 +287,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* EMERGENCY: Critical CSS - loads immediately */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* Critical above-the-fold styles */
-            *,*::before,*::after{box-sizing:border-box}
-            *{margin:0}
-            html,body{height:100%;line-height:1.5;-webkit-font-smoothing:antialiased;font-family:var(--font-inter),system-ui,-apple-system,sans-serif}
-            .container{width:100%;max-width:1200px;margin:0 auto;padding:0 1rem}
-            .nav-bar{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(10px);background:rgba(255,255,255,0.95);border-bottom:1px solid rgba(0,0,0,0.1)}
-            .hero{padding:6rem 0 4rem;text-align:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white}
-            .animate-pulse{animation:pulse 2s cubic-bezier(0.4,0,0.6,1) infinite}
-            @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-            @media(min-width:640px){.container{padding:0 1.5rem}}
-            @media(min-width:1024px){.container{padding:0 2rem}}
+            /* LCP OPTIMIZATION: Critical above-the-fold styles - hero section only (~2.8KB) */
+            *,*::before,*::after{box-sizing:border-box}*{margin:0}html,body{height:100%;line-height:1.5;-webkit-font-smoothing:antialiased}
+            body{font-family:var(--font-inter),system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+            .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
+            .hero-section h1{font-size:clamp(1.5rem,5vw,3.5rem);font-weight:700;line-height:1.2;color:#fff;margin:0}
+            .hero-section p{font-size:clamp(1rem,3vw,1.25rem);color:#cbd5e1;line-height:1.6;margin-top:1rem}
+            .hero-background{position:absolute;inset:0;pointer-events:none}
+            @media(max-width:1023px){.desktop-only{display:none!important}}
           `
         }} />
         

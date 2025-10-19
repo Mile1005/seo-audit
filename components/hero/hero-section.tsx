@@ -3,34 +3,37 @@
 import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Play, Zap, Clock, Users } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-is-mobile"
 import { DesktopHeroMockup } from "./desktop-hero-mockup"
 import { HeroHeadlineAB, CTATextAB } from "@/components/ab/ab-slot"
 import { trackCTA, trackDemo } from "@/lib/analytics"
 import { handleCTAClick } from "@/lib/cta-utils"
 
 export function HeroSection() {
-  // Reduced animation complexity for faster mobile rendering
-  const containerVariants = {
+  const isMobile = useIsMobile()
+
+  // LCP optimization: Disable animations on mobile for faster paint
+  const containerVariants = !isMobile ? {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.4,  // Reduced from 0.6ms
-        staggerChildren: 0.05  // Reduced from 0.1ms - faster cascade
+        duration: 0.4,
+        staggerChildren: 0.05
       }
     }
-  }
+  } : undefined
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },  // Reduced Y offset from 30
+  const itemVariants = !isMobile ? {
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4 }  // Reduced from 0.6ms
+      transition: { duration: 0.4 }
     }
-  }
+  } : undefined
 
-  const floatingShapeVariants = {
+  const floatingShapeVariants = !isMobile ? {
     floating: {
       y: [0, -10, 0],
       transition: {
@@ -39,7 +42,7 @@ export function HeroSection() {
         repeatType: "loop" as const
       }
     }
-  }
+  } : undefined
 
   return (
     <section 
@@ -49,25 +52,27 @@ export function HeroSection() {
       {/* Main H1 - For SEO */}
       <h1 className="sr-only">AI SEO Turbo - Professional SEO Audits & Analysis Tool</h1>
       
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        {/* Gradient Orbs */}
-        <motion.div
-          variants={floatingShapeVariants}
-          animate="floating"
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
-          style={{ animationDelay: "0s" }}
-        />
-        <motion.div
-          variants={floatingShapeVariants}
-          animate="floating"
-          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
-          style={{ animationDelay: "1.5s" }}
-        />
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      </div>
+      {/* Background Elements - LCP optimization: Skip on mobile */}
+      {!isMobile && (
+        <div className="absolute inset-0">
+          {/* Gradient Orbs */}
+          <motion.div
+            variants={floatingShapeVariants}
+            animate="floating"
+            className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
+            style={{ animationDelay: "0s" }}
+          />
+          <motion.div
+            variants={floatingShapeVariants}
+            animate="floating"
+            className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
+            style={{ animationDelay: "1.5s" }}
+          />
+          
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 py-20 relative z-10">
         <motion.div
@@ -160,13 +165,15 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Mockup Column - Desktop Only */}
-          <motion.div
-            variants={itemVariants}
-            className="hidden lg:block"
-          >
-            <DesktopHeroMockup />
-          </motion.div>
+          {/* Mockup Column - Desktop Only, LCP optimization: Skip on mobile */}
+          {!isMobile && (
+            <motion.div
+              variants={itemVariants}
+              className="hidden lg:block"
+            >
+              <DesktopHeroMockup />
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>
