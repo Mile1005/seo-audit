@@ -339,22 +339,29 @@ export function AdaptiveNavigation() {
                   <div>
                     <button
                       type="button"
+                      aria-expanded={openDropdown === section.label}
+                      aria-controls={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
                       onClick={(e) => {
                         e.preventDefault()
                         e.stopPropagation()
                         toggleDropdown(section.label)
                       }}
-                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-all duration-200 rounded-md flex items-center justify-between touch-manipulation"
+                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between touch-manipulation"
                     >
                       <span>{section.label}</span>
-                      <ChevronDown className={`h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
-                        openDropdown === section.label ? 'rotate-180 text-blue-400' : 'text-slate-400'
-                      }`} />
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={`pointer-events-none h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
+                          openDropdown === section.label ? 'rotate-180 text-blue-400' : 'text-slate-400'
+                        }`} 
+                      />
                     </button>
-                    
-                    <div className={`pl-4 transition-all duration-200 overflow-hidden ${
-                      openDropdown === section.label ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                    }`} style={{ minHeight: openDropdown === section.label ? '120px' : '0px' }}>
+
+                    {/* Submenu: use hidden/block to avoid touch height transition glitches */}
+                    <div
+                      id={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
+                      className={`${openDropdown === section.label ? 'block' : 'hidden'} pl-4 mt-1`}
+                    >
                       {section.items.map((item) => (
                         <Link
                           key={item.href}
