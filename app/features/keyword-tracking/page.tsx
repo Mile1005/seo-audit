@@ -63,8 +63,8 @@ export default function KeywordTrackingPage() {
   ];
 
   const getChangeColor = (change: number) => {
-    if (change > 0) return "text-green-600";
-    if (change < 0) return "text-red-600";
+    if (change > 0) return "text-emerald-400";
+    if (change < 0) return "text-rose-400";
     return "text-muted-foreground";
   };
 
@@ -210,11 +210,11 @@ export default function KeywordTrackingPage() {
                     <div className="mt-6 pt-4 border-t">
                       <div className="grid grid-cols-3 gap-4 text-center">
                         <div>
-                          <div className="text-lg font-bold text-green-600">+12</div>
+                          <div className="text-lg font-bold text-emerald-400">+12</div>
                           <div className="text-xs text-muted-foreground">Improved</div>
                         </div>
                         <div>
-                          <div className="text-lg font-bold text-red-600">-3</div>
+                          <div className="text-lg font-bold text-rose-400">-3</div>
                           <div className="text-xs text-muted-foreground">Declined</div>
                         </div>
                         <div>

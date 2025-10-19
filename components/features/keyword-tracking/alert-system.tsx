@@ -212,8 +212,8 @@ export default function AlertSystem() {
   };
 
   const getChangeIcon = (change: number) => {
-    if (change > 0) return <ArrowUp className="w-4 h-4 text-green-600" />;
-    if (change < 0) return <ArrowDown className="w-4 h-4 text-red-600" />;
+  if (change > 0) return <ArrowUp className="w-4 h-4 text-emerald-400" />;
+  if (change < 0) return <ArrowDown className="w-4 h-4 text-rose-400" />;
     return <Minus className="w-4 h-4 text-muted-foreground" />;
   };
 
@@ -342,7 +342,7 @@ export default function AlertSystem() {
                             <div className="flex items-center space-x-1">
                               {getChangeIcon(alert.change)}
                               <span className={`text-sm font-medium ${
-                                alert.change > 0 ? "text-green-600" : "text-red-600"
+                                alert.change > 0 ? "text-emerald-400" : "text-rose-400"
                               }`}>
                                 {alert.change > 0 ? "+" : ""}{alert.change}
                               </span>
