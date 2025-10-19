@@ -38,6 +38,9 @@ lighthouse*.json
 *-performance*.json
 chromewebdata*.html
 *.report.html
+# Keep our LHCI configs versioned
+!lighthouserc.local.json
+!lighthouserc.prod.json
 
 # Temporary files
 .perplexity*

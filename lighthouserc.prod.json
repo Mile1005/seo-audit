@@ -1,0 +1,56 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "https://www.aiseoturbo.com/",
+        "https://www.aiseoturbo.com/features/seo-audit",
+        "https://www.aiseoturbo.com/features/competitor-analysis",
+        "https://www.aiseoturbo.com/features/site-crawler",
+        "https://www.aiseoturbo.com/features/ai-assistant",
+        "https://www.aiseoturbo.com/features/keyword-tracking",
+        "https://www.aiseoturbo.com/about",
+        "https://www.aiseoturbo.com/pricing",
+        "https://www.aiseoturbo.com/contact",
+        "https://www.aiseoturbo.com/careers",
+        "https://www.aiseoturbo.com/blog",
+        "https://www.aiseoturbo.com/help",
+        "https://www.aiseoturbo.com/case-studies",
+        "https://www.aiseoturbo.com/privacy",
+        "https://www.aiseoturbo.com/terms"
+      ],
+      "numberOfRuns": 5,
+      "settings": {
+        "formFactor": "mobile",
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "cpuSlowdownMultiplier": 4,
+          "downloadThroughputKbps": 1474.56,
+          "uploadThroughputKbps": 675
+        },
+        "screenEmulation": {
+          "mobile": true,
+          "width": 360,
+          "height": 640,
+          "deviceScaleFactor": 2.625,
+          "disabled": false
+        }
+      }
+    },
+    "assert": {
+      "preset": "lighthouse:recommended",
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.8 }],
+        "categories:accessibility": ["error", { "minScore": 0.9 }],
+        "categories:best-practices": ["warn", { "minScore": 0.9 }],
+        "categories:seo": ["error", { "minScore": 0.9 }],
+        "csp-xss": "off",
+        "unused-javascript": "warn"
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
