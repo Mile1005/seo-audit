@@ -42,9 +42,9 @@ export function TrustLogos() {
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-6">
+          <h2 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-6">
             Trusted by businesses worldwide
-          </h3>
+          </h2>
         </motion.div>
 
         {/* Animated Logo Carousel - Using CSS for better performance */}
