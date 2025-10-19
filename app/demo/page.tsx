@@ -118,7 +118,7 @@ export default function DemoPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Site Structure Analysis</h4>
+                      <h3 className="text-white font-semibold mb-1">Site Structure Analysis</h3>
                       <p className="text-gray-400 text-sm">Detects navigation issues, internal linking problems, and URL structure flaws</p>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ export default function DemoPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Content Optimization</h4>
+                      <h3 className="text-white font-semibold mb-1">Content Optimization</h3>
                       <p className="text-gray-400 text-sm">Identifies keyword gaps, content depth issues, and semantic SEO opportunities</p>
                     </div>
                   </div>
@@ -142,7 +142,7 @@ export default function DemoPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Performance Metrics</h4>
+                      <h3 className="text-white font-semibold mb-1">Performance Metrics</h3>
                       <p className="text-gray-400 text-sm">Core Web Vitals assessment, page speed analysis, and loading optimization</p>
                     </div>
                   </div>
@@ -156,7 +156,7 @@ export default function DemoPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Mobile Experience</h4>
+                      <h3 className="text-white font-semibold mb-1">Mobile Experience</h3>
                       <p className="text-gray-400 text-sm">Responsive design validation, touch targets, and mobile usability testing</p>
                     </div>
                   </div>
@@ -168,7 +168,7 @@ export default function DemoPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Security & Technical</h4>
+                      <h3 className="text-white font-semibold mb-1">Security & Technical</h3>
                       <p className="text-gray-400 text-sm">HTTPS implementation, schema markup, and technical SEO best practices</p>
                     </div>
                   </div>
@@ -180,7 +180,7 @@ export default function DemoPage() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">AI-Powered Insights</h4>
+                      <h3 className="text-white font-semibold mb-1">AI-Powered Insights</h3>
                       <p className="text-gray-400 text-sm">Machine learning algorithms trained on millions of websites for accurate analysis</p>
                     </div>
                   </div>

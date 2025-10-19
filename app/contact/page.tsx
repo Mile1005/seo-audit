@@ -88,7 +88,7 @@ export default function ContactPage() {
           {/* Why Choose Us */}
           <div className="mb-16">
             <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold text-foreground mb-4">Why Choose AI SEO Turbo?</h3>
+              <h2 className="text-3xl font-bold text-foreground mb-4">Why Choose AI SEO Turbo?</h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 15+ years of combined experience helping 10,000+ businesses achieve measurable SEO growth
               </p>
@@ -103,7 +103,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Certified SEO Specialists</h4>
+                    <h3 className="font-semibold text-foreground mb-1">Certified SEO Specialists</h3>
                     <p className="text-muted-foreground text-sm">Personalized guidance from experts with proven track records</p>
                   </div>
                 </div>
@@ -111,11 +111,11 @@ export default function ContactPage() {
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
                     <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Fast Response Times</h4>
+                    <h3 className="font-semibold text-foreground mb-1">Fast Response Times</h3>
                     <p className="text-muted-foreground text-sm">24h for inquiries, 4h for urgent technical issues</p>
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Step-by-Step Solutions</h4>
+                    <h3 className="font-semibold text-foreground mb-1">Step-by-Step Solutions</h3>
                     <p className="text-muted-foreground text-sm">We don't just identify problems—we provide actionable fixes</p>
                   </div>
                 </div>
@@ -139,14 +139,14 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-foreground mb-1">Results-Driven Approach</h4>
+                    <h3 className="font-semibold text-foreground mb-1">Results-Driven Approach</h3>
                     <p className="text-muted-foreground text-sm">Focus on strategies that deliver measurable business impact</p>
                   </div>
                 </div>
               </div>
 
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-8 rounded-2xl border border-border">
-                <h4 className="text-xl font-semibold text-foreground mb-6 text-center">Response Time Guarantee</h4>
+                <h3 className="text-xl font-semibold text-foreground mb-6 text-center">Response Time Guarantee</h3>
                 <div className="grid grid-cols-3 gap-4 text-center mb-6">
                   <div className="bg-white dark:bg-slate-800 p-4 rounded-xl">
                     <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-1">24h</div>

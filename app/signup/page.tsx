@@ -349,14 +349,14 @@ export default function SignupPage() {
               </div>
               <div className="hidden md:block">
                 <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 text-white h-full">
-                  <h3 className="text-2xl font-bold mb-6">Why Choose AI SEO Turbo?</h3>
+                  <h2 className="text-2xl font-bold mb-6">Why Choose AI SEO Turbo?</h2>
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">
                       <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
                         <Check className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-1">Real-time SEO Analysis</h4>
+                        <h3 className="font-semibold mb-1">Real-time SEO Analysis</h3>
                         <p className="text-blue-100 text-sm">Get instant insights powered by Google PageSpeed Insights</p>
                       </div>
                     </div>
@@ -365,7 +365,7 @@ export default function SignupPage() {
                         <Check className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-1">Advanced Site Crawling</h4>
+                        <h3 className="font-semibold mb-1">Advanced Site Crawling</h3>
                         <p className="text-blue-100 text-sm">Discover technical issues across your entire website</p>
                       </div>
                     </div>
@@ -374,7 +374,7 @@ export default function SignupPage() {
                         <Check className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-1">Actionable Recommendations</h4>
+                        <h3 className="font-semibold mb-1">Actionable Recommendations</h3>
                         <p className="text-blue-100 text-sm">Get specific steps to improve your search rankings</p>
                       </div>
                     </div>
@@ -383,7 +383,7 @@ export default function SignupPage() {
                         <Check className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-semibold mb-1">Professional Reports</h4>
+                        <h3 className="font-semibold mb-1">Professional Reports</h3>
                         <p className="text-blue-100 text-sm">Export beautiful reports for clients and stakeholders</p>
                       </div>
                     </div>
