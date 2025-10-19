@@ -320,7 +320,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               const link = document.querySelector('link[media="print"]');
               if (link) {
                 link.onload = function() { link.media = 'all'; }
-                link.media = 'print';
               }
             `
           }}
