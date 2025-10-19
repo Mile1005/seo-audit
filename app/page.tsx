@@ -335,7 +335,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </div>
-                <h4 className="font-semibold text-slate-900 dark:text-white mb-2">For Developers</h4>
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-2">For Developers</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">API integrations and technical reports that complement your workflow</p>
               </div>
 
@@ -345,7 +345,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                   </svg>
                 </div>
-                <h4 className="font-semibold text-slate-900 dark:text-white mb-2">For SEO Specialists</h4>
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-2">For SEO Specialists</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">Advanced competitor analysis and enterprise-scale monitoring</p>
               </div>
 
@@ -355,7 +355,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                 </div>
-                <h4 className="font-semibold text-slate-900 dark:text-white mb-2">For Business Owners</h4>
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-2">For Business Owners</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">No SEO experience required - AI guides you to success</p>
               </div>
             </div>
