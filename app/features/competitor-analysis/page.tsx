@@ -189,10 +189,10 @@ export default function CompetitorAnalysisPage() {
               >
                 <div className="relative bg-card rounded-2xl p-8 border shadow-lg">
                   <div className="text-center mb-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                    <h2 className="text-lg font-semibold text-foreground mb-2">
                       <BarChart3 className="w-5 h-5 inline mr-2" />
                       Live SERP Rankings
-                    </h3>
+                    </h2>
                     <p className="text-sm text-muted-foreground">
                       Real-time competitor position tracking
                     </p>

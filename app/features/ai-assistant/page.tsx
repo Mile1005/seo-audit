@@ -116,7 +116,7 @@ export default function AiAssistantPage() {
                         <Brain className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-semibold">AI SEO Assistant</h3>
+                        <h2 className="font-semibold">AI SEO Assistant</h2>
                         <p className="text-sm opacity-90">Online • Ready to help</p>
                       </div>
                     </div>

@@ -69,25 +69,25 @@ export function HeroHeadlineAB() {
       dataTestId="hero-headline"
       variants={{
         control: (
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Professional
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> SEO Audits </span>
             Made Simple
-          </h1>
+          </h2>
         ),
         ai_powered: (
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">AI-Powered </span>
             SEO Audits That
             <span className="block">Drive Real Results</span>
-          </h1>
+          </h2>
         ),
         results_focused: (
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Get More Traffic with
             <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Expert SEO </span>
             <span className="block">Recommendations</span>
-          </h1>
+          </h2>
         )
       }}
     />
