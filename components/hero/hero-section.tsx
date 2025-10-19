@@ -46,6 +46,9 @@ export function HeroSection() {
       data-testid="hero-section"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
+      {/* Main H1 - For SEO */}
+      <h1 className="sr-only">AI SEO Turbo - Professional SEO Audits & Analysis Tool</h1>
+      
       {/* Background Elements */}
       <div className="absolute inset-0">
         {/* Gradient Orbs */}

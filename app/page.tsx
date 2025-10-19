@@ -201,9 +201,6 @@ export default function Home() {
       {/* SEO-Optimized Content Section */}
       <section className="py-20 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4 max-w-6xl">
-          {/* H1 - Main Page Title */}
-          <h1 className="sr-only">AI SEO Turbo - Professional SEO Audits & Analysis Tool</h1>
-          
           {/* Why Choose Us Section - MOVED FIRST */}
           <div className="mb-16">
             <div className="text-center mb-12">
@@ -307,9 +304,9 @@ export default function Home() {
           </div>
           <div className="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl mb-16">
             <div className="text-center max-w-3xl mx-auto">
-              <h3 className="text-2xl font-semibold text-blue-900 dark:text-blue-100 mb-4">
+              <h2 className="text-2xl font-semibold text-blue-900 dark:text-blue-100 mb-4">
                 Real Results from Real Businesses
-              </h3>
+              </h2>
               <p className="text-blue-800 dark:text-blue-200 mb-6">
                 A small business owner used our AI SEO audit to identify and fix 23 critical issues.
                 Result: <span className="font-bold">340% increase in organic traffic within 90 days</span>,
