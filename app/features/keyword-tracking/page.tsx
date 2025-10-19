@@ -80,16 +80,17 @@ export default function KeywordTrackingPage() {
         
         {/* Hero Section */}
         <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-green-600/10 via-blue-600/10 to-purple-600/10"></div>
+          {/* Lightweight grid background for consistency & low paint cost */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
           
           <div className="relative max-w-7xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               
               {/* Left Content */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={false}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.001 }}
                 className="space-y-8"
               >
                 <div className="space-y-6">
@@ -138,9 +139,9 @@ export default function KeywordTrackingPage() {
 
               {/* Right Content - Ranking Dashboard Preview */}
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
+                initial={false}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.001 }}
                 className="relative"
               >
                 <div className="bg-card rounded-2xl border shadow-2xl overflow-hidden">
@@ -161,12 +162,12 @@ export default function KeywordTrackingPage() {
                   {/* Rankings Table */}
                   <div className="p-6">
                     <div className="space-y-4">
-                      {rankingPreview.map((item, index) => (
+                      {rankingPreview.map((item) => (
                         <motion.div
                           key={item.keyword}
-                          initial={{ opacity: 0, y: 10 }}
+                          initial={false}
                           animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.4 + index * 0.1 }}
+                          transition={{ duration: 0.001 }}
                           className="flex items-center justify-between p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
                         >
                           <div className="flex-1">
@@ -233,19 +234,19 @@ export default function KeywordTrackingPage() {
         <section className="py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.2 }}
               className="grid grid-cols-2 lg:grid-cols-4 gap-8"
             >
               {heroMetrics.map((metric, index) => (
                 <motion.div
                   key={metric.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={false}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  transition={{ duration: 0.2 }}
                   className="text-center p-6 bg-card rounded-xl border hover:shadow-lg transition-shadow"
                 >
                   <div className="text-3xl font-bold text-primary mb-2">{metric.value}</div>
@@ -258,10 +259,11 @@ export default function KeywordTrackingPage() {
         </section>
 
         {/* Feature Sections */}
-        <SerpFeatures />
-        <TrackingCapabilities />
-        <PerformanceAnalytics />
-        <AlertSystem />
+  {/* Defer heavy sections: load client-side and only when on screen */}
+  <SerpFeatures />
+  <TrackingCapabilities />
+  <PerformanceAnalytics />
+  <AlertSystem />
 
         {/* CTA Section */}
         <section className="py-20 px-4 sm:px-6 lg:px-8">
