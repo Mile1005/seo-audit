@@ -276,9 +276,9 @@ export default function ProjectsPage() {
               <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Plus className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
                 No Projects Yet
-              </h3>
+              </h2>
               <p className="text-slate-600 dark:text-slate-400 mb-6">
                 Create your first project to start tracking SEO performance
               </p>
