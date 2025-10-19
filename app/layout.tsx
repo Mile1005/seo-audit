@@ -271,19 +271,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Resource hints for performance */}
         <meta httpEquiv="x-dns-prefetch-control" content="on" />
         
-        {/* EMERGENCY: Critical CSS - loads immediately */}
+        {/* CRITICAL: Inline ALL essential hero CSS to prevent render-blocking */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* LCP OPTIMIZATION: Critical above-the-fold styles - hero section only (~2.8KB) */
-            *,*::before,*::after{box-sizing:border-box}*{margin:0}html,body{height:100%;line-height:1.5;-webkit-font-smoothing:antialiased}
-            body{font-family:var(--font-inter),system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-            .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
-            .hero-section h1{font-size:clamp(1.5rem,5vw,3.5rem);font-weight:700;line-height:1.2;color:#fff;margin:0}
-            .hero-section p{font-size:clamp(1rem,3vw,1.25rem);color:#cbd5e1;line-height:1.6;margin-top:1rem}
-            .hero-background{position:absolute;inset:0;pointer-events:none}
-            @media(max-width:1023px){.desktop-only{display:none!important}}
+            /* Phase 3: Aggressive LCP optimization - All above-the-fold critical CSS inlined */
+            *{margin:0;padding:0;box-sizing:border-box}html,body{width:100%;height:100%}body{font-family:var(--font-inter),system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#fff;line-height:1.5;-webkit-font-smoothing:antialiased}
+            section{display:block;width:100%}
+            .hero-section,.container{width:100%;max-width:100%;margin:0;padding:0}
+            h1,h2,p{margin:0;padding:0}
+            img{display:block;width:100%;height:auto}
+            a{text-decoration:none;color:inherit}
+            button{font-family:inherit}
+            /* Hero specific - prevent FOUC */
+            .relative{position:relative}.min-h-screen{min-height:100vh}.flex{display:flex}.items-center{align-items:center}.overflow-hidden{overflow:hidden}
+            .bg-gradient-to-br{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
+            .space-y-8>*+*{margin-top:2rem}
+            .text-white{color:#fff}.text-gray-300{color:#d1d5db}.text-cyan-300{color:#06b6d4}.text-cyan-400{color:#06b6d4}
+            .font-bold{font-weight:700}.font-semibold{font-weight:600}.text-xl{font-size:1.25rem}.text-2xl{font-size:1.5rem}.text-3xl{font-size:1.875rem}
+            .px-4{padding-left:1rem;padding-right:1rem}.py-20{padding-top:5rem;padding-bottom:5rem}
+            .gap-12{gap:3rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}
+            .rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.rounded-lg{border-radius:0.5rem}
+            .hidden{display:none}@media(max-width:1024px){.lg\\:block{display:none}.hidden{display:block}}
           `
         }} />
+        
         
         {/* Resource hints for faster loading - removed API prefetch that causes 405 errors */}
         
@@ -323,6 +334,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Defer non-critical analytics scripts to reduce initial page requests */}
         <Analytics />
         <SpeedInsights />
+        
+        {/* Load non-critical CSS after LCP completes */}
+        <link rel="stylesheet" href="./globals.css" media="print" onLoad={(e) => (e.currentTarget.media = 'all')} />
+        <noscript>
+          <link rel="stylesheet" href="./globals.css" />
+        </noscript>
       </body>
     </html>
   );
