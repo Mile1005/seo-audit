@@ -219,6 +219,20 @@ const nextConfig = {
         ],
       },
       {
+        // CSS files - ensure proper MIME type for deferred stylesheets
+        source: '/:path*\\.css',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/css; charset=utf-8',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
         // Font cache headers - otf files
         source: '/:path*\\.otf',
         headers: [

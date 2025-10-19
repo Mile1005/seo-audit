@@ -1,0 +1,3 @@
+# pnpm configuration
+# Allow build scripts from safe packages (sharp for Next.js Image Optimization)
+allow-unapproved-scripts=true
