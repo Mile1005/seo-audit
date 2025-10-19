@@ -68,29 +68,27 @@ export function HeroSection() {
       {/* Main H1 - For SEO */}
       <h1 className="sr-only">AI SEO Turbo - Professional SEO Audits & Analysis Tool</h1>
       
-      {/* Background Elements - Skip expensive rendering on mobile, defer animations until after LCP */}
-      {!isMobile && (
-        <div className="absolute inset-0">
-          {/* Gradient Orbs - Only animate after LCP */}
-          {showBackgroundAnimations && (
-            <>
-              <motion.div
-                variants={floatingShapeVariants}
-                animate="floating"
-                className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
-              />
-              <motion.div
-                variants={floatingShapeVariants}
-                animate="floating"
-                className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
-              />
-            </>
-          )}
-          
-          {/* Grid Pattern - Always render but it's cheap */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
-        </div>
-      )}
+      {/* Background Elements - Grid pattern renders immediately on all screens, animated orbs only on desktop and deferred */}
+      <div className="absolute inset-0">
+        {/* Gradient Orbs - Desktop only, defer animations until after LCP */}
+        {!isMobile && showBackgroundAnimations && (
+          <>
+            <motion.div
+              variants={floatingShapeVariants}
+              animate="floating"
+              className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
+            />
+            <motion.div
+              variants={floatingShapeVariants}
+              animate="floating"
+              className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
+            />
+          </>
+        )}
+        
+        {/* Grid Pattern - Always render immediately on all screens (cheap CSS, no animation) */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+      </div>
 
       <div className="container mx-auto px-4 py-20 relative z-10">
         <motion.div
