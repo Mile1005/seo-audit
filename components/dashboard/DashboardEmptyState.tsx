@@ -148,9 +148,9 @@ export default function DashboardEmptyState({
                   <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg"></div>
                 </div>
                 <div className="text-left">
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                     Connect Google Search Console
-                  </h3>
+                  </h2>
                   <p className="text-slate-600 dark:text-slate-400 mt-1">
                     Get real-time search analytics, impressions, and click data directly in your dashboard
                   </p>

@@ -318,7 +318,7 @@ export default function RecommendationTypes() {
                 {(rec as any).codeSnippet && (
                   <div className="bg-slate-900 rounded-lg p-4 mb-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h5 className="text-sm font-medium text-white">Implementation Example</h5>
+                      <h4 className="text-sm font-medium text-white">Implementation Example</h4>
                       <Button variant="ghost" size="sm" className="text-white hover:text-gray-300">
                         Copy Code
                       </Button>

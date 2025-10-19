@@ -93,9 +93,9 @@ export function EmailCaptureInline({
         <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mx-auto mb-4">
           <CheckCircle className="w-8 h-8 text-white" />
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">
+        <h2 className="text-xl font-bold text-white mb-2">
           Success! Check Your Email
-        </h3>
+        </h2>
         <p className="text-gray-300 mb-4">
           Your free SEO checklist is on its way. Don't forget to check your spam folder!
         </p>

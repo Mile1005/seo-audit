@@ -201,6 +201,9 @@ export default function Home() {
       {/* SEO-Optimized Content Section */}
       <section className="py-20 bg-white dark:bg-slate-900">
         <div className="container mx-auto px-4 max-w-6xl">
+          {/* H1 - Main Page Title */}
+          <h1 className="sr-only">AI SEO Turbo - Professional SEO Audits & Analysis Tool</h1>
+          
           {/* Why Choose Us Section - MOVED FIRST */}
           <div className="mb-16">
             <div className="text-center mb-12">
