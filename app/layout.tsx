@@ -1,5 +1,4 @@
-// Import globals.css but it will be deferred via link tag in head
-// import "./globals.css";
+import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import React from "react";
 import { Inter } from "next/font/google";
@@ -306,13 +305,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `
         }} />
         
-        {/* Defer non-critical styles to prevent render blocking */}
+        {/* Defer non-critical styles to prevent render blocking - using media="print" trick */}
         <link 
           rel="stylesheet" 
           href="/_next/static/css/globals.css" 
           media="print"
-          onLoad={(e: any) => e.media = "all"}
         />
+        
+        {/* Script to convert media from print to all after load */}
+        <script 
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Defer CSS loading without blocking render
+              const link = document.querySelector('link[media="print"]');
+              if (link) {
+                link.onload = function() { link.media = 'all'; }
+                link.media = 'print';
+              }
+            `
+          }}
+        />
+        
         <noscript>
           <link rel="stylesheet" href="/_next/static/css/globals.css" />
         </noscript>
