@@ -236,26 +236,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* LCP OPTIMIZATION: Preload hero images */}
+        {/* LCP OPTIMIZATION: Preload hero SVG mockup image */}
         <link 
           rel="preload" 
           as="image" 
-          href="/images/hero/hero-mobile-portrait.webp"
-          media="(max-width: 1024px)"
-          type="image/webp"
-        />
-        <link 
-          rel="preload" 
-          as="image"
-          href="/images/hero/hero-mobile-portrait.jpg"
-          media="(max-width: 1024px)"
-        />
-        <link 
-          rel="preload" 
-          as="image"
-          href="/images/hero/hero-desktop-landscape.webp"
+          href="/images/hero/desktop-mockup.svg"
           media="(min-width: 1025px)"
-          type="image/webp"
+          type="image/svg+xml"
         />
         
         {/* Favicon and Touch Icons - SVG scales better for larger display */}
