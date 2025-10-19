@@ -274,13 +274,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* EMERGENCY: Critical CSS - loads immediately */}
         <style dangerouslySetInnerHTML={{
           __html: `
-            /* LCP OPTIMIZATION: Critical above-the-fold styles - hero section only (~2.8KB) */
-            *,*::before,*::after{box-sizing:border-box}*{margin:0}html,body{height:100%;line-height:1.5;-webkit-font-smoothing:antialiased}
+            /* LCP OPTIMIZATION: Critical above-the-fold styles - minimal reset only */
+            *,*::before,*::after{box-sizing:border-box}*{margin:0}html,body{line-height:1.5;-webkit-font-smoothing:antialiased}
             body{font-family:var(--font-inter),system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-            .hero-section{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%)}
-            .hero-section h1{font-size:clamp(1.5rem,5vw,3.5rem);font-weight:700;line-height:1.2;color:#fff;margin:0}
-            .hero-section p{font-size:clamp(1rem,3vw,1.25rem);color:#cbd5e1;line-height:1.6;margin-top:1rem}
-            .hero-background{position:absolute;inset:0;pointer-events:none}
             @media(max-width:1023px){.desktop-only{display:none!important}}
           `
         }} />
