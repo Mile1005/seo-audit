@@ -300,42 +300,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             };
           `
         }} />
-        
-        {/* Defer non-critical styles to prevent render blocking - using media="print" trick */}
-        <link 
-          rel="stylesheet" 
-          href="/_next/static/css/globals.css" 
-          media="print"
-        />
-        
-        {/* Script to convert media from print to all after load */}
-        <script 
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Defer CSS loading without blocking render
-              const link = document.querySelector('link[media="print"]');
-              if (link) {
-                link.onload = function() { link.media = 'all'; }
-              }
-            `
-          }}
-        />
-        
-        <noscript>
-          <link rel="stylesheet" href="/_next/static/css/globals.css" />
-        </noscript>
       </head>
       <body className={`${inter.className} font-inter`} suppressHydrationWarning>
-        {/* Skip links for keyboard navigation - visually hidden */}
+        {/* Skip links for keyboard navigation - visually hidden but focusable */}
         <a 
           href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded"
+          className="absolute top-0 left-0 z-50 px-4 py-2 bg-blue-600 text-white rounded opacity-0 focus:opacity-100 -translate-y-full focus:translate-y-0 transition-transform duration-200"
+          style={{ outlineOffset: '2px' }}
         >
           Skip to main content
         </a>
         <AuthProvider>
           <ThemeProvider>
-            {children}
+            <main id="main-content">
+              {children}
+            </main>
           </ThemeProvider>
         </AuthProvider>
         {/* Defer non-critical analytics scripts to reduce initial page requests */}
