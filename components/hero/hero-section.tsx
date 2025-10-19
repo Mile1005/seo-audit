@@ -1,16 +1,32 @@
 "use client"
 
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowRight, Play, Zap, Clock, Users } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-is-mobile"
-import { DesktopHeroMockup } from "./desktop-hero-mockup"
+import { DesktopHeroMockupOptimized } from "./desktop-hero-mockup-optimized"
 import { HeroHeadlineAB, CTATextAB } from "@/components/ab/ab-slot"
 import { trackCTA, trackDemo } from "@/lib/analytics"
 import { handleCTAClick } from "@/lib/cta-utils"
 
 export function HeroSection() {
   const isMobile = useIsMobile()
+  const [showBackgroundAnimations, setShowBackgroundAnimations] = useState(false)
+
+  useEffect(() => {
+    // Defer background animations until after LCP completes
+    if ("requestIdleCallback" in window) {
+      const id = requestIdleCallback(() => {
+        setShowBackgroundAnimations(true)
+      }, { timeout: 2500 })
+      return () => cancelIdleCallback(id)
+    } else {
+      const timer = setTimeout(() => {
+        setShowBackgroundAnimations(true)
+      }, 2500)
+      return () => clearTimeout(timer)
+    }
+  }, [])
 
   // Always use animations but control rendering
   const containerVariants = {
@@ -52,25 +68,29 @@ export function HeroSection() {
       {/* Main H1 - For SEO */}
       <h1 className="sr-only">AI SEO Turbo - Professional SEO Audits & Analysis Tool</h1>
       
-      {/* Background Elements - Skip expensive rendering on mobile via CSS */}
-      <div className={`absolute inset-0 ${isMobile ? 'hidden' : ''}`}>
-        {/* Gradient Orbs */}
-        <motion.div
-          variants={floatingShapeVariants}
-          animate={!isMobile ? "floating" : "none"}
-          className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
-          style={{ animationDelay: "0s" }}
-        />
-        <motion.div
-          variants={floatingShapeVariants}
-          animate={!isMobile ? "floating" : "none"}
-          className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
-          style={{ animationDelay: "1.5s" }}
-        />
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
-      </div>
+      {/* Background Elements - Skip expensive rendering on mobile, defer animations until after LCP */}
+      {!isMobile && (
+        <div className="absolute inset-0">
+          {/* Gradient Orbs - Only animate after LCP */}
+          {showBackgroundAnimations && (
+            <>
+              <motion.div
+                variants={floatingShapeVariants}
+                animate="floating"
+                className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
+              />
+              <motion.div
+                variants={floatingShapeVariants}
+                animate="floating"
+                className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
+              />
+            </>
+          )}
+          
+          {/* Grid Pattern - Always render but it's cheap */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        </div>
+      )}
 
       <div className="container mx-auto px-4 py-20 relative z-10">
         <motion.div
@@ -168,7 +188,7 @@ export function HeroSection() {
             variants={itemVariants}
             className="hidden lg:block"
           >
-            <DesktopHeroMockup />
+            <DesktopHeroMockupOptimized deferAnimation={true} />
           </motion.div>
         </motion.div>
       </div>
