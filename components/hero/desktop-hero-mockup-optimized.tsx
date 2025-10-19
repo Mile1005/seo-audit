@@ -54,7 +54,7 @@ export function DesktopHeroMockupOptimized({ deferAnimation = true }: DesktopHer
         <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-t-xl border border-slate-700 shadow-2xl overflow-hidden">
           <Image
             src="/images/hero/desktop-mockup.svg"
-            alt="AI SEO Turbo dashboard interface showing comprehensive SEO audit results with stats grid and issue list"
+            alt="AI SEO Turbo dashboard showing SEO audit results"
             width={800}
             height={500}
             priority={true}
