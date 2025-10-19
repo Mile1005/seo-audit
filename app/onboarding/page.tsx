@@ -105,6 +105,7 @@ export default function OnboardingPage() {
             <p className="text-lg text-gray-600 mb-8">
               You're about to join thousands of marketers who've boosted their SEO performance. Let's get you set up for success!
             </p>
+            <h2 className="text-xl font-semibold text-gray-800 mb-6">Key Features</h2>
             <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
               <div className="text-center p-4">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">

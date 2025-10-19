@@ -104,6 +104,7 @@ export default function GDPRPage() {
                     regardless of where the organization is based.
                   </p>
 
+                  <h3 className="text-xl font-semibold text-white mt-4">Core Concepts</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <h4 className="text-white font-medium mb-2">Key Principles</h4>

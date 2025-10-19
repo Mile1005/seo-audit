@@ -60,6 +60,7 @@ export default function OAuthTestPage() {
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
         <h1 className="text-2xl font-bold mb-6 text-center">OAuth Debug Test</h1>
         
+        <h2 className="text-lg font-semibold mb-4">Debug Information</h2>
         <div className="space-y-4">
           <div className="p-4 bg-gray-50 rounded">
             <h3 className="font-semibold mb-2">Session Status:</h3>

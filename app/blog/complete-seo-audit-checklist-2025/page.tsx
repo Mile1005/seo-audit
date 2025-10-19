@@ -190,6 +190,7 @@ const post = {
       <h2>Content Audit: 10-Point Assessment Framework</h2>
       <p>High-quality, strategic content is essential. This framework helps you evaluate your content's effectiveness at attracting, engaging, and converting visitors.</p>
 
+      <h3 class="text-xl font-semibold text-white mt-6 mb-4">Evaluation Criteria</h3>
       <div class="space-y-3 my-6">
         <div class="bg-slate-800/50 p-4 rounded-lg">
           <h4 class="font-semibold text-white mb-2">1. Content Performance Analysis</h4>
@@ -238,6 +239,7 @@ const post = {
       <h2>Off-Page SEO Audit: 10-Point Authority Framework</h2>
       <p>Off-page SEO focuses on your site's authority and reputation. This section covers the signals that build trust with search engines.</p>
 
+      <h3 class="text-xl font-semibold text-white mt-6 mb-4">Authority Assessment</h3>
       <div class="space-y-3 my-6">
         <div class="bg-slate-800/50 p-4 rounded-lg">
           <h4 class="font-semibold text-white mb-2">1. Backlink Profile Analysis</h4>

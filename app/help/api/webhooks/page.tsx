@@ -96,6 +96,7 @@ export default function WebhooksPage() {
               {/* What are Webhooks */}
               <h2 className="text-2xl font-bold text-white mb-6">What are webhooks?</h2>
 
+              <h3 className="text-xl font-semibold text-white mb-4">Webhook Basics</h3>
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <p className="text-gray-300 mb-4">
                   Webhooks are automated messages sent from our servers to your application when specific events occur.

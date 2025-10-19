@@ -193,6 +193,7 @@ const post = {
     <section id="future">
       <h2>The Future of AI in SEO: What's Coming</h2>
       
+      <h3 class="text-xl font-semibold text-white mt-6 mb-4">Emerging AI Capabilities</h3>
       <div class="space-y-4 my-6">
         <div class="bg-slate-800/50 p-4 rounded-lg">
           <h4 class="font-semibold text-white mb-2">🧠 More Sophisticated NLP</h4>

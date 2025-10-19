@@ -201,6 +201,7 @@ export default function TroubleshootingCategoryPage() {
                   For complex issues requiring deeper investigation, our platform provides advanced diagnostic
                   capabilities and logging features that help identify intermittent problems and performance bottlenecks.
                 </p>
+                <h3 className="text-xl font-semibold text-white mb-4">Available Tools</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-slate-900/50 rounded-lg p-4">
                     <h4 className="text-white font-medium mb-2">Network Diagnostics</h4>

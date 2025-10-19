@@ -135,6 +135,8 @@ export default function PrivacyPage() {
                 regulations and industry best practices. We work with legal experts specializing in data protection
                 to maintain the highest standards of compliance.
               </p>
+              
+              <h3>Legal Details</h3>
             </div>
           </div>
         </section>

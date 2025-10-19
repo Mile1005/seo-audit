@@ -418,6 +418,7 @@ export default function LoginIssuesPage() {
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-white mb-4">Security Best Practices</h3>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>

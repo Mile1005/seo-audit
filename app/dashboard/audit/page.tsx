@@ -543,7 +543,7 @@ export default function ComprehensiveAuditPage() {
                   <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
                     <CardTitle className="flex items-center gap-2 text-slate-900 dark:text-white">
                       <FileText className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                      Heading Structure Analysis
+                      <h3 className="text-lg font-semibold">Heading Structure Analysis</h3>
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pt-6">
@@ -898,7 +898,7 @@ export default function ComprehensiveAuditPage() {
                         <div className="p-2 bg-purple-500 rounded-lg">
                           <CheckCircle className="h-5 w-5 text-white" />
                         </div>
-                        Structured Recommendations ({result.recommendations.length})
+                        <h3 className="text-lg font-semibold">Structured Recommendations ({result.recommendations.length})</h3>
                       </CardTitle>
                     </CardHeader>
                     <CardContent>

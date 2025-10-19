@@ -132,6 +132,7 @@ export default function SEOScoresPage() {
                 <div className="flex items-start gap-4">
                   <Target className="w-6 h-6 text-blue-400 mt-1" aria-hidden="true" />
                   <div>
+                    <h2 className="text-white text-lg font-semibold mb-2">Understanding Your Scores</h2>
                     <h3 className="text-white text-lg font-semibold mb-2">What you'll learn</h3>
                     <p className="text-gray-300 mb-0">
                       Decode your SEO scores and understand what each metric means for your website's search performance. 
