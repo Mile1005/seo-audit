@@ -84,7 +84,7 @@ export default function TwoFactorAuthPage() {
                 <div className="flex items-start gap-4">
                   <Lock className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Enhanced account security</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Enhanced account security</h2>
                     <p className="text-gray-300 mb-0">
                       Two-factor authentication (2FA) adds an extra layer of security to your account by requiring
                       a second form of verification beyond your password. Learn how to set it up and manage it effectively.

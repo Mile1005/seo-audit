@@ -84,7 +84,7 @@ export default function GDPRPage() {
                 <div className="flex items-start gap-4">
                   <Scale className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">GDPR compliance and your rights</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">GDPR compliance and your rights</h2>
                     <p className="text-gray-300 mb-0">
                       The General Data Protection Regulation (GDPR) gives you comprehensive rights over your personal data.
                       Learn how we comply with GDPR and how to exercise your data protection rights.

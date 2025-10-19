@@ -84,7 +84,7 @@ export default function SEOAuditWalkthroughPage() {
                 <div className="flex items-start gap-4">
                   <Search className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">What you'll learn</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">What you'll learn</h2>
                     <p className="text-gray-300 mb-0">
                       Master our comprehensive SEO audit process. Learn how to analyze 200+ SEO factors, interpret results,
                       and implement actionable recommendations to improve your website's search rankings.

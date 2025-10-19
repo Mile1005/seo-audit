@@ -84,7 +84,7 @@ export default function SecurityBestPracticesPage() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 text-indigo-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Protect your account and data</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Protect your account and data</h2>
                     <p className="text-gray-300 mb-0">
                       Security is everyone's responsibility. Follow these best practices to keep your account safe,
                       protect your data, and minimize security risks when using our platform.

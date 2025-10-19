@@ -84,7 +84,7 @@ export default function PrivacyPage() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 text-purple-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Your privacy matters</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Your privacy matters</h2>
                     <p className="text-gray-300 mb-0">
                       Take control of your data and privacy settings. Learn how to manage your personal information,
                       data collection preferences, and privacy controls within our platform.

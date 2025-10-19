@@ -84,7 +84,7 @@ export default function AuthenticationPage() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Secure API access</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Secure API access</h2>
                     <p className="text-gray-300 mb-0">
                       Our API uses API keys for authentication. Keep your keys secure and rotate them regularly.
                       All API requests must include proper authentication headers to access protected endpoints.

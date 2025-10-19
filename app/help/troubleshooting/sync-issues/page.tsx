@@ -84,7 +84,7 @@ export default function SyncIssuesPage() {
                 <div className="flex items-start gap-4">
                   <Database className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Data synchronization problems</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Data synchronization problems</h2>
                     <p className="text-gray-300 mb-0">
                       Having trouble with data not syncing between devices or seeing outdated information?
                       This guide covers common sync issues and how to resolve them.

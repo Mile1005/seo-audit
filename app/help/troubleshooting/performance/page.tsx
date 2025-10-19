@@ -84,7 +84,7 @@ export default function PerformancePage() {
                 <div className="flex items-start gap-4">
                   <Cpu className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Slow performance troubleshooting</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Slow performance troubleshooting</h2>
                     <p className="text-gray-300 mb-0">
                       Experiencing slow loading times, lag, or poor responsiveness? This guide helps you identify
                       and resolve common performance issues across devices and platforms.

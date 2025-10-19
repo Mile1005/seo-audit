@@ -84,7 +84,7 @@ export default function CancellationPage() {
                 <div className="flex items-start gap-4">
                   <Heart className="w-6 h-6 text-red-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">We're sorry to see you go</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">We're sorry to see you go</h2>
                     <p className="text-gray-300 mb-0">
                       We understand that circumstances change. Learn how to cancel your subscription safely and what happens after cancellation.
                       Remember, you can always reactivate your account if you change your mind.

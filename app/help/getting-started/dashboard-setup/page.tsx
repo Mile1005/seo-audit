@@ -150,7 +150,7 @@ export default function DashboardSetupPage() {
                 <div className="flex items-start gap-4">
                   <Target className="w-6 h-6 text-blue-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">What you'll learn</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">What you'll learn</h2>
                     <p className="text-gray-300 mb-0">
                       Customize your AISEOTurbo dashboard for maximum productivity. Learn how to organize your workspace, 
                       set up notifications, and configure display preferences to match your workflow.

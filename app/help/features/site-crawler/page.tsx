@@ -84,7 +84,7 @@ export default function SiteCrawlerConfigurationPage() {
                 <div className="flex items-start gap-4">
                   <Settings className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">What you'll learn</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">What you'll learn</h2>
                     <p className="text-gray-300 mb-0">
                       Configure your site crawler for optimal performance. Learn how to set crawl limits, handle JavaScript-heavy sites,
                       respect robots.txt, and get the most accurate SEO data from your website.

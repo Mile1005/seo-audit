@@ -84,7 +84,7 @@ export default function LoginIssuesPage() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Common login problems</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Common login problems</h2>
                     <p className="text-gray-300 mb-0">
                       Having trouble accessing your account? This guide covers the most common login issues and their solutions.
                       Most problems can be resolved with a few simple steps.

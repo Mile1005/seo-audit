@@ -84,7 +84,7 @@ export default function PaymentMethodsPage() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Secure payments</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Secure payments</h2>
                     <p className="text-gray-300 mb-0">
                       We accept multiple secure payment methods to make billing as convenient as possible.
                       All transactions are encrypted and processed through PCI-compliant gateways.

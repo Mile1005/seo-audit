@@ -84,7 +84,7 @@ export default function InvoicesPage() {
                 <div className="flex items-start gap-4">
                   <FileText className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">Invoice management</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">Invoice management</h2>
                     <p className="text-gray-300 mb-0">
                       Access, download, and manage all your billing invoices from your account dashboard.
                       Invoices are available in PDF format and include detailed billing information.

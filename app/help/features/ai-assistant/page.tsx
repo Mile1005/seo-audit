@@ -84,7 +84,7 @@ export default function AIAssistantBestPracticesPage() {
                 <div className="flex items-start gap-4">
                   <Brain className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">What you'll learn</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">What you'll learn</h2>
                     <p className="text-gray-300 mb-0">
                       Master our AI SEO assistant for maximum results. Learn how to ask effective questions, interpret AI recommendations,
                       and combine AI insights with your SEO expertise for optimal outcomes.

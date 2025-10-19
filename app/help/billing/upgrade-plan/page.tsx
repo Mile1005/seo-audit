@@ -84,7 +84,7 @@ export default function UpgradePlanPage() {
                 <div className="flex items-start gap-4">
                   <CreditCard className="w-6 h-6 text-purple-400 mt-1" />
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-2">When to upgrade</h3>
+                    <h2 className="text-white text-lg font-semibold mb-2">When to upgrade</h2>
                     <p className="text-gray-300 mb-0">
                       Ready to unlock more SEO power? Learn when and how to upgrade your plan for advanced features,
                       higher limits, and priority support. Upgrades are instant and prorated.
