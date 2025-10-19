@@ -300,7 +300,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `
         }} />
       </head>
-      <body className={`${inter.className} font-inter`} suppressHydrationWarning>
+  <body className={`${inter.className} font-inter dark`} style={{ backgroundColor: '#0b1220' }} suppressHydrationWarning>
         {/* Skip links for keyboard navigation - visually hidden but focusable */}
         <a 
           href="#main-content" 

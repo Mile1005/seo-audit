@@ -107,7 +107,7 @@ export default function KeywordTrackingPage() {
                     24/7
                   </h1>
                   
-                  <p className="text-xl text-muted-foreground leading-relaxed">
+                  <p className="text-xl text-slate-300 leading-relaxed">
                     Track keyword rankings across devices, locations, and search engines. 
                     Get instant alerts when positions change and discover new opportunities.
                   </p>
@@ -126,11 +126,11 @@ export default function KeywordTrackingPage() {
 
                 {/* Trust Indicators */}
                 <div className="flex flex-wrap items-center gap-6 pt-4">
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <div className="flex items-center space-x-2 text-sm text-slate-400">
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     <span>99.9% uptime monitoring</span>
                   </div>
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <div className="flex items-center space-x-2 text-sm text-slate-400">
                     <CheckCircle className="w-4 h-4 text-green-600" />
                     <span>Daily ranking updates</span>
                   </div>

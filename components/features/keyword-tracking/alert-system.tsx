@@ -297,10 +297,12 @@ export default function AlertSystem() {
             <h3 className="text-xl font-semibold text-foreground">Recent Alerts</h3>
             <div className="flex items-center space-x-4">
               {/* Filter */}
+              <label htmlFor="alert-filter" className="sr-only">Filter alerts</label>
               <select 
+                id="alert-filter"
                 value={alertFilter}
                 onChange={(e) => setAlertFilter(e.target.value)}
-                className="bg-muted border border-border rounded-lg px-3 py-2 text-sm"
+                className="bg-muted border border-border rounded-lg px-3 py-2 text-sm text-foreground"
               >
                 <option value="all">All Alerts</option>
                 <option value="unread">Unread</option>
