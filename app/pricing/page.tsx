@@ -273,11 +273,11 @@ export default function PricingPage() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <motion.h3 
+                    <motion.h2 
                       className="text-2xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors duration-300"
                     >
                       {plan.name}
-                    </motion.h3>
+                    </motion.h2>
                     <p className="text-slate-400 group-hover:text-slate-300 transition-colors duration-300 mb-6">{plan.description}</p>
                     
                     <motion.div 

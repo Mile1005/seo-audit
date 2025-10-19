@@ -402,10 +402,10 @@ export default function SiteCrawlerPage() {
                     /* Crawl Form */
                     <>
                       <div className="text-center mb-6">
-                        <h3 className="text-lg font-semibold text-foreground mb-2">
+                        <h2 className="text-lg font-semibold text-foreground mb-2">
                           <Search className="w-5 h-5 inline mr-2" />
                           Start Your Website Crawl
-                        </h3>
+                        </h2>
                         <p className="text-sm text-muted-foreground">
                           Enter your website URL and get instant SEO insights
                         </p>
@@ -463,9 +463,9 @@ export default function SiteCrawlerPage() {
                     /* Loading State */
                     <div id="crawl-results-section" className="text-center space-y-6">
                       <div className="text-center mb-6">
-                        <h3 className="text-lg font-semibold text-foreground mb-2">
+                        <h2 className="text-lg font-semibold text-foreground mb-2">
                           Analyzing {crawlUrl}
-                        </h3>
+                        </h2>
                         <p className="text-sm text-muted-foreground">
                           This may take a few moments...
                         </p>
@@ -499,10 +499,10 @@ export default function SiteCrawlerPage() {
                     /* Results Preview */
                     <div className="space-y-6">
                       <div className="text-center mb-6">
-                        <h3 className="text-lg font-semibold text-foreground mb-2 flex items-center justify-center">
+                        <h2 className="text-lg font-semibold text-foreground mb-2 flex items-center justify-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
                           Crawl Complete!
-                        </h3>
+                        </h2>
                         <p className="text-sm text-muted-foreground">
                           Found {crawlResult.totalPages} pages with {(crawlResult.issues?.missing_titles || 0) + (crawlResult.issues?.missing_h1 || 0) + (crawlResult.issues?.missing_meta_descriptions || 0)} issues
                         </p>
