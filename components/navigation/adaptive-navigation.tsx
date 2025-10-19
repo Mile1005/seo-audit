@@ -163,6 +163,7 @@ export function AdaptiveNavigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isMounted, setIsMounted] = useState(false)
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     setIsMounted(true)
@@ -181,6 +182,31 @@ export function AdaptiveNavigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [openDropdown, isOpen])
 
+  // Close mobile submenu with Escape and close menu on outside tap
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (openDropdown) setOpenDropdown(null)
+        else if (isOpen) setIsOpen(false)
+      }
+    }
+
+    const onDocClick = (e: MouseEvent) => {
+      if (!isOpen) return
+      const target = e.target as Node
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
+        closeMenu()
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('mousedown', onDocClick)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('mousedown', onDocClick)
+    }
+  }, [isOpen, openDropdown])
+
   const toggleMenu = () => {
     setIsOpen(!isOpen)
     // Reset dropdown when closing menu
@@ -195,7 +221,8 @@ export function AdaptiveNavigation() {
   }
 
   const toggleDropdown = (label: string) => {
-    setOpenDropdown(openDropdown === label ? null : label)
+    // Functional updater avoids stale state in rapid taps
+    setOpenDropdown((prev) => (prev === label ? null : label))
   }
 
   if (!isMounted) {
@@ -329,7 +356,7 @@ export function AdaptiveNavigation() {
         </div>
 
         {/* Mobile Menu - Fixed height to prevent layout shift */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+        <div ref={mobileMenuRef} className={`md:hidden transition-all duration-300 overflow-hidden ${
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`} style={{ minHeight: isOpen ? '200px' : '0px' }}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/50 rounded-b-lg">
@@ -341,17 +368,19 @@ export function AdaptiveNavigation() {
                       type="button"
                       aria-expanded={openDropdown === section.label}
                       aria-controls={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        toggleDropdown(section.label)
+                      onClick={() => toggleDropdown(section.label)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault()
+                          toggleDropdown(section.label)
+                        }
                       }}
                       className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between touch-manipulation"
                     >
                       <span>{section.label}</span>
                       <ChevronDown
                         aria-hidden="true"
-                        className={`pointer-events-none h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
+                        className={`h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
                           openDropdown === section.label ? 'rotate-180 text-blue-400' : 'text-slate-400'
                         }`} 
                       />
