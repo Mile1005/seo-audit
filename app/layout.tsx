@@ -236,14 +236,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
-        {/* LCP OPTIMIZATION: Preload hero SVG mockup image */}
-        <link 
-          rel="preload" 
-          as="image" 
-          href="/images/hero/desktop-mockup.svg"
-          media="(min-width: 1025px)"
-          type="image/svg+xml"
-        />
+        {/* Remove global preload of hero SVG; Next/Image with priority will preload only on pages that render it */}
         
         {/* Favicon and Touch Icons - SVG scales better for larger display */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
