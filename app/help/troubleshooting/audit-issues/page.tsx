@@ -15,29 +15,38 @@ export default function AuditIssuesPage() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "TroubleshootingGuide",
-              "name": "Troubleshooting: SEO Audit Not Completing - AISEOTurbo Help",
-              "description": "Complete troubleshooting guide for fixing SEO audit issues in AISEOTurbo. Solutions for stuck audits, timeout errors, and technical problems.",
-              "image": "https://aiseoturbo.com/help/troubleshooting-audits.jpg",
-              "author": {
-                "@type": "Organization",
-                "name": "AISEOTurbo",
-                "url": "https://aiseoturbo.com"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "AISEOTurbo",
-                "logo": {
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "TroubleshootingGuide",
+                "name": "Troubleshooting: SEO Audit Not Completing - AISEOTurbo Help",
+                "description": "Complete troubleshooting guide for fixing SEO audit issues in AISEOTurbo. Solutions for stuck audits, timeout errors, and technical problems.",
+                "image": {
                   "@type": "ImageObject",
-                  "url": "https://aiseoturbo.com/logo.png"
-                }
+                  "url": "https://aiseoturbo.com/help/troubleshooting-audits.jpg",
+                  "width": 1200,
+                  "height": 630
+                },
+                "author": {
+                  "@type": "Organization",
+                  "name": "AISEOTurbo",
+                  "url": "https://aiseoturbo.com"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "AISEOTurbo",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://aiseoturbo.com/logo.png",
+                    "width": 600,
+                    "height": 60
+                  }
+                },
+                "datePublished": "2025-03-01",
+                "dateModified": "2025-03-15"
               },
-              "datePublished": "2025-03-01",
-              "dateModified": "2025-03-15",
-              "keywords": ["audit troubleshooting", "SEO audit stuck", "technical support", "website analysis problems"],
-              "mainEntity": {
+              {
+                "@context": "https://schema.org",
                 "@type": "FAQPage",
                 "mainEntity": [
                   {
@@ -58,7 +67,7 @@ export default function AuditIssuesPage() {
                   }
                 ]
               }
-            })
+            ])
           }}
         />
 

@@ -361,11 +361,18 @@ export function generateAboutPageSchema(about: {
         "Content Optimization"
       ],
       "url": about.url || "https://www.aiseoturbo.com",
-      "logo": "https://www.aiseoturbo.com/logo.png",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.aiseoturbo.com/logo.png",
+        "width": 600,
+        "height": 60
+      },
       ...(about.email && { "email": about.email }),
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "MK"
+        "addressCountry": "MK",
+        "addressLocality": "Skopje",
+        "postalCode": "1000"
       }
     }
   };
@@ -468,19 +475,26 @@ export function generateItemListSchema(items: Array<{
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
+    "numberOfItems": items.length,
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "url": item.url,
-      "name": item.name,
-      ...(item.description && { "description": item.description }),
-      ...(item.image && { 
-        "image": {
-          "@type": "ImageObject",
-          "url": item.image
-        }
-      }),
-      ...(item.datePublished && { "datePublished": item.datePublished })
+      "item": {
+        "@type": "Thing",
+        "@id": item.url,
+        "name": item.name,
+        "url": item.url,
+        ...(item.description && { "description": item.description }),
+        ...(item.image && { 
+          "image": {
+            "@type": "ImageObject",
+            "url": item.image,
+            "width": 1200,
+            "height": 630
+          }
+        }),
+        ...(item.datePublished && { "datePublished": item.datePublished })
+      }
     }))
   };
 }
