@@ -47,12 +47,12 @@
 - `/help` - Index
 
 ### Help Categories (6)
-- `/help/category/getting-started`
-- `/help/category/seo-tools-features`
-- `/help/category/account-billing`
-- `/help/category/api-integrations`
-- `/help/category/security-privacy`
-- `/help/category/troubleshooting`
+- `/help/getting-started`
+- `/help/seo-tools-features`
+- `/help/account-billing`
+- `/help/api-integrations`
+- `/help/security-privacy`
+- `/help/troubleshooting`
 
 ### Help Articles (25)
 **Getting Started:**

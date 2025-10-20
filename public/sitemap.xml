@@ -178,37 +178,37 @@
 
   <!-- Help Categories - Priority 0.5 -->
   <url>
-    <loc>https://www.aiseoturbo.com/help/category/getting-started</loc>
+    <loc>https://www.aiseoturbo.com/help/getting-started</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.aiseoturbo.com/help/category/seo-tools-features</loc>
+    <loc>https://www.aiseoturbo.com/help/seo-tools-features</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.aiseoturbo.com/help/category/account-billing</loc>
+    <loc>https://www.aiseoturbo.com/help/account-billing</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.aiseoturbo.com/help/category/api-integrations</loc>
+    <loc>https://www.aiseoturbo.com/help/api-integrations</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.aiseoturbo.com/help/category/security-privacy</loc>
+    <loc>https://www.aiseoturbo.com/help/security-privacy</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://www.aiseoturbo.com/help/category/troubleshooting</loc>
+    <loc>https://www.aiseoturbo.com/help/troubleshooting</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

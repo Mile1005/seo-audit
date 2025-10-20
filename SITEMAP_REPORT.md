@@ -59,12 +59,12 @@ A comprehensive sitemap.xml has been generated following the official [Sitemaps.
 - `/help` - Help center index
 
 **Help Categories (6):**
-- `/help/category/getting-started`
-- `/help/category/seo-tools-features`
-- `/help/category/account-billing`
-- `/help/category/api-integrations`
-- `/help/category/security-privacy`
-- `/help/category/troubleshooting`
+- `/help/getting-started`
+- `/help/seo-tools-features`
+- `/help/account-billing`
+- `/help/api-integrations`
+- `/help/security-privacy`
+- `/help/troubleshooting`
 
 ### Priority 0.4 - Help Articles & Support (25 URLs)
 **Getting Started (4):**

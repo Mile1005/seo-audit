@@ -24,6 +24,37 @@ const nextConfig = {
         destination: 'https://www.aiseoturbo.com/:path',
         permanent: true, // 301 permanent redirect
       },
+      // Redirect old /help/category/* URLs to new structure
+      {
+        source: '/help/category/getting-started',
+        destination: '/help/getting-started',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/category/troubleshooting',
+        destination: '/help/troubleshooting',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/category/account-billing',
+        destination: '/help/account-billing',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/category/api-integrations',
+        destination: '/help/api-integrations',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/category/seo-tools-features',
+        destination: '/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/category/security-privacy',
+        destination: '/help/security-privacy',
+        permanent: true, // 301 permanent redirect
+      },
       // Redirect /index.html to root
       {
         source: '/index.html',
