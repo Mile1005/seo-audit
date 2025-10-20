@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/troubleshooting/performance'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Performance Issues - Speed Up AI SEO Turbo | AI SEO Turbo',
     description: 'Resolve performance problems in AI SEO Turbo. Learn to fix slow loading, optimize audits, improve dashboard speed, and enhance platform performance.',
     type: 'article',

@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/features/site-crawler'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Site Crawler Guide - Index Website Pages | AI SEO Turbo',
     description: 'Configure and use the site crawler in AI SEO Turbo. Learn to crawl websites, discover pages, analyze site structure, and identify indexing issues.',
     type: 'article',

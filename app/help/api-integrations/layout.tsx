@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/api-integrations'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'API & Integrations Help - Connect & Automate | AI SEO Turbo',
     description: 'Master API integrations and automation with AI SEO Turbo. Learn to connect with your tools, set up webhooks, and automate SEO workflows.',
     type: 'article',

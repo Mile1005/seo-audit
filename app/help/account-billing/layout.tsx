@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/account-billing'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Account & Billing - Subscription Management | AI SEO Turbo',
     description: 'Complete guide to account management and billing for AI SEO Turbo. Learn about subscriptions, payments, invoices, and account settings.',
     type: 'article',

@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
     description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
     type: 'article',

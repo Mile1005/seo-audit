@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/security/privacy'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Privacy Settings Guide - Control Your Data | AI SEO Turbo',
     description: 'Manage your privacy settings in AI SEO Turbo. Learn to control data sharing, configure privacy preferences, and protect your SEO analysis data.',
     type: 'article',

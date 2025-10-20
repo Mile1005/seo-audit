@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
     description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
     type: 'article',

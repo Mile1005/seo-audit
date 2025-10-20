@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/troubleshooting/audit-issues'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Fix Audit Issues - Troubleshoot SEO Audits | AI SEO Turbo',
     description: 'Solve common SEO audit problems in AI SEO Turbo. Learn to fix stuck audits, timeouts, incomplete scans, and other audit-related issues.',
     type: 'article',

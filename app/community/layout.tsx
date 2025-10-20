@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/community'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'SEO Community - Connect & Learn | AI SEO Turbo',
     description: 'Join the AI SEO Turbo community to connect with SEO professionals, share insights, learn from experts, and stay updated with latest trends.',
     type: 'website',

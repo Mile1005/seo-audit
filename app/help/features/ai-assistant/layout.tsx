@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/features/ai-assistant'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'AI Assistant Guide - Smart SEO Recommendations | AI SEO Turbo',
     description: 'Master the AI assistant feature in AI SEO Turbo. Learn best practices for SEO recommendations, content optimization, and automated insights.',
     type: 'article',

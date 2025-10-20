@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/status'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'System Status - Service Availability | AI SEO Turbo',
     description: 'Check the current status of AI SEO Turbo services including API, web application, database, and crawler services.',
     type: 'website',

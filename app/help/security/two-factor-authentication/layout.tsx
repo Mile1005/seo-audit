@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/security/two-factor-authentication'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Two-Factor Authentication - Secure Account | AI SEO Turbo',
     description: 'Set up and manage two-factor authentication (2FA) for your AI SEO Turbo account. Learn to enable 2FA, use authenticator apps, and secure your SEO data.',
     type: 'article',

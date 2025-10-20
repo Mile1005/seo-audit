@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/troubleshooting'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo',
     description: 'Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.',
     type: 'article',

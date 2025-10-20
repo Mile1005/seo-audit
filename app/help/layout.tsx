@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Help Center - SEO Support & Guides | AI SEO Turbo',
     description: 'Get help with AI SEO Turbo. Find answers to common questions, tutorials, troubleshooting guides, and contact support for personalized assistance.',
     type: 'website',

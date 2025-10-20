@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/billing/payment-methods'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Payment Methods Guide - Add & Manage Cards | AI SEO Turbo',
     description: 'Manage your payment methods for AI SEO Turbo subscriptions. Learn how to add credit cards, update billing information, and secure payment processing.',
     type: 'article',

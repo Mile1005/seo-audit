@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/demo'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Free SEO Audit Demo - Try AI SEO Turbo | AI SEO Turbo',
     description: 'Try our AI-powered SEO audit tool for free. Analyze any website instantly and get recommendations to improve search rankings and drive traffic.',
     type: 'website',

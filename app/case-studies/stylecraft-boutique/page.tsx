@@ -44,6 +44,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
     description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
     type: 'article',

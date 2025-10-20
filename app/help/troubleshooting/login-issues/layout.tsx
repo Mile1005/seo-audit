@@ -8,6 +8,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/help/troubleshooting/login-issues'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Login Issues - Fix Account Access Problems | AI SEO Turbo',
     description: 'Solve login problems with AI SEO Turbo. Learn to fix password issues, account lockouts, email verification problems, and access your account.',
     type: 'article',

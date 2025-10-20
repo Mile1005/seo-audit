@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'AISEOTurbo Team' }],
   openGraph: {
+    images: ['/logo.png'],
     title: 'SEO Audit Pricing - Free & Pro Plans | AI SEO Turbo',
     description: 'Choose the perfect SEO plan. Free plan with analysis. Pro plans start at $29/month with advanced features.',
     url: 'https://www.aiseoturbo.com/pricing',

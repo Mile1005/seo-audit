@@ -43,6 +43,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
   },
   openGraph: {
+    images: ['/logo.png'],
     title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
     description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
     type: 'article',
