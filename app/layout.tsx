@@ -201,11 +201,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes. Get actionable insights to boost rankings and drive organic traffic with comprehensive website audits.",
     "offers": {
       "@type": "Offer",
-      "price": "39",
+      "price": "0",
       "priceCurrency": "USD",
       "url": "https://www.aiseoturbo.com/pricing",
       "priceValidUntil": "2026-12-31",
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "description": "Free plan available with premium features"
     },
     "aggregateRating": {
       "@type": "AggregateRating",

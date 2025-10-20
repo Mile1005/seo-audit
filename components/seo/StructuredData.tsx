@@ -307,11 +307,12 @@ export function generateFeatureSchema(feature: {
     },
     "offers": {
       "@type": "Offer",
-      "price": "39",
+      "price": "0",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
       "url": "https://www.aiseoturbo.com/pricing",
-      "priceValidUntil": "2026-12-31"
+      "priceValidUntil": "2026-12-31",
+      "description": "Free plan available with premium features"
     },
     "aggregateRating": {
       "@type": "AggregateRating",
