@@ -92,11 +92,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "legalName": "AISEOTurbo",
     "alternateName": "AI SEO Turbo",
     "url": "https://www.aiseoturbo.com",
-    "logo": "https://www.aiseoturbo.com/logo.png",
-    "image": "https://www.aiseoturbo.com/logo.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.aiseoturbo.com/logo.png",
+      "width": 600,
+      "height": 60,
+      "caption": "AISEOTurbo Logo"
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.aiseoturbo.com/logo.png",
+      "width": 1200,
+      "height": 630,
+      "caption": "AISEOTurbo - AI-Powered SEO Audits"
+    },
     "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes.",
     "slogan": "AI-Powered SEO Audits That Drive Results",
     "foundingDate": "2025-09",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Partizanska 24",
+      "addressLocality": "Skopje",
+      "postalCode": "1000",
+      "addressRegion": "Skopje",
+      "addressCountry": "MK"
+    },
     "foundingLocation": {
       "@type": "Place",
       "address": {
@@ -171,18 +191,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web Browser",
     "url": "https://www.aiseoturbo.com",
-    "image": "https://www.aiseoturbo.com/logo.png",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://www.aiseoturbo.com/logo.png",
+      "width": 1200,
+      "height": 630,
+      "caption": "AISEOTurbo Platform Screenshot"
+    },
     "description": "AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes. Get actionable insights to boost rankings and drive organic traffic with comprehensive website audits.",
     "offers": {
       "@type": "AggregateOffer",
       "priceCurrency": "USD",
       "lowPrice": "0",
       "highPrice": "99",
-      "url": "https://www.aiseoturbo.com/pricing"
+      "url": "https://www.aiseoturbo.com/pricing",
+      "priceValidUntil": "2026-12-31"
     },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",
+      "ratingCount": "1000",
       "reviewCount": "1000",
       "bestRating": "5",
       "worstRating": "1"
@@ -198,9 +226,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       "Automated SEO Reports"
     ],
     "author": {
+      "@type": "Organization",
       "@id": "https://www.aiseoturbo.com/#organization"
     },
     "provider": {
+      "@type": "Organization",
+      "@id": "https://www.aiseoturbo.com/#organization"
+    },
+    "creator": {
+      "@type": "Organization",
       "@id": "https://www.aiseoturbo.com/#organization"
     }
   };
