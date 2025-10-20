@@ -45,7 +45,7 @@ export default function FirstAuditPage() {
             <Breadcrumbs
               items={[
                 { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
-                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/category/getting-started' },
+                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/getting-started' },
                 { name: 'How to create your first SEO audit', url: 'https://www.aiseoturbo.com/help/getting-started/first-audit' }
               ]}
               darkMode={true}

@@ -45,7 +45,7 @@ export default function QuickStartPage() {
             <Breadcrumbs
               items={[
                 { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
-                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/category/getting-started' },
+                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/getting-started' },
                 { name: 'Quick start guide', url: 'https://www.aiseoturbo.com/help/getting-started/quick-start' }
               ]}
               darkMode={true}

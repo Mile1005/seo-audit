@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Complete guide to account management and billing for AI SEO Turbo. Learn about subscriptions, payments, invoices, and account settings.',
   keywords: ['account management', 'billing help', 'subscription management', 'payment help', 'account settings', 'billing support'],
   alternates: {
-    canonical: 'https://www.aiseoturbo.com/help/category/account-billing'
+    canonical: 'https://www.aiseoturbo.com/help/account-billing'
   },
   openGraph: {
     title: 'Account & Billing - Subscription Management | AI SEO Turbo',

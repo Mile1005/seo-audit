@@ -1,6 +1,6 @@
 "use client"
 
-import { MainLayout } from '../../../../components/layout/main-layout'
+import { MainLayout } from '../../../components/layout/main-layout'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, BookOpen, Shield, ArrowRight, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
@@ -396,7 +396,7 @@ export default function SecurityPrivacyCategoryPage() {
               <h3 className="text-xl font-bold text-white mb-6">Security Resources</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Link
-                  href="/help/category/security-privacy"
+                  href="/help/security-privacy"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
@@ -428,7 +428,7 @@ export default function SecurityPrivacyCategoryPage() {
               <h3 className="text-xl font-bold text-white mb-6">Related Categories</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Link
-                  href="/help/category/account-billing"
+                  href="/help/account-billing"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
@@ -438,7 +438,7 @@ export default function SecurityPrivacyCategoryPage() {
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-purple-400 transition-colors" />
                 </Link>
                 <Link
-                  href="/help/category/troubleshooting"
+                  href="/help/troubleshooting"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>

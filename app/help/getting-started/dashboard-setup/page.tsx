@@ -41,7 +41,7 @@ export default function DashboardSetupPage() {
             <Breadcrumbs
               items={[
                 { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
-                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/category/getting-started' },
+                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/getting-started' },
                 { name: 'Setting up your dashboard', url: 'https://www.aiseoturbo.com/help/getting-started/dashboard-setup' }
               ]}
               darkMode={true}

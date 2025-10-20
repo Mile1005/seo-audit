@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Master API integrations and automation with AI SEO Turbo. Learn to connect with your tools, set up webhooks, and automate SEO workflows.',
   keywords: ['API integrations', 'automation', 'webhooks', 'API documentation', 'workflow automation', 'SEO API', 'integrations guide'],
   alternates: {
-    canonical: 'https://www.aiseoturbo.com/help/category/api-integrations'
+    canonical: 'https://www.aiseoturbo.com/help/api-integrations'
   },
   openGraph: {
     title: 'API & Integrations Help - Connect & Automate | AI SEO Turbo',

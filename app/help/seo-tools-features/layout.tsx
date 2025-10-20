@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: 'Guide to AI SEO Turbo features: audits, competitor analysis, keyword tracking, site crawling, and AI assistant.',
   keywords: ['SEO tools', 'SEO features', 'SEO audit guide', 'competitor analysis', 'keyword tracking', 'site crawler', 'AI assistant'],
   alternates: {
-    canonical: 'https://www.aiseoturbo.com/help/category/seo-tools-features'
+    canonical: 'https://www.aiseoturbo.com/help/seo-tools-features'
   },
   openGraph: {
     title: 'SEO Tools & Features - Master AI SEO Turbo | AI SEO Turbo',

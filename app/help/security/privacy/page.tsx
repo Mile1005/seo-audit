@@ -18,7 +18,7 @@ export default function PrivacyPage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/category/security-privacy" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/help/security-privacy" className="text-gray-400 hover:text-white transition-colors">
                 Security
               </Link>
               <span className="text-gray-600">/</span>

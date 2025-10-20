@@ -76,7 +76,7 @@ export default function SEOScoresPage() {
                 Help Center
               </Link>
               <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/help/category/getting-started" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="/help/getting-started" className="text-gray-400 hover:text-white transition-colors">
                 Getting Started
               </Link>
               <span className="text-gray-600" aria-hidden="true">/</span>
