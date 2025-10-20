@@ -16,7 +16,7 @@ export default function SEOAuditWalkthroughPage() {
           items={[
             { name: 'Home', url: 'https://www.aiseoturbo.com' },
             { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Features', url: 'https://www.aiseoturbo.com/help/features' },
+            { name: 'Features', url: 'https://www.aiseoturbo.com/help/seo-tools-features' },
             { name: 'SEO Audit Walkthrough', url: 'https://www.aiseoturbo.com/help/features/seo-audit' }
           ]}
         />

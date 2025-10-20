@@ -16,7 +16,7 @@ export default function SiteCrawlerConfigurationPage() {
           items={[
             { name: 'Home', url: 'https://www.aiseoturbo.com' },
             { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Features', url: 'https://www.aiseoturbo.com/help/features' },
+            { name: 'Features', url: 'https://www.aiseoturbo.com/help/seo-tools-features' },
             { name: 'Site Crawler Configuration', url: 'https://www.aiseoturbo.com/help/features/site-crawler' }
           ]}
         />

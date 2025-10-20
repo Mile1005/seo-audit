@@ -16,7 +16,7 @@ export default function CompetitorAnalysisGuidePage() {
           items={[
             { name: 'Home', url: 'https://www.aiseoturbo.com' },
             { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Features', url: 'https://www.aiseoturbo.com/help/features' },
+            { name: 'Features', url: 'https://www.aiseoturbo.com/help/seo-tools-features' },
             { name: 'Competitor Analysis Guide', url: 'https://www.aiseoturbo.com/help/features/competitor-analysis' }
           ]}
         />

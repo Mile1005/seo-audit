@@ -40,7 +40,7 @@ export default function AuthenticationPage() {
           items={[
             { name: 'Home', url: 'https://www.aiseoturbo.com' },
             { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'API', url: 'https://www.aiseoturbo.com/help/api' },
+            { name: 'API', url: 'https://www.aiseoturbo.com/help/api-integrations' },
             { name: 'Authentication', url: 'https://www.aiseoturbo.com/help/api/authentication' }
           ]}
         />
