@@ -10,6 +10,12 @@
 
   <!-- Main Feature Pages - Priority 0.8 -->
   <url>
+    <loc>https://www.aiseoturbo.com/features</loc>
+    <lastmod>2025-10-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.aiseoturbo.com/features/seo-audit</loc>
     <lastmod>2025-10-20</lastmod>
     <changefreq>weekly</changefreq>
