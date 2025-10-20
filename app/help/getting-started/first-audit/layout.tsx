@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/getting-started/first-audit',
+    siteName: 'AI SEO Turbo',
     title: 'First SEO Audit Guide - Run Your Website Analysis | AI SEO Turbo',
     description: 'Step-by-step guide to running your first SEO audit with AI SEO Turbo. Learn to analyze websites, configure settings, and get SEO recommendations.',
     type: 'article',

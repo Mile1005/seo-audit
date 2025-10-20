@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     images: ['/logo.png'],
     title: 'Help Center - SEO Support & Guides | AI SEO Turbo',
     description: 'Get help with AI SEO Turbo. Find answers to common questions, tutorials, troubleshooting guides, and contact support for personalized assistance.',
+    url: 'https://www.aiseoturbo.com/help',
+    siteName: 'AI SEO Turbo',
     type: 'website',
   },
   twitter: {

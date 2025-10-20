@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/troubleshooting/performance',
+    siteName: 'AI SEO Turbo',
     title: 'Performance Issues - Speed Up AI SEO Turbo | AI SEO Turbo',
     description: 'Resolve performance problems in AI SEO Turbo. Learn to fix slow loading, optimize audits, improve dashboard speed, and enhance platform performance.',
     type: 'article',

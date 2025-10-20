@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/billing/invoices',
+    siteName: 'AI SEO Turbo',
     title: 'Invoice Management Guide - Download & View Bills | AI SEO Turbo',
     description: 'Access, download, and manage your AI SEO Turbo invoices. Learn how to view billing history, download PDF receipts, and understand invoice details.',
     type: 'article',

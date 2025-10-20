@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/getting-started/seo-scores',
+    siteName: 'AI SEO Turbo',
     title: 'SEO Scores Guide - Understand Your Rankings | AI SEO Turbo',
     description: 'Learn to interpret SEO scores and metrics in AI SEO Turbo. Understand ranking factors, score calculations, and how to improve your website performance.',
     type: 'article',

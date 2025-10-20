@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/seo-tools-features',
+    siteName: 'AI SEO Turbo',
     title: 'SEO Tools & Features - Master AI SEO Turbo | AI SEO Turbo',
     description: 'Guide to AI SEO Turbo features: audits, competitor analysis, keyword tracking, site crawling, and AI assistant.',
     type: 'article',

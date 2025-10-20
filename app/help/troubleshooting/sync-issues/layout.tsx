@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/troubleshooting/sync-issues',
+    siteName: 'AI SEO Turbo',
     title: 'Sync Issues - Fix Data Synchronization | AI SEO Turbo',
     description: 'Resolve data synchronization problems in AI SEO Turbo. Learn to fix sync errors, reconnect accounts, and ensure your SEO data stays up to date.',
     type: 'article',

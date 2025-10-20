@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/getting-started',
+    siteName: 'AI SEO Turbo',
     title: 'Getting Started Guide - Quick SEO Setup | AI SEO Turbo',
     description: 'Get started with AI SEO Turbo quickly. Learn dashboard setup, run your first audit, understand SEO scores, and optimize your website performance.',
     type: 'article',

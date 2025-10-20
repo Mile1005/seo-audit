@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/api/authentication',
+    siteName: 'AI SEO Turbo',
     title: 'API Authentication - Secure Access Tokens | AI SEO Turbo',
     description: 'Complete guide to API authentication for AI SEO Turbo. Learn to generate, manage, and secure your API access tokens for SEO audits and integrations.',
     type: 'article',

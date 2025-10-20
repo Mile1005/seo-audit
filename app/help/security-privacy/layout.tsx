@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/security-privacy',
+    siteName: 'AI SEO Turbo',
     title: 'Security & Privacy Guide - Data Protection | AI SEO Turbo',
     description: 'Learn about AI SEO Turbo security measures, data privacy, GDPR compliance, and best practices for protecting your SEO data and account.',
     type: 'article',

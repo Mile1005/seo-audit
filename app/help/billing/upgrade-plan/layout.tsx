@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/billing/upgrade-plan',
+    siteName: 'AI SEO Turbo',
     title: 'Upgrade Subscription Guide - Pro Plan Benefits | AI SEO Turbo',
     description: 'Learn how to upgrade your AI SEO Turbo subscription to Pro plan. Unlock advanced features, unlimited audits, priority support, and premium SEO tools.',
     type: 'article',

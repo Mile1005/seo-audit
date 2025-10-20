@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/security/gdpr',
+    siteName: 'AI SEO Turbo',
     title: 'GDPR Compliance Guide - Data Protection Rights | AI SEO Turbo',
     description: 'Complete GDPR compliance guide for AI SEO Turbo. Learn your data rights, privacy protection, and how we ensure GDPR compliance for your SEO data.',
     type: 'article',

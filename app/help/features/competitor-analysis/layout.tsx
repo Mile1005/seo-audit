@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/features/competitor-analysis',
+    siteName: 'AI SEO Turbo',
     title: 'Competitor Analysis Guide - Spy on Competitors | AI SEO Turbo',
     description: 'Master competitor analysis with AI SEO Turbo. Learn to identify competitors, analyze strategies, find keyword opportunities, and gain advantage.',
     type: 'article',

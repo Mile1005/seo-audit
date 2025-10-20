@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/troubleshooting',
+    siteName: 'AI SEO Turbo',
     title: 'Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo',
     description: 'Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.',
     type: 'article',

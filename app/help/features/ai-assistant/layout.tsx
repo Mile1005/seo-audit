@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     images: ['/logo.png'],
+    url: 'https://www.aiseoturbo.com/help/features/ai-assistant',
+    siteName: 'AI SEO Turbo',
     title: 'AI Assistant Guide - Smart SEO Recommendations | AI SEO Turbo',
     description: 'Master the AI assistant feature in AI SEO Turbo. Learn best practices for SEO recommendations, content optimization, and automated insights.',
     type: 'article',
