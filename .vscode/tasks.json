@@ -22,6 +22,18 @@
 			"problemMatcher": [
 				"$tsc"
 			]
+		},
+		{
+			"label": "Run typecheck",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"type-check"
+			],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
 		}
 	]
 }

@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
     title: `SEO Audit Report for ${url} - Score: ${score} | AI SEO Turbo`,
     description: `Comprehensive SEO audit results for ${url} with performance, accessibility, and best practices analysis. Generated on ${new Date(run.createdAt).toLocaleDateString()}.`,
     keywords: 'SEO audit, website analysis, performance score, accessibility check, SEO report',
+    robots: 'noindex, nofollow',
     openGraph: {
       title: `SEO Audit Report - ${url}`,
       description: `SEO audit results with score ${score} for ${url}`,
