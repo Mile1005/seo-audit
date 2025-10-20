@@ -18,8 +18,8 @@ export default function AuditIssuesPage() {
             __html: JSON.stringify([
               {
                 "@context": "https://schema.org",
-                "@type": "TroubleshootingGuide",
-                "name": "Troubleshooting: SEO Audit Not Completing - AISEOTurbo Help",
+                "@type": "HowTo",
+                "name": "How to Fix SEO Audit Issues - AISEOTurbo Troubleshooting",
                 "description": "Complete troubleshooting guide for fixing SEO audit issues in AISEOTurbo. Solutions for stuck audits, timeout errors, and technical problems.",
                 "image": {
                   "@type": "ImageObject",
@@ -27,20 +27,30 @@ export default function AuditIssuesPage() {
                   "width": 1200,
                   "height": 630
                 },
+                "step": [
+                  {
+                    "@type": "HowToStep",
+                    "name": "Check if audit is stuck",
+                    "text": "If your audit appears stuck at 'Analyzing...', this may be due to large site size, server response delays, or network connectivity issues.",
+                    "url": "https://www.aiseoturbo.com/help/troubleshooting/audit-issues#stuck"
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Refresh or restart the audit",
+                    "text": "Try refreshing the page or restarting the audit to resolve temporary connectivity issues.",
+                    "url": "https://www.aiseoturbo.com/help/troubleshooting/audit-issues#restart"
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Handle timeout errors",
+                    "text": "For timeout errors on large websites, try limiting the audit scope to specific pages or contact support for enterprise solutions.",
+                    "url": "https://www.aiseoturbo.com/help/troubleshooting/audit-issues#timeout"
+                  }
+                ],
                 "author": {
                   "@type": "Organization",
                   "name": "AISEOTurbo",
                   "url": "https://aiseoturbo.com"
-                },
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "AISEOTurbo",
-                  "logo": {
-                    "@type": "ImageObject",
-                    "url": "https://aiseoturbo.com/logo.png",
-                    "width": 600,
-                    "height": 60
-                  }
                 },
                 "datePublished": "2025-03-01",
                 "dateModified": "2025-03-15"

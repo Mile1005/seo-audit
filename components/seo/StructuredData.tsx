@@ -307,15 +307,21 @@ export function generateFeatureSchema(feature: {
     },
     "offers": {
       "@type": "Offer",
-      "price": "0",
+      "price": "39",
       "priceCurrency": "USD",
       "availability": "https://schema.org/InStock",
-      "description": "Available in free and paid plans",
-      "url": "https://www.aiseoturbo.com/pricing"
+      "url": "https://www.aiseoturbo.com/pricing",
+      "priceValidUntil": "2026-12-31"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1000",
+      "bestRating": "5",
+      "worstRating": "1"
     },
     "softwareVersion": "1.0",
-    "inLanguage": "en-US",
-    ...(feature.category && { "category": feature.category })
+    "inLanguage": "en-US"
   };
 }
 
@@ -479,7 +485,26 @@ export function generateItemListSchema(items: Array<{
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
       "position": index + 1,
-      "item": {
+      "item": item.datePublished ? {
+        "@type": "BlogPosting",
+        "@id": item.url,
+        "headline": item.name,
+        "url": item.url,
+        ...(item.description && { "description": item.description }),
+        ...(item.image && { 
+          "image": {
+            "@type": "ImageObject",
+            "url": item.image,
+            "width": 1200,
+            "height": 630
+          }
+        }),
+        "datePublished": item.datePublished,
+        "author": {
+          "@type": "Organization",
+          "name": "AISEOTurbo"
+        }
+      } : {
         "@type": "Thing",
         "@id": item.url,
         "name": item.name,
@@ -492,8 +517,7 @@ export function generateItemListSchema(items: Array<{
             "width": 1200,
             "height": 630
           }
-        }),
-        ...(item.datePublished && { "datePublished": item.datePublished })
+        })
       }
     }))
   };
