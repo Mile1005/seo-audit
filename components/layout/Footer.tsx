@@ -79,6 +79,7 @@ export default function Footer() {
                     width={200} 
                     height={53}
                     className="h-16 sm:h-20 md:h-24 w-auto"
+                    style={{ width: 'auto' }}
                   />
                 </Link>
               </motion.div>

@@ -58,88 +58,7 @@ export default function PrivacyPage() {
           </div>
         </section>
 
-        {/* Comprehensive Privacy Introduction */}
-        <section className="py-16 px-4 bg-slate-800/30">
-          <div className="container mx-auto max-w-4xl">
-            <div className="prose prose-lg prose-invert mx-auto">
-              <h2>Privacy & Data Protection in SEO Analysis</h2>
-              <p>
-                At AI SEO Turbo, we understand that privacy and data security are paramount, especially in the SEO industry
-                where sensitive website data and business intelligence are routinely analyzed. Our commitment to protecting
-                your privacy goes beyond legal compliance – it's fundamental to building trust with our users.
-              </p>
-
-              <p>
-                As an AI-powered SEO platform, we handle vast amounts of web data, analytics information, and user-generated
-                content. We implement enterprise-grade security measures and follow strict data handling protocols to ensure
-                that your information remains confidential and secure at all times.
-              </p>
-
-              <h3>Why Privacy Matters in SEO Tools</h3>
-              <p>
-                SEO analysis inherently involves examining website content, user behavior data, and competitive intelligence.
-                This sensitive information requires the highest levels of protection. We treat your data with the same care
-                we would our own proprietary technology and business secrets.
-              </p>
-
-              <h4>Our Privacy Commitments:</h4>
-              <ul>
-                <li><strong>Data Minimization:</strong> We collect only the information necessary to provide our SEO analysis services</li>
-                <li><strong>Purpose Limitation:</strong> Your data is used solely for the purposes stated in this policy</li>
-                <li><strong>Security First:</strong> Enterprise-grade encryption and access controls protect your information</li>
-                <li><strong>Transparency:</strong> Clear communication about how we handle and protect your data</li>
-                <li><strong>User Control:</strong> You maintain full control over your data and can request deletion at any time</li>
-              </ul>
-
-              <h3>Data Processing in SEO Analysis</h3>
-              <p>
-                Our AI-powered SEO audits process website data to provide insights about search engine optimization opportunities.
-                We analyze public web content, technical website structure, and performance metrics while maintaining strict
-                privacy boundaries. No personally identifiable information from website visitors is ever collected or stored.
-              </p>
-
-              <h4>What We Analyze:</h4>
-              <ul>
-                <li>Public website content and metadata</li>
-                <li>Technical SEO elements (meta tags, headers, schema markup)</li>
-                <li>Site structure and internal linking patterns</li>
-                <li>Performance metrics and loading speeds</li>
-                <li>Mobile-friendliness and accessibility features</li>
-                <li>Search engine visibility and indexing status</li>
-              </ul>
-
-              <h3>Industry-Leading Security Measures</h3>
-              <p>
-                We employ multiple layers of security to protect your data throughout its lifecycle. From initial collection
-                through processing and storage, every step includes robust security controls and monitoring.
-              </p>
-
-              <h4>Security Technologies:</h4>
-              <ul>
-                <li><strong>End-to-End Encryption:</strong> All data encrypted using AES-256 encryption standards</li>
-                <li><strong>Zero-Trust Architecture:</strong> Every access request is verified and authorized</li>
-                <li><strong>Regular Security Audits:</strong> Independent third-party security assessments</li>
-                <li><strong>Incident Response:</strong> 24/7 monitoring with rapid response capabilities</li>
-                <li><strong>Data Residency:</strong> Your data stays within secure, SOC 2 compliant data centers</li>
-              </ul>
-
-              <h2>Compliance & Legal Framework</h2>
-              <p>
-                We comply with all applicable data protection laws and regulations, including GDPR, CCPA, and other
-                international privacy frameworks. Our privacy practices exceed industry standards and reflect our
-                commitment to ethical data handling.
-              </p>
-
-              <p>
-                Regular audits and compliance reviews ensure that our practices remain current with evolving privacy
-                regulations and industry best practices. We work with legal experts specializing in data protection
-                to maintain the highest standards of compliance.
-              </p>
-              
-              <h3>Legal Details</h3>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Content Section */}
         <section className="py-20 bg-background">
@@ -304,6 +223,139 @@ export default function PrivacyPage() {
                   </div>
                 </motion.section>
 
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Additional Sections aligned to card style */}
+        <section className="py-4 bg-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl shadow-2xl p-8 md:p-12"
+            >
+              <div className="space-y-12">
+                <motion.section 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.85 }}
+                >
+                  <h2 className="text-2xl font-semibold text-foreground flex items-center">
+                    <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-4 border border-emerald-500/20">
+                      <Shield className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    Privacy in SEO Tools
+                  </h2>
+                  <div className="pl-14 space-y-4 text-muted-foreground">
+                    <p>
+                      Privacy and data security are paramount when analyzing websites and business intelligence. Our commitment goes beyond
+                      legal compliance—it’s fundamental to building trust. We handle web data, analytics information, and user-generated content
+                      with enterprise-grade security and strict handling protocols.
+                    </p>
+                  </div>
+                </motion.section>
+
+                <motion.section 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.9 }}
+                >
+                  <h2 className="text-2xl font-semibold text-foreground flex items-center">
+                    <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center mr-4 border border-blue-500/20">
+                      <Lock className="w-5 h-5 text-blue-400" />
+                    </div>
+                    Our Privacy Commitments
+                  </h2>
+                  <div className="pl-14 space-y-4 text-muted-foreground">
+                    <ul className="list-disc list-inside space-y-2 ml-4">
+                      <li><strong>Data Minimization:</strong> We collect only what’s necessary to provide SEO analysis services.</li>
+                      <li><strong>Purpose Limitation:</strong> Your data is used solely for the purposes stated in this policy.</li>
+                      <li><strong>Security First:</strong> Encryption and access controls protect your information.</li>
+                      <li><strong>Transparency:</strong> Clear communication about how we handle and protect your data.</li>
+                      <li><strong>User Control:</strong> You control your data and can request deletion at any time.</li>
+                    </ul>
+                  </div>
+                </motion.section>
+
+                <motion.section 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.95 }}
+                >
+                  <h2 className="text-2xl font-semibold text-foreground flex items-center">
+                    <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center mr-4 border border-purple-500/20">
+                      <Database className="w-5 h-5 text-purple-400" />
+                    </div>
+                    Data Processing & What We Analyze
+                  </h2>
+                  <div className="pl-14 space-y-4 text-muted-foreground">
+                    <p>
+                      Our AI-powered audits process website data to surface SEO opportunities. We analyze public web content, technical structure,
+                      and performance metrics while maintaining strict privacy boundaries. We don’t collect or store personally identifiable
+                      information from your website visitors.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 ml-4">
+                      <li>Public website content and metadata</li>
+                      <li>Technical SEO elements (meta tags, headers, schema markup)</li>
+                      <li>Site structure and internal linking patterns</li>
+                      <li>Performance metrics and loading speeds</li>
+                      <li>Mobile-friendliness and accessibility features</li>
+                      <li>Search engine visibility and indexing status</li>
+                    </ul>
+                  </div>
+                </motion.section>
+
+                <motion.section 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.0 }}
+                >
+                  <h2 className="text-2xl font-semibold text-foreground flex items-center">
+                    <div className="w-10 h-10 bg-indigo-500/10 rounded-lg flex items-center justify-center mr-4 border border-indigo-500/20">
+                      <Settings className="w-5 h-5 text-indigo-400" />
+                    </div>
+                    Security Measures & Technologies
+                  </h2>
+                  <div className="pl-14 space-y-4 text-muted-foreground">
+                    <p>
+                      We protect data throughout its lifecycle with layered controls and monitoring.
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 ml-4">
+                      <li><strong>End‑to‑End Encryption:</strong> AES‑256 in transit and at rest.</li>
+                      <li><strong>Zero‑Trust Architecture:</strong> Every request is verified and authorized.</li>
+                      <li><strong>Regular Security Audits:</strong> Independent third‑party assessments.</li>
+                      <li><strong>Incident Response:</strong> 24/7 monitoring with rapid response.</li>
+                      <li><strong>Data Residency:</strong> Secure, SOC 2 compliant data centers.</li>
+                    </ul>
+                  </div>
+                </motion.section>
+
+                <motion.section 
+                  className="space-y-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 1.05 }}
+                >
+                  <h2 className="text-2xl font-semibold text-foreground flex items-center">
+                    <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-4 border border-emerald-500/20">
+                      <Shield className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    Compliance & Legal Framework
+                  </h2>
+                  <div className="pl-14 space-y-4 text-muted-foreground">
+                    <p>
+                      We comply with GDPR, CCPA, and other applicable privacy regulations. Our practices are reviewed regularly to align with
+                      evolving standards and best practices, with guidance from legal experts in data protection.
+                    </p>
+                  </div>
+                </motion.section>
               </div>
             </motion.div>
           </div>

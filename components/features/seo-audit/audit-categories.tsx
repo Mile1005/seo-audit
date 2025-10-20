@@ -112,15 +112,15 @@ export default function AuditCategories() {
                 whileTap={{ scale: 0.95 }}
                 className="group relative rounded-xl border bg-background p-6 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden"
               >
-                <div className={`+"absolute inset-0 bg-gradient-to-br "+$c.gradient+" opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
                 <div className="relative z-10">
-                  <div className={`+"inline-flex p-2 rounded-lg bg-gradient-to-br "+$c.gradient+" mb-4`}>
+                  <div className={`inline-flex p-2 rounded-lg bg-gradient-to-br ${c.gradient} mb-4`}>
                     <Icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-gray-900 group-hover:to-gray-600 transition-all duration-300">
+                  <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-blue-300 group-hover:to-sky-400 transition-all duration-300">
                     {c.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground group-hover:text-gray-600 transition-colors duration-300">
+                  <p className="text-sm text-muted-foreground group-hover:text-slate-300 transition-colors duration-300">
                     {c.desc}
                   </p>
                 </div>

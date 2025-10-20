@@ -136,11 +136,11 @@ export default function ResultsShowcase() {
                       stiffness: 300,
                       delay: 0.6 + index * 0.1
                     }}
-                    className="text-4xl font-bold text-primary mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-gray-900 group-hover:to-gray-600 transition-all duration-300"
+                    className="text-4xl font-bold text-primary mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-br group-hover:from-blue-300 group-hover:to-sky-400 transition-all duration-300"
                   >
                     {result.stat}
                   </motion.div>
-                  <div className="text-muted-foreground group-hover:text-gray-600 transition-colors duration-300">
+                  <div className="text-muted-foreground group-hover:text-slate-300 transition-colors duration-300">
                     {result.label}
                   </div>
                 </div>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Menu, X, ChevronDown } from "lucide-react"
+import { usePathname, useRouter } from "next/navigation"
 
 // Lightweight dropdown component with CSS transitions
 interface DropdownItem {
@@ -164,6 +165,10 @@ export function AdaptiveNavigation() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isMounted, setIsMounted] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+  const pathname = usePathname()
+  const router = useRouter()
+  // Deduplicate touch + click sequences to avoid double toggle
+  const lastTouchToggleTs = useRef<number>(0)
 
   useEffect(() => {
     setIsMounted(true)
@@ -182,6 +187,15 @@ export function AdaptiveNavigation() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [openDropdown, isOpen])
 
+  // Close mobile menu AFTER route changes (prevents closing before navigation)
+  useEffect(() => {
+    // When the pathname changes, ensure the mobile menu is closed
+    if (isOpen || openDropdown) {
+      setIsOpen(false)
+      setOpenDropdown(null)
+    }
+  }, [pathname])
+
   // Close mobile submenu with Escape and close menu on outside tap
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -191,9 +205,11 @@ export function AdaptiveNavigation() {
       }
     }
 
-    const onDocClick = (e: MouseEvent) => {
+    const onDocClick = (e: MouseEvent | TouchEvent) => {
       if (!isOpen) return
-      const target = e.target as Node
+      const target = e.target as HTMLElement
+      
+      // Don't close if clicking inside the mobile menu
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
         closeMenu()
       }
@@ -201,9 +217,11 @@ export function AdaptiveNavigation() {
 
     document.addEventListener('keydown', onKeyDown)
     document.addEventListener('mousedown', onDocClick)
+    document.addEventListener('touchstart', onDocClick) // Add touch support
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.removeEventListener('mousedown', onDocClick)
+      document.removeEventListener('touchstart', onDocClick) // Remove touch listener
     }
   }, [isOpen, openDropdown])
 
@@ -239,6 +257,7 @@ export function AdaptiveNavigation() {
                   height={48}
                   priority
                   className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
+                  style={{ width: 'auto' }}
                 />
               </Link>
             </div>
@@ -265,6 +284,7 @@ export function AdaptiveNavigation() {
                 height={48}
                 priority
                 className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
+                style={{ width: 'auto' }}
               />
             </Link>
           </div>
@@ -341,9 +361,21 @@ export function AdaptiveNavigation() {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
-              onClick={toggleMenu}
+              type="button"
+              onPointerDown={(e) => {
+                // Close/open immediately on tap down for snappy UX on mobile
+                e.preventDefault()
+                e.stopPropagation()
+                if (isOpen) {
+                  setIsOpen(false)
+                  setOpenDropdown(null)
+                } else {
+                  setIsOpen(true)
+                }
+              }}
+              style={{ touchAction: 'manipulation' }}
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 transition-colors duration-200"
-              aria-expanded="false"
+              aria-expanded={isOpen}
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? (
@@ -368,38 +400,77 @@ export function AdaptiveNavigation() {
                       type="button"
                       aria-expanded={openDropdown === section.label}
                       aria-controls={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      onClick={() => toggleDropdown(section.label)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        // If a touch just occurred, ignore the synthetic click
+                        if (Date.now() - lastTouchToggleTs.current < 350) return
+                        toggleDropdown(section.label)
+                      }}
+                      onTouchEnd={(e) => {
+                        // Support touch devices explicitly
+                        e.stopPropagation()
+                        e.preventDefault()
+                        lastTouchToggleTs.current = Date.now()
+                        toggleDropdown(section.label)
+                      }}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault()
                           toggleDropdown(section.label)
                         }
                       }}
-                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between touch-manipulation"
+                      style={{ touchAction: 'manipulation' }}
+                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between active:bg-slate-800"
                     >
                       <span>{section.label}</span>
                       <ChevronDown
                         aria-hidden="true"
                         className={`h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
                           openDropdown === section.label ? 'rotate-180 text-blue-400' : 'text-slate-400'
-                        }`} 
+                        }`}
+                        onClick={(e) => {
+                          // If tapping the chevron, toggle without triggering the parent again
+                          e.stopPropagation()
+                          if (Date.now() - lastTouchToggleTs.current < 350) return
+                          toggleDropdown(section.label)
+                        }}
+                        onTouchEnd={(e) => {
+                          e.stopPropagation()
+                          e.preventDefault()
+                          lastTouchToggleTs.current = Date.now()
+                          toggleDropdown(section.label)
+                        }}
                       />
                     </button>
 
-                    {/* Submenu: use hidden/block to avoid touch height transition glitches */}
+                    {/* Submenu: fully clickable with proper touch support */}
                     <div
                       id={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      className={`${openDropdown === section.label ? 'block' : 'hidden'} pl-4 mt-1`}
+                      className={`${openDropdown === section.label ? 'block' : 'hidden'} pl-4 mt-1 space-y-1`}
+                      style={{ 
+                        pointerEvents: openDropdown === section.label ? 'auto' : 'none',
+                        touchAction: 'manipulation'
+                      }}
                     >
                       {section.items.map((item) => (
-                        <Link
+                        <button
                           key={item.href}
-                          href={item.href}
-                          className="text-slate-400 hover:text-white block px-3 py-2 text-sm transition-colors duration-200"
-                          onClick={closeMenu}
+                          className="text-slate-400 hover:text-white hover:bg-slate-800/30 active:bg-slate-800/50 block px-3 py-2.5 text-sm transition-colors duration-200 rounded-md w-full text-left"
+                          style={{ touchAction: 'manipulation' }}
+                          onClick={(e) => {
+                            // Stop bubbling to any outside-click handlers
+                            e.stopPropagation()
+                            // Navigate first; menu will close via pathname effect
+                            router.push(item.href)
+                          }}
+                          onTouchEnd={(e) => {
+                            // Ensure touch devices trigger navigation reliably
+                            e.stopPropagation()
+                            router.push(item.href)
+                          }}
                         >
                           {item.label}
-                        </Link>
+                        </button>
                       ))}
                     </div>
                   </div>

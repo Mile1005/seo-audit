@@ -21,7 +21,7 @@ export function Breadcrumbs({
   items, 
   className = '', 
   includeHome = true,
-  darkMode = false 
+  darkMode = true 
 }: BreadcrumbsProps) {
   // Prepend home if requested
   const breadcrumbItems = includeHome 
@@ -31,9 +31,10 @@ export function Breadcrumbs({
   // Generate schema data
   const schemaData = generateBreadcrumbSchema(breadcrumbItems)
 
-  const textColor = darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'
+  // Use higher-contrast slate colors by default on dark backgrounds
+  const textColor = darkMode ? 'text-slate-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'
   const activeColor = darkMode ? 'text-white' : 'text-gray-900'
-  const separatorColor = darkMode ? 'text-gray-600' : 'text-gray-400'
+  const separatorColor = darkMode ? 'text-slate-500' : 'text-gray-400'
 
   return (
     <>

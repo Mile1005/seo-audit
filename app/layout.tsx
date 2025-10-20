@@ -30,7 +30,8 @@ const inter = Inter({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  // Removed maximumScale to allow user scaling for accessibility
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export const metadata: Metadata = {
