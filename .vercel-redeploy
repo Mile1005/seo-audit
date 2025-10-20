@@ -1,0 +1,7 @@
+# Force Vercel Redeployment
+# Fixes broken JavaScript chunks on production
+# Date: 2025-10-20
+# Issue: Privacy page and other pages showing 404 for JS chunks
+# Solution: Clean rebuild and deployment
+
+This file triggers a fresh deployment to fix chunk hash mismatches.
