@@ -1,6 +1,7 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, Target, Users, TrendingUp, Search, BarChart, Zap } from 'lucide-react'
 import Link from 'next/link'
@@ -10,22 +11,15 @@ export default function CompetitorAnalysisGuidePage() {
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
 
-        {/* Breadcrumb */}
-        <section className="bg-slate-900/50 py-6">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600">/</span>
-              <Link href="/help/category/seo-tools-features" className="text-gray-400 hover:text-white transition-colors">
-                SEO Tools & Features
-              </Link>
-              <span className="text-gray-600">/</span>
-              <span className="text-white">Competitor analysis guide</span>
-            </nav>
-          </div>
-        </section>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { name: 'Home', url: 'https://www.aiseoturbo.com' },
+            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
+            { name: 'Features', url: 'https://www.aiseoturbo.com/help/features' },
+            { name: 'Competitor Analysis Guide', url: 'https://www.aiseoturbo.com/help/features/competitor-analysis' }
+          ]}
+        />
 
         {/* Article Header */}
         <section className="py-12">

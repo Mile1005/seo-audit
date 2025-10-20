@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
+import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'Content SEO: Search-Friendly Content | AI SEO Turbo Blog',
@@ -272,5 +273,23 @@ const post = {
 }
 
 export default function ContentSEOContentPage() {
-  return <BlogPostClient post={post} />
+  const blogSchema = generateBlogPostingSchema({
+    title: 'Content SEO: Ranking Content That Converts',
+    description: 'Master content SEO with our complete guide. Learn keyword research, user intent, content structure, and best practices for creating content that ranks in Google and converts visitors.',
+    author: 'Alex Morgan',
+    datePublished: '2025-10-17T11:00:00+00:00',
+    dateModified: '2025-10-17T11:00:00+00:00',
+    image: 'https://www.aiseoturbo.com/blog/content-seo.jpg',
+    url: 'https://www.aiseoturbo.com/blog/content-seo-creating-search-friendly-content',
+    wordCount: 2950,
+    keywords: ['content SEO', 'keyword research', 'user intent', 'content strategy', 'SEO writing', 'content optimization'],
+    category: 'Content SEO'
+  });
+
+  return (
+    <>
+      <StructuredData data={blogSchema} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

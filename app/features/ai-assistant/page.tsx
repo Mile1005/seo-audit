@@ -13,12 +13,56 @@ import {
 } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { MainLayout } from "../../../components/layout/main-layout";
+import { Breadcrumbs } from "../../../components/navigation/breadcrumbs";
 import HowAiWorks from "../../../components/features/ai-assistant/how-ai-works";
 import RecommendationTypes from "../../../components/features/ai-assistant/recommendation-types";
 import ImplementationGuides from "../../../components/features/ai-assistant/implementation-guides";
 import IndustrySpecialization from "../../../components/features/ai-assistant/industry-specialization";
+import { StructuredData, generateFeatureSchema, generateFAQSchema } from "../../../components/seo/StructuredData";
 
 export default function AiAssistantPage() {
+  const featureSchema = generateFeatureSchema({
+    name: "AI SEO Assistant",
+    description: "Intelligent AI-powered SEO assistant that provides personalized recommendations, answers SEO questions, guides implementation, and helps you optimize your website with expert-level advice.",
+    url: "https://www.aiseoturbo.com/features/ai-assistant",
+    features: [
+      "Natural Language SEO Questions",
+      "Personalized Recommendations",
+      "Step-by-Step Implementation Guides",
+      "Real-Time SEO Advice",
+      "Content Optimization Suggestions",
+      "Technical SEO Guidance",
+      "Best Practice Validation",
+      "Industry-Specific Insights",
+      "24/7 Availability",
+      "Multi-Language Support"
+    ],
+    category: "AI Assistant"
+  });
+
+  const faqSchema = generateFAQSchema([
+    {
+      question: "How does the AI SEO Assistant work?",
+      answer: "Our AI is trained on millions of websites and SEO best practices. Ask questions in natural language, and receive expert-level answers with step-by-step implementation guides tailored to your website."
+    },
+    {
+      question: "Can the AI help with technical SEO issues?",
+      answer: "Yes! The AI assistant can diagnose and provide solutions for technical issues including crawlability problems, indexing errors, site speed, structured data, and more."
+    },
+    {
+      question: "Is the AI assistant available 24/7?",
+      answer: "Absolutely! Get instant SEO guidance anytime, day or night. No waiting for human consultants or support tickets."
+    },
+    {
+      question: "How accurate are the AI recommendations?",
+      answer: "Our AI has 95%+ accuracy and is continuously updated with the latest Google algorithm changes and SEO best practices. Recommendations are validated by SEO experts."
+    },
+    {
+      question: "Can I use the AI for content optimization?",
+      answer: "Yes! Get suggestions for title tags, meta descriptions, heading structure, keyword usage, content gaps, and overall content quality improvements."
+    }
+  ]);
+
   const heroMetrics = [
     { label: "AI Models Trained", value: "12+", description: "Specialized SEO algorithms" },
     { label: "Recommendations Generated", value: "2.3M+", description: "Actionable insights delivered" },
@@ -42,7 +86,19 @@ export default function AiAssistantPage() {
 
   return (
     <MainLayout>
+      <StructuredData data={featureSchema} />
+      <StructuredData data={faqSchema} />
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
+              { name: 'AI Assistant', url: 'https://www.aiseoturbo.com/features/ai-assistant' }
+            ]}
+            className="mb-4"
+          />
+        </div>
         
         {/* Hero Section */}
         <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">

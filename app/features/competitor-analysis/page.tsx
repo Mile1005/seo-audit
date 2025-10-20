@@ -18,13 +18,57 @@ import {
   Zap
 } from "lucide-react";
 import { MainLayout } from "../../../components/layout/main-layout";
+import { Breadcrumbs } from "../../../components/navigation/breadcrumbs";
 import SerpComparison from "../../../components/features/competitor-analysis/serp-comparison";
 import GapAnalysis from "../../../components/features/competitor-analysis/gap-analysis";
 import MonitoringDashboard from "../../../components/features/competitor-analysis/monitoring-dashboard";
 import StrategyRecommendations from "../../../components/features/competitor-analysis/strategy-recommendations";
+import { StructuredData, generateFeatureSchema, generateFAQSchema } from "../../../components/seo/StructuredData";
 
 export default function CompetitorAnalysisPage() {
   const [selectedCompetitor, setSelectedCompetitor] = useState("competitor1");
+
+  const featureSchema = generateFeatureSchema({
+    name: "Competitor Analysis Tool",
+    description: "Advanced competitor analysis platform that tracks competitor rankings, identifies content gaps, analyzes backlink profiles, and provides strategic insights to outrank your competition.",
+    url: "https://www.aiseoturbo.com/features/competitor-analysis",
+    features: [
+      "Competitor Keyword Tracking",
+      "SERP Position Monitoring",
+      "Content Gap Analysis",
+      "Backlink Comparison",
+      "Traffic Estimation",
+      "Ranking History Tracking",
+      "Competitive Intelligence Reports",
+      "Market Share Analysis",
+      "Top Pages Discovery",
+      "Strategic Recommendations"
+    ],
+    category: "Competitive Analysis"
+  });
+
+  const faqSchema = generateFAQSchema([
+    {
+      question: "How many competitors can I track?",
+      answer: "You can track up to 3 competitors on the Professional plan and unlimited competitors on the Enterprise plan. The Starter plan allows tracking 1 competitor."
+    },
+    {
+      question: "How often is competitor data updated?",
+      answer: "Competitor rankings and metrics are updated daily for Professional users and weekly for Starter users. Enterprise customers get real-time updates."
+    },
+    {
+      question: "Can I analyze competitors in different countries?",
+      answer: "Yes! Our tool supports competitor analysis across 190+ countries and regions, allowing you to track local and international competition."
+    },
+    {
+      question: "What insights does the competitor analysis provide?",
+      answer: "You'll see keyword rankings, content gaps, backlink profiles, top-performing pages, estimated traffic, ranking trends, and actionable recommendations to outrank competitors."
+    },
+    {
+      question: "Do I need to know who my competitors are?",
+      answer: "Not necessarily! Our AI can automatically identify your top SEO competitors based on keyword overlap and market positioning."
+    }
+  ]);
 
   const keyMetrics = [
     {
@@ -66,7 +110,20 @@ export default function CompetitorAnalysisPage() {
 
   return (
     <MainLayout>
+      <StructuredData data={featureSchema} />
+      <StructuredData data={faqSchema} />
       <div className="min-h-screen bg-background overflow-x-hidden">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
+              { name: 'Competitor Analysis', url: 'https://www.aiseoturbo.com/features/competitor-analysis' }
+            ]}
+            className="mb-4"
+          />
+        </div>
+
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}

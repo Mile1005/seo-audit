@@ -1,31 +1,53 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
+import { StructuredData, generateHowToSchema } from '../../../../components/seo/StructuredData'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, Webhook, Zap, AlertTriangle, CheckCircle, Code, Settings, TestTube, Eye } from 'lucide-react'
 import Link from 'next/link'
 
 export default function WebhooksPage() {
+  const howToSchema = generateHowToSchema({
+    name: "How to Set Up Webhooks for AISEOTurbo",
+    description: "Step-by-step guide to configuring webhooks for real-time notifications when events occur in your AISEOTurbo account",
+    totalTime: "PT7M",
+    url: "https://www.aiseoturbo.com/help/api/webhooks",
+    datePublished: "2025-03-01T10:00:00+00:00",
+    steps: [
+      {
+        name: "Create webhook endpoint",
+        text: "Build an HTTPS endpoint in your application that can receive POST requests. This endpoint should handle JSON payloads and return appropriate HTTP status codes (200 for success)."
+      },
+      {
+        name: "Configure webhook URL",
+        text: "In your dashboard, go to Settings → API → Webhooks → Add Webhook. Enter your webhook endpoint URL. You can configure multiple webhooks for different events or environments."
+      },
+      {
+        name: "Select events",
+        text: "Choose which events you want to receive notifications for. You can subscribe to all events or select specific ones like audit.completed, audit.failed, billing.payment, or account.updated."
+      },
+      {
+        name: "Test your webhook",
+        text: "Use the webhook testing tool to send test events to your endpoint. Verify that your application correctly receives and processes the webhook data before enabling it for production events."
+      }
+    ]
+  })
+
   return (
     <MainLayout>
+      <StructuredData data={howToSchema} />
       <div className="min-h-screen bg-slate-950">
 
-        {/* Breadcrumb */}
-        <section className="bg-slate-900/50 py-6">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600">/</span>
-              <Link href="/help/category/api-integrations" className="text-gray-400 hover:text-white transition-colors">
-                API & Integrations
-              </Link>
-              <span className="text-gray-600">/</span>
-              <span className="text-white">Webhooks</span>
-            </nav>
-          </div>
-        </section>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { name: 'Home', url: 'https://www.aiseoturbo.com' },
+            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
+            { name: 'API', url: 'https://www.aiseoturbo.com/help/api' },
+            { name: 'Webhooks', url: 'https://www.aiseoturbo.com/help/api/webhooks' }
+          ]}
+        />
 
         {/* Article Header */}
         <section className="py-12">

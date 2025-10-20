@@ -1,4 +1,6 @@
 import { MainLayout } from "@/components/layout/main-layout"
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
+import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
 import { generateSEOMeta } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
@@ -51,46 +53,6 @@ export const metadata: Metadata = {
     title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
     description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
   }
-}
-
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "CloudSync Pro: B2B Lead Generation Success - 350% Qualified Leads Increase",
-  "description": "Comprehensive B2B SEO case study showing how CloudSync Pro transformed their lead generation with AI-powered content and keyword strategies.",
-  "datePublished": "2024-10-14",
-  "dateModified": "2024-10-14",
-  "author": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.aiseoturbo.com/case-studies/cloudsync-pro"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "B2B Lead Generation"
-    },
-    {
-      "@type": "Thing",
-      "name": "SaaS Marketing"
-    },
-    {
-      "@type": "Thing",
-      "name": "Content Strategy"
-    }
-  ]
 }
 
 const challengePoints = [
@@ -173,30 +135,36 @@ const timeline = [
 ]
 
 export default function CloudSyncProCaseStudy() {
+  const caseStudySchema = generateCaseStudySchema({
+    title: "CloudSync Pro: B2B Lead Generation Success - 350% Qualified Leads Increase",
+    description: "Comprehensive B2B SEO case study showing how CloudSync Pro transformed their lead generation with AI-powered content and keyword strategies.",
+    datePublished: "2024-10-14T10:00:00+00:00",
+    dateModified: "2025-10-17T10:00:00+00:00",
+    url: "https://www.aiseoturbo.com/case-studies/cloudsync-pro",
+    companyName: "CloudSync Pro",
+    industry: "B2B SaaS",
+    reviewRating: 5,
+    reviewAuthor: "David Park",
+    reviewText: "AI SEO Turbo gave us the competitive edge we needed in the B2B market. Our lead quality and quantity have dramatically improved, and we're now reaching enterprise decision-makers who were previously invisible to us. The ROI has been incredible."
+  });
+
   return (
     <MainLayout>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={caseStudySchema} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
-                Case Studies
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">CloudSync Pro</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Case Studies', url: 'https://www.aiseoturbo.com/case-studies' },
+                { name: 'CloudSync Pro', url: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro' }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
 
             {/* Hero Content */}
             <div className="text-center mb-12">

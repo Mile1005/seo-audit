@@ -14,12 +14,56 @@ import {
 } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 import { MainLayout } from "../../../components/layout/main-layout";
+import { Breadcrumbs } from "../../../components/navigation/breadcrumbs";
 import TrackingCapabilities from "../../../components/features/keyword-tracking/tracking-capabilities";
 import SerpFeatures from "../../../components/features/keyword-tracking/serp-features";
 import PerformanceAnalytics from "../../../components/features/keyword-tracking/performance-analytics";
 import AlertSystem from "../../../components/features/keyword-tracking/alert-system";
+import { StructuredData, generateFeatureSchema, generateFAQSchema } from "../../../components/seo/StructuredData";
 
 export default function KeywordTrackingPage() {
+  const featureSchema = generateFeatureSchema({
+    name: "Keyword Rank Tracking Tool",
+    description: "Real-time keyword ranking tracker that monitors your search positions across Google, tracks SERP features, provides competitor insights, and sends alerts when rankings change.",
+    url: "https://www.aiseoturbo.com/features/keyword-tracking",
+    features: [
+      "Daily Rank Tracking",
+      "Local & Global Rankings",
+      "SERP Feature Monitoring",
+      "Competitor Tracking",
+      "Ranking Alerts & Notifications",
+      "Historical Data Analysis",
+      "Search Volume Insights",
+      "Ranking Distribution Reports",
+      "Mobile vs Desktop Tracking",
+      "190+ Location Support"
+    ],
+    category: "Keyword Tracking"
+  });
+
+  const faqSchema = generateFAQSchema([
+    {
+      question: "How often are keyword rankings updated?",
+      answer: "Rankings are updated daily for all tracked keywords. Professional and Enterprise plans offer on-demand updates and real-time alerts when significant ranking changes occur."
+    },
+    {
+      question: "Can I track rankings in different locations?",
+      answer: "Yes! Track rankings in 190+ countries and cities worldwide. Monitor both local and global rankings to understand your search visibility across different markets."
+    },
+    {
+      question: "How many keywords can I track?",
+      answer: "Starter plan: 10 keywords, Professional plan: 500 keywords, Enterprise plan: unlimited keywords. All plans include historical data and ranking alerts."
+    },
+    {
+      question: "What SERP features are tracked?",
+      answer: "We track 15+ SERP features including featured snippets, knowledge panels, local packs, image packs, video results, People Also Ask, and more."
+    },
+    {
+      question: "Can I track competitor keyword rankings?",
+      answer: "Absolutely! Monitor competitor rankings for the same keywords you track, compare performance, and identify opportunities where competitors rank but you don't."
+    }
+  ]);
+
   const heroMetrics = [
     { label: "Keywords Tracked", value: "50M+", description: "Across all clients globally" },
     { label: "Daily Updates", value: "24/7", description: "Real-time ranking monitoring" },
@@ -76,7 +120,19 @@ export default function KeywordTrackingPage() {
 
   return (
     <MainLayout>
+      <StructuredData data={featureSchema} />
+      <StructuredData data={faqSchema} />
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
+              { name: 'Keyword Tracking', url: 'https://www.aiseoturbo.com/features/keyword-tracking' }
+            ]}
+            className="mb-4"
+          />
+        </div>
         
         {/* Hero Section */}
         <section className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">

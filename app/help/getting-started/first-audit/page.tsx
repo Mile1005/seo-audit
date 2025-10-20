@@ -1,29 +1,55 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
+import { StructuredData, generateHowToSchema } from '../../../../components/seo/StructuredData'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, Lightbulb, AlertTriangle, Target } from 'lucide-react'
 import Link from 'next/link'
 
 export default function FirstAuditPage() {
+  const howToSchema = generateHowToSchema({
+    name: "How to Create Your First SEO Audit",
+    description: "Learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. Complete step-by-step guide from entering your URL to reviewing results.",
+    totalTime: "PT5M", // 5 minutes
+    url: "https://www.aiseoturbo.com/help/getting-started/first-audit",
+    datePublished: "2025-03-01T10:00:00+00:00",
+    steps: [
+      {
+        name: "Enter your website URL",
+        text: "Navigate to the SEO Audit tool and enter your website's URL in the input field. Make sure to include the full URL including 'https://' or 'http://'."
+      },
+      {
+        name: "Configure audit settings",
+        text: "Choose your audit preferences: Enable Mobile Analysis for mobile-first indexing insights, add up to 3 competitor URLs for Competitor Analysis, and enable Deep Crawl to analyze up to 100 pages (Pro feature)."
+      },
+      {
+        name: "Start the audit",
+        text: "Click the 'Start Audit' button and wait for the AI to analyze your website. This typically takes 2-5 minutes depending on your site's size."
+      },
+      {
+        name: "Review your results",
+        text: "Once complete, review your SEO score and detailed analysis. Results are organized into categories: Passed (Green) for items your site handles well, Warnings (Yellow) for areas needing attention, Errors (Red) for critical issues to fix immediately, and Info (Blue) for additional insights."
+      }
+    ]
+  });
+
   return (
     <MainLayout>
+      <StructuredData data={howToSchema} />
       <div className="min-h-screen bg-slate-950">
         
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600">/</span>
-              <Link href="/help/category/getting-started" className="text-gray-400 hover:text-white transition-colors">
-                Getting Started
-              </Link>
-              <span className="text-gray-600">/</span>
-              <span className="text-white">How to create your first SEO audit</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
+                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/category/getting-started' },
+                { name: 'How to create your first SEO audit', url: 'https://www.aiseoturbo.com/help/getting-started/first-audit' }
+              ]}
+              darkMode={true}
+            />
           </div>
         </section>
 

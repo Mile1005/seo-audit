@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
+import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'AI-Powered SEO: The Future is Here | AI SEO Turbo Blog',
@@ -240,5 +241,23 @@ const post = {
 }
 
 export default function AIPoweredSEOFuturePage() {
-  return <BlogPostClient post={post} />
+  const blogSchema = generateBlogPostingSchema({
+    title: 'AI-Powered SEO: The Future is Here Now',
+    description: 'Discover how artificial intelligence is revolutionizing SEO. Learn how Google\'s AI algorithms work, practical AI tools for optimization, and strategies to leverage AI for competitive advantage and better rankings.',
+    author: 'Mike Chen',
+    datePublished: '2025-10-17T10:00:00+00:00',
+    dateModified: '2025-10-17T10:00:00+00:00',
+    image: 'https://www.aiseoturbo.com/blog/ai-seo-future.jpg',
+    url: 'https://www.aiseoturbo.com/blog/ai-powered-seo-future',
+    wordCount: 2847,
+    keywords: ['AI SEO', 'Machine Learning', 'RankBrain', 'BERT', 'SEO automation', 'Google AI', 'search optimization'],
+    category: 'AI & SEO'
+  });
+
+  return (
+    <>
+      <StructuredData data={blogSchema} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

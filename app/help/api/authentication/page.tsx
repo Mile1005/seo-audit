@@ -1,31 +1,49 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
+import { StructuredData, generateHowToSchema } from '../../../../components/seo/StructuredData'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, Key, Shield, Code, AlertTriangle, CheckCircle, Copy, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 
 export default function AuthenticationPage() {
+  const howToSchema = generateHowToSchema({
+    name: "How to Generate API Keys for AISEOTurbo",
+    description: "Step-by-step guide to generating and securely managing API keys for AISEOTurbo platform integration",
+    totalTime: "PT3M",
+    url: "https://www.aiseoturbo.com/help/api/authentication",
+    datePublished: "2025-03-01T10:00:00+00:00",
+    steps: [
+      {
+        name: "Access API settings",
+        text: "Navigate to your account settings and find the API section in Dashboard → Settings → API → API Keys. You'll need an Enterprise plan or API add-on to access API features."
+      },
+      {
+        name: "Create new API key",
+        text: "Click 'Generate New Key' and give your key a descriptive name like 'Production App', 'Staging Environment', or 'Mobile App'. This helps you track which applications or services are using each key."
+      },
+      {
+        name: "Copy and store securely",
+        text: "Copy the generated API key immediately (it will only be shown once). Store it securely in your application's environment variables or secret management system. Never share API keys publicly or commit them to code repositories."
+      }
+    ]
+  })
+
   return (
     <MainLayout>
+      <StructuredData data={howToSchema} />
       <div className="min-h-screen bg-slate-950">
 
-        {/* Breadcrumb */}
-        <section className="bg-slate-900/50 py-6">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600">/</span>
-              <Link href="/help/category/api-integrations" className="text-gray-400 hover:text-white transition-colors">
-                API & Integrations
-              </Link>
-              <span className="text-gray-600">/</span>
-              <span className="text-white">Authentication</span>
-            </nav>
-          </div>
-        </section>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { name: 'Home', url: 'https://www.aiseoturbo.com' },
+            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
+            { name: 'API', url: 'https://www.aiseoturbo.com/help/api' },
+            { name: 'Authentication', url: 'https://www.aiseoturbo.com/help/api/authentication' }
+          ]}
+        />
 
         {/* Article Header */}
         <section className="py-12">

@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
+import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'Technical SEO Best Practices 2025 | AI SEO Turbo Blog',
@@ -268,5 +269,23 @@ const post = {
 }
 
 export default function TechnicalSEO2025Page() {
-  return <BlogPostClient post={post} />
+  const blogSchema = generateBlogPostingSchema({
+    title: 'Technical SEO Best Practices for 2025: Complete Implementation Guide',
+    description: 'Master the latest technical SEO best practices for 2025. Optimize site speed, mobile-first indexing, structured data, crawlability, and more with our comprehensive guide.',
+    author: 'Sarah Johnson',
+    datePublished: '2025-10-17T14:00:00+00:00',
+    dateModified: '2025-10-17T14:00:00+00:00',
+    image: 'https://www.aiseoturbo.com/blog/technical-seo-2025.jpg',
+    url: 'https://www.aiseoturbo.com/blog/technical-seo-best-practices-2025',
+    wordCount: 2800,
+    keywords: ['technical SEO', 'site speed', 'mobile-first indexing', 'structured data', 'crawlability', 'SEO best practices 2025'],
+    category: 'Technical SEO'
+  });
+
+  return (
+    <>
+      <StructuredData data={blogSchema} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

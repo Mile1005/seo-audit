@@ -6,7 +6,7 @@ import { ArrowRight, CheckCircle, Zap, Star, Crown, Users, Clock, Shield, Phone,
 import { EmailCaptureInline } from "../../components/lead/email-capture-inline"
 import { handleCTAClick } from "../../lib/cta-utils"
 import { MainLayout } from "../../components/layout/main-layout"
-import { StructuredData, generateProductSchema, generateFAQSchema } from "../../components/seo/StructuredData"
+import { StructuredData, generateMultiPlanProductSchema, generateFAQSchema } from "../../components/seo/StructuredData"
 
 const pricingPlans = [
   {
@@ -131,16 +131,14 @@ export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
-  // Generate Product schemas for all pricing plans
-  const productSchemas = pricingPlans.map(plan => 
-    generateProductSchema({
-      name: `AISEOTurbo ${plan.name} Plan`,
-      description: plan.description,
+  // Generate Product schema for all pricing plans
+  const productSchema = generateMultiPlanProductSchema(
+    pricingPlans.map(plan => ({
+      name: `${plan.name} Plan`,
       price: String(plan.price.monthly),
       currency: "USD",
-      url: "https://www.aiseoturbo.com/pricing",
-      features: plan.features
-    })
+      description: plan.description
+    }))
   )
 
   // Generate FAQ schema from pricing FAQs
@@ -564,7 +562,7 @@ export default function PricingPage() {
       </div>
 
       {/* Structured Data */}
-      <StructuredData data={productSchemas} />
+      <StructuredData data={productSchema} />
       <StructuredData data={faqSchema} />
     </MainLayout>
   )

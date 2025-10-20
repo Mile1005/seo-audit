@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
+import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'Core Web Vitals Optimization Guide | AI SEO Turbo Blog',
@@ -186,5 +187,23 @@ const post = {
 }
 
 export default function CoreWebVitalsPage() {
-  return <BlogPostClient post={post} />
+  const blogSchema = generateBlogPostingSchema({
+    title: 'Core Web Vitals: Master Google Performance Metrics',
+    description: 'Master Google Core Web Vitals with our comprehensive step-by-step guide to improve page speed, user experience, and SEO rankings. Learn LCP, FID, and CLS optimization strategies.',
+    author: 'Alex Rivera',
+    datePublished: '2025-10-17T12:00:00+00:00',
+    dateModified: '2025-10-17T12:00:00+00:00',
+    image: 'https://www.aiseoturbo.com/blog/core-web-vitals.jpg',
+    url: 'https://www.aiseoturbo.com/blog/core-web-vitals-optimization-guide',
+    wordCount: 2400,
+    keywords: ['Core Web Vitals', 'LCP', 'FID', 'CLS', 'page speed', 'performance optimization', 'Google ranking factors'],
+    category: 'Technical SEO'
+  });
+
+  return (
+    <>
+      <StructuredData data={blogSchema} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

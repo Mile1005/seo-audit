@@ -3,6 +3,7 @@ import { generateSEOMeta, pageSEO } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { StructuredData, generateItemListSchema } from "@/components/seo/StructuredData"
 import {
   TrendingUp,
   Users,
@@ -193,8 +194,18 @@ const industries = [
 ]
 
 export default function CaseStudiesPage() {
+  // Generate ItemList schema for all case studies
+  const itemListSchema = generateItemListSchema(
+    caseStudies.map(study => ({
+      name: study.title,
+      url: `https://www.aiseoturbo.com/case-studies/${study.id}`,
+      description: study.challenge
+    }))
+  )
+
   return (
     <MainLayout>
+      <StructuredData data={itemListSchema} />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">

@@ -1,6 +1,7 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, BarChart3, AlertTriangle, Target, TrendingUp, Award, Zap, Star, Info } from 'lucide-react'
 import Link from 'next/link'
@@ -9,6 +10,16 @@ export default function SEOScoresPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
+        
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { name: 'Home', url: 'https://www.aiseoturbo.com' },
+            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
+            { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/getting-started' },
+            { name: 'Understanding SEO Scores', url: 'https://www.aiseoturbo.com/help/getting-started/seo-scores' }
+          ]}
+        />
         
         {/* JSON-LD Schema for SEO */}
         <script

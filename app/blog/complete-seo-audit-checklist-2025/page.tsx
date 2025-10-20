@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
+import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'Complete SEO Audit Checklist for 2025 | AI SEO Turbo Blog',
@@ -313,5 +314,23 @@ const post = {
 }
 
 export default function CompleteSEOAuditChecklistPage() {
-  return <BlogPostClient post={post} />
+  const blogSchema = generateBlogPostingSchema({
+    title: 'Complete SEO Audit Checklist: 47-Point Framework',
+    description: 'A comprehensive 47-point SEO audit checklist to identify technical issues, on-page problems, content gaps, and off-page opportunities. Used by 1000+ websites to increase organic traffic and rankings.',
+    author: 'Sarah Johnson',
+    datePublished: '2025-10-17T09:00:00+00:00',
+    dateModified: '2025-10-17T09:00:00+00:00',
+    image: 'https://www.aiseoturbo.com/blog/seo-audit-checklist.jpg',
+    url: 'https://www.aiseoturbo.com/blog/complete-seo-audit-checklist-2025',
+    wordCount: 3200,
+    keywords: ['SEO audit', 'technical SEO', 'on-page SEO', 'content audit', 'off-page SEO', 'SEO checklist', 'website audit'],
+    category: 'Technical SEO'
+  });
+
+  return (
+    <>
+      <StructuredData data={blogSchema} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

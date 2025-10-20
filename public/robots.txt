@@ -1,4 +1,35 @@
+# Robots.txt for aiseoturbo.com
+# Generated: 2025-10-20
+
+# Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
 
+# Disallow access to private/protected routes
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /login
+Disallow: /signup
+Disallow: /auth-test/
+Disallow: /oauth-test/
+Disallow: /onboarding/
+Disallow: /verify-email/
+Disallow: /reset-password/
+Disallow: /forgot-password/
+
+# Disallow crawling of share tokens (dynamic private content)
+Disallow: /share/
+
+# Disallow crawling of app-specific routes (internal tools)
+Disallow: /app/
+
+# Allow crawling of public blog images
+Allow: /blog/*.jpg
+Allow: /blog/*.jpeg
+Allow: /blog/*.png
+Allow: /blog/*.webp
+Allow: /blog/*.svg
+
+# Sitemap location
+Sitemap: https://www.aiseoturbo.com/sitemap.xml
 

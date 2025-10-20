@@ -1,4 +1,6 @@
 import { MainLayout } from "@/components/layout/main-layout"
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
+import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
 import { generateSEOMeta } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
@@ -53,46 +55,6 @@ export const metadata: Metadata = {
     title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
     description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
   }
-}
-
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "GearHub Pro: Niche E-commerce Leadership - 290% Conversion Increase",
-  "description": "Comprehensive niche e-commerce case study showing how GearHub Pro became the go-to resource in their specialized market through strategic SEO optimization.",
-  "datePublished": "2024-10-14",
-  "dateModified": "2024-10-14",
-  "author": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.aiseoturbo.com/case-studies/gearhub-pro"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "Niche E-commerce SEO"
-    },
-    {
-      "@type": "Thing",
-      "name": "Specialty Retail"
-    },
-    {
-      "@type": "Thing",
-      "name": "Niche Market Strategy"
-    }
-  ]
 }
 
 const challengePoints = [
@@ -175,30 +137,36 @@ const timeline = [
 ]
 
 export default function GearHubProCaseStudy() {
+  const caseStudySchema = generateCaseStudySchema({
+    title: "GearHub Pro: Niche E-commerce Leadership - 290% Conversion Increase",
+    description: "Comprehensive niche e-commerce case study showing how GearHub Pro became the go-to resource in their specialized market through strategic SEO optimization.",
+    datePublished: "2024-10-14T10:00:00+00:00",
+    dateModified: "2025-10-17T10:00:00+00:00",
+    url: "https://www.aiseoturbo.com/case-studies/gearhub-pro",
+    companyName: "GearHub Pro",
+    industry: "E-commerce - Outdoor Gear",
+    reviewRating: 5,
+    reviewAuthor: "Alex Rivera",
+    reviewText: "AI SEO Turbo helped us carve out our space in a competitive niche. We've become the go-to resource for our specialty, and our customers now find us first when they're searching for authentic, specialized products in our category."
+  });
+
   return (
     <MainLayout>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={caseStudySchema} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
-                Case Studies
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">GearHub Pro</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Case Studies', url: 'https://www.aiseoturbo.com/case-studies' },
+                { name: 'GearHub Pro', url: 'https://www.aiseoturbo.com/case-studies/gearhub-pro' }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
 
             {/* Hero Content */}
             <div className="text-center mb-12">

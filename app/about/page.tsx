@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { MainLayout } from '../../components/layout/main-layout'
+import { StructuredData, generateAboutPageSchema } from '../../components/seo/StructuredData'
 
 // Force dynamic rendering to fix Vercel lambda routing
 export const dynamic = 'force-dynamic';
@@ -14,8 +15,24 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+  const aboutSchema = generateAboutPageSchema({
+    organizationName: "AISEOTurbo",
+    description: "AI-powered SEO audit platform helping businesses optimize their websites for better search engine rankings. We democratize SEO insights through cutting-edge AI technology.",
+    foundingDate: "2025-09",
+    founders: [
+      {
+        name: "Mile Stoev",
+        jobTitle: "Founder & CEO"
+      }
+    ],
+    numberOfEmployees: "1-10",
+    url: "https://www.aiseoturbo.com",
+    email: "support@aiseoturbo.com"
+  });
+
   return (
     <MainLayout>
+      <StructuredData data={aboutSchema} />
       <div className="min-h-screen bg-background">{/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />

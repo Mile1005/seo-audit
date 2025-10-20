@@ -1,4 +1,6 @@
 import { MainLayout } from "@/components/layout/main-layout"
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
+import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
 import { generateSEOMeta } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
@@ -53,46 +55,6 @@ export const metadata: Metadata = {
     title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
     description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
   }
-}
-
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Peak Performance: Local SEO Domination - Local Pack #1 for 15 Services",
-  "description": "Comprehensive local SEO case study showing how Peak Performance became the dominant local service provider through strategic local optimization.",
-  "datePublished": "2024-10-14",
-  "dateModified": "2024-10-14",
-  "author": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.aiseoturbo.com/case-studies/peak-performance"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "Local SEO"
-    },
-    {
-      "@type": "Thing",
-      "name": "Google Local Pack"
-    },
-    {
-      "@type": "Thing",
-      "name": "Local Business Marketing"
-    }
-  ]
 }
 
 const challengePoints = [
@@ -175,30 +137,36 @@ const timeline = [
 ]
 
 export default function PeakPerformanceCaseStudy() {
+  const caseStudySchema = generateCaseStudySchema({
+    title: "Peak Performance: Local SEO Domination - Local Pack #1 for 15 Services",
+    description: "Comprehensive local SEO case study showing how Peak Performance became the dominant local service provider through strategic local optimization.",
+    datePublished: "2024-10-14T10:00:00+00:00",
+    dateModified: "2025-10-17T10:00:00+00:00",
+    url: "https://www.aiseoturbo.com/case-studies/peak-performance",
+    companyName: "Peak Performance",
+    industry: "Fitness & Wellness",
+    reviewRating: 5,
+    reviewAuthor: "Jennifer Walsh",
+    reviewText: "We went from being invisible to dominating our local market. AI SEO Turbo's local SEO insights were game-changing. We're now the first result that customers see when they search for our services, and our phone hasn't stopped ringing."
+  });
+
   return (
     <MainLayout>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={caseStudySchema} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
-                Case Studies
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">Peak Performance</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Case Studies', url: 'https://www.aiseoturbo.com/case-studies' },
+                { name: 'Peak Performance', url: 'https://www.aiseoturbo.com/case-studies/peak-performance' }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
 
             {/* Hero Content */}
             <div className="text-center mb-12">

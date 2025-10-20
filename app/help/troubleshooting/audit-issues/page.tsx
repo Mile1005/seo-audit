@@ -1,6 +1,7 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, AlertTriangle, Target, Zap, RefreshCw, Globe, Search, Bug, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
@@ -61,22 +62,15 @@ export default function AuditIssuesPage() {
           }}
         />
 
-        {/* Breadcrumb */}
-        <section className="bg-slate-900/50 py-6">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/help/category/troubleshooting" className="text-gray-400 hover:text-white transition-colors">
-                Troubleshooting
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">Audit not completing</span>
-            </nav>
-          </div>
-        </section>
+        {/* Breadcrumbs */}
+        <Breadcrumbs
+          items={[
+            { name: 'Home', url: 'https://www.aiseoturbo.com' },
+            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
+            { name: 'Troubleshooting', url: 'https://www.aiseoturbo.com/help/troubleshooting' },
+            { name: 'Audit Issues', url: 'https://www.aiseoturbo.com/help/troubleshooting/audit-issues' }
+          ]}
+        />
 
         {/* Article Header */}
         <section className="py-12">

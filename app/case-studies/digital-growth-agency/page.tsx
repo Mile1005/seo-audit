@@ -1,4 +1,6 @@
 import { MainLayout } from "@/components/layout/main-layout"
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
+import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
 import { generateSEOMeta } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
@@ -48,46 +50,6 @@ export const metadata: Metadata = {
     title: 'Digital Marketing Agency SEO Success - 340% Traffic Growth Case Study | AI SEO Turbo',
     description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
   }
-}
-
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Digital Growth Agency: 340% Traffic Increase with AI SEO Turbo",
-  "description": "How Digital Growth Agency achieved 340% organic traffic growth using AI-powered SEO tools and automation.",
-  "datePublished": "2024-10-14",
-  "dateModified": "2024-10-14",
-  "author": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.aiseoturbo.com/case-studies/digital-growth-agency"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "SEO Automation"
-    },
-    {
-      "@type": "Thing",
-      "name": "Digital Marketing"
-    },
-    {
-      "@type": "Thing",
-      "name": "Traffic Growth"
-    }
-  ]
 }
 
 const challengePoints = [
@@ -170,30 +132,36 @@ const timeline = [
 ]
 
 export default function DigitalGrowthAgencyCaseStudy() {
+  const caseStudySchema = generateCaseStudySchema({
+    title: "Digital Growth Agency: 340% Traffic Increase with AI SEO Turbo",
+    description: "How Digital Growth Agency achieved 340% organic traffic growth using AI-powered SEO tools and automation.",
+    datePublished: "2024-10-14T10:00:00+00:00",
+    dateModified: "2025-10-17T10:00:00+00:00",
+    url: "https://www.aiseoturbo.com/case-studies/digital-growth-agency",
+    companyName: "Digital Growth Agency",
+    industry: "Digital Marketing Agency",
+    reviewRating: 5,
+    reviewAuthor: "Sarah Chen",
+    reviewText: "AI SEO Turbo transformed our agency workflow. We now deliver consistent results and have increased our client retention by 85%. The AI insights are like having a team of SEO experts working 24/7."
+  });
+
   return (
     <MainLayout>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={caseStudySchema} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
-                Case Studies
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">Digital Growth Agency</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Case Studies', url: 'https://www.aiseoturbo.com/case-studies' },
+                { name: 'Digital Growth Agency', url: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency' }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
 
             {/* Hero Content */}
             <div className="text-center mb-12">

@@ -7,6 +7,7 @@ import { Button } from "../../../components/ui/button";
 import Link from "next/link";
 import { Search, Zap, Globe, BarChart3, Clock, ArrowRight, AlertCircle, CheckCircle, Loader2, Download } from "lucide-react";
 import { MainLayout } from "../../../components/layout/main-layout";
+import { Breadcrumbs } from "../../../components/navigation/breadcrumbs";
 import CrawlCapabilities from "../../../components/features/site-crawler/crawl-capabilities";
 import SiteArchitecture from "../../../components/features/site-crawler/site-architecture";
 import IssueDetection from "../../../components/features/site-crawler/issue-detection";
@@ -285,6 +286,17 @@ export default function SiteCrawlerPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-background overflow-x-hidden">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
+              { name: 'Site Crawler', url: 'https://www.aiseoturbo.com/features/site-crawler' }
+            ]}
+            className="mb-4"
+          />
+        </div>
+
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}

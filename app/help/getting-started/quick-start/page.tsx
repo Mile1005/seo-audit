@@ -1,108 +1,55 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
+import { StructuredData, generateHowToSchema } from '../../../../components/seo/StructuredData'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, Zap, AlertTriangle, Target, Play, Rocket, Globe, BarChart3, Settings, Star } from 'lucide-react'
 import Link from 'next/link'
 
 export default function QuickStartPage() {
+  const howToSchema = generateHowToSchema({
+    name: "AISEOTurbo Quick Start Guide: Complete Setup in 10 Minutes",
+    description: "Get started with AISEOTurbo's AI-powered SEO tools in just 10 minutes. Complete guide from account setup to your first audit results.",
+    totalTime: "PT10M", // 10 minutes
+    url: "https://www.aiseoturbo.com/help/getting-started/quick-start",
+    datePublished: "2025-03-01T10:00:00+00:00",
+    steps: [
+      {
+        name: "Create Your Account",
+        text: "Sign up for AISEOTurbo with your email and verify your account."
+      },
+      {
+        name: "Add Your First Website",
+        text: "Enter your website URL and configure basic settings."
+      },
+      {
+        name: "Run Your First Audit",
+        text: "Launch a comprehensive SEO audit and wait for AI analysis to complete."
+      },
+      {
+        name: "Review Results",
+        text: "Analyze your SEO score and prioritize recommended improvements."
+      }
+    ]
+  });
+
   return (
     <MainLayout>
+      <StructuredData data={howToSchema} />
       <div className="min-h-screen bg-slate-950">
         
-        {/* JSON-LD Schema for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "HowTo",
-              "name": "AISEOTurbo Quick Start Guide: Complete Setup in 10 Minutes",
-              "description": "Get started with AISEOTurbo's AI-powered SEO tools in just 10 minutes. Complete guide from account setup to your first audit results.",
-              "image": "https://aiseoturbo.com/help/quick-start-guide.jpg",
-              "totalTime": "PT10M",
-              "estimatedCost": {
-                "@type": "MonetaryAmount",
-                "currency": "USD",
-                "value": "0"
-              },
-              "supply": [
-                {
-                  "@type": "HowToSupply",
-                  "name": "Website URL"
-                },
-                {
-                  "@type": "HowToSupply",
-                  "name": "Email Address"
-                }
-              ],
-              "tool": [
-                {
-                  "@type": "HowToTool",
-                  "name": "Web Browser"
-                },
-                {
-                  "@type": "HowToTool",
-                  "name": "AISEOTurbo Platform"
-                }
-              ],
-              "step": [
-                {
-                  "@type": "HowToStep",
-                  "name": "Create Your Account",
-                  "text": "Sign up for AISEOTurbo with your email and verify your account.",
-                  "image": "https://aiseoturbo.com/help/signup-process.jpg"
-                },
-                {
-                  "@type": "HowToStep",
-                  "name": "Add Your First Website",
-                  "text": "Enter your website URL and configure basic settings.",
-                  "image": "https://aiseoturbo.com/help/add-website.jpg"
-                },
-                {
-                  "@type": "HowToStep",
-                  "name": "Run Your First Audit",
-                  "text": "Launch a comprehensive SEO audit and wait for AI analysis to complete.",
-                  "image": "https://aiseoturbo.com/help/first-audit.jpg"
-                },
-                {
-                  "@type": "HowToStep",
-                  "name": "Review Results",
-                  "text": "Analyze your SEO score and prioritize recommended improvements.",
-                  "image": "https://aiseoturbo.com/help/audit-results.jpg"
-                }
-              ],
-              "author": {
-                "@type": "Organization",
-                "name": "AISEOTurbo",
-                "url": "https://aiseoturbo.com"
-              },
-              "publisher": {
-                "@type": "Organization",
-                "name": "AISEOTurbo",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://aiseoturbo.com/logo.png"
-                }
-              }
-            })
-          }}
-        />
-
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/help/category/getting-started" className="text-gray-400 hover:text-white transition-colors">
-                Getting Started
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">Quick start guide</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
+                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/category/getting-started' },
+                { name: 'Quick start guide', url: 'https://www.aiseoturbo.com/help/getting-started/quick-start' }
+              ]}
+              darkMode={true}
+            />
           </div>
         </section>
 

@@ -1,4 +1,6 @@
 import { MainLayout } from "@/components/layout/main-layout"
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
+import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
 import { generateSEOMeta } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
@@ -50,46 +52,6 @@ export const metadata: Metadata = {
     title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
     description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
   }
-}
-
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "TechFlow Solutions: Enterprise SEO Transformation - 520% Traffic Increase",
-  "description": "Comprehensive enterprise SEO case study showing how TechFlow Solutions achieved remarkable results with AI-powered optimization.",
-  "datePublished": "2024-10-14",
-  "dateModified": "2024-10-14",
-  "author": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.aiseoturbo.com/case-studies/techflow-solutions"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "Enterprise SEO"
-    },
-    {
-      "@type": "Thing",
-      "name": "SaaS Optimization"
-    },
-    {
-      "@type": "Thing",
-      "name": "Technical SEO"
-    }
-  ]
 }
 
 const challengePoints = [
@@ -172,30 +134,36 @@ const timeline = [
 ]
 
 export default function TechFlowSolutionsCaseStudy() {
+  const caseStudySchema = generateCaseStudySchema({
+    title: "TechFlow Solutions: Enterprise SEO Transformation - 520% Traffic Increase",
+    description: "Comprehensive enterprise SEO case study showing how TechFlow Solutions achieved remarkable results with AI-powered optimization.",
+    datePublished: "2024-10-14T10:00:00+00:00",
+    dateModified: "2025-10-17T10:00:00+00:00",
+    url: "https://www.aiseoturbo.com/case-studies/techflow-solutions",
+    companyName: "TechFlow Solutions",
+    industry: "Enterprise SaaS",
+    reviewRating: 5,
+    reviewAuthor: "Michael Rodriguez",
+    reviewText: "The depth of analysis and actionable insights from AI SEO Turbo are unparalleled. We've seen results that exceeded our wildest expectations. The enterprise-level technical SEO capabilities transformed our search presence completely."
+  });
+
   return (
     <MainLayout>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={caseStudySchema} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
-                Case Studies
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">TechFlow Solutions</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Case Studies', url: 'https://www.aiseoturbo.com/case-studies' },
+                { name: 'TechFlow Solutions', url: 'https://www.aiseoturbo.com/case-studies/techflow-solutions' }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
 
             {/* Hero Content */}
             <div className="text-center mb-12">

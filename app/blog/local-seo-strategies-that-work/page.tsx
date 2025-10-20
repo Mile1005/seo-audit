@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { generateSEOMeta } from '@/lib/seo'
 import BlogPostClient from '../[slug]/blog-post-client'
+import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
 
 export const metadata: Metadata = generateSEOMeta({
   title: 'Local SEO Strategies That Work | AI SEO Turbo Blog',
@@ -256,5 +257,23 @@ const post = {
 }
 
 export default function LocalSEOStrategiesPage() {
-  return <BlogPostClient post={post} />
+  const blogSchema = generateBlogPostingSchema({
+    title: 'Local SEO Strategies for Local Businesses',
+    description: 'Dominate local search results with proven Local SEO strategies. Master Google Business Profile, local citations, reviews, and location-based keywords to attract nearby customers.',
+    author: 'Jennifer Liu',
+    datePublished: '2025-10-17T13:00:00+00:00',
+    dateModified: '2025-10-17T13:00:00+00:00',
+    image: 'https://www.aiseoturbo.com/blog/local-seo.jpg',
+    url: 'https://www.aiseoturbo.com/blog/local-seo-strategies-that-work',
+    wordCount: 2650,
+    keywords: ['local SEO', 'Google Business Profile', 'local search', 'local citations', 'NAP consistency', 'Google Maps'],
+    category: 'Local SEO'
+  });
+
+  return (
+    <>
+      <StructuredData data={blogSchema} />
+      <BlogPostClient post={post} />
+    </>
+  );
 }

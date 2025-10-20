@@ -1,6 +1,7 @@
 "use client"
 
 import { MainLayout } from '../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, User, ArrowLeft, Tag, Share2, Bookmark, ThumbsUp, Eye } from 'lucide-react'
 import Link from 'next/link'
@@ -40,6 +41,16 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           <div className="absolute inset-0 bg-gradient-to-b from-blue-600/10 to-transparent h-96" />
 
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12">
+            {/* Breadcrumbs */}
+            <Breadcrumbs
+              items={[
+                { name: 'Blog', url: 'https://www.aiseoturbo.com/blog' },
+                { name: post.title, url: `https://www.aiseoturbo.com/blog/${post.slug}` }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
+
             {/* Back Button */}
             <Link href="/blog">
               <motion.button

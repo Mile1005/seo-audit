@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2, Search } from 'lucide-react'
 import { MainLayout } from '../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../components/navigation/breadcrumbs'
 import { ApiErrorBoundary } from '../../../components/ui/error-boundary'
 import { useFormSubmission } from '../../../hooks/use-api'
 import { api, AuditResult, ApiResponse } from '../../../lib/api-client'
@@ -236,6 +237,17 @@ export default function SEOAuditFeaturePage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-background overflow-x-hidden">
+        {/* Breadcrumbs */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
+              { name: 'SEO Audit', url: 'https://www.aiseoturbo.com/features/seo-audit' }
+            ]}
+            className="mb-4"
+          />
+        </div>
+
         {/* Hero Section */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 via-background to-muted/20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">

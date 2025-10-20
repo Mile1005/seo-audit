@@ -4,6 +4,7 @@ import { MainLayout } from '../../components/layout/main-layout'
 import { motion } from 'framer-motion'
 import { Calendar, Clock, User, ArrowRight, Search, Tag, TrendingUp, BookOpen, Star } from 'lucide-react'
 import Link from 'next/link'
+import { StructuredData, generateItemListSchema } from '../../components/seo/StructuredData'
 
 const blogPosts = [
   {
@@ -117,8 +118,20 @@ export default function BlogPage() {
   const featuredPost = blogPosts.find(post => post.featured)
   const regularPosts = blogPosts.filter(post => !post.featured)
 
+  // Generate ItemList schema for all blog posts
+  const itemListSchema = generateItemListSchema(
+    blogPosts.map(post => ({
+      name: post.title,
+      url: `https://www.aiseoturbo.com/blog/${post.slug}`,
+      description: post.excerpt,
+      image: `https://www.aiseoturbo.com${post.image}`,
+      datePublished: new Date(post.date).toISOString()
+    }))
+  )
+
   return (
     <MainLayout>
+      <StructuredData data={itemListSchema} />
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-x-hidden">
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">

@@ -36,9 +36,11 @@ playwright-report/
 # Performance reports and audits
 lighthouse*.json
 *-performance*.json
+mobile-lighthouse.json
 chromewebdata*.html
 *.report.html
-# Keep our LHCI configs versioned
+# LHCI cache/artifacts (keep configs)
+.lighthouseci/
 !lighthouserc.local.json
 !lighthouserc.prod.json
 

@@ -1,4 +1,6 @@
 import { MainLayout } from "@/components/layout/main-layout"
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
+import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
 import { generateSEOMeta } from "@/lib/seo"
 import { Metadata } from 'next'
 import Link from "next/link"
@@ -51,46 +53,6 @@ export const metadata: Metadata = {
     title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
     description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
   }
-}
-
-// Structured Data for SEO
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "StyleCraft Boutique: E-commerce SEO Success - 420% Conversion Increase",
-  "description": "Comprehensive e-commerce SEO case study showing how StyleCraft Boutique transformed their online retail performance with AI-powered optimization.",
-  "datePublished": "2024-10-14",
-  "dateModified": "2024-10-14",
-  "author": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "AI SEO Turbo",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "/images/logo.png"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.aiseoturbo.com/case-studies/stylecraft-boutique"
-  },
-  "about": [
-    {
-      "@type": "Thing",
-      "name": "E-commerce SEO"
-    },
-    {
-      "@type": "Thing",
-      "name": "Product Page Optimization"
-    },
-    {
-      "@type": "Thing",
-      "name": "Online Retail"
-    }
-  ]
 }
 
 const challengePoints = [
@@ -173,30 +135,36 @@ const timeline = [
 ]
 
 export default function StyleCraftBoutiqueCaseStudy() {
+  const caseStudySchema = generateCaseStudySchema({
+    title: "StyleCraft Boutique: E-commerce SEO Success - 420% Conversion Increase",
+    description: "Comprehensive e-commerce SEO case study showing how StyleCraft Boutique transformed their online retail performance with AI-powered optimization.",
+    datePublished: "2024-10-14T10:00:00+00:00",
+    dateModified: "2025-10-17T10:00:00+00:00",
+    url: "https://www.aiseoturbo.com/case-studies/stylecraft-boutique",
+    companyName: "StyleCraft Boutique",
+    industry: "E-commerce - Fashion Retail",
+    reviewRating: 5,
+    reviewAuthor: "Emma Thompson",
+    reviewText: "Our online sales have never been better. AI SEO Turbo helped us understand exactly what our customers were searching for. We went from being a local boutique to a digital retail leader, and our revenue reflects that transformation."
+  });
+
   return (
     <MainLayout>
-      {/* Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      <StructuredData data={caseStudySchema} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-b from-slate-900 to-slate-950">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm mb-8" aria-label="Breadcrumb">
-              <Link href="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
-                Case Studies
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">StyleCraft Boutique</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Case Studies', url: 'https://www.aiseoturbo.com/case-studies' },
+                { name: 'StyleCraft Boutique', url: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique' }
+              ]}
+              darkMode={true}
+              className="mb-8"
+            />
 
             {/* Hero Content */}
             <div className="text-center mb-12">

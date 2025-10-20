@@ -1,94 +1,51 @@
 "use client"
 
 import { MainLayout } from '../../../../components/layout/main-layout'
+import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
+import { StructuredData, generateHowToSchema } from '../../../../components/seo/StructuredData'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, Settings, AlertTriangle, Target, Monitor, Smartphone, Palette } from 'lucide-react'
 import Link from 'next/link'
 
 export default function DashboardSetupPage() {
+  const howToSchema = generateHowToSchema({
+    name: "How to Set Up Your AISEOTurbo Dashboard",
+    description: "Complete guide to customizing and optimizing your AISEOTurbo dashboard for maximum productivity and efficiency.",
+    totalTime: "PT3M", // 3 minutes
+    url: "https://www.aiseoturbo.com/help/getting-started/dashboard-setup",
+    datePublished: "2025-03-01T10:00:00+00:00",
+    steps: [
+      {
+        name: "Access Dashboard Settings",
+        text: "Navigate to your dashboard and click the settings icon in the top right corner."
+      },
+      {
+        name: "Customize Layout",
+        text: "Choose between grid, list, or card view for your projects and audit results."
+      },
+      {
+        name: "Set Up Notifications",
+        text: "Configure email and in-app notifications for audit completion and issue alerts."
+      }
+    ]
+  });
+
   return (
     <MainLayout>
+      <StructuredData data={howToSchema} />
       <div className="min-h-screen bg-slate-950">
         
-        {/* JSON-LD Schema for SEO */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "HowTo",
-              "name": "How to Set Up Your AISEOTurbo Dashboard",
-              "description": "Complete guide to customizing and optimizing your AISEOTurbo dashboard for maximum productivity and efficiency.",
-              "image": "https://aiseoturbo.com/help/dashboard-setup.jpg",
-              "totalTime": "PT3M",
-              "estimatedCost": {
-                "@type": "MonetaryAmount",
-                "currency": "USD",
-                "value": "0"
-              },
-              "supply": [
-                {
-                  "@type": "HowToSupply",
-                  "name": "AISEOTurbo Account"
-                }
-              ],
-              "tool": [
-                {
-                  "@type": "HowToTool",
-                  "name": "Web Browser"
-                }
-              ],
-              "step": [
-                {
-                  "@type": "HowToStep",
-                  "name": "Access Dashboard Settings",
-                  "text": "Navigate to your dashboard and click the settings icon in the top right corner.",
-                  "image": "https://aiseoturbo.com/help/dashboard-settings.jpg"
-                },
-                {
-                  "@type": "HowToStep", 
-                  "name": "Customize Layout",
-                  "text": "Choose between grid, list, or card view for your projects and audit results.",
-                  "image": "https://aiseoturbo.com/help/dashboard-layout.jpg"
-                },
-                {
-                  "@type": "HowToStep",
-                  "name": "Set Up Notifications",
-                  "text": "Configure email and in-app notifications for audit completion and issue alerts.",
-                  "image": "https://aiseoturbo.com/help/dashboard-notifications.jpg"
-                }
-              ],
-              "author": {
-                "@type": "Organization",
-                "name": "AISEOTurbo",
-                "url": "https://aiseoturbo.com"
-              },
-              "publisher": {
-                "@type": "Organization", 
-                "name": "AISEOTurbo",
-                "logo": {
-                  "@type": "ImageObject",
-                  "url": "https://aiseoturbo.com/logo.png"
-                }
-              }
-            })
-          }}
-        />
-
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
-              <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                Help Center
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <Link href="/help/category/getting-started" className="text-gray-400 hover:text-white transition-colors">
-                Getting Started
-              </Link>
-              <span className="text-gray-600" aria-hidden="true">/</span>
-              <span className="text-white">Setting up your dashboard</span>
-            </nav>
+            <Breadcrumbs
+              items={[
+                { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
+                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/category/getting-started' },
+                { name: 'Setting up your dashboard', url: 'https://www.aiseoturbo.com/help/getting-started/dashboard-setup' }
+              ]}
+              darkMode={true}
+            />
           </div>
         </section>
 
