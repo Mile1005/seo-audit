@@ -290,6 +290,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             `,
           }}
         />
+        {/* Google Tag Manager — placed as high in <head> as possible */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-K7SGKVC9');
+            `,
+          }}
+        />
+
         {/* Google tag (gtag.js) — loaded once globally */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
         {/* GA4 base config; pageviews are sent manually on route change */}
@@ -368,6 +381,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }} />
       </head>
   <body className={`${inter.className} font-inter dark`} style={{ backgroundColor: '#0b1220' }} suppressHydrationWarning>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-K7SGKVC9"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         {/* Skip links for keyboard navigation - visually hidden but focusable */}
         <a 
           href="#main-content" 
