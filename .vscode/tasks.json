@@ -34,6 +34,42 @@
 				"$tsc"
 			],
 			"group": "build"
+		},
+		{
+			"label": "Run typecheck",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"type-check"
+			],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run typecheck",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"type-check"
+			],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Run typecheck",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"type-check"
+			],
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
 		}
 	]
 }

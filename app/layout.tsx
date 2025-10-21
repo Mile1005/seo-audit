@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 import { AuthProvider } from "../components/auth/auth-provider";
 import { ThemeProvider } from "../components/ui/theme-provider";
 import dynamicImport from 'next/dynamic';
+import { ClientAnalytics } from "@/components/layout/client-analytics";
+import { ConsentBanner } from "@/components/privacy/consent-banner";
 
 // Lazy load Vercel monitoring scripts (not critical for page render)
 const Analytics = dynamicImport(() => import('@vercel/analytics/react').then(mod => ({ default: mod.Analytics })), { 
@@ -84,6 +86,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
+  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
   // Organization Schema - Company/Business Entity
   const organizationSchema = {
     "@context": "https://schema.org",
@@ -267,6 +271,40 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
+        {/* Consent Mode v2: initialize defaults BEFORE loading gtag.js */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);} 
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                functionality_storage: 'granted',
+                security_storage: 'granted'
+              });
+              // Optional tuning: allow URL passthrough and redact ads data until consent updates
+              // These are applied in the GA config below as well
+            `,
+          }}
+        />
+        {/* Google tag (gtag.js) — loaded once globally */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        {/* GA4 base config; pageviews are sent manually on route change */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}', { 
+                send_page_view: false,
+                url_passthrough: true,
+                ads_data_redaction: true
+              });
+            `,
+          }}
+        />
         
         {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -345,9 +383,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </ThemeProvider>
         </AuthProvider>
+        {/* Privacy: consent banner for GA Consent Mode v2 */}
+        <ConsentBanner />
         {/* Defer non-critical analytics scripts to reduce initial page requests */}
         <Analytics />
         <SpeedInsights />
+        {/* Manual SPA pageview tracking for GA4 */}
+        <ClientAnalytics />
       </body>
     </html>
   );

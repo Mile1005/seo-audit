@@ -17,10 +17,11 @@ interface PageviewData {
 // Queue for events before GA4 is ready
 let eventQueue: AnalyticsEvent[] = []
 let isInitialized = false
+let scriptInjected = false
 
 // Check if we're in browser and GA4 is available
 const isClient = typeof window !== 'undefined'
-const hasGtag = isClient && typeof window.gtag !== 'undefined'
+const hasGtag = () => isClient && typeof window.gtag !== 'undefined'
 
 /**
  * Initialize analytics tracking
@@ -28,30 +29,42 @@ const hasGtag = isClient && typeof window.gtag !== 'undefined'
 export function initAnalytics(measurementId: string) {
   if (!isClient) return
 
-  // Load GA4 script
-  const script = document.createElement('script')
-  script.async = true
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
-  document.head.appendChild(script)
+  // If gtag already exists (from head snippet), just mark initialized and flush queue
+  if (hasGtag()) {
+    isInitialized = true
+  } else if (!scriptInjected) {
+    // Load GA4 script if not already present
+    const existing = document.querySelector(`script[src^="https://www.googletagmanager.com/gtag/js?id="]`)
+    if (!existing) {
+      const script = document.createElement('script')
+      script.async = true
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
+      document.head.appendChild(script)
+      scriptInjected = true
+    }
 
-  // Initialize gtag
-  window.dataLayer = window.dataLayer || []
-  window.gtag = function gtag() {
-    window.dataLayer.push(arguments)
+    // Initialize gtag shim in case inline snippet isn't present
+    if (!hasGtag()) {
+      window.dataLayer = window.dataLayer || []
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments)
+      }
+      window.gtag('js', new Date())
+      window.gtag('config', measurementId, {
+        page_title: document.title,
+        page_location: window.location.href,
+      })
+    }
+    isInitialized = true
   }
 
-  window.gtag('js', new Date())
-  window.gtag('config', measurementId, {
-    page_title: document.title,
-    page_location: window.location.href,
-  })
-
   // Process queued events
-  eventQueue.forEach(event => {
-    window.gtag('event', event.name, event.parameters)
-  })
-  eventQueue = []
-  isInitialized = true
+  if (hasGtag()) {
+    eventQueue.forEach(event => {
+      window.gtag('event', event.name, event.parameters)
+    })
+    eventQueue = []
+  }
 }
 
 /**
@@ -66,8 +79,9 @@ export function pageview(data: PageviewData = {}) {
     page_path: data.page_path || window.location.pathname,
   }
 
-  if (hasGtag && isInitialized) {
-    window.gtag('config', process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!, pageData)
+  if (hasGtag()) {
+    const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-VL8V8L4G7X'
+    window.gtag('config', id, pageData)
   }
 }
 
@@ -88,7 +102,7 @@ export function track(eventName: string, parameters: Record<string, any> = {}) {
   }
 
   // Queue if not ready, otherwise send immediately
-  if (hasGtag && isInitialized) {
+  if (hasGtag()) {
     window.gtag('event', eventName, event.parameters)
   } else {
     eventQueue.push(event)

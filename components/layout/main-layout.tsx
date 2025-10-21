@@ -2,7 +2,6 @@ import React from "react"
 import { AdaptiveNavigation } from "@/components/navigation/adaptive-navigation"
 import Footer from "@/components/layout/Footer"
 import { VariantProvider } from '@/lib/ab'
-import { ClientAnalytics } from './client-analytics'
 
 export interface MainLayoutProps {
   children: React.ReactNode
@@ -32,8 +31,7 @@ export function MainLayout({ children, className = "" }: MainLayoutProps) {
         {/* Footer */}
         <Footer />
         
-        {/* Client-side Analytics */}
-        <ClientAnalytics />
+  {/* Client-side Analytics now mounted globally in app/layout.tsx */}
       </div>
     </VariantProvider>
   )
