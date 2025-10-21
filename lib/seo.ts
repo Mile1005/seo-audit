@@ -39,9 +39,9 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
   const canonical = seo.canonical || baseUrl
-  const ogImageUrl = seo.ogImage?.startsWith('http') 
-    ? seo.ogImage 
-    : `${baseUrl}${seo.ogImage}`
+  const ogImageUrl = seo.ogImage
+    ? (seo.ogImage.startsWith('http') ? seo.ogImage : `${baseUrl}${seo.ogImage}`)
+    : undefined
 
   return {
     title: seo.title,
@@ -54,14 +54,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
       description: seo.description,
       url: canonical,
       type: seo.ogType,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: seo.title,
-        }
-      ],
+      ...(ogImageUrl ? { images: [{ url: ogImageUrl, width: 1200, height: 630, alt: seo.title }] } : {}),
       siteName: 'AISEOTurbo',
     },
     
@@ -69,7 +62,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
       card: seo.twitterCard,
       title: seo.title,
       description: seo.description,
-      images: [ogImageUrl],
+      ...(ogImageUrl ? { images: [ogImageUrl] } : {}),
       creator: '@aiseoturbo',
       site: '@aiseoturbo',
     },
@@ -225,13 +218,15 @@ export const pageSEO = {
   about: {
     title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
     description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
-    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists']
+    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists'],
+    canonical: 'https://www.aiseoturbo.com/about'
   },
   
   contact: {
     title: 'Contact AI SEO Turbo - Expert SEO Support & Consultation',
     description: 'Get expert SEO help from certified specialists. Contact us for personalized consultation, technical support, and partnership inquiries. Join 10,000+ businesses achieving SEO success.',
-    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership']
+    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership'],
+    canonical: 'https://www.aiseoturbo.com/contact'
   },
 
   blog: {

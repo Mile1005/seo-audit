@@ -1,18 +1,12 @@
 import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { MainLayout } from '../../components/layout/main-layout'
 import { StructuredData, generateAboutPageSchema } from '../../components/seo/StructuredData'
 
 // Force dynamic rendering to fix Vercel lambda routing
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  title: 'About Us - SEO Experts & AI Innovation | AI SEO Turbo',
-  description: 'Learn about our mission to revolutionize SEO with AI technology. Meet the team committed to helping businesses succeed online with cutting-edge tools.',
-  keywords: ['about aiseoturbo', 'seo company', 'ai seo team', 'seo experts'],
-  alternates: {
-    canonical: 'https://www.aiseoturbo.com/about'
-  }
-}
+export const metadata: Metadata = generateSEOMeta(pageSEO.about)
 
 export default function AboutPage() {
   const aboutSchema = generateAboutPageSchema({

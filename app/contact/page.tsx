@@ -1,14 +1,8 @@
 import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { MainLayout } from '../../components/layout/main-layout'
 
-export const metadata: Metadata = {
-  title: 'Contact Us - Get SEO Help Today | AI SEO Turbo',
-  description: 'Get in touch with AISEOTurbo for expert SEO consultation and support. We are here to help optimize your website and boost your search rankings.',
-  keywords: ['contact aiseoturbo', 'seo consultation', 'seo support', 'seo experts contact'],
-  alternates: {
-    canonical: 'https://www.aiseoturbo.com/contact'
-  }
-}
+export const metadata: Metadata = generateSEOMeta(pageSEO.contact)
 
 export default function ContactPage() {
   return (
