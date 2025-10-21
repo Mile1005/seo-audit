@@ -26,6 +26,13 @@ const categoryArticles = [
     time: "6 min",
     description: "Improve audit speed, reduce lag, and optimize your experience.",
     icon: BookOpen
+  },
+  {
+    title: "Audit not completing",
+    href: "/help/troubleshooting/audit-issues",
+    time: "6 min",
+    description: "Fix stuck audits, timeouts, and common analysis failures.",
+    icon: BookOpen
   }
 ]
 

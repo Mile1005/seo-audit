@@ -83,6 +83,12 @@ export default function SEOAuditWalkthroughPage() {
                       Master our comprehensive SEO audit process. Learn how to analyze 200+ SEO factors, interpret results,
                       and implement actionable recommendations to improve your website's search rankings.
                     </p>
+                    <div className="mt-4 text-sm">
+                      <span className="text-gray-400">Having trouble with an audit? </span>
+                      <Link href="/help/troubleshooting/audit-issues" className="text-blue-400 hover:text-blue-300 underline">
+                        See troubleshooting: Audit not completing
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

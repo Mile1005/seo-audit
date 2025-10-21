@@ -89,7 +89,8 @@ const helpCategories = [
     articles: [
       { title: "Login and access problems", href: "/help/troubleshooting/login-issues", time: "6 min" },
       { title: "Data synchronization issues", href: "/help/troubleshooting/sync-issues", time: "5 min" },
-      { title: "Performance optimization", href: "/help/troubleshooting/performance", time: "6 min" }
+      { title: "Performance optimization", href: "/help/troubleshooting/performance", time: "6 min" },
+      { title: "Audit not completing", href: "/help/troubleshooting/audit-issues", time: "6 min" }
     ]
   },
   {
