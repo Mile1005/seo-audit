@@ -55,6 +55,15 @@ export function ConsentBanner() {
     }
   }, []);
 
+  // Allow other components to open the banner on demand
+  useEffect(() => {
+    function openHandler() {
+      setVisible(true);
+    }
+    window.addEventListener('open-consent-banner', openHandler as EventListener);
+    return () => window.removeEventListener('open-consent-banner', openHandler as EventListener);
+  }, []);
+
   // Re-apply consent after hydration if gtag appears later (e.g., network delay)
   useEffect(() => {
     if (choice === "accepted" || choice === "rejected") {

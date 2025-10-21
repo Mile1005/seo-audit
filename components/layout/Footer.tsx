@@ -10,6 +10,7 @@ import {
   Github, 
   Youtube
 } from "lucide-react"
+import { PrivacyPreferencesLink } from "@/components/privacy/privacy-preferences"
 
 const footerSections = [
   {
@@ -148,6 +149,7 @@ export default function Footer() {
               <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm py-2 px-1 min-h-[44px] min-w-[44px] flex items-center">
                 Terms of Service
               </Link>
+              <PrivacyPreferencesLink />
             </div>
           </div>
         </div>
