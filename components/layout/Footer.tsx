@@ -139,9 +139,14 @@ export default function Footer() {
         {/* Bottom Footer */}
         <div className="py-8 border-t border-slate-800">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-gray-400 text-sm">
-              Â© 2025 AISEOTurbo. All rights reserved.
-            </p>
+            <div className="flex flex-col items-center md:items-start">
+              <p className="text-gray-400 text-sm mb-2">
+                Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations from <span className="font-semibold">AI SEO Turbo</span> that drive real results.
+              </p>
+              <p className="text-gray-400 text-sm">
+                © 2025 AI SEO Turbo. All rights reserved.
+              </p>
+            </div>
             <div className="flex items-center space-x-6">
               <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm py-2 px-1 min-h-[44px] min-w-[44px] flex items-center">
                 Privacy Policy

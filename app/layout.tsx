@@ -189,10 +189,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   // SoftwareApplication Schema - The Product
   const softwareApplicationSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "@id": "https://www.aiseoturbo.com/#software",
-    "name": "AISEOTurbo Platform",
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://www.aiseoturbo.com/#software",
+  "name": "AI SEO Turbo",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web Browser",
     "url": "https://www.aiseoturbo.com",
@@ -247,11 +247,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   // WebSite Schema
   const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://www.aiseoturbo.com/#website",
-    "url": "https://www.aiseoturbo.com",
-    "name": "AISEOTurbo",
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.aiseoturbo.com/#website",
+  "url": "https://www.aiseoturbo.com",
+  "name": "AI SEO Turbo",
     "description": "AI-powered SEO audit platform for marketers",
     "publisher": {
       "@id": "https://www.aiseoturbo.com/#organization"
@@ -303,21 +303,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        {/* Google tag (gtag.js) — loaded once globally */}
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
-        {/* GA4 base config; pageviews are sent manually on route change */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              gtag('js', new Date());
-              gtag('config', '${GA_MEASUREMENT_ID}', { 
-                send_page_view: false,
-                url_passthrough: true,
-                ads_data_redaction: true
-              });
-            `,
-          }}
-        />
+        {/** GA4 gtag.js removed to avoid duplication; GA4 should be deployed via GTM */}
         
         {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
