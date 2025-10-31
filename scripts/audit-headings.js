@@ -30,15 +30,39 @@ const importCache = new Map();
  * Extract all h1-h6 tags from JSX/TSX content
  */
 function extractHeadings(content, filePath) {
+  // Match h1-h6 tags and motion.h1-h6 tags (handles multiline, attributes, etc.)
+  const headingRegex = /<motion\.h[1-6][\s\S]*?<\/motion\.h[1-6]>|<h[1-6][\s\S]*?<\/h[1-6]>/gi;
+  
   const headings = [];
-  
-  // Match h1-h6 tags (handles multiline, attributes, etc.)
-  const headingRegex = /<(h[1-6])(?:\s[^>]*)?>([^<]+)<\/\1>/gi;
-  
   let match;
   while ((match = headingRegex.exec(content)) !== null) {
-    const level = parseInt(match[1][1]);
-    const text = match[2].replace(/\n\s*/g, ' ').trim().substring(0, 50);
+    const fullMatch = match[0];
+    
+    // Determine tag type and level
+    let tagName, level;
+    if (fullMatch.includes('motion.')) {
+      const levelMatch = fullMatch.match(/motion\.h([1-6])/);
+      if (levelMatch) {
+        tagName = `motion.h${levelMatch[1]}`;
+        level = parseInt(levelMatch[1]);
+      } else {
+        continue;
+      }
+    } else {
+      const levelMatch = fullMatch.match(/<h([1-6])/);
+      if (levelMatch) {
+        tagName = `h${levelMatch[1]}`;
+        level = parseInt(levelMatch[1]);
+      } else {
+        continue;
+      }
+    }
+    
+    // Extract content between tags (remove the tags themselves)
+    let contentMatch = fullMatch.replace(/<[^>]+>/g, '').trim();
+    
+    // Clean up the content
+    const text = contentMatch.replace(/\n\s*/g, ' ').trim().substring(0, 50);
     
     // Calculate line number
     const lineNumber = content.substring(0, match.index).split('\n').length;
@@ -47,7 +71,7 @@ function extractHeadings(content, filePath) {
       level,
       text,
       lineNumber,
-      tag: match[1],
+      tag: tagName,
       file: filePath
     });
   }
