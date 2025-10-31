@@ -9,15 +9,16 @@ export async function POST(request: NextRequest) {
   let jwt: string | null = null
 
   try {
-    // Try to get JWT from form data first (some implementations send as form field)
-    const formData = await request.formData().catch(() => null)
-    if (formData) {
-      jwt = formData.get('jwt') as string
-    }
+    // Clone the request to avoid consuming the body stream
+    const clonedRequest = request.clone()
 
-    // If not in form data, try raw body
-    if (!jwt) {
-      jwt = await request.text()
+    // Try to get JWT from form data first
+    try {
+      const formData = await request.formData()
+      jwt = formData.get('jwt') as string
+    } catch {
+      // If form data fails, try raw body from cloned request
+      jwt = await clonedRequest.text()
     }
 
     if (!jwt) {
