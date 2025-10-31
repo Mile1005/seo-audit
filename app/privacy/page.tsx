@@ -49,9 +49,9 @@ export default function PrivacyPage() {
                 <Shield className="w-4 h-4 mr-2" />
                 Privacy & Security
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Privacy Policy</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">AI SEO Turbo Privacy Policy</h1>
               <p className="text-xl text-gray-300 mb-4">
-                Your privacy is important to us. This policy explains how we collect, use, and protect your information.
+                This Privacy Policy describes how AI SEO Turbo (“the tool”, “we”, “us”, or “our”) collects, uses, and protects your information when you use our website and services.
               </p>
               <p className="text-sm text-gray-400">Last updated: August 28, 2025</p>
             </motion.div>
