@@ -131,8 +131,8 @@ export default function PricingPage() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
-  // Generate Product schema for all pricing plans
-  const productSchema = generateMultiPlanProductSchema(
+  // Generate Product schema for all pricing plans (now returns array of individual Product schemas)
+  const productSchemas = generateMultiPlanProductSchema(
     pricingPlans.map(plan => ({
       name: `${plan.name} Plan`,
       price: String(plan.price.monthly),
@@ -561,8 +561,10 @@ export default function PricingPage() {
         </section>
       </div>
 
-      {/* Structured Data */}
-      <StructuredData data={productSchema} />
+      {/* Structured Data - Individual Product schemas for Google Merchant Center */}
+      {productSchemas.map((schema, index) => (
+        <StructuredData key={index} data={schema} />
+      ))}
       <StructuredData data={faqSchema} />
     </MainLayout>
   )

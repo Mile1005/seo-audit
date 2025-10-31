@@ -86,40 +86,82 @@ export function generateProductSchema(product: {
   };
 }
 
-// Multi-Plan Product Schema Generator for Pricing Page
+// Multi-Plan Product Schema Generator for Pricing Page (Google Merchant Center compliant)
 export function generateMultiPlanProductSchema(plans: Array<{
   name: string;
   price: string;
   currency: string;
   description: string;
 }>) {
-  return {
+  // For Google Merchant Center, we need individual Product schemas for each plan
+  return plans.map(plan => ({
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "AI SEO Turbo Platform",
-    "description": "AI-powered SEO audit and optimization platform for businesses",
+    "name": `AISEOTurbo ${plan.name} Plan`,
+    "description": plan.description,
+    "image": "https://www.aiseoturbo.com/logo.png", // Required: Product image
     "brand": {
       "@type": "Brand",
       "name": "AISEOTurbo"
     },
-    "offers": plans.map(plan => ({
+    "offers": {
       "@type": "Offer",
-      "name": plan.name,
       "price": plan.price,
       "priceCurrency": plan.currency,
       "availability": "https://schema.org/InStock",
       "url": "https://www.aiseoturbo.com/pricing",
       "priceValidUntil": "2026-12-31",
-      "description": plan.description
-    })),
+      "seller": {
+        "@type": "Organization",
+        "name": "AISEOTurbo"
+      },
+      // Required for digital products
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "US",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 14,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
+      },
+      // Required for digital products - indicates digital delivery
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": plan.currency
+        },
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "US"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 1,
+            "unitText": "Day"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitText": "Day"
+          }
+        }
+      }
+    },
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.8",
       "ratingCount": "1000",
       "bestRating": "5",
       "worstRating": "1"
-    }
-  };
+    },
+    "additionalType": "https://schema.org/DigitalProduct" // Indicates this is a digital product
+  }));
 }
 
 // Article Schema Generator for Blog Posts
