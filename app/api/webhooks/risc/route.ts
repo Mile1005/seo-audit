@@ -1,18 +1,45 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createRemoteJWKSet, jwtVerify } from 'jose'
+import { createRemoteJWKSet, jwtVerify, decodeJwt } from 'jose'
 import { prisma } from '@/lib/prisma'
 
 // Google RISC JWKS
 const jwks = createRemoteJWKSet(new URL('https://www.googleapis.com/oauth2/v3/certs'))
 
 export async function POST(request: NextRequest) {
+  let jwt: string | null = null
+
   try {
-    // Get JWT from request body
-    const jwt = await request.text()
+    // Try to get JWT from form data first (some implementations send as form field)
+    const formData = await request.formData().catch(() => null)
+    if (formData) {
+      jwt = formData.get('jwt') as string
+    }
+
+    // If not in form data, try raw body
+    if (!jwt) {
+      jwt = await request.text()
+    }
 
     if (!jwt) {
-      console.error('RISC Webhook: No JWT in request body')
-      return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+      console.error('RISC Webhook: No JWT found in request body or form data')
+      return NextResponse.json({ error: 'Invalid request - no JWT' }, { status: 400 })
+    }
+
+    console.log('RISC Webhook: Received JWT token (length:', jwt.length, ')')
+
+    // First, try to decode without verification to see the payload
+    try {
+      const decoded = decodeJwt(jwt)
+      console.log('RISC Webhook: Decoded JWT payload:', {
+        iss: decoded.iss,
+        aud: decoded.aud,
+        sub: decoded.sub,
+        events: decoded.events,
+        iat: decoded.iat,
+        exp: decoded.exp,
+      })
+    } catch (decodeError) {
+      console.error('RISC Webhook: Failed to decode JWT:', decodeError)
     }
 
     // Verify JWT
@@ -21,11 +48,13 @@ export async function POST(request: NextRequest) {
       audience: process.env.GOOGLE_CLIENT_ID!,
     })
 
-    console.log('RISC Webhook: Received valid JWT', {
+    console.log('RISC Webhook: Successfully verified JWT', {
       iss: payload.iss,
       aud: payload.aud,
       sub: payload.sub,
       events: payload.events,
+      iat: payload.iat,
+      exp: payload.exp,
     })
 
     // Process events asynchronously
@@ -37,8 +66,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ status: 'ok' })
 
   } catch (error) {
-    console.error('RISC Webhook: JWT verification failed', error)
-    return NextResponse.json({ error: 'Invalid JWT' }, { status: 400 })
+    console.error('RISC Webhook: JWT verification failed', {
+      error: error instanceof Error ? error.message : String(error),
+      code: error instanceof Error && 'code' in error ? error.code : 'unknown',
+      jwtLength: jwt?.length,
+      jwtPreview: jwt?.substring(0, 50) + '...',
+    })
+    return NextResponse.json({
+      error: 'Invalid JWT',
+      details: error instanceof Error ? error.message : String(error)
+    }, { status: 400 })
   }
 }
 
