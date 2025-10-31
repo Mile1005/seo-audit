@@ -22,6 +22,7 @@ let scriptInjected = false
 // Check if we're in browser and GA4 is available
 const isClient = typeof window !== 'undefined'
 const hasGtag = () => isClient && typeof window.gtag !== 'undefined'
+const hasDataLayer = () => isClient && Array.isArray((window as any).dataLayer)
 
 /**
  * Initialize analytics tracking
@@ -82,6 +83,8 @@ export function pageview(data: PageviewData = {}) {
   if (hasGtag()) {
     const id = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-VL8V8L4G7X'
     window.gtag('config', id, pageData)
+  } else if (hasDataLayer()) {
+    ;(window as any).dataLayer.push({ event: 'page_view', ...pageData })
   }
 }
 
@@ -104,6 +107,8 @@ export function track(eventName: string, parameters: Record<string, any> = {}) {
   // Queue if not ready, otherwise send immediately
   if (hasGtag()) {
     window.gtag('event', eventName, event.parameters)
+  } else if (hasDataLayer()) {
+    ;(window as any).dataLayer.push({ event: eventName, ...event.parameters })
   } else {
     eventQueue.push(event)
   }

@@ -136,11 +136,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 name: true,
                 email: true,
                 image: true,
+                status: true,
               }
             })
           })
           
           if (dbUser) {
+            // Check if user is suspended due to RISC events
+            if (dbUser.status !== 'ACTIVE') {
+              console.log(`Auth: User ${dbUser.email} is suspended, invalidating session`)
+              throw new Error('User account suspended')
+            }
+            
             session.user.id = dbUser.id
             session.user.name = dbUser.name
             session.user.image = dbUser.image
