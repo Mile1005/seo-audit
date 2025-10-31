@@ -26,6 +26,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       authorization: {
         params: {
+          // Start with minimal scopes for authentication
+          scope: "openid email profile",
           prompt: "consent",
           access_type: "offline",
           response_type: "code",
@@ -98,7 +100,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           const existingUser = await prisma.user.findUnique({
             where: { email: user.email! }
           })
-          
+
           if (!existingUser) {
             // Create user in database
             console.log(`Creating new user: ${user.email}`)
@@ -119,6 +121,34 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             })
           }
         })
+
+        // Check granted scopes for Google OAuth
+        if (account.scope) {
+          const grantedScopes = account.scope.split(' ')
+          console.log(`Google OAuth scopes granted: ${grantedScopes.join(', ')}`)
+
+          // Store scope information for future incremental auth
+          await safeDbOperation(async () => {
+            await prisma.account.upsert({
+              where: {
+                provider_providerAccountId: {
+                  provider: 'google',
+                  providerAccountId: account.providerAccountId
+                }
+              },
+              update: {
+                scope: account.scope
+              },
+              create: {
+                userId: '', // Will be set by NextAuth
+                provider: 'google',
+                providerAccountId: account.providerAccountId,
+                type: 'oauth',
+                scope: account.scope
+              }
+            })
+          })
+        }
       }
       return true
     },
