@@ -65,10 +65,8 @@ export function HeroSection() {
       data-testid="hero-section"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
-      {/* Main H1 - Visible for OAuth branding compliance */}
-      <h1 className="text-4xl md:text-5xl font-bold text-white mb-8 text-center">
-        AI SEO Turbo – Professional SEO Audits & Analysis Tool
-      </h1>
+      {/* Main H1 - visually hidden for SEO/OAuth compliance only */}
+      <h1 className="sr-only">AI SEO Turbo – Professional SEO Audits & Analysis Tool</h1>
       
       {/* Background Elements - Grid pattern renders immediately on all screens, animated orbs only on desktop and deferred */}
       <div className="absolute inset-0">
@@ -111,8 +109,9 @@ export function HeroSection() {
                 <Zap className="w-4 h-4 text-cyan-400" />
                 <span className="text-cyan-300">AI-Powered SEO Analysis</span>
               </motion.div>
-
-              <HeroHeadlineAB />
+              <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+                AI SEO Turbo: Professional SEO Audits Made Simple
+              </h2>
             </motion.div>
 
             {/* Subheadline */}
@@ -123,7 +122,7 @@ export function HeroSection() {
             >
               Get actionable insights that <span className="text-cyan-400 font-semibold">boost your rankings</span> and 
               <span className="text-cyan-400 font-semibold"> drive organic traffic</span>. 
-              Join 1,000+ marketers who trust our AI-powered audits to identify critical SEO issues in minutes.
+              Join 1,000+ marketers who trust <span className="font-semibold">AI SEO Turbo</span>'s audits to identify critical SEO issues in minutes.
             </motion.p>
 
             {/* CTA Buttons */}
