@@ -1,14 +1,14 @@
 {
   "totalPages": 354,
-  "avgScore": 75.64769975786928,
+  "avgScore": 74.99596448748984,
   "issues": {
-    "canonical": 293,
+    "metaDesc": 244,
+    "canonical": 311,
     "schema": 48,
-    "hreflang": 230,
-    "openGraph": 134,
+    "hreflang": 122,
+    "openGraph": 242,
     "title": 333,
-    "metaDesc": 212,
-    "keywords": 46,
+    "keywords": 45,
     "links": 6,
     "headings": 36
   }

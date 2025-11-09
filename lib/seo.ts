@@ -70,7 +70,26 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   const seo = { ...defaultSEO, ...config }
   
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
-  const canonical = seo.canonical || baseUrl
+  
+  // Generate canonical URL dynamically based on locale and path
+  let canonical: string
+  if (seo.locale && seo.path !== undefined) {
+    // Build canonical URL from locale and path
+    const pathSegment = seo.path.startsWith('/') ? seo.path.slice(1) : seo.path
+    if (seo.locale === 'en') {
+      // English (default locale) doesn't use locale prefix
+      canonical = pathSegment ? `${baseUrl}/${pathSegment}` : baseUrl
+    } else {
+      // Other locales use locale prefix
+      canonical = pathSegment ? `${baseUrl}/${seo.locale}/${pathSegment}` : `${baseUrl}/${seo.locale}`
+    }
+    // Remove trailing slash unless it's the root
+    canonical = canonical.replace(/\/$/, '') || baseUrl
+  } else {
+    // Fallback to config canonical or base URL
+    canonical = seo.canonical || baseUrl
+  }
+  
   const ogImageUrl = seo.ogImage
     ? (seo.ogImage.startsWith('http') ? seo.ogImage : `${baseUrl}${seo.ogImage}`)
     : undefined
