@@ -71,5 +71,26 @@
 			],
 			"group": "build"
 		}
+	,
+		{
+			"label": "Run i18n tests",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"test:i18n"
+			],
+			"group": "build",
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate i18n messages",
+			"type": "shell",
+			"command": "pnpm",
+			"args": [
+				"validate:i18n"
+			],
+			"group": "build",
+			"problemMatcher": []
+		}
 	]
 }

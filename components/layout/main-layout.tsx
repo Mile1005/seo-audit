@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react"
 import { AdaptiveNavigation } from "@/components/navigation/adaptive-navigation"
 import Footer from "@/components/layout/Footer"

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 const logos = [
   { name: 'Shopify Stores', width: '120px' },
@@ -28,6 +29,7 @@ const carouselStyle = `
 `
 
 export function TrustLogos() {
+  const t = useTranslations('home')
   // Duplicate logos for seamless loop
   const duplicatedLogos = [...logos, ...logos]
 
@@ -43,7 +45,7 @@ export function TrustLogos() {
           className="text-center mb-8"
         >
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-6">
-            Trusted by businesses worldwide
+            {t('trustedBy', { count: '1,000' }).replace('1,000+', '').trim()}
           </h2>
         </motion.div>
 

@@ -22,183 +22,185 @@ import {
   Globe
 } from "lucide-react";
 import { Button } from "../../ui/button";
+import { useTranslations } from "next-intl";
 
 export default function IndustrySpecialization() {
+  const t = useTranslations('featurePages.aiAssistant.industrySpecialization');
   const [selectedIndustry, setSelectedIndustry] = useState("ecommerce");
 
   const industries = [
     {
       id: "ecommerce",
-      name: "E-commerce",
+      name: t('industries.ecommerce.name'),
       icon: ShoppingCart,
-      description: "Online retail and marketplace optimization",
+      description: t('industries.ecommerce.description'),
       color: "blue",
-      clients: "2,500+",
-      avgImprovement: "+65%"
+      clients: t('industries.ecommerce.clients'),
+      avgImprovement: t('industries.ecommerce.avgImprovement')
     },
     {
       id: "saas",
-      name: "SaaS & Tech",
+      name: t('industries.saas.name'),
       icon: Building,
-      description: "Software and technology companies",
+      description: t('industries.saas.description'),
       color: "purple",
-      clients: "1,800+",
-      avgImprovement: "+58%"
+      clients: t('industries.saas.clients'),
+      avgImprovement: t('industries.saas.avgImprovement')
     },
     {
       id: "healthcare",
-      name: "Healthcare",
+      name: t('industries.healthcare.name'),
       icon: Heart,
-      description: "Medical practices and health services",
+      description: t('industries.healthcare.description'),
       color: "red",
-      clients: "1,200+",
-      avgImprovement: "+72%"
+      clients: t('industries.healthcare.clients'),
+      avgImprovement: t('industries.healthcare.avgImprovement')
     },
     {
       id: "education",
-      name: "Education",
+      name: t('industries.education.name'),
       icon: GraduationCap,
-      description: "Schools, universities, and online learning",
+      description: t('industries.education.description'),
       color: "green",
-      clients: "950+",
-      avgImprovement: "+48%"
+      clients: t('industries.education.clients'),
+      avgImprovement: t('industries.education.avgImprovement')
     },
     {
       id: "finance",
-      name: "Finance",
+      name: t('industries.finance.name'),
       icon: Briefcase,
-      description: "Financial services and fintech",
+      description: t('industries.finance.description'),
       color: "yellow",
-      clients: "750+",
-      avgImprovement: "+82%"
+      clients: t('industries.finance.clients'),
+      avgImprovement: t('industries.finance.avgImprovement')
     },
     {
       id: "automotive",
-      name: "Automotive",
+      name: t('industries.automotive.name'),
       icon: Car,
-      description: "Car dealerships and auto services",
+      description: t('industries.automotive.description'),
       color: "gray",
-      clients: "650+",
-      avgImprovement: "+55%"
+      clients: t('industries.automotive.clients'),
+      avgImprovement: t('industries.automotive.avgImprovement')
     }
   ];
 
   const industrySpecializations = {
     ecommerce: {
       challenges: [
-        "Product page optimization for thousands of SKUs",
-        "Category page structure and internal linking",
-        "Shopping intent keyword targeting",
-        "Product schema markup implementation",
-        "Site speed optimization for image-heavy pages"
+        t('specializations.ecommerce.challenges.challenge1'),
+        t('specializations.ecommerce.challenges.challenge2'),
+        t('specializations.ecommerce.challenges.challenge3'),
+        t('specializations.ecommerce.challenges.challenge4'),
+        t('specializations.ecommerce.challenges.challenge5')
       ],
       solutions: [
-        "Automated product description optimization",
-        "Dynamic category page SEO templates",
-        "Commercial keyword research and mapping",
-        "Product rich snippets implementation",
-        "Image optimization and lazy loading"
+        t('specializations.ecommerce.solutions.solution1'),
+        t('specializations.ecommerce.solutions.solution2'),
+        t('specializations.ecommerce.solutions.solution3'),
+        t('specializations.ecommerce.solutions.solution4'),
+        t('specializations.ecommerce.solutions.solution5')
       ],
       keyMetrics: [
-        { label: "Product Pages Optimized", value: "2.3M+", description: "Across all clients" },
-        { label: "Average Conversion Lift", value: "+34%", description: "From SEO traffic" },
-        { label: "Page Speed Improvement", value: "+2.8s", description: "Average load time reduction" },
-        { label: "Organic Revenue Growth", value: "+127%", description: "Year-over-year average" }
+        { label: t('specializations.ecommerce.keyMetrics.metric1.label'), value: t('specializations.ecommerce.keyMetrics.metric1.value'), description: t('specializations.ecommerce.keyMetrics.metric1.description') },
+        { label: t('specializations.ecommerce.keyMetrics.metric2.label'), value: t('specializations.ecommerce.keyMetrics.metric2.value'), description: t('specializations.ecommerce.keyMetrics.metric2.description') },
+        { label: t('specializations.ecommerce.keyMetrics.metric3.label'), value: t('specializations.ecommerce.keyMetrics.metric3.value'), description: t('specializations.ecommerce.keyMetrics.metric3.description') },
+        { label: t('specializations.ecommerce.keyMetrics.metric4.label'), value: t('specializations.ecommerce.keyMetrics.metric4.value'), description: t('specializations.ecommerce.keyMetrics.metric4.description') }
       ],
       caseStudy: {
-        client: "Fashion Retailer",
-        challenge: "10,000+ product pages with poor search visibility",
-        solution: "AI-powered product page optimization and schema implementation",
+        client: t('specializations.ecommerce.caseStudy.client'),
+        challenge: t('specializations.ecommerce.caseStudy.challenge'),
+        solution: t('specializations.ecommerce.caseStudy.solution'),
         results: [
-          "185% increase in organic traffic",
-          "92% of products now appear in rich snippets",
-          "67% improvement in conversion rate from SEO traffic"
+          t('specializations.ecommerce.caseStudy.result1'),
+          t('specializations.ecommerce.caseStudy.result2'),
+          t('specializations.ecommerce.caseStudy.result3')
         ]
       },
       recommendations: [
-        "Implement product schema markup for rich snippets",
-        "Optimize category pages for broad commercial keywords",
-        "Create buying guides and comparison content",
-        "Improve site architecture for better crawling",
-        "Focus on mobile-first shopping experience"
+        t('specializations.ecommerce.recommendations.recommendation1'),
+        t('specializations.ecommerce.recommendations.recommendation2'),
+        t('specializations.ecommerce.recommendations.recommendation3'),
+        t('specializations.ecommerce.recommendations.recommendation4'),
+        t('specializations.ecommerce.recommendations.recommendation5')
       ]
     },
     saas: {
       challenges: [
-        "Complex technical product explanations for search",
-        "Long sales cycles requiring nurture content",
-        "High competition for commercial keywords",
-        "Developer and business decision-maker targeting",
-        "Feature-based vs benefit-based content strategy"
+        t('specializations.saas.challenges.challenge1'),
+        t('specializations.saas.challenges.challenge2'),
+        t('specializations.saas.challenges.challenge3'),
+        t('specializations.saas.challenges.challenge4'),
+        t('specializations.saas.challenges.challenge5')
       ],
       solutions: [
-        "Technical content that ranks and converts",
-        "Multi-stage funnel content optimization",
-        "Long-tail keyword strategy for niche features",
-        "Dual-audience content architecture",
-        "Benefit-driven landing page optimization"
+        t('specializations.saas.solutions.solution1'),
+        t('specializations.saas.solutions.solution2'),
+        t('specializations.saas.solutions.solution3'),
+        t('specializations.saas.solutions.solution4'),
+        t('specializations.saas.solutions.solution5')
       ],
       keyMetrics: [
-        { label: "SaaS Clients Served", value: "1,800+", description: "From startups to enterprise" },
-        { label: "Average MRR Growth", value: "+156%", description: "From organic channels" },
-        { label: "Lead Quality Score", value: "8.7/10", description: "SEO vs other channels" },
-        { label: "Free Trial Conversion", value: "+43%", description: "From organic traffic" }
+        { label: t('specializations.saas.keyMetrics.metric1.label'), value: t('specializations.saas.keyMetrics.metric1.value'), description: t('specializations.saas.keyMetrics.metric1.description') },
+        { label: t('specializations.saas.keyMetrics.metric2.label'), value: t('specializations.saas.keyMetrics.metric2.value'), description: t('specializations.saas.keyMetrics.metric2.description') },
+        { label: t('specializations.saas.keyMetrics.metric3.label'), value: t('specializations.saas.keyMetrics.metric3.value'), description: t('specializations.saas.keyMetrics.metric3.description') },
+        { label: t('specializations.saas.keyMetrics.metric4.label'), value: t('specializations.saas.keyMetrics.metric4.value'), description: t('specializations.saas.keyMetrics.metric4.description') }
       ],
       caseStudy: {
-        client: "Project Management SaaS",
-        challenge: "Low organic visibility for competitive keywords",
-        solution: "Comprehensive content strategy targeting the full customer journey",
+        client: t('specializations.saas.caseStudy.client'),
+        challenge: t('specializations.saas.caseStudy.challenge'),
+        solution: t('specializations.saas.caseStudy.solution'),
         results: [
-          "312% increase in organic leads",
-          "89% improvement in keyword rankings",
-          "156% growth in trial-to-paid conversions"
+          t('specializations.saas.caseStudy.result1'),
+          t('specializations.saas.caseStudy.result2'),
+          t('specializations.saas.caseStudy.result3')
         ]
       },
       recommendations: [
-        "Create in-depth feature comparison content",
-        "Develop use case and industry-specific landing pages",
-        "Build comprehensive knowledge base for long-tail traffic",
-        "Implement software schema for better categorization",
-        "Focus on integration and API documentation SEO"
+        t('specializations.saas.recommendations.recommendation1'),
+        t('specializations.saas.recommendations.recommendation2'),
+        t('specializations.saas.recommendations.recommendation3'),
+        t('specializations.saas.recommendations.recommendation4'),
+        t('specializations.saas.recommendations.recommendation5')
       ]
     },
     healthcare: {
       challenges: [
-        "YMYL (Your Money Your Life) content compliance",
-        "Medical accuracy and expertise requirements",
-        "Local SEO for multiple practice locations",
-        "Patient privacy and HIPAA considerations",
-        "Trust signals and authority building"
+        t('specializations.healthcare.challenges.challenge1'),
+        t('specializations.healthcare.challenges.challenge2'),
+        t('specializations.healthcare.challenges.challenge3'),
+        t('specializations.healthcare.challenges.challenge4'),
+        t('specializations.healthcare.challenges.challenge5')
       ],
       solutions: [
-        "YMYL-compliant content optimization",
-        "Medical expert content review process",
-        "Multi-location SEO strategy",
-        "Privacy-first website optimization",
-        "Authority and trust signal implementation"
+        t('specializations.healthcare.solutions.solution1'),
+        t('specializations.healthcare.solutions.solution2'),
+        t('specializations.healthcare.solutions.solution3'),
+        t('specializations.healthcare.solutions.solution4'),
+        t('specializations.healthcare.solutions.solution5')
       ],
       keyMetrics: [
-        { label: "Healthcare Practices", value: "1,200+", description: "Successfully optimized" },
-        { label: "Patient Appointments", value: "+89%", description: "From organic search" },
-        { label: "Local Pack Rankings", value: "94%", description: "Top 3 position rate" },
-        { label: "Trust Score Improvement", value: "+67%", description: "E-A-T signals" }
+        { label: t('specializations.healthcare.keyMetrics.metric1.label'), value: t('specializations.healthcare.keyMetrics.metric1.value'), description: t('specializations.healthcare.keyMetrics.metric1.description') },
+        { label: t('specializations.healthcare.keyMetrics.metric2.label'), value: t('specializations.healthcare.keyMetrics.metric2.value'), description: t('specializations.healthcare.keyMetrics.metric2.description') },
+        { label: t('specializations.healthcare.keyMetrics.metric3.label'), value: t('specializations.healthcare.keyMetrics.metric3.value'), description: t('specializations.healthcare.keyMetrics.metric3.description') },
+        { label: t('specializations.healthcare.keyMetrics.metric4.label'), value: t('specializations.healthcare.keyMetrics.metric4.value'), description: t('specializations.healthcare.keyMetrics.metric4.description') }
       ],
       caseStudy: {
-        client: "Multi-Location Dental Practice",
-        challenge: "Poor local visibility across 15 locations",
-        solution: "Comprehensive local SEO strategy with location-specific optimization",
+        client: t('specializations.healthcare.caseStudy.client'),
+        challenge: t('specializations.healthcare.caseStudy.challenge'),
+        solution: t('specializations.healthcare.caseStudy.solution'),
         results: [
-          "278% increase in appointment bookings",
-          "92% of locations ranking in local pack",
-          "145% improvement in online reviews"
+          t('specializations.healthcare.caseStudy.result1'),
+          t('specializations.healthcare.caseStudy.result2'),
+          t('specializations.healthcare.caseStudy.result3')
         ]
       },
       recommendations: [
-        "Implement comprehensive local SEO for each location",
-        "Create condition-specific landing pages with expert content",
-        "Build strong review and reputation management system",
-        "Focus on mobile experience for local searches",
-        "Develop patient education content hub"
+        t('specializations.healthcare.recommendations.recommendation1'),
+        t('specializations.healthcare.recommendations.recommendation2'),
+        t('specializations.healthcare.recommendations.recommendation3'),
+        t('specializations.healthcare.recommendations.recommendation4'),
+        t('specializations.healthcare.recommendations.recommendation5')
       ]
     }
   };
@@ -229,11 +231,10 @@ export default function IndustrySpecialization() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Industry-Specific SEO Expertise
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Our AI understands the unique challenges and opportunities in your industry, 
-            providing specialized recommendations that drive results.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -270,10 +271,10 @@ export default function IndustrySpecialization() {
                 </p>
                 <div className="space-y-1">
                   <div className={`text-xs ${isActive ? "text-white/90" : "text-muted-foreground"}`}>
-                    {industry.clients} clients
+                    {industry.clients} {t('labels.clients')}
                   </div>
                   <div className={`text-xs font-medium ${isActive ? "text-white" : "text-green-600"}`}>
-                    {industry.avgImprovement} avg growth
+                    {industry.avgImprovement} {t('labels.avgGrowth')}
                   </div>
                 </div>
               </motion.button>
@@ -295,7 +296,7 @@ export default function IndustrySpecialization() {
               <div className="bg-card rounded-xl border p-6">
                 <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <Target className="w-5 h-5 mr-2 text-red-500" />
-                  Common Challenges
+                  {t('sections.commonChallenges')}
                 </h3>
                 <ul className="space-y-3">
                   {currentIndustry.challenges.map((challenge, index) => (
@@ -316,7 +317,7 @@ export default function IndustrySpecialization() {
               <div className="bg-card rounded-xl border p-6">
                 <h3 className="text-xl font-semibold text-foreground mb-4 flex items-center">
                   <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
-                  Our Solutions
+                  {t('sections.ourSolutions')}
                 </h3>
                 <ul className="space-y-3">
                   {currentIndustry.solutions.map((solution, index) => (
@@ -339,7 +340,7 @@ export default function IndustrySpecialization() {
             <div className="bg-card rounded-xl border p-6">
               <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center">
                 <BarChart3 className="w-5 h-5 mr-2 text-blue-500" />
-                Industry Performance Metrics
+                {t('sections.performanceMetrics')}
               </h3>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 {currentIndustry.keyMetrics.map((metric, index) => (
@@ -363,22 +364,22 @@ export default function IndustrySpecialization() {
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <h3 className="text-xl font-semibold text-foreground mb-4">
-                    Success Story: {currentIndustry.caseStudy.client}
+                    {t('caseStudy.successStory')}: {currentIndustry.caseStudy.client}
                   </h3>
                   <div className="space-y-4">
                     <div>
-                      <h4 className="font-medium text-foreground mb-2">Challenge:</h4>
+                      <h4 className="font-medium text-foreground mb-2">{t('caseStudy.challenge')}:</h4>
                       <p className="text-muted-foreground">{currentIndustry.caseStudy.challenge}</p>
                     </div>
                     <div>
-                      <h4 className="font-medium text-foreground mb-2">Solution:</h4>
+                      <h4 className="font-medium text-foreground mb-2">{t('caseStudy.solution')}:</h4>
                       <p className="text-muted-foreground">{currentIndustry.caseStudy.solution}</p>
                     </div>
                   </div>
                 </div>
                 
                 <div>
-                  <h4 className="font-medium text-foreground mb-4">Results:</h4>
+                  <h4 className="font-medium text-foreground mb-4">{t('caseStudy.results')}:</h4>
                   <div className="space-y-3">
                     {currentIndustry.caseStudy.results.map((result, index) => (
                       <motion.div
@@ -401,7 +402,7 @@ export default function IndustrySpecialization() {
             <div className="bg-card rounded-xl border p-6">
               <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center">
                 <Target className="w-5 h-5 mr-2 text-purple-500" />
-                Key Recommendations for Your Industry
+                {t('sections.keyRecommendations')}
               </h3>
               <div className="grid lg:grid-cols-2 gap-4">
                 {currentIndustry.recommendations.map((recommendation, index) => (
@@ -431,20 +432,19 @@ export default function IndustrySpecialization() {
         >
           <div className="bg-card border rounded-xl p-8">
             <h3 className="text-2xl font-bold text-foreground mb-4">
-              Get Industry-Specific Recommendations
+              {t('cta.title')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Our AI has been trained on successful strategies from thousands of companies 
-              in your industry. Get personalized recommendations that work.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                 <Users className="w-5 h-5 mr-2" />
-                Start Industry Analysis
+                {t('cta.primaryButton')}
               </Button>
               <Button variant="outline" size="lg">
                 <Globe className="w-5 h-5 mr-2" />
-                View All Industries
+                {t('cta.secondaryButton')}
               </Button>
             </div>
           </div>

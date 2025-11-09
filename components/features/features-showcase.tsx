@@ -5,8 +5,11 @@ import { motion } from "framer-motion"
 import { FeatureCard } from "./feature-card"
 import { features } from "../../data/features"
 import { handleCTAClick } from "@/lib/cta-utils"
+import { useTranslations } from 'next-intl'
 
 export function FeaturesShowcase() {
+  const t = useTranslations('home.features')
+
   return (
     <section className="py-20 bg-gradient-to-b from-slate-950 to-slate-900 relative overflow-hidden">
       {/* Background Elements */}
@@ -36,24 +39,23 @@ export function FeaturesShowcase() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-full px-4 py-2 text-sm mb-6"
           >
-            <span className="text-cyan-300">✨ Why Choose AI SEO Turbo</span>
+            <span className="text-cyan-300">✨ {t('badge')}</span>
           </motion.div>
 
           {/* Headline */}
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              SEO Audits That Actually
+              {t('title1')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-              Drive Results
+              {t('title2')}
             </span>
           </h2>
 
           {/* Subheadline */}
           <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            Stop wasting time on generic SEO tools. Get AI-powered insights that identify 
-            real opportunities and provide actionable steps to boost your organic traffic.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -78,10 +80,10 @@ export function FeaturesShowcase() {
         >
           <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Ready to boost your SEO?
+              {t('bottomCta.title')}
             </h3>
             <p className="text-gray-300 mb-6">
-              Join 1,000+ marketers who trust our AI-powered audits to identify critical issues and opportunities.
+              {t('bottomCta.subtitle')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -96,7 +98,7 @@ export function FeaturesShowcase() {
                   handleCTAClick('START_AUDIT', 'Start Your Free Audit', 'features-showcase')
                 }}
               >
-                Start Your Free Audit
+                {t('cta')}
               </motion.a>
               
               <motion.a
@@ -110,7 +112,7 @@ export function FeaturesShowcase() {
                   handleCTAClick('/demo', 'View Sample Report', 'features-showcase')
                 }}
               >
-                View Sample Report
+                {t('bottomCta.viewSampleReport')}
               </motion.a>
             </div>
           </div>

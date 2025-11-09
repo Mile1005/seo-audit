@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   Calendar, 
   Clock, 
@@ -21,27 +22,29 @@ import {
 } from "lucide-react";
 
 export default function MonitoringFeatures() {
+  const t = useTranslations('featurePages.siteCrawler.monitoring');
+
   const monitoringPlans = [
     {
-      name: "Daily Monitor",
-      frequency: "Every 24 hours",
-      features: ["Core pages check", "Basic SEO monitoring", "Error alerts"],
+      name: t('dailyMonitor'),
+      frequency: t('dailyFrequency'),
+      features: [t('dailyFeature1'), t('dailyFeature2'), t('dailyFeature3')],
       icon: Calendar,
       color: "from-blue-500 to-blue-600",
       popular: false
     },
     {
-      name: "Smart Monitor",
-      frequency: "Adaptive scheduling",
-      features: ["Full site analysis", "Change detection", "Performance tracking", "Custom alerts"],
+      name: t('smartMonitor'),
+      frequency: t('smartFrequency'),
+      features: [t('smartFeature1'), t('smartFeature2'), t('smartFeature3'), t('smartFeature4')],
       icon: Target,
       color: "from-purple-500 to-purple-600",
       popular: true
     },
     {
-      name: "Real-time Monitor",
-      frequency: "Continuous",
-      features: ["Live monitoring", "Instant alerts", "Priority page tracking", "Emergency notifications"],
+      name: t('realtimeMonitor'),
+      frequency: t('realtimeFrequency'),
+      features: [t('realtimeFeature1'), t('realtimeFeature2'), t('realtimeFeature3'), t('realtimeFeature4')],
       icon: Shield,
       color: "from-green-500 to-green-600",
       popular: false
@@ -49,19 +52,19 @@ export default function MonitoringFeatures() {
   ];
 
   const alertTypes = [
-    { type: "New 404 Errors", count: 3, severity: "high", icon: XCircle, color: "text-red-500" },
-    { type: "Missing Meta Tags", count: 12, severity: "medium", icon: AlertTriangle, color: "text-yellow-500" },
-    { type: "Slow Pages", count: 5, severity: "medium", icon: Clock, color: "text-orange-500" },
-    { type: "Broken Links", count: 8, severity: "high", icon: XCircle, color: "text-red-500" },
-    { type: "Crawl Errors", count: 2, severity: "low", icon: AlertTriangle, color: "text-gray-500" }
+    { type: t('new404Errors'), count: 3, severity: "high", icon: XCircle, color: "text-red-500" },
+    { type: t('missingMetaTags'), count: 12, severity: "medium", icon: AlertTriangle, color: "text-yellow-500" },
+    { type: t('slowPages'), count: 5, severity: "medium", icon: Clock, color: "text-orange-500" },
+    { type: t('brokenLinks'), count: 8, severity: "high", icon: XCircle, color: "text-red-500" },
+    { type: t('crawlErrors'), count: 2, severity: "low", icon: AlertTriangle, color: "text-gray-500" }
   ];
 
   const crawlHistory = [
-    { date: "Today", status: "completed", pages: 2847, issues: 28, duration: "2h 34m" },
-    { date: "Yesterday", status: "completed", pages: 2845, issues: 31, duration: "2h 41m" },
-    { date: "2 days ago", status: "completed", pages: 2834, issues: 35, duration: "2h 28m" },
-    { date: "3 days ago", status: "failed", pages: 1205, issues: 18, duration: "1h 12m" },
-    { date: "4 days ago", status: "completed", pages: 2821, issues: 29, duration: "2h 45m" }
+    { date: t('today'), status: t('completed'), pages: 2847, issues: 28, duration: "2h 34m" },
+    { date: t('yesterday'), status: t('completed'), pages: 2845, issues: 31, duration: "2h 41m" },
+    { date: "2 " + t('daysAgo'), status: t('completed'), pages: 2834, issues: 35, duration: "2h 28m" },
+    { date: "3 " + t('daysAgo'), status: t('failed'), pages: 1205, issues: 18, duration: "1h 12m" },
+    { date: "4 " + t('daysAgo'), status: t('completed'), pages: 2821, issues: 29, duration: "2h 45m" }
   ];
 
   return (
@@ -76,10 +79,10 @@ export default function MonitoringFeatures() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Automated Monitoring & Alerts
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Stay ahead of SEO issues with intelligent scheduling, real-time alerts, and comprehensive change tracking
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -107,7 +110,7 @@ export default function MonitoringFeatures() {
                 {plan.popular && (
                   <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-medium">
-                      Most Popular
+                      {t('mostPopular')}
                     </span>
                   </div>
                 )}
@@ -150,14 +153,14 @@ export default function MonitoringFeatures() {
           {/* Alert Center */}
           <div className="bg-card rounded-2xl p-8 border">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-foreground">Recent Alerts</h3>
+              <h3 className="text-xl font-bold text-foreground">{t('recentAlerts')}</h3>
               <motion.div
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="flex items-center"
               >
                 <Bell className="w-5 h-5 text-primary mr-2" />
-                <span className="text-sm text-primary font-medium">5 New</span>
+                <span className="text-sm text-primary font-medium">5 {t('newAlerts')}</span>
               </motion.div>
             </div>
             
@@ -177,12 +180,12 @@ export default function MonitoringFeatures() {
                       <Icon className={`w-5 h-5 ${alert.color} mr-3`} />
                       <div>
                         <div className="font-medium text-foreground">{alert.type}</div>
-                        <div className="text-sm text-muted-foreground capitalize">{alert.severity} priority</div>
+                        <div className="text-sm text-muted-foreground capitalize">{alert.severity} {t('priority')}</div>
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="text-lg font-bold text-foreground">{alert.count}</div>
-                      <div className="text-xs text-muted-foreground">issues</div>
+                      <div className="text-xs text-muted-foreground">{t('issues')}</div>
                     </div>
                   </motion.div>
                 );
@@ -193,10 +196,10 @@ export default function MonitoringFeatures() {
           {/* Crawl History */}
           <div className="bg-card rounded-2xl p-8 border">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-foreground">Crawl History</h3>
+              <h3 className="text-xl font-bold text-foreground">{t('crawlHistory')}</h3>
               <div className="flex items-center space-x-2">
                 <PlayCircle className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-muted-foreground">Auto-scheduled</span>
+                <span className="text-sm text-muted-foreground">{t('autoScheduled')}</span>
               </div>
             </div>
             
@@ -221,8 +224,8 @@ export default function MonitoringFeatures() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm font-medium text-foreground">{crawl.pages} pages</div>
-                    <div className="text-sm text-muted-foreground">{crawl.issues} issues</div>
+                    <div className="text-sm font-medium text-foreground">{crawl.pages} {t('pages')}</div>
+                    <div className="text-sm text-muted-foreground">{crawl.issues} {t('issues')}</div>
                   </div>
                 </motion.div>
               ))}
@@ -241,49 +244,49 @@ export default function MonitoringFeatures() {
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Smart Notifications
+                {t('smartNotifications')}
               </h3>
               <p className="text-muted-foreground mb-6">
-                Get notified instantly when critical SEO issues are detected across your website.
+                {t('smartNotifDesc')}
               </p>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center p-4 bg-card rounded-lg border">
                   <Mail className="w-6 h-6 text-blue-500 mr-3" />
                   <div>
-                    <div className="font-medium text-foreground">Email Alerts</div>
-                    <div className="text-sm text-muted-foreground">Instant & Daily summaries</div>
+                    <div className="font-medium text-foreground">{t('emailAlerts')}</div>
+                    <div className="text-sm text-muted-foreground">{t('emailDesc')}</div>
                   </div>
                 </div>
                 
                 <div className="flex items-center p-4 bg-card rounded-lg border">
                   <Smartphone className="w-6 h-6 text-green-500 mr-3" />
                   <div>
-                    <div className="font-medium text-foreground">Mobile Push</div>
-                    <div className="text-sm text-muted-foreground">Critical issues only</div>
+                    <div className="font-medium text-foreground">{t('mobilePush')}</div>
+                    <div className="text-sm text-muted-foreground">{t('mobileDesc')}</div>
                   </div>
                 </div>
                 
                 <div className="flex items-center p-4 bg-card rounded-lg border">
                   <Bell className="w-6 h-6 text-purple-500 mr-3" />
                   <div>
-                    <div className="font-medium text-foreground">In-App Alerts</div>
-                    <div className="text-sm text-muted-foreground">Real-time dashboard</div>
+                    <div className="font-medium text-foreground">{t('inAppAlerts')}</div>
+                    <div className="text-sm text-muted-foreground">{t('inAppDesc')}</div>
                   </div>
                 </div>
                 
                 <div className="flex items-center p-4 bg-card rounded-lg border">
                   <Settings className="w-6 h-6 text-orange-500 mr-3" />
                   <div>
-                    <div className="font-medium text-foreground">Custom Rules</div>
-                    <div className="text-sm text-muted-foreground">Tailored thresholds</div>
+                    <div className="font-medium text-foreground">{t('customRules')}</div>
+                    <div className="text-sm text-muted-foreground">{t('customDesc')}</div>
                   </div>
                 </div>
               </div>
             </div>
             
             <div className="bg-card rounded-xl p-6 border">
-              <h4 className="text-lg font-semibold text-foreground mb-4">Performance Trends</h4>
+              <h4 className="text-lg font-semibold text-foreground mb-4">{t('performanceTrends')}</h4>
               
               {/* Trend Chart Placeholder */}
               <div className="relative h-40 bg-muted/30 rounded-lg mb-4 overflow-hidden">
@@ -307,11 +310,11 @@ export default function MonitoringFeatures() {
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
                   <div className="text-2xl font-bold text-green-600">+12%</div>
-                  <div className="text-xs text-muted-foreground">SEO Score</div>
+                  <div className="text-xs text-muted-foreground">{t('seoScore')}</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-blue-600">-8%</div>
-                  <div className="text-xs text-muted-foreground">Issues Found</div>
+                  <div className="text-xs text-muted-foreground">{t('issuesFound')}</div>
                 </div>
               </div>
             </div>

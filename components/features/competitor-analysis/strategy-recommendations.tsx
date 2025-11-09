@@ -22,157 +22,159 @@ import {
   Play
 } from "lucide-react";
 import { Button } from "../../ui/button";
+import { useTranslations } from "next-intl";
 
 export default function StrategyRecommendations() {
+  const t = useTranslations('featurePages.competitorAnalysis.strategyRecommendations');
   const [selectedPriority, setSelectedPriority] = useState("all");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const priorities = [
-    { id: "all", label: "All Recommendations", count: 24 },
-    { id: "high", label: "High Priority", count: 8 },
-    { id: "medium", label: "Medium Priority", count: 12 },
-    { id: "low", label: "Low Priority", count: 4 }
+    { id: "all", label: t('priorities.all'), count: 24 },
+    { id: "high", label: t('priorities.high'), count: 8 },
+    { id: "medium", label: t('priorities.medium'), count: 12 },
+    { id: "low", label: t('priorities.low'), count: 4 }
   ];
 
   const categories = [
-    { id: "all", label: "All Categories" },
-    { id: "content", label: "Content Strategy" },
-    { id: "keywords", label: "Keyword Targeting" },
-    { id: "technical", label: "Technical SEO" },
-    { id: "backlinks", label: "Link Building" }
+    { id: "all", label: t('categories.all') },
+    { id: "content", label: t('categories.content') },
+    { id: "keywords", label: t('categories.keywords') },
+    { id: "technical", label: t('categories.technical') },
+    { id: "backlinks", label: t('categories.backlinks') }
   ];
 
   const impactMetrics = [
     { 
-      label: "Potential Traffic Gain", 
-      value: "125K", 
-      unit: "visitors/month",
-      description: "Estimated organic traffic increase"
+      label: t('impactMetrics.potentialTrafficGain.label'),
+      value: t('impactMetrics.potentialTrafficGain.value'),
+      unit: t('impactMetrics.potentialTrafficGain.unit'),
+      description: t('impactMetrics.potentialTrafficGain.description')
     },
     { 
-      label: "Revenue Opportunity", 
-      value: "$45K", 
-      unit: "monthly",
-      description: "Potential revenue from traffic gains"
+      label: t('impactMetrics.revenueOpportunity.label'),
+      value: t('impactMetrics.revenueOpportunity.value'),
+      unit: t('impactMetrics.revenueOpportunity.unit'),
+      description: t('impactMetrics.revenueOpportunity.description')
     },
     { 
-      label: "Implementation Time", 
-      value: "3-6", 
-      unit: "months",
-      description: "Average time to see results"
+      label: t('impactMetrics.implementationTime.label'),
+      value: t('impactMetrics.implementationTime.value'),
+      unit: t('impactMetrics.implementationTime.unit'),
+      description: t('impactMetrics.implementationTime.description')
     },
     { 
-      label: "Success Probability", 
-      value: "78%", 
-      unit: "confidence",
-      description: "Based on competitor analysis"
+      label: t('impactMetrics.successProbability.label'),
+      value: t('impactMetrics.successProbability.value'),
+      unit: t('impactMetrics.successProbability.unit'),
+      description: t('impactMetrics.successProbability.description')
     }
   ];
 
   const recommendations = [
     {
       id: 1,
-      title: "Target High-Volume Keyword Gaps",
-      description: "Focus on 15 high-volume keywords where competitors rank but you don't, with estimated 45K monthly traffic potential.",
+      title: t('recommendations.card1.title'),
+      description: t('recommendations.card1.description'),
       category: "keywords",
-      priority: "high",
-      effort: "medium",
+      priority: t('recommendations.card1.priority'),
+      effort: t('recommendations.card1.effort'),
       impact: "high",
-      timeframe: "3-4 months",
-      confidence: 85,
+      timeframe: t('recommendations.card1.timeframe'),
+      confidence: t('recommendations.card1.confidence'),
       actions: [
-        "Create comprehensive content for 'free seo audit tool'",
-        "Optimize existing pages for 'website seo checker'",
-        "Build topical authority around 'seo analysis'"
+        t('recommendations.card1.actions.item1'),
+        t('recommendations.card1.actions.item2'),
+        t('recommendations.card1.actions.item3')
       ],
       metrics: {
-        trafficPotential: "45K",
-        difficulty: "Medium",
-        competition: "High"
+        trafficPotential: t('recommendations.card1.metrics.trafficPotential'),
+        difficulty: t('recommendations.card1.metrics.difficulty'),
+        competition: t('recommendations.card1.metrics.competition')
       }
     },
     {
       id: 2,
-      title: "Content Gap Strategy",
-      description: "Develop content around 8 key topics where competitors have strong content but you have minimal coverage.",
+      title: t('recommendations.card2.title'),
+      description: t('recommendations.card2.description'),
       category: "content",
-      priority: "high",
-      effort: "high",
+      priority: t('recommendations.card2.priority'),
+      effort: t('recommendations.card2.effort'),
       impact: "high",
-      timeframe: "4-6 months",
-      confidence: 82,
+      timeframe: t('recommendations.card2.timeframe'),
+      confidence: t('recommendations.card2.confidence'),
       actions: [
-        "Create 'Complete Technical SEO Guide'",
-        "Develop interactive SEO audit checklist",
-        "Build comparison content vs competitors"
+        t('recommendations.card2.actions.item1'),
+        t('recommendations.card2.actions.item2'),
+        t('recommendations.card2.actions.item3')
       ],
       metrics: {
-        trafficPotential: "32K",
-        difficulty: "Medium",
-        competition: "Medium"
+        trafficPotential: t('recommendations.card2.metrics.trafficPotential'),
+        difficulty: t('recommendations.card2.metrics.difficulty'),
+        competition: t('recommendations.card2.metrics.competition')
       }
     },
     {
       id: 3,
-      title: "Technical SEO Improvements",
-      description: "Address technical gaps that competitors have already optimized, improving site performance and crawlability.",
+      title: t('recommendations.card3.title'),
+      description: t('recommendations.card3.description'),
       category: "technical",
-      priority: "medium",
-      effort: "medium",
+      priority: t('recommendations.card3.priority'),
+      effort: t('recommendations.card3.effort'),
       impact: "medium",
-      timeframe: "1-2 months",
-      confidence: 90,
+      timeframe: t('recommendations.card3.timeframe'),
+      confidence: t('recommendations.card3.confidence'),
       actions: [
-        "Implement structured data markup",
-        "Optimize Core Web Vitals scores",
-        "Improve internal linking structure"
+        t('recommendations.card3.actions.item1'),
+        t('recommendations.card3.actions.item2'),
+        t('recommendations.card3.actions.item3')
       ],
       metrics: {
-        trafficPotential: "15K",
-        difficulty: "Low",
-        competition: "Low"
+        trafficPotential: t('recommendations.card3.metrics.trafficPotential'),
+        difficulty: t('recommendations.card3.metrics.difficulty'),
+        competition: t('recommendations.card3.metrics.competition')
       }
     },
     {
       id: 4,
-      title: "Strategic Link Building",
-      description: "Target high-authority domains that link to competitors but not to you, focusing on industry-relevant sites.",
+      title: t('recommendations.card4.title'),
+      description: t('recommendations.card4.description'),
       category: "backlinks",
-      priority: "medium",
-      effort: "high",
+      priority: t('recommendations.card4.priority'),
+      effort: t('recommendations.card4.effort'),
       impact: "medium",
-      timeframe: "2-4 months",
-      confidence: 75,
+      timeframe: t('recommendations.card4.timeframe'),
+      confidence: t('recommendations.card4.confidence'),
       actions: [
-        "Outreach to industry publications",
-        "Create linkable assets and tools",
-        "Guest posting on authoritative sites"
+        t('recommendations.card4.actions.item1'),
+        t('recommendations.card4.actions.item2'),
+        t('recommendations.card4.actions.item3')
       ],
       metrics: {
-        trafficPotential: "18K",
-        difficulty: "High",
-        competition: "High"
+        trafficPotential: t('recommendations.card4.metrics.trafficPotential'),
+        difficulty: t('recommendations.card4.metrics.difficulty'),
+        competition: t('recommendations.card4.metrics.competition')
       }
     },
     {
       id: 5,
-      title: "Local SEO Optimization",
-      description: "Capitalize on local search opportunities where competitors have strong presence but you're underrepresented.",
+      title: t('recommendations.card5.title'),
+      description: t('recommendations.card5.description'),
       category: "keywords",
-      priority: "low",
-      effort: "low",
+      priority: t('recommendations.card5.priority'),
+      effort: t('recommendations.card5.effort'),
       impact: "low",
-      timeframe: "1-3 months",
-      confidence: 70,
+      timeframe: t('recommendations.card5.timeframe'),
+      confidence: t('recommendations.card5.confidence'),
       actions: [
-        "Optimize Google Business Profile",
-        "Target location-based keywords",
-        "Build local citations"
+        t('recommendations.card5.actions.item1'),
+        t('recommendations.card5.actions.item2'),
+        t('recommendations.card5.actions.item3')
       ],
       metrics: {
-        trafficPotential: "8K",
-        difficulty: "Low",
-        competition: "Medium"
+        trafficPotential: t('recommendations.card5.metrics.trafficPotential'),
+        difficulty: t('recommendations.card5.metrics.difficulty'),
+        competition: t('recommendations.card5.metrics.competition')
       }
     }
   ];
@@ -223,10 +225,10 @@ export default function StrategyRecommendations() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            AI-Powered Strategy Recommendations
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Get data-driven action plans to outrank competitors based on comprehensive analysis and proven strategies
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -271,7 +273,7 @@ export default function StrategyRecommendations() {
 
           <Button variant="outline" size="sm">
             <Calendar className="w-4 h-4 mr-2" />
-            Create Action Plan
+            {t('filters.createActionPlan')}
           </Button>
         </motion.div>
 
@@ -331,25 +333,25 @@ export default function StrategyRecommendations() {
                       
                       <div className="flex flex-wrap gap-4 text-sm">
                         <div className="flex items-center space-x-2">
-                          <span className="text-muted-foreground">Priority:</span>
+                          <span className="text-muted-foreground">{t('labels.priority')}:</span>
                           <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getPriorityColor(recommendation.priority)}`}>
                             {recommendation.priority}
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-muted-foreground">Effort:</span>
+                          <span className="text-muted-foreground">{t('labels.effort')}:</span>
                           <span className={`font-medium capitalize ${getEffortColor(recommendation.effort)}`}>
                             {recommendation.effort}
                           </span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-muted-foreground">Timeframe:</span>
+                          <span className="text-muted-foreground">{t('labels.timeframe')}:</span>
                           <span className="font-medium text-foreground">
                             {recommendation.timeframe}
                           </span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <span className="text-muted-foreground">Confidence:</span>
+                          <span className="text-muted-foreground">{t('labels.confidence')}:</span>
                           <span className="font-medium text-foreground">
                             {recommendation.confidence}%
                           </span>
@@ -363,7 +365,7 @@ export default function StrategyRecommendations() {
                       {recommendation.metrics.trafficPotential}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      monthly visitors
+                      {t('labels.monthlyVisitors')}
                     </div>
                   </div>
                 </div>
@@ -372,7 +374,7 @@ export default function StrategyRecommendations() {
                 <div className="bg-muted/50 rounded-lg p-4 mb-4">
                   <h4 className="font-medium text-foreground mb-3 flex items-center">
                     <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
-                    Action Items
+                    {t('recommendations.card1.actions.title')}
                   </h4>
                   <div className="space-y-2">
                     {recommendation.actions.map((action, actionIndex) => (
@@ -390,19 +392,19 @@ export default function StrategyRecommendations() {
                     <div className="text-sm font-medium text-foreground">
                       {recommendation.metrics.trafficPotential}
                     </div>
-                    <div className="text-xs text-muted-foreground">Traffic Potential</div>
+                    <div className="text-xs text-muted-foreground">{t('labels.trafficPotential')}</div>
                   </div>
                   <div className="text-center p-3 bg-muted/30 rounded-lg">
                     <div className="text-sm font-medium text-foreground">
                       {recommendation.metrics.difficulty}
                     </div>
-                    <div className="text-xs text-muted-foreground">Difficulty</div>
+                    <div className="text-xs text-muted-foreground">{t('labels.difficulty')}</div>
                   </div>
                   <div className="text-center p-3 bg-muted/30 rounded-lg">
                     <div className="text-sm font-medium text-foreground">
                       {recommendation.metrics.competition}
                     </div>
-                    <div className="text-xs text-muted-foreground">Competition</div>
+                    <div className="text-xs text-muted-foreground">{t('labels.competition')}</div>
                   </div>
                 </div>
 
@@ -410,15 +412,15 @@ export default function StrategyRecommendations() {
                 <div className="flex items-center justify-between pt-4 border-t">
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                     <Star className="w-4 h-4" />
-                    <span>Impact Score: {recommendation.impact}/High</span>
+                    <span>{t('labels.impactScore')}: {recommendation.impact}/High</span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Button variant="outline" size="sm">
-                      View Details
+                      {t('labels.viewDetails')}
                     </Button>
                     <Button size="sm">
                       <Play className="w-3 h-3 mr-1" />
-                      Start Implementation
+                      {t('labels.startImplementation')}
                     </Button>
                   </div>
                 </div>
@@ -437,20 +439,19 @@ export default function StrategyRecommendations() {
         >
           <div className="text-center">
             <h3 className="text-xl font-bold text-foreground mb-4">
-              Ready to Execute Your Strategy?
+              {t('cta.title')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Our AI has analyzed 247 data points to create these personalized recommendations. 
-              Start with high-priority items for maximum impact.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg">
                 <Zap className="w-4 h-4 mr-2" />
-                Generate Full Action Plan
+                {t('cta.generatePlan')}
               </Button>
               <Button variant="outline" size="lg">
                 <Calendar className="w-4 h-4 mr-2" />
-                Schedule Implementation
+                {t('cta.scheduleImplementation')}
               </Button>
             </div>
           </div>

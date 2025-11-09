@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../../components/ui/button";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { 
   TrendingUp, 
   Target, 
@@ -26,6 +27,9 @@ import StrategyRecommendations from "../../../components/features/competitor-ana
 import { StructuredData, generateFeatureSchema, generateFAQSchema } from "../../../components/seo/StructuredData";
 
 export default function CompetitorAnalysisPage() {
+  const t = useTranslations('featurePages.competitorAnalysis');
+  const tHero = useTranslations('featurePages.competitorAnalysis.hero');
+  const tSuccess = useTranslations('featurePages.competitorAnalysis.successStories');
   const [selectedCompetitor, setSelectedCompetitor] = useState("competitor1");
 
   const featureSchema = generateFeatureSchema({
@@ -73,38 +77,34 @@ export default function CompetitorAnalysisPage() {
   const keyMetrics = [
     {
       icon: Target,
-      title: "SERP Tracking",
-      description: "Monitor 1,000+ keywords",
-      value: "1,000+",
-      change: "+15%"
+      title: tHero('keyMetrics.serp.label'),
+      value: tHero('keyMetrics.serp.value'),
+      change: tHero('keyMetrics.serp.change')
     },
     {
       icon: TrendingUp,
-      title: "Rank Improvements",
-      description: "Average position gain",
-      value: "+12",
-      change: "+23%"
+      title: tHero('keyMetrics.improvements.label'),
+      value: tHero('keyMetrics.improvements.value'),
+      change: tHero('keyMetrics.improvements.change')
     },
     {
       icon: Eye,
-      title: "Visibility Score",
-      description: "Search visibility increase",
-      value: "89%",
-      change: "+8%"
+      title: tHero('keyMetrics.visibility.label'),
+      value: tHero('keyMetrics.visibility.value'),
+      change: tHero('keyMetrics.visibility.change')
     },
     {
       icon: Lightbulb,
-      title: "Opportunities",
-      description: "Gap analysis findings",
-      value: "247",
-      change: "+31%"
+      title: tHero('keyMetrics.opportunities.label'),
+      value: tHero('keyMetrics.opportunities.value'),
+      change: tHero('keyMetrics.opportunities.change')
     }
   ];
 
   const competitorData = [
-    { name: "competitor1.com", rank: 1, visibility: 94, keywords: 1247, trend: "up" },
-    { name: "competitor2.com", rank: 2, visibility: 87, keywords: 1134, trend: "down" },
-    { name: "competitor3.com", rank: 3, visibility: 83, keywords: 998, trend: "up" },
+    { name: "semrush.com", rank: 1, visibility: 94, keywords: 1247, trend: "up" },
+    { name: "ahrefs.com", rank: 2, visibility: 87, keywords: 1134, trend: "down" },
+    { name: "moz.com", rank: 3, visibility: 83, keywords: 998, trend: "up" },
     { name: "yoursite.com", rank: 4, visibility: 76, keywords: 892, trend: "up" }
   ];
 
@@ -170,11 +170,7 @@ export default function CompetitorAnalysisPage() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
                 >
-                  Outsmart Your{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                    Competition
-                  </span>{" "}
-                  with Data
+                  {tHero('title')}
                 </motion.h1>
                 
                 <motion.p 
@@ -183,7 +179,7 @@ export default function CompetitorAnalysisPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0"
                 >
-                  SERP analysis, gap identification, and strategic recommendations 
+                  {tHero('subtitle')} 
                   to dominate your market. Track competitor rankings and discover opportunities.
                 </motion.p>
 
@@ -228,11 +224,11 @@ export default function CompetitorAnalysisPage() {
                 >
                   <Button size="lg" className="text-lg px-8 py-6">
                     <Target className="w-5 h-5 mr-2" />
-                    Analyze Competitors
+                    {tHero('cta.analyze')}
                   </Button>
                   <Button variant="outline" size="lg" className="text-lg px-8 py-6">
                     <Play className="w-5 h-5 mr-2" />
-                    View Demo
+                    {tHero('cta.demo')}
                   </Button>
                 </motion.div>
               </motion.div>
@@ -248,10 +244,10 @@ export default function CompetitorAnalysisPage() {
                   <div className="text-center mb-6">
                     <h2 className="text-lg font-semibold text-foreground mb-2">
                       <BarChart3 className="w-5 h-5 inline mr-2" />
-                      Live SERP Rankings
+                      {tHero('liveRankings.title')}
                     </h2>
                     <p className="text-sm text-muted-foreground">
-                      Real-time competitor position tracking
+                      {tHero('liveRankings.subtitle')}
                     </p>
                   </div>
                   
@@ -302,11 +298,11 @@ export default function CompetitorAnalysisPage() {
                   <div className="mt-6 pt-4 border-t grid grid-cols-2 gap-4">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-purple-400">247</div>
-                      <div className="text-xs text-muted-foreground/80">Opportunities Found</div>
+                      <div className="text-xs text-muted-foreground/80">{tHero('liveRankings.opportunitiesFound')}</div>
                     </div>
                     <div className="text-center">
                       <div className="text-2xl font-bold text-green-400">+12</div>
-                      <div className="text-xs text-muted-foreground/80">Avg. Rank Improvement</div>
+                      <div className="text-xs text-muted-foreground/80">{tHero('liveRankings.avgRankImprovement')}</div>
                     </div>
                   </div>
                 </div>
@@ -319,7 +315,7 @@ export default function CompetitorAnalysisPage() {
                   className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg"
                 >
                   <Zap className="w-4 h-4 inline mr-1" />
-                  Live Updates
+                  {tHero('liveRankings.liveUpdates')}
                 </motion.div>
               </motion.div>
             </div>
@@ -343,7 +339,7 @@ export default function CompetitorAnalysisPage() {
               className="text-3xl lg:text-4xl font-bold text-white mb-6"
             >
               <Trophy className="w-8 h-8 inline mr-3 text-yellow-500" />
-              Success Stories
+              {tSuccess('title')}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -352,7 +348,7 @@ export default function CompetitorAnalysisPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-xl text-muted-foreground mb-8"
             >
-              See how businesses outranked their competition and increased organic traffic by 300%+
+              {tSuccess('description')}
             </motion.p>
 
             {/* Customer Success Metrics */}
@@ -364,16 +360,16 @@ export default function CompetitorAnalysisPage() {
               className="grid md:grid-cols-3 gap-8 mb-12"
             >
               <div className="text-center">
-                <div className="text-4xl font-bold text-purple-400 mb-2">300%</div>
-                <div className="text-muted-foreground">Traffic Increase</div>
+                <div className="text-4xl font-bold text-purple-400 mb-2">{tSuccess('metrics.trafficIncrease.value')}</div>
+                <div className="text-muted-foreground">{tSuccess('metrics.trafficIncrease.label')}</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-green-400 mb-2">15</div>
-                <div className="text-muted-foreground">Avg. Rank Improvement</div>
+                <div className="text-4xl font-bold text-green-400 mb-2">{tSuccess('metrics.avgRankImprovement.value')}</div>
+                <div className="text-muted-foreground">{tSuccess('metrics.avgRankImprovement.label')}</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-blue-400 mb-2">89%</div>
-                <div className="text-muted-foreground">Customer Success Rate</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">{tSuccess('metrics.customerSuccessRate.value')}</div>
+                <div className="text-muted-foreground">{tSuccess('metrics.customerSuccessRate.label')}</div>
               </div>
             </motion.div>
 
@@ -386,7 +382,7 @@ export default function CompetitorAnalysisPage() {
               <Button asChild size="lg" className="text-lg px-8 py-6">
                 <Link href="/login">
                   <Users className="w-5 h-5 mr-2" />
-                  Start Your Success Story
+                  {tSuccess('cta')}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>

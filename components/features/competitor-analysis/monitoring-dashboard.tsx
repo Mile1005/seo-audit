@@ -22,46 +22,48 @@ import {
   RefreshCw
 } from "lucide-react";
 import { Button } from "../../ui/button";
+import { useTranslations } from "next-intl";
 
 export default function MonitoringDashboard() {
+  const t = useTranslations('featurePages.competitorAnalysis.monitoringDashboard');
   const [timeRange, setTimeRange] = useState("7d");
   const [isMonitoring, setIsMonitoring] = useState(true);
 
   const timeRanges = [
-    { value: "1d", label: "24 Hours" },
-    { value: "7d", label: "7 Days" },
-    { value: "30d", label: "30 Days" },
-    { value: "90d", label: "3 Months" }
+    { value: "1d", label: t('timeRanges.24h') },
+    { value: "7d", label: t('timeRanges.7d') },
+    { value: "30d", label: t('timeRanges.30d') },
+    { value: "90d", label: t('timeRanges.90d') }
   ];
 
   const monitoringStats = [
     { 
-      label: "Active Monitors", 
+      label: t('stats.activeMonitors'), 
       value: "12", 
       change: "+3", 
       positive: true,
-      description: "Competitors being tracked"
+      description: t('stats.activeMonitorsDesc')
     },
     { 
-      label: "Alerts Today", 
+      label: t('stats.alertsToday'), 
       value: "8", 
       change: "+2", 
       positive: false,
-      description: "Ranking changes detected"
+      description: t('stats.alertsTodayDesc')
     },
     { 
-      label: "Keywords Tracked", 
+      label: t('stats.keywordsTracked'), 
       value: "247", 
       change: "+15", 
       positive: true,
-      description: "Across all competitors"
+      description: t('stats.keywordsTrackedDesc')
     },
     { 
-      label: "Avg. Check Frequency", 
+      label: t('stats.checkFreq'), 
       value: "6h", 
       change: "0", 
       positive: null,
-      description: "Time between updates"
+      description: t('stats.checkFreqDesc')
     }
   ];
 
@@ -193,10 +195,10 @@ export default function MonitoringDashboard() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Real-Time Monitoring Dashboard
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Stay ahead with automated alerts and 24/7 tracking of competitor movements across search results
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -212,7 +214,7 @@ export default function MonitoringDashboard() {
             <div className="flex items-center space-x-2">
               <div className={`w-3 h-3 rounded-full ${isMonitoring ? "bg-green-500" : "bg-red-500"}`}></div>
               <span className="text-sm font-medium text-foreground">
-                {isMonitoring ? "Monitoring Active" : "Monitoring Paused"}
+                {isMonitoring ? t('controls.monitoringActive') : t('controls.monitoringPaused')}
               </span>
             </div>
             
@@ -240,15 +242,15 @@ export default function MonitoringDashboard() {
               onClick={() => setIsMonitoring(!isMonitoring)}
             >
               {isMonitoring ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
-              {isMonitoring ? "Pause" : "Resume"}
+              {isMonitoring ? t('controls.pause') : t('controls.resume')}
             </Button>
             <Button variant="outline" size="sm">
               <RefreshCw className="w-4 h-4 mr-2" />
-              Refresh
+              {t('controls.refresh')}
             </Button>
             <Button variant="outline" size="sm">
               <Settings className="w-4 h-4 mr-2" />
-              Settings
+              {t('controls.settings')}
             </Button>
           </div>
         </motion.div>
@@ -304,12 +306,12 @@ export default function MonitoringDashboard() {
                     <Bell className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground">Recent Alerts</h3>
-                    <p className="text-sm text-muted-foreground">Latest competitor activity</p>
+                    <h3 className="text-lg font-semibold text-foreground">{t('alerts.title')}</h3>
+                    <p className="text-sm text-muted-foreground">{t('alerts.subtitle')}</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
-                  View All
+                  {t('alerts.viewAll')}
                 </Button>
               </div>
             </div>
@@ -331,13 +333,13 @@ export default function MonitoringDashboard() {
                     <div className="flex items-center justify-between mb-1">
                       <h4 className="font-medium text-foreground truncate">
                         {alert.type === "ranking_change" && 
-                          `${alert.competitor} dropped ${Math.abs(alert.change!)} positions`}
+                          t('alerts.rankingDrop', { competitor: alert.competitor, positions: Math.abs(alert.change!) })}
                         {alert.type === "ranking_gain" && 
-                          `${alert.competitor} gained ${alert.change} positions`}
+                          t('alerts.rankingGain', { competitor: alert.competitor, positions: alert.change! })}
                         {alert.type === "new_content" && 
-                          `${alert.competitor} published new content`}
+                          t('alerts.newContent', { competitor: alert.competitor })}
                         {alert.type === "backlink_gain" && 
-                          `${alert.competitor} gained ${alert.linkCount} backlinks`}
+                          t('alerts.backlinkGain', { competitor: alert.competitor, count: alert.linkCount! })}
                       </h4>
                       <span className="text-xs text-muted-foreground whitespace-nowrap">
                         {alert.timestamp}
@@ -373,8 +375,8 @@ export default function MonitoringDashboard() {
                   <Activity className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground">Competitor Status</h3>
-                  <p className="text-sm text-muted-foreground">Monitoring overview</p>
+                  <h3 className="text-lg font-semibold text-foreground">{t('competitorStatus.title')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('competitorStatus.subtitle')}</p>
                 </div>
               </div>
             </div>
@@ -405,11 +407,11 @@ export default function MonitoringDashboard() {
                   
                   <div className="grid grid-cols-2 gap-4 text-xs">
                     <div>
-                      <div className="text-muted-foreground">Keywords</div>
+                      <div className="text-muted-foreground">{t('competitorStatus.keywords')}</div>
                       <div className="font-medium text-foreground">{competitor.keywords}</div>
                     </div>
                     <div>
-                      <div className="text-muted-foreground">Avg Position</div>
+                      <div className="text-muted-foreground">{t('competitorStatus.avgPosition')}</div>
                       <div className="flex items-center">
                         <span className="font-medium text-foreground mr-1">
                           {competitor.avgPosition}
@@ -424,11 +426,11 @@ export default function MonitoringDashboard() {
                       </div>
                     </div>
                     <div>
-                      <div className="text-muted-foreground">Visibility</div>
+                      <div className="text-muted-foreground">{t('competitorStatus.visibility')}</div>
                       <div className="font-medium text-foreground">{competitor.visibility}%</div>
                     </div>
                     <div>
-                      <div className="text-muted-foreground">Status</div>
+                      <div className="text-muted-foreground">{t('competitorStatus.status')}</div>
                       <div className={`font-medium capitalize ${
                         competitor.status === "active" ? "text-green-600" : "text-red-600"
                       }`}>
@@ -456,20 +458,19 @@ export default function MonitoringDashboard() {
         >
           <div className="text-center">
             <h3 className="text-xl font-bold text-foreground mb-4">
-              Never Miss a Competitive Move
+              {t('cta.title')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Get instant notifications when competitors change rankings, publish content, 
-              or gain backlinks. Stay ahead with real-time intelligence.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg">
                 <Bell className="w-4 h-4 mr-2" />
-                Setup Alerts
+                {t('cta.setupBtn')}
               </Button>
               <Button variant="outline" size="lg">
                 <Eye className="w-4 h-4 mr-2" />
-                Monitoring Reports
+                {t('cta.reportsBtn')}
               </Button>
             </div>
           </div>

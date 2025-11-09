@@ -1,0 +1,900 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "clear": "Effacer",
+    "apply": "Appliquer",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non",
+    "all": "Tout",
+    "none": "Aucun",
+    "or": "ou",
+    "and": "et",
+    "viewMore": "Voir Plus",
+    "viewLess": "Voir Moins",
+    "export": "Exporter",
+    "import": "Importer",
+    "download": "Télécharger",
+    "upload": "Téléverser",
+    "share": "Partager",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "refresh": "Actualiser",
+    "retry": "Réessayer",
+    "undo": "Annuler",
+    "redo": "Rétablir",
+    "select": "Sélectionner",
+    "selected": "Sélectionné",
+    "deselect": "Désélectionner",
+    "selectAll": "Tout Sélectionner",
+    "selectLanguage": "Sélectionner la langue",
+    "languageChanged": "Langue changée",
+    "languageChangeFailed": "Échec du changement de langue",
+    "analyzing": "Analyse en cours…",
+    "enterValidDomain": "Entrez un domaine valide",
+    "tryAgain": "Réessayer",
+    "startFreeAudit": "Commencer l'Audit Gratuit",
+    "user": "Utilisateur",
+    "noEmail": "Aucun email",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "signOut": "Déconnexion",
+    "page": "Page"
+  },
+  "nav": {
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "blog": "Blog",
+    "about": "À Propos",
+    "contact": "Contact",
+    "dashboard": "Tableau de Bord",
+    "login": "Connexion",
+    "signup": "S'inscrire",
+    "logout": "Déconnexion",
+    "help": "Aide",
+    "docs": "Documentation",
+    "support": "Support",
+    "status": "Statut",
+    "demo": "Démo",
+    "caseStudies": "Études de Cas",
+    "careers": "Carrières",
+    "community": "Communauté",
+    "openMenu": "Ouvrir le menu principal",
+    "projects": "Projets",
+    "keywords": "Mots-Clés",
+    "siteAudit": "Audit de Site",
+    "pageCrawler": "Crawler de Pages",
+    "backlinks": "Backlinks",
+    "competitors": "Concurrents",
+    "reports": "Rapports",
+    "cta": {
+      "freeAudit": "Audit SEO Gratuit"
+    },
+    "menu": {
+      "features": {
+        "items": {
+          "seoAudit": { "title": "Audit SEO", "desc": "Analyse complète du site et recommandations" },
+          "competitorAnalysis": { "title": "Analyse Concurrentielle", "desc": "Comparez vos performances à celles des concurrents" },
+          "keywordTracking": { "title": "Suivi des Mots-Clés", "desc": "Surveillez les classements et les performances de recherche" },
+          "siteCrawler": { "title": "Crawler de Site", "desc": "Analyse SEO technique approfondie et suivi" },
+          "aiAssistant": { "title": "Assistant IA", "desc": "Recommandations et insights SEO intelligents" }
+        }
+      }
+    }
+  },
+  "dashboard": {
+    "title": "Tableau de Bord AI SEO Turbo",
+    "subtitle": "Surveillez vos performances SEO et suivez les indicateurs clés",
+    "welcome": "Bienvenue, {name} !",
+    "breadcrumb": "Fil d'Ariane",
+    "seoTurbo": "SEOTurbo",
+    "overview": {
+      "title": "Vue d'ensemble SEO",
+      "description": "Surveillez les performances d'optimisation pour les moteurs de recherche de votre site web",
+      "totalProjects": "Projets Totaux",
+      "activeAudits": "Audits Actifs",
+      "avgScore": "Score Moyen",
+      "improvements": "Améliorations Ce Mois-ci"
+    },
+    "keywordTracking": {
+      "title": "Suivi des Mots-Clés",
+      "description": "Suivez les classements et les métriques de performance des mots-clés",
+      "totalKeywords": "Mots-Clés Totaux",
+      "topRankings": "Top 10 des Classements",
+      "improved": "Amélioré",
+      "declined": "Diminué"
+    },
+    "backlinkAnalysis": {
+      "title": "Analyse des Backlinks",
+      "description": "Analysez votre profil de backlinks et votre autorité de domaine",
+      "totalBacklinks": "Backlinks Totaux",
+      "domainAuthority": "Autorité de Domaine",
+      "newBacklinks": "Nouveaux Ce Mois-ci"
+    },
+    "competitorInsights": {
+      "title": "Insights Concurrentiels",
+      "description": "Comparez vos performances par rapport aux concurrents",
+      "competitorsTracked": "Concurrents Suivis",
+      "yourRank": "Votre Classement",
+      "gapAnalysis": "Analyse des Écarts"
+    },
+    "recentAudits": {
+      "title": "Audits Récents",
+      "viewAll": "Voir Tous les Audits",
+      "noAudits": "Aucun audit pour le moment. Lancez votre premier audit !",
+      "completedOn": "Terminé le {date}"
+    },
+    "cards": {
+      "common": {
+        "found": "trouvé"
+      },
+      "healthScore": {
+        "title": "Score de Santé",
+        "description": "Santé globale du site web basée sur des facteurs SEO techniques",
+        "empty": "Effectuez votre premier audit SEO pour voir les métriques de santé",
+        "cta": "Lancer le Premier Audit",
+        "scoreLabel": "Score",
+        "viewLatest": "Voir le Dernier Audit →"
+      },
+      "searchVisibility": {
+        "title": "Visibilité de Recherche",
+        "description": "Pourcentage du trafic de recherche capturé par votre site",
+        "connectHelp": "Connectez Google Search Console pour voir les données de recherche réelles",
+        "cta": "Configurer GSC",
+        "trend": "Tendance sur 7 jours"
+      },
+      "keywords": {
+        "title": "Mots-Clés Suivis",
+        "description": "Nombre total de mots-clés surveillés",
+        "empty": "Commencez à suivre les classements des mots-clés",
+        "cta": "Ajouter des Mots-Clés",
+        "top10": "Top 10 des positions",
+        "improved30": "Amélioré (30j)"
+      },
+      "backlinks": {
+        "title": "Backlinks Totaux",
+        "description": "Nombre de sites externes qui pointent vers votre site web",
+        "empty": "Surveillez votre profil de backlinks",
+        "cta": "Voir les Backlinks",
+        "refDomains": "Domaines référents",
+        "newThisMonth": "Nouveaux ce mois-ci"
+      },
+      "technicalSeo": {
+        "title": "SEO Technique",
+        "description": "Score d'optimisation technique du dernier audit",
+        "empty": "Effectuez un audit pour voir les métriques techniques",
+        "cta": "Lancer un Audit",
+        "seoScore": "Score SEO",
+        "performance": "Performance",
+        "performanceGood": "Bon"
+      },
+      "issues": {
+        "title": "Problèmes SEO",
+        "description": "Problèmes trouvés lors du dernier audit",
+        "empty": "Effectuez un audit pour identifier les problèmes SEO",
+        "critical": "Critique",
+        "warnings": "Avertissements",
+        "notices": "Remarques",
+        "viewAll": "Voir Tous les Problèmes →"
+      }
+    },
+    "quickActions": {
+      "title": "Actions Rapides",
+      "runAudit": "Lancer un Audit de Site",
+      "addKeywords": "Ajouter des Mots-Clés",
+      "analyzeCompetitors": "Analyser les Concurrents",
+      "free": "Gratuit",
+      "pro": "Pro"
+    },
+    "recentActivity": {
+      "title": "Activité Récente",
+      "empty": "Aucune activité récente. Lancez votre premier audit pour commencer !"
+    },
+    "gsc": {
+      "title": "Google Search Console",
+      "connected": "Connecté",
+      "connectedDesc": "Accédez aux analyses de recherche et aux données de performance en temps réel",
+      "disconnectedDesc": "Connectez-vous pour voir les analyses de recherche, les impressions et les données de clics",
+      "connect": "Connecter",
+      "connecting": "Connexion en cours...",
+      "disconnect": "Déconnecter",
+      "disconnecting": "Déconnexion en cours..."
+    },
+    "competitors": {
+      "title": "Concurrents",
+      "description": "Suivez et analysez les performances SEO de vos concurrents",
+      "comingSoon": "Prochainement",
+      "comingSoonDesc": "Notre fonction d'analyse concurrentielle sera bientôt disponible. Restez à l'écoute pour de puissants insights compétitifs !"
+    }
+  },
+  "demo": {
+    "meta": {
+      "title": "Démo - Essayez Notre Outil d'Audit SEO IA",
+      "description": "Essayez notre outil d'audit SEO alimenté par l'IA gratuitement. Analysez n'importe quel site web instantanément et obtenez des recommandations pour améliorer les classements de recherche et générer du trafic.",
+      "keywords": ["démo audit SEO", "outil SEO gratuit", "analyse de site web", "vérificateur SEO", "audit SEO gratuit"]
+    },
+    "hero": {
+      "backToHome": "Retour à l'Accueil",
+      "title": "Essayez Notre Audit SEO ",
+      "titleHighlight": "Alimenté par l'IA",
+      "titleEnd": "",
+      "subtitle": "Entrez n'importe quelle URL ci-dessous pour obtenir une analyse SEO complète en quelques secondes. Découvrez ce qui empêche votre site web de mieux se classer."
+    },
+    "features": {
+      "title": "Voyez Ce Que Notre Audit SEO IA ",
+      "titleHighlight": "Révèle",
+      "subtitle": "Notre moteur d'IA avancé analyse plus de 47 facteurs de classement pour vous donner des insights actionnables qui améliorent réellement votre visibilité de recherche."
+    },
+    "cards": {
+      "technicalAnalysis": {
+        "title": "Analyse Technique en 47 Points",
+        "description": "Analyse approfondie de la vitesse des pages, de la réactivité mobile, de l'indexabilité, de la crawlabilité, et plus encore. Obtenez des recommandations détaillées pour chaque problème détecté."
+      },
+      "competitorIntelligence": {
+        "title": "Intelligence Concurrentielle",
+        "description": "Voyez comment vous vous comparez aux concurrents les mieux classés. Identifiez les lacunes dans votre stratégie et découvrez des opportunités de mots-clés inexploitées."
+      },
+      "priorityScoring": {
+        "title": "Notation par Priorité",
+        "description": "Tous les problèmes ne sont pas égaux. Notre IA classe chaque recommandation par impact potentiel, pour que vous sachiez exactement ce qu'il faut corriger en premier."
+      }
+    },
+    "coverage": {
+      "title": "Couverture Complète de l'Analyse SEO",
+      "structure": {
+        "title": "Analyse de la Structure du Site",
+        "description": "Détecte les problèmes de navigation, les problèmes de maillage interne et les défauts de structure d'URL"
+      },
+      "content": {
+        "title": "Optimisation du Contenu",
+        "description": "Identifie les lacunes de mots-clés, les problèmes de profondeur de contenu et les opportunités de SEO sémantique"
+      },
+      "performance": {
+        "title": "Métriques de Performance",
+        "description": "Évaluation des Core Web Vitals, analyse de la vitesse des pages et optimisation du chargement"
+      },
+      "mobile": {
+        "title": "Optimisation Mobile",
+        "description": "Préparation à l'indexation mobile-first, conception responsive et éléments tactiles"
+      },
+      "security": {
+        "title": "Sécurité et Signaux de Confiance",
+        "description": "Implémentation HTTPS, détection de contenu mixte et analyse des en-têtes de sécurité"
+      },
+      "schema": {
+        "title": "Validation du Balisage Schema",
+        "description": "Détection de données structurées, opportunités de rich snippets et erreurs de balisage"
+      }
+    }
+  },
+  "help": {
+    "meta": {
+      "title": "Centre d'Aide - AI SEO Turbo",
+      "description": "Obtenez de l'aide avec AI SEO Turbo. Trouvez des réponses aux questions courantes, des tutoriels, des guides de dépannage et contactez le support pour une assistance personnalisée.",
+      "keywords": ["aide SEO", "centre de support", "tutoriels SEO", "dépannage", "guides SEO", "support client"]
+    },
+    "title": "Centre d'Aide",
+    "searchPlaceholder": "Rechercher de l'aide...",
+    "popularTopics": "Sujets Populaires",
+    "gettingStarted": "Démarrage",
+    "troubleshooting": "Dépannage",
+    "bestPractices": "Meilleures Pratiques"
+  },
+  "home": {
+    "title": "Outil d'Audit SEO - Boostez Vos Classements Rapidement",
+    "subtitle": "Obtenez des insights SEO actionnables qui boostent vos classements et génèrent du trafic organique",
+    "description": "Rejoignez plus de 1 000 marketeurs utilisant nos audits IA pour identifier les problèmes critiques en quelques minutes",
+    "cta": "Commencer l'Audit Gratuit",
+    "ctaSecondary": "Voir la Démo",
+    "trustedBy": "Plus de {count} marketeurs nous font confiance dans le monde entier",
+    "freeTrialNoCreditCard": "Commencez votre essai gratuit. Aucune carte de crédit requise.",
+    "why": {
+      "title": "Pourquoi choisir AI SEO Turbo ?",
+      "subtitle": "Rejoignez des milliers d'entreprises utilisant notre plateforme IA pour obtenir un succès SEO mesurable",
+      "col1": {
+        "title": "Analyse Technique SEO Avancée",
+        "desc": "Nos algorithmes IA propriétaires explorent votre site web comme Google le fait, identifiant les problèmes que les outils traditionnels manquent.",
+        "bullets": {
+          "0": "Audit Technique en 47 Points couvrant tous les facteurs critiques",
+          "1": "Recommandations alimentées par l'IA, priorisées par impact",
+          "2": "Intelligence concurrentielle et insights de marché"
+        }
+      },
+      "col2": {
+        "stat1": {"label": "Augmentation moyenne du trafic en 90 jours"},
+        "stat2": {"label": "Entreprises optimisées"}
+      }
+    },
+    "audit": {
+      "titlePrefix": "Outil d'Audit SEO IA Qui",
+      "titleHighlight": "Produit des Résultats",
+      "desc": "Arrêtez de deviner ce qui nuit à votre SEO. Notre outil d'audit alimenté par l'IA analyse plus de 47 facteurs techniques, identifie les problèmes critiques et fournit des recommandations actionnables qui font vraiment la différence."
+    },
+    "benefits": {
+      "analysis": {"title": "Analyse en 47 Points", "desc": "Audit SEO technique complet couvrant chaque facteur critique"},
+      "ai": {"title": "Alimenté par l'IA", "desc": "Algorithmes avancés qui rivalisent avec les consultants SEO experts"},
+      "fixes": {"title": "Corrections Actionnables", "desc": "Recommandations priorisées qui améliorent réellement les classements"},
+      "results": {"title": "Résultats Réels", "desc": "Augmentation moyenne du trafic de 300% dans les 90 premiers jours"}
+    },
+    "case": {
+      "title": "Résultats Réels d'Entreprises Réelles",
+      "desc": "Un propriétaire de petite entreprise a utilisé notre audit SEO IA pour identifier et corriger 23 problèmes critiques. Résultat : augmentation de 340% du trafic organique en 90 jours, en résolvant les problèmes d'utilisabilité mobile et en améliorant la vitesse du site.",
+      "moreLink": "Lire Plus d'Histoires de Succès"
+    },
+    "tools": {
+      "title": "Outils SEO de Qualité Professionnelle",
+      "subtitle": "Que vous soyez développeur, spécialiste SEO ou propriétaire d'entreprise, nous fournissons les outils dont vous avez besoin pour réussir.",
+      "dev": {"title": "Pour les Développeurs", "desc": "Intégrations API et rapports techniques qui complètent votre flux de travail"},
+      "seo": {"title": "Pour les Spécialistes SEO", "desc": "Analyse concurrentielle avancée et surveillance à l'échelle entreprise"},
+      "biz": {"title": "Pour les Propriétaires d'Entreprise", "desc": "Aucune expérience SEO requise - l'IA vous guide vers le succès"}
+    },
+    "mid": {
+      "offer": {"title": "Checklist SEO Gratuite", "desc": "47 points d'optimisation prouvés"}
+    },
+    "premium": {
+      "title1": "Contenu",
+      "title2": "Premium Exclusif",
+      "subtitle": "Débloquez nos ressources SEO les plus complètes avec votre email"
+    },
+    "footer": {
+      "title": "Ne Manquez Pas les Mises à Jour SEO",
+      "desc": "Rejoignez plus de 10 000 marketeurs recevant des insights et conseils SEO hebdomadaires",
+      "cta": "S'Abonner Maintenant"
+    }
+  },
+  "meta": {
+    "defaultTitle": "AI SEO Turbo - Audits SEO Alimentés par l'IA",
+    "defaultDescription": "Obtenez des insights SEO actionnables qui boostent les classements et génèrent du trafic organique en quelques minutes",
+    "keywords": "audit SEO, analyse SEO IA, optimisation de site web, trafic organique, classements de recherche",
+    "siteName": "AI SEO Turbo"
+  },
+  "audit": {
+    "title": "Audit SEO",
+    "subtitle": "Analyse SEO complète en {points} points",
+    "points": "{count, plural, =1 {1 Point} other {# Points}}",
+    "startAudit": "Démarrer l'Audit",
+    "runningAudit": "Audit en Cours...",
+    "auditComplete": "Audit Terminé !",
+    "analyzeUrl": "Analyser l'URL",
+    "enterUrl": "Entrez l'URL de votre site web",
+    "urlPlaceholder": "https://exemple.com",
+    "results": {
+      "title": "Résultats de l'Audit SEO",
+      "overallScore": "Score SEO Global",
+      "excellent": "Excellent",
+      "good": "Bon",
+      "poor": "Faible",
+      "needsImprovement": "À Améliorer",
+      "completedOn": "Terminé : {date}",
+      "auditId": "ID : {id}",
+      "excellentPerformance": "Excellente performance avec possibilité d'optimisation.",
+      "goodPerformance": "Bonne performance avec quelques domaines à améliorer.",
+      "poorPerformance": "Des améliorations significatives sont nécessaires pour de meilleures performances SEO."
+    },
+    "scores": {
+      "seo": "SEO",
+      "performance": "Performance",
+      "accessibility": "Accessibilité",
+      "bestPractices": "Meilleures Pratiques",
+      "userExperience": "Expérience Utilisateur",
+      "security": "Sécurité"
+    },
+    "categories": {
+      "criticalIssues": "Problèmes Critiques",
+      "warnings": "Avertissements",
+      "passed": "Vérifications Réussies",
+      "opportunities": "Opportunités",
+      "quickWins": "Gains Rapides"
+    },
+    "issues": {
+      "severity": {
+        "critical": "Critique",
+        "high": "Élevé",
+        "medium": "Moyen",
+        "low": "Faible",
+        "info": "Info"
+      },
+      "fix": "Corriger Ceci",
+      "learnMore": "En Savoir Plus",
+      "recommendation": "Recommandation",
+      "impact": "Impact",
+      "effort": "Effort"
+    },
+    "coreWebVitals": {
+      "title": "Core Web Vitals",
+      "lcp": "Largest Contentful Paint",
+      "fid": "First Input Delay",
+      "cls": "Cumulative Layout Shift",
+      "fcp": "First Contentful Paint",
+      "ttfb": "Time to First Byte",
+      "good": "Bon",
+      "needsWork": "À Améliorer",
+      "bad": "Mauvais"
+    },
+    "metaTags": {
+      "title": "Meta Tags",
+      "titleTag": "Balise Title",
+      "metaDescription": "Meta Description",
+      "ogTags": "Balises Open Graph",
+      "twitterCards": "Twitter Cards",
+      "canonical": "URL Canonique",
+      "robots": "Meta Robots"
+    },
+    "structuredData": {
+      "title": "Données Structurées",
+      "detected": "Schémas Détectés",
+      "valid": "Valide",
+      "invalid": "Invalide",
+      "warnings": "Avertissements",
+      "organization": "Organisation",
+      "website": "Site Web",
+      "article": "Article",
+      "product": "Produit"
+    },
+    "export": {
+      "pdf": "Exporter en PDF",
+      "csv": "Exporter en CSV",
+      "json": "Exporter en JSON",
+      "downloading": "Téléchargement...",
+      "success": "Export réussi !"
+    }
+  },
+  "keywords": {
+    "title": "Recherche de Mots-Clés",
+    "subtitle": "Découvrez plus de {count} variations de mots-clés",
+    "search": "Rechercher des Mots-Clés",
+    "searchPlaceholder": "Entrez un mot-clé ou un sujet",
+    "analyzing": "Analyse des mots-clés...",
+    "noResults": "Aucun mot-clé trouvé. Essayez un terme de recherche différent.",
+    "table": {
+      "keyword": "Mot-Clé",
+      "volume": "Volume de Recherche",
+      "difficulty": "Difficulté",
+      "cpc": "CPC",
+      "competition": "Concurrence",
+      "intent": "Intention de Recherche",
+      "trend": "Tendance",
+      "opportunity": "Opportunité"
+    },
+    "difficulty": {
+      "easy": "Facile",
+      "medium": "Moyen",
+      "hard": "Difficile",
+      "veryHard": "Très Difficile"
+    },
+    "intent": {
+      "informational": "Informationnel",
+      "navigational": "Navigationnel",
+      "transactional": "Transactionnel",
+      "commercial": "Commercial"
+    },
+    "filters": {
+      "volume": "Volume de Recherche",
+      "difficulty": "Difficulté",
+      "cpc": "Coût Par Clic",
+      "minVolume": "Volume Min",
+      "maxVolume": "Volume Max",
+      "minDifficulty": "Difficulté Min",
+      "maxDifficulty": "Difficulté Max"
+    },
+    "variations": {
+      "title": "Variations de Mots-Clés",
+      "generating": "Génération de {count} variations...",
+      "questions": "Questions",
+      "longTail": "Longue Traîne",
+      "related": "Mots-Clés Connexes",
+      "comparisons": "Comparaisons"
+    },
+    "tracking": {
+      "add": "Ajouter au Suivi",
+      "addAll": "Ajouter Tout",
+      "remove": "Retirer",
+      "tracking": "En Suivi",
+      "success": "{count} mots-clés ajoutés au suivi"
+    }
+  },
+  "backlinks": {
+    "title": "Analyse des Backlinks",
+    "subtitle": "Analysez votre profil de backlinks",
+    "overview": {
+      "totalBacklinks": "Backlinks Totaux",
+      "referringDomains": "Domaines Référents",
+      "domainAuthority": "Autorité de Domaine (DA)",
+      "pageAuthority": "Autorité de Page (PA)",
+      "trustFlow": "Trust Flow",
+      "citationFlow": "Citation Flow"
+    },
+    "table": {
+      "url": "URL Source",
+      "anchorText": "Texte d'Ancrage",
+      "da": "DA",
+      "pa": "PA",
+      "type": "Type",
+      "status": "Statut",
+      "firstSeen": "Premier Vu",
+      "lastChecked": "Dernière Vérification"
+    },
+    "types": {
+      "dofollow": "Dofollow",
+      "nofollow": "Nofollow",
+      "ugc": "UGC",
+      "sponsored": "Sponsorisé"
+    },
+    "status": {
+      "active": "Actif",
+      "lost": "Perdu",
+      "new": "Nouveau",
+      "broken": "Cassé"
+    },
+    "filters": {
+      "type": "Type de Lien",
+      "status": "Statut",
+      "minDA": "DA Min",
+      "anchorText": "Texte d'Ancrage"
+    },
+    "analysis": {
+      "toxicLinks": "Liens Toxiques",
+      "opportunities": "Opportunités de Liens",
+      "gapAnalysis": "Analyse des Écarts avec les Concurrents",
+      "anchorDistribution": "Distribution du Texte d'Ancrage"
+    }
+  },
+  "projects": {
+    "title": "Projets",
+    "create": "Créer un Projet",
+    "edit": "Modifier le Projet",
+    "deleteAction": "Supprimer le Projet",
+    "settings": "Paramètres du Projet",
+    "noProjects": "Aucun projet pour le moment. Créez votre premier projet !",
+    "form": {
+      "name": "Nom du Projet",
+      "namePlaceholder": "Mon Site Web",
+      "url": "URL du Site Web",
+      "urlPlaceholder": "https://exemple.com",
+      "description": "Description",
+      "descriptionPlaceholder": "Description du projet...",
+      "create": "Créer le Projet",
+      "update": "Mettre à Jour le Projet"
+    },
+    "deleteDialog": {
+      "title": "Supprimer le Projet ?",
+      "message": "Êtes-vous sûr de vouloir supprimer ce projet ? Cette action ne peut pas être annulée.",
+      "confirm": "Supprimer le Projet",
+      "cancel": "Annuler"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenue",
+      "subtitle": "Connectez-vous à votre compte",
+      "email": "Adresse Email",
+      "emailPlaceholder": "vous@exemple.com",
+      "password": "Mot de Passe",
+      "passwordPlaceholder": "••••••••",
+      "rememberMe": "Se souvenir de moi",
+      "forgotPassword": "Mot de passe oublié ?",
+      "submit": "Se Connecter",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signupLink": "S'inscrire",
+      "orContinueWith": "Ou continuer avec",
+      "google": "Continuer avec Google",
+      "github": "Continuer avec GitHub"
+    },
+    "signup": {
+      "title": "Créez Votre Compte",
+      "subtitle": "Commencez à optimiser votre SEO aujourd'hui",
+      "name": "Nom Complet",
+      "namePlaceholder": "Jean Dupont",
+      "email": "Adresse Email",
+      "emailPlaceholder": "vous@exemple.com",
+      "password": "Mot de Passe",
+      "passwordPlaceholder": "••••••••",
+      "confirmPassword": "Confirmer le Mot de Passe",
+      "confirmPasswordPlaceholder": "••••••••",
+      "agreeToTerms": "J'accepte les {termsLink} et la {privacyLink}",
+      "terms": "Conditions d'Utilisation",
+      "privacy": "Politique de Confidentialité",
+      "submit": "Créer un Compte",
+      "haveAccount": "Vous avez déjà un compte ?",
+      "loginLink": "Se connecter"
+    },
+    "forgotPassword": {
+      "title": "Réinitialiser le Mot de Passe",
+      "subtitle": "Entrez votre email pour recevoir un lien de réinitialisation",
+      "email": "Adresse Email",
+      "emailPlaceholder": "vous@exemple.com",
+      "submit": "Envoyer le Lien de Réinitialisation",
+      "backToLogin": "Retour à la connexion",
+      "success": "Email de réinitialisation du mot de passe envoyé ! Vérifiez votre boîte de réception."
+    },
+    "resetPassword": {
+      "title": "Définir un Nouveau Mot de Passe",
+      "subtitle": "Entrez votre nouveau mot de passe",
+      "password": "Nouveau Mot de Passe",
+      "passwordPlaceholder": "••••••••",
+      "confirmPassword": "Confirmer le Nouveau Mot de Passe",
+      "confirmPasswordPlaceholder": "••••••••",
+      "submit": "Réinitialiser le Mot de Passe",
+      "success": "Mot de passe réinitialisé avec succès !"
+    },
+    "verifyEmail": {
+      "title": "Vérifiez Votre Email",
+      "subtitle": "Nous avons envoyé un lien de vérification à {email}",
+      "checkInbox": "Vérifiez votre boîte de réception et cliquez sur le lien de vérification.",
+      "didntReceive": "Vous n'avez pas reçu l'email ?",
+      "resend": "Renvoyer l'email de vérification",
+      "resending": "Envoi en cours...",
+      "resent": "Email de vérification envoyé !"
+    },
+    "errors": {
+      "invalidCredentials": "Email ou mot de passe invalide",
+      "emailExists": "Un compte avec cet email existe déjà",
+      "passwordMismatch": "Les mots de passe ne correspondent pas",
+      "weakPassword": "Le mot de passe doit contenir au moins 8 caractères",
+      "invalidEmail": "Veuillez entrer une adresse email valide",
+      "required": "Ce champ est requis",
+      "serverError": "Une erreur s'est produite. Veuillez réessayer.",
+      "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
+    }
+  },
+  "pricing": {
+    "title": "Tarification Simple et Transparente",
+    "subtitle": "Choisissez le plan qui vous convient",
+    "monthly": "Mensuel",
+    "yearly": "Annuel",
+    "annual": "Annuel",
+    "save": "Économisez {percent}%",
+    "billedAnnually": "Facturé annuellement. Économisez 20%",
+    "perMonth": "/ mois",
+    "free": {
+      "name": "Gratuit",
+      "price": "0€",
+      "period": "pour toujours",
+      "description": "Parfait pour commencer",
+      "cta": "Commencer",
+      "features": {
+        "audits": "{count} audits par mois",
+        "keywords": "Recherche de mots-clés basique",
+        "backlinks": "Analyse limitée des backlinks",
+        "support": "Support communautaire"
+      }
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "29€",
+      "period": "par mois",
+      "description": "Pour les entreprises en croissance",
+      "cta": "Démarrer l'Essai Gratuit",
+      "popular": "Le Plus Populaire",
+      "features": {
+        "audits": "Audits illimités",
+        "keywords": "Plus de {count} variations de mots-clés",
+        "backlinks": "Analyse complète des backlinks",
+        "competitors": "Suivi des concurrents",
+        "reports": "Exports PDF/CSV",
+        "support": "Support prioritaire"
+      }
+    },
+    "enterprise": {
+      "name": "Entreprise",
+      "price": "Sur Mesure",
+      "period": "nous contacter",
+      "description": "Pour les grandes organisations",
+      "cta": "Contacter les Ventes",
+      "features": {
+        "audits": "Tout en illimité",
+        "api": "Accès API",
+        "whiteLabel": "Rapports en marque blanche",
+        "team": "Collaboration d'équipe",
+        "dedicated": "Support dédié",
+        "sla": "Garantie SLA"
+      }
+    },
+    "faq": {
+      "title": "Questions Fréquemment Posées",
+      "question1": "Puis-je changer de plan plus tard ?",
+      "answer1": "Oui, vous pouvez mettre à niveau ou rétrograder à tout moment.",
+      "question2": "Quels moyens de paiement acceptez-vous ?",
+      "answer2": "Nous acceptons toutes les principales cartes de crédit et PayPal.",
+      "question3": "Y a-t-il un essai gratuit ?",
+      "answer3": "Oui, tous les plans payants incluent un essai gratuit de 14 jours.",
+      "question4": "Puis-je annuler à tout moment ?",
+      "answer4": "Oui, annulez à tout moment sans pénalités."
+    },
+    "allPlansInclude": "Tous les plans incluent :",
+    "questionsSeeAnswers": "Des questions ? Voir les réponses aux",
+    "commonQuestions": "questions courantes"
+  },
+  "features": {
+    "title": "Fonctionnalités Puissantes pour le Succès SEO",
+    "subtitle": "Tout ce dont vous avez besoin pour dominer les classements de recherche",
+    "audit": {
+      "title": "Audit SEO en {points} Points",
+      "description": "Analyse complète couvrant le SEO technique, l'optimisation on-page, la performance et l'accessibilité",
+      "features": {
+        "technical": "Analyse SEO technique",
+        "onPage": "Optimisation on-page",
+        "performance": "Métriques de performance",
+        "accessibility": "Vérifications d'accessibilité"
+      }
+    },
+    "keywords": {
+      "title": "Plus de {count} Variations de Mots-Clés",
+      "description": "Découvrez des milliers d'opportunités de mots-clés avec volume, difficulté et données d'intention",
+      "features": {
+        "research": "Recherche de mots-clés",
+        "tracking": "Suivi des classements",
+        "variations": "Générateur de variations",
+        "intent": "Analyse de l'intention de recherche"
+      }
+    },
+    "backlinks": {
+      "title": "Analyse des Backlinks",
+      "description": "Surveillez votre profil de backlinks, identifiez les liens toxiques et trouvez de nouvelles opportunités",
+      "features": {
+        "monitoring": "Surveillance des backlinks",
+        "analysis": "Analyse de qualité",
+        "opportunities": "Opportunités de liens",
+        "competitors": "Analyse concurrentielle"
+      }
+    },
+    "reports": {
+      "title": "Rapports Automatisés",
+      "description": "Générez des rapports PDF et CSV professionnels en un clic",
+      "features": {
+        "pdf": "Rapports PDF",
+        "csv": "Exports CSV",
+        "scheduled": "Rapports planifiés",
+        "whiteLabel": "Options en marque blanche"
+      }
+    }
+  },
+  "featuresIndex": {
+    "header": {
+      "title": "Fonctionnalités SEO Puissantes",
+      "subtitle": "Tout ce dont vous avez besoin pour dominer les classements de recherche et surpasser vos concurrents"
+    },
+    "badgePopular": "Populaire",
+    "cta": {
+      "title": "Prêt à Commencer ?",
+      "subtitle": "Rejoignez des milliers d'entreprises qui font confiance à AI SEO Turbo pour leur succès SEO",
+      "startTrial": "Démarrer l'Essai Gratuit",
+      "contactSales": "Contacter les Ventes"
+    }
+  },
+  "featurePages": {
+    "siteCrawler": {
+      "loading": {
+        "heading": "Outil d'Exploration et d'Analyse de Site Complet",
+        "title": "Chargement du Crawler de Site",
+        "desc": "Préparation de votre outil d'exploration de site web..."
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "titlePrefix": "Entrer en",
+      "titleHighlight": "Contact",
+      "subtitle": "Prêt à booster votre SEO ? Notre équipe d'experts est là pour vous aider à obtenir de meilleurs classements de recherche et générer plus de trafic."
+    },
+    "services": {
+      "title": "Support SEO Expert Quand Vous en Avez Besoin",
+      "subtitle": "Des audits SEO techniques à la consultation stratégique, nos experts certifiés sont prêts à vous aider à surmonter les défis et atteindre vos objectifs de croissance organique.",
+      "cards": {
+        "technical": {"title": "SEO Technique", "desc": "Core Web Vitals, balisage schema et défis techniques"},
+        "strategy": {"title": "Support Stratégique", "desc": "Feuilles de route SEO et frameworks d'analyse concurrentielle"},
+        "training": {"title": "Formation Plateforme", "desc": "Maximisez le ROI avec des sessions de formation personnalisées"},
+        "partnerships": {"title": "Partenariats", "desc": "Solutions en marque blanche et intégrations API"}
+      }
+    },
+    "why": {
+      "title": "Pourquoi Choisir AI SEO Turbo ?",
+      "subtitle": "Plus de 15 ans d'expérience combinée aidant plus de 10 000 entreprises à obtenir une croissance SEO mesurable",
+      "items": {
+        "certified": {"title": "Spécialistes SEO Certifiés", "desc": "Accompagnement personnalisé par des experts avec des antécédents prouvés"},
+        "fast": {"title": "Temps de Réponse Rapides", "desc": "24h pour les demandes, 4h pour les problèmes techniques urgents"},
+        "steps": {"title": "Solutions Étape par Étape", "desc": "Nous n'identifions pas seulement les problèmes—nous fournissons des corrections actionnables"},
+        "results": {"title": "Approche Orientée Résultats", "desc": "Focus sur des stratégies qui produisent un impact commercial mesurable"}
+      },
+      "guarantee": {
+        "title": "Garantie de Temps de Réponse",
+        "general": "Réponse Générale",
+        "urgent": "Problèmes Urgents",
+        "satisfaction": "Satisfaction",
+        "note": "Notre équipe de support comprend des spécialistes SEO certifiés et des ingénieurs IA prêts à vous aider à réussir"
+      }
+    },
+    "form": {
+      "title": "Envoyez-nous un Message",
+      "nameLabel": "Nom *",
+      "namePlaceholder": "Votre nom",
+      "emailLabel": "Email *",
+      "emailPlaceholder": "votre@email.com",
+      "companyLabel": "Entreprise",
+      "companyPlaceholder": "Nom de votre entreprise",
+      "messageLabel": "Message *",
+      "messagePlaceholder": "Parlez-nous de vos objectifs SEO et comment nous pouvons vous aider...",
+      "submit": "Envoyer le Message"
+    },
+    "info": {
+      "title": "Entamons une Conversation",
+      "subtitle": "Vous avez des questions sur nos services SEO ? Vous voulez discuter de vos besoins spécifiques ? Nous sommes là pour vous aider à réussir en ligne.",
+      "general": {"title": "Demandes Générales"},
+      "sales": {"title": "Ventes & Partenariats"},
+      "billing": {"title": "Facturation & Paiements"},
+      "phone": {"title": "Téléphone"},
+      "address": {"title": "Adresse"},
+      "hours": {"title": "Heures d'Ouverture", "value": "Lun-Ven : 9h-18h EST"}
+    }
+  },
+  "privacy": {
+    "consent": {
+      "message": "Nous utilisons des cookies et des analyses pour améliorer votre expérience. Vous pouvez choisir d'accepter ou de rejeter le suivi.",
+      "accept": "Accepter Tout",
+      "reject": "Tout Rejeter"
+    }
+  },
+  "errors": {
+    "404": {
+      "title": "Page Non Trouvée",
+      "message": "La page que vous recherchez n'existe pas.",
+      "backHome": "Retour à l'Accueil"
+    },
+    "500": {
+      "title": "Erreur Serveur",
+      "message": "Une erreur s'est produite de notre côté. Veuillez réessayer.",
+      "retry": "Réessayer"
+    },
+    "generic": {
+      "title": "Oups !",
+      "message": "Une erreur s'est produite.",
+      "retry": "Réessayer"
+    },
+    "network": {
+      "title": "Erreur de Connexion",
+      "message": "Veuillez vérifier votre connexion internet et réessayer.",
+      "retry": "Réessayer"
+    },
+    "rateLimit": {
+      "title": "Limite de Taux Dépassée",
+      "message": "Trop de requêtes. Veuillez attendre {seconds} secondes.",
+      "wait": "Veuillez Patienter"
+    }
+  },
+  "notifications": {
+    "auditComplete": "Audit terminé avec succès !",
+    "auditFailed": "L'audit a échoué. Veuillez réessayer.",
+    "keywordAdded": "Mot-clé ajouté au suivi",
+    "keywordsAdded": "{count} mots-clés ajoutés au suivi",
+    "projectCreated": "Projet créé avec succès",
+    "projectUpdated": "Projet mis à jour avec succès",
+    "projectDeleted": "Projet supprimé avec succès",
+    "settingsSaved": "Paramètres enregistrés avec succès",
+    "exportStarted": "Export démarré. Cela peut prendre un moment...",
+    "exportComplete": "Export terminé !",
+    "exportFailed": "L'export a échoué. Veuillez réessayer."
+  },
+  "footer": {
+    "product": "Produit",
+    "company": "Entreprise",
+    "resources": "Ressources",
+    "legal": "Légal",
+    "copyright": "© {year} AI SEO Turbo. Tous droits réservés.",
+    "madeWith": "Fait avec ❤️ par {company}"
+  }
+}

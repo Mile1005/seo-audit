@@ -11,8 +11,10 @@ import {
   type ROICalculatorInputs, 
   type ROICalculatorResults 
 } from "../../data/pricing"
+import { useTranslations } from 'next-intl'
 
 export function ROICalculator() {
+  const t = useTranslations('home.calculator')
   const [inputs, setInputs] = useState<ROICalculatorInputs>({
     monthlyVisits: 10000,
     conversionRate: 2.5,
@@ -94,22 +96,21 @@ export function ROICalculator() {
         >
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-green-500/10 border border-blue-500/20 rounded-full px-4 py-2 text-sm mb-6">
             <Calculator className="w-4 h-4 text-blue-400" />
-            <span className="text-blue-300">ROI Calculator</span>
+            <span className="text-blue-300">{t('badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              Calculate Your
+              {t('title1')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-blue-400 via-green-500 to-purple-500 bg-clip-text text-transparent">
-              SEO Investment ROI
+              {t('title2')}
             </span>
           </h2>
 
           <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            See how much additional revenue you could generate with improved SEO performance. 
-            Based on real customer results.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -125,13 +126,13 @@ export function ROICalculator() {
             >
               <div>
                 <h3 className="text-2xl font-bold text-white mb-6">
-                  Enter Your Current Metrics
+                  {t('inputs.title')}
                 </h3>
 
                 {/* Plan Selection */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-300 mb-3">
-                    Select Plan
+                    {t('inputs.selectPlan')}
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     {paidPlans.map((plan) => (
@@ -149,7 +150,7 @@ export function ROICalculator() {
                       >
                         <div className="font-semibold">{plan.name}</div>
                         <div className="text-sm opacity-75">
-                          ${plan.priceMonthly}/month
+                          ${plan.priceMonthly}{t('inputs.perMonth')}
                         </div>
                       </motion.button>
                     ))}
@@ -160,7 +161,7 @@ export function ROICalculator() {
                 <div className="space-y-6">
                   <div>
                     <label htmlFor="monthly-visits" className="block text-sm font-medium text-gray-300 mb-2">
-                      Monthly Organic Visits
+                      {t('inputs.monthlyVisits')}
                     </label>
                     <input
                       id="monthly-visits"
@@ -175,7 +176,7 @@ export function ROICalculator() {
 
                   <div>
                     <label htmlFor="conversion-rate" className="block text-sm font-medium text-gray-300 mb-2">
-                      Conversion Rate (%)
+                      {t('inputs.conversionRate')}
                     </label>
                     <input
                       id="conversion-rate"
@@ -192,7 +193,7 @@ export function ROICalculator() {
 
                   <div>
                     <label htmlFor="average-order" className="block text-sm font-medium text-gray-300 mb-2">
-                      Average Order Value ($)
+                      {t('inputs.averageOrder')}
                     </label>
                     <input
                       id="average-order"
@@ -209,12 +210,12 @@ export function ROICalculator() {
                 {/* Assumptions */}
                 <div className="mt-8 p-4 bg-slate-800/30 rounded-xl border border-slate-700/30">
                   <h4 className="text-sm font-medium text-white mb-2">
-                    Conservative Estimates Based On Customer Data:
+                    {t('assumptions.title')}
                   </h4>
                   <ul className="text-xs text-gray-400 space-y-1">
-                    <li>• 30% average increase in organic traffic</li>
-                    <li>• 15% improvement in conversion rate</li>
-                    <li>• Results typically seen within 3-6 months</li>
+                    <li>• {t('assumptions.trafficIncrease')}</li>
+                    <li>• {t('assumptions.conversionImprovement')}</li>
+                    <li>• {t('assumptions.timeframe')}</li>
                   </ul>
                 </div>
               </div>
@@ -230,7 +231,7 @@ export function ROICalculator() {
             >
               <div>
                 <h3 className="text-2xl font-bold text-white mb-6">
-                  Your Projected Results
+                  {t('results.title')}
                 </h3>
 
                 {results ? (
@@ -244,7 +245,7 @@ export function ROICalculator() {
                         <div className="text-2xl font-bold text-white mb-1">
                           {formatCurrency(results.monthlyROI)}
                         </div>
-                        <div className="text-sm text-gray-400">Monthly ROI</div>
+                        <div className="text-sm text-gray-400">{t('results.monthlyROI')}</div>
                       </div>
 
                       <div className="bg-slate-800/40 border border-slate-700/40 rounded-xl p-6 text-center">
@@ -254,24 +255,24 @@ export function ROICalculator() {
                         <div className="text-2xl font-bold text-white mb-1">
                           {results.paybackPeriod.toFixed(1)}
                         </div>
-                        <div className="text-sm text-gray-400">Months to Payback</div>
+                        <div className="text-sm text-gray-400">{t('results.monthsToPayback')}</div>
                       </div>
                     </div>
 
                     {/* Revenue Comparison */}
                     <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
-                      <h4 className="text-lg font-semibold text-white mb-6">Revenue Projection</h4>
+                      <h4 className="text-lg font-semibold text-white mb-6">{t('results.revenueProjection')}</h4>
                       
                       <div className="space-y-6">
                         <ProgressBar
-                          label="Current Monthly Revenue"
+                          label={t('results.currentRevenue')}
                           value={results.currentRevenue}
                           maxValue={results.projectedRevenue}
                           color="from-gray-500 to-gray-600"
                         />
                         
                         <ProgressBar
-                          label="Projected Monthly Revenue"
+                          label={t('results.projectedRevenue')}
                           value={results.projectedRevenue}
                           maxValue={results.projectedRevenue}
                           color="from-green-500 to-blue-500"
@@ -279,7 +280,7 @@ export function ROICalculator() {
                         
                         <div className="pt-4 border-t border-slate-700/50">
                           <div className="flex justify-between items-center">
-                            <span className="text-gray-300">Monthly Increase</span>
+                            <span className="text-gray-300">{t('results.monthlyIncrease')}</span>
                             <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
                               {formatCurrency(results.potentialIncrease)}
                             </span>
@@ -295,7 +296,7 @@ export function ROICalculator() {
                           <TrendingUp className="w-4 h-4 text-white" />
                         </div>
                         <h4 className="text-lg font-semibold text-white">
-                          Annual Impact
+                          {t('results.annualImpact')}
                         </h4>
                       </div>
                       
@@ -303,7 +304,7 @@ export function ROICalculator() {
                         {formatCurrency(results.annualROI)}
                       </div>
                       <div className="text-green-400 text-sm">
-                        Additional annual revenue after plan costs
+                        {t('results.annualRevenue')}
                       </div>
                     </div>
 
@@ -319,14 +320,14 @@ export function ROICalculator() {
                       }}
                     >
                       <Target className="w-5 h-5" />
-                      <span>Start Achieving These Results</span>
+                      <span>{t('results.cta')}</span>
                     </motion.a>
                   </div>
                 ) : (
                   <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-8 text-center">
                     <Calculator className="w-12 h-12 text-gray-500 mx-auto mb-4" />
                     <p className="text-gray-400">
-                      Select a paid plan to see your ROI projection
+                      {t('results.noPlan')}
                     </p>
                   </div>
                 )}

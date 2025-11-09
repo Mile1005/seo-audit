@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { locales, defaultLocale, type Locale } from '../i18n'
 
 interface SEOConfig {
   title: string
@@ -10,6 +11,8 @@ interface SEOConfig {
   twitterCard?: 'summary' | 'summary_large_image'
   noIndex?: boolean
   structuredData?: Record<string, any>
+  locale?: Locale
+  path?: string
 }
 
 const defaultSEO: SEOConfig = {
@@ -32,6 +35,31 @@ const defaultSEO: SEOConfig = {
 }
 
 /**
+ * Generate hreflang alternate links for multilingual SEO
+ */
+export function generateLanguageAlternates(path: string = '', currentLocale: Locale = defaultLocale) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
+  
+  // Remove leading slash if present for consistency
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path
+  
+  // Create language alternates object
+  const languages: Record<string, string> = {}
+  
+  locales.forEach((locale) => {
+    if (locale === defaultLocale) {
+      // Default locale (English) uses root path without locale prefix
+      languages[locale] = `${baseUrl}/${cleanPath}`
+    } else {
+      // Other locales use locale prefix
+      languages[locale] = `${baseUrl}/${locale}/${cleanPath}`
+    }
+  })
+  
+  return languages
+}
+
+/**
  * Generate metadata for Next.js pages
  */
 export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
@@ -41,6 +69,11 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   const canonical = seo.canonical || baseUrl
   const ogImageUrl = seo.ogImage
     ? (seo.ogImage.startsWith('http') ? seo.ogImage : `${baseUrl}${seo.ogImage}`)
+    : undefined
+
+  // Generate hreflang alternates if locale and path provided
+  const languageAlternates = (seo.locale && seo.path !== undefined) 
+    ? generateLanguageAlternates(seo.path, seo.locale)
     : undefined
 
   return {
@@ -54,6 +87,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
       description: seo.description,
       url: canonical,
       type: seo.ogType,
+      locale: seo.locale ? `${seo.locale}_${seo.locale.toUpperCase()}` : 'en_US',
       ...(ogImageUrl ? { images: [{ url: ogImageUrl, width: 1200, height: 630, alt: seo.title }] } : {}),
       siteName: 'AISEOTurbo',
     },
@@ -69,6 +103,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
     
     alternates: {
       canonical,
+      ...(languageAlternates ? { languages: languageAlternates } : {}),
     },
     
     other: {
@@ -236,6 +271,97 @@ export const pageSEO = {
     canonical: 'https://www.aiseoturbo.com/blog'
   },
 
+  'blog/ai-powered-seo-future': {
+    title: 'AI-Powered SEO: The Future of Search Optimization | AI SEO Turbo',
+    description: 'Explore how artificial intelligence is revolutionizing SEO. Learn about AI-powered tools, automation, and the future of search engine optimization.',
+    keywords: ['AI SEO', 'AI-powered SEO', 'future of SEO', 'SEO automation', 'machine learning SEO'],
+    canonical: 'https://www.aiseoturbo.com/blog/ai-powered-seo-future'
+  },
+
+  'blog/complete-seo-audit-checklist-2025': {
+    title: 'Complete SEO Audit Checklist 2025 - Step-by-Step Guide',
+    description: 'Follow our comprehensive SEO audit checklist for 2025. Covers technical SEO, on-page optimization, content analysis, and performance metrics.',
+    keywords: ['SEO audit checklist', '2025 SEO guide', 'SEO audit steps', 'technical SEO checklist'],
+    canonical: 'https://www.aiseoturbo.com/blog/complete-seo-audit-checklist-2025'
+  },
+
+  'blog/content-seo-creating-search-friendly-content': {
+    title: 'Content SEO: Creating Search-Friendly Content That Ranks',
+    description: 'Master content SEO with proven strategies for creating search-friendly content. Learn keyword optimization, content structure, and user intent matching.',
+    keywords: ['content SEO', 'SEO content writing', 'search-friendly content', 'keyword optimization'],
+    canonical: 'https://www.aiseoturbo.com/blog/content-seo-creating-search-friendly-content'
+  },
+
+  'blog/core-web-vitals-optimization-guide': {
+    title: 'Core Web Vitals Optimization Guide - Improve Page Experience',
+    description: 'Complete guide to optimizing Core Web Vitals. Learn how to improve LCP, FID, and CLS for better Google rankings and user experience.',
+    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience'],
+    canonical: 'https://www.aiseoturbo.com/blog/core-web-vitals-optimization-guide'
+  },
+
+  'blog/local-seo-strategies-that-work': {
+    title: 'Local SEO Strategies That Work in 2025 - Complete Guide',
+    description: 'Boost your local search rankings with proven local SEO strategies. Learn Google Business Profile optimization, local citations, and review management.',
+    keywords: ['local SEO', 'local search optimization', 'Google Business Profile', 'local citations'],
+    canonical: 'https://www.aiseoturbo.com/blog/local-seo-strategies-that-work'
+  },
+
+  'blog/technical-seo-best-practices-2025': {
+    title: 'Technical SEO Best Practices 2025 - Expert Guide',
+    description: 'Master technical SEO with 2025 best practices. Covers site structure, crawlability, indexation, schema markup, and performance optimization.',
+    keywords: ['technical SEO', 'SEO best practices', 'technical optimization', 'site structure'],
+    canonical: 'https://www.aiseoturbo.com/blog/technical-seo-best-practices-2025'
+  },
+
+  'case-studies': {
+    title: 'SEO Case Studies - Real Results & Success Stories',
+    description: 'Explore real SEO success stories and case studies. See how businesses achieved significant traffic growth and ranking improvements with AI SEO Turbo.',
+    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'client testimonials'],
+    canonical: 'https://www.aiseoturbo.com/case-studies'
+  },
+
+  'case-studies/cloudsync-pro': {
+    title: 'CloudSync Pro Case Study - 312% Organic Traffic Increase',
+    description: 'How CloudSync Pro achieved 312% organic traffic growth in 6 months using AI-powered SEO audits and technical optimization strategies.',
+    keywords: ['SaaS SEO', 'traffic growth case study', 'B2B SEO success'],
+    canonical: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro'
+  },
+
+  'case-studies/digital-growth-agency': {
+    title: 'Digital Growth Agency Case Study - 245% Client Acquisition',
+    description: 'Learn how Digital Growth Agency scaled their SEO services and increased client acquisition by 245% using automated SEO audits.',
+    keywords: ['agency SEO', 'SEO agency case study', 'client growth'],
+    canonical: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency'
+  },
+
+  'case-studies/gearhub-pro': {
+    title: 'GearHub Pro Case Study - #1 Rankings in 4 Months',
+    description: 'How GearHub Pro achieved #1 rankings for 47 competitive keywords in just 4 months through comprehensive SEO optimization.',
+    keywords: ['ecommerce SEO', 'ranking improvement', 'SEO success story'],
+    canonical: 'https://www.aiseoturbo.com/case-studies/gearhub-pro'
+  },
+
+  'case-studies/peak-performance': {
+    title: 'Peak Performance Case Study - 189% Revenue Growth',
+    description: 'Discover how Peak Performance Fitness increased online revenue by 189% through local SEO optimization and technical improvements.',
+    keywords: ['local business SEO', 'revenue growth', 'fitness SEO'],
+    canonical: 'https://www.aiseoturbo.com/case-studies/peak-performance'
+  },
+
+  'case-studies/stylecraft-boutique': {
+    title: 'StyleCraft Boutique Case Study - 427% Organic Traffic',
+    description: 'How StyleCraft Boutique achieved 427% organic traffic growth and dominated fashion search results through AI-powered SEO.',
+    keywords: ['fashion SEO', 'ecommerce growth', 'retail SEO'],
+    canonical: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique'
+  },
+
+  'case-studies/techflow-solutions': {
+    title: 'TechFlow Solutions Case Study - Enterprise SEO Success',
+    description: 'Learn how TechFlow Solutions scaled their enterprise SEO strategy to achieve market leadership and 300% lead generation growth.',
+    keywords: ['enterprise SEO', 'B2B SEO', 'lead generation'],
+    canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
+  },
+
   help: {
     title: 'Help Center - SEO Support & Guides | AI SEO Turbo',
     description: 'Get help with AI SEO Turbo. Find answers to common questions, tutorials, troubleshooting guides, and contact support for personalized assistance.',
@@ -289,6 +415,30 @@ export const pageSEO = {
     noIndex: true
   },
 
+  'reset-password': {
+    title: 'Set New Password - Complete Password Reset | AI SEO Turbo',
+    description: 'Complete your password reset process for AI SEO Turbo. Set a new secure password and regain access to your account.',
+    keywords: ['reset password', 'new password', 'password change'],
+    canonical: 'https://www.aiseoturbo.com/reset-password',
+    noIndex: true
+  },
+
+  'verify-email': {
+    title: 'Verify Email - Complete Registration | AI SEO Turbo',
+    description: 'Verify your email address to complete your AI SEO Turbo account setup and unlock all features.',
+    keywords: ['email verification', 'verify email', 'account activation'],
+    canonical: 'https://www.aiseoturbo.com/verify-email',
+    noIndex: true
+  },
+
+  onboarding: {
+    title: 'Getting Started - Account Setup | AI SEO Turbo',
+    description: 'Complete your AI SEO Turbo account setup and learn how to use our powerful SEO tools to boost your website rankings.',
+    keywords: ['onboarding', 'getting started', 'account setup', 'SEO tutorial'],
+    canonical: 'https://www.aiseoturbo.com/onboarding',
+    noIndex: true
+  },
+
   community: {
     title: 'SEO Community - Connect & Learn | AI SEO Turbo',
     description: 'Join the AI SEO Turbo community to connect with professionals, share insights, learn from experts, and stay updated with SEO trends.',
@@ -299,20 +449,6 @@ export const pageSEO = {
     title: 'Free SEO Audit Demo - Try AI Analysis Tool Online',
     description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ checks, competitor insights, and actionable recommendations.',
     keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker']
-  },
-
-  careers: {
-    title: 'Careers - Join SEO Experts Team | AI SEO Turbo',
-    description: 'Join AISEOTurbo to revolutionize SEO with AI. We\'re hiring talented individuals passionate about search engine optimization and cutting-edge technology.',
-    keywords: ['careers', 'jobs', 'SEO', 'AI', 'technology', 'remote work'],
-    canonical: 'https://www.aiseoturbo.com/careers'
-  },
-
-  'case-studies': {
-    title: 'SEO Success Stories & Case Studies | AI SEO Turbo',
-    description: 'Explore real SEO success stories and case studies. See how businesses achieved significant traffic growth and ranking improvements using AI SEO Turbo.',
-    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'website optimization case studies'],
-    canonical: 'https://www.aiseoturbo.com/case-studies'
   },
 
   'dashboard/projects': {
@@ -377,5 +513,12 @@ export const pageSEO = {
     keywords: ['account settings', 'user preferences', 'billing settings', 'account management'],
     canonical: 'https://www.aiseoturbo.com/dashboard/settings',
     noIndex: true
+  },
+
+  status: {
+    title: 'System Status - Service Availability | AI SEO Turbo',
+    description: 'Check the current status of AI SEO Turbo services including API, web application, database, and crawler services. Monitor uptime and service health.',
+    keywords: ['system status', 'service availability', 'uptime', 'API status', 'service health'],
+    canonical: 'https://www.aiseoturbo.com/status'
   },
 }

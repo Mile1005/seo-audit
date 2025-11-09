@@ -4,9 +4,11 @@ import { enforceQuota, incrementUsage } from '../../../../lib/server/quota'
 import { auth } from '../../../../auth'
 import { initAudit, setAuditCompleted, setAuditFailed, buildUnifiedResult } from '../../../../lib/server/audit-store'
 import crypto from 'crypto'
+import { getLocaleFromHeaders, translateError } from '@/lib/i18n-server'
 
 export async function POST(request: NextRequest) {
   try {
+    const locale = getLocaleFromHeaders(request.headers)
     const body = await request.json()
     const { url, email, keyword } = body
 
@@ -31,13 +33,8 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!url) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'URL is required' 
-        },
-        { status: 400 }
-      )
+      const msg = await translateError('invalid_url', locale)
+      return NextResponse.json({ success: false, error: msg }, { status: 400 })
     }
 
     // Normalize URL - handle URLs without protocol
@@ -52,13 +49,8 @@ export async function POST(request: NextRequest) {
     try {
       new URL(normalizedUrl)
     } catch (error) {
-      return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Invalid URL format. Please enter a valid domain (e.g., example.com or https://example.com)' 
-        },
-        { status: 400 }
-      )
+      const msg = await translateError('invalid_url', locale)
+      return NextResponse.json({ success: false, error: msg }, { status: 400 })
     }
 
     // Create auditId & init store
@@ -94,7 +86,7 @@ export async function POST(request: NextRequest) {
       }
     })()
 
-    return NextResponse.json({ auditId, status: 'processing' })
+    return NextResponse.json({ auditId, status: 'processing', locale })
 
   } catch (error) {
     console.error('SEO Audit Start Error:', error)

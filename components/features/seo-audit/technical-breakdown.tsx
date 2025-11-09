@@ -3,13 +3,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, AlertCircle, Clock, TrendingUp } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function TechnicalBreakdown() {
+  const t = useTranslations('featurePages.seoAudit.technicalBreakdown');
+  
   const items = [
-    { label: "Meta tags & titles", score: 92, status: "excellent", icon: CheckCircle },
-    { label: "Headings & content structure", score: 88, status: "good", icon: CheckCircle },
-    { label: "Core Web Vitals", score: 76, status: "needs-work", icon: AlertCircle },
-    { label: "Indexation health", score: 95, status: "excellent", icon: CheckCircle },
+    { label: t('items.metaTags'), score: 92, status: "excellent", icon: CheckCircle },
+    { label: t('items.headings'), score: 88, status: "good", icon: CheckCircle },
+    { label: t('items.coreWebVitals'), score: 76, status: "needs-work", icon: AlertCircle },
+    { label: t('items.indexation'), score: 95, status: "excellent", icon: CheckCircle },
   ];
 
   const getScoreColor = (score: number) => {
@@ -38,7 +41,7 @@ export default function TechnicalBreakdown() {
           transition={{ duration: 0.6 }}
           className="text-3xl lg:text-4xl font-bold text-foreground mb-8"
         >
-          Technical Breakdown
+          {t('header.title')}
         </motion.h2>
         
         <motion.div 
@@ -61,8 +64,8 @@ export default function TechnicalBreakdown() {
                 <TrendingUp className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">Overall SEO Score</h3>
-                <p className="text-sm text-muted-foreground">Based on technical analysis</p>
+                <h3 className="font-semibold text-foreground">{t('overallScore.title')}</h3>
+                <p className="text-sm text-muted-foreground">{t('overallScore.subtitle')}</p>
               </div>
             </div>
             <motion.div 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   Globe, 
   Folder, 
@@ -16,38 +17,40 @@ import {
 } from "lucide-react";
 
 export default function SiteArchitecture() {
+  const t = useTranslations('featurePages.siteCrawler.siteArchitecture');
+
   const architectureFeatures = [
     {
       icon: TreePine,
-      title: "Visual Site Mapping",
-      description: "Interactive tree visualization of your website structure",
-      benefits: ["Clear site hierarchy", "Navigation flow analysis", "Orphaned page detection"]
+      title: t('visualMapping'),
+      description: t('visualDesc'),
+      benefits: [t('visualBenefit1'), t('visualBenefit2'), t('visualBenefit3')]
     },
     {
       icon: Map,
-      title: "URL Structure Analysis",
-      description: "Comprehensive analysis of URL patterns and organization",
-      benefits: ["URL optimization tips", "Structure consistency", "SEO-friendly patterns"]
+      title: t('urlStructure'),
+      description: t('urlDesc'),
+      benefits: [t('urlBenefit1'), t('urlBenefit2'), t('urlBenefit3')]
     },
     {
       icon: Link,
-      title: "Internal Link Mapping",
-      description: "Visualize internal linking patterns and authority flow",
-      benefits: ["Link equity distribution", "Navigation improvements", "Content relationships"]
+      title: t('internalLinkMapping'),
+      description: t('internalDesc'),
+      benefits: [t('internalBenefit1'), t('internalBenefit2'), t('internalBenefit3')]
     },
     {
       icon: Search,
-      title: "Crawl Path Optimization",
-      description: "Identify the most efficient crawl paths for search engines",
-      benefits: ["Crawl budget optimization", "Priority page identification", "Indexation improvements"]
+      title: t('crawlPathOptimization'),
+      description: t('crawlPathDesc'),
+      benefits: [t('crawlBenefit1'), t('crawlBenefit2'), t('crawlBenefit3')]
     }
   ];
 
   const siteMetrics = [
-    { label: "Total Pages", value: "2,847", change: "+12%", color: "text-blue-600" },
-    { label: "Page Depth", value: "4.2 avg", change: "-8%", color: "text-green-600" },
-    { label: "Internal Links", value: "18,492", change: "+24%", color: "text-purple-600" },
-    { label: "Orphaned Pages", value: "23", change: "-31%", color: "text-orange-600" }
+    { label: t('totalPages'), value: "2,847", change: "+12%", color: "text-blue-600" },
+    { label: t('pageDepth'), value: "4.2 " + t('avgDepth'), change: "-8%", color: "text-green-600" },
+    { label: t('internalLinks'), value: "18,492", change: "+24%", color: "text-purple-600" },
+    { label: t('orphanedPages'), value: "23", change: "-31%", color: "text-orange-600" }
   ];
 
   return (
@@ -62,10 +65,10 @@ export default function SiteArchitecture() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Site Architecture Visualization
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interactive site mapping with visual hierarchy analysis and crawl path optimization
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -97,7 +100,7 @@ export default function SiteArchitecture() {
               </motion.div>
               <div className="text-sm text-muted-foreground mb-1">{metric.label}</div>
               <div className={`text-xs ${metric.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                {metric.change} vs last month
+                {metric.change} {t('vsLastMonth')}
               </div>
             </motion.div>
           ))}
@@ -114,7 +117,7 @@ export default function SiteArchitecture() {
           {/* Left: Features */}
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-6">
-              Interactive Site Mapping
+              {t('interactiveMapping')}
             </h3>
             <div className="space-y-6">
               {architectureFeatures.map((feature, index) => {
@@ -169,8 +172,8 @@ export default function SiteArchitecture() {
             className="bg-card rounded-2xl p-8 border"
           >
             <div className="text-center mb-6">
-              <h4 className="text-lg font-semibold text-foreground mb-2">Live Site Structure</h4>
-              <p className="text-sm text-muted-foreground">Real-time visualization of your website architecture</p>
+              <h4 className="text-lg font-semibold text-foreground mb-2">{t('liveSiteStructure')}</h4>
+              <p className="text-sm text-muted-foreground">{t('realTimeVisualization')}</p>
             </div>
 
             {/* Site Tree Diagram */}
@@ -185,13 +188,13 @@ export default function SiteArchitecture() {
               >
                 <div className="flex items-center bg-blue-100 dark:bg-blue-900/30 px-4 py-2 rounded-lg">
                   <Globe className="w-4 h-4 text-blue-600 mr-2" />
-                  <span className="text-sm font-medium">Homepage</span>
+                  <span className="text-sm font-medium">{t('homepage')}</span>
                 </div>
               </motion.div>
 
               {/* Level 1 */}
               <div className="flex justify-center space-x-4">
-                {['Products', 'About', 'Blog', 'Contact'].map((page, index) => (
+                {[t('products'), t('about'), t('blog'), t('contact')].map((page, index) => (
                   <motion.div
                     key={page}
                     initial={{ scale: 0, y: -20 }}
@@ -247,11 +250,11 @@ export default function SiteArchitecture() {
             <div className="mt-6 pt-6 border-t grid grid-cols-2 gap-4 text-center">
               <div>
                 <div className="text-lg font-bold text-foreground">4.2</div>
-                <div className="text-xs text-muted-foreground">Avg Depth</div>
+                <div className="text-xs text-muted-foreground">{t('avgDepth')}</div>
               </div>
               <div>
                 <div className="text-lg font-bold text-foreground">98%</div>
-                <div className="text-xs text-muted-foreground">Crawlable</div>
+                <div className="text-xs text-muted-foreground">{t('crawlable')}</div>
               </div>
             </div>
           </motion.div>
@@ -268,41 +271,41 @@ export default function SiteArchitecture() {
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                URL Structure Optimization
+                {t('urlOptimization')}
               </h3>
               <p className="text-muted-foreground mb-6">
-                Analyze and optimize your URL patterns for better SEO performance and user experience.
+                {t('urlOptimizationDesc')}
               </p>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <BarChart3 className="w-5 h-5 text-blue-500 mr-3" />
-                  <span className="text-sm">SEO-friendly URL pattern analysis</span>
+                  <span className="text-sm">{t('seoFriendlyPatterns')}</span>
                 </div>
                 <div className="flex items-center">
                   <Eye className="w-5 h-5 text-green-500 mr-3" />
-                  <span className="text-sm">User-friendly navigation structure</span>
+                  <span className="text-sm">{t('userFriendlyNav')}</span>
                 </div>
                 <div className="flex items-center">
                   <Search className="w-5 h-5 text-purple-500 mr-3" />
-                  <span className="text-sm">Search engine crawl optimization</span>
+                  <span className="text-sm">{t('searchEngineCrawl')}</span>
                 </div>
               </div>
             </div>
             
             <div className="bg-card rounded-xl p-6 border">
-              <h4 className="text-lg font-semibold text-foreground mb-4">URL Pattern Analysis</h4>
+              <h4 className="text-lg font-semibold text-foreground mb-4">{t('urlPatternAnalysis')}</h4>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-3 bg-green-500/10 rounded-lg">
                   <span className="text-sm font-mono">/products/category/item</span>
-                  <span className="text-xs text-green-400 font-medium">Optimized</span>
+                  <span className="text-xs text-green-400 font-medium">{t('optimized')}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-yellow-500/10 rounded-lg">
                   <span className="text-sm font-mono">/page.php?id=123&cat=5</span>
-                  <span className="text-xs text-yellow-400 font-medium">Needs Work</span>
+                  <span className="text-xs text-yellow-400 font-medium">{t('needsWork')}</span>
                 </div>
                 <div className="flex items-center justify-between p-3 bg-red-500/10 rounded-lg">
                   <span className="text-sm font-mono">/very/deep/nested/structure/page</span>
-                  <span className="text-xs text-red-400 font-medium">Too Deep</span>
+                  <span className="text-xs text-red-400 font-medium">{t('tooDeep')}</span>
                 </div>
               </div>
             </div>

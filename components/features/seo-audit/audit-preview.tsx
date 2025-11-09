@@ -3,26 +3,29 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { AlertTriangle, CheckCircle, Clock, ArrowRight, FileText, BarChart3, Target } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function AuditPreview() {
+  const t = useTranslations('featurePages.seoAudit.auditPreview');
+  
   const mockIssues = [
     {
       type: "critical",
-      title: "Missing meta descriptions",
+      title: t('mockIssues.metaDescriptions'),
       count: 12,
       icon: AlertTriangle,
       color: "text-red-500"
     },
     {
       type: "warning",
-      title: "Slow loading images",
+      title: t('mockIssues.slowImages'),
       count: 8,
       icon: Clock,
       color: "text-yellow-500"
     },
     {
       type: "success",
-      title: "Optimized headings",
+      title: t('mockIssues.optimizedHeadings'),
       count: 45,
       icon: CheckCircle,
       color: "text-green-500"
@@ -32,18 +35,18 @@ export default function AuditPreview() {
   const features = [
     {
       icon: Target,
-      title: "Priority matrix (Critical, High, Medium, Low)",
-      desc: "Issues ranked by impact and effort required"
+      title: t('features.priorityMatrix.title'),
+      desc: t('features.priorityMatrix.desc')
     },
     {
       icon: BarChart3,
-      title: "AI suggestions with implementation tips",
-      desc: "Actionable recommendations powered by machine learning"
+      title: t('features.aiSuggestions.title'),
+      desc: t('features.aiSuggestions.desc')
     },
     {
       icon: FileText,
-      title: "Benchmark vs. competitors",
-      desc: "See how you stack up against industry leaders"
+      title: t('features.benchmark.title'),
+      desc: t('features.benchmark.desc')
     }
   ];
 
@@ -57,11 +60,10 @@ export default function AuditPreview() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            See a preview of your audit
+            {t('header.title')}
           </h2>
           <p className="text-muted-foreground mb-8 text-lg">
-            We generate a clear, prioritized report you can share with your team. This  
-            includes issue summaries, examples from your pages, and step-by-step fixes. 
+            {t('header.subtitle')}
           </p>
           
           <div className="space-y-4">
@@ -100,8 +102,8 @@ export default function AuditPreview() {
           <div className="rounded-xl border bg-background p-6 shadow-lg relative overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-foreground">SEO Audit Report</h3>
-              <div className="text-sm text-muted-foreground">example.com</div>
+              <h3 className="text-lg font-semibold text-foreground">{t('report.title')}</h3>
+              <div className="text-sm text-muted-foreground">{t('report.domain')}</div>
             </div>
 
             {/* Overall Score */}
@@ -113,7 +115,7 @@ export default function AuditPreview() {
               className="text-center mb-6 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg"
             >
               <div className="text-3xl font-bold text-blue-600 mb-1">78</div>
-              <div className="text-sm text-muted-foreground">Overall SEO Score</div>
+              <div className="text-sm text-muted-foreground">{t('report.overallScore')}</div>
               <div className="w-full bg-muted rounded-full h-2 mt-2">
                 <motion.div
                   initial={{ width: 0 }}
@@ -127,7 +129,7 @@ export default function AuditPreview() {
 
             {/* Issues List */}
             <div className="space-y-3">
-              <h4 className="font-medium text-foreground mb-3">Key Issues Found</h4>
+              <h4 className="font-medium text-foreground mb-3">{t('report.keyIssues')}</h4>
               {mockIssues.map((issue, index) => {
                 const Icon = issue.icon;
                 return (
@@ -166,7 +168,7 @@ export default function AuditPreview() {
               className="mt-6 p-3 bg-primary/5 rounded-lg border border-primary/20"
             >
               <div className="text-sm text-center text-muted-foreground">
-                + 23 more insights and recommendations
+                {t('report.moreInsights')}
               </div>
             </motion.div>
           </div>

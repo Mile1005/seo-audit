@@ -1,20 +1,75 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
+import { locales, defaultLocale, type Locale } from './i18n';
+import { routing } from './lib/navigation';
 
-// Minimal middleware - let next.config.js handle redirects for better performance
+// Create next-intl middleware with routing configuration
+const intlMiddleware = createMiddleware(routing);
+
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl
+  const { pathname } = req.nextUrl;
 
-  // Skip all auth routes to prevent OAuth callback interference
-  if (pathname.startsWith('/api/auth')) {
-    return NextResponse.next()
+  // Skip all API routes including auth - they should not be localized
+  if (pathname.startsWith('/api')) {
+    return NextResponse.next();
   }
 
-  // All other redirects (www/non-www) are handled in next.config.mjs
-  // This keeps middleware lightweight and fast
-  return NextResponse.next()
+  // Skip other non-localized pages
+  const nonLocalizedPaths = ['/demo', '/careers', '/community', '/privacy', '/terms', '/status', '/share', '/onboarding'];
+  if (nonLocalizedPaths.some(path => pathname.startsWith(path))) {
+    return NextResponse.next();
+  }
+
+  // Skip static files and assets
+  if (
+    pathname.includes('/_next/') ||
+    pathname.includes('/favicon.ico') ||
+    pathname.match(/\.(svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|eot|otf)$/)
+  ) {
+    return NextResponse.next();
+  }
+
+  // Check if path starts with a locale prefix
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
+
+  // If path has locale prefix, use intl middleware for proper routing
+  if (pathnameHasLocale) {
+    // Note: Cookie-based redirects are disabled for now to allow manual testing
+    // When you're ready, uncomment the code below to auto-redirect based on user preference
+    
+    /* 
+    const localeCookie = req.cookies.get('NEXT_LOCALE');
+    
+    if (localeCookie?.value && locales.includes(localeCookie.value as Locale)) {
+      const preferredLocale = localeCookie.value as Locale;
+      const pathnameLocale = locales.find(
+        (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+      );
+      
+      // If user is on a different locale than their preference, redirect
+      if (pathnameLocale && pathnameLocale !== preferredLocale) {
+        const newPathname = pathname.replace(`/${pathnameLocale}`, `/${preferredLocale}`);
+        return NextResponse.redirect(new URL(newPathname, req.url));
+      }
+    }
+    */
+    
+    return intlMiddleware(req);
+  }
+
+  // For all other paths (without locale), let intl middleware handle it
+  // It will serve English content at root (/) and redirect non-English to /locale
+  return intlMiddleware(req);
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)).*)'],
-}
+  // Match all pathnames except API routes, static files, and assets
+  matcher: [
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    '/((?!api|_next|_vercel|.*\\..*).*)',
+  ],
+};

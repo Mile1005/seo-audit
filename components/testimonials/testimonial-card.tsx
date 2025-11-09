@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Star, Quote } from "lucide-react"
 import { type Testimonial } from "../../data/testimonials"
+import { useTranslations } from 'next-intl'
 
 interface TestimonialCardProps {
   testimonial: Testimonial
@@ -12,6 +13,7 @@ interface TestimonialCardProps {
 }
 
 export function TestimonialCard({ testimonial, isActive = false }: TestimonialCardProps) {
+  const t = useTranslations()
   const {
     name,
     title,
@@ -19,7 +21,7 @@ export function TestimonialCard({ testimonial, isActive = false }: TestimonialCa
     companyLogo,
     avatar,
     rating,
-    quote,
+    quoteKey,
     metric
   } = testimonial
 
@@ -59,7 +61,7 @@ export function TestimonialCard({ testimonial, isActive = false }: TestimonialCa
 
       {/* Quote */}
       <blockquote className="text-gray-200 text-lg leading-relaxed mb-6">
-        "{quote}"
+        "{t(quoteKey)}"
       </blockquote>
 
       {/* Metric Highlight */}
@@ -70,7 +72,7 @@ export function TestimonialCard({ testimonial, isActive = false }: TestimonialCa
               {metric.value}
             </div>
             <div className="text-sm text-gray-400">
-              {metric.description}
+              {t(metric.descriptionKey)}
             </div>
           </div>
           <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">

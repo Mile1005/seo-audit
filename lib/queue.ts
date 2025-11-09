@@ -42,6 +42,7 @@ export type AuditJobData = {
   pageUrl: string;
   targetKeyword?: string;
   email?: string;
+  locale?: string; // locale hint for worker/reporting
 };
 
 export async function addAuditJob(data: AuditJobData) {

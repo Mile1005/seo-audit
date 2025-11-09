@@ -12,6 +12,7 @@ import {
   FolderOpen
 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { LanguageSwitcher } from "@/components/layout/language-switcher"
 
 interface User {
   id: string
@@ -55,8 +56,12 @@ export function DashboardHeader({ user }: { user: User }) {
             </h1>
           </div>
 
-          {/* Project Switcher */}
+          {/* Right side controls */}
           <div className="flex items-center space-x-4">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+
+            {/* Project Switcher */}
             <div className="relative">
               <button
                 onClick={() => setIsProjectMenuOpen(!isProjectMenuOpen)}

@@ -3,55 +3,58 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle, Shield, Zap, Search, Globe, FileText, Code, Eye } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 // Simple grid of the 8 audit categories referenced on the feature page
 export default function AuditCategories() {
+  const t = useTranslations('featurePages.seoAudit.auditCategories');
+  
   const categories = [
     { 
-      title: "Technical SEO", 
-      desc: "Crawlability, indexation, canonicalization",
+      title: t('technical.title'),
+      desc: t('technical.desc'),
       icon: Code,
       gradient: "from-blue-500 to-purple-600"
     },
     { 
-      title: "On-Page SEO", 
-      desc: "Titles, metas, headings, internal linking",
+      title: t('onPage.title'),
+      desc: t('onPage.desc'),
       icon: FileText,
       gradient: "from-green-500 to-teal-600"
     },
     { 
-      title: "Performance", 
-      desc: "Core Web Vitals, speed, best practices",
+      title: t('performance.title'),
+      desc: t('performance.desc'),
       icon: Zap,
       gradient: "from-yellow-500 to-orange-600"
     },
     { 
-      title: "Indexing", 
-      desc: "Sitemaps, robots.txt, noindex, duplicates",
+      title: t('indexing.title'),
+      desc: t('indexing.desc'),
       icon: Search,
       gradient: "from-purple-500 to-pink-600"
     },
     { 
-      title: "Security", 
-      desc: "HTTPS, security headers, mixed content",
+      title: t('security.title'),
+      desc: t('security.desc'),
       icon: Shield,
       gradient: "from-red-500 to-rose-600"
     },
     { 
-      title: "Content", 
-      desc: "Thin/duplicate checks, readability, freshness",
+      title: t('content.title'),
+      desc: t('content.desc'),
       icon: Globe,
       gradient: "from-indigo-500 to-blue-600"
     },
     { 
-      title: "Structured Data", 
-      desc: "Schema.org coverage and validity",
+      title: t('structuredData.title'),
+      desc: t('structuredData.desc'),
       icon: CheckCircle,
       gradient: "from-emerald-500 to-green-600"
     },
     { 
-      title: "Accessibility", 
-      desc: "Alt text, landmarks, contrast, ARIA",
+      title: t('accessibility.title'),
+      desc: t('accessibility.desc'),
       icon: Eye,
       gradient: "from-cyan-500 to-blue-600"
     },
@@ -90,7 +93,7 @@ export default function AuditCategories() {
           transition={{ duration: 0.6 }}
           className="text-3xl lg:text-4xl font-bold text-foreground mb-10 text-center"
         >
-          What We Check
+          {t('header.title')}
         </motion.h2>
         <motion.div 
           variants={containerVariants}

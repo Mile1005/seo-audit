@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { 
   Brain, 
@@ -17,86 +18,87 @@ import {
 import { Button } from "../../ui/button";
 
 export default function HowAiWorks() {
+  const t = useTranslations('featurePages.aiAssistant.howItWorks');
   const [activeStep, setActiveStep] = useState(0);
 
   const steps = [
     {
       id: 0,
-      title: "Data Collection",
-      description: "Continuously gathering SEO signals from search engines, competitors, and industry trends",
+      title: t('steps.step1.title'),
+      description: t('steps.step1.description'),
       icon: Database,
       details: [
-        "Real-time SERP monitoring across 50+ countries",
-        "Technical crawling of 100M+ web pages daily",
-        "Algorithm update tracking and correlation analysis",
-        "User behavior and engagement pattern analysis"
+        t('steps.step1.detail1'),
+        t('steps.step1.detail2'),
+        t('steps.step1.detail3'),
+        t('steps.step1.detail4')
       ],
       metrics: {
-        dataPoints: "10M+",
-        updateFrequency: "Every 6 hours",
-        accuracy: "99.7%"
+        dataPoints: t('steps.step1.metrics.dataPoints'),
+        updateFrequency: t('steps.step1.metrics.updateFrequency'),
+        accuracy: t('steps.step1.metrics.accuracy')
       }
     },
     {
       id: 1,
-      title: "AI Analysis",
-      description: "Advanced machine learning models process patterns and identify optimization opportunities",
+      title: t('steps.step2.title'),
+      description: t('steps.step2.description'),
       icon: Brain,
       details: [
-        "Natural language processing for content analysis",
-        "Computer vision for technical SEO assessment",
-        "Predictive modeling for ranking forecasts",
-        "Anomaly detection for penalty identification"
+        t('steps.step2.detail1'),
+        t('steps.step2.detail2'),
+        t('steps.step2.detail3'),
+        t('steps.step2.detail4')
       ],
       metrics: {
-        models: "12",
-        processingTime: "< 30 seconds",
-        accuracy: "94.3%"
+        models: t('steps.step2.metrics.models'),
+        processingTime: t('steps.step2.metrics.processingTime'),
+        accuracy: t('steps.step2.metrics.accuracy')
       }
     },
     {
       id: 2,
-      title: "Personalization",
-      description: "Tailoring recommendations based on your specific website, industry, and business goals",
+      title: t('steps.step3.title'),
+      description: t('steps.step3.description'),
       icon: Target,
       details: [
-        "Website-specific technical architecture analysis",
-        "Industry-based competitive landscape mapping",
-        "Business goal alignment and priority scoring",
-        "Historical performance pattern recognition"
+        t('steps.step3.detail1'),
+        t('steps.step3.detail2'),
+        t('steps.step3.detail3'),
+        t('steps.step3.detail4')
       ],
       metrics: {
-        industries: "150+",
-        customization: "100%",
-        relevance: "96.8%"
+        industries: t('steps.step3.metrics.industries'),
+        customization: t('steps.step3.metrics.customization'),
+        relevance: t('steps.step3.metrics.relevance')
       }
     },
     {
       id: 3,
-      title: "Actionable Insights",
-      description: "Delivering clear, prioritized recommendations with implementation guidance",
+      title: t('steps.step4.title'),
+      description: t('steps.step4.description'),
       icon: Zap,
       details: [
-        "Step-by-step implementation instructions",
-        "Priority scoring based on impact vs effort",
-        "Success probability calculations",
-        "Timeline and resource requirement estimates"
+        t('steps.step4.detail1'),
+        t('steps.step4.detail2'),
+        t('steps.step4.detail3'),
+        t('steps.step4.detail4')
       ],
       metrics: {
-        recommendations: "2.3M+",
-        avgImpact: "+40%",
-        successRate: "87%"
+        recommendations: t('steps.step4.metrics.recommendations'),
+        avgImpact: t('steps.step4.metrics.avgImpact'),
+        successRate: t('steps.step4.metrics.successRate')
       }
     }
   ];
 
   const trainingData = [
-    { source: "Search Engine Patents", count: "2,500+", description: "Algorithm insights" },
-    { source: "Ranking Factor Studies", count: "500+", description: "Correlation analysis" },
-    { source: "Website Crawl Data", count: "100M+", description: "Technical patterns" },
-    { source: "SERP Monitoring", count: "1B+", description: "Ranking changes" },
-    { source: "Case Studies", count: "10K+", description: "Success patterns" },
-    { source: "User Interactions", count: "50M+", description: "Behavior insights" }
+    { source: t('training.source1.name'), count: t('training.source1.count'), description: t('training.source1.description') },
+    { source: t('training.source2.name'), count: t('training.source2.count'), description: t('training.source2.description') },
+    { source: t('training.source3.name'), count: t('training.source3.count'), description: t('training.source3.description') },
+    { source: t('training.source4.name'), count: t('training.source4.count'), description: t('training.source4.description') },
+    { source: t('training.source5.name'), count: t('training.source5.count'), description: t('training.source5.description') },
+    { source: t('training.source6.name'), count: t('training.source6.count'), description: t('training.source6.description') }
   ];
 
   return (
@@ -111,11 +113,10 @@ export default function HowAiWorks() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            How Our AI Works
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Our AI assistant is trained on the world's largest SEO dataset, continuously learning from 
-            search engine patterns and successful optimization strategies.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -185,7 +186,7 @@ export default function HowAiWorks() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h4 className="text-2xl font-bold text-foreground mb-4">
-                  {steps[activeStep].title} Deep Dive
+                  {steps[activeStep].title} {t('deepDive')}
                 </h4>
                 <ul className="space-y-3">
                   {steps[activeStep].details.map((detail, index) => (
@@ -198,7 +199,7 @@ export default function HowAiWorks() {
               </div>
               
               <div className="bg-muted/50 rounded-lg p-6">
-                <h5 className="font-semibold text-foreground mb-4">Key Metrics</h5>
+                <h5 className="font-semibold text-foreground mb-4">{t('keyMetrics')}</h5>
                 <div className="space-y-4">
                   {Object.entries(steps[activeStep].metrics).map(([key, value]) => (
                     <div key={key} className="flex justify-between items-center">
@@ -224,11 +225,10 @@ export default function HowAiWorks() {
         >
           <div className="text-center mb-8">
             <h3 className="text-2xl font-bold text-foreground mb-4">
-              Trained on the World's Largest SEO Dataset
+              {t('training.title')}
             </h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our AI models are continuously trained on diverse, high-quality data sources 
-              to ensure accurate and up-to-date recommendations.
+              {t('training.subtitle')}
             </p>
           </div>
           
@@ -260,7 +260,7 @@ export default function HowAiWorks() {
         >
           <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
             <Play className="w-5 h-5 mr-2" />
-            See AI in Action
+            {t('cta')}
           </Button>
         </motion.div>
       </div>

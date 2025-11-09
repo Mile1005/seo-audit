@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Mail, CheckCircle, AlertCircle, ArrowRight, Download } from "lucide-react"
 import { useLeadCapture } from "../../hooks/use-lead-capture"
+import { useTranslations } from "next-intl"
 
 export interface EmailCaptureInlineProps {
   source: string
@@ -22,14 +23,21 @@ export interface EmailCaptureInlineProps {
 
 export function EmailCaptureInline({
   source,
-  title = "Get Your Free SEO Checklist",
-  description = "Join 10,000+ marketers getting actionable SEO insights delivered weekly",
-  placeholder = "Enter your email address",
-  ctaText = "Get Free Checklist",
+  title,
+  description,
+  placeholder,
+  ctaText,
   variant = 'default',
   className = "",
   offer
 }: EmailCaptureInlineProps) {
+  const t = useTranslations('emailCapture')
+  
+  // Use translations as defaults if props not provided
+  const finalTitle = title || t('title')
+  const finalDescription = description || t('description')
+  const finalPlaceholder = placeholder || t('placeholder')
+  const finalCtaText = ctaText || t('ctaText')
   const [email, setEmail] = useState('')
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null)
   const emailInputRef = useRef<HTMLInputElement>(null)
@@ -94,14 +102,14 @@ export function EmailCaptureInline({
           <CheckCircle className="w-8 h-8 text-white" />
         </div>
         <h2 className="text-xl font-bold text-white mb-2">
-          Success! Check Your Email
+          {t('success.title')}
         </h2>
         <p className="text-gray-300 mb-4">
-          Your free SEO checklist is on its way. Don't forget to check your spam folder!
+          {t('success.message')}
         </p>
         <div className="flex items-center justify-center space-x-2 text-sm text-green-400">
           <Download className="w-4 h-4" />
-          <span>Download link sent to your email</span>
+          <span>{t('success.downloadHint')}</span>
         </div>
       </motion.div>
     )
@@ -130,10 +138,10 @@ export function EmailCaptureInline({
       {/* Header */}
       <div className="text-center mb-6">
         <h2 className="text-xl lg:text-2xl font-bold text-white mb-2">
-          {title}
+          {finalTitle}
         </h2>
         <p className="text-gray-300 text-sm lg:text-base">
-          {description}
+          {finalDescription}
         </p>
       </div>
 
@@ -148,13 +156,13 @@ export function EmailCaptureInline({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder={placeholder}
+            placeholder={finalPlaceholder}
             className={`
               w-full pl-10 pr-4 py-3 border rounded-xl transition-all duration-200
               focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500
               ${styles.input}
             `}
-            aria-label={placeholder}
+            aria-label={finalPlaceholder}
             aria-describedby="email-error"
             aria-invalid={result && !result.success ? 'true' : 'false'}
             disabled={isSubmitting}
@@ -194,11 +202,11 @@ export function EmailCaptureInline({
           {isSubmitting ? (
             <>
               <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-              <span>Sending...</span>
+              <span>{t('sending')}</span>
             </>
           ) : (
             <>
-              <span>{ctaText}</span>
+              <span>{finalCtaText}</span>
               <ArrowRight className="w-4 h-4" />
             </>
           )}
@@ -208,7 +216,7 @@ export function EmailCaptureInline({
       {/* Trust Signals */}
       <div className="mt-4 text-center">
         <p className="text-xs text-gray-400">
-          📧 No spam, unsubscribe anytime • 🔒 Your data is secure
+          {t('trustSignal')}
         </p>
       </div>
     </motion.div>

@@ -13,8 +13,10 @@ import {
   Calendar
 } from "lucide-react";
 import { Button } from "../../ui/button";
+import { useTranslations } from "next-intl";
 
 export default function SerpComparison() {
+  const t = useTranslations('featurePages.competitorAnalysis.serpComparison');
   const [selectedKeyword, setSelectedKeyword] = useState("seo audit tool");
   const [timeRange, setTimeRange] = useState("30d");
 
@@ -62,10 +64,10 @@ export default function SerpComparison() {
   const currentData = serpData.find(data => data.keyword === selectedKeyword);
 
   const performanceMetrics = [
-    { label: "Avg. Position", value: "4.2", change: "+1.8", positive: true },
-    { label: "Visibility Score", value: "78%", change: "+12%", positive: true },
-    { label: "Click Share", value: "23%", change: "+8%", positive: true },
-    { label: "Impressions", value: "45.2K", change: "+15%", positive: true }
+    { label: t('metrics.avgPosition'), value: "4.2", change: "+1.8", positive: true },
+    { label: t('metrics.visibility'), value: "78%", change: "+12%", positive: true },
+    { label: t('metrics.clickShare'), value: "23%", change: "+8%", positive: true },
+    { label: t('metrics.impressions'), value: "45.2K", change: "+15%", positive: true }
   ];
 
   return (
@@ -80,10 +82,10 @@ export default function SerpComparison() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            SERP Intelligence & Position Tracking
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Monitor keyword rankings across search engines and track competitor movements in real-time
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -181,15 +183,15 @@ export default function SerpComparison() {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">
-                  SERP Positions for "{selectedKeyword}"
+                  {t('serpTable.title', { keyword: selectedKeyword })}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Search Volume: {currentData?.volume.toLocaleString()} • Difficulty: {currentData?.difficulty}%
+                  {t('serpTable.volume', { volume: currentData?.volume.toLocaleString() || '0' })} • {t('serpTable.difficulty', { difficulty: currentData?.difficulty || 0 })}
                 </p>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-muted-foreground">Live Data</span>
+                <span className="text-sm text-muted-foreground">{t('serpTable.liveData')}</span>
               </div>
             </div>
           </div>
@@ -203,11 +205,11 @@ export default function SerpComparison() {
             <table className="w-full">
               <thead className="bg-muted/50">
                 <tr>
-                  <th className="text-left p-4 font-semibold text-foreground">Rank</th>
-                  <th className="text-left p-4 font-semibold text-foreground">Domain</th>
-                  <th className="text-center p-4 font-semibold text-foreground">Change</th>
-                  <th className="text-center p-4 font-semibold text-foreground">Trend</th>
-                  <th className="text-center p-4 font-semibold text-foreground">Est. Traffic</th>
+                  <th className="text-left p-4 font-semibold text-foreground">{t('serpTable.rank')}</th>
+                  <th className="text-left p-4 font-semibold text-foreground">{t('serpTable.domain')}</th>
+                  <th className="text-center p-4 font-semibold text-foreground">{t('serpTable.change')}</th>
+                  <th className="text-center p-4 font-semibold text-foreground">{t('serpTable.trend')}</th>
+                  <th className="text-center p-4 font-semibold text-foreground">{t('serpTable.estTraffic')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -235,7 +237,7 @@ export default function SerpComparison() {
                     <td className="p-4">
                       <div className="font-medium text-foreground">{competitor.name}</div>
                       {competitor.name === "yoursite.com" && (
-                        <div className="text-xs text-blue-600 font-medium">Your Site</div>
+                        <div className="text-xs text-blue-600 font-medium">{t('serpTable.yourSite')}</div>
                       )}
                     </td>
                     <td className="p-4 text-center">
@@ -284,14 +286,13 @@ export default function SerpComparison() {
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3">
                 <TrendingUp className="w-4 h-4 text-white" />
               </div>
-              <h4 className="font-semibold text-foreground">Opportunity</h4>
+              <h4 className="font-semibold text-foreground">{t('insights.opportunity.title')}</h4>
             </div>
             <p className="text-sm text-muted-foreground mb-3">
-              Your site moved up 2 positions for "{selectedKeyword}" this month. 
-              With improved content optimization, you could reach position #2.
+              {t('insights.opportunity.description', { keyword: selectedKeyword })}
             </p>
             <Button size="sm" variant="outline">
-              View Recommendations
+              {t('insights.opportunity.btn')}
             </Button>
           </div>
 
@@ -300,14 +301,13 @@ export default function SerpComparison() {
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                 <Eye className="w-4 h-4 text-white" />
               </div>
-              <h4 className="font-semibold text-foreground">Competitor Alert</h4>
+              <h4 className="font-semibold text-foreground">{t('insights.alert.title')}</h4>
             </div>
             <p className="text-sm text-muted-foreground mb-3">
-              "ahrefs.com" gained 1 position and "screaming-frog.co.uk" dropped. 
-              Monitor their content changes for competitive insights.
+              {t('insights.alert.description')}
             </p>
             <Button size="sm" variant="outline">
-              Set Alert
+              {t('insights.alert.btn')}
             </Button>
           </div>
         </motion.div>

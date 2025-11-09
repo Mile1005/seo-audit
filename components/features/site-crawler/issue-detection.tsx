@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   AlertTriangle, 
   AlertCircle, 
@@ -18,61 +19,63 @@ import {
 } from "lucide-react";
 
 export default function IssueDetection() {
+  const t = useTranslations('featurePages.siteCrawler.issueDetection');
+
   const issueCategories = [
     {
       icon: XCircle,
-      title: "Critical Issues",
+      title: t('criticalIssues'),
       count: 12,
       color: "text-red-500",
       bgColor: "bg-red-500/10",
       borderColor: "border-red-500/20",
       issues: [
-        "404 Error Pages",
-        "Broken Internal Links", 
-        "Missing Title Tags",
-        "Duplicate Content"
+        t('critical1'),
+        t('critical2'), 
+        t('critical3'),
+        t('critical4')
       ]
     },
     {
       icon: AlertTriangle,
-      title: "High Priority",
+      title: t('highPriority'),
       count: 28,
       color: "text-orange-500",
       bgColor: "bg-orange-500/10",
       borderColor: "border-orange-500/20",
       issues: [
-        "Slow Loading Pages",
-        "Missing Meta Descriptions",
-        "Large Image Files",
-        "Redirect Chains"
+        t('high1'),
+        t('high2'),
+        t('high3'),
+        t('high4')
       ]
     },
     {
       icon: AlertCircle,
-      title: "Medium Priority",
+      title: t('mediumPriority'),
       count: 45,
       color: "text-yellow-500",
       bgColor: "bg-yellow-500/10",
       borderColor: "border-yellow-500/20",
       issues: [
-        "Missing Alt Text",
-        "Long Page Titles",
-        "External Link Issues",
-        "Crawlability Problems"
+        t('medium1'),
+        t('medium2'),
+        t('medium3'),
+        t('medium4')
       ]
     },
     {
       icon: CheckCircle,
-      title: "Optimized",
+      title: t('optimized'),
       count: 156,
       color: "text-green-500",
       bgColor: "bg-green-500/10",
       borderColor: "border-green-500/20",
       issues: [
-        "Proper Title Tags",
-        "Optimized Images",
-        "Fast Loading Pages",
-        "Clean URL Structure"
+        t('opt1'),
+        t('opt2'),
+        t('opt3'),
+        t('opt4')
       ]
     }
   ];
@@ -80,39 +83,39 @@ export default function IssueDetection() {
   const detectionFeatures = [
     {
       icon: Link,
-      title: "Link Analysis",
-      description: "Comprehensive link health monitoring",
-      items: ["Broken internal links", "External link validation", "Redirect chain detection", "Orphaned pages"]
+      title: t('linkAnalysis'),
+      description: t('linkAnalysisDesc'),
+      items: [t('linkFeature1'), t('linkFeature2'), t('linkFeature3'), t('linkFeature4')]
     },
     {
       icon: Zap,
-      title: "Performance Issues",
-      description: "Page speed and optimization problems",
-      items: ["Core Web Vitals", "Large resource files", "Render-blocking resources", "Unused CSS/JS"]
+      title: t('performanceIssues'),
+      description: t('performanceDesc'),
+      items: [t('perfFeature1'), t('perfFeature2'), t('perfFeature3'), t('perfFeature4')]
     },
     {
       icon: Code,
-      title: "Technical SEO",
-      description: "Code-level SEO implementation issues",
-      items: ["Missing meta tags", "Improper heading structure", "Schema markup errors", "Canonical issues"]
+      title: t('technicalSeo'),
+      description: t('technicalDesc'),
+      items: [t('techFeature1'), t('techFeature2'), t('techFeature3'), t('techFeature4')]
     },
     {
       icon: Image,
-      title: "Content Optimization",
-      description: "Content and media optimization opportunities",
-      items: ["Image optimization", "Alt text missing", "Duplicate content", "Thin content pages"]
+      title: t('contentOptimization'),
+      description: t('contentDesc'),
+      items: [t('contentFeature1'), t('contentFeature2'), t('contentFeature3'), t('contentFeature4')]
     },
     {
       icon: Search,
-      title: "Crawlability",
-      description: "Search engine accessibility problems",
-      items: ["Robots.txt issues", "XML sitemap errors", "Noindex problems", "Crawl depth issues"]
+      title: t('crawlability'),
+      description: t('crawlabilityDesc'),
+      items: [t('crawlFeature1'), t('crawlFeature2'), t('crawlFeature3'), t('crawlFeature4')]
     },
     {
       icon: Shield,
-      title: "Security & Structure",
-      description: "Website security and structural issues",
-      items: ["HTTPS implementation", "Mixed content warnings", "URL structure problems", "Mobile usability"]
+      title: t('securityStructure'),
+      description: t('securityDesc'),
+      items: [t('secFeature1'), t('secFeature2'), t('secFeature3'), t('secFeature4')]
     }
   ];
 
@@ -128,10 +131,10 @@ export default function IssueDetection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            What Gets Detected
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            50+ issue types automatically identified and categorized by priority level with actionable solutions
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -249,25 +252,25 @@ export default function IssueDetection() {
           className="bg-card rounded-2xl p-8 border"
         >
           <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-foreground mb-2">Sample Issue Report</h3>
-            <p className="text-muted-foreground">Real-time issue identification with detailed context and solutions</p>
+            <h3 className="text-2xl font-bold text-foreground mb-2">{t('sampleReport')}</h3>
+            <p className="text-muted-foreground">{t('sampleSubtitle')}</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="text-lg font-semibold text-foreground mb-4 flex items-center">
                 <XCircle className="w-5 h-5 text-red-500 mr-2" />
-                Critical Issue Found
+                {t('criticalFound')}
               </h4>
               <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-4">
                 <div className="text-sm font-medium text-red-400 mb-2">
-                  404 Error on Important Page
+                  {t('error404')}
                 </div>
                 <div className="text-sm text-red-300 mb-3">
-                  /products/featured-item  Returns 404 status
+                  {t('errorDetail')}
                 </div>
                 <div className="text-xs text-red-400">
-                  Found on 12 pages  High traffic page  SEO impact: High
+                  {t('errorImpact')}
                 </div>
               </div>
             </div>
@@ -275,17 +278,17 @@ export default function IssueDetection() {
             <div>
               <h4 className="text-lg font-semibold text-foreground mb-4 flex items-center">
                 <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-                Suggested Solution
+                {t('suggestedSolution')}
               </h4>
               <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                 <div className="text-sm font-medium text-green-400 mb-2">
-                  Immediate Action Required
+                  {t('immediateAction')}
                 </div>
                 <ul className="text-sm text-green-300 space-y-1">
-                  <li> Check if page should exist or redirect</li>
-                  <li> Update internal links pointing to this URL</li>
-                  <li> Consider 301 redirect if content moved</li>
-                  <li> Remove links if page permanently deleted</li>
+                  <li>• {t('action1')}</li>
+                  <li>• {t('action2')}</li>
+                  <li>• {t('action3')}</li>
+                  <li>• {t('action4')}</li>
                 </ul>
               </div>
             </div>

@@ -1,7 +1,14 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:3000"],
+      "url": [
+        "http://localhost:3000",
+        "http://localhost:3000/fr",
+        "http://localhost:3000/it",
+        "http://localhost:3000/es",
+        "http://localhost:3000/id",
+        "http://localhost:3000/de"
+      ],
       "startServerCommand": "pnpm start",
       "startServerReadyPattern": "ready on",
       "numberOfRuns": 3

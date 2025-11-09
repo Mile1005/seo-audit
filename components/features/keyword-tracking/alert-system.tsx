@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   Bell, 
   TrendingUp, 
@@ -30,47 +31,48 @@ import {
 import { Button } from "../../ui/button";
 
 export default function AlertSystem() {
+  const t = useTranslations('featurePages.keywordTracking.alertSystem');
   const [selectedAlert, setSelectedAlert] = useState("ranking-changes");
   const [alertFilter, setAlertFilter] = useState("all");
 
   const alertTypes = [
     {
       id: "ranking-changes",
-      name: "Ranking Changes",
+      name: t('alertTypes.rankingChanges.name'),
       icon: TrendingUp,
-      description: "Position improvements or drops",
+      description: t('alertTypes.rankingChanges.description'),
       color: "blue",
       count: 23
     },
     {
       id: "traffic-anomalies",
-      name: "Traffic Anomalies",
+      name: t('alertTypes.trafficAnomalies.name'),
       icon: Activity,
-      description: "Unusual traffic patterns",
+      description: t('alertTypes.trafficAnomalies.description'),
       color: "green",
       count: 8
     },
     {
       id: "competitor-moves",
-      name: "Competitor Moves",
+      name: t('alertTypes.competitorMoves.name'),
       icon: Users,
-      description: "Competitor ranking changes",
+      description: t('alertTypes.competitorMoves.description'),
       color: "purple",
       count: 15
     },
     {
       id: "serp-features",
-      name: "SERP Features",
-      description: "New feature opportunities",
+      name: t('alertTypes.serpFeatures.name'),
+      description: t('alertTypes.serpFeatures.description'),
       icon: Eye,
       color: "orange",
       count: 12
     },
     {
       id: "technical-issues",
-      name: "Technical Issues",
+      name: t('alertTypes.technicalIssues.name'),
       icon: AlertTriangle,
-      description: "Crawl errors and issues",
+      description: t('alertTypes.technicalIssues.description'),
       color: "red",
       count: 3
     }
@@ -81,10 +83,10 @@ export default function AlertSystem() {
       id: 1,
       type: "ranking-changes",
       severity: "high",
-      title: "Major ranking improvement detected",
-      description: "5 keywords moved to first page positions",
+      title: t('recentAlerts.alert1.title'),
+      description: t('recentAlerts.alert1.description'),
       keywords: ["seo audit tool", "website analysis", "technical seo"],
-      timestamp: "2 minutes ago",
+      timestamp: t('recentAlerts.alert1.timestamp'),
       change: +5,
       icon: TrendingUp,
       status: "unread"
@@ -93,10 +95,10 @@ export default function AlertSystem() {
       id: 2,
       type: "competitor-moves",
       severity: "medium",
-      title: "Competitor overtook your position",
-      description: "semrush.com moved above you for 'seo analysis'",
+      title: t('recentAlerts.alert2.title'),
+      description: t('recentAlerts.alert2.description'),
       keywords: ["seo analysis"],
-      timestamp: "15 minutes ago",
+      timestamp: t('recentAlerts.alert2.timestamp'),
       change: -2,
       icon: Users,
       status: "read"
@@ -105,10 +107,10 @@ export default function AlertSystem() {
       id: 3,
       type: "serp-features",
       severity: "medium",
-      title: "Featured snippet opportunity",
-      description: "New PAA box appeared for tracked keywords",
+      title: t('recentAlerts.alert3.title'),
+      description: t('recentAlerts.alert3.description'),
       keywords: ["how to do seo audit", "seo audit checklist"],
-      timestamp: "1 hour ago",
+      timestamp: t('recentAlerts.alert3.timestamp'),
       change: 0,
       icon: Eye,
       status: "unread"
@@ -117,10 +119,10 @@ export default function AlertSystem() {
       id: 4,
       type: "traffic-anomalies",
       severity: "high",
-      title: "Traffic spike detected",
-      description: "156% increase in organic traffic from mobile",
+      title: t('recentAlerts.alert4.title'),
+      description: t('recentAlerts.alert4.description'),
       keywords: ["mobile seo", "responsive design"],
-      timestamp: "3 hours ago",
+      timestamp: t('recentAlerts.alert4.timestamp'),
       change: +156,
       icon: Activity,
       status: "read"
@@ -129,10 +131,10 @@ export default function AlertSystem() {
       id: 5,
       type: "technical-issues",
       severity: "critical",
-      title: "Crawl errors increased",
-      description: "12 new 404 errors found on your website",
+      title: t('recentAlerts.alert5.title'),
+      description: t('recentAlerts.alert5.description'),
       keywords: [],
-      timestamp: "6 hours ago",
+      timestamp: t('recentAlerts.alert5.timestamp'),
       change: -12,
       icon: AlertTriangle,
       status: "unread"
@@ -142,33 +144,33 @@ export default function AlertSystem() {
   const notificationChannels = [
     {
       id: "email",
-      name: "Email",
+      name: t('channels.email.name'),
       icon: Mail,
-      description: "Get alerts via email",
+      description: t('channels.email.description'),
       enabled: true,
       frequency: "instant"
     },
     {
       id: "push",
-      name: "Push Notifications",
+      name: t('channels.push.name'),
       icon: Smartphone,
-      description: "Browser and mobile push",
+      description: t('channels.push.description'),
       enabled: true,
       frequency: "instant"
     },
     {
       id: "slack",
-      name: "Slack",
+      name: t('channels.slack.name'),
       icon: Slack,
-      description: "Team collaboration alerts",
+      description: t('channels.slack.description'),
       enabled: false,
       frequency: "daily"
     },
     {
       id: "webhook",
-      name: "Webhook",
+      name: t('channels.webhook.name'),
       icon: Globe,
-      description: "Custom integrations",
+      description: t('channels.webhook.description'),
       enabled: false,
       frequency: "instant"
     }
@@ -176,27 +178,27 @@ export default function AlertSystem() {
 
   const alertSettings = [
     {
-      category: "Ranking Thresholds",
+      category: t('alertSettings.rankingThresholds.title'),
       settings: [
-        { name: "Position changes", value: "±3 positions", description: "Alert when ranking changes by 3+ positions" },
-        { name: "First page entries", value: "Enabled", description: "Alert when keywords enter top 10" },
-        { name: "Top 3 achievements", value: "Enabled", description: "Alert when reaching top 3 positions" }
+        { name: t('alertSettings.rankingThresholds.positionChanges.name'), value: t('alertSettings.rankingThresholds.positionChanges.value'), description: t('alertSettings.rankingThresholds.positionChanges.description') },
+        { name: t('alertSettings.rankingThresholds.firstPageEntries.name'), value: t('alertSettings.rankingThresholds.firstPageEntries.value'), description: t('alertSettings.rankingThresholds.firstPageEntries.description') },
+        { name: t('alertSettings.rankingThresholds.top3Achievements.name'), value: t('alertSettings.rankingThresholds.top3Achievements.value'), description: t('alertSettings.rankingThresholds.top3Achievements.description') }
       ]
     },
     {
-      category: "Traffic Alerts",
+      category: t('alertSettings.trafficAlerts.title'),
       settings: [
-        { name: "Traffic anomalies", value: "±25%", description: "Alert on significant traffic changes" },
-        { name: "CTR changes", value: "±15%", description: "Alert on click-through rate changes" },
-        { name: "Impression changes", value: "±30%", description: "Alert on search impression changes" }
+        { name: t('alertSettings.trafficAlerts.trafficAnomalies.name'), value: t('alertSettings.trafficAlerts.trafficAnomalies.value'), description: t('alertSettings.trafficAlerts.trafficAnomalies.description') },
+        { name: t('alertSettings.trafficAlerts.ctrChanges.name'), value: t('alertSettings.trafficAlerts.ctrChanges.value'), description: t('alertSettings.trafficAlerts.ctrChanges.description') },
+        { name: t('alertSettings.trafficAlerts.impressionChanges.name'), value: t('alertSettings.trafficAlerts.impressionChanges.value'), description: t('alertSettings.trafficAlerts.impressionChanges.description') }
       ]
     },
     {
-      category: "Competitor Monitoring",
+      category: t('alertSettings.competitorMonitoring.title'),
       settings: [
-        { name: "New competitors", value: "Enabled", description: "Alert when new competitors appear" },
-        { name: "Position overtakes", value: "Enabled", description: "Alert when competitors overtake you" },
-        { name: "SERP feature wins", value: "Enabled", description: "Alert when competitors win features" }
+        { name: t('alertSettings.competitorMonitoring.newCompetitors.name'), value: t('alertSettings.competitorMonitoring.newCompetitors.value'), description: t('alertSettings.competitorMonitoring.newCompetitors.description') },
+        { name: t('alertSettings.competitorMonitoring.positionOvertakes.name'), value: t('alertSettings.competitorMonitoring.positionOvertakes.value'), description: t('alertSettings.competitorMonitoring.positionOvertakes.description') },
+        { name: t('alertSettings.competitorMonitoring.serpFeatureWins.name'), value: t('alertSettings.competitorMonitoring.serpFeatureWins.value'), description: t('alertSettings.competitorMonitoring.serpFeatureWins.description') }
       ]
     }
   ];
@@ -233,11 +235,10 @@ export default function AlertSystem() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Smart Alert System
+            {t('header.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Stay informed with intelligent alerts for ranking changes, traffic anomalies, 
-            competitor moves, and technical issues. Never miss important SEO developments.
+            {t('header.subtitle')}
           </p>
         </motion.div>
 
@@ -304,14 +305,14 @@ export default function AlertSystem() {
                 onChange={(e) => setAlertFilter(e.target.value)}
                 className="bg-muted border border-border rounded-lg px-3 py-2 text-sm text-foreground"
               >
-                <option value="all">All Alerts</option>
-                <option value="unread">Unread</option>
-                <option value="read">Read</option>
+                <option value="all">{t('alertFeed.filter.all')}</option>
+                <option value="unread">{t('alertFeed.filter.unread')}</option>
+                <option value="read">{t('alertFeed.filter.read')}</option>
               </select>
               
               <Button variant="outline" size="sm">
                 <Settings className="w-4 h-4 mr-2" />
-                Settings
+                {t('alertFeed.settings')}
               </Button>
             </div>
           </div>
@@ -390,7 +391,7 @@ export default function AlertSystem() {
         >
           {/* Channels */}
           <div className="bg-card rounded-xl border p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6">Notification Channels</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-6">{t('notificationChannels.title')}</h3>
             <div className="space-y-4">
               {notificationChannels.map((channel, index) => {
                 const Icon = channel.icon;
@@ -427,7 +428,7 @@ export default function AlertSystem() {
 
           {/* Alert Settings */}
           <div className="bg-card rounded-xl border p-6">
-            <h3 className="text-xl font-semibold text-foreground mb-6">Alert Configuration</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-6">{t('configuration.title')}</h3>
             <div className="space-y-6">
               {alertSettings.map((category, categoryIndex) => (
                 <div key={category.category}>
@@ -466,20 +467,19 @@ export default function AlertSystem() {
           <div className="bg-card border rounded-xl p-8">
             <Zap className="w-16 h-16 text-orange-600 mx-auto mb-6" />
             <h3 className="text-2xl font-bold text-foreground mb-4">
-              Never Miss Critical SEO Changes
+              {t('cta.title')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Set up intelligent alerts and stay ahead of ranking changes, technical issues, 
-              and competitor moves with our advanced monitoring system.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700">
                 <Bell className="w-5 h-5 mr-2" />
-                Setup Smart Alerts
+                {t('cta.setup')}
               </Button>
               <Button variant="outline" size="lg">
                 <Settings className="w-5 h-5 mr-2" />
-                Configure Notifications
+                {t('cta.configure')}
               </Button>
             </div>
           </div>

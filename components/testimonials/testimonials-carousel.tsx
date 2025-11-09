@@ -6,8 +6,10 @@ import { ChevronLeft, ChevronRight, Play, Pause, Users, Award } from "lucide-rea
 import { TestimonialCard } from "./testimonial-card"
 import { CaseStudyPreview } from "./case-study-preview"
 import { testimonials, getTestimonialsWithCaseStudies } from "../../data/testimonials"
+import { useTranslations } from 'next-intl'
 
 export function TestimonialsCarousel() {
+  const t = useTranslations('home.testimonials')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
   const [isHovered, setIsHovered] = useState(false)
@@ -70,22 +72,21 @@ export function TestimonialsCarousel() {
         >
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full px-4 py-2 text-sm mb-6">
             <Users className="w-4 h-4 text-blue-400" />
-            <span className="text-blue-300">Customer Success Stories</span>
+            <span className="text-blue-300">{t('badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              Real Results from
+              {t('title1')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              Real Customers
+              {t('title2')}
             </span>
           </h2>
 
           <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto">
-            Join thousands of businesses that have transformed their SEO performance with 
-            actionable insights and measurable results.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -100,7 +101,7 @@ export function TestimonialsCarousel() {
                 whileTap={{ scale: 0.95 }}
                 onClick={togglePlayPause}
                 className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label={isPlaying ? "Pause carousel" : "Play carousel"}
+                aria-label={isPlaying ? t('aria.pause') : t('aria.play')}
               >
                 {isPlaying ? (
                   <Pause className="w-4 h-4 text-white" />
@@ -122,7 +123,7 @@ export function TestimonialsCarousel() {
                 whileTap={{ scale: 0.95 }}
                 onClick={goToPrevious}
                 className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Previous testimonial"
+                aria-label={t('aria.previous')}
               >
                 <ChevronLeft className="w-5 h-5 text-white" />
               </motion.button>
@@ -132,7 +133,7 @@ export function TestimonialsCarousel() {
                 whileTap={{ scale: 0.95 }}
                 onClick={goToNext}
                 className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 rounded-full p-3 transition-all duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
-                aria-label="Next testimonial"
+                aria-label={t('aria.next')}
               >
                 <ChevronRight className="w-5 h-5 text-white" />
               </motion.button>
@@ -145,7 +146,7 @@ export function TestimonialsCarousel() {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             role="region"
-            aria-label="Customer testimonials carousel"
+            aria-label={t('aria.carousel')}
             aria-live="polite"
             aria-atomic="false"
           >
@@ -182,7 +183,7 @@ export function TestimonialsCarousel() {
                       ? 'bg-purple-500 w-8' 
                       : 'bg-gray-600 hover:bg-gray-500'
                   }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  aria-label={t('aria.goTo', { number: index + 1 })}
                 />
               ))}
             </div>
@@ -199,7 +200,7 @@ export function TestimonialsCarousel() {
                     ? 'bg-purple-500 scale-125' 
                     : 'bg-gray-600 hover:bg-gray-500'
                 }`}
-                aria-label={`Go to testimonial ${index + 1}`}
+                aria-label={t('aria.goTo', { number: index + 1 })}
               />
             ))}
           </div>
@@ -216,22 +217,21 @@ export function TestimonialsCarousel() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-full px-4 py-2 text-sm mb-6">
               <Award className="w-4 h-4 text-purple-400" />
-              <span className="text-purple-300">Detailed Case Studies</span>
+              <span className="text-purple-300">{t('caseStudies.badge')}</span>
             </div>
 
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
               <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-                Dive Deeper into
+                {t('caseStudies.title1')}
               </span>
               <br />
               <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Success Stories
+                {t('caseStudies.title2')}
               </span>
             </h3>
 
             <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">
-              Explore detailed breakdowns of how our customers achieved 
-              transformational SEO results.
+              {t('caseStudies.subtitle')}
             </p>
           </div>
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 import { 
   ChartBarIcon,
   EyeIcon,
@@ -18,6 +19,7 @@ import DashboardEmptyState from './DashboardEmptyState'
 import LatestAuditWidget from './LatestAuditWidget'
 
 export default function DashboardOverview() {
+  const t = useTranslations('dashboard')
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState<any>(null)
   const [recentActivity, setRecentActivity] = useState<any[]>([])
@@ -223,21 +225,21 @@ export default function DashboardOverview() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Health Score */}
         <MetricWidget
-          title="Health Score"
+          title={t('cards.healthScore.title')}
           value={data.metrics.healthScore}
           change={{ value: 8.5, type: 'increase', period: '30d' }}
           icon={<ChartBarIcon className="w-5 h-5 text-blue-600" />}
-          description="Overall website health based on technical SEO factors"
+          description={t('cards.healthScore.description')}
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Run your first SEO audit to see health metrics
+                {t('cards.healthScore.empty')}
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-                  Run First Audit
+                  {t('cards.healthScore.cta')}
                 </button>
               </a>
             </div>
@@ -248,15 +250,15 @@ export default function DashboardOverview() {
                 max={100} 
                 color="green" 
                 showLabel 
-                label="Score"
+                label={t('cards.healthScore.scoreLabel')}
               />
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">Critical Issues</span>
-                <StatusBadge status="warning" size="sm">{data.metrics.audits.criticalIssues} found</StatusBadge>
+                <span className="text-slate-600 dark:text-slate-400">{t('cards.issues.critical')}</span>
+                <StatusBadge status="warning" size="sm">{data.metrics.audits.criticalIssues} {t('cards.common.found')}</StatusBadge>
               </div>
               <a href="/dashboard/audit">
                 <button className="w-full mt-2 px-3 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                  View Latest Audit →
+                  {t('cards.healthScore.viewLatest')}
                 </button>
               </a>
             </div>
@@ -265,29 +267,29 @@ export default function DashboardOverview() {
 
         {/* Search Visibility */}
         <MetricWidget
-          title="Search Visibility"
+          title={t('cards.searchVisibility.title')}
           value={data.metrics.searchVisibility}
           change={{ value: 12.3, type: 'increase', period: '30d' }}
           icon={<EyeIcon className="w-5 h-5 text-emerald-600" />}
-          description="Percentage of search traffic your site captures"
+          description={t('cards.searchVisibility.description')}
           loading={isDataLoading}
         >
           {!gscConnected ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Connect Google Search Console to view real search data
+                {t('cards.searchVisibility.connectHelp')}
               </p>
               <button 
                 onClick={handleGscConnect}
                 disabled={gscLoading}
                 className="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {gscLoading ? 'Connecting...' : 'Set Up GSC'}
+                {gscLoading ? t('gsc.connecting') : t('cards.searchVisibility.cta')}
               </button>
             </div>
           ) : (
             <div className="space-y-2">
-              <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">7-day trend</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">{t('cards.searchVisibility.trend')}</div>
               <Sparkline data={data.trends.keywords} color="green" />
             </div>
           )}
@@ -295,32 +297,32 @@ export default function DashboardOverview() {
 
         {/* Top Keywords */}
         <MetricWidget
-          title="Tracked Keywords"
+          title={t('cards.keywords.title')}
           value={data.metrics.keywords.total}
           change={data.metrics.keywords.total > 0 ? { value: data.metrics.keywords.improved, type: 'increase', period: '30d' } : undefined}
           icon={<MagnifyingGlassIcon className="w-5 h-5 text-purple-600" />}
-          description="Total number of keywords being monitored"
+          description={t('cards.keywords.description')}
           loading={isDataLoading}
         >
           {data.metrics.keywords.total === 0 ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Start tracking keyword rankings
+                {t('cards.keywords.empty')}
               </p>
               <a href="/dashboard/keywords">
                 <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
-                  Add Keywords
+                  {t('cards.keywords.cta')}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Top 10 positions</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.keywords.top10')}</span>
                 <StatusBadge status="success" size="sm">{data.metrics.keywords.top10}</StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Improved (30d)</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.keywords.improved30')}</span>
                 <StatusBadge status="info" size="sm">{data.metrics.keywords.improved}</StatusBadge>
               </div>
             </div>
@@ -329,32 +331,32 @@ export default function DashboardOverview() {
 
         {/* Backlinks */}
         <MetricWidget
-          title="Total Backlinks"
+          title={t('cards.backlinks.title')}
           value={data.metrics.backlinks.total}
           change={data.metrics.backlinks.total > 0 ? { value: data.metrics.backlinks.newThisMonth, type: 'increase', period: '30d' } : undefined}
           icon={<LinkIcon className="w-5 h-5 text-indigo-600" />}
-          description="Number of external sites linking to your website"
+          description={t('cards.backlinks.description')}
           loading={isDataLoading}
         >
           {data.metrics.backlinks.total === 0 ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Monitor your backlink profile
+                {t('cards.backlinks.empty')}
               </p>
               <a href="/dashboard/backlinks">
                 <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
-                  View Backlinks
+                  {t('cards.backlinks.cta')}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Referring domains</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.backlinks.refDomains')}</span>
                 <span className="text-sm font-medium text-slate-900 dark:text-white">{data.metrics.backlinks.referringDomains}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">New this month</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.backlinks.newThisMonth')}</span>
                 <StatusBadge status="success" size="sm">+{data.metrics.backlinks.newThisMonth}</StatusBadge>
               </div>
             </div>
@@ -363,35 +365,35 @@ export default function DashboardOverview() {
 
         {/* Technical SEO - Replaces Organic Traffic */}
         <MetricWidget
-          title="Technical SEO"
+          title={t('cards.technicalSeo.title')}
           value={hasAudits ? data.metrics.healthScore : 0}
           change={hasAudits ? { value: 8.5, type: 'increase', period: '7d' } : undefined}
           icon={<ChartBarIcon className="w-5 h-5 text-blue-600" />}
-          description="Technical optimization score from latest audit"
+          description={t('cards.technicalSeo.description')}
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Run audit to see technical metrics
+                {t('cards.technicalSeo.empty')}
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-                  Run Audit
+                  {t('cards.technicalSeo.cta')}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">SEO Score</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.technicalSeo.seoScore')}</span>
                 <StatusBadge status={data.metrics.healthScore >= 80 ? 'success' : 'warning'} size="sm">
                   {data.metrics.healthScore}/100
                 </StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Performance</span>
-                <StatusBadge status="info" size="sm">Good</StatusBadge>
+                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.technicalSeo.performance')}</span>
+                <StatusBadge status="info" size="sm">{t('cards.technicalSeo.performanceGood')}</StatusBadge>
               </div>
             </div>
           )}
@@ -399,41 +401,41 @@ export default function DashboardOverview() {
 
         {/* All Issues */}
         <MetricWidget
-          title="SEO Issues"
+          title={t('cards.issues.title')}
           value={data.metrics.audits.total}
           change={hasAudits ? { value: -5, type: 'decrease', period: '7d' } : undefined}
           icon={<ExclamationTriangleIcon className="w-5 h-5 text-red-600" />}
-          description="Issues found in latest audit"
+          description={t('cards.issues.description')}
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Run audit to identify SEO issues
+                {t('cards.issues.empty')}
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
-                  Run First Audit
+                  {t('cards.healthScore.cta')}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Critical</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{t('cards.issues.critical')}</span>
                 <StatusBadge status="error" size="sm">{data.metrics.audits.criticalIssues}</StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Warnings</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{t('cards.issues.warnings')}</span>
                 <StatusBadge status="warning" size="sm">{data.metrics.audits.warnings}</StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Notices</span>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{t('cards.issues.notices')}</span>
                 <StatusBadge status="info" size="sm">{Math.max(0, data.metrics.audits.total - data.metrics.audits.criticalIssues - data.metrics.audits.warnings)}</StatusBadge>
               </div>
               <a href="/dashboard/audit">
                 <button className="w-full mt-3 px-3 py-2 text-xs font-medium bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
-                  View All Issues →
+                  {t('cards.issues.viewAll')}
                 </button>
               </a>
             </div>
@@ -447,7 +449,7 @@ export default function DashboardOverview() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Quick Actions</h3>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">{t('quickActions.title')}</h3>
           <div className="space-y-3">
             <a href="/dashboard/audit" className="block">
               <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
@@ -455,9 +457,9 @@ export default function DashboardOverview() {
                   <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-900/40 transition-colors">
                     <DocumentMagnifyingGlassIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">Run Site Audit</span>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">{t('quickActions.runAudit')}</span>
                 </div>
-                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">Free</span>
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{t('quickActions.free')}</span>
               </button>
             </a>
             
@@ -467,9 +469,9 @@ export default function DashboardOverview() {
                   <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/40 transition-colors">
                     <MagnifyingGlassIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">Add Keywords</span>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">{t('quickActions.addKeywords')}</span>
                 </div>
-                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Pro</span>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">{t('quickActions.pro')}</span>
               </button>
             </a>
             
@@ -479,9 +481,9 @@ export default function DashboardOverview() {
                   <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-900/40 transition-colors">
                     <UsersIcon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">Analyze Competitors</span>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">{t('quickActions.analyzeCompetitors')}</span>
                 </div>
-                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">Pro</span>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">{t('quickActions.pro')}</span>
               </button>
             </a>
           </div>
@@ -489,7 +491,7 @@ export default function DashboardOverview() {
 
         {/* Recent Activity */}
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Recent Activity</h3>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">{t('recentActivity.title')}</h3>
           <div className="space-y-4">
             {recentActivity && recentActivity.length > 0 ? (
               recentActivity.map((activity: any, index: number) => (
@@ -509,13 +511,9 @@ export default function DashboardOverview() {
               ))
             ) : (
               <div className="text-center py-6">
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  No recent activity. Run your first audit to get started!
-                </p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">{t('recentActivity.empty')}</p>
                 <a href="/dashboard/audit" className="inline-block mt-3">
-                  <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                    Run First Audit
-                  </button>
+                  <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">{t('cards.healthScore.cta')}</button>
                 </a>
               </div>
             )}
@@ -542,13 +540,13 @@ export default function DashboardOverview() {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                Google Search Console
-                {gscConnected && <span className="ml-2 text-sm font-normal text-emerald-600 dark:text-emerald-400">● Connected</span>}
+                {t('gsc.title')}
+                {gscConnected && <span className="ml-2 text-sm font-normal text-emerald-600 dark:text-emerald-400">● {t('gsc.connected')}</span>}
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
                 {gscConnected 
-                  ? 'Access real-time search analytics and performance data'
-                  : 'Connect to view search analytics, impressions, and click data'
+                  ? t('gsc.connectedDesc')
+                  : t('gsc.disconnectedDesc')
                 }
               </p>
               {gscError && (
@@ -565,7 +563,7 @@ export default function DashboardOverview() {
                 disabled={gscLoading}
                 className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {gscLoading ? 'Disconnecting...' : 'Disconnect'}
+                {gscLoading ? t('gsc.disconnecting') : t('gsc.disconnect')}
               </button>
             ) : (
               <button 
@@ -573,7 +571,7 @@ export default function DashboardOverview() {
                 disabled={gscLoading}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {gscLoading ? 'Connecting...' : 'Connect'}
+                {gscLoading ? t('gsc.connecting') : t('gsc.connect')}
               </button>
             )}
           </div>

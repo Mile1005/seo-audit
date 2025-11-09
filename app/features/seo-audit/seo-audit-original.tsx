@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2, Search } from 'lucide-react'
 import { MainLayout } from '../../../components/layout/main-layout'
@@ -127,6 +128,30 @@ interface SEOAuditResult {
 }
 
 export default function SEOAuditFeaturePage() {
+  const t = useTranslations('featurePages.seoAudit');
+  const steps = [
+    {
+      step: "1",
+      title: t('howItWorks.step1.title'),
+      description: t('howItWorks.step1.description'),
+      icon: Target,
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      step: "2",
+      title: t('howItWorks.step2.title'),
+      description: t('howItWorks.step2.description'),
+      icon: Zap,
+      color: "from-purple-500 to-violet-500"
+    },
+    {
+      step: "3",
+      title: t('howItWorks.step3.title'),
+      description: t('howItWorks.step3.description'),
+      icon: BarChart,
+      color: "from-green-500 to-emerald-500"
+    }
+  ];
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
   const [keyword, setKeyword] = useState("");
@@ -167,14 +192,15 @@ export default function SEOAuditFeaturePage() {
     
     if (!validateForm()) {
       console.log('Form validation failed');
-      return;
-    }
-
-    setShowResults(false);
-    setAuditResult(null);
-    
-    console.log('Starting API call...');
-    
+      return (
+        <MainLayout>
+          <div className="min-h-screen bg-background overflow-x-hidden">
+          {/* Breadcrumbs */}
+          ...existing code...
+          </div>
+        </MainLayout>
+      );
+  }
     try {
       const result = await submit(
         (data) => {
@@ -234,9 +260,9 @@ export default function SEOAuditFeaturePage() {
     return 'Poor';
   };
 
-  return (
-    <MainLayout>
-      <div className="min-h-screen bg-background overflow-x-hidden">
+    return (
+      <MainLayout>
+        <div className="min-h-screen bg-background overflow-x-hidden">
         {/* Breadcrumbs */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <Breadcrumbs
@@ -261,14 +287,14 @@ export default function SEOAuditFeaturePage() {
               <div className="space-y-4">
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">
                   <Zap className="w-4 h-4 mr-2" />
-                  AI-Powered Analysis
+                  {t('hero.badge')}
                 </div>
                 <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight">
-                  Comprehensive SEO Audit in 
-                  <span className="text-primary"> Under 3 Minutes</span>
+                  {t('hero.title')}
+                  <span className="text-primary"> {t('hero.titleHighlight')}</span>
                 </h1>
                 <p className="text-xl text-muted-foreground">
-                  47+ technical checks, AI recommendations, and actionable insights to boost your search rankings and drive more organic traffic.
+                  {t('hero.subtitle')}
                 </p>
               </div>
 
@@ -276,19 +302,19 @@ export default function SEOAuditFeaturePage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-muted-foreground">47+ Technical Checks</span>
+                  <span className="text-sm text-muted-foreground">{t('hero.feature1')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-muted-foreground">AI Recommendations</span>
+                  <span className="text-sm text-muted-foreground">{t('hero.feature2')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-muted-foreground">Actionable Insights</span>
+                  <span className="text-sm text-muted-foreground">{t('hero.feature3')}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <CheckCircle className="w-5 h-5 text-green-600" />
-                  <span className="text-sm text-muted-foreground">Free Analysis</span>
+                  <span className="text-sm text-muted-foreground">{t('hero.feature4')}</span>
                 </div>
               </div>
             </motion.div>
@@ -301,21 +327,21 @@ export default function SEOAuditFeaturePage() {
               className="bg-background rounded-2xl shadow-2xl border p-8"
             >
               <div className="text-center mb-6">
-                <h2 className="text-2xl font-bold text-foreground mb-2">Start Your Free SEO Audit</h2>
-                <p className="text-muted-foreground">Get comprehensive analysis in minutes</p>
+                <h2 className="text-2xl font-bold text-foreground mb-2">{t('form.heading')}</h2>
+                <p className="text-muted-foreground">{t('form.subheading')}</p>
               </div>
 
               <form onSubmit={handleSubmit} action="/api/audit" method="post" className="space-y-6">
                 <div>
                   <label htmlFor="website-url" className="block text-sm font-medium text-foreground mb-2">
-                    Website URL
+                    {t('form.urlLabel')}
                   </label>
                   <input
                     type="url"
                     id="website-url"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    placeholder="e.g., produkto.io, youtube.com, or https://example.com"
+                    placeholder={t('form.urlPlaceholder')}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                       errors.url ? 'border-red-500' : 'border-muted-foreground/20'
                     }`}
@@ -327,14 +353,14 @@ export default function SEOAuditFeaturePage() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email Address
+                    {t('form.emailLabel')}
                   </label>
                   <input
                     type="email"
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
+                    placeholder={t('form.emailPlaceholder')}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                       errors.email ? 'border-red-500' : 'border-muted-foreground/20'
                     }`}
@@ -355,19 +381,19 @@ export default function SEOAuditFeaturePage() {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Analyzing Your Website...
+                      {t('form.submittingButton')}
                     </span>
                   ) : (
                     <span className="flex items-center justify-center">
                       <Zap className="w-5 h-5 mr-2" />
-                      Start Free SEO Audit
+                      {t('form.submitButton')}
                     </span>
                   )}
                 </button>
               </form>
 
               <div className="mt-6 text-center text-sm text-muted-foreground">
-                <p> No credit card required   Results in under 3 minutes   47+ checks included</p>
+                <p>✓ No credit card required  ✓ Results in under 3 minutes  ✓ 47+ checks included</p>
               </div>
             </motion.div>
           </div>
@@ -1506,7 +1532,7 @@ export default function SEOAuditFeaturePage() {
               )}
 
               {/* Fallback Recommendations for older format */}
-              {auditResult.recommendations && auditResult.recommendations.length > 0 && !auditResult.rawData?.quick_wins && (
+              {auditResult.recommendations && auditResult.recommendations.length > 0 && !auditResult.rawData?.quick_wins ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -1535,7 +1561,7 @@ export default function SEOAuditFeaturePage() {
                     ))}
                   </div>
                 </motion.div>
-              )}
+              ) : null}
 
               {/* Action Buttons */}
               <motion.div
@@ -1573,37 +1599,14 @@ export default function SEOAuditFeaturePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              How It Works
+              {t('howItWorks.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our AI-powered SEO audit analyzes your website in three simple steps
+              {t('howItWorks.description')}
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Enter Your URL",
-                description: "Simply paste your website URL and email address into our secure audit form.",
-                icon: Target,
-                color: "from-blue-500 to-cyan-500"
-              },
-              {
-                step: "2",
-                title: "AI Analysis",
-                description: "Our advanced AI analyzes 47+ technical SEO factors across 8 critical categories.",
-                icon: Zap,
-                color: "from-purple-500 to-violet-500"
-              },
-              {
-                step: "3",
-                title: "Get Results",
-                description: "Receive a comprehensive report with actionable recommendations to improve your SEO.",
-                icon: BarChart,
-                color: "from-green-500 to-emerald-500"
-              }
-            ].map((step, index) => (
+            {steps.map((step, index) => (
               <motion.div
                 key={step.step}
                 initial={{ opacity: 0, y: 20 }}
@@ -1651,10 +1654,10 @@ export default function SEOAuditFeaturePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Why Choose Our SEO Audit?
+              {t('whyChoose.title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Compare our comprehensive analysis with basic SEO tools
+              {t('whyChoose.description')}
             </p>
           </motion.div>
 
@@ -1665,19 +1668,12 @@ export default function SEOAuditFeaturePage() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-foreground mb-6">Our Comprehensive Audit</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-6">{t('whyChoose.comprehensive.title')}</h3>
               <div className="space-y-4">
-                {[
-                  "47+ technical SEO checks across 8 categories",
-                  "AI-powered recommendations and insights",
-                  "Core Web Vitals and performance analysis",
-                  "Competitive analysis and benchmarking",
-                  "Actionable improvement roadmap",
-                  "Free detailed report with priority matrix"
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-3">
+                {[1,2,3,4,5,6].map((i) => (
+                  <div key={i} className="flex items-start space-x-3">
                     <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span className="text-muted-foreground">{feature}</span>
+                    <span className="text-muted-foreground">{t(`whyChoose.comprehensive.feature${i}`)}</span>
                   </div>
                 ))}
               </div>
@@ -1690,19 +1686,12 @@ export default function SEOAuditFeaturePage() {
               viewport={{ once: true }}
               className="bg-muted/20 rounded-2xl p-8"
             >
-              <h3 className="text-2xl font-bold text-foreground mb-6">Basic SEO Tools</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-6">{t('whyChoose.basic.title')}</h3>
               <div className="space-y-4">
-                {[
-                  "Limited to 5-10 basic checks",
-                  "Generic recommendations",
-                  "No performance analysis",
-                  "No competitive insights",
-                  "Vague improvement suggestions",
-                  "Requires paid subscription for details"
-                ].map((limitation, index) => (
-                  <div key={index} className="flex items-start space-x-3">
+                {[1,2,3,4,5,6].map((i) => (
+                  <div key={i} className="flex items-start space-x-3">
                     <div className="w-5 h-5 rounded-full border-2 border-muted-foreground/30 mt-0.5 flex-shrink-0" />
-                    <span className="text-muted-foreground/70">{limitation}</span>
+                    <span className="text-muted-foreground/70">{t(`whyChoose.basic.limitation${i}`)}</span>
                   </div>
                 ))}
               </div>
@@ -1721,24 +1710,24 @@ export default function SEOAuditFeaturePage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
-              Ready to Improve Your SEO?
+              {t('readyToImprove.title')}
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join thousands of websites that have improved their search rankings with our comprehensive SEO audit. Get started in under 3 minutes.
+              {t('readyToImprove.description')}
             </p>
             
             <div className="flex items-center justify-center space-x-8 mb-8">
               <div className="flex items-center space-x-2">
                 <Star className="w-5 h-5 text-yellow-500" />
-                <span className="text-sm text-muted-foreground">4.9/5 rating</span>
+                <span className="text-sm text-muted-foreground">{t('readyToImprove.rating')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Users className="w-5 h-5 text-blue-500" />
-                <span className="text-sm text-muted-foreground">10,000+ audits completed</span>
+                <span className="text-sm text-muted-foreground">{t('readyToImprove.completed')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="w-5 h-5 text-green-500" />
-                <span className="text-sm text-muted-foreground">Results in 3 minutes</span>
+                <span className="text-sm text-muted-foreground">{t('readyToImprove.time')}</span>
               </div>
             </div>
 
@@ -1748,13 +1737,13 @@ export default function SEOAuditFeaturePage() {
               }}
               className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors font-semibold text-lg group"
             >
-              Start Your Free Audit Now
+              {t('readyToImprove.cta')}
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
         </div>
       </section>
     </div>
-    </MainLayout>
-  )
+  </MainLayout>
+);
 }

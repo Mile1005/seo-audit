@@ -14,10 +14,12 @@ import {
 } from "lucide-react"
 import { sampleAudits, progressSteps, type SampleAuditData } from "./sample-data"
 import { handleCTAClick } from "@/lib/cta-utils"
+import { useTranslations } from 'next-intl'
 
 type DemoStep = 'input' | 'progress' | 'results'
 
 export function InteractiveDemo() {
+  const t = useTranslations('home.demo')
   const [currentStep, setCurrentStep] = useState<DemoStep>('input')
   const [inputUrl, setInputUrl] = useState('')
   const [progressPercent, setProgressPercent] = useState(0)
@@ -132,22 +134,21 @@ export function InteractiveDemo() {
         >
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 rounded-full px-4 py-2 text-sm mb-6">
             <Play className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300">Interactive Demo</span>
+            <span className="text-purple-300">{t('badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              See Your SEO Audit
+              {t('title1')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-              In Action
+              {t('title2')}
             </span>
           </h2>
 
           <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Experience our AI-powered audit process with this interactive demo. 
-            See exactly what insights you'll get in under 3 minutes.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -168,10 +169,10 @@ export function InteractiveDemo() {
                 >
                   <div className="mb-8">
                     <h3 className="text-2xl font-bold text-white mb-4">
-                      Enter Your Website URL
+                      {t('form.title')}
                     </h3>
                     <p className="text-gray-400">
-                      Try with any URL to see our audit process in action
+                      {t('form.subtitle')}
                     </p>
                   </div>
 
@@ -179,7 +180,7 @@ export function InteractiveDemo() {
                     <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                       <input
                         type="url"
-                        placeholder="https://your-website.com"
+                        placeholder={t('form.placeholder')}
                         value={inputUrl}
                         onChange={(e) => setInputUrl(e.target.value)}
                         className="flex-1 px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
@@ -192,13 +193,13 @@ export function InteractiveDemo() {
                         disabled={!inputUrl.trim()}
                         className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200 flex items-center space-x-2"
                       >
-                        <span>Start Demo</span>
+                        <span>{t('form.button')}</span>
                         <ArrowRight className="w-4 h-4" />
                       </motion.button>
                     </div>
 
                     <div className="text-sm text-gray-500">
-                      Try: "shop.example.com", "blog.example.com", or "corp.example.com"
+                      {t('form.examples')}
                     </div>
                   </div>
                 </motion.div>

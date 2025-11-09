@@ -3,24 +3,27 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, Clock, Target, Star, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ResultsShowcase() {
+  const t = useTranslations('featurePages.seoAudit.resultsShowcase');
+  
   const results = [
     { 
-      stat: "+112%", 
-      label: "Organic traffic in 60 days",
+      stat: t('stats.organicTraffic.value'),
+      label: t('stats.organicTraffic.label'),
       icon: TrendingUp,
       color: "from-green-500 to-emerald-600"
     },
     { 
-      stat: "-38%", 
-      label: "Load time reduction",
+      stat: t('stats.loadTime.value'),
+      label: t('stats.loadTime.label'),
       icon: Clock,
       color: "from-blue-500 to-cyan-600"
     },
     { 
-      stat: "+27", 
-      label: "Avg. position improvement",
+      stat: t('stats.positionImprovement.value'),
+      label: t('stats.positionImprovement.label'),
       icon: Target,
       color: "from-purple-500 to-pink-600"
     },
@@ -28,15 +31,15 @@ export default function ResultsShowcase() {
 
   const testimonials = [
     {
-      quote: "This audit completely transformed our SEO strategy. The insights were actionable and results came quickly.",
-      author: "Sarah Johnson",
-      role: "Marketing Director",
+      quote: t('testimonials.testimonial1.quote'),
+      author: t('testimonials.testimonial1.author'),
+      role: t('testimonials.testimonial1.role'),
       rating: 5
     },
     {
-      quote: "Finally, an SEO audit that''s both comprehensive and easy to understand. Highly recommend!",
-      author: "Mike Chen",
-      role: "Founder",
+      quote: t('testimonials.testimonial2.quote'),
+      author: t('testimonials.testimonial2.author'),
+      role: t('testimonials.testimonial2.role'),
       rating: 5
     }
   ];
@@ -80,7 +83,7 @@ export default function ResultsShowcase() {
           transition={{ duration: 0.6 }}
           className="text-3xl lg:text-4xl font-bold text-foreground mb-4 text-center"
         >
-          Real Results
+          {t('header.title')}
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: -10 }}
@@ -89,7 +92,7 @@ export default function ResultsShowcase() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto"
         >
-          See how our comprehensive SEO audits have helped businesses like yours achieve measurable growth
+          {t('header.subtitle')}
         </motion.p>
 
         {/* Stats Grid */}

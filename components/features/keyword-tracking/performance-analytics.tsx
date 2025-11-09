@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   BarChart3, 
   TrendingUp, 
@@ -24,21 +25,22 @@ import {
 import { Button } from "../../ui/button";
 
 export default function PerformanceAnalytics() {
+  const t = useTranslations('featurePages.keywordTracking.performanceAnalytics');
   const [selectedTimeframe, setSelectedTimeframe] = useState("30d");
   const [selectedMetric, setSelectedMetric] = useState("rankings");
 
   const timeframes = [
-    { id: "7d", label: "7 Days" },
-    { id: "30d", label: "30 Days" },
-    { id: "90d", label: "90 Days" },
-    { id: "1y", label: "1 Year" }
+    { id: "7d", label: t('timeframes.7d') },
+    { id: "30d", label: t('timeframes.30d') },
+    { id: "90d", label: t('timeframes.90d') },
+    { id: "1y", label: t('timeframes.1y') }
   ];
 
   const metrics = [
-    { id: "rankings", label: "Rankings", icon: TrendingUp, color: "blue" },
-    { id: "visibility", label: "Visibility", icon: Eye, color: "green" },
-    { id: "traffic", label: "Traffic", icon: Users, color: "purple" },
-    { id: "clicks", label: "Clicks", icon: MousePointer, color: "orange" }
+    { id: "rankings", label: t('metrics.rankings.label'), icon: TrendingUp, color: "blue" },
+    { id: "visibility", label: t('metrics.visibility.label'), icon: Eye, color: "green" },
+    { id: "traffic", label: t('metrics.traffic.label'), icon: Users, color: "purple" },
+    { id: "clicks", label: t('metrics.clicks.label'), icon: MousePointer, color: "orange" }
   ];
 
   const performanceData = {
@@ -71,37 +73,57 @@ export default function PerformanceAnalytics() {
   const currentData = performanceData[selectedTimeframe as keyof typeof performanceData];
 
   const keywordPerformance = [
-    { keyword: "seo audit tool", position: 3, change: +2, traffic: 1247, difficulty: 65 },
-    { keyword: "website seo analysis", position: 7, change: +1, traffic: 892, difficulty: 58 },
-    { keyword: "technical seo audit", position: 12, change: +5, traffic: 634, difficulty: 72 },
-    { keyword: "seo report generator", position: 15, change: +3, traffic: 445, difficulty: 55 },
-    { keyword: "competitor seo analysis", position: 8, change: -1, traffic: 723, difficulty: 68 }
+    { keyword: t('keywordTable.keywords.keyword1'), position: 3, change: +2, traffic: 1247, difficulty: 65 },
+    { keyword: t('keywordTable.keywords.keyword2'), position: 7, change: +1, traffic: 892, difficulty: 58 },
+    { keyword: t('keywordTable.keywords.keyword3'), position: 12, change: +5, traffic: 634, difficulty: 72 },
+    { keyword: t('keywordTable.keywords.keyword4'), position: 15, change: +3, traffic: 445, difficulty: 55 },
+    { keyword: t('keywordTable.keywords.keyword5'), position: 8, change: -1, traffic: 723, difficulty: 68 }
   ];
 
   const analyticsFeatures = [
     {
       icon: BarChart3,
-      title: "Ranking Trends",
-      description: "Track position changes over time with detailed trend analysis",
-      metrics: ["Position tracking", "SERP volatility", "Rank distribution", "Progress velocity"]
+      title: t('analyticsFeatures.rankingTrends.title'),
+      description: t('analyticsFeatures.rankingTrends.description'),
+      metrics: [
+        t('analyticsFeatures.rankingTrends.metrics.item1'),
+        t('analyticsFeatures.rankingTrends.metrics.item2'),
+        t('analyticsFeatures.rankingTrends.metrics.item3'),
+        t('analyticsFeatures.rankingTrends.metrics.item4')
+      ]
     },
     {
       icon: Eye,
-      title: "Visibility Metrics",
-      description: "Measure your search visibility across different keyword groups",
-      metrics: ["Search visibility", "Impression share", "Brand visibility", "Category coverage"]
+      title: t('analyticsFeatures.visibilityMetrics.title'),
+      description: t('analyticsFeatures.visibilityMetrics.description'),
+      metrics: [
+        t('analyticsFeatures.visibilityMetrics.metrics.item1'),
+        t('analyticsFeatures.visibilityMetrics.metrics.item2'),
+        t('analyticsFeatures.visibilityMetrics.metrics.item3'),
+        t('analyticsFeatures.visibilityMetrics.metrics.item4')
+      ]
     },
     {
       icon: Users,
-      title: "Traffic Analysis",
-      description: "Connect rankings to actual organic traffic and conversions",
-      metrics: ["Organic traffic", "Click-through rates", "Conversion tracking", "Revenue attribution"]
+      title: t('analyticsFeatures.trafficAnalysis.title'),
+      description: t('analyticsFeatures.trafficAnalysis.description'),
+      metrics: [
+        t('analyticsFeatures.trafficAnalysis.metrics.item1'),
+        t('analyticsFeatures.trafficAnalysis.metrics.item2'),
+        t('analyticsFeatures.trafficAnalysis.metrics.item3'),
+        t('analyticsFeatures.trafficAnalysis.metrics.item4')
+      ]
     },
     {
       icon: Target,
-      title: "Competitive Intelligence",
-      description: "Compare your performance against top competitors",
-      metrics: ["Share of voice", "Competitive gaps", "Market share", "Opportunity analysis"]
+      title: t('analyticsFeatures.competitiveIntel.title'),
+      description: t('analyticsFeatures.competitiveIntel.description'),
+      metrics: [
+        t('analyticsFeatures.competitiveIntel.metrics.item1'),
+        t('analyticsFeatures.competitiveIntel.metrics.item2'),
+        t('analyticsFeatures.competitiveIntel.metrics.item3'),
+        t('analyticsFeatures.competitiveIntel.metrics.item4')
+      ]
     }
   ];
 
@@ -133,11 +155,10 @@ export default function PerformanceAnalytics() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Performance Analytics
+            {t('header.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Deep insights into your keyword performance with comprehensive analytics, 
-            trend analysis, and actionable reporting to drive SEO success.
+            {t('header.subtitle')}
           </p>
         </motion.div>
 
@@ -170,15 +191,15 @@ export default function PerformanceAnalytics() {
           <div className="flex gap-2">
             <Button variant="outline" size="sm">
               <Filter className="w-4 h-4 mr-2" />
-              Filter
+              {t('controls.filter')}
             </Button>
             <Button variant="outline" size="sm">
               <Download className="w-4 h-4 mr-2" />
-              Export
+              {t('controls.export')}
             </Button>
             <Button variant="outline" size="sm">
               <Share2 className="w-4 h-4 mr-2" />
-              Share
+              {t('controls.share')}
             </Button>
           </div>
         </motion.div>
@@ -247,11 +268,11 @@ export default function PerformanceAnalytics() {
         >
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-xl font-semibold text-foreground">
-              {metrics.find(m => m.id === selectedMetric)?.label} Trend
+              {metrics.find(m => m.id === selectedMetric)?.label} {t('chart.trend')}
             </h3>
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Calendar className="w-4 h-4" />
-              <span>Last {timeframes.find(t => t.id === selectedTimeframe)?.label}</span>
+              <span>{t('chart.last')} {timeframes.find(t => t.id === selectedTimeframe)?.label}</span>
             </div>
           </div>
           
@@ -259,9 +280,9 @@ export default function PerformanceAnalytics() {
           <div className="h-64 bg-muted/30 rounded-lg flex items-center justify-center">
             <div className="text-center">
               <Activity className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">Interactive chart visualization</p>
+              <p className="text-muted-foreground">{t('chart.visualization')}</p>
               <p className="text-sm text-muted-foreground mt-2">
-                Real-time data visualization with drill-down capabilities
+                {t('chart.drillDown')}
               </p>
             </div>
           </div>
@@ -275,7 +296,7 @@ export default function PerformanceAnalytics() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="bg-card rounded-xl border p-6 mb-12"
         >
-          <h3 className="text-xl font-semibold text-foreground mb-6">Top Performing Keywords</h3>
+          <h3 className="text-xl font-semibold text-foreground mb-6">{t('keywordTable.title')}</h3>
           
           <div 
             className="overflow-x-auto" 
@@ -286,11 +307,11 @@ export default function PerformanceAnalytics() {
             <table className="w-full">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">Keyword</th>
-                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">Position</th>
-                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">Change</th>
-                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">Traffic</th>
-                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">Difficulty</th>
+                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">{t('keywordTable.headers.keyword')}</th>
+                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">{t('keywordTable.headers.position')}</th>
+                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">{t('keywordTable.headers.change')}</th>
+                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">{t('keywordTable.headers.traffic')}</th>
+                  <th className="text-left py-3 px-2 text-sm font-medium text-muted-foreground">{t('keywordTable.headers.difficulty')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -393,20 +414,19 @@ export default function PerformanceAnalytics() {
           <div className="bg-card border rounded-xl p-8">
             <Zap className="w-16 h-16 text-purple-600 mx-auto mb-6" />
             <h3 className="text-2xl font-bold text-foreground mb-4">
-              Advanced Performance Analytics
+              {t('cta.title')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Get deeper insights with custom reporting, automated alerts, and 
-              AI-powered recommendations to accelerate your SEO performance.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                 <BarChart3 className="w-5 h-5 mr-2" />
-                Unlock Advanced Analytics
+                {t('cta.unlock')}
               </Button>
               <Button variant="outline" size="lg">
                 <Globe className="w-5 h-5 mr-2" />
-                View Demo Report
+                {t('cta.viewDemo')}
               </Button>
             </div>
           </div>

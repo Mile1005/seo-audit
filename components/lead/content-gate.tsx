@@ -13,6 +13,7 @@ import {
   AlertCircle
 } from "lucide-react"
 import { useLeadCapture } from "../../hooks/use-lead-capture"
+import { useTranslations } from 'next-intl'
 
 export interface ContentGateProps {
   content: {
@@ -30,10 +31,15 @@ export interface ContentGateProps {
 
 export function ContentGate({
   content,
-  gateTitle = "Unlock This Premium Content",
-  gateDescription = "Enter your email to access this exclusive resource instantly",
+  gateTitle,
+  gateDescription,
   className = ""
 }: ContentGateProps) {
+  const t = useTranslations('lead.contentGate')
+  
+  // Use provided props or fall back to translations
+  const finalGateTitle = gateTitle || t('messages.gateTitle')
+  const finalGateDescription = gateDescription || t('messages.gateDescription')
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [email, setEmail] = useState('')
   const [result, setResult] = useState<{ success: boolean; message: string } | null>(null)
@@ -78,11 +84,11 @@ export function ContentGate({
 
   const getContentTypeLabel = () => {
     switch (content.type) {
-      case 'checklist': return 'Checklist'
-      case 'guide': return 'Guide'
-      case 'template': return 'Template'
-      case 'report': return 'Report'
-      default: return 'Resource'
+      case 'checklist': return t('contentTypes.checklist')
+      case 'guide': return t('contentTypes.guide')
+      case 'template': return t('contentTypes.template')
+      case 'report': return t('contentTypes.report')
+      default: return t('contentTypes.resource')
     }
   }
 
@@ -99,7 +105,7 @@ export function ContentGate({
                 {getContentIcon()}
               </span>
               <span className="text-purple-300 text-sm font-medium">
-                Premium {getContentTypeLabel()}
+                {t('premiumLabel')} {getContentTypeLabel()}
               </span>
             </div>
             
@@ -110,7 +116,7 @@ export function ContentGate({
                 className="flex items-center space-x-1 text-green-400 text-sm"
               >
                 <Unlock className="w-4 h-4" />
-                <span>Unlocked</span>
+                <span>{t('status.unlocked')}</span>
               </motion.div>
             )}
           </div>
@@ -152,11 +158,11 @@ export function ContentGate({
                     </div>
                     
                     <h4 className="text-lg font-bold text-white mb-2">
-                      {gateTitle}
+                      {finalGateTitle}
                     </h4>
                     
                     <p className="text-gray-300 text-sm mb-6">
-                      {gateDescription}
+                      {finalGateDescription}
                     </p>
 
                     {/* Email Form */}
@@ -166,7 +172,7 @@ export function ContentGate({
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
+                        placeholder={t('messages.enterEmail')}
                         className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
                         aria-describedby="gate-error"
                         disabled={isSubmitting}
@@ -200,19 +206,19 @@ export function ContentGate({
                         {isSubmitting ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span>Unlocking...</span>
+                            <span>{t('status.unlocking')}</span>
                           </>
                         ) : (
                           <>
                             <Unlock className="w-4 h-4" />
-                            <span>Unlock Content</span>
+                            <span>{t('buttons.unlockContent')}</span>
                           </>
                         )}
                       </motion.button>
                     </form>
 
                     <p className="text-xs text-gray-400 mt-3">
-                      🔒 Your email is secure • No spam ever
+                      {t('messages.securityNotice')}
                     </p>
                   </div>
                 </motion.div>
@@ -234,7 +240,7 @@ export function ContentGate({
               <div className="flex items-center space-x-2 bg-green-500/10 border border-green-500/30 rounded-xl p-4 mb-6">
                 <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                 <span className="text-green-300 text-sm">
-                  Content unlocked! Here's your exclusive {getContentTypeLabel().toLowerCase()}.
+                  {t('messages.successMessage', { type: getContentTypeLabel().toLowerCase() })}
                 </span>
               </div>
 
@@ -258,7 +264,7 @@ export function ContentGate({
                       className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-200"
                     >
                       <Download className="w-4 h-4" />
-                      <span>Download PDF Version</span>
+                      <span>{t('buttons.downloadPdf')}</span>
                       <ArrowRight className="w-4 h-4" />
                     </motion.a>
                   </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-
+import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "../../../components/ui/button";
 import Link from "next/link";
@@ -36,6 +36,7 @@ interface CrawlResult {
 
 
 export default function SiteCrawlerPage() {
+  const t = useTranslations('featurePages.siteCrawler');
   const [crawlUrl, setCrawlUrl] = useState("");
   const [pageLimit, setPageLimit] = useState(10);
   const [isCrawling, setIsCrawling] = useState(false);
@@ -120,13 +121,13 @@ export default function SiteCrawlerPage() {
   const [showResults, setShowResults] = useState(false);
 
   const progressMessages = [
-    "Initializing crawler...",
-    "Fetching robots.txt and sitemap...", 
-    "Crawling pages and analyzing content...",
-    "Detecting SEO issues...",
-    "Analyzing page structure...",
-    "Generating recommendations...",
-    "Finalizing results..."
+    t('progress.step1'),
+    t('progress.step2'), 
+    t('progress.step3'),
+    t('progress.step4'),
+    t('progress.step5'),
+    t('progress.step6'),
+    t('progress.step7')
   ];
 
   const [currentProgressMessage, setCurrentProgressMessage] = useState(progressMessages[0]);
@@ -263,23 +264,23 @@ export default function SiteCrawlerPage() {
   const features = [
     {
       icon: Globe,
-      title: "10,000+ Pages",
-      description: "Crawl massive websites"
+      title: t('features.pages'),
+      description: t('features.pagesDesc')
     },
     {
       icon: Search,
-      title: "50+ Issue Types",
-      description: "Comprehensive detection"
+      title: t('features.issues'),
+      description: t('features.issuesDesc')
     },
     {
       icon: Zap,
-      title: "Minutes Not Hours",
-      description: "Lightning-fast analysis"
+      title: t('features.speed'),
+      description: t('features.speedDesc')
     },
     {
       icon: Clock,
-      title: "24/7 Monitoring",
-      description: "Continuous site health"
+      title: t('features.monitoring'),
+      description: t('features.monitoringDesc')
     }
   ];
 
@@ -342,11 +343,11 @@ export default function SiteCrawlerPage() {
                   transition={{ duration: 0.6, delay: 0.1 }}
                   className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight"
                 >
-                  Analyze Your{" "}
+                  {t('hero.title')}{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    Entire Website
+                    {t('hero.titleHighlight')}
                   </span>{" "}
-                  in Minutes
+                  {t('hero.titleEnd')}
                 </motion.h1>
                 
                 <motion.p 
@@ -355,8 +356,7 @@ export default function SiteCrawlerPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0"
                 >
-                  Crawl up to 10,000 pages, detect 50+ issues, monitor continuously. 
-                  Complete technical SEO analysis with visual site mapping.
+                  {t('hero.subtitle')}
                 </motion.p>
 
                 {/* Feature Pills */}
@@ -397,7 +397,7 @@ export default function SiteCrawlerPage() {
                 >
                   <Button variant="outline" size="lg" className="text-lg px-8 py-6">
                     <BarChart3 className="w-5 h-5 mr-2" />
-                    View Demo
+                    {t('hero.viewDemo')}
                   </Button>
                 </motion.div>
               </motion.div>
@@ -416,10 +416,10 @@ export default function SiteCrawlerPage() {
                       <div className="text-center mb-6">
                         <h2 className="text-lg font-semibold text-foreground mb-2">
                           <Search className="w-5 h-5 inline mr-2" />
-                          Start Your Website Crawl
+                          {t('form.title')}
                         </h2>
                         <p className="text-sm text-muted-foreground">
-                          Enter your website URL and get instant SEO insights
+                          {t('form.subtitle')}
                         </p>
                       </div>
                       
@@ -427,14 +427,14 @@ export default function SiteCrawlerPage() {
                         {/* URL Input */}
                         <div>
                           <label htmlFor="crawl-url" className="block text-sm font-medium text-foreground mb-2">
-                            Website URL
+                            {t('form.urlLabel')}
                           </label>
                           <input
                             id="crawl-url"
                             type="url"
                             value={crawlUrl}
                             onChange={(e) => setCrawlUrl(e.target.value)}
-                            placeholder="https://your-website.com"
+                            placeholder={t('form.urlPlaceholder')}
                             className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                           />
                         </div>
@@ -442,7 +442,7 @@ export default function SiteCrawlerPage() {
                         {/* Page Limit Selector */}
                         <div>
                           <label htmlFor="page-limit" className="block text-sm font-medium text-foreground mb-2">
-                            Pages to Crawl
+                            {t('form.pageLimitLabel')}
                           </label>
                           <select
                             id="page-limit"
@@ -450,12 +450,12 @@ export default function SiteCrawlerPage() {
                             onChange={(e) => setPageLimit(Number(e.target.value))}
                             className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                           >
-                            <option value={5}>5 pages (Quick scan)</option>
-                            <option value={10}>10 pages (Recommended)</option>
-                            <option value={15}>15 pages (Deep analysis)</option>
+                            <option value={5}>{t('form.option5')}</option>
+                            <option value={10}>{t('form.option10')}</option>
+                            <option value={15}>{t('form.option15')}</option>
                           </select>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Free users can crawl up to 15 pages
+                            {t('form.freeLimit')}
                           </p>
                         </div>
 
@@ -467,7 +467,7 @@ export default function SiteCrawlerPage() {
                           size="lg"
                         >
                           <Search className="w-5 h-5 mr-2" />
-                          Start Crawling
+                          {t('form.startButton')}
                         </Button>
                       </div>
                     </>
@@ -476,17 +476,17 @@ export default function SiteCrawlerPage() {
                     <div id="crawl-results-section" className="text-center space-y-6">
                       <div className="text-center mb-6">
                         <h2 className="text-lg font-semibold text-foreground mb-2">
-                          Analyzing {crawlUrl}
+                          {t('progress.analyzing')} {crawlUrl}
                         </h2>
                         <p className="text-sm text-muted-foreground">
-                          This may take a few moments...
+                          {t('progress.subtitle')}
                         </p>
                       </div>
 
                       {/* Progress Bar */}
                       <div className="space-y-4">
                         <div className="flex justify-between text-sm text-muted-foreground">
-                          <span>Progress</span>
+                          <span>{t('progress.progressLabel')}</span>
                           <span>{Math.round(crawlProgress)}%</span>
                         </div>
                         <div className="w-full bg-muted rounded-full h-3">
@@ -513,10 +513,13 @@ export default function SiteCrawlerPage() {
                       <div className="text-center mb-6">
                         <h2 className="text-lg font-semibold text-foreground mb-2 flex items-center justify-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
-                          Crawl Complete!
+                          {t('results.complete')}
                         </h2>
                         <p className="text-sm text-muted-foreground">
-                          Found {crawlResult.totalPages} pages with {(crawlResult.issues?.missing_titles || 0) + (crawlResult.issues?.missing_h1 || 0) + (crawlResult.issues?.missing_meta_descriptions || 0)} issues
+                          {t('results.summary', { 
+                            pages: crawlResult.totalPages, 
+                            issues: (crawlResult.issues?.missing_titles || 0) + (crawlResult.issues?.missing_h1 || 0) + (crawlResult.issues?.missing_meta_descriptions || 0) 
+                          })}
                         </p>
                       </div>
 
@@ -524,13 +527,13 @@ export default function SiteCrawlerPage() {
                       <div className="grid grid-cols-2 gap-4">
                         <div className="text-center p-3 bg-background rounded-lg border">
                           <div className="text-2xl font-bold text-foreground">{crawlResult.successfulPages}</div>
-                          <div className="text-xs text-muted-foreground">Pages Crawled</div>
+                          <div className="text-xs text-muted-foreground">{t('results.pagesCrawled')}</div>
                         </div>
                         <div className="text-center p-3 bg-background rounded-lg border">
                           <div className="text-2xl font-bold text-red-500">
                             {(crawlResult.issues?.missing_titles || 0) + (crawlResult.issues?.missing_h1 || 0) + (crawlResult.issues?.missing_meta_descriptions || 0)}
                           </div>
-                          <div className="text-xs text-muted-foreground">Issues Found</div>
+                          <div className="text-xs text-muted-foreground">{t('results.issuesFound')}</div>
                         </div>
                       </div>
 
@@ -541,7 +544,7 @@ export default function SiteCrawlerPage() {
                           onClick={() => setShowResults(false)}
                         >
                           <BarChart3 className="w-4 h-4 mr-2" />
-                          View Full Report
+                          {t('results.viewReport')}
                         </Button>
                         <Button 
                           variant="outline" 
@@ -552,7 +555,7 @@ export default function SiteCrawlerPage() {
                             setCrawlResult(null);
                           }}
                         >
-                          Crawl Another Site
+                          {t('results.crawlAnother')}
                         </Button>
                       </div>
                     </div>
@@ -563,7 +566,7 @@ export default function SiteCrawlerPage() {
                     <div id="crawl-error-section" className="mt-4 p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
                       <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
                         <AlertCircle className="w-4 h-4" />
-                        <span className="text-sm font-medium">Error</span>
+                        <span className="text-sm font-medium">{t('error.title')}</span>
                       </div>
                       <p className="text-sm text-red-600 dark:text-red-400 mt-1">{crawlError}</p>
                     </div>
@@ -593,10 +596,13 @@ export default function SiteCrawlerPage() {
                   className="text-center mb-12"
                 >
                   <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
-                    Crawl Results for {crawlResult.startUrl}
+                    {t('results.crawlResultsFor')} {crawlResult.startUrl}
                   </h2>
                   <p className="text-xl text-muted-foreground">
-                    Completed in {Math.round(crawlResult.crawlTime / 1000)}s • {crawlResult.successfulPages} pages analyzed
+                    {t('results.completedIn', { 
+                      seconds: Math.round(crawlResult.crawlTime / 1000), 
+                      pages: crawlResult.successfulPages 
+                    })}
                   </p>
                 </motion.div>
 
@@ -609,22 +615,22 @@ export default function SiteCrawlerPage() {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="bg-card p-6 rounded-xl border shadow-sm"
                   >
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Pages Overview</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">{t('results.pagesOverview')}</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Total Found:</span>
+                        <span className="text-muted-foreground">{t('results.totalFound')}</span>
                         <span className="font-semibold">{crawlResult.totalPages}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Successfully Crawled:</span>
+                        <span className="text-muted-foreground">{t('results.successfullyCrawled')}</span>
                         <span className="font-semibold text-green-600">{crawlResult.successfulPages}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Failed:</span>
+                        <span className="text-muted-foreground">{t('results.failed')}</span>
                         <span className="font-semibold text-red-600">{crawlResult.failedPages}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Avg Load Time:</span>
+                        <span className="text-muted-foreground">{t('results.avgLoadTime')}</span>
                         <span className="font-semibold">{Math.round(crawlResult.averageLoadTime)}ms</span>
                       </div>
                     </div>
@@ -637,22 +643,22 @@ export default function SiteCrawlerPage() {
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className="bg-card p-6 rounded-xl border shadow-sm"
                   >
-                    <h3 className="text-lg font-semibold text-foreground mb-4">SEO Issues</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">{t('results.seoIssues')}</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Missing Titles:</span>
+                        <span className="text-muted-foreground">{t('results.missingTitles')}</span>
                         <span className="font-semibold text-red-600">{crawlResult.issues?.missing_titles || 0}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Missing H1:</span>
+                        <span className="text-muted-foreground">{t('results.missingH1')}</span>
                         <span className="font-semibold text-red-600">{crawlResult.issues?.missing_h1 || 0}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Missing Meta Desc:</span>
+                        <span className="text-muted-foreground">{t('results.missingMetaDesc')}</span>
                         <span className="font-semibold text-red-600">{crawlResult.issues?.missing_meta_descriptions || 0}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Images w/o Alt:</span>
+                        <span className="text-muted-foreground">{t('results.imagesWithoutAlt')}</span>
                         <span className="font-semibold text-yellow-600">{crawlResult.issues?.images_without_alt || 0}</span>
                       </div>
                     </div>
@@ -665,32 +671,32 @@ export default function SiteCrawlerPage() {
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="bg-card p-6 rounded-xl border shadow-sm"
                   >
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Technical</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">{t('results.technical')}</h3>
                     <div className="space-y-3">
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Robots.txt:</span>
+                        <span className="text-muted-foreground">{t('results.robotsTxt')}</span>
                         <div className="flex items-center space-x-2">
                           {crawlResult.robotsTxt?.found ? (
                             <CheckCircle className="w-4 h-4 text-green-500" />
                           ) : (
                             <AlertCircle className="w-4 h-4 text-red-500" />
                           )}
-                          <span className="text-sm">{crawlResult.robotsTxt?.found ? 'Found' : 'Missing'}</span>
+                          <span className="text-sm">{crawlResult.robotsTxt?.found ? t('results.found') : t('results.missing')}</span>
                         </div>
                       </div>
                       <div className="flex justify-between items-center">
-                        <span className="text-muted-foreground">Sitemap.xml:</span>
+                        <span className="text-muted-foreground">{t('results.sitemapXml')}</span>
                         <div className="flex items-center space-x-2">
                           {crawlResult.sitemapXml?.found ? (
                             <CheckCircle className="w-4 h-4 text-green-500" />
                           ) : (
                             <AlertCircle className="w-4 h-4 text-red-500" />
                           )}
-                          <span className="text-sm">{crawlResult.sitemapXml?.found ? 'Found' : 'Missing'}</span>
+                          <span className="text-sm">{crawlResult.sitemapXml?.found ? t('results.found') : t('results.missing')}</span>
                         </div>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Broken Links:</span>
+                        <span className="text-muted-foreground">{t('results.brokenLinks')}</span>
                         <span className="font-semibold text-red-600">{crawlResult.brokenLinks?.length || 0}</span>
                       </div>
                     </div>
@@ -707,7 +713,7 @@ export default function SiteCrawlerPage() {
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Button size="lg" className="text-lg px-8 py-6">
                       <BarChart3 className="w-5 h-5 mr-2" />
-                      Get Full Report
+                      {t('results.getFullReport')}
                     </Button>
                     <Button 
                       variant="outline" 
@@ -721,7 +727,7 @@ export default function SiteCrawlerPage() {
                       ) : (
                         <Download className="w-5 h-5 mr-2" />
                       )}
-                      {isExporting ? 'Generating CSV...' : 'Export Results CSV'}
+                      {isExporting ? t('results.generatingCsv') : t('results.exportResults')}
                     </Button>
                   </div>
                   <Button 
@@ -733,7 +739,7 @@ export default function SiteCrawlerPage() {
                     }}
                     className="text-muted-foreground hover:text-foreground"
                   >
-                    Start New Crawl
+                    {t('results.startNewCrawl')}
                   </Button>
                 </motion.div>
 
@@ -745,9 +751,9 @@ export default function SiteCrawlerPage() {
                   className="bg-card rounded-xl border shadow-sm overflow-hidden"
                 >
                   <div className="px-6 py-4 border-b bg-muted/50">
-                    <h3 className="text-lg font-semibold text-foreground">Detailed Page Analysis</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{t('results.detailedPageAnalysis')}</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Complete breakdown of all crawled pages with SEO insights
+                      {t('results.completeBreakdown')}
                     </p>
                   </div>
                   
@@ -760,14 +766,14 @@ export default function SiteCrawlerPage() {
                     <table className="w-full">
                       <thead className="bg-muted/30">
                         <tr>
-                          <th className="text-left px-6 py-4 text-sm font-medium text-foreground">Page URL</th>
-                          <th className="text-left px-6 py-4 text-sm font-medium text-foreground">Title</th>
-                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">H1</th>
-                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Meta Desc</th>
-                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Word Count</th>
-                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Images</th>
-                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Load Time</th>
-                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">Status</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-foreground">{t('results.pageUrl')}</th>
+                          <th className="text-left px-6 py-4 text-sm font-medium text-foreground">{t('results.title')}</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">{t('results.h1')}</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">{t('results.metaDesc')}</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">{t('results.wordCount')}</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">{t('results.images')}</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">{t('results.loadTime')}</th>
+                          <th className="text-center px-6 py-4 text-sm font-medium text-foreground">{t('results.status')}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-border">
@@ -803,7 +809,7 @@ export default function SiteCrawlerPage() {
                                 ) : (
                                   <span className="text-sm text-red-500 flex items-center">
                                     <AlertCircle className="w-3 h-3 mr-1" />
-                                    Missing
+                                    {t('results.missing')}
                                   </span>
                                 )}
                               </div>
@@ -835,7 +841,7 @@ export default function SiteCrawlerPage() {
                                 <span className="text-foreground">{page.images_total || 0}</span>
                                 {page.images_missing_alt > 0 && (
                                   <span className="text-red-500 ml-1">
-                                    ({page.images_missing_alt} w/o alt)
+                                    ({page.images_missing_alt} {t('results.withoutAlt')})
                                   </span>
                                 )}
                               </div>
@@ -866,9 +872,9 @@ export default function SiteCrawlerPage() {
                   {crawlResult.pages && crawlResult.pages.length === 0 && (
                     <div className="text-center py-12">
                       <AlertCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                      <h3 className="text-lg font-medium text-foreground mb-2">No Pages Found</h3>
+                      <h3 className="text-lg font-medium text-foreground mb-2">{t('results.noPagesFound')}</h3>
                       <p className="text-muted-foreground">
-                        The crawler was unable to find any accessible pages on this website.
+                        {t('results.unableToFind')}
                       </p>
                     </div>
                   )}
@@ -895,7 +901,7 @@ export default function SiteCrawlerPage() {
               transition={{ duration: 0.6 }}
               className="text-3xl lg:text-4xl font-bold text-foreground mb-6"
             >
-              Ready to Crawl Your Website?
+              {t('cta.title')}
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -904,8 +910,7 @@ export default function SiteCrawlerPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-xl text-muted-foreground mb-8"
             >
-              Start your comprehensive website analysis in under 60 seconds.
-              No setup required.
+              {t('cta.subtitle')}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -916,7 +921,7 @@ export default function SiteCrawlerPage() {
               <Button asChild size="lg" className="text-lg px-8 py-6">
                 <Link href="/login">
                   <Globe className="w-5 h-5 mr-2" />
-                  Start Crawling Now
+                  {t('cta.button')}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Link>
               </Button>

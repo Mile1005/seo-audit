@@ -6,17 +6,17 @@ export interface Testimonial {
   companyLogo: string
   avatar: string
   rating: number
-  quote: string
+  quoteKey: string
   metric: {
     value: string
-    description: string
+    descriptionKey: string
   }
   category: 'agency' | 'smb' | 'ecommerce' | 'saas'
   caseStudy?: {
-    beforeMetric: string
-    afterMetric: string
-    improvement: string
-    timeframe: string
+    beforeMetricKey: string
+    afterMetricKey: string
+    improvementKey: string
+    timeframeKey: string
     link: string // placeholder for now
   }
 }
@@ -30,17 +30,17 @@ export const testimonials: Testimonial[] = [
     companyLogo: "/testimonials/logos/digital-growth.svg",
     avatar: "/testimonials/avatars/sarah-chen.jpg",
     rating: 5,
-    quote: "AISEOTurbo reduced our audit time from 6 hours to 20 minutes. Our team can now handle 3x more clients with the same resources.",
+    quoteKey: "testimonialsData.testimonial-1.quote",
     metric: {
       value: "300%",
-      description: "increase in client capacity"
+      descriptionKey: "testimonialsData.testimonial-1.metric.description"
     },
     category: "agency",
     caseStudy: {
-      beforeMetric: "6 hours per audit",
-      afterMetric: "20 minutes per audit",
-      improvement: "95% time reduction",
-      timeframe: "Within 30 days",
+      beforeMetricKey: "testimonialsData.testimonial-1.caseStudy.beforeMetric",
+      afterMetricKey: "testimonialsData.testimonial-1.caseStudy.afterMetric",
+      improvementKey: "testimonialsData.testimonial-1.caseStudy.improvement",
+      timeframeKey: "testimonialsData.testimonial-1.caseStudy.timeframe",
       link: "/case-studies/digital-growth-agency"
     }
   },
@@ -52,17 +52,17 @@ export const testimonials: Testimonial[] = [
     companyLogo: "/testimonials/logos/techflow.svg",
     avatar: "/testimonials/avatars/marcus-rodriguez.jpg",
     rating: 5,
-    quote: "We increased organic traffic by 180% in 4 months following AISeOTurbo's actionable recommendations. Game-changing insights.",
+    quoteKey: "testimonialsData.testimonial-2.quote",
     metric: {
       value: "180%",
-      description: "organic traffic growth"
+      descriptionKey: "testimonialsData.testimonial-2.metric.description"
     },
     category: "smb",
     caseStudy: {
-      beforeMetric: "2.5K monthly visits",
-      afterMetric: "7K monthly visits",
-      improvement: "180% traffic increase",
-      timeframe: "4 months",
+      beforeMetricKey: "testimonialsData.testimonial-2.caseStudy.beforeMetric",
+      afterMetricKey: "testimonialsData.testimonial-2.caseStudy.afterMetric",
+      improvementKey: "testimonialsData.testimonial-2.caseStudy.improvement",
+      timeframeKey: "testimonialsData.testimonial-2.caseStudy.timeframe",
       link: "/case-studies/techflow-solutions"
     }
   },
@@ -74,17 +74,17 @@ export const testimonials: Testimonial[] = [
     companyLogo: "/testimonials/logos/stylecraft.svg",
     avatar: "/testimonials/avatars/emma-thompson.jpg",
     rating: 5,
-    quote: "Our e-commerce sales jumped 85% after implementing the technical SEO fixes. The ROI was immediate and measurable.",
+    quoteKey: "testimonialsData.testimonial-3.quote",
     metric: {
       value: "85%",
-      description: "e-commerce sales increase"
+      descriptionKey: "testimonialsData.testimonial-3.metric.description"
     },
     category: "ecommerce",
     caseStudy: {
-      beforeMetric: "$45K monthly revenue",
-      afterMetric: "$83K monthly revenue",
-      improvement: "85% revenue growth",
-      timeframe: "3 months",
+      beforeMetricKey: "testimonialsData.testimonial-3.caseStudy.beforeMetric",
+      afterMetricKey: "testimonialsData.testimonial-3.caseStudy.afterMetric",
+      improvementKey: "testimonialsData.testimonial-3.caseStudy.improvement",
+      timeframeKey: "testimonialsData.testimonial-3.caseStudy.timeframe",
       link: "/case-studies/stylecraft-boutique"
     }
   },
@@ -96,17 +96,17 @@ export const testimonials: Testimonial[] = [
     companyLogo: "/testimonials/logos/cloudsync.svg",
     avatar: "/testimonials/avatars/david-park.jpg",
     rating: 5,
-    quote: "AISeOTurbo identified critical Core Web Vitals issues that our dev team missed. Page speed improved 60% and conversions followed.",
+    quoteKey: "testimonialsData.testimonial-4.quote",
     metric: {
       value: "60%",
-      description: "page speed improvement"
+      descriptionKey: "testimonialsData.testimonial-4.metric.description"
     },
     category: "saas",
     caseStudy: {
-      beforeMetric: "4.2s load time",
-      afterMetric: "1.7s load time",
-      improvement: "60% speed increase",
-      timeframe: "6 weeks",
+      beforeMetricKey: "testimonialsData.testimonial-4.caseStudy.beforeMetric",
+      afterMetricKey: "testimonialsData.testimonial-4.caseStudy.afterMetric",
+      improvementKey: "testimonialsData.testimonial-4.caseStudy.improvement",
+      timeframeKey: "testimonialsData.testimonial-4.caseStudy.timeframe",
       link: "/case-studies/cloudsync-pro"
     }
   },
@@ -118,17 +118,17 @@ export const testimonials: Testimonial[] = [
     companyLogo: "/testimonials/logos/peak-performance.svg",
     avatar: "/testimonials/avatars/lisa-morgan.jpg",
     rating: 5,
-    quote: "The competitive analysis feature helped us steal 40% market share from competitors. Our clients love the detailed reports.",
+    quoteKey: "testimonialsData.testimonial-5.quote",
     metric: {
       value: "40%",
-      description: "market share gained"
+      descriptionKey: "testimonialsData.testimonial-5.metric.description"
     },
     category: "agency",
     caseStudy: {
-      beforeMetric: "15% market visibility",
-      afterMetric: "55% market visibility",
-      improvement: "40% share increase",
-      timeframe: "5 months",
+      beforeMetricKey: "testimonialsData.testimonial-5.caseStudy.beforeMetric",
+      afterMetricKey: "testimonialsData.testimonial-5.caseStudy.afterMetric",
+      improvementKey: "testimonialsData.testimonial-5.caseStudy.improvement",
+      timeframeKey: "testimonialsData.testimonial-5.caseStudy.timeframe",
       link: "/case-studies/peak-performance"
     }
   },
@@ -140,17 +140,17 @@ export const testimonials: Testimonial[] = [
     companyLogo: "/testimonials/logos/gearhub.svg",
     avatar: "/testimonials/avatars/alex-kim.jpg",
     rating: 5,
-    quote: "Product page optimization suggestions increased our conversion rate by 45%. Every recommendation was data-driven and actionable.",
+    quoteKey: "testimonialsData.testimonial-6.quote",
     metric: {
       value: "45%",
-      description: "conversion rate boost"
+      descriptionKey: "testimonialsData.testimonial-6.metric.description"
     },
     category: "ecommerce",
     caseStudy: {
-      beforeMetric: "2.1% conversion rate",
-      afterMetric: "3.8% conversion rate",
-      improvement: "45% conversion boost",
-      timeframe: "2 months",
+      beforeMetricKey: "testimonialsData.testimonial-6.caseStudy.beforeMetric",
+      afterMetricKey: "testimonialsData.testimonial-6.caseStudy.afterMetric",
+      improvementKey: "testimonialsData.testimonial-6.caseStudy.improvement",
+      timeframeKey: "testimonialsData.testimonial-6.caseStudy.timeframe",
       link: "/case-studies/gearhub-pro"
     }
   }

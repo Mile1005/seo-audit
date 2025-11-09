@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   Search, 
   MapPin, 
@@ -21,56 +22,87 @@ import {
 import { Button } from "../../ui/button";
 
 export default function SerpFeatures() {
+  const t = useTranslations('featurePages.keywordTracking.serpFeatures');
   const [selectedFeature, setSelectedFeature] = useState("featured-snippets");
 
   const serpFeatures = [
     {
       id: "featured-snippets",
-      name: "Featured Snippets",
+      name: t('features.featuredSnippets.name'),
       icon: BookOpen,
-      description: "Position zero results that answer user queries directly",
+      description: t('features.featuredSnippets.description'),
       color: "blue",
-      examples: ["Paragraph snippets", "List snippets", "Table snippets", "Video snippets"]
+      examples: [
+        t('features.featuredSnippets.examples.item1'),
+        t('features.featuredSnippets.examples.item2'),
+        t('features.featuredSnippets.examples.item3'),
+        t('features.featuredSnippets.examples.item4')
+      ]
     },
     {
       id: "local-pack",
-      name: "Local Pack",
+      name: t('features.localPack.name'),
       icon: MapPin,
-      description: "Local business listings with map integration",
+      description: t('features.localPack.description'),
       color: "green",
-      examples: ["3-pack results", "Local finder", "Maps integration", "Review stars"]
+      examples: [
+        t('features.localPack.examples.item1'),
+        t('features.localPack.examples.item2'),
+        t('features.localPack.examples.item3'),
+        t('features.localPack.examples.item4')
+      ]
     },
     {
       id: "people-also-ask",
-      name: "People Also Ask",
+      name: t('features.peopleAlsoAsk.name'),
       icon: MessageSquare,
-      description: "Related questions that expand search results",
+      description: t('features.peopleAlsoAsk.description'),
       color: "purple",
-      examples: ["Expandable questions", "Related queries", "Answer boxes", "Topic clusters"]
+      examples: [
+        t('features.peopleAlsoAsk.examples.item1'),
+        t('features.peopleAlsoAsk.examples.item2'),
+        t('features.peopleAlsoAsk.examples.item3'),
+        t('features.peopleAlsoAsk.examples.item4')
+      ]
     },
     {
       id: "image-pack",
-      name: "Image Pack",
+      name: t('features.imagePack.name'),
       icon: Image,
-      description: "Visual search results for image-based queries",
+      description: t('features.imagePack.description'),
       color: "orange",
-      examples: ["Image carousels", "Visual results", "Shopping images", "News images"]
+      examples: [
+        t('features.imagePack.examples.item1'),
+        t('features.imagePack.examples.item2'),
+        t('features.imagePack.examples.item3'),
+        t('features.imagePack.examples.item4')
+      ]
     },
     {
       id: "video-results",
-      name: "Video Results",
+      name: t('features.videoResults.name'),
       icon: Video,
-      description: "Video content prominently displayed in search",
+      description: t('features.videoResults.description'),
       color: "red",
-      examples: ["YouTube integration", "Video thumbnails", "Duration stamps", "Video carousels"]
+      examples: [
+        t('features.videoResults.examples.item1'),
+        t('features.videoResults.examples.item2'),
+        t('features.videoResults.examples.item3'),
+        t('features.videoResults.examples.item4')
+      ]
     },
     {
       id: "shopping-results",
-      name: "Shopping Results",
+      name: t('features.shoppingResults.name'),
       icon: ShoppingCart,
-      description: "Product listings with prices and merchant info",
+      description: t('features.shoppingResults.description'),
       color: "yellow",
-      examples: ["Product listings", "Price comparisons", "Merchant ratings", "Product images"]
+      examples: [
+        t('features.shoppingResults.examples.item1'),
+        t('features.shoppingResults.examples.item2'),
+        t('features.shoppingResults.examples.item3'),
+        t('features.shoppingResults.examples.item4')
+      ]
     }
   ];
 
@@ -78,58 +110,58 @@ export default function SerpFeatures() {
     "featured-snippets": {
       visibility: "78%",
       clickthrough: "35%",
-      opportunity: "High",
-      description: "Featured snippets appear in 78% of informational queries and capture 35% of clicks when present.",
+      opportunity: t('featureData.featuredSnippets.opportunity'),
+      description: t('featureData.featuredSnippets.description'),
       optimization: [
-        "Structure content with clear headings and lists",
-        "Answer questions directly in the first paragraph",
-        "Use schema markup for FAQ and How-to content",
-        "Optimize for question-based keywords",
-        "Include step-by-step instructions where relevant"
+        t('featureData.featuredSnippets.optimization.item1'),
+        t('featureData.featuredSnippets.optimization.item2'),
+        t('featureData.featuredSnippets.optimization.item3'),
+        t('featureData.featuredSnippets.optimization.item4'),
+        t('featureData.featuredSnippets.optimization.item5')
       ],
       tracking: [
-        "Monitor position zero rankings",
-        "Track snippet format changes",
-        "Identify snippet opportunities",
-        "Measure click-through impact"
+        t('featureData.featuredSnippets.tracking.item1'),
+        t('featureData.featuredSnippets.tracking.item2'),
+        t('featureData.featuredSnippets.tracking.item3'),
+        t('featureData.featuredSnippets.tracking.item4')
       ]
     },
     "local-pack": {
       visibility: "65%",
       clickthrough: "44%",
-      opportunity: "Critical",
-      description: "Local pack results dominate location-based searches with high click-through rates.",
+      opportunity: t('featureData.localPack.opportunity'),
+      description: t('featureData.localPack.description'),
       optimization: [
-        "Optimize Google Business Profile completely",
-        "Maintain consistent NAP across all platforms",
-        "Collect and respond to customer reviews",
-        "Use local keywords in title tags and content",
-        "Build local citations and directories"
+        t('featureData.localPack.optimization.item1'),
+        t('featureData.localPack.optimization.item2'),
+        t('featureData.localPack.optimization.item3'),
+        t('featureData.localPack.optimization.item4'),
+        t('featureData.localPack.optimization.item5')
       ],
       tracking: [
-        "Monitor local pack rankings",
-        "Track review scores and counts",
-        "Measure local visibility changes",
-        "Analyze competitor local presence"
+        t('featureData.localPack.tracking.item1'),
+        t('featureData.localPack.tracking.item2'),
+        t('featureData.localPack.tracking.item3'),
+        t('featureData.localPack.tracking.item4')
       ]
     },
     "people-also-ask": {
       visibility: "42%",
       clickthrough: "23%",
-      opportunity: "Medium",
-      description: "PAA boxes expand search results and provide additional visibility opportunities.",
+      opportunity: t('featureData.peopleAlsoAsk.opportunity'),
+      description: t('featureData.peopleAlsoAsk.description'),
       optimization: [
-        "Create comprehensive FAQ sections",
-        "Target related question keywords",
-        "Structure answers for featured snippets",
-        "Build topical authority with in-depth content",
-        "Use natural language and conversational tone"
+        t('featureData.peopleAlsoAsk.optimization.item1'),
+        t('featureData.peopleAlsoAsk.optimization.item2'),
+        t('featureData.peopleAlsoAsk.optimization.item3'),
+        t('featureData.peopleAlsoAsk.optimization.item4'),
+        t('featureData.peopleAlsoAsk.optimization.item5')
       ],
       tracking: [
-        "Monitor PAA appearances",
-        "Track question variations",
-        "Identify content gaps",
-        "Measure expansion rates"
+        t('featureData.peopleAlsoAsk.tracking.item1'),
+        t('featureData.peopleAlsoAsk.tracking.item2'),
+        t('featureData.peopleAlsoAsk.tracking.item3'),
+        t('featureData.peopleAlsoAsk.tracking.item4')
       ]
     }
   };
@@ -159,10 +191,10 @@ export default function SerpFeatures() {
   };
 
   const serpMetrics = [
-    { label: "SERP Features Tracked", value: "15+", description: "Comprehensive coverage" },
-    { label: "Average Visibility Lift", value: "+156%", description: "When optimizing for features" },
-    { label: "Click Share Increase", value: "+67%", description: "From feature optimization" },
-    { label: "Opportunity Detection", value: "Real-time", description: "Instant feature alerts" }
+    { label: t('metrics.tracked.label'), value: "15+", description: t('metrics.tracked.description') },
+    { label: t('metrics.visibilityLift.label'), value: "+156%", description: t('metrics.visibilityLift.description') },
+    { label: t('metrics.clickShare.label'), value: "+67%", description: t('metrics.clickShare.description') },
+    { label: t('metrics.opportunityDetection.label'), value: t('metrics.opportunityDetection.value'), description: t('metrics.opportunityDetection.description') }
   ];
 
   return (
@@ -177,11 +209,10 @@ export default function SerpFeatures() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            SERP Features Monitoring
+            {t('header.title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Track your presence in featured snippets, local packs, image results, and other 
-            SERP features that drive high-value traffic and visibility.
+            {t('header.subtitle')}
           </p>
         </motion.div>
 
@@ -236,18 +267,18 @@ export default function SerpFeatures() {
             <div className="grid lg:grid-cols-3 gap-8">
               {/* Stats */}
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Performance Metrics</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">{t('featureDetails.performanceMetrics')}</h3>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
-                    <span className="text-muted-foreground">Visibility Rate</span>
+                    <span className="text-muted-foreground">{t('featureDetails.visibilityRate')}</span>
                     <span className="font-bold text-primary">{currentFeatureData.visibility}</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
-                    <span className="text-muted-foreground">Click-Through Rate</span>
+                    <span className="text-muted-foreground">{t('featureDetails.clickThroughRate')}</span>
                     <span className="font-bold text-primary">{currentFeatureData.clickthrough}</span>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-muted/30 rounded-lg">
-                    <span className="text-muted-foreground">Opportunity Level</span>
+                    <span className="text-muted-foreground">{t('featureDetails.opportunityLevel')}</span>
                     <span className={`px-2 py-1 rounded text-xs font-medium ${getOpportunityColor(currentFeatureData.opportunity)}`}>
                       {currentFeatureData.opportunity}
                     </span>
@@ -261,7 +292,7 @@ export default function SerpFeatures() {
 
               {/* Optimization */}
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">Optimization Strategy</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">{t('featureDetails.optimizationStrategy')}</h3>
                 <ul className="space-y-2">
                   {currentFeatureData.optimization.map((item, index) => (
                     <li key={index} className="flex items-start space-x-2">
@@ -274,7 +305,7 @@ export default function SerpFeatures() {
 
               {/* Tracking */}
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-4">What We Track</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-4">{t('featureDetails.whatWeTrack')}</h3>
                 <ul className="space-y-2">
                   {currentFeatureData.tracking.map((item, index) => (
                     <li key={index} className="flex items-start space-x-2">
@@ -321,7 +352,7 @@ export default function SerpFeatures() {
           className="bg-card rounded-xl border p-8"
         >
           <h3 className="text-xl font-semibold text-foreground mb-6 text-center">
-            SERP Features in Action
+            {t('visualExample.title')}
           </h3>
           
           <div className="bg-muted/30 rounded-lg p-6 space-y-4">
@@ -329,11 +360,11 @@ export default function SerpFeatures() {
             <div className="bg-card rounded-lg border p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <BookOpen className="w-4 h-4 text-blue-600" />
-                <span className="text-xs text-muted-foreground">Featured Snippet</span>
+                <span className="text-xs text-muted-foreground">{t('visualExample.featuredSnippet.label')}</span>
               </div>
-              <h4 className="font-medium text-foreground mb-2">What is SEO audit?</h4>
+              <h4 className="font-medium text-foreground mb-2">{t('visualExample.featuredSnippet.question')}</h4>
               <p className="text-sm text-muted-foreground mb-2">
-                An SEO audit is a comprehensive analysis of your website's search engine optimization performance...
+                {t('visualExample.featuredSnippet.answer')}
               </p>
               <div className="text-xs text-blue-600">aiseoturbo.com › features › seo-audit</div>
             </div>
@@ -342,7 +373,7 @@ export default function SerpFeatures() {
             <div className="bg-card rounded-lg border p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <MapPin className="w-4 h-4 text-green-600" />
-                <span className="text-xs text-muted-foreground">Local Pack</span>
+                <span className="text-xs text-muted-foreground">{t('visualExample.localPack.label')}</span>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
@@ -376,12 +407,12 @@ export default function SerpFeatures() {
             <div className="bg-card rounded-lg border p-4">
               <div className="flex items-center space-x-2 mb-2">
                 <MessageSquare className="w-4 h-4 text-purple-600" />
-                <span className="text-xs text-muted-foreground">People Also Ask</span>
+                <span className="text-xs text-muted-foreground">{t('visualExample.peopleAlsoAsk.label')}</span>
               </div>
               <div className="space-y-2">
-                <div className="text-sm text-foreground">▶ How often should you do an SEO audit?</div>
-                <div className="text-sm text-foreground">▶ What tools are best for SEO audits?</div>
-                <div className="text-sm text-foreground">▶ How much does an SEO audit cost?</div>
+                <div className="text-sm text-foreground">▶ {t('visualExample.peopleAlsoAsk.q1')}</div>
+                <div className="text-sm text-foreground">▶ {t('visualExample.peopleAlsoAsk.q2')}</div>
+                <div className="text-sm text-foreground">▶ {t('visualExample.peopleAlsoAsk.q3')}</div>
               </div>
             </div>
           </div>
@@ -397,20 +428,19 @@ export default function SerpFeatures() {
         >
           <div className="bg-card border rounded-xl p-8">
             <h3 className="text-xl font-bold text-foreground mb-4">
-              Maximize Your SERP Features Presence
+              {t('cta.title')}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Start tracking SERP features today and identify opportunities to capture 
-              more visibility and traffic from search results.
+              {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                 <BarChart3 className="w-5 h-5 mr-2" />
-                Start SERP Tracking
+                {t('cta.startTracking')}
               </Button>
               <Button variant="outline" size="lg">
                 <TrendingUp className="w-5 h-5 mr-2" />
-                View Opportunities
+                {t('cta.viewOpportunities')}
               </Button>
             </div>
           </div>

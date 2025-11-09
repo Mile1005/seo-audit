@@ -66,6 +66,7 @@ model User {
 	timezone      String?   @default("UTC")
 	bio           String?
 	website       String?
+	preferredLocale String? @default("en") // User's preferred language (en, fr, it, es, id, de)
 	
 	// Settings
 	emailNotifications    Boolean @default(true)
@@ -854,7 +855,7 @@ model ApiKey {
 // ============================================
 
 model Run {
-	id            String    @id @default(uuid())
+	id            String    @id @default(cuid())
 	pageUrl       String
 	targetKeyword String?
 	email         String?
@@ -866,7 +867,7 @@ model Run {
 }
 
 model Audit {
-	id        String   @id @default(uuid())
+	id        String   @id @default(cuid())
 	runId     String
 	json      Json
 	createdAt DateTime @default(now())
@@ -877,7 +878,7 @@ model Audit {
 }
 
 model GscToken {
-	id        String   @id @default(uuid())
+	id        String   @id @default(cuid())
 	userId    String?  // Link to user
 	state     String   @unique
 	tokens    Json

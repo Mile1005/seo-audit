@@ -11,45 +11,7 @@ import {
   Youtube
 } from "lucide-react"
 import { PrivacyPreferencesLink } from "@/components/privacy/privacy-preferences"
-
-const footerSections = [
-  {
-    title: "Product",
-    links: [
-      { label: "SEO Audit", href: "/features/seo-audit" },
-      { label: "Competitor Analysis", href: "/features/competitor-analysis" },
-      { label: "Site Crawler", href: "/features/site-crawler" },
-      { label: "AI Assistant", href: "/features/ai-assistant" },
-      { label: "Keyword Tracking", href: "/features/keyword-tracking" }
-    ]
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", href: "/about" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Contact", href: "/contact" },
-      { label: "Careers", href: "/careers" },
-      { label: "Blog", href: "/blog" }
-    ]
-  },
-  {
-    title: "Resources",
-    links: [
-      { label: "Help Center", href: "/help" },
-      { label: "Case Studies", href: "/case-studies" },
-    
-    ]
-  },
-  {
-    title: "Contact",
-    links: [
-      { label: "Support", href: "mailto:support@aiseoturbo.com" },
-      { label: "Sales", href: "mailto:sales@aiseoturbo.com" },
-      { label: "Billing", href: "mailto:billing@aiseoturbo.com" }
-    ]
-  }
-]
+import { useTranslations } from "next-intl"
 
 const socialLinks = [
   { name: "Twitter", href: "https://twitter.com/aiseoturbo", icon: Twitter },
@@ -59,6 +21,47 @@ const socialLinks = [
 ]
 
 export default function Footer() {
+  const t = useTranslations('footer')
+  const currentYear = new Date().getFullYear()
+
+  const footerSections = [
+    {
+      title: t('sections.product.title'),
+      links: [
+        { label: t('sections.product.links.seoAudit'), href: "/features/seo-audit" },
+        { label: t('sections.product.links.competitorAnalysis'), href: "/features/competitor-analysis" },
+        { label: t('sections.product.links.siteCrawler'), href: "/features/site-crawler" },
+        { label: t('sections.product.links.aiAssistant'), href: "/features/ai-assistant" },
+        { label: t('sections.product.links.keywordTracking'), href: "/features/keyword-tracking" }
+      ]
+    },
+    {
+      title: t('sections.company.title'),
+      links: [
+        { label: t('sections.company.links.about'), href: "/about" },
+        { label: t('sections.company.links.pricing'), href: "/pricing" },
+        { label: t('sections.company.links.contact'), href: "/contact" },
+        { label: t('sections.company.links.careers'), href: "/careers" },
+        { label: t('sections.company.links.blog'), href: "/blog" }
+      ]
+    },
+    {
+      title: t('sections.resources.title'),
+      links: [
+        { label: t('sections.resources.links.helpCenter'), href: "/help" },
+        { label: t('sections.resources.links.caseStudies'), href: "/case-studies" },
+      ]
+    },
+    {
+      title: t('sections.contact.title'),
+      links: [
+        { label: t('sections.contact.links.support'), href: "mailto:support@aiseoturbo.com" },
+        { label: t('sections.contact.links.sales'), href: "mailto:sales@aiseoturbo.com" },
+        { label: t('sections.contact.links.billing'), href: "mailto:billing@aiseoturbo.com" }
+      ]
+    }
+  ]
+
   return (
     <footer className="bg-slate-950 border-t border-slate-800" role="contentinfo">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,7 +88,7 @@ export default function Footer() {
                 </Link>
               </motion.div>
               <p className="text-gray-400 text-lg leading-relaxed">
-                Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations that drive real results.
+                {t('tagline')}
               </p>
               
               {/* Social Links */}
@@ -100,7 +103,7 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -2 }}
                       className="text-gray-400 hover:text-white transition-colors duration-200 p-2"
-                      aria-label={`Follow us on ${social.name}`}
+                      aria-label={t('social.followUs', { platform: social.name })}
                     >
                       <Icon className="w-5 h-5" />
                     </motion.a>
@@ -140,19 +143,17 @@ export default function Footer() {
         <div className="py-8 border-t border-slate-800">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className="flex flex-col items-center md:items-start">
-              <p className="text-gray-400 text-sm mb-2">
-                Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations from <span className="font-semibold">AI SEO Turbo</span> that drive real results.
-              </p>
+              <p className="text-gray-400 text-sm mb-2" dangerouslySetInnerHTML={{ __html: t.raw('bottomTagline') }} />
               <p className="text-gray-400 text-sm">
-                © 2025 AI SEO Turbo. All rights reserved.
+                {t('copyright', { year: currentYear })}
               </p>
             </div>
             <div className="flex items-center space-x-6">
               <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm py-2 px-1 min-h-[44px] min-w-[44px] flex items-center">
-                Privacy Policy
+                {t('links.privacy')}
               </Link>
               <Link href="/terms" className="text-gray-400 hover:text-white transition-colors text-sm py-2 px-1 min-h-[44px] min-w-[44px] flex items-center">
-                Terms of Service
+                {t('links.terms')}
               </Link>
               <PrivacyPreferencesLink />
             </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { 
   MessageSquare, 
@@ -21,6 +22,7 @@ import IndustrySpecialization from "../../../components/features/ai-assistant/in
 import { StructuredData, generateFeatureSchema, generateFAQSchema } from "../../../components/seo/StructuredData";
 
 export default function AiAssistantPage() {
+  const t = useTranslations('featurePages.aiAssistant');
   const featureSchema = generateFeatureSchema({
     name: "AI SEO Assistant",
     description: "Intelligent AI-powered SEO assistant that provides personalized recommendations, answers SEO questions, guides implementation, and helps you optimize your website with expert-level advice.",
@@ -64,22 +66,22 @@ export default function AiAssistantPage() {
   ]);
 
   const heroMetrics = [
-    { label: "AI Models Trained", value: "12+", description: "Specialized SEO algorithms" },
-    { label: "Recommendations Generated", value: "2.3M+", description: "Actionable insights delivered" },
-    { label: "Average Improvement", value: "40%", description: "Traffic increase within 3 months" },
-    { label: "Languages Supported", value: "25+", description: "Global SEO optimization" }
+    { label: t('metrics.models.label'), value: t('metrics.models.value'), description: t('metrics.models.description') },
+    { label: t('metrics.recommendations.label'), value: t('metrics.recommendations.value'), description: t('metrics.recommendations.description') },
+    { label: t('metrics.improvement.label'), value: t('metrics.improvement.value'), description: t('metrics.improvement.description') },
+    { label: t('metrics.languages.label'), value: t('metrics.languages.value'), description: t('metrics.languages.description') }
   ];
 
   const conversationPreview = [
     {
       type: "user",
-      message: "My website traffic dropped 30% last month. What should I check first?",
-      time: "Just now"
+      message: t('chatPreview.userMessage'),
+      time: "2:34 PM"
     },
     {
       type: "ai",
-      message: "I'll analyze your recent data. Based on my initial scan, I see 3 priority areas: 1) Core Web Vitals scores dropped significantly 2) 15 high-value keywords lost rankings 3) Technical crawl errors increased. Let me run a deeper analysis...",
-      time: "Just now",
+      message: t('chatPreview.aiMessage'),
+      time: "2:34 PM",
       typing: true
     }
   ];
@@ -117,30 +119,29 @@ export default function AiAssistantPage() {
                 <div className="space-y-6">
                   <div className="inline-flex items-center px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium">
                     <Brain className="w-4 h-4 mr-2" />
-                    AI-Powered SEO Intelligence
+                    {t('hero.badge')}
                   </div>
                   
                   <h1 className="text-4xl lg:text-6xl font-bold text-foreground">
-                    Get Personalized{" "}
+                    {t('hero.title')}{" "}
                     <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                      SEO Recommendations
+                      {t('hero.titleHighlight')}
                     </span>
                   </h1>
                   
                   <p className="text-xl text-muted-foreground leading-relaxed">
-                    Chat with our AI assistant for instant, personalized SEO advice. Get actionable 
-                    recommendations based on your specific website, industry, and goals.
+                    {t('hero.subtitle')}
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-4">
                   <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                     <MessageSquare className="w-5 h-5 mr-2" />
-                    Chat with AI Assistant
+                    {t('hero.chatButton')}
                   </Button>
                   <Button variant="outline" size="lg">
                     <Play className="w-5 h-5 mr-2" />
-                    Watch Demo
+                    {t('hero.demoButton')}
                   </Button>
                 </div>
 
@@ -148,11 +149,15 @@ export default function AiAssistantPage() {
                 <div className="flex flex-wrap items-center gap-6 pt-4">
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Trained on 10M+ SEO data points</span>
+                    <span>{t('hero.trust.users')}</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Real-time Google algorithm updates</span>
+                    <span>{t('hero.trust.accuracy')}</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span>{t('hero.trust.available')}</span>
                   </div>
                 </div>
               </motion.div>
@@ -172,8 +177,8 @@ export default function AiAssistantPage() {
                         <Brain className="w-5 h-5" />
                       </div>
                       <div>
-                        <h2 className="font-semibold">AI SEO Assistant</h2>
-                        <p className="text-sm opacity-90">Online • Ready to help</p>
+                        <h2 className="font-semibold">{t('chatPreview.headerTitle')}</h2>
+                        <p className="text-sm opacity-90">{t('chatPreview.headerStatus')}</p>
                       </div>
                     </div>
                   </div>
@@ -216,7 +221,7 @@ export default function AiAssistantPage() {
                     <div className="flex items-center space-x-2 p-3 bg-muted rounded-lg">
                       <input 
                         type="text" 
-                        placeholder="Ask me anything about SEO..."
+                        placeholder={t('chatPreview.inputPlaceholder')}
                         className="flex-1 bg-transparent border-none outline-none text-sm"
                         disabled
                       />
@@ -280,21 +285,20 @@ export default function AiAssistantPage() {
               </div>
               
               <h2 className="text-3xl font-bold text-foreground mb-4">
-                Ready to Accelerate Your SEO?
+                {t('cta.title')}
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of SEO professionals who rely on our AI assistant for 
-                data-driven recommendations and faster results.
+                {t('cta.subtitle')}
               </p>
               
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
                   <MessageSquare className="w-5 h-5 mr-2" />
-                  Start Free Conversation
+                  {t('cta.startButton')}
                 </Button>
                 <Button variant="outline" size="lg">
                   <Target className="w-5 h-5 mr-2" />
-                  View Pricing Plans
+                  {t('cta.pricingButton')}
                 </Button>
               </div>
             </motion.div>

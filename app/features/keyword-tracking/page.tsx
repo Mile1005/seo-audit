@@ -12,6 +12,7 @@ import {
   Play,
   CheckCircle
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "../../../components/ui/button";
 import { MainLayout } from "../../../components/layout/main-layout";
 import { Breadcrumbs } from "../../../components/navigation/breadcrumbs";
@@ -22,6 +23,10 @@ import AlertSystem from "../../../components/features/keyword-tracking/alert-sys
 import { StructuredData, generateFeatureSchema, generateFAQSchema } from "../../../components/seo/StructuredData";
 
 export default function KeywordTrackingPage() {
+  const t = useTranslations('featurePages.keywordTracking');
+  const tHero = useTranslations('featurePages.keywordTracking.hero');
+  const tCta = useTranslations('featurePages.keywordTracking.cta');
+  
   const featureSchema = generateFeatureSchema({
     name: "Keyword Rank Tracking Tool",
     description: "Real-time keyword ranking tracker that monitors your search positions across Google, tracks SERP features, provides competitor insights, and sends alerts when rankings change.",
@@ -65,10 +70,10 @@ export default function KeywordTrackingPage() {
   ]);
 
   const heroMetrics = [
-    { label: "Keywords Tracked", value: "50M+", description: "Across all clients globally" },
-    { label: "Daily Updates", value: "24/7", description: "Real-time ranking monitoring" },
-    { label: "Global Locations", value: "190+", description: "Countries and cities supported" },
-    { label: "SERP Features", value: "15+", description: "Tracked and analyzed" }
+    { label: tHero('metrics.keywordsTracked.label'), value: tHero('metrics.keywordsTracked.value'), description: tHero('metrics.keywordsTracked.description') },
+    { label: tHero('metrics.dailyUpdates.label'), value: tHero('metrics.dailyUpdates.value'), description: tHero('metrics.dailyUpdates.description') },
+    { label: tHero('metrics.globalLocations.label'), value: tHero('metrics.globalLocations.value'), description: tHero('metrics.globalLocations.description') },
+    { label: tHero('metrics.serpFeatures.label'), value: tHero('metrics.serpFeatures.value'), description: tHero('metrics.serpFeatures.description') }
   ];
 
   const rankingPreview = [
@@ -152,31 +157,26 @@ export default function KeywordTrackingPage() {
                 <div className="space-y-6">
                   <div className="inline-flex items-center px-4 py-2 bg-green-500/10 rounded-full text-green-400 text-sm font-medium">
                     <BarChart3 className="w-4 h-4 mr-2" />
-                    Real-Time Ranking Intelligence
+                    {tHero('badge')}
                   </div>
                   
                   <h1 className="text-4xl lg:text-6xl font-bold text-foreground">
-                    Monitor Your{" "}
-                    <span className="bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
-                      Search Rankings
-                    </span>{" "}
-                    24/7
+                    {tHero('title')}
                   </h1>
                   
                   <p className="text-xl text-slate-300 leading-relaxed">
-                    Track keyword rankings across devices, locations, and search engines. 
-                    Get instant alerts when positions change and discover new opportunities.
+                    {tHero('subtitle')}
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-4">
                   <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
                     <Target className="w-5 h-5 mr-2" />
-                    Track Keywords Now
+                    {tHero('cta.track')}
                   </Button>
                   <Button variant="outline" size="lg">
                     <Play className="w-5 h-5 mr-2" />
-                    See Demo
+                    {tHero('cta.demo')}
                   </Button>
                 </div>
 
@@ -184,11 +184,11 @@ export default function KeywordTrackingPage() {
                 <div className="flex flex-wrap items-center gap-6 pt-4">
                   <div className="flex items-center space-x-2 text-sm text-slate-400">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>99.9% uptime monitoring</span>
+                    <span>{tHero('trustIndicators.uptime')}</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-slate-400">
                     <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span>Daily ranking updates</span>
+                    <span>{tHero('trustIndicators.dailyUpdates')}</span>
                   </div>
                 </div>
               </motion.div>
@@ -205,12 +205,12 @@ export default function KeywordTrackingPage() {
                   <div className="bg-gradient-to-r from-green-600 to-blue-600 p-6 text-white">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h2 className="text-lg font-semibold">Keyword Rankings</h2>
-                        <p className="text-sm opacity-90">Live tracking dashboard</p>
+                        <h2 className="text-lg font-semibold">{tHero('dashboard.title')}</h2>
+                        <p className="text-sm opacity-90">{tHero('dashboard.subtitle')}</p>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span className="text-sm">Live</span>
+                        <span className="text-sm">{tHero('dashboard.live')}</span>
                       </div>
                     </div>
                   </div>
@@ -231,21 +231,21 @@ export default function KeywordTrackingPage() {
                               {item.keyword}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {item.volume.toLocaleString()} monthly searches
+                              {item.volume.toLocaleString()} {tHero('dashboard.monthlySearches')}
                             </div>
                           </div>
                           
                           <div className="flex items-center space-x-4">
                             <div className="text-center">
                               <div className="text-lg font-bold text-foreground">#{item.position}</div>
-                              <div className="text-xs text-muted-foreground">Position</div>
+                              <div className="text-xs text-muted-foreground">{tHero('dashboard.position')}</div>
                             </div>
                             
                             <div className="text-center">
                               <div className={`text-sm font-medium ${getChangeColor(item.change)}`}>
                                 {getChangeIcon(item.change)} {item.change > 0 ? '+' : ''}{item.change}
                               </div>
-                              <div className="text-xs text-muted-foreground">Change</div>
+                              <div className="text-xs text-muted-foreground">{tHero('dashboard.change')}</div>
                             </div>
                             
                             <div className="flex space-x-1">
@@ -267,15 +267,15 @@ export default function KeywordTrackingPage() {
                       <div className="grid grid-cols-3 gap-4 text-center">
                         <div>
                           <div className="text-lg font-bold text-emerald-400">+12</div>
-                          <div className="text-xs text-muted-foreground">Improved</div>
+                          <div className="text-xs text-muted-foreground">{tHero('dashboard.improved')}</div>
                         </div>
                         <div>
                           <div className="text-lg font-bold text-rose-400">-3</div>
-                          <div className="text-xs text-muted-foreground">Declined</div>
+                          <div className="text-xs text-muted-foreground">{tHero('dashboard.declined')}</div>
                         </div>
                         <div>
                           <div className="text-lg font-bold text-muted-foreground">5</div>
-                          <div className="text-xs text-muted-foreground">Unchanged</div>
+                          <div className="text-xs text-muted-foreground">{tHero('dashboard.unchanged')}</div>
                         </div>
                       </div>
                     </div>
@@ -336,21 +336,20 @@ export default function KeywordTrackingPage() {
               </div>
               
               <h2 className="text-3xl font-bold text-foreground mb-4">
-                Start Tracking Your Rankings Today
+                {tCta('title')}
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of SEO professionals who trust our platform for accurate, 
-                real-time keyword tracking and competitive intelligence.
+                {tCta('description')}
               </p>
               
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
                   <Target className="w-5 h-5 mr-2" />
-                  Start Free Trial
+                  {tCta('startTrial')}
                 </Button>
                 <Button variant="outline" size="lg">
                   <Bell className="w-5 h-5 mr-2" />
-                  Setup Alerts
+                  {tCta('setupAlerts')}
                 </Button>
               </div>
             </motion.div>

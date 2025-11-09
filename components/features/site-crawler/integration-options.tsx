@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { 
   Rocket, 
@@ -17,58 +18,60 @@ import {
 } from "lucide-react";
 
 export default function IntegrationOptions() {
+  const t = useTranslations('featurePages.siteCrawler.integrations');
+
   const integrations = [
     {
-      name: "Google Search Console",
-      description: "Import your existing GSC data for comprehensive analysis",
+      name: t('googleSearchConsole'),
+      description: t('gscDesc'),
       icon: Globe,
-      features: ["Search performance data", "Index coverage reports", "Core Web Vitals"],
+      features: [t('gscFeature1'), t('gscFeature2'), t('gscFeature3')],
       color: "from-blue-500 to-blue-600"
     },
     {
-      name: "Google Analytics",
-      description: "Combine crawl data with user behavior insights",
+      name: t('googleAnalytics'),
+      description: t('gaDesc'),
       icon: TrendingUp,
-      features: ["Traffic patterns", "User experience metrics", "Conversion tracking"],
+      features: [t('gaFeature1'), t('gaFeature2'), t('gaFeature3')],
       color: "from-green-500 to-green-600"
     },
     {
-      name: "PageSpeed Insights",
-      description: "Automated performance testing for all discovered pages",
+      name: t('pageSpeedInsights'),
+      description: t('psiDesc'),
       icon: Zap,
-      features: ["Core Web Vitals", "Performance scores", "Optimization suggestions"],
+      features: [t('psiFeature1'), t('psiFeature2'), t('psiFeature3')],
       color: "from-yellow-500 to-orange-500"
     }
   ];
 
   const testimonials = [
     {
-      name: "Sarah Chen",
-      role: "SEO Director, TechCorp",
-      content: "The site crawler found issues we didn't even know existed. Our organic traffic increased 40% after fixing them.",
+      name: t('testimonial1Name'),
+      role: t('testimonial1Role'),
+      content: t('testimonial1Content'),
       rating: 5
     },
     {
-      name: "Marcus Rodriguez",
-      role: "Digital Marketing Manager",
-      content: "Automated monitoring saves us 10+ hours per week. The alerts are spot-on and actionable.",
+      name: t('testimonial2Name'),
+      role: t('testimonial2Role'),
+      content: t('testimonial2Content'),
       rating: 5
     },
     {
-      name: "Emma Thompson",
-      role: "Technical SEO Consultant",
-      content: "Most comprehensive crawling tool I've used. The visual site mapping is a game-changer for client reports.",
+      name: t('testimonial3Name'),
+      role: t('testimonial3Role'),
+      content: t('testimonial3Content'),
       rating: 5
     }
   ];
 
   const pricingFeatures = [
-    "Crawl up to 10,000 pages",
-    "50+ automated issue detections",
-    "Real-time monitoring & alerts",
-    "Visual site architecture mapping",
-    "Google integrations",
-    "Priority support"
+    t('ctaFeature1'),
+    t('ctaFeature2'),
+    t('ctaFeature3'),
+    t('ctaFeature4'),
+    t('ctaFeature5'),
+    t('ctaFeature6')
   ];
 
   return (
@@ -84,10 +87,10 @@ export default function IntegrationOptions() {
         >
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Powerful Integrations
+              {t('title')}
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Connect with your existing tools for a complete SEO workflow
+              {t('subtitle')}
             </p>
           </div>
 
@@ -141,10 +144,10 @@ export default function IntegrationOptions() {
         >
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Trusted by SEO Professionals
+              {t('trustedBySeo')}
             </h2>
             <p className="text-xl text-muted-foreground">
-              See what industry experts say about our site crawler
+              {t('trustedSubtitle')}
             </p>
           </div>
 
@@ -206,10 +209,10 @@ export default function IntegrationOptions() {
             </motion.div>
             
             <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Start Your Free Site Crawl Today
+              {t('ctaTitle')}
             </h2>
             <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-              Discover hidden SEO issues and opportunities across your entire website in minutes
+              {t('ctaSubtitle')}
             </p>
             
             <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-8">
@@ -241,7 +244,7 @@ export default function IntegrationOptions() {
                 className="text-lg px-8 py-6 bg-primary text-white hover:bg-primary/90"
               >
                 <Target className="w-5 h-5 mr-2" />
-                Start Free Crawl
+                {t('startFreeCrawl')}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button 
@@ -250,7 +253,7 @@ export default function IntegrationOptions() {
                 className="text-lg px-8 py-6 border-white/30 text-white hover:bg-white/10"
               >
                 <Users className="w-5 h-5 mr-2" />
-                Book Demo
+                {t('bookDemo')}
               </Button>
             </motion.div>
             
@@ -261,7 +264,7 @@ export default function IntegrationOptions() {
               transition={{ duration: 0.6, delay: 1.6 }}
               className="text-sm opacity-75 mt-6"
             >
-              No credit card required  14-day free trial  Cancel anytime
+              {t('noCreditCard')}
             </motion.p>
           </div>
         </motion.div>

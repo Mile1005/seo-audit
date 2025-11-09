@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { 
   Zap, 
   Globe, 
@@ -14,50 +15,52 @@ import {
 } from "lucide-react";
 
 export default function CrawlCapabilities() {
+  const t = useTranslations('featurePages.siteCrawler.crawlCapabilities');
+
   const capabilities = [
     {
       icon: Globe,
-      title: "Unlimited Page Crawling",
-      description: "Crawl up to 10,000 pages per scan with intelligent discovery",
-      features: ["Smart page discovery", "Custom crawl depth", "Robots.txt compliance"]
+      title: t('unlimitedCrawling'),
+      description: t('unlimitedDesc'),
+      features: [t('unlimitedFeature1'), t('unlimitedFeature2'), t('unlimitedFeature3')]
     },
     {
       icon: Settings,
-      title: "Custom Crawl Rules",
-      description: "Configure crawling behavior with advanced settings",
-      features: ["URL pattern filtering", "Custom user agents", "Crawl delay controls"]
+      title: t('customRules'),
+      description: t('customRulesDesc'),
+      features: [t('customFeature1'), t('customFeature2'), t('customFeature3')]
     },
     {
       icon: Link,
-      title: "Broken Link Detection",
-      description: "Find and map all broken internal and external links",
-      features: ["404 error detection", "Redirect chain analysis", "Link relationship mapping"]
+      title: t('brokenLinkDetection'),
+      description: t('brokenLinkDesc'),
+      features: [t('brokenFeature1'), t('brokenFeature2'), t('brokenFeature3')]
     },
     {
       icon: Zap,
-      title: "Page Speed Analysis",
-      description: "Measure loading performance across your entire site",
-      features: ["Core Web Vitals", "Resource optimization", "Performance bottlenecks"]
+      title: t('pageSpeedAnalysis'),
+      description: t('pageSpeedDesc'),
+      features: [t('speedFeature1'), t('speedFeature2'), t('speedFeature3')]
     },
     {
       icon: FileText,
-      title: "Duplicate Content ID",
-      description: "Identify and resolve content duplication issues",
-      features: ["Content similarity", "Canonical analysis", "Thin content detection"]
+      title: t('duplicateContentId'),
+      description: t('duplicateDesc'),
+      features: [t('dupFeature1'), t('dupFeature2'), t('dupFeature3')]
     },
     {
       icon: Image,
-      title: "Image Optimization",
-      description: "Discover image optimization opportunities site-wide",
-      features: ["Missing alt text", "Oversized images", "Format recommendations"]
+      title: t('imageOptimization'),
+      description: t('imageOptDesc'),
+      features: [t('imgFeature1'), t('imgFeature2'), t('imgFeature3')]
     }
   ];
 
   const stats = [
-    { number: "10,000+", label: "Pages Per Crawl", color: "from-blue-500 to-cyan-600" },
-    { number: "50+", label: "Issue Types", color: "from-green-500 to-emerald-600" },
-    { number: "< 5min", label: "Average Crawl Time", color: "from-purple-500 to-pink-600" },
-    { number: "99.9%", label: "Accuracy Rate", color: "from-orange-500 to-red-600" }
+    { number: "10,000+", label: t('pagesPerCrawl'), color: "from-blue-500 to-cyan-600" },
+    { number: "50+", label: t('issueTypes'), color: "from-green-500 to-emerald-600" },
+    { number: "< 5min", label: t('avgCrawlTime'), color: "from-purple-500 to-pink-600" },
+    { number: "99.9%", label: t('accuracyRate'), color: "from-orange-500 to-red-600" }
   ];
 
   return (
@@ -72,10 +75,10 @@ export default function CrawlCapabilities() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Powerful Crawling Capabilities
+            {t('title')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Advanced website analysis with intelligent crawling algorithms and comprehensive issue detection
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -179,24 +182,23 @@ export default function CrawlCapabilities() {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-bold text-foreground mb-4">
-                Enterprise-Grade Infrastructure
+                {t('enterpriseInfrastructure')}
               </h3>
               <p className="text-muted-foreground mb-6">
-                Built for scale with distributed crawling, intelligent rate limiting, 
-                and real-time progress tracking.
+                {t('enterpriseDesc')}
               </p>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <Shield className="w-5 h-5 text-green-500 mr-3" />
-                  <span className="text-sm">Respect robots.txt and crawl delays</span>
+                  <span className="text-sm">{t('respects')}</span>
                 </div>
                 <div className="flex items-center">
                   <BarChart3 className="w-5 h-5 text-blue-500 mr-3" />
-                  <span className="text-sm">Real-time crawl progress and analytics</span>
+                  <span className="text-sm">{t('realtime')}</span>
                 </div>
                 <div className="flex items-center">
                   <Zap className="w-5 h-5 text-yellow-500 mr-3" />
-                  <span className="text-sm">Distributed crawling for maximum speed</span>
+                  <span className="text-sm">{t('distributed')}</span>
                 </div>
               </div>
             </div>

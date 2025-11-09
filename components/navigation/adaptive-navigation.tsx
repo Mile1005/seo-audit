@@ -1,13 +1,16 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from "react"
-import Link from "next/link"
+import { Link, useRouter } from "@/lib/navigation"
 import Image from "next/image"
 import { Menu, X, ChevronDown } from "lucide-react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
+import { LanguageSwitcher } from "@/components/layout/language-switcher"
+import { useTranslations } from "next-intl"
 
 // Lightweight dropdown component with CSS transitions
 interface DropdownItem {
+  id: string
   label: string
   href: string
   description?: string
@@ -60,27 +63,27 @@ function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
             <div className="relative z-10 flex items-start space-x-3">
               {/* Feature Icon */}
               <div className="flex-shrink-0 mt-0.5">
-                {item.label === "SEO Audit" && (
+                {item.id === "seoAudit" && (
                   <svg className="w-5 h-5 text-blue-400 group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 )}
-                {item.label === "Competitor Analysis" && (
+                {item.id === "competitorAnalysis" && (
                   <svg className="w-5 h-5 text-purple-400 group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                   </svg>
                 )}
-                {item.label === "Keyword Tracking" && (
+                {item.id === "keywordTracking" && (
                   <svg className="w-5 h-5 text-green-400 group-hover:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
                   </svg>
                 )}
-                {item.label === "Site Crawler" && (
+                {item.id === "siteCrawler" && (
                   <svg className="w-5 h-5 text-orange-400 group-hover:text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                   </svg>
                 )}
-                {item.label === "AI Assistant" && (
+                {item.id === "aiAssistant" && (
                   <svg className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
@@ -104,6 +107,7 @@ function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
 }
 
 export interface NavigationItem {
+  id: string
   label: string
   href: string
   description?: string
@@ -115,52 +119,53 @@ export interface NavigationSection {
   items?: NavigationItem[]
 }
 
-const navigationData: NavigationSection[] = [
-  {
-    label: "Features",
-    items: [
-      {
-        label: "SEO Audit",
-        href: "/features/seo-audit",
-        description: "Comprehensive website analysis and recommendations"
-      },
-      {
-        label: "Competitor Analysis",
-        href: "/features/competitor-analysis",
-        description: "Compare your performance against competitors"
-      },
-      {
-        label: "Keyword Tracking",
-        href: "/features/keyword-tracking",
-        description: "Monitor rankings and search performance"
-      },
-      {
-        label: "Site Crawler",
-        href: "/features/site-crawler",
-        description: "Deep technical SEO analysis and monitoring"
-      },
-      {
-        label: "AI Assistant",
-        href: "/features/ai-assistant",
-        description: "Intelligent SEO recommendations and insights"
-      }
-    ]
-  },
-  {
-    label: "Pricing",
-    href: "/pricing"
-  },
-  {
-    label: "About",
-    href: "/about"
-  },
-  {
-    label: "Contact",
-    href: "/contact"
-  }
-]
+function useNavigationData(): NavigationSection[] {
+  const t = useTranslations('nav')
+  return [
+    {
+      label: t('features'),
+      items: [
+        {
+          id: 'seoAudit',
+          label: t('menu.features.items.seoAudit.title'),
+          href: '/features/seo-audit',
+          description: t('menu.features.items.seoAudit.desc')
+        },
+        {
+          id: 'competitorAnalysis',
+          label: t('menu.features.items.competitorAnalysis.title'),
+          href: '/features/competitor-analysis',
+          description: t('menu.features.items.competitorAnalysis.desc')
+        },
+        {
+          id: 'keywordTracking',
+          label: t('menu.features.items.keywordTracking.title'),
+          href: '/features/keyword-tracking',
+          description: t('menu.features.items.keywordTracking.desc')
+        },
+        {
+          id: 'siteCrawler',
+          label: t('menu.features.items.siteCrawler.title'),
+          href: '/features/site-crawler',
+          description: t('menu.features.items.siteCrawler.desc')
+        },
+        {
+          id: 'aiAssistant',
+          label: t('menu.features.items.aiAssistant.title'),
+          href: '/features/ai-assistant',
+          description: t('menu.features.items.aiAssistant.desc')
+        }
+      ]
+    },
+    { label: t('pricing'), href: '/pricing' },
+    { label: t('about'), href: '/about' },
+    { label: t('contact'), href: '/contact' }
+  ]
+}
 
 export function AdaptiveNavigation() {
+  const t = useTranslations('nav')
+  const navigationData = useNavigationData()
   const [isOpen, setIsOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isMounted, setIsMounted] = useState(false)
@@ -329,19 +334,20 @@ export function AdaptiveNavigation() {
             </div>
           </div>
 
-          {/* CTA Buttons */}
+          {/* Right Section: Language + CTAs */}
           <div className="hidden md:flex items-center space-x-4">
+            <LanguageSwitcher />
             <Link
               href="/login"
               className="relative group text-white hover:text-blue-400 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 border border-slate-600/50 hover:border-blue-400/70 backdrop-blur-sm hover:bg-slate-800/30 hover:shadow-lg hover:shadow-blue-500/20"
             >
-              <span className="relative z-10">Log In</span>
+              <span className="relative z-10">{t('login')}</span>
             </Link>
             <Link
               href="/signup"
               className="relative group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105 border border-blue-500/20"
             >
-              <span className="relative z-10">Sign Up</span>
+              <span className="relative z-10">{t('signup')}</span>
               <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </Link>
             <Link
@@ -352,7 +358,7 @@ export function AdaptiveNavigation() {
                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Free SEO Audit
+                {t('cta.freeAudit')}
               </span>
               <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </Link>
@@ -377,7 +383,7 @@ export function AdaptiveNavigation() {
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 transition-colors duration-200"
               aria-expanded={isOpen}
             >
-              <span className="sr-only">Open main menu</span>
+              <span className="sr-only">{t('openMenu')}</span>
               {isOpen ? (
                 <X className="block h-6 w-6" aria-hidden="true" />
               ) : (
@@ -392,6 +398,7 @@ export function AdaptiveNavigation() {
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`} style={{ minHeight: isOpen ? '200px' : '0px' }}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/50 rounded-b-lg">
+            <div className="px-3 py-2"><LanguageSwitcher /></div>
             {navigationData.map((section) => (
               <div key={section.label}>
                 {section.items ? (
@@ -420,7 +427,7 @@ export function AdaptiveNavigation() {
                         }
                       }}
                       style={{ touchAction: 'manipulation' }}
-                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between active:bg-slate-800"
+                      className="text-slate-300 hover:text-white hover:bg-slate-800/50 px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between active:bg-slate-800"
                     >
                       <span>{section.label}</span>
                       <ChevronDown
@@ -493,14 +500,14 @@ export function AdaptiveNavigation() {
                 className="relative group text-white hover:text-blue-400 block px-4 py-3 text-base font-semibold transition-all duration-300 border border-slate-600/50 hover:border-blue-400/70 rounded-lg mb-3 backdrop-blur-sm hover:bg-slate-800/30"
                 onClick={closeMenu}
               >
-                <span className="relative z-10">Log In</span>
+                <span className="relative z-10">{t('login')}</span>
               </Link>
               <Link
                 href="/signup"
                 className="relative group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 shadow-lg shadow-blue-600/25 mb-3 border border-blue-500/20"
                 onClick={closeMenu}
               >
-                <span className="relative z-10">Sign Up</span>
+                <span className="relative z-10">{t('signup')}</span>
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </Link>
               <Link
@@ -512,7 +519,7 @@ export function AdaptiveNavigation() {
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Free SEO Audit
+                  {t('cta.freeAudit')}
                 </span>
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </Link>

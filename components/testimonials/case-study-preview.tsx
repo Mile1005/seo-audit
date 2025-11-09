@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, TrendingUp, Clock } from "lucide-react"
 import { handleCTAClick } from "@/lib/cta-utils"
 import { type Testimonial } from "../../data/testimonials"
+import { useTranslations } from 'next-intl'
 
 interface CaseStudyPreviewProps {
   testimonial: Testimonial
@@ -12,6 +13,7 @@ interface CaseStudyPreviewProps {
 }
 
 export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPreviewProps) {
+  const t = useTranslations()
   if (!testimonial.caseStudy) return null
 
   const { caseStudy, name, company, category } = testimonial
@@ -28,11 +30,11 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
 
   const getCategoryLabel = (cat: string) => {
     switch (cat) {
-      case 'agency': return 'Marketing Agency'
-      case 'smb': return 'Small Business'
-      case 'ecommerce': return 'E-commerce'
-      case 'saas': return 'SaaS Company'
-      default: return 'Company'
+      case 'agency': return t('home.testimonials.caseStudies.categories.agency')
+      case 'smb': return t('home.testimonials.caseStudies.categories.smb')
+      case 'ecommerce': return t('home.testimonials.caseStudies.categories.ecommerce')
+      case 'saas': return t('home.testimonials.caseStudies.categories.saas')
+      default: return t('home.testimonials.caseStudies.categories.agency')
     }
   }
 
@@ -61,7 +63,7 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
             {company}
           </h3>
           <p className="text-gray-400 text-sm">
-            Case study with {name}
+            {t('home.testimonials.caseStudies.labels.caseStudyWith', { name })}
           </p>
         </div>
         
@@ -73,24 +75,24 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
       {/* Before/After Metrics */}
       <div className="space-y-3 mb-6">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-400">Before</span>
+          <span className="text-sm text-gray-400">{t('home.testimonials.caseStudies.labels.before')}</span>
           <span className="text-sm font-medium text-red-400">
-            {caseStudy.beforeMetric}
+            {t(caseStudy.beforeMetricKey)}
           </span>
         </div>
         
         <div className="flex items-center justify-between">
-          <span className="text-sm text-gray-400">After</span>
+          <span className="text-sm text-gray-400">{t('home.testimonials.caseStudies.labels.after')}</span>
           <span className="text-sm font-medium text-green-400">
-            {caseStudy.afterMetric}
+            {t(caseStudy.afterMetricKey)}
           </span>
         </div>
         
         <div className="border-t border-slate-700/50 pt-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-400">Improvement</span>
+            <span className="text-sm text-gray-400">{t('home.testimonials.caseStudies.labels.improvement')}</span>
             <span className="text-sm font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-              {caseStudy.improvement}
+              {t(caseStudy.improvementKey)}
             </span>
           </div>
         </div>
@@ -100,7 +102,7 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
       <div className="flex items-center space-x-2 mb-6 p-3 bg-slate-800/30 rounded-lg border border-slate-700/30">
         <Clock className="w-4 h-4 text-blue-400" />
         <span className="text-sm text-gray-300">
-          Achieved in <span className="font-semibold text-white">{caseStudy.timeframe}</span>
+          {t('home.testimonials.caseStudies.labels.achievedIn')} <span className="font-semibold text-white">{t(caseStudy.timeframeKey)}</span>
         </span>
       </div>
 
@@ -119,7 +121,7 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
           handleCTAClick('/blog', 'Read Full Case Study', 'case-study-preview')
         }}
       >
-        <span className="font-medium">Read Full Case Study</span>
+        <span className="font-medium">{t('home.testimonials.caseStudies.labels.readFullCaseStudy')}</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
       </motion.a>
     </motion.div>

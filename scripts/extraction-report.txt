@@ -1,0 +1,91 @@
+String Extraction Report
+==================================================
+
+Total unique strings extracted: 12103
+
+Strings by namespace:
+  common: 12103
+
+==================================================
+Sample extracted strings:
+
+common.h16_bggray900_darkbggray900_animatepulse_rounded:
+  Value: "h-16 bg-gray-900 dark:bg-gray-900 animate-pulse rounded"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:27
+
+common.aipowered_seo_audit_service:
+  Value: "AI-Powered SEO Audit Service"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:96
+
+common.comprehensive_aidriven_seo_analysis_and:
+  Value: "Comprehensive AI-driven SEO analysis and optimization recommendations for websites. Our advanced algorithms analyze 100+ SEO factors to provide actionable insights for improving search rankings."
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:97
+
+common.aiseoturbo:
+  Value: "AISEOTurbo"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:98
+
+common.seo_audit_analysis:
+  Value: "SEO Audit & Analysis"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:99
+
+common.worldwide:
+  Value: "Worldwide"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:100
+
+common.47point_seo_audit_checklist:
+  Value: "47-Point SEO Audit Checklist"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:106
+
+common.the_complete_technical_seo_checklist:
+  Value: "The complete technical SEO checklist used by 1000+ websites to increase organic traffic by 40% in 90 days."
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:107
+
+common.py20_bgwhite_darkbgslate900:
+  Value: "py-20 bg-white dark:bg-slate-900"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:202
+
+common.container_mxauto_px4_maxw6xl:
+  Value: "container mx-auto px-4 max-w-6xl"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:203
+
+common.textcenter_mb12:
+  Value: "text-center mb-12"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:206
+
+common.text3xl_mdtext4xl_fontbold_textslate900_darktextwhite:
+  Value: "text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:207
+
+common.textlg_textslate600_darktextslate400_maxw2xl_mxauto:
+  Value: "text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:210
+
+common.grid_lggridcols2_gap12_itemscenter:
+  Value: "grid lg:grid-cols-2 gap-12 items-center"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:215
+
+common.text2xl_fontsemibold_textslate900_darktextwhite_mb4:
+  Value: "text-2xl font-semibold text-slate-900 dark:text-white mb-4"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:217
+
+common.textslate600_darktextslate400_mb6:
+  Value: "text-slate-600 dark:text-slate-400 mb-6"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:220
+
+common.flex_itemsstart_gap3:
+  Value: "flex items-start gap-3"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:224
+
+common.w5_h5_textgreen500_mt05_flexshrink0:
+  Value: "w-5 h-5 text-green-500 mt-0.5 flex-shrink-0"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:225
+
+common.47point_technical_audit_covering_all:
+  Value: "47-Point Technical Audit covering all critical factors"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:226
+
+common.textslate700_darktextslate300:
+  Value: "text-slate-700 dark:text-slate-300"
+  Context: C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx:226
+

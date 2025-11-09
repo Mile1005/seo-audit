@@ -167,6 +167,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
                 email: true,
                 image: true,
                 status: true,
+                // @ts-ignore - preferredLocale added to schema, types will update after migration
+                preferredLocale: true,
               }
             })
           })
@@ -181,6 +183,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             session.user.id = dbUser.id
             session.user.name = dbUser.name
             session.user.image = dbUser.image
+            // @ts-ignore - preferredLocale types will update after migration
+            session.user.preferredLocale = dbUser.preferredLocale || 'en'
           }
         }
       }

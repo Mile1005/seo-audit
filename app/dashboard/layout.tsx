@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useSession, signOut } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { 
   HomeIcon, 
   FolderIcon, 
@@ -28,17 +29,6 @@ interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Projects', href: '/dashboard/projects', icon: FolderIcon },
-  { name: 'Keywords', href: '/dashboard/keywords', icon: MagnifyingGlassIcon },
-  { name: 'Site Audit', href: '/dashboard/audit', icon: DocumentMagnifyingGlassIcon },
-  { name: 'Page Crawler', href: '/dashboard/page-crawler', icon: GlobeAltIcon },
-  { name: 'Backlinks', href: '/dashboard/backlinks', icon: LinkIcon },
-  { name: 'Competitors', href: '/dashboard/competitors', icon: UsersIcon },
-  { name: 'Reports', href: '/dashboard/reports', icon: DocumentTextIcon },
-]
-
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
@@ -46,6 +36,22 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const { data: session } = useSession()
   const { mode, setMode } = useTheme()
   const userMenuRef = useRef<HTMLDivElement>(null)
+  
+  // Translations
+  const t = useTranslations('nav')
+  const tCommon = useTranslations('common')
+  const tDashboard = useTranslations('dashboard')
+  
+  const navigation = [
+    { name: t('dashboard'), href: '/dashboard', icon: HomeIcon },
+    { name: t('projects'), href: '/dashboard/projects', icon: FolderIcon },
+    { name: t('keywords'), href: '/dashboard/keywords', icon: MagnifyingGlassIcon },
+    { name: t('siteAudit'), href: '/dashboard/audit', icon: DocumentMagnifyingGlassIcon },
+    { name: t('pageCrawler'), href: '/dashboard/page-crawler', icon: GlobeAltIcon },
+    { name: t('backlinks'), href: '/dashboard/backlinks', icon: LinkIcon },
+    { name: t('competitors'), href: '/dashboard/competitors', icon: UsersIcon },
+    { name: t('reports'), href: '/dashboard/reports', icon: DocumentTextIcon },
+  ]
 
   // Close user menu when clicking outside
   useEffect(() => {
@@ -84,7 +90,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">AI</span>
             </div>
-            <span className="text-xl font-bold text-slate-900 dark:text-white">SEOTurbo</span>
+            <span className="text-xl font-bold text-slate-900 dark:text-white">{tDashboard('seoTurbo')}</span>
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}
@@ -124,7 +130,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">AI</span>
               </div>
-              <span className="text-xl font-bold text-slate-900 dark:text-white">SEOTurbo</span>
+              <span className="text-xl font-bold text-slate-900 dark:text-white">{tDashboard('seoTurbo')}</span>
             </Link>
           </div>
           <nav className="mt-6 flex-1 px-3">
@@ -155,7 +161,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               className="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
             >
               <Cog6ToothIcon className="w-5 h-5 mr-3" />
-              Settings
+              {tCommon('settings')}
             </Link>
           </div>
         </div>
@@ -180,14 +186,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <ol className="flex items-center space-x-2">
                   <li>
                     <Link href="/dashboard" className="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-300">
-                      Dashboard
+                      {t('dashboard')}
                     </Link>
                   </li>
                   {pathname !== '/dashboard' && (
                     <>
                       <span className="text-slate-400">/</span>
                       <li className="text-slate-900 dark:text-white font-medium">
-                        {navigation.find(item => item.href === pathname)?.name || 'Page'}
+                        {navigation.find(item => item.href === pathname)?.name || tCommon('page')}
                       </li>
                     </>
                   )}
@@ -216,10 +222,10 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               <div ref={userMenuRef} className="relative flex items-center space-x-3">
                 <div className="hidden sm:block text-right">
                   <p className="text-sm font-medium text-slate-900 dark:text-white">
-                    {session?.user?.name || 'User'}
+                    {session?.user?.name || tCommon('user')}
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {session?.user?.email || 'No email'}
+                    {session?.user?.email || tCommon('noEmail')}
                   </p>
                 </div>
                 <button 
@@ -245,14 +251,14 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                       className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
                       onClick={() => setUserMenuOpen(false)}
                     >
-                      Settings
+                      {tCommon('settings')}
                     </Link>
                     <Link 
                       href="/dashboard/profile" 
                       className="block px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
                       onClick={() => setUserMenuOpen(false)}
                     >
-                      Profile
+                      {tCommon('profile')}
                     </Link>
                     <hr className="my-2 border-slate-200 dark:border-slate-700" />
                     <button
@@ -262,7 +268,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                       }}
                       className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
                     >
-                      Sign out
+                      {tCommon('signOut')}
                     </button>
                   </div>
                 )}

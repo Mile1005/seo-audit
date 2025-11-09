@@ -23,8 +23,10 @@ const nextConfig = {
   
   // Redirects configuration - handle non-www to www and index pages
   async redirects() {
+    const locales = ['en', 'fr', 'it', 'es', 'id', 'de'];
+    
     return [
-      // Redirect non-www to www for SEO consistency
+      // Redirect non-www to www for SEO consistency (locale-aware)
       {
         source: '/:path((?!_next).*)',
         has: [
@@ -109,7 +111,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.googletagmanager.com; frame-ancestors 'none';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.google-analytics.com https://*.googletagmanager.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.googletagmanager.com; frame-ancestors 'none';",
           },
           {
             key: 'Referrer-Policy',
@@ -316,31 +318,35 @@ const nextConfig = {
   
   // Webpack optimization for reducing HTTP requests
   webpack: (config, { isServer }) => {
-    config.optimization = {
-      ...config.optimization,
-      // Enable code splitting optimization
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          // Bundle React and Next.js runtime together
-          default: {
-            minChunks: 2,
-            priority: -20,
-            reuseExistingChunk: true,
-            name: 'common',
-          },
-          // Vendor libraries
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            minChunks: 1,
-            priority: -10,
-            name: 'vendors',
-            reuseExistingChunk: true,
-            maxSize: 250000, // Combine smaller vendor chunks
-          },
-        },
-      },
-    }
+    // Temporarily disable splitChunks to diagnose framer-motion SSR issue
+    // config.optimization = {
+    //   ...config.optimization,
+    //   splitChunks: {
+    //     chunks: 'all',
+    //     cacheGroups: {
+    //       default: {
+    //         minChunks: 2,
+    //         priority: -20,
+    //         reuseExistingChunk: true,
+    //         name: 'common',
+    //       },
+    //       framerMotion: {
+    //         test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+    //         name: 'framer-motion',
+    //         priority: 10,
+    //         reuseExistingChunk: true,
+    //       },
+    //       vendor: {
+    //         test: /[\\/]node_modules[\\/]((?!framer-motion).*)[\\/]/,
+    //         minChunks: 1,
+    //         priority: -10,
+    //         name: 'vendors',
+    //         reuseExistingChunk: true,
+    //         maxSize: 250000,
+    //       },
+    //     },
+    //   },
+    // }
     return config
   },
 }
@@ -357,4 +363,10 @@ const withMDX = (await import('@next/mdx')).default({
   },
 })
 
-export default withBundleAnalyzer(withMDX(nextConfig))
+// Import next-intl plugin for i18n support
+const withNextIntl = (await import('next-intl/plugin')).default(
+  // Specify the path to your i18n config
+  './i18n.ts'
+);
+
+export default withBundleAnalyzer(withMDX(withNextIntl(nextConfig)))

@@ -116,8 +116,7 @@ export async function seedKeyword(
     }
 
     await prisma.keywordPosition.createMany({
-      data: positions,
-      skipDuplicates: true
+      data: positions
     });
     console.log(`  ✅ Created ${positions.length} position records`);
 
@@ -149,8 +148,7 @@ export async function seedKeyword(
 
     if (competitors.length > 0) {
       await prisma.keywordCompetitor.createMany({
-        data: competitors,
-        skipDuplicates: true
+        data: competitors
       });
       console.log(`  ✅ Created ${competitors.length} competitor records`);
     }
@@ -199,8 +197,7 @@ export async function seedKeyword(
     }
 
     await prisma.keywordPosition.createMany({
-      data: locationRankings,
-      skipDuplicates: true
+      data: locationRankings
     });
     console.log(`  ✅ Created ${locationRankings.length} location-specific rankings (countries + cities)`);
 
@@ -218,8 +215,7 @@ export async function seedKeyword(
     }));
 
     await prisma.rankingAlert.createMany({
-      data: alerts,
-      skipDuplicates: true
+      data: alerts
     });
     console.log(`  ✅ Created ${alerts.length} alert configurations`);
 

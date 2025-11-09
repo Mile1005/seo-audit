@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, ChevronUp } from "lucide-react"
+import { useTranslations } from 'next-intl'
 import type { Feature } from "../../data/features"
 
 interface FeatureCardProps {
@@ -12,6 +13,7 @@ interface FeatureCardProps {
 
 export function FeatureCard({ feature, index }: FeatureCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const t = useTranslations()
 
   const IconComponent = feature.icon
 
@@ -45,12 +47,12 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
         <div className="space-y-3">
           {/* Title */}
           <h3 className="text-lg font-semibold text-white group-hover:text-cyan-400 transition-colors duration-200">
-            {feature.title}
+            {t(feature.title)}
           </h3>
 
           {/* Benefit */}
           <p className="text-gray-300 text-sm leading-relaxed">
-            {feature.benefit}
+            {t(feature.benefit)}
           </p>
 
           {/* Expand Button */}
@@ -80,7 +82,7 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
               >
                 <div className="pt-2 border-t border-slate-700/50">
                   <p className="text-gray-400 text-sm leading-relaxed">
-                    {feature.details}
+                    {t(feature.details)}
                   </p>
                 </div>
               </motion.div>

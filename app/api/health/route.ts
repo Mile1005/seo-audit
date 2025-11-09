@@ -1,22 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { checkDatabaseHealth } from '@/lib/database';
 
 // Force dynamic rendering for this route
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
   try {
-    // Basic health checks
+    // Comprehensive health checks
+    const [databaseHealth] = await Promise.all([
+      checkDatabaseHealth(),
+    ]);
+
     const healthChecks = {
-      status: 'healthy',
+      status: databaseHealth.status === 'healthy' ? 'healthy' : 'unhealthy',
       timestamp: new Date().toISOString(),
       version: process.env.VERCEL_GIT_COMMIT_SHA || 'development',
       environment: process.env.NODE_ENV || 'development',
       uptime: process.uptime(),
       memory: process.memoryUsage(),
       checks: {
-        database: await checkDatabase(),
+        database: databaseHealth.status === 'healthy',
         api: true,
         static: true
+      },
+      database: {
+        status: databaseHealth.status,
+        latency: 'latency' in databaseHealth ? databaseHealth.latency : undefined,
+        error: databaseHealth.error,
       }
     };
 
@@ -31,17 +41,5 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString(),
       error: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 503 });
-  }
-}
-
-async function checkDatabase(): Promise<boolean> {
-  try {
-    // Simple database connectivity check
-    // This would typically involve a lightweight query
-    // For now, just check if DATABASE_URL exists
-    return !!process.env.DATABASE_URL;
-  } catch (error) {
-    console.error('Database health check failed:', error);
-    return false;
   }
 }

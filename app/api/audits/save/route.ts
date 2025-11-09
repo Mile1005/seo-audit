@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { AuditResultUnified } from '@/lib/types/audit'
+import { getLocaleFromHeaders, translateNotification } from '@/lib/i18n-server'
 
 export const dynamic = 'force-dynamic'
 
@@ -12,6 +13,7 @@ export const dynamic = 'force-dynamic'
  */
 export async function POST(req: NextRequest) {
   try {
+    const locale = getLocaleFromHeaders(req.headers as any)
     const session = await auth()
     
     if (!session?.user?.id) {
@@ -39,8 +41,7 @@ export async function POST(req: NextRequest) {
     let project = await prisma.project.findFirst({
       where: {
         domain: {
-          contains: domain,
-          mode: 'insensitive'
+          contains: domain
         },
         ownerId: session.user.id
       }
@@ -111,12 +112,16 @@ export async function POST(req: NextRequest) {
 
     // Create notification for completed audit
     try {
+      const notif = await translateNotification('audit_complete', locale, {
+        domain,
+        score: auditResult.score ?? 0,
+      })
       await (prisma as any).notification.create({
         data: {
           userId: session.user.id,
           type: 'AUDIT_COMPLETED',
-          title: 'Audit Completed',
-          message: `SEO audit for ${domain} completed with score ${auditResult.score}`,
+          title: notif.title,
+          message: notif.message,
           metadata: {
             projectId: project.id,
             auditId: siteAudit.id,

@@ -1,20 +1,26 @@
 "use client";
 
 import dynamic from 'next/dynamic'
+import { useTranslations } from 'next-intl'
 import { StructuredData, generateFeatureSchema, generateFAQSchema } from '../../../components/seo/StructuredData'
 
-// Dynamically import the content to prevent lambda tracing issues
-const SiteCrawlerContent = dynamic(() => import('./site-crawler-content'), {
-  loading: () => (
+function FeatureLoading() {
+  const t = useTranslations('featurePages.siteCrawler.loading')
+  return (
     <div className="min-h-screen flex items-center justify-center bg-background dark:bg-slate-950">
       <div className="text-center">
-        <h1 className="sr-only">Comprehensive Site Crawling & Analysis Tool</h1>
+        <h1 className="sr-only">{t('heading')}</h1>
         <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 dark:border-cyan-500 mx-auto mb-6"></div>
-        <h2 className="text-2xl font-bold text-foreground dark:text-white mb-4">Loading Site Crawler</h2>
-        <p className="text-muted-foreground dark:text-gray-400">Preparing your website crawling tool...</p>
+        <h2 className="text-2xl font-bold text-foreground dark:text-white mb-4">{t('title')}</h2>
+        <p className="text-muted-foreground dark:text-gray-400">{t('desc')}</p>
       </div>
     </div>
   )
+}
+
+// Dynamically import the content to prevent lambda tracing issues
+const SiteCrawlerContent = dynamic(() => import('./site-crawler-content'), {
+  loading: () => <FeatureLoading />
 })
 
 export default function SiteCrawlerPage() {

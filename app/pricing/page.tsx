@@ -7,129 +7,131 @@ import { EmailCaptureInline } from "../../components/lead/email-capture-inline"
 import { handleCTAClick } from "../../lib/cta-utils"
 import { MainLayout } from "../../components/layout/main-layout"
 import { StructuredData, generateMultiPlanProductSchema, generateFAQSchema } from "../../components/seo/StructuredData"
-
-const pricingPlans = [
-  {
-    name: "Starter",
-    description: "Perfect for small websites and beginners",
-    price: { monthly: 0, yearly: 0 },
-    originalPrice: { monthly: 29, yearly: 290 },
-    popular: false,
-    cta: "Get Started Free",
-    features: [
-      "1 website audit per month",
-      "Basic SEO recommendations",
-      "Technical issue detection",
-      "Meta tags analysis",
-      "Email support"
-    ],
-    limitations: [
-      "Limited to 10 pages per audit",
-      "No priority support",
-      "Basic reporting only"
-    ]
-  },
-  {
-    name: "Professional",
-    description: "Ideal for growing businesses and agencies",
-    price: { monthly: 49, yearly: 39 },
-    originalPrice: { monthly: 99, yearly: 990 },
-    popular: true,
-    cta: "Start Professional",
-    features: [
-      "10 website audits per month",
-      "Advanced SEO recommendations",
-      "Competitor analysis",
-      "Content optimization suggestions",
-      "Performance monitoring",
-      "Priority email support",
-      "Custom reporting",
-      "API access"
-    ],
-    limitations: [
-      "Limited to 100 pages per audit",
-      "No phone support"
-    ]
-  },
-  {
-    name: "Enterprise",
-    description: "For large organizations with complex needs",
-    price: { monthly: 199, yearly: 159 },
-    originalPrice: { monthly: 399, yearly: 3990 },
-    popular: false,
-    cta: "Contact Sales",
-    features: [
-      "Unlimited website audits",
-      "White-label reporting",
-      "Advanced competitor tracking",
-      "Custom integrations",
-      "Dedicated account manager",
-      "Phone support",
-      "SLA guarantee",
-      "Custom training sessions",
-      "Advanced API features"
-    ],
-    limitations: []
-  }
-]
-
-const testimonials = [
-  {
-    name: "Sarah Chen",
-    role: "Marketing Director",
-    company: "TechFlow Solutions",
-    content: "AI SEO Turbo transformed our website performance. We saw a 150% increase in organic traffic within 3 months.",
-    rating: 5,
-    avatar: "/testimonials/sarah-chen.jpg"
-  },
-  {
-    name: "Mike Rodriguez",
-    role: "SEO Specialist",
-    company: "Digital Growth Agency",
-    content: "The AI-powered insights are incredible. It caught issues our previous tools missed and provided actionable solutions.",
-    rating: 5,
-    avatar: "/testimonials/mike-rodriguez.jpg"
-  },
-  {
-    name: "Emily Watson",
-    role: "E-commerce Manager",
-    company: "StyleHub Retail",
-    content: "Our conversion rate improved by 40% after implementing the recommended optimizations. ROI was immediate.",
-    rating: 5,
-    avatar: "/testimonials/emily-watson.jpg"
-  }
-]
-
-const faqs = [
-  {
-    question: "How does the AI SEO audit work?",
-    answer: "Our AI analyzes your website's technical structure, content quality, performance metrics, and SEO factors. It then provides personalized recommendations based on current best practices and search engine guidelines."
-  },
-  {
-    question: "Can I upgrade or downgrade my plan anytime?",
-    answer: "Yes! You can change your plan at any time. Upgrades take effect immediately, while downgrades take effect at your next billing cycle."
-  },
-  {
-    question: "Do you offer refunds?",
-    answer: "We offer a 30-day money-back guarantee for all paid plans. If you're not satisfied, contact our support team for a full refund."
-  },
-  {
-    question: "How accurate are the AI recommendations?",
-    answer: "Our AI is trained on millions of websites and constantly updated with the latest SEO best practices. Recommendations have a 95%+ accuracy rate and are regularly validated by SEO experts."
-  },
-  {
-    question: "Is there a free trial available?",
-    answer: "Yes! Our Starter plan is completely free and includes 1 website audit per month. No credit card required to get started."
-  },
-  {
-    question: "What kind of support do you provide?",
-    answer: "We offer email support for all plans, priority email support for Professional users, and dedicated phone support for Enterprise customers. Response times vary by plan level."
-  }
-]
+import { useTranslations } from "next-intl"
 
 export default function PricingPage() {
+  const t = useTranslations('pricing')
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
+
+  const pricingPlans = [
+    {
+      name: t('plans.starter.name'),
+      description: t('plans.starter.description'),
+      price: { monthly: 0, yearly: 0 },
+      originalPrice: { monthly: 29, yearly: 290 },
+      popular: false,
+      cta: t('plans.starter.cta'),
+      features: [
+        t('plans.starter.features.feature1'),
+        t('plans.starter.features.feature2'),
+        t('plans.starter.features.feature3'),
+        t('plans.starter.features.feature4'),
+        t('plans.starter.features.feature5')
+      ],
+      limitations: [
+        t('plans.starter.limitations.limit1'),
+        t('plans.starter.limitations.limit2'),
+        t('plans.starter.limitations.limit3')
+      ]
+    },
+    {
+      name: t('plans.professional.name'),
+      description: t('plans.professional.description'),
+      price: { monthly: 49, yearly: 39 },
+      originalPrice: { monthly: 99, yearly: 990 },
+      popular: true,
+      cta: t('plans.professional.cta'),
+      features: [
+        t('plans.professional.features.feature1'),
+        t('plans.professional.features.feature2'),
+        t('plans.professional.features.feature3'),
+        t('plans.professional.features.feature4'),
+        t('plans.professional.features.feature5'),
+        t('plans.professional.features.feature6'),
+        t('plans.professional.features.feature7'),
+        t('plans.professional.features.feature8')
+      ],
+      limitations: [
+        t('plans.professional.limitations.limit1'),
+        t('plans.professional.limitations.limit2')
+      ]
+    },
+    {
+      name: t('plans.enterprise.name'),
+      description: t('plans.enterprise.description'),
+      price: { monthly: 199, yearly: 159 },
+      originalPrice: { monthly: 399, yearly: 3990 },
+      popular: false,
+      cta: t('plans.enterprise.cta'),
+      features: [
+        t('plans.enterprise.features.feature1'),
+        t('plans.enterprise.features.feature2'),
+        t('plans.enterprise.features.feature3'),
+        t('plans.enterprise.features.feature4'),
+        t('plans.enterprise.features.feature5'),
+        t('plans.enterprise.features.feature6'),
+        t('plans.enterprise.features.feature7'),
+        t('plans.enterprise.features.feature8'),
+        t('plans.enterprise.features.feature9')
+      ],
+      limitations: []
+    }
+  ]
+
+  const testimonials = [
+    {
+      name: t('testimonials.items.testimonial1.name'),
+      role: t('testimonials.items.testimonial1.role'),
+      company: t('testimonials.items.testimonial1.company'),
+      content: t('testimonials.items.testimonial1.content'),
+      rating: 5,
+      avatar: "/testimonials/sarah-chen.jpg"
+    },
+    {
+      name: t('testimonials.items.testimonial2.name'),
+      role: t('testimonials.items.testimonial2.role'),
+      company: t('testimonials.items.testimonial2.company'),
+      content: t('testimonials.items.testimonial2.content'),
+      rating: 5,
+      avatar: "/testimonials/mike-rodriguez.jpg"
+    },
+    {
+      name: t('testimonials.items.testimonial3.name'),
+      role: t('testimonials.items.testimonial3.role'),
+      company: t('testimonials.items.testimonial3.company'),
+      content: t('testimonials.items.testimonial3.content'),
+      rating: 5,
+      avatar: "/testimonials/emily-watson.jpg"
+    }
+  ]
+
+  const faqs = [
+    {
+      question: t('faq.questions.q1.question'),
+      answer: t('faq.questions.q1.answer')
+    },
+    {
+      question: t('faq.questions.q2.question'),
+      answer: t('faq.questions.q2.answer')
+    },
+    {
+      question: t('faq.questions.q3.question'),
+      answer: t('faq.questions.q3.answer')
+    },
+    {
+      question: t('faq.questions.q4.question'),
+      answer: t('faq.questions.q4.answer')
+    },
+    {
+      question: t('faq.questions.q5.question'),
+      answer: t('faq.questions.q5.answer')
+    },
+    {
+      question: t('faq.questions.q6.question'),
+      answer: t('faq.questions.q6.answer')
+    }
+  ]
 
   // Generate Product schema for all pricing plans (now returns array of individual Product schemas)
   const productSchemas = generateMultiPlanProductSchema(
@@ -168,22 +170,21 @@ export default function PricingPage() {
                 transition={{ duration: 0.2 }}
               >
                 <Sparkles className="w-5 h-5 text-purple-400" />
-                <span className="text-purple-300 font-medium">Limited Time: 60% Off All Plans</span>
+                <span className="text-purple-300 font-medium">{t('hero.badge')}</span>
               </motion.div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-                  Choose Your
+                  {t('hero.title1')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  SEO Success Plan
+                  {t('hero.title2')}
                 </span>
               </h1>
               
               <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Transform your website with AI-powered SEO audits. Get actionable insights, 
-                boost your rankings, and increase organic traffic with our intelligent optimization platform.
+                {t('hero.subtitle')}
               </p>
 
               {/* Billing Toggle */}
@@ -194,7 +195,7 @@ export default function PricingPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className={`text-lg ${billingCycle === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
-                  Monthly
+                  {t('hero.billing.monthly')}
                 </span>
                 <motion.button
                   onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'yearly' : 'monthly')}
@@ -214,14 +215,14 @@ export default function PricingPage() {
                   />
                 </motion.button>
                 <span className={`text-lg ${billingCycle === 'yearly' ? 'text-white' : 'text-slate-400'}`}>
-                  Yearly
+                  {t('hero.billing.yearly')}
                 </span>
                 <motion.div 
                   className="bg-green-500/20 border border-green-500/30 rounded-full px-3 py-1"
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <span className="text-green-400 text-sm font-medium">Save 20%</span>
+                  <span className="text-green-400 text-sm font-medium">{t('hero.billing.saveLabel')}</span>
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -261,7 +262,7 @@ export default function PricingPage() {
                       }}
                     >
                       <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-                        Most Popular
+                        {t('plans.professional.popularBadge')}
                       </div>
                     </motion.div>
                   )}
@@ -289,15 +290,15 @@ export default function PricingPage() {
                         ${plan.price[billingCycle]}
                       </motion.span>
                       <span className="text-slate-400 ml-2 group-hover:text-slate-300 transition-colors duration-300">
-                        /{billingCycle === 'monthly' ? 'month' : 'month, billed annually'}
+                        /{billingCycle === 'monthly' ? t('plans.billing.monthly') : t('plans.billing.yearly')}
                       </span>
                       {plan.originalPrice[billingCycle] > 0 && (
                         <div className="mt-2">
                           <span className="text-slate-500 line-through text-lg">
-                            ${plan.originalPrice[billingCycle]}/{billingCycle === 'monthly' ? 'mo' : 'mo'}
+                            ${plan.originalPrice[billingCycle]}/{billingCycle === 'monthly' ? t('plans.billing.monthly') : t('plans.billing.monthly')}
                           </span>
                           <span className="ml-2 bg-red-500/20 text-red-400 px-2 py-1 rounded text-sm">
-                            60% OFF
+                            {t('plans.billing.discount')}
                           </span>
                         </div>
                       )}
@@ -392,11 +393,11 @@ export default function PricingPage() {
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                  Frequently Asked Questions
+                  {t('faq.title')}
                 </span>
               </h2>
               <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Everything you need to know about our AI SEO platform
+                {t('faq.subtitle')}
               </p>
             </motion.div>
 
@@ -455,11 +456,11 @@ export default function PricingPage() {
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">
-                  Trusted by 10,000+ Businesses
+                  {t('testimonials.title')}
                 </span>
               </h2>
               <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                See how our AI-powered SEO audits have transformed businesses worldwide
+                {t('testimonials.subtitle')}
               </p>
             </motion.div>
 
@@ -512,13 +513,12 @@ export default function PricingPage() {
             >
               <h2 className="text-4xl md:text-6xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-                  Ready to Transform Your SEO?
+                  {t('cta.title')}
                 </span>
               </h2>
               
               <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-                Join thousands of businesses already boosting their organic traffic with AI-powered SEO insights.
-                Start your free audit today and see the difference intelligent optimization can make.
+                {t('cta.subtitle')}
               </p>
 
               <motion.div 
@@ -529,31 +529,32 @@ export default function PricingPage() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <motion.button
-                  onClick={() => handleCTAClick('/signup', 'Start Free Audit', 'pricing-cta-primary')}
+                  onClick={() => handleCTAClick('/signup', t('cta.primaryButton'), 'pricing-cta-primary')}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/50 flex items-center gap-2 justify-center"
                 >
-                  Start Free Audit
+                  {t('cta.primaryButton')}
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
                 
                 <motion.button
-                  onClick={() => handleCTAClick('/contact', 'Contact Sales', 'pricing-cta-secondary')}
+                  onClick={() => handleCTAClick('/contact', t('cta.secondaryButton'), 'pricing-cta-secondary')}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-slate-700 text-white px-8 py-4 rounded-xl font-semibold hover:bg-slate-600 transition-all duration-300 flex items-center gap-2 justify-center"
                 >
                   <Phone className="w-5 h-5" />
-                  Contact Sales
+                  {t('cta.secondaryButton')}
                 </motion.button>
               </motion.div>
 
               <div className="max-w-md mx-auto">
                 <EmailCaptureInline 
                   source="pricing-page"
-                  placeholder="Enter your email for exclusive SEO tips"
-                  ctaText="Get SEO Tips"
+                  placeholder={t('cta.emailPlaceholder')}
+                  ctaText={t('cta.emailCta')}
+                  variant="accent"
                 />
               </div>
             </motion.div>

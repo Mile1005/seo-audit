@@ -7,6 +7,7 @@ import { ThemeProvider } from "../components/ui/theme-provider";
 import dynamicImport from 'next/dynamic';
 import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
+import { WebVitals } from "@/components/performance/web-vitals";
 
 // Lazy load Vercel monitoring scripts (not critical for page render)
 const Analytics = dynamicImport(() => import('@vercel/analytics/react').then(mod => ({ default: mod.Analytics })), { 
@@ -398,6 +399,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SpeedInsights />
         {/* Manual SPA pageview tracking for GA4 */}
         <ClientAnalytics />
+        {/* Web Vitals monitoring */}
+        <WebVitals />
       </body>
     </html>
   );

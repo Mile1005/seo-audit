@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 const ensureHttps = (url: string) => {
   const t = url.trim();
@@ -21,6 +22,7 @@ const isValidDomainOrUrl = (value: string) => {
 
 export default function StickyAuditBar() {
   const router = useRouter();
+  const t = useTranslations('common');
   const [visible, setVisible] = useState(false);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,7 +40,7 @@ export default function StickyAuditBar() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValidDomainOrUrl(url)) { setError('Enter a valid domain'); return; }
+    if (!isValidDomainOrUrl(url)) { setError(t('enterValidDomain')); return; }
     setError(null);
     setLoading(true);
     try {
@@ -51,7 +53,7 @@ export default function StickyAuditBar() {
       if (!res.ok) throw new Error(data?.error || 'Failed');
       router.push(`/seo-audit/results?id=${data.auditId || data.id}`);
     } catch (err) {
-      setError('Try again');
+      setError(t('tryAgain'));
       setLoading(false);
     }
   };
@@ -81,7 +83,7 @@ export default function StickyAuditBar() {
                   disabled={loading}
                   className="btn-primary ripple whitespace-nowrap"
                 >
-                  {loading ? 'Analyzing…' : 'Start Free Audit'}
+                  {loading ? t('analyzing') : t('startFreeAudit')}
                 </button>
               </form>
               {error && <div className="text-red-600 text-xs mt-1 px-1">{error}</div>}

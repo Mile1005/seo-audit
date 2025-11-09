@@ -5,8 +5,10 @@ import { motion } from "framer-motion"
 import { Check, Star, Zap, Crown, ArrowRight } from "lucide-react"
 import { pricingPlans, formatCurrency, calculateSavings, type PricingPlan } from "../../data/pricing"
 import { handleCTAClick } from "@/lib/cta-utils"
+import { useTranslations } from 'next-intl'
 
 export function PricingCards() {
+  const t = useTranslations('home.pricing')
   const [isAnnual, setIsAnnual] = useState(false)
 
   // Persist billing cycle preference in localStorage
@@ -60,28 +62,27 @@ export function PricingCards() {
         >
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-full px-4 py-2 text-sm mb-6">
             <Star className="w-4 h-4 text-green-400" />
-            <span className="text-green-300">Simple, Transparent Pricing</span>
+            <span className="text-green-300">{t('badge')}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             <span className="bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent">
-              Choose Your
+              {t('title1')}
             </span>
             <br />
             <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-              SEO Growth Plan
+              {t('title2')}
             </span>
           </h2>
 
           <p className="text-xl text-gray-300 leading-relaxed max-w-3xl mx-auto mb-8">
-            Start free, upgrade as you grow. All plans include our core SEO audit engine 
-            with no hidden fees or usage limits.
+            {t('subtitle')}
           </p>
 
           {/* Billing Toggle */}
           <div className="flex items-center justify-center space-x-4 mb-8">
             <span className={`text-sm ${!isAnnual ? 'text-white font-medium' : 'text-gray-400'}`}>
-              Monthly
+              {t('billing.monthly')}
             </span>
             
             <motion.button
@@ -101,11 +102,11 @@ export function PricingCards() {
 
             <div className="flex items-center space-x-2">
               <span className={`text-sm ${isAnnual ? 'text-white font-medium' : 'text-gray-400'}`}>
-                Annual
+                {t('billing.annual')}
               </span>
               {isAnnual && (
                 <span className="bg-gradient-to-r from-green-500 to-blue-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-                  Save up to 17%
+                  {t('billing.saveUpTo')}
                 </span>
               )}
             </div>
@@ -133,7 +134,7 @@ export function PricingCards() {
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
                   <div className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
-                    Most Popular
+                    {t('mostPopular')}
                   </div>
                 </div>
               )}
@@ -161,22 +162,22 @@ export function PricingCards() {
                   </div>
 
                   <h3 className="text-2xl font-bold text-white mb-2">
-                    {plan.name}
+                    {t(`plans.${plan.id}.name`)}
                   </h3>
                   
                   <p className="text-gray-400 text-sm mb-6">
-                    {plan.description}
+                    {t(`plans.${plan.id}.description`)}
                   </p>
 
                   {/* Price */}
                   <div className="mb-6">
                     <div className="flex items-baseline justify-center space-x-1">
                       <span className="text-4xl lg:text-5xl font-bold text-white">
-                        {plan.priceMonthly === 0 ? 'Free' : `$${getPlanPrice(plan)}`}
+                        {plan.priceMonthly === 0 ? t('plans.free.name') : `$${getPlanPrice(plan)}`}
                       </span>
                       {plan.priceMonthly > 0 && (
                         <span className="text-gray-400 text-lg">
-                          /month
+                          /{t('billing.monthly').toLowerCase()}
                         </span>
                       )}
                     </div>
@@ -184,17 +185,17 @@ export function PricingCards() {
                     {isAnnual && plan.priceMonthly > 0 && (
                       <div className="mt-2">
                         <span className="text-sm text-gray-400 line-through">
-                          ${plan.priceMonthly}/month
+                          ${plan.priceMonthly}/{t('billing.monthly').toLowerCase()}
                         </span>
                         <span className="ml-2 text-sm text-green-400 font-medium">
-                          Save {getSavingsAmount(plan)}%
+                          {t('billing.save')} {getSavingsAmount(plan)}%
                         </span>
                       </div>
                     )}
                     
                     {isAnnual && plan.priceMonthly > 0 && (
                       <div className="text-xs text-gray-500 mt-1">
-                        Billed annually (${formatCurrency(plan.priceAnnual)})
+                        {t('billing.billedAnnually')} (${formatCurrency(plan.priceAnnual)})
                       </div>
                     )}
                   </div>
@@ -215,7 +216,7 @@ export function PricingCards() {
                           <Check className="w-3 h-3 text-white" />
                         </div>
                         <span className="text-gray-300 text-sm leading-relaxed">
-                          {feature}
+                          {t(`plans.${plan.id}.features.${featureIndex}`)}
                         </span>
                       </div>
                     ))}
@@ -224,23 +225,23 @@ export function PricingCards() {
 
                 {/* Limits */}
                 <div className="mb-8 p-4 bg-slate-800/30 rounded-xl border border-slate-700/30">
-                  <h4 className="text-sm font-medium text-white mb-3">Plan Limits</h4>
+                  <h4 className="text-sm font-medium text-white mb-3">{t('limits.title')}</h4>
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div>
-                      <span className="text-gray-400">Audits:</span>
-                      <span className="text-white ml-1 font-medium">{plan.limits.audits}</span>
+                      <span className="text-gray-400">{t('limits.audits')}:</span>
+                      <span className="text-white ml-1 font-medium">{t(`limits.values.${plan.id}.audits`)}</span>
                     </div>
                     <div>
-                      <span className="text-gray-400">Sites:</span>
-                      <span className="text-white ml-1 font-medium">{plan.limits.sites}</span>
+                      <span className="text-gray-400">{t('limits.sites')}:</span>
+                      <span className="text-white ml-1 font-medium">{t(`limits.values.${plan.id}.sites`)}</span>
                     </div>
                     <div>
-                      <span className="text-gray-400">Reports:</span>
-                      <span className="text-white ml-1 font-medium">{plan.limits.reports}</span>
+                      <span className="text-gray-400">{t('limits.reports')}:</span>
+                      <span className="text-white ml-1 font-medium">{t(`limits.values.${plan.id}.reports`)}</span>
                     </div>
                     <div>
-                      <span className="text-gray-400">Support:</span>
-                      <span className="text-white ml-1 font-medium">{plan.limits.support}</span>
+                      <span className="text-gray-400">{t('limits.support')}:</span>
+                      <span className="text-white ml-1 font-medium">{t(`limits.values.${plan.id}.support`)}</span>
                     </div>
                   </div>
                 </div>
@@ -261,14 +262,14 @@ export function PricingCards() {
                     }
                   `}
                   data-testid={`cta-${plan.id}`}
-                  aria-label={`${plan.ctaText} for ${plan.name} plan`}
+                  aria-label={`${t(`plans.${plan.id}.cta`)} for ${t(`plans.${plan.id}.name`)} plan`}
                   onClick={(e) => {
                     e.preventDefault()
                     const destination = plan.id === 'free' ? 'FREE_TRIAL' : 'PRICING'
-                    handleCTAClick(destination, plan.ctaText, 'pricing-cards')
+                    handleCTAClick(destination, t(`plans.${plan.id}.cta`), 'pricing-cards')
                   }}
                 >
-                  <span>{plan.ctaText}</span>
+                  <span>{t(`plans.${plan.id}.cta`)}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </motion.a>
               </div>
@@ -285,14 +286,14 @@ export function PricingCards() {
           className="text-center mt-16"
         >
           <p className="text-gray-400 mb-6">
-            Not sure which plan is right for you? 
+            {t('footer.notSure')}
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-white/5 hover:bg-white/10 border border-white/20 hover:border-purple-500/30 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-200"
           >
-            Schedule a Demo
+            {t('footer.scheduleDemo')}
           </motion.button>
         </motion.div>
       </div>
