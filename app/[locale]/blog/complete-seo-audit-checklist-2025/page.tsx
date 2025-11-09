@@ -1,22 +1,62 @@
-'use client'
-
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import BlogPostClient from '../[slug]/blog-post-client'
-import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
+import { StructuredData, generateBlogPostingSchema, generateHowToSchema } from '@/components/seo/StructuredData'
+import { generateSEOMeta } from '@/lib/seo'
+import { Metadata } from 'next'
+import { type Locale } from '@/i18n'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Complete SEO Audit Checklist for 2025 | AI SEO Turbo Blog',
-  description: 'A comprehensive 47-point checklist to audit your website for SEO issues and opportunities. Used by 1000+ websites to increase organic traffic.',
-  canonical: 'https://www.aiseoturbo.com/blog/complete-seo-audit-checklist-2025',
-  ogType: 'article',
-  keywords: ['SEO', 'Audit', 'Technical', 'Checklist', '2025']
+// SEO metadata for the blog post
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    title: 'Complete SEO Audit Checklist for 2025 | AI SEO Turbo Blog',
+    description: 'A comprehensive 47-point checklist to audit your website for SEO issues and opportunities. Used by 1000+ websites to increase organic traffic.',
+    keywords: ['SEO', 'Audit', 'Technical', 'Checklist', '2025'],
+    ogType: 'article',
+    locale: locale as Locale,
+    path: 'blog/complete-seo-audit-checklist-2025'
+  })
 }
 
-export default function CompleteSEOAuditChecklistPage() {
-  // Namespace lives under blog.completeSEOAuditChecklist2025 (messages are nested inside the "blog" object)
-  const t = useTranslations('blog.completeSEOAuditChecklist2025')
+export default async function CompleteSEOAuditChecklistPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  // Enable static rendering
+  setRequestLocale(locale)
+
+  // Get translations server-side
+  const t = await getTranslations({ locale, namespace: 'blog.completeSEOAuditChecklist2025' })
+
+  // Generate HowTo schema for the SEO audit checklist
+  const howToSchema = generateHowToSchema({
+    name: "Complete SEO Audit Checklist for 2025",
+    description: "A comprehensive 47-point checklist to audit your website for SEO issues and opportunities. Follow this step-by-step guide to identify and fix critical SEO problems.",
+    steps: [
+      {
+        name: "Technical Foundation Audit",
+        text: "Check site crawlability, XML sitemaps, robots.txt, URL structure, and redirect chains. Ensure search engines can properly access and index your content."
+      },
+      {
+        name: "Page Speed Optimization",
+        text: "Analyze Core Web Vitals (LCP, FID, CLS), optimize images, minify CSS/JavaScript, configure browser caching, and implement CDN for faster loading times."
+      },
+      {
+        name: "Mobile Optimization",
+        text: "Verify mobile-first indexing readiness, test responsive design, ensure proper viewport configuration, and optimize touch targets for mobile users."
+      },
+      {
+        name: "On-Page SEO Audit",
+        text: "Review title tags, meta descriptions, header structure, keyword usage, content length, and internal linking to improve search rankings."
+      },
+      {
+        name: "Content Quality Assessment",
+        text: "Evaluate content freshness, uniqueness, readability, and user engagement metrics. Ensure content provides real value to your target audience."
+      }
+    ],
+    totalTime: "PT2H",
+    url: "https://www.aiseoturbo.com/blog/complete-seo-audit-checklist-2025"
+  })
 
   // Build content inside component so translations work
   const content = `
@@ -316,6 +356,12 @@ export default function CompleteSEOAuditChecklistPage() {
       <h2>${t('conclusion.title')}</h2>
       <p>${t('conclusion.paragraph1')}</p>
       <p>${t('conclusion.paragraph2')}</p>
+      
+      <div class="bg-blue-600/10 border-l-4 border-blue-500 p-4 my-6">
+        <p class="text-gray-100"><strong>Ready to get started?</strong> Try <a href="/features" class="text-blue-400 hover:text-blue-300 underline">AI SEO Turbo's automated auditing tools</a> or <a href="/pricing" class="text-blue-400 hover:text-blue-300 underline">choose a plan</a> that fits your needs.</p>
+      </div>
+      
+      <p class="text-gray-300">Learn more about <a href="/blog/core-web-vitals-optimization-guide" class="text-blue-400 hover:text-blue-300 underline">Core Web Vitals optimization</a> and <a href="/blog/technical-seo-best-practices-2025" class="text-blue-400 hover:text-blue-300 underline">technical SEO best practices</a> to complement your audit findings.</p>
     </section>
   `
 
@@ -353,6 +399,7 @@ export default function CompleteSEOAuditChecklistPage() {
   return (
     <>
       <StructuredData data={blogSchema} />
+      <StructuredData data={howToSchema} />
       <BlogPostClient post={post} />
     </>
   );

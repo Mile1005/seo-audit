@@ -1,18 +1,20 @@
-"use client"
-
 import { MainLayout } from '@/components/layout/main-layout'
+import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
-import { 
-  Search, 
-  MessageCircle, 
-  BookOpen, 
-  CreditCard, 
-  Settings, 
-  Users, 
-  Shield, 
-  BarChart, 
-  Bot, 
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { type Locale } from '@/i18n'
+import {
+  Search,
+  MessageCircle,
+  BookOpen,
+  CreditCard,
+  Settings,
+  Users,
+  Shield,
+  BarChart,
+  Bot,
   ArrowRight,
   HelpCircle,
   Phone,
@@ -31,13 +33,44 @@ import {
   ChevronRight
 } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
-import { StructuredData, generateBreadcrumbSchema } from '@/components/seo/StructuredData'
+import { StructuredData, generateBreadcrumbSchema, generateFAQSchema } from '@/components/seo/StructuredData'
 
-export default function HelpPage() {
-  const t = useTranslations('helpCenter')
-  const [searchQuery, setSearchQuery] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("all")
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    ...pageSEO.help,
+    locale: locale as Locale,
+    path: 'help'
+  })
+}
+
+export default async function HelpPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'helpCenter' })
+
+  // FAQ Schema for Help Center
+  const faqSchema = generateFAQSchema([
+    {
+      question: "How do I run my first SEO audit?",
+      answer: "To run your first SEO audit, sign up for a free account, connect your website, and click 'Start Audit'. Our AI will analyze your site and provide detailed recommendations within minutes."
+    },
+    {
+      question: "What SEO metrics should I focus on first?",
+      answer: "Start with Core Web Vitals (LCP, FID, CLS), title tags, meta descriptions, and mobile-friendliness. These have the biggest impact on search rankings and user experience."
+    },
+    {
+      question: "How often should I run SEO audits?",
+      answer: "Run comprehensive audits monthly and quick checks weekly. Major content changes or technical updates should trigger immediate audits."
+    },
+    {
+      question: "Can I export my SEO audit results?",
+      answer: "Yes, all audit results can be exported as PDF reports or CSV files. Premium plans include advanced reporting and team sharing features."
+    },
+    {
+      question: "What makes AI SEO Turbo different from other SEO tools?",
+      answer: "Our AI provides personalized recommendations, competitor intelligence, and automated optimization suggestions that other tools miss. We focus on actionable insights over just data."
+    }
+  ])
 
   const helpCategories = [
     {
@@ -166,18 +199,9 @@ export default function HelpPage() {
     }
   ]
 
-  const filteredQuickHelp = selectedCategory === "all" 
-    ? quickHelp 
-    : quickHelp.filter(item => item.type === selectedCategory)
-
-  // Breadcrumb schema for help page
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: "https://www.aiseoturbo.com" },
-    { name: "Help Center", url: "https://www.aiseoturbo.com/help" }
-  ])
-
   return (
     <MainLayout>
+      <StructuredData data={faqSchema} />
       <div className="min-h-screen bg-slate-950">
         
         {/* Hero Section */}
@@ -185,6 +209,16 @@ export default function HelpPage() {
           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            {/* Breadcrumbs */}
+            <div className="mb-8">
+              <Breadcrumbs
+                items={[
+                  { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' }
+                ]}
+                darkMode={true}
+              />
+            </div>
+            
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,17 +233,16 @@ export default function HelpPage() {
                 {t('hero.subtitle')}
               </p>
 
-              {/* Search Bar */}
+              <div className="mb-8">
+                <p className="text-gray-300 mb-4">Need help getting started? Check out our <Link href="/features" className="text-blue-400 hover:text-blue-300 underline">features</Link> or <Link href="/pricing" className="text-blue-400 hover:text-blue-300 underline">pricing plans</Link>.</p>
+              </div>
+
+              {/* Search Bar - Static for SEO */}
               <div className="relative max-w-2xl mx-auto">
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder={t('hero.searchPlaceholder')}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
-                  aria-label={t('hero.searchLabel')}
-                />
+                <div className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-gray-400 cursor-not-allowed">
+                  {t('hero.searchPlaceholder')}
+                </div>
               </div>
             </motion.div>
           </div>
@@ -228,34 +261,10 @@ export default function HelpPage() {
                 {t('quickAnswers.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t('quickAnswers.titleHighlight')}</span>
               </h2>
               <p className="text-xl text-gray-400 mb-8">{t('quickAnswers.subtitle')}</p>
-              
-              {/* Category Filter */}
-              <div className="flex flex-wrap justify-center gap-2 mb-12">
-                {[
-                  { key: "all", label: t('quickAnswers.filterAll') },
-                  { key: "popular", label: t('quickAnswers.filterPopular') },
-                  { key: "features", label: t('quickAnswers.filterFeatures') },
-                  { key: "billing", label: t('quickAnswers.filterBilling') },
-                  { key: "support", label: t('quickAnswers.filterSupport') }
-                ].map((category) => (
-                  <button
-                    key={category.key}
-                    onClick={() => setSelectedCategory(category.key)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      selectedCategory === category.key
-                        ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                        : "bg-slate-800 text-gray-400 hover:bg-slate-700 hover:text-white"
-                    }`}
-                    aria-label={t('quickAnswers.filterLabel', { category: category.label })}
-                  >
-                    {category.label}
-                  </button>
-                ))}
-              </div>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-              {filteredQuickHelp.map((item, index) => (
+              {quickHelp.map((item: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -504,9 +513,6 @@ export default function HelpPage() {
           </div>
         </section>
       </div>
-
-      {/* Breadcrumb Schema */}
-      <StructuredData data={breadcrumbSchema} />
     </MainLayout>
   )
 }

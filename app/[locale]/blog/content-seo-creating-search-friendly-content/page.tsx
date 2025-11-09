@@ -1,23 +1,32 @@
-'use client'
-
 import BlogPostClient from '../[slug]/blog-post-client'
 import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
-import { useTranslations, useLocale } from 'next-intl'
+import { generateSEOMeta } from '@/lib/seo'
+import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
+import { type Locale } from '@/i18n'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Content SEO: Search-Friendly Content | AI SEO Turbo Blog',
-  description: 'Master content SEO with keyword research, user intent optimization, and structure best practices to create content that ranks and converts.',
-  canonical: 'https://www.aiseoturbo.com/blog/content-seo-creating-search-friendly-content',
-  ogType: 'article',
-  keywords: ['Content SEO', 'Writing', 'User Experience', 'Search']
+// SEO metadata for the blog post
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    title: 'Content SEO: Search-Friendly Content | AI SEO Turbo Blog',
+    description: 'Master content SEO with keyword research, user intent optimization, and structure best practices to create content that ranks and converts.',
+    keywords: ['Content SEO', 'Writing', 'User Experience', 'Search'],
+    ogType: 'article',
+    locale: locale as Locale,
+    path: 'blog/content-seo-creating-search-friendly-content'
+  })
 }
 
-export default function ContentSEOContentPage() {
-  // Namespace lives under blog.contentSEOCreatingSearchFriendlyContent (messages are nested inside the "blog" object)
-  const t = useTranslations('blog.contentSEOCreatingSearchFriendlyContent')
-  const locale = useLocale()
+export default async function ContentSEOContentPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  // Enable static rendering
+  setRequestLocale(locale)
+
+  // Get translations server-side
+  const t = await getTranslations({ locale, namespace: 'blog.contentSEOCreatingSearchFriendlyContent' })
 
   const post = {
     id: '6',

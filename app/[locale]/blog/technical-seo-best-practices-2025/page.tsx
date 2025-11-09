@@ -1,22 +1,32 @@
-'use client'
-
 import BlogPostClient from '../[slug]/blog-post-client'
 import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
-import { useTranslations, useLocale } from 'next-intl'
+import { generateSEOMeta } from '@/lib/seo'
+import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
+import { type Locale } from '@/i18n'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Technical SEO Best Practices 2025 | AI SEO Turbo Blog',
-  description: 'Master technical SEO in 2025 with our complete guide covering site speed, mobile-first indexing, structured data, crawlability, and best practices.',
-  canonical: 'https://www.aiseoturbo.com/blog/technical-seo-best-practices-2025',
-  ogType: 'article',
-  keywords: ['Technical SEO', 'Best Practices', '2025', 'Optimization']
+// SEO metadata for the blog post
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    title: 'Technical SEO Best Practices 2025 | AI SEO Turbo Blog',
+    description: 'Master technical SEO in 2025 with our complete guide covering site speed, mobile-first indexing, structured data, crawlability, and best practices.',
+    keywords: ['Technical SEO', 'Best Practices', '2025', 'Optimization'],
+    ogType: 'article',
+    locale: locale as Locale,
+    path: 'blog/technical-seo-best-practices-2025'
+  })
 }
 
-export default function TechnicalSEO2025Page() {
-  const t = useTranslations('blog.technicalSEO2025')
-  const locale = useLocale()
+export default async function TechnicalSEO2025Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  // Enable static rendering
+  setRequestLocale(locale)
+
+  // Get translations server-side
+  const t = await getTranslations({ locale, namespace: 'blog.technicalSEO2025' })
   
   // Build content inside component so translations work
   const content = `

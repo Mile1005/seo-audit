@@ -6,6 +6,7 @@ import { ArrowRight, CheckCircle, Zap, Star, Crown, Users, Clock, Shield, Phone,
 import { EmailCaptureInline } from "../../components/lead/email-capture-inline"
 import { handleCTAClick } from "../../lib/cta-utils"
 import { MainLayout } from "../../components/layout/main-layout"
+import { Breadcrumbs } from "../../components/navigation/breadcrumbs"
 import { StructuredData, generateMultiPlanProductSchema, generateFAQSchema } from "../../components/seo/StructuredData"
 import { useTranslations } from "next-intl"
 
@@ -158,6 +159,16 @@ export default function PricingPage() {
         <section className="relative py-20">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 to-pink-900/20" />
           <div className="relative container mx-auto px-6">
+            {/* Breadcrumbs */}
+            <div className="mb-8">
+              <Breadcrumbs
+                items={[
+                  { name: 'Pricing', url: 'https://www.aiseoturbo.com/pricing' }
+                ]}
+                darkMode={true}
+              />
+            </div>
+            
             <motion.div 
               className="text-center max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}

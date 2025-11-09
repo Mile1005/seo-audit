@@ -1,9 +1,8 @@
-'use client'
-
 import { MainLayout } from "@/components/layout/main-layout"
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
 import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -29,40 +28,41 @@ import {
   Crown
 } from "lucide-react"
 
-// SEO metadata for reference (not exported in client components)
-const pageMetadata = {
-  title: 'E-commerce SEO - 420% Sales Growth | AI SEO Turbo',
-  description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
-  keywords: [
-    'ecommerce SEO case study',
-    'product page optimization',
-    'online store SEO',
-    'fashion boutique SEO',
-    'conversion rate optimization',
-    'product ranking SEO',
-    'retail SEO success'
-  ],
-  alternates: {
-    canonical: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique'
-  },
-  openGraph: {
-    images: ['/logo.png'],
-    url: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique',
-    siteName: 'AI SEO Turbo',
-    title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  return {
+    title: 'E-commerce SEO - 420% Sales Growth | AI SEO Turbo',
     description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
-    description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
+    keywords: [
+      'ecommerce SEO case study',
+      'product page optimization',
+      'online store SEO',
+      'fashion boutique SEO',
+      'conversion rate optimization',
+      'product ranking SEO',
+      'retail SEO success'
+    ],
+    alternates: {
+      canonical: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique'
+    },
+    openGraph: {
+      images: ['/logo.png'],
+      url: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique',
+      siteName: 'AI SEO Turbo',
+      title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+      description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'E-commerce SEO Case Study - 420% Sales Increase StyleCraft Boutique | AI SEO Turbo',
+      description: 'E-commerce fashion boutique case study: 280% organic traffic growth, 300+ ranked product pages, 420% conversion increase with AI-powered SEO.',
+    }
   }
 }
 
-export default function StyleCraftBoutiqueCaseStudy() {
-  const t = useTranslations('caseStudies.stylecraftBoutique')
-  const tBreadcrumbs = useTranslations('caseStudies.breadcrumbs')
+export default async function StyleCraftBoutiqueCaseStudy({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'caseStudies.stylecraftBoutique' })
+  const tBreadcrumbs = await getTranslations({ locale: params.locale, namespace: 'caseStudies.breadcrumbs' })
 
   const challengePoints = [
     t('challengePoints.0'),
@@ -348,7 +348,7 @@ export default function StyleCraftBoutiqueCaseStudy() {
                 </blockquote>
                 <div className="flex items-center justify-center gap-4">
                   <div className="w-12 h-12 bg-pink-500/10 rounded-full flex items-center justify-center">
-                    <span className="text-pink-400 font-bold">{t('testimonial.author').split(' ').map(n => n[0]).join('')}</span>
+                    <span className="text-pink-400 font-bold">{t('testimonial.author').split(' ').map((n: string) => n[0]).join('')}</span>
                   </div>
                   <div className="text-left">
                     <div className="text-white font-semibold">{t('testimonial.author')}</div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { CheckCircle, Search, TrendingUp, Shield, Zap, Users } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { Breadcrumbs } from '../../components/navigation/breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'SEO Features - Complete Audit Tools | AI SEO Turbo',
@@ -91,6 +92,16 @@ export default async function FeaturesPage() {
       {/* Header */}
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
+          {/* Breadcrumbs */}
+          <div className="mb-8 flex justify-center">
+            <Breadcrumbs
+              items={[
+                { name: 'Features', url: 'https://www.aiseoturbo.com/features' }
+              ]}
+              darkMode={false}
+            />
+          </div>
+          
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             {t('header.title')}
           </h1>

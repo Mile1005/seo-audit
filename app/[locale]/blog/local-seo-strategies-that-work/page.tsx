@@ -1,23 +1,32 @@
-'use client'
-
 import BlogPostClient from '../[slug]/blog-post-client'
 import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
-import { useTranslations, useLocale } from 'next-intl'
+import { generateSEOMeta } from '@/lib/seo'
+import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
+import { type Locale } from '@/i18n'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Local SEO Strategies That Work | AI SEO Turbo Blog',
-  description: 'Boost your local search rankings with these proven strategies for local businesses and service providers.',
-  canonical: 'https://www.aiseoturbo.com/blog/local-seo-strategies-that-work',
-  ogType: 'article',
-  keywords: ['Local SEO', 'Local Search', 'Business', 'Optimization']
+// SEO metadata for the blog post
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    title: 'Local SEO Strategies That Work | AI SEO Turbo Blog',
+    description: 'Boost your local search rankings with these proven strategies for local businesses and service providers.',
+    keywords: ['Local SEO', 'Local Search', 'Business', 'Optimization'],
+    ogType: 'article',
+    locale: locale as Locale,
+    path: 'blog/local-seo-strategies-that-work'
+  })
 }
 
-export default function LocalSEOStrategiesPage() {
-  // Namespace lives under blog.localSEOStrategiesThatWork (messages are nested inside the "blog" object)
-  const t = useTranslations('blog.localSEOStrategiesThatWork')
-  const locale = useLocale()
+export default async function LocalSEOStrategiesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  // Enable static rendering
+  setRequestLocale(locale)
+
+  // Get translations server-side
+  const t = await getTranslations({ locale, namespace: 'blog.localSEOStrategiesThatWork' })
 
   const post = {
     id: '5',

@@ -1,12 +1,32 @@
-'use client'
-
-import { useTranslations, useLocale } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
 import BlogPostClient from '../[slug]/blog-post-client'
-import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
+import { StructuredData, generateBlogPostingSchema, generateHowToSchema } from '@/components/seo/StructuredData'
+import { generateSEOMeta } from '@/lib/seo'
+import { Metadata } from 'next'
+import { type Locale } from '@/i18n'
 
-export default function CoreWebVitalsPage() {
-  const t = useTranslations('blog.coreWebVitals2025')
-  const locale = useLocale()
+// SEO metadata for the blog post
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    title: 'Core Web Vitals Optimization Guide - Improve Page Experience | AI SEO Turbo Blog',
+    description: 'Complete guide to optimizing Core Web Vitals. Learn how to improve LCP, FID, and CLS for better Google rankings and user experience.',
+    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience'],
+    ogType: 'article',
+    locale: locale as Locale,
+    path: 'blog/core-web-vitals-optimization-guide'
+  })
+}
+
+export default async function CoreWebVitalsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  // Enable static rendering
+  setRequestLocale(locale)
+
+  // Get translations server-side
+  const t = await getTranslations({ locale, namespace: 'blog.coreWebVitals2025' })
   
   const content = `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">
@@ -155,22 +175,26 @@ export default function CoreWebVitalsPage() {
             <li>• ${t('optimization.step1.extension')}</li>
             <li>• ${t('optimization.step1.webPageTest')}</li>
             <li>• ${t('optimization.step1.searchConsole')}</li>
+            <li>• <a href="/features" class="text-blue-400 hover:text-blue-300 underline">AI SEO Turbo automated auditing tools</a></li>
           </ul>
         </div>
 
         <div class="bg-slate-800/50 p-4 rounded-lg border-l-4 border-emerald-500">
           <h3 class="font-semibold text-white mb-2">${t('optimization.step2.title')}</h3>
           <p class="text-gray-300">${t('optimization.step2.description')}</p>
+          <p class="text-gray-300 mt-2">Get professional help with <a href="/pricing" class="text-blue-400 hover:text-blue-300 underline">AI SEO Turbo's optimization services</a>.</p>
         </div>
 
         <div class="bg-slate-800/50 p-4 rounded-lg border-l-4 border-purple-500">
           <h3 class="font-semibold text-white mb-2">${t('optimization.step3.title')}</h3>
           <p class="text-gray-300">${t('optimization.step3.description')}</p>
+          <p class="text-gray-300 mt-2">Learn more about <a href="/features" class="text-blue-400 hover:text-blue-300 underline">continuous monitoring features</a>.</p>
         </div>
 
         <div class="bg-slate-800/50 p-4 rounded-lg border-l-4 border-orange-500">
           <h3 class="font-semibold text-white mb-2">${t('optimization.step4.title')}</h3>
           <p class="text-gray-300">${t('optimization.step4.description')}</p>
+          <p class="text-gray-300 mt-2">Stay updated with <a href="/blog" class="text-blue-400 hover:text-blue-300 underline">latest SEO best practices</a>.</p>
         </div>
       </div>
 
@@ -235,9 +259,41 @@ export default function CoreWebVitalsPage() {
     category: t('post.category')
   })
 
+  const howToSchema = generateHowToSchema({
+    name: 'How to Optimize Core Web Vitals for Better SEO',
+    description: 'Complete step-by-step guide to optimizing Core Web Vitals (LCP, FID, CLS) for improved Google rankings and user experience.',
+    image: 'https://www.aiseoturbo.com/blog/core-web-vitals.jpg',
+    totalTime: 'PT30M',
+    url: `https://www.aiseoturbo.com/${locale === 'en' ? '' : locale + '/'}blog/core-web-vitals-optimization-guide`,
+    datePublished: '2025-10-17T12:00:00+00:00',
+    steps: [
+      {
+        name: 'Audit Your Current Core Web Vitals Performance',
+        text: 'Use Google PageSpeed Insights, Lighthouse, WebPageTest, or Search Console to measure your current LCP, FID, and CLS scores. Identify which metrics need improvement.'
+      },
+      {
+        name: 'Optimize Largest Contentful Paint (LCP)',
+        text: 'Improve server response times, optimize images, implement lazy loading, eliminate render-blocking resources, optimize font loading, and configure browser caching.'
+      },
+      {
+        name: 'Reduce First Input Delay (FID)',
+        text: 'Break up long tasks, minimize third-party script impact, use web workers for heavy computations, implement code splitting, and profile JavaScript execution.'
+      },
+      {
+        name: 'Fix Cumulative Layout Shift (CLS)',
+        text: 'Include size attributes on images and video elements, avoid inserting content above existing content, use CSS aspect-ratio property, and reserve space for ad elements.'
+      },
+      {
+        name: 'Monitor and Maintain Performance',
+        text: 'Set up continuous monitoring, use real user monitoring (RUM), regularly audit performance, and stay updated with Google\'s latest guidelines.'
+      }
+    ]
+  })
+
   return (
     <>
       <StructuredData data={blogSchema} />
+      <StructuredData data={howToSchema} />
       <BlogPostClient post={post} />
     </>
   )

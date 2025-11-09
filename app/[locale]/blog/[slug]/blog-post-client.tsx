@@ -29,8 +29,58 @@ interface BlogPostClientProps {
 }
 
 export default function BlogPostClient({ post }: BlogPostClientProps) {
-  // Related posts (same category, excluding current post) - simplified for now
-  const relatedPosts: BlogPost[] = []
+  // Related posts based on current post category and content
+  const getRelatedPosts = (currentPost: BlogPost) => {
+    const allPosts = [
+      {
+        id: '1',
+        slug: 'complete-seo-audit-checklist-2025',
+        title: 'Complete SEO Audit Checklist 2025',
+        excerpt: 'Comprehensive checklist for conducting thorough SEO audits in 2025.',
+        category: 'SEO Audit',
+        readTime: '8 min read'
+      },
+      {
+        id: '2',
+        slug: 'core-web-vitals-optimization-guide',
+        title: 'Core Web Vitals Optimization Guide',
+        excerpt: 'Complete guide to optimizing Core Web Vitals for better search rankings.',
+        category: 'Performance',
+        readTime: '12 min read'
+      },
+      {
+        id: '3',
+        slug: 'technical-seo-best-practices-2025',
+        title: 'Technical SEO Best Practices 2025',
+        excerpt: 'Essential technical SEO practices for 2025 and beyond.',
+        category: 'Technical SEO',
+        readTime: '10 min read'
+      },
+      {
+        id: '4',
+        slug: 'content-seo-creating-search-friendly-content',
+        title: 'Content SEO: Creating Search-Friendly Content',
+        excerpt: 'How to create content that ranks well in search engines.',
+        category: 'Content',
+        readTime: '9 min read'
+      },
+      {
+        id: '5',
+        slug: 'ai-powered-seo-future',
+        title: 'AI-Powered SEO: The Future of Search Optimization',
+        excerpt: 'How artificial intelligence is transforming SEO strategies.',
+        category: 'AI & SEO',
+        readTime: '11 min read'
+      }
+    ]
+
+    // Filter out current post and return up to 3 related posts
+    return allPosts
+      .filter(p => p.slug !== currentPost.slug)
+      .slice(0, 3)
+  }
+
+  const relatedPosts = getRelatedPosts(post)
 
   return (
     <MainLayout>

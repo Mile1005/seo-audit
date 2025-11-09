@@ -1,5 +1,3 @@
-'use client'
-
 import { MainLayout } from "@/components/layout/main-layout"
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
 import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
@@ -22,12 +20,30 @@ import {
   Download,
   ExternalLink
 } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 
-// SEO metadata for reference only
-const pageMetadata = {
-  title: 'Digital Agency SEO - 340% Traffic Growth | AI SEO Turbo',
-  description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.'
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  return {
+    title: 'Digital Agency SEO - 340% Traffic Growth | AI SEO Turbo',
+    description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
+    alternates: {
+      canonical: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency'
+    },
+    openGraph: {
+      images: ['/logo.png'],
+      url: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency',
+      siteName: 'AI SEO Turbo',
+      title: 'Digital Agency SEO - 340% Traffic Growth | AI SEO Turbo',
+      description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Digital Agency SEO - 340% Traffic Growth | AI SEO Turbo',
+      description: 'Digital marketing agency case study: 340% organic traffic increase, 150+ top 10 keywords, 450% ROI with AI SEO Turbo and proven strategy.',
+    }
+  }
 }
 
 const iconMap = {
@@ -39,9 +55,9 @@ const iconMap = {
   Globe
 }
 
-export default function DigitalGrowthAgencyCaseStudy() {
-  const t = useTranslations('caseStudies.digitalGrowthAgency')
-  const tBreadcrumbs = useTranslations('caseStudies.breadcrumbs')
+export default async function DigitalGrowthAgencyCaseStudy({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'caseStudies.digitalGrowthAgency' })
+  const tBreadcrumbs = await getTranslations({ locale: params.locale, namespace: 'caseStudies.breadcrumbs' })
 
   const caseStudySchema = generateCaseStudySchema({
     title: t('title'),

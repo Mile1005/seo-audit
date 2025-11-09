@@ -1,5 +1,3 @@
-'use client'
-
 import { MainLayout } from "@/components/layout/main-layout"
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
 import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
@@ -26,43 +24,44 @@ import {
   Heart,
   Trophy
 } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Outdoor Gear SEO - 290% Conversions | AI SEO Turbo',
-  description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
-  keywords: [
-    'outdoor gear SEO case study',
-    'niche e-commerce optimization',
-    'specialty retail SEO',
-    'outdoor equipment keywords',
-    'hiking gear SEO',
-    'camping equipment optimization',
-    'niche market conversion SEO'
-  ],
-  alternates: {
-    canonical: 'https://www.aiseoturbo.com/case-studies/gearhub-pro'
-  },
-  openGraph: {
-    images: ['/logo.png'],
-    url: 'https://www.aiseoturbo.com/case-studies/gearhub-pro',
-    siteName: 'AI SEO Turbo',
-    title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  return {
+    title: 'Outdoor Gear SEO - 290% Conversions | AI SEO Turbo',
     description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
-    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
+    keywords: [
+      'outdoor gear SEO case study',
+      'niche e-commerce optimization',
+      'specialty retail SEO',
+      'outdoor equipment keywords',
+      'hiking gear SEO',
+      'camping equipment optimization',
+      'niche market conversion SEO'
+    ],
+    alternates: {
+      canonical: 'https://www.aiseoturbo.com/case-studies/gearhub-pro'
+    },
+    openGraph: {
+      images: ['/logo.png'],
+      url: 'https://www.aiseoturbo.com/case-studies/gearhub-pro',
+      siteName: 'AI SEO Turbo',
+      title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+      description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
+      description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
+    }
   }
 }
 
-export default function GearHubProCaseStudy() {
-  const t = useTranslations('caseStudies.gearhubPro')
-  const tBreadcrumbs = useTranslations('caseStudies.breadcrumbs')
+export default async function GearHubProCaseStudy({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'caseStudies.gearhubPro' })
+  const tBreadcrumbs = await getTranslations({ locale: params.locale, namespace: 'caseStudies.breadcrumbs' })
 
   // Challenge points from translations
   const challengePoints = [
@@ -352,7 +351,7 @@ export default function GearHubProCaseStudy() {
                 </blockquote>
                 <div className="flex items-center justify-center gap-4">
                   <div className="w-12 h-12 bg-yellow-500/10 rounded-full flex items-center justify-center">
-                    <span className="text-yellow-400 font-bold">{t('testimonial.author').split(' ').map(n => n[0]).join('')}</span>
+                    <span className="text-yellow-400 font-bold">{t('testimonial.author').split(' ').map((n: string) => n[0]).join('')}</span>
                   </div>
                   <div className="text-left">
                     <div className="text-white font-semibold">{t('testimonial.author')}</div>

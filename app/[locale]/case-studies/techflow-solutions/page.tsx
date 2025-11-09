@@ -1,5 +1,3 @@
-'use client'
-
 import { MainLayout } from "@/components/layout/main-layout"
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
 import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
@@ -25,43 +23,44 @@ import {
   Shield,
   Cpu
 } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Enterprise SaaS SEO - 520% Traffic Growth | AI SEO Turbo',
-  description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
-  keywords: [
-    'enterprise SEO case study',
-    'SaaS SEO success',
-    'technical SEO enterprise',
-    'enterprise traffic growth',
-    'B2B SEO results',
-    'enterprise keyword ranking',
-    'SaaS SEO ROI'
-  ],
-  alternates: {
-    canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
-  },
-  openGraph: {
-    images: ['/logo.png'],
-    url: 'https://www.aiseoturbo.com/case-studies/techflow-solutions',
-    siteName: 'AI SEO Turbo',
-    title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  return {
+    title: 'Enterprise SaaS SEO - 520% Traffic Growth | AI SEO Turbo',
     description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
-    description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
+    keywords: [
+      'enterprise SEO case study',
+      'SaaS SEO success',
+      'technical SEO enterprise',
+      'enterprise traffic growth',
+      'B2B SEO results',
+      'enterprise keyword ranking',
+      'SaaS SEO ROI'
+    ],
+    alternates: {
+      canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
+    },
+    openGraph: {
+      images: ['/logo.png'],
+      url: 'https://www.aiseoturbo.com/case-studies/techflow-solutions',
+      siteName: 'AI SEO Turbo',
+      title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+      description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
+      description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
+    }
   }
 }
 
-export default function TechFlowSolutionsCaseStudy() {
-  const t = useTranslations('caseStudies.techflowSolutions')
-  const tBreadcrumbs = useTranslations('caseStudies.breadcrumbs')
+export default async function TechFlowSolutionsCaseStudy({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'caseStudies.techflowSolutions' })
+  const tBreadcrumbs = await getTranslations({ locale: params.locale, namespace: 'caseStudies.breadcrumbs' })
 
   // Challenge points from translations
   const challengePoints = [

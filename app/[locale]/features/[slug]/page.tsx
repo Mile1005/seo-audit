@@ -7,15 +7,28 @@ import SiteCrawlerPage from '@/app/features/site-crawler/page'
 import KeywordTrackingPage from '@/app/features/keyword-tracking/page'
 import CompetitorAnalysisPage from '@/app/features/competitor-analysis/page'
 import AIAssistantPage from '@/app/features/ai-assistant/page'
+import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { type Locale } from '@/i18n'
 
-export const metadata: Metadata = {
-  title: 'SEO Features - AI SEO Turbo',
+// SEO metadata for feature pages with hreflang support
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale, slug } = await params
+
+  // Get the appropriate SEO config based on slug
+  const seoKey = `features/${slug}` as keyof typeof pageSEO
+  const seoConfig = pageSEO[seoKey] || pageSEO.features
+
+  return generateSEOMeta({
+    ...seoConfig,
+    locale: locale as Locale,
+    path: `features/${slug}`
+  })
 }
 
-type Props = { params: { locale: string; slug: string } }
+type Props = { params: Promise<{ locale: string; slug: string }> }
 
 export default async function LocalizedFeatureSlugPage({ params }: Props) {
-  const { locale, slug } = params
+  const { locale, slug } = await params
   setRequestLocale(locale)
 
   switch (slug) {

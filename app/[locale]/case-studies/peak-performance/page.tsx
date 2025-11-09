@@ -1,5 +1,3 @@
-'use client'
-
 import { MainLayout } from "@/components/layout/main-layout"
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs"
 import { StructuredData, generateCaseStudySchema } from "@/components/seo/StructuredData"
@@ -26,43 +24,44 @@ import {
   Building,
   Trophy
 } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
+import { Metadata } from 'next'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'Fitness App SEO - 280% User Growth | AI SEO Turbo',
-  description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
-  keywords: [
-    'fitness app SEO case study',
-    'mobile app optimization',
-    'app store SEO',
-    'fitness user acquisition',
-    'mobile keyword strategy',
-    'app download growth',
-    'fitness marketing SEO'
-  ],
-  alternates: {
-    canonical: 'https://www.aiseoturbo.com/case-studies/peak-performance'
-  },
-  openGraph: {
-    images: ['/logo.png'],
-    url: 'https://www.aiseoturbo.com/case-studies/peak-performance',
-    siteName: 'AI SEO Turbo',
-    title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+  return {
+    title: 'Fitness App SEO - 280% User Growth | AI SEO Turbo',
     description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
-    type: 'article',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
-    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
+    keywords: [
+      'fitness app SEO case study',
+      'mobile app optimization',
+      'app store SEO',
+      'fitness user acquisition',
+      'mobile keyword strategy',
+      'app download growth',
+      'fitness marketing SEO'
+    ],
+    alternates: {
+      canonical: 'https://www.aiseoturbo.com/case-studies/peak-performance'
+    },
+    openGraph: {
+      images: ['/logo.png'],
+      url: 'https://www.aiseoturbo.com/case-studies/peak-performance',
+      siteName: 'AI SEO Turbo',
+      title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+      description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
+      description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
+    }
   }
 }
 
-export default function PeakPerformanceCaseStudy() {
-  const t = useTranslations('caseStudies.peakPerformance')
-  const tBreadcrumbs = useTranslations('caseStudies.breadcrumbs')
+export default async function PeakPerformanceCaseStudy({ params }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: 'caseStudies.peakPerformance' })
+  const tBreadcrumbs = await getTranslations({ locale: params.locale, namespace: 'caseStudies.breadcrumbs' })
 
   // Challenge points from translations
   const challengePoints = [
@@ -352,7 +351,7 @@ export default function PeakPerformanceCaseStudy() {
                 </blockquote>
                 <div className="flex items-center justify-center gap-4">
                   <div className="w-12 h-12 bg-orange-500/10 rounded-full flex items-center justify-center">
-                    <span className="text-orange-400 font-bold">{t('testimonial.author').split(' ').map(n => n[0]).join('')}</span>
+                    <span className="text-orange-400 font-bold">{t('testimonial.author').split(' ').map((n: string) => n[0]).join('')}</span>
                   </div>
                   <div className="text-left">
                     <div className="text-white font-semibold">{t('testimonial.author')}</div>

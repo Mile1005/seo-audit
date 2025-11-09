@@ -36,6 +36,7 @@ const defaultSEO: SEOConfig = {
 
 /**
  * Generate hreflang alternate links for multilingual SEO
+ * Includes x-default hreflang for better international SEO
  */
 export function generateLanguageAlternates(path: string = '', currentLocale: Locale = defaultLocale) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
@@ -49,12 +50,15 @@ export function generateLanguageAlternates(path: string = '', currentLocale: Loc
   locales.forEach((locale) => {
     if (locale === defaultLocale) {
       // Default locale (English) uses root path without locale prefix
-      languages[locale] = `${baseUrl}/${cleanPath}`
+      languages[locale] = `${baseUrl}/${cleanPath}`.replace(/\/$/, '') // Remove trailing slash
     } else {
       // Other locales use locale prefix
-      languages[locale] = `${baseUrl}/${locale}/${cleanPath}`
+      languages[locale] = `${baseUrl}/${locale}/${cleanPath}`.replace(/\/$/, '') // Remove trailing slash
     }
   })
+  
+  // Add x-default hreflang pointing to the default locale
+  languages['x-default'] = languages[defaultLocale]
   
   return languages
 }
@@ -114,16 +118,19 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
 }
 
 /**
- * Generate JSON-LD structured data
+ * Generate JSON-LD structured data with enhanced validation
  */
-export function generateStructuredData(type: 'website' | 'organization' | 'product' | 'article', data: Record<string, any> = {}) {
+export function generateStructuredData(type: 'website' | 'organization' | 'product' | 'article' | 'breadcrumb' | 'faq' | 'howto', data: Record<string, any> = {}) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
   
   const commonData = {
     '@context': 'https://schema.org',
     '@type': type === 'website' ? 'WebSite' : 
               type === 'organization' ? 'Organization' :
-              type === 'product' ? 'SoftwareApplication' : 'Article'
+              type === 'product' ? 'SoftwareApplication' :
+              type === 'article' ? 'Article' :
+              type === 'breadcrumb' ? 'BreadcrumbList' :
+              type === 'faq' ? 'FAQPage' : 'HowTo'
   }
 
   switch (type) {
@@ -131,7 +138,7 @@ export function generateStructuredData(type: 'website' | 'organization' | 'produ
       return {
         ...commonData,
         name: 'AISEOTurbo',
-        description: 'AI-Powered SEO Audits & Optimization Tools',
+        description: 'AI-powered SEO audit platform that helps marketers and businesses identify critical SEO issues in minutes.',
         url: baseUrl,
         potentialAction: {
           '@type': 'SearchAction',
@@ -145,30 +152,83 @@ export function generateStructuredData(type: 'website' | 'organization' | 'produ
       return {
         ...commonData,
         name: 'AISEOTurbo',
-        description: 'Leading provider of AI-powered SEO audit and optimization tools',
+        alternateName: 'AI SEO Turbo',
+        description: 'Leading provider of AI-powered SEO audit and optimization tools for businesses worldwide',
         url: baseUrl,
-        logo: `${baseUrl}/images/logo.webp`,
+        logo: `${baseUrl}/logo.png`,
+        foundingDate: '2023-01-01',
+        numberOfEmployees: '10-50',
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+1-555-SEO-TURBO',
-          contactType: 'customer service',
-          availableLanguage: 'English'
+          contactType: 'Customer Support',
+          email: 'support@aiseoturbo.com',
+          availableLanguage: ['en', 'fr', 'it', 'es', 'id', 'de'],
+          areaServed: 'Worldwide',
+          hoursAvailable: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '09:00',
+            closes: '17:00',
+            timeZone: 'UTC'
+          }
         },
         sameAs: [
           'https://twitter.com/aiseoturbo',
           'https://linkedin.com/company/aiseoturbo',
-          'https://github.com/aiseoturbo'
+          'https://github.com/aiseoturbo',
+          'https://youtube.com/@aiseoturbo'
         ],
+        knowsAbout: [
+          'Search Engine Optimization',
+          'SEO Audit Tools',
+          'Technical SEO',
+          'Content Optimization',
+          'Keyword Research',
+          'Competitor Analysis',
+          'AI Technology',
+          'Digital Marketing',
+          'Web Analytics'
+        ],
+        hasOfferCatalog: {
+          '@type': 'OfferCatalog',
+          name: 'SEO Services',
+          itemListElement: [
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'AI SEO Audit',
+                description: 'Comprehensive SEO analysis powered by artificial intelligence'
+              }
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Technical SEO Optimization',
+                description: 'Complete technical SEO audit and optimization services'
+              }
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'Content Optimization',
+                description: 'AI-powered content analysis and optimization recommendations'
+              }
+            }
+          ]
+        },
         ...data
       }
 
     case 'product':
       return {
         ...commonData,
-        name: 'AISEOTurbo SEO Audit Tool',
+        name: 'AI SEO Turbo',
         description: 'Comprehensive SEO audit and optimization platform powered by AI',
         url: baseUrl,
-        applicationCategory: 'SEO Tool',
+        applicationCategory: 'BusinessApplication',
         operatingSystem: 'Web Browser',
         offers: {
           '@type': 'Offer',
@@ -187,9 +247,93 @@ export function generateStructuredData(type: 'website' | 'organization' | 'produ
         ...data
       }
 
+    case 'article':
+      return {
+        ...commonData,
+        headline: data.headline || 'SEO Article',
+        description: data.description || 'SEO optimization guide',
+        author: {
+          '@type': 'Organization',
+          name: 'AISEOTurbo Team'
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'AISEOTurbo',
+          logo: {
+            '@type': 'ImageObject',
+            url: `${baseUrl}/logo.png`
+          }
+        },
+        datePublished: data.datePublished || new Date().toISOString(),
+        dateModified: data.dateModified || new Date().toISOString(),
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': data.url || baseUrl
+        },
+        ...data
+      }
+
+    case 'breadcrumb':
+      return {
+        ...commonData,
+        itemListElement: data.breadcrumbs || [],
+        ...data
+      }
+
+    case 'faq':
+      return {
+        ...commonData,
+        mainEntity: data.questions || [],
+        ...data
+      }
+
+    case 'howto':
+      return {
+        ...commonData,
+        name: data.name || 'How-to Guide',
+        description: data.description || 'Step-by-step instructions',
+        step: data.steps || [],
+        ...data
+      }
+
     default:
       return { ...commonData, ...data }
   }
+}
+
+/**
+ * Validate structured data JSON-LD
+ */
+export function validateStructuredData(schema: Record<string, any>): { isValid: boolean; errors: string[] } {
+  const errors: string[] = []
+  
+  // Check required fields based on type
+  if (!schema['@context']) {
+    errors.push('Missing @context field')
+  }
+  
+  if (!schema['@type']) {
+    errors.push('Missing @type field')
+  }
+  
+  // Type-specific validation
+  switch (schema['@type']) {
+    case 'Article':
+      if (!schema.headline) errors.push('Article missing headline')
+      if (!schema.author) errors.push('Article missing author')
+      if (!schema.publisher) errors.push('Article missing publisher')
+      break
+    case 'Organization':
+      if (!schema.name) errors.push('Organization missing name')
+      if (!schema.url) errors.push('Organization missing url')
+      break
+    case 'SoftwareApplication':
+      if (!schema.name) errors.push('SoftwareApplication missing name')
+      if (!schema.offers) errors.push('SoftwareApplication missing offers')
+      break
+  }
+  
+  return { isValid: errors.length === 0, errors }
 }
 
 /**
@@ -521,4 +665,196 @@ export const pageSEO = {
     keywords: ['system status', 'service availability', 'uptime', 'API status', 'service health'],
     canonical: 'https://www.aiseoturbo.com/status'
   },
+}
+
+// SEO UTILITIES FOR OPTIMIZATION AND VALIDATION
+
+/**
+ * Title optimization utilities
+ */
+export const titleUtils = {
+  /**
+   * Validate title length (50-60 characters recommended)
+   */
+  validateLength: (title: string): { isValid: boolean; length: number; recommendation?: string } => {
+    const length = title.length
+    if (length < 30) {
+      return { isValid: false, length, recommendation: 'Title too short. Add primary keywords to reach 50-60 characters.' }
+    }
+    if (length > 60) {
+      return { isValid: false, length, recommendation: 'Title too long. Consider shortening to 50-60 characters for better display.' }
+    }
+    return { isValid: true, length }
+  },
+
+  /**
+   * Check if title contains primary keyword
+   */
+  containsKeyword: (title: string, keyword: string): boolean => {
+    return title.toLowerCase().includes(keyword.toLowerCase())
+  },
+
+  /**
+   * Optimize title for better SEO
+   */
+  optimize: (title: string, primaryKeyword: string, brandName?: string): string => {
+    const brand = brandName || 'AI SEO Turbo'
+    
+    // If title already contains brand, don't add it again
+    if (title.toLowerCase().includes(brand.toLowerCase())) {
+      return title.length <= 60 ? title : title.substring(0, 57) + '...'
+    }
+    
+    // Add brand if space allows
+    const withBrand = `${title} | ${brand}`
+    if (withBrand.length <= 60) {
+      return withBrand
+    }
+    
+    // If too long, prioritize title content
+    return title.length <= 60 ? title : title.substring(0, 57) + '...'
+  }
+}
+
+/**
+ * Meta description utilities
+ */
+export const metaDescriptionUtils = {
+  /**
+   * Validate description length (120-160 characters recommended)
+   */
+  validateLength: (description: string): { isValid: boolean; length: number; recommendation?: string } => {
+    const length = description.length
+    if (length < 120) {
+      return { isValid: false, length, recommendation: 'Description too short. Expand to 120-160 characters for better SERP display.' }
+    }
+    if (length > 160) {
+      return { isValid: false, length, recommendation: 'Description too long. Consider shortening to 120-160 characters.' }
+    }
+    return { isValid: true, length }
+  },
+
+  /**
+   * Check description uniqueness compared to other descriptions
+   */
+  checkUniqueness: (description: string, otherDescriptions: string[]): { isUnique: boolean; similarity: number } => {
+    // Simple similarity check - in production, use more sophisticated algorithms
+    const similarities = otherDescriptions.map(other => {
+      const words1 = description.toLowerCase().split(' ')
+      const words2 = other.toLowerCase().split(' ')
+      const common = words1.filter(word => words2.includes(word)).length
+      return common / Math.max(words1.length, words2.length)
+    })
+    
+    const maxSimilarity = Math.max(...similarities)
+    return { isUnique: maxSimilarity < 0.7, similarity: maxSimilarity }
+  },
+
+  /**
+   * Optimize description for better CTR
+   */
+  optimize: (description: string, primaryKeyword: string, callToAction?: string): string => {
+    let optimized = description
+    
+    // Ensure primary keyword is included
+    if (!optimized.toLowerCase().includes(primaryKeyword.toLowerCase())) {
+      optimized = `${primaryKeyword} - ${optimized}`
+    }
+    
+    // Add call to action if provided and space allows
+    if (callToAction && optimized.length + callToAction.length + 3 <= 160) {
+      optimized = `${optimized} ${callToAction}`
+    }
+    
+    // Trim to optimal length
+    return optimized.length <= 160 ? optimized : optimized.substring(0, 157) + '...'
+  }
+}
+
+/**
+ * Keyword density utilities
+ */
+export const keywordDensityUtils = {
+  /**
+   * Calculate keyword density in text
+   */
+  calculateDensity: (text: string, keyword: string): number => {
+    const cleanText = text.toLowerCase().replace(/[^\w\s]/g, '')
+    const words = cleanText.split(/\s+/).filter(word => word.length > 0)
+    const keywordCount = words.filter(word => word === keyword.toLowerCase()).length
+    return words.length > 0 ? (keywordCount / words.length) * 100 : 0
+  },
+
+  /**
+   * Check if keyword density is within optimal range (0.5-2.5%)
+   */
+  validateDensity: (density: number): { isValid: boolean; recommendation?: string } => {
+    if (density < 0.5) {
+      return { isValid: false, recommendation: 'Keyword density too low. Consider adding the keyword more naturally.' }
+    }
+    if (density > 2.5) {
+      return { isValid: false, recommendation: 'Keyword density too high. This may appear as keyword stuffing to search engines.' }
+    }
+    return { isValid: true }
+  },
+
+  /**
+   * Analyze keyword density for multiple keywords
+   */
+  analyzeKeywords: (text: string, keywords: string[]): Array<{ keyword: string; density: number; isValid: boolean }> => {
+    return keywords.map(keyword => {
+      const density = keywordDensityUtils.calculateDensity(text, keyword)
+      const validation = keywordDensityUtils.validateDensity(density)
+      return {
+        keyword,
+        density,
+        isValid: validation.isValid
+      }
+    })
+  }
+}
+
+/**
+ * Comprehensive SEO validation function
+ */
+export function validateSEO(config: Partial<SEOConfig> & { content?: string }): {
+  title: ReturnType<typeof titleUtils.validateLength>
+  description: ReturnType<typeof metaDescriptionUtils.validateLength>
+  keywords?: Array<{ keyword: string; density: number; isValid: boolean }>
+  overall: { score: number; issues: string[] }
+} {
+  const issues: string[] = []
+  let score = 100
+
+  // Title validation
+  const titleValidation = titleUtils.validateLength(config.title || '')
+  if (!titleValidation.isValid) {
+    issues.push(`Title: ${titleValidation.recommendation}`)
+    score -= 15
+  }
+
+  // Description validation
+  const descValidation = metaDescriptionUtils.validateLength(config.description || '')
+  if (!descValidation.isValid) {
+    issues.push(`Description: ${descValidation.recommendation}`)
+    score -= 10
+  }
+
+  // Keyword density analysis
+  let keywordAnalysis: Array<{ keyword: string; density: number; isValid: boolean }> | undefined
+  if (config.keywords && config.content) {
+    keywordAnalysis = keywordDensityUtils.analyzeKeywords(config.content, config.keywords)
+    const invalidKeywords = keywordAnalysis.filter(k => !k.isValid)
+    if (invalidKeywords.length > 0) {
+      issues.push(`Keywords: ${invalidKeywords.length} keywords have suboptimal density`)
+      score -= invalidKeywords.length * 5
+    }
+  }
+
+  return {
+    title: titleValidation,
+    description: descValidation,
+    keywords: keywordAnalysis,
+    overall: { score: Math.max(0, score), issues }
+  }
 }

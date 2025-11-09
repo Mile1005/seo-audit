@@ -11,7 +11,7 @@ import * as jsonld from 'jsonld';
 import stringSimilarity from 'string-similarity';
 
 // Default configuration
-let SITEMAP_URL = 'http://localhost:3000/sitemap.xml';
+let SITEMAP_URL = 'https://aiseoturbo.com/sitemap.xml';
 const LANGUAGES = ['de', 'fr', 'en', 'it', 'es', 'id'];
 const CONCURRENT_LIMIT = 10;
 const PUPPETEER_TIMEOUT = 30000;
@@ -22,11 +22,11 @@ let allTitles = [];
 let allDescriptions = [];
 
 function loadUrls() {
-  if (!fs.existsSync('urls.csv')) {
-    console.error('urls.csv not found');
+  if (!fs.existsSync('urls_live.csv')) {
+    console.error('urls_live.csv not found');
     process.exit(1);
   }
-  const csvData = fs.readFileSync('urls.csv', 'utf8');
+  const csvData = fs.readFileSync('urls_live.csv', 'utf8');
   const records = csvParse.parse(csvData, { columns: true });
   return records;
 }

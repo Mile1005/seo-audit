@@ -1,25 +1,34 @@
-'use client'
-
 import BlogPostClient from '../[slug]/blog-post-client'
 import { StructuredData, generateBlogPostingSchema } from '@/components/seo/StructuredData'
-import { useTranslations, useLocale } from 'next-intl'
+import { generateSEOMeta, generateStructuredData, pageSEO } from '@/lib/seo'
+import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
+import { setRequestLocale } from 'next-intl/server'
+import { type Locale } from '@/i18n'
 
-// Note: Metadata export not supported in client components
-// SEO is handled by parent layout and structured data
-const pageMetadata = {
-  title: 'AI-Powered SEO: The Future is Here | AI SEO Turbo Blog',
-  description: 'Discover how artificial intelligence is revolutionizing search engine optimization and how to leverage AI for better rankings.',
-  canonical: 'https://www.aiseoturbo.com/blog/ai-powered-seo-future',
-  ogType: 'article',
-  keywords: ['AI', 'Machine Learning', 'SEO', 'Future']
+// SEO metadata for the blog post
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    title: 'AI-Powered SEO: The Future is Here | AI SEO Turbo Blog',
+    description: 'Discover how artificial intelligence is revolutionizing search engine optimization and how to leverage AI for better rankings.',
+    keywords: ['AI', 'Machine Learning', 'SEO', 'Future'],
+    ogType: 'article',
+    locale: locale as Locale,
+    path: 'blog/ai-powered-seo-future'
+  })
 }
 
-export default function AIPoweredSEOFuturePage() {
-  // Namespace lives under blog.aiPoweredSEOFuture (messages are nested inside the "blog" object)
-  const t = useTranslations('blog.aiPoweredSEOFuture')
-  const locale = useLocale()
-  
-  // Build content inside component so translations work
+export default async function AIPoweredSEOFuturePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  // Enable static rendering
+  setRequestLocale(locale)
+
+  // Get translations server-side
+  const t = await getTranslations({ locale, namespace: 'blog.aiPoweredSEOFuture' })
+
+  // Build content server-side with translations
   const content = `
     <div role="navigation" aria-label="Table of Contents" class="bg-slate-800/30 border border-slate-700/50 rounded-lg p-6 mb-8">
       <h2 class="text-lg font-semibold text-white mb-4">${t('toc.title')}</h2>
@@ -53,7 +62,7 @@ export default function AIPoweredSEOFuturePage() {
 
     <section id="how-google">
       <h2>${t('howGoogle.title')}</h2>
-      
+
       <h3>${t('howGoogle.rankBrain.title')}</h3>
       <div class="bg-slate-800/50 p-4 rounded-lg my-4">
         <p class="text-gray-300">${t('howGoogle.rankBrain.description')}</p>
@@ -232,7 +241,7 @@ export default function AIPoweredSEOFuturePage() {
       <p>${t('conclusion.paragraph3')}</p>
     </section>
   `
-  
+
   const post = {
     id: '2',
     slug: 'ai-powered-seo-future',
@@ -250,7 +259,7 @@ export default function AIPoweredSEOFuturePage() {
     views: '1.8k',
     likes: 89
   }
-  
+
   const blogSchema = generateBlogPostingSchema({
     title: t('post.title'),
     description: t('post.excerpt'),
