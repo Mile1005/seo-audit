@@ -1,6 +1,5 @@
 import { MainLayout } from '@/components/layout/main-layout'
 import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
-import { motion } from 'framer-motion'
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
@@ -219,11 +218,8 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
               />
             </div>
             
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center max-w-4xl mx-auto"
+            <div 
+              className="text-center max-w-4xl mx-auto animate-fade-in-up"
             >
               <HelpCircle className="w-16 h-16 text-blue-400 mx-auto mb-6" />
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
@@ -244,33 +240,28 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                   {t('hero.searchPlaceholder')}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Quick Help Section */}
         <section className="py-20 bg-slate-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center mb-16"
+            <div
+              className="text-center mb-16 animate-fade-in-up"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 {t('quickAnswers.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t('quickAnswers.titleHighlight')}</span>
               </h2>
               <p className="text-xl text-gray-400 mb-8">{t('quickAnswers.subtitle')}</p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
               {quickHelp.map((item: any, index: number) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300"
+                  className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 animate-fade-in-up"
+                  style={{ animationDelay: `${0.1 * index}s` }}
                 >
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
@@ -285,7 +276,7 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -294,26 +285,21 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
         {/* Help Categories */}
         <section className="py-20 bg-slate-900/50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+            <div
+              className="text-center mb-16 animate-fade-in-up"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 {t('categories.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t('categories.titleHighlight')}</span>
               </h2>
               <p className="text-xl text-gray-400">{t('categories.subtitle')}</p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {helpCategories.map((category, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300"
+                  className="group bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 animate-fade-in-up"
+                  style={{ animationDelay: `${0.1 * index}s` }}
                 >
                   <div className="mb-6">
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.color} p-3 mb-4 group-hover:scale-110 transition-transform duration-300`}>
@@ -353,7 +339,7 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                     {t('categories.viewAll')}
                     <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -362,26 +348,21 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
         {/* Contact Support */}
         <section className="py-20 bg-slate-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+            <div
+              className="text-center mb-16 animate-fade-in-up"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 {t('contact.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t('contact.titleHighlight')}</span>{t('contact.titleEnd')}
               </h2>
               <p className="text-xl text-gray-400">{t('contact.subtitle')}</p>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {contactOptions.map((option, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                  className="group"
+                  className="group animate-fade-in-up"
+                  style={{ animationDelay: `${0.1 * index}s` }}
                 >
                   <Link
                     href={option.href}
@@ -401,7 +382,7 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                       </span>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
@@ -413,11 +394,8 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               
               {/* System Status */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8"
+              <div
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 animate-fade-in-up"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 p-3">
@@ -456,14 +434,11 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                   {t('status.viewDetailed')}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </motion.div>
+              </div>
 
               {/* Community */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8"
+              <div
+                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 animate-fade-in-up"
               >
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 p-3">
@@ -508,7 +483,7 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                   {t('community.joinButton')}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </motion.div>
+              </div>
             </div>
           </div>
         </section>
