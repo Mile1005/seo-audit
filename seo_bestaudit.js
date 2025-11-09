@@ -10,7 +10,8 @@ import * as csvParse from 'csv-parse/sync';
 import * as jsonld from 'jsonld';
 import stringSimilarity from 'string-similarity';
 
-const SITEMAP_URL = 'http://localhost:3000/sitemap.xml';
+// Default configuration
+let SITEMAP_URL = 'http://localhost:3000/sitemap.xml';
 const LANGUAGES = ['de', 'fr', 'en', 'it', 'es', 'id'];
 const CONCURRENT_LIMIT = 10;
 const PUPPETEER_TIMEOUT = 30000;
@@ -306,6 +307,9 @@ async function main() {
       langs = arg.split('=')[1].split(',');
     } else if (arg.startsWith('--subset=')) {
       subset = parseInt(arg.split('=')[1]);
+    } else if (arg.startsWith('--base-url=')) {
+      const baseUrl = arg.split('=')[1];
+      SITEMAP_URL = `${baseUrl}/sitemap.xml`;
     }
   });
   const urls = loadUrls().filter(u => !langs.length || langs.includes(u.lang));

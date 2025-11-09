@@ -39,6 +39,8 @@
     "lhci:local": "lhci autorun --config=./lighthouserc.local.json",
     "lhci:prod": "lhci autorun --config=./lighthouserc.prod.json",
     "audit": "npm audit --audit-level=high",
+    "seo:audit": "node seo_bestaudit.js",
+    "seo:audit:prod": "node seo_bestaudit.js --base-url=https://aiseoturbo.com",
     "mobile:audit": "npx lighthouse http://localhost:3000 --form-factor=mobile --only-categories=performance --view",
     "mobile:optimize": "node scripts/optimization/mobile-optimizer.js",
     "mobile:test": "npm run build && npm run mobile:audit",

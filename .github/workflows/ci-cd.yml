@@ -254,3 +254,44 @@ jobs:
         run: |
           sleep 30  # Wait for deployment
           curl -f https://aiseoturbo.com/api/health || exit 1
+          
+  seo-audit:
+    name: 'SEO Audit (Production)'
+    runs-on: ubuntu-latest
+    needs: deploy-production
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Wait for deployment to be ready
+        run: sleep 60  # Give Vercel extra time to fully deploy
+        
+      - name: Run SEO audit against production
+        run: node seo_bestaudit.js --base-url=https://aiseoturbo.com
+        env:
+          CI: true
+          
+      - name: Upload SEO audit results
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-audit-results
+          path: |
+            audit_results.csv
+            audit_summary.json
+            audit-full.txt
+          retention-days: 30
