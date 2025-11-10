@@ -29,15 +29,15 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Handle /en/* paths for English - strip /en prefix without redirecting root
+  // Handle /en/* paths for English - redirect 301 to root paths to eliminate duplicates
   if (pathname.startsWith('/en/') || pathname === '/en') {
     // For /en root, redirect to /
     if (pathname === '/en') {
-      return NextResponse.redirect(new URL('/', req.url));
+      return NextResponse.redirect(new URL('/', req.url), 301);
     }
-    // For /en/path, rewrite to /path internally (no external redirect)
+    // For /en/path, redirect 301 to /path to eliminate duplicate hreflang entries
     const newPathname = pathname.replace(/^\/en/, '') || '/';
-    return NextResponse.rewrite(new URL(newPathname, req.url));
+    return NextResponse.redirect(new URL(newPathname, req.url), 301);
   }
 
   // Check if path starts with a locale prefix
