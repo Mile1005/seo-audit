@@ -1,5 +1,5 @@
-import { redirect } from '../../lib/navigation';
+import { redirect } from 'next/navigation';
 
 export default function ContactPage() {
-  redirect({ href: '/contact', locale: 'en' });
+  redirect('/en/contact');
 }
