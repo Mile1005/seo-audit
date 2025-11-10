@@ -8,6 +8,7 @@ import dynamicImport from 'next/dynamic';
 import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
 import { NextIntlClientProvider } from 'next-intl';
+import { generateLanguageAlternates } from '@/lib/seo';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales, type Locale, localeNames } from '../../i18n';
@@ -74,6 +75,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = 'https://www.aiseoturbo.com';
   const currentPath = `/${locale}`;
 
+  // Generate hreflang alternates for all locales
+  const languageAlternates = generateLanguageAlternates(currentPath, locale as any);
+
   return {
     title: t('defaultTitle'),
     description: t('defaultDescription'),
@@ -89,6 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(baseUrl),
     alternates: {
       canonical: `${baseUrl}${currentPath}`,
+      languages: languageAlternates, // Adds hreflang links
     },
     openGraph: {
       title: t('defaultTitle'),

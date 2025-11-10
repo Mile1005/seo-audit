@@ -78,8 +78,11 @@ const routes: Route[] = [
 
 function generateAlternates(path: string) {
   return LOCALES.reduce((acc, locale) => {
-    // All locales use locale prefix for consistency with [locale] routing
-    const url = `${BASE_URL}/${locale}${path}`
+    // For homepage (empty path), English is at root, others have locale prefix
+    // For all other paths, all locales use locale prefix
+    const url = (path === '' && locale === 'en')
+      ? `${BASE_URL}${path}`
+      : `${BASE_URL}/${locale}${path}`
 
     acc[locale] = url
     return acc
