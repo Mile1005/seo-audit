@@ -83,8 +83,8 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
     ? (seo.ogImage.startsWith('http') ? seo.ogImage : `${baseUrl}${seo.ogImage}`)
     : undefined
 
-  // Generate hreflang alternates if locale and path provided
-  const languageAlternates = (seo.locale && seo.path !== undefined) 
+  // Generate hreflang alternates if locale and path provided, and not noindex
+  const languageAlternates = (seo.locale && seo.path !== undefined && !seo.noIndex) 
     ? generateLanguageAlternates(seo.path, seo.locale)
     : undefined
 

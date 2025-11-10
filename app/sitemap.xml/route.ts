@@ -93,7 +93,7 @@ export async function GET() {
   const lastModified = now.toISOString().split('T')[0] // YYYY-MM-DD
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
   routes.forEach(route => {
     const { path, priority = 0.5, changeFrequency = 'monthly' } = route;
@@ -106,12 +106,6 @@ export async function GET() {
       xml += `    <lastmod>${lastModified}</lastmod>\n`;
       xml += `    <changefreq>${changeFrequency}</changefreq>\n`;
       xml += `    <priority>${priority}</priority>\n`;
-      // Add hreflang alternates for all locales
-      Object.entries(alternates).forEach(([hreflang, href]) => {
-        xml += `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${href}" />\n`;
-      });
-      // Add x-default alternate
-      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${alternates['en']}" />\n`;
       xml += `  </url>\n`;
     });
   });
