@@ -357,43 +357,37 @@ export const pageSEO = {
   features: {
     title: 'SEO Features - Complete Audit & Analysis | AI SEO Turbo',
     description: 'Discover powerful SEO features including technical audits, competitor analysis, keyword tracking, and AI-powered recommendations for better rankings.',
-    keywords: ['SEO features', 'technical SEO audit', 'competitor analysis', 'keyword tracking'],
-    canonical: 'https://www.aiseoturbo.com/features'
+    keywords: ['SEO features', 'technical SEO audit', 'competitor analysis', 'keyword tracking']
   },
 
   'features/seo-audit': {
     title: 'SEO Audit Feature - Comprehensive Analysis | AI SEO Turbo',
     description: 'Get detailed SEO audits with 47+ technical checks, AI-powered recommendations, and actionable insights to improve your website rankings.',
-    keywords: ['SEO audit', 'technical SEO', 'website analysis', 'SEO recommendations'],
-    canonical: 'https://www.aiseoturbo.com/features/seo-audit'
+    keywords: ['SEO audit', 'technical SEO', 'website analysis', 'SEO recommendations']
   },
 
   'features/site-crawler': {
     title: 'Site Crawler - Deep Website Analysis | AI SEO Turbo',
     description: 'Comprehensive website crawler that detects broken links, analyzes site structure, and identifies technical SEO issues for better search performance.',
-    keywords: ['site crawler', 'website analysis', 'SEO crawler', 'broken links'],
-    canonical: 'https://www.aiseoturbo.com/features/site-crawler'
+    keywords: ['site crawler', 'website analysis', 'SEO crawler', 'broken links']
   },
 
   'features/competitor-analysis': {
     title: 'Competitor Analysis - SEO Intelligence | AI SEO Turbo',
     description: 'Analyze competitor SEO strategies, keyword rankings, and backlink profiles. Discover opportunities to outrank competitors and gain market share.',
-    keywords: ['competitor analysis', 'SEO intelligence', 'keyword tracking', 'competitive research'],
-    canonical: 'https://www.aiseoturbo.com/features/competitor-analysis'
+    keywords: ['competitor analysis', 'SEO intelligence', 'keyword tracking', 'competitive research']
   },
 
   'features/ai-assistant': {
     title: 'AI SEO Assistant - Smart Recommendations | AI SEO Turbo',
     description: 'AI-powered SEO assistant providing personalized recommendations, content optimization suggestions, and automated insights for better rankings.',
-    keywords: ['AI SEO assistant', 'SEO recommendations', 'AI optimization', 'SEO insights'],
-    canonical: 'https://www.aiseoturbo.com/features/ai-assistant'
+    keywords: ['AI SEO assistant', 'SEO recommendations', 'AI optimization', 'SEO insights']
   },
 
   'features/keyword-tracking': {
     title: 'Keyword Tracking - Monitor Rankings | AI SEO Turbo',
     description: 'Track keyword positions across search engines, monitor ranking changes, and get alerts for SERP movements to optimize your SEO strategy.',
-    keywords: ['keyword tracking', 'ranking monitor', 'SERP tracking', 'SEO alerts'],
-    canonical: 'https://www.aiseoturbo.com/features/keyword-tracking'
+    keywords: ['keyword tracking', 'ranking monitor', 'SERP tracking', 'SEO alerts']
   },
   
   pricing: {
@@ -405,141 +399,121 @@ export const pageSEO = {
   about: {
     title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
     description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
-    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists'],
-    canonical: 'https://www.aiseoturbo.com/about'
+    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists']
   },
   
   contact: {
     title: 'Contact AI SEO Turbo - Expert SEO Support & Consultation',
     description: 'Get expert SEO help from certified specialists. Contact us for personalized consultation, technical support, and partnership inquiries. Join 10,000+ businesses achieving SEO success.',
-    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership'],
-    canonical: 'https://www.aiseoturbo.com/contact'
+    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership']
   },
 
   blog: {
     title: 'SEO Blog - Tips & Strategies | AI SEO Turbo',
     description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn expert insights on technical SEO, content optimization, and algorithms.',
-    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization'],
-    canonical: 'https://www.aiseoturbo.com/blog'
+    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization']
   },
 
   'blog/ai-powered-seo-future': {
     title: 'AI-Powered SEO: The Future of Search Optimization | AI SEO Turbo',
     description: 'Explore how artificial intelligence is revolutionizing SEO. Learn about AI-powered tools, automation, and the future of search engine optimization.',
-    keywords: ['AI SEO', 'AI-powered SEO', 'future of SEO', 'SEO automation', 'machine learning SEO'],
-    canonical: 'https://www.aiseoturbo.com/blog/ai-powered-seo-future'
+    keywords: ['AI SEO', 'AI-powered SEO', 'future of SEO', 'SEO automation', 'machine learning SEO']
   },
 
   'blog/complete-seo-audit-checklist-2025': {
     title: 'Complete SEO Audit Checklist 2025 - Step-by-Step Guide',
     description: 'Follow our comprehensive SEO audit checklist for 2025. Covers technical SEO, on-page optimization, content analysis, and performance metrics.',
-    keywords: ['SEO audit checklist', '2025 SEO guide', 'SEO audit steps', 'technical SEO checklist'],
-    canonical: 'https://www.aiseoturbo.com/blog/complete-seo-audit-checklist-2025'
+    keywords: ['SEO audit checklist', '2025 SEO guide', 'SEO audit steps', 'technical SEO checklist']
   },
 
   'blog/content-seo-creating-search-friendly-content': {
     title: 'Content SEO: Creating Search-Friendly Content That Ranks',
     description: 'Master content SEO with proven strategies for creating search-friendly content. Learn keyword optimization, content structure, and user intent matching.',
-    keywords: ['content SEO', 'SEO content writing', 'search-friendly content', 'keyword optimization'],
-    canonical: 'https://www.aiseoturbo.com/blog/content-seo-creating-search-friendly-content'
+    keywords: ['content SEO', 'SEO content writing', 'search-friendly content', 'keyword optimization']
   },
 
   'blog/core-web-vitals-optimization-guide': {
     title: 'Core Web Vitals Optimization Guide - Improve Page Experience',
     description: 'Complete guide to optimizing Core Web Vitals. Learn how to improve LCP, FID, and CLS for better Google rankings and user experience.',
-    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience'],
-    canonical: 'https://www.aiseoturbo.com/blog/core-web-vitals-optimization-guide'
+    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience']
   },
 
   'blog/local-seo-strategies-that-work': {
     title: 'Local SEO Strategies That Work in 2025 - Complete Guide',
     description: 'Boost your local search rankings with proven local SEO strategies. Learn Google Business Profile optimization, local citations, and review management.',
-    keywords: ['local SEO', 'local search optimization', 'Google Business Profile', 'local citations'],
-    canonical: 'https://www.aiseoturbo.com/blog/local-seo-strategies-that-work'
+    keywords: ['local SEO', 'local search optimization', 'Google Business Profile', 'local citations']
   },
 
   'blog/technical-seo-best-practices-2025': {
     title: 'Technical SEO Best Practices 2025 - Expert Guide',
     description: 'Master technical SEO with 2025 best practices. Covers site structure, crawlability, indexation, schema markup, and performance optimization.',
-    keywords: ['technical SEO', 'SEO best practices', 'technical optimization', 'site structure'],
-    canonical: 'https://www.aiseoturbo.com/blog/technical-seo-best-practices-2025'
+    keywords: ['technical SEO', 'SEO best practices', 'technical optimization', 'site structure']
   },
 
   'case-studies': {
     title: 'SEO Case Studies - Real Results & Success Stories',
     description: 'Explore real SEO success stories and case studies. See how businesses achieved significant traffic growth and ranking improvements with AI SEO Turbo.',
-    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'client testimonials'],
-    canonical: 'https://www.aiseoturbo.com/case-studies'
+    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'client testimonials']
   },
 
   'case-studies/cloudsync-pro': {
     title: 'CloudSync Pro Case Study - 312% Organic Traffic Increase',
     description: 'How CloudSync Pro achieved 312% organic traffic growth in 6 months using AI-powered SEO audits and technical optimization strategies.',
-    keywords: ['SaaS SEO', 'traffic growth case study', 'B2B SEO success'],
-    canonical: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro'
+    keywords: ['SaaS SEO', 'traffic growth case study', 'B2B SEO success']
   },
 
   'case-studies/digital-growth-agency': {
     title: 'Digital Growth Agency Case Study - 245% Client Acquisition',
     description: 'Learn how Digital Growth Agency scaled their SEO services and increased client acquisition by 245% using automated SEO audits.',
-    keywords: ['agency SEO', 'SEO agency case study', 'client growth'],
-    canonical: 'https://www.aiseoturbo.com/case-studies/digital-growth-agency'
+    keywords: ['agency SEO', 'SEO agency case study', 'client growth']
   },
 
   'case-studies/gearhub-pro': {
     title: 'GearHub Pro Case Study - #1 Rankings in 4 Months',
     description: 'How GearHub Pro achieved #1 rankings for 47 competitive keywords in just 4 months through comprehensive SEO optimization.',
-    keywords: ['ecommerce SEO', 'ranking improvement', 'SEO success story'],
-    canonical: 'https://www.aiseoturbo.com/case-studies/gearhub-pro'
+    keywords: ['ecommerce SEO', 'ranking improvement', 'SEO success story']
   },
 
   'case-studies/peak-performance': {
     title: 'Peak Performance Case Study - 189% Revenue Growth',
     description: 'Discover how Peak Performance Fitness increased online revenue by 189% through local SEO optimization and technical improvements.',
-    keywords: ['local business SEO', 'revenue growth', 'fitness SEO'],
-    canonical: 'https://www.aiseoturbo.com/case-studies/peak-performance'
+    keywords: ['local business SEO', 'revenue growth', 'fitness SEO']
   },
 
   'case-studies/stylecraft-boutique': {
     title: 'StyleCraft Boutique Case Study - 427% Organic Traffic',
     description: 'How StyleCraft Boutique achieved 427% organic traffic growth and dominated fashion search results through AI-powered SEO.',
-    keywords: ['fashion SEO', 'ecommerce growth', 'retail SEO'],
-    canonical: 'https://www.aiseoturbo.com/case-studies/stylecraft-boutique'
+    keywords: ['fashion SEO', 'ecommerce growth', 'retail SEO']
   },
 
   'case-studies/techflow-solutions': {
     title: 'TechFlow Solutions Case Study - Enterprise SEO Success',
     description: 'Learn how TechFlow Solutions scaled their enterprise SEO strategy to achieve market leadership and 300% lead generation growth.',
-    keywords: ['enterprise SEO', 'B2B SEO', 'lead generation'],
-    canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
+    keywords: ['enterprise SEO', 'B2B SEO', 'lead generation']
   },
 
   help: {
     title: 'Help Center - SEO Support & Guides | AI SEO Turbo',
     description: 'Get help with AI SEO Turbo. Find answers to common questions, tutorials, troubleshooting guides, and contact support for personalized assistance.',
-    keywords: ['SEO help', 'support center', 'SEO tutorials', 'troubleshooting'],
-    canonical: 'https://www.aiseoturbo.com/help'
+    keywords: ['SEO help', 'support center', 'SEO tutorials', 'troubleshooting']
   },
 
   terms: {
     title: 'Terms of Service - Legal Agreement | AI SEO Turbo',
     description: 'Read our terms of service and legal agreement for using AI SEO Turbo. Understand your rights and responsibilities when using our SEO audit tools.',
-    keywords: ['terms of service', 'legal agreement', 'SEO terms', 'user agreement'],
-    canonical: 'https://www.aiseoturbo.com/terms'
+    keywords: ['terms of service', 'legal agreement', 'SEO terms', 'user agreement']
   },
 
   privacy: {
     title: 'Privacy Policy - Data Protection | AI SEO Turbo',
     description: 'Learn how AISEOTurbo protects your privacy and handles your data. Our privacy policy covers GDPR compliance and data security measures.',
-    keywords: ['privacy policy', 'data protection', 'GDPR', 'privacy rights'],
-    canonical: 'https://www.aiseoturbo.com/privacy'
+    keywords: ['privacy policy', 'data protection', 'GDPR', 'privacy rights']
   },
 
   dashboard: {
     title: 'SEO Dashboard - Track Performance | AI SEO Turbo',
     description: 'Access your personalized SEO dashboard to monitor performance, track rankings, analyze competitors, and get AI-powered optimization recommendations.',
     keywords: ['SEO dashboard', 'analytics', 'keyword tracking', 'competitor analysis'],
-    canonical: 'https://www.aiseoturbo.com/dashboard',
     noIndex: true
   },
 
@@ -547,7 +521,6 @@ export const pageSEO = {
     title: 'Login - Access Your SEO Dashboard | AI SEO Turbo',
     description: 'Sign in to your AI SEO Turbo account to access comprehensive SEO audits, analytics dashboard, and optimization tools for your websites.',
     keywords: ['login', 'sign in', 'SEO dashboard', 'account access'],
-    canonical: 'https://www.aiseoturbo.com/login',
     noIndex: true
   },
 
@@ -555,7 +528,6 @@ export const pageSEO = {
     title: 'Sign Up - Start Your SEO Journey | AI SEO Turbo',
     description: 'Create your free AI SEO Turbo account and start optimizing your website with AI-powered SEO audits, competitor analysis, and expert recommendations.',
     keywords: ['sign up', 'register', 'SEO tools', 'free account'],
-    canonical: 'https://www.aiseoturbo.com/signup',
     noIndex: true
   },
 
@@ -563,7 +535,6 @@ export const pageSEO = {
     title: 'Reset Password - Account Recovery | AI SEO Turbo',
     description: 'Reset your AI SEO Turbo account password securely. Regain access to your SEO dashboard, audits, and optimization tools quickly and safely.',
     keywords: ['reset password', 'forgot password', 'account recovery'],
-    canonical: 'https://www.aiseoturbo.com/forgot-password',
     noIndex: true
   },
 
@@ -571,7 +542,6 @@ export const pageSEO = {
     title: 'Set New Password - Complete Password Reset | AI SEO Turbo',
     description: 'Complete your password reset process for AI SEO Turbo. Set a new secure password and regain access to your account.',
     keywords: ['reset password', 'new password', 'password change'],
-    canonical: 'https://www.aiseoturbo.com/reset-password',
     noIndex: true
   },
 
@@ -579,7 +549,6 @@ export const pageSEO = {
     title: 'Verify Email - Complete Registration | AI SEO Turbo',
     description: 'Verify your email address to complete your AI SEO Turbo account setup and unlock all features.',
     keywords: ['email verification', 'verify email', 'account activation'],
-    canonical: 'https://www.aiseoturbo.com/verify-email',
     noIndex: true
   },
 
@@ -587,7 +556,6 @@ export const pageSEO = {
     title: 'Getting Started - Account Setup | AI SEO Turbo',
     description: 'Complete your AI SEO Turbo account setup and learn how to use our powerful SEO tools to boost your website rankings.',
     keywords: ['onboarding', 'getting started', 'account setup', 'SEO tutorial'],
-    canonical: 'https://www.aiseoturbo.com/onboarding',
     noIndex: true
   },
 
@@ -607,7 +575,6 @@ export const pageSEO = {
     title: 'Projects - Manage SEO Audits | AI SEO Turbo',
     description: 'Manage your SEO projects, organize website audits, and track optimization progress across all your domains from your dashboard.',
     keywords: ['SEO projects', 'website audits', 'project management', 'SEO tracking'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/projects',
     noIndex: true
   },
 
@@ -615,7 +582,6 @@ export const pageSEO = {
     title: 'SEO Audit Dashboard | AI SEO Turbo',
     description: 'Run comprehensive SEO audits from your dashboard, analyze technical issues, and receive AI-powered recommendations to improve website performance.',
     keywords: ['SEO audit dashboard', 'technical audit', 'SEO analysis', 'performance optimization'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/audit',
     noIndex: true
   },
 
@@ -623,7 +589,6 @@ export const pageSEO = {
     title: 'Keyword Tracking Dashboard | AI SEO Turbo',
     description: 'Monitor keyword rankings, track SERP position changes, and analyze keyword performance data across all search engines from your dashboard.',
     keywords: ['keyword dashboard', 'ranking tracker', 'SERP monitoring', 'keyword analytics'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/keywords',
     noIndex: true
   },
 
@@ -631,7 +596,6 @@ export const pageSEO = {
     title: 'Competitor Analysis Dashboard | AI SEO Turbo',
     description: 'Analyze competitor SEO strategies, track their performance metrics, and discover opportunities to gain competitive advantage from your dashboard.',
     keywords: ['competitor dashboard', 'SEO analysis', 'competitive intelligence', 'market research'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/competitors',
     noIndex: true
   },
 
@@ -639,7 +603,6 @@ export const pageSEO = {
     title: 'Page Crawler Dashboard | AI SEO Turbo',
     description: 'Use advanced page crawling tools from your dashboard to detect SEO issues, analyze site structure, and monitor website health comprehensively.',
     keywords: ['page crawler', 'website analysis', 'SEO crawler', 'site audit'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/page-crawler',
     noIndex: true
   },
 
@@ -647,7 +610,6 @@ export const pageSEO = {
     title: 'Backlinks Dashboard | AI SEO Turbo',
     description: 'Monitor your backlink profile, analyze link quality metrics, and track new backlink acquisitions to improve domain authority from your dashboard.',
     keywords: ['backlinks dashboard', 'link analysis', 'backlink monitoring', 'domain authority'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/backlinks',
     noIndex: true
   },
 
@@ -655,7 +617,6 @@ export const pageSEO = {
     title: 'SEO Reports Dashboard | AI SEO Turbo',
     description: 'Generate comprehensive SEO reports, track performance metrics over time, and create custom reports for stakeholders from your dashboard.',
     keywords: ['SEO reports', 'performance reports', 'analytics dashboard', 'SEO metrics'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/reports',
     noIndex: true
   },
 
@@ -663,15 +624,13 @@ export const pageSEO = {
     title: 'Account Settings | AI SEO Turbo',
     description: 'Manage your AI SEO Turbo account settings, billing preferences, and dashboard configuration options for a personalized experience.',
     keywords: ['account settings', 'user preferences', 'billing settings', 'account management'],
-    canonical: 'https://www.aiseoturbo.com/dashboard/settings',
     noIndex: true
   },
 
   status: {
     title: 'System Status - Service Availability | AI SEO Turbo',
     description: 'Check the current status of AI SEO Turbo services including API, web application, database, and crawler services. Monitor uptime and service health.',
-    keywords: ['system status', 'service availability', 'uptime', 'API status', 'service health'],
-    canonical: 'https://www.aiseoturbo.com/status'
+    keywords: ['system status', 'service availability', 'uptime', 'API status', 'service health']
   },
 }
 
@@ -866,3 +825,5 @@ export function validateSEO(config: Partial<SEOConfig> & { content?: string }): 
     overall: { score: Math.max(0, score), issues }
   }
 }
+
+
