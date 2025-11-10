@@ -19,7 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const seoConfig = pageSEO[seoKey] || pageSEO.features
 
   return generateSEOMeta({
-    ...seoConfig,
+    title: seoConfig.title,
+    description: seoConfig.description,
+    keywords: seoConfig.keywords,
     locale: locale as Locale,
     path: `features/${slug}`
   })
@@ -44,7 +46,7 @@ export default async function LocalizedFeatureSlugPage({ params }: Props) {
       return <AIAssistantPage />
     default:
       // Fallback: show top-level features page for unknown slugs (prevents 404)
-      const FeaturesPage = (await import('@/app/features/page')).default
+      const FeaturesPage = (await import('@/components/features/FeaturesPage')).default
       return <FeaturesPage />
   }
 }

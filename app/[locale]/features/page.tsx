@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
-import FeaturesPage from '@/app/features/page'
+import FeaturesPage from '@/components/features/FeaturesPage'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
 
@@ -8,7 +8,9 @@ import { type Locale } from '@/i18n'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    ...pageSEO.features,
+    title: pageSEO.features.title,
+    description: pageSEO.features.description,
+    keywords: pageSEO.features.keywords,
     locale: locale as Locale,
     path: 'features'
   })

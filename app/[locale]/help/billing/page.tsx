@@ -6,7 +6,6 @@ import { Metadata } from 'next'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    ...pageSEO.help,
     locale: locale as Locale,
     path: 'help/billing',
     title: 'Billing & Account Management | AI SEO Turbo Help',

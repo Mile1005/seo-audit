@@ -37,7 +37,9 @@ import { StructuredData, generateBreadcrumbSchema, generateFAQSchema } from '@/c
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    ...pageSEO.help,
+    title: pageSEO.help.title,
+    description: pageSEO.help.description,
+    keywords: pageSEO.help.keywords,
     locale: locale as Locale,
     path: 'help'
   })

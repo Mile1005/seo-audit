@@ -7,7 +7,9 @@ import { type Locale } from '@/i18n'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    ...pageSEO.pricing,
+    title: pageSEO.pricing.title,
+    description: pageSEO.pricing.description,
+    keywords: pageSEO.pricing.keywords,
     locale: locale as Locale,
     path: 'pricing'
   })

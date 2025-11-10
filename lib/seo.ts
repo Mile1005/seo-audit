@@ -48,13 +48,8 @@ export function generateLanguageAlternates(path: string = '', currentLocale: Loc
   const languages: Record<string, string> = {}
   
   locales.forEach((locale) => {
-    if (locale === defaultLocale) {
-      // Default locale (English) uses root path without locale prefix
-      languages[locale] = `${baseUrl}/${cleanPath}`.replace(/\/$/, '') // Remove trailing slash
-    } else {
-      // Other locales use locale prefix
-      languages[locale] = `${baseUrl}/${locale}/${cleanPath}`.replace(/\/$/, '') // Remove trailing slash
-    }
+    // All locales use locale prefix for consistency with [locale] routing
+    languages[locale] = `${baseUrl}/${locale}/${cleanPath}`.replace(/\/$/, '') // Remove trailing slash
   })
   
   // Add x-default hreflang pointing to the default locale
@@ -74,15 +69,9 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   // Generate canonical URL dynamically based on locale and path
   let canonical: string
   if (seo.locale && seo.path !== undefined) {
-    // Build canonical URL from locale and path
+    // Build canonical URL from locale and path - all locales use locale prefix
     const pathSegment = seo.path.startsWith('/') ? seo.path.slice(1) : seo.path
-    if (seo.locale === 'en') {
-      // English (default locale) doesn't use locale prefix
-      canonical = pathSegment ? `${baseUrl}/${pathSegment}` : baseUrl
-    } else {
-      // Other locales use locale prefix
-      canonical = pathSegment ? `${baseUrl}/${seo.locale}/${pathSegment}` : `${baseUrl}/${seo.locale}`
-    }
+    canonical = pathSegment ? `${baseUrl}/${seo.locale}/${pathSegment}` : `${baseUrl}/${seo.locale}`
     // Remove trailing slash unless it's the root
     canonical = canonical.replace(/\/$/, '') || baseUrl
   } else {

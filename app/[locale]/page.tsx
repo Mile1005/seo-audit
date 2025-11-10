@@ -85,7 +85,9 @@ const ContentGate = dynamic(() =>
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    ...pageSEO.home,
+    title: pageSEO.home.title,
+    description: pageSEO.home.description,
+    keywords: pageSEO.home.keywords,
     locale: locale as Locale,
     path: '' // Homepage path (empty for root)
   })
