@@ -292,16 +292,12 @@ const nextConfig = {
         ],
       },
       {
-        // Font cache headers - eot files
-        source: '/:path*\\.eot',
+        // Remove HTTP Link headers to prevent hreflang multiple implementations
+        source: '/(.*)',
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-          {
-            key: 'Expires',
-            value: 'Wed, 18 Oct 2026 00:00:00 GMT',
+            key: 'Link',
+            value: '',
           },
         ],
       },
