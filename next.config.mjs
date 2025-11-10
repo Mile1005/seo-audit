@@ -203,6 +203,11 @@ const nextConfig = {
             key: 'Permissions-Policy',
             value: 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=(), autoplay=(), encrypted-media=(), fullscreen=(self), picture-in-picture=()',
           },
+          // Suppress HTTP Link headers to prevent hreflang duplication with HTML <link> tags
+          {
+            key: 'Link',
+            value: undefined,
+          },
         ],
       },
       {
