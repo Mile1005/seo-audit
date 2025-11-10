@@ -6,6 +6,19 @@ import { routing } from './lib/navigation';
 // Create next-intl middleware with routing configuration
 const intlMiddleware = createMiddleware(routing);
 
+// Post-process intlMiddleware response to remove hreflang from Link headers
+function postProcessResponse(response: NextResponse) {
+  // Remove hreflang from Link header if present
+  const linkHeader = response.headers.get('Link') || '';
+  const cleanedLink = linkHeader.replace(/<[^>]+>; rel="alternate"; hreflang="[^"]+"(,|$|;)/g, '$1');
+
+  if (cleanedLink !== linkHeader) {
+    response.headers.set('Link', cleanedLink);
+  }
+
+  return response;
+}
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -49,16 +62,16 @@ export function middleware(req: NextRequest) {
   if (pathnameHasLocale) {
     // Note: Cookie-based redirects are disabled for now to allow manual testing
     // When you're ready, uncomment the code below to auto-redirect based on user preference
-    
-    /* 
+
+    /*
     const localeCookie = req.cookies.get('NEXT_LOCALE');
-    
+
     if (localeCookie?.value && locales.includes(localeCookie.value as Locale)) {
       const preferredLocale = localeCookie.value as Locale;
       const pathnameLocale = locales.find(
         (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
       );
-      
+
       // If user is on a different locale than their preference, redirect
       if (pathnameLocale && pathnameLocale !== preferredLocale) {
         const newPathname = pathname.replace(`/${pathnameLocale}`, `/${preferredLocale}`);
@@ -66,13 +79,13 @@ export function middleware(req: NextRequest) {
       }
     }
     */
-    
-    return intlMiddleware(req);
+
+    return postProcessResponse(intlMiddleware(req));
   }
 
   // For all other paths (without locale), let intl middleware handle it
   // It will serve English content at root (/) and redirect non-English to /locale
-  return intlMiddleware(req);
+  return postProcessResponse(intlMiddleware(req));
 }
 
 export const config = {
