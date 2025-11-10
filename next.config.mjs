@@ -162,6 +162,13 @@ const nextConfig = {
         destination: '/:locale/help/seo-tools-features',
         permanent: true, // 301 permanent redirect
       },
+      // Redirect /en/* to /* for English paths (as-needed locale prefix)
+      {
+        source: '/en/:path*',
+        destination: '/:path*',
+        permanent: true, // 301 permanent redirect
+        locale: false, // Apply to all locales
+      },
     ]
   },
 

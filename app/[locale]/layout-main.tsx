@@ -8,7 +8,7 @@ import dynamicImport from 'next/dynamic';
 import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
 import { NextIntlClientProvider } from 'next-intl';
-import { generateLanguageAlternates } from '@/lib/seo';
+import { generateLanguageAlternates, generateSEOMeta } from '@/lib/seo';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { locales, type Locale, localeNames } from '../../i18n';
@@ -54,81 +54,24 @@ export function generateStaticParams() {
 // Generate metadata with hreflang support
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = params;
-  
-  // Validate locale
-  if (!locales.includes(locale as Locale)) {
-    return {};
-  }
+  if (!locales.includes(locale as Locale)) return {};
 
   const t = await getTranslations({ locale, namespace: 'meta' });
-  
-  // Locale to language mapping for Open Graph
-  const localeToOGLocale: Record<string, string> = {
-    en: 'en_US',
-    fr: 'fr_FR',
-    it: 'it_IT',
-    es: 'es_ES',
-    id: 'id_ID',
-    de: 'de_DE',
-  };
 
-  const baseUrl = 'https://www.aiseoturbo.com';
-  const currentPath = `/${locale}`;
-
-  // Generate hreflang alternates for all locales
-  const languageAlternates = generateLanguageAlternates(currentPath, locale as any);
-
-  return {
+  // Use page path '' for root, or pass actual path from searchParams if deeper
+  const meta = generateSEOMeta({
     title: t('defaultTitle'),
     description: t('defaultDescription'),
-    keywords: "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
-    authors: [{ name: "AI SEO Turbo" }],
-    creator: "AI SEO Turbo",
-    publisher: "AI SEO Turbo",
-    formatDetection: {
-      email: false,
-      address: false,
-      telephone: false,
-    },
-    metadataBase: new URL(baseUrl),
-    alternates: {
-      canonical: `${baseUrl}${currentPath}`,
-      languages: languageAlternates, // Adds hreflang links
-    },
-    openGraph: {
-      title: t('defaultTitle'),
-      description: t('defaultDescription'),
-      url: `${baseUrl}${currentPath}`,
-      siteName: "AI SEO Turbo",
-      locale: localeToOGLocale[locale] || 'en_US',
-      type: "website",
-      images: [
-        {
-          url: "/logo.png",
-          width: 1200,
-          height: 630,
-          alt: "AISEOTurbo - AI-Powered SEO Audits",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: t('defaultTitle'),
-      description: t('defaultDescription'),
-      creator: "@aiseoturbo",
-      images: ["/logo.png"],
-    },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
-    },
+    locale: locale as Locale,
+    path: '',  // Adjust per page; for root layout, this handles homepage
+  });
+
+  // Override html lang for full BCP47 to match hreflang
+  const fullLang = locale === 'en' ? 'en' : `${locale}-${locale.toUpperCase()}`;
+
+  return {
+    ...meta,
+    // Ensure alternates.languages includes x-default to root
   };
 }
 
@@ -147,7 +90,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X';
   
   // Get the appropriate language code for the html lang attribute
-  const htmlLang = locale;
+  const htmlLang = locale === 'en' ? 'en' : `${locale}-${locale.toUpperCase()}`;
 
   // Organization Schema - Company/Business Entity
   const organizationSchema = {

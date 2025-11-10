@@ -77,16 +77,21 @@ const routes: Route[] = [
 ]
 
 function generateAlternates(path: string) {
-  return LOCALES.reduce((acc, locale) => {
-    // For homepage (empty path), English is at root, others have locale prefix
-    // For all other paths, all locales use locale prefix
-    const url = (path === '' && locale === 'en')
-      ? `${BASE_URL}${path}`
-      : `${BASE_URL}/${locale}${path}`
+  const alternates = LOCALES.reduce((acc, locale) => {
+    let url: string;
+    if (locale === 'en') {
+      url = path ? `${BASE_URL}/${path}` : BASE_URL;
+    } else {
+      url = `${BASE_URL}/${locale}${path}`;
+    }
+    acc[locale] = url.replace(/\/$/, '');
+    return acc;
+  }, {} as Record<string, string>);
 
-    acc[locale] = url
-    return acc
-  }, {} as Record<string, string>)
+  // Add x-default pointing to English root
+  alternates['x-default'] = path ? `${BASE_URL}/${path}` : BASE_URL;
+
+  return alternates;
 }
 
 export async function GET() {
@@ -94,7 +99,7 @@ export async function GET() {
   const lastModified = now.toISOString().split('T')[0] // YYYY-MM-DD
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
   routes.forEach(route => {
     const { path, priority = 0.5, changeFrequency = 'monthly' } = route;
@@ -107,6 +112,12 @@ export async function GET() {
       xml += `    <lastmod>${lastModified}</lastmod>\n`;
       xml += `    <changefreq>${changeFrequency}</changefreq>\n`;
       xml += `    <priority>${priority}</priority>\n`;
+
+      // Add hreflang alternates per <url>
+      Object.entries(alternates).forEach(([lang, altUrl]) => {
+        xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${altUrl}" />\n`;
+      });
+
       xml += `  </url>\n`;
     });
   });

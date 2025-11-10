@@ -29,6 +29,17 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
+  // Handle /en/* paths for English - strip /en prefix without redirecting root
+  if (pathname.startsWith('/en/') || pathname === '/en') {
+    // For /en root, redirect to /
+    if (pathname === '/en') {
+      return NextResponse.redirect(new URL('/', req.url));
+    }
+    // For /en/path, rewrite to /path internally (no external redirect)
+    const newPathname = pathname.replace(/^\/en/, '') || '/';
+    return NextResponse.rewrite(new URL(newPathname, req.url));
+  }
+
   // Check if path starts with a locale prefix
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -66,6 +77,7 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   // Match all pathnames except API routes, static files, and assets
+  // Include /en/* paths for English handling
   matcher: [
     // Match all pathnames except for
     // - … if they start with `/api`, `/_next` or `/_vercel`
