@@ -72,16 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 
   const baseUrl = 'https://www.aiseoturbo.com';
-  const currentPath = locale === 'en' ? '' : `/${locale}`;
-
-  // Generate alternate language links for hreflang
-  const languages: Record<string, string> = {};
-  locales.forEach((loc) => {
-    const path = loc === 'en' ? baseUrl : `${baseUrl}/${loc}`;
-    languages[loc] = path;
-  });
-  // Add x-default for international targeting
-  languages['x-default'] = baseUrl;
+  const currentPath = `/${locale}`;
 
   return {
     title: t('defaultTitle'),
@@ -98,7 +89,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(baseUrl),
     alternates: {
       canonical: `${baseUrl}${currentPath}`,
-      languages,
     },
     openGraph: {
       title: t('defaultTitle'),
