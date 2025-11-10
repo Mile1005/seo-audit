@@ -81,10 +81,85 @@ const nextConfig = {
         destination: '/',
         permanent: true, // 301 permanent redirect
       },
-      // Redirect /index to root
+      // Redirect old help URLs to new structure
       {
-        source: '/index',
-        destination: '/',
+        source: '/help/features',
+        destination: '/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/features',
+        destination: '/:locale/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/competitor-analysis',
+        destination: '/help/features/competitor-analysis',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/competitor-analysis',
+        destination: '/:locale/help/features/competitor-analysis',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/seo-audit-guide',
+        destination: '/help/features/seo-audit',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/seo-audit-guide',
+        destination: '/:locale/help/features/seo-audit',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/site-crawling',
+        destination: '/help/features/site-crawler',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/site-crawling',
+        destination: '/:locale/help/features/site-crawler',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/content-optimization',
+        destination: '/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/content-optimization',
+        destination: '/:locale/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/enterprise-reporting',
+        destination: '/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/enterprise-reporting',
+        destination: '/:locale/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/keyword-research',
+        destination: '/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/keyword-research',
+        destination: '/:locale/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/seo-tools-features/performance-monitoring',
+        destination: '/help/seo-tools-features',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/seo-tools-features/performance-monitoring',
+        destination: '/:locale/help/seo-tools-features',
         permanent: true, // 301 permanent redirect
       },
     ]
