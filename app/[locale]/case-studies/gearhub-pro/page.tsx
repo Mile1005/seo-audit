@@ -26,37 +26,16 @@ import {
 } from "lucide-react"
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from "@/lib/seo"
+import { type Locale } from '@/i18n'
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  return {
-    title: 'Outdoor Gear SEO - 290% Conversions | AI SEO Turbo',
-    description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
-    keywords: [
-      'outdoor gear SEO case study',
-      'niche e-commerce optimization',
-      'specialty retail SEO',
-      'outdoor equipment keywords',
-      'hiking gear SEO',
-      'camping equipment optimization',
-      'niche market conversion SEO'
-    ],
-    alternates: {
-      canonical: 'https://www.aiseoturbo.com/case-studies/gearhub-pro'
-    },
-    openGraph: {
-      images: ['/logo.png'],
-      url: 'https://www.aiseoturbo.com/case-studies/gearhub-pro',
-      siteName: 'AI SEO Turbo',
-      title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
-      description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
-      type: 'article',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Outdoor Gear E-commerce SEO Case Study - 290% Conversions GearHub Pro | AI SEO Turbo',
-      description: 'Outdoor gear e-commerce case study: 380% organic traffic growth, 250+ niche keywords ranked, 290% conversion increase with specialized SEO.',
-    }
-  }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    ...pageSEO['case-studies/gearhub-pro'],
+    locale: locale as Locale,
+    path: 'case-studies/gearhub-pro'
+  })
 }
 
 export default async function GearHubProCaseStudy({ params }: { params: { locale: string } }) {

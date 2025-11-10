@@ -26,37 +26,16 @@ import {
 } from "lucide-react"
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from "@/lib/seo"
+import { type Locale } from '@/i18n'
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  return {
-    title: 'Fitness App SEO - 280% User Growth | AI SEO Turbo',
-    description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
-    keywords: [
-      'fitness app SEO case study',
-      'mobile app optimization',
-      'app store SEO',
-      'fitness user acquisition',
-      'mobile keyword strategy',
-      'app download growth',
-      'fitness marketing SEO'
-    ],
-    alternates: {
-      canonical: 'https://www.aiseoturbo.com/case-studies/peak-performance'
-    },
-    openGraph: {
-      images: ['/logo.png'],
-      url: 'https://www.aiseoturbo.com/case-studies/peak-performance',
-      siteName: 'AI SEO Turbo',
-      title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
-      description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
-      type: 'article',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Fitness App SEO Case Study - 280% User Acquisition Peak Performance | AI SEO Turbo',
-      description: 'Fitness app case study: 380% organic downloads growth, 95+ fitness keywords ranked, 280% user acquisition with mobile SEO and app optimization.',
-    }
-  }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    ...pageSEO['case-studies/peak-performance'],
+    locale: locale as Locale,
+    path: 'case-studies/peak-performance'
+  })
 }
 
 export default async function PeakPerformanceCaseStudy({ params }: { params: { locale: string } }) {

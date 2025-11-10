@@ -25,37 +25,16 @@ import {
 } from "lucide-react"
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from "@/lib/seo"
+import { type Locale } from '@/i18n'
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  return {
-    title: 'Enterprise SaaS SEO - 520% Traffic Growth | AI SEO Turbo',
-    description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
-    keywords: [
-      'enterprise SEO case study',
-      'SaaS SEO success',
-      'technical SEO enterprise',
-      'enterprise traffic growth',
-      'B2B SEO results',
-      'enterprise keyword ranking',
-      'SaaS SEO ROI'
-    ],
-    alternates: {
-      canonical: 'https://www.aiseoturbo.com/case-studies/techflow-solutions'
-    },
-    openGraph: {
-      images: ['/logo.png'],
-      url: 'https://www.aiseoturbo.com/case-studies/techflow-solutions',
-      siteName: 'AI SEO Turbo',
-      title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
-      description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
-      type: 'article',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'Enterprise SaaS SEO Case Study - 520% Traffic Growth TechFlow Solutions | AI SEO Turbo',
-      description: 'Enterprise SaaS company case study: 520% organic traffic increase, 200+ top keywords, 680% ROI with AI-powered technical SEO and optimization.',
-    }
-  }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    ...pageSEO['case-studies/techflow-solutions'],
+    locale: locale as Locale,
+    path: 'case-studies/techflow-solutions'
+  })
 }
 
 export default async function TechFlowSolutionsCaseStudy({ params }: { params: { locale: string } }) {

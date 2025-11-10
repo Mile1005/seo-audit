@@ -26,39 +26,16 @@ import {
 } from "lucide-react"
 import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
+import { generateSEOMeta, pageSEO } from "@/lib/seo"
+import { type Locale } from '@/i18n'
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'caseStudies.cloudsyncPro' })
-
-  return {
-    title: 'B2B SaaS SEO - 350% Lead Generation | AI SEO Turbo',
-    description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
-    keywords: [
-      'B2B lead generation case study',
-      'SaaS SEO success',
-      'qualified leads SEO',
-      'B2B keyword strategy',
-      'enterprise lead generation',
-      'SaaS traffic growth',
-      'content marketing SEO'
-    ],
-    alternates: {
-      canonical: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro'
-    },
-    openGraph: {
-      images: ['/logo.png'],
-      url: 'https://www.aiseoturbo.com/case-studies/cloudsync-pro',
-      siteName: 'AI SEO Turbo',
-      title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
-      description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
-      type: 'article',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'B2B SaaS Lead Generation Case Study - 350% Leads CloudSync Pro | AI SEO Turbo',
-      description: 'B2B SaaS company case study: 410% organic traffic growth, 180+ keywords ranked, 350% qualified leads with AI-powered content and strategy.',
-    }
-  }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return generateSEOMeta({
+    ...pageSEO['case-studies/cloudsync-pro'],
+    locale: locale as Locale,
+    path: 'case-studies/cloudsync-pro'
+  })
 }
 
 const iconMap = {
