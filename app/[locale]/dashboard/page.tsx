@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import DashboardContent from '@/components/dashboard/DashboardContent';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { generateSEOMeta } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -8,20 +9,15 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'meta' });
   
-  return {
+  return generateSEOMeta({
     title: 'Dashboard - AI SEO Turbo Control Center',
     description: 'Access your comprehensive SEO dashboard to monitor rankings, track keywords, analyze competitors, and optimize your website performance.',
     keywords: ['SEO dashboard', 'ranking monitor', 'keyword tracking', 'SEO analytics', 'website optimization'],
-    alternates: {
-      canonical: 'https://www.aiseoturbo.com/dashboard'
-    },
-    robots: {
-      index: false,
-      follow: false
-    }
-  }
+    locale: locale as any,
+    path: '/dashboard',
+    noIndex: true // Dashboard should not be indexed
+  });
 }
 
 export default async function DashboardPage({ params }: Props) {
