@@ -11,6 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: pageSEO['case-studies'].title,
     description: pageSEO['case-studies'].description,
     keywords: pageSEO['case-studies'].keywords,
+    ogImage: pageSEO['case-studies'].ogImage,
     locale: locale as Locale,
     path: 'case-studies'
   })

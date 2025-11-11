@@ -77,19 +77,22 @@ const routes: Route[] = [
 ]
 
 function generateAlternates(path: string) {
+  // Remove leading slash from path to avoid double slashes
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  
   const alternates = LOCALES.reduce((acc, locale) => {
     let url: string;
     if (locale === 'en') {
-      url = path ? `${BASE_URL}/${path}` : BASE_URL;
+      url = cleanPath ? `${BASE_URL}/${cleanPath}` : BASE_URL;
     } else {
-      url = `${BASE_URL}/${locale}${path}`;
+      url = `${BASE_URL}/${locale}/${cleanPath}`;
     }
     acc[locale] = url.replace(/\/$/, '');
     return acc;
   }, {} as Record<string, string>);
 
   // Add x-default pointing to English root
-  alternates['x-default'] = path ? `${BASE_URL}/${path}` : BASE_URL;
+  alternates['x-default'] = cleanPath ? `${BASE_URL}/${cleanPath}` : BASE_URL;
 
   return alternates;
 }

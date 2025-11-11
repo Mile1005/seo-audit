@@ -17,9 +17,10 @@ export function StructuredData({ data }: StructuredDataProps) {
 }
 
 // Breadcrumb Schema Generator
-export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
+export function generateBreadcrumbSchema(items: Array<{ name: string; url: string }>, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "BreadcrumbList",
     "itemListElement": items.map((item, index) => ({
       "@type": "ListItem",
@@ -31,9 +32,10 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
 }
 
 // FAQ Schema Generator
-export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
+export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "FAQPage",
     "mainEntity": faqs.map(faq => ({
       "@type": "Question",
@@ -54,9 +56,10 @@ export function generateProductSchema(product: {
   currency: string;
   url: string;
   features?: string[];
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "Product",
     "name": product.name,
     "description": product.description,
@@ -92,10 +95,11 @@ export function generateMultiPlanProductSchema(plans: Array<{
   price: string;
   currency: string;
   description: string;
-}>) {
+}>, locale?: string) {
   // For Google Merchant Center, we need individual Product schemas for each plan
   return plans.map(plan => ({
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "Product",
     "name": `AISEOTurbo ${plan.name} Plan`,
     "description": plan.description,
@@ -173,9 +177,10 @@ export function generateArticleSchema(article: {
   dateModified?: string;
   image?: string;
   url: string;
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "Article",
     "headline": article.title,
     "description": article.description,
@@ -213,9 +218,10 @@ export function generateBlogPostingSchema(post: {
   wordCount?: number;
   keywords?: string[];
   category?: string;
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "BlogPosting",
     "headline": post.title,
     "description": post.description,
@@ -262,9 +268,10 @@ export function generateHowToSchema(howTo: {
   totalTime?: string; // ISO 8601 duration format (e.g., "PT5M" for 5 minutes)
   url?: string;
   datePublished?: string;
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "HowTo",
     "name": howTo.name,
     "description": howTo.description,
@@ -295,9 +302,10 @@ export function generateServiceSchema(service: {
   serviceType: string;
   provider: string;
   areaServed: string;
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "Service",
     "name": service.name,
     "description": service.description,
@@ -331,9 +339,10 @@ export function generateFeatureSchema(feature: {
   url: string;
   features: string[];
   category?: string;
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "SoftwareApplication",
     "name": feature.name,
     "description": feature.description,
@@ -377,9 +386,10 @@ export function generateAboutPageSchema(about: {
   numberOfEmployees?: string;
   url?: string;
   email?: string;
-}) {
+}, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "AboutPage",
     "mainEntity": {
       "@type": "Organization",
@@ -441,9 +451,10 @@ export function generateCaseStudySchema(caseStudy: {
   reviewAuthor?: string;
   reviewText?: string;
   results?: Array<{ metric: string; value: string; description: string }>;
-}) {
+}, locale?: string) {
   const articleSchema = {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "Article",
     "headline": caseStudy.title,
     "description": caseStudy.description,
@@ -520,9 +531,10 @@ export function generateItemListSchema(items: Array<{
   description?: string;
   image?: string;
   datePublished?: string;
-}>) {
+}>, locale?: string) {
   return {
     "@context": "https://schema.org",
+    "@language": locale || "en",
     "@type": "ItemList",
     "numberOfItems": items.length,
     "itemListElement": items.map((item, index) => ({

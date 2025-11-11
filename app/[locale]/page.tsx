@@ -88,17 +88,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title: pageSEO.home.title,
     description: pageSEO.home.description,
     keywords: pageSEO.home.keywords,
+    ogImage: pageSEO.home.ogImage,
     locale: locale as Locale,
     path: '' // Homepage path (empty for root)
   })
 }
 
-// Structured data for the homepage
-const structuredData = {
-  website: generateStructuredData('website'),
-  organization: generateStructuredData('organization'),
-  product: generateStructuredData('product')
-}
+// Structured data for the homepage - will be generated with locale
+const getStructuredData = (locale: string) => ({
+  website: generateStructuredData('website', {}, locale as Locale),
+  organization: generateStructuredData('organization', {}, locale as Locale),
+  product: generateStructuredData('product', {}, locale as Locale)
+})
 
 // Service schema for SEO audit service
 const serviceSchema = generateServiceSchema({
@@ -478,13 +479,13 @@ export default async function Home({ params: { locale } }: Props) {
       </LazyWrapper>
 
       {/* Structured Data - Keep inline for SEO */}
-      <script 
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
-            structuredData.website,
-            structuredData.organization,
-            structuredData.product
+            getStructuredData(locale).website,
+            getStructuredData(locale).organization,
+            getStructuredData(locale).product
           ])
         }}
       />

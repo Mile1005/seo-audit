@@ -135,7 +135,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
 /**
  * Generate JSON-LD structured data with enhanced validation
  */
-export function generateStructuredData(type: 'website' | 'organization' | 'product' | 'article' | 'breadcrumb' | 'faq' | 'howto', data: Record<string, any> = {}) {
+export function generateStructuredData(type: 'website' | 'organization' | 'product' | 'article' | 'breadcrumb' | 'faq' | 'howto', data: Record<string, any> = {}, locale?: Locale) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
   
   const commonData = {
@@ -145,7 +145,8 @@ export function generateStructuredData(type: 'website' | 'organization' | 'produ
               type === 'product' ? 'SoftwareApplication' :
               type === 'article' ? 'Article' :
               type === 'breadcrumb' ? 'BreadcrumbList' :
-              type === 'faq' ? 'FAQPage' : 'HowTo'
+              type === 'faq' ? 'FAQPage' : 'HowTo',
+    ...(locale ? { '@language': locale } : {})
   }
 
   switch (type) {
@@ -358,163 +359,190 @@ export const pageSEO = {
   home: {
     title: 'AI SEO Audit Tool - Boost Rankings 300% Faster',
     description: 'Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.',
-    keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis']
+    keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis'],
+    ogImage: '/logo.png'
   },
   
   features: {
     title: 'SEO Features - Complete Audit & Analysis | AI SEO Turbo',
     description: 'Discover powerful SEO features including technical audits, competitor analysis, keyword tracking, and AI-powered recommendations for better rankings.',
-    keywords: ['SEO features', 'technical SEO audit', 'competitor analysis', 'keyword tracking']
+    keywords: ['SEO features', 'technical SEO audit', 'competitor analysis', 'keyword tracking'],
+    ogImage: '/logo.png'
   },
 
   'features/seo-audit': {
     title: 'SEO Audit Feature - Comprehensive Analysis | AI SEO Turbo',
     description: 'Get detailed SEO audits with 47+ technical checks, AI-powered recommendations, and actionable insights to improve your website rankings.',
-    keywords: ['SEO audit', 'technical SEO', 'website analysis', 'SEO recommendations']
+    keywords: ['SEO audit', 'technical SEO', 'website analysis', 'SEO recommendations'],
+    ogImage: '/logo.png'
   },
 
   'features/site-crawler': {
     title: 'Site Crawler - Deep Website Analysis | AI SEO Turbo',
     description: 'Comprehensive website crawler that detects broken links, analyzes site structure, and identifies technical SEO issues for better search performance.',
-    keywords: ['site crawler', 'website analysis', 'SEO crawler', 'broken links']
+    keywords: ['site crawler', 'website analysis', 'SEO crawler', 'broken links'],
+    ogImage: '/logo.png'
   },
 
   'features/competitor-analysis': {
     title: 'Competitor Analysis - SEO Intelligence | AI SEO Turbo',
     description: 'Analyze competitor SEO strategies, keyword rankings, and backlink profiles. Discover opportunities to outrank competitors and gain market share.',
-    keywords: ['competitor analysis', 'SEO intelligence', 'keyword tracking', 'competitive research']
+    keywords: ['competitor analysis', 'SEO intelligence', 'keyword tracking', 'competitive research'],
+    ogImage: '/logo.png'
   },
 
   'features/ai-assistant': {
     title: 'AI SEO Assistant - Smart Recommendations | AI SEO Turbo',
     description: 'AI-powered SEO assistant providing personalized recommendations, content optimization suggestions, and automated insights for better rankings.',
-    keywords: ['AI SEO assistant', 'SEO recommendations', 'AI optimization', 'SEO insights']
+    keywords: ['AI SEO assistant', 'SEO recommendations', 'AI optimization', 'SEO insights'],
+    ogImage: '/logo.png'
   },
 
   'features/keyword-tracking': {
     title: 'Keyword Tracking - Monitor Rankings | AI SEO Turbo',
     description: 'Track keyword positions across search engines, monitor ranking changes, and get alerts for SERP movements to optimize your SEO strategy.',
-    keywords: ['keyword tracking', 'ranking monitor', 'SERP tracking', 'SEO alerts']
+    keywords: ['keyword tracking', 'ranking monitor', 'SERP tracking', 'SEO alerts'],
+    ogImage: '/logo.png'
   },
   
   pricing: {
     title: 'SEO Audit Pricing - Plans From $29/month | AI SEO Turbo',
     description: 'Choose the perfect SEO audit plan for your business. Free plan with analysis, Pro plans from $29/month with advanced features and priority support.',
-    keywords: ['SEO audit pricing', 'SEO tools cost', 'website audit plans']
+    keywords: ['SEO audit pricing', 'SEO tools cost', 'website audit plans'],
+    ogImage: '/logo.png'
   },
   
   about: {
     title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
     description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
-    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists']
+    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists'],
+    ogImage: '/logo.png'
   },
   
   contact: {
     title: 'Contact AI SEO Turbo - Expert SEO Support & Consultation',
     description: 'Get expert SEO help from certified specialists. Contact us for personalized consultation, technical support, and partnership inquiries. Join 10,000+ businesses achieving SEO success.',
-    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership']
+    keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership'],
+    ogImage: '/logo.png'
   },
 
   blog: {
     title: 'SEO Blog - Tips & Strategies | AI SEO Turbo',
     description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn expert insights on technical SEO, content optimization, and algorithms.',
-    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization']
+    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization'],
+    ogImage: '/logo.png'
   },
 
   'blog/ai-powered-seo-future': {
     title: 'AI-Powered SEO: The Future of Search Optimization | AI SEO Turbo',
     description: 'Explore how artificial intelligence is revolutionizing SEO. Learn about AI-powered tools, automation, and the future of search engine optimization.',
-    keywords: ['AI SEO', 'AI-powered SEO', 'future of SEO', 'SEO automation', 'machine learning SEO']
+    keywords: ['AI SEO', 'AI-powered SEO', 'future of SEO', 'SEO automation', 'machine learning SEO'],
+    ogImage: '/logo.png'
   },
 
   'blog/complete-seo-audit-checklist-2025': {
     title: 'Complete SEO Audit Checklist 2025 - Step-by-Step Guide',
     description: 'Follow our comprehensive SEO audit checklist for 2025. Covers technical SEO, on-page optimization, content analysis, and performance metrics.',
-    keywords: ['SEO audit checklist', '2025 SEO guide', 'SEO audit steps', 'technical SEO checklist']
+    keywords: ['SEO audit checklist', '2025 SEO guide', 'SEO audit steps', 'technical SEO checklist'],
+    ogImage: '/logo.png'
   },
 
   'blog/content-seo-creating-search-friendly-content': {
     title: 'Content SEO: Creating Search-Friendly Content That Ranks',
     description: 'Master content SEO with proven strategies for creating search-friendly content. Learn keyword optimization, content structure, and user intent matching.',
-    keywords: ['content SEO', 'SEO content writing', 'search-friendly content', 'keyword optimization']
+    keywords: ['content SEO', 'SEO content writing', 'search-friendly content', 'keyword optimization'],
+    ogImage: '/logo.png'
   },
 
   'blog/core-web-vitals-optimization-guide': {
     title: 'Core Web Vitals Optimization Guide - Improve Page Experience',
     description: 'Complete guide to optimizing Core Web Vitals. Learn how to improve LCP, FID, and CLS for better Google rankings and user experience.',
-    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience']
+    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience'],
+    ogImage: '/logo.png'
   },
 
   'blog/local-seo-strategies-that-work': {
     title: 'Local SEO Strategies That Work in 2025 - Complete Guide',
     description: 'Boost your local search rankings with proven local SEO strategies. Learn Google Business Profile optimization, local citations, and review management.',
-    keywords: ['local SEO', 'local search optimization', 'Google Business Profile', 'local citations']
+    keywords: ['local SEO', 'local search optimization', 'Google Business Profile', 'local citations'],
+    ogImage: '/logo.png'
   },
 
   'blog/technical-seo-best-practices-2025': {
     title: 'Technical SEO Best Practices 2025 - Expert Guide',
     description: 'Master technical SEO with 2025 best practices. Covers site structure, crawlability, indexation, schema markup, and performance optimization.',
-    keywords: ['technical SEO', 'SEO best practices', 'technical optimization', 'site structure']
+    keywords: ['technical SEO', 'SEO best practices', 'technical optimization', 'site structure'],
+    ogImage: '/logo.png'
   },
 
   'case-studies': {
     title: 'SEO Case Studies - Real Results & Success Stories',
     description: 'Explore real SEO success stories and case studies. See how businesses achieved significant traffic growth and ranking improvements with AI SEO Turbo.',
-    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'client testimonials']
+    keywords: ['SEO case studies', 'SEO success stories', 'SEO results', 'client testimonials'],
+    ogImage: '/logo.png'
   },
 
   'case-studies/cloudsync-pro': {
     title: 'CloudSync Pro Case Study - 312% Organic Traffic Increase',
     description: 'How CloudSync Pro achieved 312% organic traffic growth in 6 months using AI-powered SEO audits and technical optimization strategies.',
-    keywords: ['SaaS SEO', 'traffic growth case study', 'B2B SEO success']
+    keywords: ['SaaS SEO', 'traffic growth case study', 'B2B SEO success'],
+    ogImage: '/logo.png'
   },
 
   'case-studies/digital-growth-agency': {
     title: 'Digital Growth Agency Case Study - 245% Client Acquisition',
     description: 'Learn how Digital Growth Agency scaled their SEO services and increased client acquisition by 245% using automated SEO audits.',
-    keywords: ['agency SEO', 'SEO agency case study', 'client growth']
+    keywords: ['agency SEO', 'SEO agency case study', 'client growth'],
+    ogImage: '/logo.png'
   },
 
   'case-studies/gearhub-pro': {
     title: 'GearHub Pro Case Study - #1 Rankings in 4 Months',
     description: 'How GearHub Pro achieved #1 rankings for 47 competitive keywords in just 4 months through comprehensive SEO optimization.',
-    keywords: ['ecommerce SEO', 'ranking improvement', 'SEO success story']
+    keywords: ['ecommerce SEO', 'ranking improvement', 'SEO success story'],
+    ogImage: '/logo.png'
   },
 
   'case-studies/peak-performance': {
     title: 'Peak Performance Case Study - 189% Revenue Growth',
     description: 'Discover how Peak Performance Fitness increased online revenue by 189% through local SEO optimization and technical improvements.',
-    keywords: ['local business SEO', 'revenue growth', 'fitness SEO']
+    keywords: ['local business SEO', 'revenue growth', 'fitness SEO'],
+    ogImage: '/logo.png'
   },
 
   'case-studies/stylecraft-boutique': {
     title: 'StyleCraft Boutique Case Study - 427% Organic Traffic',
     description: 'How StyleCraft Boutique achieved 427% organic traffic growth and dominated fashion search results through AI-powered SEO.',
-    keywords: ['fashion SEO', 'ecommerce growth', 'retail SEO']
+    keywords: ['fashion SEO', 'ecommerce growth', 'retail SEO'],
+    ogImage: '/logo.png'
   },
 
   'case-studies/techflow-solutions': {
     title: 'TechFlow Solutions Case Study - Enterprise SEO Success',
     description: 'Learn how TechFlow Solutions scaled their enterprise SEO strategy to achieve market leadership and 300% lead generation growth.',
-    keywords: ['enterprise SEO', 'B2B SEO', 'lead generation']
+    keywords: ['enterprise SEO', 'B2B SEO', 'lead generation'],
+    ogImage: '/logo.png'
   },
 
   help: {
     title: 'Help Center - SEO Support & Guides | AI SEO Turbo',
     description: 'Get help with AI SEO Turbo. Find answers to common questions, tutorials, troubleshooting guides, and contact support for personalized assistance.',
-    keywords: ['SEO help', 'support center', 'SEO tutorials', 'troubleshooting']
+    keywords: ['SEO help', 'support center', 'SEO tutorials', 'troubleshooting'],
+    ogImage: '/logo.png'
   },
 
   terms: {
     title: 'Terms of Service - Legal Agreement | AI SEO Turbo',
     description: 'Read our terms of service and legal agreement for using AI SEO Turbo. Understand your rights and responsibilities when using our SEO audit tools.',
-    keywords: ['terms of service', 'legal agreement', 'SEO terms', 'user agreement']
+    keywords: ['terms of service', 'legal agreement', 'SEO terms', 'user agreement'],
+    ogImage: '/logo.png'
   },
 
   privacy: {
     title: 'Privacy Policy - Data Protection | AI SEO Turbo',
     description: 'Learn how AISEOTurbo protects your privacy and handles your data. Our privacy policy covers GDPR compliance and data security measures.',
-    keywords: ['privacy policy', 'data protection', 'GDPR', 'privacy rights']
+    keywords: ['privacy policy', 'data protection', 'GDPR', 'privacy rights'],
+    ogImage: '/logo.png'
   },
 
   dashboard: {
@@ -569,7 +597,8 @@ export const pageSEO = {
   demo: {
     title: 'Free SEO Audit Demo - Try AI Analysis Tool Online',
     description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ checks, competitor insights, and actionable recommendations.',
-    keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker']
+    keywords: ['SEO audit demo', 'free SEO analysis', 'AI SEO tool demo', 'website audit online', 'technical SEO checker'],
+    ogImage: '/logo.png'
   },
 
   'dashboard/projects': {
@@ -631,7 +660,8 @@ export const pageSEO = {
   status: {
     title: 'System Status - Service Availability | AI SEO Turbo',
     description: 'Check the current status of AI SEO Turbo services including API, web application, database, and crawler services. Monitor uptime and service health.',
-    keywords: ['system status', 'service availability', 'uptime', 'API status', 'service health']
+    keywords: ['system status', 'service availability', 'uptime', 'API status', 'service health'],
+    ogImage: '/logo.png'
   },
 }
 
