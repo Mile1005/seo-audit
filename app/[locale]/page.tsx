@@ -85,30 +85,14 @@ const ContentGate = dynamic(() =>
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    title: pageSEO.home.title,
-    description: pageSEO.home.description,
-    keywords: pageSEO.home.keywords,
-    ogImage: pageSEO.home.ogImage,
+    title: 'AI SEO Audit Tool - Boost Rankings 300% Faster | AI SEO Turbo',
+    description: 'Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.',
+    keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis'],
+    ogImage: '/logo.png',
     locale: locale as Locale,
-    path: '' // Homepage path (empty for root)
+    path: 'home'
   })
 }
-
-// Structured data for the homepage - will be generated with locale
-const getStructuredData = (locale: string) => ({
-  website: generateStructuredData('website', {}, locale as Locale),
-  organization: generateStructuredData('organization', {}, locale as Locale),
-  product: generateStructuredData('product', {}, locale as Locale)
-})
-
-// Service schema for SEO audit service
-const serviceSchema = generateServiceSchema({
-  name: "AI-Powered SEO Audit Service",
-  description: "Comprehensive AI-driven SEO analysis and optimization recommendations for websites. Our advanced algorithms analyze 100+ SEO factors to provide actionable insights for improving search rankings.",
-  provider: "AISEOTurbo",
-  serviceType: "SEO Audit & Analysis",
-  areaServed: "Worldwide"
-})
 
 type Props = {
   params: { locale: string };
@@ -234,6 +218,18 @@ export default async function Home({ params: { locale } }: Props) {
   }
 
   // Translation loading complete - debug logging removed
+
+  // Generate structured data schemas
+  const websiteSchema = generateStructuredData('website', {}, locale as Locale);
+  const organizationSchema = generateStructuredData('organization', {}, locale as Locale);
+  const productSchema = generateStructuredData('product', {}, locale as Locale);
+  const serviceSchema = generateServiceSchema({
+    name: 'AI SEO Audit Service',
+    description: 'Comprehensive AI-powered SEO audit and optimization service',
+    serviceType: 'SEO Audit',
+    provider: 'AISEOTurbo',
+    areaServed: 'Worldwide'
+  }, locale);
 
   return (
     <MainLayout>
@@ -483,9 +479,9 @@ export default async function Home({ params: { locale } }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify([
-            getStructuredData(locale).website,
-            getStructuredData(locale).organization,
-            getStructuredData(locale).product
+            websiteSchema,
+            organizationSchema,
+            productSchema
           ])
         }}
       />

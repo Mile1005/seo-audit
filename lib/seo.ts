@@ -34,6 +34,120 @@ const defaultSEO: SEOConfig = {
   // ogImage will be set per page if needed
 }
 
+// Cache for CSV data
+let csvTitleCache: Map<string, Map<string, string>> | null = null;
+
+/**
+ * Parse a CSV line properly handling quoted fields
+ */
+function parseCSVLine(line: string): string[] {
+  const result: string[] = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+
+    if (char === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        // Escaped quote
+        current += '"';
+        i++; // Skip next quote
+      } else {
+        // Toggle quote state
+        inQuotes = !inQuotes;
+      }
+    } else if (char === ',' && !inQuotes) {
+      // Field separator
+      result.push(current);
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+
+  // Add the last field
+  result.push(current);
+
+  return result;
+}
+
+/**
+ * Load and cache CSV title data
+ */
+function loadCSVTitleData(): Map<string, Map<string, string>> {
+  if (csvTitleCache) return csvTitleCache;
+
+  csvTitleCache = new Map();
+
+  try {
+    // Try to read the CSV file
+    const fs = require('fs');
+    const path = require('path');
+    const csvPath = path.join(process.cwd(), 'all-page-titles-complete.csv');
+
+    if (!fs.existsSync(csvPath)) {
+      console.warn('CSV file not found, using fallback titles');
+      return csvTitleCache;
+    }
+
+    const csvContent = fs.readFileSync(csvPath, 'utf8');
+    const lines = csvContent.split('\n');
+
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+
+      const parts = parseCSVLine(line);
+      if (parts.length >= 8) {
+        const url = parts[0];
+        const locale = parts[1];
+        const finalTitle = parts[6].replace(/^"|"$/g, '');
+
+        // Extract page path
+        let pagePath = url.replace('https://www.aiseoturbo.com', '');
+        if (pagePath === '' || pagePath === '/') {
+          pagePath = 'home';
+        } else if (pagePath.startsWith('/fr') || pagePath.startsWith('/de') || pagePath.startsWith('/es') ||
+                   pagePath.startsWith('/it') || pagePath.startsWith('/id')) {
+          // Check if this is just a locale prefix (no path after it)
+          const localePart = pagePath.substring(1, 3); // 'fr', 'de', etc.
+          const rest = pagePath.substring(3); // should be empty or start with '/'
+          if (rest === '' || rest === '/') {
+            pagePath = 'home';
+          } else {
+            pagePath = rest.startsWith('/') ? rest.substring(1) : rest;
+          }
+        } else {
+          pagePath = pagePath.startsWith('/') ? pagePath.substring(1) : pagePath;
+        }
+        if (pagePath === '') pagePath = 'home';
+
+        if (!csvTitleCache.has(pagePath)) {
+          csvTitleCache.set(pagePath, new Map());
+        }
+        csvTitleCache.get(pagePath)!.set(locale, finalTitle);
+      }
+    }
+  } catch (error) {
+    console.warn('Error loading CSV data:', error);
+  }
+
+  return csvTitleCache;
+}
+
+/**
+ * Get localized title from CSV data
+ */
+function getLocalizedTitle(pagePath: string, locale: string): string | null {
+  const csvData = loadCSVTitleData();
+  const pageTitles = csvData.get(pagePath);
+  if (pageTitles) {
+    return pageTitles.get(locale) || pageTitles.get('en') || null;
+  }
+  return null;
+}
+
 /**
  * Generate hreflang alternate links for multilingual SEO
  * Includes x-default hreflang for better international SEO
@@ -66,7 +180,16 @@ export function generateLanguageAlternates(path: string = '', currentLocale: Loc
  */
 export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   const seo = { ...defaultSEO, ...config }
-  
+
+  // Get localized title from CSV if available
+  let finalTitle = seo.title;
+  if (seo.locale && seo.path) {
+    const csvTitle = getLocalizedTitle(seo.path, seo.locale);
+    if (csvTitle) {
+      finalTitle = csvTitle;
+    }
+  }
+
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.aiseoturbo.com'
   
   // Generate canonical URL dynamically based on locale and path
@@ -96,24 +219,24 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
     : undefined
 
   return {
-    title: seo.title,
+    title: finalTitle,
     description: seo.description,
     keywords: seo.keywords?.join(', '),
     robots: seo.noIndex ? 'noindex,nofollow' : 'index,follow',
     
     openGraph: {
-      title: seo.title,
+      title: finalTitle,
       description: seo.description,
       url: canonical,
       type: seo.ogType,
       locale: seo.locale ? `${seo.locale}_${seo.locale.toUpperCase()}` : 'en_US',
-      ...(ogImageUrl ? { images: [{ url: ogImageUrl, width: 1200, height: 630, alt: seo.title }] } : {}),
+      ...(ogImageUrl ? { images: [{ url: ogImageUrl, width: 1200, height: 630, alt: finalTitle }] } : {}),
       siteName: 'AISEOTurbo',
     },
     
     twitter: {
       card: seo.twitterCard,
-      title: seo.title,
+      title: finalTitle,
       description: seo.description,
       ...(ogImageUrl ? { images: [ogImageUrl] } : {}),
       creator: '@aiseoturbo',

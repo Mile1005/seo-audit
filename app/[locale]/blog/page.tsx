@@ -8,9 +8,9 @@ import { type Locale } from '@/i18n'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    title: pageSEO.blog.title,
-    description: pageSEO.blog.description,
-    keywords: pageSEO.blog.keywords,
+    title: 'SEO Blog - Tips & Strategies | AI SEO Turbo',
+    description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn expert insights on technical SEO, content optimization, and algorithms.',
+    keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization'],
     locale: locale as Locale,
     path: 'blog'
   })

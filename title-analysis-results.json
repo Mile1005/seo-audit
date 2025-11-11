@@ -1,0 +1,39 @@
+{
+  "totalPages": 0,
+  "uniqueTitles": {},
+  "duplicateGroups": {},
+  "titleToPages": {},
+  "localeStats": {
+    "en": {
+      "totalPages": 0,
+      "uniqueTitles": 0,
+      "duplicates": 0
+    },
+    "fr": {
+      "totalPages": 0,
+      "uniqueTitles": 0,
+      "duplicates": 0
+    },
+    "de": {
+      "totalPages": 0,
+      "uniqueTitles": 0,
+      "duplicates": 0
+    },
+    "es": {
+      "totalPages": 0,
+      "uniqueTitles": 0,
+      "duplicates": 0
+    },
+    "it": {
+      "totalPages": 0,
+      "uniqueTitles": 0,
+      "duplicates": 0
+    },
+    "id": {
+      "totalPages": 0,
+      "uniqueTitles": 0,
+      "duplicates": 0
+    }
+  },
+  "recommendations": []
+}
