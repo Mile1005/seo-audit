@@ -1,14 +1,14 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
-
-// Reuse existing non-localized feature pages
-import SeoAuditPage from '@/app/features/seo-audit/page'
-import SiteCrawlerPage from '@/app/features/site-crawler/page'
-import KeywordTrackingPage from '@/app/features/keyword-tracking/page'
-import CompetitorAnalysisPage from '@/app/features/competitor-analysis/page'
-import AIAssistantPage from '@/app/features/ai-assistant/page'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
+
+// Import proper feature components
+import SEOAuditFeaturePage from '@/components/features/seo-audit/SEOAuditFeaturePage'
+import SiteCrawlerFeaturePage from '@/components/features/site-crawler/SiteCrawlerFeaturePage'
+import KeywordTrackingFeaturePage from '@/components/features/keyword-tracking/KeywordTrackingFeaturePage'
+import CompetitorAnalysisFeaturePage from '@/components/features/competitor-analysis/CompetitorAnalysisFeaturePage'
+import AIAssistantFeaturePage from '@/components/features/ai-assistant/AIAssistantFeaturePage'
 
 // SEO metadata for feature pages with hreflang support
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
@@ -35,15 +35,15 @@ export default async function LocalizedFeatureSlugPage({ params }: Props) {
 
   switch (slug) {
     case 'seo-audit':
-      return <SeoAuditPage />
+      return <SEOAuditFeaturePage />
     case 'site-crawler':
-      return <SiteCrawlerPage />
+      return <SiteCrawlerFeaturePage />
     case 'keyword-tracking':
-      return <KeywordTrackingPage />
+      return <KeywordTrackingFeaturePage />
     case 'competitor-analysis':
-      return <CompetitorAnalysisPage />
+      return <CompetitorAnalysisFeaturePage />
     case 'ai-assistant':
-      return <AIAssistantPage />
+      return <AIAssistantFeaturePage />
     default:
       // Fallback: show top-level features page for unknown slugs (prevents 404)
       const FeaturesPage = (await import('@/components/features/FeaturesPage')).default

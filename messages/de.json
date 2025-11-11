@@ -1411,7 +1411,17 @@
         "submittingButton": "Wird analysiert...",
         "errorRequired": "Dieses Feld ist erforderlich",
         "errorInvalidUrl": "Bitte geben Sie eine gültige URL ein",
-        "errorInvalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
+        "errorInvalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "errors": {
+          "urlRequired": "URL ist erforderlich",
+          "urlInvalid": "Bitte geben Sie eine gültige URL ein (z.B. example.com, produkto.io oder https://youtube.com)",
+          "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+          "urlInvalidSimple": "Bitte geben Sie eine gültige URL ein"
+        },
+        "optional": "Optional",
+        "analyzing": "Wird analysiert...",
+        "startAudit": "Kostenloses Audit Starten",
+        "footer": "Kostenloses Audit • Keine Kreditkarte erforderlich • Ergebnisse in Minuten"
       },
       "faq": {
         "q1": "Wie lange dauert ein SEO-Audit?",
@@ -1540,6 +1550,46 @@
           "coreWebVitals": "Core Web Vitals",
           "indexation": "Indexierungsstatus"
         }
+      },
+      "scores": {
+        "excellent": "Ausgezeichnet",
+        "good": "Gut",
+        "needsWork": "Verbesserungsbedürftig",
+        "poor": "Schlecht"
+      },
+      "breadcrumbs": {
+        "features": "Funktionen",
+        "seoAudit": "SEO-Audit"
+      },
+      "results": {
+        "scoresBreakdown": "SEO-Punktzahl-Aufschlüsselung",
+        "overallScore": "Gesamtpunktzahl",
+        "performance": "Performance",
+        "accessibility": "Barrierefreiheit",
+        "seo": "SEO",
+        "performanceMetrics": "Performance-Metriken",
+        "firstContentfulPaint": "First Contentful Paint",
+        "firstContentfulPaintDesc": "Zeit bis zum ersten Inhalt",
+        "largestContentfulPaint": "Largest Contentful Paint",
+        "largestContentfulPaintDesc": "Zeit bis zum Hauptinhalt",
+        "totalBlockingTime": "Total Blocking Time",
+        "totalBlockingTimeDesc": "Zeit, die den Hauptthread blockiert",
+        "cumulativeLayoutShift": "Cumulative Layout Shift",
+        "cumulativeLayoutShiftDesc": "Visuelle Stabilitätsbewertung",
+        "issuesFound": "Gefundene Probleme",
+        "issues": "Probleme",
+        "howToFix": "Wie zu beheben:",
+        "severity": "Schweregrad:",
+        "quickWins": "Schnelle Gewinne und einfache Verbesserungen",
+        "improvements": "Verbesserungen",
+        "auditAnotherPage": "Eine andere Seite auditieren",
+        "exportReport": "Detaillierten Bericht exportieren",
+        "completedOn": "Abgeschlossen am"
+      },
+      "cta": {
+        "title": "Bereit, Ihre SEO zu verbessern?",
+        "subtitle": "Treten Sie Tausenden von Websites bei, die ihre Suchmaschinen-Rankings mit unserer umfassenden SEO-Audit verbessert haben.",
+        "button": "Starten Sie Ihre Kostenlose Audit"
       }
     },
     "siteCrawler": {

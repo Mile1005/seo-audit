@@ -1331,7 +1331,17 @@
         "submittingButton": "Analyzing...",
         "errorRequired": "This field is required",
         "errorInvalidUrl": "Please enter a valid URL",
-        "errorInvalidEmail": "Please enter a valid email address"
+        "errorInvalidEmail": "Please enter a valid email address",
+        "errors": {
+          "urlRequired": "URL is required",
+          "urlInvalid": "Please enter a valid URL (e.g., example.com, produkto.io, or https://youtube.com)",
+          "emailInvalid": "Please enter a valid email address",
+          "urlInvalidSimple": "Please enter a valid URL"
+        },
+        "optional": "Optional",
+        "analyzing": "Analyzing...",
+        "startAudit": "Start Your Free Audit",
+        "footer": "Free audit • No credit card required • Results in minutes"
       },
       "faq": {
         "q1": "How long does an SEO audit take?",
@@ -1460,6 +1470,46 @@
           "coreWebVitals": "Core Web Vitals",
           "indexation": "Indexation health"
         }
+      },
+      "scores": {
+        "excellent": "Excellent",
+        "good": "Good",
+        "needsWork": "Needs Work",
+        "poor": "Poor"
+      },
+      "breadcrumbs": {
+        "features": "Features",
+        "seoAudit": "SEO Audit"
+      },
+      "results": {
+        "scoresBreakdown": "SEO Scores Breakdown",
+        "overallScore": "Overall Score",
+        "performance": "Performance",
+        "accessibility": "Accessibility",
+        "seo": "SEO",
+        "performanceMetrics": "Performance Metrics",
+        "firstContentfulPaint": "First Contentful Paint",
+        "firstContentfulPaintDesc": "Time to first content",
+        "largestContentfulPaint": "Largest Contentful Paint",
+        "largestContentfulPaintDesc": "Time to main content",
+        "totalBlockingTime": "Total Blocking Time",
+        "totalBlockingTimeDesc": "Time blocking main thread",
+        "cumulativeLayoutShift": "Cumulative Layout Shift",
+        "cumulativeLayoutShiftDesc": "Visual stability score",
+        "issuesFound": "Issues Found",
+        "issues": "issues",
+        "howToFix": "How to Fix:",
+        "severity": "Severity:",
+        "quickWins": "Quick Wins & Easy Improvements",
+        "improvements": "improvements",
+        "auditAnotherPage": "Audit Another Page",
+        "exportReport": "Export Detailed Report",
+        "completedOn": "Completed on"
+      },
+      "cta": {
+        "title": "Ready to Boost Your SEO Rankings?",
+        "subtitle": "Get comprehensive SEO analysis and actionable recommendations to improve your search visibility.",
+        "button": "Start Your Free SEO Audit"
       }
     },
     "siteCrawler": {

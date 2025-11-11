@@ -1416,7 +1416,17 @@
         "submittingButton": "Menganalisis...",
         "errorRequired": "Bidang ini wajib diisi",
         "errorInvalidUrl": "Silakan masukkan URL yang valid",
-        "errorInvalidEmail": "Silakan masukkan alamat email yang valid"
+        "errorInvalidEmail": "Silakan masukkan alamat email yang valid",
+        "errors": {
+          "urlRequired": "URL wajib diisi",
+          "urlInvalid": "Silakan masukkan URL yang valid (contoh: example.com, produkto.io, atau https://youtube.com)",
+          "emailInvalid": "Silakan masukkan alamat email yang valid",
+          "urlInvalidSimple": "Silakan masukkan URL yang valid"
+        },
+        "optional": "Opsional",
+        "analyzing": "Menganalisis...",
+        "startAudit": "Mulai Audit Gratis Anda",
+        "footer": "Audit gratis • Tidak memerlukan kartu kredit • Hasil dalam hitungan menit"
       },
       "faq": {
         "q1": "Berapa lama waktu yang dibutuhkan untuk audit SEO?",
@@ -1545,6 +1555,46 @@
           "coreWebVitals": "Core Web Vitals",
           "indexation": "Kesehatan indeksasi"
         }
+      },
+      "scores": {
+        "excellent": "Sangat Baik",
+        "good": "Baik",
+        "needsWork": "Perlu Ditingkatkan",
+        "poor": "Buruk"
+      },
+      "breadcrumbs": {
+        "features": "Fitur",
+        "seoAudit": "Audit SEO"
+      },
+      "results": {
+        "scoresBreakdown": "Rincian Skor SEO",
+        "overallScore": "Skor Keseluruhan",
+        "performance": "Performa",
+        "accessibility": "Aksesibilitas",
+        "seo": "SEO",
+        "performanceMetrics": "Metrik Performa",
+        "firstContentfulPaint": "First Contentful Paint",
+        "firstContentfulPaintDesc": "Waktu hingga konten pertama",
+        "largestContentfulPaint": "Largest Contentful Paint",
+        "largestContentfulPaintDesc": "Waktu hingga konten utama",
+        "totalBlockingTime": "Total Blocking Time",
+        "totalBlockingTimeDesc": "Waktu yang memblokir thread utama",
+        "cumulativeLayoutShift": "Cumulative Layout Shift",
+        "cumulativeLayoutShiftDesc": "Skor stabilitas visual",
+        "issuesFound": "Masalah Ditemukan",
+        "issues": "masalah",
+        "howToFix": "Cara Memperbaiki:",
+        "severity": "Tingkat Keparahan:",
+        "quickWins": "Kemenangan Cepat dan Perbaikan Mudah",
+        "improvements": "perbaikan",
+        "auditAnotherPage": "Audit Halaman Lain",
+        "exportReport": "Ekspor Laporan Detail",
+        "completedOn": "Diselesaikan pada"
+      },
+      "cta": {
+        "title": "Siap Meningkatkan SEO Anda?",
+        "subtitle": "Bergabunglah dengan ribuan situs web yang telah meningkatkan peringkat pencarian mereka dengan audit SEO komprehensif kami.",
+        "button": "Mulai Audit Gratis Anda"
       }
     },
     "siteCrawler": {
