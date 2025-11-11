@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
+import StatusPage from '../[locale]/status/page'
 
-export default function StatusPage() {
-  redirect('/en/status')
+export default function RootStatusPage() {
+  return <StatusPage />
 }

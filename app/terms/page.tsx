@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
+import TermsPage from '../[locale]/terms/page'
 
-export default function TermsPage() {
-  redirect('/en/terms')
+export default function RootTermsPage() {
+  return <TermsPage />
 }

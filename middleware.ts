@@ -28,7 +28,7 @@ export function middleware(req: NextRequest) {
   }
 
   // Skip other non-localized pages
-  const nonLocalizedPaths = ['/demo', '/privacy', '/terms', '/status', '/share', '/onboarding'];
+  const nonLocalizedPaths = ['/share', '/onboarding'];
   if (nonLocalizedPaths.some(path => pathname.startsWith(path))) {
     return NextResponse.next();
   }

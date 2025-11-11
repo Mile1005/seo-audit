@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
+import PrivacyPage from '../[locale]/privacy/page'
 
-export default function PrivacyPage() {
-  redirect('/en/privacy')
+export default function RootPrivacyPage() {
+  return <PrivacyPage />
 }

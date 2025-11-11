@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation'
+import DemoPage from '../[locale]/demo/page'
 
-export default function DemoPage() {
-  redirect('/en/demo')
+export default function RootDemoPage() {
+  return <DemoPage />
 }
