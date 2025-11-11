@@ -4,7 +4,9 @@ import SecurityPrivacyPage from '@/app/help/security-privacy/page'
 
 export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
   return generateSEOMeta({
-    ...pageSEO.help,
+    title: 'Security & Privacy Policies - Data Protection & Compliance | AI SEO Turbo',
+    description: 'Learn about AI SEO Turbo\'s security measures, privacy policies, data protection practices, GDPR compliance, and how we safeguard your information.',
+    keywords: ['security', 'privacy policy', 'data protection', 'GDPR compliance', 'information security'],
     path: '/help/security-privacy',
     locale: params.locale as Locale,
   })

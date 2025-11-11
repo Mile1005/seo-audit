@@ -10,8 +10,9 @@ export async function generateMetadata({ params }: Props) {
   const { locale } = await params
 
   return generateSEOMeta({
-    title: 'API & Integrations - AISEOTurbo Help',
+    title: 'API & Integrations Guide - RESTful Endpoints, Webhooks & SDKs | AI SEO Turbo',
     description: 'Complete guide to AI SEO Turbo API and integrations. Learn about RESTful API endpoints, webhooks, SDKs, and enterprise integration features.',
+    keywords: ['API integrations', 'RESTful API', 'webhooks', 'SDK', 'enterprise integration', 'API endpoints'],
     path: '/help/api-integrations',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })

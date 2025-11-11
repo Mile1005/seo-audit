@@ -4,7 +4,9 @@ import AccountBillingPage from '@/app/help/account-billing/page'
 
 export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
   return generateSEOMeta({
-    ...pageSEO.help,
+    title: 'Account & Billing Management - Subscription & Payment Guide | AI SEO Turbo',
+    description: 'Manage your AI SEO Turbo account settings, billing information, subscription plans, and payment methods. Learn about account security and billing preferences.',
+    keywords: ['account management', 'billing', 'subscription', 'payment methods', 'account settings'],
     path: '/help/account-billing',
     locale: params.locale as Locale,
   })

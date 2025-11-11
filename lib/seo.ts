@@ -181,7 +181,7 @@ export function generateLanguageAlternates(path: string = '', currentLocale: Loc
 export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   const seo = { ...defaultSEO, ...config }
 
-  // Get localized title from CSV if available
+  // Get localized title from CSV if available (takes precedence over config title)
   let finalTitle = seo.title;
   if (seo.locale && seo.path) {
     const csvTitle = getLocalizedTitle(seo.path, seo.locale);
