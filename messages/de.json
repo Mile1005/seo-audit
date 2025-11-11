@@ -152,8 +152,6 @@
     "status": "Status",
     "demo": "Demo",
     "caseStudies": "Fallstudien",
-    "careers": "Karriere",
-    "community": "Community",
     "openMenu": "Hauptmenü öffnen",
     "projects": "Projekte",
     "keywords": "Keywords",
@@ -3869,7 +3867,6 @@
           "about": "Über Uns",
           "pricing": "Preise",
           "contact": "Kontakt",
-          "careers": "Karriere",
           "blog": "Blog"
         }
       },

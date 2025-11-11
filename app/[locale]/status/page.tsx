@@ -194,7 +194,6 @@ export default function StatusPage() {
                 <li><strong>Email Notifications:</strong> Critical updates sent to all registered users</li>
                 <li><strong>Incident Post-Mortems:</strong> Detailed analysis of any incidents with prevention measures</li>
                 <li><strong>Maintenance Scheduling:</strong> Advance notice of planned maintenance windows</li>
-                <li><strong>Community Updates:</strong> Real-time updates in our Discord community</li>
               </ul>
 
               <h3>Proactive Maintenance & Improvements</h3>
@@ -394,7 +393,7 @@ export default function StatusPage() {
                 Get notified about system updates and scheduled maintenance
               </p>
               <p className="text-gray-400">
-                Follow us on social media or join our community to receive real-time status updates
+                Follow us on social media to receive real-time status updates
               </p>
             </motion.div>
           </div>

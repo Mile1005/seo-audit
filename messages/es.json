@@ -77,8 +77,6 @@
     "status": "Estado",
     "demo": "Demo",
     "caseStudies": "Casos de estudio",
-    "careers": "Carreras",
-    "community": "Comunidad",
     "openMenu": "Abrir menú principal",
     "projects": "Proyectos",
     "keywords": "Keywords",
@@ -3793,7 +3791,6 @@
           "about": "Acerca de Nosotros",
           "pricing": "Precios",
           "contact": "Contacto",
-          "careers": "Carreras",
           "blog": "Blog"
         }
       },

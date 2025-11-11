@@ -566,12 +566,6 @@ export const pageSEO = {
     noIndex: true
   },
 
-  community: {
-    title: 'SEO Community - Connect & Learn | AI SEO Turbo',
-    description: 'Join the AI SEO Turbo community to connect with professionals, share insights, learn from experts, and stay updated with SEO trends.',
-    keywords: ['SEO community', 'SEO professionals', 'SEO networking', 'SEO insights']
-  },
-
   demo: {
     title: 'Free SEO Audit Demo - Try AI Analysis Tool Online',
     description: 'Experience our AI-powered SEO audit tool free. Analyze any website instantly with 47+ checks, competitor insights, and actionable recommendations.',

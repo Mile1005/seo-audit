@@ -188,8 +188,6 @@ class PageAnalyzer {
       /\/blog/,
       /\/help/,
       /\/case-studies/,
-      /\/careers/,
-      /\/community/,
       /\/demo/,
     ];
 

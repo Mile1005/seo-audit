@@ -59,12 +59,6 @@ http://localhost:3000/fr/about,fr
 http://localhost:3000/it/about,it
 http://localhost:3000/es/about,es
 http://localhost:3000/id/about,id
-http://localhost:3000/en/careers,en
-http://localhost:3000/de/careers,de
-http://localhost:3000/fr/careers,fr
-http://localhost:3000/it/careers,it
-http://localhost:3000/es/careers,es
-http://localhost:3000/id/careers,id
 http://localhost:3000/en/blog,en
 http://localhost:3000/de/blog,de
 http://localhost:3000/fr/blog,fr
@@ -149,12 +143,6 @@ http://localhost:3000/fr/case-studies/techflow-solutions,fr
 http://localhost:3000/it/case-studies/techflow-solutions,it
 http://localhost:3000/es/case-studies/techflow-solutions,es
 http://localhost:3000/id/case-studies/techflow-solutions,id
-http://localhost:3000/en/community,en
-http://localhost:3000/de/community,de
-http://localhost:3000/fr/community,fr
-http://localhost:3000/it/community,it
-http://localhost:3000/es/community,es
-http://localhost:3000/id/community,id
 http://localhost:3000/en/help,en
 http://localhost:3000/de/help,de
 http://localhost:3000/fr/help,fr

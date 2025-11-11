@@ -157,8 +157,6 @@
     "status": "Status",
     "demo": "Demo",
     "caseStudies": "Studi Kasus",
-    "careers": "Karir",
-    "community": "Komunitas",
     "openMenu": "Buka menu utama",
     "projects": "Proyek",
     "keywords": "Keywords",
@@ -3873,7 +3871,6 @@
           "about": "Tentang Kami",
           "pricing": "Harga",
           "contact": "Kontak",
-          "careers": "Karir",
           "blog": "Blog"
         }
       },

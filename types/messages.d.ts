@@ -71,8 +71,6 @@ export type Messages = {
     status: string;
     demo: string;
     caseStudies: string;
-    careers: string;
-    community: string;
   };
   home: {
     title: string;

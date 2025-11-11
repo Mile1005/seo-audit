@@ -72,8 +72,6 @@
     "status": "Status",
     "demo": "Demo",
     "caseStudies": "Case Studies",
-    "careers": "Careers",
-    "community": "Community",
     "openMenu": "Open main menu",
     "projects": "Projects",
     "keywords": "Keywords",
@@ -3789,7 +3787,6 @@
           "about": "About Us",
           "pricing": "Pricing",
           "contact": "Contact",
-          "careers": "Careers",
           "blog": "Blog"
         }
       },
@@ -5339,12 +5336,6 @@
         "description": "Speak directly with our experts",
         "availability": "Mon-Fri 9AM-6PM EST",
         "action": "Call Now"
-      },
-      "community": {
-        "title": "Community Forum",
-        "description": "Connect with other users",
-        "availability": "Community Driven",
-        "action": "Join Forum"
       }
     },
     "status": {
@@ -5359,23 +5350,6 @@
         "dashboard": "Dashboard",
         "dataProcessing": "Data Processing"
       }
-    },
-    "community": {
-      "title": "Join Our Community",
-      "subtitle": "Connect with 10,000+ SEO professionals",
-      "forum": {
-        "title": "Community Forum",
-        "description": "Ask questions and share knowledge"
-      },
-      "features": {
-        "title": "Feature Requests",
-        "description": "Suggest new features and improvements"
-      },
-      "tutorials": {
-        "title": "SEO Tutorials",
-        "description": "Learn from expert guides and tutorials"
-      },
-      "joinButton": "Join Community"
     }
   },
   "emailCapture": {

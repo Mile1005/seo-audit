@@ -66,7 +66,12 @@ export function LanguageSwitcher() {
         document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
 
         // Navigate to the same page with new locale
-        router.replace(pathname, { locale: newLocale });
+        if (newLocale === 'en') {
+          // For English (default locale), navigate to root without locale prefix
+          window.location.href = pathname;
+        } else {
+          router.replace(pathname, { locale: newLocale });
+        }
         
         // Close dropdown
         setIsOpen(false);

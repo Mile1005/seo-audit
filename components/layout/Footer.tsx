@@ -41,7 +41,6 @@ export default function Footer() {
         { label: t('sections.company.links.about'), href: "/about" },
         { label: t('sections.company.links.pricing'), href: "/pricing" },
         { label: t('sections.company.links.contact'), href: "/contact" },
-        { label: t('sections.company.links.careers'), href: "/careers" },
         { label: t('sections.company.links.blog'), href: "/blog" }
       ]
     },

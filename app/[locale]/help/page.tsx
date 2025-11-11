@@ -191,12 +191,6 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
       icon: Phone,
       color: "from-purple-500 to-violet-500",
       href: "tel:+1-555-0123"
-    },
-    {
-      key: "community",
-      icon: Users,
-      color: "from-orange-500 to-red-500",
-      href: "/community"
     }
   ]
 
@@ -434,55 +428,6 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
                   className="inline-flex items-center gap-2 mt-6 text-blue-400 hover:text-blue-300 font-medium group"
                 >
                   {t('status.viewDetailed')}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-
-              {/* Community */}
-              <div
-                className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8 animate-fade-in-up"
-              >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-violet-500 p-3">
-                    <Users className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{t('community.title')}</h3>
-                    <p className="text-gray-400">{t('community.subtitle')}</p>
-                  </div>
-                </div>
-                
-                <div className="space-y-4 mb-6">
-                  <div className="flex items-center gap-4 p-4 bg-slate-900/50 rounded-lg">
-                    <MessageCircle className="w-8 h-8 text-blue-400" />
-                    <div>
-                      <h4 className="text-white font-medium">{t('community.forum.title')}</h4>
-                      <p className="text-gray-400 text-sm">{t('community.forum.description')}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-4 p-4 bg-slate-900/50 rounded-lg">
-                    <Zap className="w-8 h-8 text-yellow-400" />
-                    <div>
-                      <h4 className="text-white font-medium">{t('community.features.title')}</h4>
-                      <p className="text-gray-400 text-sm">{t('community.features.description')}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center gap-4 p-4 bg-slate-900/50 rounded-lg">
-                    <BookOpen className="w-8 h-8 text-green-400" />
-                    <div>
-                      <h4 className="text-white font-medium">{t('community.tutorials.title')}</h4>
-                      <p className="text-gray-400 text-sm">{t('community.tutorials.description')}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <Link
-                  href="/community"
-                  className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-gradient-to-r from-purple-600 to-violet-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-violet-700 transition-all duration-300 group"
-                >
-                  {t('community.joinButton')}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>

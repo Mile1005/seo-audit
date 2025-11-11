@@ -157,8 +157,6 @@
     "status": "Stato",
     "demo": "Demo",
     "caseStudies": "Casi di studio",
-    "careers": "Carriere",
-    "community": "Community",
     "openMenu": "Apri menu principale",
     "projects": "Progetti",
     "keywords": "Keywords",
@@ -3873,7 +3871,6 @@
           "about": "Chi Siamo",
           "pricing": "Prezzi",
           "contact": "Contatti",
-          "careers": "Carriere",
           "blog": "Blog"
         }
       },

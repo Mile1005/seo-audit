@@ -59,12 +59,6 @@ https://www.aiseoturbo.com/about,en,71.42857142857143,warn,50,Title length 66,pa
 https://www.aiseoturbo.com/it/about,it,89.28571428571429,warn,50,Title length 68,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/es/about,es,87.85714285714286,warn,70,Primary keyword not in title,warn,60,Similar descriptions found,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/id/about,id,86.42857142857143,warn,50,Title length 84,warn,60,Similar descriptions found,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
-https://www.aiseoturbo.com/de/careers,de,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/fr/careers,fr,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/careers,en,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/it/careers,it,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/es/careers,es,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/id/careers,id,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://www.aiseoturbo.com/de/blog,de,90.71428571428571,warn,70,Primary keyword not in title,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/fr/blog,fr,87.85714285714286,warn,70,Primary keyword not in title,warn,60,Similar descriptions found,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/blog,en,70,warn,70,Primary keyword not in title,warn,60,Similar descriptions found,pass,100,Good,fail,0,Canonical missing or incorrect,pass,100,Valid schema,fail,0,Self hreflang missing or incorrect,fail,0,Missing OG tags,pass,100,Good,warn,50,Keyword density 2.22%,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
@@ -149,12 +143,6 @@ https://www.aiseoturbo.com/case-studies/techflow-solutions,en,65.71428571428571,
 https://www.aiseoturbo.com/it/case-studies/techflow-solutions,it,83.57142857142857,warn,50,Title length 70,pass,100,Good,pass,100,Good,pass,100,Good,fail,20,Invalid JSON-LD,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/es/case-studies/techflow-solutions,es,83.57142857142857,warn,50,Title length 68,pass,100,Good,pass,100,Good,pass,100,Good,fail,20,Invalid JSON-LD,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/id/case-studies/techflow-solutions,id,80.71428571428571,warn,50,Title length 86,warn,60,Similar descriptions found,pass,100,Good,pass,100,Good,fail,20,Invalid JSON-LD,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
-https://www.aiseoturbo.com/de/community,de,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/fr/community,fr,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/community,en,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/it/community,it,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/es/community,es,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-https://www.aiseoturbo.com/id/community,id,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 https://www.aiseoturbo.com/de/help,de,86.42857142857143,warn,50,Title length 63,warn,60,Similar descriptions found,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/fr/help,fr,86.42857142857143,warn,50,Title length 65,warn,60,Similar descriptions found,pass,100,Good,pass,100,Good,pass,100,Valid schema,pass,100,Good,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
 https://www.aiseoturbo.com/help,en,75,warn,50,Title length 63,pass,100,Good,pass,100,Good,fail,0,Canonical missing or incorrect,pass,100,Valid schema,fail,0,Self hreflang missing or incorrect,fail,0,Missing OG tags,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good,pass,100,Good
