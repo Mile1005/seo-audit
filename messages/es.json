@@ -1324,6 +1324,8 @@
         }
       },
       "form": {
+        "title": "Comience su auditoría SEO gratuita",
+        "subtitle": "Obtenga un análisis completo en minutos",
         "heading": "Comience su auditoría SEO gratuita",
         "subheading": "Obtenga un análisis completo en minutos",
         "urlLabel": "URL del sitio web",
@@ -1550,7 +1552,11 @@
         "option10": "10 páginas (Recomendado)",
         "option15": "15 páginas (Análisis profundo)",
         "freeLimit": "Los usuarios gratuitos pueden rastrear hasta 15 páginas",
-        "startButton": "Iniciar Rastreo"
+        "startButton": "Iniciar Rastreo",
+        "maxPagesLabel": "Máximo de Páginas a Rastrear",
+        "includeSubdomains": "Incluir Subdominios",
+        "startCrawl": "Iniciar Rastreo",
+        "footer": "Los datos de su sitio web se procesan de forma segura y nunca se almacenan permanentemente."
       },
       "progress": {
         "analyzing": "Analizando",
@@ -1896,6 +1902,26 @@
         "cta": {
           "analyze": "Analizar Competidores",
           "demo": "Ver Demo"
+        },
+        "dashboard": {
+          "title": "Dashboard de Rankings Competitivos",
+          "subtitle": "Seguimiento en vivo de posiciones competitivas",
+          "live": "En Vivo",
+          "position": "Posición",
+          "change": "Cambio",
+          "monthlySearches": "búsquedas mensuales",
+          "improved": "Mejorado",
+          "declined": "Disminuido",
+          "unchanged": "Sin Cambios",
+          "visibility": "Visibilidad",
+          "trend": "Tendencia",
+          "gained": "Ganado",
+          "lost": "Perdido",
+          "opportunities": "Oportunidades"
+        },
+        "trustIndicators": {
+          "realTime": "Seguimiento competitivo en tiempo real",
+          "accurate": "Tasa de precisión superior al 95%"
         },
         "keyMetrics": {
           "serp": {
@@ -2301,6 +2327,11 @@
           "generatePlan": "Generar Plan de Acción Completo",
           "scheduleImplementation": "Programar Implementación"
         }
+      },
+      "cta": {
+        "title": "¿Listo para Superar a tu Competencia?",
+        "subtitle": "Únete a miles de empresas que utilizan análisis de competidores impulsado por IA para dominar sus mercados e incrementar el tráfico orgánico.",
+        "button": "Iniciar Análisis de Competidores"
       }
     },
     "keywordTracking": {
@@ -2932,6 +2963,11 @@
         "a5": "¡Sí! Monitoree los rankings de sus competidores para las mismas palabras clave y reciba alertas cuando hagan movimientos significativos."
       }
     },
+    "cta": {
+      "title": "¿Listo para Comenzar el Seguimiento de Palabras Clave?",
+      "subtitle": "Únete a miles de empresas que confían en nuestro seguimiento de rankings impulsado por IA para dominar sus mercados e incrementar el tráfico orgánico.",
+      "button": "Comenzar Seguimiento de Palabras Clave"
+    },
     "aiAssistant": {
       "hero": {
         "badge": "Asistente de SEO Impulsado por IA",
@@ -2945,7 +2981,9 @@
         "trust": {
           "users": "10,000+ usuarios confían en nuestro Asistente IA",
           "accuracy": "Precisión de recomendación del 95%",
-          "available": "Disponible 24/7"
+          "available": "Disponible 24/7",
+          "trained": "Entrenado con más de 10M de puntos de datos SEO",
+          "realtime": "Actualizaciones en tiempo real del algoritmo de Google"
         }
       },
       "chatPreview": {
@@ -3869,6 +3907,7 @@
       "caseStudies": "Casos de Estudio"
     },
     "hero": {
+      "badge": "Historias de Éxito",
       "title": "Resultados Reales, Impacto Medible",
       "subtitle": "Descubre cómo empresas de diversas industrias lograron un crecimiento extraordinario con Crawlee. Desde negocios locales hasta empresas SaaS, nuestras soluciones SEO inteligentes generan resultados medibles que impulsan el crecimiento empresarial."
     },
@@ -3884,6 +3923,7 @@
     "common": {
       "trafficGrowth": "Crecimiento de Tráfico",
       "conversionIncrease": "Aumento de Conversiones",
+      "readMore": "Leer más",
       "readFullCaseStudy": "Leer Caso Completo",
       "talkToOurTeam": "Hablar con Nuestro Equipo",
       "duration": "Duración"
@@ -3894,6 +3934,66 @@
       "button": "Comienza Tu Auditoría Gratuita"
     },
     "cases": {
+      "cloudsync": {
+        "title": "CloudSync Pro: 520% Crecimiento Empresarial",
+        "description": "Empresa B2B SaaS logró 520% de crecimiento de tráfico a través de monitoreo técnico SEO integral y optimización de palabras clave empresariales.",
+        "results": [
+          "+520% crecimiento de tráfico orgánico",
+          "200+ palabras clave empresariales rankeadas",
+          "+185% mejora en tasa de conversión"
+        ],
+        "category": "B2B SaaS"
+      },
+      "digitalGrowth": {
+        "title": "Agencia de Crecimiento Digital: 340% Aumento de Tráfico",
+        "description": "Agencia de marketing digital transformó su flujo de trabajo con automatización SEO impulsada por IA, logrando 340% de crecimiento de tráfico y 85% más de retención de clientes.",
+        "results": [
+          "+340% crecimiento de tráfico orgánico",
+          "150+ palabras clave en rankings top 10",
+          "+280% mejora en tasa de conversión"
+        ],
+        "category": "Marketing Digital"
+      },
+      "stylecraft": {
+        "title": "StyleCraft Boutique: 420% Crecimiento de Tráfico",
+        "description": "Tienda de comercio electrónico de productos artesanales triplicó ventas a través de optimización SEO integral y estrategias de contenido automatizadas.",
+        "results": [
+          "+420% crecimiento de tráfico orgánico",
+          "80+ nuevos rankings de palabras clave top 10",
+          "+215% mejora en tasa de conversión"
+        ],
+        "category": "Comercio Electrónico"
+      },
+      "peak": {
+        "title": "Peak Performance Gym: 290% Crecimiento Local",
+        "description": "Gimnasio local dominó resultados de búsqueda local, triplicando llamadas y consultas de membresía a través de optimización SEO local estratégica.",
+        "results": [
+          "+290% crecimiento de tráfico local",
+          "45+ rankings locales top 3 logrados",
+          "+156% mejora en tasa de conversión"
+        ],
+        "category": "Servicios Locales"
+      },
+      "gearhub": {
+        "title": "GearHub Pro: 365% Éxito en Comercio Electrónico de Nicho",
+        "description": "Tienda especializada en equipo outdoor se convirtió en el destino principal en su nicho a través de segmentación estratégica de palabras clave long-tail y análisis de competidores.",
+        "results": [
+          "+365% crecimiento de tráfico orgánico",
+          "120+ rankings de palabras clave de productos",
+          "+245% mejora en tasa de conversión"
+        ],
+        "category": "Comercio Electrónico de Nicho"
+      },
+      "techflow": {
+        "title": "TechFlow Solutions: 520% Crecimiento Empresarial",
+        "description": "Plataforma SaaS empresarial superó desafíos técnicos complejos para lograr 520% de crecimiento de tráfico orgánico y dominar resultados de búsqueda empresarial.",
+        "results": [
+          "+520% crecimiento de tráfico orgánico",
+          "200+ rankings de palabras clave empresariales",
+          "+185% mejora en tasa de conversión"
+        ],
+        "category": "SaaS Empresarial"
+      },
       "digitalGrowthAgency": {
         "title": "Digital Growth Agency: 340% Aumento de Tráfico Orgánico",
         "client": "Digital Growth Agency",

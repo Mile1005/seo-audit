@@ -1404,6 +1404,8 @@
         }
       },
       "form": {
+        "title": "Mulai Audit SEO Gratis Anda",
+        "subtitle": "Dapatkan analisis komprehensif dalam hitungan menit",
         "heading": "Mulai Audit SEO Gratis Anda",
         "subheading": "Dapatkan analisis komprehensif dalam hitungan menit",
         "urlLabel": "URL Website",
@@ -1630,7 +1632,11 @@
         "option10": "10 halaman (Disarankan)",
         "option15": "15 halaman (Analisis mendalam)",
         "freeLimit": "Pengguna gratis dapat melakukan crawl hingga 15 halaman",
-        "startButton": "Mulai Crawling"
+        "startButton": "Mulai Crawling",
+        "maxPagesLabel": "Maksimum Halaman untuk Di-crawl",
+        "includeSubdomains": "Sertakan Subdomain",
+        "startCrawl": "Mulai Crawling",
+        "footer": "Data website Anda diproses dengan aman dan tidak pernah disimpan secara permanen."
       },
       "progress": {
         "analyzing": "Menganalisis",
@@ -1976,6 +1982,26 @@
         "cta": {
           "analyze": "Analisis Kompetitor",
           "demo": "Lihat Demo"
+        },
+        "dashboard": {
+          "title": "Dashboard Peringkat Kompetitor",
+          "subtitle": "Pelacakan posisi kompetitor secara langsung",
+          "live": "Langsung",
+          "position": "Posisi",
+          "change": "Perubahan",
+          "monthlySearches": "pencarian bulanan",
+          "improved": "Meningkat",
+          "declined": "Menurun",
+          "unchanged": "Tidak Berubah",
+          "visibility": "Visibilitas",
+          "trend": "Tren",
+          "gained": "Diperoleh",
+          "lost": "Hilang",
+          "opportunities": "Peluang"
+        },
+        "trustIndicators": {
+          "realTime": "Pelacakan kompetitor secara real-time",
+          "accurate": "Tingkat akurasi 95%+"
         },
         "keyMetrics": {
           "serp": {
@@ -2381,6 +2407,11 @@
           "generatePlan": "Buat Rencana Aksi Lengkap",
           "scheduleImplementation": "Jadwalkan Implementasi"
         }
+      },
+      "cta": {
+        "title": "Siap Mengungguli Kompetitor Anda?",
+        "subtitle": "Bergabunglah dengan ribuan bisnis yang menggunakan analisis kompetitor bertenaga AI untuk mendominasi pasar mereka dan meningkatkan traffic organik.",
+        "button": "Mulai Analisis Kompetitor"
       }
     },
     "keywordTracking": {
@@ -3012,6 +3043,11 @@
         "a5": "Ya! Pantau peringkat kompetitor Anda untuk kata kunci yang sama dan dapatkan alert ketika mereka membuat pergerakan signifikan."
       }
     },
+    "cta": {
+      "title": "Siap Memulai Pelacakan Kata Kunci?",
+      "subtitle": "Bergabunglah dengan ribuan perusahaan yang mempercayai pelacakan peringkat bertenaga AI kami untuk mendominasi pasar mereka dan meningkatkan lalu lintas organik.",
+      "button": "Mulai Pelacakan Kata Kunci"
+    },
     "aiAssistant": {
       "hero": {
         "badge": "Asisten SEO Bertenaga AI",
@@ -3025,7 +3061,9 @@
         "trust": {
           "users": "Lebih dari 10.000 pengguna mempercayai Asisten AI kami",
           "accuracy": "Akurasi rekomendasi 95%",
-          "available": "Tersedia 24/7"
+          "available": "Tersedia 24/7",
+          "trained": "Dilatih pada lebih dari 10 juta titik data SEO",
+          "realtime": "Pembaruan algoritma Google secara real-time"
         }
       },
       "chatPreview": {
@@ -3949,6 +3987,7 @@
       "caseStudies": "Studi Kasus"
     },
     "hero": {
+      "badge": "Cerita Sukses",
       "title": "Hasil Nyata, Dampak Terukur",
       "subtitle": "Temukan bagaimana bisnis dari berbagai industri mencapai pertumbuhan luar biasa dengan Crawlee. Dari layanan lokal hingga perusahaan SaaS enterprise, solusi SEO cerdas kami menghasilkan hasil terukur yang mendorong pertumbuhan bisnis."
     },
@@ -3964,6 +4003,7 @@
     "common": {
       "trafficGrowth": "Pertumbuhan Trafik",
       "conversionIncrease": "Peningkatan Konversi",
+      "readMore": "Baca selengkapnya",
       "readFullCaseStudy": "Baca Studi Kasus Lengkap",
       "talkToOurTeam": "Bicara dengan Tim Kami",
       "duration": "Durasi"
@@ -3974,6 +4014,66 @@
       "button": "Mulai Audit Gratis Anda"
     },
     "cases": {
+      "cloudsync": {
+        "title": "CloudSync Pro: 520% Pertumbuhan Perusahaan",
+        "description": "Perusahaan B2B SaaS mencapai 520% pertumbuhan traffic melalui pemantauan SEO teknis komprehensif dan optimasi kata kunci perusahaan.",
+        "results": [
+          "+520% pertumbuhan traffic organik",
+          "200+ kata kunci perusahaan yang diranking",
+          "+185% peningkatan tingkat konversi"
+        ],
+        "category": "B2B SaaS"
+      },
+      "digitalGrowth": {
+        "title": "Agensi Pertumbuhan Digital: 340% Peningkatan Traffic",
+        "description": "Agensi pemasaran digital mentransformasi alur kerja mereka dengan otomatisasi SEO bertenaga AI, mencapai 340% pertumbuhan traffic dan 85% lebih banyak retensi klien.",
+        "results": [
+          "+340% pertumbuhan traffic organik",
+          "150+ kata kunci dalam ranking top 10",
+          "+280% peningkatan tingkat konversi"
+        ],
+        "category": "Pemasaran Digital"
+      },
+      "stylecraft": {
+        "title": "StyleCraft Boutique: 420% Pertumbuhan Traffic",
+        "description": "Toko e-commerce produk buatan tangan melipatgandakan penjualan melalui optimasi SEO komprehensif dan strategi konten otomatis.",
+        "results": [
+          "+420% pertumbuhan traffic organik",
+          "80+ ranking kata kunci top 10 baru",
+          "+215% peningkatan tingkat konversi"
+        ],
+        "category": "E-commerce"
+      },
+      "peak": {
+        "title": "Peak Performance Gym: 290% Pertumbuhan Lokal",
+        "description": "Gym lokal mendominasi hasil pencarian lokal, melipatgandakan panggilan dan pertanyaan keanggotaan melalui optimasi SEO lokal strategis.",
+        "results": [
+          "+290% pertumbuhan traffic lokal",
+          "45+ ranking lokal top 3 dicapai",
+          "+156% peningkatan tingkat konversi"
+        ],
+        "category": "Layanan Lokal"
+      },
+      "gearhub": {
+        "title": "GearHub Pro: 365% Kesuksesan E-commerce Niche",
+        "description": "Toko khusus perlengkapan outdoor menjadi tujuan utama di niche mereka melalui penargetan kata kunci long-tail strategis dan analisis kompetitor.",
+        "results": [
+          "+365% pertumbuhan traffic organik",
+          "120+ ranking kata kunci produk",
+          "+245% peningkatan tingkat konversi"
+        ],
+        "category": "E-commerce Niche"
+      },
+      "techflow": {
+        "title": "TechFlow Solutions: 520% Pertumbuhan Perusahaan",
+        "description": "Platform SaaS perusahaan mengatasi tantangan teknis kompleks untuk mencapai 520% pertumbuhan traffic organik dan mendominasi hasil pencarian perusahaan.",
+        "results": [
+          "+520% pertumbuhan traffic organik",
+          "200+ ranking kata kunci perusahaan",
+          "+185% peningkatan tingkat konversi"
+        ],
+        "category": "SaaS Perusahaan"
+      },
       "digitalGrowthAgency": {
         "title": "Digital Growth Agency: 340% Peningkatan Trafik Organik",
         "client": "Digital Growth Agency",

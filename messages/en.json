@@ -1252,6 +1252,7 @@
     "cta": {
       "title": "Ready to Get Started?",
       "subtitle": "Join thousands of businesses that trust AI SEO Turbo for their SEO success",
+      "button": "Start Keyword Tracking",
       "startTrial": "Start Free Trial",
       "contactSales": "Contact Sales"
     }
@@ -1319,6 +1320,8 @@
         }
       },
       "form": {
+        "title": "Start Your Free SEO Audit",
+        "subtitle": "Get comprehensive analysis in minutes",
         "heading": "Start Your Free SEO Audit",
         "subheading": "Get comprehensive analysis in minutes",
         "urlLabel": "Website URL",
@@ -1505,11 +1508,6 @@
         "auditAnotherPage": "Audit Another Page",
         "exportReport": "Export Detailed Report",
         "completedOn": "Completed on"
-      },
-      "cta": {
-        "title": "Ready to Boost Your SEO Rankings?",
-        "subtitle": "Get comprehensive SEO analysis and actionable recommendations to improve your search visibility.",
-        "button": "Start Your Free SEO Audit"
       }
     },
     "siteCrawler": {
@@ -1545,7 +1543,11 @@
         "option10": "10 pages (Recommended)",
         "option15": "15 pages (Deep analysis)",
         "freeLimit": "Free users can crawl up to 15 pages",
-        "startButton": "Start Crawling"
+        "startButton": "Start Crawling",
+        "maxPagesLabel": "Maximum Pages to Crawl",
+        "includeSubdomains": "Include Subdomains",
+        "startCrawl": "Start Crawl",
+        "footer": "Your website data is processed securely and never stored permanently."
       },
       "progress": {
         "analyzing": "Analyzing",
@@ -1891,6 +1893,26 @@
         "cta": {
           "analyze": "Analyze Competitors",
           "demo": "View Demo"
+        },
+        "dashboard": {
+          "title": "Competitor Rankings Dashboard",
+          "subtitle": "Live competitor position tracking",
+          "live": "Live",
+          "position": "Position",
+          "change": "Change",
+          "monthlySearches": "monthly searches",
+          "improved": "Improved",
+          "declined": "Declined",
+          "unchanged": "Unchanged",
+          "visibility": "Visibility",
+          "trend": "Trend",
+          "gained": "Gained",
+          "lost": "Lost",
+          "opportunities": "Opportunities"
+        },
+        "trustIndicators": {
+          "realTime": "Real-time competitor tracking",
+          "accurate": "95%+ accuracy rate"
         },
         "keyMetrics": {
           "serp": {
@@ -2296,6 +2318,11 @@
           "generatePlan": "Generate Full Action Plan",
           "scheduleImplementation": "Schedule Implementation"
         }
+      },
+      "cta": {
+        "title": "Ready to Outsmart Your Competition?",
+        "subtitle": "Join thousands of businesses using AI-powered competitor analysis to dominate their markets and increase organic traffic.",
+        "button": "Start Competitor Analysis"
       }
     },
     "keywordTracking": {
@@ -2927,6 +2954,11 @@
         "a5": "Yes! Monitor your competitors' rankings for the same keywords and get alerts when they make significant movements."
       }
     },
+    "cta": {
+      "title": "Ready to Start Keyword Tracking?",
+      "subtitle": "Join thousands of businesses that trust our AI-powered ranking tracking to dominate their markets and increase organic traffic.",
+      "button": "Start Keyword Tracking"
+    },
     "aiAssistant": {
       "hero": {
         "badge": "AI-Powered SEO Intelligence",
@@ -2940,7 +2972,9 @@
         "trust": {
           "users": "Trusted by 50,000+ users",
           "accuracy": "95%+ accuracy rate",
-          "available": "24/7 availability"
+          "available": "24/7 availability",
+          "trained": "Trained on 10M+ SEO data points",
+          "realtime": "Real-time Google algorithm updates"
         }
       },
       "chatPreview": {
@@ -3719,6 +3753,11 @@
       "wait": "Please Wait"
     }
   },
+  "cta": {
+    "title": "Ready to Get AI-Powered SEO Help?",
+    "subtitle": "Join thousands of businesses using our AI assistant to get personalized SEO recommendations and boost their search rankings.",
+    "button": "Chat with AI Assistant"
+  },
   "notifications": {
     "auditComplete": "Audit completed successfully!",
     "auditFailed": "Audit failed. Please try again.",
@@ -3864,6 +3903,7 @@
       "caseStudies": "Case Studies"
     },
     "hero": {
+      "badge": "Success Stories",
       "title": "Real Results, Real Impact",
       "subtitle": "Discover how businesses across industries achieved remarkable growth with AI-powered SEO strategies. From 340% traffic increases to complete market domination."
     },
@@ -3879,6 +3919,7 @@
     "common": {
       "trafficGrowth": "Traffic Growth",
       "conversionIncrease": "Conversion Increase",
+      "readMore": "Read More",
       "readFullCaseStudy": "Read Full Case Study",
       "talkToOurTeam": "Talk to Our Team",
       "duration": "Duration"
@@ -3889,6 +3930,66 @@
       "button": "Start Your Free Audit"
     },
     "cases": {
+      "cloudsync": {
+        "title": "CloudSync Pro: 520% Enterprise Growth",
+        "description": "B2B SaaS company achieved 520% traffic growth through comprehensive technical SEO monitoring and enterprise keyword optimization.",
+        "results": [
+          "+520% organic traffic growth",
+          "200+ enterprise keywords ranked",
+          "+185% conversion rate improvement"
+        ],
+        "category": "B2B SaaS"
+      },
+      "digitalGrowth": {
+        "title": "Digital Growth Agency: 340% Traffic Increase",
+        "description": "Digital marketing agency transformed their workflow with AI-powered SEO automation, achieving 340% traffic growth and 85% client retention increase.",
+        "results": [
+          "+340% organic traffic growth",
+          "150+ keywords in top 10 rankings",
+          "+280% conversion rate improvement"
+        ],
+        "category": "Digital Marketing"
+      },
+      "stylecraft": {
+        "title": "StyleCraft Boutique: 420% Traffic Growth",
+        "description": "E-commerce store for handcrafted products tripled sales through comprehensive SEO optimization and automated content strategies.",
+        "results": [
+          "+420% organic traffic growth",
+          "80+ new top 10 keyword rankings",
+          "+215% conversion rate improvement"
+        ],
+        "category": "E-commerce"
+      },
+      "peak": {
+        "title": "Peak Performance Gym: 290% Local Growth",
+        "description": "Local gym dominated local search results, tripling phone calls and membership inquiries through strategic local SEO optimization.",
+        "results": [
+          "+290% local traffic growth",
+          "45+ local top 3 rankings achieved",
+          "+156% conversion rate improvement"
+        ],
+        "category": "Local Services"
+      },
+      "gearhub": {
+        "title": "GearHub Pro: 365% Niche E-commerce Success",
+        "description": "Specialized outdoor gear store became the go-to destination in their niche through strategic long-tail keyword targeting and competitor analysis.",
+        "results": [
+          "+365% organic traffic growth",
+          "120+ product keyword rankings",
+          "+245% conversion rate improvement"
+        ],
+        "category": "Niche E-commerce"
+      },
+      "techflow": {
+        "title": "TechFlow Solutions: 520% Enterprise Growth",
+        "description": "Enterprise SaaS platform overcame complex technical challenges to achieve 520% organic traffic growth and dominate enterprise search results.",
+        "results": [
+          "+520% organic traffic growth",
+          "200+ enterprise keyword rankings",
+          "+185% conversion rate improvement"
+        ],
+        "category": "Enterprise SaaS"
+      },
       "digitalGrowthAgency": {
         "title": "Digital Growth Agency: 340% Traffic Increase",
         "client": "Digital Growth Agency",

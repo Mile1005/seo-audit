@@ -1399,6 +1399,8 @@
         }
       },
       "form": {
+        "title": "Commencez votre audit SEO gratuit",
+        "subtitle": "Obtenez une analyse complète en quelques minutes",
         "heading": "Commencez votre audit SEO gratuit",
         "subheading": "Obtenez une analyse complète en quelques minutes",
         "urlLabel": "URL du site web",
@@ -1625,7 +1627,11 @@
         "option10": "10 pages (Recommandé)",
         "option15": "15 pages (Analyse approfondie)",
         "freeLimit": "Les utilisateurs gratuits peuvent explorer jusqu'à 15 pages",
-        "startButton": "Démarrer l'Exploration"
+        "startButton": "Démarrer l'Exploration",
+        "maxPagesLabel": "Nombre Maximum de Pages à Explorer",
+        "includeSubdomains": "Inclure les Sous-domaines",
+        "startCrawl": "Démarrer l'Exploration",
+        "footer": "Les données de votre site web sont traitées en toute sécurité et ne sont jamais stockées de manière permanente."
       },
       "progress": {
         "analyzing": "Analyse de",
@@ -1971,6 +1977,26 @@
         "cta": {
           "analyze": "Analyser les Concurrents",
           "demo": "Voir la Démo"
+        },
+        "dashboard": {
+          "title": "Tableau de Bord des Classements Concurrentiels",
+          "subtitle": "Suivi en direct des positions concurrentes",
+          "live": "En Direct",
+          "position": "Position",
+          "change": "Changement",
+          "monthlySearches": "recherches mensuelles",
+          "improved": "Amélioré",
+          "declined": "Diminué",
+          "unchanged": "Inchangé",
+          "visibility": "Visibilité",
+          "trend": "Tendance",
+          "gained": "Gagné",
+          "lost": "Perdu",
+          "opportunities": "Opportunités"
+        },
+        "trustIndicators": {
+          "realTime": "Suivi concurrentiel en temps réel",
+          "accurate": "Taux de précision supérieur à 95%"
         },
         "keyMetrics": {
           "serp": {
@@ -2376,6 +2402,11 @@
           "generatePlan": "Générer le Plan d'Action Complet",
           "scheduleImplementation": "Planifier la Mise en Œuvre"
         }
+      },
+      "cta": {
+        "title": "Prêt à Surpasser Votre Concurrence ?",
+        "subtitle": "Rejoignez des milliers d'entreprises utilisant l'analyse de concurrents alimentée par IA pour dominer leurs marchés et augmenter le trafic organique.",
+        "button": "Démarrer l'Analyse de Concurrents"
       }
     },
     "keywordTracking": {
@@ -3007,6 +3038,11 @@
         "a5": "Oui ! Surveillez les classements de vos concurrents pour les mêmes mots-clés et recevez des alertes lorsqu'ils font des mouvements significatifs."
       }
     },
+    "cta": {
+      "title": "Prêt à Commencer le Suivi des Mots-Clés ?",
+      "subtitle": "Rejoignez des milliers d'entreprises qui font confiance à notre suivi de classements alimenté par l'IA pour dominer leurs marchés et augmenter le trafic organique.",
+      "button": "Commencer le Suivi des Mots-Clés"
+    },
     "aiAssistant": {
       "hero": {
         "badge": "Assistant SEO alimenté par l'IA",
@@ -3020,7 +3056,9 @@
         "trust": {
           "users": "Plus de 10 000 utilisateurs font confiance à notre assistant IA",
           "accuracy": "95% de précision des recommandations",
-          "available": "Disponible 24h/24 et 7j/7"
+          "available": "Disponible 24h/24 et 7j/7",
+          "trained": "Formé sur plus de 10M de points de données SEO",
+          "realtime": "Mises à jour en temps réel de l'algorithme Google"
         }
       },
       "chatPreview": {
@@ -3812,6 +3850,11 @@
     "exportComplete": "Export terminé !",
     "exportFailed": "L'export a échoué. Veuillez réessayer."
   },
+  "cta": {
+    "title": "Prêt à révolutionner votre stratégie SEO ?",
+    "subtitle": "Rejoignez des milliers de marketeurs qui font confiance à notre assistant IA pour des recommandations SEO expertes.",
+    "button": "Discuter avec l'Assistant IA"
+  },
   "footer": {
     "sections": {
       "product": {
@@ -3944,6 +3987,7 @@
       "caseStudies": "Études de Cas"
     },
     "hero": {
+      "badge": "Histoires de Réussite",
       "title": "Résultats Réels, Impact Concret",
       "subtitle": "Découvrez comment des entreprises de divers secteurs ont atteint une croissance remarquable avec Crawlee. Des services locaux aux entreprises SaaS, nos solutions SEO intelligentes génèrent des résultats mesurables qui stimulent la croissance commerciale."
     },
@@ -3959,6 +4003,7 @@
     "common": {
       "trafficGrowth": "Croissance du Trafic",
       "conversionIncrease": "Augmentation des Conversions",
+      "readMore": "En savoir plus",
       "readFullCaseStudy": "Lire l'Étude Complète",
       "talkToOurTeam": "Parler à Notre Équipe",
       "duration": "Durée"
@@ -3969,6 +4014,66 @@
       "button": "Commencez Votre Audit Gratuit"
     },
     "cases": {
+      "cloudsync": {
+        "title": "CloudSync Pro : 520% de Croissance d'Entreprise",
+        "description": "Entreprise B2B SaaS a atteint 520% de croissance de trafic grâce à une surveillance SEO technique complète et à l'optimisation des mots-clés d'entreprise.",
+        "results": [
+          "+520% de croissance de trafic organique",
+          "200+ mots-clés d'entreprise classés",
+          "+185% d'amélioration du taux de conversion"
+        ],
+        "category": "B2B SaaS"
+      },
+      "digitalGrowth": {
+        "title": "Agence de Croissance Digitale : 340% d'Augmentation de Trafic",
+        "description": "Agence de marketing digital a transformé son workflow avec l'automatisation SEO alimentée par IA, atteignant 340% de croissance de trafic et 85% de rétention client supplémentaire.",
+        "results": [
+          "+340% de croissance de trafic organique",
+          "150+ mots-clés dans les classements top 10",
+          "+280% d'amélioration du taux de conversion"
+        ],
+        "category": "Marketing Digital"
+      },
+      "stylecraft": {
+        "title": "StyleCraft Boutique : 420% de Croissance de Trafic",
+        "description": "Boutique de commerce électronique de produits artisanaux a triplé ses ventes grâce à une optimisation SEO complète et des stratégies de contenu automatisées.",
+        "results": [
+          "+420% de croissance de trafic organique",
+          "80+ nouveaux classements de mots-clés top 10",
+          "+215% d'amélioration du taux de conversion"
+        ],
+        "category": "Commerce Électronique"
+      },
+      "peak": {
+        "title": "Peak Performance Gym : 290% de Croissance Locale",
+        "description": "Salle de sport locale a dominé les résultats de recherche locale, triplant les appels et les demandes d'adhésion grâce à une optimisation SEO locale stratégique.",
+        "results": [
+          "+290% de croissance de trafic local",
+          "45+ classements locaux top 3 atteints",
+          "+156% d'amélioration du taux de conversion"
+        ],
+        "category": "Services Locaux"
+      },
+      "gearhub": {
+        "title": "GearHub Pro : 365% de Succès E-commerce de Niche",
+        "description": "Magasin spécialisé en équipement outdoor est devenu la destination de référence dans sa niche grâce à un ciblage stratégique de mots-clés long-tail et à l'analyse des concurrents.",
+        "results": [
+          "+365% de croissance de trafic organique",
+          "120+ classements de mots-clés de produits",
+          "+245% d'amélioration du taux de conversion"
+        ],
+        "category": "E-commerce de Niche"
+      },
+      "techflow": {
+        "title": "TechFlow Solutions : 520% de Croissance d'Entreprise",
+        "description": "Plateforme SaaS d'entreprise a surmonté des défis techniques complexes pour atteindre 520% de croissance de trafic organique et dominer les résultats de recherche d'entreprise.",
+        "results": [
+          "+520% de croissance de trafic organique",
+          "200+ classements de mots-clés d'entreprise",
+          "+185% d'amélioration du taux de conversion"
+        ],
+        "category": "SaaS d'Entreprise"
+      },
       "digitalGrowthAgency": {
         "title": "Digital Growth Agency : 340% d'Augmentation du Trafic Organique",
         "client": "Digital Growth Agency",

@@ -1,7 +1,8 @@
 import React from 'react';
 import { CheckCircle, Search, TrendingUp, Shield, Zap, Users } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { Breadcrumbs } from '../../components/navigation/breadcrumbs';
+import { Breadcrumbs } from '../navigation/breadcrumbs';
+import { MainLayout } from '../layout/main-layout';
 
 export default async function FeaturesPage() {
   const t = await getTranslations('featuresIndex');
@@ -81,7 +82,8 @@ export default async function FeaturesPage() {
     },
   ];
   return (
-    <div className="min-h-screen bg-background">
+    <MainLayout>
+      <div className="min-h-screen bg-background">
       {/* Header */}
       <section className="py-20 px-4 text-center">
         <div className="max-w-4xl mx-auto">
@@ -284,5 +286,6 @@ export default async function FeaturesPage() {
         </div>
       </section>
     </div>
+    </MainLayout>
   );
 }

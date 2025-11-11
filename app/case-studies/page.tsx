@@ -44,6 +44,54 @@ export default function CaseStudiesPage() {
       ],
       category: t('cases.digitalGrowth.category'),
       image: '/case-studies/digital-growth-agency.jpg'
+    },
+    {
+      id: 'stylecraft-boutique',
+      title: t('cases.stylecraft.title'),
+      description: t('cases.stylecraft.description'),
+      results: [
+        t('cases.stylecraft.results.0'),
+        t('cases.stylecraft.results.1'),
+        t('cases.stylecraft.results.2')
+      ],
+      category: t('cases.stylecraft.category'),
+      image: '/case-studies/stylecraft-boutique.jpg'
+    },
+    {
+      id: 'peak-performance',
+      title: t('cases.peak.title'),
+      description: t('cases.peak.description'),
+      results: [
+        t('cases.peak.results.0'),
+        t('cases.peak.results.1'),
+        t('cases.peak.results.2')
+      ],
+      category: t('cases.peak.category'),
+      image: '/case-studies/peak-performance.jpg'
+    },
+    {
+      id: 'gearhub-pro',
+      title: t('cases.gearhub.title'),
+      description: t('cases.gearhub.description'),
+      results: [
+        t('cases.gearhub.results.0'),
+        t('cases.gearhub.results.1'),
+        t('cases.gearhub.results.2')
+      ],
+      category: t('cases.gearhub.category'),
+      image: '/case-studies/gearhub-pro.jpg'
+    },
+    {
+      id: 'techflow-solutions',
+      title: t('cases.techflow.title'),
+      description: t('cases.techflow.description'),
+      results: [
+        t('cases.techflow.results.0'),
+        t('cases.techflow.results.1'),
+        t('cases.techflow.results.2')
+      ],
+      category: t('cases.techflow.category'),
+      image: '/case-studies/techflow-solutions.jpg'
     }
   ];
 
@@ -120,7 +168,7 @@ export default function CaseStudiesPage() {
                       href={`/case-studies/${study.id}`}
                       className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25"
                     >
-                      {t('common.readMore')}
+                                            {t('common.readMore')}
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </div>

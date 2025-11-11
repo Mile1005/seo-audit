@@ -1332,6 +1332,7 @@
     "cta": {
       "title": "Bereit loszulegen?",
       "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die AI SEO Turbo für ihren SEO-Erfolg vertrauen",
+      "button": "Keyword-Tracking starten",
       "startTrial": "Kostenlose Testversion starten",
       "contactSales": "Vertrieb kontaktieren"
     }
@@ -1399,6 +1400,8 @@
         }
       },
       "form": {
+        "title": "Starten Sie Ihr kostenloses SEO-Audit",
+        "subtitle": "Erhalten Sie in wenigen Minuten eine umfassende Analyse",
         "heading": "Starten Sie Ihr kostenloses SEO-Audit",
         "subheading": "Erhalten Sie in wenigen Minuten eine umfassende Analyse",
         "urlLabel": "Website-URL",
@@ -1625,7 +1628,11 @@
         "option10": "10 Seiten (Empfohlen)",
         "option15": "15 Seiten (Tiefenanalyse)",
         "freeLimit": "Kostenlose Benutzer können bis zu 15 Seiten crawlen",
-        "startButton": "Crawling Starten"
+        "startButton": "Crawling Starten",
+        "maxPagesLabel": "Maximale Anzahl zu crawlender Seiten",
+        "includeSubdomains": "Subdomains einschließen",
+        "startCrawl": "Crawling starten",
+        "footer": "Ihre Website-Daten werden sicher verarbeitet und niemals dauerhaft gespeichert."
       },
       "progress": {
         "analyzing": "Analysiere",
@@ -1971,6 +1978,26 @@
         "cta": {
           "analyze": "Wettbewerber Analysieren",
           "demo": "Demo Ansehen"
+        },
+        "dashboard": {
+          "title": "Wettbewerber-Rankings Dashboard",
+          "subtitle": "Live Wettbewerber-Positionsverfolgung",
+          "live": "Live",
+          "position": "Position",
+          "change": "Änderung",
+          "monthlySearches": "monatliche Suchanfragen",
+          "improved": "Verbessert",
+          "declined": "Zurückgegangen",
+          "unchanged": "Unverändert",
+          "visibility": "Sichtbarkeit",
+          "trend": "Trend",
+          "gained": "Gewonnen",
+          "lost": "Verloren",
+          "opportunities": "Chancen"
+        },
+        "trustIndicators": {
+          "realTime": "Echtzeit-Wettbewerber-Verfolgung",
+          "accurate": "Über 95% Genauigkeitsrate"
         },
         "keyMetrics": {
           "serp": {
@@ -2376,6 +2403,11 @@
           "generatePlan": "Vollständigen Aktionsplan Generieren",
           "scheduleImplementation": "Implementierung Planen"
         }
+      },
+      "cta": {
+        "title": "Bereit, Ihre Konkurrenz zu Überlisten?",
+        "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die KI-gestützte Wettbewerberanalyse nutzen, um ihre Märkte zu dominieren und organischen Traffic zu steigern.",
+        "button": "Wettbewerberanalyse Starten"
       }
     },
     "keywordTracking": {
@@ -3020,7 +3052,9 @@
         "trust": {
           "users": "Über 10.000 Nutzer vertrauen unserem KI-Assistenten",
           "accuracy": "95% Empfehlungsgenauigkeit",
-          "available": "Rund um die Uhr verfügbar"
+          "available": "Rund um die Uhr verfügbar",
+          "trained": "Auf über 10M SEO-Datenpunkten trainiert",
+          "realtime": "Echtzeit-Updates des Google-Algorithmus"
         }
       },
       "chatPreview": {
@@ -3812,6 +3846,11 @@
     "exportComplete": "Export abgeschlossen!",
     "exportFailed": "Export fehlgeschlagen. Bitte versuchen Sie es erneut."
   },
+  "cta": {
+    "title": "Bereit, Ihre SEO-Strategie zu revolutionieren?",
+    "subtitle": "Schließen Sie sich Tausenden von Marketern an, die unserem KI-Assistenten für Experten-SEO-Empfehlungen vertrauen.",
+    "button": "Mit KI-Assistenten chatten"
+  },
   "footer": {
     "sections": {
       "product": {
@@ -3944,6 +3983,7 @@
       "caseStudies": "Fallstudien"
     },
     "hero": {
+      "badge": "Erfolgsgeschichten",
       "title": "Echte Ergebnisse, Echte Wirkung",
       "subtitle": "Entdecken Sie, wie Unternehmen verschiedener Branchen mit Crawlee bemerkenswerte Wachstumsraten erzielten. Von lokalen Dienstleistern bis hin zu Enterprise-SaaS-Unternehmen - unsere intelligenten SEO-Lösungen liefern messbare Ergebnisse, die das Geschäft vorantreiben."
     },
@@ -3959,6 +3999,7 @@
     "common": {
       "trafficGrowth": "Traffic-Wachstum",
       "conversionIncrease": "Conversion-Steigerung",
+      "readMore": "Mehr lesen",
       "readFullCaseStudy": "Vollständige Fallstudie lesen",
       "talkToOurTeam": "Sprechen Sie mit unserem Team",
       "duration": "Dauer"
@@ -3969,6 +4010,66 @@
       "button": "Starten Sie Ihr kostenloses Audit"
     },
     "cases": {
+      "cloudsync": {
+        "title": "CloudSync Pro: 520% Unternehmenswachstum",
+        "description": "B2B SaaS-Unternehmen erreichte 520% Traffic-Wachstum durch umfassende technische SEO-Überwachung und Enterprise-Keyword-Optimierung.",
+        "results": [
+          "+520% organisches Traffic-Wachstum",
+          "200+ Enterprise-Keywords gerankt",
+          "+185% Konversionsrate-Verbesserung"
+        ],
+        "category": "B2B SaaS"
+      },
+      "digitalGrowth": {
+        "title": "Digital Growth Agency: 340% Traffic-Steigerung",
+        "description": "Digitale Marketing-Agentur transformierte ihren Workflow mit KI-gestützter SEO-Automatisierung und erreichte 340% Traffic-Wachstum sowie 85% mehr Kundenbindung.",
+        "results": [
+          "+340% organisches Traffic-Wachstum",
+          "150+ Keywords in Top-10-Rankings",
+          "+280% Konversionsrate-Verbesserung"
+        ],
+        "category": "Digitales Marketing"
+      },
+      "stylecraft": {
+        "title": "StyleCraft Boutique: 420% Traffic-Wachstum",
+        "description": "E-Commerce-Shop für handgefertigte Produkte verdreifachte Verkäufe durch umfassende SEO-Optimierung und automatisierte Content-Strategien.",
+        "results": [
+          "+420% organisches Traffic-Wachstum",
+          "80+ neue Top-10-Keyword-Rankings",
+          "+215% Konversionsrate-Verbesserung"
+        ],
+        "category": "E-Commerce"
+      },
+      "peak": {
+        "title": "Peak Performance Gym: 290% lokales Wachstum",
+        "description": "Lokales Fitnessstudio dominierte lokale Suchergebnisse und verdreifachte Anrufe und Mitgliedsanfragen durch strategische lokale SEO-Optimierung.",
+        "results": [
+          "+290% lokales Traffic-Wachstum",
+          "45+ lokale Top-3-Rankings erreicht",
+          "+156% Konversionsrate-Verbesserung"
+        ],
+        "category": "Lokale Dienstleistungen"
+      },
+      "gearhub": {
+        "title": "GearHub Pro: 365% Nischen-E-Commerce-Erfolg",
+        "description": "Spezialisierter Outdoor-Ausrüstungsshop wurde zur ersten Anlaufstelle in seiner Nische durch strategische Long-Tail-Keyword-Zielsetzung und Wettbewerberanalyse.",
+        "results": [
+          "+365% organisches Traffic-Wachstum",
+          "120+ Produkt-Keyword-Rankings",
+          "+245% Konversionsrate-Verbesserung"
+        ],
+        "category": "Nischen-E-Commerce"
+      },
+      "techflow": {
+        "title": "TechFlow Solutions: 520% Unternehmenswachstum",
+        "description": "Enterprise-SaaS-Plattform überwand komplexe technische Herausforderungen und erreichte 520% organisches Traffic-Wachstum sowie Dominanz in Enterprise-Suchergebnissen.",
+        "results": [
+          "+520% organisches Traffic-Wachstum",
+          "200+ Enterprise-Keyword-Rankings",
+          "+185% Konversionsrate-Verbesserung"
+        ],
+        "category": "Enterprise SaaS"
+      },
       "digitalGrowthAgency": {
         "title": "Digital Growth Agency: 340% Traffic-Steigerung",
         "client": "Digital Growth Agency",
