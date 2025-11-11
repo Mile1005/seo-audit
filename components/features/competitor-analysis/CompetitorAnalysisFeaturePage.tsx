@@ -84,11 +84,14 @@ export default function CompetitorAnalysisFeaturePage() {
         </div>
 
         {/* Hero Section */}
-        <CompetitorAnalysisHero
-          onCompetitorSubmit={handleCompetitorSubmit}
-          isSubmitting={isSubmitting}
-          submitError={submitError || undefined}
-        />
+        <section>
+          <h1 className="sr-only">Competitor Analysis - SEO Intelligence Tool</h1>
+          <CompetitorAnalysisHero
+            onCompetitorSubmit={handleCompetitorSubmit}
+            isSubmitting={isSubmitting}
+            submitError={submitError || undefined}
+          />
+        </section>
 
         {/* Results Section */}
         <AnimatePresence>

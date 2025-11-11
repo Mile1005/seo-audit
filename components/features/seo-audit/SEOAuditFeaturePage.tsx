@@ -291,11 +291,14 @@ export default function SEOAuditFeaturePage() {
         </div>
 
         {/* Hero Section with Interactive Form */}
-        <SEOAuditHero
-          onAuditSubmit={handleAuditSubmit}
-          isSubmitting={isSubmitting}
-          submitError={submitError ?? undefined}
-        />
+        <section>
+          <h1 className="sr-only">SEO Audit Tool - Comprehensive Website Analysis</h1>
+          <SEOAuditHero
+            onAuditSubmit={handleAuditSubmit}
+            isSubmitting={isSubmitting}
+            submitError={submitError ?? undefined}
+          />
+        </section>
 
         {/* Audit Results Display */}
         <AnimatePresence>

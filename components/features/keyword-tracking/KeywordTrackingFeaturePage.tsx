@@ -103,11 +103,14 @@ export default function KeywordTrackingFeaturePage() {
         </div>
 
         {/* Hero Section */}
-        <KeywordTrackingHero
-          onKeywordSubmit={handleKeywordSubmit}
-          isSubmitting={isSubmitting}
-          submitError={submitError ?? undefined}
-        />
+        <section>
+          <h1 className="sr-only">Keyword Tracking - Monitor SEO Rankings</h1>
+          <KeywordTrackingHero
+            onKeywordSubmit={handleKeywordSubmit}
+            isSubmitting={isSubmitting}
+            submitError={submitError ?? undefined}
+          />
+        </section>
 
         {/* Keyword Research Results */}
         <AnimatePresence>

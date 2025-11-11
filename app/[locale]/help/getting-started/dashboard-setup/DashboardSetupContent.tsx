@@ -15,6 +15,8 @@ export default function DashboardSetupContent() {
           className="prose prose-lg prose-invert max-w-none"
         >
 
+          <h1 className="sr-only">Dashboard Setup Guide - Customize Your Workspace</h1>
+
           {/* Introduction */}
           <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
             <div className="flex items-start gap-4">

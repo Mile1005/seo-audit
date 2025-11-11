@@ -99,16 +99,19 @@ export default function AIAssistantFeaturePage() {
         </div>
 
         {/* Interactive Hero Section */}
-        <AIAssistantHero
-          onChatSubmit={handleChatSubmit}
-          isTyping={isSubmitting}
-          conversation={messages.map(msg => ({
-            type: msg.role === 'user' ? 'user' as const : 'ai' as const,
-            message: msg.content,
-            time: msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            typing: msg.role === 'assistant' && isSubmitting
-          }))}
-        />
+        <section>
+          <h1 className="sr-only">AI SEO Assistant - Smart Optimization Recommendations</h1>
+          <AIAssistantHero
+            onChatSubmit={handleChatSubmit}
+            isTyping={isSubmitting}
+            conversation={messages.map(msg => ({
+              type: msg.role === 'user' ? 'user' as const : 'ai' as const,
+              message: msg.content,
+              time: msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              typing: msg.role === 'assistant' && isSubmitting
+            }))}
+          />
+        </section>
 
         {/* How AI Works */}
         <HowAIWorks />

@@ -63,11 +63,14 @@ export default function SiteCrawlerFeaturePage() {
         </div>
 
         {/* Hero Section */}
-        <SiteCrawlerHero
-          onCrawlSubmit={handleCrawl}
-          isSubmitting={isSubmitting}
-          submitError={submitError ?? undefined}
-        />
+        <section>
+          <h1 className="sr-only">Site Crawler - Complete Website Analysis Tool</h1>
+          <SiteCrawlerHero
+            onCrawlSubmit={handleCrawl}
+            isSubmitting={isSubmitting}
+            submitError={submitError ?? undefined}
+          />
+        </section>
 
         {/* Crawl Results Display */}
         <AnimatePresence>
