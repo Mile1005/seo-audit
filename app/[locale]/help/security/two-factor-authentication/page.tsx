@@ -4,7 +4,9 @@ import TwoFactorAuthPage from '@/app/help/security/two-factor-authentication/pag
 
 export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
   return generateSEOMeta({
-    ...pageSEO.help,
+    title: 'Two-Factor Authentication Setup Guide - Account Security | AI SEO Turbo',
+    description: 'Learn how to enable and configure two-factor authentication (2FA) to secure your AI SEO Turbo account with an extra layer of protection.',
+    keywords: ['two-factor authentication', '2FA', 'account security', 'login protection', 'security settings'],
     path: '/help/security/two-factor-authentication',
     locale: params.locale as Locale,
   })

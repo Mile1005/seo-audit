@@ -6,7 +6,9 @@ export const dynamic = 'force-static'
 
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   return generateSEOMeta({
-    ...pageSEO.help,
+    title: 'GDPR Compliance & Data Rights - Privacy Regulations | AI SEO Turbo',
+    description: 'Understand your GDPR rights, data portability options, and how AI SEO Turbo complies with privacy regulations for EU users.',
+    keywords: ['GDPR', 'data rights', 'privacy regulations', 'EU compliance', 'data portability', 'right to erasure'],
     path: '/help/security/gdpr',
     locale: params.locale as Locale,
   })
