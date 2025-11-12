@@ -141,7 +141,9 @@ function loadCSVTitleData(): Map<string, Map<string, string>> {
  */
 function getLocalizedTitle(pagePath: string, locale: string): string | null {
   const csvData = loadCSVTitleData();
-  const pageTitles = csvData.get(pagePath);
+  // Handle homepage case - empty path should map to 'home' in CSV
+  const lookupPath = pagePath === '' ? 'home' : pagePath;
+  const pageTitles = csvData.get(lookupPath);
   if (pageTitles) {
     return pageTitles.get(locale) || pageTitles.get('en') || null;
   }
@@ -183,7 +185,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
 
   // Get localized title from CSV if available (takes precedence over config title)
   let finalTitle = seo.title;
-  if (seo.locale && seo.path) {
+  if (seo.locale && seo.path !== undefined) {
     const csvTitle = getLocalizedTitle(seo.path, seo.locale);
     if (csvTitle) {
       finalTitle = csvTitle;
