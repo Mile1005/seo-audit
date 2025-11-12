@@ -85,12 +85,11 @@ const ContentGate = dynamic(() =>
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    title: 'AI SEO Audit Tool - Boost Rankings 300% Faster | AI SEO Turbo',
     description: 'Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.',
     keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis'],
     ogImage: '/logo.png',
     locale: locale as Locale,
-    path: 'home' // Homepage should be at root, not /home
+    path: '' // Homepage should be at root, not /home
   })
 }
 
