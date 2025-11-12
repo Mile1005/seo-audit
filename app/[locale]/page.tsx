@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis'],
     ogImage: '/logo.png',
     locale: locale as Locale,
-    path: 'home'
+    path: '' // Homepage should be at root, not /home
   })
 }
 
