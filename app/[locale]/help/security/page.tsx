@@ -6,7 +6,6 @@ import { Metadata } from 'next'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   return generateSEOMeta({
-    title: 'Security Overview - Data Protection & Account Safety | AI SEO Turbo',
     description: 'Learn about our security measures, privacy policies, data protection practices, and how we keep your information safe and compliant.',
     keywords: ['security', 'data protection', 'account safety', 'privacy policies', 'compliance'],
     locale: locale as Locale,
