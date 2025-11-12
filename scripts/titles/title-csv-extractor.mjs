@@ -109,14 +109,15 @@ class TitleExtractor {
   }
 
   generateCSV(results) {
-    const csvHeader = 'URL,Locale,Locale Name,Title,HTML Lang,Status,Error\n';
+    const csvHeader = 'URL,Locale,Locale Name,Title,Title Length,HTML Lang,Status,Error\n';
 
     const csvRows = results.map(result => {
       const localeName = LOCALE_NAMES[result.locale] || result.locale;
       const escapedTitle = `"${(result.title || '').replace(/"/g, '""')}"`;
+      const titleLength = result.title && result.title !== 'ERROR' && result.title !== 'NO TITLE' ? result.title.length : 0;
       const escapedError = result.error ? `"${result.error.replace(/"/g, '""')}"` : '';
 
-      return `${result.url},${result.locale},${localeName},${escapedTitle},${result.htmlLang || ''},${result.status},${escapedError}`;
+      return `${result.url},${result.locale},${localeName},${escapedTitle},${titleLength},${result.htmlLang || ''},${result.status},${escapedError}`;
     });
 
     return csvHeader + csvRows.join('\n');
@@ -159,10 +160,28 @@ class TitleExtractor {
     const duplicates = Object.entries(titleCounts).filter(([title, count]) => count > 1);
     const uniqueTitles = Object.keys(titleCounts).length;
 
-    console.log(`\n🎯 TITLE ANALYSIS:`);
+    console.log(`🎯 TITLE ANALYSIS:`);
     console.log(`   Unique titles: ${uniqueTitles}`);
     console.log(`   Duplicate title groups: ${duplicates.length}`);
     console.log(`   Total duplicate instances: ${duplicates.reduce((sum, [title, count]) => sum + count, 0)}\n`);
+
+    // Title length analysis
+    const titleLengths = results
+      .filter(r => r.title && r.title !== 'ERROR' && r.title !== 'NO TITLE')
+      .map(r => r.title.length);
+
+    if (titleLengths.length > 0) {
+      const avgLength = Math.round(titleLengths.reduce((sum, len) => sum + len, 0) / titleLengths.length);
+      const minLength = Math.min(...titleLengths);
+      const maxLength = Math.max(...titleLengths);
+      const optimalRange = titleLengths.filter(len => len >= 50 && len <= 60).length;
+
+      console.log(`📏 TITLE LENGTH ANALYSIS:`);
+      console.log(`   Average length: ${avgLength} characters`);
+      console.log(`   Shortest title: ${minLength} characters`);
+      console.log(`   Longest title: ${maxLength} characters`);
+      console.log(`   Titles in optimal range (50-60 chars): ${optimalRange}/${titleLengths.length} (${Math.round((optimalRange/titleLengths.length)*100)}%)\n`);
+    }
 
     if (duplicates.length > 0) {
       console.log(`🚨 TOP DUPLICATE TITLES:`);

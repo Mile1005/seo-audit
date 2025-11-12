@@ -102,7 +102,7 @@ function loadCSVTitleData(): Map<string, Map<string, string>> {
       if (parts.length >= 8) {
         const url = parts[0];
         const locale = parts[1];
-        const finalTitle = parts[6].replace(/^"|"$/g, '');
+        const finalTitle = parts[3].replace(/^"|"$/g, '');
 
         // Extract page path
         let pagePath = url.replace('https://www.aiseoturbo.com', '');
