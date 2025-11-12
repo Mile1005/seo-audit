@@ -84,7 +84,7 @@ function loadCSVTitleData(): Map<string, Map<string, string>> {
     // Try to read the CSV file
     const fs = require('fs');
     const path = require('path');
-    const csvPath = path.join(process.cwd(), 'all-page-titles-complete.csv');
+    const csvPath = path.join(process.cwd(), 'csv', 'all-page-titles-complete.csv');
 
     if (!fs.existsSync(csvPath)) {
       console.warn('CSV file not found, using fallback titles');
