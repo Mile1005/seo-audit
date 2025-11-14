@@ -404,7 +404,25 @@
     "popularTopics": "Topik Populer",
     "gettingStarted": "Memulai",
     "troubleshooting": "Troubleshooting",
-    "bestPractices": "Praktik Terbaik"
+    "bestPractices": "Praktik Terbaik",
+    "first-audit": {
+      "meta": {
+        "title": "Cara Membuat Audit SEO Pertama Anda - Panduan Langkah-demi-Langkah | AI SEO Turbo",
+        "description": "Pelajari cara melakukan audit SEO komprehensif pertama Anda menggunakan alat bertenaga AI AISEOTurbo. Panduan lengkap langkah-demi-langkah dari memasukkan URL Anda hingga meninjau hasil."
+      }
+    },
+    "dashboard-setup": {
+      "meta": {
+        "title": "Panduan Setup Dashboard - Sesuaikan Ruang Kerja Anda | AI SEO Turbo",
+        "description": "Pelajari cara menyesuaikan dashboard AISEOTurbo Anda untuk produktivitas maksimal. Atur notifikasi, atur ruang kerja Anda, dan konfigurasikan preferensi tampilan."
+      }
+    },
+    "seo-scores": {
+      "meta": {
+        "title": "Memahami Skor SEO - Panduan Lengkap | AI SEO Turbo",
+        "description": "Pelajari cara menafsirkan skor audit SEO Anda. Pahami apa arti setiap skor, bagaimana mereka dihitung, dan bagaimana meningkatkan performa SEO situs web Anda."
+      }
+    }
   },
   "home": {
     "hero": {

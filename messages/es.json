@@ -324,7 +324,25 @@
     "popularTopics": "Temas populares",
     "gettingStarted": "Primeros pasos",
     "troubleshooting": "Solución de problemas",
-    "bestPractices": "Mejores prácticas"
+    "bestPractices": "Mejores prácticas",
+    "first-audit": {
+      "meta": {
+        "title": "Cómo crear su primera auditoría SEO - Guía paso a paso | AI SEO Turbo",
+        "description": "Aprenda a realizar su primera auditoría SEO completa utilizando las herramientas impulsadas por IA de AISEOTurbo. Guía completa paso a paso desde ingresar su URL hasta revisar los resultados."
+      }
+    },
+    "dashboard-setup": {
+      "meta": {
+        "title": "Guía de configuración del panel - Personalice su espacio de trabajo | AI SEO Turbo",
+        "description": "Aprenda a personalizar su panel de AISEOTurbo para máxima productividad. Configure notificaciones, organice su espacio de trabajo y ajuste las preferencias de visualización."
+      }
+    },
+    "seo-scores": {
+      "meta": {
+        "title": "Entender las puntuaciones SEO - Guía completa | AI SEO Turbo",
+        "description": "Aprenda a interpretar sus puntuaciones de auditoría SEO. Entienda qué significa cada puntuación, cómo se calculan y cómo mejorar el rendimiento SEO de su sitio web."
+      }
+    }
   },
   "home": {
     "hero": {

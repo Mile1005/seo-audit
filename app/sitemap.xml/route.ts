@@ -15,6 +15,7 @@ const routes: Route[] = [
   // Main Pages - Priority 1.0
   { path: '/pricing', priority: 1.0, changeFrequency: 'monthly' },
   { path: '/features', priority: 1.0, changeFrequency: 'weekly' },
+  { path: '/demo', priority: 0.9, changeFrequency: 'monthly' },
 
   // Feature Pages - Priority 0.9
   { path: '/features/seo-audit', priority: 0.9, changeFrequency: 'weekly' },
@@ -26,6 +27,11 @@ const routes: Route[] = [
   // About & Company - Priority 0.8
   { path: '/about', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/contact', priority: 0.8, changeFrequency: 'monthly' },
+
+  // Legal & Status - Priority 0.5
+  { path: '/privacy', priority: 0.5, changeFrequency: 'yearly' },
+  { path: '/terms', priority: 0.5, changeFrequency: 'yearly' },
+  { path: '/status', priority: 0.5, changeFrequency: 'weekly' },
 
   // Blog - Priority 0.7
   { path: '/blog', priority: 0.7, changeFrequency: 'weekly' },
@@ -51,7 +57,11 @@ const routes: Route[] = [
   { path: '/help/getting-started/quick-start', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/help/getting-started/first-audit', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/help/getting-started/seo-scores', priority: 0.5, changeFrequency: 'monthly' },
-  { path: '/help/seo-tools-features', priority: 0.5, changeFrequency: 'monthly' },
+  { path: '/help/getting-started/dashboard-setup', priority: 0.5, changeFrequency: 'monthly' },
+  { path: '/help/seo-tools', priority: 0.5, changeFrequency: 'monthly' },
+  { path: '/help/billing', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/security', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/api', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/features/seo-audit', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/help/features/site-crawler', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/help/features/competitor-analysis', priority: 0.5, changeFrequency: 'monthly' },

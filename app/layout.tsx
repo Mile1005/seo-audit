@@ -92,6 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   // Organization Schema - Company/Business Entity
   const organizationSchema = {
     "@context": "https://schema.org",
+    "@language": "en",
     "@type": "Organization",
     "@id": "https://www.aiseoturbo.com/#organization",
     "name": "AISEOTurbo",

@@ -22,11 +22,12 @@ let allTitles = [];
 let allDescriptions = [];
 
 function loadUrls() {
-  if (!fs.existsSync('urls_live.csv')) {
-    console.error('urls_live.csv not found');
+  const urlsPath = 'csv/urls_live.csv';
+  if (!fs.existsSync(urlsPath)) {
+    console.error('csv/urls_live.csv not found');
     process.exit(1);
   }
-  const csvData = fs.readFileSync('urls_live.csv', 'utf8');
+  const csvData = fs.readFileSync(urlsPath, 'utf8');
   const records = csvParse.parse(csvData, { columns: true });
   return records;
 }

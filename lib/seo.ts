@@ -30,8 +30,8 @@ const defaultSEO: SEOConfig = {
     'AI SEO tools'
   ],
   ogType: 'website',
-  twitterCard: 'summary_large_image'
-  // ogImage will be set per page if needed
+  twitterCard: 'summary_large_image',
+  ogImage: '/logo.png'  // Default og:image
 }
 
 // Cache for CSV data

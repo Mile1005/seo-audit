@@ -399,7 +399,25 @@
     "popularTopics": "Beliebte Themen",
     "gettingStarted": "Erste Schritte",
     "troubleshooting": "Fehlerbehebung",
-    "bestPractices": "Best Practices"
+    "bestPractices": "Best Practices",
+    "first-audit": {
+      "meta": {
+        "title": "So erstellen Sie Ihr erstes SEO-Audit - Schritt-für-Schritt-Anleitung | AI SEO Turbo",
+        "description": "Erfahren Sie, wie Sie Ihr erstes umfassendes SEO-Audit mit den KI-gestützten Tools von AISEOTurbo durchführen. Vollständige Schritt-für-Schritt-Anleitung von der Eingabe Ihrer URL bis zur Überprüfung der Ergebnisse."
+      }
+    },
+    "dashboard-setup": {
+      "meta": {
+        "title": "Dashboard-Setup-Anleitung - Passen Sie Ihren Arbeitsbereich an | AI SEO Turbo",
+        "description": "Erfahren Sie, wie Sie Ihr AISEOTurbo-Dashboard für maximale Produktivität anpassen. Richten Sie Benachrichtigungen ein, organisieren Sie Ihren Arbeitsbereich und konfigurieren Sie Anzeigepräferenzen."
+      }
+    },
+    "seo-scores": {
+      "meta": {
+        "title": "SEO-Scores verstehen - Vollständiger Leitfaden | AI SEO Turbo",
+        "description": "Erfahren Sie, wie Sie Ihre SEO-Audit-Scores interpretieren. Verstehen Sie, was jeder Score bedeutet, wie sie berechnet werden und wie Sie die SEO-Leistung Ihrer Website verbessern."
+      }
+    }
   },
   "home": {
     "hero": {
