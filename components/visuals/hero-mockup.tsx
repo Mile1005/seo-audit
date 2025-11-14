@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import { Play, Pause, Maximize2, Minimize2 } from "lucide-react"
 import { HeroImage } from "@/components/ui/optimized-image"
+import { useTranslations } from 'next-intl'
 
 export interface HeroMockupProps {
   className?: string
@@ -11,6 +12,7 @@ export interface HeroMockupProps {
 export function HeroMockup({ className = "" }: HeroMockupProps) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const t = useTranslations()
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
@@ -43,7 +45,7 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
             {/* Dashboard Content */}
             <HeroImage
               src="/images/hero/hero-laptop-dashboard.svg"
-              alt="SEO Audit Dashboard showing comprehensive website analysis results"
+              alt={t('home.images.heroDashboard')}
               className="absolute inset-0 w-full h-full object-cover"
               priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"

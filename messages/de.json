@@ -444,6 +444,31 @@
       "trustText": "vertrauen unserer Plattform",
       "ratingLabel": "Durchschnittsbewertung"
     },
+    "images": {
+      "heroDashboard": "SEO-Audit-Dashboard mit umfassenden Website-Analyseergebnissen",
+      "competitorAnalysis": "Wettbewerber-Analyse-Dashboard mit SEO-Vergleichsmetriken und wettbewerbsbezogenen Einblicken",
+      "pdfReport": "Professioneller PDF-SEO-Bericht mit Diagrammen, Empfehlungen und personalisiertem Layout",
+      "aiChat": "KI-Chat-Schnittstelle mit personalisierten SEO-Empfehlungen und Einblicken",
+      "teamCollaboration": "Team-Kollaborations-Dashboard mit gemeinsamen Projekten, Aufgaben und Fortschrittsverfolgung",
+      "features": {
+        "competitorAnalysis": {
+          "title": "Wettbewerber-Analyse-Dashboard",
+          "description": "Vergleichen Sie Ihre SEO-Leistung mit Wettbewerbern mit detaillierten Einblicken und Lückenanalyse."
+        },
+        "pdfReports": {
+          "title": "Professionelle PDF-Berichte",
+          "description": "Erstellen Sie umfassende, white-label SEO-Berichte für Kunden und Stakeholder."
+        },
+        "aiChat": {
+          "title": "KI-gestützter SEO-Assistent",
+          "description": "Erhalten Sie sofortige Antworten und Empfehlungen von unserem intelligenten SEO-Chatbot."
+        },
+        "teamCollaboration": {
+          "title": "Team-Kollaborationstools",
+          "description": "Arbeiten Sie gemeinsam mit Ihrem Team an SEO-Projekten mit geteilten Dashboards und Aufgabenverwaltung."
+        }
+      }
+    },
     "freeTrialNoCreditCard": "Starten Sie Ihre kostenlose Testversion. Keine Kreditkarte erforderlich.",
     "why": {
       "title": "Warum AI SEO Turbo wählen?",
@@ -3730,6 +3755,11 @@
         "q5": "Integriert sich der KI-Assistent mit anderen Tools?",
         "a5": "Der KI-Assistent funktioniert nahtlos mit allen AI SEO Turbo-Funktionen und liefert kontextualisierte Erkenntnisse basierend auf Ihren Audit-Ergebnissen, Keyword-Daten und Wettbewerbsanalysen."
       }
+    },
+    "cta": {
+      "title": "Bereit, mit Keyword-Tracking zu beginnen?",
+      "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die unserem KI-gestützten Ranking-Tracking vertrauen, um ihre Märkte zu dominieren und organischen Traffic zu steigern.",
+      "button": "Keyword-Tracking starten"
     }
   },
   "contact": {

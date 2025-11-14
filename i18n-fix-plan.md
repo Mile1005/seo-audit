@@ -16,15 +16,17 @@ Focus on public-facing SEO elements and accessibility to prevent traffic loss an
 - **Effort**: 2 hours
 - **Impact**: High - Affects SERP appearance and click-through rates
 
-### 1.2 Image Alt Texts
+### 1.2 Image Alt Texts ✅ COMPLETED
 - **Files**: All components with `<img>` or `<Image>` tags
 - **Issues**: 29 hardcoded alt attributes
-- **Fixes**:
-  - Add alt text keys to `messages/[locale].json` (e.g., `common.logo.alt`, `features.screenshot.alt`)
-  - Replace hardcoded alt with `alt={t('common.logo.alt')}`
-  - Verify Next.js Image components use proper alt props
-- **Effort**: 1 hour
-- **Impact**: High - Accessibility and SEO compliance
+- **Fixes**: ✅ DONE
+  - Added alt text keys to `messages/[locale].json` under `home.images.*` namespace
+  - Updated `hero-mockup.tsx` and `feature-mockups.tsx` to use `useTranslations` hook
+  - Replaced hardcoded alt with `alt={t('home.images.heroDashboard')}` etc.
+  - Verified Next.js Image components use proper alt props
+  - All 6 locales (en/fr/it/es/de/id) have complete alt text translations
+- **Effort**: 1 hour ✅ COMPLETED
+- **Impact**: High - Accessibility and SEO compliance ✅ ACHIEVED
 
 ### 1.3 Hero Section Subtitles and CTAs
 - **Files**: `components/hero/hero-section.tsx`

@@ -446,6 +446,31 @@
       "trustText": "nous font confiance",
       "ratingLabel": "note moyenne"
     },
+    "images": {
+      "heroDashboard": "Tableau de bord d'audit SEO montrant des résultats d'analyse complète du site web",
+      "competitorAnalysis": "Tableau de bord d'analyse concurrentielle montrant les métriques de comparaison SEO et les insights concurrentiels",
+      "pdfReport": "Rapport SEO PDF professionnel avec graphiques, recommandations et mise en page personnalisée",
+      "aiChat": "Interface de chat IA fournissant des recommandations SEO personnalisées et des insights",
+      "teamCollaboration": "Tableau de bord de collaboration d'équipe avec projets partagés, tâches et suivi des progrès",
+      "features": {
+        "competitorAnalysis": {
+          "title": "Tableau de Bord d'Analyse Concurrentielle",
+          "description": "Comparez vos performances SEO avec les concurrents grâce à des insights détaillés et une analyse des écarts."
+        },
+        "pdfReports": {
+          "title": "Rapports PDF Professionnels",
+          "description": "Générez des rapports SEO complets, en marque blanche, pour les clients et les parties prenantes."
+        },
+        "aiChat": {
+          "title": "Assistant SEO Alimenté par IA",
+          "description": "Obtenez des réponses instantanées et des recommandations de notre chatbot SEO intelligent."
+        },
+        "teamCollaboration": {
+          "title": "Outils de Collaboration d'Équipe",
+          "description": "Travaillez ensemble sur des projets SEO avec des tableaux de bord partagés et une gestion des tâches."
+        }
+      }
+    },
     "freeTrialNoCreditCard": "Commencez votre essai gratuit. Aucune carte de crédit requise.",
     "why": {
       "title": "Pourquoi choisir AI SEO Turbo ?",
@@ -1360,6 +1385,7 @@
     "cta": {
       "title": "Prêt à Commencer ?",
       "subtitle": "Rejoignez des milliers d'entreprises qui font confiance à AI SEO Turbo pour leur succès SEO",
+      "button": "Commencer le suivi des mots-clés",
       "startTrial": "Démarrer l'Essai Gratuit",
       "contactSales": "Contacter les Ventes"
     }

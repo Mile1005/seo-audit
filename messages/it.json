@@ -449,6 +449,31 @@
       "trustText": "si fidano della nostra piattaforma",
       "ratingLabel": "valutazione media"
     },
+    "images": {
+      "heroDashboard": "Dashboard di audit SEO che mostra risultati completi di analisi del sito web",
+      "competitorAnalysis": "Dashboard di analisi concorrenti che mostra metriche di confronto SEO e insights competitivi",
+      "pdfReport": "Rapporto SEO PDF professionale con grafici, raccomandazioni e layout personalizzato",
+      "aiChat": "Interfaccia di chat AI che fornisce raccomandazioni SEO personalizzate e insights",
+      "teamCollaboration": "Dashboard di collaborazione team con progetti condivisi, compiti e monitoraggio dei progressi",
+      "features": {
+        "competitorAnalysis": {
+          "title": "Dashboard di Analisi Concorrenti",
+          "description": "Confronta le tue prestazioni SEO con i concorrenti con insights dettagliati e analisi delle lacune."
+        },
+        "pdfReports": {
+          "title": "Rapporti PDF Professionali",
+          "description": "Genera rapporti SEO completi, white-label, per clienti e stakeholder."
+        },
+        "aiChat": {
+          "title": "Assistente SEO Alimentato da AI",
+          "description": "Ottieni risposte istantanee e raccomandazioni dal nostro chatbot SEO intelligente."
+        },
+        "teamCollaboration": {
+          "title": "Strumenti di Collaborazione Team",
+          "description": "Lavora insieme al tuo team su progetti SEO con dashboard condivise e gestione delle attività."
+        }
+      }
+    },
     "freeTrialNoCreditCard": "Inizi la sua prova gratuita. Nessuna carta di credito richiesta.",
     "why": {
       "title": "Perché scegliere AI SEO Turbo?",
@@ -1363,6 +1388,7 @@
     "cta": {
       "title": "Pronto per iniziare?",
       "subtitle": "Si unisca a migliaia di aziende che si fidano di AI SEO Turbo per il loro successo SEO",
+      "button": "Inizia monitoraggio parole chiave",
       "startTrial": "Inizia prova gratuita",
       "contactSales": "Contatta vendite"
     }
@@ -3867,6 +3893,11 @@
       "message": "Troppe richieste. Attenda {seconds} secondi.",
       "wait": "Attenda"
     }
+  },
+  "cta": {
+    "title": "Pronto per ottenere aiuto SEO alimentato dall'IA?",
+    "subtitle": "Unisciti a migliaia di aziende che utilizzano il nostro assistente IA per ottenere raccomandazioni SEO personalizzate e migliorare i loro ranking di ricerca.",
+    "button": "Chatta con l'Assistente IA"
   },
   "notifications": {
     "auditComplete": "Audit completato con successo!",

@@ -364,6 +364,31 @@
       "trustText": "trust our platform",
       "ratingLabel": "average rating"
     },
+    "images": {
+      "heroDashboard": "SEO Audit Dashboard showing comprehensive website analysis results",
+      "competitorAnalysis": "Competitor analysis dashboard showing SEO comparison metrics and competitive insights",
+      "pdfReport": "Professional PDF SEO report with charts, recommendations, and branded layout",
+      "aiChat": "AI chat interface providing personalized SEO recommendations and insights",
+      "teamCollaboration": "Team collaboration dashboard with shared projects, tasks, and progress tracking",
+      "features": {
+        "competitorAnalysis": {
+          "title": "Competitor Analysis Dashboard",
+          "description": "Compare your SEO performance against competitors with detailed insights and gap analysis."
+        },
+        "pdfReports": {
+          "title": "Professional PDF Reports",
+          "description": "Generate comprehensive, white-label SEO reports for clients and stakeholders."
+        },
+        "aiChat": {
+          "title": "AI-Powered SEO Assistant",
+          "description": "Get instant answers and recommendations from our intelligent SEO chatbot."
+        },
+        "teamCollaboration": {
+          "title": "Team Collaboration Tools",
+          "description": "Work together with your team on SEO projects with shared dashboards and task management."
+        }
+      }
+    },
     "freeTrialNoCreditCard": "Start your free trial. No credit card required.",
     "why": {
       "title": "Why Choose AI SEO Turbo?",

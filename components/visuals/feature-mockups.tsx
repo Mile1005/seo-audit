@@ -4,13 +4,14 @@ import React, { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ChevronLeft, ChevronRight, Maximize2, Download } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 export interface FeatureMockup {
   id: string
-  title: string
-  description: string
+  titleKey: string
+  descriptionKey: string
   imageSrc: string
-  imageAlt: string
+  imageAltKey: string
   category: 'desktop' | 'mobile' | 'report'
 }
 
@@ -22,34 +23,34 @@ export interface FeatureMockupsProps {
 const defaultMockups: FeatureMockup[] = [
   {
     id: 'competitor-analysis',
-    title: 'Competitor Analysis Dashboard',
-    description: 'Compare your SEO performance against competitors with detailed insights and gap analysis.',
+    titleKey: 'home.images.features.competitorAnalysis.title',
+    descriptionKey: 'home.images.features.competitorAnalysis.description',
     imageSrc: '/images/features/competitor-analysis-desktop.webp',
-    imageAlt: 'Competitor analysis dashboard showing SEO comparison metrics and competitive insights',
+    imageAltKey: 'home.images.competitorAnalysis',
     category: 'desktop'
   },
   {
     id: 'pdf-reports',
-    title: 'Professional PDF Reports',
-    description: 'Generate comprehensive, white-label SEO reports for clients and stakeholders.',
+    titleKey: 'home.images.features.pdfReports.title',
+    descriptionKey: 'home.images.features.pdfReports.description',
     imageSrc: '/images/features/pdf-report-generation.webp',
-    imageAlt: 'Professional PDF SEO report with charts, recommendations, and branded layout',
+    imageAltKey: 'home.images.pdfReport',
     category: 'report'
   },
   {
     id: 'ai-chat',
-    title: 'AI-Powered SEO Assistant',
-    description: 'Get instant answers and recommendations from our intelligent SEO chatbot.',
+    titleKey: 'home.images.features.aiChat.title',
+    descriptionKey: 'home.images.features.aiChat.description',
     imageSrc: '/images/features/ai-chat-interface.webp',
-    imageAlt: 'AI chat interface providing personalized SEO recommendations and insights',
+    imageAltKey: 'home.images.aiChat',
     category: 'desktop'
   },
   {
     id: 'team-collaboration',
-    title: 'Team Collaboration Tools',
-    description: 'Work together with your team on SEO projects with shared dashboards and task management.',
+    titleKey: 'home.images.features.teamCollaboration.title',
+    descriptionKey: 'home.images.features.teamCollaboration.description',
     imageSrc: '/images/features/team-collaboration-dashboard.webp',
-    imageAlt: 'Team collaboration dashboard with shared projects, tasks, and progress tracking',
+    imageAltKey: 'home.images.teamCollaboration',
     category: 'desktop'
   }
 ]
@@ -62,6 +63,7 @@ export function FeatureMockups({
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const lightboxRef = useRef<HTMLDivElement>(null)
+  const t = useTranslations()
 
   // Handle escape key for lightbox
   useEffect(() => {
@@ -173,7 +175,7 @@ export function FeatureMockups({
                 {/* TODO: Replace with actual feature mockup images */}
                 <Image
                   src={mockup.imageSrc}
-                  alt={mockup.imageAlt}
+                  alt={t(mockup.imageAltKey)}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
@@ -190,8 +192,8 @@ export function FeatureMockups({
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3">
                       <span className="text-lg">{getCategoryIcon(mockup.category)}</span>
                     </div>
-                    <h4 className="font-semibold mb-2">{mockup.title}</h4>
-                    <p className="text-xs text-gray-400 mb-2">{mockup.description}</p>
+                    <h4 className="font-semibold mb-2">{t(mockup.titleKey)}</h4>
+                    <p className="text-xs text-gray-400 mb-2">{t(mockup.descriptionKey)}</p>
                     <div className="text-xs text-purple-400">
                       TODO: {mockup.imageSrc.split('/').pop()}
                     </div>
@@ -202,10 +204,10 @@ export function FeatureMockups({
               {/* Content */}
               <div className="p-4">
                 <h3 className="font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors duration-300">
-                  {mockup.title}
+                  {t(mockup.titleKey)}
                 </h3>
                 <p className="text-gray-400 text-sm line-clamp-2">
-                  {mockup.description}
+                  {t(mockup.descriptionKey)}
                 </p>
               </div>
             </div>
@@ -243,7 +245,7 @@ export function FeatureMockups({
                   <span className="text-2xl">{getCategoryIcon(mockups[selectedIndex].category)}</span>
                   <div>
                     <h3 className="text-lg font-semibold text-white">
-                      {mockups[selectedIndex].title}
+                      {t(mockups[selectedIndex].titleKey)}
                     </h3>
                     <p className="text-sm text-gray-400">
                       {selectedIndex + 1} of {mockups.length}
@@ -275,7 +277,7 @@ export function FeatureMockups({
                 <div className="relative w-full h-[60vh] max-h-[600px]">
                   <Image
                     src={mockups[selectedIndex].imageSrc}
-                    alt={mockups[selectedIndex].imageAlt}
+                    alt={t(mockups[selectedIndex].imageAltKey)}
                     fill
                     sizes="(max-width: 768px) 100vw, 90vw"
                     className="object-contain"
@@ -311,7 +313,7 @@ export function FeatureMockups({
               {/* Description */}
               <div className="p-4 border-t border-slate-700/50">
                 <p className="text-gray-300 leading-relaxed">
-                  {mockups[selectedIndex].description}
+                  {t(mockups[selectedIndex].descriptionKey)}
                 </p>
               </div>
 

@@ -144,7 +144,11 @@
     "home": {
       "description": "Transformasikan SEO Anda dengan audit bertenaga AI yang mengidentifikasi 47+ masalah kritis. Dapatkan wawasan berbasis data untuk meningkatkan traffic organik dan mendominasi peringkat.",
       "keywords": ["audit SEO AI", "alat optimasi SEO", "boost peringkat website", "pertumbuhan traffic organik", "analisis SEO teknis"]
-    }
+    },
+    "defaultTitle": "AI SEO Turbo - Audit SEO Bertenaga AI",
+    "defaultDescription": "Dapatkan wawasan SEO yang dapat ditindaklanjuti yang meningkatkan peringkat dan mendorong traffic organik dalam hitungan menit",
+    "defaultKeywords": "audit SEO, analisis SEO AI, optimasi website, traffic organik, peringkat pencarian",
+    "siteName": "AI SEO Turbo"
   },
   "nav": {
     "home": "Beranda",
@@ -444,6 +448,31 @@
       "ratingText": "4,9/5",
       "trustText": "memercayai platform kami",
       "ratingLabel": "rating rata-rata"
+    },
+    "images": {
+      "heroDashboard": "Dashboard audit SEO yang menampilkan hasil analisis website yang komprehensif",
+      "competitorAnalysis": "Dashboard analisis kompetitor yang menampilkan metrik perbandingan SEO dan wawasan kompetitif",
+      "pdfReport": "Laporan SEO PDF profesional dengan grafik, rekomendasi, dan tata letak bermerek",
+      "aiChat": "Antarmuka obrolan AI yang memberikan rekomendasi SEO yang dipersonalisasi dan wawasan",
+      "teamCollaboration": "Dashboard kolaborasi tim dengan proyek bersama, tugas, dan pelacakan kemajuan",
+      "features": {
+        "competitorAnalysis": {
+          "title": "Dashboard Analisis Kompetitor",
+          "description": "Bandingkan performa SEO Anda dengan kompetitor dengan insights detail dan analisis kesenjangan."
+        },
+        "pdfReports": {
+          "title": "Laporan PDF Profesional",
+          "description": "Hasilkan laporan SEO komprehensif, white-label, untuk klien dan stakeholder."
+        },
+        "aiChat": {
+          "title": "Asisten SEO Bertenaga AI",
+          "description": "Dapatkan jawaban instan dan rekomendasi dari chatbot SEO cerdas kami."
+        },
+        "teamCollaboration": {
+          "title": "Alat Kolaborasi Tim",
+          "description": "Bekerja sama dengan tim Anda di proyek SEO dengan dashboard bersama dan manajemen tugas."
+        }
+      }
     },
     "freeTrialNoCreditCard": "Mulai uji coba gratis Anda. Tidak perlu kartu kredit.",
     "why": {
@@ -1359,6 +1388,7 @@
     "cta": {
       "title": "Siap untuk Mulai?",
       "subtitle": "Bergabunglah dengan ribuan bisnis yang mempercayai AI SEO Turbo untuk kesuksesan SEO mereka",
+      "button": "Mulai Pelacakan Kata Kunci",
       "startTrial": "Mulai Uji Coba Gratis",
       "contactSales": "Hubungi Sales"
     }
@@ -3863,6 +3893,11 @@
       "message": "Terlalu banyak permintaan. Silakan tunggu {seconds} detik.",
       "wait": "Silakan Tunggu"
     }
+  },
+  "cta": {
+    "title": "Siap Mendapatkan Bantuan SEO Bertenaga AI?",
+    "subtitle": "Bergabunglah dengan ribuan bisnis yang menggunakan asisten AI kami untuk mendapatkan rekomendasi SEO yang dipersonalisasi dan meningkatkan peringkat pencarian mereka.",
+    "button": "Chat dengan Asisten AI"
   },
   "notifications": {
     "auditComplete": "Audit berhasil diselesaikan!",
