@@ -427,6 +427,137 @@
         "title": "SEO-Scores verstehen - Vollständiger Leitfaden | AI SEO Turbo",
         "description": "Erfahren Sie, wie Sie Ihre SEO-Audit-Scores interpretieren. Verstehen Sie, was jeder Score bedeutet, wie sie berechnet werden und wie Sie die SEO-Leistung Ihrer Website verbessern."
       }
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "Erste Schritte",
+        "subtitle": "Willkommen bei AI SEO Turbo! Starten Sie mit umfassenden SEO-Audits, Wettbewerberanalysen und KI-gestützten Einblicken, um die Suchleistung Ihrer Website zu verbessern.",
+        "backToHelp": "Zurück zum Hilfe-Center",
+        "quickStart": {
+          "title": "Schnellstart",
+          "startAudit": {
+            "title": "Ihr erstes Audit starten",
+            "description": "Analysieren Sie Ihre Website in Minuten"
+          },
+          "tryDemo": {
+            "title": "Demo ausprobieren",
+            "description": "AI SEO Turbo in Aktion sehen"
+          }
+        },
+        "articles": {
+          "firstAudit": {
+            "title": "So erstellen Sie Ihr erstes SEO-Audit",
+            "href": "/help/getting-started/first-audit",
+            "time": "5 Min",
+            "description": "Starten Sie mit Ihrem ersten umfassenden SEO-Audit in nur wenigen Klicks."
+          },
+          "dashboardSetup": {
+            "title": "Dashboard einrichten",
+            "href": "/help/getting-started/dashboard-setup",
+            "time": "3 Min",
+            "description": "Passen Sie Ihr Dashboard an und lernen Sie die Oberfläche für optimalen Workflow."
+          },
+          "seoScores": {
+            "title": "SEO-Scores verstehen",
+            "href": "/help/getting-started/seo-scores",
+            "time": "7 Min",
+            "description": "Lernen Sie, was Ihre SEO-Scores bedeuten und wie Sie Audit-Ergebnisse interpretieren."
+          },
+          "quickStart": {
+            "title": "Schnellstart-Anleitung",
+            "href": "/help/getting-started/quick-start",
+            "time": "10 Min",
+            "description": "Vollständige Anleitung, um in Minuten mit AI SEO Turbo loszulegen."
+          }
+        },
+        "additionalResources": {
+          "title": "Zusätzliche Ressourcen",
+          "blog": {
+            "title": "Blog",
+            "description": "SEO-Tipps und Best Practices"
+          },
+          "features": {
+            "title": "Funktionen",
+            "description": "Erfahren Sie mehr über unsere Tools"
+          },
+          "contactSupport": {
+            "title": "Support kontaktieren",
+            "description": "Holen Sie sich Hilfe von unserem Team"
+          }
+        }
+      },
+      "accountBilling": {
+        "title": "Konto & Abrechnung",
+        "subtitle": "Verwalten Sie Ihre Kontoeinstellungen und Abrechnungsinformationen",
+        "backToHelp": "Zurück zum Hilfe-Center",
+        "accountManagement": {
+          "title": "Kontoverwaltung",
+          "accessDashboard": {
+            "title": "Dashboard aufrufen",
+            "description": "Verwalten Sie Ihre Kontoeinstellungen"
+          },
+          "viewPlans": {
+            "title": "Pläne anzeigen",
+            "description": "Abonnementoptionen vergleichen"
+          }
+        },
+        "articles": {
+          "upgradePlan": {
+            "title": "Ihren Plan upgraden",
+            "href": "/help/billing/upgrade-plan",
+            "time": "4 Min.",
+            "description": "Erfahren Sie, wie Sie Ihren Abonnementplan upgraden und Premium-Funktionen freischalten."
+          },
+          "paymentMethods": {
+            "title": "Zahlungsmethoden verwalten",
+            "href": "/help/billing/payment-methods",
+            "time": "5 Min.",
+            "description": "Zahlungsmethoden hinzufügen, aktualisieren oder entfernen und Abrechnungsinformationen."
+          },
+          "invoices": {
+            "title": "Ihre Rechnung verstehen",
+            "href": "/help/billing/invoices",
+            "time": "4 Min.",
+            "description": "Erfahren Sie, wie Sie Ihre Rechnungen lesen und den Abrechnungsverlauf herunterladen."
+          },
+          "cancellation": {
+            "title": "Ihr Abonnement kündigen",
+            "href": "/help/billing/cancellation",
+            "time": "3 Min.",
+            "description": "Erfahren Sie mehr über unsere Kündigungsrichtlinie und wie Sie Ihr Abonnement kündigen."
+          }
+        },
+        "billingFAQ": {
+          "title": "Abrechnungs-FAQ",
+          "whenCharged": {
+            "question": "Wann werde ich abgerechnet?",
+            "answer": "Sie werden zu Beginn jedes Abrechnungszyklus abgerechnet. Für Jahrespläne erhalten Sie eine anteilige Gebühr für den ersten teilweisen Monat."
+          },
+          "changePlans": {
+            "question": "Kann ich Pläne jederzeit ändern?",
+            "answer": "Ja! Sie können Ihren Plan jederzeit upgraden oder downgraden. Änderungen treten sofort in Kraft, und wir verrechnen die Abrechnung anteilig."
+          },
+          "paymentMethods": {
+            "question": "Welche Zahlungsmethoden akzeptieren Sie?",
+            "answer": "Wir akzeptieren alle gängigen Kreditkarten (Visa, MasterCard, American Express), PayPal und Banküberweisungen für Jahrespläne."
+          }
+        },
+        "additionalResources": {
+          "title": "Zusätzliche Ressourcen",
+          "securityPrivacy": {
+            "title": "Sicherheit & Datenschutz",
+            "description": "Ihr Datenschutz"
+          },
+          "apiIntegrations": {
+            "title": "API & Integrationen",
+            "description": "Externe Tools verbinden"
+          },
+          "contactSupport": {
+            "title": "Support kontaktieren",
+            "description": "Hilfe bei der Abrechnung erhalten"
+          }
+        }
+      }
     }
   },
   "home": {
@@ -1653,6 +1784,7 @@
         "desc": "Bereite Ihr Website-Crawling-Tool vor..."
       },
       "hero": {
+        "badge": "Erweiterte Website-Crawling",
         "title": "Analysieren Sie Ihre",
         "titleHighlight": "Gesamte Website",
         "titleEnd": "in Minuten",
@@ -3074,6 +3206,8 @@
       "cta": {
         "title": "Beginnen Sie Heute mit dem Tracking Ihrer Rankings",
         "description": "Schließen Sie sich über 50.000 Marketern an, die AI SEO Turbo für präzise Keyword-Ranking-Daten vertrauen. Starten Sie Ihre 14-tägige kostenlose Testversion mit allen Premium-Funktionen.",
+        "subtitle": "Schließen Sie sich Tausenden von Unternehmen an, die unserem KI-gestützten Ranking-Tracking vertrauen, um ihre Märkte zu dominieren und organischen Traffic zu steigern.",
+        "button": "Keyword-Tracking starten",
         "startTrial": "Kostenlose Testversion Starten",
         "setupAlerts": "Benachrichtigungen Einrichten"
       },
@@ -3141,6 +3275,7 @@
       "cta": {
         "title": "Bereit, Ihre SEO-Strategie zu revolutionieren?",
         "subtitle": "Schließen Sie sich Tausenden von Marketern an, die unserem KI-Assistenten für Experten-SEO-Empfehlungen vertrauen.",
+        "button": "Kostenlos starten",
         "startButton": "Kostenlos starten",
         "pricingButton": "Preise ansehen"
       },

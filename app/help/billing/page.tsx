@@ -14,10 +14,10 @@ export default function BillingOverviewPage() {
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Home', url: 'https://www.aiseoturbo.com' },
             { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
             { name: 'Billing & Account', url: 'https://www.aiseoturbo.com/help/billing' }
           ]}
+          includeHome={false}
         />
 
         {/* Article Header */}

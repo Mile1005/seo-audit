@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
-import GettingStartedPage from '@/app/help/getting-started/page'
+import GettingStartedPage from './page-translated'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
 

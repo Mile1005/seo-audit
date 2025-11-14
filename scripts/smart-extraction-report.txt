@@ -1,138 +1,26 @@
 Smart String Extraction Report
 ============================================================
 
-Files Scanned: 422
-Unique Strings Extracted: 6579
+Files Scanned: 497
+Unique Strings Extracted: 4424
 
 Distribution by Namespace:
 ------------------------------------------------------------
-  pages                 3128 strings
-  features              1360 strings
-  common                 598 strings
-  dashboard              357 strings
+  pages                 1578 strings
+  common                1091 strings
+  features               381 strings
+  dashboard              326 strings
   keywords               255 strings
-  audit                  211 strings
-  auth                   182 strings
+  audit                  212 strings
+  auth                   174 strings
   backlinks              165 strings
-  layout                 141 strings
-  pricing                119 strings
-  nav                     46 strings
-  hero                    17 strings
+  layout                 116 strings
+  pricing                 62 strings
+  nav                     44 strings
+  hero                    20 strings
 
 ============================================================
 Sample Extracted Strings (First 30):
-
-pages.powered_recommendations_prioritized_impact:
-  "AI-Powered recommendations prioritized by impact"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.competitor_intelligence_and_market:
-  "Competitor intelligence and market insights"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.average_traffic_increase_days:
-  "Average traffic increase in 90 days"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.businesses_optimized:
-  "Businesses optimized"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.delivers_results:
-  "Delivers Results"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.comprehensive_technical_seo_audit:
-  "Comprehensive technical SEO audit covering every critical factor"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.powered:
-  "AI-Powered"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.advanced_algorithms_that_rival:
-  "Advanced algorithms that rival expert SEO consultants"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.actionable_fixes:
-  "Actionable Fixes"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.prioritized_recommendations_that_actually:
-  "Prioritized recommendations that actually improve rankings"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.real_results:
-  "Real Results"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.average_300_traffic_increase:
-  "Average 300% traffic increase in first 90 days"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.for_developers:
-  "For Developers"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.api_integrations_and_technical:
-  "API integrations and technical reports that complement your workflow"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.for_seo_specialists:
-  "For SEO Specialists"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.advanced_competitor_analysis_and:
-  "Advanced competitor analysis and enterprise-scale monitoring"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.for_business_owners:
-  "For Business Owners"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.seo_experience_required_guides:
-  "No SEO experience required - AI guides you to success"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.don:
-  "Don"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.powered_seo_audit_service:
-  "AI-Powered SEO Audit Service"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.aiseoturbo:
-  "AISEOTurbo"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.seo_audit_analysis:
-  "SEO Audit & Analysis"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.worldwide:
-  "Worldwide"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.m13_10v3l4_14h7v7l9_11h:
-  "M13 10V3L4 14h7v7l9-11h-7z"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.m10_20l4_16m4_4l4:
-  "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.free_seo_checklist:
-  "Free SEO Checklist"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.join_000_marketers_getting:
-  "Join 10,000+ marketers getting weekly SEO insights and tips"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
-
-pages.subscribe_now:
-  "Subscribe Now"
-  (C:\Users\Mile\Desktop\seo-audit-fresh\app\page.tsx)
 
 layout.blinkmacsystemfont:
   "BlinkMacSystemFont"
@@ -140,5 +28,117 @@ layout.blinkmacsystemfont:
 
 layout.segoe:
   "Segoe UI"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.seo_audit_tool_boost:
+  "SEO Audit Tool - Boost Rankings Fast | AI SEO Turbo"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.seo_audit_seo_analysis:
+  "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.seo_turbo:
+  "AI SEO Turbo"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.seo_turbo_powered_seo:
+  "AI SEO Turbo - AI-Powered SEO Audits"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.get_actionable_seo_insights:
+  "Get actionable SEO insights that boost rankings and drive organic traffic in minutes."
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.aiseoturbo_powered_seo_audits:
+  "AISEOTurbo - AI-Powered SEO Audits"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.vl8v8l4g7x:
+  "G-VL8V8L4G7X"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.organization:
+  "Organization"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.aiseoturbo:
+  "AISEOTurbo"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.imageobject:
+  "ImageObject"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.aiseoturbo_logo:
+  "AISEOTurbo Logo"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.powered_seo_audits_that:
+  "AI-Powered SEO Audits That Drive Results"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.postaladdress:
+  "PostalAddress"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.partizanska:
+  "Partizanska 24"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.skopje:
+  "Skopje"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.place:
+  "Place"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.macedonia:
+  "Macedonia"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.quantitativevalue:
+  "QuantitativeValue"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.contactpoint:
+  "ContactPoint"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.customer_support:
+  "Customer Support"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.worldwide:
+  "Worldwide"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.sales:
+  "Sales"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.billing_support:
+  "Billing Support"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.person:
+  "Person"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.mile_stoev:
+  "Mile Stoev"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.founder_ceo:
+  "Founder & CEO"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.technical_seo:
+  "Technical SEO"
+  (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
+
+layout.website_audits:
+  "Website Audits"
   (C:\Users\Mile\Desktop\seo-audit-fresh\app\layout.tsx)
 

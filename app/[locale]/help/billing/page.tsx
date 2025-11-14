@@ -1,4 +1,4 @@
-import BillingOverviewPage from '@/app/help/billing/page'
+import AccountBillingPage from '../account-billing/page-translated'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
 import { Metadata } from 'next'
@@ -14,5 +14,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 export default function Page() {
-  return <BillingOverviewPage />
+  return <AccountBillingPage />
 }

@@ -432,6 +432,137 @@
         "title": "Memahami Skor SEO - Panduan Lengkap | AI SEO Turbo",
         "description": "Pelajari cara menafsirkan skor audit SEO Anda. Pahami apa arti setiap skor, bagaimana mereka dihitung, dan bagaimana meningkatkan performa SEO situs web Anda."
       }
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "Memulai",
+        "subtitle": "Selamat datang di AI SEO Turbo! Mulai dengan audit SEO komprehensif, analisis kompetitor, dan wawasan bertenaga AI untuk meningkatkan performa pencarian situs web Anda.",
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "quickStart": {
+          "title": "Mulai Cepat",
+          "startAudit": {
+            "title": "Mulai audit pertama Anda",
+            "description": "Analisis situs web Anda dalam hitungan menit"
+          },
+          "tryDemo": {
+            "title": "Coba demo",
+            "description": "Lihat AI SEO Turbo beraksi"
+          }
+        },
+        "articles": {
+          "firstAudit": {
+            "title": "Cara membuat audit SEO pertama Anda",
+            "href": "/help/getting-started/first-audit",
+            "time": "5 menit",
+            "description": "Mulai dengan audit SEO komprehensif pertama Anda hanya dalam beberapa klik."
+          },
+          "dashboardSetup": {
+            "title": "Mengatur dashboard Anda",
+            "href": "/help/getting-started/dashboard-setup",
+            "time": "3 menit",
+            "description": "Sesuaikan dashboard Anda dan pelajari antarmuka untuk alur kerja optimal."
+          },
+          "seoScores": {
+            "title": "Memahami skor SEO",
+            "href": "/help/getting-started/seo-scores",
+            "time": "7 menit",
+            "description": "Pelajari apa arti skor SEO Anda dan bagaimana menafsirkan hasil audit."
+          },
+          "quickStart": {
+            "title": "Panduan mulai cepat",
+            "href": "/help/getting-started/quick-start",
+            "time": "10 menit",
+            "description": "Panduan lengkap untuk memulai dengan AI SEO Turbo dalam hitungan menit."
+          }
+        },
+        "additionalResources": {
+          "title": "Sumber Daya Tambahan",
+          "blog": {
+            "title": "Blog",
+            "description": "Tips dan praktik terbaik SEO"
+          },
+          "features": {
+            "title": "Fitur",
+            "description": "Pelajari tentang alat kami"
+          },
+          "contactSupport": {
+            "title": "Hubungi Dukungan",
+            "description": "Dapatkan bantuan dari tim kami"
+          }
+        }
+      },
+      "accountBilling": {
+        "title": "Akun & Penagihan",
+        "subtitle": "Kelola pengaturan akun dan informasi penagihan Anda",
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "accountManagement": {
+          "title": "Manajemen Akun",
+          "accessDashboard": {
+            "title": "Akses Dashboard",
+            "description": "Kelola pengaturan akun Anda"
+          },
+          "viewPlans": {
+            "title": "Lihat Paket",
+            "description": "Bandingkan opsi langganan"
+          }
+        },
+        "articles": {
+          "upgradePlan": {
+            "title": "Meningkatkan paket Anda",
+            "href": "/help/billing/upgrade-plan",
+            "time": "4 menit",
+            "description": "Pelajari cara meningkatkan paket langganan Anda dan membuka fitur premium."
+          },
+          "paymentMethods": {
+            "title": "Mengelola metode pembayaran",
+            "href": "/help/billing/payment-methods",
+            "time": "5 menit",
+            "description": "Tambah, perbarui, atau hapus metode pembayaran dan informasi penagihan."
+          },
+          "invoices": {
+            "title": "Memahami faktur Anda",
+            "href": "/help/billing/invoices",
+            "time": "4 menit",
+            "description": "Pelajari cara membaca faktur Anda dan mengunduh riwayat penagihan."
+          },
+          "cancellation": {
+            "title": "Membatalkan langganan Anda",
+            "href": "/help/billing/cancellation",
+            "time": "3 menit",
+            "description": "Pelajari kebijakan pembatalan kami dan cara membatalkan langganan Anda."
+          }
+        },
+        "billingFAQ": {
+          "title": "FAQ Penagihan",
+          "whenCharged": {
+            "question": "Kapan saya ditagih?",
+            "answer": "Anda ditagih pada awal setiap siklus penagihan. Untuk paket tahunan, Anda akan menerima biaya prorata untuk bulan parsial pertama."
+          },
+          "changePlans": {
+            "question": "Bisakah saya mengubah paket kapan saja?",
+            "answer": "Ya! Anda dapat meningkatkan atau menurunkan paket Anda kapan saja. Perubahan berlaku segera, dan kami akan menghitung ulang penagihan secara proporsional."
+          },
+          "paymentMethods": {
+            "question": "Metode pembayaran apa yang Anda terima?",
+            "answer": "Kami menerima semua kartu kredit utama (Visa, MasterCard, American Express), PayPal, dan transfer bank untuk paket tahunan."
+          }
+        },
+        "additionalResources": {
+          "title": "Sumber Daya Tambahan",
+          "securityPrivacy": {
+            "title": "Keamanan & Privasi",
+            "description": "Perlindungan data Anda"
+          },
+          "apiIntegrations": {
+            "title": "API & Integrasi",
+            "description": "Hubungkan alat eksternal"
+          },
+          "contactSupport": {
+            "title": "Hubungi Dukungan",
+            "description": "Dapatkan bantuan dengan penagihan"
+          }
+        }
+      }
     }
   },
   "home": {
@@ -1658,6 +1789,7 @@
         "desc": "Mempersiapkan alat crawling website Anda..."
       },
       "hero": {
+        "badge": "Crawling Situs Lanjutan",
         "title": "Analisis",
         "titleHighlight": "Seluruh Website Anda",
         "titleEnd": "dalam Hitungan Menit",
@@ -3079,6 +3211,8 @@
       "cta": {
         "title": "Mulai Lacak Peringkat Anda Hari Ini",
         "description": "Bergabunglah dengan 50.000+ marketer yang mempercayai AI SEO Turbo untuk data peringkat kata kunci yang akurat. Mulai uji coba gratis 14 hari dengan semua fitur premium termasuk.",
+        "subtitle": "Bergabunglah dengan ribuan bisnis yang mempercayai pelacakan peringkat bertenaga AI kami untuk mendominasi pasar mereka dan meningkatkan traffic organik.",
+        "button": "Mulai Pelacakan Kata Kunci",
         "startTrial": "Mulai Uji Coba Gratis",
         "setupAlerts": "Atur Alert"
       },
@@ -3151,6 +3285,7 @@
       "cta": {
         "title": "Siap untuk merevolusi strategi SEO Anda?",
         "subtitle": "Bergabunglah dengan ribuan pemasar yang mempercayai Asisten AI kami untuk rekomendasi SEO ahli.",
+        "button": "Mulai Gratis",
         "startButton": "Mulai Gratis",
         "pricingButton": "Lihat Harga"
       },

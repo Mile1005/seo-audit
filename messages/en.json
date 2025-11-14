@@ -347,6 +347,137 @@
         "title": "Understanding SEO Scores - Complete Guide | AI SEO Turbo",
         "description": "Learn how to interpret your SEO audit scores. Understand what each score means, how they're calculated, and how to improve your website's SEO performance."
       }
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "Getting Started",
+        "subtitle": "Welcome to AI SEO Turbo! Get started with comprehensive SEO audits, competitor analysis, and AI-powered insights to boost your website's search performance.",
+        "backToHelp": "Back to Help Center",
+        "quickStart": {
+          "title": "Quick Start",
+          "startAudit": {
+            "title": "Start Your First Audit",
+            "description": "Analyze your website in minutes"
+          },
+          "tryDemo": {
+            "title": "Try Demo",
+            "description": "See AI SEO Turbo in action"
+          }
+        },
+        "articles": {
+          "firstAudit": {
+            "title": "How to create your first SEO audit",
+            "href": "/help/getting-started/first-audit",
+            "time": "5 min",
+            "description": "Get started with your first comprehensive SEO audit in just a few clicks."
+          },
+          "dashboardSetup": {
+            "title": "Setting up your dashboard",
+            "href": "/help/getting-started/dashboard-setup",
+            "time": "3 min",
+            "description": "Customize your dashboard and learn the interface for optimal workflow."
+          },
+          "seoScores": {
+            "title": "Understanding SEO scores",
+            "href": "/help/getting-started/seo-scores",
+            "time": "7 min",
+            "description": "Learn what your SEO scores mean and how to interpret audit results."
+          },
+          "quickStart": {
+            "title": "Quick start guide",
+            "href": "/help/getting-started/quick-start",
+            "time": "10 min",
+            "description": "Complete guide to get up and running with AI SEO Turbo in minutes."
+          }
+        },
+        "additionalResources": {
+          "title": "Additional Resources",
+          "blog": {
+            "title": "Blog",
+            "description": "SEO tips and best practices"
+          },
+          "features": {
+            "title": "Features",
+            "description": "Learn about our tools"
+          },
+          "contactSupport": {
+            "title": "Contact Support",
+            "description": "Get help from our team"
+          }
+        }
+      },
+      "accountBilling": {
+        "title": "Account & Billing",
+        "subtitle": "Manage your AI SEO Turbo account, subscription plans, billing information, and payment methods with our comprehensive guides.",
+        "backToHelp": "Back to Help Center",
+        "accountManagement": {
+          "title": "Account Management",
+          "accessDashboard": {
+            "title": "Access Dashboard",
+            "description": "Manage your account settings"
+          },
+          "viewPlans": {
+            "title": "View Plans",
+            "description": "Compare subscription options"
+          }
+        },
+        "articles": {
+          "upgradePlan": {
+            "title": "Upgrading your plan",
+            "href": "/help/billing/upgrade-plan",
+            "time": "4 min",
+            "description": "Learn how to upgrade your subscription plan and unlock premium features."
+          },
+          "paymentMethods": {
+            "title": "Managing payment methods",
+            "href": "/help/billing/payment-methods",
+            "time": "5 min",
+            "description": "Add, update, or remove payment methods and billing information."
+          },
+          "invoices": {
+            "title": "Understanding your invoice",
+            "href": "/help/billing/invoices",
+            "time": "4 min",
+            "description": "Learn how to read your invoices and download billing history."
+          },
+          "cancellation": {
+            "title": "Cancelling your subscription",
+            "href": "/help/billing/cancellation",
+            "time": "3 min",
+            "description": "Learn about our cancellation policy and how to cancel your subscription."
+          }
+        },
+        "billingFAQ": {
+          "title": "Billing & Subscription FAQ",
+          "whenCharged": {
+            "question": "When will I be charged?",
+            "answer": "You'll be charged at the beginning of your billing cycle. For annual plans, you'll receive a prorated charge for the first partial month."
+          },
+          "changePlans": {
+            "question": "Can I change plans anytime?",
+            "answer": "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate the billing accordingly."
+          },
+          "paymentMethods": {
+            "question": "What payment methods do you accept?",
+            "answer": "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for annual plans."
+          }
+        },
+        "additionalResources": {
+          "title": "Additional Resources",
+          "securityPrivacy": {
+            "title": "Security & Privacy",
+            "description": "Your data protection"
+          },
+          "apiIntegrations": {
+            "title": "API & Integrations",
+            "description": "Connect external tools"
+          },
+          "contactSupport": {
+            "title": "Contact Support",
+            "description": "Get help with billing"
+          }
+        }
+      }
     }
   },
   "home": {
@@ -1559,6 +1690,11 @@
         "auditAnotherPage": "Audit Another Page",
         "exportReport": "Export Detailed Report",
         "completedOn": "Completed on"
+      },
+      "cta": {
+        "title": "Ready to Improve Your SEO?",
+        "subtitle": "Join thousands of websites that have improved their search rankings with our comprehensive SEO audit.",
+        "button": "Start Your Free Audit"
       }
     },
     "siteCrawler": {
@@ -1568,6 +1704,7 @@
         "desc": "Preparing your website crawling tool..."
       },
       "hero": {
+        "badge": "Advanced Site Crawling",
         "title": "Analyze Your",
         "titleHighlight": "Entire Website",
         "titleEnd": "in Minutes",
@@ -2989,6 +3126,8 @@
       "cta": {
         "title": "Start Tracking Your Rankings Today",
         "description": "Join 50,000+ marketers who trust AI SEO Turbo for accurate keyword ranking data. Start your 14-day free trial with all premium features included.",
+        "subtitle": "Join thousands of businesses using AI-powered keyword tracking to dominate their markets and increase organic traffic.",
+        "button": "Start Keyword Tracking",
         "startTrial": "Start Free Trial",
         "setupAlerts": "Setup Alerts"
       },
@@ -3061,6 +3200,7 @@
       "cta": {
         "title": "Ready to revolutionize your SEO strategy?",
         "subtitle": "Join thousands of marketers who trust our AI Assistant for expert SEO recommendations.",
+        "button": "Start Free",
         "startButton": "Start Free",
         "pricingButton": "View Pricing"
       },

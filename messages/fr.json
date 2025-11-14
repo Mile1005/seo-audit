@@ -429,6 +429,137 @@
         "title": "Comprendre les scores SEO - Guide complet | AI SEO Turbo",
         "description": "Apprenez à interpréter vos scores d'audit SEO. Comprenez ce que signifie chaque score, comment ils sont calculés et comment améliorer les performances SEO de votre site web."
       }
+    },
+    "categories": {
+      "gettingStarted": {
+        "title": "Démarrage",
+        "subtitle": "Bienvenue sur AI SEO Turbo ! Commencez avec des audits SEO complets, des analyses de concurrents et des insights alimentés par l'IA pour améliorer les performances de recherche de votre site web.",
+        "backToHelp": "Retour au Centre d'Aide",
+        "quickStart": {
+          "title": "Démarrage Rapide",
+          "startAudit": {
+            "title": "Démarrer votre première audit",
+            "description": "Analysez votre site web en minutes"
+          },
+          "tryDemo": {
+            "title": "Essayer la démo",
+            "description": "Voir AI SEO Turbo en action"
+          }
+        },
+        "articles": {
+          "firstAudit": {
+            "title": "Comment créer votre première audit SEO",
+            "href": "/help/getting-started/first-audit",
+            "time": "5 min",
+            "description": "Commencez avec votre première audit SEO complète en quelques clics seulement."
+          },
+          "dashboardSetup": {
+            "title": "Configurer votre tableau de bord",
+            "href": "/help/getting-started/dashboard-setup",
+            "time": "3 min",
+            "description": "Personnalisez votre tableau de bord et apprenez l'interface pour un flux de travail optimal."
+          },
+          "seoScores": {
+            "title": "Comprendre les scores SEO",
+            "href": "/help/getting-started/seo-scores",
+            "time": "7 min",
+            "description": "Apprenez ce que signifient vos scores SEO et comment interpréter les résultats d'audit."
+          },
+          "quickStart": {
+            "title": "Guide de démarrage rapide",
+            "href": "/help/getting-started/quick-start",
+            "time": "10 min",
+            "description": "Guide complet pour commencer avec AI SEO Turbo en minutes."
+          }
+        },
+        "additionalResources": {
+          "title": "Ressources Supplémentaires",
+          "blog": {
+            "title": "Blog",
+            "description": "Conseils et meilleures pratiques SEO"
+          },
+          "features": {
+            "title": "Fonctionnalités",
+            "description": "Découvrez nos outils"
+          },
+          "contactSupport": {
+            "title": "Contacter le Support",
+            "description": "Obtenez de l'aide de notre équipe"
+          }
+        }
+      },
+      "accountBilling": {
+        "title": "Compte et Facturation",
+        "subtitle": "Gérez les paramètres de votre compte et les informations de facturation",
+        "backToHelp": "Retour au Centre d'Aide",
+        "accountManagement": {
+          "title": "Gestion du Compte",
+          "accessDashboard": {
+            "title": "Accéder au Tableau de Bord",
+            "description": "Gérez les paramètres de votre compte"
+          },
+          "viewPlans": {
+            "title": "Voir les Plans",
+            "description": "Comparez les options d'abonnement"
+          }
+        },
+        "articles": {
+          "upgradePlan": {
+            "title": "Mettre à niveau votre plan",
+            "href": "/help/billing/upgrade-plan",
+            "time": "4 min",
+            "description": "Apprenez comment mettre à niveau votre plan d'abonnement et débloquer des fonctionnalités premium."
+          },
+          "paymentMethods": {
+            "title": "Gérer les méthodes de paiement",
+            "href": "/help/billing/payment-methods",
+            "time": "5 min",
+            "description": "Ajoutez, mettez à jour ou supprimez des méthodes de paiement et des informations de facturation."
+          },
+          "invoices": {
+            "title": "Comprendre votre facture",
+            "href": "/help/billing/invoices",
+            "time": "4 min",
+            "description": "Apprenez comment lire vos factures et télécharger l'historique de facturation."
+          },
+          "cancellation": {
+            "title": "Annuler votre abonnement",
+            "href": "/help/billing/cancellation",
+            "time": "3 min",
+            "description": "Apprenez notre politique d'annulation et comment annuler votre abonnement."
+          }
+        },
+        "billingFAQ": {
+          "title": "FAQ Facturation",
+          "whenCharged": {
+            "question": "Quand suis-je facturé ?",
+            "answer": "Vous êtes facturé au début de chaque cycle de facturation. Pour les plans annuels, vous recevrez des frais prorogés pour le premier mois partiel."
+          },
+          "changePlans": {
+            "question": "Puis-je changer de plans à tout moment ?",
+            "answer": "Oui ! Vous pouvez mettre à niveau ou rétrograder votre plan à tout moment. Les changements prennent effet immédiatement, et nous prorogerons la facturation en conséquence."
+          },
+          "paymentMethods": {
+            "question": "Quels modes de paiement acceptez-vous ?",
+            "answer": "Nous acceptons toutes les principales cartes de crédit (Visa, MasterCard, American Express), PayPal et les virements bancaires pour les plans annuels."
+          }
+        },
+        "additionalResources": {
+          "title": "Ressources Supplémentaires",
+          "securityPrivacy": {
+            "title": "Sécurité et Confidentialité",
+            "description": "La protection de vos données"
+          },
+          "apiIntegrations": {
+            "title": "API et Intégrations",
+            "description": "Connecter des outils externes"
+          },
+          "contactSupport": {
+            "title": "Contacter le Support",
+            "description": "Obtenir de l'aide avec la facturation"
+          }
+        }
+      }
     }
   },
   "home": {
@@ -1655,6 +1786,7 @@
         "desc": "Préparation de votre outil d'exploration de site web..."
       },
       "hero": {
+        "badge": "Exploration Avancée de Sites",
         "title": "Analysez votre",
         "titleHighlight": "Site Web Entier",
         "titleEnd": "en Minutes",
@@ -3076,6 +3208,8 @@
       "cta": {
         "title": "Commencez à Suivre Vos Classements Aujourd'hui",
         "description": "Rejoignez plus de 50 000 marketeurs qui font confiance à AI SEO Turbo pour des données de classement de mots-clés précises. Commencez votre essai gratuit de 14 jours avec toutes les fonctionnalités premium incluses.",
+        "subtitle": "Rejoignez des milliers d'entreprises qui font confiance à notre suivi de classements alimenté par l'IA pour dominer leurs marchés et augmenter le trafic organique.",
+        "button": "Commencer le Suivi des Mots-Clés",
         "startTrial": "Commencer l'Essai Gratuit",
         "setupAlerts": "Configurer les Alertes"
       },
@@ -3148,6 +3282,7 @@
       "cta": {
         "title": "Prêt à révolutionner votre stratégie SEO ?",
         "subtitle": "Rejoignez des milliers de marketeurs qui font confiance à notre assistant IA pour des recommandations SEO expertes.",
+        "button": "Commencer Gratuitement",
         "startButton": "Commencer Gratuitement",
         "pricingButton": "Voir les Tarifs"
       },
