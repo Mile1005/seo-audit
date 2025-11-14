@@ -1,16 +1,23 @@
+import { setRequestLocale } from 'next-intl/server'
+import type { Metadata } from 'next'
+import TroubleshootingTranslatedPage from './page-translated'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import TroubleshootingPage from '@/app/help/troubleshooting/page'
 
-export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
   return generateSEOMeta({
-    description: 'Having trouble with AI SEO Turbo? Find solutions to common issues, error messages, and technical problems in our troubleshooting guide.',
+    description: 'Find solutions to common issues, error messages, and technical problems you might encounter while using AI SEO Turbo.',
     keywords: ['troubleshooting', 'error fixes', 'technical support', 'common issues', 'SEO tool problems'],
-    path: 'help/troubleshooting',
-    locale: params.locale as Locale,
+    locale: locale as Locale,
+    path: 'help/troubleshooting'
   })
 }
 
-export default function LocalizedTroubleshootingPage() {
-  return <TroubleshootingPage />
+type Props = { params: Promise<{ locale: string }> }
+
+export default async function LocalizedTroubleshootingPage({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  return <TroubleshootingTranslatedPage />
 }

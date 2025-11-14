@@ -562,6 +562,193 @@
             "description": "Dapatkan bantuan dengan penagihan"
           }
         }
+      },
+      "seoTools": {
+        "title": "Alat dan Fitur SEO",
+        "subtitle": "Jelajahi rangkaian lengkap alat SEO kami yang dirancang untuk meningkatkan peringkat pencarian Anda, menganalisis pesaing, dan mengoptimalkan kinerja situs web.",
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "articles": {
+          "seoAudit": {
+            "title": "Panduan Audit SEO",
+            "href": "/help/seo-tools/seo-audit",
+            "time": "8 min",
+            "description": "Pelajari cara melakukan audit SEO komprehensif yang mencakup 47+ faktor teknis."
+          },
+          "competitorAnalysis": {
+            "title": "Analisis Pesaing",
+            "href": "/help/seo-tools/competitor-analysis",
+            "time": "6 min",
+            "description": "Analisis strategi SEO pesaing Anda dan dapatkan wawasan kompetitif."
+          },
+          "siteCrawler": {
+            "title": "Alat Crawler Situs",
+            "href": "/help/seo-tools/site-crawler",
+            "time": "5 min",
+            "description": "Temukan semua halaman situs web Anda dan identifikasi masalah crawlability."
+          },
+          "aiAssistant": {
+            "title": "Asisten SEO AI",
+            "href": "/help/seo-tools/ai-assistant",
+            "time": "4 min",
+            "description": "Dapatkan rekomendasi SEO yang dipersonalisasi dari asisten AI cerdas kami."
+          }
+        },
+        "additionalResources": {
+          "title": "Sumber Daya Tambahan",
+          "keywordTracking": {
+            "title": "Pelacakan Kata Kunci",
+            "description": "Pantau peringkat kata kunci"
+          },
+          "backlinkAnalysis": {
+            "title": "Analisis Backlink",
+            "description": "Analisis profil backlink"
+          },
+          "contactSupport": {
+            "title": "Hubungi Dukungan",
+            "description": "Dapatkan bantuan dengan alat kami"
+          }
+        }
+      },
+      "api": {
+        "title": "API dan Integrasi",
+        "subtitle": "Integrasikan alat SEO canggih AI SEO Turbo ke dalam aplikasi Anda dengan API REST lengkap kami. Otomatiskan audit, akses data real-time, dan buat alur kerja kustom.",
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "articles": {
+          "authentication": {
+            "title": "Autentikasi API",
+            "href": "/help/api/authentication",
+            "time": "6 min",
+            "description": "Pelajari cara mengautentikasi dengan API AI SEO Turbo dan mendapatkan kunci API Anda."
+          },
+          "webhooks": {
+            "title": "Webhooks dan Notifikasi",
+            "href": "/help/api/webhooks",
+            "time": "8 min",
+            "description": "Siapkan webhooks untuk menerima notifikasi real-time tentang audit SEO dan laporan Anda."
+          }
+        },
+        "additionalResources": {
+          "title": "Sumber Daya Tambahan",
+          "documentation": {
+            "title": "Dokumentasi API",
+            "description": "Referensi API lengkap dan contoh"
+          },
+          "sdks": {
+            "title": "SDK dan Pustaka",
+            "description": "SDK resmi untuk bahasa populer"
+          },
+          "contactSupport": {
+            "title": "Dukungan Pengembang",
+            "description": "Dapatkan bantuan dengan integrasi API"
+          }
+        }
+      },
+      "security": {
+        "title": "Keamanan dan Privasi",
+        "subtitle": "Pelajari tentang langkah-langkah keamanan kami, kebijakan privasi, praktik perlindungan data, dan bagaimana kami menjaga informasi Anda tetap aman dan patuh.",
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "securityOverview": {
+          "title": "Keamanan di AI SEO Turbo",
+          "enterpriseSecurity": {
+            "title": "Keamanan Perusahaan",
+            "description": "Enkripsi dan protokol keamanan tingkat bank"
+          },
+          "gdprCompliant": {
+            "title": "Patuh GDPR",
+            "description": "Kepatuhan penuh dengan peraturan perlindungan data"
+          },
+          "privacyControls": {
+            "title": "Kontrol Privasi",
+            "description": "Kontrol penuh atas data dan preferensi Anda"
+          }
+        },
+        "articles": {
+          "bestPractices": {
+            "title": "Praktik Terbaik Keamanan",
+            "href": "/help/security/best-practices",
+            "time": "7 min",
+            "description": "Pelajari praktik keamanan penting untuk menjaga akun dan data Anda tetap aman."
+          },
+          "twoFactorAuth": {
+            "title": "Autentikasi Dua Faktor",
+            "href": "/help/security/two-factor-authentication",
+            "time": "4 min",
+            "description": "Siapkan dan kelola autentikasi dua faktor untuk keamanan akun yang lebih baik."
+          },
+          "privacy": {
+            "title": "Pengaturan Privasi",
+            "href": "/help/security/privacy",
+            "time": "5 min",
+            "description": "Kontrol pengaturan privasi Anda dan pahami bagaimana kami melindungi data Anda."
+          },
+          "gdpr": {
+            "title": "Kepatuhan GDPR",
+            "href": "/help/security/gdpr",
+            "time": "6 min",
+            "description": "Pahami kepatuhan GDPR kami dan hak perlindungan data Anda."
+          }
+        },
+        "additionalResources": {
+          "title": "Sumber Daya Tambahan",
+          "securityCenter": {
+            "title": "Pusat Keamanan",
+            "description": "Pembaruan dan peringatan keamanan terbaru"
+          },
+          "privacyPolicy": {
+            "title": "Kebijakan Privasi",
+            "description": "Dokumen kebijakan privasi lengkap"
+          },
+          "contactSupport": {
+            "title": "Dukungan Keamanan",
+            "description": "Dapatkan bantuan dengan masalah keamanan"
+          }
+        }
+      },
+      "troubleshooting": {
+        "title": "Pemecahan Masalah",
+        "subtitle": "Temukan solusi untuk masalah umum, pesan kesalahan, dan masalah teknis yang mungkin Anda temui saat menggunakan AI SEO Turbo.",
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "articles": {
+          "loginIssues": {
+            "title": "Masalah Login dan Akses",
+            "href": "/help/troubleshooting/login-issues",
+            "time": "6 mnt",
+            "description": "Mengatasi kesalahan login, masalah reset kata sandi, dan masalah akses akun."
+          },
+          "syncIssues": {
+            "title": "Masalah Sinkronisasi Data",
+            "href": "/help/troubleshooting/sync-issues",
+            "time": "5 mnt",
+            "description": "Memperbaiki masalah sinkronisasi data, kesalahan impor/ekspor, dan masalah konektivitas."
+          },
+          "performance": {
+            "title": "Optimasi Kinerja",
+            "href": "/help/troubleshooting/performance",
+            "time": "6 mnt",
+            "description": "Meningkatkan kecepatan audit, mengatasi masalah pemuatan lambat, dan mengoptimalkan kinerja."
+          },
+          "auditIssues": {
+            "title": "Audit Tidak Selesai",
+            "href": "/help/troubleshooting/audit-issues",
+            "time": "6 mnt",
+            "description": "Memecahkan masalah audit yang tidak lengkap, proses yang macet, dan pesan kesalahan audit."
+          }
+        },
+        "additionalResources": {
+          "title": "Sumber Daya Tambahan",
+          "systemStatus": {
+            "title": "Status Sistem",
+            "description": "Periksa ketersediaan layanan dan gangguan"
+          },
+          "errorCodes": {
+            "title": "Kode Kesalahan",
+            "description": "Daftar lengkap kode kesalahan dan solusi"
+          },
+          "contactSupport": {
+            "title": "Hubungi Dukungan",
+            "description": "Dapatkan bantuan pribadi untuk masalah teknis"
+          }
+        }
       }
     }
   },
@@ -5547,30 +5734,7 @@
           }
         }
       },
-      "troubleshooting": {
-        "title": "Pemecahan Masalah",
-        "description": "Selesaikan masalah dan kesalahan umum",
-        "articles": {
-          "loginIssues": {
-            "title": "Masalah login dan akses",
-            "time": "6 mnt"
-          },
-          "syncIssues": {
-            "title": "Masalah sinkronisasi data",
-            "time": "5 mnt"
-          },
-          "performance": {
-            "title": "Optimasi kinerja",
-            "time": "6 mnt"
-          },
-          "auditIssues": {
-            "title": "Audit tidak selesai",
-            "time": "6 mnt"
-          }
-        }
-      },
       "security": {
-        "title": "Keamanan & Privasi",
         "description": "Perlindungan data dan keamanan akun",
         "articles": {
           "twoFactor": {
@@ -5588,6 +5752,28 @@
           "bestPractices": {
             "title": "Praktik terbaik keamanan",
             "time": "9 mnt"
+          }
+        }
+      },
+      "troubleshooting": {
+        "title": "Pemecahan Masalah",
+        "description": "Temukan solusi untuk masalah umum dan teknis",
+        "articles": {
+          "loginIssues": {
+            "title": "Masalah akses dan login",
+            "time": "6 mnt"
+          },
+          "syncIssues": {
+            "title": "Masalah sinkronisasi data",
+            "time": "5 mnt"
+          },
+          "performance": {
+            "title": "Optimasi kinerja",
+            "time": "6 mnt"
+          },
+          "auditIssues": {
+            "title": "Audit tidak selesai",
+            "time": "6 mnt"
           }
         }
       }

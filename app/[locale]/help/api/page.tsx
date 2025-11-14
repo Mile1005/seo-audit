@@ -1,7 +1,8 @@
-import APIOverviewPage from '@/app/help/api/page'
+import { setRequestLocale } from 'next-intl/server'
+import type { Metadata } from 'next'
+import ApiPage from './page-translated'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import { Metadata } from 'next'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
@@ -14,6 +15,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   })
 }
 
-export default function Page() {
-  return <APIOverviewPage />
+type Props = { params: Promise<{ locale: string }> }
+
+export default async function LocalizedApiPage({ params }: Props) {
+  const { locale } = await params
+  setRequestLocale(locale)
+  return <ApiPage />
 }

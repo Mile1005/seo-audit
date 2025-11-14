@@ -562,6 +562,193 @@
             "description": "Ottieni aiuto con la fatturazione"
           }
         }
+      },
+      "seoTools": {
+        "title": "Strumenti e Funzionalità SEO",
+        "subtitle": "Esplora la nostra suite completa di strumenti SEO progettati per migliorare i tuoi ranking di ricerca, analizzare i concorrenti e ottimizzare le prestazioni del tuo sito web.",
+        "backToHelp": "Torna al Centro Assistenza",
+        "articles": {
+          "seoAudit": {
+            "title": "Guida all'Audit SEO",
+            "href": "/help/seo-tools/seo-audit",
+            "time": "8 min",
+            "description": "Impara a eseguire audit SEO completi che coprono 47+ fattori tecnici."
+          },
+          "competitorAnalysis": {
+            "title": "Analisi dei Concorrenti",
+            "href": "/help/seo-tools/competitor-analysis",
+            "time": "6 min",
+            "description": "Analizza le strategie SEO dei tuoi concorrenti e ottieni insight competitivi."
+          },
+          "siteCrawler": {
+            "title": "Strumento Crawler del Sito",
+            "href": "/help/seo-tools/site-crawler",
+            "time": "5 min",
+            "description": "Scopri tutte le pagine del tuo sito web e identifica i problemi di crawling."
+          },
+          "aiAssistant": {
+            "title": "Assistente SEO IA",
+            "href": "/help/seo-tools/ai-assistant",
+            "time": "4 min",
+            "description": "Ottieni raccomandazioni SEO personalizzate dal nostro assistente IA intelligente."
+          }
+        },
+        "additionalResources": {
+          "title": "Risorse Aggiuntive",
+          "keywordTracking": {
+            "title": "Monitoraggio Parole Chiave",
+            "description": "Monitora i ranking delle parole chiave"
+          },
+          "backlinkAnalysis": {
+            "title": "Analisi Backlink",
+            "description": "Analizza i profili dei backlink"
+          },
+          "contactSupport": {
+            "title": "Contatta Supporto",
+            "description": "Ottieni aiuto con i nostri strumenti"
+          }
+        }
+      },
+      "api": {
+        "title": "API e Integrazioni",
+        "subtitle": "Integra gli potenti strumenti SEO di AI SEO Turbo nelle tue applicazioni con la nostra completa API REST. Automatizza gli audit, accedi ai dati in tempo reale e crea workflow personalizzati.",
+        "backToHelp": "Torna al Centro Assistenza",
+        "articles": {
+          "authentication": {
+            "title": "Autenticazione API",
+            "href": "/help/api/authentication",
+            "time": "6 min",
+            "description": "Impara ad autenticarti con l'API AI SEO Turbo e ottenere le tue chiavi API."
+          },
+          "webhooks": {
+            "title": "Webhooks e Notifiche",
+            "href": "/help/api/webhooks",
+            "time": "8 min",
+            "description": "Configura i webhooks per ricevere notifiche in tempo reale sui tuoi audit SEO e rapporti."
+          }
+        },
+        "additionalResources": {
+          "title": "Risorse Aggiuntive",
+          "documentation": {
+            "title": "Documentazione API",
+            "description": "Riferimento completo API ed esempi"
+          },
+          "sdks": {
+            "title": "SDK e Librerie",
+            "description": "SDK ufficiali per linguaggi popolari"
+          },
+          "contactSupport": {
+            "title": "Supporto Sviluppatori",
+            "description": "Ottieni aiuto con l'integrazione API"
+          }
+        }
+      },
+      "security": {
+        "title": "Sicurezza e Privacy",
+        "subtitle": "Scopri le nostre misure di sicurezza, politiche sulla privacy, pratiche di protezione dei dati e come manteniamo le tue informazioni sicure e conformi.",
+        "backToHelp": "Torna al Centro Assistenza",
+        "securityOverview": {
+          "title": "Sicurezza in AI SEO Turbo",
+          "enterpriseSecurity": {
+            "title": "Sicurezza Aziendale",
+            "description": "Crittografia e protocolli di sicurezza a livello bancario"
+          },
+          "gdprCompliant": {
+            "title": "Conforme GDPR",
+            "description": "Conformità completa con le normative sulla protezione dei dati"
+          },
+          "privacyControls": {
+            "title": "Controlli Privacy",
+            "description": "Controllo completo sui tuoi dati e preferenze"
+          }
+        },
+        "articles": {
+          "bestPractices": {
+            "title": "Migliori Pratiche di Sicurezza",
+            "href": "/help/security/best-practices",
+            "time": "7 min",
+            "description": "Impara le pratiche di sicurezza essenziali per mantenere il tuo account e i tuoi dati al sicuro."
+          },
+          "twoFactorAuth": {
+            "title": "Autenticazione a Due Fattori",
+            "href": "/help/security/two-factor-authentication",
+            "time": "4 min",
+            "description": "Configura e gestisci l'autenticazione a due fattori per una maggiore sicurezza dell'account."
+          },
+          "privacy": {
+            "title": "Impostazioni Privacy",
+            "href": "/help/security/privacy",
+            "time": "5 min",
+            "description": "Controlla le tue impostazioni di privacy e comprendi come proteggiamo i tuoi dati."
+          },
+          "gdpr": {
+            "title": "Conformità GDPR",
+            "href": "/help/security/gdpr",
+            "time": "6 min",
+            "description": "Comprendi la nostra conformità GDPR e i tuoi diritti di protezione dei dati."
+          }
+        },
+        "additionalResources": {
+          "title": "Risorse Aggiuntive",
+          "securityCenter": {
+            "title": "Centro Sicurezza",
+            "description": "Ultimi aggiornamenti e avvisi di sicurezza"
+          },
+          "privacyPolicy": {
+            "title": "Informativa sulla Privacy",
+            "description": "Documento completo dell'informativa sulla privacy"
+          },
+          "contactSupport": {
+            "title": "Supporto Sicurezza",
+            "description": "Ottieni aiuto con le preoccupazioni di sicurezza"
+          }
+        }
+      },
+      "troubleshooting": {
+        "title": "Risoluzione Problemi",
+        "subtitle": "Trova soluzioni ai problemi comuni, messaggi di errore e problemi tecnici che potresti incontrare durante l'uso di AI SEO Turbo.",
+        "backToHelp": "Torna al Centro Assistenza",
+        "articles": {
+          "loginIssues": {
+            "title": "Problemi di Accesso e Login",
+            "href": "/help/troubleshooting/login-issues",
+            "time": "6 min",
+            "description": "Risolvere errori di login, problemi di reset password e problemi di accesso all'account."
+          },
+          "syncIssues": {
+            "title": "Problemi di Sincronizzazione Dati",
+            "href": "/help/troubleshooting/sync-issues",
+            "time": "5 min",
+            "description": "Correggere problemi di sincronizzazione dati, errori di importazione/esportazione e problemi di connettività."
+          },
+          "performance": {
+            "title": "Ottimizzazione delle Prestazioni",
+            "href": "/help/troubleshooting/performance",
+            "time": "6 min",
+            "description": "Migliorare la velocità di audit, risolvere problemi di caricamento lento e ottimizzare le prestazioni."
+          },
+          "auditIssues": {
+            "title": "Audit Non Completato",
+            "href": "/help/troubleshooting/audit-issues",
+            "time": "6 min",
+            "description": "Risolvere audit incompleti, processi bloccati e messaggi di errore di audit."
+          }
+        },
+        "additionalResources": {
+          "title": "Risorse Aggiuntive",
+          "systemStatus": {
+            "title": "Stato del Sistema",
+            "description": "Verificare la disponibilità dei servizi e le interruzioni"
+          },
+          "errorCodes": {
+            "title": "Codici di Errore",
+            "description": "Elenco completo dei codici di errore e soluzioni"
+          },
+          "contactSupport": {
+            "title": "Contattare il Supporto",
+            "description": "Ottenere aiuto personalizzato per problemi tecnici"
+          }
+        }
       }
     }
   },
@@ -5547,28 +5734,6 @@
           }
         }
       },
-      "troubleshooting": {
-        "title": "Risoluzione Problemi",
-        "description": "Risolvi problemi ed errori comuni",
-        "articles": {
-          "loginIssues": {
-            "title": "Problemi di accesso e login",
-            "time": "6 min"
-          },
-          "syncIssues": {
-            "title": "Problemi di sincronizzazione dati",
-            "time": "5 min"
-          },
-          "performance": {
-            "title": "Ottimizzazione delle prestazioni",
-            "time": "6 min"
-          },
-          "auditIssues": {
-            "title": "Audit non completato",
-            "time": "6 min"
-          }
-        }
-      },
       "security": {
         "title": "Sicurezza e Privacy",
         "description": "Protezione dei dati e sicurezza dell'account",
@@ -5588,6 +5753,28 @@
           "bestPractices": {
             "title": "Best practice di sicurezza",
             "time": "9 min"
+          }
+        }
+      },
+      "troubleshooting": {
+        "title": "Risoluzione Problemi",
+        "description": "Trova soluzioni ai problemi comuni e tecnici",
+        "articles": {
+          "loginIssues": {
+            "title": "Problemi di accesso e login",
+            "time": "6 min"
+          },
+          "syncIssues": {
+            "title": "Problemi di sincronizzazione dati",
+            "time": "5 min"
+          },
+          "performance": {
+            "title": "Ottimizzazione prestazioni",
+            "time": "6 min"
+          },
+          "auditIssues": {
+            "title": "Audit non completato",
+            "time": "6 min"
           }
         }
       }

@@ -477,6 +477,193 @@
             "description": "Get help with billing"
           }
         }
+      },
+      "seoTools": {
+        "title": "SEO Tools & Features",
+        "subtitle": "Explore our comprehensive suite of SEO tools designed to boost your search rankings, analyze competitors, and optimize your website performance.",
+        "backToHelp": "Back to Help Center",
+        "articles": {
+          "seoAudit": {
+            "title": "SEO Audit Guide",
+            "href": "/help/seo-tools/seo-audit",
+            "time": "8 min",
+            "description": "Learn how to perform comprehensive SEO audits covering 47+ technical factors."
+          },
+          "competitorAnalysis": {
+            "title": "Competitor Analysis",
+            "href": "/help/seo-tools/competitor-analysis",
+            "time": "6 min",
+            "description": "Analyze your competitors' SEO strategies and gain competitive insights."
+          },
+          "siteCrawler": {
+            "title": "Site Crawler Tool",
+            "href": "/help/seo-tools/site-crawler",
+            "time": "5 min",
+            "description": "Discover all pages on your website and identify crawlability issues."
+          },
+          "aiAssistant": {
+            "title": "AI SEO Assistant",
+            "href": "/help/seo-tools/ai-assistant",
+            "time": "4 min",
+            "description": "Get personalized SEO recommendations from our intelligent AI assistant."
+          }
+        },
+        "additionalResources": {
+          "title": "Additional Resources",
+          "keywordTracking": {
+            "title": "Keyword Tracking",
+            "description": "Monitor keyword rankings"
+          },
+          "backlinkAnalysis": {
+            "title": "Backlink Analysis",
+            "description": "Analyze backlink profiles"
+          },
+          "contactSupport": {
+            "title": "Contact Support",
+            "description": "Get help with our tools"
+          }
+        }
+      },
+      "api": {
+        "title": "API & Integrations",
+        "subtitle": "Integrate AI SEO Turbo's powerful SEO tools into your applications with our comprehensive REST API. Automate audits, access real-time data, and build custom workflows.",
+        "backToHelp": "Back to Help Center",
+        "articles": {
+          "authentication": {
+            "title": "API Authentication",
+            "href": "/help/api/authentication",
+            "time": "6 min",
+            "description": "Learn how to authenticate with the AI SEO Turbo API and get your API keys."
+          },
+          "webhooks": {
+            "title": "Webhooks & Notifications",
+            "href": "/help/api/webhooks",
+            "time": "8 min",
+            "description": "Set up webhooks to receive real-time notifications about your SEO audits and reports."
+          }
+        },
+        "additionalResources": {
+          "title": "Additional Resources",
+          "documentation": {
+            "title": "API Documentation",
+            "description": "Complete API reference and examples"
+          },
+          "sdks": {
+            "title": "SDKs & Libraries",
+            "description": "Official SDKs for popular languages"
+          },
+          "contactSupport": {
+            "title": "Developer Support",
+            "description": "Get help with API integration"
+          }
+        }
+      },
+      "security": {
+        "title": "Security & Privacy",
+        "subtitle": "Learn about our security measures, privacy policies, data protection practices, and how we keep your information safe and compliant.",
+        "backToHelp": "Back to Help Center",
+        "securityOverview": {
+          "title": "Security at AI SEO Turbo",
+          "enterpriseSecurity": {
+            "title": "Enterprise Security",
+            "description": "Bank-level encryption and security protocols"
+          },
+          "gdprCompliant": {
+            "title": "GDPR Compliant",
+            "description": "Full compliance with data protection regulations"
+          },
+          "privacyControls": {
+            "title": "Privacy Controls",
+            "description": "Complete control over your data and preferences"
+          }
+        },
+        "articles": {
+          "bestPractices": {
+            "title": "Security Best Practices",
+            "href": "/help/security/best-practices",
+            "time": "7 min",
+            "description": "Learn essential security practices to keep your account and data safe."
+          },
+          "twoFactorAuth": {
+            "title": "Two-Factor Authentication",
+            "href": "/help/security/two-factor-authentication",
+            "time": "4 min",
+            "description": "Set up and manage two-factor authentication for enhanced account security."
+          },
+          "privacy": {
+            "title": "Privacy Settings",
+            "href": "/help/security/privacy",
+            "time": "5 min",
+            "description": "Control your privacy settings and understand how we protect your data."
+          },
+          "gdpr": {
+            "title": "GDPR Compliance",
+            "href": "/help/security/gdpr",
+            "time": "6 min",
+            "description": "Understand our GDPR compliance and your data protection rights."
+          }
+        },
+        "additionalResources": {
+          "title": "Additional Resources",
+          "securityCenter": {
+            "title": "Security Center",
+            "description": "Latest security updates and alerts"
+          },
+          "privacyPolicy": {
+            "title": "Privacy Policy",
+            "description": "Complete privacy policy document"
+          },
+          "contactSupport": {
+            "title": "Security Support",
+            "description": "Get help with security concerns"
+          }
+        }
+      },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "subtitle": "Find solutions to common issues, error messages, and technical problems you might encounter while using AI SEO Turbo.",
+        "backToHelp": "Back to Help Center",
+        "articles": {
+          "loginIssues": {
+            "title": "Login and Access Problems",
+            "href": "/help/troubleshooting/login-issues",
+            "time": "6 min",
+            "description": "Resolve login errors, password reset issues, and account access problems."
+          },
+          "syncIssues": {
+            "title": "Data Synchronization Issues",
+            "href": "/help/troubleshooting/sync-issues",
+            "time": "5 min",
+            "description": "Fix problems with data syncing, import/export errors, and connectivity issues."
+          },
+          "performance": {
+            "title": "Performance Optimization",
+            "href": "/help/troubleshooting/performance",
+            "time": "6 min",
+            "description": "Improve audit speed, resolve slow loading issues, and optimize performance."
+          },
+          "auditIssues": {
+            "title": "Audit Not Completing",
+            "href": "/help/troubleshooting/audit-issues",
+            "time": "6 min",
+            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
+          }
+        },
+        "additionalResources": {
+          "title": "Additional Resources",
+          "systemStatus": {
+            "title": "System Status",
+            "description": "Check service availability and outages"
+          },
+          "errorCodes": {
+            "title": "Error Codes",
+            "description": "Complete list of error codes and solutions"
+          },
+          "contactSupport": {
+            "title": "Contact Support",
+            "description": "Get personalized help with technical issues"
+          }
+        }
       }
     }
   },
@@ -5462,28 +5649,6 @@
           }
         }
       },
-      "troubleshooting": {
-        "title": "Troubleshooting",
-        "description": "Resolve common issues and errors",
-        "articles": {
-          "loginIssues": {
-            "title": "Login and access problems",
-            "time": "6 min"
-          },
-          "syncIssues": {
-            "title": "Data synchronization issues",
-            "time": "5 min"
-          },
-          "performance": {
-            "title": "Performance optimization",
-            "time": "6 min"
-          },
-          "auditIssues": {
-            "title": "Audit not completing",
-            "time": "6 min"
-          }
-        }
-      },
       "security": {
         "title": "Security & Privacy",
         "description": "Data protection and account security",
@@ -5503,6 +5668,28 @@
           "bestPractices": {
             "title": "Security best practices",
             "time": "9 min"
+          }
+        }
+      },
+      "troubleshooting": {
+        "title": "Troubleshooting",
+        "description": "Find solutions to common issues and technical problems",
+        "articles": {
+          "loginIssues": {
+            "title": "Login and access problems",
+            "time": "6 min"
+          },
+          "syncIssues": {
+            "title": "Data sync issues",
+            "time": "5 min"
+          },
+          "performance": {
+            "title": "Performance optimization",
+            "time": "6 min"
+          },
+          "auditIssues": {
+            "title": "Audit not completing",
+            "time": "6 min"
           }
         }
       }
