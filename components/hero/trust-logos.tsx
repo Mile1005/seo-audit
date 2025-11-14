@@ -93,7 +93,7 @@ export function TrustLogos() {
               ))}
             </div>
             <span className="text-gray-400 text-sm">
-              <span className="text-blue-400 font-semibold">1,000+ marketers</span> trust our platform
+              <span className="text-blue-400 font-semibold">{t('trustLogos.marketersText')}</span> {t('trustLogos.trustText')}
             </span>
           </div>
 
@@ -107,7 +107,7 @@ export function TrustLogos() {
               ))}
             </div>
             <span className="text-gray-400 text-sm ml-2">
-              <span className="text-white font-semibold">4.9/5</span> average rating
+              <span className="text-white font-semibold">{t('trustLogos.ratingText')}</span> {t('trustLogos.ratingLabel')}
             </span>
           </div>
         </motion.div>

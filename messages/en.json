@@ -55,6 +55,16 @@
     "signOut": "Sign Out",
     "page": "Page"
   },
+  "meta": {
+    "home": {
+      "description": "Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.",
+      "keywords": ["AI SEO audit", "SEO optimization tool", "website ranking boost", "organic traffic growth", "technical SEO analysis"]
+    },
+    "defaultTitle": "AI SEO Turbo - AI-Powered SEO Audits",
+    "defaultDescription": "Get actionable SEO insights that boost rankings and drive organic traffic in minutes",
+    "defaultKeywords": "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
+    "siteName": "AI SEO Turbo"
+  },
   "nav": {
     "home": "Home",
     "features": "Features",
@@ -348,6 +358,12 @@
       "ctaSecondary": "See Live Demo"
     },
     "trustedBy": "Trusted by {count}+ marketers worldwide",
+    "trustLogos": {
+      "marketersText": "1,000+ marketers",
+      "ratingText": "4.9/5",
+      "trustText": "trust our platform",
+      "ratingLabel": "average rating"
+    },
     "freeTrialNoCreditCard": "Start your free trial. No credit card required.",
     "why": {
       "title": "Why Choose AI SEO Turbo?",
@@ -671,12 +687,6 @@
         "description": "The complete technical SEO checklist used by 1000+ websites to increase organic traffic by 40% in 90 days."
       }
     }
-  },
-  "meta": {
-    "defaultTitle": "AI SEO Turbo - AI-Powered SEO Audits",
-    "defaultDescription": "Get actionable SEO insights that boost rankings and drive organic traffic in minutes",
-    "keywords": "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
-    "siteName": "AI SEO Turbo"
   },
   "audit": {
     "title": "SEO Audit",

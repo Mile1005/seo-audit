@@ -135,6 +135,16 @@
     "signOut": "Abmelden",
     "page": "Seite"
   },
+  "meta": {
+    "home": {
+      "description": "Transformieren Sie Ihr SEO mit KI-gestützten Audits, die 47+ kritische Probleme identifizieren. Erhalten Sie datengetriebene Einblicke, um organischen Traffic zu steigern und Rankings zu dominieren.",
+      "keywords": ["KI SEO Audit", "SEO Optimierungstool", "Website Ranking Boost", "organisches Traffic Wachstum", "technische SEO Analyse"]
+    },
+    "defaultTitle": "AI SEO Turbo - KI-gestützte SEO Audits",
+    "defaultDescription": "Erhalten Sie umsetzbare SEO-Einblicke, die Rankings verbessern und organischen Traffic in Minuten generieren",
+    "defaultKeywords": "SEO Audit, KI SEO Analyse, Website Optimierung, organischer Traffic, Suchrankings",
+    "siteName": "AI SEO Turbo"
+  },
   "nav": {
     "home": "Startseite",
     "features": "Funktionen",
@@ -428,6 +438,12 @@
       "ctaSecondary": "Live-Demo ansehen"
     },
     "trustedBy": "Vertraut von über {count} Marketern weltweit",
+    "trustLogos": {
+      "marketersText": "1.000+ Marketern",
+      "ratingText": "4,9/5",
+      "trustText": "vertrauen unserer Plattform",
+      "ratingLabel": "Durchschnittsbewertung"
+    },
     "freeTrialNoCreditCard": "Starten Sie Ihre kostenlose Testversion. Keine Kreditkarte erforderlich.",
     "why": {
       "title": "Warum AI SEO Turbo wählen?",
@@ -751,12 +767,6 @@
         "description": "Die vollständige technische SEO-Checkliste, die von über 1000 Websites verwendet wird, um den organischen Traffic um 40% in 90 Tagen zu steigern."
       }
     }
-  },
-  "meta": {
-    "defaultTitle": "AI SEO Turbo - KI-gestützte SEO-Audits",
-    "defaultDescription": "Erhalten Sie umsetzbare SEO-Erkenntnisse, die Rankings steigern und organischen Traffic in Minuten generieren",
-    "keywords": "SEO-Audit, KI-SEO-Analyse, Website-Optimierung, organischer Traffic, Suchrankings",
-    "siteName": "AI SEO Turbo"
   },
   "audit": {
     "title": "SEO-Audit",

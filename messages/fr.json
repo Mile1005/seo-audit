@@ -135,6 +135,16 @@
     "signOut": "Déconnexion",
     "page": "Page"
   },
+  "meta": {
+    "home": {
+      "description": "Transformez votre SEO avec des audits alimentés par IA identifiant 47+ problèmes critiques. Obtenez des insights basés sur les données pour booster votre trafic organique et dominer les classements.",
+      "keywords": ["audit SEO IA", "outil optimisation SEO", "amélioration classement site web", "croissance trafic organique", "analyse SEO technique"]
+    },
+    "defaultTitle": "AI SEO Turbo - Audits SEO Alimentés par l'IA",
+    "defaultDescription": "Obtenez des insights SEO actionnables qui boostent les classements et génèrent du trafic organique en quelques minutes",
+    "defaultKeywords": "audit SEO, analyse SEO IA, optimisation de site web, trafic organique, classements de recherche",
+    "siteName": "AI SEO Turbo"
+  },
   "nav": {
     "home": "Accueil",
     "features": "Fonctionnalités",
@@ -430,6 +440,12 @@
       "ctaSecondary": "Voir la Démo en Direct"
     },
     "trustedBy": "Plus de {count} marketeurs nous font confiance dans le monde entier",
+    "trustLogos": {
+      "marketersText": "1 000+ marketeurs",
+      "ratingText": "4,9/5",
+      "trustText": "nous font confiance",
+      "ratingLabel": "note moyenne"
+    },
     "freeTrialNoCreditCard": "Commencez votre essai gratuit. Aucune carte de crédit requise.",
     "why": {
       "title": "Pourquoi choisir AI SEO Turbo ?",
@@ -753,12 +769,6 @@
         "description": "La liste de contrôle technique SEO complète utilisée par plus de 1000 sites web pour augmenter le trafic organique de 40% en 90 jours."
       }
     }
-  },
-  "meta": {
-    "defaultTitle": "AI SEO Turbo - Audits SEO Alimentés par l'IA",
-    "defaultDescription": "Obtenez des insights SEO actionnables qui boostent les classements et génèrent du trafic organique en quelques minutes",
-    "keywords": "audit SEO, analyse SEO IA, optimisation de site web, trafic organique, classements de recherche",
-    "siteName": "AI SEO Turbo"
   },
   "audit": {
     "title": "Audit SEO",

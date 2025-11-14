@@ -140,6 +140,12 @@
     "signOut": "Keluar",
     "page": "Halaman"
   },
+  "meta": {
+    "home": {
+      "description": "Transformasikan SEO Anda dengan audit bertenaga AI yang mengidentifikasi 47+ masalah kritis. Dapatkan wawasan berbasis data untuk meningkatkan traffic organik dan mendominasi peringkat.",
+      "keywords": ["audit SEO AI", "alat optimasi SEO", "boost peringkat website", "pertumbuhan traffic organik", "analisis SEO teknis"]
+    }
+  },
   "nav": {
     "home": "Beranda",
     "features": "Fitur",
@@ -433,6 +439,12 @@
       "ctaSecondary": "Lihat Demo Langsung"
     },
     "trustedBy": "Dipercaya oleh {count}+ marketer di seluruh dunia",
+    "trustLogos": {
+      "marketersText": "1.000+ marketer",
+      "ratingText": "4,9/5",
+      "trustText": "memercayai platform kami",
+      "ratingLabel": "rating rata-rata"
+    },
     "freeTrialNoCreditCard": "Mulai uji coba gratis Anda. Tidak perlu kartu kredit.",
     "why": {
       "title": "Mengapa Memilih AI SEO Turbo?",
@@ -756,12 +768,6 @@
         "description": "Daftar periksa teknis SEO lengkap yang digunakan oleh lebih dari 1000 situs web untuk meningkatkan trafik organik sebesar 40% dalam 90 hari."
       }
     }
-  },
-  "meta": {
-    "defaultTitle": "AI SEO Turbo - Audit SEO Bertenaga AI",
-    "defaultDescription": "Dapatkan wawasan SEO actionable yang meningkatkan peringkat dan mendorong traffic organik dalam hitungan menit",
-    "keywords": "audit SEO, analisis SEO AI, optimasi website, traffic organik, peringkat pencarian",
-    "siteName": "AI SEO Turbo"
   },
   "audit": {
     "title": "Audit SEO",

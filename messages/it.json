@@ -140,6 +140,16 @@
     "signOut": "Esci",
     "page": "Pagina"
   },
+  "meta": {
+    "home": {
+      "description": "Trasforma il tuo SEO con audit alimentati da IA che identificano 47+ problemi critici. Ottieni insight basati sui dati per aumentare il traffico organico e dominare le classifiche.",
+      "keywords": ["audit SEO IA", "strumento ottimizzazione SEO", "miglioramento ranking sito web", "crescita traffico organico", "analisi SEO tecnica"]
+    },
+    "defaultTitle": "AI SEO Turbo - Audit SEO alimentati da AI",
+    "defaultDescription": "Ottenga insights SEO azionabili che migliorano le classifiche e generano traffico organico in pochi minuti",
+    "defaultKeywords": "audit SEO, analisi AI SEO, ottimizzazione sito web, traffico organico, classifiche di ricerca",
+    "siteName": "AI SEO Turbo"
+  },
   "nav": {
     "home": "Home",
     "features": "Funzionalità",
@@ -433,6 +443,12 @@
       "ctaSecondary": "Visualizzi Demo dal Vivo"
     },
     "trustedBy": "Di fiducia per oltre {count} marketer in tutto il mondo",
+    "trustLogos": {
+      "marketersText": "1.000+ marketer",
+      "ratingText": "4,9/5",
+      "trustText": "si fidano della nostra piattaforma",
+      "ratingLabel": "valutazione media"
+    },
     "freeTrialNoCreditCard": "Inizi la sua prova gratuita. Nessuna carta di credito richiesta.",
     "why": {
       "title": "Perché scegliere AI SEO Turbo?",
@@ -756,12 +772,6 @@
         "description": "La lista di controllo tecnica SEO completa utilizzata da oltre 1000 siti web per aumentare il traffico organico del 40% in 90 giorni."
       }
     }
-  },
-  "meta": {
-    "defaultTitle": "AI SEO Turbo - Audit SEO alimentati da AI",
-    "defaultDescription": "Ottenga insights SEO azionabili che migliorano le classifiche e generano traffico organico in pochi minuti",
-    "keywords": "audit SEO, analisi AI SEO, ottimizzazione sito web, traffico organico, classifiche di ricerca",
-    "siteName": "AI SEO Turbo"
   },
   "audit": {
     "title": "SEO Audit",

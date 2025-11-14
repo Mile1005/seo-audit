@@ -8,6 +8,16 @@ import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { useTranslations } from "next-intl"
 
+// Safe translation hook with fallbacks
+function useSafeTranslations(namespace: string) {
+  try {
+    return useTranslations(namespace)
+  } catch (error) {
+    // Fallback when context is not available
+    return (key: string) => key
+  }
+}
+
 // Lightweight dropdown component with CSS transitions
 interface DropdownItem {
   id: string
@@ -120,7 +130,7 @@ export interface NavigationSection {
 }
 
 function useNavigationData(): NavigationSection[] {
-  const t = useTranslations('nav')
+  const t = useSafeTranslations('nav')
   return [
     {
       label: t('features'),
@@ -164,7 +174,7 @@ function useNavigationData(): NavigationSection[] {
 }
 
 export function AdaptiveNavigation() {
-  const t = useTranslations('nav')
+  const t = useSafeTranslations('nav')
   const navigationData = useNavigationData()
   const [isOpen, setIsOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)

@@ -84,9 +84,12 @@ const ContentGate = dynamic(() =>
 // SEO metadata for the homepage with hreflang support
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
+  setRequestLocale(locale);
+  const t = await getTranslations('meta');
+  
   return generateSEOMeta({
-    description: 'Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.',
-    keywords: ['AI SEO audit', 'SEO optimization tool', 'website ranking boost', 'organic traffic growth', 'technical SEO analysis'],
+    description: t('home.description'),
+    keywords: t.raw('home.keywords'),
     ogImage: '/logo.png',
     locale: locale as Locale,
     path: '' // Homepage at root path

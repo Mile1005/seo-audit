@@ -4,7 +4,7 @@ import { locales, defaultLocale, type Locale } from '../i18n'
 interface SEOConfig {
   title: string
   description: string
-  keywords?: string[]
+  keywords?: string | string[]
   canonical?: string
   ogImage?: string
   ogType?: 'website' | 'article'
@@ -223,7 +223,7 @@ export function generateSEOMeta(config: Partial<SEOConfig> = {}): Metadata {
   return {
     title: finalTitle,
     description: seo.description,
-    keywords: seo.keywords?.join(', '),
+    keywords: Array.isArray(seo.keywords) ? seo.keywords.join(', ') : seo.keywords,
     robots: seo.noIndex ? 'noindex,nofollow' : 'index,follow',
     
     openGraph: {
@@ -966,7 +966,8 @@ export function validateSEO(config: Partial<SEOConfig> & { content?: string }): 
   // Keyword density analysis
   let keywordAnalysis: Array<{ keyword: string; density: number; isValid: boolean }> | undefined
   if (config.keywords && config.content) {
-    keywordAnalysis = keywordDensityUtils.analyzeKeywords(config.content, config.keywords)
+    const keywordsArray = Array.isArray(config.keywords) ? config.keywords : [config.keywords]
+    keywordAnalysis = keywordDensityUtils.analyzeKeywords(config.content, keywordsArray)
     const invalidKeywords = keywordAnalysis.filter(k => !k.isValid)
     if (invalidKeywords.length > 0) {
       issues.push(`Keywords: ${invalidKeywords.length} keywords have suboptimal density`)
