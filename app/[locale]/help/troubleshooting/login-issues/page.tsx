@@ -1,4 +1,5 @@
 import { generateSEOMeta } from '@/lib/seo'
+import { getTranslations } from 'next-intl/server'
 import { setRequestLocale } from 'next-intl/server'
 import LoginIssuesContent from './LoginIssuesContent'
 
@@ -9,9 +10,11 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
 
+  const t = await getTranslations({ locale, namespace: 'login-issues' })
+
   return generateSEOMeta({
-    title: 'Login Issues Troubleshooting - AISEOTurbo Help',
-    description: 'Complete troubleshooting guide for login problems in AISEOTurbo. Solutions for invalid credentials, account lockouts, 2FA issues, and password reset problems.',
+    title: t('meta.title'),
+    description: t('meta.description'),
     path: '/help/troubleshooting/login-issues',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })

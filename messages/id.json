@@ -1241,6 +1241,12 @@
             "href": "/help/api/webhooks",
             "time": "8 min",
             "description": "Siapkan webhooks untuk menerima notifikasi real-time tentang audit SEO dan laporan Anda."
+          },
+          "apiIntegrations": {
+            "title": "Integrasi API",
+            "href": "/help/api/api-integrations",
+            "time": "10 min",
+            "description": "Panduan lengkap untuk mengintegrasikan AI SEO Turbo dengan aplikasi Anda, termasuk endpoint REST API, SDK, dan fitur enterprise."
           }
         },
         "additionalResources": {
@@ -2269,6 +2275,351 @@
             "title": "Hubungi Dukungan",
             "description": "Dapatkan bantuan pribadi untuk masalah teknis"
           }
+        }
+      }
+    }
+  },
+  "audit-issues": {
+    "meta": {
+      "title": "Pemecahan Masalah Audit - Bantuan AISEOTurbo",
+      "description": "Panduan pemecahan masalah lengkap untuk memperbaiki masalah audit SEO di AISEOTurbo. Solusi untuk audit yang macet, kesalahan timeout, dan masalah teknis."
+    }
+  },
+  "performance": {
+    "meta": {
+      "title": "Optimasi Performa - Bantuan AISEOTurbo",
+      "description": "Tingkatkan kecepatan audit, selesaikan masalah pemuatan lambat, dan optimalkan performa."
+    }
+  },
+  "login-issues": {
+    "meta": {
+      "title": "Pemecahan Masalah Login - Bantuan AISEOTurbo",
+      "description": "Panduan pemecahan masalah lengkap untuk masalah login di AISEOTurbo. Solusi untuk kredensial tidak valid, pemblokiran akun, masalah 2FA, dan masalah reset kata sandi."
+    }
+  },
+  "apiContent": {
+    "api-integrations": {
+      "breadcrumb": {
+        "help": "Pusat Bantuan",
+        "apiIntegrations": "API & Integrasi"
+      },
+      "header": {
+        "backToHelp": "Kembali ke Pusat Bantuan",
+        "title": "API & Integrasi",
+        "subtitle": "Hubungkan dan otomatisasi alur kerja dengan API dan integrasi.",
+        "lastUpdated": "Terakhir diperbarui: Maret 2025"
+      },
+      "articles": {
+        "authentication": {
+          "title": "Autentikasi API",
+          "href": "/help/api/authentication",
+          "time": "5",
+          "description": "Pelajari cara mengautentikasi dan mengotorisasi permintaan API dengan aman."
+        },
+        "webhooks": {
+          "title": "Webhook & Callback",
+          "href": "/help/api/webhooks",
+          "time": "7",
+          "description": "Atur notifikasi real-time dan alur kerja otomatis."
+        },
+        "apiIntegrations": {
+          "title": "Panduan Integrasi API",
+          "href": "/help/api/api-integrations",
+          "time": "10",
+          "description": "Panduan lengkap untuk mengintegrasikan API kami ke aplikasi Anda."
+        }
+      },
+      "sections": {
+        "mainIntro": {
+          "title": "API AI SEO Turbo: Tenagai Aplikasi Anda",
+          "description": "Rangkaian API kami yang komprehensif memungkinkan pengembang, agensi, dan bisnis mengintegrasikan kemampuan SEO berbasis AI langsung ke aplikasi, alur kerja, dan platform mereka. Mulai dari audit otomatis hingga pelacakan kata kunci real-time, API kami menghadirkan kecerdasan tingkat lanjut yang sama seperti pada dasbor kami."
+        },
+        "gettingStarted": {
+          "title": "Memulai dengan API AI SEO Turbo",
+          "description": "Integrasi dengan API kami sangat mudah, baik Anda membangun alat SEO kustom, mengotomasi alur kerja klien, atau mengembangkan solusi white-label. API RESTful kami mengikuti standar industri dan dilengkapi dokumentasi lengkap serta SDK.",
+          "requirements": {
+            "title": "Persyaratan Akses API",
+            "apiKey": {
+              "title": "API Key",
+              "description": "Autentikasi API key yang aman untuk semua permintaan"
+            },
+            "rateLimits": {
+              "title": "Batas Permintaan",
+              "description": "Batas permintaan yang fleksibel mulai dari 1.000 permintaan/jam"
+            },
+            "httpsOnly": {
+              "title": "Hanya HTTPS",
+              "description": "Seluruh komunikasi API diamankan dengan TLS 1.3"
+            },
+            "jsonFormat": {
+              "title": "Format JSON",
+              "description": "Format permintaan/respons JSON yang konsisten"
+            }
+          }
+        },
+        "coreEndpoints": {
+          "title": "Endpoint Inti API",
+          "description": "API kami menyediakan akses ke seluruh fitur analisis dan pelacakan SEO utama melalui endpoint yang terdokumentasi dengan baik.",
+          "auditApi": {
+            "title": "API Audit SEO",
+            "features": {
+              "siteAudit": {
+                "title": "Audit Situs",
+                "description": "SEO teknis dengan 47+ pemeriksaan"
+              },
+              "pageAnalysis": {
+                "title": "Analisis Halaman",
+                "description": "Evaluasi tiap halaman secara individual"
+              },
+              "crawlerControl": {
+                "title": "Kontrol Crawler",
+                "description": "Parameter yang dapat disesuaikan"
+              },
+              "reports": {
+                "title": "Laporan",
+                "description": "Pembuatan PDF & JSON otomatis"
+              }
+            }
+          },
+          "keywordApi": {
+            "title": "API Riset Kata Kunci",
+            "features": {
+              "discovery": {
+                "title": "Penemuan",
+                "description": "Analisis volume & kompetisi"
+              },
+              "serpAnalysis": {
+                "title": "Analisis SERP",
+                "description": "Pemeriksaan hasil pencarian"
+              },
+              "competitorKeywords": {
+                "title": "Kata Kunci Kompetitor",
+                "description": "Analisis strategi"
+              },
+              "longTail": {
+                "title": "Long-tail",
+                "description": "Saran berbasis AI"
+              }
+            }
+          },
+          "backlinkApi": {
+            "title": "API Analisis Backlink",
+            "features": {
+              "discovery": {
+                "title": "Penemuan",
+                "description": "Analisis profil"
+              },
+              "qualityScoring": {
+                "title": "Penilaian Kualitas",
+                "description": "Deteksi link toksik"
+              },
+              "competitorCompare": {
+                "title": "Perbandingan Kompetitor",
+                "description": "Perbandingan profil"
+              },
+              "monitoring": {
+                "title": "Monitoring",
+                "description": "Pelacakan real-time"
+              }
+            }
+          }
+        },
+        "advancedFeatures": {
+          "title": "Fitur Integrasi Lanjutan",
+          "description": "Pelanggan enterprise dan agensi dapat mengakses fitur integrasi lanjutan di luar akses API dasar.",
+          "webhooks": {
+            "title": "Webhook",
+            "features": {
+              "realTime": "Notifikasi real-time",
+              "automatedWorkflows": "Alur kerja otomatis",
+              "customCallbacks": "Callback khusus",
+              "retryLogic": "Logika retry otomatis"
+            }
+          },
+          "whiteLabel": {
+            "title": "White Label",
+            "features": {
+              "customBranding": "Penjenamaan khusus",
+              "apiReselling": "Penjualan kembali API",
+              "customDomains": "Domain khusus",
+              "prioritySupport": "Dukungan prioritas"
+            }
+          }
+        },
+        "sdks": {
+          "title": "SDK & Alat Pengembangan",
+          "description": "Percepat integrasi dengan SDK resmi untuk berbagai bahasa pemrograman populer.",
+          "available": {
+            "title": "SDK Tersedia"
+          },
+          "languages": {
+            "js": {
+              "label": "JS",
+              "description": "JavaScript/Node.js dengan dukungan TypeScript"
+            },
+            "python": {
+              "label": "PY",
+              "description": "Python dengan dukungan async/await"
+            },
+            "php": {
+              "label": "PHP",
+              "description": "Bebas framework dengan integrasi Laravel"
+            },
+            "java": {
+              "label": "JAVA",
+              "description": "SDK enterprise dengan dukungan Spring Boot"
+            },
+            "go": {
+              "label": "GO",
+              "description": "Performa tinggi untuk permintaan konkuren"
+            },
+            "ruby": {
+              "label": "RUBY",
+              "description": "Integrasi Rails dengan ActiveSupport"
+            }
+          }
+        },
+        "rateLimits": {
+          "title": "Batas Permintaan dan Kuota API",
+          "description": "Pembatasan permintaan yang fleksibel memastikan akses adil sambil memungkinkan volume tinggi untuk aplikasi enterprise.",
+          "tiers": {
+            "free": {
+              "title": "🆓 Paket Gratis",
+              "requestsPerHour": "100 permintaan/jam",
+              "requestsPerMonth": "1.000 permintaan/bulan"
+            },
+            "pro": {
+              "title": "⭐ Paket Pro",
+              "requestsPerHour": "1.000 permintaan/jam",
+              "requestsPerMonth": "50.000 permintaan/bulan"
+            },
+            "agency": {
+              "title": "🏢 Agensi",
+              "requestsPerHour": "5.000 permintaan/jam",
+              "requestsPerMonth": "250.000 permintaan/bulan"
+            },
+            "enterprise": {
+              "title": "🚀 Enterprise",
+              "customLimits": "Batas khusus",
+              "dedicatedInfrastructure": "Infrastruktur khusus"
+            }
+          }
+        },
+        "security": {
+          "title": "Keamanan dan Kepatuhan",
+          "description": "Keamanan tingkat enterprise memastikan data dan komunikasi API Anda selalu terlindungi.",
+          "features": {
+            "title": "Fitur Keamanan",
+            "oauth": {
+              "title": "OAuth 2.0",
+              "description": "Autentikasi aman dengan refresh token"
+            },
+            "keyRotation": {
+              "title": "Rotasi Kunci",
+              "description": "Rotasi kunci otomatis untuk keamanan"
+            },
+            "auditLogging": {
+              "title": "Audit Logging",
+              "description": "Log penggunaan API lengkap"
+            },
+            "gdpr": {
+              "title": "Kepatuhan GDPR",
+              "description": "Kepatuhan dalam pemrosesan data"
+            },
+            "soc2": {
+              "title": "SOC 2 Tipe II",
+              "description": "Standar tersertifikasi"
+            }
+          }
+        },
+        "documentation": {
+          "title": "Dokumentasi dan Dukungan API",
+          "description": "Dokumentasi lengkap dan dukungan khusus memastikan integrasi Anda berhasil.",
+          "items": {
+            "explorer": {
+              "title": "API Explorer Interaktif",
+              "description": "Uji endpoint langsung di browser Anda"
+            },
+            "examples": {
+              "title": "Contoh Kode",
+              "description": "Implementasi contoh dalam berbagai bahasa"
+            },
+            "tutorials": {
+              "title": "Tutorial Video",
+              "description": "Panduan integrasi langkah demi langkah"
+            },
+            "forums": {
+              "title": "Forum Komunitas",
+              "description": "Dukungan antar pengembang"
+            },
+            "support": {
+              "title": "Dukungan 24/7",
+              "description": "Dukungan teknis untuk masalah integrasi"
+            }
+          }
+        },
+        "useCases": {
+          "title": "Studi Kasus & Cerita Sukses",
+          "description": "Lihat bagaimana organisasi menggunakan API kami untuk membangun solusi SEO inovatif.",
+          "items": {
+            "agencies": {
+              "title": "🏢 Agensi SEO",
+              "description": "Otomatisasi audit dan alur kerja pelaporan"
+            },
+            "cms": {
+              "title": "📝 Platform CMS",
+              "description": "Analisis SEO terintegrasi pada CMS"
+            },
+            "ecommerce": {
+              "title": "🛒 E-commerce",
+              "description": "Optimasi halaman produk otomatis"
+            },
+            "automation": {
+              "title": "🤖 Otomasi Pemasaran",
+              "description": "Optimasi kampanye berdasarkan SEO"
+            },
+            "monitoring": {
+              "title": "👁️ Monitoring Kompetitor",
+              "description": "Intelijen kompetitif otomatis"
+            }
+          }
+        },
+        "closing": {
+          "title": "Membentuk Masa Depan Otomasi SEO",
+          "description1": "API kami memberdayakan pengembang dan organisasi untuk menciptakan solusi SEO inovatif yang sebelumnya tidak memungkinkan. Baik Anda membangun generasi baru alat SEO maupun mengintegrasikan analitik berbasis AI ke platform yang sudah ada, API AI SEO Turbo memberi fondasi yang Anda butuhkan.",
+          "description2": "Siap membangun? Jelajahi dokumentasi lengkap dan SDK kami di bawah ini, atau hubungi tim Developer Relations untuk dukungan integrasi yang dipersonalisasi."
+        },
+        "apiResources": {
+          "title": "Sumber Daya API",
+          "items": {
+            "authentication": {
+              "title": "Autentikasi API",
+              "description": "Pelajari cara mengautentikasi permintaan API"
+            },
+            "status": {
+              "title": "Status API",
+              "description": "Cek ketersediaan dan uptime API"
+            }
+          }
+        },
+        "relatedCategories": {
+          "title": "Kategori Terkait",
+          "items": {
+            "troubleshooting": {
+              "title": "Pemecahan Masalah",
+              "description": "Atasi masalah dan error umum"
+            },
+            "tools": {
+              "title": "Alat & Fitur SEO",
+              "description": "Kuasi toolkit SEO berbasis AI kami"
+            }
+          }
+        },
+        "needHelp": {
+          "title": "Butuh Dukungan API?",
+          "description": "Tim dukungan pengembang kami dapat membantu integrasi, masalah API, dan implementasi khusus.",
+          "developerSupport": "Dukungan Pengembang",
+          "browseAllHelp": "Lihat Semua Bantuan"
         }
       }
     }

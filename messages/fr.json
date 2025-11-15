@@ -1238,6 +1238,12 @@
             "href": "/help/api/webhooks",
             "time": "8 min",
             "description": "Configurez des webhooks pour recevoir des notifications en temps réel sur vos audits SEO et rapports."
+          },
+          "apiIntegrations": {
+            "title": "Intégrations API",
+            "href": "/help/api/api-integrations",
+            "time": "10 min",
+            "description": "Guide complet pour intégrer AI SEO Turbo avec vos applications, incluant les points de terminaison REST API, SDKs et fonctionnalités d'entreprise."
           }
         },
         "additionalResources": {
@@ -2266,6 +2272,678 @@
             "title": "Contacter le Support",
             "description": "Obtenir une aide personnalisée pour les problèmes techniques"
           }
+        }
+      }
+    }
+  },
+  "audit-issues": {
+    "meta": {
+      "title": "Dépannage des Problèmes d'Audit - Aide AISEOTurbo",
+      "description": "Guide complet de dépannage pour résoudre les problèmes d'audit SEO dans AISEOTurbo. Solutions pour les audits bloqués, erreurs de timeout et problèmes techniques."
+    }
+  },
+  "performance": {
+    "meta": {
+      "title": "Optimisation des Performances - Aide AISEOTurbo",
+      "description": "Améliorez la vitesse d'audit, résolvez les problèmes de chargement lent et optimisez les performances."
+    }
+  },
+  "login-issues": {
+    "meta": {
+      "title": "Dépannage des Problèmes de Connexion - Aide AISEOTurbo",
+      "description": "Guide complet de dépannage pour les problèmes de connexion dans AISEOTurbo. Solutions pour les identifiants invalides, blocages de compte, problèmes 2FA et réinitialisation de mot de passe."
+    }
+  },
+  "apiContent": {
+    "api-integrations": {
+      "breadcrumb": {
+        "help": "Centre d'aide",
+        "apiIntegrations": "API & Intégrations"
+      },
+      "header": {
+        "backToHelp": "Retour au Centre d'aide",
+        "title": "API & Intégrations",
+        "subtitle": "Connectez et automatisez les flux de travail avec les API et intégrations.",
+        "lastUpdated": "Dernière mise à jour : mars 2025"
+      },
+      "articles": {
+        "authentication": {
+          "title": "Authentification API",
+          "href": "/help/api/authentication",
+          "time": "5",
+          "description": "Apprenez à authentifier et autoriser les demandes d'API en toute sécurité."
+        },
+        "webhooks": {
+          "title": "Webhooks et Callbacks",
+          "href": "/help/api/webhooks",
+          "time": "7",
+          "description": "Configurez des notifications en temps réel et des flux de travail automatisés."
+        },
+        "apiIntegrations": {
+          "title": "Guide d'intégration API",
+          "href": "/help/api/api-integrations",
+          "time": "10",
+          "description": "Guide complet pour intégrer nos API dans vos applications."
+        }
+      },
+      "sections": {
+        "mainIntro": {
+          "title": "API AI SEO Turbo : Puisez dans vos Applications",
+          "description": "Notre suite API complète permet aux développeurs, agences et entreprises d'intégrer des capacités SEO alimentées par l'IA directement dans leurs applications, flux de travail et plateformes. Des audits automatisés au suivi des mots-clés en temps réel, nos APIs offrent la même intelligence avancée que notre tableau de bord."
+        },
+        "gettingStarted": {
+          "title": "Premiers pas avec les API AI SEO Turbo",
+          "description": "L'intégration avec nos APIs est simple, que vous construisiez des outils SEO personnalisés, automatisiez les flux de travail clients ou développiez des solutions en marque blanche. Nos APIs RESTful suivent les normes de l'industrie et sont accompagnées d'une documentation complète et de SDKs.",
+          "requirements": {
+            "title": "Exigences d'accès à l'API",
+            "apiKey": {
+              "title": "Clé API",
+              "description": "Authentification sécurisée par clé API pour toutes les demandes"
+            },
+            "rateLimits": {
+              "title": "Limites de débit",
+              "description": "Limites généreuses à partir de 1 000 demandes/heure"
+            },
+            "httpsOnly": {
+              "title": "HTTPS uniquement",
+              "description": "Toutes les communications API sécurisées avec TLS 1.3"
+            },
+            "jsonFormat": {
+              "title": "Format JSON",
+              "description": "Format de demande/réponse JSON cohérent"
+            }
+          }
+        },
+        "coreEndpoints": {
+          "title": "Points de terminaison principaux de l'API",
+          "description": "Nos APIs donnent accès à toutes les principales fonctionnalités d'analyse et de suivi SEO via des points de terminaison bien documentés.",
+          "auditApi": {
+            "title": "API d'audit SEO",
+            "features": {
+              "siteAudit": {
+                "title": "Audit de site",
+                "description": "SEO technique avec plus de 47 vérifications"
+              },
+              "pageAnalysis": {
+                "title": "Analyse de page",
+                "description": "Évaluation individuelle page par page"
+              },
+              "crawlerControl": {
+                "title": "Contrôle du crawler",
+                "description": "Paramètres personnalisables"
+              },
+              "reports": {
+                "title": "Rapports",
+                "description": "Génération automatique de PDF et JSON"
+              }
+            }
+          },
+          "keywordApi": {
+            "title": "API de recherche de mots-clés",
+            "features": {
+              "discovery": {
+                "title": "Découverte",
+                "description": "Analyse du volume et de la concurrence"
+              },
+              "serpAnalysis": {
+                "title": "Analyse SERP",
+                "description": "Examen des résultats de recherche"
+              },
+              "competitorKeywords": {
+                "title": "Mots-clés concurrents",
+                "description": "Analyse de stratégie"
+              },
+              "longTail": {
+                "title": "Long-tail",
+                "description": "Suggestions alimentées par l'IA"
+              }
+            }
+          },
+          "backlinkApi": {
+            "title": "API d'analyse de backlinks",
+            "features": {
+              "discovery": {
+                "title": "Découverte",
+                "description": "Analyse de profil"
+              },
+              "qualityScoring": {
+                "title": "Notation qualité",
+                "description": "Détection des liens toxiques"
+              },
+              "competitorCompare": {
+                "title": "Comparaison concurrentielle",
+                "description": "Benchmarking des profils"
+              },
+              "monitoring": {
+                "title": "Surveillance",
+                "description": "Suivi en temps réel"
+              }
+            }
+          }
+        },
+        "advancedFeatures": {
+          "title": "Fonctionnalités d'intégration avancées",
+          "description": "Les clients entreprise et agences peuvent accéder à des fonctionnalités d'intégration avancées au-delà de l'accès API de base.",
+          "webhooks": {
+            "title": "Webhooks",
+            "features": {
+              "realTime": "Notifications en temps réel",
+              "automatedWorkflows": "Flux de travail automatisés",
+              "customCallbacks": "Callbacks personnalisés",
+              "retryLogic": "Logique de nouvelle tentative automatique"
+            }
+          },
+          "whiteLabel": {
+            "title": "Marque blanche",
+            "features": {
+              "customBranding": "Marquage personnalisé",
+              "apiReselling": "Revente d'API",
+              "customDomains": "Domaines personnalisés",
+              "prioritySupport": "Support prioritaire"
+            }
+          }
+        },
+        "sdks": {
+          "title": "SDKs et outils de développement",
+          "description": "Accélérez l'intégration avec des SDKs officiels pour les langages de programmation populaires.",
+          "available": {
+            "title": "SDKs disponibles"
+          },
+          "languages": {
+            "js": {
+              "label": "JS",
+              "description": "JavaScript/Node.js avec support TypeScript"
+            },
+            "python": {
+              "label": "PY",
+              "description": "Python avec support async/await"
+            },
+            "php": {
+              "label": "PHP",
+              "description": "Indépendant du framework avec intégration Laravel"
+            },
+            "java": {
+              "label": "JAVA",
+              "description": "SDK entreprise avec support Spring Boot"
+            },
+            "go": {
+              "label": "GO",
+              "description": "Haute performance pour les demandes concurrentes"
+            },
+            "ruby": {
+              "label": "RUBY",
+              "description": "Intégration Rails avec ActiveSupport"
+            }
+          }
+        },
+        "rateLimits": {
+          "title": "Limites et quotas d'API",
+          "description": "La limitation de débit flexible assure un accès équitable tout en permettant des volumes élevés pour les applications d'entreprise.",
+          "tiers": {
+            "free": {
+              "title": "🆓 Plan gratuit",
+              "requestsPerHour": "100 req/heure",
+              "requestsPerMonth": "1 000 req/mois"
+            },
+            "pro": {
+              "title": "⭐ Plan Pro",
+              "requestsPerHour": "1 000 req/heure",
+              "requestsPerMonth": "50 000 req/mois"
+            },
+            "agency": {
+              "title": "🏢 Agence",
+              "requestsPerHour": "5 000 req/heure",
+              "requestsPerMonth": "250 000 req/mois"
+            },
+            "enterprise": {
+              "title": "🚀 Entreprise",
+              "customLimits": "Limites personnalisées",
+              "dedicatedInfrastructure": "Infrastructure dédiée"
+            }
+          }
+        },
+        "security": {
+          "title": "Sécurité et conformité",
+          "description": "La sécurité de niveau entreprise garantit que vos données et communications API sont toujours protégées.",
+          "features": {
+            "title": "Fonctionnalités de sécurité",
+            "oauth": {
+              "title": "OAuth 2.0",
+              "description": "Authentification sécurisée avec des jetons de rafraîchissement"
+            },
+            "keyRotation": {
+              "title": "Rotation des clés",
+              "description": "Rotation automatique des clés pour la sécurité"
+            },
+            "auditLogging": {
+              "title": "Journalisation d'audit",
+              "description": "Journalisation complète de l'utilisation de l'API"
+            },
+            "gdpr": {
+              "title": "Conformité RGPD",
+              "description": "Conformité dans le traitement des données"
+            },
+            "soc2": {
+              "title": "SOC 2 Type II",
+              "description": "Normes certifiées"
+            }
+          }
+        },
+        "documentation": {
+          "title": "Documentation et support API",
+          "description": "Une documentation complète et un support dédié garantissent le succès de vos intégrations.",
+          "items": {
+            "explorer": {
+              "title": "Explorateur API interactif",
+              "description": "Testez les points de terminaison directement dans votre navigateur"
+            },
+            "examples": {
+              "title": "Exemples de code",
+              "description": "Implémentations d'exemple dans plusieurs langages"
+            },
+            "tutorials": {
+              "title": "Tutoriels vidéo",
+              "description": "Guides étape par étape d'intégration"
+            },
+            "forums": {
+              "title": "Forums communautaires",
+              "description": "Support entre développeurs"
+            },
+            "support": {
+              "title": "Support 24/7",
+              "description": "Support technique pour les problèmes d'intégration"
+            }
+          }
+        },
+        "useCases": {
+          "title": "Études de cas et réussites",
+          "description": "Découvrez comment les organisations utilisent nos APIs pour créer des solutions SEO innovantes.",
+          "items": {
+            "agencies": {
+              "title": "🏢 Agences SEO",
+              "description": "Automatisez les audits et les flux de reporting"
+            },
+            "cms": {
+              "title": "📝 Plateformes CMS",
+              "description": "Analyse SEO intégrée dans les CMS"
+            },
+            "ecommerce": {
+              "title": "🛒 E-commerce",
+              "description": "Optimisation automatisée des pages produits"
+            },
+            "automation": {
+              "title": "🤖 Automatisation marketing",
+              "description": "Optimisation des campagnes basée sur le SEO"
+            },
+            "monitoring": {
+              "title": "👁️ Surveillance concurrentielle",
+              "description": "Intelligence concurrentielle automatisée"
+            }
+          }
+        },
+        "closing": {
+          "title": "Façonner l'avenir de l'automatisation SEO",
+          "description1": "Nos APIs permettent aux développeurs et organisations de créer des solutions SEO innovantes qui étaient auparavant impossibles. Que vous construisiez la prochaine génération d'outils SEO ou intégriez des analyses alimentées par l'IA dans des plateformes existantes, les APIs AI SEO Turbo vous fournissent la base dont vous avez besoin.",
+          "description2": "Prêt à construire ? Explorez notre documentation complète et nos SDKs ci-dessous, ou contactez notre équipe Developer Relations pour un support personnalisé d'intégration."
+        },
+        "apiResources": {
+          "title": "Ressources API",
+          "items": {
+            "authentication": {
+              "title": "Authentification API",
+              "description": "Apprenez à authentifier les demandes d'API"
+            },
+            "status": {
+              "title": "Statut API",
+              "description": "Vérifiez la disponibilité et le temps de fonctionnement de l'API"
+            }
+          }
+        },
+        "relatedCategories": {
+          "title": "Catégories connexes",
+          "items": {
+            "troubleshooting": {
+              "title": "Dépannage",
+              "description": "Résoudre les problèmes et erreurs courants"
+            },
+            "tools": {
+              "title": "Outils et fonctionnalités SEO",
+              "description": "Maîtrisez notre boîte à outils SEO alimentée par l'IA"
+            }
+          }
+        },
+        "needHelp": {
+          "title": "Besoin d'aide API ?",
+          "description": "Notre équipe de support développeur peut vous aider avec les intégrations, les problèmes d'API et les implémentations personnalisées.",
+          "developerSupport": "Support développeur",
+          "browseAllHelp": "Parcourir toute l'aide"
+        }
+      }
+    }
+  },
+  "home": {
+    "api-integrations": {
+      "breadcrumb": {
+        "help": "Centre d'aide",
+        "apiIntegrations": "API & Intégrations"
+      },
+      "header": {
+        "backToHelp": "Retour au centre d'aide",
+        "title": "API & Intégrations",
+        "subtitle": "Connectez et automatisez vos workflows avec l'API et les intégrations.",
+        "lastUpdated": "Dernière mise à jour : mars 2025"
+      },
+      "articles": {
+        "authentication": {
+          "title": "Authentification API",
+          "href": "/help/api/authentication",
+          "time": "5",
+          "description": "Découvrez comment authentifier et autoriser les requêtes API de manière sécurisée."
+        },
+        "webhooks": {
+          "title": "Webhooks & Callbacks",
+          "href": "/help/api/webhooks",
+          "time": "7",
+          "description": "Configurez des notifications en temps réel et des workflows automatisés."
+        },
+        "apiIntegrations": {
+          "title": "Guide des intégrations API",
+          "href": "/help/api/api-integrations",
+          "time": "10",
+          "description": "Guide complet pour intégrer notre API dans vos applications."
+        }
+      },
+      "sections": {
+        "mainIntro": {
+          "title": "API AI SEO Turbo : Dynamisez vos applications",
+          "description": "Notre suite API complète permet aux développeurs, agences et entreprises d'intégrer des fonctionnalités SEO basées sur l'IA directement dans leurs applications, workflows et plateformes. Des audits automatisés au suivi des mots-clés en temps réel, nos APIs offrent la même intelligence avancée que notre tableau de bord."
+        },
+        "gettingStarted": {
+          "title": "Démarrer avec l'API AI SEO Turbo",
+          "description": "L'intégration avec notre API est simple, que vous créiez des outils SEO personnalisés, automatisiez les workflows de vos clients ou développiez des solutions en marque blanche. Notre API REST respecte les standards du secteur et inclut une documentation complète ainsi que des SDKs.",
+          "requirements": {
+            "title": "Conditions d'accès à l'API",
+            "apiKey": {
+              "title": "Clé API",
+              "description": "Authentification sécurisée par clé API pour toutes les requêtes"
+            },
+            "rateLimits": {
+              "title": "Limites de taux",
+              "description": "Limites généreuses à partir de 1 000 requêtes/heure"
+            },
+            "httpsOnly": {
+              "title": "HTTPS uniquement",
+              "description": "Toutes les communications API sécurisées par TLS 1.3"
+            },
+            "jsonFormat": {
+              "title": "Format JSON",
+              "description": "Format JSON cohérent pour les requêtes/réponses"
+            }
+          }
+        },
+        "coreEndpoints": {
+          "title": "Points de terminaison principaux de l'API",
+          "description": "Notre API donne accès à toutes les fonctionnalités d'analyse et de suivi SEO, via des endpoints bien documentés.",
+          "auditApi": {
+            "title": "API d'audit SEO",
+            "features": {
+              "siteAudit": {
+                "title": "Audit du site",
+                "description": "SEO technique avec plus de 47 vérifications"
+              },
+              "pageAnalysis": {
+                "title": "Analyse de page",
+                "description": "Évaluation individuelle des pages"
+              },
+              "crawlerControl": {
+                "title": "Contrôle du crawler",
+                "description": "Paramètres personnalisables"
+              },
+              "reports": {
+                "title": "Rapports",
+                "description": "Génération automatisée de PDF & JSON"
+              }
+            }
+          },
+          "keywordApi": {
+            "title": "API de recherche de mots-clés",
+            "features": {
+              "discovery": {
+                "title": "Découverte",
+                "description": "Analyse du volume et de la concurrence"
+              },
+              "serpAnalysis": {
+                "title": "Analyse SERP",
+                "description": "Examen des résultats"
+              },
+              "competitorKeywords": {
+                "title": "Mots-clés concurrents",
+                "description": "Analyse des stratégies"
+              },
+              "longTail": {
+                "title": "Longue traîne",
+                "description": "Suggestions AI"
+              }
+            }
+          },
+          "backlinkApi": {
+            "title": "API d'analyse de backlinks",
+            "features": {
+              "discovery": {
+                "title": "Découverte",
+                "description": "Analyse de profil"
+              },
+              "qualityScoring": {
+                "title": "Évaluation de la qualité",
+                "description": "Détection des liens toxiques"
+              },
+              "competitorCompare": {
+                "title": "Comparaison concurrents",
+                "description": "Comparaison des profils"
+              },
+              "monitoring": {
+                "title": "Suivi",
+                "description": "Suivi en temps réel"
+              }
+            }
+          }
+        },
+        "advancedFeatures": {
+          "title": "Fonctionnalités d'intégration avancées",
+          "description": "Les clients entreprise et agence peuvent accéder à des fonctionnalités avancées au-delà de l'accès API standard.",
+          "webhooks": {
+            "title": "Webhooks",
+            "features": {
+              "realTime": "Notifications en temps réel",
+              "automatedWorkflows": "Workflows automatisés",
+              "customCallbacks": "Callbacks personnalisés",
+              "retryLogic": "Logique de réessai automatique"
+            }
+          },
+          "whiteLabel": {
+            "title": "Marque blanche",
+            "features": {
+              "customBranding": "Personnalisation de la marque",
+              "apiReselling": "Revente d'API",
+              "customDomains": "Domaines personnalisés",
+              "prioritySupport": "Support prioritaire"
+            }
+          }
+        },
+        "sdks": {
+          "title": "SDKs et outils de développement",
+          "description": "Accélérez l'intégration avec les SDKs officiels pour les langages populaires.",
+          "available": {
+            "title": "SDKs disponibles"
+          },
+          "languages": {
+            "js": {
+              "label": "JS",
+              "description": "JavaScript/Node.js avec support TypeScript"
+            },
+            "python": {
+              "label": "PY",
+              "description": "Python avec support async/await"
+            },
+            "php": {
+              "label": "PHP",
+              "description": "Indépendant du framework, intégration Laravel"
+            },
+            "java": {
+              "label": "JAVA",
+              "description": "SDK entreprise avec support Spring Boot"
+            },
+            "go": {
+              "label": "GO",
+              "description": "Haute performance pour requêtes concurrentes"
+            },
+            "ruby": {
+              "label": "RUBY",
+              "description": "Intégration Rails avec ActiveSupport"
+            }
+          }
+        },
+        "rateLimits": {
+          "title": "Limites de taux et quotas API",
+          "description": "La gestion flexible du taux d'accès garantit un accès équitable tout en permettant un volume élevé pour les applications d'entreprise.",
+          "tiers": {
+            "free": {
+              "title": "🆓 Offre gratuite",
+              "requestsPerHour": "100 req./heure",
+              "requestsPerMonth": "1 000 req./mois"
+            },
+            "pro": {
+              "title": "⭐ Offre Pro",
+              "requestsPerHour": "1 000 req./heure",
+              "requestsPerMonth": "50 000 req./mois"
+            },
+            "agency": {
+              "title": "🏢 Agence",
+              "requestsPerHour": "5 000 req./heure",
+              "requestsPerMonth": "250 000 req./mois"
+            },
+            "enterprise": {
+              "title": "🚀 Entreprise",
+              "customLimits": "Limites personnalisées",
+              "dedicatedInfrastructure": "Infrastructure dédiée"
+            }
+          }
+        },
+        "security": {
+          "title": "Sécurité et conformité",
+          "description": "La sécurité de niveau entreprise garantit la protection de vos données et de vos communications API à tout moment.",
+          "features": {
+            "title": "Fonctionnalités de sécurité",
+            "oauth": {
+              "title": "OAuth 2.0",
+              "description": "Authentification sécurisée avec jetons de rafraîchissement"
+            },
+            "keyRotation": {
+              "title": "Rotation des clés",
+              "description": "Rotation automatique des clés pour la sécurité"
+            },
+            "auditLogging": {
+              "title": "Journalisation d'audit",
+              "description": "Logs complets d'utilisation de l'API"
+            },
+            "gdpr": {
+              "title": "Conformité RGPD",
+              "description": "Conformité dans le traitement des données"
+            },
+            "soc2": {
+              "title": "SOC 2 Type II",
+              "description": "Normes certifiées"
+            }
+          }
+        },
+        "documentation": {
+          "title": "Documentation & support API",
+          "description": "Une documentation complète et un support dédié garantissent le succès de vos intégrations.",
+          "items": {
+            "explorer": {
+              "title": "Explorateur API interactif",
+              "description": "Testez les endpoints directement depuis votre navigateur"
+            },
+            "examples": {
+              "title": "Exemples de code",
+              "description": "Implémentations exemples dans plusieurs langages"
+            },
+            "tutorials": {
+              "title": "Tutoriels vidéo",
+              "description": "Guides d'intégration étape par étape"
+            },
+            "forums": {
+              "title": "Forums communautaires",
+              "description": "Support entre développeurs"
+            },
+            "support": {
+              "title": "Support 24/7",
+              "description": "Support technique pour les problèmes d'intégration"
+            }
+          }
+        },
+        "useCases": {
+          "title": "Cas d'usage et success stories",
+          "description": "Découvrez comment des organisations utilisent notre API pour créer des solutions SEO innovantes.",
+          "items": {
+            "agencies": {
+              "title": "🏢 Agences SEO",
+              "description": "Automatisation des audits et des workflows de reporting"
+            },
+            "cms": {
+              "title": "📝 Plateformes CMS",
+              "description": "Analyse SEO intégrée pour CMS"
+            },
+            "ecommerce": {
+              "title": "🛒 E-commerce",
+              "description": "Optimisation automatisée des pages produit"
+            },
+            "automation": {
+              "title": "🤖 Automatisation marketing",
+              "description": "Optimisation des campagnes déclenchée par SEO"
+            },
+            "monitoring": {
+              "title": "👁️ Veille concurrentielle",
+              "description": "Intelligence concurrentielle automatisée"
+            }
+          }
+        },
+        "closing": {
+          "title": "Façonner l'avenir de l'automatisation SEO",
+          "description1": "Notre API permet aux développeurs et aux organisations de créer des solutions SEO innovantes qui étaient auparavant impossibles. Que vous construisiez la prochaine génération d'outils SEO ou que vous intégriez des analyses AI dans des plateformes existantes, l'API AI SEO Turbo vous donne les bases nécessaires.",
+          "description2": "Prêt à commencer ? Parcourez ci-dessous notre documentation complète et nos SDKs, ou contactez notre équipe Relations développeurs pour un accompagnement personnalisé."
+        },
+        "apiResources": {
+          "title": "Ressources API",
+          "items": {
+            "authentication": {
+              "title": "Authentification API",
+              "description": "Découvrez comment authentifier les requêtes API"
+            },
+            "status": {
+              "title": "Statut de l'API",
+              "description": "Consultez la disponibilité et le temps de fonctionnement de l'API"
+            }
+          }
+        },
+        "relatedCategories": {
+          "title": "Catégories associées",
+          "items": {
+            "troubleshooting": {
+              "title": "Dépannage",
+              "description": "Résolvez les erreurs et problèmes fréquents"
+            },
+            "tools": {
+              "title": "Outils & fonctionnalités SEO",
+              "description": "Maîtrisez notre suite SEO basée sur l'IA"
+            }
+          }
+        },
+        "needHelp": {
+          "title": "Besoin d'aide avec l'API ?",
+          "description": "Notre équipe de support développeurs peut vous aider pour les intégrations, les problèmes API et les implémentations sur mesure.",
+          "developerSupport": "Support développeur",
+          "browseAllHelp": "Parcourir toute l'aide"
         }
       }
     }

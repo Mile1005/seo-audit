@@ -79,6 +79,333 @@
       }
     }
   },
+  "apiContent": {
+    "api-integrations": {
+      "breadcrumb": {
+        "help": "Hilfe-Center",
+        "apiIntegrations": "API & Integrationen"
+      },
+      "header": {
+        "backToHelp": "Zurück zum Hilfe-Center",
+        "title": "API & Integrationen",
+        "subtitle": "Verbinden und automatisieren Sie Workflows mit API und Integrationen.",
+        "lastUpdated": "Zuletzt aktualisiert: März 2025"
+      },
+      "articles": {
+        "authentication": {
+          "title": "API-Authentifizierung",
+          "href": "/help/api/authentication",
+          "time": "5",
+          "description": "Erfahren Sie, wie Sie API-Anfragen sicher authentifizieren und autorisieren."
+        },
+        "webhooks": {
+          "title": "Webhooks & Callbacks",
+          "href": "/help/api/webhooks",
+          "time": "7",
+          "description": "Richten Sie Echtzeit-Benachrichtigungen und automatisierte Workflows ein."
+        },
+        "apiIntegrations": {
+          "title": "API-Integrations-Leitfaden",
+          "href": "/help/api/api-integrations",
+          "time": "10",
+          "description": "Vollständiger Leitfaden zur Integration unserer API in Ihre Anwendungen."
+        }
+      },
+      "sections": {
+        "mainIntro": {
+          "title": "AI SEO Turbo API: Stärken Sie Ihre Anwendungen",
+          "description": "Unsere umfassende API-Suite ermöglicht es Entwicklern, Agenturen und Unternehmen, KI-gestützte SEO-Funktionen direkt in ihre Anwendungen, Workflows und Plattformen zu integrieren. Von automatisierten Audits bis hin zum Echtzeit-Keyword-Tracking bieten unsere APIs die gleiche fortschrittliche Intelligenz, die unser Dashboard antreibt."
+        },
+        "gettingStarted": {
+          "title": "Erste Schritte mit AI SEO Turbo API",
+          "description": "Die Integration mit unserer API ist unkompliziert, egal ob Sie benutzerdefinierte SEO-Tools erstellen, Client-Workflows automatisieren oder White-Label-Lösungen entwickeln. Unsere RESTful-API folgt Industriestandards und umfasst umfassende Dokumentation und SDKs.",
+          "requirements": {
+            "title": "API-Zugangsvoraussetzungen",
+            "apiKey": {
+              "title": "API-Schlüssel",
+              "description": "Sichere API-Schlüssel-Authentifizierung für alle Anfragen"
+            },
+            "rateLimits": {
+              "title": "Ratenbegrenzungen",
+              "description": "Großzügige Ratenbegrenzungen ab 1.000 Anfragen/Stunde"
+            },
+            "httpsOnly": {
+              "title": "Nur HTTPS",
+              "description": "Alle API-Kommunikation gesichert mit TLS 1.3"
+            },
+            "jsonFormat": {
+              "title": "JSON-Format",
+              "description": "Konsistentes JSON-Anfrage/Antwort-Format"
+            }
+          }
+        },
+        "coreEndpoints": {
+          "title": "Kern-API-Endpunkte",
+          "description": "Unsere API bietet Zugriff auf alle wichtigen SEO-Analyse- und Tracking-Funktionen über gut dokumentierte Endpunkte.",
+          "auditApi": {
+            "title": "SEO-Audit-API",
+            "features": {
+              "siteAudit": {
+                "title": "Website-Audit",
+                "description": "Technisches SEO mit 47+ Prüfungen"
+              },
+              "pageAnalysis": {
+                "title": "Seitenanalyse",
+                "description": "Individuelle Seitenevaluierung"
+              },
+              "crawlerControl": {
+                "title": "Crawler-Steuerung",
+                "description": "Anpassbare Parameter"
+              },
+              "reports": {
+                "title": "Berichte",
+                "description": "Automatisierte PDF- & JSON-Erstellung"
+              }
+            }
+          },
+          "keywordApi": {
+            "title": "Keyword-Recherche-API",
+            "features": {
+              "discovery": {
+                "title": "Entdeckung",
+                "description": "Volumen- & Wettbewerbsanalyse"
+              },
+              "serpAnalysis": {
+                "title": "SERP-Analyse",
+                "description": "Ergebnisuntersuchung"
+              },
+              "competitorKeywords": {
+                "title": "Konkurrenten-Keywords",
+                "description": "Strategieanalyse"
+              },
+              "longTail": {
+                "title": "Long-tail",
+                "description": "KI-gestützte Vorschläge"
+              }
+            }
+          },
+          "backlinkApi": {
+            "title": "Backlink-Analyse-API",
+            "features": {
+              "discovery": {
+                "title": "Entdeckung",
+                "description": "Profilanalyse"
+              },
+              "qualityScoring": {
+                "title": "Qualitätsbewertung",
+                "description": "Toxische Erkennung"
+              },
+              "competitorCompare": {
+                "title": "Konkurrenten-Vergleich",
+                "description": "Profilvergleich"
+              },
+              "monitoring": {
+                "title": "Überwachung",
+                "description": "Echtzeit-Tracking"
+              }
+            }
+          }
+        },
+        "advancedFeatures": {
+          "title": "Erweiterte Integrationsfunktionen",
+          "description": "Enterprise- und Agenturkunden können auf erweiterte Integrationsfunktionen jenseits des grundlegenden API-Zugangs zugreifen.",
+          "webhooks": {
+            "title": "Webhooks",
+            "features": {
+              "realTime": "Echtzeit-Benachrichtigungen",
+              "automatedWorkflows": "Automatisierte Workflows",
+              "customCallbacks": "Benutzerdefinierte Callbacks",
+              "retryLogic": "Automatische Wiederholungslogik"
+            }
+          },
+          "whiteLabel": {
+            "title": "White-Label",
+            "features": {
+              "customBranding": "Benutzerdefinierte Markenbildung",
+              "apiReselling": "API-Weiterverkauf",
+              "customDomains": "Benutzerdefinierte Domains",
+              "prioritySupport": "Prioritäts-Support"
+            }
+          }
+        },
+        "sdks": {
+          "title": "SDKs und Entwicklungstools",
+          "description": "Beschleunigen Sie die Integration mit offiziellen SDKs für beliebte Programmiersprachen.",
+          "available": {
+            "title": "Verfügbare SDKs"
+          },
+          "languages": {
+            "js": {
+              "label": "JS",
+              "description": "JavaScript/Node.js mit TypeScript-Unterstützung"
+            },
+            "python": {
+              "label": "PY",
+              "description": "Python mit async/await-Unterstützung"
+            },
+            "php": {
+              "label": "PHP",
+              "description": "Framework-unabhängig mit Laravel-Integration"
+            },
+            "java": {
+              "label": "JAVA",
+              "description": "Enterprise-SDK mit Spring Boot-Unterstützung"
+            },
+            "go": {
+              "label": "GO",
+              "description": "Hochleistung für gleichzeitige Anfragen"
+            },
+            "ruby": {
+              "label": "RUBY",
+              "description": "Rails-Integration mit ActiveSupport"
+            }
+          }
+        },
+        "rateLimits": {
+          "title": "API-Ratenbegrenzungen und Quoten",
+          "description": "Flexible Ratenbegrenzung gewährleistet fairen Zugang und ermöglicht gleichzeitig hohen Volumen für Enterprise-Anwendungen.",
+          "tiers": {
+            "free": {
+              "title": "🆓 Free Tier",
+              "requestsPerHour": "100 Anfr./Stunde",
+              "requestsPerMonth": "1.000 Anfr./Monat"
+            },
+            "pro": {
+              "title": "⭐ Pro Tier",
+              "requestsPerHour": "1.000 Anfr./Stunde",
+              "requestsPerMonth": "50.000 Anfr./Monat"
+            },
+            "agency": {
+              "title": "🏢 Agency",
+              "requestsPerHour": "5.000 Anfr./Stunde",
+              "requestsPerMonth": "250.000 Anfr./Monat"
+            },
+            "enterprise": {
+              "title": "🚀 Enterprise",
+              "customLimits": "Benutzerdefinierte Limits",
+              "dedicatedInfrastructure": "Dedizierte Infrastruktur"
+            }
+          }
+        },
+        "security": {
+          "title": "Sicherheit und Compliance",
+          "description": "Enterprise-Grade-Sicherheit stellt sicher, dass Ihre Daten und API-Kommunikation jederzeit geschützt sind.",
+          "features": {
+            "title": "Sicherheitsfunktionen",
+            "oauth": {
+              "title": "OAuth 2.0",
+              "description": "Sichere Authentifizierung mit Refresh-Tokens"
+            },
+            "keyRotation": {
+              "title": "Schlüsselrotation",
+              "description": "Automatische Schlüsselrotation für Sicherheit"
+            },
+            "auditLogging": {
+              "title": "Audit-Logging",
+              "description": "Vollständige API-Nutzungsprotokolle"
+            },
+            "gdpr": {
+              "title": "GDPR-Compliance",
+              "description": "Compliance bei der Datenverarbeitung"
+            },
+            "soc2": {
+              "title": "SOC 2 Type II",
+              "description": "Zertifizierte Standards"
+            }
+          }
+        },
+        "documentation": {
+          "title": "API-Dokumentation und Support",
+          "description": "Umfassende Dokumentation und dedizierter Support gewährleisten erfolgreiche Integrationen.",
+          "items": {
+            "explorer": {
+              "title": "Interaktiver API-Explorer",
+              "description": "Testen Sie Endpunkte direkt in Ihrem Browser"
+            },
+            "examples": {
+              "title": "Codebeispiele",
+              "description": "Beispielimplementierungen in mehreren Sprachen"
+            },
+            "tutorials": {
+              "title": "Video-Tutorials",
+              "description": "Schritt-für-Schritt-Integrationsleitfäden"
+            },
+            "forums": {
+              "title": "Community-Foren",
+              "description": "Entwickler-zu-Entwickler-Support"
+            },
+            "support": {
+              "title": "24/7 Support",
+              "description": "Technischer Support für Integrationsprobleme"
+            }
+          }
+        },
+        "useCases": {
+          "title": "Anwendungsfälle und Erfolgsgeschichten",
+          "description": "Sehen Sie, wie Organisationen unsere API nutzen, um innovative SEO-Lösungen zu entwickeln.",
+          "items": {
+            "agencies": {
+              "title": "🏢 SEO Agencies",
+              "description": "Automatisieren Sie Audits und Berichterstellungs-Workflows"
+            },
+            "cms": {
+              "title": "📝 CMS Platforms",
+              "description": "Eingebaute SEO-Analyse für CMS"
+            },
+            "ecommerce": {
+              "title": "🛒 E-commerce",
+              "description": "Automatisierte Produktseiten-Optimierung"
+            },
+            "automation": {
+              "title": "🤖 Marketing Automation",
+              "description": "SEO-ausgelöste Kampagnenoptimierung"
+            },
+            "monitoring": {
+              "title": "👁️ Competitor Monitoring",
+              "description": "Automatisierte Wettbewerbsintelligenz"
+            }
+          }
+        },
+        "closing": {
+          "title": "Die Zukunft der SEO-Automatisierung gestalten",
+          "description1": "Unsere API ermächtigt Entwickler und Organisationen, innovative SEO-Lösungen zu schaffen, die zuvor unmöglich waren. Egal, ob Sie die nächste Generation von SEO-Tools entwickeln oder KI-gestützte Analysen in bestehende Plattformen integrieren, die AI SEO Turbo API bietet Ihnen die Grundlage, die Sie brauchen.",
+          "description2": "Bereit, mit dem Bauen zu beginnen? Entdecken Sie unsere umfassende Dokumentation und SDKs unten, oder kontaktieren Sie unser Developer-Relations-Team für personalisierte Integrationsunterstützung."
+        },
+        "apiResources": {
+          "title": "API-Ressourcen",
+          "items": {
+            "authentication": {
+              "title": "API-Authentifizierung",
+              "description": "Erfahren Sie, wie Sie API-Anfragen authentifizieren"
+            },
+            "status": {
+              "title": "API-Status",
+              "description": "Überprüfen Sie die API-Verfügbarkeit und Betriebszeit"
+            }
+          }
+        },
+        "relatedCategories": {
+          "title": "Verwandte Kategorien",
+          "items": {
+            "troubleshooting": {
+              "title": "Fehlerbehebung",
+              "description": "Lösen Sie häufige Probleme und Fehler"
+            },
+            "tools": {
+              "title": "SEO-Tools & Funktionen",
+              "description": "Beherrschen Sie unser KI-gestütztes SEO-Toolkit"
+            }
+          }
+        },
+        "needHelp": {
+          "title": "Brauchen Sie API-Support?",
+          "description": "Unser Entwickler-Support-Team kann bei Integrationen, API-Problemen und benutzerdefinierten Implementierungen helfen.",
+          "developerSupport": "Entwickler-Support",
+          "browseAllHelp": "Alle Hilfe durchsuchen"
+        }
+      }
+    }
+  },
   "common": {
     "loading": "Laden...",
     "error": "Fehler",
@@ -137,6 +464,7 @@
   },
   "meta": {
     "home": {
+      "title": "SEO-Audit-Tool - Rankings schnell verbessern | AI SEO Turbo",
       "description": "Transformieren Sie Ihr SEO mit KI-gestützten Audits, die 47+ kritische Probleme identifizieren. Erhalten Sie datengetriebene Einblicke, um organischen Traffic zu steigern und Rankings zu dominieren.",
       "keywords": ["KI SEO Audit", "SEO Optimierungstool", "Website Ranking Boost", "organisches Traffic Wachstum", "technische SEO Analyse"]
     },
@@ -2266,9 +2594,50 @@
           }
         }
       }
+    },
+    "audit-issues": {
+      "meta": {
+        "title": "Audit-Probleme Fehlerbehebung - AISEOTurbo Hilfe",
+        "description": "Vollständige Fehlerbehebungsanleitung zur Behebung von SEO-Audit-Problemen in AISEOTurbo. Lösungen für hängende Audits, Timeout-Fehler und technische Probleme."
+      }
+    },
+    "performance": {
+      "meta": {
+        "title": "Leistungsoptimierung - AISEOTurbo Hilfe",
+        "description": "Verbessern Sie die Audit-Geschwindigkeit, beheben Sie langsame Ladezeiten und optimieren Sie die Leistung."
+      }
+    },
+    "login-issues": {
+      "meta": {
+        "title": "Anmeldeprobleme Fehlerbehebung - AISEOTurbo Hilfe",
+        "description": "Vollständige Fehlerbehebungsanleitung für Anmeldeprobleme in AISEOTurbo. Lösungen für ungültige Anmeldedaten, Kontosperren, 2FA-Probleme und Passwort-Reset-Probleme."
+      }
+    }
+
+  },
+  "audit-issues": {
+    "meta": {
+      "title": "Audit-Probleme Fehlerbehebung - AISEOTurbo Hilfe",
+      "description": "Vollständige Anleitung zur Fehlerbehebung bei SEO-Audit-Problemen in AISEOTurbo. Lösungen für hängende Audits, Timeout-Fehler und technische Probleme."
+    }
+  },
+  "performance": {
+    "meta": {
+      "title": "Leistungsoptimierung - AISEOTurbo Hilfe",
+      "description": "Verbessern Sie die Audit-Geschwindigkeit, beheben Sie langsame Ladezeiten und optimieren Sie die Leistung."
+    }
+  },
+  "login-issues": {
+    "meta": {
+      "title": "Anmeldeprobleme Fehlerbehebung - AISEOTurbo Hilfe",
+      "description": "Vollständige Anleitung zur Fehlerbehebung bei Anmeldeproblemen in AISEOTurbo. Lösungen für ungültige Anmeldedaten, Kontosperren, 2FA-Probleme und Passwort-Reset-Probleme."
     }
   },
   "home": {
+    "meta": {
+      "title": "SEO-Audit-Tool - Rankings schnell verbessern | AI SEO Turbo",
+      "description": "Erhalten Sie umsetzbare SEO-Einblicke, die Rankings verbessern und organischen Traffic generieren. Schließen Sie sich 1.000+ Marketern an, die unsere KI-gestützten Audits nutzen, um kritische Probleme in Minuten zu identifizieren."
+    },
     "hero": {
       "badge": "KI-gestützte SEO-Analyse",
       "title": "AI SEO Turbo: Professionelle SEO-Audits einfach gemacht",

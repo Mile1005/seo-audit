@@ -1,4 +1,5 @@
 import { generateSEOMeta } from '@/lib/seo'
+import { getTranslations } from 'next-intl/server'
 import { setRequestLocale } from 'next-intl/server'
 import PerformanceContent from './PerformanceContent'
 
@@ -9,10 +10,11 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
 
+  const t = await getTranslations({ locale, namespace: 'performance' })
 
   return generateSEOMeta({
-    title: `Performance Optimization - AISEOTurbo Help`,
-    description: "Improve audit speed, resolve slow loading issues, and optimize performance.",
+    title: t('meta.title'),
+    description: t('meta.description'),
     path: '/help/troubleshooting/performance',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })

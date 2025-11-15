@@ -2,16 +2,19 @@ import { setRequestLocale } from 'next-intl/server'
 import type { Metadata } from 'next'
 import ApiPage from './page-translated'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { getTranslations } from 'next-intl/server'
 import { type Locale } from '@/i18n'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'help.categories.api' })
+
   return generateSEOMeta({
     ...pageSEO.help,
     locale: locale as Locale,
     path: 'help/api',
-    title: 'API Integration Guide | AI SEO Turbo Help',
-    description: 'Integrate AI SEO Turbo\'s powerful SEO tools into your applications with our comprehensive REST API. Automate audits, access real-time data, and build custom workflows.'
+    title: t('title'),
+    description: t('subtitle')
   })
 }
 

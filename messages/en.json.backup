@@ -57,7 +57,6 @@
   },
   "meta": {
     "home": {
-      "title": "SEO Audit Tool - Boost Rankings Fast | AI SEO Turbo",
       "description": "Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.",
       "keywords": ["AI SEO audit", "SEO optimization tool", "website ranking boost", "organic traffic growth", "technical SEO analysis"]
     },
@@ -173,7 +172,7 @@
         "empty": "Run your first SEO audit to see health metrics",
         "cta": "Run First Audit",
         "scoreLabel": "Score",
-        "viewLatest": "View Latest Audit â†’"
+        "viewLatest": "View Latest Audit →"
       },
       "searchVisibility": {
         "title": "Search Visibility",
@@ -214,7 +213,7 @@
         "critical": "Critical",
         "warnings": "Warnings",
         "notices": "Notices",
-        "viewAll": "View All Issues â†’"
+        "viewAll": "View All Issues →"
       }
     },
     "quickActions": {
@@ -380,19 +379,19 @@
           "description": "Once complete, you'll see your SEO score and detailed analysis. The results are organized into categories:",
           "categories": {
             "passed": {
-              "title": "âœ“ Passed (Green)",
+              "title": "✓ Passed (Green)",
               "description": "Items your site is handling well"
             },
             "warnings": {
-              "title": "âš  Warnings (Yellow)",
+              "title": "⚠ Warnings (Yellow)",
               "description": "Areas that need attention"
             },
             "errors": {
-              "title": "âœ— Errors (Red)",
+              "title": "✗ Errors (Red)",
               "description": "Critical issues to fix immediately"
             },
             "info": {
-              "title": "â„¹ Info (Blue)",
+              "title": "ℹ Info (Blue)",
               "description": "Additional insights and tips"
             }
           }
@@ -506,7 +505,7 @@
       "advancedTips": {
         "title": "Advanced customization tips",
         "tips": [
-          "Keyboard Shortcuts: Enable advanced shortcuts for power users in Settings â†’ Accessibility",
+          "Keyboard Shortcuts: Enable advanced shortcuts for power users in Settings → Accessibility",
           "API Integration: Connect your dashboard to external tools via our REST API",
           "Team Collaboration: Share custom dashboard layouts with team members",
           "Dark/Light Mode: Switch themes based on time of day or personal preference",
@@ -518,7 +517,7 @@
         "questions": [
           {
             "question": "Can I reset my dashboard to default settings?",
-            "answer": "Yes, go to Settings â†’ Reset â†’ Restore Defaults. This won't affect your audit data."
+            "answer": "Yes, go to Settings → Reset → Restore Defaults. This won't affect your audit data."
           },
           {
             "question": "Do settings sync across devices?",
@@ -612,7 +611,7 @@
             ]
           },
           "tip": {
-            "title": "ðŸ’¡ Pro tip",
+            "title": "💡 Pro tip",
             "description": "Use your business email for better organization and to receive important audit notifications."
           }
         },
@@ -638,7 +637,7 @@
             ]
           },
           "warning": {
-            "title": "âš ï¸ Important",
+            "title": "⚠️ Important",
             "description": "Make sure your website is publicly accessible. Private or password-protected sites need special configuration."
           }
         },
@@ -694,13 +693,13 @@
             ]
           },
           "focus": {
-            "title": "ðŸŽ¯ Focus on impact",
+            "title": "🎯 Focus on impact",
             "description": "Start with high-impact, low-effort improvements. Our AI ranks suggestions by potential SEO benefit and implementation difficulty."
           }
         }
       },
       "congratulations": {
-        "title": "ðŸŽ‰ Congratulations! You're all set!",
+        "title": "🎉 Congratulations! You're all set!",
         "description": "You've successfully completed your first SEO audit. Here's what you can do next to maximize your results:",
         "nextActions": [
           {
@@ -941,7 +940,7 @@
           },
           {
             "title": "When to be concerned?",
-            "description": "Significant drops (>10 points) warrant investigation. Small fluctuations (Â±3 points) are normal."
+            "description": "Significant drops (>10 points) warrant investigation. Small fluctuations (±3 points) are normal."
           },
           {
             "title": "Focus on trends",
@@ -1990,7 +1989,7 @@
               "description": "Having trouble with stuck or incomplete audits? This guide covers the most common issues and their solutions. Most problems can be resolved in just a few minutes with the right approach."
             },
             "diagnostics": {
-              "title": "ðŸ” Quick diagnostics checklist",
+              "title": "🔍 Quick diagnostics checklist",
               "checklist": {
                 "siteAccessible": "Is your website publicly accessible?",
                 "connectionStable": "Is your internet connection stable?",
@@ -2003,7 +2002,7 @@
             "issues": {
               "title": "Common issues & solutions",
               "stuck": {
-                "title": "ðŸ”„ Audit stuck at \"Analyzing...\"",
+                "title": "🔄 Audit stuck at \"Analyzing...\"",
                 "description": "This is the most common issue, usually caused by network delays or large site complexity.",
                 "solution": {
                   "title": "Step-by-step solution:",
@@ -2016,39 +2015,39 @@
                   }
                 },
                 "proTip": {
-                  "title": "ðŸ’¡ Pro tip",
+                  "title": "💡 Pro tip",
                   "description": "Enable audit notifications in your settings to get alerts when audits complete, even if you close the browser."
                 }
               },
               "timeout": {
-                "title": "â° Audit timeout errors",
+                "title": "⏰ Audit timeout errors",
                 "description": "Timeout errors occur when your website takes too long to respond or when auditing very large sites.",
                 "solutions": {
                   "title": "Immediate solutions:",
                   "limitScope": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Limit audit scope: Focus on specific pages instead of the entire site"
                   },
                   "checkPerformance": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Check server performance: Ensure your website loads quickly"
                   },
                   "optimize": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Optimize before auditing: Enable caching and CDN if available"
                   },
                   "contactHosting": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Contact hosting provider: Ask about server resource limits"
                   }
                 },
                 "largeSites": {
-                  "title": "âš ï¸ For large sites (>1000 pages)",
+                  "title": "⚠️ For large sites (>1000 pages)",
                   "description": "Consider upgrading to our Pro plan for extended timeout limits and priority processing, or contact support for enterprise solutions."
                 }
               },
               "accessDenied": {
-                "title": "ðŸš« \"Access denied\" or \"Site not reachable\"",
+                "title": "🚫 \"Access denied\" or \"Site not reachable\"",
                 "description": "These errors indicate that our crawlers cannot access your website due to security restrictions or misconfigurations.",
                 "causes": {
                   "title": "Common causes & fixes:",
@@ -2070,7 +2069,7 @@
                   }
                 },
                 "testing": {
-                  "title": "ðŸ”§ Testing your site accessibility",
+                  "title": "🔧 Testing your site accessibility",
                   "steps": {
                     "incognito": "Open an incognito/private browser window",
                     "exactUrl": "Try accessing your site from the exact URL you provided",
@@ -2080,33 +2079,33 @@
                 }
               },
               "partial": {
-                "title": "ðŸ“Š Incomplete or partial results",
+                "title": "📊 Incomplete or partial results",
                 "description": "Sometimes audits complete but show incomplete data or missing sections.",
                 "causes": {
                   "title": "Why this happens:",
                   "inaccessible": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Some pages were inaccessible during crawling"
                   },
                   "javascript": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "JavaScript-heavy content couldn't be fully analyzed"
                   },
                   "rateLimit": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Rate limiting or server restrictions kicked in"
                   },
                   "interruptions": {
-                    "marker": "â€¢",
+                    "marker": "•",
                     "text": "Network interruptions during the audit process"
                   }
                 },
                 "solutions": {
-                  "title": "âœ… Solutions",
-                  "offPeak": "â€¢ Re-run the audit during low-traffic periods",
-                  "serverSideRendering": "â€¢ Enable server-side rendering for JavaScript content",
-                  "increaseResources": "â€¢ Increase server resources temporarily during audits",
-                  "checkSitemap": "â€¢ Check your sitemap.xml for accuracy and completeness"
+                  "title": "✅ Solutions",
+                  "offPeak": "• Re-run the audit during low-traffic periods",
+                  "serverSideRendering": "• Enable server-side rendering for JavaScript content",
+                  "increaseResources": "• Increase server resources temporarily during audits",
+                  "checkSitemap": "• Check your sitemap.xml for accuracy and completeness"
                 }
               }
             },
@@ -2154,12 +2153,12 @@
               "title": "Prevention is better than cure",
               "description": "Avoid future audit issues by following these best practices:",
               "tips": {
-                "fastLoading": "â€¢ Ensure your website loads consistently in under 5 seconds",
-                "reliableHosting": "â€¢ Use a reliable hosting provider with good uptime guarantees",
-                "simpleRobots": "â€¢ Keep your robots.txt file simple and permissive for legitimate crawlers",
-                "errorHandling": "â€¢ Implement proper error handling for 404s and server errors",
-                "scheduleAudits": "â€¢ Schedule audits during low-traffic periods",
-                "monitorPerformance": "â€¢ Monitor your site's performance regularly"
+                "fastLoading": "• Ensure your website loads consistently in under 5 seconds",
+                "reliableHosting": "• Use a reliable hosting provider with good uptime guarantees",
+                "simpleRobots": "• Keep your robots.txt file simple and permissive for legitimate crawlers",
+                "errorHandling": "• Implement proper error handling for 404s and server errors",
+                "scheduleAudits": "• Schedule audits during low-traffic periods",
+                "monitorPerformance": "• Monitor your site's performance regularly"
               }
             },
             "related": {
@@ -2213,338 +2212,7 @@
       "description": "Complete troubleshooting guide for login problems in AISEOTurbo. Solutions for invalid credentials, account lockouts, 2FA issues, and password reset problems."
     }
   },
-  "apiContent": {
-    "api-integrations": {
-      "breadcrumb": {
-        "help": "Help Center",
-        "apiIntegrations": "API & Integrations"
-      },
-      "header": {
-        "backToHelp": "Back to Help Center",
-        "title": "API & Integrations",
-        "subtitle": "Connect and automate workflows with APIs and integrations.",
-        "lastUpdated": "Last updated: March 2025"
-      },
-      "articles": {
-        "authentication": {
-          "title": "API Authentication",
-          "href": "/help/api/authentication",
-          "time": "5",
-          "description": "Learn how to securely authenticate and authorize API requests."
-        },
-        "webhooks": {
-          "title": "Webhooks & Callbacks",
-          "href": "/help/api/webhooks",
-          "time": "7",
-          "description": "Set up real-time notifications and automated workflows."
-        },
-        "apiIntegrations": {
-          "title": "API Integration Guide",
-          "href": "/help/api/api-integrations",
-          "time": "10",
-          "description": "Complete guide for integrating our APIs into your applications."
-        }
-      },
-      "sections": {
-        "mainIntro": {
-          "title": "AI SEO Turbo API: Power Your Applications",
-          "description": "Our comprehensive API suite enables developers, agencies, and businesses to integrate AI-powered SEO capabilities directly into their applications, workflows, and platforms. From automated audits to real-time keyword tracking, our APIs bring the same advanced intelligence as our dashboard."
-        },
-        "gettingStarted": {
-          "title": "Getting Started with AI SEO Turbo APIs",
-          "description": "Integrating with our APIs is straightforward, whether you're building custom SEO tools, automating client workflows, or developing white-label solutions. Our RESTful APIs follow industry standards and come with comprehensive documentation and SDKs.",
-          "requirements": {
-            "title": "API Access Requirements",
-            "apiKey": {
-              "title": "API Key",
-              "description": "Secure API key authentication for all requests"
-            },
-            "rateLimits": {
-              "title": "Rate Limits",
-              "description": "Flexible rate limits starting from 1,000 requests/hour"
-            },
-            "httpsOnly": {
-              "title": "HTTPS Only",
-              "description": "All API communications secured with TLS 1.3"
-            },
-            "jsonFormat": {
-              "title": "JSON Format",
-              "description": "Consistent JSON request/response format"
-            }
-          }
-        },
-        "coreEndpoints": {
-          "title": "Core API Endpoints",
-          "description": "Our APIs provide access to all major SEO analysis and tracking features through well-documented endpoints.",
-          "auditApi": {
-            "title": "SEO Audit API",
-            "features": {
-              "siteAudit": {
-                "title": "Site Audit",
-                "description": "Technical SEO with 47+ checks"
-              },
-              "pageAnalysis": {
-                "title": "Page Analysis",
-                "description": "Individual page-by-page evaluation"
-              },
-              "crawlerControl": {
-                "title": "Crawler Control",
-                "description": "Customizable parameters"
-              },
-              "reports": {
-                "title": "Reports",
-                "description": "Automated PDF & JSON generation"
-              }
-            }
-          },
-          "keywordApi": {
-            "title": "Keyword Research API",
-            "features": {
-              "discovery": {
-                "title": "Discovery",
-                "description": "Volume & competition analysis"
-              },
-              "serpAnalysis": {
-                "title": "SERP Analysis",
-                "description": "Search results examination"
-              },
-              "competitorKeywords": {
-                "title": "Competitor Keywords",
-                "description": "Strategy analysis"
-              },
-              "longTail": {
-                "title": "Long-tail",
-                "description": "AI-powered suggestions"
-              }
-            }
-          },
-          "backlinkApi": {
-            "title": "Backlink Analysis API",
-            "features": {
-              "discovery": {
-                "title": "Discovery",
-                "description": "Profile analysis"
-              },
-              "qualityScoring": {
-                "title": "Quality Scoring",
-                "description": "Toxic link detection"
-              },
-              "competitorCompare": {
-                "title": "Competitor Comparison",
-                "description": "Profile benchmarking"
-              },
-              "monitoring": {
-                "title": "Monitoring",
-                "description": "Real-time tracking"
-              }
-            }
-          }
-        },
-        "advancedFeatures": {
-          "title": "Advanced Integration Features",
-          "description": "Enterprise customers and agencies can access advanced integration features beyond basic API access.",
-          "webhooks": {
-            "title": "Webhooks",
-            "features": {
-              "realTime": "Real-time notifications",
-              "automatedWorkflows": "Automated workflows",
-              "customCallbacks": "Custom callbacks",
-              "retryLogic": "Automatic retry logic"
-            }
-          },
-          "whiteLabel": {
-            "title": "White Label",
-            "features": {
-              "customBranding": "Custom branding",
-              "apiReselling": "API reselling",
-              "customDomains": "Custom domains",
-              "prioritySupport": "Priority support"
-            }
-          }
-        },
-        "sdks": {
-          "title": "SDKs & Development Tools",
-          "description": "Accelerate integration with official SDKs for popular programming languages.",
-          "available": {
-            "title": "Available SDKs"
-          },
-          "languages": {
-            "js": {
-              "label": "JS",
-              "description": "JavaScript/Node.js with TypeScript support"
-            },
-            "python": {
-              "label": "PY",
-              "description": "Python with async/await support"
-            },
-            "php": {
-              "label": "PHP",
-              "description": "Framework-agnostic with Laravel integration"
-            },
-            "java": {
-              "label": "JAVA",
-              "description": "Enterprise SDK with Spring Boot support"
-            },
-            "go": {
-              "label": "GO",
-              "description": "High-performance for concurrent requests"
-            },
-            "ruby": {
-              "label": "RUBY",
-              "description": "Rails integration with ActiveSupport"
-            }
-          }
-        },
-        "rateLimits": {
-          "title": "API Rate Limits and Quotas",
-          "description": "Flexible rate limiting ensures fair access while allowing high volumes for enterprise applications.",
-          "tiers": {
-            "free": {
-              "title": "🆓 Free Plan",
-              "requestsPerHour": "100 requests/hour",
-              "requestsPerMonth": "1,000 requests/month"
-            },
-            "pro": {
-              "title": "⭐ Pro Plan",
-              "requestsPerHour": "1,000 requests/hour",
-              "requestsPerMonth": "50,000 requests/month"
-            },
-            "agency": {
-              "title": "🏢 Agency",
-              "requestsPerHour": "5,000 requests/hour",
-              "requestsPerMonth": "250,000 requests/month"
-            },
-            "enterprise": {
-              "title": "🚀 Enterprise",
-              "customLimits": "Custom limits",
-              "dedicatedInfrastructure": "Dedicated infrastructure"
-            }
-          }
-        },
-        "security": {
-          "title": "Security and Compliance",
-          "description": "Enterprise-grade security ensures your API data and communications are always protected.",
-          "features": {
-            "title": "Security Features",
-            "oauth": {
-              "title": "OAuth 2.0",
-              "description": "Secure authentication with refresh tokens"
-            },
-            "keyRotation": {
-              "title": "Key Rotation",
-              "description": "Automatic key rotation for security"
-            },
-            "auditLogging": {
-              "title": "Audit Logging",
-              "description": "Comprehensive API usage logging"
-            },
-            "gdpr": {
-              "title": "GDPR Compliance",
-              "description": "Compliance in data processing"
-            },
-            "soc2": {
-              "title": "SOC 2 Type II",
-              "description": "Certified standards"
-            }
-          }
-        },
-        "documentation": {
-          "title": "API Documentation and Support",
-          "description": "Comprehensive documentation and dedicated support ensure your integrations succeed.",
-          "items": {
-            "explorer": {
-              "title": "Interactive API Explorer",
-              "description": "Test endpoints directly in your browser"
-            },
-            "examples": {
-              "title": "Code Examples",
-              "description": "Implementation examples in multiple languages"
-            },
-            "tutorials": {
-              "title": "Video Tutorials",
-              "description": "Step-by-step integration guides"
-            },
-            "forums": {
-              "title": "Community Forums",
-              "description": "Peer-to-peer developer support"
-            },
-            "support": {
-              "title": "24/7 Support",
-              "description": "Technical support for integration issues"
-            }
-          }
-        },
-        "useCases": {
-          "title": "Case Studies & Success Stories",
-          "description": "See how organizations are using our APIs to build innovative SEO solutions.",
-          "items": {
-            "agencies": {
-              "title": "🏢 SEO Agencies",
-              "description": "Automate audits and reporting workflows"
-            },
-            "cms": {
-              "title": "📝 CMS Platforms",
-              "description": "Integrated SEO analysis in CMS"
-            },
-            "ecommerce": {
-              "title": "🛒 E-commerce",
-              "description": "Automated product page optimization"
-            },
-            "automation": {
-              "title": "🤖 Marketing Automation",
-              "description": "SEO-driven campaign optimization"
-            },
-            "monitoring": {
-              "title": "👁️ Competitor Monitoring",
-              "description": "Automated competitive intelligence"
-            }
-          }
-        },
-        "closing": {
-          "title": "Shaping the Future of SEO Automation",
-          "description1": "Our APIs empower developers and organizations to create innovative SEO solutions that were previously impossible. Whether you're building the next generation of SEO tools or integrating AI-powered analytics into existing platforms, AI SEO Turbo APIs provide the foundation you need.",
-          "description2": "Ready to build? Explore our comprehensive documentation and SDKs below, or contact our Developer Relations team for personalized integration support."
-        },
-        "apiResources": {
-          "title": "API Resources",
-          "items": {
-            "authentication": {
-              "title": "API Authentication",
-              "description": "Learn how to authenticate API requests"
-            },
-            "status": {
-              "title": "API Status",
-              "description": "Check API availability and uptime"
-            }
-          }
-        },
-        "relatedCategories": {
-          "title": "Related Categories",
-          "items": {
-            "troubleshooting": {
-              "title": "Troubleshooting",
-              "description": "Resolve common issues and errors"
-            },
-            "tools": {
-              "title": "SEO Tools & Features",
-              "description": "Explore our AI-powered SEO toolkit"
-            }
-          }
-        },
-        "needHelp": {
-          "title": "Need API Support?",
-          "description": "Our developer support team can help with integrations, API issues, and custom implementations.",
-          "developerSupport": "Developer Support",
-          "browseAllHelp": "Browse All Help"
-        }
-      }
-    }
-  },
   "home": {
-    "meta": {
-      "title": "SEO Audit Tool - Boost Rankings Fast | AI SEO Turbo",
-      "description": "Get actionable SEO insights that boost rankings and drive organic traffic. Join 1,000+ marketers using our AI-powered audits to identify critical issues in minutes."
-    },
     "hero": {
       "badge": "AI-Powered SEO Analysis",
       "title": "AI SEO Turbo: Professional SEO Audits Made Simple",
@@ -3130,7 +2798,7 @@
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
       "password": "Password",
-      "passwordPlaceholder": "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢",
+      "passwordPlaceholder": "••••••••",
       "rememberMe": "Remember me",
       "forgotPassword": "Forgot password?",
       "submit": "Sign In",
@@ -3148,9 +2816,9 @@
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
       "password": "Password",
-      "passwordPlaceholder": "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢",
+      "passwordPlaceholder": "••••••••",
       "confirmPassword": "Confirm Password",
-      "confirmPasswordPlaceholder": "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢",
+      "confirmPasswordPlaceholder": "••••••••",
       "agreeToTerms": "I agree to the {termsLink} and {privacyLink}",
       "terms": "Terms of Service",
       "privacy": "Privacy Policy",
@@ -3171,9 +2839,9 @@
       "title": "Set New Password",
       "subtitle": "Enter your new password",
       "password": "New Password",
-      "passwordPlaceholder": "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢",
+      "passwordPlaceholder": "••••••••",
       "confirmPassword": "Confirm New Password",
-      "confirmPasswordPlaceholder": "â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢",
+      "confirmPasswordPlaceholder": "••••••••",
       "submit": "Reset Password",
       "success": "Password reset successful!"
     },
@@ -3393,7 +3061,7 @@
       "p1": "AI SEO Turbo provides a comprehensive suite of cutting-edge SEO tools designed to give you a competitive edge in search engine optimization. Whether you're a beginner or an experienced SEO professional, our platform offers the features and insights you need to drive organic growth and dominate search results.",
       "p2": "Our AI-powered platform combines machine learning algorithms with deep industry expertise to deliver actionable SEO insights that drive real results. From comprehensive technical audits to advanced competitor analysis, every feature is built to help you understand and improve your search engine visibility.",
       "whyChooseTitle": "Why Choose AI SEO Turbo's Feature Suite?",
-      "whyChooseText": "What sets AI SEO Turbo apart is our commitment to combining artificial intelligence with human expertise. Our platform doesn't just identify problems â€“ it provides context, explains solutions, and guides you through implementation. Every recommendation is backed by data and designed for real-world application.",
+      "whyChooseText": "What sets AI SEO Turbo apart is our commitment to combining artificial intelligence with human expertise. Our platform doesn't just identify problems – it provides context, explains solutions, and guides you through implementation. Every recommendation is backed by data and designed for real-world application.",
       "technicalTitle": "Comprehensive Technical SEO Analysis",
       "technicalText": "Our flagship SEO audit tool goes beyond basic checklists, providing AI-driven analysis that identifies critical issues and opportunities. The 47-point technical audit covers everything from crawlability and indexation to performance optimization and content gaps.",
       "technicalItem1": "Core Web Vitals Assessment: Detailed analysis of loading performance, interactivity, and visual stability",
@@ -3441,7 +3109,7 @@
       "reportingItem4": "Executive summaries and detailed technical reports",
       "reportingItem5": "Historical trend analysis and forecasting",
       "expertTitle": "Expert SEO Insights & Recommendations",
-      "expertP1": "Every feature in AI SEO Turbo is designed by SEO experts with decades of combined experience. Our recommendations aren't generic suggestions â€“ they're data-driven insights tailored to your specific situation and goals. We understand that SEO isn't just about rankings; it's about driving meaningful business results through sustainable, ethical optimization strategies.",
+      "expertP1": "Every feature in AI SEO Turbo is designed by SEO experts with decades of combined experience. Our recommendations aren't generic suggestions – they're data-driven insights tailored to your specific situation and goals. We understand that SEO isn't just about rankings; it's about driving meaningful business results through sustainable, ethical optimization strategies.",
       "expertP2": "Our platform continuously learns from successful SEO campaigns across industries, enabling us to provide increasingly accurate and valuable recommendations. Whether you're optimizing for local search, e-commerce, or content marketing, AI SEO Turbo adapts to your needs and provides the tools necessary for success."
     },
     "features": {
@@ -3590,7 +3258,7 @@
         "optional": "Optional",
         "analyzing": "Analyzing...",
         "startAudit": "Start Your Free Audit",
-        "footer": "Free audit â€¢ No credit card required â€¢ Results in minutes"
+        "footer": "Free audit • No credit card required • Results in minutes"
       },
       "faq": {
         "q1": "How long does an SEO audit take?",
@@ -3821,7 +3489,7 @@
         "viewReport": "View Full Report",
         "crawlAnother": "Crawl Another Site",
         "crawlResultsFor": "Crawl Results for",
-        "completedIn": "Completed in {seconds}s â€¢ {pages} pages analyzed",
+        "completedIn": "Completed in {seconds}s • {pages} pages analyzed",
         "pagesOverview": "Pages Overview",
         "totalFound": "Total Found:",
         "successfullyCrawled": "Successfully Crawled:",
@@ -5129,7 +4797,7 @@
             "title": "Ranking Thresholds",
             "positionChanges": {
               "name": "Position changes",
-              "value": "Â±3 positions",
+              "value": "±3 positions",
               "description": "Alert when ranking changes by 3+ positions"
             },
             "firstPageEntries": {
@@ -5147,17 +4815,17 @@
             "title": "Traffic Alerts",
             "trafficAnomalies": {
               "name": "Traffic anomalies",
-              "value": "Â±25%",
+              "value": "±25%",
               "description": "Alert on significant traffic changes"
             },
             "ctrChanges": {
               "name": "CTR changes",
-              "value": "Â±15%",
+              "value": "±15%",
               "description": "Alert on click-through rate changes"
             },
             "impressionChanges": {
               "name": "Impression changes",
-              "value": "Â±30%",
+              "value": "±30%",
               "description": "Alert on search impression changes"
             }
           },
@@ -5233,7 +4901,7 @@
       },
       "chatPreview": {
         "headerTitle": "AI SEO Assistant",
-        "headerStatus": "Online â€¢ Ready to help",
+        "headerStatus": "Online • Ready to help",
         "userMessage": "My website traffic dropped 30% last month. What should I check first?",
         "aiMessage": "I'll analyze your recent data. Based on my initial scan, I see 3 priority areas: 1) Core Web Vitals scores dropped significantly 2) 15 high-value keywords lost rankings 3) Technical crawl errors increased. Let me run a deeper analysis...",
         "inputPlaceholder": "Ask me anything about SEO...",
@@ -5525,7 +5193,7 @@
       },
       "implementationGuides": {
         "title": "Step-by-Step Implementation Guides",
-        "subtitle": "Don't just get recommendationsâ€”get detailed, actionable guides with code snippets, tools, and timelines to implement every optimization.",
+        "subtitle": "Don't just get recommendations—get detailed, actionable guides with code snippets, tools, and timelines to implement every optimization.",
         "guides": {
           "coreWebVitals": {
             "title": "Core Web Vitals Optimization",
@@ -5923,7 +5591,7 @@
         },
         "steps": {
           "title": "Step-by-Step Solutions",
-          "desc": "We don't just identify problemsâ€”we provide actionable fixes"
+          "desc": "We don't just identify problems—we provide actionable fixes"
         },
         "results": {
           "title": "Results-Driven Approach",
@@ -6068,12 +5736,12 @@
     },
     "tagline": "Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations that drive real results.",
     "bottomTagline": "Supercharge your SEO with AI-powered insights, comprehensive audits, and data-driven recommendations from <strong>AI SEO Turbo</strong> that drive real results.",
-    "copyright": "Â© {year} AI SEO Turbo. All rights reserved.",
+    "copyright": "© {year} AI SEO Turbo. All rights reserved.",
     "links": {
       "privacy": "Privacy Policy",
       "terms": "Terms of Service"
     },
-    "madeWith": "Made with â¤ï¸ by {company}"
+    "madeWith": "Made with ❤️ by {company}"
   },
   "about": {
     "hero": {
@@ -6148,7 +5816,7 @@
     "team": {
       "title": "Our Team",
       "description": "Our diverse team combines deep SEO expertise with cutting-edge AI knowledge. We're passionate about helping businesses succeed online through innovative technology and proven strategies.",
-      "quote": "We're not just building tools â€” we're crafting solutions that transform how businesses approach SEO.",
+      "quote": "We're not just building tools — we're crafting solutions that transform how businesses approach SEO.",
       "attribution": "- The AISEOTurbo Team"
     }
   },
@@ -7615,7 +7283,7 @@
     "placeholder": "Enter your email address",
     "ctaText": "Get Free Checklist",
     "sending": "Sending...",
-    "trustSignal": "ðŸ“§ No spam, unsubscribe anytime â€¢ ðŸ”’ Your data is secure",
+    "trustSignal": "📧 No spam, unsubscribe anytime • 🔒 Your data is secure",
     "success": {
       "title": "Success! Check Your Email",
       "message": "Your free SEO checklist is on its way. Don't forget to check your spam folder!",
@@ -7733,7 +7401,7 @@
         "title": "The Evolution of Technical SEO in 2025",
         "intro": "Technical SEO has fundamentally transformed over the past few years. What once was about simple XML sitemaps and robots.txt has evolved into a complex discipline encompassing Core Web Vitals, JavaScript rendering, structured data, and AI-powered search understanding.",
         "reality": {
-          "label": "ðŸŽ¯ 2025 Reality:",
+          "label": "🎯 2025 Reality:",
           "text": "In 2025, technical SEO is no longer just about helping Google crawl your site. It's about optimizing for user experience, AI comprehension, and preparing your content for semantic search and future search paradigms."
         },
         "keyShift": {
@@ -7757,7 +7425,7 @@
           "description": "Page speed is both a ranking factor and a conversion factor. Google's data shows that 40% of users abandon a website if it takes more than 3 seconds to load. For mobile users, the impact is even more dramatic."
         },
         "benchmarks": {
-          "title": "ðŸ“Š Speed Benchmarks (2025)",
+          "title": "📊 Speed Benchmarks (2025)",
           "excellent": "Excellent:",
           "excellentValue": "< 1.5 seconds (First Contentful Paint)",
           "good": "Good:",
@@ -7770,23 +7438,23 @@
         "techniques": {
           "title": "Core Speed Optimization Techniques",
           "imageOptimization": {
-            "title": "ðŸ–¼ï¸ Image Optimization",
+            "title": "🖼️ Image Optimization",
             "description": "Images account for 50%+ of page weight. Serve modern formats (WebP), use responsive images, lazy-load below-the-fold content, and compress aggressively. Image optimization alone can improve loading time by 30-50%."
           },
           "codeMinification": {
-            "title": "âš™ï¸ Code Minification & Compression",
+            "title": "⚙️ Code Minification & Compression",
             "description": "Minify CSS, JavaScript, and HTML. Enable GZIP compression on your server. Use CSS-in-JS wisely to avoid render-blocking. Remove unused CSS and JavaScript."
           },
           "cdn": {
-            "title": "ðŸŒ Content Delivery Network (CDN)",
+            "title": "🌐 Content Delivery Network (CDN)",
             "description": "Serve content from geographically distributed servers. CDNs reduce latency significantly, especially for international traffic. Most users won't notice speed improvements beyond what a CDN can provide."
           },
           "thirdParty": {
-            "title": "ðŸ”Œ Third-Party Script Management",
+            "title": "🔌 Third-Party Script Management",
             "description": "Third-party scripts (analytics, ads, chat widgets) often have the biggest impact on page speed. Defer their loading, lazy-load them, or use facades to defer initialization."
           },
           "caching": {
-            "title": "ðŸ’¾ Caching Strategy",
+            "title": "💾 Caching Strategy",
             "description": "Implement browser caching (leverage max-age headers), server-side caching, and database query caching. Consider using a service worker for offline functionality."
           }
         },
@@ -7808,7 +7476,7 @@
         "bestPractices": {
           "title": "Mobile-First Best Practices",
           "responsive": {
-            "title": "ðŸ“± Responsive Design",
+            "title": "📱 Responsive Design",
             "items": {
               "design": "Use responsive design (not separate mobile URLs if possible)",
               "testing": "Test on multiple devices and screen sizes",
@@ -7817,7 +7485,7 @@
             }
           },
           "performance": {
-            "title": "âš¡ Mobile Performance",
+            "title": "⚡ Mobile Performance",
             "items": {
               "speed": "Mobile pages should load in under 3 seconds on 4G",
               "popups": "Avoid pop-ups that block content on mobile",
@@ -7826,7 +7494,7 @@
             }
           },
           "contentParity": {
-            "title": "ðŸ“ Content Parity",
+            "title": "📝 Content Parity",
             "items": {
               "content": "Ensure mobile version contains all important content from desktop",
               "interactive": "Don't hide critical content behind interactive elements",
@@ -7855,27 +7523,27 @@
         "schemaTypes": {
           "title": "Essential Schema Types for SEO",
           "article": {
-            "title": "ðŸ“„ Article Schema",
+            "title": "📄 Article Schema",
             "description": "For blog posts and articles. Include headline, date published, author, and image. Can enable Google News inclusion."
           },
           "localBusiness": {
-            "title": "ðŸ¢ LocalBusiness Schema",
+            "title": "🏢 LocalBusiness Schema",
             "description": "For local businesses. Include business name, address, phone, hours, reviews, and location. Critical for local SEO."
           },
           "aggregateRating": {
-            "title": "â­ AggregateRating Schema",
+            "title": "⭐ AggregateRating Schema",
             "description": "Display star ratings in search results. Increases click-through rates by 20-30%. Include review count and rating value."
           },
           "product": {
-            "title": "ðŸ’° Product Schema",
+            "title": "💰 Product Schema",
             "description": "For e-commerce. Include price, availability, reviews, and product images. Enables rich shopping features."
           },
           "organization": {
-            "title": "ðŸ¢ Organization Schema",
+            "title": "🏢 Organization Schema",
             "description": "For your company's homepage. Include name, logo, contact info, and social media profiles. Establishes brand entity for Google."
           },
           "faqPage": {
-            "title": "â“ FAQPage Schema",
+            "title": "❓ FAQPage Schema",
             "description": "For FAQ sections. Can appear in Google's featured snippets with accordion-style results."
           }
         },
@@ -7904,19 +7572,19 @@
         "efficiency": {
           "title": "Crawl Efficiency Best Practices",
           "internalLinking": {
-            "title": "ðŸ”— Internal Linking",
+            "title": "🔗 Internal Linking",
             "description": "Strategic internal linking distributes page authority and helps Google discover all important pages. Use descriptive anchor text."
           },
           "avoidWaste": {
-            "title": "ðŸš« Avoid Crawl Waste",
+            "title": "🚫 Avoid Crawl Waste",
             "description": "Block non-indexable pages (login pages, thank you pages, print versions) from crawling to preserve crawl budget."
           },
           "redirects": {
-            "title": "ðŸ”„ Redirect Strategy",
+            "title": "🔄 Redirect Strategy",
             "description": "Use 301 redirects for permanent changes. Minimize redirect chains (more than 2 redirects waste crawl budget)."
           },
           "javascript": {
-            "title": "ðŸ¦ JavaScript Rendering",
+            "title": "🐦 JavaScript Rendering",
             "description": "Google can crawl JavaScript, but ensure important content is available in the HTML. Test JavaScript-rendered content in Google Search Console's URL Inspection tool."
           }
         }
@@ -7967,7 +7635,7 @@
         "title": "What Are Core Web Vitals and Why Do They Matter?",
         "paragraph1": "Core Web Vitals are essential performance metrics that Google uses to evaluate the overall user experience of your website. Introduced by Google in 2020 and becoming a ranking factor in 2021, these metrics focus on three critical aspects of web performance: loading speed, interactivity, and visual stability.",
         "insight": {
-          "label": "ðŸŽ¯ Key Insight:",
+          "label": "🎯 Key Insight:",
           "text": "Websites optimized for Core Web Vitals see improved SEO rankings, higher user engagement, and better conversion rates. Studies show that improving Core Web Vitals can increase mobile conversions by up to 24%."
         },
         "paragraph2": "The importance of Core Web Vitals extends beyond SEO rankings. These metrics directly correlate with user satisfaction, bounce rates, and conversion metrics. A website that loads quickly, responds instantly to user input, and maintains visual stability will naturally retain more visitors and generate more revenue."
@@ -7979,9 +7647,9 @@
           "description": "Largest Contentful Paint (LCP) measures when the largest content element becomes visible to the user during the page load. This could be an image, heading, paragraph, or video that takes up significant space in the viewport. LCP is crucial because it represents when a user perceives that the page's main content is loading."
         },
         "thresholds": {
-          "title": "âœ… LCP Thresholds (Google 2024)",
+          "title": "✅ LCP Thresholds (Google 2024)",
           "good": "Good:",
-          "goodValue": "â‰¤ 2.5 seconds",
+          "goodValue": "≤ 2.5 seconds",
           "needsImprovement": "Needs Improvement:",
           "needsImprovementValue": "2.5 - 4.0 seconds",
           "poor": "Poor:",
@@ -8004,9 +7672,9 @@
           "description": "First Input Delay (FID) measures the time between when a user first interacts with your page (clicking a button, typing in a form, etc.) and when the browser can respond to that interaction. It captures the unresponsiveness users experience when visiting a site with sluggish, unresponsive interactions."
         },
         "thresholds": {
-          "title": "âœ… FID Thresholds (Google 2024)",
+          "title": "✅ FID Thresholds (Google 2024)",
           "good": "Good:",
-          "goodValue": "â‰¤ 100 milliseconds",
+          "goodValue": "≤ 100 milliseconds",
           "needsImprovement": "Needs Improvement:",
           "needsImprovementValue": "100 - 300 milliseconds",
           "poor": "Poor:",
@@ -8029,9 +7697,9 @@
           "description": "Cumulative Layout Shift (CLS) measures the sum of individual layout shift scores for every unexpected layout shift that occurs during the entire lifespan of the page. A layout shift happens when a visible element changes its position or size between render frames without being initiated by user interaction."
         },
         "thresholds": {
-          "title": "âœ… CLS Thresholds (Google 2024)",
+          "title": "✅ CLS Thresholds (Google 2024)",
           "good": "Good:",
-          "goodValue": "â‰¤ 0.1",
+          "goodValue": "≤ 0.1",
           "needsImprovement": "Needs Improvement:",
           "needsImprovementValue": "0.1 - 0.25",
           "poor": "Poor:",
@@ -8040,19 +7708,19 @@
         "causes": {
           "title": "Common Causes of Layout Shift and Solutions",
           "images": {
-            "title": "ðŸ“¸ Images Without Dimensions",
+            "title": "📸 Images Without Dimensions",
             "description": "Always include width and height attributes on images. This reserves space and prevents shift when images load."
           },
           "fonts": {
-            "title": "ðŸ“ Web Fonts Causing FOUT/FOIT",
+            "title": "📝 Web Fonts Causing FOUT/FOIT",
             "description": "Use font-display: swap and preload fonts to prevent invisible text or layout shifts during font load."
           },
           "ads": {
-            "title": "ðŸ“¢ Ads, Embeds, and Iframes",
+            "title": "📢 Ads, Embeds, and Iframes",
             "description": "Reserve space for ads and dynamic content using CSS aspect-ratio or container queries."
           },
           "injected": {
-            "title": "ðŸ”” Late-Injected Content",
+            "title": "🔔 Late-Injected Content",
             "description": "Avoid injecting content into the DOM that shifts existing elements. Use CSS transforms for animations instead of changing dimensions."
           }
         }
@@ -8079,13 +7747,13 @@
           "description": "After implementing changes, monitor your Core Web Vitals using Google's tools. Set up alerts and establish a regular monitoring routine to catch regressions early."
         },
         "important": {
-          "label": "âš ï¸ Important:",
+          "label": "⚠️ Important:",
           "text": "Core Web Vitals performance is calculated based on real user data collected by Google over the previous 28 days. Changes may take time to reflect in official reports."
         }
       },
       "business": {
         "title": "Why Core Web Vitals Matter for Your Business",
-        "intro": "Optimizing Core Web Vitals isn't just about SEO rankingsâ€”it directly impacts your bottom line:",
+        "intro": "Optimizing Core Web Vitals isn't just about SEO rankings—it directly impacts your bottom line:",
         "conversion": "Improved Conversion Rates: Faster pages convert better. A 1-second delay can reduce conversions by 7%.",
         "ux": "Better User Experience: Responsive pages with stable layouts create a professional impression and build trust.",
         "bounce": "Reduced Bounce Rates: Users are more likely to stay and explore a site that performs well.",
@@ -8126,31 +7794,31 @@
       },
       "importance": {
         "title": "Why SEO Audits Matter: The Foundation of Search Ranking Improvement",
-        "intro": "In 2025, SEO audits have become more critical than ever. With AI-powered search algorithms, Core Web Vitals as ranking factors, and increasingly sophisticated competition, a comprehensive audit isn't optionalâ€”it's essential for maintaining and improving your search visibility.",
+        "intro": "In 2025, SEO audits have become more critical than ever. With AI-powered search algorithms, Core Web Vitals as ranking factors, and increasingly sophisticated competition, a comprehensive audit isn't optional—it's essential for maintaining and improving your search visibility.",
         "impact": {
-          "label": "ðŸ“Š Audit Impact:",
+          "label": "📊 Audit Impact:",
           "text": "Websites that conduct regular SEO audits see an average 23% increase in organic traffic within 3 months. Those that audit quarterly see 47% higher traffic growth than websites that audit infrequently."
         },
         "accomplish": {
           "title": "What Regular SEO Audits Accomplish",
           "technical": {
-            "title": "ðŸ” Identify Technical Issues",
+            "title": "🔍 Identify Technical Issues",
             "description": "Discover crawlability problems, indexation issues, Core Web Vitals failures, and architecture problems that are actively hurting your rankings."
           },
           "keyword": {
-            "title": "ðŸŽ¯ Find Keyword Opportunities",
+            "title": "🎯 Find Keyword Opportunities",
             "description": "Uncover low-competition keywords you should be targeting, content gaps where competitors are ranking but you're not, and quick wins you can capitalize on."
           },
           "algorithm": {
-            "title": "ðŸš€ Stay Ahead of Algorithm Updates",
+            "title": "🚀 Stay Ahead of Algorithm Updates",
             "description": "Systematic audits help you identify how algorithm updates are affecting your site and allow you to proactively optimize before ranking drops occur."
           },
           "ux": {
-            "title": "ðŸ“ˆ Improve UX & Conversions",
+            "title": "📈 Improve UX & Conversions",
             "description": "Many SEO issues directly impact user experience and conversion rates. Fixing them benefits both search rankings and your bottom line."
           },
           "competitive": {
-            "title": "ðŸŽ¯ Competitive Intelligence",
+            "title": "🎯 Competitive Intelligence",
             "description": "Understand your competitors' strategies, identify where they're outranking you, and find opportunities to capture market share."
           }
         }
@@ -8162,63 +7830,63 @@
         "checkpoints": {
           "speed": {
             "title": "1. Site Speed & Core Web Vitals",
-            "description": "â€¢ LCP â‰¤ 2.5s, FID â‰¤ 100ms, CLS â‰¤ 0.1<br/>â€¢ Test via PageSpeed Insights and Web Vitals<br/>â€¢ Address all \"Poor\" ratings"
+            "description": "• LCP ≤ 2.5s, FID ≤ 100ms, CLS ≤ 0.1<br/>• Test via PageSpeed Insights and Web Vitals<br/>• Address all \"Poor\" ratings"
           },
           "mobile": {
             "title": "2. Mobile Responsiveness",
-            "description": "â€¢ Test on multiple devices and screen sizes<br/>â€¢ Verify touch targets are 48x48px minimum<br/>â€¢ Ensure content is readable on mobile<br/>â€¢ Check mobile-first indexing compatibility"
+            "description": "• Test on multiple devices and screen sizes<br/>• Verify touch targets are 48x48px minimum<br/>• Ensure content is readable on mobile<br/>• Check mobile-first indexing compatibility"
           },
           "ssl": {
             "title": "3. SSL/HTTPS Implementation",
-            "description": "â€¢ All pages served over HTTPS<br/>â€¢ No mixed content warnings<br/>â€¢ Valid SSL certificate without errors<br/>â€¢ Proper redirects from HTTP to HTTPS"
+            "description": "• All pages served over HTTPS<br/>• No mixed content warnings<br/>• Valid SSL certificate without errors<br/>• Proper redirects from HTTP to HTTPS"
           },
           "sitemap": {
             "title": "4. XML Sitemap Audit",
-            "description": "â€¢ Sitemap exists and is accessible<br/>â€¢ All important pages included<br/>â€¢ No pages that should be excluded<br/>â€¢ Sitemap submitted to Google Search Console"
+            "description": "• Sitemap exists and is accessible<br/>• All important pages included<br/>• No pages that should be excluded<br/>• Sitemap submitted to Google Search Console"
           },
           "robots": {
             "title": "5. Robots.txt Optimization",
-            "description": "â€¢ File exists and is properly formatted<br/>â€¢ Isn't blocking important pages<br/>â€¢ Correctly specifies User-agents<br/>â€¢ Optimized crawl budget efficiency"
+            "description": "• File exists and is properly formatted<br/>• Isn't blocking important pages<br/>• Correctly specifies User-agents<br/>• Optimized crawl budget efficiency"
           },
           "internalLinking": {
             "title": "6. Internal Linking Analysis",
-            "description": "â€¢ Strategic internal linking hierarchy<br/>â€¢ Descriptive anchor text used<br/>â€¢ No orphan pages<br/>â€¢ Proper link equity distribution"
+            "description": "• Strategic internal linking hierarchy<br/>• Descriptive anchor text used<br/>• No orphan pages<br/>• Proper link equity distribution"
           },
           "brokenLinks": {
             "title": "7. Broken Links Audit",
-            "description": "â€¢ Scan entire site for 404 errors<br/>â€¢ Check internal link destinations<br/>â€¢ Fix or redirect broken links<br/>â€¢ Monitor for new broken links"
+            "description": "• Scan entire site for 404 errors<br/>• Check internal link destinations<br/>• Fix or redirect broken links<br/>• Monitor for new broken links"
           },
           "canonical": {
             "title": "8. Canonical Tag Review",
-            "description": "â€¢ Every page has a canonical tag<br/>â€¢ Canonical points to correct URL<br/>â€¢ No canonical chains<br/>â€¢ Proper handling of parameters"
+            "description": "• Every page has a canonical tag<br/>• Canonical points to correct URL<br/>• No canonical chains<br/>• Proper handling of parameters"
           },
           "duplicate": {
             "title": "9. Duplicate Content Check",
-            "description": "â€¢ Identify duplicate pages<br/>â€¢ Use canonicals for deliberate duplicates<br/>â€¢ Consolidate thin content<br/>â€¢ Check URL parameter handling"
+            "description": "• Identify duplicate pages<br/>• Use canonicals for deliberate duplicates<br/>• Consolidate thin content<br/>• Check URL parameter handling"
           },
           "structuredData": {
             "title": "10. Structured Data Validation",
-            "description": "â€¢ Schema markup implemented<br/>â€¢ No structured data errors<br/>â€¢ Rich snippets displaying correctly<br/>â€¢ All key schemas present (Article, LocalBusiness, etc.)"
+            "description": "• Schema markup implemented<br/>• No structured data errors<br/>• Rich snippets displaying correctly<br/>• All key schemas present (Article, LocalBusiness, etc.)"
           },
           "architecture": {
             "title": "11. Site Architecture & Crawlability",
-            "description": "â€¢ Logical site structure hierarchy<br/>â€¢ No crawl traps or loops<br/>â€¢ Proper URL structure<br/>â€¢ Navigation is clear and crawlable"
+            "description": "• Logical site structure hierarchy<br/>• No crawl traps or loops<br/>• Proper URL structure<br/>• Navigation is clear and crawlable"
           },
           "urlStructure": {
             "title": "12. URL Structure Optimization",
-            "description": "â€¢ Descriptive, keyword-relevant URLs<br/>â€¢ No unnecessary parameters<br/>â€¢ Consistent URL format<br/>â€¢ Lowercase and hyphens (not underscores)"
+            "description": "• Descriptive, keyword-relevant URLs<br/>• No unnecessary parameters<br/>• Consistent URL format<br/>• Lowercase and hyphens (not underscores)"
           },
           "redirects": {
             "title": "13. Redirect Chain Audit",
-            "description": "â€¢ Minimize redirect chains (max 2)<br/>â€¢ Use 301 redirects for permanent moves<br/>â€¢ Check redirect mapping<br/>â€¢ Monitor for circular redirects"
+            "description": "• Minimize redirect chains (max 2)<br/>• Use 301 redirects for permanent moves<br/>• Check redirect mapping<br/>• Monitor for circular redirects"
           },
           "serverResponse": {
             "title": "14. Server Response Codes",
-            "description": "â€¢ Monitor HTTP status codes<br/>â€¢ Fix 5xx server errors<br/>â€¢ Investigate unusual 4xx patterns<br/>â€¢ Ensure proper redirects (3xx)"
+            "description": "• Monitor HTTP status codes<br/>• Fix 5xx server errors<br/>• Investigate unusual 4xx patterns<br/>• Ensure proper redirects (3xx)"
           },
           "javascript": {
             "title": "15. JavaScript Rendering Check",
-            "description": "â€¢ Verify Google can render JavaScript<br/>â€¢ Check for JavaScript render issues<br/>â€¢ Ensure critical content loads<br/>â€¢ Test with Google Search Console"
+            "description": "• Verify Google can render JavaScript<br/>• Check for JavaScript render issues<br/>• Ensure critical content loads<br/>• Test with Google Search Console"
           }
         }
       },
@@ -8229,51 +7897,51 @@
         "checkpoints": {
           "titleTag": {
             "title": "1. Title Tag Optimization",
-            "description": "â€¢ 50-60 characters maximum<br/>â€¢ Primary keyword included<br/>â€¢ Unique for every page<br/>â€¢ Compelling and click-worthy"
+            "description": "• 50-60 characters maximum<br/>• Primary keyword included<br/>• Unique for every page<br/>• Compelling and click-worthy"
           },
           "metaDescription": {
             "title": "2. Meta Description Enhancement",
-            "description": "â€¢ 150-160 characters<br/>â€¢ Includes primary keyword<br/>â€¢ Contains clear call-to-action<br/>â€¢ Compels clicks from search results"
+            "description": "• 150-160 characters<br/>• Includes primary keyword<br/>• Contains clear call-to-action<br/>• Compels clicks from search results"
           },
           "headers": {
             "title": "3. Header Hierarchy (H1-H6)",
-            "description": "â€¢ One H1 per page (your main keyword)<br/>â€¢ Logical hierarchy maintained<br/>â€¢ H2s and H3s organize content<br/>â€¢ Proper nesting structure"
+            "description": "• One H1 per page (your main keyword)<br/>• Logical hierarchy maintained<br/>• H2s and H3s organize content<br/>• Proper nesting structure"
           },
           "images": {
             "title": "4. Image Optimization",
-            "description": "â€¢ Descriptive alt text for all images<br/>â€¢ Optimized file names with keywords<br/>â€¢ Compressed for web performance<br/>â€¢ Modern formats (WebP) used"
+            "description": "• Descriptive alt text for all images<br/>• Optimized file names with keywords<br/>• Compressed for web performance<br/>• Modern formats (WebP) used"
           },
           "contentQuality": {
             "title": "5. Content Quality & Relevance",
-            "description": "â€¢ Original, unique content<br/>â€¢ Comprehensive and thorough<br/>â€¢ Matches search intent<br/>â€¢ Well-researched and accurate"
+            "description": "• Original, unique content<br/>• Comprehensive and thorough<br/>• Matches search intent<br/>• Well-researched and accurate"
           },
           "keywordOptimization": {
             "title": "6. Keyword Optimization",
-            "description": "â€¢ Primary keyword in first 100 words<br/>â€¢ Natural keyword placement<br/>â€¢ Related keywords included<br/>â€¢ No keyword stuffing"
+            "description": "• Primary keyword in first 100 words<br/>• Natural keyword placement<br/>• Related keywords included<br/>• No keyword stuffing"
           },
           "internalLinkingStrategy": {
             "title": "7. Internal Linking Strategy",
-            "description": "â€¢ Links to relevant internal pages<br/>â€¢ Descriptive anchor text<br/>â€¢ Proper link equity distribution<br/>â€¢ No excessive linking"
+            "description": "• Links to relevant internal pages<br/>• Descriptive anchor text<br/>• Proper link equity distribution<br/>• No excessive linking"
           },
           "urlSlug": {
             "title": "8. URL Slug Optimization",
-            "description": "â€¢ Short and descriptive<br/>â€¢ Keywords included naturally<br/>â€¢ Hyphens between words<br/>â€¢ Lowercase formatting"
+            "description": "• Short and descriptive<br/>• Keywords included naturally<br/>• Hyphens between words<br/>• Lowercase formatting"
           },
           "schemaMarkup": {
             "title": "9. Schema Markup Implementation",
-            "description": "â€¢ Appropriate schema for page type<br/>â€¢ Structured data validation passes<br/>â€¢ Rich snippets enabled<br/>â€¢ Updated schema used"
+            "description": "• Appropriate schema for page type<br/>• Structured data validation passes<br/>• Rich snippets enabled<br/>• Updated schema used"
           },
           "readability": {
             "title": "10. Content Readability",
-            "description": "â€¢ Flesch Reading Ease: 60+<br/>â€¢ Short paragraphs (2-4 sentences)<br/>â€¢ Bullet points and lists<br/>â€¢ Active voice preferred"
+            "description": "• Flesch Reading Ease: 60+<br/>• Short paragraphs (2-4 sentences)<br/>• Bullet points and lists<br/>• Active voice preferred"
           },
           "freshness": {
             "title": "11. Content Freshness",
-            "description": "â€¢ Regular content updates<br/>â€¢ Last modified date visible<br/>â€¢ Current data and examples<br/>â€¢ Updated links"
+            "description": "• Regular content updates<br/>• Last modified date visible<br/>• Current data and examples<br/>• Updated links"
           },
           "featuredSnippets": {
             "title": "12. Featured Snippet Optimization",
-            "description": "â€¢ Answer people's questions directly<br/>â€¢ Use lists and tables<br/>â€¢ Target \"Position Zero\"<br/>â€¢ Include definition paragraphs"
+            "description": "• Answer people's questions directly<br/>• Use lists and tables<br/>• Target \"Position Zero\"<br/>• Include definition paragraphs"
           }
         }
       },
@@ -8284,43 +7952,43 @@
         "criteria": {
           "performance": {
             "title": "1. Content Performance Analysis",
-            "description": "â€¢ Identify top-performing pages<br/>â€¢ Find underperforming content<br/>â€¢ Analyze traffic trends<br/>â€¢ Calculate ROI by page"
+            "description": "• Identify top-performing pages<br/>• Find underperforming content<br/>• Analyze traffic trends<br/>• Calculate ROI by page"
           },
           "thinContent": {
             "title": "2. Thin Content Identification",
-            "description": "â€¢ Pages with &lt; 300 words<br/>â€¢ High bounce rate pages<br/>â€¢ Low-value, low-traffic pages<br/>â€¢ Consolidation opportunities"
+            "description": "• Pages with &lt; 300 words<br/>• High bounce rate pages<br/>• Low-value, low-traffic pages<br/>• Consolidation opportunities"
           },
           "contentGaps": {
             "title": "3. Content Gap Discovery",
-            "description": "â€¢ Topics you should cover<br/>â€¢ Keywords competitors rank for you don't<br/>â€¢ Search intent not being met<br/>â€¢ Expansion opportunities"
+            "description": "• Topics you should cover<br/>• Keywords competitors rank for you don't<br/>• Search intent not being met<br/>• Expansion opportunities"
           },
           "structure": {
             "title": "4. Content Structure Review",
-            "description": "â€¢ Proper heading hierarchy<br/>â€¢ Logical section organization<br/>â€¢ Table of contents for long content<br/>â€¢ Visual elements distribution"
+            "description": "• Proper heading hierarchy<br/>• Logical section organization<br/>• Table of contents for long content<br/>• Visual elements distribution"
           },
           "plagiarism": {
             "title": "5. Plagiarism & Originality",
-            "description": "â€¢ Check for plagiarism<br/>â€¢ Verify original research<br/>â€¢ Identify duplicate content<br/>â€¢ Ensure unique value proposition"
+            "description": "• Check for plagiarism<br/>• Verify original research<br/>• Identify duplicate content<br/>• Ensure unique value proposition"
           },
           "engagement": {
             "title": "6. Engagement Metrics",
-            "description": "â€¢ Time on page analysis<br/>â€¢ Scroll depth tracking<br/>â€¢ Click-through rates<br/>â€¢ Bounce rate assessment"
+            "description": "• Time on page analysis<br/>• Scroll depth tracking<br/>• Click-through rates<br/>• Bounce rate assessment"
           },
           "multimedia": {
             "title": "7. Multimedia Usage",
-            "description": "â€¢ Images and infographics<br/>â€¢ Video integration<br/>â€¢ Charts and data visualization<br/>â€¢ Media optimization"
+            "description": "• Images and infographics<br/>• Video integration<br/>• Charts and data visualization<br/>• Media optimization"
           },
           "accuracy": {
             "title": "8. Content Accuracy",
-            "description": "â€¢ Fact-check all claims<br/>â€¢ Verify statistics and data<br/>â€¢ Update outdated information<br/>â€¢ Source verification"
+            "description": "• Fact-check all claims<br/>• Verify statistics and data<br/>• Update outdated information<br/>• Source verification"
           },
           "uniqueness": {
             "title": "9. Content Uniqueness",
-            "description": "â€¢ Original perspective offered<br/>â€¢ Unique insights included<br/>â€¢ Differentiates from competitors<br/>â€¢ Expert viewpoint evident"
+            "description": "• Original perspective offered<br/>• Unique insights included<br/>• Differentiates from competitors<br/>• Expert viewpoint evident"
           },
           "depth": {
             "title": "10. Content Depth Assessment",
-            "description": "â€¢ Comprehensive coverage (2000+ words ideal)<br/>â€¢ All angles covered<br/>â€¢ Actionable recommendations<br/>â€¢ Expert-level insights"
+            "description": "• Comprehensive coverage (2000+ words ideal)<br/>• All angles covered<br/>• Actionable recommendations<br/>• Expert-level insights"
           }
         }
       },
@@ -8331,43 +7999,43 @@
         "assessment": {
           "backlinks": {
             "title": "1. Backlink Profile Analysis",
-            "description": "â€¢ Total backlinks count<br/>â€¢ Referring domain diversity<br/>â€¢ Backlink quality assessment<br/>â€¢ Link velocity trends"
+            "description": "• Total backlinks count<br/>• Referring domain diversity<br/>• Backlink quality assessment<br/>• Link velocity trends"
           },
           "toxicLinks": {
             "title": "2. Toxic Backlink Detection",
-            "description": "â€¢ Identify low-quality links<br/>â€¢ Assess link relevance<br/>â€¢ Check for spammy sources<br/>â€¢ Disavow harmful links"
+            "description": "• Identify low-quality links<br/>• Assess link relevance<br/>• Check for spammy sources<br/>• Disavow harmful links"
           },
           "domainAuthority": {
             "title": "3. Domain Authority Evaluation",
-            "description": "â€¢ Track domain authority score<br/>â€¢ Page authority by page<br/>â€¢ Compare to competitors<br/>â€¢ Set improvement targets"
+            "description": "• Track domain authority score<br/>• Page authority by page<br/>• Compare to competitors<br/>• Set improvement targets"
           },
           "brandMentions": {
             "title": "4. Brand Mention Monitoring",
-            "description": "â€¢ Unlinked brand mentions<br/>â€¢ Opportunities for link building<br/>â€¢ Brand sentiment analysis<br/>â€¢ Reputation management"
+            "description": "• Unlinked brand mentions<br/>• Opportunities for link building<br/>• Brand sentiment analysis<br/>• Reputation management"
           },
           "socialSignals": {
             "title": "5. Social Signals Assessment",
-            "description": "â€¢ Social media presence<br/>â€¢ Engagement metrics<br/>â€¢ Share counts analysis<br/>â€¢ Social authority evaluation"
+            "description": "• Social media presence<br/>• Engagement metrics<br/>• Share counts analysis<br/>• Social authority evaluation"
           },
           "citations": {
             "title": "6. Local Citations Audit",
-            "description": "â€¢ NAP consistency check<br/>â€¢ Citation count<br/>â€¢ Citation quality assessment<br/>â€¢ Directory optimization"
+            "description": "• NAP consistency check<br/>• Citation count<br/>• Citation quality assessment<br/>• Directory optimization"
           },
           "gmb": {
             "title": "7. Google My Business Optimization",
-            "description": "â€¢ Profile completeness<br/>â€¢ Review quality and quantity<br/>â€¢ Photo optimization<br/>â€¢ Post frequency"
+            "description": "• Profile completeness<br/>• Review quality and quantity<br/>• Photo optimization<br/>• Post frequency"
           },
           "competitorBacklinks": {
             "title": "8. Competitor Backlink Analysis",
-            "description": "â€¢ Analyze competitor links<br/>â€¢ Identify link opportunities<br/>â€¢ Link gap analysis<br/>â€¢ Competitive benchmarking"
+            "description": "• Analyze competitor links<br/>• Identify link opportunities<br/>• Link gap analysis<br/>• Competitive benchmarking"
           },
           "guestPosting": {
             "title": "9. Guest Posting Opportunities",
-            "description": "â€¢ Find relevant publications<br/>â€¢ Assess authority and traffic<br/>â€¢ Identify link building opportunities<br/>â€¢ Outreach strategy"
+            "description": "• Find relevant publications<br/>• Assess authority and traffic<br/>• Identify link building opportunities<br/>• Outreach strategy"
           },
           "reputation": {
             "title": "10. Online Reputation Management",
-            "description": "â€¢ Monitor mentions and reviews<br/>â€¢ Respond to feedback<br/>â€¢ Address negative reviews<br/>â€¢ Build positive reputation"
+            "description": "• Monitor mentions and reviews<br/>• Respond to feedback<br/>• Address negative reviews<br/>• Build positive reputation"
           }
         }
       },
@@ -8410,9 +8078,9 @@
       },
       "revolution": {
         "title": "The AI Revolution in SEO: From Keywords to Intent",
-        "intro": "Artificial intelligence hasn't just changed SEOâ€”it has fundamentally transformed how search engines understand, interpret, and rank content. From Google's RankBrain to BERT, Helpful Content Update, and most recently, AI-generated content detection, AI is now at the absolute core of modern search engine optimization.",
+        "intro": "Artificial intelligence hasn't just changed SEO—it has fundamentally transformed how search engines understand, interpret, and rank content. From Google's RankBrain to BERT, Helpful Content Update, and most recently, AI-generated content detection, AI is now at the absolute core of modern search engine optimization.",
         "impact": {
-          "label": "ðŸ¤– AI Impact on SEO:",
+          "label": "🤖 AI Impact on SEO:",
           "text": "AI-powered search algorithms now understand semantic meaning, context, and user intent with unprecedented accuracy. Traditional keyword-stuffing tactics that worked 5 years ago would actually hurt your rankings today."
         },
         "shift": {
@@ -8451,80 +8119,80 @@
         "contentCreation": {
           "title": "1. Content Creation and Optimization",
           "aiAssisted": {
-            "title": "ðŸ“ AI-Assisted Content Creation",
+            "title": "📝 AI-Assisted Content Creation",
             "description": "Tools like ChatGPT, Claude, and Gemini can now generate high-quality content outlines, first drafts, and section ideas. However, Google now penalizes thin, purely AI-generated content. The future belongs to human-AI collaboration where writers use AI as a tool, not a replacement."
           },
           "keywordSuggestions": {
-            "title": "ðŸŽ¯ Intelligent Keyword Suggestions",
+            "title": "🎯 Intelligent Keyword Suggestions",
             "description": "AI tools analyze search patterns, competitor content, and semantic relationships to suggest high-value keywords you might miss. These go beyond simple search volume metrics to identify keywords that actually convert."
           },
           "semanticOptimization": {
-            "title": "ðŸ” Semantic Optimization",
+            "title": "🔍 Semantic Optimization",
             "description": "AI now helps optimize for semantic search by suggesting related concepts, synonyms, and supporting ideas that strengthen your semantic footprint. This is more important than ever in a BERT-driven world."
           },
           "qualityAssessment": {
-            "title": "âœ¨ Content Quality Assessment",
+            "title": "✨ Content Quality Assessment",
             "description": "AI tools can now analyze content and predict whether it will rank well based on expertise, comprehensiveness, and quality signals. This helps you optimize before publishing rather than waiting for rankings to fall."
           }
         },
         "technicalSEO": {
           "title": "2. Technical SEO Automation",
           "automatedAudits": {
-            "title": "ðŸ”§ Automated Site Audits",
+            "title": "🔧 Automated Site Audits",
             "description": "AI-powered SEO platforms can now crawl your site and automatically identify technical issues, prioritizing them by impact. What used to take hours now takes minutes."
           },
           "predictiveAnalytics": {
-            "title": "ðŸ“Š Predictive Analytics",
+            "title": "📊 Predictive Analytics",
             "description": "AI predicts which technical fixes will have the biggest ranking impact, allowing you to focus resources on high-ROI improvements rather than spending time on low-impact optimizations."
           },
           "performanceMonitoring": {
-            "title": "âš¡ Performance Monitoring",
+            "title": "⚡ Performance Monitoring",
             "description": "AI continuously monitors your site's performance metrics and alerts you to anomalies. It can detect ranking drops, traffic changes, and technical issues in real-time."
           }
         },
         "searchIntent": {
           "title": "3. Search Intent Understanding",
           "intentClassification": {
-            "title": "ðŸ§  Intent Classification",
+            "title": "🧠 Intent Classification",
             "description": "AI can now accurately classify search intent (informational, navigational, commercial, transactional) with high precision, helping you create content that matches what users are actually looking for."
           },
           "audienceBehavior": {
-            "title": "ðŸ‘¥ Audience Behavior Analysis",
+            "title": "👥 Audience Behavior Analysis",
             "description": "AI analyzes search patterns to understand user needs, pain points, and desires. This goes beyond simple keyword data to understand the psychology behind searches."
           },
           "contentIntentMatching": {
-            "title": "ðŸŽ¯ Content-Intent Matching",
+            "title": "🎯 Content-Intent Matching",
             "description": "AI ensures your content structure and format match user expectations for a given search intent. Different intents need different content types."
           }
         },
         "personalization": {
           "title": "4. Personalization and Ranking Prediction",
           "localization": {
-            "title": "ðŸŒ Localization Intelligence",
+            "title": "🌍 Localization Intelligence",
             "description": "AI understands local variations in search intent and language, helping international sites rank better in local markets with culturally appropriate content."
           },
           "rankingPrediction": {
-            "title": "ðŸ“ˆ Ranking Prediction",
+            "title": "📈 Ranking Prediction",
             "description": "Advanced AI models can now predict ranking potential for a piece of content before you create it, showing you which topics have the best opportunity for your site."
           },
           "trafficForecasting": {
-            "title": "ðŸ”® Traffic Forecasting",
+            "title": "🔮 Traffic Forecasting",
             "description": "AI forecasts potential traffic gains from ranking improvements, helping you prioritize which keywords to target based on potential ROI."
           }
         },
         "competitiveAnalysis": {
           "title": "5. Competitive Analysis at Scale",
           "reverseEngineering": {
-            "title": "âš”ï¸ Competitor Strategy Reverse-Engineering",
+            "title": "⚔️ Competitor Strategy Reverse-Engineering",
             "description": "AI can analyze thousands of competitor pages simultaneously to identify what's working in your market, from content structure to keyword targeting strategies."
           },
           "gapIdentification": {
-            "title": "ðŸŽ¯ Gap Identification",
+            "title": "🎯 Gap Identification",
             "description": "AI identifies where you're losing to competitors, not just in rankings but in content strategy, link profile, and overall market positioning."
           },
           "opportunityDiscovery": {
-            "title": "ðŸ’¡ Opportunity Discovery",
-            "description": "AI surfaces untapped opportunitiesâ€”keywords competitors aren't targeting, content types that drive better engagement, and untapped market segments."
+            "title": "💡 Opportunity Discovery",
+            "description": "AI surfaces untapped opportunities—keywords competitors aren't targeting, content types that drive better engagement, and untapped market segments."
           }
         }
       },
@@ -8568,31 +8236,31 @@
         "emerging": {
           "title": "Emerging AI Capabilities",
           "nlp": {
-            "title": "ðŸ§  More Sophisticated NLP",
+            "title": "🧠 More Sophisticated NLP",
             "description": "Natural language processing will become even more sophisticated, understanding subtle context, cultural nuance, and implied meaning with higher accuracy."
           },
           "multimodal": {
-            "title": "ðŸ–¼ï¸ Multimodal Understanding",
+            "title": "🖼️ Multimodal Understanding",
             "description": "AI will better understand relationships between text, images, video, and audio, meaning optimization will extend beyond text to visual and multimedia content."
           },
           "voiceSearch": {
-            "title": "ðŸŽ™ï¸ Voice Search Evolution",
+            "title": "🎙️ Voice Search Evolution",
             "description": "Voice search will become more sophisticated, with AI understanding conversational queries, context, and personalization at a deeper level."
           },
           "predictive": {
-            "title": "ðŸ”® Predictive SEO",
-            "description": "AI will move from reactive optimization to predictive optimizationâ€”telling you what to optimize before problems occur or competitors gain advantage."
+            "title": "🔮 Predictive SEO",
+            "description": "AI will move from reactive optimization to predictive optimization—telling you what to optimize before problems occur or competitors gain advantage."
           },
           "personalization": {
-            "title": "ðŸ‘¥ Hyper-Personalization",
-            "description": "Search results will become increasingly personalized to individual users, meaning one \"ranking position\" won't existâ€”results will vary dramatically by user."
+            "title": "👥 Hyper-Personalization",
+            "description": "Search results will become increasingly personalized to individual users, meaning one \"ranking position\" won't exist—results will vary dramatically by user."
           }
         }
       },
       "conclusion": {
-        "title": "Conclusion: AI Isn't the Future of SEOâ€”It's the Present",
+        "title": "Conclusion: AI Isn't the Future of SEO—It's the Present",
         "paragraph1": "AI-powered SEO isn't something to prepare for in a few years. It's happening now. Google's algorithms are powered by AI. Competitive advantage comes from understanding how AI works and using AI tools effectively to optimize faster and smarter than competitors.",
-        "paragraph2": "The question isn't whether AI will change SEOâ€”it already has. The real question is: will you adapt to these changes and leverage AI to your advantage, or will you get left behind by competitors who do?",
+        "paragraph2": "The question isn't whether AI will change SEO—it already has. The real question is: will you adapt to these changes and leverage AI to your advantage, or will you get left behind by competitors who do?",
         "paragraph3": "By embracing AI tools and strategies now, you can stay ahead of the competition and ensure your website ranks well in an increasingly AI-driven search landscape. The time to act is now."
       }
     },
@@ -8622,9 +8290,9 @@
       },
       "importance": {
         "title": "Why Local SEO Matters More Than Ever in 2025",
-        "intro": "Local search isn't just importantâ€”it's critical for any business with a physical location or local service area. With Google processing over 100 billion searches annually and 46% of all searches having local intent, local SEO has become the battleground where local businesses fight for visibility and customers.",
+        "intro": "Local search isn't just important—it's critical for any business with a physical location or local service area. With Google processing over 100 billion searches annually and 46% of all searches having local intent, local SEO has become the battleground where local businesses fight for visibility and customers.",
         "stats": {
-          "label": "ðŸ“Š 2025 Local Search Reality:",
+          "label": "📊 2025 Local Search Reality:",
           "text": "78% of local searches on mobile result in offline purchases within 24 hours. Local businesses that rank well in local search capture 3x more leads than those that don't."
         },
         "localSearchJourney": {
@@ -8661,7 +8329,7 @@
         "optimizationChecklist": {
           "title": "Complete GBP Optimization Checklist",
           "businessInfo": {
-            "title": "ðŸ¢ Business Information",
+            "title": "🏢 Business Information",
             "verifyClaim": "Verify and claim your GBP listing",
             "exactName": "Use your exact business name as registered",
             "completeAddress": "Include complete street address",
@@ -8669,7 +8337,7 @@
             "categories": "Select primary and secondary categories"
           },
           "visualContent": {
-            "title": "ðŸ“¸ Visual Content",
+            "title": "📸 Visual Content",
             "uploadPhotos": "Upload high-quality business photos",
             "businessPhotos": "Include exterior and interior shots",
             "professionalLogo": "Add professional logo",
@@ -8678,7 +8346,7 @@
             "virtualTour": "Consider adding virtual tour if applicable"
           },
           "description": {
-            "title": "ðŸ“ Business Description",
+            "title": "📝 Business Description",
             "writeDescription": "Write compelling business description",
             "includeKeywords": "Include relevant local keywords naturally",
             "highlightUSPs": "Highlight unique selling points",
@@ -8686,7 +8354,7 @@
             "businessHours": "Include business hours and special hours"
           },
           "posts": {
-            "title": "ðŸ“± Posts & Updates",
+            "title": "📱 Posts & Updates",
             "postWeekly": "Post at least once per week",
             "shareOffers": "Share special offers and promotions",
             "includeImages": "Include images with every post",
@@ -8705,19 +8373,19 @@
         "optimization": {
           "title": "Complete GMB Profile Optimization",
           "businessInfo": {
-            "title": "ðŸ¢ Business Information",
+            "title": "🏢 Business Information",
             "description": "Ensure your business name, address, and phone number (NAP) are consistent across all platforms. Use your full legal business name and complete address. Include your primary phone number and consider adding a tracking phone number for call attribution."
           },
           "categories": {
-            "title": "ðŸ“‚ Primary & Secondary Categories",
+            "title": "📂 Primary & Secondary Categories",
             "description": "Choose the most accurate primary category for your business. Add relevant secondary categories to capture more search queries. For example, a restaurant might use 'Italian Restaurant' as primary and 'Pizza Restaurant' as secondary."
           },
           "attributes": {
-            "title": "âœ¨ Business Attributes",
+            "title": "✨ Business Attributes",
             "description": "Complete all relevant attributes that describe your business. This includes hours, payment methods, accessibility features, and services offered. Attributes help Google match your business to relevant searches."
           },
           "photos": {
-            "title": "ðŸ“¸ High-Quality Photos",
+            "title": "📸 High-Quality Photos",
             "description": "Upload at least 10 high-quality photos including exterior shots, interior photos, team photos, products/services, and customer interactions. Use descriptive file names and alt text for images."
           }
         },
@@ -8785,19 +8453,19 @@
         "strategy": {
           "title": "Citation Building Strategy",
           "localDirectories": {
-            "title": "ðŸ“™ Local Business Directories",
+            "title": "📙 Local Business Directories",
             "description": "Claim and optimize listings on major directories like Yelp, Yellow Pages, Angie's List, and local chamber of commerce websites. Focus on the most authoritative directories in your industry and location."
           },
           "industryAssociations": {
-            "title": "ðŸ›ï¸ Industry Associations & Organizations",
+            "title": "🏛️ Industry Associations & Organizations",
             "description": "Join and get listed in relevant industry associations, professional organizations, and trade groups. These carry significant authority and are highly valued by Google."
           },
           "localWebsites": {
-            "title": "ðŸŒ Local Websites & Blogs",
+            "title": "🌐 Local Websites & Blogs",
             "description": "Get featured on local news websites, community blogs, and neighborhood websites. Sponsor local events or partner with local influencers for citation opportunities."
           },
           "dataAggregators": {
-            "title": "ðŸ“Š Data Aggregators",
+            "title": "📊 Data Aggregators",
             "description": "Ensure your business information is accurate on data aggregators like Infogroup, Localeze, and Factual. These feed data to many other platforms."
           }
         },
@@ -8822,19 +8490,19 @@
         "strategy": {
           "title": "Comprehensive Review Management Strategy",
           "encourageReviews": {
-            "title": "ðŸŽ¯ Encourage Reviews Strategically",
-            "description": "Don't just ask for reviewsâ€”make it easy and rewarding. Use email follow-ups, in-person requests, and digital review collection tools. Offer incentives like discounts for leaving reviews."
+            "title": "🎯 Encourage Reviews Strategically",
+            "description": "Don't just ask for reviews—make it easy and rewarding. Use email follow-ups, in-person requests, and digital review collection tools. Offer incentives like discounts for leaving reviews."
           },
           "respondToReviews": {
-            "title": "ðŸ’¬ Respond to All Reviews",
+            "title": "💬 Respond to All Reviews",
             "description": "Respond to every review within 24 hours. Thank positive reviewers and address negative feedback professionally. Show that you care about customer experience."
           },
           "reviewPlatforms": {
-            "title": "ðŸ“± Multi-Platform Review Management",
+            "title": "📱 Multi-Platform Review Management",
             "description": "Monitor and manage reviews across all platforms: Google, Yelp, Facebook, and industry-specific review sites. Use review management tools to streamline the process."
           },
           "fakeReviews": {
-            "title": "ðŸš« Avoid Fake Reviews",
+            "title": "🚫 Avoid Fake Reviews",
             "description": "Never buy fake reviews or engage in review manipulation. Google can detect and penalize fake reviews. Focus on earning genuine reviews through excellent service."
           }
         },
@@ -8860,19 +8528,19 @@
         "contentStrategy": {
           "title": "Local Content Creation Strategy",
           "locationPages": {
-            "title": "ðŸ“ Location-Specific Pages",
+            "title": "📍 Location-Specific Pages",
             "description": "Create dedicated pages for different service areas, neighborhoods, or cities you serve. Include unique content, local keywords, and relevant local information."
           },
           "localBlogContent": {
-            "title": "ðŸ“ Local Blog Content",
+            "title": "📝 Local Blog Content",
             "description": "Create content about local events, community news, seasonal activities, and hyper-local topics. This establishes your business as a local authority and expert."
           },
           "servicePages": {
-            "title": "ðŸ› ï¸ Service-Specific Pages",
+            "title": "🛠️ Service-Specific Pages",
             "description": "Create detailed service pages that address local customer needs and questions. Include local pricing, availability, and testimonials."
           },
           "localSchema": {
-            "title": "ðŸ·ï¸ Local Schema Markup",
+            "title": "🏷️ Local Schema Markup",
             "description": "Implement LocalBusiness schema and other local-specific structured data to help Google understand and display your local information."
           }
         }
@@ -8956,7 +8624,7 @@
       },
       "contentVsSEO": {
         "title": "Content vs SEO: Finding the Perfect Balance in 2025",
-        "intro": "The old debate of 'content vs SEO' is obsolete. In 2025, successful content marketing requires both exceptional content and strategic SEO optimization. The question isn't whether to focus on content or SEOâ€”it's how to create content that serves both users and search engines simultaneously.",
+        "intro": "The old debate of 'content vs SEO' is obsolete. In 2025, successful content marketing requires both exceptional content and strategic SEO optimization. The question isn't whether to focus on content or SEO—it's how to create content that serves both users and search engines simultaneously.",
         "evolution": {
           "title": "How Content SEO Has Evolved",
           "description": "Content SEO has transformed from keyword stuffing and thin content to a sophisticated discipline that combines user experience, semantic understanding, and business objectives. Modern content SEO requires understanding AI algorithms, user psychology, and conversion optimization."
@@ -8978,19 +8646,19 @@
         "types": {
           "title": "The 4 Types of Search Intent",
           "informational": {
-            "title": "ðŸ” Informational Intent",
+            "title": "🔍 Informational Intent",
             "description": "Users want to learn something. They search for 'how to', 'what is', 'guide to', etc. Content should be educational, comprehensive, and helpful."
           },
           "navigational": {
-            "title": "ðŸ§­ Navigational Intent",
+            "title": "🧭 Navigational Intent",
             "description": "Users want to find a specific website or page. They search for brand names or specific URLs. Content should reinforce brand identity and provide clear navigation."
           },
           "commercial": {
-            "title": "ðŸ’° Commercial Intent",
+            "title": "💰 Commercial Intent",
             "description": "Users are researching before buying. They search for 'best [product]', 'reviews', 'vs' comparisons. Content should provide detailed information to help decision-making."
           },
           "transactional": {
-            "title": "ðŸ›’ Transactional Intent",
+            "title": "🛒 Transactional Intent",
             "description": "Users want to buy something now. They search for 'buy [product]', 'order [service]'. Content should include clear calls-to-action and conversion elements."
           }
         },
@@ -9041,7 +8709,7 @@
         },
         "engagement": {
           "title": "Content Engagement Optimization",
-          "readability": "Write for humans firstâ€”use clear language, short paragraphs, and engaging formatting",
+          "readability": "Write for humans first—use clear language, short paragraphs, and engaging formatting",
           "visuals": "Include relevant images, charts, and multimedia to improve engagement",
           "social": "Create shareable content that naturally attracts social signals",
           "callsToAction": "Include clear next steps and calls-to-action throughout the content"
@@ -9050,23 +8718,23 @@
       "creation": {
         "title": "Content Creation Frameworks for 2025",
         "skyscraper": {
-          "title": "ðŸ—ï¸ Skyscraper Technique 2.0",
+          "title": "🏗️ Skyscraper Technique 2.0",
           "description": "Find popular content in your niche, analyze what makes it successful, then create something bigger and better. In 2025, this means adding AI-powered insights, updated data, and multimedia elements that competitors haven't included."
         },
         "pillarCluster": {
-          "title": "ðŸ›ï¸ Pillar-Cluster Content Model",
+          "title": "🏛️ Pillar-Cluster Content Model",
           "description": "Create comprehensive pillar pages that cover topics in-depth, then build cluster content around related subtopics. This creates topical authority and natural linking structures that search engines reward."
         },
         "zeroPosition": {
-          "title": "ðŸŽ¯ Zero-Position Content Strategy",
+          "title": "🎯 Zero-Position Content Strategy",
           "description": "Create content specifically designed to appear in featured snippets and 'Position Zero'. Focus on answering common questions with clear, concise answers that satisfy user intent immediately."
         },
         "aiAugmented": {
-          "title": "ðŸ¤– AI-Augmented Content Creation",
+          "title": "🤖 AI-Augmented Content Creation",
           "description": "Use AI tools to enhance your content creation process, not replace it. AI can help with research, outlining, optimization suggestions, and content expansion, but human expertise ensures quality and authenticity."
         },
         "userGenerated": {
-          "title": "ðŸ‘¥ User-Generated Content Integration",
+          "title": "👥 User-Generated Content Integration",
           "description": "Incorporate user-generated content like reviews, testimonials, and user-submitted content into your content strategy. This builds social proof and provides fresh, authentic content that search engines favor."
         }
       },
@@ -9221,6 +8889,335 @@
         "securityNotice": "🔒 Your email is secure • No spam ever",
         "successMessage": "Content unlocked! Here's your exclusive {type}.",
         "enterEmail": "Enter your email"
+      }
+    }
+  },
+  "help": {
+    "api": {
+      "api-integrations": {
+        "breadcrumb": {
+          "help": "Help Center",
+          "apiIntegrations": "API & Integrations"
+        },
+        "header": {
+          "backToHelp": "Back to Help Center",
+          "title": "API & Integrations",
+          "subtitle": "Connect and automate workflows with API and integrations.",
+          "lastUpdated": "Last updated: March 2025"
+        },
+        "articles": {
+          "authentication": {
+            "title": "API Authentication",
+            "href": "/help/api/authentication",
+            "time": "5",
+            "description": "Learn how to authenticate and authorize API requests securely."
+          },
+          "webhooks": {
+            "title": "Webhooks & Callbacks",
+            "href": "/help/api/webhooks",
+            "time": "7",
+            "description": "Set up real-time notifications and automated workflows."
+          },
+          "apiIntegrations": {
+            "title": "API Integrations Guide",
+            "href": "/help/api/api-integrations",
+            "time": "10",
+            "description": "Complete guide to integrating our API into your applications."
+          }
+        },
+        "sections": {
+          "mainIntro": {
+            "title": "AI SEO Turbo API: Power Your Applications",
+            "description": "Our comprehensive API suite enables developers, agencies, and enterprises to integrate AI-powered SEO capabilities directly into their applications, workflows, and platforms. From automated audits to real-time keyword tracking, our APIs provide the same advanced intelligence that powers our dashboard."
+          },
+          "gettingStarted": {
+            "title": "Getting Started with AI SEO Turbo API",
+            "description": "Integrating with our API is straightforward, whether you're building custom SEO tools, automating client workflows, or creating white-label solutions. Our RESTful API follows industry standards and includes comprehensive documentation and SDKs.",
+            "requirements": {
+              "title": "API Access Requirements",
+              "apiKey": {
+                "title": "API Key",
+                "description": "Secure API key authentication for all requests"
+              },
+              "rateLimits": {
+                "title": "Rate Limits",
+                "description": "Generous rate limits starting at 1,000 requests/hour"
+              },
+              "httpsOnly": {
+                "title": "HTTPS Only",
+                "description": "All API communication secured with TLS 1.3"
+              },
+              "jsonFormat": {
+                "title": "JSON Format",
+                "description": "Consistent JSON request/response format"
+              }
+            }
+          },
+          "coreEndpoints": {
+            "title": "Core API Endpoints",
+            "description": "Our API provides access to all major SEO analysis and tracking features through well-documented endpoints.",
+            "auditApi": {
+              "title": "SEO Audit API",
+              "features": {
+                "siteAudit": {
+                  "title": "Site Audit",
+                  "description": "Technical SEO with 47+ checks"
+                },
+                "pageAnalysis": {
+                  "title": "Page Analysis",
+                  "description": "Individual page evaluation"
+                },
+                "crawlerControl": {
+                  "title": "Crawler Control",
+                  "description": "Customizable parameters"
+                },
+                "reports": {
+                  "title": "Reports",
+                  "description": "Automated PDF & JSON creation"
+                }
+              }
+            },
+            "keywordApi": {
+              "title": "Keyword Research API",
+              "features": {
+                "discovery": {
+                  "title": "Discovery",
+                  "description": "Volume & competition analysis"
+                },
+                "serpAnalysis": {
+                  "title": "SERP Analysis",
+                  "description": "Results examination"
+                },
+                "competitorKeywords": {
+                  "title": "Competitor Keywords",
+                  "description": "Strategy analysis"
+                },
+                "longTail": {
+                  "title": "Long-tail",
+                  "description": "AI-powered suggestions"
+                }
+              }
+            },
+            "backlinkApi": {
+              "title": "Backlink Analysis API",
+              "features": {
+                "discovery": {
+                  "title": "Discovery",
+                  "description": "Profile analysis"
+                },
+                "qualityScoring": {
+                  "title": "Quality Scoring",
+                  "description": "Toxic detection"
+                },
+                "competitorCompare": {
+                  "title": "Competitor Compare",
+                  "description": "Profile comparison"
+                },
+                "monitoring": {
+                  "title": "Monitoring",
+                  "description": "Real-time tracking"
+                }
+              }
+            }
+          },
+          "advancedFeatures": {
+            "title": "Advanced Integration Features",
+            "description": "Enterprise and agency clients can access advanced integration capabilities beyond basic API access.",
+            "webhooks": {
+              "title": "Webhooks",
+              "features": {
+                "realTime": "Real-time notifications",
+                "automatedWorkflows": "Automated workflows",
+                "customCallbacks": "Custom callbacks",
+                "retryLogic": "Automatic retry logic"
+              }
+            },
+            "whiteLabel": {
+              "title": "White-Label",
+              "features": {
+                "customBranding": "Custom branding",
+                "apiReselling": "API reselling",
+                "customDomains": "Custom domains",
+                "prioritySupport": "Priority support"
+              }
+            }
+          },
+          "sdks": {
+            "title": "SDKs and Development Tools",
+            "description": "Speed up integration with official SDKs for popular programming languages.",
+            "available": {
+              "title": "Available SDKs"
+            },
+            "languages": {
+              "js": {
+                "label": "JS",
+                "description": "JavaScript/Node.js with TypeScript support"
+              },
+              "python": {
+                "label": "PY",
+                "description": "Python with async/await support"
+              },
+              "php": {
+                "label": "PHP",
+                "description": "Framework-agnostic with Laravel integration"
+              },
+              "java": {
+                "label": "JAVA",
+                "description": "Enterprise SDK with Spring Boot support"
+              },
+              "go": {
+                "label": "GO",
+                "description": "High-performance for concurrent requests"
+              },
+              "ruby": {
+                "label": "RUBY",
+                "description": "Rails integration with ActiveSupport"
+              }
+            }
+          },
+          "rateLimits": {
+            "title": "API Rate Limits and Quotas",
+            "description": "Flexible rate limiting ensures fair access while allowing high-volume usage for enterprise applications.",
+            "tiers": {
+              "free": {
+                "title": "🆓 Free Tier",
+                "requestsPerHour": "100 req/hour",
+                "requestsPerMonth": "1,000 req/month"
+              },
+              "pro": {
+                "title": "⭐ Pro Tier",
+                "requestsPerHour": "1,000 req/hour",
+                "requestsPerMonth": "50,000 req/month"
+              },
+              "agency": {
+                "title": "🏢 Agency",
+                "requestsPerHour": "5,000 req/hour",
+                "requestsPerMonth": "250,000 req/month"
+              },
+              "enterprise": {
+                "title": "🚀 Enterprise",
+                "customLimits": "Custom limits",
+                "dedicatedInfrastructure": "Dedicated infrastructure"
+              }
+            }
+          },
+          "security": {
+            "title": "Security and Compliance",
+            "description": "Enterprise-grade security ensures your data and API communications are protected at all times.",
+            "features": {
+              "title": "Security Features",
+              "oauth": {
+                "title": "OAuth 2.0",
+                "description": "Secure authentication with refresh tokens"
+              },
+              "keyRotation": {
+                "title": "Key Rotation",
+                "description": "Automatic key rotation for security"
+              },
+              "auditLogging": {
+                "title": "Audit Logging",
+                "description": "Complete API usage logs"
+              },
+              "gdpr": {
+                "title": "GDPR Compliance",
+                "description": "Data processing compliance"
+              },
+              "soc2": {
+                "title": "SOC 2 Type II",
+                "description": "Certified standards"
+              }
+            }
+          },
+          "documentation": {
+            "title": "API Documentation and Support",
+            "description": "Comprehensive documentation and dedicated support ensure successful integrations.",
+            "items": {
+              "explorer": {
+                "title": "Interactive API Explorer",
+                "description": "Test endpoints directly in your browser"
+              },
+              "examples": {
+                "title": "Code Examples",
+                "description": "Sample implementations in multiple languages"
+              },
+              "tutorials": {
+                "title": "Video Tutorials",
+                "description": "Step-by-step integration guides"
+              },
+              "forums": {
+                "title": "Community Forums",
+                "description": "Developer-to-developer support"
+              },
+              "support": {
+                "title": "24/7 Support",
+                "description": "Technical support for integration issues"
+              }
+            }
+          },
+          "useCases": {
+            "title": "Use Cases and Success Stories",
+            "description": "See how organizations are leveraging our API to build innovative SEO solutions.",
+            "items": {
+              "agencies": {
+                "title": "🏢 SEO Agencies",
+                "description": "Automate audits and reporting workflows"
+              },
+              "cms": {
+                "title": "📝 CMS Platforms",
+                "description": "Built-in SEO analysis for CMS"
+              },
+              "ecommerce": {
+                "title": "🛒 E-commerce",
+                "description": "Automated product page optimization"
+              },
+              "automation": {
+                "title": "🤖 Marketing Automation",
+                "description": "SEO-triggered campaign optimization"
+              },
+              "monitoring": {
+                "title": "👁️ Competitor Monitoring",
+                "description": "Automated competitive intelligence"
+              }
+            }
+          },
+          "closing": {
+            "title": "Building the Future of SEO Automation",
+            "description1": "Our API empowers developers and organizations to create innovative SEO solutions that were previously impossible. Whether you're building the next generation of SEO tools or integrating AI-powered analysis into existing platforms, AI SEO Turbo API provides the foundation you need.",
+            "description2": "Ready to start building? Explore our comprehensive documentation and SDKs below, or contact our developer relations team for personalized integration support."
+          },
+          "apiResources": {
+            "title": "API Resources",
+            "items": {
+              "authentication": {
+                "title": "API Authentication",
+                "description": "Learn how to authenticate API requests"
+              },
+              "status": {
+                "title": "API Status",
+                "description": "Check API availability and uptime"
+              }
+            }
+          },
+          "relatedCategories": {
+            "title": "Related Categories",
+            "items": {
+              "troubleshooting": {
+                "title": "Troubleshooting",
+                "description": "Resolve common issues and errors"
+              },
+              "tools": {
+                "title": "SEO Tools & Features",
+                "description": "Master our AI-powered SEO toolkit"
+              }
+            }
+          },
+          "needHelp": {
+            "title": "Need API support?",
+            "description": "Our developer support team can help with integrations, API issues, and custom implementations.",
+            "developerSupport": "Developer Support",
+            "browseAllHelp": "Browse All Help"
+          }
+        }
       }
     }
   }

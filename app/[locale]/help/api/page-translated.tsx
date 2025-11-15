@@ -23,6 +23,13 @@ export default function ApiPage() {
       time: t('articles.webhooks.time'),
       description: t('articles.webhooks.description'),
       icon: Webhook
+    },
+    {
+      title: t('articles.apiIntegrations.title'),
+      href: t('articles.apiIntegrations.href'),
+      time: t('articles.apiIntegrations.time'),
+      description: t('articles.apiIntegrations.description'),
+      icon: BookOpen
     }
   ]
 

@@ -1,4 +1,5 @@
 import { generateSEOMeta } from '@/lib/seo'
+import { getTranslations } from 'next-intl/server'
 import { setRequestLocale } from 'next-intl/server'
 import AuditIssuesContent from './AuditIssuesContent'
 
@@ -9,9 +10,11 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
 
+  const t = await getTranslations({ locale, namespace: 'audit-issues' })
+
   return generateSEOMeta({
-    title: 'Audit Issues Troubleshooting - AISEOTurbo Help',
-    description: 'Complete troubleshooting guide for fixing SEO audit issues in AISEOTurbo. Solutions for stuck audits, timeout errors, and technical problems.',
+    title: t('meta.title'),
+    description: t('meta.description'),
     path: '/help/troubleshooting/audit-issues',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })
