@@ -417,20 +417,636 @@
     "bestPractices": "Praktik Terbaik",
     "first-audit": {
       "meta": {
-        "title": "Cara Membuat Audit SEO Pertama Anda - Panduan Langkah-demi-Langkah | AI SEO Turbo",
-        "description": "Pelajari cara melakukan audit SEO komprehensif pertama Anda menggunakan alat bertenaga AI AISEOTurbo. Panduan lengkap langkah-demi-langkah dari memasukkan URL Anda hingga meninjau hasil."
+        "title": "Cara Membuat Audit SEO Pertama Anda - Panduan Langkah demi Langkah | AI SEO Turbo",
+        "description": "Pelajari cara melakukan audit SEO komprehensif pertama Anda menggunakan alat berbasis AI dari AISEOTurbo. Panduan lengkap langkah demi langkah mulai dari memasukkan URL hingga meninjau hasil."
+      },
+      "backToCategory": "Kembali ke Memulai",
+      "backToHelp": "Kembali ke Pusat Bantuan",
+      "breadcrumb": {
+        "home": "Beranda",
+        "help": "Bantuan",
+        "gettingStarted": "Memulai",
+        "firstAudit": "Cara membuat audit SEO pertama Anda"
+      },
+      "header": {
+        "category": "Memulai",
+        "title": "Cara membuat audit SEO pertama Anda",
+        "readTime": "Baca 5 menit",
+        "lastUpdated": "Terakhir diperbarui: Maret 2025"
+      },
+      "intro": {
+        "title": "Apa yang akan Anda pelajari",
+        "description": "Dalam panduan ini, Anda akan belajar cara melakukan audit SEO komprehensif pertama menggunakan alat berbasis AI dari AISEOTurbo. Di akhir panduan, Anda akan sepenuhnya memahami kesehatan SEO situs Anda dan mendapatkan rekomendasi yang dapat ditindaklanjuti."
+      },
+      "stepByStepTitle": "Panduan langkah demi langkah",
+      "steps": {
+        "1": {
+          "title": "Masukkan URL situs web Anda",
+          "description": "Arahkan ke alat SEO Audit dan masukkan URL situs web Anda di bidang input. Pastikan untuk memasukkan URL lengkap termasuk 'https://' atau 'http://'.",
+          "example": "https://example.com"
+        },
+        "2": {
+          "title": "Konfigurasi pengaturan audit",
+          "description": "Pilih preferensi audit Anda:",
+          "options": [
+            "Analisis Seluler: Aktifkan untuk wawasan pengindeksan mobile-first",
+            "Analisis Pesaing: Tambahkan hingga 3 URL pesaing",
+            "Crawl Mendalam: Analisis hingga 100 halaman (fitur Pro)"
+          ]
+        },
+        "3": {
+          "title": "Mulai audit",
+          "description": "Klik tombol \"Mulai Audit\" dan tunggu AI kami menganalisis situs web Anda. Biasanya ini memakan waktu 2-5 menit tergantung ukuran situs Anda.",
+          "status": "Audit sedang berlangsung... Menganalisis 47 faktor SEO"
+        },
+        "4": {
+          "title": "Tinjau hasil Anda",
+          "description": "Setelah selesai, Anda akan melihat skor SEO dan analisis detail Anda. Hasil diorganisasi ke dalam kategori:",
+          "categories": {
+            "passed": {
+              "title": "✓ Lulus (Hijau)",
+              "description": "Item yang diatasi situs Anda dengan baik"
+            },
+            "warnings": {
+              "title": "⚠ Peringatan (Kuning)",
+              "description": "Area yang perlu perhatian"
+            },
+            "errors": {
+              "title": "✗ Kesalahan (Merah)",
+              "description": "Masalah kritis yang harus segera diperbaiki"
+            },
+            "info": {
+              "title": "ℹ Info (Biru)",
+              "description": "Wawasan dan tips tambahan"
+            }
+          }
+        }
+      },
+      "proTips": {
+        "title": "Tips Pro",
+        "tips": [
+          "Lakukan audit secara rutin (mingguan untuk situs aktif, bulanan untuk situs stabil)",
+          "Fokus memperbaiki kesalahan kritis terlebih dahulu, lalu peringatan",
+          "Gunakan analisis pesaing untuk menemukan peluang",
+          "Ekspor laporan untuk melacak kemajuan Anda dari waktu ke waktu",
+          "Siapkan pemantauan otomatis untuk wawasan yang berkelanjutan"
+        ]
+      },
+      "nextSteps": {
+        "title": "Langkah berikutnya",
+        "articles": [
+          {
+            "title": "Menyiapkan dashboard Anda",
+            "href": "/help/getting-started/dashboard-setup",
+            "description": "Pelajari cara menyesuaikan dashboard Anda untuk produktivitas maksimal"
+          },
+          {
+            "title": "Memahami skor SEO",
+            "href": "/help/getting-started/seo-scores",
+            "description": "Pelajari lebih dalam tentang cara kami menghitung dan arti setiap skor"
+          }
+        ]
       }
     },
     "dashboard-setup": {
       "meta": {
         "title": "Panduan Setup Dashboard - Sesuaikan Ruang Kerja Anda | AI SEO Turbo",
         "description": "Pelajari cara menyesuaikan dashboard AISEOTurbo Anda untuk produktivitas maksimal. Atur notifikasi, atur ruang kerja Anda, dan konfigurasikan preferensi tampilan."
+      },
+      "backToCategory": "Kembali ke Memulai",
+      "backToHelp": "Kembali ke Pusat Bantuan",
+      "breadcrumb": {
+        "home": "Beranda",
+        "help": "Bantuan",
+        "gettingStarted": "Memulai",
+        "dashboardSetup": "Panduan Setup Dashboard"
+      },
+      "header": {
+        "category": "Memulai",
+        "title": "Panduan Setup Dashboard – Sesuaikan Ruang Kerja Anda",
+        "readTime": "Waktu baca: 3 menit",
+        "lastUpdated": "Terakhir diperbarui: Maret 2025"
+      },
+      "intro": {
+        "title": "Apa yang akan Anda pelajari",
+        "description": "Sesuaikan dashboard AISEOTurbo Anda untuk produktivitas maksimal. Pelajari cara mengatur ruang kerja Anda, mengatur notifikasi, dan mengkonfigurasi preferensi tampilan sesuai dengan alur kerja Anda."
+      },
+      "steps": {
+        "1": {
+          "title": "Akses pengaturan dashboard",
+          "description": "Setelah masuk, buka dashboard Anda dan cari ikon roda gigi di kanan atas. Ini akan membuka panel personalisasi di mana Anda dapat memodifikasi setiap aspek ruang kerja.",
+          "tip": {
+            "title": "Tips akses cepat",
+            "description": "Gunakan pintasan keyboard Ctrl + , untuk membuka pengaturan dengan cepat"
+          }
+        },
+        "2": {
+          "title": "Pilih preferensi layout",
+          "description": "Pilih layout yang paling sesuai dengan alur kerja Anda. Setiap opsi dirancang untuk kebutuhan yang berbeda:",
+          "layouts": [
+            {
+              "name": "Tampilan grid",
+              "description": "Ideal untuk gambaran visual dari beberapa proyek"
+            },
+            {
+              "name": "Tampilan daftar",
+              "description": "Ideal untuk informasi detail tentang proyek"
+            },
+            {
+              "name": "Tampilan kartu",
+              "description": "Keseimbangan sempurna antara visual dan informasi detail"
+            }
+          ]
+        },
+        "3": {
+          "title": "Konfigurasi preferensi notifikasi",
+          "description": "Tetap update dengan peristiwa penting tanpa kewalahan. Sesuaikan pengaturan notifikasi:",
+          "notifications": [
+            {
+              "name": "Penyelesaian audit",
+              "description": "Terima notifikasi ketika analisis SEO selesai"
+            },
+            {
+              "name": "Masalah kritis",
+              "description": "Peringatan segera untuk masalah SEO mendesak"
+            },
+            {
+              "name": "Laporan mingguan",
+              "description": "Ringkasan performa SEO situs Anda"
+            }
+          ]
+        },
+        "4": {
+          "title": "Atur ruang kerja Anda",
+          "description": "Buat alur kerja yang sesuai dengan kebutuhan Anda dengan mengatur proyek dan mengatur filter kustom:",
+          "features": [
+            "Grup proyek: atur situs berdasarkan klien, prioritas, atau kategori",
+            "Tag kustom: beri label proyek untuk memudahkan filter dan pencarian",
+            "Aksi cepat: atur pintasan untuk aktivitas yang sering dilakukan",
+            "Tampilan preset: simpan filter dan opsi penyortiran favorit Anda"
+          ]
+        }
+      },
+      "advancedTips": {
+        "title": "Tips personalisasi lanjutan",
+        "tips": [
+          "Pintasan keyboard: aktifkan pintasan lanjutan untuk pengguna ahli di Pengaturan → Aksesibilitas",
+          "Integrasi API: hubungkan dashboard ke alat eksternal melalui REST API kami",
+          "Kolaborasi tim: bagikan layout dashboard kustom dengan anggota tim",
+          "Mode gelap/terang: ubah tema berdasarkan waktu hari atau preferensi",
+          "Ekspor pengaturan: backup konfigurasi kustom untuk migrasi yang mudah"
+        ]
+      },
+      "faq": {
+        "title": "Pertanyaan yang sering diajukan",
+        "questions": [
+          {
+            "question": "Bisakah saya mengembalikan dashboard ke pengaturan default?",
+            "answer": "Ya, buka Pengaturan → Reset → Kembalikan Default. Ini tidak akan mempengaruhi data audit Anda."
+          },
+          {
+            "question": "Apakah pengaturan disinkronkan antar perangkat?",
+            "answer": "Ya, preferensi Anda disimpan di akun dan disinkronkan secara otomatis."
+          },
+          {
+            "question": "Bisakah saya membuat lebih dari satu layout dashboard?",
+            "answer": "Saat ini Anda dapat menyimpan satu layout kustom per akun, tetapi kami sedang mengerjakan dukungan untuk beberapa layout."
+          }
+        ]
+      },
+      "nextSteps": {
+        "title": "Langkah selanjutnya",
+        "articles": [
+          {
+            "title": "Memahami Skor SEO",
+            "href": "/help/getting-started/seo-scores",
+            "description": "Pelajari apa arti skor SEO Anda dan bagaimana meningkatkannya"
+          },
+          {
+            "title": "Melakukan Audit Pertama Anda",
+            "href": "/help/getting-started/first-audit",
+            "description": "Panduan langkah demi langkah untuk memulai dan memahami audit SEO pertama Anda"
+          }
+        ]
+      }
+    },
+    "quick-start": {
+      "meta": {
+        "title": "Panduan Cepat - Setup AISEOTurbo dalam 10 Menit | AI SEO Turbo",
+        "description": "Mulai gunakan alat SEO bertenaga AI dari AISEOTurbo hanya dalam 10 menit. Panduan lengkap mulai dari pembuatan akun hingga hasil audit pertama Anda."
+      },
+      "backToCategory": "Kembali ke Memulai",
+      "backToHelp": "Kembali ke Pusat Bantuan",
+      "breadcrumb": {
+        "home": "Beranda",
+        "help": "Bantuan",
+        "gettingStarted": "Memulai",
+        "quickStart": "Panduan cepat"
+      },
+      "header": {
+        "category": "Memulai",
+        "title": "Panduan Cepat – Mulai hanya dalam 10 menit",
+        "readTime": "10 menit baca",
+        "lastUpdated": "Terakhir diperbarui: Maret 2025"
+      },
+      "intro": {
+        "title": "Mulai dalam 10 menit",
+        "description": "Selamat datang di AISEOTurbo! Panduan cepat ini akan membantu Anda menjalankan audit SEO pertama yang didukung AI hanya dalam 10 menit. Ikuti langkah sederhana ini untuk membuka wawasan tentang performa pencarian situs Anda.",
+        "highlights": [
+          "4 langkah mudah",
+          "Hasil instan",
+          "Tidak butuh pengetahuan teknis"
+        ]
+      },
+      "progressTracker": {
+        "title": "Perjalanan Anda menuju sukses SEO",
+        "steps": [
+          {
+            "number": "1",
+            "title": "Daftar",
+            "time": "2 menit"
+          },
+          {
+            "number": "2",
+            "title": "Tambahkan Website",
+            "time": "1 menit"
+          },
+          {
+            "number": "3",
+            "title": "Jalankan Audit",
+            "time": "3 menit"
+          },
+          {
+            "number": "4",
+            "title": "Dapatkan Hasil",
+            "time": "4 menit"
+          }
+        ]
+      },
+      "steps": {
+        "1": {
+          "title": "Buat akun Anda (2 menit)",
+          "description": "Mulai perjalanan SEO Anda dengan membuat akun AISEOTurbo gratis. Anda akan langsung mendapatkan akses ke alat audit kami yang bertenaga.",
+          "requirements": {
+            "title": "Yang Anda butuhkan:",
+            "items": [
+              "Alamat email yang valid",
+              "URL situs web Anda",
+              "2 menit waktu Anda"
+            ]
+          },
+          "tip": {
+            "title": "💡 Tip pro",
+            "description": "Gunakan email bisnis Anda agar lebih terorganisir dan menerima notifikasi audit penting."
+          }
+        },
+        "2": {
+          "title": "Tambahkan website Anda (1 menit)",
+          "description": "Setelah login, tambahkan situs Anda untuk mulai memantau kesehatan SEO-nya. AI kami langsung menganalisis struktur situs Anda.",
+          "details": {
+            "title": "Masukkan detail website Anda:",
+            "items": [
+              {
+                "icon": "Globe",
+                "label": "URL Website:",
+                "value": "https://yoursite.com"
+              },
+              {
+                "icon": "Settings",
+                "label": "Pilih frekuensi audit (opsional)"
+              },
+              {
+                "icon": "BarChart3",
+                "label": "Atur pelacakan pesaing (opsional)"
+              }
+            ]
+          },
+          "warning": {
+            "title": "⚠️ Penting",
+            "description": "Pastikan website Anda dapat diakses publik. Situs yang privat atau dilindungi password memerlukan konfigurasi khusus."
+          }
+        },
+        "3": {
+          "title": "Jalankan audit pertama Anda (3 menit)",
+          "description": "Luncurkan audit SEO komprehensif hanya dengan satu klik. AI kami akan menganalisis lebih dari 200 faktor SEO dan memberi insight yang dapat ditindaklanjuti.",
+          "analysis": {
+            "title": "Yang terjadi selama audit:",
+            "categories": [
+              [
+                "Analisis struktur halaman",
+                "Pemeriksaan optimisasi konten",
+                "Review SEO teknis"
+              ],
+              [
+                "Metode performa",
+                "Optimisasi seluler",
+                "Penilaian keamanan"
+              ]
+            ]
+          },
+          "feature": {
+            "title": "Progres waktu nyata",
+            "description": "Saksikan proses AI kami menganalisis situs Anda secara real-time. Anda akan melihat indikator progres pada setiap fase analisis."
+          }
+        },
+        "4": {
+          "title": "Tinjau hasil Anda (4 menit)",
+          "description": "Selamat! Audit pertama Anda selesai. Sekarang mari pahami makna hasil dan cara prioritas peningkatan.",
+          "dashboard": {
+            "title": "Dashboard audit Anda berisi:",
+            "items": [
+              {
+                "icon": "BarChart3",
+                "title": "Skor SEO keseluruhan",
+                "description": "Rating kesehatan situs Anda (0-100)"
+              },
+              {
+                "icon": "AlertTriangle",
+                "title": "Masalah Kritis",
+                "description": "Masalah mendesak yang harus segera diperbaiki"
+              },
+              {
+                "icon": "CheckCircle",
+                "title": "Kemenangan Optimasi",
+                "description": "Perbaikan cepat yang bisa Anda lakukan"
+              },
+              {
+                "icon": "Target",
+                "title": "Rencana aksi",
+                "description": "Daftar prioritas peningkatan"
+              }
+            ]
+          },
+          "focus": {
+            "title": "🎯 Fokus pada dampak",
+            "description": "Mulailah dengan perbaikan berdampak besar tapi mudah. Saran AI kami diperingkat menurut potensi manfaat SEO dan tingkat kesulitan."
+          }
+        }
+      },
+      "congratulations": {
+        "title": "🎉 Selamat! Anda sudah siap!",
+        "description": "Anda telah berhasil melakukan audit SEO pertama. Berikut langkah selanjutnya untuk memaksimalkan hasil Anda:",
+        "nextActions": [
+          {
+            "icon": "CheckCircle",
+            "title": "Terapkan Perbaikan Cepat",
+            "description": "Mulai dari peningkatan termudah untuk hasil SEO langsung"
+          },
+          {
+            "icon": "BarChart3",
+            "title": "Pantau Perkembangan",
+            "description": "Jadwalkan audit rutin untuk melacak kemajuan SEO"
+          },
+          {
+            "icon": "Rocket",
+            "title": "Jelajahi Fitur Lanjutan",
+            "description": "Temukan analisis pesaing, pelacakan kata kunci, dan lainnya"
+          }
+        ]
+      },
+      "faq": {
+        "title": "Pertanyaan umum pertama",
+        "questions": [
+          {
+            "question": "Seberapa sering saya harus melakukan audit?",
+            "answer": "Untuk situs aktif: mingguan. Untuk situs stabil: bulanan. Setelah perubahan besar: segera."
+          },
+          {
+            "question": "Bisakah saya mengaudit beberapa situs?",
+            "answer": "Bisa! Tambahkan sebanyak situs yang diizinkan paket Anda. Masing-masing memiliki dashboard dan pelacak sendiri."
+          },
+          {
+            "question": "Bagaimana jika skor saya rendah?",
+            "answer": "Jangan khawatir! Ikuti rekomendasi kami langkah demi langkah. Sebagian besar pengguna naik 20+ poin dalam 30 hari."
+          }
+        ]
+      },
+      "nextSteps": {
+        "title": "Langkah selanjutnya yang direkomendasikan",
+        "articles": [
+          {
+            "title": "Kustomisasi dashboard Anda",
+            "href": "/help/getting-started/dashboard-setup",
+            "description": "Personalisasi ruang kerja Anda agar maksimal produktivitas dan efisiensi"
+          },
+          {
+            "title": "Memahami skor SEO",
+            "href": "/help/getting-started/seo-scores",
+            "description": "Pelajari arti skor SEO Anda dan bagaimana cara meningkatkannya"
+          }
+        ]
       }
     },
     "seo-scores": {
       "meta": {
         "title": "Memahami Skor SEO - Panduan Lengkap | AI SEO Turbo",
-        "description": "Pelajari cara menafsirkan skor audit SEO Anda. Pahami apa arti setiap skor, bagaimana mereka dihitung, dan bagaimana meningkatkan performa SEO situs web Anda."
+        "description": "Pelajari cara menafsirkan skor audit SEO Anda. Pahami arti setiap skor, bagaimana skor dihitung, dan cara meningkatkan performa SEO situs web Anda."
+      },
+      "backToHelp": "Kembali ke Pusat Bantuan",
+      "breadcrumb": {
+        "home": "Beranda",
+        "help": "Bantuan",
+        "gettingStarted": "Memulai",
+        "seoScores": "Memahami skor SEO"
+      },
+      "header": {
+        "category": "Memulai",
+        "title": "Memahami skor SEO",
+        "readTime": "Waktu baca: 7 menit",
+        "lastUpdated": "Terakhir diperbarui: Maret 2025"
+      },
+      "introduction": {
+        "title": "Memahami Skor Anda",
+        "subtitle": "Apa yang akan Anda pelajari",
+        "description": "Memecahkan kode skor SEO Anda dan pahami apa arti setiap metrik untuk performa pencarian situs web Anda. Pelajari cara menafsirkan hasil dan memprioritaskan peningkatan untuk dampak maksimal."
+      },
+      "overallScore": {
+        "title": "Skor SEO keseluruhan Anda",
+        "subtitle": "Skor SEO Keseluruhan",
+        "description": "Penilaian kesehatan SEO komprehensif situs web Anda",
+        "ranges": {
+          "excellent": {
+            "score": "90+",
+            "label": "Sangat Baik",
+            "description": "10% situs teratas"
+          },
+          "good": {
+            "score": "70-89",
+            "label": "Baik",
+            "description": "Di atas rata-rata"
+          },
+          "needsWork": {
+            "score": "50-69",
+            "label": "Perlu Perbaikan",
+            "description": "Perlu peningkatan"
+          },
+          "critical": {
+            "score": "Di bawah 50",
+            "label": "Kritis",
+            "description": "Perlu tindakan segera"
+          }
+        }
+      },
+      "scoreBreakdown": {
+        "title": "Rincian skor per kategori",
+        "categories": {
+          "technical": {
+            "title": "SEO Teknis",
+            "description": "Struktur situs, kecepatan, dan kemampuan crawl",
+            "score": "92",
+            "rating": "Sangat Baik",
+            "metrics": {
+              "pageLoadSpeed": {
+                "label": "Kecepatan Muat Halaman",
+                "score": "95"
+              },
+              "mobileFriendliness": {
+                "label": "Kesesuaian untuk Seluler",
+                "score": "100"
+              },
+              "siteSecurity": {
+                "label": "Keamanan Situs (HTTPS)",
+                "score": "100"
+              },
+              "crawlability": {
+                "label": "Kemampuan Crawl",
+                "score": "75"
+              }
+            }
+          },
+          "content": {
+            "title": "Kualitas Konten",
+            "description": "Optimasi dan relevansi konten",
+            "score": "78",
+            "rating": "Baik",
+            "metrics": {
+              "keywordOptimization": {
+                "label": "Optimasi Kata Kunci",
+                "score": "85"
+              },
+              "contentLength": {
+                "label": "Panjang Konten",
+                "score": "65"
+              },
+              "readabilityScore": {
+                "label": "Skor Keterbacaan",
+                "score": "82"
+              },
+              "contentFreshness": {
+                "label": "Kesegaran Konten",
+                "score": "75"
+              }
+            }
+          },
+          "userExperience": {
+            "title": "Pengalaman Pengguna",
+            "description": "Core Web Vitals dan kegunaan",
+            "score": "88",
+            "rating": "Baik",
+            "metrics": {
+              "lcp": {
+                "label": "Largest Contentful Paint (LCP)",
+                "score": "90"
+              },
+              "fid": {
+                "label": "First Input Delay (FID)",
+                "score": "95"
+              },
+              "cls": {
+                "label": "Cumulative Layout Shift (CLS)",
+                "score": "80"
+              }
+            }
+          }
+        }
+      },
+      "calculationMethodology": {
+        "title": "Bagaimana kami menghitung skor Anda",
+        "subtitle": "Metodologi penilaian kami",
+        "description": "AISEOTurbo menganalisis lebih dari 200 faktor SEO menggunakan algoritma AI canggih. Sistem skor kami berdasarkan pada:",
+        "factors": [
+          {
+            "title": "Pedoman Google",
+            "description": "Faktor peringkat resmi dan praktik terbaik"
+          },
+          {
+            "title": "Standar Industri",
+            "description": "Tolok ukur dari jutaan situs web"
+          },
+          {
+            "title": "Data Kinerja Nyata",
+            "description": "Metrik pengalaman pengguna sebenarnya"
+          },
+          {
+            "title": "Analisis AI",
+            "description": "Wawasan berbasis pembelajaran mesin"
+          }
+        ]
+      },
+      "improvingScores": {
+        "title": "Cara meningkatkan skor Anda",
+        "quickWins": {
+          "title": "Peningkatan cepat (1-2 minggu)",
+          "items": [
+            "Perbaiki meta deskripsi dan tag judul yang hilang",
+            "Optimalkan teks alt gambar dan ukuran file",
+            "Tingkatkan kecepatan muat halaman dengan kompresi",
+            "Tambahkan markup data terstruktur",
+            "Perbaiki tautan internal yang rusak"
+          ]
+        },
+        "mediumTerm": {
+          "title": "Perbaikan jangka menengah (1-3 bulan)",
+          "items": [
+            "Buat konten asli dan berkualitas tinggi",
+            "Bangun backlink otoritatif",
+            "Optimalkan untuk Core Web Vitals",
+            "Tingkatkan arsitektur dan navigasi situs",
+            "Tingkatkan pengalaman pengguna seluler"
+          ]
+        },
+        "longTerm": {
+          "title": "Strategi jangka panjang (3+ bulan)",
+          "items": [
+            "Kembangkan strategi konten yang komprehensif",
+            "Bangun otoritas domain melalui PR dan outreach",
+            "Terapkan optimasi teknis lanjutan",
+            "Pantau dan sesuaikan dengan perubahan algoritma",
+            "Bangun kepemimpinan pemikiran di industri Anda"
+          ]
+        }
+      },
+      "troubleshooting": {
+        "title": "Fluktuasi skor",
+        "sections": [
+          {
+            "title": "Mengapa skor berubah?",
+            "description": "Skor dapat berubah akibat pembaruan situs web, perubahan algoritma, atau peningkatan dari kompetitor."
+          },
+          {
+            "title": "Kapan harus khawatir?",
+            "description": "Penurunan besar (>10 poin) perlu diselidiki. Fluktuasi kecil (±3 poin) adalah hal yang normal."
+          },
+          {
+            "title": "Fokus pada tren",
+            "description": "Lihat tren skor dalam minggu/bulan, bukan perubahan harian, untuk mendapatkan wawasan yang signifikan."
+          }
+        ]
+      },
+      "nextSteps": {
+        "title": "Langkah selanjutnya",
+        "links": [
+          {
+            "title": "Panduan audit SEO lengkap",
+            "description": "Telusuri proses audit kami secara menyeluruh dan bagaimana cara menafsirkan hasil secara detail",
+            "href": "/help/features/seo-audit"
+          },
+          {
+            "title": "Panduan mulai cepat",
+            "description": "Mulai dengan AISEOTurbo dalam 10 menit menggunakan panduan langkah demi langkah kami",
+            "href": "/help/getting-started/quick-start"
+          }
+        ]
       }
     },
     "categories": {

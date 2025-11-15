@@ -6,8 +6,11 @@ import { StructuredData, generateHowToSchema } from '@/components/seo/Structured
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, Lightbulb, AlertTriangle, Target } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function FirstAuditContent() {
+  const t = useTranslations('help.first-audit')
+
   const howToSchema = generateHowToSchema({
     name: "How to Create Your First SEO Audit",
     description: "Learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. Complete step-by-step guide from entering your URL to reviewing results.",
@@ -44,10 +47,12 @@ export default function FirstAuditContent() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               items={[
-                { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
-                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/getting-started' },
-                { name: 'How to create your first SEO audit', url: 'https://www.aiseoturbo.com/help/getting-started/first-audit' }
+                { name: t('breadcrumb.home'), url: 'https://www.aiseoturbo.com' },
+                { name: t('breadcrumb.help'), url: 'https://www.aiseoturbo.com/help' },
+                { name: t('breadcrumb.gettingStarted'), url: 'https://www.aiseoturbo.com/help/getting-started' },
+                { name: t('breadcrumb.firstAudit'), url: 'https://www.aiseoturbo.com/help/getting-started/first-audit' }
               ]}
+              includeHome={false}
               darkMode={true}
             />
           </div>
@@ -66,7 +71,7 @@ export default function FirstAuditContent() {
                 className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-6 group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                Back to Help Center
+                {t('backToHelp')}
               </Link>
 
               <div className="flex items-center gap-4 mb-6">
@@ -74,9 +79,9 @@ export default function FirstAuditContent() {
                   <Lightbulb className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <span className="text-blue-400 text-sm font-medium">Getting Started</span>
+                  <span className="text-blue-400 text-sm font-medium">{t('header.category')}</span>
                   <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    How to create your first SEO audit
+                    {t('header.title')}
                   </h1>
                 </div>
               </div>
@@ -84,11 +89,11 @@ export default function FirstAuditContent() {
               <div className="flex items-center gap-6 text-gray-400 text-sm mb-8">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  <span>5 min read</span>
+                  <span>{t('header.readTime')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4" />
-                  <span>Last updated: March 2025</span>
+                  <span>{t('header.lastUpdated')}</span>
                 </div>
               </div>
             </motion.div>
@@ -110,17 +115,16 @@ export default function FirstAuditContent() {
                 <div className="flex items-start gap-4">
                   <Target className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h2 className="text-white text-lg font-semibold mb-2">What you'll learn</h2>
+                    <h2 className="text-white text-lg font-semibold mb-2">{t('intro.title')}</h2>
                     <p className="text-gray-300 mb-0">
-                      In this guide, you'll learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools.
-                      By the end, you'll have a complete understanding of your website's SEO health and actionable recommendations.
+                      {t('intro.description')}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Step-by-step Guide */}
-              <h2 className="text-2xl font-bold text-white mb-6">Step-by-step guide</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('stepByStepTitle')}</h2>
 
               <div className="space-y-8">
 
@@ -131,12 +135,12 @@ export default function FirstAuditContent() {
                       1
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Enter your website URL</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.1.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Navigate to the SEO Audit tool and enter your website's URL in the input field. Make sure to include the full URL including 'https://' or 'http://'.
+                        {t('steps.1.description')}
                       </p>
                       <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                        <code className="text-green-400">https://example.com</code>
+                        <code className="text-green-400">{t('steps.1.example')}</code>
                       </div>
                     </div>
                   </div>
@@ -149,23 +153,17 @@ export default function FirstAuditContent() {
                       2
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Configure audit settings</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.2.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Choose your audit preferences:
+                        {t('steps.2.description')}
                       </p>
                       <ul className="space-y-2 text-gray-300">
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" />
-                          <span><strong>Mobile Analysis:</strong> Enable for mobile-first indexing insights</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" />
-                          <span><strong>Competitor Analysis:</strong> Add up to 3 competitor URLs</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" />
-                          <span><strong>Deep Crawl:</strong> Analyze up to 100 pages (Pro feature)</span>
-                        </li>
+                        {t.raw('steps.2.options').map((option: string, index: number) => (
+                          <li key={index} className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-green-400" />
+                            <span>{option}</span>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -178,14 +176,14 @@ export default function FirstAuditContent() {
                       3
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Start the audit</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.3.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Click the "Start Audit" button and wait for our AI to analyze your website. This typically takes 2-5 minutes depending on your site's size.
+                        {t('steps.3.description')}
                       </p>
                       <div className="bg-blue-900/30 border border-blue-600/30 rounded-lg p-4">
                         <div className="flex items-center gap-3">
                           <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse"></div>
-                          <span className="text-blue-300">Audit in progress... Analyzing 47 SEO factors</span>
+                          <span className="text-blue-300">{t('steps.3.status')}</span>
                         </div>
                       </div>
                     </div>
@@ -199,26 +197,26 @@ export default function FirstAuditContent() {
                       4
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Review your results</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.4.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Once complete, you'll see your SEO score and detailed analysis. The results are organized into categories:
+                        {t('steps.4.description')}
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-green-900/30 border border-green-600/30 rounded-lg p-3">
-                          <h4 className="text-green-400 font-medium">✓ Passed (Green)</h4>
-                          <p className="text-gray-300 text-sm">Items your site is handling well</p>
+                          <h4 className="text-green-400 font-medium">{t('steps.4.categories.passed.title')}</h4>
+                          <p className="text-gray-300 text-sm">{t('steps.4.categories.passed.description')}</p>
                         </div>
                         <div className="bg-yellow-900/30 border border-yellow-600/30 rounded-lg p-3">
-                          <h4 className="text-yellow-400 font-medium">⚠ Warnings (Yellow)</h4>
-                          <p className="text-gray-300 text-sm">Areas that need attention</p>
+                          <h4 className="text-yellow-400 font-medium">{t('steps.4.categories.warnings.title')}</h4>
+                          <p className="text-gray-300 text-sm">{t('steps.4.categories.warnings.description')}</p>
                         </div>
                         <div className="bg-red-900/30 border border-red-600/30 rounded-lg p-3">
-                          <h4 className="text-red-400 font-medium">✗ Errors (Red)</h4>
-                          <p className="text-gray-300 text-sm">Critical issues to fix immediately</p>
+                          <h4 className="text-red-400 font-medium">{t('steps.4.categories.errors.title')}</h4>
+                          <p className="text-gray-300 text-sm">{t('steps.4.categories.errors.description')}</p>
                         </div>
                         <div className="bg-blue-900/30 border border-blue-600/30 rounded-lg p-3">
-                          <h4 className="text-blue-400 font-medium">ℹ Info (Blue)</h4>
-                          <p className="text-gray-300 text-sm">Additional insights and tips</p>
+                          <h4 className="text-blue-400 font-medium">{t('steps.4.categories.info.title')}</h4>
+                          <p className="text-gray-300 text-sm">{t('steps.4.categories.info.description')}</p>
                         </div>
                       </div>
                     </div>
@@ -231,44 +229,33 @@ export default function FirstAuditContent() {
                 <div className="flex items-start gap-4">
                   <AlertTriangle className="w-6 h-6 text-yellow-400 mt-1" />
                   <div>
-                    <h3 className="text-yellow-400 text-lg font-semibold mb-2">Pro Tips</h3>
+                    <h3 className="text-yellow-400 text-lg font-semibold mb-2">{t('proTips.title')}</h3>
                     <ul className="space-y-2 text-gray-300">
-                      <li>• Run audits regularly (weekly for active sites, monthly for stable ones)</li>
-                      <li>• Focus on fixing critical errors first, then warnings</li>
-                      <li>• Use the competitor analysis to identify opportunities</li>
-                      <li>• Export reports to track your progress over time</li>
-                      <li>• Set up automated monitoring for continuous insights</li>
+                      {t.raw('proTips.tips').map((tip: string, index: number) => (
+                        <li key={index}>• {tip}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
               </div>
 
               {/* Next Steps */}
-              <h3 className="text-2xl font-bold text-white mt-12 mb-6">Next steps</h3>
+              <h3 className="text-2xl font-bold text-white mt-12 mb-6">{t('nextSteps.title')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link
-                  href="/help/getting-started/dashboard-setup"
-                  className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
-                >
-                  <h3 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                    Setting up your dashboard
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    Learn how to customize your dashboard for maximum productivity
-                  </p>
-                </Link>
-
-                <Link
-                  href="/help/getting-started/seo-scores"
-                  className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
-                >
-                  <h3 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                    Understanding SEO scores
-                  </h3>
-                  <p className="text-gray-400 text-sm">
-                    Deep dive into how we calculate and what each score means
-                  </p>
-                </Link>
+                {t.raw('nextSteps.articles').map((article: any, index: number) => (
+                  <Link
+                    key={index}
+                    href={article.href}
+                    className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
+                  >
+                    <h3 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm">
+                      {article.description}
+                    </p>
+                  </Link>
+                ))}
               </div>
             </motion.div>
           </div>

@@ -334,18 +334,634 @@
       "meta": {
         "title": "How to Create Your First SEO Audit - Step-by-Step Guide | AI SEO Turbo",
         "description": "Learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. Complete step-by-step guide from entering your URL to reviewing results."
+      },
+      "backToCategory": "Back to Getting Started",
+      "backToHelp": "Back to Help Center",
+      "breadcrumb": {
+        "home": "Home",
+        "help": "Help",
+        "gettingStarted": "Getting Started",
+        "firstAudit": "How to create your first SEO audit"
+      },
+      "header": {
+        "category": "Getting Started",
+        "title": "How to create your first SEO audit",
+        "readTime": "5 min read",
+        "lastUpdated": "Last updated: March 2025"
+      },
+      "intro": {
+        "title": "What you'll learn",
+        "description": "In this guide, you'll learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. By the end, you'll have a complete understanding of your website's SEO health and actionable recommendations."
+      },
+      "stepByStepTitle": "Step-by-step guide",
+      "steps": {
+        "1": {
+          "title": "Enter your website URL",
+          "description": "Navigate to the SEO Audit tool and enter your website's URL in the input field. Make sure to include the full URL including 'https://' or 'http://'.",
+          "example": "https://example.com"
+        },
+        "2": {
+          "title": "Configure audit settings",
+          "description": "Choose your audit preferences:",
+          "options": [
+            "Mobile Analysis: Enable for mobile-first indexing insights",
+            "Competitor Analysis: Add up to 3 competitor URLs",
+            "Deep Crawl: Analyze up to 100 pages (Pro feature)"
+          ]
+        },
+        "3": {
+          "title": "Start the audit",
+          "description": "Click the \"Start Audit\" button and wait for our AI to analyze your website. This typically takes 2-5 minutes depending on your site's size.",
+          "status": "Audit in progress... Analyzing 47 SEO factors"
+        },
+        "4": {
+          "title": "Review your results",
+          "description": "Once complete, you'll see your SEO score and detailed analysis. The results are organized into categories:",
+          "categories": {
+            "passed": {
+              "title": "✓ Passed (Green)",
+              "description": "Items your site is handling well"
+            },
+            "warnings": {
+              "title": "⚠ Warnings (Yellow)",
+              "description": "Areas that need attention"
+            },
+            "errors": {
+              "title": "✗ Errors (Red)",
+              "description": "Critical issues to fix immediately"
+            },
+            "info": {
+              "title": "ℹ Info (Blue)",
+              "description": "Additional insights and tips"
+            }
+          }
+        }
+      },
+      "proTips": {
+        "title": "Pro Tips",
+        "tips": [
+          "Run audits regularly (weekly for active sites, monthly for stable ones)",
+          "Focus on fixing critical errors first, then warnings",
+          "Use the competitor analysis to identify opportunities",
+          "Export reports to track your progress over time",
+          "Set up automated monitoring for continuous insights"
+        ]
+      },
+      "nextSteps": {
+        "title": "Next steps",
+        "articles": [
+          {
+            "title": "Setting up your dashboard",
+            "href": "/help/getting-started/dashboard-setup",
+            "description": "Learn how to customize your dashboard for maximum productivity"
+          },
+          {
+            "title": "Understanding SEO scores",
+            "href": "/help/getting-started/seo-scores",
+            "description": "Deep dive into how we calculate and what each score means"
+          }
+        ]
       }
     },
     "dashboard-setup": {
       "meta": {
         "title": "Dashboard Setup Guide - Customize Your Workspace | AI SEO Turbo",
         "description": "Learn how to customize your AISEOTurbo dashboard for maximum productivity. Set up notifications, organize your workspace, and configure display preferences."
+      },
+      "backToCategory": "Back to Getting Started",
+      "backToHelp": "Back to Help Center",
+      "breadcrumb": {
+        "home": "Home",
+        "help": "Help",
+        "gettingStarted": "Getting Started",
+        "dashboardSetup": "Dashboard setup guide"
+      },
+      "header": {
+        "category": "Getting Started",
+        "title": "Dashboard Setup Guide - Customize Your Workspace",
+        "readTime": "3 min read",
+        "lastUpdated": "Last updated: March 2025"
+      },
+      "intro": {
+        "title": "What you'll learn",
+        "description": "Customize your AISEOTurbo dashboard for maximum productivity. Learn how to organize your workspace, set up notifications, and configure display preferences to match your workflow."
+      },
+      "steps": {
+        "1": {
+          "title": "Access dashboard settings",
+          "description": "Once logged in, navigate to your dashboard and look for the settings gear icon in the top-right corner. This opens your personalization panel where you can customize every aspect of your workspace.",
+          "tip": {
+            "title": "Quick Access Tip",
+            "description": "Use keyboard shortcut Ctrl + , to quickly open settings"
+          }
+        },
+        "2": {
+          "title": "Choose your layout preference",
+          "description": "Select the layout that works best for your workflow. Each option is designed for different use cases:",
+          "layouts": [
+            {
+              "name": "Grid View",
+              "description": "Best for visual overview of multiple projects"
+            },
+            {
+              "name": "List View",
+              "description": "Ideal for detailed project information"
+            },
+            {
+              "name": "Card View",
+              "description": "Perfect balance of visual and detailed info"
+            }
+          ]
+        },
+        "3": {
+          "title": "Configure notification preferences",
+          "description": "Stay informed about important events without being overwhelmed. Customize your notification settings:",
+          "notifications": [
+            {
+              "name": "Audit Completion",
+              "description": "Get notified when your SEO audits finish processing"
+            },
+            {
+              "name": "Critical Issues",
+              "description": "Immediate alerts for urgent SEO problems"
+            },
+            {
+              "name": "Weekly Reports",
+              "description": "Summary of your site's SEO performance"
+            }
+          ]
+        },
+        "4": {
+          "title": "Organize your workspace",
+          "description": "Create a workflow that matches your needs by organizing projects and setting up custom filters:",
+          "features": [
+            "Project Groups: Organize sites by client, priority, or category",
+            "Custom Tags: Label projects for easy filtering and search",
+            "Quick Actions: Set up shortcuts for frequent tasks",
+            "Default Views: Save your preferred filters and sorting options"
+          ]
+        }
+      },
+      "advancedTips": {
+        "title": "Advanced customization tips",
+        "tips": [
+          "Keyboard Shortcuts: Enable advanced shortcuts for power users in Settings → Accessibility",
+          "API Integration: Connect your dashboard to external tools via our REST API",
+          "Team Collaboration: Share custom dashboard layouts with team members",
+          "Dark/Light Mode: Switch themes based on time of day or personal preference",
+          "Export Settings: Backup your custom configurations for easy migration"
+        ]
+      },
+      "faq": {
+        "title": "Common questions",
+        "questions": [
+          {
+            "question": "Can I reset my dashboard to default settings?",
+            "answer": "Yes, go to Settings → Reset → Restore Defaults. This won't affect your audit data."
+          },
+          {
+            "question": "Do settings sync across devices?",
+            "answer": "Yes, your preferences are saved to your account and sync automatically."
+          },
+          {
+            "question": "Can I create multiple dashboard layouts?",
+            "answer": "Currently, you can save one custom layout per account, but we're working on multiple layouts."
+          }
+        ]
+      },
+      "nextSteps": {
+        "title": "Next steps",
+        "articles": [
+          {
+            "title": "Understanding SEO scores",
+            "href": "/help/getting-started/seo-scores",
+            "description": "Learn what your SEO score means and how to improve it"
+          },
+          {
+            "title": "Running your first audit",
+            "href": "/help/getting-started/first-audit",
+            "description": "Step-by-step guide to launching and understanding your first SEO audit"
+          }
+        ]
+      }
+    },
+    "quick-start": {
+      "meta": {
+        "title": "Quick Start Guide - AISEOTurbo Setup in 10 Minutes | AI SEO Turbo",
+        "description": "Get started with AISEOTurbo's AI-powered SEO tools in just 10 minutes. Complete guide from account setup to your first audit results."
+      },
+      "backToCategory": "Back to Getting Started",
+      "backToHelp": "Back to Help Center",
+      "breadcrumb": {
+        "home": "Home",
+        "help": "Help",
+        "gettingStarted": "Getting Started",
+        "quickStart": "Quick start guide"
+      },
+      "header": {
+        "category": "Getting Started",
+        "title": "Quick Start Guide - Get up and running in 10 minutes",
+        "readTime": "10 min read",
+        "lastUpdated": "Last updated: March 2025"
+      },
+      "intro": {
+        "title": "Get started in 10 minutes",
+        "description": "Welcome to AISEOTurbo! This quick start guide will have you running your first AI-powered SEO audit in just 10 minutes. Follow these simple steps to unlock powerful insights about your website's search performance.",
+        "highlights": [
+          "4 simple steps",
+          "Instant results",
+          "No technical knowledge required"
+        ]
+      },
+      "progressTracker": {
+        "title": "Your journey to SEO success",
+        "steps": [
+          {
+            "number": "1",
+            "title": "Sign Up",
+            "time": "2 minutes"
+          },
+          {
+            "number": "2",
+            "title": "Add Website",
+            "time": "1 minute"
+          },
+          {
+            "number": "3",
+            "title": "Run Audit",
+            "time": "3 minutes"
+          },
+          {
+            "number": "4",
+            "title": "Get Results",
+            "time": "4 minutes"
+          }
+        ]
+      },
+      "steps": {
+        "1": {
+          "title": "Create your account (2 minutes)",
+          "description": "Start your SEO journey by creating a free AISEOTurbo account. You'll get immediate access to our powerful audit tools.",
+          "requirements": {
+            "title": "What you'll need:",
+            "items": [
+              "A valid email address",
+              "Your website URL",
+              "2 minutes of your time"
+            ]
+          },
+          "tip": {
+            "title": "💡 Pro tip",
+            "description": "Use your business email for better organization and to receive important audit notifications."
+          }
+        },
+        "2": {
+          "title": "Add your website (1 minute)",
+          "description": "Once logged in, add your website to start monitoring its SEO health. Our AI will immediately begin analyzing your site structure.",
+          "details": {
+            "title": "Enter your website details:",
+            "items": [
+              {
+                "icon": "Globe",
+                "label": "Website URL:",
+                "value": "https://yoursite.com"
+              },
+              {
+                "icon": "Settings",
+                "label": "Choose audit frequency (optional)"
+              },
+              {
+                "icon": "BarChart3",
+                "label": "Set up competitor tracking (optional)"
+              }
+            ]
+          },
+          "warning": {
+            "title": "⚠️ Important",
+            "description": "Make sure your website is publicly accessible. Private or password-protected sites need special configuration."
+          }
+        },
+        "3": {
+          "title": "Run your first audit (3 minutes)",
+          "description": "Launch a comprehensive SEO audit with one click. Our AI will analyze over 200 SEO factors and provide actionable insights.",
+          "analysis": {
+            "title": "What happens during the audit:",
+            "categories": [
+              [
+                "Page structure analysis",
+                "Content optimization check",
+                "Technical SEO review"
+              ],
+              [
+                "Performance metrics",
+                "Mobile optimization",
+                "Security assessment"
+              ]
+            ]
+          },
+          "feature": {
+            "title": "Real-time progress",
+            "description": "Watch as our AI processes your site in real-time. You'll see progress indicators for each analysis phase."
+          }
+        },
+        "4": {
+          "title": "Review your results (4 minutes)",
+          "description": "Congratulations! Your first audit is complete. Now let's understand what the results mean and how to prioritize improvements.",
+          "dashboard": {
+            "title": "Your audit dashboard includes:",
+            "items": [
+              {
+                "icon": "BarChart3",
+                "title": "Overall SEO Score",
+                "description": "Your site's health rating (0-100)"
+              },
+              {
+                "icon": "AlertTriangle",
+                "title": "Critical Issues",
+                "description": "Urgent problems to fix first"
+              },
+              {
+                "icon": "CheckCircle",
+                "title": "Optimization Wins",
+                "description": "Quick improvements you can make"
+              },
+              {
+                "icon": "Target",
+                "title": "Action Plan",
+                "description": "Prioritized list of improvements"
+              }
+            ]
+          },
+          "focus": {
+            "title": "🎯 Focus on impact",
+            "description": "Start with high-impact, low-effort improvements. Our AI ranks suggestions by potential SEO benefit and implementation difficulty."
+          }
+        }
+      },
+      "congratulations": {
+        "title": "🎉 Congratulations! You're all set!",
+        "description": "You've successfully completed your first SEO audit. Here's what you can do next to maximize your results:",
+        "nextActions": [
+          {
+            "icon": "CheckCircle",
+            "title": "Implement Quick Fixes",
+            "description": "Start with the easiest improvements for immediate SEO gains"
+          },
+          {
+            "icon": "BarChart3",
+            "title": "Monitor Progress",
+            "description": "Schedule regular audits to track your SEO improvements"
+          },
+          {
+            "icon": "Rocket",
+            "title": "Explore Advanced Features",
+            "description": "Discover competitor analysis, keyword tracking, and more"
+          }
+        ]
+      },
+      "faq": {
+        "title": "Common first-time questions",
+        "questions": [
+          {
+            "question": "How often should I run audits?",
+            "answer": "For active sites: weekly. For stable sites: monthly. After major changes: immediately."
+          },
+          {
+            "question": "Can I audit multiple websites?",
+            "answer": "Yes! Add as many sites as your plan allows. Each gets its own dashboard and tracking."
+          },
+          {
+            "question": "What if my score is low?",
+            "answer": "Don't worry! Follow our recommendations step-by-step. Most users see 20+ point improvements within 30 days."
+          }
+        ]
+      },
+      "nextSteps": {
+        "title": "Recommended next steps",
+        "articles": [
+          {
+            "title": "Customize your dashboard",
+            "href": "/help/getting-started/dashboard-setup",
+            "description": "Personalize your workspace for maximum productivity and efficiency"
+          },
+          {
+            "title": "Understanding SEO scores",
+            "href": "/help/getting-started/seo-scores",
+            "description": "Learn what your SEO score means and how to improve it"
+          }
+        ]
       }
     },
     "seo-scores": {
       "meta": {
         "title": "Understanding SEO Scores - Complete Guide | AI SEO Turbo",
         "description": "Learn how to interpret your SEO audit scores. Understand what each score means, how they're calculated, and how to improve your website's SEO performance."
+      },
+      "backToHelp": "Back to Help Center",
+      "breadcrumb": {
+        "home": "Home",
+        "help": "Help",
+        "gettingStarted": "Getting Started",
+        "seoScores": "Understanding SEO scores"
+      },
+      "header": {
+        "category": "Getting Started",
+        "title": "Understanding SEO scores",
+        "readTime": "7 min read",
+        "lastUpdated": "Last updated: March 2025"
+      },
+      "introduction": {
+        "title": "Understanding Your Scores",
+        "subtitle": "What you'll learn",
+        "description": "Decode your SEO scores and understand what each metric means for your website's search performance. Learn how to interpret results and prioritize improvements for maximum impact."
+      },
+      "overallScore": {
+        "title": "Your overall SEO score",
+        "subtitle": "Overall SEO Score",
+        "description": "Your website's comprehensive SEO health rating",
+        "ranges": {
+          "excellent": {
+            "score": "90+",
+            "label": "Excellent",
+            "description": "Top 10% of sites"
+          },
+          "good": {
+            "score": "70-89",
+            "label": "Good",
+            "description": "Above average"
+          },
+          "needsWork": {
+            "score": "50-69",
+            "label": "Needs Work",
+            "description": "Room for improvement"
+          },
+          "critical": {
+            "score": "Below 50",
+            "label": "Critical",
+            "description": "Immediate action needed"
+          }
+        }
+      },
+      "scoreBreakdown": {
+        "title": "Score breakdown by category",
+        "categories": {
+          "technical": {
+            "title": "Technical SEO",
+            "description": "Site structure, speed, and crawlability",
+            "score": "92",
+            "rating": "Excellent",
+            "metrics": {
+              "pageLoadSpeed": {
+                "label": "Page Load Speed",
+                "score": "95"
+              },
+              "mobileFriendliness": {
+                "label": "Mobile Friendliness",
+                "score": "100"
+              },
+              "siteSecurity": {
+                "label": "Site Security (HTTPS)",
+                "score": "100"
+              },
+              "crawlability": {
+                "label": "Crawlability",
+                "score": "75"
+              }
+            }
+          },
+          "content": {
+            "title": "Content Quality",
+            "description": "Content optimization and relevance",
+            "score": "78",
+            "rating": "Good",
+            "metrics": {
+              "keywordOptimization": {
+                "label": "Keyword Optimization",
+                "score": "85"
+              },
+              "contentLength": {
+                "label": "Content Length",
+                "score": "65"
+              },
+              "readabilityScore": {
+                "label": "Readability Score",
+                "score": "82"
+              },
+              "contentFreshness": {
+                "label": "Content Freshness",
+                "score": "75"
+              }
+            }
+          },
+          "userExperience": {
+            "title": "User Experience",
+            "description": "Core Web Vitals and usability",
+            "score": "88",
+            "rating": "Good",
+            "metrics": {
+              "lcp": {
+                "label": "Largest Contentful Paint (LCP)",
+                "score": "90"
+              },
+              "fid": {
+                "label": "First Input Delay (FID)",
+                "score": "95"
+              },
+              "cls": {
+                "label": "Cumulative Layout Shift (CLS)",
+                "score": "80"
+              }
+            }
+          }
+        }
+      },
+      "calculationMethodology": {
+        "title": "How we calculate your scores",
+        "subtitle": "Our scoring methodology",
+        "description": "AISEOTurbo analyzes over 200 SEO factors using advanced AI algorithms. Our scoring system is based on:",
+        "factors": [
+          {
+            "title": "Google's Guidelines",
+            "description": "Official ranking factors and best practices"
+          },
+          {
+            "title": "Industry Standards",
+            "description": "Benchmarks from millions of websites"
+          },
+          {
+            "title": "Real Performance Data",
+            "description": "Actual user experience metrics"
+          },
+          {
+            "title": "AI Analysis",
+            "description": "Machine learning-powered insights"
+          }
+        ]
+      },
+      "improvingScores": {
+        "title": "How to improve your scores",
+        "quickWins": {
+          "title": "Quick wins (1-2 weeks)",
+          "items": [
+            "Fix missing meta descriptions and title tags",
+            "Optimize image alt text and file sizes",
+            "Improve page loading speed with compression",
+            "Add structured data markup",
+            "Fix broken internal links"
+          ]
+        },
+        "mediumTerm": {
+          "title": "Medium-term improvements (1-3 months)",
+          "items": [
+            "Create high-quality, original content",
+            "Build authoritative backlinks",
+            "Optimize for Core Web Vitals",
+            "Improve site architecture and navigation",
+            "Enhance mobile user experience"
+          ]
+        },
+        "longTerm": {
+          "title": "Long-term strategy (3+ months)",
+          "items": [
+            "Develop comprehensive content strategy",
+            "Build domain authority through PR and outreach",
+            "Implement advanced technical optimizations",
+            "Monitor and adapt to algorithm changes",
+            "Establish thought leadership in your industry"
+          ]
+        }
+      },
+      "troubleshooting": {
+        "title": "Score fluctuations",
+        "sections": [
+          {
+            "title": "Why do scores change?",
+            "description": "Scores can fluctuate due to website changes, algorithm updates, or competitors' improvements."
+          },
+          {
+            "title": "When to be concerned?",
+            "description": "Significant drops (>10 points) warrant investigation. Small fluctuations (±3 points) are normal."
+          },
+          {
+            "title": "Focus on trends",
+            "description": "Look at score trends over weeks/months rather than daily changes for meaningful insights."
+          }
+        ]
+      },
+      "nextSteps": {
+        "title": "Next steps",
+        "links": [
+          {
+            "title": "Complete SEO audit walkthrough",
+            "description": "Deep dive into our comprehensive audit process and how to interpret detailed results",
+            "href": "/help/features/seo-audit"
+          },
+          {
+            "title": "Quick start guide",
+            "description": "Get up and running with AISEOTurbo in 10 minutes with our step-by-step guide",
+            "href": "/help/getting-started/quick-start"
+          }
+        ]
       }
     },
     "categories": {

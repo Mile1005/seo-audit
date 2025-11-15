@@ -5,8 +5,10 @@ import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { CheckCircle, Settings, Target, Monitor, Smartphone, Palette, AlertTriangle } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function DashboardSetupContent() {
+  const t = useTranslations('help.dashboard-setup')
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
@@ -16,11 +18,13 @@ export default function DashboardSetupContent() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               items={[
-                { name: 'Help Center', url: 'https://www.aiseoturbo.com/help' },
-                { name: 'Getting Started', url: 'https://www.aiseoturbo.com/help/getting-started' },
-                { name: 'Dashboard setup guide', url: 'https://www.aiseoturbo.com/help/getting-started/dashboard-setup' }
+                { name: t('breadcrumb.home'), url: 'https://www.aiseoturbo.com' },
+                { name: t('breadcrumb.help'), url: 'https://www.aiseoturbo.com/help' },
+                { name: t('breadcrumb.gettingStarted'), url: 'https://www.aiseoturbo.com/help/getting-started' },
+                { name: t('breadcrumb.dashboardSetup'), url: 'https://www.aiseoturbo.com/help/getting-started/dashboard-setup' }
               ]}
               darkMode={true}
+              includeHome={false}
             />
           </div>
         </section>
@@ -35,17 +39,16 @@ export default function DashboardSetupContent() {
               className="prose prose-lg prose-invert max-w-none"
             >
 
-              <h1 className="text-3xl font-bold text-white mb-6">Dashboard Setup Guide - Customize Your Workspace</h1>
+              <h1 className="text-3xl font-bold text-white mb-6">{t('header.title')}</h1>
 
               {/* Introduction */}
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
                   <Target className="w-6 h-6 text-blue-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h2 className="text-white text-lg font-semibold mb-2">What you'll learn</h2>
+                    <h2 className="text-white text-lg font-semibold mb-2">{t('intro.title')}</h2>
                     <p className="text-gray-300 mb-0">
-                      Customize your AISEOTurbo dashboard for maximum productivity. Learn how to organize your workspace,
-                      set up notifications, and configure display preferences to match your workflow.
+                      {t('intro.description')}
                     </p>
                   </div>
                 </div>
@@ -63,15 +66,14 @@ export default function DashboardSetupContent() {
                       1
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Access dashboard settings</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.1.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Once logged in, navigate to your dashboard and look for the settings gear icon in the top-right corner.
-                        This opens your personalization panel where you can customize every aspect of your workspace.
+                        {t('steps.1.description')}
                       </p>
                       <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4 mb-4">
-                        <h4 className="text-green-400 font-medium mb-2">✓ Quick Access Tip</h4>
+                        <h4 className="text-green-400 font-medium mb-2">{t('steps.1.tip.title')}</h4>
                         <p className="text-gray-300 text-sm mb-0">
-                          Use keyboard shortcut <kbd className="bg-slate-700 px-2 py-1 rounded text-xs">Ctrl + ,</kbd> to quickly open settings
+                          {t('steps.1.tip.description')}
                         </p>
                       </div>
                     </div>
@@ -85,32 +87,22 @@ export default function DashboardSetupContent() {
                       2
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Choose your layout preference</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.2.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Select the layout that works best for your workflow. Each option is designed for different use cases:
+                        {t('steps.2.description')}
                       </p>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                        <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Monitor className="w-5 h-5 text-blue-400" aria-hidden="true" />
-                            <h4 className="text-white font-medium">Grid View</h4>
+                        {t.raw('steps.2.layouts').map((layout: any, index: number) => (
+                          <div key={index} className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                              {index === 0 && <Monitor className="w-5 h-5 text-blue-400" aria-hidden="true" />}
+                              {index === 1 && <Smartphone className="w-5 h-5 text-green-400" aria-hidden="true" />}
+                              {index === 2 && <Palette className="w-5 h-5 text-purple-400" aria-hidden="true" />}
+                              <h4 className="text-white font-medium">{layout.name}</h4>
+                            </div>
+                            <p className="text-gray-300 text-sm">{layout.description}</p>
                           </div>
-                          <p className="text-gray-300 text-sm">Best for visual overview of multiple projects</p>
-                        </div>
-                        <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Smartphone className="w-5 h-5 text-green-400" aria-hidden="true" />
-                            <h4 className="text-white font-medium">List View</h4>
-                          </div>
-                          <p className="text-gray-300 text-sm">Ideal for detailed project information</p>
-                        </div>
-                        <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Palette className="w-5 h-5 text-purple-400" aria-hidden="true" />
-                            <h4 className="text-white font-medium">Card View</h4>
-                          </div>
-                          <p className="text-gray-300 text-sm">Perfect balance of visual and detailed info</p>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -123,32 +115,20 @@ export default function DashboardSetupContent() {
                       3
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Configure notification preferences</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.3.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Stay informed about important events without being overwhelmed. Customize your notification settings:
+                        {t('steps.3.description')}
                       </p>
                       <div className="space-y-3">
-                        <div className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg">
-                          <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" aria-hidden="true" />
-                          <div>
-                            <h4 className="text-white font-medium">Audit Completion</h4>
-                            <p className="text-gray-400 text-sm">Get notified when your SEO audits finish processing</p>
+                        {t.raw('steps.3.notifications').map((notification: any, index: number) => (
+                          <div key={index} className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg">
+                            <CheckCircle className={`w-5 h-5 mt-0.5 ${index === 0 ? 'text-green-400' : index === 1 ? 'text-yellow-400' : 'text-blue-400'}`} aria-hidden="true" />
+                            <div>
+                              <h4 className="text-white font-medium">{notification.name}</h4>
+                              <p className="text-gray-400 text-sm">{notification.description}</p>
+                            </div>
                           </div>
-                        </div>
-                        <div className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg">
-                          <CheckCircle className="w-5 h-5 text-yellow-400 mt-0.5" aria-hidden="true" />
-                          <div>
-                            <h4 className="text-white font-medium">Critical Issues</h4>
-                            <p className="text-gray-400 text-sm">Immediate alerts for urgent SEO problems</p>
-                          </div>
-                        </div>
-                        <div className="flex items-start gap-3 p-3 bg-slate-900/50 rounded-lg">
-                          <CheckCircle className="w-5 h-5 text-blue-400 mt-0.5" aria-hidden="true" />
-                          <div>
-                            <h4 className="text-white font-medium">Weekly Reports</h4>
-                            <p className="text-gray-400 text-sm">Summary of your site's SEO performance</p>
-                          </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -161,27 +141,17 @@ export default function DashboardSetupContent() {
                       4
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">Organize your workspace</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('steps.4.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Create a workflow that matches your needs by organizing projects and setting up custom filters:
+                        {t('steps.4.description')}
                       </p>
                       <ul className="space-y-2 text-gray-300">
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span><strong>Project Groups:</strong> Organize sites by client, priority, or category</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span><strong>Custom Tags:</strong> Label projects for easy filtering and search</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span><strong>Quick Actions:</strong> Set up shortcuts for frequent tasks</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span><strong>Default Views:</strong> Save your preferred filters and sorting options</span>
-                        </li>
+                        {t.raw('steps.4.features').map((feature: string, index: number) => (
+                          <li key={index} className="flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
+                            <span dangerouslySetInnerHTML={{ __html: feature }} />
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </div>
@@ -193,13 +163,11 @@ export default function DashboardSetupContent() {
                 <div className="flex items-start gap-4">
                   <Settings className="w-6 h-6 text-blue-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h3 className="text-blue-400 text-lg font-semibold mb-2">Advanced customization tips</h3>
+                    <h3 className="text-blue-400 text-lg font-semibold mb-2">{t('advancedTips.title')}</h3>
                     <ul className="space-y-2 text-gray-300">
-                      <li>• <strong>Keyboard Shortcuts:</strong> Enable advanced shortcuts for power users in Settings → Accessibility</li>
-                      <li>• <strong>API Integration:</strong> Connect your dashboard to external tools via our REST API</li>
-                      <li>• <strong>Team Collaboration:</strong> Share custom dashboard layouts with team members</li>
-                      <li>• <strong>Dark/Light Mode:</strong> Switch themes based on time of day or personal preference</li>
-                      <li>• <strong>Export Settings:</strong> Backup your custom configurations for easy migration</li>
+                      {t.raw('advancedTips.tips').map((tip: string, index: number) => (
+                        <li key={index} dangerouslySetInnerHTML={{ __html: `• ${tip}` }} />
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -210,53 +178,37 @@ export default function DashboardSetupContent() {
                 <div className="flex items-start gap-4">
                   <AlertTriangle className="w-6 h-6 text-yellow-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h3 className="text-yellow-400 text-lg font-semibold mb-4">Common questions</h3>
+                    <h3 className="text-yellow-400 text-lg font-semibold mb-4">{t('faq.title')}</h3>
                     <div className="space-y-4">
-                      <div>
-                        <h4 className="text-white font-medium">Can I reset my dashboard to default settings?</h4>
-                        <p className="text-gray-300 text-sm">Yes, go to Settings → Reset → Restore Defaults. This won't affect your audit data.</p>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium">Do settings sync across devices?</h4>
-                        <p className="text-gray-300 text-sm">Yes, your preferences are saved to your account and sync automatically.</p>
-                      </div>
-                      <div>
-                        <h4 className="text-white font-medium">Can I create multiple dashboard layouts?</h4>
-                        <p className="text-gray-300 text-sm">Currently, you can save one custom layout per account, but we're working on multiple layouts.</p>
-                      </div>
+                      {t.raw('faq.questions').map((item: any, index: number) => (
+                        <div key={index}>
+                          <h4 className="text-white font-medium">{item.question}</h4>
+                          <p className="text-gray-300 text-sm">{item.answer}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Next Steps */}
-              <h3 className="text-2xl font-bold text-white mt-12 mb-6">Next steps</h3>
+              <h3 className="text-2xl font-bold text-white mt-12 mb-6">{t('nextSteps.title')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Link
-                  href="/help/getting-started/seo-scores"
-                  className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
-                  aria-label="Learn about SEO scores and what they mean"
-                >
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                    Understanding SEO scores
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Learn what your SEO score means and how to improve it
-                  </p>
-                </Link>
-
-                <Link
-                  href="/help/getting-started/first-audit"
-                  className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
-                  aria-label="Learn how to run your first SEO audit"
-                >
-                  <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                    Running your first audit
-                  </h4>
-                  <p className="text-gray-400 text-sm">
-                    Step-by-step guide to launching and understanding your first SEO audit
-                  </p>
-                </Link>
+                {t.raw('nextSteps.articles').map((article: any, index: number) => (
+                  <Link
+                    key={index}
+                    href={article.href}
+                    className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
+                    aria-label={`Learn about ${article.title.toLowerCase()}`}
+                  >
+                    <h4 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+                      {article.title}
+                    </h4>
+                    <p className="text-gray-400 text-sm">
+                      {article.description}
+                    </p>
+                  </Link>
+                ))}
               </div>
 
             </motion.div>

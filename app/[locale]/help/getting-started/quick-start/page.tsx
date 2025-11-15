@@ -14,10 +14,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'help' })
 
   return generateSEOMeta({
-    title: 'Quick Start Guide - AISEOTurbo Setup in 10 Minutes',
-    description: 'Get started with AISEOTurbo\'s AI-powered SEO tools in just 10 minutes. Complete guide from account setup to your first audit results.',
+    title: t('quick-start.meta.title'),
+    description: t('quick-start.meta.description'),
     keywords: ['quick start guide', 'getting started', 'AISEOTurbo setup', 'SEO audit tutorial', 'website optimization guide'],
     locale: locale as any,
     path: '/help/getting-started/quick-start'
@@ -33,27 +34,27 @@ export default async function QuickStartPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'help' })
 
   const howToSchema = generateHowToSchema({
-    name: "AISEOTurbo Quick Start Guide: Complete Setup in 10 Minutes",
-    description: "Get started with AISEOTurbo's AI-powered SEO tools in just 10 minutes. Complete guide from account setup to your first audit results.",
+    name: t('quick-start.meta.title'),
+    description: t('quick-start.meta.description'),
     totalTime: "PT10M", // 10 minutes
     url: `https://www.aiseoturbo.com/${locale}/help/getting-started/quick-start`,
     datePublished: "2025-03-01T10:00:00+00:00",
     steps: [
       {
-        name: "Create Your Account",
-        text: "Sign up for AISEOTurbo with your email and verify your account."
+        name: t('quick-start.steps.1.title'),
+        text: t('quick-start.steps.1.description')
       },
       {
-        name: "Add Your First Website",
-        text: "Enter your website URL and configure basic settings."
+        name: t('quick-start.steps.2.title'),
+        text: t('quick-start.steps.2.description')
       },
       {
-        name: "Run Your First Audit",
-        text: "Launch a comprehensive SEO audit and wait for AI analysis to complete."
+        name: t('quick-start.steps.3.title'),
+        text: t('quick-start.steps.3.description')
       },
       {
-        name: "Review Results",
-        text: "Analyze your SEO score and prioritize recommended improvements."
+        name: t('quick-start.steps.4.title'),
+        text: t('quick-start.steps.4.description')
       }
     ]
   })
@@ -68,9 +69,9 @@ export default async function QuickStartPage({ params }: Props) {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               items={[
-                { name: 'Help Center', url: `https://www.aiseoturbo.com/${locale}/help` },
-                { name: 'Getting Started', url: `https://www.aiseoturbo.com/${locale}/help/getting-started` },
-                { name: 'Quick start guide', url: `https://www.aiseoturbo.com/${locale}/help/getting-started/quick-start` }
+                { name: t('quick-start.breadcrumb.help'), url: `https://www.aiseoturbo.com/${locale}/help` },
+                { name: t('quick-start.breadcrumb.gettingStarted'), url: `https://www.aiseoturbo.com/${locale}/help/getting-started` },
+                { name: t('quick-start.breadcrumb.quickStart'), url: `https://www.aiseoturbo.com/${locale}/help/getting-started/quick-start` }
               ]}
               darkMode={true}
             />
@@ -86,7 +87,7 @@ export default async function QuickStartPage({ params }: Props) {
               aria-label="Return to Help Center"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-              Back to Help Center
+              {t('quick-start.backToHelp')}
             </Link>
 
             <div className="flex items-center gap-4 mb-6">
@@ -94,9 +95,9 @@ export default async function QuickStartPage({ params }: Props) {
                 <Rocket className="w-6 h-6 text-white" />
               </div>
               <div>
-                <span className="text-blue-400 text-sm font-medium">Getting Started</span>
+                <span className="text-blue-400 text-sm font-medium">{t('quick-start.header.category')}</span>
                 <h1 className="text-3xl md:text-4xl font-bold text-white">
-                  Quick start guide
+                  {t('quick-start.header.title')}
                 </h1>
               </div>
             </div>
@@ -104,11 +105,11 @@ export default async function QuickStartPage({ params }: Props) {
             <div className="flex items-center gap-6 text-gray-400 text-sm mb-8">
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" aria-hidden="true" />
-                <span>10 min read</span>
+                <span>{t('quick-start.header.readTime')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" aria-hidden="true" />
-                <span>Last updated: March 2025</span>
+                <span>{t('quick-start.header.lastUpdated')}</span>
               </div>
             </div>
           </div>

@@ -1,0 +1,1057 @@
+{
+  "generated": "2025-11-15T09:04:00.626Z",
+  "totalNamespaces": 1,
+  "totalKeys": 131,
+  "translations": {
+    "help.security.gdpr.page": {
+      "back_to_help_center_0": {
+        "en": "Back to Help Center",
+        "de": "[DE] Back to Help Center",
+        "fr": "[FR] Back to Help Center",
+        "it": "[IT] Back to Help Center",
+        "es": "[ES] Back to Help Center",
+        "id": "[ID] Back to Help Center"
+      },
+      "gdpr_compliance_guide_1": {
+        "en": "GDPR Compliance Guide",
+        "de": "[DE] GDPR Compliance Guide",
+        "fr": "[FR] GDPR Compliance Guide",
+        "it": "[IT] GDPR Compliance Guide",
+        "es": "[ES] GDPR Compliance Guide",
+        "id": "[ID] GDPR Compliance Guide"
+      },
+      "understanding_gdpr_2": {
+        "en": "Understanding GDPR",
+        "de": "[DE] Understanding GDPR",
+        "fr": "[FR] Understanding GDPR",
+        "it": "[IT] Understanding GDPR",
+        "es": "[ES] Understanding GDPR",
+        "id": "[ID] Understanding GDPR"
+      },
+      "privacy_policy_3": {
+        "en": "Privacy Policy",
+        "de": "[DE] Privacy Policy",
+        "fr": "[FR] Privacy Policy",
+        "it": "[IT] Privacy Policy",
+        "es": "[ES] Privacy Policy",
+        "id": "[ID] Privacy Policy"
+      },
+      "clear_comprehensive_privacy_po_4": {
+        "en": "Clear, comprehensive privacy policy",
+        "de": "[DE] Clear, comprehensive privacy policy",
+        "fr": "[FR] Clear, comprehensive privacy policy",
+        "it": "[IT] Clear, comprehensive privacy policy",
+        "es": "[ES] Clear, comprehensive privacy policy",
+        "id": "[ID] Clear, comprehensive privacy policy"
+      },
+      "data_security_5": {
+        "en": "Data Security",
+        "de": "[DE] Data Security",
+        "fr": "[FR] Data Security",
+        "it": "[IT] Data Security",
+        "es": "[ES] Data Security",
+        "id": "[ID] Data Security"
+      },
+      "secure_data_handling_and_stora_6": {
+        "en": "Secure data handling and storage",
+        "de": "[DE] Secure data handling and storage",
+        "fr": "[FR] Secure data handling and storage",
+        "it": "[IT] Secure data handling and storage",
+        "es": "[ES] Secure data handling and storage",
+        "id": "[ID] Secure data handling and storage"
+      },
+      "user_consent_7": {
+        "en": "User Consent",
+        "de": "[DE] User Consent",
+        "fr": "[FR] User Consent",
+        "it": "[IT] User Consent",
+        "es": "[ES] User Consent",
+        "id": "[ID] User Consent"
+      },
+      "proper_consent_mechanisms_8": {
+        "en": "Proper consent mechanisms",
+        "de": "[DE] Proper consent mechanisms",
+        "fr": "[FR] Proper consent mechanisms",
+        "it": "[IT] Proper consent mechanisms",
+        "es": "[ES] Proper consent mechanisms",
+        "id": "[ID] Proper consent mechanisms"
+      },
+      "data_subject_rights_9": {
+        "en": "Data Subject Rights",
+        "de": "[DE] Data Subject Rights",
+        "fr": "[FR] Data Subject Rights",
+        "it": "[IT] Data Subject Rights",
+        "es": "[ES] Data Subject Rights",
+        "id": "[ID] Data Subject Rights"
+      },
+      "honor_user_data_rights_10": {
+        "en": "Honor user data rights",
+        "de": "[DE] Honor user data rights",
+        "fr": "[FR] Honor user data rights",
+        "it": "[IT] Honor user data rights",
+        "es": "[ES] Honor user data rights",
+        "id": "[ID] Honor user data rights"
+      },
+      "what_constitutes_personal_data_11": {
+        "en": "What Constitutes Personal Data?",
+        "de": "[DE] What Constitutes Personal Data?",
+        "fr": "[FR] What Constitutes Personal Data?",
+        "it": "[IT] What Constitutes Personal Data?",
+        "es": "[ES] What Constitutes Personal Data?",
+        "id": "[ID] What Constitutes Personal Data?"
+      },
+      "directly_identifiable_data_12": {
+        "en": "Directly Identifiable Data",
+        "de": "[DE] Directly Identifiable Data",
+        "fr": "[FR] Directly Identifiable Data",
+        "it": "[IT] Directly Identifiable Data",
+        "es": "[ES] Directly Identifiable Data",
+        "id": "[ID] Directly Identifiable Data"
+      },
+      "_full_name_13": {
+        "en": "• Full name",
+        "de": "[DE] • Full name",
+        "fr": "[FR] • Full name",
+        "it": "[IT] • Full name",
+        "es": "[ES] • Full name",
+        "id": "[ID] • Full name"
+      },
+      "_email_address_14": {
+        "en": "• Email address",
+        "de": "[DE] • Email address",
+        "fr": "[FR] • Email address",
+        "it": "[IT] • Email address",
+        "es": "[ES] • Email address",
+        "id": "[ID] • Email address"
+      },
+      "_phone_number_15": {
+        "en": "• Phone number",
+        "de": "[DE] • Phone number",
+        "fr": "[FR] • Phone number",
+        "it": "[IT] • Phone number",
+        "es": "[ES] • Phone number",
+        "id": "[ID] • Phone number"
+      },
+      "_physical_address_16": {
+        "en": "• Physical address",
+        "de": "[DE] • Physical address",
+        "fr": "[FR] • Physical address",
+        "it": "[IT] • Physical address",
+        "es": "[ES] • Physical address",
+        "id": "[ID] • Physical address"
+      },
+      "_ip_address_17": {
+        "en": "• IP address",
+        "de": "[DE] • IP address",
+        "fr": "[FR] • IP address",
+        "it": "[IT] • IP address",
+        "es": "[ES] • IP address",
+        "id": "[ID] • IP address"
+      },
+      "_social_media_profiles_18": {
+        "en": "• Social media profiles",
+        "de": "[DE] • Social media profiles",
+        "fr": "[FR] • Social media profiles",
+        "it": "[IT] • Social media profiles",
+        "es": "[ES] • Social media profiles",
+        "id": "[ID] • Social media profiles"
+      },
+      "online_identifiers_19": {
+        "en": "Online Identifiers",
+        "de": "[DE] Online Identifiers",
+        "fr": "[FR] Online Identifiers",
+        "it": "[IT] Online Identifiers",
+        "es": "[ES] Online Identifiers",
+        "id": "[ID] Online Identifiers"
+      },
+      "_cookies_and_tracking_pixels_20": {
+        "en": "• Cookies and tracking pixels",
+        "de": "[DE] • Cookies and tracking pixels",
+        "fr": "[FR] • Cookies and tracking pixels",
+        "it": "[IT] • Cookies and tracking pixels",
+        "es": "[ES] • Cookies and tracking pixels",
+        "id": "[ID] • Cookies and tracking pixels"
+      },
+      "_browser_fingerprinting_21": {
+        "en": "• Browser fingerprinting",
+        "de": "[DE] • Browser fingerprinting",
+        "fr": "[FR] • Browser fingerprinting",
+        "it": "[IT] • Browser fingerprinting",
+        "es": "[ES] • Browser fingerprinting",
+        "id": "[ID] • Browser fingerprinting"
+      },
+      "_device_information_22": {
+        "en": "• Device information",
+        "de": "[DE] • Device information",
+        "fr": "[FR] • Device information",
+        "it": "[IT] • Device information",
+        "es": "[ES] • Device information",
+        "id": "[ID] • Device information"
+      },
+      "_location_data_23": {
+        "en": "• Location data",
+        "de": "[DE] • Location data",
+        "fr": "[FR] • Location data",
+        "it": "[IT] • Location data",
+        "es": "[ES] • Location data",
+        "id": "[ID] • Location data"
+      },
+      "_behavioral_patterns_24": {
+        "en": "• Behavioral patterns",
+        "de": "[DE] • Behavioral patterns",
+        "fr": "[FR] • Behavioral patterns",
+        "it": "[IT] • Behavioral patterns",
+        "es": "[ES] • Behavioral patterns",
+        "id": "[ID] • Behavioral patterns"
+      },
+      "sensitive_data_25": {
+        "en": "Sensitive Data",
+        "de": "[DE] Sensitive Data",
+        "fr": "[FR] Sensitive Data",
+        "it": "[IT] Sensitive Data",
+        "es": "[ES] Sensitive Data",
+        "id": "[ID] Sensitive Data"
+      },
+      "_racialethnic_origin_26": {
+        "en": "• Racial/ethnic origin",
+        "de": "[DE] • Racial/ethnic origin",
+        "fr": "[FR] • Racial/ethnic origin",
+        "it": "[IT] • Racial/ethnic origin",
+        "es": "[ES] • Racial/ethnic origin",
+        "id": "[ID] • Racial/ethnic origin"
+      },
+      "_political_opinions_27": {
+        "en": "• Political opinions",
+        "de": "[DE] • Political opinions",
+        "fr": "[FR] • Political opinions",
+        "it": "[IT] • Political opinions",
+        "es": "[ES] • Political opinions",
+        "id": "[ID] • Political opinions"
+      },
+      "_religious_beliefs_28": {
+        "en": "• Religious beliefs",
+        "de": "[DE] • Religious beliefs",
+        "fr": "[FR] • Religious beliefs",
+        "it": "[IT] • Religious beliefs",
+        "es": "[ES] • Religious beliefs",
+        "id": "[ID] • Religious beliefs"
+      },
+      "_health_information_29": {
+        "en": "• Health information",
+        "de": "[DE] • Health information",
+        "fr": "[FR] • Health information",
+        "it": "[IT] • Health information",
+        "es": "[ES] • Health information",
+        "id": "[ID] • Health information"
+      },
+      "_sexual_orientation_30": {
+        "en": "• Sexual orientation",
+        "de": "[DE] • Sexual orientation",
+        "fr": "[FR] • Sexual orientation",
+        "it": "[IT] • Sexual orientation",
+        "es": "[ES] • Sexual orientation",
+        "id": "[ID] • Sexual orientation"
+      },
+      "_criminal_records_31": {
+        "en": "• Criminal records",
+        "de": "[DE] • Criminal records",
+        "fr": "[FR] • Criminal records",
+        "it": "[IT] • Criminal records",
+        "es": "[ES] • Criminal records",
+        "id": "[ID] • Criminal records"
+      },
+      "business_data_32": {
+        "en": "Business Data",
+        "de": "[DE] Business Data",
+        "fr": "[FR] Business Data",
+        "it": "[IT] Business Data",
+        "es": "[ES] Business Data",
+        "id": "[ID] Business Data"
+      },
+      "_purchase_history_33": {
+        "en": "• Purchase history",
+        "de": "[DE] • Purchase history",
+        "fr": "[FR] • Purchase history",
+        "it": "[IT] • Purchase history",
+        "es": "[ES] • Purchase history",
+        "id": "[ID] • Purchase history"
+      },
+      "_communication_preferences_34": {
+        "en": "• Communication preferences",
+        "de": "[DE] • Communication preferences",
+        "fr": "[FR] • Communication preferences",
+        "it": "[IT] • Communication preferences",
+        "es": "[ES] • Communication preferences",
+        "id": "[ID] • Communication preferences"
+      },
+      "_service_usage_patterns_35": {
+        "en": "• Service usage patterns",
+        "de": "[DE] • Service usage patterns",
+        "fr": "[FR] • Service usage patterns",
+        "it": "[IT] • Service usage patterns",
+        "es": "[ES] • Service usage patterns",
+        "id": "[ID] • Service usage patterns"
+      },
+      "_customer_feedback_36": {
+        "en": "• Customer feedback",
+        "de": "[DE] • Customer feedback",
+        "fr": "[FR] • Customer feedback",
+        "it": "[IT] • Customer feedback",
+        "es": "[ES] • Customer feedback",
+        "id": "[ID] • Customer feedback"
+      },
+      "legal_basis_for_data_processin_37": {
+        "en": "Legal Basis for Data Processing",
+        "de": "[DE] Legal Basis for Data Processing",
+        "fr": "[FR] Legal Basis for Data Processing",
+        "it": "[IT] Legal Basis for Data Processing",
+        "es": "[ES] Legal Basis for Data Processing",
+        "id": "[ID] Legal Basis for Data Processing"
+      },
+      "consent_38": {
+        "en": "Consent",
+        "de": "[DE] Consent",
+        "fr": "[FR] Consent",
+        "it": "[IT] Consent",
+        "es": "[ES] Consent",
+        "id": "[ID] Consent"
+      },
+      "consent_requirements_39": {
+        "en": "Consent Requirements:",
+        "de": "[DE] Consent Requirements:",
+        "fr": "[FR] Consent Requirements:",
+        "it": "[IT] Consent Requirements:",
+        "es": "[ES] Consent Requirements:",
+        "id": "[ID] Consent Requirements:"
+      },
+      "_separate_consent_for_differen_40": {
+        "en": "• Separate consent for different processing activities",
+        "de": "[DE] • Separate consent for different processing activities",
+        "fr": "[FR] • Separate consent for different processing activities",
+        "it": "[IT] • Separate consent for different processing activities",
+        "es": "[ES] • Separate consent for different processing activities",
+        "id": "[ID] • Separate consent for different processing activities"
+      },
+      "_easy_optout_mechanisms_41": {
+        "en": "• Easy opt-out mechanisms",
+        "de": "[DE] • Easy opt-out mechanisms",
+        "fr": "[FR] • Easy opt-out mechanisms",
+        "it": "[IT] • Easy opt-out mechanisms",
+        "es": "[ES] • Easy opt-out mechanisms",
+        "id": "[ID] • Easy opt-out mechanisms"
+      },
+      "_no_preticked_boxes_42": {
+        "en": "• No pre-ticked boxes",
+        "de": "[DE] • No pre-ticked boxes",
+        "fr": "[FR] • No pre-ticked boxes",
+        "it": "[IT] • No pre-ticked boxes",
+        "es": "[ES] • No pre-ticked boxes",
+        "id": "[ID] • No pre-ticked boxes"
+      },
+      "contract_43": {
+        "en": "Contract",
+        "de": "[DE] Contract",
+        "fr": "[FR] Contract",
+        "it": "[IT] Contract",
+        "es": "[ES] Contract",
+        "id": "[ID] Contract"
+      },
+      "examples_44": {
+        "en": "Examples:",
+        "de": "[DE] Examples:",
+        "fr": "[FR] Examples:",
+        "it": "[IT] Examples:",
+        "es": "[ES] Examples:",
+        "id": "[ID] Examples:"
+      },
+      "_processing_payment_informatio_45": {
+        "en": "• Processing payment information for purchases",
+        "de": "[DE] • Processing payment information for purchases",
+        "fr": "[FR] • Processing payment information for purchases",
+        "it": "[IT] • Processing payment information for purchases",
+        "es": "[ES] • Processing payment information for purchases",
+        "id": "[ID] • Processing payment information for purchases"
+      },
+      "_account_creation_and_manageme_46": {
+        "en": "• Account creation and management",
+        "de": "[DE] • Account creation and management",
+        "fr": "[FR] • Account creation and management",
+        "it": "[IT] • Account creation and management",
+        "es": "[ES] • Account creation and management",
+        "id": "[ID] • Account creation and management"
+      },
+      "_order_fulfillment_and_deliver_47": {
+        "en": "• Order fulfillment and delivery",
+        "de": "[DE] • Order fulfillment and delivery",
+        "fr": "[FR] • Order fulfillment and delivery",
+        "it": "[IT] • Order fulfillment and delivery",
+        "es": "[ES] • Order fulfillment and delivery",
+        "id": "[ID] • Order fulfillment and delivery"
+      },
+      "_customer_support_communicatio_48": {
+        "en": "• Customer support communications",
+        "de": "[DE] • Customer support communications",
+        "fr": "[FR] • Customer support communications",
+        "it": "[IT] • Customer support communications",
+        "es": "[ES] • Customer support communications",
+        "id": "[ID] • Customer support communications"
+      },
+      "legitimate_interest_49": {
+        "en": "Legitimate Interest",
+        "de": "[DE] Legitimate Interest",
+        "fr": "[FR] Legitimate Interest",
+        "it": "[IT] Legitimate Interest",
+        "es": "[ES] Legitimate Interest",
+        "id": "[ID] Legitimate Interest"
+      },
+      "when_to_use_50": {
+        "en": "When to use:",
+        "de": "[DE] When to use:",
+        "fr": "[FR] When to use:",
+        "it": "[IT] When to use:",
+        "es": "[ES] When to use:",
+        "id": "[ID] When to use:"
+      },
+      "_fraud_prevention_and_security_51": {
+        "en": "• Fraud prevention and security",
+        "de": "[DE] • Fraud prevention and security",
+        "fr": "[FR] • Fraud prevention and security",
+        "it": "[IT] • Fraud prevention and security",
+        "es": "[ES] • Fraud prevention and security",
+        "id": "[ID] • Fraud prevention and security"
+      },
+      "_network_and_information_secur_52": {
+        "en": "• Network and information security",
+        "de": "[DE] • Network and information security",
+        "fr": "[FR] • Network and information security",
+        "it": "[IT] • Network and information security",
+        "es": "[ES] • Network and information security",
+        "id": "[ID] • Network and information security"
+      },
+      "_legal_claims_and_compliance_53": {
+        "en": "• Legal claims and compliance",
+        "de": "[DE] • Legal claims and compliance",
+        "fr": "[FR] • Legal claims and compliance",
+        "it": "[IT] • Legal claims and compliance",
+        "es": "[ES] • Legal claims and compliance",
+        "id": "[ID] • Legal claims and compliance"
+      },
+      "legal_obligation_54": {
+        "en": "Legal Obligation",
+        "de": "[DE] Legal Obligation",
+        "fr": "[FR] Legal Obligation",
+        "it": "[IT] Legal Obligation",
+        "es": "[ES] Legal Obligation",
+        "id": "[ID] Legal Obligation"
+      },
+      "_tax_reporting_and_compliance_56": {
+        "en": "• Tax reporting and compliance",
+        "de": "[DE] • Tax reporting and compliance",
+        "fr": "[FR] • Tax reporting and compliance",
+        "it": "[IT] • Tax reporting and compliance",
+        "es": "[ES] • Tax reporting and compliance",
+        "id": "[ID] • Tax reporting and compliance"
+      },
+      "_employment_law_requirements_57": {
+        "en": "• Employment law requirements",
+        "de": "[DE] • Employment law requirements",
+        "fr": "[FR] • Employment law requirements",
+        "it": "[IT] • Employment law requirements",
+        "es": "[ES] • Employment law requirements",
+        "id": "[ID] • Employment law requirements"
+      },
+      "_financial_regulations_58": {
+        "en": "• Financial regulations",
+        "de": "[DE] • Financial regulations",
+        "fr": "[FR] • Financial regulations",
+        "it": "[IT] • Financial regulations",
+        "es": "[ES] • Financial regulations",
+        "id": "[ID] • Financial regulations"
+      },
+      "_public_health_and_safety_laws_59": {
+        "en": "• Public health and safety laws",
+        "de": "[DE] • Public health and safety laws",
+        "fr": "[FR] • Public health and safety laws",
+        "it": "[IT] • Public health and safety laws",
+        "es": "[ES] • Public health and safety laws",
+        "id": "[ID] • Public health and safety laws"
+      },
+      "right_to_information_61": {
+        "en": "Right to Information",
+        "de": "[DE] Right to Information",
+        "fr": "[FR] Right to Information",
+        "it": "[IT] Right to Information",
+        "es": "[ES] Right to Information",
+        "id": "[ID] Right to Information"
+      },
+      "users_must_be_informed_about_d_62": {
+        "en": "Users must be informed about data collection and processing purposes.",
+        "de": "[DE] Users must be informed about data collection and processing purposes.",
+        "fr": "[FR] Users must be informed about data collection and processing purposes.",
+        "it": "[IT] Users must be informed about data collection and processing purposes.",
+        "es": "[ES] Users must be informed about data collection and processing purposes.",
+        "id": "[ID] Users must be informed about data collection and processing purposes."
+      },
+      "right_of_access_63": {
+        "en": "Right of Access",
+        "de": "[DE] Right of Access",
+        "fr": "[FR] Right of Access",
+        "it": "[IT] Right of Access",
+        "es": "[ES] Right of Access",
+        "id": "[ID] Right of Access"
+      },
+      "users_can_request_copies_of_th_64": {
+        "en": "Users can request copies of their personal data you hold.",
+        "de": "[DE] Users can request copies of their personal data you hold.",
+        "fr": "[FR] Users can request copies of their personal data you hold.",
+        "it": "[IT] Users can request copies of their personal data you hold.",
+        "es": "[ES] Users can request copies of their personal data you hold.",
+        "id": "[ID] Users can request copies of their personal data you hold."
+      },
+      "right_to_rectification_65": {
+        "en": "Right to Rectification",
+        "de": "[DE] Right to Rectification",
+        "fr": "[FR] Right to Rectification",
+        "it": "[IT] Right to Rectification",
+        "es": "[ES] Right to Rectification",
+        "id": "[ID] Right to Rectification"
+      },
+      "users_can_have_inaccurate_data_66": {
+        "en": "Users can have inaccurate data corrected or incomplete data completed.",
+        "de": "[DE] Users can have inaccurate data corrected or incomplete data completed.",
+        "fr": "[FR] Users can have inaccurate data corrected or incomplete data completed.",
+        "it": "[IT] Users can have inaccurate data corrected or incomplete data completed.",
+        "es": "[ES] Users can have inaccurate data corrected or incomplete data completed.",
+        "id": "[ID] Users can have inaccurate data corrected or incomplete data completed."
+      },
+      "right_to_erasure_67": {
+        "en": "Right to Erasure",
+        "de": "[DE] Right to Erasure",
+        "fr": "[FR] Right to Erasure",
+        "it": "[IT] Right to Erasure",
+        "es": "[ES] Right to Erasure",
+        "id": "[ID] Right to Erasure"
+      },
+      "right_to_restriction_68": {
+        "en": "Right to Restriction",
+        "de": "[DE] Right to Restriction",
+        "fr": "[FR] Right to Restriction",
+        "it": "[IT] Right to Restriction",
+        "es": "[ES] Right to Restriction",
+        "id": "[ID] Right to Restriction"
+      },
+      "users_can_limit_how_their_data_69": {
+        "en": "Users can limit how their data is processed in certain circumstances.",
+        "de": "[DE] Users can limit how their data is processed in certain circumstances.",
+        "fr": "[FR] Users can limit how their data is processed in certain circumstances.",
+        "it": "[IT] Users can limit how their data is processed in certain circumstances.",
+        "es": "[ES] Users can limit how their data is processed in certain circumstances.",
+        "id": "[ID] Users can limit how their data is processed in certain circumstances."
+      },
+      "right_to_portability_70": {
+        "en": "Right to Portability",
+        "de": "[DE] Right to Portability",
+        "fr": "[FR] Right to Portability",
+        "it": "[IT] Right to Portability",
+        "es": "[ES] Right to Portability",
+        "id": "[ID] Right to Portability"
+      },
+      "users_can_receive_their_data_i_71": {
+        "en": "Users can receive their data in a structured format and transfer it elsewhere.",
+        "de": "[DE] Users can receive their data in a structured format and transfer it elsewhere.",
+        "fr": "[FR] Users can receive their data in a structured format and transfer it elsewhere.",
+        "it": "[IT] Users can receive their data in a structured format and transfer it elsewhere.",
+        "es": "[ES] Users can receive their data in a structured format and transfer it elsewhere.",
+        "id": "[ID] Users can receive their data in a structured format and transfer it elsewhere."
+      },
+      "right_to_object_72": {
+        "en": "Right to Object",
+        "de": "[DE] Right to Object",
+        "fr": "[FR] Right to Object",
+        "it": "[IT] Right to Object",
+        "es": "[ES] Right to Object",
+        "id": "[ID] Right to Object"
+      },
+      "users_can_object_to_processing_73": {
+        "en": "Users can object to processing based on legitimate interests or direct marketing.",
+        "de": "[DE] Users can object to processing based on legitimate interests or direct marketing.",
+        "fr": "[FR] Users can object to processing based on legitimate interests or direct marketing.",
+        "it": "[IT] Users can object to processing based on legitimate interests or direct marketing.",
+        "es": "[ES] Users can object to processing based on legitimate interests or direct marketing.",
+        "id": "[ID] Users can object to processing based on legitimate interests or direct marketing."
+      },
+      "automated_decision_making_74": {
+        "en": "Automated Decision Making",
+        "de": "[DE] Automated Decision Making",
+        "fr": "[FR] Automated Decision Making",
+        "it": "[IT] Automated Decision Making",
+        "es": "[ES] Automated Decision Making",
+        "id": "[ID] Automated Decision Making"
+      },
+      "users_have_rights_regarding_au_75": {
+        "en": "Users have rights regarding automated decisions without human intervention.",
+        "de": "[DE] Users have rights regarding automated decisions without human intervention.",
+        "fr": "[FR] Users have rights regarding automated decisions without human intervention.",
+        "it": "[IT] Users have rights regarding automated decisions without human intervention.",
+        "es": "[ES] Users have rights regarding automated decisions without human intervention.",
+        "id": "[ID] Users have rights regarding automated decisions without human intervention."
+      },
+      "cookie_compliance_eprivacy_76": {
+        "en": "Cookie Compliance & ePrivacy",
+        "de": "[DE] Cookie Compliance & ePrivacy",
+        "fr": "[FR] Cookie Compliance & ePrivacy",
+        "it": "[IT] Cookie Compliance & ePrivacy",
+        "es": "[ES] Cookie Compliance & ePrivacy",
+        "id": "[ID] Cookie Compliance & ePrivacy"
+      },
+      "cookie_consent_banner_77": {
+        "en": "Cookie Consent Banner",
+        "de": "[DE] Cookie Consent Banner",
+        "fr": "[FR] Cookie Consent Banner",
+        "it": "[IT] Cookie Consent Banner",
+        "es": "[ES] Cookie Consent Banner",
+        "id": "[ID] Cookie Consent Banner"
+      },
+      "required_elements_78": {
+        "en": "Required Elements:",
+        "de": "[DE] Required Elements:",
+        "fr": "[FR] Required Elements:",
+        "it": "[IT] Required Elements:",
+        "es": "[ES] Required Elements:",
+        "id": "[ID] Required Elements:"
+      },
+      "_clear_description_of_cookie_p_79": {
+        "en": "• Clear description of cookie purposes",
+        "de": "[DE] • Clear description of cookie purposes",
+        "fr": "[FR] • Clear description of cookie purposes",
+        "it": "[IT] • Clear description of cookie purposes",
+        "es": "[ES] • Clear description of cookie purposes",
+        "id": "[ID] • Clear description of cookie purposes"
+      },
+      "_easy_rejection_of_nonessentia_80": {
+        "en": "• Easy rejection of non-essential cookies",
+        "de": "[DE] • Easy rejection of non-essential cookies",
+        "fr": "[FR] • Easy rejection of non-essential cookies",
+        "it": "[IT] • Easy rejection of non-essential cookies",
+        "es": "[ES] • Easy rejection of non-essential cookies",
+        "id": "[ID] • Easy rejection of non-essential cookies"
+      },
+      "_link_to_detailed_cookie_polic_81": {
+        "en": "• Link to detailed cookie policy",
+        "de": "[DE] • Link to detailed cookie policy",
+        "fr": "[FR] • Link to detailed cookie policy",
+        "it": "[IT] • Link to detailed cookie policy",
+        "es": "[ES] • Link to detailed cookie policy",
+        "id": "[ID] • Link to detailed cookie policy"
+      },
+      "cookie_categories_82": {
+        "en": "Cookie Categories",
+        "de": "[DE] Cookie Categories",
+        "fr": "[FR] Cookie Categories",
+        "it": "[IT] Cookie Categories",
+        "es": "[ES] Cookie Categories",
+        "id": "[ID] Cookie Categories"
+      },
+      "classify_cookies_by_purpose_an_83": {
+        "en": "Classify cookies by purpose and obtain appropriate consent levels for each category.",
+        "de": "[DE] Classify cookies by purpose and obtain appropriate consent levels for each category.",
+        "fr": "[FR] Classify cookies by purpose and obtain appropriate consent levels for each category.",
+        "it": "[IT] Classify cookies by purpose and obtain appropriate consent levels for each category.",
+        "es": "[ES] Classify cookies by purpose and obtain appropriate consent levels for each category.",
+        "id": "[ID] Classify cookies by purpose and obtain appropriate consent levels for each category."
+      },
+      "essential_cookies_84": {
+        "en": "Essential Cookies",
+        "de": "[DE] Essential Cookies",
+        "fr": "[FR] Essential Cookies",
+        "it": "[IT] Essential Cookies",
+        "es": "[ES] Essential Cookies",
+        "id": "[ID] Essential Cookies"
+      },
+      "no_consent_needed_strictly_nec_85": {
+        "en": "No consent needed - strictly necessary for website function",
+        "de": "[DE] No consent needed - strictly necessary for website function",
+        "fr": "[FR] No consent needed - strictly necessary for website function",
+        "it": "[IT] No consent needed - strictly necessary for website function",
+        "es": "[ES] No consent needed - strictly necessary for website function",
+        "id": "[ID] No consent needed - strictly necessary for website function"
+      },
+      "analytics_cookies_86": {
+        "en": "Analytics Cookies",
+        "de": "[DE] Analytics Cookies",
+        "fr": "[FR] Analytics Cookies",
+        "it": "[IT] Analytics Cookies",
+        "es": "[ES] Analytics Cookies",
+        "id": "[ID] Analytics Cookies"
+      },
+      "consent_required_track_website_87": {
+        "en": "Consent required - track website usage and performance",
+        "de": "[DE] Consent required - track website usage and performance",
+        "fr": "[FR] Consent required - track website usage and performance",
+        "it": "[IT] Consent required - track website usage and performance",
+        "es": "[ES] Consent required - track website usage and performance",
+        "id": "[ID] Consent required - track website usage and performance"
+      },
+      "cookie_policy_88": {
+        "en": "Cookie Policy",
+        "de": "[DE] Cookie Policy",
+        "fr": "[FR] Cookie Policy",
+        "it": "[IT] Cookie Policy",
+        "es": "[ES] Cookie Policy",
+        "id": "[ID] Cookie Policy"
+      },
+      "policy_requirements_89": {
+        "en": "Policy Requirements:",
+        "de": "[DE] Policy Requirements:",
+        "fr": "[FR] Policy Requirements:",
+        "it": "[IT] Policy Requirements:",
+        "es": "[ES] Policy Requirements:",
+        "id": "[ID] Policy Requirements:"
+      },
+      "_list_of_all_cookies_and_their_90": {
+        "en": "• List of all cookies and their purposes",
+        "de": "[DE] • List of all cookies and their purposes",
+        "fr": "[FR] • List of all cookies and their purposes",
+        "it": "[IT] • List of all cookies and their purposes",
+        "es": "[ES] • List of all cookies and their purposes",
+        "id": "[ID] • List of all cookies and their purposes"
+      },
+      "_thirdparty_cookie_disclosures_91": {
+        "en": "• Third-party cookie disclosures",
+        "de": "[DE] • Third-party cookie disclosures",
+        "fr": "[FR] • Third-party cookie disclosures",
+        "it": "[IT] • Third-party cookie disclosures",
+        "es": "[ES] • Third-party cookie disclosures",
+        "id": "[ID] • Third-party cookie disclosures"
+      },
+      "_cookie_management_instruction_92": {
+        "en": "• Cookie management instructions",
+        "de": "[DE] • Cookie management instructions",
+        "fr": "[FR] • Cookie management instructions",
+        "it": "[IT] • Cookie management instructions",
+        "es": "[ES] • Cookie management instructions",
+        "id": "[ID] • Cookie management instructions"
+      },
+      "_contact_information_for_quest_93": {
+        "en": "• Contact information for questions",
+        "de": "[DE] • Contact information for questions",
+        "fr": "[FR] • Contact information for questions",
+        "it": "[IT] • Contact information for questions",
+        "es": "[ES] • Contact information for questions",
+        "id": "[ID] • Contact information for questions"
+      },
+      "gdpr_implementation_steps_94": {
+        "en": "GDPR Implementation Steps",
+        "de": "[DE] GDPR Implementation Steps",
+        "fr": "[FR] GDPR Implementation Steps",
+        "it": "[IT] GDPR Implementation Steps",
+        "es": "[ES] GDPR Implementation Steps",
+        "id": "[ID] GDPR Implementation Steps"
+      },
+      "conduct_data_audit_95": {
+        "en": "Conduct Data Audit",
+        "de": "[DE] Conduct Data Audit",
+        "fr": "[FR] Conduct Data Audit",
+        "it": "[IT] Conduct Data Audit",
+        "es": "[ES] Conduct Data Audit",
+        "id": "[ID] Conduct Data Audit"
+      },
+      "audit_checklist_96": {
+        "en": "Audit Checklist:",
+        "de": "[DE] Audit Checklist:",
+        "fr": "[FR] Audit Checklist:",
+        "it": "[IT] Audit Checklist:",
+        "es": "[ES] Audit Checklist:",
+        "id": "[ID] Audit Checklist:"
+      },
+      "_forms_and_data_collection_poi_97": {
+        "en": "• Forms and data collection points",
+        "de": "[DE] • Forms and data collection points",
+        "fr": "[FR] • Forms and data collection points",
+        "it": "[IT] • Forms and data collection points",
+        "es": "[ES] • Forms and data collection points",
+        "id": "[ID] • Forms and data collection points"
+      },
+      "_thirdparty_integrations_and_t_98": {
+        "en": "• Third-party integrations and tools",
+        "de": "[DE] • Third-party integrations and tools",
+        "fr": "[FR] • Third-party integrations and tools",
+        "it": "[IT] • Third-party integrations and tools",
+        "es": "[ES] • Third-party integrations and tools",
+        "id": "[ID] • Third-party integrations and tools"
+      },
+      "_data_storage_locations_and_sy_99": {
+        "en": "• Data storage locations and systems",
+        "de": "[DE] • Data storage locations and systems",
+        "fr": "[FR] • Data storage locations and systems",
+        "it": "[IT] • Data storage locations and systems",
+        "es": "[ES] • Data storage locations and systems",
+        "id": "[ID] • Data storage locations and systems"
+      },
+      "_data_sharing_and_transfer_pra_100": {
+        "en": "• Data sharing and transfer practices",
+        "de": "[DE] • Data sharing and transfer practices",
+        "fr": "[FR] • Data sharing and transfer practices",
+        "it": "[IT] • Data sharing and transfer practices",
+        "es": "[ES] • Data sharing and transfer practices",
+        "id": "[ID] • Data sharing and transfer practices"
+      },
+      "update_privacy_policy_101": {
+        "en": "Update Privacy Policy",
+        "de": "[DE] Update Privacy Policy",
+        "fr": "[FR] Update Privacy Policy",
+        "it": "[IT] Update Privacy Policy",
+        "es": "[ES] Update Privacy Policy",
+        "id": "[ID] Update Privacy Policy"
+      },
+      "required_sections_102": {
+        "en": "Required Sections:",
+        "de": "[DE] Required Sections:",
+        "fr": "[FR] Required Sections:",
+        "it": "[IT] Required Sections:",
+        "es": "[ES] Required Sections:",
+        "id": "[ID] Required Sections:"
+      },
+      "_data_controller_identity_and_103": {
+        "en": "• Data controller identity and contact details",
+        "de": "[DE] • Data controller identity and contact details",
+        "fr": "[FR] • Data controller identity and contact details",
+        "it": "[IT] • Data controller identity and contact details",
+        "es": "[ES] • Data controller identity and contact details",
+        "id": "[ID] • Data controller identity and contact details"
+      },
+      "_legal_basis_for_processing_104": {
+        "en": "• Legal basis for processing",
+        "de": "[DE] • Legal basis for processing",
+        "fr": "[FR] • Legal basis for processing",
+        "it": "[IT] • Legal basis for processing",
+        "es": "[ES] • Legal basis for processing",
+        "id": "[ID] • Legal basis for processing"
+      },
+      "_data_retention_periods_105": {
+        "en": "• Data retention periods",
+        "de": "[DE] • Data retention periods",
+        "fr": "[FR] • Data retention periods",
+        "it": "[IT] • Data retention periods",
+        "es": "[ES] • Data retention periods",
+        "id": "[ID] • Data retention periods"
+      },
+      "_user_rights_and_how_to_exerci_106": {
+        "en": "• User rights and how to exercise them",
+        "de": "[DE] • User rights and how to exercise them",
+        "fr": "[FR] • User rights and how to exercise them",
+        "it": "[IT] • User rights and how to exercise them",
+        "es": "[ES] • User rights and how to exercise them",
+        "id": "[ID] • User rights and how to exercise them"
+      },
+      "_data_sharing_and_internationa_107": {
+        "en": "• Data sharing and international transfers",
+        "de": "[DE] • Data sharing and international transfers",
+        "fr": "[FR] • Data sharing and international transfers",
+        "it": "[IT] • Data sharing and international transfers",
+        "es": "[ES] • Data sharing and international transfers",
+        "id": "[ID] • Data sharing and international transfers"
+      },
+      "implement_consent_mechanisms_108": {
+        "en": "Implement Consent Mechanisms",
+        "de": "[DE] Implement Consent Mechanisms",
+        "fr": "[FR] Implement Consent Mechanisms",
+        "it": "[IT] Implement Consent Mechanisms",
+        "es": "[ES] Implement Consent Mechanisms",
+        "id": "[ID] Implement Consent Mechanisms"
+      },
+      "consent_features_109": {
+        "en": "Consent Features:",
+        "de": "[DE] Consent Features:",
+        "fr": "[FR] Consent Features:",
+        "it": "[IT] Consent Features:",
+        "es": "[ES] Consent Features:",
+        "id": "[ID] Consent Features:"
+      },
+      "_cookie_consent_banner_110": {
+        "en": "• Cookie consent banner",
+        "de": "[DE] • Cookie consent banner",
+        "fr": "[FR] • Cookie consent banner",
+        "it": "[IT] • Cookie consent banner",
+        "es": "[ES] • Cookie consent banner",
+        "id": "[ID] • Cookie consent banner"
+      },
+      "_preference_management_center_111": {
+        "en": "• Preference management center",
+        "de": "[DE] • Preference management center",
+        "fr": "[FR] • Preference management center",
+        "it": "[IT] • Preference management center",
+        "es": "[ES] • Preference management center",
+        "id": "[ID] • Preference management center"
+      },
+      "_granular_consent_options_112": {
+        "en": "• Granular consent options",
+        "de": "[DE] • Granular consent options",
+        "fr": "[FR] • Granular consent options",
+        "it": "[IT] • Granular consent options",
+        "es": "[ES] • Granular consent options",
+        "id": "[ID] • Granular consent options"
+      },
+      "_consent_withdrawal_mechanisms_113": {
+        "en": "• Consent withdrawal mechanisms",
+        "de": "[DE] • Consent withdrawal mechanisms",
+        "fr": "[FR] • Consent withdrawal mechanisms",
+        "it": "[IT] • Consent withdrawal mechanisms",
+        "es": "[ES] • Consent withdrawal mechanisms",
+        "id": "[ID] • Consent withdrawal mechanisms"
+      },
+      "establish_data_protection_proc_114": {
+        "en": "Establish Data Protection Processes",
+        "de": "[DE] Establish Data Protection Processes",
+        "fr": "[FR] Establish Data Protection Processes",
+        "it": "[IT] Establish Data Protection Processes",
+        "es": "[ES] Establish Data Protection Processes",
+        "id": "[ID] Establish Data Protection Processes"
+      },
+      "data_protection_officer_115": {
+        "en": "Data Protection Officer",
+        "de": "[DE] Data Protection Officer",
+        "fr": "[FR] Data Protection Officer",
+        "it": "[IT] Data Protection Officer",
+        "es": "[ES] Data Protection Officer",
+        "id": "[ID] Data Protection Officer"
+      },
+      "consider_appointing_a_dpo_for_116": {
+        "en": "Consider appointing a DPO for complex operations",
+        "de": "[DE] Consider appointing a DPO for complex operations",
+        "fr": "[FR] Consider appointing a DPO for complex operations",
+        "it": "[IT] Consider appointing a DPO for complex operations",
+        "es": "[ES] Consider appointing a DPO for complex operations",
+        "id": "[ID] Consider appointing a DPO for complex operations"
+      },
+      "common_gdpr_compliance_pitfall_117": {
+        "en": "Common GDPR Compliance Pitfalls",
+        "de": "[DE] Common GDPR Compliance Pitfalls",
+        "fr": "[FR] Common GDPR Compliance Pitfalls",
+        "it": "[IT] Common GDPR Compliance Pitfalls",
+        "es": "[ES] Common GDPR Compliance Pitfalls",
+        "id": "[ID] Common GDPR Compliance Pitfalls"
+      },
+      "preticked_consent_boxes_118": {
+        "en": "Pre-ticked Consent Boxes",
+        "de": "[DE] Pre-ticked Consent Boxes",
+        "fr": "[FR] Pre-ticked Consent Boxes",
+        "it": "[IT] Pre-ticked Consent Boxes",
+        "es": "[ES] Pre-ticked Consent Boxes",
+        "id": "[ID] Pre-ticked Consent Boxes"
+      },
+      "using_prechecked_boxes_for_con_119": {
+        "en": "Using pre-checked boxes for consent violates GDPR requirements.",
+        "de": "[DE] Using pre-checked boxes for consent violates GDPR requirements.",
+        "fr": "[FR] Using pre-checked boxes for consent violates GDPR requirements.",
+        "it": "[IT] Using pre-checked boxes for consent violates GDPR requirements.",
+        "es": "[ES] Using pre-checked boxes for consent violates GDPR requirements.",
+        "id": "[ID] Using pre-checked boxes for consent violates GDPR requirements."
+      },
+      "vague_privacy_policies_120": {
+        "en": "Vague Privacy Policies",
+        "de": "[DE] Vague Privacy Policies",
+        "fr": "[FR] Vague Privacy Policies",
+        "it": "[IT] Vague Privacy Policies",
+        "es": "[ES] Vague Privacy Policies",
+        "id": "[ID] Vague Privacy Policies"
+      },
+      "generic_hardtounderstand_priva_121": {
+        "en": "Generic, hard-to-understand privacy policies don't meet transparency requirements.",
+        "de": "[DE] Generic, hard-to-understand privacy policies don't meet transparency requirements.",
+        "fr": "[FR] Generic, hard-to-understand privacy policies don't meet transparency requirements.",
+        "it": "[IT] Generic, hard-to-understand privacy policies don't meet transparency requirements.",
+        "es": "[ES] Generic, hard-to-understand privacy policies don't meet transparency requirements.",
+        "id": "[ID] Generic, hard-to-understand privacy policies don't meet transparency requirements."
+      },
+      "no_data_subject_rights_122": {
+        "en": "No Data Subject Rights",
+        "de": "[DE] No Data Subject Rights",
+        "fr": "[FR] No Data Subject Rights",
+        "it": "[IT] No Data Subject Rights",
+        "es": "[ES] No Data Subject Rights",
+        "id": "[ID] No Data Subject Rights"
+      },
+      "failing_to_honor_user_requests_123": {
+        "en": "Failing to honor user requests for data access, deletion, or portability.",
+        "de": "[DE] Failing to honor user requests for data access, deletion, or portability.",
+        "fr": "[FR] Failing to honor user requests for data access, deletion, or portability.",
+        "it": "[IT] Failing to honor user requests for data access, deletion, or portability.",
+        "es": "[ES] Failing to honor user requests for data access, deletion, or portability.",
+        "id": "[ID] Failing to honor user requests for data access, deletion, or portability."
+      },
+      "inadequate_security_124": {
+        "en": "Inadequate Security",
+        "de": "[DE] Inadequate Security",
+        "fr": "[FR] Inadequate Security",
+        "it": "[IT] Inadequate Security",
+        "es": "[ES] Inadequate Security",
+        "id": "[ID] Inadequate Security"
+      },
+      "not_implementing_appropriate_t_125": {
+        "en": "Not implementing appropriate technical and organizational security measures.",
+        "de": "[DE] Not implementing appropriate technical and organizational security measures.",
+        "fr": "[FR] Not implementing appropriate technical and organizational security measures.",
+        "it": "[IT] Not implementing appropriate technical and organizational security measures.",
+        "es": "[ES] Not implementing appropriate technical and organizational security measures.",
+        "id": "[ID] Not implementing appropriate technical and organizational security measures."
+      },
+      "no_breach_notification_126": {
+        "en": "No Breach Notification",
+        "de": "[DE] No Breach Notification",
+        "fr": "[FR] No Breach Notification",
+        "it": "[IT] No Breach Notification",
+        "es": "[ES] No Breach Notification",
+        "id": "[ID] No Breach Notification"
+      },
+      "failing_to_report_data_breache_127": {
+        "en": "Failing to report data breaches to supervisory authorities within 72 hours.",
+        "de": "[DE] Failing to report data breaches to supervisory authorities within 72 hours.",
+        "fr": "[FR] Failing to report data breaches to supervisory authorities within 72 hours.",
+        "it": "[IT] Failing to report data breaches to supervisory authorities within 72 hours.",
+        "es": "[ES] Failing to report data breaches to supervisory authorities within 72 hours.",
+        "id": "[ID] Failing to report data breaches to supervisory authorities within 72 hours."
+      },
+      "international_data_transfers_128": {
+        "en": "International Data Transfers",
+        "de": "[DE] International Data Transfers",
+        "fr": "[FR] International Data Transfers",
+        "it": "[IT] International Data Transfers",
+        "es": "[ES] International Data Transfers",
+        "id": "[ID] International Data Transfers"
+      },
+      "transferring_data_to_countries_129": {
+        "en": "Transferring data to countries without adequate protection without safeguards.",
+        "de": "[DE] Transferring data to countries without adequate protection without safeguards.",
+        "fr": "[FR] Transferring data to countries without adequate protection without safeguards.",
+        "it": "[IT] Transferring data to countries without adequate protection without safeguards.",
+        "es": "[ES] Transferring data to countries without adequate protection without safeguards.",
+        "id": "[ID] Transferring data to countries without adequate protection without safeguards."
+      },
+      "start_your_gdpr_compliance_jou_130": {
+        "en": "Start Your GDPR Compliance Journey",
+        "de": "[DE] Start Your GDPR Compliance Journey",
+        "fr": "[FR] Start Your GDPR Compliance Journey",
+        "it": "[IT] Start Your GDPR Compliance Journey",
+        "es": "[ES] Start Your GDPR Compliance Journey",
+        "id": "[ID] Start Your GDPR Compliance Journey"
+      },
+      "view_privacy_policy_guide_131": {
+        "en": "View Privacy Policy Guide",
+        "de": "[DE] View Privacy Policy Guide",
+        "fr": "[FR] View Privacy Policy Guide",
+        "it": "[IT] View Privacy Policy Guide",
+        "es": "[ES] View Privacy Policy Guide",
+        "id": "[ID] View Privacy Policy Guide"
+      },
+      "security_best_practices_132": {
+        "en": "Security Best Practices",
+        "de": "[DE] Security Best Practices",
+        "fr": "[FR] Security Best Practices",
+        "it": "[IT] Security Best Practices",
+        "es": "[ES] Security Best Practices",
+        "id": "[ID] Security Best Practices"
+      }
+    }
+  }
+}
