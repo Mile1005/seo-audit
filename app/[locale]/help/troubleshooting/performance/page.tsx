@@ -9,9 +9,10 @@ type Props = {
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
 
+
   return generateSEOMeta({
-    title: 'Performance Issues Troubleshooting - AISEOTurbo Help',
-    description: 'Complete troubleshooting guide for fixing performance issues in AISEOTurbo. Solutions for slow loading, lag, and responsiveness problems.',
+    title: `Performance Optimization - AISEOTurbo Help`,
+    description: "Improve audit speed, resolve slow loading issues, and optimize performance.",
     path: '/help/troubleshooting/performance',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })

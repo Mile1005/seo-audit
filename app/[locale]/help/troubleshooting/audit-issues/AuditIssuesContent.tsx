@@ -89,6 +89,7 @@ export default function AuditIssuesContent() {
             { name: 'Troubleshooting', url: 'https://www.aiseoturbo.com/help/troubleshooting' },
             { name: 'Audit Issues', url: 'https://www.aiseoturbo.com/help/troubleshooting/audit-issues' }
           ]}
+          includeHome={false}
         />
 
         {/* Article Header */}

@@ -5,8 +5,11 @@ import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, LogIn, AlertTriangle, CheckCircle, RefreshCw, Shield, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function LoginIssuesContent() {
+  const t = useTranslations('help.categories.troubleshooting.articles.loginIssues')
+
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
@@ -14,11 +17,12 @@ export default function LoginIssuesContent() {
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Home', url: 'https://www.aiseoturbo.com' },
-            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Troubleshooting', url: 'https://www.aiseoturbo.com/help/troubleshooting' },
-            { name: 'Login Issues', url: 'https://www.aiseoturbo.com/help/troubleshooting/login-issues' }
+            { name: t('breadcrumb.home'), url: 'https://www.aiseoturbo.com' },
+            { name: t('breadcrumb.help'), url: 'https://www.aiseoturbo.com/help' },
+            { name: t('breadcrumb.troubleshooting'), url: 'https://www.aiseoturbo.com/help/troubleshooting' },
+            { name: t('breadcrumb.loginIssues'), url: 'https://www.aiseoturbo.com/help/troubleshooting/login-issues' }
           ]}
+          includeHome={false}
         />
 
         {/* Article Header */}
@@ -34,7 +38,7 @@ export default function LoginIssuesContent() {
                 className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-6 group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                Back to Help Center
+                {t('backToHelp')}
               </Link>
 
               <div className="flex items-center gap-4 mb-6">
@@ -42,9 +46,9 @@ export default function LoginIssuesContent() {
                   <LogIn className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <span className="text-orange-400 text-sm font-medium">Troubleshooting</span>
+                  <span className="text-orange-400 text-sm font-medium">{t('header.category')}</span>
                   <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    Login issues
+                    {t('header.title')}
                   </h1>
                 </div>
               </div>
@@ -52,11 +56,11 @@ export default function LoginIssuesContent() {
               <div className="flex items-center gap-6 text-gray-400 text-sm mb-8">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  <span>6 min read</span>
+                  <span>{t('header.readTime')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4" />
-                  <span>Last updated: March 2025</span>
+                  <span>{t('header.lastUpdated')}</span>
                 </div>
               </div>
             </motion.div>
@@ -78,76 +82,75 @@ export default function LoginIssuesContent() {
                 <div className="flex items-start gap-4">
                   <Shield className="w-6 h-6 text-green-400 mt-1" />
                   <div>
-                    <h2 className="text-white text-lg font-semibold mb-2">Common login problems</h2>
+                    <h2 className="text-white text-lg font-semibold mb-2">{t('intro.title')}</h2>
                     <p className="text-gray-300 mb-0">
-                      Having trouble accessing your account? This guide covers the most common login issues and their solutions.
-                      Most problems can be resolved with a few simple steps.
+                      {t('intro.description')}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Quick Fixes */}
-              <h2 className="text-2xl font-bold text-white mb-6">Quick fixes to try first</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('quickFixes.title')}</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <RefreshCw className="w-6 h-6 text-blue-400" />
-                    <h3 className="text-white font-semibold">Clear browser cache</h3>
+                    <h3 className="text-white font-semibold">{t('quickFixes.clearCache.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Press Ctrl+Shift+R (Windows/Linux)</div>
-                    <div>• Press Cmd+Shift+R (Mac)</div>
-                    <div>• Or clear cache in browser settings</div>
-                    <div>• Try incognito/private mode</div>
+                    <div>• {t('quickFixes.clearCache.instructions.0')}</div>
+                    <div>• {t('quickFixes.clearCache.instructions.1')}</div>
+                    <div>• {t('quickFixes.clearCache.instructions.2')}</div>
+                    <div>• {t('quickFixes.clearCache.instructions.3')}</div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Eye className="w-6 h-6 text-green-400" />
-                    <h3 className="text-white font-semibold">Check your credentials</h3>
+                    <h3 className="text-white font-semibold">{t('quickFixes.checkCredentials.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Verify email address is correct</div>
-                    <div>• Check password (case sensitive)</div>
-                    <div>• Ensure Caps Lock is off</div>
-                    <div>• Try password reset if unsure</div>
+                    <div>• {t('quickFixes.checkCredentials.instructions.0')}</div>
+                    <div>• {t('quickFixes.checkCredentials.instructions.1')}</div>
+                    <div>• {t('quickFixes.checkCredentials.instructions.2')}</div>
+                    <div>• {t('quickFixes.checkCredentials.instructions.3')}</div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Shield className="w-6 h-6 text-purple-400" />
-                    <h3 className="text-white font-semibold">Disable VPN/extensions</h3>
+                    <h3 className="text-white font-semibold">{t('quickFixes.disableVpn.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Temporarily disable VPN</div>
-                    <div>• Turn off browser extensions</div>
-                    <div>• Try different network</div>
-                    <div>• Check firewall settings</div>
+                    <div>• {t('quickFixes.disableVpn.instructions.0')}</div>
+                    <div>• {t('quickFixes.disableVpn.instructions.1')}</div>
+                    <div>• {t('quickFixes.disableVpn.instructions.2')}</div>
+                    <div>• {t('quickFixes.disableVpn.instructions.3')}</div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <RefreshCw className="w-6 h-6 text-orange-400" />
-                    <h3 className="text-white font-semibold">Try different browser</h3>
+                    <h3 className="text-white font-semibold">{t('quickFixes.tryBrowser.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Chrome, Firefox, Safari, Edge</div>
-                    <div>• Clear all browser data</div>
-                    <div>• Update to latest version</div>
-                    <div>• Try mobile browser</div>
+                    <div>• {t('quickFixes.tryBrowser.instructions.0')}</div>
+                    <div>• {t('quickFixes.tryBrowser.instructions.1')}</div>
+                    <div>• {t('quickFixes.tryBrowser.instructions.2')}</div>
+                    <div>• {t('quickFixes.tryBrowser.instructions.3')}</div>
                   </div>
                 </div>
 
               </div>
 
               {/* Specific Issues */}
-              <h2 className="text-2xl font-bold text-white mb-6">Specific login problems</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('specificIssues.title')}</h2>
 
               <div className="space-y-6 mb-8">
 
@@ -156,37 +159,36 @@ export default function LoginIssuesContent() {
                   <div className="flex items-start gap-4">
                     <AlertTriangle className="w-6 h-6 text-red-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">"Invalid email or password"</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('specificIssues.invalidCredentials.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        This error means the email or password you entered doesn't match our records.
-                        Here's how to resolve it:
+                        {t('specificIssues.invalidCredentials.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="flex items-center gap-2 mb-2">
                             <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-white font-medium">Reset your password</span>
+                            <span className="text-white font-medium">{t('specificIssues.invalidCredentials.solutions.0.title')}</span>
                           </div>
                           <p className="text-gray-300 text-sm">
-                            Click "Forgot Password" on the login page and follow the reset instructions sent to your email.
+                            {t('specificIssues.invalidCredentials.solutions.0.description')}
                           </p>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="flex items-center gap-2 mb-2">
                             <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-white font-medium">Check email variations</span>
+                            <span className="text-white font-medium">{t('specificIssues.invalidCredentials.solutions.1.title')}</span>
                           </div>
                           <p className="text-gray-300 text-sm">
-                            Try different email formats (username@gmail.com vs username+tag@gmail.com).
+                            {t('specificIssues.invalidCredentials.solutions.1.description')}
                           </p>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="flex items-center gap-2 mb-2">
                             <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-white font-medium">Account verification</span>
+                            <span className="text-white font-medium">{t('specificIssues.invalidCredentials.solutions.2.title')}</span>
                           </div>
                           <p className="text-gray-300 text-sm">
-                            Ensure your account is verified. Check your email for verification links.
+                            {t('specificIssues.invalidCredentials.solutions.2.description')}
                           </p>
                         </div>
                       </div>
@@ -199,19 +201,17 @@ export default function LoginIssuesContent() {
                   <div className="flex items-start gap-4">
                     <Lock className="w-6 h-6 text-orange-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Account temporarily locked</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('specificIssues.accountLocked.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        After multiple failed login attempts, accounts are temporarily locked for security.
-                        This prevents brute force attacks.
+                        {t('specificIssues.accountLocked.description')}
                       </p>
                       <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-4">
                         <div className="flex items-center gap-3 mb-2">
                           <AlertTriangle className="w-5 h-5 text-orange-400" />
-                          <span className="text-orange-400 font-medium">Automatic unlock</span>
+                          <span className="text-orange-400 font-medium">{t('specificIssues.accountLocked.note.title')}</span>
                         </div>
                         <p className="text-gray-300 text-sm">
-                          Accounts are automatically unlocked after 30 minutes. For immediate access,
-                          use the "Forgot Password" link to reset your password.
+                          {t('specificIssues.accountLocked.note.description')}
                         </p>
                       </div>
                     </div>
@@ -223,27 +223,27 @@ export default function LoginIssuesContent() {
                   <div className="flex items-start gap-4">
                     <Shield className="w-6 h-6 text-blue-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Two-factor authentication issues</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('specificIssues.twoFactorAuth.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        If you have 2FA enabled, you need both your password and a verification code.
+                        {t('specificIssues.twoFactorAuth.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="text-blue-400 font-medium mb-1">Authenticator App Issues:</div>
+                          <div className="text-blue-400 font-medium mb-1">{t('specificIssues.twoFactorAuth.authenticatorApp.title')}</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Check device time is correct</li>
-                            <li>• Ensure app is up to date</li>
-                            <li>• Try regenerating backup codes</li>
-                            <li>• Contact support if app is lost</li>
+                            <li>• {t('specificIssues.twoFactorAuth.authenticatorApp.issues.0')}</li>
+                            <li>• {t('specificIssues.twoFactorAuth.authenticatorApp.issues.1')}</li>
+                            <li>• {t('specificIssues.twoFactorAuth.authenticatorApp.issues.2')}</li>
+                            <li>• {t('specificIssues.twoFactorAuth.authenticatorApp.issues.3')}</li>
                           </ul>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="text-blue-400 font-medium mb-1">SMS Code Issues:</div>
+                          <div className="text-blue-400 font-medium mb-1">{t('specificIssues.twoFactorAuth.smsCode.title')}</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Check phone signal and coverage</li>
-                            <li>• Verify phone number is correct</li>
-                            <li>• Wait 60 seconds for retry</li>
-                            <li>• Try backup codes if available</li>
+                            <li>• {t('specificIssues.twoFactorAuth.smsCode.issues.0')}</li>
+                            <li>• {t('specificIssues.twoFactorAuth.smsCode.issues.1')}</li>
+                            <li>• {t('specificIssues.twoFactorAuth.smsCode.issues.2')}</li>
+                            <li>• {t('specificIssues.twoFactorAuth.smsCode.issues.3')}</li>
                           </ul>
                         </div>
                       </div>
@@ -256,19 +256,19 @@ export default function LoginIssuesContent() {
                   <div className="flex items-start gap-4">
                     <RefreshCw className="w-6 h-6 text-purple-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Social login problems</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('specificIssues.socialLogin.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Issues with Google, GitHub, or other social login providers.
+                        {t('specificIssues.socialLogin.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="text-purple-400 font-medium mb-1">Common Solutions:</div>
+                          <div className="text-purple-400 font-medium mb-1">{t('specificIssues.socialLogin.solutions.title')}</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Clear browser cookies for the provider</li>
-                            <li>• Ensure you're logged into the provider</li>
-                            <li>• Check if provider account is verified</li>
-                            <li>• Try using email/password login instead</li>
-                            <li>• Contact support for account linking issues</li>
+                            <li>• {t('specificIssues.socialLogin.solutions.fixes.0')}</li>
+                            <li>• {t('specificIssues.socialLogin.solutions.fixes.1')}</li>
+                            <li>• {t('specificIssues.socialLogin.solutions.fixes.2')}</li>
+                            <li>• {t('specificIssues.socialLogin.solutions.fixes.3')}</li>
+                            <li>• {t('specificIssues.socialLogin.solutions.fixes.4')}</li>
                           </ul>
                         </div>
                       </div>
@@ -279,127 +279,133 @@ export default function LoginIssuesContent() {
               </div>
 
               {/* Password Reset */}
-              <h3 className="text-2xl font-bold text-white mb-6">Password reset process</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('passwordReset.title')}</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
-
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                      1
+                      {t('passwordReset.steps.0.step')}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-lg font-semibold mb-2">Request password reset</h3>
+                      <h3 className="text-white text-lg font-semibold mb-2">{t('passwordReset.steps.0.title')}</h3>
                       <p className="text-gray-300 text-sm">
-                        Click "Forgot Password" on the login page and enter your email address.
-                        We'll send reset instructions to your email.
+                        {t('passwordReset.steps.0.description')}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                      2
+                      {t('passwordReset.steps.1.step')}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-lg font-semibold mb-2">Check your email</h3>
+                      <h3 className="text-white text-lg font-semibold mb-2">{t('passwordReset.steps.1.title')}</h3>
                       <p className="text-gray-300 text-sm">
-                        Look for an email from us with the subject "Reset your password".
-                        Check your spam/junk folder if you don't see it.
+                        {t('passwordReset.steps.1.description')}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                      3
+                      {t('passwordReset.steps.2.step')}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-lg font-semibold mb-2">Follow reset link</h3>
+                      <h3 className="text-white text-lg font-semibold mb-2">{t('passwordReset.steps.2.title')}</h3>
                       <p className="text-gray-300 text-sm">
-                        Click the reset link in the email. It will take you to a secure page to create a new password.
+                        {t('passwordReset.steps.2.description')}
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                      4
+                      {t('passwordReset.steps.3.step')}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-lg font-semibold mb-2">Create new password</h3>
+                      <h3 className="text-white text-lg font-semibold mb-2">{t('passwordReset.steps.3.title')}</h3>
                       <p className="text-gray-300 text-sm">
-                        Choose a strong password and confirm it. You'll be automatically logged in with your new password.
+                        {t('passwordReset.steps.3.description')}
                       </p>
                     </div>
                   </div>
 
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      {t('passwordReset.steps.4.step')}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-white text-lg font-semibold mb-2">{t('passwordReset.steps.4.title')}</h3>
+                      <p className="text-gray-300 text-sm">
+                        {t('passwordReset.steps.4.description')}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Email Issues */}
-              <h3 className="text-2xl font-bold text-white mb-6">Didn't receive reset email?</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('emailIssues.title')}</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
                     <Mail className="w-5 h-5 text-blue-400" />
-                    Check these folders
+                    {t('emailIssues.checkFolders.title')}
                   </h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Inbox (primary)</li>
-                    <li>• Spam/Junk folder</li>
-                    <li>• Promotions tab (Gmail)</li>
-                    <li>• Social/Updates (Gmail)</li>
-                    <li>• Clutter (Outlook)</li>
+                    <li>• {t('emailIssues.checkFolders.folders.0')}</li>
+                    <li>• {t('emailIssues.checkFolders.folders.1')}</li>
+                    <li>• {t('emailIssues.checkFolders.folders.2')}</li>
+                    <li>• {t('emailIssues.checkFolders.folders.3')}</li>
+                    <li>• {t('emailIssues.checkFolders.folders.4')}</li>
                   </ul>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
                     <AlertTriangle className="w-5 h-5 text-orange-400" />
-                    Common issues
+                    {t('emailIssues.commonIssues.title')}
                   </h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Email address typo</li>
-                    <li>• Full inbox/quota exceeded</li>
-                    <li>• Email filters blocking us</li>
-                    <li>• Temporary email service</li>
-                    <li>• Domain-specific issues</li>
+                    <li>• {t('emailIssues.commonIssues.issues.0')}</li>
+                    <li>• {t('emailIssues.commonIssues.issues.1')}</li>
+                    <li>• {t('emailIssues.commonIssues.issues.2')}</li>
+                    <li>• {t('emailIssues.commonIssues.issues.3')}</li>
+                    <li>• {t('emailIssues.commonIssues.issues.4')}</li>
                   </ul>
                 </div>
 
               </div>
 
               {/* Account Recovery */}
-              <h3 className="text-2xl font-bold text-white mb-6">Account recovery</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('accountRecovery.title')}</h3>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
                   <Shield className="w-8 h-8 text-blue-400 mt-1" />
                   <div>
-                    <h3 className="text-blue-400 text-lg font-semibold mb-3">Need help recovering your account?</h3>
+                    <h3 className="text-blue-400 text-lg font-semibold mb-3">{t('accountRecovery.title')}</h3>
                     <p className="text-gray-300 mb-4">
-                      If you're still unable to access your account after trying all the above steps,
-                      our support team can help verify your identity and restore access.
+                      {t('accountRecovery.description')}
                     </p>
                     <div className="space-y-3">
                       <div>
-                        <h4 className="text-white font-medium mb-1">What we'll need:</h4>
+                        <h4 className="text-white font-medium mb-1">{t('accountRecovery.whatWeNeed.title')}</h4>
                         <ul className="text-gray-300 text-sm space-y-1">
-                          <li>• Email address associated with the account</li>
-                          <li>• Date the account was created (approximate)</li>
-                          <li>• Last successful login date (if known)</li>
-                          <li>• Any payment receipts or invoice numbers</li>
-                          <li>• Description of recent account activity</li>
+                          <li>• {t('accountRecovery.whatWeNeed.items.0')}</li>
+                          <li>• {t('accountRecovery.whatWeNeed.items.1')}</li>
+                          <li>• {t('accountRecovery.whatWeNeed.items.2')}</li>
+                          <li>• {t('accountRecovery.whatWeNeed.items.3')}</li>
+                          <li>• {t('accountRecovery.whatWeNeed.items.4')}</li>
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-white font-medium mb-1">Verification process:</h4>
+                        <h4 className="text-white font-medium mb-1">{t('accountRecovery.verificationProcess.title')}</h4>
                         <p className="text-gray-300 text-sm">
-                          We'll verify your identity through multiple factors and may ask for additional information
-                          to ensure account security.
+                          {t('accountRecovery.verificationProcess.description')}
                         </p>
                       </div>
                     </div>
@@ -408,44 +414,44 @@ export default function LoginIssuesContent() {
               </div>
 
               {/* Prevention */}
-              <h2 className="text-2xl font-bold text-white mb-6">Preventing future login issues</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('prevention.title')}</h2>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-white mb-4">Security Best Practices</h3>
+                  <h3 className="text-xl font-semibold text-white mb-4">{t('prevention.securityBestPractices.title')}</h3>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Use a password manager</h4>
+                      <h4 className="text-white font-medium">{t('prevention.securityBestPractices.practices.0.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Store your passwords securely and generate strong, unique passwords for each service.
+                        {t('prevention.securityBestPractices.practices.0.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Enable two-factor authentication</h4>
+                      <h4 className="text-white font-medium">{t('prevention.securityBestPractices.practices.1.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Add an extra layer of security to prevent unauthorized access even if your password is compromised.
+                        {t('prevention.securityBestPractices.practices.1.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Keep recovery information updated</h4>
+                      <h4 className="text-white font-medium">{t('prevention.securityBestPractices.practices.2.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Ensure your recovery email and phone number are current and accessible.
+                        {t('prevention.securityBestPractices.practices.2.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Regular password updates</h4>
+                      <h4 className="text-white font-medium">{t('prevention.securityBestPractices.practices.3.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Change your password periodically, especially after any security incidents.
+                        {t('prevention.securityBestPractices.practices.3.description')}
                       </p>
                     </div>
                   </div>
@@ -454,23 +460,22 @@ export default function LoginIssuesContent() {
 
               {/* Still Having Issues */}
               <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 mt-8">
-                <h3 className="text-white text-lg font-semibold mb-3">Still can't log in?</h3>
+                <h3 className="text-white text-lg font-semibold mb-3">{t('stillHavingIssues.title')}</h3>
                 <p className="text-gray-300 mb-4">
-                  If none of the above solutions work, our support team is here to help you regain access to your account.
-                  We'll work with you to resolve the issue securely.
+                  {t('stillHavingIssues.description')}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/contact"
                     className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
-                    Contact Support
+                    {t('stillHavingIssues.contactSupport')}
                   </Link>
                   <Link
                     href="/help/security/two-factor-authentication"
                     className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
-                    2FA Help
+                    {t('stillHavingIssues.twoFaHelp')}
                   </Link>
                 </div>
               </div>

@@ -628,19 +628,688 @@
             "title": "Login and Access Problems",
             "href": "/help/troubleshooting/login-issues",
             "time": "6 min",
-            "description": "Resolve login errors, password reset issues, and account access problems."
+            "description": "Resolve login errors, password reset issues, and account access problems.",
+            "backToCategory": "Back to Troubleshooting",
+            "backToHelp": "Back to Help Center",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Help",
+              "troubleshooting": "Troubleshooting",
+              "loginIssues": "Login Issues"
+            },
+            "header": {
+              "category": "Troubleshooting",
+              "title": "Login issues",
+              "readTime": "6 min read",
+              "lastUpdated": "Last updated: March 2025"
+            },
+            "intro": {
+              "title": "Common login problems",
+              "description": "Having trouble accessing your account? This guide covers the most common login issues and their solutions. Most problems can be resolved with a few simple steps."
+            },
+            "quickFixes": {
+              "title": "Quick fixes to try first",
+              "clearCache": {
+                "title": "Clear browser cache",
+                "instructions": [
+                  "Press Ctrl+Shift+R (Windows/Linux)",
+                  "Press Cmd+Shift+R (Mac)",
+                  "Or clear cache in browser settings",
+                  "Try incognito/private mode"
+                ]
+              },
+              "checkCredentials": {
+                "title": "Check your credentials",
+                "instructions": [
+                  "Verify email address is correct",
+                  "Check password (case sensitive)",
+                  "Ensure Caps Lock is off",
+                  "Try password reset if unsure"
+                ]
+              },
+              "disableVpn": {
+                "title": "Disable VPN/extensions",
+                "instructions": [
+                  "Temporarily disable VPN",
+                  "Turn off browser extensions",
+                  "Try different network",
+                  "Check firewall settings"
+                ]
+              },
+              "tryBrowser": {
+                "title": "Try different browser",
+                "instructions": [
+                  "Chrome, Firefox, Safari, Edge",
+                  "Clear all browser data",
+                  "Update to latest version",
+                  "Try mobile browser"
+                ]
+              }
+            },
+            "specificIssues": {
+              "title": "Specific login problems",
+              "invalidCredentials": {
+                "title": "\"Invalid email or password\"",
+                "description": "This error means the email or password you entered doesn't match our records. Here's how to resolve it:",
+                "solutions": [
+                  {
+                    "title": "Reset your password",
+                    "description": "Click \"Forgot Password\" on the login page and follow the reset instructions sent to your email."
+                  },
+                  {
+                    "title": "Check email variations",
+                    "description": "Try different email formats (username@gmail.com vs username+tag@gmail.com)."
+                  },
+                  {
+                    "title": "Account verification",
+                    "description": "Ensure your account is verified. Check your email for verification links."
+                  }
+                ]
+              },
+              "accountLocked": {
+                "title": "Account temporarily locked",
+                "description": "After multiple failed login attempts, accounts are temporarily locked for security. This prevents brute force attacks.",
+                "note": {
+                  "title": "Automatic unlock",
+                  "description": "Accounts are automatically unlocked after 30 minutes. For immediate access, use the \"Forgot Password\" link to reset your password."
+                }
+              },
+              "twoFactorAuth": {
+                "title": "Two-factor authentication issues",
+                "description": "If you have 2FA enabled, you need both your password and a verification code.",
+                "authenticatorApp": {
+                  "title": "Authenticator App Issues:",
+                  "issues": [
+                    "Check device time is correct",
+                    "Ensure app is up to date",
+                    "Try regenerating backup codes",
+                    "Contact support if app is lost"
+                  ]
+                },
+                "smsCode": {
+                  "title": "SMS Code Issues:",
+                  "issues": [
+                    "Check phone signal and coverage",
+                    "Verify phone number is correct",
+                    "Wait 60 seconds for retry",
+                    "Try backup codes if available"
+                  ]
+                }
+              },
+              "socialLogin": {
+                "title": "Social login problems",
+                "description": "Issues with Google, GitHub, or other social login providers.",
+                "solutions": {
+                  "title": "Common Solutions:",
+                  "fixes": [
+                    "Clear browser cookies for the provider",
+                    "Ensure you're logged into the provider",
+                    "Check if provider account is verified",
+                    "Try using email/password login instead",
+                    "Contact support for account linking issues"
+                  ]
+                }
+              }
+            },
+            "passwordReset": {
+              "title": "Password reset process",
+              "steps": [
+                {
+                  "step": "1",
+                  "title": "Request password reset",
+                  "description": "Click \"Forgot Password\" on the login page and enter your email address. We'll send reset instructions to your email."
+                },
+                {
+                  "step": "2",
+                  "title": "Check your email",
+                  "description": "Look for an email from us with the subject line containing password reset. Check your spam folder if you don't see it."
+                },
+                {
+                  "step": "3",
+                  "title": "Follow the link",
+                  "description": "Click the secure reset link in the email. This link expires in 24 hours for security."
+                },
+                {
+                  "step": "4",
+                  "title": "Create new password",
+                  "description": "Enter a strong, unique password. We recommend using a password manager to generate and store secure passwords."
+                },
+                {
+                  "step": "5",
+                  "title": "Confirm and login",
+                  "description": "Your password is now reset. Return to the login page and sign in with your new credentials."
+                }
+              ]
+            },
+            "emailIssues": {
+              "title": "Didn't receive reset email?",
+              "checkFolders": {
+                "title": "Check these folders",
+                "folders": [
+                  "Inbox (primary)",
+                  "Spam/Junk folder",
+                  "Promotions tab (Gmail)",
+                  "Social/Updates (Gmail)",
+                  "Clutter (Outlook)"
+                ]
+              },
+              "commonIssues": {
+                "title": "Common issues",
+                "issues": [
+                  "Email address typo",
+                  "Full inbox/quota exceeded",
+                  "Email filters blocking us",
+                  "Temporary email service",
+                  "Domain-specific issues"
+                ]
+              }
+            },
+            "accountRecovery": {
+              "title": "Account recovery",
+              "description": "Need help recovering your account? If you're still unable to access your account after trying all the above steps, our support team can help verify your identity and restore access.",
+              "whatWeNeed": {
+                "title": "What we'll need:",
+                "items": [
+                  "Email address associated with the account",
+                  "Date the account was created (approximate)",
+                  "Last successful login date (if known)",
+                  "Any payment receipts or invoice numbers",
+                  "Description of recent account activity"
+                ]
+              },
+              "verificationProcess": {
+                "title": "Verification process:",
+                "description": "We'll verify your identity through multiple factors and may ask for additional information to ensure account security."
+              }
+            },
+            "prevention": {
+              "title": "Preventing future login issues",
+              "securityBestPractices": {
+                "title": "Security Best Practices",
+                "practices": [
+                  {
+                    "title": "Use a password manager",
+                    "description": "Store your passwords securely and generate strong, unique passwords for each service."
+                  },
+                  {
+                    "title": "Enable two-factor authentication",
+                    "description": "Add an extra layer of security to prevent unauthorized access even if your password is compromised."
+                  },
+                  {
+                    "title": "Keep recovery information updated",
+                    "description": "Ensure your recovery email and phone number are current and accessible."
+                  },
+                  {
+                    "title": "Regular password updates",
+                    "description": "Change your password periodically, especially after any security incidents."
+                  }
+                ]
+              }
+            },
+            "stillHavingIssues": {
+              "title": "Still can't log in?",
+              "description": "If none of the above solutions work, our support team is here to help you regain access to your account. We'll work with you to resolve the issue securely.",
+              "contactSupport": "Contact Support",
+              "twoFaHelp": "2FA Help"
+            },
+            "contactSupport": "If these steps don't help, contact our support team at support@aiseoturbo.com for assistance."
           },
           "syncIssues": {
             "title": "Data Synchronization Issues",
             "href": "/help/troubleshooting/sync-issues",
             "time": "5 min",
-            "description": "Fix problems with data syncing, import/export errors, and connectivity issues."
+            "description": "Fix problems with data syncing, import/export errors, and connectivity issues.",
+            "backToCategory": "Back to Troubleshooting",
+            "backToHelp": "Back to Help Center",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Help",
+              "troubleshooting": "Troubleshooting",
+              "syncIssues": "Sync Issues"
+            },
+            "header": {
+              "category": "Troubleshooting",
+              "title": "Sync issues",
+              "readTime": "5 min read",
+              "lastUpdated": "Last updated: March 2025"
+            },
+            "intro": {
+              "title": "Data synchronization problems",
+              "description": "Having trouble with data not syncing between devices or seeing outdated information? This guide covers common sync issues and how to resolve them."
+            },
+            "quickChecks": {
+              "title": "Quick checks to try first",
+              "connection": {
+                "title": "Check your connection",
+                "instructions": [
+                  "Ensure you're connected to the internet",
+                  "Try switching between WiFi and mobile data",
+                  "Check if other websites load properly",
+                  "Restart your router if needed"
+                ]
+              },
+              "forceRefresh": {
+                "title": "Force refresh the page",
+                "instructions": [
+                  "Press Ctrl+F5 (Windows/Linux) or Cmd+Shift+R (Mac)",
+                  "Clear browser cache and cookies",
+                  "Try opening in an incognito/private window",
+                  "Restart your browser completely"
+                ]
+              },
+              "appRestart": {
+                "title": "Restart the application",
+                "instructions": [
+                  "Close all browser tabs with our app",
+                  "Wait 30 seconds before reopening",
+                  "Try a different browser if possible",
+                  "Check if the issue persists across browsers"
+                ]
+              },
+              "settingsCheck": {
+                "title": "Verify sync settings",
+                "instructions": [
+                  "Ensure sync is enabled in your account",
+                  "Check if background sync is active",
+                  "Verify you have the correct permissions",
+                  "Confirm your account is in good standing"
+                ]
+              }
+            },
+            "commonProblems": {
+              "title": "Common sync problems",
+              "outdatedData": {
+                "title": "Data appears outdated",
+                "description": "You're seeing old information that hasn't updated with recent changes.",
+                "solutions": [
+                  "Use Ctrl+F5 (Windows) or Cmd+Shift+R (Mac) to hard refresh your browser.",
+                  "Look for sync indicators in the app - some changes may take a few minutes to propagate.",
+                  "Clear your browser cache and cookies, then log back in to force a fresh sync."
+                ]
+              },
+              "syncErrors": {
+                "title": "Sync errors or failures",
+                "description": "Synchronization is failing with error messages or not completing.",
+                "solutions": [
+                  "Check your account permissions and ensure you have the necessary access rights.",
+                  "Contact support if errors persist - provide the specific error message for faster resolution."
+                ]
+              }
+            },
+            "advancedSolutions": {
+              "title": "Advanced troubleshooting",
+              "browserIssues": {
+                "title": "Browser-specific issues",
+                "description": "Some browsers handle sync differently. Try these solutions:",
+                "solutions": [
+                  "Disable browser extensions temporarily",
+                  "Clear all browsing data (cache, cookies, local storage)",
+                  "Try disabling browser sync features",
+                  "Update to the latest browser version"
+                ]
+              },
+              "networkIssues": {
+                "title": "Network and firewall problems",
+                "description": "Corporate networks or firewalls may block sync functionality.",
+                "solutions": [
+                  "Try accessing from a different network",
+                  "Check with your IT department about firewall rules",
+                  "Use a VPN if available",
+                  "Try mobile hotspot as alternative connection"
+                ]
+              },
+              "accountIssues": {
+                "title": "Account and permission problems",
+                "description": "Sync may fail due to account restrictions or permission issues.",
+                "solutions": [
+                  "Verify your account is active and in good standing",
+                  "Check if you have admin privileges if required",
+                  "Ensure your email is verified",
+                  "Contact billing support if account is suspended"
+                ]
+              }
+            },
+            "deviceSyncIssues": {
+              "title": "Not syncing between devices",
+              "description": "Changes made on one device aren't appearing on others.",
+              "crossDeviceSync": [
+                "Ensure all devices are logged into same account",
+                "Check that sync is enabled on all devices",
+                "Verify devices have internet access",
+                "Restart apps on all devices",
+                "Check for app updates on all devices"
+              ],
+              "accountVerification": [
+                "Confirm same email address on all devices",
+                "Check account status and permissions",
+                "Verify billing status (sync may be limited on free accounts)"
+              ]
+            },
+            "slowSync": {
+              "title": "Sync is very slow",
+              "description": "Synchronization is taking much longer than usual.",
+              "performanceFactors": [
+                "Large amounts of data to sync",
+                "Slow internet connection",
+                "High server load (check status page)",
+                "Many devices syncing simultaneously",
+                "Background processes interfering"
+              ],
+              "optimizationTips": [
+                "Sync during off-peak hours",
+                "Close other bandwidth-intensive apps",
+                "Ensure stable, fast internet connection",
+                "Consider upgrading your plan for faster sync"
+              ]
+            },
+            "advancedTroubleshooting": {
+              "title": "Advanced troubleshooting",
+              "accountSettings": [
+                "Verify account is in good standing",
+                "Check billing status",
+                "Ensure account hasn't been suspended",
+                "Confirm email verification status",
+                "Check for any account flags"
+              ],
+              "applicationSettings": [
+                "Reset sync settings to defaults",
+                "Clear all application data",
+                "Reinstall the application",
+                "Check for conflicting applications",
+                "Verify system permissions"
+              ],
+              "networkIssues": [
+                "Test with different networks",
+                "Check firewall/proxy settings",
+                "Verify DNS resolution",
+                "Test with VPN on/off",
+                "Check for ISP restrictions"
+              ],
+              "deviceIssues": [
+                "Check available storage space",
+                "Verify system compatibility",
+                "Update operating system",
+                "Check for malware/viruses",
+                "Test on different devices"
+              ]
+            },
+            "syncStatusDashboard": {
+              "title": "Checking sync status",
+              "howToCheck": "How to check your sync status:",
+              "dashboardIndicator": {
+                "title": "Dashboard Indicator",
+                "description": "Look for sync status indicators in your account dashboard or app settings. Green usually means healthy, yellow/orange means issues, red means errors."
+              },
+              "lastSyncTime": {
+                "title": "Last Sync Time",
+                "description": "Check when your last successful sync occurred. If it's been more than a few hours, there may be an issue that needs attention."
+              },
+              "errorLogs": {
+                "title": "Error Logs",
+                "description": "Review any error messages or logs that might provide clues about what's going wrong."
+              },
+              "serviceStatus": {
+                "title": "Service Status",
+                "description": "Check our status page for any ongoing service issues that might affect sync."
+              }
+            },
+            "prevention": {
+              "title": "Preventing sync issues",
+              "practices": [
+                {
+                  "title": "Maintain stable connections",
+                  "description": "Use reliable internet connections and avoid switching networks frequently during sync operations."
+                },
+                {
+                  "title": "Keep apps updated",
+                  "description": "Regularly update your applications to ensure you have the latest sync improvements and bug fixes."
+                },
+                {
+                  "title": "Monitor storage space",
+                  "description": "Keep adequate free space on your devices and accounts to prevent sync interruptions."
+                },
+                {
+                  "title": "Regular maintenance",
+                  "description": "Periodically clear caches, restart applications, and check sync settings to keep everything running smoothly."
+                }
+              ]
+            },
+            "stillHavingIssues": {
+              "title": "Still experiencing sync problems?",
+              "description": "If the troubleshooting steps above don't resolve your sync issues, our technical support team can help investigate further. Please provide details about your setup and the specific problems you're experiencing.",
+              "contactSupport": "Contact Technical Support",
+              "performanceIssues": "Performance Issues"
+            },
+            "contactSupport": "If these steps don't help, contact our support team at support@aiseoturbo.com for assistance."
           },
           "performance": {
             "title": "Performance Optimization",
             "href": "/help/troubleshooting/performance",
             "time": "6 min",
-            "description": "Improve audit speed, resolve slow loading issues, and optimize performance."
+            "description": "Improve audit speed, resolve slow loading issues, and optimize performance.",
+            "backToCategory": "Back to Troubleshooting",
+            "backToHelp": "Back to Help Center",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Help",
+              "troubleshooting": "Troubleshooting",
+              "performance": "Performance Issues"
+            },
+            "header": {
+              "category": "Troubleshooting",
+              "title": "Performance issues",
+              "readTime": "6 min read",
+              "lastUpdated": "Last updated: March 2025"
+            },
+            "intro": {
+              "title": "Slow performance troubleshooting",
+              "description": "Experiencing slow loading times, lag, or poor responsiveness? This guide helps you identify and resolve common performance issues across devices and platforms."
+            },
+            "quickChecks": {
+              "title": "Quick performance checks",
+              "networkConnection": {
+                "title": "Network connection",
+                "instructions": [
+                  "Test internet speed (fast.com)",
+                  "Check ping to our servers",
+                  "Try different networks",
+                  "Disable VPN temporarily"
+                ]
+              },
+              "deviceResources": {
+                "title": "Device resources",
+                "instructions": [
+                  "Check CPU and memory usage",
+                  "Close unnecessary applications",
+                  "Free up disk space",
+                  "Restart your device"
+                ]
+              },
+              "browserOptimization": {
+                "title": "Browser optimization",
+                "instructions": [
+                  "Clear browser cache and cookies",
+                  "Disable browser extensions",
+                  "Update to latest browser version",
+                  "Try incognito/private mode"
+                ]
+              },
+              "applicationUpdates": {
+                "title": "Application updates",
+                "instructions": [
+                  "Check for app updates",
+                  "Update operating system",
+                  "Clear app cache/data",
+                  "Reinstall if necessary"
+                ]
+              }
+            },
+            "commonProblems": {
+              "title": "Common performance problems",
+              "slowLoading": {
+                "title": "Slow page loading",
+                "description": "Pages are taking longer than usual to load or become interactive.",
+                "networkIssues": "Network issues",
+                "networkIssuesDesc": "Slow internet, high latency, or network congestion can cause loading delays. Try a speed test and consider switching networks.",
+                "browserCache": "Browser cache",
+                "browserCacheDesc": "Old cached files can slow down loading. Clear your browser cache and hard refresh (Ctrl+F5).",
+                "serverLoad": "Server load",
+                "serverLoadDesc": "High server load during peak times can slow responses. Check our status page for incidents."
+              },
+              "lagging": {
+                "title": "Interface lag and unresponsiveness",
+                "description": "The interface feels sluggish, buttons don't respond immediately, or animations are choppy.",
+                "devicePerformanceTitle": "Device Performance:",
+                "devicePerformance": [
+                  "Close other resource-intensive applications",
+                  "Check available RAM and CPU usage",
+                  "Restart your device to clear memory",
+                  "Update device drivers and firmware"
+                ],
+                "browserIssuesTitle": "Browser Issues:",
+                "browserIssues": [
+                  "Disable browser extensions temporarily",
+                  "Reduce number of open tabs",
+                  "Update browser to latest version",
+                  "Try a different browser"
+                ]
+              },
+              "slowAudits": {
+                "title": "Slow SEO audits",
+                "description": "Website audits are taking much longer than expected to complete.",
+                "auditFactorsTitle": "Audit Factors:",
+                "auditFactors": [
+                  "Large websites take longer to crawl",
+                  "Slow target website response times",
+                  "High crawl depth settings",
+                  "Current server load and queue",
+                  "Network connectivity issues"
+                ],
+                "optimizationTipsTitle": "Optimization Tips:",
+                "optimizationTips": [
+                  "Reduce crawl depth for faster results",
+                  "Audit during off-peak hours",
+                  "Consider upgrading to Pro plan for faster processing",
+                  "Check target website performance first"
+                ]
+              },
+              "memoryIssues": {
+                "title": "High memory usage",
+                "description": "The application is using excessive memory, causing slowdowns or crashes.",
+                "memoryManagementTitle": "Memory Management:",
+                "memoryManagement": [
+                  "Close other memory-intensive applications",
+                  "Clear browser cache and temporary files",
+                  "Restart the application or browser",
+                  "Check for memory leaks in browser dev tools",
+                  "Consider using a lighter browser"
+                ],
+                "deviceResourcesTitle": "Device Resources:",
+                "deviceResources": [
+                  "Ensure adequate RAM for your usage",
+                  "Close unnecessary background processes",
+                  "Update device firmware and drivers",
+                  "Consider hardware upgrades if needed"
+                ]
+              }
+            },
+            "platformSpecific": {
+              "title": "Platform-specific optimizations",
+              "desktopBrowsersTitle": "Desktop Browsers",
+              "desktopBrowsers": [
+                "Use Chrome or Firefox for best performance",
+                "Enable hardware acceleration in settings",
+                "Keep browser updated automatically",
+                "Use browser task manager to identify issues",
+                "Consider using beta versions for latest features"
+              ],
+              "mobileDevicesTitle": "Mobile Devices",
+              "mobileDevices": [
+                "Ensure stable cellular/WiFi connection",
+                "Close background apps to free memory",
+                "Clear app cache regularly",
+                "Update device OS and apps",
+                "Consider using desktop site for complex tasks"
+              ],
+              "networkOptimizationTitle": "Network Optimization",
+              "networkOptimization": [
+                "Use wired connection when possible",
+                "Avoid public WiFi for sensitive work",
+                "Check for network interference",
+                "Use a VPN only if necessary",
+                "Monitor network latency and packet loss"
+              ],
+              "dataManagementTitle": "Data Management",
+              "dataManagement": [
+                "Regularly archive old audit data",
+                "Clean up unused keyword lists",
+                "Optimize database queries",
+                "Use data compression features",
+                "Monitor storage usage and limits"
+              ]
+            },
+            "performanceMonitoring": {
+              "title": "Monitoring performance",
+              "toolsTitle": "Tools to monitor and diagnose performance:",
+              "browserDevTools": {
+                "title": "Browser Developer Tools",
+                "description": "Use Network and Performance tabs in browser dev tools to identify bottlenecks. Look for slow requests, large files, and rendering issues."
+              },
+              "systemMonitoring": {
+                "title": "System Monitoring",
+                "description": "Monitor CPU, memory, disk, and network usage with system tools. Identify resource-intensive processes and optimize accordingly."
+              },
+              "networkTesting": {
+                "title": "Network Testing",
+                "description": "Use tools like ping, traceroute, and speed tests to diagnose network issues. Check for packet loss, high latency, or bandwidth limitations."
+              },
+              "applicationMetrics": {
+                "title": "Application Metrics",
+                "description": "Review audit completion times, error rates, and usage patterns. Compare performance across different times and conditions."
+              }
+            },
+            "advancedTips": {
+              "title": "Advanced performance tips",
+              "optimizeAuditSettings": {
+                "title": "Optimize audit settings",
+                "description": "Adjust crawl depth, frequency, and scope based on your needs. More comprehensive audits take longer but provide better insights."
+              },
+              "scheduleStrategically": {
+                "title": "Schedule strategically",
+                "description": "Run large audits during off-peak hours when server load is lower. Use scheduling features to automate routine audits."
+              },
+              "useAppropriatePlans": {
+                "title": "Use appropriate plans",
+                "description": "Higher-tier plans offer faster processing, more concurrent audits, and priority queuing for better performance."
+              },
+              "monitorAndOptimize": {
+                "title": "Monitor and optimize",
+                "description": "Regularly review performance metrics and adjust your usage patterns. Identify bottlenecks and optimize your workflow accordingly."
+              }
+            },
+            "contactSupport": {
+              "title": "When to contact support",
+              "persistentIssues": {
+                "title": "Persistent performance issues",
+                "description": "If performance problems persist after trying all troubleshooting steps, our technical support team can investigate server-side issues or account-specific problems.",
+                "reportItemsTitle": "What to include in your report:",
+                "reportItems": [
+                  "Device and browser information",
+                  "Network speed test results",
+                  "Screenshots of performance issues",
+                  "Timeline of when problems occur",
+                  "Steps to reproduce the issue",
+                  "Any error messages or console logs"
+                ]
+              }
+            },
+            "prevention": {
+              "title": "Maintaining optimal performance",
+              "description": "Regular maintenance and best practices can prevent most performance issues. Keep your systems updated and monitor performance proactively.",
+              "reportPerformanceIssue": "Report Performance Issue",
+              "syncIssues": "Sync Issues"
+            },
+            "contactSupportMessage": "If these steps don't help, contact our support team at support@aiseoturbo.com for assistance."
           },
           "auditIssues": {
             "title": "Audit Not Completing",

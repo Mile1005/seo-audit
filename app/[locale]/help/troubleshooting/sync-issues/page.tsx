@@ -1,5 +1,6 @@
 import { generateSEOMeta } from '@/lib/seo'
 import { setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import SyncIssuesContent from './SyncIssuesContent'
 
 type Props = {
@@ -8,10 +9,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'help.categories.troubleshooting.articles.syncIssues' })
 
   return generateSEOMeta({
-    title: 'Sync Issues Troubleshooting - AISEOTurbo Help',
-    description: 'Complete troubleshooting guide for fixing data synchronization issues in AISEOTurbo. Solutions for sync errors, outdated data, and cross-device sync problems.',
+    title: `${t('title')} - AISEOTurbo Help`,
+    description: t('description'),
     path: '/help/troubleshooting/sync-issues',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })

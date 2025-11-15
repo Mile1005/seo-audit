@@ -5,8 +5,11 @@ import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, RefreshCw, AlertTriangle, CheckCircle, Wifi, Database, Settings, Zap, Monitor, Smartphone } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function SyncIssuesContent() {
+  const t = useTranslations('help.categories.troubleshooting.articles.syncIssues')
+
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
@@ -14,11 +17,12 @@ export default function SyncIssuesContent() {
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Home', url: 'https://www.aiseoturbo.com' },
-            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Troubleshooting', url: 'https://www.aiseoturbo.com/help/troubleshooting' },
-            { name: 'Sync Issues', url: 'https://www.aiseoturbo.com/help/troubleshooting/sync-issues' }
+            { name: t('breadcrumb.home'), url: 'https://www.aiseoturbo.com' },
+            { name: t('breadcrumb.help'), url: 'https://www.aiseoturbo.com/help' },
+            { name: t('breadcrumb.troubleshooting'), url: 'https://www.aiseoturbo.com/help/troubleshooting' },
+            { name: t('breadcrumb.syncIssues'), url: 'https://www.aiseoturbo.com/help/troubleshooting/sync-issues' }
           ]}
+          includeHome={false}
         />
 
         {/* Article Header */}
@@ -34,7 +38,7 @@ export default function SyncIssuesContent() {
                 className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-6 group"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                Back to Help Center
+                {t('backToHelp')}
               </Link>
 
               <div className="flex items-center gap-4 mb-6">
@@ -42,9 +46,9 @@ export default function SyncIssuesContent() {
                   <RefreshCw className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <span className="text-yellow-400 text-sm font-medium">Troubleshooting</span>
+                  <span className="text-yellow-400 text-sm font-medium">{t('header.category')}</span>
                   <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    Sync issues
+                    {t('header.title')}
                   </h1>
                 </div>
               </div>
@@ -52,11 +56,11 @@ export default function SyncIssuesContent() {
               <div className="flex items-center gap-6 text-gray-400 text-sm mb-8">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  <span>5 min read</span>
+                  <span>{t('header.readTime')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4" />
-                  <span>Last updated: March 2025</span>
+                  <span>{t('header.lastUpdated')}</span>
                 </div>
               </div>
             </motion.div>
@@ -78,76 +82,75 @@ export default function SyncIssuesContent() {
                 <div className="flex items-start gap-4">
                   <Database className="w-6 h-6 text-blue-400 mt-1" />
                   <div>
-                    <h2 className="text-white text-lg font-semibold mb-2">Data synchronization problems</h2>
+                    <h2 className="text-white text-lg font-semibold mb-2">{t('intro.title')}</h2>
                     <p className="text-gray-300 mb-0">
-                      Having trouble with data not syncing between devices or seeing outdated information?
-                      This guide covers common sync issues and how to resolve them.
+                      {t('intro.description')}
                     </p>
                   </div>
                 </div>
               </div>
 
               {/* Quick Checks */}
-              <h2 className="text-2xl font-bold text-white mb-6">Quick checks to try first</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('quickChecks.title')}</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Wifi className="w-6 h-6 text-green-400" />
-                    <h3 className="text-white font-semibold">Check your connection</h3>
+                    <h3 className="text-white font-semibold">{t('quickChecks.connection.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Ensure stable internet connection</div>
-                    <div>• Try switching networks (WiFi/cellular)</div>
-                    <div>• Check if other apps are working</div>
-                    <div>• Restart your router if needed</div>
+                    <div>• {t('quickChecks.connection.instructions.0')}</div>
+                    <div>• {t('quickChecks.connection.instructions.1')}</div>
+                    <div>• {t('quickChecks.connection.instructions.2')}</div>
+                    <div>• {t('quickChecks.connection.instructions.3')}</div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <RefreshCw className="w-6 h-6 text-blue-400" />
-                    <h3 className="text-white font-semibold">Manual sync</h3>
+                    <h3 className="text-white font-semibold">{t('quickChecks.forceRefresh.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Look for sync/refresh buttons</div>
-                    <div>• Pull down to refresh (mobile)</div>
-                    <div>• Force refresh browser (Ctrl+F5)</div>
-                    <div>• Wait a few minutes and try again</div>
+                    <div>• {t('quickChecks.forceRefresh.instructions.0')}</div>
+                    <div>• {t('quickChecks.forceRefresh.instructions.1')}</div>
+                    <div>• {t('quickChecks.forceRefresh.instructions.2')}</div>
+                    <div>• {t('quickChecks.forceRefresh.instructions.3')}</div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Monitor className="w-6 h-6 text-purple-400" />
-                    <h3 className="text-white font-semibold">Restart applications</h3>
+                    <h3 className="text-white font-semibold">{t('quickChecks.appRestart.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Close and reopen the app</div>
-                    <div>• Clear app cache if available</div>
-                    <div>• Restart your device</div>
-                    <div>• Update to latest version</div>
+                    <div>• {t('quickChecks.appRestart.instructions.0')}</div>
+                    <div>• {t('quickChecks.appRestart.instructions.1')}</div>
+                    <div>• {t('quickChecks.appRestart.instructions.2')}</div>
+                    <div>• {t('quickChecks.appRestart.instructions.3')}</div>
                   </div>
                 </div>
 
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Settings className="w-6 h-6 text-orange-400" />
-                    <h3 className="text-white font-semibold">Check sync settings</h3>
+                    <h3 className="text-white font-semibold">{t('quickChecks.settingsCheck.title')}</h3>
                   </div>
                   <div className="space-y-3 text-gray-300 text-sm">
-                    <div>• Verify sync is enabled</div>
-                    <div>• Check sync frequency settings</div>
-                    <div>• Ensure background sync is on</div>
-                    <div>• Review account permissions</div>
+                    <div>• {t('quickChecks.settingsCheck.instructions.0')}</div>
+                    <div>• {t('quickChecks.settingsCheck.instructions.1')}</div>
+                    <div>• {t('quickChecks.settingsCheck.instructions.2')}</div>
+                    <div>• {t('quickChecks.settingsCheck.instructions.3')}</div>
                   </div>
                 </div>
 
               </div>
 
               {/* Common Sync Issues */}
-              <h3 className="text-2xl font-bold text-white mb-6">Common sync problems</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('commonProblems.title')}</h3>
 
               <div className="space-y-6 mb-8">
 
@@ -156,36 +159,24 @@ export default function SyncIssuesContent() {
                   <div className="flex items-start gap-4">
                     <RefreshCw className="w-6 h-6 text-blue-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Data appears outdated</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('commonProblems.outdatedData.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        You're seeing old information that hasn't updated with recent changes.
+                        {t('commonProblems.outdatedData.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-white font-medium">Force refresh</span>
-                          </div>
                           <p className="text-gray-300 text-sm">
-                            Use Ctrl+F5 (Windows) or Cmd+Shift+R (Mac) to hard refresh your browser.
+                            {t('commonProblems.outdatedData.solutions.0')}
                           </p>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-white font-medium">Check sync status</span>
-                          </div>
                           <p className="text-gray-300 text-sm">
-                            Look for sync indicators in the app. Some changes may take a few minutes to propagate.
+                            {t('commonProblems.outdatedData.solutions.1')}
                           </p>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="flex items-center gap-2 mb-2">
-                            <CheckCircle className="w-4 h-4 text-green-400" />
-                            <span className="text-white font-medium">Clear cache</span>
-                          </div>
                           <p className="text-gray-300 text-sm">
-                            Clear your browser cache and cookies, then log back in to force a fresh sync.
+                            {t('commonProblems.outdatedData.solutions.2')}
                           </p>
                         </div>
                       </div>
@@ -198,28 +189,20 @@ export default function SyncIssuesContent() {
                   <div className="flex items-start gap-4">
                     <AlertTriangle className="w-6 h-6 text-red-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Sync errors or failures</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('commonProblems.syncErrors.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Sync is failing with error messages or not completing successfully.
+                        {t('commonProblems.syncErrors.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="text-red-400 font-medium mb-1">Error Messages:</div>
-                          <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• "Network timeout" - Check internet connection</li>
-                            <li>• "Authentication failed" - Re-login to refresh tokens</li>
-                            <li>• "Storage quota exceeded" - Free up space or upgrade plan</li>
-                            <li>• "Rate limit exceeded" - Wait and try again later</li>
-                          </ul>
+                          <p className="text-gray-300 text-sm">
+                            {t('commonProblems.syncErrors.solutions.0')}
+                          </p>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="text-green-400 font-medium mb-1">Solutions:</div>
-                          <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Check error details for specific guidance</li>
-                            <li>• Retry the sync operation</li>
-                            <li>• Contact support if errors persist</li>
-                            <li>• Check service status page</li>
-                          </ul>
+                          <p className="text-gray-300 text-sm">
+                            {t('commonProblems.syncErrors.solutions.1')}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -231,27 +214,27 @@ export default function SyncIssuesContent() {
                   <div className="flex items-start gap-4">
                     <Smartphone className="w-6 h-6 text-purple-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Not syncing between devices</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('deviceSyncIssues.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Changes made on one device aren't appearing on others.
+                        {t('deviceSyncIssues.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="text-purple-400 font-medium mb-1">Cross-Device Sync:</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Ensure all devices are logged into same account</li>
-                            <li>• Check that sync is enabled on all devices</li>
-                            <li>• Verify devices have internet access</li>
-                            <li>• Restart apps on all devices</li>
-                            <li>• Check for app updates on all devices</li>
+                            <li>• {t('deviceSyncIssues.crossDeviceSync.0')}</li>
+                            <li>• {t('deviceSyncIssues.crossDeviceSync.1')}</li>
+                            <li>• {t('deviceSyncIssues.crossDeviceSync.2')}</li>
+                            <li>• {t('deviceSyncIssues.crossDeviceSync.3')}</li>
+                            <li>• {t('deviceSyncIssues.crossDeviceSync.4')}</li>
                           </ul>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="text-purple-400 font-medium mb-1">Account Verification:</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Confirm same email address on all devices</li>
-                            <li>• Check account status and permissions</li>
-                            <li>• Verify billing status (sync may be limited on free accounts)</li>
+                            <li>• {t('deviceSyncIssues.accountVerification.0')}</li>
+                            <li>• {t('deviceSyncIssues.accountVerification.1')}</li>
+                            <li>• {t('deviceSyncIssues.accountVerification.2')}</li>
                           </ul>
                         </div>
                       </div>
@@ -264,28 +247,28 @@ export default function SyncIssuesContent() {
                   <div className="flex items-start gap-4">
                     <Zap className="w-6 h-6 text-yellow-400 mt-1" />
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Sync is very slow</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">{t('slowSync.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Synchronization is taking much longer than usual.
+                        {t('slowSync.description')}
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="text-yellow-400 font-medium mb-1">Performance Factors:</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Large amounts of data to sync</li>
-                            <li>• Slow internet connection</li>
-                            <li>• High server load (check status page)</li>
-                            <li>• Many devices syncing simultaneously</li>
-                            <li>• Background processes interfering</li>
+                            <li>• {t('slowSync.performanceFactors.0')}</li>
+                            <li>• {t('slowSync.performanceFactors.1')}</li>
+                            <li>• {t('slowSync.performanceFactors.2')}</li>
+                            <li>• {t('slowSync.performanceFactors.3')}</li>
+                            <li>• {t('slowSync.performanceFactors.4')}</li>
                           </ul>
                         </div>
                         <div className="bg-slate-900/50 rounded-lg p-3">
                           <div className="text-yellow-400 font-medium mb-1">Optimization Tips:</div>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Sync during off-peak hours</li>
-                            <li>• Close other bandwidth-intensive apps</li>
-                            <li>• Ensure stable, fast internet connection</li>
-                            <li>• Consider upgrading your plan for faster sync</li>
+                            <li>• {t('slowSync.optimizationTips.0')}</li>
+                            <li>• {t('slowSync.optimizationTips.1')}</li>
+                            <li>• {t('slowSync.optimizationTips.2')}</li>
+                            <li>• {t('slowSync.optimizationTips.3')}</li>
                           </ul>
                         </div>
                       </div>
@@ -296,7 +279,7 @@ export default function SyncIssuesContent() {
               </div>
 
               {/* Advanced Troubleshooting */}
-              <h3 className="text-2xl font-bold text-white mb-6">Advanced troubleshooting</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('advancedTroubleshooting.title')}</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
 
@@ -306,11 +289,11 @@ export default function SyncIssuesContent() {
                     Account Settings
                   </h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Verify account is in good standing</li>
-                    <li>• Check billing status</li>
-                    <li>• Ensure account hasn't been suspended</li>
-                    <li>• Confirm email verification status</li>
-                    <li>• Check for any account flags</li>
+                    <li>• {t('advancedTroubleshooting.accountSettings.0')}</li>
+                    <li>• {t('advancedTroubleshooting.accountSettings.1')}</li>
+                    <li>• {t('advancedTroubleshooting.accountSettings.2')}</li>
+                    <li>• {t('advancedTroubleshooting.accountSettings.3')}</li>
+                    <li>• {t('advancedTroubleshooting.accountSettings.4')}</li>
                   </ul>
                 </div>
 
@@ -320,11 +303,11 @@ export default function SyncIssuesContent() {
                     Application Settings
                   </h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Reset sync settings to defaults</li>
-                    <li>• Clear all application data</li>
-                    <li>• Reinstall the application</li>
-                    <li>• Check for conflicting applications</li>
-                    <li>• Verify system permissions</li>
+                    <li>• {t('advancedTroubleshooting.applicationSettings.0')}</li>
+                    <li>• {t('advancedTroubleshooting.applicationSettings.1')}</li>
+                    <li>• {t('advancedTroubleshooting.applicationSettings.2')}</li>
+                    <li>• {t('advancedTroubleshooting.applicationSettings.3')}</li>
+                    <li>• {t('advancedTroubleshooting.applicationSettings.4')}</li>
                   </ul>
                 </div>
 
@@ -334,11 +317,11 @@ export default function SyncIssuesContent() {
                     Network Issues
                   </h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Test with different networks</li>
-                    <li>• Check firewall/proxy settings</li>
-                    <li>• Verify DNS resolution</li>
-                    <li>• Test with VPN on/off</li>
-                    <li>• Check for ISP restrictions</li>
+                    <li>• {t('advancedTroubleshooting.networkIssues.0')}</li>
+                    <li>• {t('advancedTroubleshooting.networkIssues.1')}</li>
+                    <li>• {t('advancedTroubleshooting.networkIssues.2')}</li>
+                    <li>• {t('advancedTroubleshooting.networkIssues.3')}</li>
+                    <li>• {t('advancedTroubleshooting.networkIssues.4')}</li>
                   </ul>
                 </div>
 
@@ -348,58 +331,56 @@ export default function SyncIssuesContent() {
                     Device Issues
                   </h3>
                   <ul className="space-y-2 text-gray-300 text-sm">
-                    <li>• Check available storage space</li>
-                    <li>• Verify system compatibility</li>
-                    <li>• Update operating system</li>
-                    <li>• Check for malware/viruses</li>
-                    <li>• Test on different devices</li>
+                    <li>• {t('advancedTroubleshooting.deviceIssues.0')}</li>
+                    <li>• {t('advancedTroubleshooting.deviceIssues.1')}</li>
+                    <li>• {t('advancedTroubleshooting.deviceIssues.2')}</li>
+                    <li>• {t('advancedTroubleshooting.deviceIssues.3')}</li>
+                    <li>• {t('advancedTroubleshooting.deviceIssues.4')}</li>
                   </ul>
                 </div>
 
               </div>
 
               {/* Sync Status Dashboard */}
-              <h3 className="text-2xl font-bold text-white mb-6">Checking sync status</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('syncStatusDashboard.title')}</h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
-                <h3 className="text-white font-semibold mb-4">How to check your sync status:</h3>
+                <h3 className="text-white font-semibold mb-4">{t('syncStatusDashboard.howToCheck')}</h3>
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Dashboard Indicator</h4>
+                      <h4 className="text-white font-medium">{t('syncStatusDashboard.dashboardIndicator.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Look for sync status indicators in your account dashboard or app settings.
-                        Green usually means healthy, yellow/orange means issues, red means errors.
+                        {t('syncStatusDashboard.dashboardIndicator.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Last Sync Time</h4>
+                      <h4 className="text-white font-medium">{t('syncStatusDashboard.lastSyncTime.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Check when your last successful sync occurred. If it's been more than a few hours,
-                        there may be an issue that needs attention.
+                        {t('syncStatusDashboard.lastSyncTime.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Error Logs</h4>
+                      <h4 className="text-white font-medium">{t('syncStatusDashboard.errorLogs.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Review any error messages or logs that might provide clues about what's going wrong.
+                        {t('syncStatusDashboard.errorLogs.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Service Status</h4>
+                      <h4 className="text-white font-medium">{t('syncStatusDashboard.serviceStatus.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Check our status page for any ongoing service issues that might affect sync.
+                        {t('syncStatusDashboard.serviceStatus.description')}
                       </p>
                     </div>
                   </div>
@@ -407,43 +388,43 @@ export default function SyncIssuesContent() {
               </div>
 
               {/* Prevention */}
-              <h3 className="text-2xl font-bold text-white mb-6">Preventing sync issues</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">{t('prevention.title')}</h3>
 
               <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Maintain stable connections</h4>
+                      <h4 className="text-white font-medium">{t('prevention.practices.0.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Use reliable internet connections and avoid switching networks frequently during sync operations.
+                        {t('prevention.practices.0.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Keep apps updated</h4>
+                      <h4 className="text-white font-medium">{t('prevention.practices.1.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Regularly update your applications to ensure you have the latest sync improvements and bug fixes.
+                        {t('prevention.practices.1.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Monitor storage space</h4>
+                      <h4 className="text-white font-medium">{t('prevention.practices.2.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Keep adequate free space on your devices and accounts to prevent sync interruptions.
+                        {t('prevention.practices.2.description')}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
-                      <h4 className="text-white font-medium">Regular maintenance</h4>
+                      <h4 className="text-white font-medium">{t('prevention.practices.3.title')}</h4>
                       <p className="text-gray-300 text-sm">
-                        Periodically clear caches, restart applications, and check sync settings to keep everything running smoothly.
+                        {t('prevention.practices.3.description')}
                       </p>
                     </div>
                   </div>
@@ -452,23 +433,25 @@ export default function SyncIssuesContent() {
 
               {/* Still Having Issues */}
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mt-8">
-                <h3 className="text-white text-lg font-semibold mb-3">Still experiencing sync problems?</h3>
+                <h3 className="text-white text-lg font-semibold mb-3">{t('stillHavingIssues.title')}</h3>
                 <p className="text-gray-300 mb-4">
-                  If the troubleshooting steps above don't resolve your sync issues, our technical support team can help investigate further.
-                  Please provide details about your setup and the specific problems you're experiencing.
+                  {t('stillHavingIssues.description')}
+                </p>
+                <p className="text-gray-300 mb-4">
+                  {t('contactSupport')}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/contact"
                     className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
-                    Contact Technical Support
+                    {t('stillHavingIssues.contactSupport')}
                   </Link>
                   <Link
                     href="/help/troubleshooting/performance"
                     className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
-                    Performance Issues
+                    {t('stillHavingIssues.performanceIssues')}
                   </Link>
                 </div>
               </div>

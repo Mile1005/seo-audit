@@ -710,28 +710,697 @@
         "backToHelp": "Torna al Centro Assistenza",
         "articles": {
           "loginIssues": {
-            "title": "Problemi di Accesso e Login",
+            "title": "Problemi di accesso e accesso",
             "href": "/help/troubleshooting/login-issues",
             "time": "6 min",
-            "description": "Risolvere errori di login, problemi di reset password e problemi di accesso all'account."
+            "description": "Risolvi errori di accesso, problemi di ripristino password e problemi di accesso all'account.",
+            "backToCategory": "Torna alla risoluzione dei problemi",
+            "backToHelp": "Torna al Centro assistenza",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Assistenza",
+              "troubleshooting": "Risoluzione dei problemi",
+              "loginIssues": "Problemi di accesso"
+            },
+            "header": {
+              "category": "Risoluzione dei problemi",
+              "title": "Problemi di accesso",
+              "readTime": "6 min di lettura",
+              "lastUpdated": "Ultimo aggiornamento: marzo 2025"
+            },
+            "intro": {
+              "title": "Problemi di accesso comuni",
+              "description": "Hai problemi ad accedere al tuo account? Questa guida copre i problemi di accesso più comuni e le loro soluzioni. La maggior parte dei problemi può essere risolta con pochi semplici passaggi."
+            },
+            "quickFixes": {
+              "title": "Correzioni rapide da provare per primo",
+              "clearCache": {
+                "title": "Svuota la cache del browser",
+                "instructions": [
+                  "Premi Ctrl+Maiusc+R (Windows/Linux)",
+                  "Premi Cmd+Maiusc+R (Mac)",
+                  "Oppure svuota la cache nelle impostazioni del browser",
+                  "Prova la modalità in incognito/privata"
+                ]
+              },
+              "checkCredentials": {
+                "title": "Verifica le tue credenziali",
+                "instructions": [
+                  "Verifica che l'indirizzo email sia corretto",
+                  "Controlla la password (sensibile alle maiuscole)",
+                  "Assicurati che Maiusc sia disattivato",
+                  "Prova il ripristino della password se non sei sicuro"
+                ]
+              },
+              "disableVpn": {
+                "title": "Disabilita VPN/estensioni",
+                "instructions": [
+                  "Disabilita temporaneamente la VPN",
+                  "Spegni le estensioni del browser",
+                  "Prova una rete diversa",
+                  "Controlla le impostazioni del firewall"
+                ]
+              },
+              "tryBrowser": {
+                "title": "Prova un browser diverso",
+                "instructions": [
+                  "Chrome, Firefox, Safari, Edge",
+                  "Cancella tutti i dati del browser",
+                  "Aggiorna all'ultima versione",
+                  "Prova il browser mobile"
+                ]
+              }
+            },
+            "specificIssues": {
+              "title": "Problemi di accesso specifici",
+              "invalidCredentials": {
+                "title": "\"Email o password non valida\"",
+                "description": "Questo errore significa che l'email o la password che hai inserito non corrisponde ai nostri dati. Ecco come risolverlo:",
+                "solutions": [
+                  {
+                    "title": "Ripristina la tua password",
+                    "description": "Fai clic su \"Password dimenticata\" nella pagina di accesso e segui le istruzioni di ripristino inviate alla tua email."
+                  },
+                  {
+                    "title": "Controlla variazioni email",
+                    "description": "Prova diversi formati di email (username@gmail.com vs username+tag@gmail.com)."
+                  },
+                  {
+                    "title": "Verifica dell'account",
+                    "description": "Assicurati che il tuo account sia verificato. Controlla la tua email per i link di verifica."
+                  }
+                ]
+              },
+              "accountLocked": {
+                "title": "Account temporaneamente bloccato",
+                "description": "Dopo molteplici tentativi di accesso non riusciti, gli account vengono temporaneamente bloccati per motivi di sicurezza. Ciò previene attacchi di forza bruta.",
+                "note": {
+                  "title": "Sblocco automatico",
+                  "description": "Gli account vengono sbloccati automaticamente dopo 30 minuti. Per accesso immediato, utilizza il link \"Password dimenticata\" per ripristinare la tua password."
+                }
+              },
+              "twoFactorAuth": {
+                "title": "Problemi di autenticazione a due fattori",
+                "description": "Se hai abilitato l'autenticazione a due fattori, hai bisogno sia della tua password che di un codice di verifica.",
+                "authenticatorApp": {
+                  "title": "Problemi dell'app Authenticator:",
+                  "issues": [
+                    "Controlla che l'ora del dispositivo sia corretta",
+                    "Assicurati che l'app sia aggiornata",
+                    "Prova a rigenerare i codici di backup",
+                    "Contatta il supporto se l'app è persa"
+                  ]
+                },
+                "smsCode": {
+                  "title": "Problemi con codice SMS:",
+                  "issues": [
+                    "Controlla il segnale del telefono e la copertura",
+                    "Verifica che il numero di telefono sia corretto",
+                    "Attendi 60 secondi per riprovare",
+                    "Prova i codici di backup se disponibili"
+                  ]
+                }
+              },
+              "socialLogin": {
+                "title": "Problemi di accesso social",
+                "description": "Problemi con i provider di accesso social come Google, GitHub e altri.",
+                "solutions": {
+                  "title": "Soluzioni comuni:",
+                  "fixes": [
+                    "Cancella i cookie del browser per il provider",
+                    "Assicurati di essere connesso al provider",
+                    "Controlla se l'account del provider è verificato",
+                    "Prova a utilizzare l'accesso email/password",
+                    "Contatta il supporto per problemi di collegamento account"
+                  ]
+                }
+              }
+            },
+            "passwordReset": {
+              "title": "Processo di ripristino della password",
+              "steps": [
+                {
+                  "step": "1",
+                  "title": "Richiedi il ripristino della password",
+                  "description": "Fai clic su \"Password dimenticata\" nella pagina di accesso e inserisci il tuo indirizzo email. Ti invieremo le istruzioni di ripristino alla tua email."
+                },
+                {
+                  "step": "2",
+                  "title": "Controlla la tua email",
+                  "description": "Cerca un'email da noi con la riga dell'oggetto contenente il ripristino della password. Controlla la cartella spam se non la vedi."
+                },
+                {
+                  "step": "3",
+                  "title": "Segui il link",
+                  "description": "Fai clic sul link di ripristino sicuro nell'email. Questo link scade in 24 ore per motivi di sicurezza."
+                },
+                {
+                  "step": "4",
+                  "title": "Crea una nuova password",
+                  "description": "Inserisci una password forte e univoca. Ti consigliamo di utilizzare un gestore di password per generare e archiviare password sicure."
+                },
+                {
+                  "step": "5",
+                  "title": "Conferma e accedi",
+                  "description": "La tua password è stata ripristinata. Torna alla pagina di accesso e accedi con le tue nuove credenziali."
+                }
+              ]
+            },
+            "emailIssues": {
+              "title": "Non hai ricevuto l'email di ripristino?",
+              "checkFolders": {
+                "title": "Controlla queste cartelle",
+                "folders": [
+                  "Posta in arrivo (principale)",
+                  "Cartella spam/Posta indesiderata",
+                  "Scheda Promozioni (Gmail)",
+                  "Social/Aggiornamenti (Gmail)",
+                  "Posta disordinata (Outlook)"
+                ]
+              },
+              "commonIssues": {
+                "title": "Problemi comuni",
+                "issues": [
+                  "Errore di battitura nell'indirizzo email",
+                  "Casella di posta piena/quota superata",
+                  "Filtri email che ci bloccano",
+                  "Servizio email temporaneo",
+                  "Problemi specifici del dominio"
+                ]
+              }
+            },
+            "accountRecovery": {
+              "title": "Recupero account",
+              "description": "Hai bisogno di aiuto per recuperare il tuo account? Se non riesci ancora ad accedere al tuo account dopo aver provato tutti i passaggi precedenti, il nostro team di supporto può aiutarti a verificare la tua identità e ripristinare l'accesso.",
+              "whatWeNeed": {
+                "title": "Quello di cui abbiamo bisogno:",
+                "items": [
+                  "Indirizzo email associato all'account",
+                  "Data di creazione dell'account (approssimativamente)",
+                  "Data dell'ultimo accesso riuscito (se nota)",
+                  "Eventuali ricevute di pagamento o numeri di fattura",
+                  "Descrizione dell'attività recente dell'account"
+                ]
+              },
+              "verificationProcess": {
+                "title": "Processo di verifica:",
+                "description": "Verificheremo la tua identità attraverso molteplici fattori e potremmo chiederti informazioni aggiuntive per garantire la sicurezza dell'account."
+              }
+            },
+            "prevention": {
+              "title": "Prevenzione di futuri problemi di accesso",
+              "securityBestPractices": {
+                "title": "Migliori pratiche di sicurezza",
+                "practices": [
+                  {
+                    "title": "Usa un gestore di password",
+                    "description": "Archivia le tue password in modo sicuro e genera password forti e univoche per ogni servizio."
+                  },
+                  {
+                    "title": "Abilita l'autenticazione a due fattori",
+                    "description": "Aggiungi un ulteriore livello di sicurezza per prevenire accessi non autorizzati anche se la tua password è compromessa."
+                  },
+                  {
+                    "title": "Mantieni le informazioni di recupero aggiornate",
+                    "description": "Assicurati che la tua email di recupero e il numero di telefono siano attuali e accessibili."
+                  },
+                  {
+                    "title": "Aggiornamenti regolari della password",
+                    "description": "Cambia la tua password periodicamente, soprattutto dopo eventuali incidenti di sicurezza."
+                  }
+                ]
+              }
+            },
+            "stillHavingIssues": {
+              "title": "Non riesci ancora ad accedere?",
+              "description": "Se nessuna delle soluzioni precedenti funziona, il nostro team di supporto è qui per aiutarti a recuperare l'accesso al tuo account. Lavoreremo con te per risolvere il problema in modo sicuro.",
+              "contactSupport": "Contatta il supporto",
+              "twoFaHelp": "Aiuto 2FA"
+            },
+            "contactSupport": "Se questi passaggi non ti aiutano, contatta il nostro team di supporto all'indirizzo support@aiseoturbo.com per assistenza."
           },
           "syncIssues": {
-            "title": "Problemi di Sincronizzazione Dati",
+            "title": "Problemi di sincronizzazione dati",
             "href": "/help/troubleshooting/sync-issues",
             "time": "5 min",
-            "description": "Correggere problemi di sincronizzazione dati, errori di importazione/esportazione e problemi di connettività."
+            "description": "Risolvi problemi con la sincronizzazione dei dati, errori di importazione/esportazione e problemi di connettività.",
+            "backToCategory": "Torna alla risoluzione problemi",
+            "backToHelp": "Torna al Centro assistenza",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Assistenza",
+              "troubleshooting": "Risoluzione problemi",
+              "syncIssues": "Problemi di sincronizzazione"
+            },
+            "header": {
+              "category": "Risoluzione problemi",
+              "title": "Problemi di sincronizzazione",
+              "readTime": "Lettura di 5 min",
+              "lastUpdated": "Ultimo aggiornamento: marzo 2025"
+            },
+            "intro": {
+              "title": "Problemi di sincronizzazione dei dati",
+              "description": "Hai problemi con i dati che non si sincronizzano tra dispositivi o vedi informazioni obsolete? Questa guida copre i problemi comuni di sincronizzazione e come risolverli."
+            },
+            "quickChecks": {
+              "title": "Controlli rapidi da provare prima",
+              "connection": {
+                "title": "Verifica la tua connessione",
+                "instructions": [
+                  "Assicurati di essere connesso a internet",
+                  "Prova a passare da WiFi a dati mobili",
+                  "Verifica se altri siti web si caricano correttamente",
+                  "Riavvia il router se necessario"
+                ]
+              },
+              "forceRefresh": {
+                "title": "Forza l'aggiornamento della pagina",
+                "instructions": [
+                  "Premi Ctrl+F5 (Windows/Linux) o Cmd+Shift+R (Mac)",
+                  "Cancella cache e cookie del browser",
+                  "Prova ad aprire in una finestra incognito/privata",
+                  "Riavvia completamente il browser"
+                ]
+              },
+              "appRestart": {
+                "title": "Riavvia l'applicazione",
+                "instructions": [
+                  "Chiudi tutte le schede del browser con la nostra app",
+                  "Aspetta 30 secondi prima di riaprire",
+                  "Prova un browser diverso se possibile",
+                  "Verifica se il problema persiste tra browser diversi"
+                ]
+              },
+              "settingsCheck": {
+                "title": "Verifica le impostazioni di sincronizzazione",
+                "instructions": [
+                  "Assicurati che la sincronizzazione sia abilitata nel tuo account",
+                  "Verifica se la sincronizzazione in background è attiva",
+                  "Verifica di avere le autorizzazioni corrette",
+                  "Conferma che il tuo account sia in regola"
+                ]
+              }
+            },
+            "commonProblems": {
+              "title": "Problemi comuni di sincronizzazione",
+              "outdatedData": {
+                "title": "I dati sembrano obsoleti",
+                "description": "Stai vedendo informazioni vecchie che non si sono aggiornate con le modifiche recenti.",
+                "solutions": [
+                  "Usa Ctrl+F5 (Windows) o Cmd+Shift+R (Mac) per un aggiornamento forzato del browser.",
+                  "Cerca indicatori di sincronizzazione nell'app - alcune modifiche potrebbero richiedere alcuni minuti per propagarsi.",
+                  "Cancella cache e cookie del browser, quindi accedi nuovamente per forzare una sincronizzazione fresca."
+                ]
+              },
+              "syncErrors": {
+                "title": "Errori o fallimenti di sincronizzazione",
+                "description": "La sincronizzazione fallisce con messaggi di errore o non si completa.",
+                "solutions": [
+                  "Verifica le autorizzazioni del tuo account e assicurati di avere i diritti di accesso necessari.",
+                  "Contatta il supporto se gli errori persistono - fornisci il messaggio di errore specifico per una risoluzione più rapida."
+                ]
+              }
+            },
+            "advancedSolutions": {
+              "title": "Risoluzione problemi avanzata",
+              "browserIssues": {
+                "title": "Problemi specifici del browser",
+                "description": "Alcuni browser gestiscono la sincronizzazione in modo diverso. Prova queste soluzioni:",
+                "solutions": [
+                  "Disabilita temporaneamente le estensioni del browser",
+                  "Cancella tutti i dati di navigazione (cache, cookie, archiviazione locale)",
+                  "Prova a disabilitare le funzionalità di sincronizzazione del browser",
+                  "Aggiorna alla versione più recente del browser"
+                ]
+              },
+              "networkIssues": {
+                "title": "Problemi di rete e firewall",
+                "description": "Le reti aziendali o i firewall potrebbero bloccare la funzionalità di sincronizzazione.",
+                "solutions": [
+                  "Prova ad accedere da una rete diversa",
+                  "Verifica con il tuo dipartimento IT le regole del firewall",
+                  "Usa una VPN se disponibile",
+                  "Prova hotspot mobile come connessione alternativa"
+                ]
+              },
+              "accountIssues": {
+                "title": "Problemi di account e autorizzazioni",
+                "description": "La sincronizzazione potrebbe fallire a causa di restrizioni dell'account o problemi di autorizzazioni.",
+                "solutions": [
+                  "Verifica che il tuo account sia attivo e in regola",
+                  "Verifica di avere privilegi di amministratore se richiesti",
+                  "Assicurati che la tua email sia verificata",
+                  "Contatta il supporto fatturazione se l'account è sospeso"
+                ]
+              }
+            },
+            "deviceSyncIssues": {
+              "title": "Non si sincronizza tra dispositivi",
+              "description": "Le modifiche apportate su un dispositivo non appaiono sugli altri.",
+              "crossDeviceSync": [
+                "Assicurati che tutti i dispositivi siano collegati allo stesso account",
+                "Verifica che la sincronizzazione sia abilitata su tutti i dispositivi",
+                "Verifica che i dispositivi abbiano accesso a internet",
+                "Riavvia le app su tutti i dispositivi",
+                "Verifica aggiornamenti delle app su tutti i dispositivi"
+              ],
+              "accountVerification": [
+                "Conferma lo stesso indirizzo email su tutti i dispositivi",
+                "Verifica lo stato dell'account e le autorizzazioni",
+                "Verifica lo stato di fatturazione (la sincronizzazione potrebbe essere limitata sugli account gratuiti)"
+              ]
+            },
+            "slowSync": {
+              "title": "La sincronizzazione è molto lenta",
+              "description": "La sincronizzazione richiede molto più tempo del solito.",
+              "performanceFactors": [
+                "Grandi quantità di dati da sincronizzare",
+                "Connessione internet lenta",
+                "Carico elevato del server (verifica la pagina di stato)",
+                "Molti dispositivi che si sincronizzano contemporaneamente",
+                "Processi in background che interferiscono"
+              ],
+              "optimizationTips": [
+                "Sincronizza durante le ore di minor traffico",
+                "Chiudi altre app che richiedono larghezza di banda",
+                "Assicurati di avere una connessione internet stabile e veloce",
+                "Considera l'aggiornamento del tuo piano per una sincronizzazione più veloce"
+              ]
+            },
+            "advancedTroubleshooting": {
+              "title": "Risoluzione problemi avanzata",
+              "accountSettings": [
+                "Verifica che l'account sia in regola",
+                "Verifica lo stato di fatturazione",
+                "Assicurati che l'account non sia stato sospeso",
+                "Conferma lo stato di verifica email",
+                "Verifica eventuali flag dell'account"
+              ],
+              "applicationSettings": [
+                "Ripristina le impostazioni di sincronizzazione ai valori predefiniti",
+                "Cancella tutti i dati dell'applicazione",
+                "Reinstalla l'applicazione",
+                "Verifica applicazioni in conflitto",
+                "Verifica le autorizzazioni di sistema"
+              ],
+              "networkIssues": [
+                "Testa con reti diverse",
+                "Verifica impostazioni firewall/proxy",
+                "Verifica risoluzione DNS",
+                "Testa con VPN attiva/disattiva",
+                "Verifica restrizioni ISP"
+              ],
+              "deviceIssues": [
+                "Verifica spazio di archiviazione disponibile",
+                "Verifica compatibilità del sistema",
+                "Aggiorna sistema operativo",
+                "Verifica presenza di malware/virus",
+                "Testa su dispositivi diversi"
+              ]
+            },
+            "syncStatusDashboard": {
+              "title": "Verifica dello stato di sincronizzazione",
+              "howToCheck": "Come verificare lo stato della tua sincronizzazione:",
+              "dashboardIndicator": {
+                "title": "Indicatore Dashboard",
+                "description": "Cerca indicatori di stato di sincronizzazione nella dashboard del tuo account o nelle impostazioni dell'app. Verde di solito significa integro, giallo/arancione significa problemi, rosso significa errori."
+              },
+              "lastSyncTime": {
+                "title": "Ora ultima sincronizzazione",
+                "description": "Verifica quando è avvenuta la tua ultima sincronizzazione riuscita. Se sono passate più di alcune ore, potrebbe esserci un problema che richiede attenzione."
+              },
+              "errorLogs": {
+                "title": "Log errori",
+                "description": "Rivedi eventuali messaggi di errore o log che potrebbero fornire indizi su cosa sta andando storto."
+              },
+              "serviceStatus": {
+                "title": "Stato servizio",
+                "description": "Verifica la nostra pagina di stato per eventuali problemi di servizio in corso che potrebbero influire sulla sincronizzazione."
+              }
+            },
+            "prevention": {
+              "title": "Prevenzione dei problemi di sincronizzazione",
+              "practices": [
+                {
+                  "title": "Mantieni connessioni stabili",
+                  "description": "Usa connessioni internet affidabili ed evita di cambiare rete frequentemente durante le operazioni di sincronizzazione."
+                },
+                {
+                  "title": "Mantieni le app aggiornate",
+                  "description": "Aggiorna regolarmente le tue applicazioni per assicurarti di avere i miglioramenti e le correzioni di bug più recenti per la sincronizzazione."
+                },
+                {
+                  "title": "Monitora lo spazio di archiviazione",
+                  "description": "Mantieni spazio libero adeguato sui tuoi dispositivi e account per prevenire interruzioni della sincronizzazione."
+                },
+                {
+                  "title": "Manutenzione regolare",
+                  "description": "Cancella periodicamente le cache, riavvia le applicazioni e verifica le impostazioni di sincronizzazione per mantenere tutto funzionante senza problemi."
+                }
+              ]
+            },
+            "stillHavingIssues": {
+              "title": "Stai ancora riscontrando problemi di sincronizzazione?",
+              "description": "Se i passaggi di risoluzione problemi sopra non risolvono i tuoi problemi di sincronizzazione, il nostro team di supporto tecnico può aiutare a investigare ulteriormente. Fornisci dettagli sulla tua configurazione e sui problemi specifici che stai riscontrando.",
+              "contactSupport": "Contatta il supporto tecnico",
+              "performanceIssues": "Problemi di prestazioni"
+            },
+            "contactSupport": "Se questi passaggi non aiutano, contatta il nostro team di supporto all'indirizzo support@aiseoturbo.com per assistenza."
           },
           "performance": {
-            "title": "Ottimizzazione delle Prestazioni",
+            "title": "Ottimizzazione delle prestazioni",
             "href": "/help/troubleshooting/performance",
             "time": "6 min",
-            "description": "Migliorare la velocità di audit, risolvere problemi di caricamento lento e ottimizzare le prestazioni."
+            "description": "Migliora la velocità delle verifiche, risolvi i problemi di caricamento lento e ottimizza le prestazioni.",
+            "backToCategory": "Torna a Risoluzione dei problemi",
+            "backToHelp": "Torna al Centro Assistenza",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Assistenza",
+              "troubleshooting": "Risoluzione dei problemi",
+              "performance": "Problemi di prestazioni"
+            },
+            "header": {
+              "category": "Risoluzione dei problemi",
+              "title": "Problemi di prestazioni",
+              "readTime": "Lettura 6 min",
+              "lastUpdated": "Ultimo aggiornamento: marzo 2025"
+            },
+            "intro": {
+              "title": "Risoluzione problemi di prestazioni lente",
+              "description": "Stai riscontrando tempi di caricamento lenti, ritardi o scarsa reattività? Questa guida ti aiuta a identificare e risolvere i problemi di prestazioni più comuni su dispositivi e piattaforme diverse."
+            },
+            "quickChecks": {
+              "title": "Verifiche rapide delle prestazioni",
+              "networkConnection": {
+                "title": "Connessione di rete",
+                "instructions": [
+                  "Testa la velocità di Internet (fast.com)",
+                  "Controlla il ping ai nostri server",
+                  "Prova reti diverse",
+                  "Disattiva temporaneamente la VPN"
+                ]
+              },
+              "deviceResources": {
+                "title": "Risorse del dispositivo",
+                "instructions": [
+                  "Controlla l'utilizzo di CPU e memoria",
+                  "Chiudi le applicazioni non necessarie",
+                  "Libera spazio su disco",
+                  "Riavvia il dispositivo"
+                ]
+              },
+              "browserOptimization": {
+                "title": "Ottimizzazione del browser",
+                "instructions": [
+                  "Svuota cache e cookie del browser",
+                  "Disabilita le estensioni del browser",
+                  "Aggiorna all'ultima versione del browser",
+                  "Prova la modalità in incognito/privata"
+                ]
+              },
+              "applicationUpdates": {
+                "title": "Aggiornamenti dell'applicazione",
+                "instructions": [
+                  "Controlla la presenza di aggiornamenti dell'app",
+                  "Aggiorna il sistema operativo",
+                  "Svuota cache/dati dell'app",
+                  "Reinstalla se necessario"
+                ]
+              }
+            },
+            "commonProblems": {
+              "title": "Problemi di prestazioni comuni",
+              "slowLoading": {
+                "title": "Caricamento lento delle pagine",
+                "description": "Le pagine impiegano più tempo del solito per caricarsi o diventare interattive.",
+                "networkIssues": "Problemi di rete",
+                "networkIssuesDesc": "Connessione lenta, alta latenza o congestione di rete possono causare ritardi nel caricamento. Fai un test di velocità e valuta di cambiare rete.",
+                "browserCache": "Cache del browser",
+                "browserCacheDesc": "File cache obsoleti possono rallentare il caricamento. Svuota la cache e aggiorna forzatamente la pagina (Ctrl+F5).",
+                "serverLoad": "Carico del server",
+                "serverLoadDesc": "Un forte carico durante gli orari di punta può rallentare le risposte. Controlla la nostra pagina di stato per eventuali incidenti."
+              },
+              "lagging": {
+                "title": "Latenza e scarsa reattività dell'interfaccia",
+                "description": "L'interfaccia risulta lenta, i pulsanti non rispondono immediatamente o le animazioni sono scattose.",
+                "devicePerformanceTitle": "Prestazioni del dispositivo:",
+                "devicePerformance": [
+                  "Chiudi altre applicazioni che utilizzano molte risorse",
+                  "Controlla RAM disponibile e utilizzo CPU",
+                  "Riavvia il dispositivo per liberare memoria",
+                  "Aggiorna i driver e il firmware del dispositivo"
+                ],
+                "browserIssuesTitle": "Problemi del browser:",
+                "browserIssues": [
+                  "Disabilita temporaneamente le estensioni del browser",
+                  "Riduci il numero di schede aperte",
+                  "Aggiorna il browser all'ultima versione",
+                  "Prova un browser differente"
+                ]
+              },
+              "slowAudits": {
+                "title": "Verifiche SEO lente",
+                "description": "Le verifiche del sito web richiedono molto più tempo del previsto per essere completate.",
+                "auditFactorsTitle": "Fattori che influenzano la verifica:",
+                "auditFactors": [
+                  "I siti web di grandi dimensioni richiedono più tempo per la scansione",
+                  "Tempi di risposta lenti del sito target",
+                  "Impostazioni di profondità di scansione elevate",
+                  "Carico attuale del server e coda",
+                  "Problemi di connettività di rete"
+                ],
+                "optimizationTipsTitle": "Suggerimenti per l'ottimizzazione:",
+                "optimizationTips": [
+                  "Riduci la profondità della scansione per risultati più rapidi",
+                  "Esegui le verifiche in orari non di punta",
+                  "Valuta l'upgrade al piano Pro per una velocità maggiore",
+                  "Controlla prima le prestazioni del sito target"
+                ]
+              },
+              "memoryIssues": {
+                "title": "Uso eccessivo della memoria",
+                "description": "L'applicazione utilizza troppa memoria, causando rallentamenti o crash.",
+                "memoryManagementTitle": "Gestione della memoria:",
+                "memoryManagement": [
+                  "Chiudi altre applicazioni che occupano molta memoria",
+                  "Svuota la cache e i file temporanei del browser",
+                  "Riavvia l'applicazione o il browser",
+                  "Controlla la presenza di memory leak negli strumenti di sviluppo del browser",
+                  "Considera l'uso di un browser più leggero"
+                ],
+                "deviceResourcesTitle": "Risorse del dispositivo:",
+                "deviceResources": [
+                  "Assicurati di avere RAM sufficiente per il tuo utilizzo",
+                  "Chiudi i processi in background non necessari",
+                  "Aggiorna firmware e driver del dispositivo",
+                  "Valuta un upgrade hardware se necessario"
+                ]
+              }
+            },
+            "platformSpecific": {
+              "title": "Ottimizzazioni specifiche per piattaforma",
+              "desktopBrowsersTitle": "Browser desktop",
+              "desktopBrowsers": [
+                "Usa Chrome o Firefox per prestazioni ottimali",
+                "Abilita l'accelerazione hardware nelle impostazioni",
+                "Mantieni il browser aggiornato automaticamente",
+                "Utilizza il task manager del browser per identificare problemi",
+                "Valuta l'uso di versioni beta per le funzionalità più recenti"
+              ],
+              "mobileDevicesTitle": "Dispositivi mobili",
+              "mobileDevices": [
+                "Assicurati di avere una connessione cellulare/WiFi stabile",
+                "Chiudi le app in background per liberare memoria",
+                "Svuota regolarmente la cache dell'app",
+                "Aggiorna sistema operativo e app",
+                "Valuta l'uso della versione desktop per compiti complessi"
+              ],
+              "networkOptimizationTitle": "Ottimizzazione della rete",
+              "networkOptimization": [
+                "Utilizza una connessione cablata quando possibile",
+                "Evita WiFi pubblici per lavori sensibili",
+                "Controlla eventuali interferenze di rete",
+                "Usa la VPN solo se necessario",
+                "Monitora latenza e perdita di pacchetti"
+              ],
+              "dataManagementTitle": "Gestione dei dati",
+              "dataManagement": [
+                "Archivia regolarmente i dati delle verifiche obsolete",
+                "Elimina liste di parole chiave inutilizzate",
+                "Ottimizza le query del database",
+                "Usa le funzionalità di compressione dati",
+                "Monitora l'utilizzo e i limiti di archiviazione"
+              ]
+            },
+            "performanceMonitoring": {
+              "title": "Monitoraggio delle prestazioni",
+              "toolsTitle": "Strumenti per monitorare e diagnosticare le prestazioni:",
+              "browserDevTools": {
+                "title": "Strumenti di sviluppo del browser",
+                "description": "Utilizza le schede Network e Performance negli strumenti del browser per individuare i colli di bottiglia. Controlla richieste lente, file di grandi dimensioni e problemi di rendering."
+              },
+              "systemMonitoring": {
+                "title": "Monitoraggio del sistema",
+                "description": "Monitora uso di CPU, memoria, disco e rete con strumenti di sistema. Identifica i processi che consumano più risorse e ottimizza di conseguenza."
+              },
+              "networkTesting": {
+                "title": "Test di rete",
+                "description": "Utilizza strumenti come ping, traceroute e test di velocità per diagnosticare problemi di rete. Controlla perdite di pacchetti, alta latenza o limitazioni di banda."
+              },
+              "applicationMetrics": {
+                "title": "Metriche dell'applicazione",
+                "description": "Esamina tempi di completamento delle verifiche, tassi di errore e modelli di utilizzo. Confronta le prestazioni in diversi periodi e condizioni."
+              }
+            },
+            "advancedTips": {
+              "title": "Consigli avanzati sulle prestazioni",
+              "optimizeAuditSettings": {
+                "title": "Ottimizza le impostazioni delle verifiche",
+                "description": "Regola profondità, frequenza e ambito della scansione secondo necessità. Verifiche più approfondite richiedono più tempo ma forniscono indicazioni migliori."
+              },
+              "scheduleStrategically": {
+                "title": "Pianifica strategicamente",
+                "description": "Esegui le verifiche più grandi durante le ore non di punta. Usa la pianificazione per automatizzare i controlli di routine."
+              },
+              "useAppropriatePlans": {
+                "title": "Usa i piani appropriati",
+                "description": "I piani di livello superiore offrono processamenti più rapidi, più verifiche simultanee e priorità in coda per prestazioni migliori."
+              },
+              "monitorAndOptimize": {
+                "title": "Monitora e ottimizza",
+                "description": "Rivedi regolarmente le metriche di prestazione e adegua il tuo utilizzo. Identifica i colli di bottiglia e ottimizza il flusso di lavoro di conseguenza."
+              }
+            },
+            "contactSupport": {
+              "title": "Quando contattare l'assistenza",
+              "persistentIssues": {
+                "title": "Problemi di prestazioni persistenti",
+                "description": "Se i problemi persistono dopo tutti i tentativi di risoluzione, il nostro team di supporto tecnico può indagare su problemi lato server o specifici per l'account.",
+                "reportItemsTitle": "Cosa includere nella richiesta:",
+                "reportItems": [
+                  "Informazioni su dispositivo e browser",
+                  "Risultati dei test di velocità di rete",
+                  "Screenshot dei problemi di prestazione",
+                  "Tempistiche dei problemi",
+                  "Passaggi per riprodurre il problema",
+                  "Eventuali messaggi di errore o log della console"
+                ]
+              }
+            },
+            "prevention": {
+              "title": "Mantenere prestazioni ottimali",
+              "description": "Manutenzione regolare e buone pratiche possono prevenire la maggior parte dei problemi di prestazioni. Tieni i sistemi aggiornati e monitora attivamente le prestazioni.",
+              "reportPerformanceIssue": "Segnala problema di prestazioni",
+              "syncIssues": "Problemi di sincronizzazione"
+            },
+            "contactSupportMessage": "Se questi passaggi non aiutano, contatta il nostro team all'indirizzo support@aiseoturbo.com per assistenza."
           },
           "auditIssues": {
-            "title": "Audit Non Completato",
+            "title": "Audit Not Completing",
             "href": "/help/troubleshooting/audit-issues",
             "time": "6 min",
-            "description": "Risolvere audit incompleti, processi bloccati e messaggi di errore di audit."
+            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
           }
         },
         "additionalResources": {

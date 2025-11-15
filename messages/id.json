@@ -712,26 +712,695 @@
           "loginIssues": {
             "title": "Masalah Login dan Akses",
             "href": "/help/troubleshooting/login-issues",
-            "time": "6 mnt",
-            "description": "Mengatasi kesalahan login, masalah reset kata sandi, dan masalah akses akun."
+            "time": "6 menit",
+            "description": "Atasi kesalahan login, masalah reset kata sandi, dan kendala akses akun.",
+            "backToCategory": "Kembali ke Pemecahan Masalah",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "troubleshooting": "Pemecahan Masalah",
+              "loginIssues": "Masalah Login"
+            },
+            "header": {
+              "category": "Pemecahan Masalah",
+              "title": "Masalah login",
+              "readTime": "6 menit baca",
+              "lastUpdated": "Terakhir diperbarui: Maret 2025"
+            },
+            "intro": {
+              "title": "Masalah login umum",
+              "description": "Kesulitan mengakses akun Anda? Panduan ini membahas masalah login yang paling sering terjadi dan solusinya. Sebagian besar masalah dapat diatasi dengan beberapa langkah sederhana."
+            },
+            "quickFixes": {
+              "title": "Perbaikan cepat yang bisa dicoba terlebih dahulu",
+              "clearCache": {
+                "title": "Bersihkan cache browser",
+                "instructions": [
+                  "Tekan Ctrl+Shift+R (Windows/Linux)",
+                  "Tekan Cmd+Shift+R (Mac)",
+                  "Atau hapus cache di pengaturan browser",
+                  "Coba mode incognito/pribadi"
+                ]
+              },
+              "checkCredentials": {
+                "title": "Periksa kredensial Anda",
+                "instructions": [
+                  "Pastikan alamat email benar",
+                  "Cek kata sandi (huruf besar/kecil sensitif)",
+                  "Pastikan Caps Lock tidak aktif",
+                  "Coba reset kata sandi jika ragu"
+                ]
+              },
+              "disableVpn": {
+                "title": "Nonaktifkan VPN/ekstensi",
+                "instructions": [
+                  "Nonaktifkan VPN sementara",
+                  "Matikan ekstensi browser",
+                  "Coba jaringan berbeda",
+                  "Periksa pengaturan firewall"
+                ]
+              },
+              "tryBrowser": {
+                "title": "Coba browser lain",
+                "instructions": [
+                  "Chrome, Firefox, Safari, Edge",
+                  "Hapus semua data browser",
+                  "Perbarui ke versi terbaru",
+                  "Coba browser di ponsel"
+                ]
+              }
+            },
+            "specificIssues": {
+              "title": "Masalah login khusus",
+              "invalidCredentials": {
+                "title": "\"Email atau kata sandi tidak valid\"",
+                "description": "Kesalahan ini berarti email atau kata sandi yang Anda masukkan tidak sesuai dengan data kami. Berikut cara mengatasinya:",
+                "solutions": [
+                  {
+                    "title": "Reset kata sandi Anda",
+                    "description": "Klik \"Lupa Kata Sandi\" di halaman login dan ikuti instruksi reset yang dikirim ke email Anda."
+                  },
+                  {
+                    "title": "Periksa variasi email",
+                    "description": "Coba format email berbeda (username@gmail.com vs username+tag@gmail.com)."
+                  },
+                  {
+                    "title": "Verifikasi akun",
+                    "description": "Pastikan akun Anda sudah diverifikasi. Cek email Anda untuk tautan verifikasi."
+                  }
+                ]
+              },
+              "accountLocked": {
+                "title": "Akun dikunci sementara",
+                "description": "Setelah beberapa kali gagal login, akun akan dikunci sementara untuk keamanan. Ini mencegah serangan brute force.",
+                "note": {
+                  "title": "Pembukaan otomatis",
+                  "description": "Akun akan otomatis terbuka kembali setelah 30 menit. Untuk akses langsung, gunakan tautan \"Lupa Kata Sandi\" untuk mereset kata sandi Anda."
+                }
+              },
+              "twoFactorAuth": {
+                "title": "Masalah autentikasi dua faktor",
+                "description": "Jika Anda mengaktifkan 2FA, Anda membutuhkan kata sandi dan kode verifikasi.",
+                "authenticatorApp": {
+                  "title": "Masalah Aplikasi Authenticator:",
+                  "issues": [
+                    "Pastikan waktu pada perangkat benar",
+                    "Pastikan aplikasi sudah diperbarui",
+                    "Coba buat ulang kode cadangan",
+                    "Hubungi dukungan jika aplikasi hilang"
+                  ]
+                },
+                "smsCode": {
+                  "title": "Masalah Kode SMS:",
+                  "issues": [
+                    "Pastikan sinyal dan jaringan ponsel baik",
+                    "Verifikasi nomor ponsel sudah benar",
+                    "Tunggu 60 detik untuk mencoba ulang",
+                    "Coba kode cadangan jika tersedia"
+                  ]
+                }
+              },
+              "socialLogin": {
+                "title": "Masalah login sosial",
+                "description": "Masalah dengan Google, GitHub, atau penyedia login sosial lainnya.",
+                "solutions": {
+                  "title": "Solusi umum:",
+                  "fixes": [
+                    "Hapus cookies browser untuk penyedia tersebut",
+                    "Pastikan Anda masuk ke akun penyedia",
+                    "Periksa apakah akun penyedia sudah diverifikasi",
+                    "Coba login dengan email/kata sandi sebagai alternatif",
+                    "Hubungi dukungan untuk masalah penghubungan akun"
+                  ]
+                }
+              }
+            },
+            "passwordReset": {
+              "title": "Proses reset kata sandi",
+              "steps": [
+                {
+                  "step": "1",
+                  "title": "Minta reset kata sandi",
+                  "description": "Klik \"Lupa Kata Sandi\" di halaman login dan masukkan alamat email Anda. Kami akan mengirimkan instruksi reset melalui email."
+                },
+                {
+                  "step": "2",
+                  "title": "Periksa email Anda",
+                  "description": "Cari email dari kami dengan judul yang mengandung reset kata sandi. Periksa folder spam jika tidak menemukannya."
+                },
+                {
+                  "step": "3",
+                  "title": "Ikuti tautan",
+                  "description": "Klik tautan reset yang aman di email Anda. Tautan ini kadaluarsa dalam 24 jam demi keamanan."
+                },
+                {
+                  "step": "4",
+                  "title": "Buat kata sandi baru",
+                  "description": "Masukkan kata sandi yang kuat dan unik. Kami sarankan menggunakan pengelola kata sandi untuk membuat dan menyimpan kata sandi yang aman."
+                },
+                {
+                  "step": "5",
+                  "title": "Konfirmasi dan login",
+                  "description": "Kata sandi Anda sudah direset. Kembali ke halaman login dan masuk dengan kredensial baru Anda."
+                }
+              ]
+            },
+            "emailIssues": {
+              "title": "Tidak menerima email reset?",
+              "checkFolders": {
+                "title": "Periksa folder berikut",
+                "folders": [
+                  "Kotak masuk (utama)",
+                  "Folder spam/junk",
+                  "Tab Promosi (Gmail)",
+                  "Sosial/Pembaruan (Gmail)",
+                  "Clutter (Outlook)"
+                ]
+              },
+              "commonIssues": {
+                "title": "Masalah umum",
+                "issues": [
+                  "Kesalahan pengetikan alamat email",
+                  "Kotak masuk penuh/kuota terlampaui",
+                  "Filter email memblokir kami",
+                  "Menggunakan layanan email sementara",
+                  "Masalah spesifik domain"
+                ]
+              }
+            },
+            "accountRecovery": {
+              "title": "Pemulihan akun",
+              "description": "Perlu bantuan memulihkan akun Anda? Jika Anda masih tidak bisa mengakses akun setelah mencoba seluruh langkah di atas, tim dukungan kami dapat membantu verifikasi identitas Anda dan mengembalikan akses.",
+              "whatWeNeed": {
+                "title": "Yang kami perlukan:",
+                "items": [
+                  "Alamat email yang terkait dengan akun",
+                  "Tanggal pembuatan akun (perkiraan)",
+                  "Tanggal login terakhir yang berhasil (jika diketahui)",
+                  "Resi pembayaran atau nomor faktur",
+                  "Deskripsi aktivitas akun terbaru"
+                ]
+              },
+              "verificationProcess": {
+                "title": "Proses verifikasi:",
+                "description": "Kami akan memverifikasi identitas Anda dengan beberapa faktor dan mungkin meminta informasi tambahan untuk menjaga keamanan akun."
+              }
+            },
+            "prevention": {
+              "title": "Mencegah masalah login di masa depan",
+              "securityBestPractices": {
+                "title": "Praktik Keamanan Terbaik",
+                "practices": [
+                  {
+                    "title": "Gunakan pengelola kata sandi",
+                    "description": "Simpan kata sandi Anda dengan aman dan buat kata sandi yang kuat serta unik untuk setiap layanan."
+                  },
+                  {
+                    "title": "Aktifkan autentikasi dua faktor",
+                    "description": "Tambahkan lapisan keamanan ekstra agar akun tetap aman walau kata sandi terkompromi."
+                  },
+                  {
+                    "title": "Perbarui informasi pemulihan secara berkala",
+                    "description": "Pastikan email dan nomor ponsel pemulihan Anda selalu terbaru dan dapat diakses."
+                  },
+                  {
+                    "title": "Rutin mengganti kata sandi",
+                    "description": "Ganti kata sandi secara berkala, terutama setelah insiden keamanan apa pun."
+                  }
+                ]
+              }
+            },
+            "stillHavingIssues": {
+              "title": "Masih tidak bisa login?",
+              "description": "Jika solusi di atas tidak berhasil, tim dukungan kami siap membantu Anda mendapatkan kembali akses ke akun. Kami akan bekerja sama untuk menyelesaikan masalah secara aman.",
+              "contactSupport": "Hubungi Dukungan",
+              "twoFaHelp": "Bantuan 2FA"
+            },
+            "contactSupport": "Jika langkah-langkah ini tidak membantu, hubungi tim dukungan kami di support@aiseoturbo.com untuk bantuan."
           },
           "syncIssues": {
             "title": "Masalah Sinkronisasi Data",
             "href": "/help/troubleshooting/sync-issues",
-            "time": "5 mnt",
-            "description": "Memperbaiki masalah sinkronisasi data, kesalahan impor/ekspor, dan masalah konektivitas."
+            "time": "5 menit",
+            "description": "Atasi masalah sinkronisasi data, kesalahan impor/ekspor, dan masalah konektivitas.",
+            "backToCategory": "Kembali ke Pemecahan Masalah",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "troubleshooting": "Pemecahan Masalah",
+              "syncIssues": "Masalah Sinkronisasi"
+            },
+            "header": {
+              "category": "Pemecahan Masalah",
+              "title": "Masalah sinkronisasi",
+              "readTime": "Baca 5 menit",
+              "lastUpdated": "Terakhir diperbarui: Maret 2025"
+            },
+            "intro": {
+              "title": "Masalah sinkronisasi data",
+              "description": "Mengalami masalah data tidak tersinkronisasi antar perangkat atau melihat informasi yang sudah usang? Panduan ini membahas masalah sinkronisasi umum dan cara mengatasinya."
+            },
+            "quickChecks": {
+              "title": "Pemeriksaan cepat yang bisa dicoba terlebih dahulu",
+              "connection": {
+                "title": "Periksa koneksi Anda",
+                "instructions": [
+                  "Pastikan Anda terhubung ke internet",
+                  "Coba beralih antara WiFi dan data seluler",
+                  "Periksa apakah situs lain dapat dimuat dengan baik",
+                  "Restart router Anda jika diperlukan"
+                ]
+              },
+              "forceRefresh": {
+                "title": "Paksa muat ulang halaman",
+                "instructions": [
+                  "Tekan Ctrl+F5 (Windows/Linux) atau Cmd+Shift+R (Mac)",
+                  "Bersihkan cache dan cookie browser",
+                  "Coba buka di mode incognito/pribadi",
+                  "Restart browser Anda sepenuhnya"
+                ]
+              },
+              "appRestart": {
+                "title": "Restart aplikasi",
+                "instructions": [
+                  "Tutup semua tab browser yang menjalankan aplikasi kami",
+                  "Tunggu 30 detik sebelum membuka kembali",
+                  "Coba gunakan browser lain jika memungkinkan",
+                  "Periksa apakah masalahnya terjadi di browser yang berbeda"
+                ]
+              },
+              "settingsCheck": {
+                "title": "Verifikasi pengaturan sinkronisasi",
+                "instructions": [
+                  "Pastikan sinkronisasi diaktifkan di akun Anda",
+                  "Periksa apakah sinkronisasi latar belakang aktif",
+                  "Verifikasi Anda memiliki izin yang benar",
+                  "Pastikan akun Anda dalam status baik"
+                ]
+              }
+            },
+            "commonProblems": {
+              "title": "Masalah sinkronisasi umum",
+              "outdatedData": {
+                "title": "Data tampak usang",
+                "description": "Anda melihat informasi lama yang belum diperbarui dengan perubahan terbaru.",
+                "solutions": [
+                  "Gunakan Ctrl+F5 (Windows) atau Cmd+Shift+R (Mac) untuk memuat ulang browser secara paksa.",
+                  "Cari indikator sinkronisasi di aplikasi - beberapa perubahan mungkin membutuhkan beberapa menit untuk menyebar.",
+                  "Bersihkan cache dan cookie browser, lalu login kembali untuk memaksa sinkronisasi baru."
+                ]
+              },
+              "syncErrors": {
+                "title": "Kesalahan atau kegagalan sinkronisasi",
+                "description": "Sinkronisasi gagal dengan pesan kesalahan atau tidak selesai.",
+                "solutions": [
+                  "Periksa izin akun Anda dan pastikan Anda memiliki hak akses yang diperlukan.",
+                  "Hubungi dukungan jika kesalahan terus berlanjut - sertakan pesan kesalahan spesifik untuk penyelesaian lebih cepat."
+                ]
+              }
+            },
+            "advancedSolutions": {
+              "title": "Pemecahan masalah lanjutan",
+              "browserIssues": {
+                "title": "Masalah spesifik browser",
+                "description": "Beberapa browser menangani sinkronisasi secara berbeda. Coba solusi berikut:",
+                "solutions": [
+                  "Nonaktifkan ekstensi browser sementara",
+                  "Bersihkan semua data penjelajahan (cache, cookie, dan penyimpanan lokal)",
+                  "Coba nonaktifkan fitur sinkronisasi browser",
+                  "Perbarui ke versi browser terbaru"
+                ]
+              },
+              "networkIssues": {
+                "title": "Masalah jaringan dan firewall",
+                "description": "Jaringan perusahaan atau firewall dapat memblokir fungsi sinkronisasi.",
+                "solutions": [
+                  "Coba akses dari jaringan yang berbeda",
+                  "Konsultasikan dengan tim TI Anda mengenai aturan firewall",
+                  "Gunakan VPN jika tersedia",
+                  "Coba koneksi hotspot seluler sebagai alternatif"
+                ]
+              },
+              "accountIssues": {
+                "title": "Masalah akun dan izin",
+                "description": "Sinkronisasi bisa gagal karena pembatasan akun atau masalah izin.",
+                "solutions": [
+                  "Pastikan akun Anda aktif dan dalam status baik",
+                  "Jika diperlukan, periksa apakah Anda memiliki hak admin",
+                  "Pastikan email Anda sudah terverifikasi",
+                  "Hubungi dukungan penagihan jika akun Anda ditangguhkan"
+                ]
+              }
+            },
+            "deviceSyncIssues": {
+              "title": "Tidak tersinkronisasi antar perangkat",
+              "description": "Perubahan yang dilakukan di satu perangkat tidak muncul di perangkat lain.",
+              "crossDeviceSync": [
+                "Pastikan semua perangkat login ke akun yang sama",
+                "Periksa bahwa sinkronisasi diaktifkan di semua perangkat",
+                "Verifikasi semua perangkat terhubung ke internet",
+                "Restart aplikasi di semua perangkat",
+                "Periksa pembaruan aplikasi di semua perangkat"
+              ],
+              "accountVerification": [
+                "Pastikan alamat email sama di semua perangkat",
+                "Periksa status dan izin akun",
+                "Verifikasi status penagihan (sinkronisasi mungkin dibatasi pada akun gratis)"
+              ]
+            },
+            "slowSync": {
+              "title": "Sinkronisasi sangat lambat",
+              "description": "Proses sinkronisasi berlangsung jauh lebih lama dari biasanya.",
+              "performanceFactors": [
+                "Jumlah data yang besar untuk disinkronkan",
+                "Koneksi internet lambat",
+                "Beban server tinggi (periksa halaman status)",
+                "Banyak perangkat melakukan sinkronisasi secara bersamaan",
+                "Proses latar belakang yang mengganggu"
+              ],
+              "optimizationTips": [
+                "Lakukan sinkronisasi di luar jam sibuk",
+                "Tutup aplikasi lain yang menggunakan banyak bandwidth",
+                "Pastikan koneksi internet stabil dan cepat",
+                "Pertimbangkan untuk upgrade paket Anda demi sinkronisasi lebih cepat"
+              ]
+            },
+            "advancedTroubleshooting": {
+              "title": "Pemecahan masalah lanjutan",
+              "accountSettings": [
+                "Verifikasi akun dalam status baik",
+                "Periksa status penagihan",
+                "Pastikan akun tidak ditangguhkan",
+                "Konfirmasi status verifikasi email",
+                "Periksa apakah ada penandaan khusus pada akun"
+              ],
+              "applicationSettings": [
+                "Reset pengaturan sinkronisasi ke bawaan",
+                "Bersihkan seluruh data aplikasi",
+                "Instal ulang aplikasi",
+                "Periksa kemungkinan aplikasi konflik",
+                "Verifikasi izin sistem"
+              ],
+              "networkIssues": [
+                "Coba dengan jaringan yang berbeda",
+                "Periksa pengaturan firewall/proxy",
+                "Verifikasi resolusi DNS",
+                "Coba dengan VPN aktif/nonaktif",
+                "Cek kemungkinan pembatasan dari ISP"
+              ],
+              "deviceIssues": [
+                "Periksa ruang penyimpanan yang tersedia",
+                "Verifikasi kompatibilitas sistem",
+                "Perbarui sistem operasi",
+                "Periksa malware/virus",
+                "Coba di perangkat lain"
+              ]
+            },
+            "syncStatusDashboard": {
+              "title": "Memeriksa status sinkronisasi",
+              "howToCheck": "Cara memeriksa status sinkronisasi Anda:",
+              "dashboardIndicator": {
+                "title": "Indikator Dashboard",
+                "description": "Cari indikator status sinkronisasi di dashboard akun atau pengaturan aplikasi Anda. Hijau biasanya berarti sehat, kuning/jingga menandakan ada masalah, merah menunjukkan kesalahan."
+              },
+              "lastSyncTime": {
+                "title": "Waktu Sinkronisasi Terakhir",
+                "description": "Periksa kapan sinkronisasi terakhir yang berhasil dilakukan. Jika sudah lebih dari beberapa jam, mungkin ada masalah yang perlu perhatian."
+              },
+              "errorLogs": {
+                "title": "Log Kesalahan",
+                "description": "Tinjau pesan kesalahan atau log apa pun yang bisa memberikan petunjuk tentang masalah yang terjadi."
+              },
+              "serviceStatus": {
+                "title": "Status Layanan",
+                "description": "Periksa halaman status kami untuk melihat apakah ada masalah layanan yang sedang berlangsung dan dapat memengaruhi sinkronisasi."
+              }
+            },
+            "prevention": {
+              "title": "Pencegahan masalah sinkronisasi",
+              "practices": [
+                {
+                  "title": "Jaga koneksi tetap stabil",
+                  "description": "Gunakan koneksi internet yang andal dan hindari sering berpindah jaringan saat sinkronisasi."
+                },
+                {
+                  "title": "Selalu perbarui aplikasi",
+                  "description": "Perbarui aplikasi Anda secara berkala untuk mendapatkan perbaikan bug dan peningkatan sinkronisasi terbaru."
+                },
+                {
+                  "title": "Pantau ruang penyimpanan",
+                  "description": "Pastikan perangkat dan akun Anda memiliki ruang yang cukup agar sinkronisasi tidak terganggu."
+                },
+                {
+                  "title": "Lakukan pemeliharaan rutin",
+                  "description": "Secara berkala bersihkan cache, restart aplikasi, dan periksa pengaturan sinkronisasi agar semuanya berjalan lancar."
+                }
+              ]
+            },
+            "stillHavingIssues": {
+              "title": "Masih mengalami masalah sinkronisasi?",
+              "description": "Jika langkah pemecahan masalah di atas belum menyelesaikan masalah sinkronisasi Anda, tim dukungan teknis kami siap membantu investigasi lebih lanjut. Mohon sertakan detail tentang pengaturan Anda dan masalah spesifik yang dialami.",
+              "contactSupport": "Hubungi Dukungan Teknis",
+              "performanceIssues": "Masalah Performa"
+            },
+            "contactSupport": "Jika langkah-langkah ini tidak membantu, hubungi tim dukungan kami di support@aiseoturbo.com untuk bantuan lebih lanjut."
           },
           "performance": {
-            "title": "Optimasi Kinerja",
+            "title": "Optimasi Performa",
             "href": "/help/troubleshooting/performance",
-            "time": "6 mnt",
-            "description": "Meningkatkan kecepatan audit, mengatasi masalah pemuatan lambat, dan mengoptimalkan kinerja."
+            "time": "6 menit",
+            "description": "Tingkatkan kecepatan audit, atasi masalah pemuatan lambat, dan optimalkan performa.",
+            "backToCategory": "Kembali ke Pemecahan Masalah",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "troubleshooting": "Pemecahan Masalah",
+              "performance": "Masalah Performa"
+            },
+            "header": {
+              "category": "Pemecahan Masalah",
+              "title": "Masalah performa",
+              "readTime": "Baca 6 menit",
+              "lastUpdated": "Terakhir diperbarui: Maret 2025"
+            },
+            "intro": {
+              "title": "Pemecahan masalah performa lambat",
+              "description": "Mengalami waktu muat yang lambat, lag, atau respons yang buruk? Panduan ini membantu Anda mengidentifikasi dan mengatasi masalah performa umum di berbagai perangkat dan platform."
+            },
+            "quickChecks": {
+              "title": "Pemeriksaan performa cepat",
+              "networkConnection": {
+                "title": "Koneksi jaringan",
+                "instructions": [
+                  "Tes kecepatan Internet (fast.com)",
+                  "Periksa ping ke server kami",
+                  "Coba jaringan berbeda",
+                  "Matikan VPN sementara"
+                ]
+              },
+              "deviceResources": {
+                "title": "Sumber daya perangkat",
+                "instructions": [
+                  "Periksa penggunaan CPU dan memori",
+                  "Tutup aplikasi yang tidak diperlukan",
+                  "Bebaskan ruang penyimpanan",
+                  "Restart perangkat Anda"
+                ]
+              },
+              "browserOptimization": {
+                "title": "Optimasi browser",
+                "instructions": [
+                  "Bersihkan cache dan cookie browser",
+                  "Nonaktifkan ekstensi browser",
+                  "Perbarui ke versi browser terbaru",
+                  "Coba mode samaran/pribadi"
+                ]
+              },
+              "applicationUpdates": {
+                "title": "Pembaruan aplikasi",
+                "instructions": [
+                  "Periksa pembaruan aplikasi",
+                  "Perbarui sistem operasi",
+                  "Kosongkan cache/data aplikasi",
+                  "Instal ulang jika perlu"
+                ]
+              }
+            },
+            "commonProblems": {
+              "title": "Masalah performa umum",
+              "slowLoading": {
+                "title": "Halaman lambat dimuat",
+                "description": "Halaman memerlukan waktu lebih lama dari biasanya untuk dimuat atau menjadi interaktif.",
+                "networkIssues": "Masalah jaringan",
+                "networkIssuesDesc": "Internet lambat, latensi tinggi, atau kemacetan jaringan dapat menyebabkan keterlambatan pemuatan. Coba tes kecepatan dan pertimbangkan ganti jaringan.",
+                "browserCache": "Cache browser",
+                "browserCacheDesc": "File cache lama dapat memperlambat pemuatan. Bersihkan cache browser dan lakukan hard refresh (Ctrl+F5).",
+                "serverLoad": "Beban server",
+                "serverLoadDesc": "Beban server tinggi pada jam sibuk dapat memperlambat respons. Periksa halaman status kami untuk insiden."
+              },
+              "lagging": {
+                "title": "Lag dan tidak responsif pada antarmuka",
+                "description": "Antarmuka terasa lamban, tombol tidak langsung merespons, atau animasi tersendat.",
+                "devicePerformanceTitle": "Performa perangkat:",
+                "devicePerformance": [
+                  "Tutup aplikasi lain yang menggunakan banyak sumber daya",
+                  "Periksa RAM dan penggunaan CPU yang tersedia",
+                  "Restart perangkat Anda untuk mengosongkan memori",
+                  "Perbarui driver dan firmware perangkat"
+                ],
+                "browserIssuesTitle": "Masalah browser:",
+                "browserIssues": [
+                  "Nonaktifkan ekstensi browser sementara",
+                  "Kurangi jumlah tab yang terbuka",
+                  "Perbarui browser ke versi terakhir",
+                  "Coba browser lain"
+                ]
+              },
+              "slowAudits": {
+                "title": "Audit SEO lambat",
+                "description": "Audit situs web memerlukan waktu jauh lebih lama dari perkiraan untuk selesai.",
+                "auditFactorsTitle": "Faktor audit:",
+                "auditFactors": [
+                  "Situs besar memerlukan waktu lebih lama untuk di-crawl",
+                  "Waktu respons situs target lambat",
+                  "Pengaturan kedalaman crawl tinggi",
+                  "Beban dan antrean server saat ini",
+                  "Masalah konektivitas jaringan"
+                ],
+                "optimizationTipsTitle": "Tips optimasi:",
+                "optimizationTips": [
+                  "Kurangi kedalaman crawl untuk hasil lebih cepat",
+                  "Audit saat jam-jam tidak sibuk",
+                  "Pertimbangkan upgrade ke paket Pro untuk pemrosesan lebih cepat",
+                  "Periksa dulu performa situs target"
+                ]
+              },
+              "memoryIssues": {
+                "title": "Penggunaan memori tinggi",
+                "description": "Aplikasi menggunakan memori berlebihan, menyebabkan lambat atau crash.",
+                "memoryManagementTitle": "Manajemen memori:",
+                "memoryManagement": [
+                  "Tutup aplikasi lain yang intensif memori",
+                  "Bersihkan cache dan file sementara browser",
+                  "Restart aplikasi atau browser",
+                  "Periksa kebocoran memori di dev tools browser",
+                  "Pertimbangkan menggunakan browser yang lebih ringan"
+                ],
+                "deviceResourcesTitle": "Sumber daya perangkat:",
+                "deviceResources": [
+                  "Pastikan RAM mencukupi untuk kebutuhan Anda",
+                  "Tutup proses latar belakang yang tidak perlu",
+                  "Perbarui firmware dan driver perangkat",
+                  "Pertimbangkan upgrade hardware jika dibutuhkan"
+                ]
+              }
+            },
+            "platformSpecific": {
+              "title": "Optimasi khusus platform",
+              "desktopBrowsersTitle": "Browser Desktop",
+              "desktopBrowsers": [
+                "Gunakan Chrome atau Firefox untuk performa terbaik",
+                "Aktifkan akselerasi perangkat keras di pengaturan",
+                "Jaga browser tetap diperbarui otomatis",
+                "Gunakan task manager browser untuk identifikasi masalah",
+                "Pertimbangkan gunakan versi beta untuk fitur terbaru"
+              ],
+              "mobileDevicesTitle": "Perangkat Mobile",
+              "mobileDevices": [
+                "Pastikan koneksi seluler/WiFi stabil",
+                "Tutup aplikasi latar belakang untuk mengosongkan memori",
+                "Bersihkan cache aplikasi secara rutin",
+                "Perbarui OS perangkat dan aplikasi",
+                "Pertimbangkan gunakan situs desktop untuk tugas kompleks"
+              ],
+              "networkOptimizationTitle": "Optimasi jaringan",
+              "networkOptimization": [
+                "Gunakan koneksi kabel bila memungkinkan",
+                "Hindari WiFi publik untuk pekerjaan sensitif",
+                "Periksa interferensi jaringan",
+                "Gunakan VPN hanya jika diperlukan",
+                "Pantau latensi dan hilangnya paket jaringan"
+              ],
+              "dataManagementTitle": "Manajemen data",
+              "dataManagement": [
+                "Arsipkan data audit lama secara rutin",
+                "Bersihkan daftar kata kunci yang tidak terpakai",
+                "Optimalkan query database",
+                "Gunakan fitur kompresi data",
+                "Pantau penggunaan dan batas penyimpanan"
+              ]
+            },
+            "performanceMonitoring": {
+              "title": "Pemantauan performa",
+              "toolsTitle": "Alat untuk memantau dan mendiagnosis performa:",
+              "browserDevTools": {
+                "title": "Developer Tools browser",
+                "description": "Gunakan tab Network dan Performance di dev tools browser untuk mengidentifikasi bottleneck. Cari permintaan lambat, file besar, dan masalah rendering."
+              },
+              "systemMonitoring": {
+                "title": "Pemantauan sistem",
+                "description": "Pantau penggunaan CPU, memori, disk, dan jaringan dengan alat sistem. Identifikasi proses berat dan optimalkan sesuai kebutuhan."
+              },
+              "networkTesting": {
+                "title": "Pengujian jaringan",
+                "description": "Gunakan alat seperti ping, traceroute, dan tes kecepatan untuk diagnosis jaringan. Periksa loss paket, latensi tinggi, atau batas bandwidth."
+              },
+              "applicationMetrics": {
+                "title": "Metrik aplikasi",
+                "description": "Tinjau waktu penyelesaian audit, tingkat error, dan pola penggunaan. Bandingkan performa di berbagai waktu dan kondisi."
+              }
+            },
+            "advancedTips": {
+              "title": "Tips performa lanjutan",
+              "optimizeAuditSettings": {
+                "title": "Optimalkan pengaturan audit",
+                "description": "Sesuaikan kedalaman crawl, frekuensi, dan cakupan sesuai kebutuhan. Audit komprehensif memerlukan waktu lebih lama, tetapi memberikan wawasan yang lebih baik."
+              },
+              "scheduleStrategically": {
+                "title": "Jadwal secara strategis",
+                "description": "Lakukan audit besar saat jam-jam sepi server. Gunakan fitur penjadwalan untuk mengotomatisasi audit rutin."
+              },
+              "useAppropriatePlans": {
+                "title": "Gunakan paket yang sesuai",
+                "description": "Paket tingkat lanjut menawarkan pemrosesan lebih cepat, audit paralel lebih banyak, dan antrean prioritas untuk performa lebih baik."
+              },
+              "monitorAndOptimize": {
+                "title": "Pantau dan optimalkan",
+                "description": "Tinjau metrik performa secara rutin dan sesuaikan pola pemakaian. Identifikasi bottleneck dan optimalkan alur kerja sesuai kebutuhan."
+              }
+            },
+            "contactSupport": {
+              "title": "Kapan menghubungi dukungan",
+              "persistentIssues": {
+                "title": "Masalah performa yang terus-menerus",
+                "description": "Jika masalah tetap berlanjut setelah semua langkah pemecahan masalah, tim teknis kami dapat memeriksa masalah sisi server atau akun.",
+                "reportItemsTitle": "Sertakan dalam laporan Anda:",
+                "reportItems": [
+                  "Informasi perangkat dan browser",
+                  "Hasil tes kecepatan jaringan",
+                  "Tangkapan layar masalah performa",
+                  "Kapan masalah terjadi",
+                  "Langkah untuk mereproduksi masalah",
+                  "Pesan error atau log konsol"
+                ]
+              }
+            },
+            "prevention": {
+              "title": "Menjaga performa optimal",
+              "description": "Perawatan rutin dan praktik terbaik dapat mencegah sebagian besar masalah performa. Jaga sistem tetap mutakhir dan pantau performa secara proaktif.",
+              "reportPerformanceIssue": "Laporkan Masalah Performa",
+              "syncIssues": "Masalah Sinkronisasi"
+            },
+            "contactSupportMessage": "Jika langkah di atas tidak membantu, hubungi tim dukungan kami di support@aiseoturbo.com."
           },
           "auditIssues": {
-            "title": "Audit Tidak Selesai",
+            "title": "Audit Not Completing",
             "href": "/help/troubleshooting/audit-issues",
-            "time": "6 mnt",
-            "description": "Memecahkan masalah audit yang tidak lengkap, proses yang macet, dan pesan kesalahan audit."
+            "time": "6 min",
+            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
           }
         },
         "additionalResources": {
@@ -5735,6 +6404,7 @@
         }
       },
       "security": {
+        "title": "Security & Privacy",
         "description": "Perlindungan data dan keamanan akun",
         "articles": {
           "twoFactor": {
