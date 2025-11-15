@@ -5,8 +5,10 @@ import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Clock, User, CheckCircle, AlertTriangle, Target, Zap, RefreshCw, Globe, Search, Bug, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 export default function AuditIssuesContent() {
+  const t = useTranslations('help.categories.troubleshooting.articles.auditIssues')
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
@@ -19,8 +21,8 @@ export default function AuditIssuesContent() {
               {
                 "@context": "https://schema.org",
                 "@type": "HowTo",
-                "name": "How to Fix SEO Audit Issues - AISEOTurbo Troubleshooting",
-                "description": "Complete troubleshooting guide for fixing SEO audit issues in AISEOTurbo. Solutions for stuck audits, timeout errors, and technical problems.",
+                "name": t('schema.name'),
+                "description": t('schema.description'),
                 "image": {
                   "@type": "ImageObject",
                   "url": "https://aiseoturbo.com/help/troubleshooting-audits.jpg",
@@ -30,20 +32,20 @@ export default function AuditIssuesContent() {
                 "step": [
                   {
                     "@type": "HowToStep",
-                    "name": "Check if audit is stuck",
-                    "text": "If your audit appears stuck at 'Analyzing...', this may be due to large site size, server response delays, or network connectivity issues.",
+                    "name": t('schema.steps.stuck.name'),
+                    "text": t('schema.steps.stuck.text'),
                     "url": "https://www.aiseoturbo.com/help/troubleshooting/audit-issues#stuck"
                   },
                   {
                     "@type": "HowToStep",
-                    "name": "Refresh or restart the audit",
-                    "text": "Try refreshing the page or restarting the audit to resolve temporary connectivity issues.",
+                    "name": t('schema.steps.restart.name'),
+                    "text": t('schema.steps.restart.text'),
                     "url": "https://www.aiseoturbo.com/help/troubleshooting/audit-issues#restart"
                   },
                   {
                     "@type": "HowToStep",
-                    "name": "Handle timeout errors",
-                    "text": "For timeout errors on large websites, try limiting the audit scope to specific pages or contact support for enterprise solutions.",
+                    "name": t('schema.steps.timeout.name'),
+                    "text": t('schema.steps.timeout.text'),
                     "url": "https://www.aiseoturbo.com/help/troubleshooting/audit-issues#timeout"
                   }
                 ],
@@ -61,18 +63,18 @@ export default function AuditIssuesContent() {
                 "mainEntity": [
                   {
                     "@type": "Question",
-                    "name": "Why is my SEO audit stuck at 'Analyzing...'?",
+                    "name": t('schema.faq.stuck.question'),
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Audits may appear stuck due to large site size, server response delays, or network connectivity issues. Try refreshing the page or restarting the audit."
+                      "text": t('schema.faq.stuck.answer')
                     }
                   },
                   {
                     "@type": "Question",
-                    "name": "What should I do if my audit times out?",
+                    "name": t('schema.faq.timeout.question'),
                     "acceptedAnswer": {
                       "@type": "Answer",
-                      "text": "Audit timeouts usually occur with very large websites. Try limiting the audit scope to specific pages or contact support for enterprise solutions."
+                      "text": t('schema.faq.timeout.answer')
                     }
                   }
                 ]
@@ -84,10 +86,10 @@ export default function AuditIssuesContent() {
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Home', url: 'https://www.aiseoturbo.com' },
-            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Troubleshooting', url: 'https://www.aiseoturbo.com/help/troubleshooting' },
-            { name: 'Audit Issues', url: 'https://www.aiseoturbo.com/help/troubleshooting/audit-issues' }
+            { name: t('breadcrumb.home'), url: 'https://www.aiseoturbo.com' },
+            { name: t('breadcrumb.help'), url: 'https://www.aiseoturbo.com/help' },
+            { name: t('breadcrumb.troubleshooting'), url: 'https://www.aiseoturbo.com/help/troubleshooting' },
+            { name: t('breadcrumb.auditIssues'), url: 'https://www.aiseoturbo.com/help/troubleshooting/audit-issues' }
           ]}
           includeHome={false}
         />
@@ -103,10 +105,10 @@ export default function AuditIssuesContent() {
               <Link
                 href="/help"
                 className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 mb-6 group"
-                aria-label="Return to Help Center"
+                aria-label={t('backToHelp.ariaLabel')}
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" aria-hidden="true" />
-                Back to Help Center
+                {t('backToHelp.text')}
               </Link>
 
               <div className="flex items-center gap-4 mb-6">
@@ -114,9 +116,9 @@ export default function AuditIssuesContent() {
                   <Bug className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <span className="text-blue-400 text-sm font-medium">Troubleshooting</span>
+                  <span className="text-blue-400 text-sm font-medium">{t('header.category')}</span>
                   <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    Audit not completing
+                    {t('header.title')}
                   </h1>
                 </div>
               </div>
@@ -124,11 +126,11 @@ export default function AuditIssuesContent() {
               <div className="flex items-center gap-6 text-gray-400 text-sm mb-8">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" aria-hidden="true" />
-                  <span>6 min read</span>
+                  <span>{t('header.readTime')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <User className="w-4 h-4" aria-hidden="true" />
-                  <span>Last updated: March 2025</span>
+                  <span>{t('header.lastUpdated')}</span>
                 </div>
               </div>
             </motion.div>
@@ -150,10 +152,9 @@ export default function AuditIssuesContent() {
                 <div className="flex items-start gap-4">
                   <Target className="w-6 h-6 text-blue-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h2 className="text-white text-lg font-semibold mb-2">Quick resolution guide</h2>
+                    <h2 className="text-white text-lg font-semibold mb-2">{t('intro.title')}</h2>
                     <p className="text-gray-300 mb-0">
-                      Having trouble with stuck or incomplete audits? This guide covers the most common issues and their solutions.
-                      Most problems can be resolved in just a few minutes with the right approach.
+                      {t('intro.description')}
                     </p>
                   </div>
                 </div>
@@ -161,41 +162,41 @@ export default function AuditIssuesContent() {
 
               {/* Quick Diagnostics */}
               <div className="bg-blue-900/20 border border-blue-600/30 rounded-xl p-6 mb-8">
-                <h3 className="text-blue-400 text-lg font-semibold mb-4">🔍 Quick diagnostics checklist</h3>
+                <h3 className="text-blue-400 text-lg font-semibold mb-4">{t('diagnostics.title')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400" aria-hidden="true" />
-                      <span className="text-gray-300 text-sm">Is your website publicly accessible?</span>
+                      <span className="text-gray-300 text-sm">{t('diagnostics.checklist.siteAccessible')}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400" aria-hidden="true" />
-                      <span className="text-gray-300 text-sm">Is your internet connection stable?</span>
+                      <span className="text-gray-300 text-sm">{t('diagnostics.checklist.connectionStable')}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400" aria-hidden="true" />
-                      <span className="text-gray-300 text-sm">Have you waited at least 5 minutes?</span>
+                      <span className="text-gray-300 text-sm">{t('diagnostics.checklist.waitedFiveMinutes')}</span>
                     </div>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400" aria-hidden="true" />
-                      <span className="text-gray-300 text-sm">Does your site respond quickly (&lt;10s)?</span>
+                      <span className="text-gray-300 text-sm">{t('diagnostics.checklist.siteRespondsQuickly')}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400" aria-hidden="true" />
-                      <span className="text-gray-300 text-sm">Are you using the correct URL format?</span>
+                      <span className="text-gray-300 text-sm">{t('diagnostics.checklist.correctUrlFormat')}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <CheckCircle className="w-5 h-5 text-green-400" aria-hidden="true" />
-                      <span className="text-gray-300 text-sm">Have you tried refreshing the page?</span>
+                      <span className="text-gray-300 text-sm">{t('diagnostics.checklist.triedRefreshing')}</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Common Issues & Solutions */}
-              <h2 className="text-2xl font-bold text-white mb-6">Common issues & solutions</h2>
+              <h2 className="text-2xl font-bold text-white mb-6">{t('issues.title')}</h2>
 
               <div className="space-y-8">
 
@@ -206,26 +207,26 @@ export default function AuditIssuesContent() {
                       <RefreshCw className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">🔄 Audit stuck at "Analyzing..."</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('issues.stuck.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        This is the most common issue, usually caused by network delays or large site complexity.
+                        {t('issues.stuck.description')}
                       </p>
 
                       <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4 mb-4">
-                        <h4 className="text-white font-medium mb-3">Step-by-step solution:</h4>
+                        <h4 className="text-white font-medium mb-3">{t('issues.stuck.solution.title')}</h4>
                         <ol className="space-y-2 text-gray-300 list-decimal list-inside">
-                          <li>Wait 5-10 minutes (large sites take longer)</li>
-                          <li>Refresh your browser page (Ctrl+F5 or Cmd+R)</li>
-                          <li>Check if the audit status changed</li>
-                          <li>If still stuck, cancel and restart the audit</li>
-                          <li>Try auditing during off-peak hours (early morning/late evening)</li>
+                          <li>{t('issues.stuck.solution.steps.wait')}</li>
+                          <li>{t('issues.stuck.solution.steps.refresh')}</li>
+                          <li>{t('issues.stuck.solution.steps.checkStatus')}</li>
+                          <li>{t('issues.stuck.solution.steps.cancelRestart')}</li>
+                          <li>{t('issues.stuck.solution.steps.offPeak')}</li>
                         </ol>
                       </div>
 
                       <div className="bg-green-900/30 border border-green-600/30 rounded-lg p-4">
-                        <h4 className="text-green-400 font-medium mb-2">💡 Pro tip</h4>
+                        <h4 className="text-green-400 font-medium mb-2">{t('issues.stuck.proTip.title')}</h4>
                         <p className="text-gray-300 text-sm">
-                          Enable audit notifications in your settings to get alerts when audits complete, even if you close the browser.
+                          {t('issues.stuck.proTip.description')}
                         </p>
                       </div>
                     </div>
@@ -239,38 +240,38 @@ export default function AuditIssuesContent() {
                       <AlertTriangle className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">⏰ Audit timeout errors</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('issues.timeout.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Timeout errors occur when your website takes too long to respond or when auditing very large sites.
+                        {t('issues.timeout.description')}
                       </p>
 
                       <div className="space-y-4">
                         <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                          <h4 className="text-white font-medium mb-3">Immediate solutions:</h4>
+                          <h4 className="text-white font-medium mb-3">{t('issues.timeout.solutions.title')}</h4>
                           <ul className="space-y-2 text-gray-300">
                             <li className="flex items-start gap-2">
-                              <span className="text-blue-400 font-bold">•</span>
-                              <span><strong>Limit audit scope:</strong> Focus on specific pages instead of the entire site</span>
+                              <span className="text-blue-400 font-bold">{t('issues.timeout.solutions.limitScope.marker')}</span>
+                              <span>{t('issues.timeout.solutions.limitScope.text')}</span>
                             </li>
                             <li className="flex items-start gap-2">
-                              <span className="text-blue-400 font-bold">•</span>
-                              <span><strong>Check server performance:</strong> Ensure your website loads quickly</span>
+                              <span className="text-blue-400 font-bold">{t('issues.timeout.solutions.checkPerformance.marker')}</span>
+                              <span>{t('issues.timeout.solutions.checkPerformance.text')}</span>
                             </li>
                             <li className="flex items-start gap-2">
-                              <span className="text-blue-400 font-bold">•</span>
-                              <span><strong>Optimize before auditing:</strong> Enable caching and CDN if available</span>
+                              <span className="text-blue-400 font-bold">{t('issues.timeout.solutions.optimize.marker')}</span>
+                              <span>{t('issues.timeout.solutions.optimize.text')}</span>
                             </li>
                             <li className="flex items-start gap-2">
-                              <span className="text-blue-400 font-bold">•</span>
-                              <span><strong>Contact hosting provider:</strong> Ask about server resource limits</span>
+                              <span className="text-blue-400 font-bold">{t('issues.timeout.solutions.contactHosting.marker')}</span>
+                              <span>{t('issues.timeout.solutions.contactHosting.text')}</span>
                             </li>
                           </ul>
                         </div>
 
                         <div className="bg-yellow-900/30 border border-yellow-600/30 rounded-lg p-4">
-                          <h4 className="text-yellow-400 font-medium mb-2">⚠️ For large sites (&gt;1000 pages)</h4>
+                          <h4 className="text-yellow-400 font-medium mb-2">{t('issues.timeout.largeSites.title')}</h4>
                           <p className="text-gray-300 text-sm">
-                            Consider upgrading to our Pro plan for extended timeout limits and priority processing, or contact support for enterprise solutions.
+                            {t('issues.timeout.largeSites.description')}
                           </p>
                         </div>
                       </div>
@@ -285,41 +286,41 @@ export default function AuditIssuesContent() {
                       <Globe className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">🚫 "Access denied" or "Site not reachable"</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('issues.accessDenied.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        These errors indicate that our crawlers cannot access your website due to security restrictions or misconfigurations.
+                        {t('issues.accessDenied.description')}
                       </p>
 
                       <div className="space-y-4">
                         <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                          <h4 className="text-white font-medium mb-3">Common causes & fixes:</h4>
+                          <h4 className="text-white font-medium mb-3">{t('issues.accessDenied.causes.title')}</h4>
                           <div className="space-y-3">
                             <div className="border-l-4 border-blue-500 pl-4">
-                              <h5 className="text-white font-medium">Password protection</h5>
-                              <p className="text-gray-300 text-sm">Remove password protection or whitelist our crawler IPs</p>
+                              <h5 className="text-white font-medium">{t('issues.accessDenied.causes.password.title')}</h5>
+                              <p className="text-gray-300 text-sm">{t('issues.accessDenied.causes.password.description')}</p>
                             </div>
                             <div className="border-l-4 border-green-500 pl-4">
-                              <h5 className="text-white font-medium">Firewall blocking</h5>
-                              <p className="text-gray-300 text-sm">Configure firewall to allow AISEOTurbo crawler access</p>
+                              <h5 className="text-white font-medium">{t('issues.accessDenied.causes.firewall.title')}</h5>
+                              <p className="text-gray-300 text-sm">{t('issues.accessDenied.causes.firewall.description')}</p>
                             </div>
                             <div className="border-l-4 border-yellow-500 pl-4">
-                              <h5 className="text-white font-medium">robots.txt restrictions</h5>
-                              <p className="text-gray-300 text-sm">Check if robots.txt is blocking legitimate crawlers</p>
+                              <h5 className="text-white font-medium">{t('issues.accessDenied.causes.robots.title')}</h5>
+                              <p className="text-gray-300 text-sm">{t('issues.accessDenied.causes.robots.description')}</p>
                             </div>
                             <div className="border-l-4 border-red-500 pl-4">
-                              <h5 className="text-white font-medium">Server downtime</h5>
-                              <p className="text-gray-300 text-sm">Verify your website is online and accessible</p>
+                              <h5 className="text-white font-medium">{t('issues.accessDenied.causes.downtime.title')}</h5>
+                              <p className="text-gray-300 text-sm">{t('issues.accessDenied.causes.downtime.description')}</p>
                             </div>
                           </div>
                         </div>
 
                         <div className="bg-blue-900/30 border border-blue-600/30 rounded-lg p-4">
-                          <h4 className="text-blue-400 font-medium mb-2">🔧 Testing your site accessibility</h4>
+                          <h4 className="text-blue-400 font-medium mb-2">{t('issues.accessDenied.testing.title')}</h4>
                           <ol className="text-gray-300 text-sm space-y-1 list-decimal list-inside">
-                            <li>Open an incognito/private browser window</li>
-                            <li>Try accessing your site from the exact URL you provided</li>
-                            <li>Check if any login prompts or error pages appear</li>
-                            <li>Test from different devices or networks</li>
+                            <li>{t('issues.accessDenied.testing.steps.incognito')}</li>
+                            <li>{t('issues.accessDenied.testing.steps.exactUrl')}</li>
+                            <li>{t('issues.accessDenied.testing.steps.loginPrompts')}</li>
+                            <li>{t('issues.accessDenied.testing.steps.differentDevices')}</li>
                           </ol>
                         </div>
                       </div>
@@ -334,41 +335,41 @@ export default function AuditIssuesContent() {
                       <Search className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-3">📊 Incomplete or partial results</h3>
+                      <h3 className="text-xl font-semibold text-white mb-3">{t('issues.partial.title')}</h3>
                       <p className="text-gray-300 mb-4">
-                        Sometimes audits complete but show incomplete data or missing sections.
+                        {t('issues.partial.description')}
                       </p>
 
                       <div className="space-y-4">
                         <div className="bg-slate-900/50 border border-slate-600 rounded-lg p-4">
-                          <h4 className="text-white font-medium mb-3">Why this happens:</h4>
+                          <h4 className="text-white font-medium mb-3">{t('issues.partial.causes.title')}</h4>
                           <ul className="space-y-2 text-gray-300">
                             <li className="flex items-start gap-2">
-                              <span className="text-orange-400 font-bold">•</span>
-                              <span>Some pages were inaccessible during crawling</span>
+                              <span className="text-orange-400 font-bold">{t('issues.partial.causes.inaccessible.marker')}</span>
+                              <span>{t('issues.partial.causes.inaccessible.text')}</span>
                             </li>
                             <li className="flex items-start gap-2">
-                              <span className="text-orange-400 font-bold">•</span>
-                              <span>JavaScript-heavy content couldn't be fully analyzed</span>
+                              <span className="text-orange-400 font-bold">{t('issues.partial.causes.javascript.marker')}</span>
+                              <span>{t('issues.partial.causes.javascript.text')}</span>
                             </li>
                             <li className="flex items-start gap-2">
-                              <span className="text-orange-400 font-bold">•</span>
-                              <span>Rate limiting or server restrictions kicked in</span>
+                              <span className="text-orange-400 font-bold">{t('issues.partial.causes.rateLimit.marker')}</span>
+                              <span>{t('issues.partial.causes.rateLimit.text')}</span>
                             </li>
                             <li className="flex items-start gap-2">
-                              <span className="text-orange-400 font-bold">•</span>
-                              <span>Network interruptions during the audit process</span>
+                              <span className="text-orange-400 font-bold">{t('issues.partial.causes.interruptions.marker')}</span>
+                              <span>{t('issues.partial.causes.interruptions.text')}</span>
                             </li>
                           </ul>
                         </div>
 
                         <div className="bg-green-900/30 border border-green-600/30 rounded-lg p-4">
-                          <h4 className="text-green-400 font-medium mb-2">✅ Solutions</h4>
+                          <h4 className="text-green-400 font-medium mb-2">{t('issues.partial.solutions.title')}</h4>
                           <ul className="text-gray-300 text-sm space-y-1">
-                            <li>• Re-run the audit during low-traffic periods</li>
-                            <li>• Enable server-side rendering for JavaScript content</li>
-                            <li>• Increase server resources temporarily during audits</li>
-                            <li>• Check your sitemap.xml for accuracy and completeness</li>
+                            <li>{t('issues.partial.solutions.offPeak')}</li>
+                            <li>{t('issues.partial.solutions.serverSideRendering')}</li>
+                            <li>{t('issues.partial.solutions.increaseResources')}</li>
+                            <li>{t('issues.partial.solutions.checkSitemap')}</li>
                           </ul>
                         </div>
                       </div>
@@ -378,38 +379,38 @@ export default function AuditIssuesContent() {
               </div>
 
               {/* Advanced Troubleshooting */}
-              <h2 className="text-2xl font-bold text-white mt-12 mb-6">Advanced troubleshooting</h2>
+              <h2 className="text-2xl font-bold text-white mt-12 mb-6">{t('advanced.title')}</h2>
 
               <div className="bg-purple-900/20 border border-purple-600/30 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
                   <Zap className="w-6 h-6 text-purple-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h3 className="text-purple-400 text-lg font-semibold mb-4">For technical users</h3>
+                    <h3 className="text-purple-400 text-lg font-semibold mb-4">{t('advanced.forTechnicalUsers')}</h3>
                     <div className="space-y-4">
                       <div>
-                        <h4 className="text-white font-medium mb-2">Check server logs</h4>
-                        <p className="text-gray-300 text-sm mb-2">Look for crawler requests from AISEOTurbo IP ranges:</p>
+                        <h4 className="text-white font-medium mb-2">{t('advanced.serverLogs.title')}</h4>
+                        <p className="text-gray-300 text-sm mb-2">{t('advanced.serverLogs.description')}</p>
                         <code className="block bg-slate-800 p-3 rounded text-green-400 text-sm">
-                          grep "AISEOTurbo" /var/log/apache2/access.log<br/>
-                          # or<br/>
-                          grep "185.199.108.0/22" /var/log/nginx/access.log
+                          {t('advanced.serverLogs.commands.apache')}<br/>
+                          {t('advanced.serverLogs.commands.or')}<br/>
+                          {t('advanced.serverLogs.commands.nginx')}
                         </code>
                       </div>
 
                       <div>
-                        <h4 className="text-white font-medium mb-2">Test robots.txt compliance</h4>
-                        <p className="text-gray-300 text-sm mb-2">Verify our crawler is allowed:</p>
+                        <h4 className="text-white font-medium mb-2">{t('advanced.robotsTxt.title')}</h4>
+                        <p className="text-gray-300 text-sm mb-2">{t('advanced.robotsTxt.description')}</p>
                         <code className="block bg-slate-800 p-3 rounded text-green-400 text-sm">
-                          curl -I https://yoursite.com/robots.txt<br/>
-                          # Check for "Disallow: /" or bot restrictions
+                          {t('advanced.robotsTxt.commands.curl')}<br/>
+                          {t('advanced.robotsTxt.commands.comment')}
                         </code>
                       </div>
 
                       <div>
-                        <h4 className="text-white font-medium mb-2">Validate SSL certificate</h4>
-                        <p className="text-gray-300 text-sm mb-2">Ensure HTTPS is properly configured:</p>
+                        <h4 className="text-white font-medium mb-2">{t('advanced.ssl.title')}</h4>
+                        <p className="text-gray-300 text-sm mb-2">{t('advanced.ssl.description')}</p>
                         <code className="block bg-slate-800 p-3 rounded text-green-400 text-sm">
-                          openssl s_client -connect yoursite.com:443 -servername yoursite.com
+                          {t('advanced.ssl.commands.openssl')}
                         </code>
                       </div>
                     </div>
@@ -422,37 +423,37 @@ export default function AuditIssuesContent() {
                 <div className="flex items-start gap-4">
                   <HelpCircle className="w-6 h-6 text-blue-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h3 className="text-blue-400 text-lg font-semibold mb-4">When to contact support</h3>
+                    <h3 className="text-blue-400 text-lg font-semibold mb-4">{t('support.title')}</h3>
                     <p className="text-gray-300 mb-4">
-                      If you've tried the solutions above and still experiencing issues, contact our support team with:
+                      {t('support.description')}
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span className="text-gray-300 text-sm">Your website URL</span>
+                          <span className="text-gray-300 text-sm">{t('support.info.websiteUrl')}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span className="text-gray-300 text-sm">Exact error messages</span>
+                          <span className="text-gray-300 text-sm">{t('support.info.exactErrors')}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span className="text-gray-300 text-sm">Time when the issue occurred</span>
+                          <span className="text-gray-300 text-sm">{t('support.info.timeOccurred')}</span>
                         </div>
                       </div>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span className="text-gray-300 text-sm">Steps you've already tried</span>
+                          <span className="text-gray-300 text-sm">{t('support.info.stepsTried')}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span className="text-gray-300 text-sm">Your browser and device info</span>
+                          <span className="text-gray-300 text-sm">{t('support.info.browserInfo')}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <CheckCircle className="w-4 h-4 text-green-400" aria-hidden="true" />
-                          <span className="text-gray-300 text-sm">Screenshots of error screens</span>
+                          <span className="text-gray-300 text-sm">{t('support.info.screenshots')}</span>
                         </div>
                       </div>
                     </div>
@@ -465,48 +466,48 @@ export default function AuditIssuesContent() {
                 <div className="flex items-start gap-4">
                   <Target className="w-6 h-6 text-green-400 mt-1" aria-hidden="true" />
                   <div>
-                    <h3 className="text-green-400 text-lg font-semibold mb-2">Prevention is better than cure</h3>
+                    <h3 className="text-green-400 text-lg font-semibold mb-2">{t('prevention.title')}</h3>
                     <p className="text-gray-300 mb-4">
-                      Avoid future audit issues by following these best practices:
+                      {t('prevention.description')}
                     </p>
                     <ul className="space-y-2 text-gray-300">
-                      <li>• Ensure your website loads consistently in under 5 seconds</li>
-                      <li>• Use a reliable hosting provider with good uptime guarantees</li>
-                      <li>• Keep your robots.txt file simple and permissive for legitimate crawlers</li>
-                      <li>• Implement proper error handling for 404s and server errors</li>
-                      <li>• Schedule audits during low-traffic periods</li>
-                      <li>• Monitor your site's performance regularly</li>
+                      <li>{t('prevention.tips.fastLoading')}</li>
+                      <li>{t('prevention.tips.reliableHosting')}</li>
+                      <li>{t('prevention.tips.simpleRobots')}</li>
+                      <li>{t('prevention.tips.errorHandling')}</li>
+                      <li>{t('prevention.tips.scheduleAudits')}</li>
+                      <li>{t('prevention.tips.monitorPerformance')}</li>
                     </ul>
                   </div>
                 </div>
               </div>
 
               {/* Next Steps */}
-              <h2 className="text-2xl font-bold text-white mt-12 mb-6">Related help articles</h2>
+              <h2 className="text-2xl font-bold text-white mt-12 mb-6">{t('related.title')}</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Link
                   href="/help/getting-started/first-audit"
                   className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
-                  aria-label="Learn how to create your first SEO audit"
+                  aria-label={t('related.firstAudit.ariaLabel')}
                 >
                   <h3 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                    How to create your first audit
+                    {t('related.firstAudit.title')}
                   </h3>
                   <p className="text-gray-400 text-sm">
-                    Step-by-step guide to running successful SEO audits from the start
+                    {t('related.firstAudit.description')}
                   </p>
                 </Link>
 
                 <Link
                   href="/help/troubleshooting/performance"
                   className="block bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:bg-slate-800 hover:border-slate-600 transition-all duration-300 group"
-                  aria-label="Learn about performance optimization"
+                  aria-label={t('related.performance.ariaLabel')}
                 >
                   <h3 className="text-white font-semibold mb-2 group-hover:text-blue-400 transition-colors">
-                    Performance optimization
+                    {t('related.performance.title')}
                   </h3>
                   <p className="text-gray-400 text-sm">
-                    Optimize your website's performance for better audit results
+                    {t('related.performance.description')}
                   </p>
                 </Link>
               </div>

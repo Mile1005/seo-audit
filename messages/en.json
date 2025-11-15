@@ -1315,7 +1315,243 @@
             "title": "Audit Not Completing",
             "href": "/help/troubleshooting/audit-issues",
             "time": "6 min",
-            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
+            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages.",
+            "backToCategory": "Back to Troubleshooting",
+            "backToHelp": "Back to Help Center",
+            "breadcrumb": {
+              "home": "Home",
+              "help": "Help",
+              "troubleshooting": "Troubleshooting",
+              "auditIssues": "Audit Issues"
+            },
+            "header": {
+              "category": "Troubleshooting",
+              "title": "Audit not completing",
+              "readTime": "6 min read",
+              "lastUpdated": "Last updated: March 2025"
+            },
+            "backToHelp": {
+              "text": "Back to Help Center",
+              "ariaLabel": "Return to Help Center"
+            },
+            "schema": {
+              "name": "How to Fix SEO Audit Issues - AISEOTurbo Troubleshooting",
+              "description": "Complete troubleshooting guide for fixing SEO audit issues in AISEOTurbo. Solutions for stuck audits, timeout errors, and technical problems.",
+              "steps": {
+                "stuck": {
+                  "name": "Check if audit is stuck",
+                  "text": "If your audit appears stuck at 'Analyzing...', this may be due to large site size, server response delays, or network connectivity issues."
+                },
+                "restart": {
+                  "name": "Refresh or restart the audit",
+                  "text": "Try refreshing the page or restarting the audit to resolve temporary connectivity issues."
+                },
+                "timeout": {
+                  "name": "Handle timeout errors",
+                  "text": "For timeout errors on large websites, try limiting the audit scope to specific pages or contact support for enterprise solutions."
+                }
+              },
+              "faq": {
+                "stuck": {
+                  "question": "Why is my SEO audit stuck at 'Analyzing...'?",
+                  "answer": "Audits may appear stuck due to large site size, server response delays, or network connectivity issues. Try refreshing the page or restarting the audit."
+                },
+                "timeout": {
+                  "question": "What should I do if my audit times out?",
+                  "answer": "Audit timeouts usually occur with very large websites. Try limiting the audit scope to specific pages or contact support for enterprise solutions."
+                }
+              }
+            },
+            "intro": {
+              "title": "Quick resolution guide",
+              "description": "Having trouble with stuck or incomplete audits? This guide covers the most common issues and their solutions. Most problems can be resolved in just a few minutes with the right approach."
+            },
+            "diagnostics": {
+              "title": "🔍 Quick diagnostics checklist",
+              "checklist": {
+                "siteAccessible": "Is your website publicly accessible?",
+                "connectionStable": "Is your internet connection stable?",
+                "waitedFiveMinutes": "Have you waited at least 5 minutes?",
+                "siteRespondsQuickly": "Does your site respond quickly (<10s)?",
+                "correctUrlFormat": "Are you using the correct URL format?",
+                "triedRefreshing": "Have you tried refreshing the page?"
+              }
+            },
+            "issues": {
+              "title": "Common issues & solutions",
+              "stuck": {
+                "title": "🔄 Audit stuck at \"Analyzing...\"",
+                "description": "This is the most common issue, usually caused by network delays or large site complexity.",
+                "solution": {
+                  "title": "Step-by-step solution:",
+                  "steps": {
+                    "wait": "Wait 5-10 minutes (large sites take longer)",
+                    "refresh": "Refresh your browser page (Ctrl+F5 or Cmd+R)",
+                    "checkStatus": "Check if the audit status changed",
+                    "cancelRestart": "If still stuck, cancel and restart the audit",
+                    "offPeak": "Try auditing during off-peak hours (early morning/late evening)"
+                  }
+                },
+                "proTip": {
+                  "title": "💡 Pro tip",
+                  "description": "Enable audit notifications in your settings to get alerts when audits complete, even if you close the browser."
+                }
+              },
+              "timeout": {
+                "title": "⏰ Audit timeout errors",
+                "description": "Timeout errors occur when your website takes too long to respond or when auditing very large sites.",
+                "solutions": {
+                  "title": "Immediate solutions:",
+                  "limitScope": {
+                    "marker": "•",
+                    "text": "Limit audit scope: Focus on specific pages instead of the entire site"
+                  },
+                  "checkPerformance": {
+                    "marker": "•",
+                    "text": "Check server performance: Ensure your website loads quickly"
+                  },
+                  "optimize": {
+                    "marker": "•",
+                    "text": "Optimize before auditing: Enable caching and CDN if available"
+                  },
+                  "contactHosting": {
+                    "marker": "•",
+                    "text": "Contact hosting provider: Ask about server resource limits"
+                  }
+                },
+                "largeSites": {
+                  "title": "⚠️ For large sites (>1000 pages)",
+                  "description": "Consider upgrading to our Pro plan for extended timeout limits and priority processing, or contact support for enterprise solutions."
+                }
+              },
+              "accessDenied": {
+                "title": "🚫 \"Access denied\" or \"Site not reachable\"",
+                "description": "These errors indicate that our crawlers cannot access your website due to security restrictions or misconfigurations.",
+                "causes": {
+                  "title": "Common causes & fixes:",
+                  "password": {
+                    "title": "Password protection",
+                    "description": "Remove password protection or whitelist our crawler IPs"
+                  },
+                  "firewall": {
+                    "title": "Firewall blocking",
+                    "description": "Configure firewall to allow AISEOTurbo crawler access"
+                  },
+                  "robots": {
+                    "title": "robots.txt restrictions",
+                    "description": "Check if robots.txt is blocking legitimate crawlers"
+                  },
+                  "downtime": {
+                    "title": "Server downtime",
+                    "description": "Verify your website is online and accessible"
+                  }
+                },
+                "testing": {
+                  "title": "🔧 Testing your site accessibility",
+                  "steps": {
+                    "incognito": "Open an incognito/private browser window",
+                    "exactUrl": "Try accessing your site from the exact URL you provided",
+                    "loginPrompts": "Check if any login prompts or error pages appear",
+                    "differentDevices": "Test from different devices or networks"
+                  }
+                }
+              },
+              "partial": {
+                "title": "📊 Incomplete or partial results",
+                "description": "Sometimes audits complete but show incomplete data or missing sections.",
+                "causes": {
+                  "title": "Why this happens:",
+                  "inaccessible": {
+                    "marker": "•",
+                    "text": "Some pages were inaccessible during crawling"
+                  },
+                  "javascript": {
+                    "marker": "•",
+                    "text": "JavaScript-heavy content couldn't be fully analyzed"
+                  },
+                  "rateLimit": {
+                    "marker": "•",
+                    "text": "Rate limiting or server restrictions kicked in"
+                  },
+                  "interruptions": {
+                    "marker": "•",
+                    "text": "Network interruptions during the audit process"
+                  }
+                },
+                "solutions": {
+                  "title": "✅ Solutions",
+                  "offPeak": "• Re-run the audit during low-traffic periods",
+                  "serverSideRendering": "• Enable server-side rendering for JavaScript content",
+                  "increaseResources": "• Increase server resources temporarily during audits",
+                  "checkSitemap": "• Check your sitemap.xml for accuracy and completeness"
+                }
+              }
+            },
+            "advanced": {
+              "title": "Advanced troubleshooting",
+              "forTechnicalUsers": "For technical users",
+              "serverLogs": {
+                "title": "Check server logs",
+                "description": "Look for crawler requests from AISEOTurbo IP ranges:",
+                "commands": {
+                  "apache": "grep \"AISEOTurbo\" /var/log/apache2/access.log",
+                  "or": "# or",
+                  "nginx": "grep \"185.199.108.0/22\" /var/log/nginx/access.log"
+                }
+              },
+              "robotsTxt": {
+                "title": "Test robots.txt compliance",
+                "description": "Verify our crawler is allowed:",
+                "commands": {
+                  "curl": "curl -I https://yoursite.com/robots.txt",
+                  "comment": "# Check for \"Disallow: /\" or bot restrictions"
+                }
+              },
+              "ssl": {
+                "title": "Validate SSL certificate",
+                "description": "Ensure HTTPS is properly configured:",
+                "commands": {
+                  "openssl": "openssl s_client -connect yoursite.com:443 -servername yoursite.com"
+                }
+              }
+            },
+            "support": {
+              "title": "When to contact support",
+              "description": "If you've tried the solutions above and still experiencing issues, contact our support team with:",
+              "info": {
+                "websiteUrl": "Your website URL",
+                "exactErrors": "Exact error messages",
+                "timeOccurred": "Time when the issue occurred",
+                "stepsTried": "Steps you've already tried",
+                "browserInfo": "Your browser and device info",
+                "screenshots": "Screenshots of error screens"
+              }
+            },
+            "prevention": {
+              "title": "Prevention is better than cure",
+              "description": "Avoid future audit issues by following these best practices:",
+              "tips": {
+                "fastLoading": "• Ensure your website loads consistently in under 5 seconds",
+                "reliableHosting": "• Use a reliable hosting provider with good uptime guarantees",
+                "simpleRobots": "• Keep your robots.txt file simple and permissive for legitimate crawlers",
+                "errorHandling": "• Implement proper error handling for 404s and server errors",
+                "scheduleAudits": "• Schedule audits during low-traffic periods",
+                "monitorPerformance": "• Monitor your site's performance regularly"
+              }
+            },
+            "related": {
+              "title": "Related help articles",
+              "firstAudit": {
+                "title": "How to create your first audit",
+                "description": "Step-by-step guide to running successful SEO audits from the start",
+                "ariaLabel": "Learn how to create your first SEO audit"
+              },
+              "performance": {
+                "title": "Performance optimization",
+                "description": "Optimize your website's performance for better audit results",
+                "ariaLabel": "Learn about performance optimization"
+              }
+            }
           }
         },
         "additionalResources": {

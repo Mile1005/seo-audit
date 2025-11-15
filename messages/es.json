@@ -1317,10 +1317,246 @@
             "contactSupportMessage": "Si estos pasos no ayudan, contacta a nuestro equipo de soporte en support@aiseoturbo.com para recibir ayuda."
           },
           "auditIssues": {
-            "title": "Audit Not Completing",
+            "title": "El auditoría no se completa",
             "href": "/help/troubleshooting/audit-issues",
-            "time": "6 min",
-            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
+            "time": "6 minutos",
+            "description": "Soluciona auditorías incompletas, procesos bloqueados y mensajes de error de auditoría.",
+            "backToCategory": "Volver a Resolución de Problemas",
+            "backToHelp": "Volver al Centro de Ayuda",
+            "breadcrumb": {
+              "home": "Inicio",
+              "help": "Ayuda",
+              "troubleshooting": "Resolución de Problemas",
+              "auditIssues": "Problemas de Auditoría"
+            },
+            "header": {
+              "category": "Resolución de Problemas",
+              "title": "La auditoría no se completa",
+              "readTime": "Lectura de 6 min",
+              "lastUpdated": "Última actualización: marzo de 2025"
+            },
+            "backToHelp": {
+              "text": "Volver al Centro de Ayuda",
+              "ariaLabel": "Regresar al Centro de Ayuda"
+            },
+            "schema": {
+              "name": "Cómo solucionar problemas de auditoría SEO - Resolución de problemas AISEOTurbo",
+              "description": "Guía completa para solucionar problemas de auditoría SEO en AISEOTurbo. Soluciones para auditorías bloqueadas, errores de tiempo de espera y problemas técnicos.",
+              "steps": {
+                "stuck": {
+                  "name": "Verificar si la auditoría está bloqueada",
+                  "text": "Si la auditoría se queda atascada en 'Analizando...', puede deberse al tamaño del sitio, retrasos del servidor o problemas de conectividad de red."
+                },
+                "restart": {
+                  "name": "Actualizar o reiniciar la auditoría",
+                  "text": "Prueba actualizando la página o reiniciando la auditoría para resolver problemas temporales de conectividad."
+                },
+                "timeout": {
+                  "name": "Gestionar errores de tiempo de espera",
+                  "text": "En errores de tiempo de espera en sitios grandes, limita el alcance de la auditoría a páginas específicas o contacta al soporte para soluciones empresariales."
+                }
+              },
+              "faq": {
+                "stuck": {
+                  "question": "¿Por qué mi auditoría SEO está bloqueada en 'Analizando...?'",
+                  "answer": "Las auditorías pueden quedar bloqueadas por el tamaño del sitio, retrasos del servidor o problemas de red. Prueba actualizar la página o reiniciar la auditoría."
+                },
+                "timeout": {
+                  "question": "¿Qué hago si la auditoría expira?",
+                  "answer": "Las expiraciones suelen ocurrir con sitios web muy grandes. Limita el alcance a páginas específicas o contacta al soporte para soluciones empresariales."
+                }
+              }
+            },
+            "intro": {
+              "title": "Guía rápida de resolución",
+              "description": "¿Problemas con auditorías bloqueadas o incompletas? Esta guía cubre los inconvenientes más comunes y sus soluciones. La mayoría se resuelven en unos minutos con el enfoque adecuado."
+            },
+            "diagnostics": {
+              "title": "🔍 Lista de verificación rápida de diagnóstico",
+              "checklist": {
+                "siteAccessible": "¿Tu sitio web es público?",
+                "connectionStable": "¿Tu conexión a internet es estable?",
+                "waitedFiveMinutes": "¿Has esperado al menos 5 minutos?",
+                "siteRespondsQuickly": "¿Tu sitio responde rápido (<10s)?",
+                "correctUrlFormat": "¿Utilizas el formato de URL correcto?",
+                "triedRefreshing": "¿Has intentado actualizar la página?"
+              }
+            },
+            "issues": {
+              "title": "Problemas comunes y soluciones",
+              "stuck": {
+                "title": "🔄 Auditoría bloqueada en \"Analizando...\"",
+                "description": "Este es el problema más común, normalmente causado por retrasos de red o alta complejidad del sitio.",
+                "solution": {
+                  "title": "Solución paso a paso:",
+                  "steps": {
+                    "wait": "Espera 5-10 minutos (los sitios grandes tardan más)",
+                    "refresh": "Actualiza la página del navegador (Ctrl+F5 o Cmd+R)",
+                    "checkStatus": "Verifica si el estado de la auditoría cambió",
+                    "cancelRestart": "Si sigue bloqueada, cancela y reinicia la auditoría",
+                    "offPeak": "Realiza la auditoría en horas de menor tráfico (mañana temprano/noche)"
+                  }
+                },
+                "proTip": {
+                  "title": "💡 Consejo profesional",
+                  "description": "Activa las notificaciones de auditoría en la configuración para recibir alertas al completarse, incluso si cierras el navegador."
+                }
+              },
+              "timeout": {
+                "title": "⏰ Errores de tiempo de espera en auditoría",
+                "description": "Los errores de tiempo de espera ocurren cuando el sitio tarda demasiado en responder o al auditar sitios muy grandes.",
+                "solutions": {
+                  "title": "Soluciones inmediatas:",
+                  "limitScope": {
+                    "marker": "•",
+                    "text": "Limita el alcance: Audita páginas específicas en lugar de todo el sitio"
+                  },
+                  "checkPerformance": {
+                    "marker": "•",
+                    "text": "Revisa el rendimiento del servidor: Asegúrate que el sitio cargue rápido"
+                  },
+                  "optimize": {
+                    "marker": "•",
+                    "text": "Optimiza antes de auditar: Activa caché y CDN si están disponibles"
+                  },
+                  "contactHosting": {
+                    "marker": "•",
+                    "text": "Contacta al proveedor de hosting: Consulta los límites de recursos del servidor"
+                  }
+                },
+                "largeSites": {
+                  "title": "⚠️ Para sitios grandes (>1000 páginas)",
+                  "description": "Considera actualizar al plan Pro para límites de tiempo extendidos y procesamiento prioritario, o contacta al soporte para soluciones empresariales."
+                }
+              },
+              "accessDenied": {
+                "title": "🚫 \"Acceso denegado\" o \"Sitio no disponible\"",
+                "description": "Estos errores indican que nuestros rastreadores no pueden acceder a tu sitio por restricciones de seguridad o configuraciones incorrectas.",
+                "causes": {
+                  "title": "Causas habituales y soluciones:",
+                  "password": {
+                    "title": "Protección por contraseña",
+                    "description": "Elimina la protección o autoriza nuestras IPs de rastreo"
+                  },
+                  "firewall": {
+                    "title": "El firewall bloquea",
+                    "description": "Configura el firewall para permitir el acceso a AISEOTurbo"
+                  },
+                  "robots": {
+                    "title": "Restricciones de robots.txt",
+                    "description": "Verifica que robots.txt no bloquee rastreadores legítimos"
+                  },
+                  "downtime": {
+                    "title": "Servidor caído",
+                    "description": "Asegúrate que tu web esté en línea y disponible"
+                  }
+                },
+                "testing": {
+                  "title": "🔧 Prueba de accesibilidad",
+                  "steps": {
+                    "incognito": "Abre una ventana privada/incógnito en el navegador",
+                    "exactUrl": "Intenta acceder al sitio con la URL exacta proporcionada",
+                    "loginPrompts": "Verifica si aparecen páginas de acceso o errores",
+                    "differentDevices": "Prueba desde diferentes dispositivos o redes"
+                  }
+                }
+              },
+              "partial": {
+                "title": "📊 Resultados incompletos o parciales",
+                "description": "A veces la auditoría finaliza pero muestra datos incompletos o faltan secciones.",
+                "causes": {
+                  "title": "Por qué ocurre:",
+                  "inaccessible": {
+                    "marker": "•",
+                    "text": "Algunas páginas no fueron accesibles durante el rastreo"
+                  },
+                  "javascript": {
+                    "marker": "•",
+                    "text": "Contenido complejo en JavaScript no fue analizado completamente"
+                  },
+                  "rateLimit": {
+                    "marker": "•",
+                    "text": "Se aplicaron limitaciones o restricciones de servidor"
+                  },
+                  "interruptions": {
+                    "marker": "•",
+                    "text": "Interrupciones de red durante el proceso de auditoría"
+                  }
+                },
+                "solutions": {
+                  "title": "✅ Soluciones",
+                  "offPeak": "• Repite la auditoría en horarios de bajo tráfico",
+                  "serverSideRendering": "• Activa el renderizado del lado del servidor para contenido en JavaScript",
+                  "increaseResources": "• Aumenta temporalmente los recursos del servidor durante auditorías",
+                  "checkSitemap": "• Revisa la precisión y completitud de tu sitemap.xml"
+                }
+              }
+            },
+            "advanced": {
+              "title": "Solución avanzada de problemas",
+              "forTechnicalUsers": "Para usuarios técnicos",
+              "serverLogs": {
+                "title": "Revisa los registros del servidor",
+                "description": "Busca solicitudes de rastreador de los siguientes rangos de IP de AISEOTurbo:",
+                "commands": {
+                  "apache": "grep \"AISEOTurbo\" /var/log/apache2/access.log",
+                  "or": "# o",
+                  "nginx": "grep \"185.199.108.0/22\" /var/log/nginx/access.log"
+                }
+              },
+              "robotsTxt": {
+                "title": "Prueba la conformidad con robots.txt",
+                "description": "Verifica que nuestro rastreador esté permitido:",
+                "commands": {
+                  "curl": "curl -I https://yoursite.com/robots.txt",
+                  "comment": "# Revisa \"Disallow: /\" o restricciones para bots"
+                }
+              },
+              "ssl": {
+                "title": "Valida el certificado SSL",
+                "description": "Asegura que HTTPS está bien configurado:",
+                "commands": {
+                  "openssl": "openssl s_client -connect yoursite.com:443 -servername yoursite.com"
+                }
+              }
+            },
+            "support": {
+              "title": "Cuándo contactar soporte",
+              "description": "Si probaste las soluciones anteriores y sigues teniendo problemas, contacta a nuestro soporte con:",
+              "info": {
+                "websiteUrl": "URL de tu sitio web",
+                "exactErrors": "Mensajes de error exactos",
+                "timeOccurred": "Hora del problema",
+                "stepsTried": "Acciones ya intentadas",
+                "browserInfo": "Información del navegador y dispositivo",
+                "screenshots": "Capturas de pantalla del error"
+              }
+            },
+            "prevention": {
+              "title": "La prevención es mejor que la solución",
+              "description": "Evita problemas futuros en auditorías siguiendo estas mejores prácticas:",
+              "tips": {
+                "fastLoading": "• Asegura que tu sitio cargue siempre en menos de 5 segundos",
+                "reliableHosting": "• Usa un proveedor de hosting confiable con garantía de disponibilidad",
+                "simpleRobots": "• Mantén robots.txt simple y permisivo para rastreadores legítimos",
+                "errorHandling": "• Implementa manejo de errores adecuado para 404 y errores de servidor",
+                "scheduleAudits": "• Programa auditorías en periodos de bajo tráfico",
+                "monitorPerformance": "• Monitorea el rendimiento del sitio regularmente"
+              }
+            },
+            "related": {
+              "title": "Artículos relacionados de ayuda",
+              "firstAudit": {
+                "title": "Cómo crear tu primera auditoría",
+                "description": "Guía paso a paso para iniciar auditorías SEO exitosas",
+                "ariaLabel": "Aprende a crear tu primera auditoría SEO"
+              },
+              "performance": {
+                "title": "Optimización de rendimiento",
+                "description": "Optimiza el rendimiento de tu web para mejores resultados de auditoría",
+                "ariaLabel": "Aprende sobre optimización de rendimiento"
+              }
+            }
           }
         },
         "additionalResources": {

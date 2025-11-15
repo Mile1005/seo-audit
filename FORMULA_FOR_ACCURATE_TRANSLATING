@@ -1,0 +1,48 @@
+# Internationalization Strategy & Formula
+
+## Core Process (5-Step Formula)
+
+### 1. **Locate & Isolate Content**
+- Identify where content lives (page-level or component-level)
+- If content is in a component, refactor the component first
+- Never start with the page if content is component-based
+
+### 2. **Transform to t() Functions**
+- Replace ALL hardcoded strings with `t()` calls
+- Use proper namespace paths (e.g., `help.categories.troubleshooting.articles.performance`)
+- Ensure consistent key naming conventions
+
+### 3. **Source Language Setup (en.json)**
+- Add all new keys to the appropriate nested structure in `en.json`
+- Maintain the exact same JSON structure as existing translations
+- Double-check key paths match the namespace used in components
+
+### 4. **Bulk Translation via Perplexity MCP**
+- Copy the ENTIRE section from `en.json` for the page/component being worked on
+- Send to Perplexity MCP for translation to: `de`, `it`, `id`, `es`, `fr`
+- Wait for complete translation response
+- **Copy language-by-language** (never mix languages in one paste)
+- Paste each language's full translation block into respective JSON files
+
+### 5. **Validation & Verification**
+- Check component imports: `useTranslations` with correct namespace
+- Run `pnpm type-check` to catch namespace/key mismatches
+- Run `npm run build` to ensure all routes generate correctly
+- Test actual display in browser (not just build success)
+- Double-check before moving to next article
+
+## Error Prevention Rules
+
+- **Never edit translation files directly** - always start with `en.json` and translate
+- **Namespace consistency** - ensure `t()` calls match JSON structure exactly
+- **Complete sections only** - don't partial translate; do whole pages/components
+- **Validate before commit** - typecheck + build + visual verification
+- **One language at a time** - prevents cross-contamination during paste operations
+
+## Tool Usage
+- **Perplexity MCP**: For bulk translations (send full sections, get back complete translations)
+- **Typecheck**: Catches namespace/key errors immediately
+- **Build**: Validates route generation and compilation
+- **Browser testing**: Final verification that translations display correctly
+
+This systematic approach ensures zero translation errors and maintains consistency across all languages.

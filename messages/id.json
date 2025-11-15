@@ -1397,10 +1397,246 @@
             "contactSupportMessage": "Jika langkah di atas tidak membantu, hubungi tim dukungan kami di support@aiseoturbo.com."
           },
           "auditIssues": {
-            "title": "Audit Not Completing",
+            "title": "Audit Tidak Selesai",
             "href": "/help/troubleshooting/audit-issues",
-            "time": "6 min",
-            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
+            "time": "6 menit",
+            "description": "Mengatasi audit yang tidak lengkap, proses yang macet, dan pesan kesalahan audit.",
+            "backToCategory": "Kembali ke Pemecahan Masalah",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "troubleshooting": "Pemecahan Masalah",
+              "auditIssues": "Masalah Audit"
+            },
+            "header": {
+              "category": "Pemecahan Masalah",
+              "title": "Audit tidak selesai",
+              "readTime": "Baca 6 menit",
+              "lastUpdated": "Terakhir diperbarui: Maret 2025"
+            },
+            "backToHelp": {
+              "text": "Kembali ke Pusat Bantuan",
+              "ariaLabel": "Kembali ke Pusat Bantuan"
+            },
+            "schema": {
+              "name": "Cara Memperbaiki Masalah Audit SEO - Pemecahan Masalah AISEOTurbo",
+              "description": "Panduan lengkap pemecahan masalah untuk mengatasi masalah audit SEO di AISEOTurbo. Solusi untuk audit macet, error timeout, dan masalah teknis.",
+              "steps": {
+                "stuck": {
+                  "name": "Periksa apakah audit macet",
+                  "text": "Jika audit Anda macet di 'Menganalisis...', kemungkinan karena ukuran situs yang besar, respons server yang lambat, atau masalah koneksi jaringan."
+                },
+                "restart": {
+                  "name": "Segarkan atau mulai ulang audit",
+                  "text": "Coba segarkan halaman atau mulai ulang audit untuk mengatasi masalah koneksi sementara."
+                },
+                "timeout": {
+                  "name": "Tangani error timeout",
+                  "text": "Untuk error timeout pada situs besar, batasi cakupan audit ke halaman tertentu atau hubungi dukungan untuk solusi enterprise."
+                }
+              },
+              "faq": {
+                "stuck": {
+                  "question": "Mengapa audit SEO saya macet di 'Menganalisis...?'",
+                  "answer": "Audit mungkin macet karena ukuran situs besar, respons server lambat, atau masalah koneksi jaringan. Coba segarkan halaman atau mulai ulang audit."
+                },
+                "timeout": {
+                  "question": "Apa yang harus dilakukan jika audit mengalami timeout?",
+                  "answer": "Timeout audit biasanya terjadi pada situs yang sangat besar. Batasi cakupan audit ke halaman tertentu atau hubungi dukungan untuk solusi perusahaan."
+                }
+              }
+            },
+            "intro": {
+              "title": "Panduan penyelesaian cepat",
+              "description": "Kesulitan dengan audit yang macet atau tidak lengkap? Panduan ini membahas masalah umum dan solusinya. Sebagian besar masalah dapat diselesaikan hanya dalam beberapa menit dengan pendekatan yang tepat."
+            },
+            "diagnostics": {
+              "title": "🔍 Daftar periksa diagnosis cepat",
+              "checklist": {
+                "siteAccessible": "Apakah situs Anda dapat diakses publik?",
+                "connectionStable": "Apakah koneksi internet Anda stabil?",
+                "waitedFiveMinutes": "Sudah menunggu setidaknya 5 menit?",
+                "siteRespondsQuickly": "Apakah situs Anda merespons dengan cepat (<10 detik)?",
+                "correctUrlFormat": "Apakah Anda menggunakan format URL yang benar?",
+                "triedRefreshing": "Sudah mencoba menyegarkan halaman?"
+              }
+            },
+            "issues": {
+              "title": "Masalah umum & solusi",
+              "stuck": {
+                "title": "🔄 Audit macet di \"Menganalisis...\"",
+                "description": "Ini adalah masalah paling umum, biasanya disebabkan oleh keterlambatan jaringan atau kompleksitas situs yang besar.",
+                "solution": {
+                  "title": "Solusi langkah demi langkah:",
+                  "steps": {
+                    "wait": "Tunggu 5-10 menit (situs besar membutuhkan waktu lebih lama)",
+                    "refresh": "Segarkan halaman browser Anda (Ctrl+F5 atau Cmd+R)",
+                    "checkStatus": "Periksa apakah status audit berubah",
+                    "cancelRestart": "Jika masih macet, batalkan dan mulai ulang audit",
+                    "offPeak": "Coba audit di luar jam ramai (pagi/sore)"
+                  }
+                },
+                "proTip": {
+                  "title": "💡 Tips profesional",
+                  "description": "Aktifkan notifikasi audit di pengaturan untuk mendapatkan peringatan saat audit selesai, bahkan jika Anda menutup browser."
+                }
+              },
+              "timeout": {
+                "title": "⏰ Error timeout audit",
+                "description": "Error timeout terjadi ketika situs Anda terlalu lama merespons atau saat mengaudit situs sangat besar.",
+                "solutions": {
+                  "title": "Solusi langsung:",
+                  "limitScope": {
+                    "marker": "•",
+                    "text": "Batasi cakupan audit: Fokus pada halaman tertentu, bukan seluruh situs"
+                  },
+                  "checkPerformance": {
+                    "marker": "•",
+                    "text": "Cek performa server: Pastikan situs Anda cepat diakses"
+                  },
+                  "optimize": {
+                    "marker": "•",
+                    "text": "Optimalkan sebelum audit: Aktifkan caching dan CDN jika tersedia"
+                  },
+                  "contactHosting": {
+                    "marker": "•",
+                    "text": "Hubungi penyedia hosting: Tanyakan batas sumber daya server"
+                  }
+                },
+                "largeSites": {
+                  "title": "⚠️ Untuk situs besar (>1000 halaman)",
+                  "description": "Pertimbangkan upgrade ke paket Pro untuk batas timeout lebih lama dan prioritas pemrosesan, atau hubungi dukungan untuk solusi enterprise."
+                }
+              },
+              "accessDenied": {
+                "title": "🚫 \"Akses ditolak\" atau \"Situs tidak dapat dijangkau\"",
+                "description": "Error ini berarti crawler kami tidak dapat mengakses situs Anda karena pembatasan keamanan atau konfigurasi yang salah.",
+                "causes": {
+                  "title": "Penyebab umum & solusinya:",
+                  "password": {
+                    "title": "Perlindungan kata sandi",
+                    "description": "Hapus perlindungan kata sandi atau whitelist IP crawler kami"
+                  },
+                  "firewall": {
+                    "title": "Firewall menghalangi",
+                    "description": "Konfigurasikan firewall agar crawler AISEOTurbo dapat mengakses"
+                  },
+                  "robots": {
+                    "title": "Pembatasan robots.txt",
+                    "description": "Periksa apakah robots.txt memblokir crawler yang sah"
+                  },
+                  "downtime": {
+                    "title": "Server down",
+                    "description": "Pastikan situs Anda online dan dapat diakses"
+                  }
+                },
+                "testing": {
+                  "title": "🔧 Uji aksesibilitas situs Anda",
+                  "steps": {
+                    "incognito": "Buka jendela browser incognito/pribadi",
+                    "exactUrl": "Coba akses situs dari URL persis yang Anda berikan",
+                    "loginPrompts": "Cek apakah ada permintaan login atau halaman error",
+                    "differentDevices": "Uji dari perangkat atau jaringan yang berbeda"
+                  }
+                }
+              },
+              "partial": {
+                "title": "📊 Hasil tidak lengkap atau sebagian",
+                "description": "Kadang audit selesai tetapi hasilnya kurang lengkap atau bagian data hilang.",
+                "causes": {
+                  "title": "Mengapa ini terjadi:",
+                  "inaccessible": {
+                    "marker": "•",
+                    "text": "Beberapa halaman tidak dapat diakses selama crawling"
+                  },
+                  "javascript": {
+                    "marker": "•",
+                    "text": "Konten yang berat JavaScript tidak dapat dianalisis sepenuhnya"
+                  },
+                  "rateLimit": {
+                    "marker": "•",
+                    "text": "Pembatasan laju atau batasan server aktif"
+                  },
+                  "interruptions": {
+                    "marker": "•",
+                    "text": "Gangguan jaringan saat proses audit"
+                  }
+                },
+                "solutions": {
+                  "title": "✅ Solusi",
+                  "offPeak": "• Jalankan kembali audit di jam sepi",
+                  "serverSideRendering": "• Aktifkan rendering sisi server untuk konten JavaScript",
+                  "increaseResources": "• Tambah sumber daya server sementara selama audit",
+                  "checkSitemap": "• Periksa sitemap.xml untuk kelengkapan dan akurasi"
+                }
+              }
+            },
+            "advanced": {
+              "title": "Pemecahan masalah lanjutan",
+              "forTechnicalUsers": "Untuk pengguna teknis",
+              "serverLogs": {
+                "title": "Periksa log server",
+                "description": "Cari permintaan crawler dari rentang IP AISEOTurbo berikut:",
+                "commands": {
+                  "apache": "grep \"AISEOTurbo\" /var/log/apache2/access.log",
+                  "or": "# atau",
+                  "nginx": "grep \"185.199.108.0/22\" /var/log/nginx/access.log"
+                }
+              },
+              "robotsTxt": {
+                "title": "Uji kepatuhan robots.txt",
+                "description": "Pastikan crawler kami diperbolehkan:",
+                "commands": {
+                  "curl": "curl -I https://yoursite.com/robots.txt",
+                  "comment": "# Cek untuk \"Disallow: /\" atau pembatasan bot"
+                }
+              },
+              "ssl": {
+                "title": "Validasi sertifikat SSL",
+                "description": "Pastikan HTTPS sudah dikonfigurasi dengan benar:",
+                "commands": {
+                  "openssl": "openssl s_client -connect yoursite.com:443 -servername yoursite.com"
+                }
+              }
+            },
+            "support": {
+              "title": "Kapan harus menghubungi dukungan",
+              "description": "Jika solusi di atas belum menyelesaikan masalah, hubungi tim dukungan kami dengan:",
+              "info": {
+                "websiteUrl": "URL situs web Anda",
+                "exactErrors": "Pesan error yang muncul",
+                "timeOccurred": "Waktu terjadinya masalah",
+                "stepsTried": "Langkah yang sudah dicoba",
+                "browserInfo": "Info browser dan perangkat Anda",
+                "screenshots": "Tangkapan layar error"
+              }
+            },
+            "prevention": {
+              "title": "Pencegahan lebih baik daripada pengobatan",
+              "description": "Hindari masalah audit di masa depan dengan praktik terbaik berikut:",
+              "tips": {
+                "fastLoading": "• Pastikan situs Anda selalu memuat dalam waktu kurang dari 5 detik",
+                "reliableHosting": "• Gunakan penyedia hosting yang dapat diandalkan dengan jaminan uptime",
+                "simpleRobots": "• Buat robots.txt sesederhana dan se-permisif mungkin untuk crawler yang sah",
+                "errorHandling": "• Terapkan penanganan error untuk 404 dan kesalahan server",
+                "scheduleAudits": "• Jadwalkan audit di jam sepi",
+                "monitorPerformance": "• Pantau performa situs Anda secara rutin"
+              }
+            },
+            "related": {
+              "title": "Artikel bantuan terkait",
+              "firstAudit": {
+                "title": "Cara membuat audit pertama Anda",
+                "description": "Panduan langkah-demi-langkah untuk menjalankan audit SEO yang sukses",
+                "ariaLabel": "Pelajari cara membuat audit SEO pertama Anda"
+              },
+              "performance": {
+                "title": "Optimasi performa",
+                "description": "Optimalkan kinerja situs Anda untuk hasil audit yang lebih baik",
+                "ariaLabel": "Pelajari tentang optimasi performa"
+              }
+            }
           }
         },
         "additionalResources": {

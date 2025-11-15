@@ -1392,10 +1392,246 @@
             "contactSupportMessage": "Wenn diese Schritte nicht helfen, wenden Sie sich an unser Support-Team unter support@aiseoturbo.com."
           },
           "auditIssues": {
-            "title": "Audit Not Completing",
+            "title": "Audit wird nicht abgeschlossen",
             "href": "/help/troubleshooting/audit-issues",
-            "time": "6 min",
-            "description": "Troubleshoot incomplete audits, stuck processes, and audit error messages."
+            "time": "6 Minuten",
+            "description": "Unvollständige Audits, hängende Prozesse und Audit-Fehlermeldungen beheben.",
+            "backToCategory": "Zurück zur Fehlerbehebung",
+            "backToHelp": "Zurück zum Hilfe-Center",
+            "breadcrumb": {
+              "home": "Startseite",
+              "help": "Hilfe",
+              "troubleshooting": "Fehlerbehebung",
+              "auditIssues": "Audit-Probleme"
+            },
+            "header": {
+              "category": "Fehlerbehebung",
+              "title": "Audit wird nicht abgeschlossen",
+              "readTime": "6 Min. Lesezeit",
+              "lastUpdated": "Letzte Aktualisierung: März 2025"
+            },
+            "backToHelp": {
+              "text": "Zurück zum Hilfe-Center",
+              "ariaLabel": "Zurück zum Hilfe-Center"
+            },
+            "schema": {
+              "name": "So beheben Sie SEO-Audit-Probleme - AISEOTurbo Fehlerbehebung",
+              "description": "Vollständige Anleitung zur Behebung von SEO-Audit-Problemen in AISEOTurbo. Lösungen für hängende Audits, Timeout-Fehler und technische Probleme.",
+              "steps": {
+                "stuck": {
+                  "name": "Prüfen, ob Audit hängt",
+                  "text": "Wenn Ihr Audit bei 'Analyse...' hängen bleibt, kann dies an der Größe der Website, an Serververzögerungen oder an Netzwerkproblemen liegen."
+                },
+                "restart": {
+                  "name": "Seite aktualisieren oder Audit neu starten",
+                  "text": "Versuchen Sie, die Seite zu aktualisieren oder das Audit neu zu starten, um temporäre Verbindungsprobleme zu beheben."
+                },
+                "timeout": {
+                  "name": "Timeout-Fehler behandeln",
+                  "text": "Bei Timeout-Fehlern auf großen Websites beschränken Sie den Audit-Umfang auf einzelne Seiten oder kontaktieren Sie den Support für Unternehmenslösungen."
+                }
+              },
+              "faq": {
+                "stuck": {
+                  "question": "Warum bleibt mein SEO-Audit bei 'Analyse...' hängen?",
+                  "answer": "Audits können aufgrund der Größe der Website, Serververzögerungen oder Netzwerkproblemen hängen bleiben. Versuchen Sie, die Seite zu aktualisieren oder das Audit neu zu starten."
+                },
+                "timeout": {
+                  "question": "Was soll ich tun, wenn mein Audit ein Timeout erhält?",
+                  "answer": "Audit-Timeouts treten meist bei sehr großen Websites auf. Beschränken Sie den Audit-Umfang auf bestimmte Seiten oder kontaktieren Sie den Support für Unternehmenslösungen."
+                }
+              }
+            },
+            "intro": {
+              "title": "Schnelle Anleitung zur Lösung",
+              "description": "Probleme mit hängenden oder unvollständigen Audits? Dieser Leitfaden deckt die häufigsten Probleme und Lösungen ab. Die meisten Probleme lassen sich mit der richtigen Methode in wenigen Minuten beheben."
+            },
+            "diagnostics": {
+              "title": "🔍 Schnelle Checkliste zur Diagnose",
+              "checklist": {
+                "siteAccessible": "Ist Ihre Website öffentlich zugänglich?",
+                "connectionStable": "Ist Ihre Internetverbindung stabil?",
+                "waitedFiveMinutes": "Haben Sie mindestens 5 Minuten gewartet?",
+                "siteRespondsQuickly": "Antwortet Ihre Website schnell (<10s)?",
+                "correctUrlFormat": "Verwenden Sie das korrekte URL-Format?",
+                "triedRefreshing": "Haben Sie die Seite aktualisiert?"
+              }
+            },
+            "issues": {
+              "title": "Häufige Probleme & Lösungen",
+              "stuck": {
+                "title": "🔄 Audit bleibt bei \"Analyse...\" stecken",
+                "description": "Dies ist das häufigste Problem, verursacht durch Netzwerkverzögerungen oder eine komplexe Website-Struktur.",
+                "solution": {
+                  "title": "Schritt-für-Schritt-Lösung:",
+                  "steps": {
+                    "wait": "5-10 Minuten warten (große Websites brauchen länger)",
+                    "refresh": "Browserseite aktualisieren (Strg+F5 oder Cmd+R)",
+                    "checkStatus": "Prüfen, ob sich der Audit-Status geändert hat",
+                    "cancelRestart": "Wenn weiterhin steckengeblieben, Audit abbrechen und neu starten",
+                    "offPeak": "Audit zu Nebenzeiten durchführen (früh morgens/spät abends)"
+                  }
+                },
+                "proTip": {
+                  "title": "💡 Profi-Tipp",
+                  "description": "Aktivieren Sie Audit-Benachrichtigungen in den Einstellungen, um Alerts zu erhalten, wenn Audits abgeschlossen sind – auch wenn der Browser geschlossen ist."
+                }
+              },
+              "timeout": {
+                "title": "⏰ Audit-Timeout-Fehler",
+                "description": "Timeout-Fehler treten auf, wenn Ihre Website zu langsam reagiert oder sehr groß ist.",
+                "solutions": {
+                  "title": "Sofortige Lösungen:",
+                  "limitScope": {
+                    "marker": "•",
+                    "text": "Audit-Umfang einschränken: Konzentrieren Sie sich auf bestimmte Seiten statt auf die gesamte Website"
+                  },
+                  "checkPerformance": {
+                    "marker": "•",
+                    "text": "Server-Performance prüfen: Stellen Sie sicher, dass Ihre Website schnell lädt"
+                  },
+                  "optimize": {
+                    "marker": "•",
+                    "text": "Optimieren vor Audit: Caching und CDN aktivieren, falls verfügbar"
+                  },
+                  "contactHosting": {
+                    "marker": "•",
+                    "text": "Provider kontaktieren: Fragen Sie nach Serverressourcen-Limits"
+                  }
+                },
+                "largeSites": {
+                  "title": "⚠️ Für große Websites (>1000 Seiten)",
+                  "description": "Erwägen Sie ein Upgrade auf unseren Pro-Plan für längere Timeout-Grenzen und Prioritätsverarbeitung oder kontaktieren Sie den Support für Unternehmenslösungen."
+                }
+              },
+              "accessDenied": {
+                "title": "🚫 \"Zugriff verweigert\" oder \"Seite nicht erreichbar\"",
+                "description": "Diese Fehler zeigen an, dass unsere Crawler Ihre Website aufgrund von Sicherheitsbeschränkungen oder Fehlkonfigurationen nicht erreichen können.",
+                "causes": {
+                  "title": "Häufige Ursachen & Lösungen:",
+                  "password": {
+                    "title": "Passwortschutz",
+                    "description": "Passwortschutz entfernen oder unsere Crawler-IPs freigeben"
+                  },
+                  "firewall": {
+                    "title": "Firewall-Blockierung",
+                    "description": "Firewall so konfigurieren, dass AISEOTurbo-Crawler Zugriff haben"
+                  },
+                  "robots": {
+                    "title": "robots.txt-Einschränkungen",
+                    "description": "Prüfen, ob robots.txt legitime Crawler blockiert"
+                  },
+                  "downtime": {
+                    "title": "Server-Ausfall",
+                    "description": "Sicherstellen, dass Ihre Website online und erreichbar ist"
+                  }
+                },
+                "testing": {
+                  "title": "🔧 Website-Zugänglichkeit testen",
+                  "steps": {
+                    "incognito": "Öffnen Sie ein Inkognito-/Privatbrowserfenster",
+                    "exactUrl": "Greifen Sie auf die Website über die exakt angegebene URL zu",
+                    "loginPrompts": "Prüfen Sie auf Login-Abfragen oder Fehlerseiten",
+                    "differentDevices": "Testen Sie mit verschiedenen Geräten oder Netzwerken"
+                  }
+                }
+              },
+              "partial": {
+                "title": "📊 Unvollständige oder teilweise Ergebnisse",
+                "description": "Manchmal werden Audits abgeschlossen, zeigen aber unvollständige Daten oder fehlende Abschnitte.",
+                "causes": {
+                  "title": "Warum passiert das:",
+                  "inaccessible": {
+                    "marker": "•",
+                    "text": "Einige Seiten waren während des Crawlings nicht erreichbar"
+                  },
+                  "javascript": {
+                    "marker": "•",
+                    "text": "JavaScript-lastige Inhalte konnten nicht vollständig analysiert werden"
+                  },
+                  "rateLimit": {
+                    "marker": "•",
+                    "text": "Ratenbegrenzungen oder Servereinschränkungen sind aufgetreten"
+                  },
+                  "interruptions": {
+                    "marker": "•",
+                    "text": "Netzwerkunterbrechungen während des Audit-Prozesses"
+                  }
+                },
+                "solutions": {
+                  "title": "✅ Lösungen",
+                  "offPeak": "• Audit in verkehrsarmen Zeiten erneut ausführen",
+                  "serverSideRendering": "• Serverseitiges Rendering für JavaScript-Inhalte aktivieren",
+                  "increaseResources": "• Serverressourcen während des Audits vorübergehend erhöhen",
+                  "checkSitemap": "• sitemap.xml auf Richtigkeit und Vollständigkeit prüfen"
+                }
+              }
+            },
+            "advanced": {
+              "title": "Erweiterte Fehlerbehebung",
+              "forTechnicalUsers": "Für technische Anwender",
+              "serverLogs": {
+                "title": "Server-Logs prüfen",
+                "description": "Suchen Sie nach Crawler-Anfragen aus folgenden AISEOTurbo-IP-Bereichen:",
+                "commands": {
+                  "apache": "grep \"AISEOTurbo\" /var/log/apache2/access.log",
+                  "or": "# oder",
+                  "nginx": "grep \"185.199.108.0/22\" /var/log/nginx/access.log"
+                }
+              },
+              "robotsTxt": {
+                "title": "robots.txt-Konformität testen",
+                "description": "Überprüfen Sie, ob unser Crawler zugelassen ist:",
+                "commands": {
+                  "curl": "curl -I https://yoursite.com/robots.txt",
+                  "comment": "# Prüfen Sie auf \"Disallow: /\" oder Bot-Beschränkungen"
+                }
+              },
+              "ssl": {
+                "title": "SSL-Zertifikat validieren",
+                "description": "Stellen Sie sicher, dass HTTPS korrekt konfiguriert ist:",
+                "commands": {
+                  "openssl": "openssl s_client -connect yoursite.com:443 -servername yoursite.com"
+                }
+              }
+            },
+            "support": {
+              "title": "Wann sollte der Support kontaktiert werden?",
+              "description": "Wenn die oben genannten Lösungen nicht helfen, kontaktieren Sie unser Support-Team mit:",
+              "info": {
+                "websiteUrl": "Ihre Website-URL",
+                "exactErrors": "Genaue Fehlermeldungen",
+                "timeOccurred": "Zeitpunkt des Problems",
+                "stepsTried": "Bereits durchgeführte Schritte",
+                "browserInfo": "Browser- und Geräteinformationen",
+                "screenshots": "Screenshots der Fehlermeldungen"
+              }
+            },
+            "prevention": {
+              "title": "Vorbeugen ist besser als heilen",
+              "description": "Vermeiden Sie künftige Audit-Probleme durch Befolgen dieser Best Practices:",
+              "tips": {
+                "fastLoading": "• Stellen Sie sicher, dass Ihre Website konsistent unter 5 Sekunden lädt",
+                "reliableHosting": "• Verwenden Sie einen zuverlässigen Hosting-Anbieter mit guter Erreichbarkeit",
+                "simpleRobots": "• Halten Sie Ihre robots.txt-Datei einfach und erlauben legitime Crawler",
+                "errorHandling": "• Implementieren Sie gutes Fehlerhandling für 404- und Serverfehler",
+                "scheduleAudits": "• Führen Sie Audits zu verkehrsarmen Zeiten durch",
+                "monitorPerformance": "• Überwachen Sie regelmäßig die Leistung Ihrer Website"
+              }
+            },
+            "related": {
+              "title": "Verwandte Hilfeartikel",
+              "firstAudit": {
+                "title": "So erstellen Sie Ihr erstes Audit",
+                "description": "Schritt-für-Schritt-Anleitung für erfolgreiche SEO-Audits von Anfang an",
+                "ariaLabel": "Erfahren Sie, wie Sie Ihr erstes SEO-Audit erstellen"
+              },
+              "performance": {
+                "title": "Leistungsoptimierung",
+                "description": "Optimieren Sie die Leistung Ihrer Website für bessere Auditergebnisse",
+                "ariaLabel": "Informieren Sie sich über Leistungsoptimierung"
+              }
+            }
           }
         },
         "additionalResources": {
