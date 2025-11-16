@@ -280,13 +280,125 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <ClientAnalytics />
-        <WebVitals />
-        {children}
-        <ConsentBanner />
-      </ThemeProvider>
-    </AuthProvider>
+    <html lang={detectedLocale} className={inter.variable} suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        {/* Consent Mode v2: initialize defaults BEFORE loading gtag.js */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);} 
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                analytics_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                functionality_storage: 'granted',
+                security_storage: 'granted'
+              });
+            `,
+          }}
+        />
+        {/* Google Tag Manager — placed as high in <head> as possible */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GTM-K7SGKVC9');
+            `,
+          }}
+        />
+
+        {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+        {/* Favicon and Touch Icons */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="64x64" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+        {/* Schema.org Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+
+        {/* Resource hints for performance */}
+        <meta httpEquiv="x-dns-prefetch-control" content="on" />
+
+        {/* EMERGENCY: Critical CSS - loads immediately */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* LCP OPTIMIZATION: Critical above-the-fold styles - minimal reset only */
+            *,*::before,*::after{box-sizing:border-box}*{margin:0}html,body{line-height:1.5;-webkit-font-smoothing:antialiased}
+            body{font-family:var(--font-inter),system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+            @media(max-width:1023px){.desktop-only{display:none!important}}
+          `
+        }} />
+
+        {/* Early loading of critical scripts */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.__performance = {
+              start: Date.now(),
+              preloadImage: function(src) {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = src;
+                document.head.appendChild(link);
+              }
+            };
+          `
+        }} />
+      </head>
+      <body className={`${inter.className} font-inter dark`} style={{ backgroundColor: '#0b1220' }} suppressHydrationWarning>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-K7SGKVC9"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+
+        <a
+          href="#main-content"
+          className="absolute top-0 left-0 z-50 px-4 py-2 bg-blue-600 text-white rounded opacity-0 focus:opacity-100 -translate-y-full focus:translate-y-0 transition-transform duration-200"
+          style={{ outlineOffset: '2px' }}
+        >
+          Skip to main content
+        </a>
+
+        <AuthProvider>
+          <ThemeProvider>
+            <main id="main-content">
+              <ClientAnalytics />
+              <WebVitals />
+              {children}
+              <ConsentBanner />
+            </main>
+          </ThemeProvider>
+        </AuthProvider>
+
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }
