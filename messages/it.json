@@ -7882,6 +7882,323 @@
           "buttonText": "Contatta il team privacy"
         }
       },
+      "gdpr": {
+        "title": "Guida alla conformità GDPR",
+        "subtitle": "Guida completa alla conformità GDPR per i proprietari di siti web. Scopri i requisiti sulla protezione dei dati, i diritti degli utenti e come implementare pratiche rispettose della privacy.",
+        "backToSecurity": "Torna alla Sicurezza",
+        "breadcrumb": {
+          "help": "Aiuto",
+          "security": "Sicurezza",
+          "gdpr": "Conformità GDPR"
+        },
+        "introduction": {
+          "title": "Comprendere il GDPR",
+          "description": "Il Regolamento Generale sulla Protezione dei Dati (GDPR) è una legge completa sulla protezione dei dati che disciplina come vengono raccolti, trattati e conservati i dati personali dei residenti dell’UE. La conformità è obbligatoria per qualsiasi sito web che raccoglie dati da utenti UE, indipendentemente dalla tua posizione.",
+          "keyRequirements": [
+            {
+              "title": "Informativa sulla Privacy",
+              "description": "Informativa sulla privacy chiara e completa"
+            },
+            {
+              "title": "Sicurezza dei Dati",
+              "description": "Gestione e archiviazione sicura dei dati"
+            },
+            {
+              "title": "Consenso dell’Utente",
+              "description": "Meccanismi di consenso adeguati"
+            },
+            {
+              "title": "Diritti dell’Interessato",
+              "description": "Rispetto dei diritti degli utenti sui dati"
+            }
+          ]
+        },
+        "personalData": {
+          "title": "Cosa si intende per Dati Personali?",
+          "directlyIdentifiable": {
+            "title": "Dati direttamente identificabili",
+            "items": [
+              "Nome completo",
+              "Indirizzo email",
+              "Numero di telefono",
+              "Indirizzo fisico",
+              "Indirizzo IP",
+              "Profili social media"
+            ]
+          },
+          "onlineIdentifiers": {
+            "title": "Identificatori online",
+            "items": [
+              "Cookie e pixel di tracciamento",
+              "Rilevamento impronta browser",
+              "Informazioni sul dispositivo",
+              "Dati di localizzazione",
+              "Modelli comportamentali"
+            ]
+          },
+          "sensitiveData": {
+            "title": "Dati sensibili",
+            "items": [
+              "Origine razziale/etnica",
+              "Opinioni politiche",
+              "Credenze religiose",
+              "Informazioni sulla salute",
+              "Orientamento sessuale",
+              "Precedenti penali"
+            ]
+          },
+          "businessData": {
+            "title": "Dati commerciali",
+            "items": [
+              "Storico acquisti",
+              "Preferenze di comunicazione",
+              "Modelli di utilizzo dei servizi",
+              "Feedback dei clienti"
+            ]
+          }
+        },
+        "legalBasis": {
+          "title": "Base giuridica per il trattamento dei dati",
+          "bases": [
+            {
+              "title": "Consenso",
+              "description": "La base giuridica più comune. Gli utenti devono fornire un consenso chiaro e inequivocabile per il trattamento dei dati. Il consenso deve essere liberamente fornito, specifico, informato e facilmente revocabile.",
+              "requirements": {
+                "title": "Requisiti per il consenso:",
+                "items": [
+                  "Consenso separato per attività di trattamento diverse",
+                  "Meccanismi di opt-out semplici",
+                  "Nessuna casella preselezionata",
+                  "Linguaggio chiaro (senza gergo legale)"
+                ]
+              }
+            },
+            {
+              "title": "Contratto",
+              "description": "Trattamento necessario per eseguire un contratto con l’utente. Questo vale per siti e-commerce, piattaforme SaaS e fornitori di servizi.",
+              "examples": {
+                "title": "Esempi:",
+                "items": [
+                  "Trattamento delle informazioni di pagamento per acquisti",
+                  "Creazione e gestione account",
+                  "Evasione e consegna ordini",
+                  "Comunicazioni di assistenza clienti"
+                ]
+              }
+            },
+            {
+              "title": "Interesse legittimo",
+              "description": "Trattamento necessario per i legittimi interessi aziendali, a condizione che non prevalgano i diritti alla privacy degli utenti. Richiede un equilibrato bilanciamento e trasparenza.",
+              "whenToUse": {
+                "title": "Quando utilizzarlo:",
+                "items": [
+                  "Prevenzione frodi e sicurezza",
+                  "Marketing diretto (con possibilità di opt-out)",
+                  "Sicurezza delle reti e delle informazioni",
+                  "Rivendicazioni legali e conformità"
+                ]
+              }
+            },
+            {
+              "title": "Obbligo legale",
+              "description": "Trattamento richiesto dalla legge. Include obblighi fiscali, legislazione sul lavoro e altri requisiti normativi.",
+              "examples": {
+                "title": "Esempi:",
+                "items": [
+                  "Dichiarazioni fiscali e conformità",
+                  "Requisiti delle leggi sul lavoro",
+                  "Regolamentazioni finanziarie",
+                  "Leggi su salute e sicurezza pubblica"
+                ]
+              }
+            }
+          ]
+        },
+        "dataSubjectRights": {
+          "title": "Diritti dell’Interessato",
+          "rights": [
+            {
+              "title": "Diritto all’informazione",
+              "description": "Gli utenti devono essere informati sulla raccolta e sulle finalità del trattamento dei dati."
+            },
+            {
+              "title": "Diritto di accesso",
+              "description": "Gli utenti possono richiedere copie dei propri dati personali in possesso."
+            },
+            {
+              "title": "Diritto di rettifica",
+              "description": "Gli utenti possono far correggere dati inesatti o completare dati incompleti."
+            },
+            {
+              "title": "Diritto alla cancellazione",
+              "description": "Gli utenti possono richiedere la cancellazione dei propri dati ('diritto all’oblio')."
+            },
+            {
+              "title": "Diritto alla limitazione",
+              "description": "Gli utenti possono limitare il modo in cui i loro dati sono trattati in determinate circostanze."
+            },
+            {
+              "title": "Diritto alla portabilità",
+              "description": "Gli utenti possono ricevere i propri dati in un formato strutturato e trasferirli altrove."
+            },
+            {
+              "title": "Diritto di opposizione",
+              "description": "Gli utenti possono opporsi al trattamento basato su interessi legittimi o a fini di marketing diretto."
+            },
+            {
+              "title": "Decisioni automatizzate",
+              "description": "Gli utenti hanno diritti riguardo alle decisioni automatizzate senza intervento umano."
+            }
+          ]
+        },
+        "cookieCompliance": {
+          "title": "Conformità Cookie & ePrivacy",
+          "steps": [
+            {
+              "title": "Banner consenso cookie",
+              "description": "Mostra un banner di consenso cookie chiaro e ben visibile prima di impostare cookie non essenziali. Gli utenti devono poter accettare o rifiutare le diverse categorie di cookie.",
+              "requiredElements": {
+                "title": "Elementi richiesti:",
+                "items": [
+                  "Descrizione chiara degli scopi dei cookie",
+                  "Opzioni di consenso dettagliate (essenziali, analitici, marketing)",
+                  "Facile rifiuto dei cookie non essenziali",
+                  "Link all’informativa dettagliata sui cookie"
+                ]
+              }
+            },
+            {
+              "title": "Categorie di cookie",
+              "description": "Classifica i cookie per finalità e acquisisci i consensi appropriati per ogni categoria.",
+              "categories": [
+                {
+                  "name": "Cookie essenziali",
+                  "description": "Nessun consenso necessario - strettamente necessari al funzionamento del sito"
+                },
+                {
+                  "name": "Cookie analitici",
+                  "description": "Richiesto il consenso - monitorano utilizzo e prestazioni del sito"
+                }
+              ]
+            },
+            {
+              "title": "Informativa sui cookie",
+              "description": "Mantieni un’informativa sui cookie completa che spieghi tutti i cookie utilizzati sul tuo sito, i loro scopi e come gli utenti possono gestire le preferenze.",
+              "policyRequirements": {
+                "title": "Requisiti dell’informativa:",
+                "items": [
+                  "Elenco di tutti i cookie e dei loro scopi",
+                  "Rivelazioni su cookie di terze parti",
+                  "Istruzioni per la gestione dei cookie",
+                  "Contatti per domande"
+                ]
+              }
+            }
+          ]
+        },
+        "implementationSteps": {
+          "title": "Fasi di implementazione del GDPR",
+          "steps": [
+            {
+              "title": "Effettua un audit dei dati",
+              "description": "Mappa tutti i dati personali che raccogli, tratti e conservi. Identifica le fonti dei dati, le finalità del trattamento e i periodi di conservazione.",
+              "auditChecklist": {
+                "title": "Checklist audit:",
+                "items": [
+                  "Form e punti di raccolta dati",
+                  "Integrazioni e strumenti di terze parti",
+                  "Luoghi e sistemi di archiviazione dati",
+                  "Pratiche di condivisione e trasferimento dati"
+                ]
+              }
+            },
+            {
+              "title": "Aggiorna l’informativa sulla privacy",
+              "description": "Crea o aggiorna l’informativa sulla privacy includendo tutte le informazioni richieste dal GDPR. Usa un linguaggio chiaro e semplice, facilmente comprensibile dagli utenti.",
+              "requiredSections": {
+                "title": "Sezioni richieste:",
+                "items": [
+                  "Identità e contatti del titolare del trattamento",
+                  "Base legale del trattamento",
+                  "Periodi di conservazione dei dati",
+                  "Diritti degli utenti e modalità di esercizio",
+                  "Condivisione dati e trasferimenti internazionali"
+                ]
+              }
+            },
+            {
+              "title": "Implementa i meccanismi di consenso",
+              "description": "Configura una corretta gestione del consenso per cookie e trattamenti dei dati. Assicurati che gli utenti possano revocare facilmente il consenso in qualsiasi momento.",
+              "consentFeatures": {
+                "title": "Funzionalità di consenso:",
+                "items": [
+                  "Banner consenso cookie",
+                  "Centro gestione preferenze",
+                  "Opzioni di consenso granulari",
+                  "Meccanismi di revoca del consenso"
+                ]
+              }
+            },
+            {
+              "title": "Stabilisci processi di protezione dati",
+              "description": "Crea procedure per la gestione delle richieste degli interessati, delle violazioni di dati e per il mantenimento dei registri di conformità.",
+              "dpoNote": {
+                "title": "Responsabile Protezione Dati",
+                "description": "Valuta la nomina di un DPO per operazioni complesse"
+              }
+            }
+          ]
+        },
+        "commonPitfalls": {
+          "title": "Errori comuni nella conformità al GDPR",
+          "pitfalls": [
+            {
+              "title": "Caselle di consenso preselezionate",
+              "description": "L’uso di caselle preselezionate per il consenso viola i requisiti del GDPR.",
+              "severity": "alto"
+            },
+            {
+              "title": "Informative sulla privacy vaghe",
+              "description": "Informative generiche e difficili da comprendere non soddisfano i requisiti di trasparenza.",
+              "severity": "alto"
+            },
+            {
+              "title": "Nessun rispetto dei diritti dell’interessato",
+              "description": "Non soddisfare le richieste degli utenti di accesso, cancellazione o portabilità dei dati.",
+              "severity": "alto"
+            },
+            {
+              "title": "Sicurezza inadeguata",
+              "description": "Non implementare adeguate misure tecniche e organizzative di sicurezza.",
+              "severity": "medio"
+            },
+            {
+              "title": "Nessuna notifica di violazione",
+              "description": "Non segnalare le violazioni dei dati alle autorità competenti entro 72 ore.",
+              "severity": "medio"
+            },
+            {
+              "title": "Trasferimenti internazionali di dati",
+              "description": "Trasferire dati verso Paesi privi di adeguata protezione senza salvaguardie.",
+              "severity": "medio"
+            }
+          ]
+        },
+        "gettingStarted": {
+          "title": "Inizia il percorso di conformità GDPR",
+          "description": "La conformità al GDPR è essenziale per qualsiasi sito che gestisce dati di utenti UE. Inizia con un audit dei dati, aggiorna le tue politiche e implementa meccanismi di consenso adeguati.",
+          "links": [
+            {
+              "text": "Visualizza la guida all’informativa sulla privacy",
+              "href": "/help/security/privacy"
+            },
+            {
+              "text": "Migliori pratiche di sicurezza",
+              "href": "/help/security/best-practices"
+            }
+          ]
+        }
+      },
       "troubleshooting": {
         "title": "Risoluzione Problemi",
         "description": "Trova soluzioni ai problemi comuni e tecnici",

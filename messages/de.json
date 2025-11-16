@@ -7896,6 +7896,323 @@
           "buttonText": "Datenschutzteam kontaktieren"
         }
       },
+      "gdpr": {
+        "title": "Leitfaden zur DSGVO-Konformität",
+        "subtitle": "Vollständiger Leitfaden zur DSGVO-Konformität für Website-Betreiber. Erfahren Sie mehr über Datenschutzanforderungen, Nutzerrechte und die Umsetzung datenschutzkonformer Praktiken.",
+        "backToSecurity": "Zurück zur Sicherheit",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "security": "Sicherheit",
+          "gdpr": "DSGVO-Konformität"
+        },
+        "introduction": {
+          "title": "Die DSGVO verstehen",
+          "description": "Die Datenschutz-Grundverordnung (DSGVO) ist ein umfassendes Datenschutzgesetz, das regelt, wie personenbezogene Daten von EU-Bürgern erhoben, verarbeitet und gespeichert werden. Die Einhaltung ist für jede Website verpflichtend, die Daten von EU-Nutzern sammelt – unabhängig davon, wo Sie sich befinden.",
+          "keyRequirements": [
+            {
+              "title": "Datenschutzerklärung",
+              "description": "Klare, umfassende Datenschutzerklärung"
+            },
+            {
+              "title": "Datensicherheit",
+              "description": "Sichere Datenverarbeitung und -speicherung"
+            },
+            {
+              "title": "Nutzer-Einwilligung",
+              "description": "Geeignete Einwilligungsmechanismen"
+            },
+            {
+              "title": "Rechte der betroffenen Person",
+              "description": "Wahrung der Datenschutzrechte der Nutzer"
+            }
+          ]
+        },
+        "personalData": {
+          "title": "Was sind personenbezogene Daten?",
+          "directlyIdentifiable": {
+            "title": "Direkt identifizierende Daten",
+            "items": [
+              "Vollständiger Name",
+              "E-Mail-Adresse",
+              "Telefonnummer",
+              "Postanschrift",
+              "IP-Adresse",
+              "Social-Media-Profile"
+            ]
+          },
+          "onlineIdentifiers": {
+            "title": "Online-Kennungen",
+            "items": [
+              "Cookies und Tracking-Pixel",
+              "Browser-Fingerprinting",
+              "Geräteinformationen",
+              "Standortdaten",
+              "Verhaltensmuster"
+            ]
+          },
+          "sensitiveData": {
+            "title": "Sensible Daten",
+            "items": [
+              "Rassische/ethnische Herkunft",
+              "Politische Meinungen",
+              "Religiöse Überzeugungen",
+              "Gesundheitsinformationen",
+              "Sexuelle Orientierung",
+              "Strafregister"
+            ]
+          },
+          "businessData": {
+            "title": "Geschäftsdaten",
+            "items": [
+              "Kaufhistorie",
+              "Kommunikationspräferenzen",
+              "Service-Nutzungsmuster",
+              "Kundenfeedback"
+            ]
+          }
+        },
+        "legalBasis": {
+          "title": "Rechtsgrundlagen der Datenverarbeitung",
+          "bases": [
+            {
+              "title": "Einwilligung",
+              "description": "Die häufigste Rechtsgrundlage. Nutzer müssen eine klare, ausdrückliche Einwilligung zur Datenverarbeitung geben. Die Einwilligung muss freiwillig, spezifisch, informiert und leicht widerrufbar sein.",
+              "requirements": {
+                "title": "Einwilligungsanforderungen:",
+                "items": [
+                  "Getrennte Einwilligung für unterschiedliche Verarbeitungszwecke",
+                  "Einfache Opt-out-Mechanismen",
+                  "Keine vorausgewählten Checkboxen",
+                  "Klare Sprache (kein Juristendeutsch)"
+                ]
+              }
+            },
+            {
+              "title": "Vertrag",
+              "description": "Verarbeitung, die zur Erfüllung eines Vertrags mit dem Nutzer erforderlich ist. Gilt für E-Commerce-Websites, SaaS-Plattformen und Dienstleister.",
+              "examples": {
+                "title": "Beispiele:",
+                "items": [
+                  "Verarbeitung von Zahlungsdaten für Käufe",
+                  "Erstellung und Verwaltung von Kundenkonten",
+                  "Auftragsabwicklung und Lieferung",
+                  "Kundenservice-Kommunikation"
+                ]
+              }
+            },
+            {
+              "title": "Berechtigtes Interesse",
+              "description": "Verarbeitung, die für berechtigte Geschäftsinteressen erforderlich ist, solange sie nicht die Datenschutzrechte der Nutzer überwiegt. Erfordert sorgfältige Abwägung und Transparenz.",
+              "whenToUse": {
+                "title": "Wann verwendbar:",
+                "items": [
+                  "Betrugsprävention und Sicherheit",
+                  "Direktmarketing (mit Opt-out)",
+                  "Netzwerk- und Informationssicherheit",
+                  "Rechtliche Ansprüche und Compliance"
+                ]
+              }
+            },
+            {
+              "title": "Gesetzliche Verpflichtung",
+              "description": "Verarbeitung, die gesetzlich vorgeschrieben ist. Dazu gehören steuerliche Pflichten, Arbeitsgesetze und andere regulatorische Anforderungen.",
+              "examples": {
+                "title": "Beispiele:",
+                "items": [
+                  "Steuermeldungen und Compliance",
+                  "Anforderungen aus dem Arbeitsrecht",
+                  "Finanzielle Regulierungen",
+                  "Gesetze zum Schutz von Gesundheit und Sicherheit"
+                ]
+              }
+            }
+          ]
+        },
+        "dataSubjectRights": {
+          "title": "Rechte der betroffenen Person",
+          "rights": [
+            {
+              "title": "Recht auf Information",
+              "description": "Nutzer müssen über die Zwecke der Datenerhebung und -verarbeitung informiert werden."
+            },
+            {
+              "title": "Recht auf Auskunft",
+              "description": "Nutzer können eine Kopie ihrer gespeicherten personenbezogenen Daten anfordern."
+            },
+            {
+              "title": "Recht auf Berichtigung",
+              "description": "Nutzer können unrichtige oder unvollständige Daten korrigieren lassen."
+            },
+            {
+              "title": "Recht auf Löschung",
+              "description": "Nutzer können die Löschung ihrer Daten verlangen (\"Recht auf Vergessenwerden\")."
+            },
+            {
+              "title": "Recht auf Einschränkung",
+              "description": "Nutzer können die Verarbeitung ihrer Daten unter bestimmten Umständen einschränken lassen."
+            },
+            {
+              "title": "Recht auf Datenübertragbarkeit",
+              "description": "Nutzer können ihre Daten in einem strukturierten Format erhalten und an Dritte übertragen."
+            },
+            {
+              "title": "Widerspruchsrecht",
+              "description": "Nutzer können der Verarbeitung aus berechtigtem Interesse oder zu Direktmarketingzwecken widersprechen."
+            },
+            {
+              "title": "Automatisierte Entscheidungsfindung",
+              "description": "Nutzer haben Rechte in Bezug auf ausschließlich automatisierte Entscheidungen ohne menschliches Eingreifen."
+            }
+          ]
+        },
+        "cookieCompliance": {
+          "title": "Cookie-Konformität & ePrivacy",
+          "steps": [
+            {
+              "title": "Cookie-Einwilligungsbanner",
+              "description": "Zeigen Sie ein deutliches, prominentes Cookie-Banner an, bevor nicht-essenziellen Cookies gesetzt werden. Nutzer müssen verschiedene Kategorien von Cookies akzeptieren oder ablehnen können.",
+              "requiredElements": {
+                "title": "Erforderliche Elemente:",
+                "items": [
+                  "Klare Beschreibung der Cookie-Zwecke",
+                  "Detaillierte Einwilligungsoptionen (essenziell, Analyse, Marketing)",
+                  "Einfache Ablehnung nicht-essenzieller Cookies",
+                  "Link zur ausführlichen Cookie-Richtlinie"
+                ]
+              }
+            },
+            {
+              "title": "Cookie-Kategorien",
+              "description": "Klassifizieren Sie Cookies nach ihrem Zweck und holen Sie jeweils die entsprechenden Einwilligungen ein.",
+              "categories": [
+                {
+                  "name": "Essenziell notwendige Cookies",
+                  "description": "Keine Einwilligung erforderlich – für die Funktion der Website unbedingt notwendig"
+                },
+                {
+                  "name": "Analyse-Cookies",
+                  "description": "Einwilligung erforderlich – zur Nachverfolgung der Websitenutzung und -leistung"
+                }
+              ]
+            },
+            {
+              "title": "Cookie-Richtlinie",
+              "description": "Pflegen Sie eine umfassende Cookie-Richtlinie, die alle auf Ihrer Website verwendeten Cookies, deren Zwecke sowie die Möglichkeiten zur Verwaltung erklärt.",
+              "policyRequirements": {
+                "title": "Erforderliche Angaben:",
+                "items": [
+                  "Alle Cookies und ihre Zwecke auflisten",
+                  "Angaben zu Drittanbieter-Cookies",
+                  "Hinweise zur Verwaltung von Cookies",
+                  "Kontaktinformationen für Fragen"
+                ]
+              }
+            }
+          ]
+        },
+        "implementationSteps": {
+          "title": "Schritte zur DSGVO-Implementierung",
+          "steps": [
+            {
+              "title": "Daten-Audit durchführen",
+              "description": "Erfassen Sie alle personenbezogenen Daten, die Sie sammeln, verarbeiten und speichern. Identifizieren Sie Datenquellen, Verarbeitungszwecke und Aufbewahrungsfristen.",
+              "auditChecklist": {
+                "title": "Audit-Checkliste:",
+                "items": [
+                  "Formulare und Datensammelstellen",
+                  "Drittanbieter-Integrationen und Tools",
+                  "Datenaufbewahrungsorte und -systeme",
+                  "Praktiken zur Datenweitergabe und -übertragung"
+                ]
+              }
+            },
+            {
+              "title": "Datenschutzerklärung aktualisieren",
+              "description": "Erstellen oder aktualisieren Sie Ihre Datenschutzerklärung, um alle durch die DSGVO geforderten Angaben zu enthalten. Verwenden Sie klare, verständliche Sprache.",
+              "requiredSections": {
+                "title": "Erforderliche Abschnitte:",
+                "items": [
+                  "Identität und Kontaktdaten des Verantwortlichen",
+                  "Rechtsgrundlage der Verarbeitung",
+                  "Speicherfristen für Daten",
+                  "Nutzerrechte und deren Ausübung",
+                  "Datenweitergabe und internationale Übertragung"
+                ]
+              }
+            },
+            {
+              "title": "Einwilligungsmechanismen implementieren",
+              "description": "Richten Sie ein geeignetes Einwilligungsmanagement für Cookies und Datenverarbeitung ein. Sorgen Sie dafür, dass Nutzer ihre Einwilligung jederzeit einfach widerrufen können.",
+              "consentFeatures": {
+                "title": "Funktionen zur Einwilligung:",
+                "items": [
+                  "Cookie-Einwilligungsbanner",
+                  "Präferenzverwaltungszentrum",
+                  "Granulare Einwilligungsoptionen",
+                  "Widerrufsmechanismen für Einwilligungen"
+                ]
+              }
+            },
+            {
+              "title": "Datenschutzprozesse etablieren",
+              "description": "Schaffen Sie Abläufe für den Umgang mit Betroffenenanfragen, Datenschutzverletzungen und die Aufbewahrung von Nachweisen zur Einhaltung.",
+              "dpoNote": {
+                "title": "Datenschutzbeauftragter",
+                "description": "Erwägen Sie die Bestellung eines Datenschutzbeauftragten bei komplexen Tätigkeiten"
+              }
+            }
+          ]
+        },
+        "commonPitfalls": {
+          "title": "Häufige DSGVO-Fehler",
+          "pitfalls": [
+            {
+              "title": "Vorab angekreuzte Einwilligungsboxen",
+              "description": "Die Nutzung vorausgewählter Kästchen für die Einwilligung verstößt gegen die DSGVO.",
+              "severity": "hoch"
+            },
+            {
+              "title": "Unklare Datenschutzerklärungen",
+              "description": "Allgemeine, schwer verständliche Datenschutzerklärungen erfüllen nicht die Transparenzanforderungen.",
+              "severity": "hoch"
+            },
+            {
+              "title": "Keine Wahrung der Betroffenenrechte",
+              "description": "Nutzeranfragen auf Auskunft, Löschung oder Übertragbarkeit werden nicht umgesetzt.",
+              "severity": "hoch"
+            },
+            {
+              "title": "Unzureichende Sicherheit",
+              "description": "Fehlende technische und organisatorische Maßnahmen für die Datensicherheit.",
+              "severity": "mittel"
+            },
+            {
+              "title": "Keine Meldung von Datenschutzverletzungen",
+              "description": "Verstöße werden nicht innerhalb von 72 Stunden an die Aufsichtsbehörden gemeldet.",
+              "severity": "mittel"
+            },
+            {
+              "title": "Internationale Datenübertragung",
+              "description": "Übermittlung in Länder ohne angemessenes Datenschutzniveau ohne Schutzmaßnahmen.",
+              "severity": "mittel"
+            }
+          ]
+        },
+        "gettingStarted": {
+          "title": "Starten Sie Ihre DSGVO-Reise",
+          "description": "Die DSGVO-Konformität ist unerlässlich für jede Website, die Daten von EU-Nutzern verarbeitet. Beginnen Sie mit einem Daten-Audit, aktualisieren Sie Ihre Richtlinien und setzen Sie geeignete Einwilligungen um.",
+          "links": [
+            {
+              "text": "Leitfaden zur Datenschutzerklärung anzeigen",
+              "href": "/help/security/privacy"
+            },
+            {
+              "text": "Best Practices für Sicherheit",
+              "href": "/help/security/best-practices"
+            }
+          ]
+        }
+      },
       "troubleshooting": {
         "title": "Fehlerbehebung",
         "description": "Finden Sie Lösungen für häufige Probleme und technische Schwierigkeiten",

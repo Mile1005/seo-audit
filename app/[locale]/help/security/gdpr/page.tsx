@@ -1,6 +1,6 @@
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { generateSEOMeta } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import GDPRPage from '@/app/help/security/gdpr/page'
+import GdprContent from './gdpr-content'
 
 export const dynamic = 'force-static'
 
@@ -14,5 +14,5 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default function Page() {
-  return <GDPRPage />
+  return <GdprContent />
 }

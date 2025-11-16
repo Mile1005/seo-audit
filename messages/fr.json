@@ -8208,6 +8208,323 @@
           "buttonText": "Contacter l’équipe confidentialité"
         }
       },
+      "gdpr": {
+        "title": "Guide de conformité RGPD",
+        "subtitle": "Guide complet de conformité RGPD pour les propriétaires de sites web. Découvrez les exigences en matière de protection des données, les droits des utilisateurs et comment mettre en œuvre des pratiques respectueuses de la vie privée.",
+        "backToSecurity": "Retour à la sécurité",
+        "breadcrumb": {
+          "help": "Aide",
+          "security": "Sécurité",
+          "gdpr": "Conformité RGPD"
+        },
+        "introduction": {
+          "title": "Comprendre le RGPD",
+          "description": "Le Règlement Général sur la Protection des Données (RGPD) est une loi complète sur la protection des données qui régit la collecte, le traitement et le stockage des données personnelles des résidents de l’UE. La conformité est obligatoire pour tout site web recueillant des données auprès d’utilisateurs de l’UE, quel que soit votre emplacement.",
+          "keyRequirements": [
+            {
+              "title": "Politique de confidentialité",
+              "description": "Politique de confidentialité claire et complète"
+            },
+            {
+              "title": "Sécurité des données",
+              "description": "Traitement et stockage sécurisés des données"
+            },
+            {
+              "title": "Consentement de l'utilisateur",
+              "description": "Mécanismes de consentement appropriés"
+            },
+            {
+              "title": "Droits de la personne concernée",
+              "description": "Respecter les droits des utilisateurs sur leurs données"
+            }
+          ]
+        },
+        "personalData": {
+          "title": "Qu'est-ce qu'une donnée personnelle ?",
+          "directlyIdentifiable": {
+            "title": "Données directement identifiables",
+            "items": [
+              "Nom complet",
+              "Adresse e-mail",
+              "Numéro de téléphone",
+              "Adresse physique",
+              "Adresse IP",
+              "Profils de réseaux sociaux"
+            ]
+          },
+          "onlineIdentifiers": {
+            "title": "Identifiants en ligne",
+            "items": [
+              "Cookies et pixels de suivi",
+              "Empreinte digitale du navigateur",
+              "Informations sur l’appareil",
+              "Données de localisation",
+              "Habitudes comportementales"
+            ]
+          },
+          "sensitiveData": {
+            "title": "Données sensibles",
+            "items": [
+              "Origine raciale/ethnique",
+              "Opinions politiques",
+              "Croyances religieuses",
+              "Informations de santé",
+              "Orientation sexuelle",
+              "Casier judiciaire"
+            ]
+          },
+          "businessData": {
+            "title": "Données commerciales",
+            "items": [
+              "Historique des achats",
+              "Préférences de communication",
+              "Schémas d’utilisation du service",
+              "Avis des clients"
+            ]
+          }
+        },
+        "legalBasis": {
+          "title": "Base légale pour le traitement des données",
+          "bases": [
+            {
+              "title": "Consentement",
+              "description": "La base légale la plus courante. Les utilisateurs doivent donner un consentement clair et sans ambiguïté pour le traitement des données. Le consentement doit être donné librement, spécifique, informé, et facilement révocable.",
+              "requirements": {
+                "title": "Exigences en matière de consentement :",
+                "items": [
+                  "Consentement séparé pour différentes activités de traitement",
+                  "Mécanismes simples de retrait du consentement",
+                  "Pas de cases pré-cochées",
+                  "Langage clair (pas de jargon juridique)"
+                ]
+              }
+            },
+            {
+              "title": "Contrat",
+              "description": "Traitement nécessaire pour exécuter un contrat avec l’utilisateur. S’applique aux sites e-commerce, plateformes SaaS et prestataires de services.",
+              "examples": {
+                "title": "Exemples :",
+                "items": [
+                  "Traitement des informations de paiement pour les achats",
+                  "Création et gestion de compte",
+                  "Exécution et livraison de commande",
+                  "Communications avec le support client"
+                ]
+              }
+            },
+            {
+              "title": "Intérêt légitime",
+              "description": "Traitement nécessaire pour les intérêts commerciaux légitimes, à condition de ne pas prévaloir sur les droits de confidentialité des utilisateurs. Nécessite une évaluation équilibrée et de la transparence.",
+              "whenToUse": {
+                "title": "Quand l'utiliser :",
+                "items": [
+                  "Prévention de la fraude et sécurité",
+                  "Marketing direct (avec possibilité de retrait)",
+                  "Sécurité des réseaux et des informations",
+                  "Réclamations juridiques et conformité"
+                ]
+              }
+            },
+            {
+              "title": "Obligation légale",
+              "description": "Traitement requis par la loi. Inclut les obligations fiscales, la législation du travail et d’autres exigences réglementaires.",
+              "examples": {
+                "title": "Exemples :",
+                "items": [
+                  "Déclarations fiscales et conformité",
+                  "Exigences de la législation du travail",
+                  "Réglementations financières",
+                  "Lois sur la santé publique et la sécurité"
+                ]
+              }
+            }
+          ]
+        },
+        "dataSubjectRights": {
+          "title": "Droits des personnes concernées",
+          "rights": [
+            {
+              "title": "Droit à l'information",
+              "description": "Les utilisateurs doivent être informés de la collecte de données et des finalités du traitement."
+            },
+            {
+              "title": "Droit d'accès",
+              "description": "Les utilisateurs peuvent demander des copies de leurs données personnelles détenues."
+            },
+            {
+              "title": "Droit de rectification",
+              "description": "Les utilisateurs peuvent faire corriger les données inexactes ou compléter des données incomplètes."
+            },
+            {
+              "title": "Droit à l’effacement",
+              "description": "Les utilisateurs peuvent demander la suppression de leurs données (« droit à l’oubli »)."
+            },
+            {
+              "title": "Droit à la limitation",
+              "description": "Les utilisateurs peuvent limiter le traitement de leurs données dans certaines circonstances."
+            },
+            {
+              "title": "Droit à la portabilité",
+              "description": "Les utilisateurs peuvent recevoir leurs données dans un format structuré et les transférer ailleurs."
+            },
+            {
+              "title": "Droit d’opposition",
+              "description": "Les utilisateurs peuvent s’opposer au traitement fondé sur des intérêts légitimes ou à des fins de marketing direct."
+            },
+            {
+              "title": "Décisions automatisées",
+              "description": "Les utilisateurs disposent de droits concernant les décisions automatisées sans intervention humaine."
+            }
+          ]
+        },
+        "cookieCompliance": {
+          "title": "Conformité cookies & ePrivacy",
+          "steps": [
+            {
+              "title": "Bannière de consentement aux cookies",
+              "description": "Afficher une bannière de consentement aux cookies claire et visible avant l’installation de cookies non essentiels. Les utilisateurs doivent pouvoir accepter ou refuser différentes catégories de cookies.",
+              "requiredElements": {
+                "title": "Éléments requis :",
+                "items": [
+                  "Description claire des finalités des cookies",
+                  "Options de consentement détaillées (essentiels, analytiques, marketing)",
+                  "Rejet facile des cookies non essentiels",
+                  "Lien vers une politique cookies détaillée"
+                ]
+              }
+            },
+            {
+              "title": "Catégories de cookies",
+              "description": "Catégorisez les cookies par finalité et obtenez les consentements appropriés pour chaque catégorie.",
+              "categories": [
+                {
+                  "name": "Cookies essentiels",
+                  "description": "Aucun consentement nécessaire – strictement nécessaires au fonctionnement du site"
+                },
+                {
+                  "name": "Cookies analytiques",
+                  "description": "Consentement requis – surveillent l’utilisation et la performance du site"
+                }
+              ]
+            },
+            {
+              "title": "Politique cookies",
+              "description": "Maintenez une politique cookies complète qui explique tous les cookies utilisés sur votre site, leurs finalités et comment les utilisateurs peuvent gérer leurs préférences.",
+              "policyRequirements": {
+                "title": "Exigences pour la politique :",
+                "items": [
+                  "Liste de tous les cookies et leurs finalités",
+                  "Divulgation des cookies tiers",
+                  "Instructions pour la gestion des cookies",
+                  "Informations de contact pour les questions"
+                ]
+              }
+            }
+          ]
+        },
+        "implementationSteps": {
+          "title": "Étapes de mise en œuvre du RGPD",
+          "steps": [
+            {
+              "title": "Réaliser un audit des données",
+              "description": "Cartographiez toutes les données personnelles collectées, traitées et stockées. Identifiez les sources de données, les finalités du traitement et les durées de conservation.",
+              "auditChecklist": {
+                "title": "Liste de vérification de l’audit :",
+                "items": [
+                  "Formulaires et points de collecte de données",
+                  "Intégrations et outils tiers",
+                  "Emplacements et systèmes de stockage des données",
+                  "Pratiques de partage et de transfert des données"
+                ]
+              }
+            },
+            {
+              "title": "Mettre à jour la politique de confidentialité",
+              "description": "Créez ou mettez à jour votre politique de confidentialité avec toutes les informations requises par le RGPD. Utilisez un langage clair, simple et compréhensible par les utilisateurs.",
+              "requiredSections": {
+                "title": "Sections requises :",
+                "items": [
+                  "Identité et coordonnées du responsable de traitement",
+                  "Base légale du traitement",
+                  "Durées de conservation des données",
+                  "Droits des utilisateurs et modalités d’exercice",
+                  "Partage des données et transferts internationaux"
+                ]
+              }
+            },
+            {
+              "title": "Mettre en place des mécanismes de consentement",
+              "description": "Déployez une gestion appropriée du consentement pour les cookies et le traitement des données. Assurez-vous que les utilisateurs peuvent facilement retirer leur consentement à tout moment.",
+              "consentFeatures": {
+                "title": "Fonctionnalités de consentement :",
+                "items": [
+                  "Bannière de consentement aux cookies",
+                  "Centre de gestion des préférences",
+                  "Options de consentement granulaires",
+                  "Mécanismes de retrait du consentement"
+                ]
+              }
+            },
+            {
+              "title": "Établir des procédures de protection des données",
+              "description": "Élaborez des procédures pour traiter les demandes des personnes concernées, gérer les violations de données et tenir à jour des registres de conformité.",
+              "dpoNote": {
+                "title": "Délégué à la protection des données",
+                "description": "Envisagez de désigner un DPD pour des opérations complexes"
+              }
+            }
+          ]
+        },
+        "commonPitfalls": {
+          "title": "Erreurs courantes de conformité RGPD",
+          "pitfalls": [
+            {
+              "title": "Cases de consentement pré-cochées",
+              "description": "L’utilisation de cases pré-cochées pour le consentement viole les exigences du RGPD.",
+              "severity": "élevé"
+            },
+            {
+              "title": "Politiques de confidentialité vagues",
+              "description": "Des politiques génériques et difficiles à comprendre ne répondent pas aux exigences de transparence.",
+              "severity": "élevé"
+            },
+            {
+              "title": "Non-respect des droits des personnes",
+              "description": "Ne pas satisfaire les demandes d'accès, de suppression ou de portabilité des utilisateurs.",
+              "severity": "élevé"
+            },
+            {
+              "title": "Sécurité insuffisante",
+              "description": "Ne pas mettre en place de mesures de sécurité techniques et organisationnelles adéquates.",
+              "severity": "moyen"
+            },
+            {
+              "title": "Pas de notification de violation",
+              "description": "Ne pas signaler les violations de données aux autorités dans les 72 heures.",
+              "severity": "moyen"
+            },
+            {
+              "title": "Transferts internationaux de données",
+              "description": "Transfert de données vers des pays sans protection adéquate sans garanties.",
+              "severity": "moyen"
+            }
+          ]
+        },
+        "gettingStarted": {
+          "title": "Commencez votre parcours de conformité RGPD",
+          "description": "La conformité RGPD est essentielle pour tout site traitant des données d’utilisateurs de l’UE. Commencez par un audit des données, mettez à jour vos politiques et mettez en place des mécanismes de consentement adaptés.",
+          "links": [
+            {
+              "text": "Voir le guide sur la politique de confidentialité",
+              "href": "/help/security/privacy"
+            },
+            {
+              "text": "Bonnes pratiques de sécurité",
+              "href": "/help/security/best-practices"
+            }
+          ]
+        }
+      },
       "troubleshooting": {
         "title": "Dépannage",
         "description": "Trouvez des solutions aux problèmes courants et techniques",

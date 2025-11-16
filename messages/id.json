@@ -7883,6 +7883,323 @@
           "buttonText": "Hubungi Tim Privasi"
         }
       },
+      "gdpr": {
+        "title": "Panduan Kepatuhan GDPR",
+        "subtitle": "Panduan kepatuhan GDPR lengkap untuk pemilik situs web. Pelajari tentang persyaratan perlindungan data, hak pengguna, dan cara menerapkan praktik yang menghargai privasi.",
+        "backToSecurity": "Kembali ke Keamanan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "security": "Keamanan",
+          "gdpr": "Kepatuhan GDPR"
+        },
+        "introduction": {
+          "title": "Memahami GDPR",
+          "description": "General Data Protection Regulation (GDPR) adalah undang-undang perlindungan data yang komprehensif yang mengatur cara data pribadi penduduk UE dikumpulkan, diproses, dan disimpan. Kepatuhan wajib bagi setiap situs web yang mengumpulkan data dari pengguna UE, tidak peduli lokasi Anda.",
+          "keyRequirements": [
+            {
+              "title": "Kebijakan Privasi",
+              "description": "Kebijakan privasi yang jelas dan komprehensif"
+            },
+            {
+              "title": "Keamanan Data",
+              "description": "Penanganan dan penyimpanan data yang aman"
+            },
+            {
+              "title": "Persetujuan Pengguna",
+              "description": "Mekanisme persetujuan yang tepat"
+            },
+            {
+              "title": "Hak Subjek Data",
+              "description": "Menghormati hak pengguna atas data mereka"
+            }
+          ]
+        },
+        "personalData": {
+          "title": "Apa itu Data Pribadi?",
+          "directlyIdentifiable": {
+            "title": "Data yang dapat diidentifikasi langsung",
+            "items": [
+              "Nama lengkap",
+              "Alamat email",
+              "Nomor telepon",
+              "Alamat fisik",
+              "Alamat IP",
+              "Profil media sosial"
+            ]
+          },
+          "onlineIdentifiers": {
+            "title": "Pengenal online",
+            "items": [
+              "Cookie pelacakan dan piksel",
+              "Fingerprinting browser",
+              "Informasi perangkat",
+              "Data lokasi",
+              "Pola perilaku"
+            ]
+          },
+          "sensitiveData": {
+            "title": "Data sensitif",
+            "items": [
+              "Asal ras/etnis",
+              "Pandangan politik",
+              "Kepercayaan agama",
+              "Informasi kesehatan",
+              "Orientasi seksual",
+              "Catatan kriminal"
+            ]
+          },
+          "businessData": {
+            "title": "Data bisnis",
+            "items": [
+              "Riwayat pembelian",
+              "Preferensi komunikasi",
+              "Pola penggunaan layanan",
+              "Masukan pelanggan"
+            ]
+          }
+        },
+        "legalBasis": {
+          "title": "Dasar hukum pemrosesan data",
+          "bases": [
+            {
+              "title": "Persetujuan",
+              "description": "Dasar hukum yang paling umum. Pengguna harus memberikan persetujuan yang jelas dan tidak ambigu untuk pemrosesan data. Persetujuan harus diberikan secara sukarela, spesifik, diinformasikan, dan mudah dicabut.",
+              "requirements": {
+                "title": "Persyaratan persetujuan:",
+                "items": [
+                  "Persetujuan terpisah untuk aktivitas pemrosesan yang berbeda",
+                  "Mekanisme opt-out yang sederhana",
+                  "Tanpa kotak yang sudah dicentang",
+                  "Bahasa yang jelas (tanpa istilah hukum)"
+                ]
+              }
+            },
+            {
+              "title": "Kontrak",
+              "description": "Pemrosesan yang diperlukan untuk menjalankan kontrak dengan pengguna. Berlaku untuk situs e-commerce, platform SaaS, dan penyedia layanan.",
+              "examples": {
+                "title": "Contoh:",
+                "items": [
+                  "Memproses informasi pembayaran untuk pembelian",
+                  "Pembuatan dan pengelolaan akun",
+                  "Pemenuhan dan pengiriman pesanan",
+                  "Komunikasi dukungan pelanggan"
+                ]
+              }
+            },
+            {
+              "title": "Kepentingan sah",
+              "description": "Pemrosesan yang diperlukan untuk kepentingan bisnis yang sah, dengan syarat tidak melampaui hak privasi pengguna. Membutuhkan penilaian yang seimbang dan transparansi.",
+              "whenToUse": {
+                "title": "Kapan digunakan:",
+                "items": [
+                  "Pencegahan penipuan dan keamanan",
+                  "Pemasaran langsung (dengan opt-out)",
+                  "Keamanan jaringan dan informasi",
+                  "Klaim hukum dan kepatuhan"
+                ]
+              }
+            },
+            {
+              "title": "Kewajiban hukum",
+              "description": "Pemrosesan yang diwajibkan oleh hukum. Termasuk kewajiban pajak, undang-undang ketenagakerjaan, dan persyaratan regulasi lainnya.",
+              "examples": {
+                "title": "Contoh:",
+                "items": [
+                  "Pelaporan dan kepatuhan pajak",
+                  "Persyaratan hukum ketenagakerjaan",
+                  "Regulasi keuangan",
+                  "Undang-undang kesehatan dan keselamatan publik"
+                ]
+              }
+            }
+          ]
+        },
+        "dataSubjectRights": {
+          "title": "Hak Subjek Data",
+          "rights": [
+            {
+              "title": "Hak atas informasi",
+              "description": "Pengguna harus diberi tahu tentang tujuan pengumpulan dan pemrosesan data."
+            },
+            {
+              "title": "Hak akses",
+              "description": "Pengguna dapat meminta salinan data pribadi yang Anda miliki."
+            },
+            {
+              "title": "Hak perbaikan",
+              "description": "Pengguna dapat memperbaiki data yang tidak akurat atau melengkapi data yang kurang lengkap."
+            },
+            {
+              "title": "Hak penghapusan",
+              "description": "Pengguna dapat meminta penghapusan data mereka ('hak untuk dilupakan')."
+            },
+            {
+              "title": "Hak pembatasan",
+              "description": "Pengguna dapat membatasi bagaimana data mereka diproses dalam keadaan tertentu."
+            },
+            {
+              "title": "Hak portabilitas",
+              "description": "Pengguna dapat menerima data mereka dalam format terstruktur dan mentransfernya ke pihak lain."
+            },
+            {
+              "title": "Hak untuk menolak",
+              "description": "Pengguna dapat menolak pemrosesan berdasarkan kepentingan sah atau untuk tujuan pemasaran langsung."
+            },
+            {
+              "title": "Keputusan otomatis",
+              "description": "Pengguna memiliki hak atas keputusan otomatis tanpa intervensi manusia."
+            }
+          ]
+        },
+        "cookieCompliance": {
+          "title": "Kepatuhan Cookie & ePrivacy",
+          "steps": [
+            {
+              "title": "Banner persetujuan cookie",
+              "description": "Tampilkan banner persetujuan cookie yang jelas dan mencolok sebelum menetapkan cookie non-esensial. Pengguna harus dapat menerima atau menolak kategori cookie yang berbeda.",
+              "requiredElements": {
+                "title": "Elemen wajib:",
+                "items": [
+                  "Deskripsi tujuan cookie yang jelas",
+                  "Opsi persetujuan yang terperinci (esensial, analitik, pemasaran)",
+                  "Penolakan cookie non-esensial yang mudah",
+                  "Tautan ke kebijakan cookie terperinci"
+                ]
+              }
+            },
+            {
+              "title": "Kategori cookie",
+              "description": "Kategorikan cookie berdasarkan tujuan dan dapatkan persetujuan yang sesuai untuk setiap kategori.",
+              "categories": [
+                {
+                  "name": "Cookie esensial",
+                  "description": "Tidak membutuhkan persetujuan - sangat diperlukan untuk fungsi situs"
+                },
+                {
+                  "name": "Cookie analitik",
+                  "description": "Membutuhkan persetujuan - memonitor penggunaan dan kinerja situs"
+                }
+              ]
+            },
+            {
+              "title": "Kebijakan cookie",
+              "description": "Buat dan jaga kebijakan cookie yang komprehensif yang menjelaskan semua cookie di situs Anda, tujuannya, dan cara pengguna mengatur preferensi.",
+              "policyRequirements": {
+                "title": "Persyaratan kebijakan:",
+                "items": [
+                  "Daftar semua cookie dan tujuannya",
+                  "Pengungkapan cookie pihak ketiga",
+                  "Instruksi untuk pengelolaan cookie",
+                  "Informasi kontak untuk pertanyaan"
+                ]
+              }
+            }
+          ]
+        },
+        "implementationSteps": {
+          "title": "Langkah Implementasi GDPR",
+          "steps": [
+            {
+              "title": "Lakukan audit data",
+              "description": "Petakan semua data pribadi yang Anda kumpulkan, proses, dan simpan. Identifikasi sumber data, tujuan pemrosesan, dan periode retensi.",
+              "auditChecklist": {
+                "title": "Daftar periksa audit:",
+                "items": [
+                  "Formulir dan titik pengumpulan data",
+                  "Integrasi dan alat pihak ketiga",
+                  "Lokasi dan sistem penyimpanan data",
+                  "Praktik berbagi dan transfer data"
+                ]
+              }
+            },
+            {
+              "title": "Perbarui kebijakan privasi",
+              "description": "Buat atau perbarui kebijakan privasi Anda yang mencakup semua informasi yang diwajibkan GDPR. Gunakan bahasa yang jelas dan sederhana agar mudah dipahami pengguna.",
+              "requiredSections": {
+                "title": "Bagian wajib:",
+                "items": [
+                  "Identitas dan detail kontak pengendali",
+                  "Dasar hukum pemrosesan",
+                  "Periode retensi data",
+                  "Hak pengguna dan cara menjalankannya",
+                  "Berbagi data dan transfer internasional"
+                ]
+              }
+            },
+            {
+              "title": "Implementasikan mekanisme persetujuan",
+              "description": "Siapkan manajemen persetujuan yang tepat untuk cookie dan pemrosesan data. Pastikan pengguna dapat dengan mudah mencabut persetujuan kapan saja.",
+              "consentFeatures": {
+                "title": "Fitur persetujuan:",
+                "items": [
+                  "Banner persetujuan cookie",
+                  "Pusat pengelolaan preferensi",
+                  "Opsi persetujuan yang terperinci",
+                  "Mekanisme pencabutan persetujuan"
+                ]
+              }
+            },
+            {
+              "title": "Tetapkan proses perlindungan data",
+              "description": "Buat prosedur untuk menangani permintaan subjek data, pelanggaran data, dan menjaga catatan kepatuhan.",
+              "dpoNote": {
+                "title": "Petugas Perlindungan Data",
+                "description": "Pertimbangkan penunjukan DPO untuk operasi yang kompleks"
+              }
+            }
+          ]
+        },
+        "commonPitfalls": {
+          "title": "Kesalahan Umum Kepatuhan GDPR",
+          "pitfalls": [
+            {
+              "title": "Kotak persetujuan yang sudah dicentang",
+              "description": "Menggunakan kotak yang sudah dicentang untuk persetujuan melanggar persyaratan GDPR.",
+              "severity": "tinggi"
+            },
+            {
+              "title": "Kebijakan privasi yang samar",
+              "description": "Kebijakan yang bersifat umum dan sulit dipahami tidak memenuhi persyaratan transparansi.",
+              "severity": "tinggi"
+            },
+            {
+              "title": "Tidak memenuhi hak subjek data",
+              "description": "Gagal memenuhi permintaan pengguna untuk akses, penghapusan, atau portabilitas.",
+              "severity": "tinggi"
+            },
+            {
+              "title": "Keamanan yang tidak memadai",
+              "description": "Tidak menerapkan langkah-langkah keamanan teknis dan organisasi yang memadai.",
+              "severity": "sedang"
+            },
+            {
+              "title": "Tidak ada pemberitahuan pelanggaran",
+              "description": "Tidak melaporkan pelanggaran data ke otoritas dalam 72 jam.",
+              "severity": "sedang"
+            },
+            {
+              "title": "Transfer data internasional",
+              "description": "Mentransfer data ke negara yang tidak memiliki perlindungan yang memadai tanpa perlindungan tambahan.",
+              "severity": "sedang"
+            }
+          ]
+        },
+        "gettingStarted": {
+          "title": "Mulai Perjalanan Kepatuhan GDPR Anda",
+          "description": "Kepatuhan GDPR sangat penting untuk setiap situs yang menangani data pengguna UE. Mulai dengan audit data, perbarui kebijakan Anda, dan implementasikan mekanisme persetujuan yang tepat.",
+          "links": [
+            {
+              "text": "Lihat panduan kebijakan privasi",
+              "href": "/help/security/privacy"
+            },
+            {
+              "text": "Praktik keamanan terbaik",
+              "href": "/help/security/best-practices"
+            }
+          ]
+        }
+      },
       "troubleshooting": {
         "title": "Pemecahan Masalah",
         "description": "Temukan solusi untuk masalah umum dan teknis",
