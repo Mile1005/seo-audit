@@ -7641,6 +7641,170 @@
           }
         }
       },
+      "bestPractices": {
+        "title": "Sicherheitsbewährte Praktiken",
+        "subtitle": "Wesentliche Sicherheitspraktiken zum Schutz Ihres AI SEO Turbo-Kontos und Ihrer Daten",
+        "backToSecurity": "Zurück zur Sicherheit",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "security": "Sicherheit",
+          "bestPractices": "Bewährte Praktiken"
+        },
+        "introduction": {
+          "title": "Warum Sicherheit wichtig ist",
+          "description": "Ihre SEO-Daten enthalten wertvolle Geschäftseinblicke. Die Befolgung dieser bewährten Praktiken hilft, Ihr Konto vor unbefugtem Zugriff und potenziellen Datenschutzverletzungen zu schützen."
+        },
+        "accountSecurity": {
+          "title": "Kontosicherheit",
+          "practices": [
+            {
+              "title": "Starke Passwörter",
+              "description": "Verwenden Sie komplexe Passwörter mit einer Mischung aus Groß- und Kleinbuchstaben, Zahlen und Symbolen. Vermeiden Sie gebräuchliche Wörter oder persönliche Informationen."
+            },
+            {
+              "title": "Zwei-Faktor-Authentifizierung",
+              "description": "Aktivieren Sie 2FA für Ihr Konto, um eine zusätzliche Sicherheitsebene über das Passwort hinaus zu erhalten."
+            },
+            {
+              "title": "Regelmäßige Anmeldeüberwachung",
+              "description": "Überprüfen Sie regelmäßig Ihre Kontoaktivität und melden Sie sich auf gemeinsam genutzten Geräten ab."
+            },
+            {
+              "title": "Sichere Gerätenutzung",
+              "description": "Greifen Sie nur von vertrauenswürdigen Geräten und Netzwerken auf Ihr Konto zu."
+            },
+            {
+              "title": "Sitzungsmanagement",
+              "description": "Melden Sie sich nach der Nutzung von gemeinsam genutzten Computern ab und speichern Sie keine Passwörter in Browsern."
+            },
+            {
+              "title": "Einrichtung der Kontowiederherstellung",
+              "description": "Richten Sie Optionen zur Kontowiederherstellung ein und bewahren Sie Backup-Codes sicher auf."
+            }
+          ]
+        },
+        "passwordManagement": {
+          "title": "Passwortverwaltung",
+          "tips": [
+            "Verwenden Sie für jedes Konto ein einzigartiges Passwort",
+            "Ändern Sie Passwörter regelmäßig, insbesondere nach Sicherheitsvorfällen",
+            "Nutzen Sie einen renommierten Passwort-Manager",
+            "Teilen Sie Passwörter niemals per E-Mail oder Chat",
+            "Vermeiden Sie es, Passwörter an sichtbaren Orten aufzuschreiben",
+            "Verwenden Sie Passwort-Stärkeindikatoren, wenn verfügbar"
+          ]
+        },
+        "dataProtection": {
+          "title": "Datenschutz",
+          "measures": [
+            {
+              "title": "Datenverschlüsselung",
+              "description": "Alle Daten werden während der Übertragung und im Ruhezustand mit branchenüblichen Protokollen verschlüsselt."
+            },
+            {
+              "title": "Zugriffskontrollen",
+              "description": "Implementieren Sie rollenbasierte Zugriffskontrollen, um den Datenzugriff auf autorisiertes Personal zu beschränken."
+            },
+            {
+              "title": "Regelmäßige Backups",
+              "description": "Führen Sie regelmäßige Backups von kritischen Daten mit sicherer Speicherung und Testung durch."
+            },
+            {
+              "title": "Datenminimierung",
+              "description": "Erheben Sie nur notwendige Daten und überprüfen sowie löschen Sie regelmäßig nicht benötigte Informationen."
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "Überwachung und Warnmeldungen",
+          "alerts": {
+            "title": "Sicherheitswarnungen",
+            "items": [
+              "Ungewöhnliche Anmeldeversuche",
+              "Änderungen an Kontoeinstellungen",
+              "Anmeldungen auf neuen Geräten",
+              "Fehlgeschlagene Passwortversuche",
+              "Verdächtige Aktivitätsmuster"
+            ]
+          }
+        },
+        "contactSupport": {
+          "title": "Brauchen Sie Hilfe?",
+          "description": "Wenn Sie Fragen zur Sicherung Ihres Kontos haben oder einen unbefugten Zugriff vermuten, kontaktieren Sie umgehend unser Sicherheitsteam.",
+          "buttonText": "Sicherheits-Support kontaktieren"
+        }
+      },
+      "privacy": {
+        "title": "Datenschutzeinstellungen",
+        "subtitle": "Verwalten Sie Ihre Datenschutzeinstellungen und erfahren Sie, wie wir Ihre Daten schützen",
+        "backToSecurity": "Zurück zur Sicherheit",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "security": "Sicherheit",
+          "privacy": "Datenschutz"
+        },
+        "introduction": {
+          "title": "Ihr Datenschutz ist wichtig",
+          "description": "Wir verpflichten uns, Ihre persönlichen Informationen zu schützen und Ihnen die Kontrolle über Ihre Daten zu geben. Dieser Leitfaden erklärt Ihre Datenschutzoptionen und unsere Praktiken zur Datenverarbeitung."
+        },
+        "privacyControls": {
+          "title": "Datenschutzsteuerungen",
+          "settings": [
+            {
+              "title": "Präferenzen zur Datenerfassung",
+              "description": "Wählen Sie, welche Arten von Daten Sie uns für Analysen und Personalisierung zur Verfügung stellen möchten.",
+              "action": "Präferenzen verwalten"
+            },
+            {
+              "title": "Kommunikationseinstellungen",
+              "description": "Verwalten Sie E-Mail-Benachrichtigungen, Marketingkommunikation und Aktualisierungseinstellungen.",
+              "action": "Einstellungen aktualisieren"
+            },
+            {
+              "title": "Datenexport",
+              "description": "Laden Sie eine Kopie aller Ihrer bei uns gespeicherten persönlichen Daten herunter.",
+              "action": "Export anfordern"
+            },
+            {
+              "title": "Kontolöschung",
+              "description": "Löschen Sie Ihr Konto und alle zugehörigen Daten dauerhaft.",
+              "action": "Konto löschen"
+            }
+          ]
+        },
+        "dataUsage": {
+          "title": "Wie wir Ihre Daten nutzen",
+          "description": "Wir erfassen und nutzen Ihre Daten verantwortungsbewusst, um unsere Dienste bereitzustellen. Hier erfahren Sie, was wir mit Ihren Informationen tun:",
+          "purposes": [
+            "Bereitstellung und Wartung unserer SEO-Analyse-Dienste",
+            "Bearbeitung von Zahlungen und Verwaltung von Abonnements",
+            "Versand wichtiger Service-Updates und Sicherheitsbenachrichtigungen",
+            "Verbesserung unserer Dienste durch Analysen und Nutzerfeedback",
+            "Einhaltung gesetzlicher Verpflichtungen und Schutz vor Betrug",
+            "Personalisierung Ihrer Erfahrung mit relevanten Inhalten und Funktionen"
+          ]
+        },
+        "dataRetention": {
+          "title": "Datenspeicherung",
+          "policy": "Wir speichern Ihre personenbezogenen Daten nur so lange, wie es zur Bereitstellung unserer Dienste und zur Einhaltung gesetzlicher Anforderungen erforderlich ist. Kontodaten werden innerhalb von 30 Tagen nach Kontolöschung gelöscht, während anonymisierte Analysedaten länger zur Serviceverbesserung aufbewahrt werden können."
+        },
+        "yourRights": {
+          "title": "Ihre Datenschutzrechte",
+          "rights": [
+            "Recht auf Zugang zu Ihren personenbezogenen Daten",
+            "Recht auf Berichtigung unrichtiger Daten",
+            "Recht auf Löschung Ihrer Daten (Recht auf Vergessenwerden)",
+            "Recht auf Einschränkung der Verarbeitung Ihrer Daten",
+            "Recht auf Datenübertragbarkeit",
+            "Recht auf Widerspruch gegen die Datenverarbeitung"
+          ]
+        },
+        "contactSupport": {
+          "title": "Datenschutz-Support",
+          "description": "Haben Sie Fragen zu Ihren Datenschutzrechten oder zu unseren Datenpraktiken? Unser Datenschutzteam hilft Ihnen gerne weiter.",
+          "buttonText": "Datenschutzteam kontaktieren"
+        }
+      },
       "troubleshooting": {
         "title": "Fehlerbehebung",
         "description": "Finden Sie Lösungen für häufige Probleme und technische Schwierigkeiten",

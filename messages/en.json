@@ -7548,6 +7548,170 @@
           }
         }
       },
+      "bestPractices": {
+        "title": "Security Best Practices",
+        "subtitle": "Essential security practices to protect your AI SEO Turbo account and data",
+        "backToSecurity": "Back to Security",
+        "breadcrumb": {
+          "help": "Help",
+          "security": "Security",
+          "bestPractices": "Best Practices"
+        },
+        "introduction": {
+          "title": "Why Security Matters",
+          "description": "Your SEO data contains valuable business insights. Following these best practices helps protect your account from unauthorized access and potential data breaches."
+        },
+        "accountSecurity": {
+          "title": "Account Security",
+          "practices": [
+            {
+              "title": "Strong Passwords",
+              "description": "Use complex passwords with a mix of uppercase, lowercase, numbers, and symbols. Avoid common words or personal information."
+            },
+            {
+              "title": "Two-Factor Authentication",
+              "description": "Enable 2FA on your account for an extra layer of security beyond your password."
+            },
+            {
+              "title": "Regular Login Monitoring",
+              "description": "Check your account activity regularly and log out of shared devices."
+            },
+            {
+              "title": "Secure Device Usage",
+              "description": "Only access your account from trusted devices and networks."
+            },
+            {
+              "title": "Session Management",
+              "description": "Log out after using shared computers and don't save passwords in browsers."
+            },
+            {
+              "title": "Account Recovery Setup",
+              "description": "Set up account recovery options and keep backup codes secure."
+            }
+          ]
+        },
+        "passwordManagement": {
+          "title": "Password Management",
+          "tips": [
+            "Use a unique password for each account",
+            "Change passwords regularly, especially after security incidents",
+            "Use a reputable password manager",
+            "Never share passwords via email or chat",
+            "Avoid writing passwords down in visible places",
+            "Use password strength indicators when available"
+          ]
+        },
+        "dataProtection": {
+          "title": "Data Protection",
+          "measures": [
+            {
+              "title": "Data Encryption",
+              "description": "All data is encrypted in transit and at rest using industry-standard protocols."
+            },
+            {
+              "title": "Access Controls",
+              "description": "Implement role-based access controls to limit data access to authorized personnel only."
+            },
+            {
+              "title": "Regular Backups",
+              "description": "Maintain regular backups of critical data with secure storage and testing."
+            },
+            {
+              "title": "Data Minimization",
+              "description": "Collect only necessary data and regularly review and delete unnecessary information."
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "Monitoring and Alerts",
+          "alerts": {
+            "title": "Security Alerts",
+            "items": [
+              "Unusual login attempts",
+              "Changes to account settings",
+              "New device logins",
+              "Failed password attempts",
+              "Suspicious activity patterns"
+            ]
+          }
+        },
+        "contactSupport": {
+          "title": "Need Help?",
+          "description": "If you have questions about securing your account or suspect unauthorized access, contact our security team immediately.",
+          "buttonText": "Contact Security Support"
+        }
+      },
+      "privacy": {
+        "title": "Privacy Settings",
+        "subtitle": "Control your privacy preferences and understand how we protect your data",
+        "backToSecurity": "Back to Security",
+        "breadcrumb": {
+          "help": "Help",
+          "security": "Security",
+          "privacy": "Privacy"
+        },
+        "introduction": {
+          "title": "Your Privacy Matters",
+          "description": "We are committed to protecting your personal information and giving you control over your data. This guide explains your privacy options and our data handling practices."
+        },
+        "privacyControls": {
+          "title": "Privacy Controls",
+          "settings": [
+            {
+              "title": "Data Collection Preferences",
+              "description": "Choose what types of data you want to share with us for analytics and personalization.",
+              "action": "Manage Preferences"
+            },
+            {
+              "title": "Communication Settings",
+              "description": "Control email notifications, marketing communications, and update preferences.",
+              "action": "Update Settings"
+            },
+            {
+              "title": "Data Export",
+              "description": "Download a copy of all your personal data stored in our systems.",
+              "action": "Request Export"
+            },
+            {
+              "title": "Account Deletion",
+              "description": "Permanently delete your account and all associated data.",
+              "action": "Delete Account"
+            }
+          ]
+        },
+        "dataUsage": {
+          "title": "How We Use Your Data",
+          "description": "We collect and use your data responsibly to provide our services. Here's what we do with your information:",
+          "purposes": [
+            "Provide and maintain our SEO analysis services",
+            "Process payments and manage subscriptions",
+            "Send important service updates and security notifications",
+            "Improve our services through analytics and user feedback",
+            "Comply with legal obligations and protect against fraud",
+            "Personalize your experience with relevant content and features"
+          ]
+        },
+        "dataRetention": {
+          "title": "Data Retention",
+          "policy": "We retain your personal data only as long as necessary to provide our services and comply with legal requirements. Account data is deleted within 30 days of account deletion, while anonymized analytics data may be retained longer for service improvement."
+        },
+        "yourRights": {
+          "title": "Your Data Rights",
+          "rights": [
+            "Right to access your personal data",
+            "Right to rectify inaccurate data",
+            "Right to erase your data (right to be forgotten)",
+            "Right to restrict processing of your data",
+            "Right to data portability",
+            "Right to object to data processing"
+          ]
+        },
+        "contactSupport": {
+          "title": "Privacy Support",
+          "description": "Have questions about your privacy rights or our data practices? Our privacy team is here to help.",
+          "buttonText": "Contact Privacy Team"
+        }
+      },
       "troubleshooting": {
         "title": "Troubleshooting",
         "description": "Find solutions to common issues and technical problems",

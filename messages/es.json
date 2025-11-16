@@ -7566,6 +7566,170 @@
           }
         }
       },
+      "bestPractices": {
+        "title": "Mejores Prácticas de Seguridad",
+        "subtitle": "Prácticas de seguridad esenciales para proteger tu cuenta y datos de AI SEO Turbo",
+        "backToSecurity": "Volver a Seguridad",
+        "breadcrumb": {
+          "help": "Ayuda",
+          "security": "Seguridad",
+          "bestPractices": "Mejores Prácticas"
+        },
+        "introduction": {
+          "title": "Por Qué Importa la Seguridad",
+          "description": "Tus datos de SEO contienen información valiosa sobre tu negocio. Seguir estas mejores prácticas ayuda a proteger tu cuenta ante accesos no autorizados y posibles filtraciones de datos."
+        },
+        "accountSecurity": {
+          "title": "Seguridad de la Cuenta",
+          "practices": [
+            {
+              "title": "Contraseñas Fuertes",
+              "description": "Usa contraseñas complejas con una combinación de mayúsculas, minúsculas, números y símbolos. Evita palabras comunes o información personal."
+            },
+            {
+              "title": "Autenticación en Dos Factores",
+              "description": "Activa la autenticación en dos factores (2FA) en tu cuenta para una capa extra de seguridad además de tu contraseña."
+            },
+            {
+              "title": "Monitoreo Regular de Inicios de Sesión",
+              "description": "Revisa la actividad de tu cuenta regularmente y cierra sesión en dispositivos compartidos."
+            },
+            {
+              "title": "Uso Seguro de Dispositivos",
+              "description": "Accede a tu cuenta solo desde dispositivos y redes de confianza."
+            },
+            {
+              "title": "Gestión de Sesiones",
+              "description": "Cierra sesión después de usar computadoras compartidas y no guardes contraseñas en los navegadores."
+            },
+            {
+              "title": "Configuración de Recuperación de Cuenta",
+              "description": "Configura opciones de recuperación de cuenta y mantén los códigos de respaldo seguros."
+            }
+          ]
+        },
+        "passwordManagement": {
+          "title": "Gestión de Contraseñas",
+          "tips": [
+            "Usa una contraseña única para cada cuenta",
+            "Cambia las contraseñas regularmente, especialmente después de incidentes de seguridad",
+            "Utiliza un gestor de contraseñas confiable",
+            "Nunca compartas contraseñas por correo electrónico o chat",
+            "Evita escribir contraseñas en lugares visibles",
+            "Utiliza indicadores de fortaleza de contraseña cuando estén disponibles"
+          ]
+        },
+        "dataProtection": {
+          "title": "Protección de Datos",
+          "measures": [
+            {
+              "title": "Cifrado de Datos",
+              "description": "Todos los datos se cifran en tránsito y en reposo usando protocolos estándar de la industria."
+            },
+            {
+              "title": "Controles de Acceso",
+              "description": "Implementa controles de acceso basados en roles para limitar el acceso a los datos solo al personal autorizado."
+            },
+            {
+              "title": "Copias de Seguridad Regulares",
+              "description": "Mantén copias de seguridad periódicas de los datos críticos con almacenamiento seguro y pruebas."
+            },
+            {
+              "title": "Minimización de Datos",
+              "description": "Recopila solo los datos necesarios y revisa y elimina periódicamente la información innecesaria."
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "Monitoreo y Alertas",
+          "alerts": {
+            "title": "Alertas de Seguridad",
+            "items": [
+              "Intentos de inicio de sesión inusuales",
+              "Cambios en la configuración de la cuenta",
+              "Inicios de sesión desde nuevos dispositivos",
+              "Intentos fallidos de contraseña",
+              "Patrones de actividad sospechosos"
+            ]
+          }
+        },
+        "contactSupport": {
+          "title": "¿Necesitas Ayuda?",
+          "description": "Si tienes preguntas sobre cómo asegurar tu cuenta o sospechas de un acceso no autorizado, contacta de inmediato con nuestro equipo de seguridad.",
+          "buttonText": "Contactar Soporte de Seguridad"
+        }
+      },
+      "privacy": {
+        "title": "Configuración de privacidad",
+        "subtitle": "Controla tus preferencias de privacidad y comprende cómo protegemos tus datos",
+        "backToSecurity": "Volver a Seguridad",
+        "breadcrumb": {
+          "help": "Ayuda",
+          "security": "Seguridad",
+          "privacy": "Privacidad"
+        },
+        "introduction": {
+          "title": "Tu privacidad es importante",
+          "description": "Estamos comprometidos a proteger tu información personal y a brindarte control sobre tus datos. Esta guía explica tus opciones de privacidad y nuestras prácticas de manejo de datos."
+        },
+        "privacyControls": {
+          "title": "Controles de privacidad",
+          "settings": [
+            {
+              "title": "Preferencias de recopilación de datos",
+              "description": "Elige qué tipos de datos deseas compartir con nosotros para análisis y personalización.",
+              "action": "Gestionar preferencias"
+            },
+            {
+              "title": "Configuración de comunicaciones",
+              "description": "Controla las notificaciones por correo electrónico, las comunicaciones de marketing y las preferencias de actualización.",
+              "action": "Actualizar configuración"
+            },
+            {
+              "title": "Exportación de datos",
+              "description": "Descarga una copia de todos tus datos personales almacenados en nuestros sistemas.",
+              "action": "Solicitar exportación"
+            },
+            {
+              "title": "Eliminación de cuenta",
+              "description": "Elimina permanentemente tu cuenta y todos los datos asociados.",
+              "action": "Eliminar cuenta"
+            }
+          ]
+        },
+        "dataUsage": {
+          "title": "Cómo usamos tus datos",
+          "description": "Recopilamos y usamos tus datos de manera responsable para brindar nuestros servicios. Esto es lo que hacemos con tu información:",
+          "purposes": [
+            "Ofrecer y mantener nuestros servicios de análisis SEO",
+            "Procesar pagos y gestionar suscripciones",
+            "Enviar actualizaciones importantes del servicio y notificaciones de seguridad",
+            "Mejorar nuestros servicios mediante análisis y comentarios de usuarios",
+            "Cumplir con obligaciones legales y proteger contra el fraude",
+            "Personalizar tu experiencia con contenido y funciones relevantes"
+          ]
+        },
+        "dataRetention": {
+          "title": "Conservación de datos",
+          "policy": "Conservamos tus datos personales solo el tiempo necesario para brindar nuestros servicios y cumplir con requisitos legales. Los datos de la cuenta se eliminan dentro de los 30 días posteriores a la eliminación de la cuenta, mientras que los datos anonimizados de análisis pueden conservarse por más tiempo para mejorar el servicio."
+        },
+        "yourRights": {
+          "title": "Tus derechos sobre los datos",
+          "rights": [
+            "Derecho a acceder a tus datos personales",
+            "Derecho a rectificar datos inexactos",
+            "Derecho a borrar tus datos (derecho al olvido)",
+            "Derecho a restringir el procesamiento de tus datos",
+            "Derecho a la portabilidad de los datos",
+            "Derecho a oponerte al procesamiento de datos"
+          ]
+        },
+        "contactSupport": {
+          "title": "Soporte de privacidad",
+          "description": "¿Tienes preguntas sobre tus derechos de privacidad o nuestras prácticas de datos? Nuestro equipo de privacidad está aquí para ayudarte.",
+          "buttonText": "Contactar al equipo de privacidad"
+        }
+      },
       "troubleshooting": {
         "title": "Solución de Problemas",
         "description": "Encuentra soluciones a problemas comunes y técnicos",

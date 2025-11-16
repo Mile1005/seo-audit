@@ -7627,6 +7627,170 @@
           }
         }
       },
+      "bestPractices": {
+        "title": "Migliori Pratiche di Sicurezza",
+        "subtitle": "Pratiche di sicurezza essenziali per proteggere il tuo account AI SEO Turbo e i tuoi dati",
+        "backToSecurity": "Torna alla Sicurezza",
+        "breadcrumb": {
+          "help": "Aiuto",
+          "security": "Sicurezza",
+          "bestPractices": "Migliori Pratiche"
+        },
+        "introduction": {
+          "title": "Perché la Sicurezza è Importante",
+          "description": "I tuoi dati SEO contengono informazioni aziendali preziose. Seguire queste migliori pratiche aiuta a proteggere il tuo account da accessi non autorizzati e potenziali violazioni dei dati."
+        },
+        "accountSecurity": {
+          "title": "Sicurezza dell'Account",
+          "practices": [
+            {
+              "title": "Password Complesse",
+              "description": "Usa password complesse con una combinazione di maiuscole, minuscole, numeri e simboli. Evita parole comuni o informazioni personali."
+            },
+            {
+              "title": "Autenticazione a Due Fattori",
+              "description": "Abilita l'autenticazione a due fattori (2FA) sul tuo account per un livello di sicurezza aggiuntivo oltre la password."
+            },
+            {
+              "title": "Monitoraggio Regolare degli Accessi",
+              "description": "Controlla regolarmente l'attività del tuo account e disconnettiti dai dispositivi condivisi."
+            },
+            {
+              "title": "Utilizzo di Dispositivi Sicuri",
+              "description": "Accedi al tuo account solo da dispositivi e reti attendibili."
+            },
+            {
+              "title": "Gestione delle Sessioni",
+              "description": "Disconnettiti dopo aver utilizzato computer condivisi e non salvare le password nei browser."
+            },
+            {
+              "title": "Configurazione del Recupero Account",
+              "description": "Configura le opzioni di recupero account e mantieni al sicuro i codici di backup."
+            }
+          ]
+        },
+        "passwordManagement": {
+          "title": "Gestione delle Password",
+          "tips": [
+            "Usa una password unica per ogni account",
+            "Cambia le password regolarmente, specialmente dopo incidenti di sicurezza",
+            "Usa un gestore password affidabile",
+            "Non condividere mai le password tramite email o chat",
+            "Evita di scrivere le password in posti visibili",
+            "Usa gli indicatori di forza della password quando disponibili"
+          ]
+        },
+        "dataProtection": {
+          "title": "Protezione dei Dati",
+          "measures": [
+            {
+              "title": "Crittografia dei Dati",
+              "description": "Tutti i dati sono crittografati durante il trasferimento e a riposo utilizzando protocolli standard del settore."
+            },
+            {
+              "title": "Controlli di Accesso",
+              "description": "Implementa controlli di accesso basati sui ruoli per limitare l'accesso ai dati solo al personale autorizzato."
+            },
+            {
+              "title": "Backup Regolari",
+              "description": "Mantieni backup regolari dei dati critici con archiviazione sicura e test."
+            },
+            {
+              "title": "Minimizzazione dei Dati",
+              "description": "Raccogli solo i dati necessari e rivedi regolarmente ed elimina le informazioni non necessarie."
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "Monitoraggio e Avvisi",
+          "alerts": {
+            "title": "Avvisi di Sicurezza",
+            "items": [
+              "Tentativi di accesso insoliti",
+              "Modifiche alle impostazioni dell'account",
+              "Accessi da nuovi dispositivi",
+              "Tentativi di password non riusciti",
+              "Pattern di attività sospette"
+            ]
+          }
+        },
+        "contactSupport": {
+          "title": "Hai Bisogno di Aiuto?",
+          "description": "Se hai domande sulla sicurezza del tuo account o sospetti un accesso non autorizzato, contatta immediatamente il nostro team di sicurezza.",
+          "buttonText": "Contatta il Supporto di Sicurezza"
+        }
+      },
+      "privacy": {
+        "title": "Impostazioni sulla privacy",
+        "subtitle": "Controlla le tue preferenze sulla privacy e scopri come proteggiamo i tuoi dati",
+        "backToSecurity": "Torna alla sicurezza",
+        "breadcrumb": {
+          "help": "Aiuto",
+          "security": "Sicurezza",
+          "privacy": "Privacy"
+        },
+        "introduction": {
+          "title": "La tua privacy è importante",
+          "description": "Ci impegniamo a proteggere le tue informazioni personali e a darti il controllo sui tuoi dati. Questa guida spiega le tue opzioni di privacy e le nostre pratiche di gestione dei dati."
+        },
+        "privacyControls": {
+          "title": "Controlli sulla privacy",
+          "settings": [
+            {
+              "title": "Preferenze di raccolta dati",
+              "description": "Scegli quali tipi di dati desideri condividere con noi per analisi e personalizzazione.",
+              "action": "Gestisci preferenze"
+            },
+            {
+              "title": "Impostazioni di comunicazione",
+              "description": "Controlla le notifiche email, le comunicazioni di marketing e le preferenze di aggiornamento.",
+              "action": "Aggiorna impostazioni"
+            },
+            {
+              "title": "Esportazione dati",
+              "description": "Scarica una copia di tutti i tuoi dati personali archiviati nei nostri sistemi.",
+              "action": "Richiedi esportazione"
+            },
+            {
+              "title": "Eliminazione account",
+              "description": "Elimina definitivamente il tuo account e tutti i dati associati.",
+              "action": "Elimina account"
+            }
+          ]
+        },
+        "dataUsage": {
+          "title": "Come utilizziamo i tuoi dati",
+          "description": "Raccogliamo e utilizziamo i tuoi dati in modo responsabile per fornire i nostri servizi. Ecco cosa facciamo con le tue informazioni:",
+          "purposes": [
+            "Fornire e mantenere i nostri servizi di analisi SEO",
+            "Elaborare pagamenti e gestire abbonamenti",
+            "Inviare aggiornamenti importanti sui servizi e notifiche di sicurezza",
+            "Migliorare i nostri servizi tramite analisi e feedback degli utenti",
+            "Rispettare gli obblighi legali e proteggere contro le frodi",
+            "Personalizzare la tua esperienza con contenuti e funzionalità pertinenti"
+          ]
+        },
+        "dataRetention": {
+          "title": "Conservazione dei dati",
+          "policy": "Conserviamo i tuoi dati personali solo per il tempo necessario a fornire i nostri servizi e rispettare i requisiti legali. I dati dell'account vengono eliminati entro 30 giorni dalla cancellazione dell'account, mentre i dati analitici anonimizzati possono essere conservati più a lungo per il miglioramento del servizio."
+        },
+        "yourRights": {
+          "title": "I tuoi diritti sui dati",
+          "rights": [
+            "Diritto di accesso ai tuoi dati personali",
+            "Diritto di rettifica dei dati inesatti",
+            "Diritto alla cancellazione dei tuoi dati (diritto all’oblio)",
+            "Diritto di limitare il trattamento dei tuoi dati",
+            "Diritto alla portabilità dei dati",
+            "Diritto di opposizione al trattamento dei dati"
+          ]
+        },
+        "contactSupport": {
+          "title": "Assistenza sulla privacy",
+          "description": "Hai domande sui tuoi diritti relativi alla privacy o sulle nostre pratiche sui dati? Il nostro team sulla privacy è qui per aiutarti.",
+          "buttonText": "Contatta il team privacy"
+        }
+      },
       "troubleshooting": {
         "title": "Risoluzione Problemi",
         "description": "Trova soluzioni ai problemi comuni e tecnici",

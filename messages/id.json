@@ -7628,6 +7628,170 @@
           }
         }
       },
+      "bestPractices": {
+        "title": "Praktik Keamanan Terbaik",
+        "subtitle": "Praktik keamanan penting untuk melindungi akun dan data AI SEO Turbo Anda",
+        "backToSecurity": "Kembali ke Keamanan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "security": "Keamanan",
+          "bestPractices": "Praktik Terbaik"
+        },
+        "introduction": {
+          "title": "Mengapa Keamanan Penting",
+          "description": "Data SEO Anda berisi wawasan bisnis yang berharga. Mengikuti praktik terbaik ini membantu melindungi akun Anda dari akses tidak sah dan potensi pelanggaran data."
+        },
+        "accountSecurity": {
+          "title": "Keamanan Akun",
+          "practices": [
+            {
+              "title": "Kata Sandi Kuat",
+              "description": "Gunakan kata sandi yang kompleks dengan kombinasi huruf besar, huruf kecil, angka, dan simbol. Hindari kata umum atau informasi pribadi."
+            },
+            {
+              "title": "Otentikasi Dua Faktor",
+              "description": "Aktifkan 2FA di akun Anda untuk lapisan keamanan ekstra selain kata sandi."
+            },
+            {
+              "title": "Pemantauan Masuk Secara Berkala",
+              "description": "Periksa aktivitas akun Anda secara berkala dan keluar dari perangkat bersama."
+            },
+            {
+              "title": "Penggunaan Perangkat Aman",
+              "description": "Akses akun Anda hanya dari perangkat dan jaringan yang terpercaya."
+            },
+            {
+              "title": "Manajemen Sesi",
+              "description": "Keluar setelah menggunakan komputer bersama dan jangan simpan kata sandi di peramban."
+            },
+            {
+              "title": "Pengaturan Pemulihan Akun",
+              "description": "Atur opsi pemulihan akun dan simpan kode cadangan dengan aman."
+            }
+          ]
+        },
+        "passwordManagement": {
+          "title": "Manajemen Kata Sandi",
+          "tips": [
+            "Gunakan kata sandi yang unik untuk setiap akun",
+            "Ganti kata sandi secara berkala, terutama setelah insiden keamanan",
+            "Gunakan pengelola kata sandi yang terpercaya",
+            "Jangan pernah membagikan kata sandi melalui email atau obrolan",
+            "Hindari menuliskan kata sandi di tempat yang terlihat",
+            "Gunakan indikator kekuatan kata sandi jika tersedia"
+          ]
+        },
+        "dataProtection": {
+          "title": "Perlindungan Data",
+          "measures": [
+            {
+              "title": "Enkripsi Data",
+              "description": "Semua data dienkripsi saat transit dan saat disimpan menggunakan protokol standar industri."
+            },
+            {
+              "title": "Kontrol Akses",
+              "description": "Terapkan kontrol akses berbasis peran untuk membatasi akses data hanya kepada pihak yang berwenang."
+            },
+            {
+              "title": "Cadangan Rutin",
+              "description": "Lakukan cadangan rutin terhadap data penting dengan penyimpanan yang aman dan uji secara berkala."
+            },
+            {
+              "title": "Minimisasi Data",
+              "description": "Kumpulkan hanya data yang diperlukan dan tinjau serta hapus informasi yang tidak diperlukan secara berkala."
+            }
+          ]
+        },
+        "monitoring": {
+          "title": "Pemantauan dan Notifikasi",
+          "alerts": {
+            "title": "Peringatan Keamanan",
+            "items": [
+              "Percobaan masuk yang tidak biasa",
+              "Perubahan pada pengaturan akun",
+              "Login perangkat baru",
+              "Percobaan kata sandi yang gagal",
+              "Pola aktivitas mencurigakan"
+            ]
+          }
+        },
+        "contactSupport": {
+          "title": "Butuh Bantuan?",
+          "description": "Jika Anda memiliki pertanyaan tentang keamanan akun atau mencurigai adanya akses tidak sah, segera hubungi tim keamanan kami.",
+          "buttonText": "Hubungi Dukungan Keamanan"
+        }
+      },
+      "privacy": {
+        "title": "Pengaturan Privasi",
+        "subtitle": "Kendalikan preferensi privasi Anda dan pahami bagaimana kami melindungi data Anda",
+        "backToSecurity": "Kembali ke Keamanan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "security": "Keamanan",
+          "privacy": "Privasi"
+        },
+        "introduction": {
+          "title": "Privasi Anda Penting",
+          "description": "Kami berkomitmen untuk melindungi informasi pribadi Anda dan memberikan kendali atas data Anda. Panduan ini menjelaskan pilihan privasi Anda dan praktik penanganan data kami."
+        },
+        "privacyControls": {
+          "title": "Kontrol Privasi",
+          "settings": [
+            {
+              "title": "Preferensi Pengumpulan Data",
+              "description": "Pilih jenis data apa yang ingin Anda bagikan dengan kami untuk analitik dan personalisasi.",
+              "action": "Kelola Preferensi"
+            },
+            {
+              "title": "Pengaturan Komunikasi",
+              "description": "Kendalikan notifikasi email, komunikasi pemasaran, dan preferensi pembaruan.",
+              "action": "Perbarui Pengaturan"
+            },
+            {
+              "title": "Ekspor Data",
+              "description": "Unduh salinan semua data pribadi Anda yang tersimpan di sistem kami.",
+              "action": "Minta Ekspor"
+            },
+            {
+              "title": "Penghapusan Akun",
+              "description": "Hapus akun Anda secara permanen beserta seluruh data yang terkait.",
+              "action": "Hapus Akun"
+            }
+          ]
+        },
+        "dataUsage": {
+          "title": "Bagaimana Kami Menggunakan Data Anda",
+          "description": "Kami mengumpulkan dan menggunakan data Anda secara bertanggung jawab untuk menyediakan layanan kami. Berikut yang kami lakukan dengan informasi Anda:",
+          "purposes": [
+            "Menyediakan dan memelihara layanan analisis SEO kami",
+            "Memproses pembayaran dan mengelola langganan",
+            "Mengirim pembaruan layanan penting dan notifikasi keamanan",
+            "Meningkatkan layanan kami melalui analitik dan umpan balik pengguna",
+            "Mematuhi kewajiban hukum dan melindungi dari penipuan",
+            "Personalisasi pengalaman Anda dengan konten dan fitur yang relevan"
+          ]
+        },
+        "dataRetention": {
+          "title": "Penyimpanan Data",
+          "policy": "Kami menyimpan data pribadi Anda hanya selama diperlukan untuk menyediakan layanan kami dan mematuhi persyaratan hukum. Data akun akan dihapus dalam waktu 30 hari setelah penghapusan akun, sementara data analitik teranominisasi dapat disimpan lebih lama untuk peningkatan layanan."
+        },
+        "yourRights": {
+          "title": "Hak Data Anda",
+          "rights": [
+            "Hak untuk mengakses data pribadi Anda",
+            "Hak untuk memperbaiki data yang tidak akurat",
+            "Hak untuk menghapus data Anda (hak untuk dilupakan)",
+            "Hak untuk membatasi pemrosesan data Anda",
+            "Hak untuk portabilitas data",
+            "Hak untuk menolak pemrosesan data"
+          ]
+        },
+        "contactSupport": {
+          "title": "Dukungan Privasi",
+          "description": "Punya pertanyaan tentang hak privasi Anda atau praktik data kami? Tim privasi kami siap membantu.",
+          "buttonText": "Hubungi Tim Privasi"
+        }
+      },
       "troubleshooting": {
         "title": "Pemecahan Masalah",
         "description": "Temukan solusi untuk masalah umum dan teknis",
