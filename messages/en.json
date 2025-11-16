@@ -7512,6 +7512,498 @@
           }
         }
       },
+      "cancellation": {
+        "title": "Account Cancellation & Refunds",
+        "subtitle": "Learn how to cancel your subscription, understand refund policies, and manage account closure",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "cancellation": "Cancellation"
+        },
+        "importantNotice": {
+          "title": "Important Notice",
+          "description": "Before canceling, consider pausing your subscription instead. This preserves your data and allows easy reactivation."
+        },
+        "process": {
+          "title": "Cancellation Process",
+          "steps": [
+            {
+              "title": "Access Account Settings",
+              "description": "Log in to your account and navigate to Settings → Subscription → Cancel Subscription.",
+              "details": [
+                "Go to your account dashboard",
+                "Click on 'Subscription' in the left menu",
+                "Scroll to the 'Cancel Subscription' section"
+              ]
+            },
+            {
+              "title": "Choose Cancellation Reason",
+              "description": "Select why you're canceling from our predefined options or provide custom feedback.",
+              "details": [
+                "Help us improve by sharing your reason",
+                "Your feedback is valuable for our service development",
+                "This step is optional but appreciated"
+              ]
+            },
+            {
+              "title": "Confirm Cancellation",
+              "description": "Review the cancellation terms and confirm your decision.",
+              "details": [
+                "Review what happens after cancellation",
+                "Confirm you understand the refund policy",
+                "Click 'Cancel Subscription' to proceed"
+              ]
+            },
+            {
+              "title": "Receive Confirmation",
+              "description": "You'll receive an email confirmation with next steps and data retention information.",
+              "details": [
+                "Check your email for confirmation",
+                "Save the confirmation for your records",
+                "Contact support if you don't receive it"
+              ]
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "What Happens After Cancellation",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Immediate Access",
+              "description": "You'll retain full access to your account and data until the end of your current billing period."
+            },
+            {
+              "icon": "shield",
+              "title": "Data Retention",
+              "description": "Your data is securely stored for 30 days after cancellation, allowing time for account reactivation."
+            },
+            {
+              "icon": "credit-card",
+              "title": "No Further Charges",
+              "description": "Your payment method won't be charged again, and any pending invoices will be canceled."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Refund Policy",
+          "eligible": "Eligible for Refund",
+          "notEligible": "Not Eligible",
+          "scenarios": [
+            {
+              "title": "Monthly Subscription - Within 14 Days",
+              "eligible": true,
+              "description": "Full refund available if you cancel within 14 days of your initial subscription or renewal."
+            },
+            {
+              "title": "Monthly Subscription - After 14 Days",
+              "eligible": false,
+              "description": "No refund for the current billing period. Service continues until period end."
+            },
+            {
+              "title": "Annual Subscription - Within 30 Days",
+              "eligible": true,
+              "description": "Full refund available within 30 days of subscription. Prorated refund after 30 days."
+            },
+            {
+              "title": "Annual Subscription - After 30 Days",
+              "eligible": true,
+              "description": "Prorated refund for remaining months. No refund for the current month."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Need Help with Cancellation?",
+          "description": "Our billing support team is here to help you through the cancellation process.",
+          "contacts": [
+            {
+              "text": "Contact Billing Support",
+              "href": "/contact?subject=cancellation"
+            },
+            {
+              "text": "Live Chat",
+              "href": "#chat"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Understanding Your Invoices",
+        "subtitle": "Learn how to access, download, and understand your billing history and invoice details with AI SEO Turbo.",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "invoices": "Invoices"
+        },
+        "accessInvoices": {
+          "title": "How to Access Your Invoices",
+          "description": "Your complete billing history is available in your account dashboard at any time.",
+          "steps": [
+            {
+              "title": "Log into your account",
+              "description": "Access your AI SEO Turbo dashboard using your registered email and password."
+            },
+            {
+              "title": "Navigate to Billing",
+              "description": "Click on 'Billing' or 'Subscription' in your account menu to access payment information."
+            },
+            {
+              "title": "View Invoice History",
+              "description": "Select 'Invoices' or 'Billing History' to see all your past and current invoices."
+            },
+            {
+              "title": "Download or Print",
+              "description": "Click the download button next to any invoice to save a PDF copy for your records."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "What's Included in Your Invoice",
+          "description": "Each invoice contains comprehensive billing information and transaction details.",
+          "items": [
+            {
+              "icon": "FileText",
+              "title": "Invoice Number & Date",
+              "description": "Unique invoice identifier, issue date, and payment due date for your records."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Service Details",
+              "description": "Breakdown of services, plan type, billing period, and any applicable discounts."
+            },
+            {
+              "icon": "Calendar",
+              "title": "Payment Status",
+              "description": "Current payment status, amount paid, and any outstanding balances."
+            },
+            {
+              "icon": "Download",
+              "title": "Tax Information",
+              "description": "Applicable taxes, VAT information, and tax-inclusive pricing where required."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Managing Your Billing History",
+          "description": "Keep track of all your transactions and maintain organized financial records.",
+          "features": [
+            {
+              "title": "Complete Transaction History",
+              "description": "View all payments, refunds, and billing adjustments in chronological order."
+            },
+            {
+              "title": "Download Multiple Invoices",
+              "description": "Bulk download invoices for accounting purposes or tax preparation."
+            },
+            {
+              "title": "Payment Method Tracking",
+              "description": "See which payment methods were used for each transaction."
+            },
+            {
+              "title": "Subscription Changes",
+              "description": "Track plan upgrades, downgrades, and subscription modifications over time."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Need Help with Invoices?",
+          "description": "Our billing support team can assist with invoice questions, payment issues, or billing discrepancies.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "Email Support",
+              "description": "Send us an email with your invoice questions",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Live Chat",
+              "description": "Chat with our billing specialists in real-time",
+              "link": "#chat",
+              "linkText": "Start Live Chat"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Managing Payment Methods",
+        "subtitle": "Learn how to add, update, and manage your payment methods for seamless billing with AI SEO Turbo.",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "paymentMethods": "Payment Methods"
+        },
+        "acceptedMethods": {
+          "title": "Accepted Payment Methods",
+          "description": "We accept a wide range of payment methods to make your subscription management as convenient as possible.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Credit & Debit Cards",
+              "description": "All major credit and debit cards including Visa, MasterCard, American Express, and Discover.",
+              "features": ["Instant processing", "Secure encryption", "Global acceptance"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Digital Wallets",
+              "description": "PayPal, Apple Pay, Google Pay, and other popular digital wallet solutions.",
+              "features": ["One-click payments", "Enhanced security", "Mobile optimized"]
+            },
+            {
+              "icon": "Building",
+              "name": "Bank Transfers",
+              "description": "Direct bank transfers and wire transfers for annual subscriptions and enterprise accounts.",
+              "features": ["No processing fees", "Bulk payments", "Invoice generation"]
+            },
+            {
+              "icon": "Coins",
+              "name": "Cryptocurrency",
+              "description": "Bitcoin, Ethereum, and other major cryptocurrencies through our trusted payment partners.",
+              "features": ["Borderless payments", "Fast transactions", "Privacy focused"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Managing Your Payment Methods",
+          "description": "Keep your payment information up to date and manage multiple payment options for your account.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Add a Payment Method",
+              "description": "Add a new credit card, debit card, or digital wallet to your account.",
+              "steps": [
+                "Go to your account settings",
+                "Navigate to 'Billing & Payments'",
+                "Click 'Add Payment Method'",
+                "Enter your payment details",
+                "Verify and save the information"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Update Payment Information",
+              "description": "Change your card details, billing address, or switch to a different payment method.",
+              "steps": [
+                "Access your payment methods list",
+                "Select the method to update",
+                "Click 'Edit' or 'Update'",
+                "Modify the required information",
+                "Save your changes securely"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Remove Payment Methods",
+              "description": "Remove old or unused payment methods from your account while keeping at least one active method.",
+              "steps": [
+                "View your payment methods",
+                "Select the method to remove",
+                "Click 'Remove' or 'Delete'",
+                "Confirm the removal",
+                "Ensure another method remains active"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Payment Security & Privacy",
+          "description": "Your payment information is protected with industry-leading security measures and encryption.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "PCI DSS Compliant",
+              "description": "We adhere to the highest Payment Card Industry Data Security Standards for secure payment processing."
+            },
+            {
+              "icon": "Lock",
+              "title": "End-to-End Encryption",
+              "description": "All payment data is encrypted during transmission and storage using 256-bit SSL encryption."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "No Card Storage",
+              "description": "We don't store your full card details on our servers. Payment processing is handled by certified partners."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Fraud Protection",
+              "description": "Advanced fraud detection and prevention systems protect against unauthorized transactions."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Need Help with Payment Methods?",
+          "description": "Our billing support team can help you with payment method issues, failed transactions, or billing questions.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "Email Support",
+              "description": "Send us an email with your payment questions",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Live Chat",
+              "description": "Chat with our billing specialists in real-time",
+              "link": "#chat",
+              "linkText": "Start Live Chat"
+            }
+          ]
+        }
+      },
+      "upgradePlan": {
+        "title": "Upgrading Your Plan",
+        "subtitle": "Learn how to upgrade your subscription plan to unlock more features, higher usage limits, and premium AI SEO Turbo capabilities.",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "upgradePlan": "Upgrade Plan"
+        },
+        "benefits": {
+          "title": "Benefits of Upgrading",
+          "description": "Upgrading your plan gives you access to advanced features and higher usage limits to supercharge your SEO efforts.",
+          "features": [
+            {
+              "icon": "TrendingUp",
+              "title": "More Audits Per Month",
+              "description": "Increase your monthly audit limit from 3 to unlimited, allowing comprehensive website monitoring."
+            },
+            {
+              "icon": "Zap",
+              "title": "Advanced AI Features",
+              "description": "Access premium AI recommendations, competitor analysis, and automated optimization suggestions."
+            },
+            {
+              "icon": "Download",
+              "title": "Priority Support",
+              "description": "Get faster response times and priority access to our expert support team."
+            },
+            {
+              "icon": "BarChart3",
+              "title": "Detailed Analytics",
+              "description": "Unlock comprehensive reporting, trend analysis, and performance tracking dashboards."
+            }
+          ]
+        },
+        "howToUpgrade": {
+          "title": "How to Upgrade Your Plan",
+          "description": "Follow these simple steps to upgrade your subscription and start using premium features immediately.",
+          "steps": [
+            {
+              "title": "Review Available Plans",
+              "description": "Compare plan features and pricing to choose the best option for your needs.",
+              "details": [
+                "Visit the pricing page",
+                "Compare feature differences",
+                "Check usage limits and pricing",
+                "Consider your budget and goals"
+              ]
+            },
+            {
+              "title": "Access Account Settings",
+              "description": "Log into your account and navigate to the billing section to initiate the upgrade.",
+              "details": [
+                "Log into your AI SEO Turbo account",
+                "Go to Account Settings",
+                "Click on 'Subscription' or 'Billing'",
+                "Find the 'Upgrade Plan' option"
+              ]
+            },
+            {
+              "title": "Select New Plan",
+              "description": "Choose your desired plan and billing cycle (monthly or annual for better savings).",
+              "details": [
+                "Select your preferred plan tier",
+                "Choose monthly or annual billing",
+                "Review the pricing and features",
+                "Apply any available discount codes"
+              ]
+            },
+            {
+              "title": "Complete Payment",
+              "description": "Update your payment method if needed and confirm the upgrade to activate new features.",
+              "details": [
+                "Update payment method if required",
+                "Review the prorated charges",
+                "Confirm the upgrade",
+                "Receive immediate access to new features"
+              ]
+            }
+          ]
+        },
+        "billingChanges": {
+          "title": "Billing Changes After Upgrade",
+          "description": "Understand how your billing changes when you upgrade, including prorated charges and billing cycles.",
+          "scenarios": [
+            {
+              "icon": "Calendar",
+              "title": "Mid-Cycle Upgrade",
+              "description": "When upgrading mid-billing cycle, you'll be charged a prorated amount for the upgrade.",
+              "billing": "Prorated charge + next full cycle at new rate"
+            },
+            {
+              "icon": "TrendingUp",
+              "title": "Monthly to Annual",
+              "description": "Switching to annual billing saves you money and provides a full year of service.",
+              "billing": "One-time annual payment with 2 months free"
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Payment Method Update",
+              "description": "You may need to update your payment method for the new billing amount.",
+              "billing": "New payment method charged immediately"
+            },
+            {
+              "icon": "Clock",
+              "title": "Immediate Access",
+              "description": "Premium features are available immediately after successful payment processing.",
+              "billing": "Instant activation, no waiting period"
+            }
+          ]
+        },
+        "premiumFeatures": {
+          "title": "Premium Features You'll Unlock",
+          "description": "Upgrading gives you access to powerful features that can transform your SEO strategy.",
+          "features": [
+            {
+              "icon": "Search",
+              "title": "Unlimited Audits",
+              "description": "Run as many SEO audits as you need without monthly limits."
+            },
+            {
+              "icon": "Brain",
+              "title": "AI Recommendations",
+              "description": "Get personalized AI-powered suggestions for SEO improvements."
+            },
+            {
+              "icon": "Users",
+              "title": "Team Collaboration",
+              "description": "Invite team members and collaborate on SEO projects."
+            },
+            {
+              "icon": "FileText",
+              "title": "Advanced Reports",
+              "description": "Generate detailed PDF reports and export data in multiple formats."
+            },
+            {
+              "icon": "Target",
+              "title": "Competitor Tracking",
+              "description": "Monitor competitor SEO strategies and performance metrics."
+            },
+            {
+              "icon": "Zap",
+              "title": "Priority Support",
+              "description": "Get faster response times from our expert support team."
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API & Integrations",
         "description": "Connect AISEOTurbo with your tools",

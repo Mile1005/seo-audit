@@ -7605,6 +7605,498 @@
           }
         }
       },
+      "cancellation": {
+        "title": "Konto­kündigung & Rückerstattungen",
+        "subtitle": "Erfahren Sie, wie Sie Ihr Abonnement kündigen, die Rückerstattungsrichtlinien verstehen und die Kontoschließung verwalten",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "cancellation": "Kündigung"
+        },
+        "importantNotice": {
+          "title": "Wichtiger Hinweis",
+          "description": "Bevor Sie kündigen, erwägen Sie stattdessen, Ihr Abonnement zu pausieren. So bleiben Ihre Daten erhalten und eine erneute Aktivierung ist jederzeit möglich."
+        },
+        "process": {
+          "title": "Kündigungsprozess",
+          "steps": [
+            {
+              "title": "Zugang zu den Konto­einstellungen",
+              "description": "Loggen Sie sich in Ihr Konto ein und navigieren Sie zu Einstellungen → Abonnement → Abonnement kündigen.",
+              "details": [
+                "Öffnen Sie Ihr Konto-Dashboard",
+                "Klicken Sie auf 'Abonnement' im linken Menü",
+                "Scrollen Sie zum Bereich 'Abonnement kündigen'"
+              ]
+            },
+            {
+              "title": "Grund für Kündigung wählen",
+              "description": "Wählen Sie einen Kündigungsgrund aus unseren Vorlagen oder geben Sie individuelles Feedback an.",
+              "details": [
+                "Helfen Sie uns, unseren Service durch Ihre Rückmeldung zu verbessern",
+                "Ihr Feedback ist für die Weiterentwicklung unseres Angebots wertvoll",
+                "Dieser Schritt ist optional, aber sehr willkommen"
+              ]
+            },
+            {
+              "title": "Kündigung bestätigen",
+              "description": "Prüfen Sie die Kündigungsbedingungen und bestätigen Sie Ihre Entscheidung.",
+              "details": [
+                "Lesen Sie, was nach der Kündigung passiert",
+                "Bestätigen Sie, dass Sie die Rückerstattungsrichtlinie verstanden haben",
+                "Klicken Sie auf 'Abonnement kündigen', um fortzufahren"
+              ]
+            },
+            {
+              "title": "Bestätigung erhalten",
+              "description": "Sie erhalten eine Bestätigungs-E-Mail mit weiteren Schritten und Informationen zur Datenaufbewahrung.",
+              "details": [
+                "Prüfen Sie Ihr E-Mail-Postfach auf die Bestätigung",
+                "Speichern Sie die Bestätigung für Ihre Unterlagen",
+                "Kontaktieren Sie den Support, falls Sie keine Nachricht erhalten"
+              ]
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "Was passiert nach der Kündigung",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Sofortiger Zugriff",
+              "description": "Sie behalten bis zum Ende Ihrer aktuellen Abrechnungsperiode vollen Zugriff auf Ihr Konto und Ihre Daten."
+            },
+            {
+              "icon": "shield",
+              "title": "Daten­aufbewahrung",
+              "description": "Ihre Daten werden nach der Kündigung für 30 Tage sicher gespeichert, sodass Sie Ihr Konto wieder aktivieren können."
+            },
+            {
+              "icon": "credit-card",
+              "title": "Keine weiteren Abbuchungen",
+              "description": "Ihre Zahlungs­methode wird nicht erneut belastet und offene Rechnungen werden storniert."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Rückerstattungs­richtlinie",
+          "eligible": "Rückerstattungs­berechtigt",
+          "notEligible": "Nicht berechtigt",
+          "scenarios": [
+            {
+              "title": "Monatsabo – innerhalb von 14 Tagen",
+              "eligible": true,
+              "description": "Vollständige Rückerstattung bei Kündigung innerhalb von 14 Tagen nach dem ersten Abonnement oder der Verlängerung."
+            },
+            {
+              "title": "Monatsabo – nach 14 Tagen",
+              "eligible": false,
+              "description": "Keine Rückerstattung für die laufende Abrechnungsperiode. Der Service läuft bis zum Ende des Zeitraums weiter."
+            },
+            {
+              "title": "Jahresabo – innerhalb von 30 Tagen",
+              "eligible": true,
+              "description": "Vollständige Rückerstattung innerhalb von 30 Tagen nach Abonnementbeginn. Danach anteilige Rückerstattung."
+            },
+            {
+              "title": "Jahresabo – nach 30 Tagen",
+              "eligible": true,
+              "description": "Anteilige Rückerstattung für verbleibende Monate. Keine Rückerstattung für den laufenden Monat."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Hilfe bei der Kündigung benötigt?",
+          "description": "Unser Abrechnungssupport hilft Ihnen gerne beim Kündigungsprozess.",
+          "contacts": [
+            {
+              "text": "Abrechnungssupport kontaktieren",
+              "href": "/contact?subject=kuendigung"
+            },
+            {
+              "text": "Live-Chat",
+              "href": "#chat"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Ihre Rechnungen verstehen",
+        "subtitle": "Erfahren Sie, wie Sie auf Ihre Abrechnungshistorie zugreifen, Rechnungen herunterladen und diese mit AI SEO Turbo verstehen.",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "invoices": "Rechnungen"
+        },
+        "accessInvoices": {
+          "title": "So greifen Sie auf Ihre Rechnungen zu",
+          "description": "Ihre vollständige Abrechnungshistorie ist jederzeit in Ihrem Kontodashboard verfügbar.",
+          "steps": [
+            {
+              "title": "Melden Sie sich in Ihrem Konto an",
+              "description": "Greifen Sie auf Ihr AI SEO Turbo-Dashboard mit Ihrer registrierten E-Mail-Adresse und Ihrem Passwort zu."
+            },
+            {
+              "title": "Navigieren Sie zur Abrechnung",
+              "description": "Klicken Sie im Kontomenü auf 'Abrechnung' oder 'Abonnement', um auf Zahlungsinformationen zuzugreifen."
+            },
+            {
+              "title": "Rechnungshistorie anzeigen",
+              "description": "Wählen Sie 'Rechnungen' oder 'Abrechnungshistorie', um alle vergangenen und aktuellen Rechnungen zu sehen."
+            },
+            {
+              "title": "Herunterladen oder drucken",
+              "description": "Klicken Sie neben einer Rechnung auf die Download-Schaltfläche, um eine PDF-Kopie für Ihre Unterlagen zu speichern."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Was ist in Ihrer Rechnung enthalten",
+          "description": "Jede Rechnung enthält umfassende Abrechnungsinformationen und Transaktionsdetails.",
+          "items": [
+            {
+              "icon": "FileText",
+              "title": "Rechnungsnummer & Datum",
+              "description": "Eindeutige Rechnungskennung, Ausstellungsdatum und Fälligkeitsdatum der Zahlung für Ihre Unterlagen."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Service-Details",
+              "description": "Aufschlüsselung der Dienstleistungen, Plantyp, Abrechnungszeitraum und etwaige Rabatte."
+            },
+            {
+              "icon": "Calendar",
+              "title": "Zahlungsstatus",
+              "description": "Aktueller Zahlungsstatus, gezahlter Betrag und etwaige ausstehende Salden."
+            },
+            {
+              "icon": "Download",
+              "title": "Steuerinformationen",
+              "description": "Anwendbare Steuern, Mehrwertsteuer-Informationen und steuerlich inklusive Preisgestaltung, wo erforderlich."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Ihre Abrechnungshistorie verwalten",
+          "description": "Behalten Sie den Überblick über alle Ihre Transaktionen und führen Sie geordnete Finanzunterlagen.",
+          "features": [
+            {
+              "title": "Vollständige Transaktionshistorie",
+              "description": "Zeigen Sie alle Zahlungen, Rückerstattungen und Abrechnungsanpassungen in chronologischer Reihenfolge an."
+            },
+            {
+              "title": "Mehrere Rechnungen herunterladen",
+              "description": "Laden Sie Rechnungen stapelweise für Buchhaltungszwecke oder Steuervorbereitung herunter."
+            },
+            {
+              "title": "Zahlungsmethoden-Verfolgung",
+              "description": "Sehen Sie, welche Zahlungsmethoden für jede Transaktion verwendet wurden."
+            },
+            {
+              "title": "Abonnement-Änderungen",
+              "description": "Verfolgen Sie Plan-Upgrades, -Downgrades und Abonnement-Änderungen im Laufe der Zeit."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Hilfe bei Rechnungen benötigt?",
+          "description": "Unser Abrechnungssupport kann Ihnen bei Fragen zu Rechnungen, Zahlungsproblemen oder Abrechnungsunterschieden helfen.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "E-Mail-Support",
+              "description": "Senden Sie uns eine E-Mail mit Ihren Rechnungsfragen",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Live-Chat",
+              "description": "Chatten Sie in Echtzeit mit unseren Abrechnungsspezialisten",
+              "link": "#chat",
+              "linkText": "Live-Chat starten"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Zahlungsmethoden verwalten",
+        "subtitle": "Erfahren Sie, wie Sie Zahlungsmethoden hinzufügen, aktualisieren und für nahtlose Abrechnung mit AI SEO Turbo verwalten.",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "paymentMethods": "Zahlungsmethoden"
+        },
+        "acceptedMethods": {
+          "title": "Akzeptierte Zahlungsmethoden",
+          "description": "Wir akzeptieren eine Vielzahl von Zahlungsmethoden, um die Verwaltung Ihres Abonnements so bequem wie möglich zu gestalten.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Kredit- und Debitkarten",
+              "description": "Alle gängigen Kredit- und Debitkarten einschließlich Visa, MasterCard, American Express und Discover.",
+              "features": ["Sofortige Verarbeitung", "Sichere Verschlüsselung", "Globale Akzeptanz"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Digitale Geldbörsen",
+              "description": "PayPal, Apple Pay, Google Pay und andere beliebte digitale Geldbörsen-Lösungen.",
+              "features": ["Ein-Klick-Zahlungen", "Erhöhte Sicherheit", "Mobil optimiert"]
+            },
+            {
+              "icon": "Building",
+              "name": "Banküberweisungen",
+              "description": "Direkte Banküberweisungen und Überweisungen für Jahresabonnements und Unternehmenskonten.",
+              "features": ["Keine Bearbeitungsgebühren", "Massen-Zahlungen", "Rechnungserstellung"]
+            },
+            {
+              "icon": "Coins",
+              "name": "Kryptowährung",
+              "description": "Bitcoin, Ethereum und andere wichtige Kryptowährungen durch unsere vertrauenswürdigen Zahlungspartner.",
+              "features": ["Grenzüberschreitende Zahlungen", "Schnelle Transaktionen", "Datenschutz fokussiert"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Verwaltung Ihrer Zahlungsmethoden",
+          "description": "Halten Sie Ihre Zahlungsinformationen auf dem neuesten Stand und verwalten Sie mehrere Zahlungsoptionen für Ihr Konto.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Eine Zahlungsmethode hinzufügen",
+              "description": "Fügen Sie eine neue Kreditkarte, Debitkarte oder digitale Geldbörse zu Ihrem Konto hinzu.",
+              "steps": [
+                "Gehen Sie zu Ihren Kontoeinstellungen",
+                "Navigieren Sie zu 'Abrechnung & Zahlungen'",
+                "Klicken Sie auf 'Zahlungsmethode hinzufügen'",
+                "Geben Sie Ihre Zahlungsdaten ein",
+                "Überprüfen und speichern Sie die Informationen"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Zahlungsinformationen aktualisieren",
+              "description": "Ändern Sie Ihre Kartendaten, Rechnungsadresse oder wechseln Sie zu einer anderen Zahlungsmethode.",
+              "steps": [
+                "Greifen Sie auf Ihre Liste der Zahlungsmethoden zu",
+                "Wählen Sie die zu aktualisierende Methode aus",
+                "Klicken Sie auf 'Bearbeiten' oder 'Aktualisieren'",
+                "Ändern Sie die erforderlichen Informationen",
+                "Speichern Sie Ihre Änderungen sicher"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Zahlungsmethoden entfernen",
+              "description": "Entfernen Sie alte oder ungenutzte Zahlungsmethoden von Ihrem Konto und behalten Sie mindestens eine aktive Methode bei.",
+              "steps": [
+                "Zeigen Sie Ihre Zahlungsmethoden an",
+                "Wählen Sie die zu entfernende Methode aus",
+                "Klicken Sie auf 'Entfernen' oder 'Löschen'",
+                "Bestätigen Sie die Entfernung",
+                "Stellen Sie sicher, dass eine andere Methode aktiv bleibt"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Zahlungssicherheit & Datenschutz",
+          "description": "Ihre Zahlungsinformationen sind durch branchenführende Sicherheitsmaßnahmen und Verschlüsselung geschützt.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "PCI DSS konform",
+              "description": "Wir halten uns an die höchsten Payment Card Industry Data Security Standards für sichere Zahlungsverarbeitung."
+            },
+            {
+              "icon": "Lock",
+              "title": "End-to-End-Verschlüsselung",
+              "description": "Alle Zahlungsdaten werden während der Übertragung und Speicherung mit 256-Bit-SSL-Verschlüsselung verschlüsselt."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Keine Kartenspeicherung",
+              "description": "Wir speichern Ihre vollständigen Kartendaten nicht auf unseren Servern. Die Zahlungsverarbeitung erfolgt durch zertifizierte Partner."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Betrugsschutz",
+              "description": "Erweiterte Betrugserkennungs- und Präventionssysteme schützen vor nicht autorisierten Transaktionen."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Brauchen Sie Hilfe bei Zahlungsmethoden?",
+          "description": "Unser Abrechnungssupport-Team kann Ihnen bei Problemen mit Zahlungsmethoden, fehlgeschlagenen Transaktionen oder Abrechnungsfragen helfen.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "E-Mail-Support",
+              "description": "Senden Sie uns eine E-Mail mit Ihren Zahlungsfragen",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Live-Chat",
+              "description": "Chatten Sie in Echtzeit mit unseren Abrechnungsspezialisten",
+              "link": "#chat",
+              "linkText": "Live-Chat starten"
+            }
+          ]
+        }
+      },
+      "upgradePlan": {
+        "title": "Ihren Plan upgraden",
+        "subtitle": "Erfahren Sie, wie Sie Ihren Abonnementplan upgraden, um mehr Funktionen, höhere Nutzungslimits und erweiterte KI-SEO-Turbo-Funktionen freizuschalten.",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "upgradePlan": "Plan upgraden"
+        },
+        "benefits": {
+          "title": "Vorteile des Upgrades",
+          "description": "Das Upgrade Ihres Plans gibt Ihnen Zugang zu erweiterten Funktionen und höheren Nutzungslimits, um Ihre SEO-Bemühungen zu maximieren.",
+          "features": [
+            {
+              "icon": "TrendingUp",
+              "title": "Mehr Audits pro Monat",
+              "description": "Erhöhen Sie Ihr monatliches Audit-Limit von 3 auf unbegrenzt, um umfassende Website-Überwachung zu ermöglichen."
+            },
+            {
+              "icon": "Zap",
+              "title": "Erweiterte KI-Funktionen",
+              "description": "Greifen Sie auf Premium-KI-Empfehlungen, Wettbewerberanalysen und automatisierte Optimierungsvorschläge zu."
+            },
+            {
+              "icon": "Download",
+              "title": "Prioritäts-Support",
+              "description": "Erhalten Sie schnellere Antwortzeiten und priorisierten Zugang zu unserem Expertensupport-Team."
+            },
+            {
+              "icon": "BarChart3",
+              "title": "Detaillierte Analysen",
+              "description": "Schalten Sie umfassende Berichterstattung, Trendanalysen und Performance-Tracking-Dashboards frei."
+            }
+          ]
+        },
+        "howToUpgrade": {
+          "title": "So upgraden Sie Ihren Plan",
+          "description": "Befolgen Sie diese einfachen Schritte, um Ihr Abonnement zu upgraden und sofort Premium-Funktionen zu nutzen.",
+          "steps": [
+            {
+              "title": "Verfügbare Pläne überprüfen",
+              "description": "Vergleichen Sie Planfunktionen und Preise, um die beste Option für Ihre Bedürfnisse zu wählen.",
+              "details": [
+                "Besuchen Sie die Preisseite",
+                "Vergleichen Sie Funktionsunterschiede",
+                "Überprüfen Sie Nutzungslimits und Preise",
+                "Berücksichtigen Sie Ihr Budget und Ihre Ziele"
+              ]
+            },
+            {
+              "title": "Kontoeinstellungen aufrufen",
+              "description": "Melden Sie sich in Ihrem Konto an und navigieren Sie zum Abrechnungsbereich, um das Upgrade zu initiieren.",
+              "details": [
+                "Melden Sie sich in Ihrem AI SEO Turbo-Konto an",
+                "Gehen Sie zu Kontoeinstellungen",
+                "Klicken Sie auf 'Abonnement' oder 'Abrechnung'",
+                "Suchen Sie die Option 'Plan upgraden'"
+              ]
+            },
+            {
+              "title": "Neuen Plan auswählen",
+              "description": "Wählen Sie Ihren gewünschten Plan und Abrechnungszyklus (monatlich oder jährlich für bessere Einsparungen).",
+              "details": [
+                "Wählen Sie Ihren bevorzugten Plantyp",
+                "Wählen Sie monatliche oder jährliche Abrechnung",
+                "Überprüfen Sie die Preise und Funktionen",
+                "Wenden Sie verfügbare Rabattcodes an"
+              ]
+            },
+            {
+              "title": "Zahlung abschließen",
+              "description": "Aktualisieren Sie bei Bedarf Ihre Zahlungsmethode und bestätigen Sie das Upgrade, um neue Funktionen zu aktivieren.",
+              "details": [
+                "Aktualisieren Sie bei Bedarf die Zahlungsmethode",
+                "Überprüfen Sie die anteiligen Gebühren",
+                "Bestätigen Sie das Upgrade",
+                "Erhalten Sie sofortigen Zugang zu neuen Funktionen"
+              ]
+            }
+          ]
+        },
+        "billingChanges": {
+          "title": "Abrechnungsänderungen nach dem Upgrade",
+          "description": "Verstehen Sie, wie sich Ihre Abrechnung nach dem Upgrade ändert, einschließlich anteiliger Gebühren und Abrechnungszyklen.",
+          "scenarios": [
+            {
+              "icon": "Calendar",
+              "title": "Upgrade mitten im Zyklus",
+              "description": "Wenn Sie mitten im Abrechnungszyklus upgraden, wird Ihnen ein anteiliger Betrag für das Upgrade berechnet.",
+              "billing": "Anteilige Gebühr + nächster voller Zyklus zum neuen Tarif"
+            },
+            {
+              "icon": "TrendingUp",
+              "title": "Monatlich zu jährlich",
+              "description": "Der Wechsel zur jährlichen Abrechnung spart Geld und bietet einen vollen Jahresservice.",
+              "billing": "Einmalige jährliche Zahlung mit 2 Monaten kostenlos"
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Aktualisierung der Zahlungsmethode",
+              "description": "Möglicherweise müssen Sie Ihre Zahlungsmethode für den neuen Abrechnungsbetrag aktualisieren.",
+              "billing": "Neue Zahlungsmethode wird sofort belastet"
+            },
+            {
+              "icon": "Clock",
+              "title": "Sofortiger Zugang",
+              "description": "Premium-Funktionen sind sofort nach erfolgreicher Zahlungsverarbeitung verfügbar.",
+              "billing": "Sofortige Aktivierung, keine Wartezeit"
+            }
+          ]
+        },
+        "premiumFeatures": {
+          "title": "Premium-Funktionen, die Sie freischalten",
+          "description": "Das Upgrade gibt Ihnen Zugang zu leistungsstarken Funktionen, die Ihre SEO-Strategie transformieren können.",
+          "features": [
+            {
+              "icon": "Search",
+              "title": "Unbegrenzte Audits",
+              "description": "Führen Sie so viele SEO-Audits durch, wie Sie benötigen, ohne monatliche Limits."
+            },
+            {
+              "icon": "Brain",
+              "title": "KI-Empfehlungen",
+              "description": "Erhalten Sie personalisierte KI-gestützte Vorschläge für SEO-Verbesserungen."
+            },
+            {
+              "icon": "Users",
+              "title": "Team-Zusammenarbeit",
+              "description": "Laden Sie Teammitglieder ein und arbeiten Sie gemeinsam an SEO-Projekten."
+            },
+            {
+              "icon": "FileText",
+              "title": "Erweiterte Berichte",
+              "description": "Generieren Sie detaillierte PDF-Berichte und exportieren Sie Daten in mehreren Formaten."
+            },
+            {
+              "icon": "Target",
+              "title": "Wettbewerber-Tracking",
+              "description": "Überwachen Sie die SEO-Strategien und Performance-Metriken von Wettbewerbern."
+            },
+            {
+              "icon": "Zap",
+              "title": "Prioritäts-Support",
+              "description": "Erhalten Sie schnellere Antwortzeiten von unserem Expertensupport-Team."
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API & Integrationen",
         "description": "Verbinden Sie AISEOTurbo mit Ihren Tools",

@@ -1,6 +1,6 @@
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { generateSEOMeta } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import PaymentMethodsPage from '@/app/help/billing/payment-methods/page'
+import PaymentMethodsContent from './payment-methods-content'
 
 export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
   return generateSEOMeta({
@@ -12,5 +12,5 @@ export const generateMetadata = async ({ params }: { params: { locale: string } 
 }
 
 export default function LocalizedPaymentMethodsPage() {
-  return <PaymentMethodsPage />
+  return <PaymentMethodsContent />
 }

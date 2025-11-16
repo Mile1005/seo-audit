@@ -7592,6 +7592,498 @@
           }
         }
       },
+      "cancellation": {
+        "title": "Pembatalan Akun & Pengembalian Dana",
+        "subtitle": "Pelajari cara membatalkan langganan Anda, pahami kebijakan pengembalian dana, dan kelola penutupan akun",
+        "backToBilling": "Kembali ke Penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "cancellation": "Pembatalan"
+        },
+        "importantNotice": {
+          "title": "Pemberitahuan Penting",
+          "description": "Sebelum membatalkan, pertimbangkan untuk menjeda langganan Anda sebagai alternatif. Cara ini menjaga data Anda tetap aman dan memungkinkan reaktivasi dengan mudah."
+        },
+        "process": {
+          "title": "Proses Pembatalan",
+          "steps": [
+            {
+              "title": "Akses Pengaturan Akun",
+              "description": "Masuk ke akun Anda dan menuju ke Pengaturan → Langganan → Batalkan Langganan.",
+              "details": [
+                "Masuk ke dasbor akun Anda",
+                "Klik 'Langganan' pada menu sebelah kiri",
+                "Gulir ke bagian 'Batalkan Langganan'"
+              ]
+            },
+            {
+              "title": "Pilih Alasan Pembatalan",
+              "description": "Pilih alasan pembatalan dari opsi yang tersedia atau berikan masukan khusus.",
+              "details": [
+                "Bantu kami berkembang dengan membagikan alasan Anda",
+                "Masukan Anda sangat berharga untuk pengembangan layanan kami",
+                "Langkah ini bersifat opsional namun sangat kami apresiasi"
+              ]
+            },
+            {
+              "title": "Konfirmasi Pembatalan",
+              "description": "Tinjau syarat pembatalan dan konfirmasikan keputusan Anda.",
+              "details": [
+                "Tinjau apa yang terjadi setelah pembatalan",
+                "Pastikan Anda memahami kebijakan pengembalian dana",
+                "Klik 'Batalkan Langganan' untuk melanjutkan"
+              ]
+            },
+            {
+              "title": "Terima Konfirmasi",
+              "description": "Anda akan menerima email konfirmasi berisi langkah lanjutan dan informasi penyimpanan data.",
+              "details": [
+                "Periksa email Anda untuk konfirmasi",
+                "Simpan konfirmasi tersebut untuk arsip Anda",
+                "Hubungi dukungan jika Anda tidak menerimanya"
+              ]
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "Apa yang Terjadi Setelah Pembatalan",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Akses Langsung",
+              "description": "Anda tetap memiliki akses penuh ke akun dan data hingga akhir periode penagihan saat ini."
+            },
+            {
+              "icon": "shield",
+              "title": "Penyimpanan Data",
+              "description": "Data Anda akan disimpan dengan aman selama 30 hari setelah pembatalan, dan Anda dapat mengaktifkan kembali akun selama periode ini."
+            },
+            {
+              "icon": "credit-card",
+              "title": "Tidak Ada Tagihan Lebih Lanjut",
+              "description": "Metode pembayaran Anda tidak akan ditagih lagi dan faktur yang tertunda akan dibatalkan."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Kebijakan Pengembalian Dana",
+          "eligible": "Memenuhi Syarat Pengembalian Dana",
+          "notEligible": "Tidak Memenuhi Syarat",
+          "scenarios": [
+            {
+              "title": "Langganan Bulanan - Dalam 14 Hari",
+              "eligible": true,
+              "description": "Pengembalian dana penuh tersedia jika Anda membatalkan dalam 14 hari sejak langganan awal atau perpanjangan."
+            },
+            {
+              "title": "Langganan Bulanan - Setelah 14 Hari",
+              "eligible": false,
+              "description": "Tidak ada pengembalian dana untuk periode penagihan berjalan. Layanan tetap tersedia hingga akhir periode."
+            },
+            {
+              "title": "Langganan Tahunan - Dalam 30 Hari",
+              "eligible": true,
+              "description": "Pengembalian dana penuh tersedia dalam 30 hari sejak langganan. Pengembalian dana proporsional setelah 30 hari."
+            },
+            {
+              "title": "Langganan Tahunan - Setelah 30 Hari",
+              "eligible": true,
+              "description": "Pengembalian dana proporsional untuk bulan yang tersisa. Tidak ada pengembalian untuk bulan berjalan."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Butuh Bantuan Pembatalan?",
+          "description": "Tim dukungan penagihan kami siap membantu Anda dalam proses pembatalan.",
+          "contacts": [
+            {
+              "text": "Hubungi Dukungan Penagihan",
+              "href": "/contact?subject=cancellation"
+            },
+            {
+              "text": "Obrolan Langsung",
+              "href": "#chat"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Memahami Faktur Anda",
+        "subtitle": "Pelajari cara mengakses, mengunduh, dan memahami riwayat penagihan dan detail faktur dengan AI SEO Turbo.",
+        "backToBilling": "Kembali ke Penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "invoices": "Faktur"
+        },
+        "accessInvoices": {
+          "title": "Cara Mengakses Faktur Anda",
+          "description": "Riwayat penagihan lengkap Anda tersedia kapan saja di dasbor akun Anda.",
+          "steps": [
+            {
+              "title": "Masuk ke akun Anda",
+              "description": "Akses dasbor AI SEO Turbo Anda menggunakan email terdaftar dan kata sandi."
+            },
+            {
+              "title": "Navigasi ke Penagihan",
+              "description": "Klik 'Penagihan' atau 'Langganan' di menu akun Anda untuk mengakses informasi pembayaran."
+            },
+            {
+              "title": "Lihat Riwayat Faktur",
+              "description": "Pilih 'Faktur' atau 'Riwayat Penagihan' untuk melihat semua faktur masa lalu dan saat ini."
+            },
+            {
+              "title": "Unduh atau Cetak",
+              "description": "Klik tombol unduh di samping faktur apa pun untuk menyimpan salinan PDF untuk arsip Anda."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Apa yang Termasuk dalam Faktur Anda",
+          "description": "Setiap faktur berisi informasi penagihan lengkap dan detail transaksi.",
+          "items": [
+            {
+              "icon": "FileText",
+              "title": "Nomor Faktur & Tanggal",
+              "description": "Pengidentifikasi faktur unik, tanggal penerbitan, dan tanggal jatuh tempo pembayaran untuk arsip Anda."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Detail Layanan",
+              "description": "Rincian layanan, jenis paket, periode penagihan, dan diskon yang berlaku."
+            },
+            {
+              "icon": "Calendar",
+              "title": "Status Pembayaran",
+              "description": "Status pembayaran saat ini, jumlah yang dibayarkan, dan saldo tertunda apa pun."
+            },
+            {
+              "icon": "Download",
+              "title": "Informasi Pajak",
+              "description": "Pajak yang berlaku, informasi PPN, dan harga termasuk pajak jika diperlukan."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Mengelola Riwayat Penagihan Anda",
+          "description": "Lacak semua transaksi Anda dan jaga catatan keuangan yang terorganisir.",
+          "features": [
+            {
+              "title": "Riwayat Transaksi Lengkap",
+              "description": "Lihat semua pembayaran, pengembalian dana, dan penyesuaian penagihan dalam urutan kronologis."
+            },
+            {
+              "title": "Unduh Beberapa Faktur",
+              "description": "Unduh faktur dalam batch untuk tujuan akuntansi atau persiapan pajak."
+            },
+            {
+              "title": "Pelacakan Metode Pembayaran",
+              "description": "Lihat metode pembayaran mana yang digunakan untuk setiap transaksi."
+            },
+            {
+              "title": "Perubahan Langganan",
+              "description": "Lacak peningkatan paket, penurunan, dan modifikasi langganan dari waktu ke waktu."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Butuh Bantuan dengan Faktur?",
+          "description": "Tim dukungan penagihan kami dapat membantu dengan pertanyaan faktur, masalah pembayaran, atau perbedaan penagihan.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "Dukungan Email",
+              "description": "Kirim email kepada kami dengan pertanyaan faktur Anda",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Obrolan Langsung",
+              "description": "Obrolan secara real-time dengan spesialis penagihan kami",
+              "link": "#chat",
+              "linkText": "Mulai Obrolan Langsung"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Mengelola Metode Pembayaran",
+        "subtitle": "Pelajari cara menambah, memperbarui, dan mengelola metode pembayaran Anda untuk penagihan yang lancar dengan AI SEO Turbo.",
+        "backToBilling": "Kembali ke Penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "paymentMethods": "Metode Pembayaran"
+        },
+        "acceptedMethods": {
+          "title": "Metode Pembayaran yang Diterima",
+          "description": "Kami menerima berbagai metode pembayaran untuk membuat pengelolaan langganan Anda semudah mungkin.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Kartu Kredit & Debit",
+              "description": "Semua kartu kredit dan debit utama termasuk Visa, MasterCard, American Express, dan Discover.",
+              "features": ["Pemrosesan instan", "Enkripsi aman", "Penerimaan global"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Dompet Digital",
+              "description": "PayPal, Apple Pay, Google Pay, dan solusi dompet digital populer lainnya.",
+              "features": ["Pembayaran satu klik", "Keamanan yang ditingkatkan", "Dioptimalkan untuk mobile"]
+            },
+            {
+              "icon": "Building",
+              "name": "Transfer Bank",
+              "description": "Transfer bank langsung dan transfer kawat untuk langganan tahunan dan akun perusahaan.",
+              "features": ["Tidak ada biaya pemrosesan", "Pembayaran massal", "Pembuatan faktur"]
+            },
+            {
+              "icon": "Coins",
+              "name": "Kriptocurrency",
+              "description": "Bitcoin, Ethereum, dan kriptocurrency utama lainnya melalui mitra pembayaran terpercaya kami.",
+              "features": ["Pembayaran tanpa batas", "Transaksi cepat", "Berfokus pada privasi"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Mengelola Metode Pembayaran Anda",
+          "description": "Jaga informasi pembayaran Anda tetap terbaru dan kelola beberapa opsi pembayaran untuk akun Anda.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Tambah Metode Pembayaran",
+              "description": "Tambahkan kartu kredit, debit, atau dompet digital baru ke akun Anda.",
+              "steps": [
+                "Buka pengaturan akun Anda",
+                "Navigasi ke 'Penagihan & Pembayaran'",
+                "Klik 'Tambah Metode Pembayaran'",
+                "Masukkan detail pembayaran Anda",
+                "Verifikasi dan simpan informasi"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Perbarui Informasi Pembayaran",
+              "description": "Ubah detail kartu, alamat penagihan, atau beralih ke metode pembayaran yang berbeda.",
+              "steps": [
+                "Akses daftar metode pembayaran Anda",
+                "Pilih metode yang akan diperbarui",
+                "Klik 'Edit' atau 'Perbarui'",
+                "Modifikasi informasi yang diperlukan",
+                "Simpan perubahan Anda dengan aman"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Hapus Metode Pembayaran",
+              "description": "Hapus metode pembayaran lama atau yang tidak digunakan dari akun Anda sambil mempertahankan setidaknya satu metode aktif.",
+              "steps": [
+                "Lihat metode pembayaran Anda",
+                "Pilih metode yang akan dihapus",
+                "Klik 'Hapus' atau 'Delete'",
+                "Konfirmasi penghapusan",
+                "Pastikan metode lain tetap aktif"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Keamanan & Privasi Pembayaran",
+          "description": "Informasi pembayaran Anda dilindungi dengan langkah-langkah keamanan terdepan industri dan enkripsi.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "Sesuai PCI DSS",
+              "description": "Kami mematuhi Standar Keamanan Data Industri Kartu Pembayaran tertinggi untuk pemrosesan pembayaran yang aman."
+            },
+            {
+              "icon": "Lock",
+              "title": "Enkripsi End-to-End",
+              "description": "Semua data pembayaran dienkripsi selama transmisi dan penyimpanan menggunakan enkripsi SSL 256-bit."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Tidak Menyimpan Kartu",
+              "description": "Kami tidak menyimpan detail kartu lengkap di server kami. Pemrosesan pembayaran ditangani oleh mitra bersertifikat."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Perlindungan Penipuan",
+              "description": "Sistem deteksi dan pencegahan penipuan canggih melindungi terhadap transaksi yang tidak sah."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Butuh Bantuan dengan Metode Pembayaran?",
+          "description": "Tim dukungan penagihan kami dapat membantu Anda dengan masalah metode pembayaran, transaksi gagal, atau pertanyaan penagihan.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "Dukungan Email",
+              "description": "Kirim email kepada kami dengan pertanyaan pembayaran Anda",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Obrolan Langsung",
+              "description": "Obrolan secara real-time dengan spesialis penagihan kami",
+              "link": "#chat",
+              "linkText": "Mulai Obrolan Langsung"
+            }
+          ]
+        }
+      },
+      "upgradePlan": {
+        "title": "Meningkatkan Paket Anda",
+        "subtitle": "Pelajari cara meningkatkan paket langganan Anda untuk membuka lebih banyak fitur, batas penggunaan yang lebih tinggi, dan kemampuan AI SEO Turbo premium.",
+        "backToBilling": "Kembali ke Penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "upgradePlan": "Tingkatkan Paket"
+        },
+        "benefits": {
+          "title": "Manfaat Meningkatkan",
+          "description": "Meningkatkan paket Anda memberi Anda akses ke fitur-fitur canggih dan batas penggunaan yang lebih tinggi untuk meningkatkan upaya SEO Anda.",
+          "features": [
+            {
+              "icon": "TrendingUp",
+              "title": "Lebih Banyak Audit Per Bulan",
+              "description": "Tingkatkan batas audit bulanan Anda dari 3 menjadi tak terbatas, memungkinkan pemantauan situs web yang komprehensif."
+            },
+            {
+              "icon": "Zap",
+              "title": "Fitur AI Canggih",
+              "description": "Akses rekomendasi AI premium, analisis kompetitor, dan saran optimasi otomatis."
+            },
+            {
+              "icon": "Download",
+              "title": "Dukungan Prioritas",
+              "description": "Dapatkan waktu respons yang lebih cepat dan akses prioritas ke tim dukungan ahli kami."
+            },
+            {
+              "icon": "BarChart3",
+              "title": "Analitik Detail",
+              "description": "Buka pelaporan komprehensif, analisis tren, dan dasbor pelacakan performa."
+            }
+          ]
+        },
+        "howToUpgrade": {
+          "title": "Cara Meningkatkan Paket Anda",
+          "description": "Ikuti langkah-langkah sederhana ini untuk meningkatkan langganan Anda dan mulai menggunakan fitur premium segera.",
+          "steps": [
+            {
+              "title": "Tinjau Paket yang Tersedia",
+              "description": "Bandingkan fitur dan harga paket untuk memilih opsi terbaik untuk kebutuhan Anda.",
+              "details": [
+                "Kunjungi halaman harga",
+                "Bandingkan perbedaan fitur",
+                "Periksa batas penggunaan dan harga",
+                "Pertimbangkan anggaran dan tujuan Anda"
+              ]
+            },
+            {
+              "title": "Akses Pengaturan Akun",
+              "description": "Masuk ke akun Anda dan navigasi ke bagian penagihan untuk memulai peningkatan.",
+              "details": [
+                "Masuk ke akun AI SEO Turbo Anda",
+                "Buka Pengaturan Akun",
+                "Klik 'Langganan' atau 'Penagihan'",
+                "Temukan opsi 'Tingkatkan Paket'"
+              ]
+            },
+            {
+              "title": "Pilih Paket Baru",
+              "description": "Pilih paket yang diinginkan dan siklus penagihan (bulanan atau tahunan untuk penghematan yang lebih baik).",
+              "details": [
+                "Pilih tingkatan paket yang Anda inginkan",
+                "Pilih penagihan bulanan atau tahunan",
+                "Tinjau harga dan fitur",
+                "Terapkan kode diskon yang tersedia"
+              ]
+            },
+            {
+              "title": "Selesaikan Pembayaran",
+              "description": "Perbarui metode pembayaran jika diperlukan dan konfirmasi peningkatan untuk mengaktifkan fitur baru.",
+              "details": [
+                "Perbarui metode pembayaran jika diperlukan",
+                "Tinjau biaya prorata",
+                "Konfirmasi peningkatan",
+                "Terima akses segera ke fitur baru"
+              ]
+            }
+          ]
+        },
+        "billingChanges": {
+          "title": "Perubahan Penagihan Setelah Peningkatan",
+          "description": "Pahami bagaimana penagihan Anda berubah saat Anda meningkatkan, termasuk biaya prorata dan siklus penagihan.",
+          "scenarios": [
+            {
+              "icon": "Calendar",
+              "title": "Peningkatan Mid-Cycle",
+              "description": "Saat meningkatkan di tengah siklus penagihan, Anda akan dikenakan biaya prorata untuk peningkatan.",
+              "billing": "Biaya prorata + siklus penuh berikutnya dengan tarif baru"
+            },
+            {
+              "icon": "TrendingUp",
+              "title": "Bulanan ke Tahunan",
+              "description": "Beralih ke penagihan tahunan menghemat uang Anda dan menyediakan layanan selama satu tahun penuh.",
+              "billing": "Pembayaran tahunan satu kali dengan 2 bulan gratis"
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Pembaruan Metode Pembayaran",
+              "description": "Anda mungkin perlu memperbarui metode pembayaran untuk jumlah penagihan baru.",
+              "billing": "Metode pembayaran baru dikenakan segera"
+            },
+            {
+              "icon": "Clock",
+              "title": "Akses Segera",
+              "description": "Fitur premium tersedia segera setelah pemrosesan pembayaran berhasil.",
+              "billing": "Aktivasi instan, tidak ada masa tunggu"
+            }
+          ]
+        },
+        "premiumFeatures": {
+          "title": "Fitur Premium yang Akan Anda Buka",
+          "description": "Meningkatkan memberi Anda akses ke fitur-fitur canggih yang dapat mengubah strategi SEO Anda.",
+          "features": [
+            {
+              "icon": "Search",
+              "title": "Audit Tak Terbatas",
+              "description": "Jalankan audit SEO sebanyak yang Anda butuhkan tanpa batas bulanan."
+            },
+            {
+              "icon": "Brain",
+              "title": "Rekomendasi AI",
+              "description": "Dapatkan saran yang dipersonalisasi bertenaga AI untuk perbaikan SEO."
+            },
+            {
+              "icon": "Users",
+              "title": "Kolaborasi Tim",
+              "description": "Undang anggota tim dan berkolaborasi pada proyek SEO."
+            },
+            {
+              "icon": "FileText",
+              "title": "Laporan Lanjutan",
+              "description": "Hasilkan laporan PDF detail dan ekspor data dalam berbagai format."
+            },
+            {
+              "icon": "Target",
+              "title": "Pelacakan Kompetitor",
+              "description": "Pantau strategi dan metrik performa SEO kompetitor."
+            },
+            {
+              "icon": "Zap",
+              "title": "Dukungan Prioritas",
+              "description": "Dapatkan waktu respons yang lebih cepat dari tim dukungan ahli kami."
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API & Integrasi",
         "description": "Hubungkan AISEOTurbo dengan alat Anda",

@@ -1,6 +1,6 @@
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { generateSEOMeta } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import UpgradePlanPage from '@/app/help/billing/upgrade-plan/page'
+import UpgradePlanContent from './upgrade-plan-content'
 
 export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
   return generateSEOMeta({
@@ -12,5 +12,5 @@ export const generateMetadata = async ({ params }: { params: { locale: string } 
 }
 
 export default function LocalizedUpgradePlanPage() {
-  return <UpgradePlanPage />
+  return <UpgradePlanContent />
 }

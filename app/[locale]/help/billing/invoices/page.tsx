@@ -1,6 +1,6 @@
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { generateSEOMeta } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import InvoicesPage from '@/app/help/billing/invoices/page'
+import InvoicesContent from './invoices-content'
 
 export const dynamic = 'force-static'
 
@@ -14,5 +14,5 @@ export async function generateMetadata({ params }: { params: { locale: string } 
 }
 
 export default function Page() {
-  return <InvoicesPage />
+  return <InvoicesContent />
 }

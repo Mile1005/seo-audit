@@ -7530,6 +7530,498 @@
           }
         }
       },
+      "cancellation": {
+        "title": "Cancelación de Cuenta y Reembolsos",
+        "subtitle": "Aprende cómo cancelar tu suscripción, conoce las políticas de reembolso y gestiona el cierre de tu cuenta",
+        "backToBilling": "Volver a Facturación",
+        "breadcrumb": {
+          "help": "Ayuda",
+          "billing": "Facturación",
+          "cancellation": "Cancelación"
+        },
+        "importantNotice": {
+          "title": "Aviso Importante",
+          "description": "Antes de cancelar, considera pausar tu suscripción. Esto preserva tus datos y permite una reactivación sencilla."
+        },
+        "process": {
+          "title": "Proceso de Cancelación",
+          "steps": [
+            {
+              "title": "Acceder a la Configuración de la Cuenta",
+              "description": "Inicia sesión en tu cuenta y navega a Configuración → Suscripción → Cancelar suscripción.",
+              "details": [
+                "Ve al panel de tu cuenta",
+                "Haz clic en 'Suscripción' en el menú izquierdo",
+                "Desplázate hasta la sección 'Cancelar suscripción'"
+              ]
+            },
+            {
+              "title": "Elegir Motivo de Cancelación",
+              "description": "Selecciona el motivo de la cancelación de entre nuestras opciones predefinidas o proporciona comentarios personalizados.",
+              "details": [
+                "Ayúdanos a mejorar compartiendo tu motivo",
+                "Tu opinión es valiosa para el desarrollo de nuestro servicio",
+                "Este paso es opcional, pero agradecido"
+              ]
+            },
+            {
+              "title": "Confirmar Cancelación",
+              "description": "Revisa los términos de la cancelación y confirma tu decisión.",
+              "details": [
+                "Revisa qué sucede tras la cancelación",
+                "Confirma que comprendes la política de reembolso",
+                "Haz clic en 'Cancelar suscripción' para continuar"
+              ]
+            },
+            {
+              "title": "Recibir Confirmación",
+              "description": "Recibirás una confirmación por correo electrónico con los próximos pasos y la información sobre retención de datos.",
+              "details": [
+                "Verifica tu correo electrónico para la confirmación",
+                "Guarda la confirmación para tus registros",
+                "Contacta con soporte si no la recibes"
+              ]
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "Qué Ocurre Después de la Cancelación",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Acceso Inmediato",
+              "description": "Conservarás acceso completo a tu cuenta y datos hasta el final de tu periodo de facturación actual."
+            },
+            {
+              "icon": "shield",
+              "title": "Retención de Datos",
+              "description": "Tus datos se almacenan de forma segura durante 30 días después de la cancelación, permitiendo reactivar tu cuenta si lo deseas."
+            },
+            {
+              "icon": "credit-card",
+              "title": "Sin Cargos Adicionales",
+              "description": "No se volverá a cargar tu método de pago y cualquier factura pendiente será anulada."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Política de Reembolsos",
+          "eligible": "Elegible para reembolso",
+          "notEligible": "No elegible",
+          "scenarios": [
+            {
+              "title": "Suscripción mensual – Dentro de 14 días",
+              "eligible": true,
+              "description": "Reembolso total disponible si cancelas dentro de los 14 días posteriores a tu suscripción inicial o renovación."
+            },
+            {
+              "title": "Suscripción mensual – Después de 14 días",
+              "eligible": false,
+              "description": "No hay reembolso para el periodo de facturación actual. El servicio continuará hasta que finalice el periodo."
+            },
+            {
+              "title": "Suscripción anual – Dentro de 30 días",
+              "eligible": true,
+              "description": "Reembolso total disponible dentro de los 30 días de la suscripción. Reembolso proporcional después de los 30 días."
+            },
+            {
+              "title": "Suscripción anual – Después de 30 días",
+              "eligible": true,
+              "description": "Reembolso proporcional por los meses restantes. No hay reembolso para el mes en curso."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "¿Necesitas ayuda con la cancelación?",
+          "description": "Nuestro equipo de soporte de facturación está disponible para asistirte durante el proceso de cancelación.",
+          "contacts": [
+            {
+              "text": "Contactar con Soporte de Facturación",
+              "href": "/contact?subject=cancellation"
+            },
+            {
+              "text": "Chat en Vivo",
+              "href": "#chat"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Entender tus Facturas",
+        "subtitle": "Aprende cómo acceder, descargar y entender el historial de facturación y los detalles de las facturas con AI SEO Turbo.",
+        "backToBilling": "Volver a Facturación",
+        "breadcrumb": {
+          "help": "Ayuda",
+          "billing": "Facturación",
+          "invoices": "Facturas"
+        },
+        "accessInvoices": {
+          "title": "Cómo Acceder a tus Facturas",
+          "description": "Tu historial de facturación completo está disponible en cualquier momento en el panel de control de tu cuenta.",
+          "steps": [
+            {
+              "title": "Inicia sesión en tu cuenta",
+              "description": "Accede al panel de control de AI SEO Turbo utilizando tu email registrado y contraseña."
+            },
+            {
+              "title": "Navega a Facturación",
+              "description": "Haz clic en 'Facturación' o 'Suscripción' en el menú de tu cuenta para acceder a la información de pagos."
+            },
+            {
+              "title": "Ver Historial de Facturas",
+              "description": "Selecciona 'Facturas' o 'Historial de Facturación' para ver todas tus facturas pasadas y actuales."
+            },
+            {
+              "title": "Descargar o Imprimir",
+              "description": "Haz clic en el botón de descarga junto a cualquier factura para guardar una copia PDF para tus registros."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Qué se Incluye en tu Factura",
+          "description": "Cada factura contiene información completa de facturación y detalles de transacciones.",
+          "items": [
+            {
+              "icon": "FileText",
+              "title": "Número de Factura y Fecha",
+              "description": "Identificador único de factura, fecha de emisión y fecha de vencimiento del pago para tus registros."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Detalles del Servicio",
+              "description": "Desglose de servicios, tipo de plan, período de facturación y descuentos aplicables."
+            },
+            {
+              "icon": "Calendar",
+              "title": "Estado del Pago",
+              "description": "Estado actual del pago, cantidad pagada y saldos pendientes."
+            },
+            {
+              "icon": "Download",
+              "title": "Información Fiscal",
+              "description": "Impuestos aplicables, información de IVA y precios con impuestos incluidos cuando sea requerido."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Gestionar tu Historial de Facturación",
+          "description": "Mantén un registro de todas tus transacciones y conserva registros financieros organizados.",
+          "features": [
+            {
+              "title": "Historial de Transacciones Completo",
+              "description": "Visualiza todos los pagos, reembolsos y ajustes de facturación en orden cronológico."
+            },
+            {
+              "title": "Descargar Múltiples Facturas",
+              "description": "Descarga facturas en lote para fines contables o preparación de impuestos."
+            },
+            {
+              "title": "Seguimiento de Métodos de Pago",
+              "description": "Ve qué métodos de pago se utilizaron para cada transacción."
+            },
+            {
+              "title": "Cambios de Suscripción",
+              "description": "Rastrea actualizaciones de plan, degradaciones y modificaciones de suscripción a lo largo del tiempo."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "¿Necesitas Ayuda con las Facturas?",
+          "description": "Nuestro equipo de soporte de facturación puede ayudarte con preguntas sobre facturas, problemas de pago o discrepancias de facturación.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "Soporte por Email",
+              "description": "Envíanos un email con tus preguntas sobre facturas",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Chat en Vivo",
+              "description": "Chatea en tiempo real con nuestros especialistas en facturación",
+              "link": "#chat",
+              "linkText": "Iniciar Chat en Vivo"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Gestionar Métodos de Pago",
+        "subtitle": "Aprende cómo agregar, actualizar y gestionar tus métodos de pago para una facturación fluida con AI SEO Turbo.",
+        "backToBilling": "Volver a Facturación",
+        "breadcrumb": {
+          "help": "Ayuda",
+          "billing": "Facturación",
+          "paymentMethods": "Métodos de Pago"
+        },
+        "acceptedMethods": {
+          "title": "Métodos de Pago Aceptados",
+          "description": "Aceptamos una amplia gama de métodos de pago para hacer que la gestión de tu suscripción sea lo más conveniente posible.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Tarjetas de Crédito y Débito",
+              "description": "Todas las principales tarjetas de crédito y débito incluyendo Visa, MasterCard, American Express y Discover.",
+              "features": ["Procesamiento instantáneo", "Encriptación segura", "Aceptación global"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Billeteras Digitales",
+              "description": "PayPal, Apple Pay, Google Pay y otras soluciones de billetera digital populares.",
+              "features": ["Pagos con un clic", "Seguridad mejorada", "Optimizado para móvil"]
+            },
+            {
+              "icon": "Building",
+              "name": "Transferencias Bancarias",
+              "description": "Transferencias bancarias directas y transferencias cablegráficas para suscripciones anuales y cuentas empresariales.",
+              "features": ["Sin tarifas de procesamiento", "Pagos masivos", "Generación de facturas"]
+            },
+            {
+              "icon": "Coins",
+              "name": "Criptomonedas",
+              "description": "Bitcoin, Ethereum y otras criptomonedas principales a través de nuestros socios de pago de confianza.",
+              "features": ["Pagos sin fronteras", "Transacciones rápidas", "Enfocado en la privacidad"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Gestionar tus Métodos de Pago",
+          "description": "Mantén actualizada tu información de pago y gestiona múltiples opciones de pago para tu cuenta.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Agregar un Método de Pago",
+              "description": "Agrega una nueva tarjeta de crédito, débito o billetera digital a tu cuenta.",
+              "steps": [
+                "Ve a la configuración de tu cuenta",
+                "Navega a 'Facturación y Pagos'",
+                "Haz clic en 'Agregar Método de Pago'",
+                "Ingresa tus detalles de pago",
+                "Verifica y guarda la información"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Actualizar Información de Pago",
+              "description": "Cambia los detalles de tu tarjeta, dirección de facturación o cambia a un método de pago diferente.",
+              "steps": [
+                "Accede a tu lista de métodos de pago",
+                "Selecciona el método a actualizar",
+                "Haz clic en 'Editar' o 'Actualizar'",
+                "Modifica la información requerida",
+                "Guarda tus cambios de forma segura"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Eliminar Métodos de Pago",
+              "description": "Elimina métodos de pago antiguos o no utilizados de tu cuenta manteniendo al menos un método activo.",
+              "steps": [
+                "Ve a tus métodos de pago",
+                "Selecciona el método a eliminar",
+                "Haz clic en 'Eliminar' o 'Borrar'",
+                "Confirma la eliminación",
+                "Asegúrate de que otro método permanezca activo"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Seguridad y Privacidad de Pagos",
+          "description": "Tu información de pago está protegida con medidas de seguridad líderes en la industria y encriptación.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "Compatible con PCI DSS",
+              "description": "Cumplimos con los más altos estándares de seguridad de datos de la industria de tarjetas de pago para el procesamiento seguro de pagos."
+            },
+            {
+              "icon": "Lock",
+              "title": "Encriptación de Extremo a Extremo",
+              "description": "Todos los datos de pago se encriptan durante la transmisión y el almacenamiento usando encriptación SSL de 256 bits."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Sin Almacenamiento de Tarjetas",
+              "description": "No almacenamos los detalles completos de tu tarjeta en nuestros servidores. El procesamiento de pagos es manejado por socios certificados."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Protección contra Fraudes",
+              "description": "Sistemas avanzados de detección y prevención de fraudes protegen contra transacciones no autorizadas."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "¿Necesitas Ayuda con Métodos de Pago?",
+          "description": "Nuestro equipo de soporte de facturación puede ayudarte con problemas de métodos de pago, transacciones fallidas o preguntas de facturación.",
+          "contacts": [
+            {
+              "icon": "Mail",
+              "title": "Soporte por Email",
+              "description": "Envíanos un email con tus preguntas sobre pagos",
+              "link": "mailto:billing@aiseoturbo.com",
+              "linkText": "billing@aiseoturbo.com"
+            },
+            {
+              "icon": "MessageCircle",
+              "title": "Chat en Vivo",
+              "description": "Chatea en tiempo real con nuestros especialistas en facturación",
+              "link": "#chat",
+              "linkText": "Iniciar Chat en Vivo"
+            }
+          ]
+        }
+      },
+      "upgradePlan": {
+        "title": "Actualizar tu Plan",
+        "subtitle": "Aprende cómo actualizar tu plan de suscripción para desbloquear más funciones, límites de uso más altos y capacidades premium de AI SEO Turbo.",
+        "backToBilling": "Volver a Facturación",
+        "breadcrumb": {
+          "help": "Ayuda",
+          "billing": "Facturación",
+          "upgradePlan": "Actualizar Plan"
+        },
+        "benefits": {
+          "title": "Beneficios de Actualizar",
+          "description": "Actualizar tu plan te da acceso a funciones avanzadas y límites de uso más altos para potenciar tus esfuerzos de SEO.",
+          "features": [
+            {
+              "icon": "TrendingUp",
+              "title": "Más Auditorías por Mes",
+              "description": "Aumenta tu límite mensual de auditorías de 3 a ilimitado, permitiendo monitoreo integral del sitio web."
+            },
+            {
+              "icon": "Zap",
+              "title": "Funciones Avanzadas de IA",
+              "description": "Accede a recomendaciones premium de IA, análisis de competidores y sugerencias de optimización automatizadas."
+            },
+            {
+              "icon": "Download",
+              "title": "Soporte Prioritario",
+              "description": "Obtén tiempos de respuesta más rápidos y acceso prioritario a nuestro equipo de soporte experto."
+            },
+            {
+              "icon": "BarChart3",
+              "title": "Análisis Detallados",
+              "description": "Desbloquea reportes integrales, análisis de tendencias y dashboards de seguimiento de rendimiento."
+            }
+          ]
+        },
+        "howToUpgrade": {
+          "title": "Cómo Actualizar tu Plan",
+          "description": "Sigue estos pasos simples para actualizar tu suscripción y comenzar a usar funciones premium inmediatamente.",
+          "steps": [
+            {
+              "title": "Revisar Planes Disponibles",
+              "description": "Compara funciones y precios de planes para elegir la mejor opción para tus necesidades.",
+              "details": [
+                "Visita la página de precios",
+                "Compara diferencias de funciones",
+                "Revisa límites de uso y precios",
+                "Considera tu presupuesto y objetivos"
+              ]
+            },
+            {
+              "title": "Acceder a Configuración de Cuenta",
+              "description": "Inicia sesión en tu cuenta y navega a la sección de facturación para iniciar la actualización.",
+              "details": [
+                "Inicia sesión en tu cuenta de AI SEO Turbo",
+                "Ve a Configuración de Cuenta",
+                "Haz clic en 'Suscripción' o 'Facturación'",
+                "Encuentra la opción 'Actualizar Plan'"
+              ]
+            },
+            {
+              "title": "Seleccionar Nuevo Plan",
+              "description": "Elige tu plan deseado y ciclo de facturación (mensual o anual para mejores ahorros).",
+              "details": [
+                "Selecciona tu nivel de plan preferido",
+                "Elige facturación mensual o anual",
+                "Revisa el precio y las funciones",
+                "Aplica códigos de descuento disponibles"
+              ]
+            },
+            {
+              "title": "Completar Pago",
+              "description": "Actualiza tu método de pago si es necesario y confirma la actualización para activar nuevas funciones.",
+              "details": [
+                "Actualiza el método de pago si es requerido",
+                "Revisa los cargos prorrateados",
+                "Confirma la actualización",
+                "Recibe acceso inmediato a nuevas funciones"
+              ]
+            }
+          ]
+        },
+        "billingChanges": {
+          "title": "Cambios de Facturación Después de Actualizar",
+          "description": "Entiende cómo cambia tu facturación cuando actualizas, incluyendo cargos prorrateados y ciclos de facturación.",
+          "scenarios": [
+            {
+              "icon": "Calendar",
+              "title": "Actualización de Medio Ciclo",
+              "description": "Cuando actualizas a medio ciclo de facturación, se te cobrará un monto prorrateado por la actualización.",
+              "billing": "Cargo prorrateado + siguiente ciclo completo a la nueva tarifa"
+            },
+            {
+              "icon": "TrendingUp",
+              "title": "Mensual a Anual",
+              "description": "Cambiar a facturación anual te ahorra dinero y proporciona un año completo de servicio.",
+              "billing": "Pago anual único con 2 meses gratis"
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Actualización de Método de Pago",
+              "description": "Es posible que necesites actualizar tu método de pago para el nuevo monto de facturación.",
+              "billing": "Nuevo método de pago cargado inmediatamente"
+            },
+            {
+              "icon": "Clock",
+              "title": "Acceso Inmediato",
+              "description": "Las funciones premium están disponibles inmediatamente después del procesamiento exitoso del pago.",
+              "billing": "Activación instantánea, sin período de espera"
+            }
+          ]
+        },
+        "premiumFeatures": {
+          "title": "Funciones Premium que Desbloquearás",
+          "description": "Actualizar te da acceso a funciones poderosas que pueden transformar tu estrategia de SEO.",
+          "features": [
+            {
+              "icon": "Search",
+              "title": "Auditorías Ilimitadas",
+              "description": "Ejecuta tantas auditorías de SEO como necesites sin límites mensuales."
+            },
+            {
+              "icon": "Brain",
+              "title": "Recomendaciones de IA",
+              "description": "Obtén sugerencias personalizadas impulsadas por IA para mejoras de SEO."
+            },
+            {
+              "icon": "Users",
+              "title": "Colaboración en Equipo",
+              "description": "Invita a miembros del equipo y colabora en proyectos de SEO."
+            },
+            {
+              "icon": "FileText",
+              "title": "Reportes Avanzados",
+              "description": "Genera reportes detallados en PDF y exporta datos en múltiples formatos."
+            },
+            {
+              "icon": "Target",
+              "title": "Seguimiento de Competidores",
+              "description": "Monitorea estrategias y métricas de rendimiento de SEO de competidores."
+            },
+            {
+              "icon": "Zap",
+              "title": "Soporte Prioritario",
+              "description": "Obtén tiempos de respuesta más rápidos de nuestro equipo de soporte experto."
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API e Integraciones",
         "description": "Conecte AISEOTurbo con sus herramientas",
