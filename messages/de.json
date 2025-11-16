@@ -7641,6 +7641,97 @@
           }
         }
       },
+      "twoFactor": {
+        "title": "Zwei-Faktor-Authentifizierung",
+        "subtitle": "Fügen Sie Ihrem AI SEO Turbo-Konto mit der Zwei-Faktor-Authentifizierung (2FA) per Authentifikator-App oder SMS eine zusätzliche Sicherheitsebene hinzu.",
+        "backToSecurity": "Zurück zur Sicherheit",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "security": "Sicherheit",
+          "twoFactor": "Zwei-Faktor-Authentifizierung"
+        },
+        "introduction": {
+          "title": "Warum Zwei-Faktor-Authentifizierung aktivieren?",
+          "description": "Fügen Sie Ihrem AI SEO Turbo-Konto mit der Zwei-Faktor-Authentifizierung (2FA) per Authentifikator-App oder SMS eine zusätzliche Sicherheitsebene hinzu."
+        },
+        "whyEnable": {
+          "enhancedSecurity": {
+            "title": "Erhöhte Sicherheit",
+            "description": "Schützt Ihr Konto auch bei kompromittiertem Passwort. Erfordert sowohl etwas, das Sie wissen (Passwort), als auch etwas, das Sie besitzen (Telefon/Authentifikator)."
+          },
+          "accountProtection": {
+            "title": "Kontoschutz",
+            "description": "Verhindert unbefugten Zugriff auf Ihre SEO-Daten, Prüfhistorie und Abrechnungsinformationen."
+          }
+        },
+        "availableMethods": {
+          "title": "Verfügbare 2FA-Methoden",
+          "authenticatorApp": {
+            "title": "Authentifikator-App",
+            "description": "Verwenden Sie Apps wie Google Authenticator, Authy oder Microsoft Authenticator, um zeitbasierte Codes zu generieren.",
+            "features": [
+              "Sicherste Option",
+              "Funktioniert ohne Mobilfunknetz",
+              "Backup-Codes verfügbar"
+            ]
+          },
+          "smsAuth": {
+            "title": "SMS-Authentifizierung",
+            "description": "Empfangen Sie Bestätigungscodes per SMS an Ihre registrierte Telefonnummer.",
+            "features": [
+              "Einfach einzurichten",
+              "Funktioniert auf jedem Telefon"
+            ],
+            "limitation": "Erfordert Mobilfunknetz"
+          }
+        },
+        "setupSteps": {
+          "title": "So aktivieren Sie 2FA",
+          "steps": [
+            {
+              "title": "Gehen Sie zu den Kontoeinstellungen",
+              "description": "Navigieren Sie zu Konto → Sicherheit → Zwei-Faktor-Authentifizierung."
+            },
+            {
+              "title": "Wählen Sie Ihre Methode",
+              "description": "Wählen Sie Authentifikator-App oder SMS-Bestätigung."
+            },
+            {
+              "title": "QR-Code scannen oder Code eingeben",
+              "description": "Für Apps: Scannen Sie den QR-Code. Für SMS: Geben Sie Ihre Telefonnummer ein."
+            },
+            {
+              "title": "Code bestätigen und Backup-Codes speichern",
+              "description": "Geben Sie den Bestätigungscode ein und speichern Sie Ihre Backup-Codes sicher."
+            }
+          ]
+        },
+        "backupCodes": {
+          "title": "Wichtig: Speichern Sie Ihre Backup-Codes",
+          "description": "Wenn Sie 2FA aktivieren, erhalten Sie Backup-Codes. Diese sind entscheidend für die Kontowiederherstellung, falls Sie den Zugriff auf Ihre Authentifikator-App oder Ihr Telefon verlieren.",
+          "tips": [
+            "Backup-Codes in einem sicheren Passwortmanager aufbewahren",
+            "Ausdrucken und an einem sicheren Ort aufbewahren",
+            "Niemals mit anderen teilen",
+            "Neue Codes generieren, wenn Sie einen Verdacht auf Kompromittierung haben"
+          ]
+        },
+        "relatedArticles": {
+          "title": "Verwandte Sicherheitsartikel",
+          "securityPrivacy": {
+            "title": "Sicherheit & Datenschutz",
+            "description": "Überblick über Sicherheitsfunktionen"
+          },
+          "bestPractices": {
+            "title": "Sicherheitsbest Practices",
+            "description": "So bleibt Ihr Konto sicher"
+          },
+          "securitySupport": {
+            "title": "Sicherheits-Support",
+            "description": "Hilfe bei Sicherheitsfragen"
+          }
+        }
+      },
       "bestPractices": {
         "title": "Sicherheitsbewährte Praktiken",
         "subtitle": "Wesentliche Sicherheitspraktiken zum Schutz Ihres AI SEO Turbo-Kontos und Ihrer Daten",

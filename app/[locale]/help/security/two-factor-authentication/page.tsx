@@ -1,6 +1,6 @@
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
-import TwoFactorAuthPage from '@/app/help/security/two-factor-authentication/page'
+import TwoFactorContent from './two-factor-content'
 
 export const generateMetadata = async ({ params }: { params: { locale: string } }) => {
   return generateSEOMeta({
@@ -12,5 +12,5 @@ export const generateMetadata = async ({ params }: { params: { locale: string } 
 }
 
 export default function LocalizedTwoFactorAuthPage() {
-  return <TwoFactorAuthPage />
+  return <TwoFactorContent />
 }

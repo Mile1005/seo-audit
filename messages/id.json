@@ -7628,6 +7628,97 @@
           }
         }
       },
+      "twoFactor": {
+        "title": "Otentikasi Dua Faktor",
+        "subtitle": "Tambahkan lapisan keamanan ekstra ke akun AI SEO Turbo Anda dengan otentikasi dua faktor (2FA) menggunakan aplikasi autentikator atau SMS.",
+        "backToSecurity": "Kembali ke Keamanan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "security": "Keamanan",
+          "twoFactor": "Otentikasi Dua Faktor"
+        },
+        "introduction": {
+          "title": "Mengapa Mengaktifkan Otentikasi Dua Faktor?",
+          "description": "Tambahkan lapisan keamanan ekstra ke akun AI SEO Turbo Anda dengan otentikasi dua faktor (2FA) menggunakan aplikasi autentikator atau SMS."
+        },
+        "whyEnable": {
+          "enhancedSecurity": {
+            "title": "Keamanan yang Ditingkatkan",
+            "description": "Melindungi akun Anda bahkan jika kata sandi Anda dibobol. Memerlukan sesuatu yang Anda ketahui (kata sandi) dan sesuatu yang Anda miliki (ponsel/aplikasi autentikator)."
+          },
+          "accountProtection": {
+            "title": "Perlindungan Akun",
+            "description": "Mencegah akses tidak sah ke data SEO, riwayat audit, dan informasi penagihan Anda."
+          }
+        },
+        "availableMethods": {
+          "title": "Metode 2FA yang Tersedia",
+          "authenticatorApp": {
+            "title": "Aplikasi Autentikator",
+            "description": "Gunakan aplikasi seperti Google Authenticator, Authy, atau Microsoft Authenticator untuk menghasilkan kode berbasis waktu.",
+            "features": [
+              "Opsi paling aman",
+              "Berfungsi tanpa layanan seluler",
+              "Kode cadangan tersedia"
+            ]
+          },
+          "smsAuth": {
+            "title": "Otentikasi SMS",
+            "description": "Terima kode verifikasi melalui pesan teks ke nomor ponsel yang terdaftar.",
+            "features": [
+              "Mudah diatur",
+              "Berfungsi di semua jenis ponsel"
+            ],
+            "limitation": "Memerlukan layanan seluler"
+          }
+        },
+        "setupSteps": {
+          "title": "Cara Mengaktifkan 2FA",
+          "steps": [
+            {
+              "title": "Buka Pengaturan Akun",
+              "description": "Arahkan ke Akun → Keamanan → Otentikasi Dua Faktor."
+            },
+            {
+              "title": "Pilih Metode Anda",
+              "description": "Pilih aplikasi autentikator atau verifikasi SMS."
+            },
+            {
+              "title": "Pindai Kode QR atau Masukkan Kode",
+              "description": "Untuk aplikasi: pindai kode QR. Untuk SMS: masukkan nomor ponsel Anda."
+            },
+            {
+              "title": "Verifikasi dan Simpan Kode Cadangan",
+              "description": "Masukkan kode verifikasi dan simpan kode cadangan Anda dengan aman."
+            }
+          ]
+        },
+        "backupCodes": {
+          "title": "Penting: Simpan Kode Cadangan Anda",
+          "description": "Saat Anda mengaktifkan 2FA, Anda akan menerima kode cadangan. Kode ini sangat penting untuk pemulihan akun jika Anda kehilangan akses ke aplikasi autentikator atau ponsel Anda.",
+          "tips": [
+            "Simpan kode cadangan di pengelola kata sandi yang aman",
+            "Cetak dan simpan di tempat aman",
+            "Jangan pernah membagikan kode cadangan kepada siapapun",
+            "Buat kode baru jika Anda curiga kode telah dibobol"
+          ]
+        },
+        "relatedArticles": {
+          "title": "Artikel Keamanan Terkait",
+          "securityPrivacy": {
+            "title": "Keamanan & Privasi",
+            "description": "Ikhtisar fitur keamanan"
+          },
+          "bestPractices": {
+            "title": "Praktik Terbaik Keamanan",
+            "description": "Jaga keamanan akun Anda"
+          },
+          "securitySupport": {
+            "title": "Dukungan Keamanan",
+            "description": "Dapatkan bantuan terkait keamanan"
+          }
+        }
+      },
       "bestPractices": {
         "title": "Praktik Keamanan Terbaik",
         "subtitle": "Praktik keamanan penting untuk melindungi akun dan data AI SEO Turbo Anda",

@@ -7627,6 +7627,97 @@
           }
         }
       },
+      "twoFactor": {
+        "title": "Autenticazione a due fattori",
+        "subtitle": "Aggiungi un ulteriore livello di sicurezza al tuo account AI SEO Turbo con l'autenticazione a due fattori (2FA) tramite app autenticatrici o SMS.",
+        "backToSecurity": "Torna alla Sicurezza",
+        "breadcrumb": {
+          "help": "Aiuto",
+          "security": "Sicurezza",
+          "twoFactor": "Autenticazione a due fattori"
+        },
+        "introduction": {
+          "title": "Perché abilitare l'autenticazione a due fattori?",
+          "description": "Aggiungi un ulteriore livello di sicurezza al tuo account AI SEO Turbo con l'autenticazione a due fattori (2FA) tramite app autenticatrici o SMS."
+        },
+        "whyEnable": {
+          "enhancedSecurity": {
+            "title": "Sicurezza avanzata",
+            "description": "Protegge il tuo account anche se la password viene compromessa. Richiede sia qualcosa che conosci (password) sia qualcosa che possiedi (telefono/app autenticatrice)."
+          },
+          "accountProtection": {
+            "title": "Protezione dell'account",
+            "description": "Previene accessi non autorizzati ai tuoi dati SEO, cronologia degli audit e informazioni di fatturazione."
+          }
+        },
+        "availableMethods": {
+          "title": "Metodi 2FA disponibili",
+          "authenticatorApp": {
+            "title": "App Autenticatrice",
+            "description": "Usa app come Google Authenticator, Authy o Microsoft Authenticator per generare codici temporanei.",
+            "features": [
+              "Opzione più sicura",
+              "Funziona senza servizio cellulare",
+              "Codici di backup disponibili"
+            ]
+          },
+          "smsAuth": {
+            "title": "Autenticazione via SMS",
+            "description": "Ricevi codici di verifica tramite SMS al tuo numero di telefono registrato.",
+            "features": [
+              "Facile da configurare",
+              "Funziona su qualsiasi telefono"
+            ],
+            "limitation": "Richiede il servizio cellulare"
+          }
+        },
+        "setupSteps": {
+          "title": "Come abilitare la 2FA",
+          "steps": [
+            {
+              "title": "Vai alle Impostazioni account",
+              "description": "Naviga su Account → Sicurezza → Autenticazione a due fattori."
+            },
+            {
+              "title": "Scegli il tuo metodo",
+              "description": "Seleziona app autenticatrice o verifica tramite SMS."
+            },
+            {
+              "title": "Scansiona il QR code o inserisci il codice",
+              "description": "Per le app: scansiona il QR code. Per SMS: inserisci il tuo numero di telefono."
+            },
+            {
+              "title": "Verifica e salva i codici di backup",
+              "description": "Inserisci il codice di verifica e salva in sicurezza i tuoi codici di backup."
+            }
+          ]
+        },
+        "backupCodes": {
+          "title": "Importante: salva i tuoi codici di backup",
+          "description": "Quando abiliti la 2FA, riceverai dei codici di backup. Questi sono fondamentali per recuperare l'account se perdi l'accesso all'app autenticatrice o al telefono.",
+          "tips": [
+            "Conserva i codici di backup in un gestore di password sicuro",
+            "Stampali e conservali in un luogo sicuro",
+            "Non condividerli mai con nessuno",
+            "Genera nuovi codici se sospetti che siano stati compromessi"
+          ]
+        },
+        "relatedArticles": {
+          "title": "Articoli correlati sulla sicurezza",
+          "securityPrivacy": {
+            "title": "Sicurezza e privacy",
+            "description": "Panoramica delle funzionalità di sicurezza"
+          },
+          "bestPractices": {
+            "title": "Best practice di sicurezza",
+            "description": "Mantieni sicuro il tuo account"
+          },
+          "securitySupport": {
+            "title": "Supporto sicurezza",
+            "description": "Ottieni aiuto con la sicurezza"
+          }
+        }
+      },
       "bestPractices": {
         "title": "Migliori Pratiche di Sicurezza",
         "subtitle": "Pratiche di sicurezza essenziali per proteggere il tuo account AI SEO Turbo e i tuoi dati",
