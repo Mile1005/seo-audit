@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props) {
     title: `${t('title')} - AI SEO Turbo Help`,
     description: t('subtitle'),
     keywords: ['API integrations', 'RESTful API', 'webhooks', 'SDK', 'enterprise integration', 'API endpoints'],
-    path: '/help/api-integrations',
+    path: '/help/api/api-integrations',
     locale: locale as 'en' | 'fr' | 'it' | 'es' | 'id' | 'de',
   })
 }

@@ -71,6 +71,11 @@
       "description": "Learn how AISEOTurbo protects your privacy and handles your data. Our privacy policy covers GDPR compliance and data security measures.",
       "keywords": ["privacy policy", "data protection", "GDPR", "privacy rights"]
     },
+    "status": {
+      "title": "System Status - Service Availability | AI SEO Turbo",
+      "description": "Check the current status of AI SEO Turbo services including API, web application, database, and crawler services. Monitor uptime and service health.",
+      "keywords": ["system status", "service availability", "uptime", "API status", "service health"]
+    },
     "defaultTitle": "AI SEO Turbo - AI-Powered SEO Audits",
     "defaultDescription": "Get actionable SEO insights that boost rankings and drive organic traffic in minutes",
     "defaultKeywords": "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
@@ -8476,6 +8481,448 @@
           ]
         }
       },
+      "cancellation": {
+        "title": "Cancelling Your Subscription",
+        "subtitle": "Learn about our cancellation policy, refund process, and how to cancel your AI SEO Turbo subscription.",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "cancellation": "Cancellation"
+        },
+        "importantNotice": {
+          "title": "Important Notice",
+          "description": "Cancelling your subscription will deactivate your premium features at the end of your current billing cycle. You can reactivate at any time."
+        },
+        "process": {
+          "title": "Cancellation Process",
+          "steps": [
+            {
+              "title": "Access Your Account",
+              "description": "Log into your AI SEO Turbo dashboard and navigate to your account settings."
+            },
+            {
+              "title": "Go to Billing",
+              "description": "Click on the 'Billing' or 'Subscription' section in your account settings.",
+              "details": [
+                "Find the subscription management area",
+                "Locate your current plan details",
+                "Look for the cancellation option"
+              ]
+            },
+            {
+              "title": "Cancel Subscription",
+              "description": "Click the 'Cancel Subscription' button and follow the confirmation prompts.",
+              "details": [
+                "Review the cancellation terms",
+                "Confirm your decision",
+                "Receive confirmation email"
+              ]
+            },
+            {
+              "title": "Access Continues",
+              "description": "Your premium features remain active until the end of your current billing period.",
+              "details": [
+                "Full access until billing cycle ends",
+                "No immediate service interruption",
+                "Prorated refund if applicable"
+              ]
+            }
+          ]
+        },
+        "introduction": {
+          "title": "Cancellation Policy",
+          "description": "We understand that circumstances change. Our cancellation process is designed to be simple and transparent."
+        },
+        "whenToCancel": {
+          "title": "When Can You Cancel?",
+          "description": "You can cancel your subscription at any time. Your access will continue until the end of your current billing period.",
+          "scenarios": [
+            {
+              "icon": "Clock",
+              "title": "End of Billing Cycle",
+              "description": "Cancel at any time - your subscription remains active until the end of your current billing period."
+            },
+            {
+              "icon": "TrendingDown",
+              "title": "Plan Changes",
+              "description": "Downgrade to a lower tier or switch billing cycles instead of cancelling completely."
+            },
+            {
+              "icon": "Pause",
+              "title": "Temporary Pause",
+              "description": "Contact support if you need to temporarily pause your subscription due to extended absence."
+            }
+          ]
+        },
+        "howToCancel": {
+          "title": "How to Cancel Your Subscription",
+          "description": "Follow these simple steps to cancel your subscription.",
+          "steps": [
+            {
+              "title": "Log into Your Account",
+              "description": "Sign in to your AI SEO Turbo account using your email and password."
+            },
+            {
+              "title": "Go to Account Settings",
+              "description": "Navigate to Account Settings from the main menu or user dropdown."
+            },
+            {
+              "title": "Access Billing Section",
+              "description": "Click on 'Subscription' or 'Billing' in your account settings."
+            },
+            {
+              "title": "Cancel Subscription",
+              "description": "Find the 'Cancel Subscription' option and follow the prompts to confirm."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Refund Policy",
+          "description": "Our refund policy ensures fair treatment for all customers.",
+          "policy": [
+            {
+              "icon": "Calendar",
+              "title": "14-Day Money Back Guarantee",
+              "description": "If you're not satisfied within the first 14 days, we'll provide a full refund, no questions asked."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Prorated Refunds",
+              "description": "For cancellations after 14 days, you'll receive a prorated refund for unused time in your billing cycle."
+            },
+            {
+              "icon": "Clock",
+              "title": "Processing Time",
+              "description": "Refunds are typically processed within 5-7 business days and appear in your original payment method."
+            }
+          ],
+          "scenarios": [
+            {
+              "title": "Within 14 Days",
+              "description": "Full refund available for cancellations within the first 14 days of service.",
+              "eligible": true
+            },
+            {
+              "title": "After 14 Days",
+              "description": "Prorated refund for unused time in the current billing cycle.",
+              "eligible": true
+            },
+            {
+              "title": "Free Plan Users",
+              "description": "Free plan users are not eligible for refunds as no payment was made.",
+              "eligible": false
+            }
+          ],
+          "eligible": "Eligible",
+          "notEligible": "Not Eligible"
+        },
+        "whatHappens": {
+          "title": "What Happens After Cancellation?",
+          "description": "Understand what to expect after you cancel your subscription.",
+          "timeline": [
+            {
+              "title": "Immediate Effects",
+              "description": "Your subscription remains active until the end of your current billing period. You'll continue to have full access to all features."
+            },
+            {
+              "title": "End of Billing Cycle",
+              "description": "At the end of your current billing period, your subscription will be deactivated. You'll lose access to premium features."
+            },
+            {
+              "title": "Data Retention",
+              "description": "Your audit history and reports will be retained for 30 days after cancellation. Download important data before then."
+            },
+            {
+              "title": "Account Access",
+              "description": "You'll retain access to your account but will be limited to free tier features and usage limits."
+            }
+          ]
+        },
+        "beforeCancelling": {
+          "title": "Before You Cancel",
+          "description": "Consider these alternatives to cancelling your subscription.",
+          "alternatives": [
+            {
+              "icon": "TrendingDown",
+              "title": "Downgrade Your Plan",
+              "description": "Switch to a lower-tier plan that better fits your current needs and budget."
+            },
+            {
+              "icon": "Pause",
+              "title": "Pause Subscription",
+              "description": "Contact our support team to discuss temporary subscription pauses for extended absences."
+            },
+            {
+              "icon": "MessageSquare",
+              "title": "Contact Support",
+              "description": "Reach out to our support team to discuss your concerns and explore solutions."
+            },
+            {
+              "icon": "Gift",
+              "title": "Discount or Extension",
+              "description": "Ask about special discounts or billing extensions that might make continuing more affordable."
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "What Happens After Cancellation?",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Access Continues Until End of Billing Cycle",
+              "description": "Your premium features remain active until your current billing period expires."
+            },
+            {
+              "icon": "shield",
+              "title": "Data Remains Secure",
+              "description": "Your audit history and reports are safely stored and accessible for 30 days."
+            },
+            {
+              "icon": "credit-card",
+              "title": "No Further Charges",
+              "description": "You won't be billed again, and any unused portion may be refunded based on our policy."
+            }
+          ]
+        },
+
+        "needHelp": {
+          "title": "Need Help?",
+          "description": "Our support team is here to help you with any questions about cancellation or billing.",
+          "contacts": [
+            {
+              "text": "Contact Support",
+              "href": "/help/support"
+            },
+            {
+              "text": "Billing FAQ",
+              "href": "/help/billing"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Managing Payment Methods",
+        "subtitle": "Learn how to add, update, and manage your payment methods for seamless billing.",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "paymentMethods": "Payment Methods"
+        },
+        "acceptedMethods": {
+          "title": "Accepted Payment Methods",
+          "description": "We accept a variety of secure payment methods to make billing convenient for you.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Credit & Debit Cards",
+              "description": "Visa, MasterCard, American Express, and Discover cards accepted.",
+              "features": ["Instant processing", "Secure encryption", "Global acceptance"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Digital Wallets",
+              "description": "PayPal, Apple Pay, Google Pay, and other digital wallet options.",
+              "features": ["One-click payments", "Enhanced security", "Mobile-friendly"]
+            },
+            {
+              "icon": "Building",
+              "name": "Bank Transfers",
+              "description": "ACH and wire transfers for annual plans and enterprise accounts.",
+              "features": ["Lower fees", "Direct from bank", "Batch processing"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Managing Your Payment Methods",
+          "description": "Keep your payment information up to date and secure.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Add a Payment Method",
+              "description": "Add a new credit card, debit card, or digital wallet to your account.",
+              "steps": [
+                "Go to Account Settings",
+                "Click on 'Billing & Payments'",
+                "Select 'Add Payment Method'",
+                "Enter your payment details",
+                "Verify and save"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Update Payment Information",
+              "description": "Change card details, expiration dates, or billing addresses.",
+              "steps": [
+                "Navigate to payment methods",
+                "Select the method to update",
+                "Edit the information",
+                "Save changes",
+                "Verify with test transaction if needed"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Remove Payment Methods",
+              "description": "Remove old or unused payment methods from your account.",
+              "steps": [
+                "Access payment methods list",
+                "Select method to remove",
+                "Confirm removal",
+                "Ensure another method exists",
+                "Contact support if issues arise"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Security & Privacy",
+          "description": "Your payment information is protected with industry-leading security measures.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "PCI DSS Compliant",
+              "description": "We adhere to Payment Card Industry Data Security Standards for maximum protection."
+            },
+            {
+              "icon": "Lock",
+              "title": "End-to-End Encryption",
+              "description": "All payment data is encrypted during transmission and storage using SSL/TLS protocols."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Tokenization",
+              "description": "Sensitive card information is replaced with secure tokens that cannot be reverse-engineered."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Fraud Protection",
+              "description": "Advanced fraud detection systems monitor and prevent unauthorized transactions."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Need Help?",
+          "description": "Our support team is here to help with any payment method questions or issues.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Contact Support",
+              "description": "Get help with payment methods, billing issues, or account questions.",
+              "link": "/help/support",
+              "linkText": "Start a conversation"
+            },
+            {
+              "icon": "FileText",
+              "title": "Billing FAQ",
+              "description": "Find answers to common billing and payment questions.",
+              "link": "/help/billing",
+              "linkText": "View FAQ"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Understanding Your Invoices",
+        "subtitle": "Learn how to access, read, and download your billing invoices and receipts.",
+        "backToBilling": "Back to Billing",
+        "breadcrumb": {
+          "help": "Help",
+          "billing": "Billing",
+          "invoices": "Invoices"
+        },
+        "accessInvoices": {
+          "title": "Accessing Your Invoices",
+          "description": "View and download your billing history and invoices from your account dashboard.",
+          "steps": [
+            {
+              "title": "Log into Your Account",
+              "description": "Sign in to your AI SEO Turbo dashboard with your email and password."
+            },
+            {
+              "title": "Navigate to Billing",
+              "description": "Click on 'Account Settings' then 'Billing & Payments' from the main menu."
+            },
+            {
+              "title": "View Invoice History",
+              "description": "Select 'Invoices' or 'Billing History' to see all your past invoices."
+            },
+            {
+              "title": "Download or Print",
+              "description": "Click 'Download PDF' or 'Print' to save or print your invoices."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Understanding Invoice Details",
+          "description": "Learn what each section of your invoice contains and how to interpret the information.",
+          "items": [
+            {
+              "icon": "Calendar",
+              "title": "Billing Period",
+              "description": "Shows the date range for which you're being charged (e.g., monthly or annual cycle)."
+            },
+            {
+              "icon": "Tag",
+              "title": "Plan Details",
+              "description": "Your subscription plan name, tier, and any add-ons or discounts applied."
+            },
+            {
+              "icon": "DollarSign",
+              "title": "Charges Breakdown",
+              "description": "Itemized list of all charges including base plan, taxes, and additional fees."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Payment Method",
+              "description": "The payment method used and last four digits for verification."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Billing History & Records",
+          "description": "Keep track of all your payments and maintain records for accounting purposes.",
+          "features": [
+            {
+              "title": "Complete Transaction History",
+              "description": "View all payments, refunds, and adjustments in chronological order."
+            },
+            {
+              "title": "PDF Downloads",
+              "description": "Download professional PDF invoices for your accounting records."
+            },
+            {
+              "title": "Email Receipts",
+              "description": "Automatic email receipts sent for every transaction."
+            },
+            {
+              "title": "Tax Documentation",
+              "description": "Access tax-related information and documentation when needed."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Need Help with Invoices?",
+          "description": "Get assistance with invoice questions, billing disputes, or account issues.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Contact Billing Support",
+              "description": "Reach out to our billing specialists for invoice-related questions.",
+              "link": "/help/support",
+              "linkText": "Contact Support"
+            },
+            {
+              "icon": "FileText",
+              "title": "Billing FAQ",
+              "description": "Find answers to common billing and invoice questions.",
+              "link": "/help/billing",
+              "linkText": "View FAQ"
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API & Integrations",
         "description": "Connect AISEOTurbo with your tools",
@@ -11027,6 +11474,218 @@
       "compliance": {
         "title": "Compliance & Legal Framework",
         "description": "We comply with GDPR, CCPA, and other applicable privacy regulations. Our practices are reviewed regularly to align with evolving standards and best practices, with guidance from legal experts in data protection."
+      }
+    }
+  },
+  "status": {
+    "title": "System Status",
+    "description": "Real-time status of all AI SEO Turbo services and infrastructure",
+    "lastUpdated": "Last updated",
+    "hero": {
+      "title": "System",
+      "titleHighlight": "Status",
+      "description": "Real-time status of all AI SEO Turbo services and infrastructure",
+      "lastUpdated": "Last updated",
+      "allSystemsOperational": "All Systems Operational"
+    },
+    "overallStatus": {
+      "allSystems": "All Systems",
+      "operational": "Operational",
+      "thirtyDayUptime": "30-Day Uptime",
+      "avgResponseTime": "Avg Response Time"
+    },
+    "services": {
+      "title": "Service Status",
+      "uptimeLabel": "30-day uptime",
+      "statusLabels": {
+        "operational": "Operational"
+      },
+      "items": {
+        "apiServices": {
+          "name": "API Services",
+          "description": "All API endpoints are functioning normally"
+        },
+        "webApplication": {
+          "name": "Web Application",
+          "description": "Dashboard and web interface are fully operational"
+        },
+        "database": {
+          "name": "Database",
+          "description": "Database services are running smoothly"
+        },
+        "seoCrawler": {
+          "name": "SEO Crawler",
+          "description": "Website crawling and analysis services are active"
+        },
+        "authentication": {
+          "name": "Authentication",
+          "description": "Login and authentication services are operational"
+        }
+      }
+    },
+    "incidents": {
+      "title": "Recent Incidents",
+      "statusLabels": {
+        "resolved": "Resolved"
+      },
+      "durationLabel": "Duration",
+      "noIncidents": "No recent incidents to report",
+      "items": {
+        "maintenance": {
+          "date": "March 10, 2025",
+          "title": "Scheduled Maintenance",
+          "description": "Routine database maintenance completed successfully with no service disruption.",
+          "duration": "30 minutes"
+        },
+        "optimization": {
+          "date": "February 28, 2025",
+          "title": "API Performance Optimization",
+          "description": "Deployed performance improvements to API endpoints. Average response time improved by 40%.",
+          "duration": "15 minutes"
+        }
+      }
+    },
+    "maintenance": {
+      "title": "Scheduled Maintenance",
+      "noMaintenance": "No scheduled maintenance at this time",
+      "items": {
+        "infrastructure": {
+          "date": "March 20, 2025",
+          "time": "02:00 AM - 04:00 AM UTC",
+          "title": "Infrastructure Upgrade",
+          "description": "Upgrading server infrastructure for improved performance and reliability."
+        }
+      }
+    },
+    "subscribe": {
+      "title": "Stay Informed",
+      "description": "Get notified about system updates and scheduled maintenance",
+      "followText": "Follow us on social media to receive real-time status updates"
+    },
+    "reliability": {
+      "title": "Committed to Reliability & Transparency",
+      "description": "At AI SEO Turbo, we understand that your SEO success depends on reliable tools and services you can count on. That's why we've built our infrastructure with enterprise-grade reliability and maintain complete transparency about our system performance and any issues that may arise.",
+      "uptime": {
+        "title": "Industry-Leading Uptime Standards",
+        "description": "We maintain 99.9% uptime across all our services, with most services achieving 99.99% availability. This level of reliability ensures that you can run SEO audits, monitor rankings, and access your data whenever you need it, without worrying about service interruptions.",
+        "features": [
+          {
+            "title": "99.9% Service Availability",
+            "description": "Enterprise-grade infrastructure with automatic failover"
+          },
+          {
+            "title": "Real-Time Monitoring",
+            "description": "24/7 system monitoring with instant alerts for any issues"
+          },
+          {
+            "title": "Automatic Scaling",
+            "description": "Our systems automatically scale to handle increased demand"
+          },
+          {
+            "title": "Data Redundancy",
+            "description": "Multiple backups ensure your data is always safe and accessible"
+          },
+          {
+            "title": "Global CDN",
+            "description": "Fast loading times worldwide through our content delivery network"
+          }
+        ]
+      },
+      "transparency": {
+        "title": "Transparent Communication",
+        "description": "We believe in complete transparency with our users. When issues occur (which is rare), we provide immediate updates through multiple channels. Our status page is updated in real-time, and we send email notifications for any service disruptions or maintenance activities.",
+        "methods": [
+          {
+            "title": "Real-Time Status Updates",
+            "description": "This page updates automatically as soon as we detect any changes"
+          },
+          {
+            "title": "Email Notifications",
+            "description": "Critical updates sent to all registered users"
+          },
+          {
+            "title": "Incident Post-Mortems",
+            "description": "Detailed analysis of any incidents with prevention measures"
+          },
+          {
+            "title": "Maintenance Scheduling",
+            "description": "Advance notice of planned maintenance windows"
+          }
+        ]
+      },
+      "maintenance": {
+        "title": "Proactive Maintenance & Improvements",
+        "description": "Rather than waiting for issues to occur, we perform regular maintenance and implement continuous improvements to ensure optimal performance. Our development team works around the clock to enhance features, fix bugs, and optimize performance before they impact users.",
+        "philosophy": [
+          {
+            "title": "Zero-Downtime Deployments",
+            "description": "All updates deployed without service interruption"
+          },
+          {
+            "title": "Performance Optimization",
+            "description": "Continuous monitoring and improvement of response times"
+          },
+          {
+            "title": "Security Updates",
+            "description": "Regular security patches and vulnerability assessments"
+          },
+          {
+            "title": "Feature Enhancements",
+            "description": "Regular releases of new features and improvements"
+          },
+          {
+            "title": "Database Optimization",
+            "description": "Regular maintenance to ensure fast query performance"
+          }
+        ]
+      },
+      "seoImpact": {
+        "title": "What Our Uptime Means for Your SEO",
+        "description": "Reliable service isn't just about availability—it's about ensuring your SEO efforts can continue uninterrupted. Whether you're running weekly audits, monitoring daily ranking changes, or analyzing competitor strategies, you need tools that work when you do.",
+        "testimonials": {
+          "title": "Why Reliability Matters",
+          "items": [
+            {
+              "quote": "During a critical algorithm update, I needed to run multiple audits quickly. AI SEO Turbo's reliability gave me the confidence to focus on strategy rather than worrying about tool availability.",
+              "author": "Sarah Mitchell, Enterprise SEO Manager"
+            },
+            {
+              "quote": "I've tried other SEO tools that went down during peak usage times. AI SEO Turbo's consistent uptime has become essential to my workflow.",
+              "author": "James Rodriguez, Freelance SEO Consultant"
+            }
+          ]
+        }
+      },
+      "enterprise": {
+        "title": "Built for Enterprise Reliability",
+        "description": "Our infrastructure is designed to handle the demands of enterprise users while maintaining the flexibility that smaller businesses need. From multi-region data centers to automatic load balancing, every aspect of our system is optimized for maximum uptime and performance.",
+        "features": [
+          {
+            "title": "Multi-Region Deployment",
+            "description": "Services distributed across multiple data centers"
+          },
+          {
+            "title": "Automatic Failover",
+            "description": "Instant switching to backup systems if issues occur"
+          },
+          {
+            "title": "Load Balancing",
+            "description": "Traffic automatically distributed for optimal performance"
+          },
+          {
+            "title": "Database Clustering",
+            "description": "Redundant database systems for maximum data safety"
+          },
+          {
+            "title": "24/7 Monitoring",
+            "description": "Round-the-clock monitoring by our DevOps team"
+          }
+        ]
+      },
+      "success": {
+        "title": "Your Success is Our Priority",
+        "description1": "We measure our success by your success. That's why we invest heavily in infrastructure, monitoring, and support systems that ensure AI SEO Turbo is always available when you need it. Our commitment to reliability is backed by our 99.9% uptime guarantee and our dedication to transparent communication.",
+        "description2": "If you ever experience any issues or have questions about our service status, don't hesitate to contact our support team. We're here to ensure your SEO efforts are supported by the most reliable tools in the industry."
       }
     }
   }

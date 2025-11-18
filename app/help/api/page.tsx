@@ -287,7 +287,7 @@ export default function APIOverviewPage() {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
-                      href="/help/api-integrations"
+                      href="/help/api/api-integrations"
                       className="inline-flex items-center justify-center px-6 py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors"
                     >
                       API Integration Guide

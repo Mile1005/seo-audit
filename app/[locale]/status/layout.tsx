@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
-import { setRequestLocale } from 'next-intl/server'
+import { generateSEOMeta } from '@/lib/seo'
+import { setRequestLocale, getTranslations } from 'next-intl/server'
 import type { Locale } from '@/i18n'
 
 type Props = {
@@ -11,8 +11,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
   setRequestLocale(locale)
 
+  const t = await getTranslations('meta')
+  const statusMeta = t.raw('status')
+
   return generateSEOMeta({
-    ...pageSEO.status,
+    title: statusMeta.title,
+    description: statusMeta.description,
+    keywords: statusMeta.keywords,
     locale: locale as Locale,
     path: 'status'
   })

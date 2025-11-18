@@ -86,7 +86,7 @@ export default function SEOToolsOverviewPage() {
                 <h3 className="text-2xl font-bold text-white mb-6">Core SEO Features</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Link
-                    href="/help/features/seo-audit"
+                    href="/help/seo-tools/seo-audit"
                     className="group bg-slate-800/50 border border-slate-700/50 rounded-lg p-6 hover:border-blue-500/50 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
@@ -109,7 +109,7 @@ export default function SEOToolsOverviewPage() {
                   </Link>
 
                   <Link
-                    href="/help/features/competitor-analysis"
+                    href="/help/seo-tools/competitor-analysis"
                     className="group bg-slate-800/50 border border-slate-700/50 rounded-lg p-6 hover:border-purple-500/50 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
@@ -132,7 +132,7 @@ export default function SEOToolsOverviewPage() {
                   </Link>
 
                   <Link
-                    href="/help/features/site-crawler"
+                    href="/help/seo-tools/site-crawler"
                     className="group bg-slate-800/50 border border-slate-700/50 rounded-lg p-6 hover:border-orange-500/50 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
@@ -155,7 +155,7 @@ export default function SEOToolsOverviewPage() {
                   </Link>
 
                   <Link
-                    href="/help/features/ai-assistant"
+                    href="/help/seo-tools/ai-assistant"
                     className="group bg-slate-800/50 border border-slate-700/50 rounded-lg p-6 hover:border-cyan-500/50 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">

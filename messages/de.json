@@ -478,6 +478,11 @@
       "description": "Erfahren Sie, wie AISEOTurbo Ihre Privatsphäre schützt und Ihre Daten behandelt. Unsere Datenschutzrichtlinie deckt DSGVO-Konformität und Datenschutzmaßnahmen ab.",
       "keywords": ["Datenschutzrichtlinie", "Datenschutz", "DSGVO", "Datenschutzrechte"]
     },
+    "status": {
+      "title": "Systemstatus - Serviceverfügbarkeit | AI SEO Turbo",
+      "description": "Überprüfen Sie den aktuellen Status unserer Dienste und überwachen Sie die Systemleistung. Bleiben Sie über geplante Wartungen und mögliche Unterbrechungen informiert.",
+      "keywords": ["Systemstatus", "Serviceverfügbarkeit", "Wartung", "Systemstatus", "Überwachung"]
+    },
     "defaultTitle": "AI SEO Turbo - KI-gestützte SEO Audits",
     "defaultDescription": "Erhalten Sie umsetzbare SEO-Einblicke, die Rankings verbessern und organischen Traffic in Minuten generieren",
     "defaultKeywords": "SEO Audit, KI SEO Analyse, Website Optimierung, organischer Traffic, Suchrankings",
@@ -8571,6 +8576,466 @@
           ]
         }
       },
+      "cancellation": {
+        "title": "Ihr Abonnement kündigen",
+        "subtitle": "Erfahren Sie mehr über unsere Kündigungsrichtlinien, den Rückerstattungsprozess und wie Sie Ihr AI SEO Turbo-Abonnement kündigen.",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "cancellation": "Kündigung"
+        },
+        "importantNotice": {
+          "title": "Wichtiger Hinweis",
+          "description": "Die Kündigung Ihres Abonnements deaktiviert Ihre Premium-Funktionen am Ende Ihres aktuellen Abrechnungszeitraums. Sie können jederzeit wieder aktivieren."
+        },
+        "process": {
+          "title": "Kündigungsprozess",
+          "steps": [
+            {
+              "title": "Zugriff auf Ihr Konto",
+              "description": "Melden Sie sich in Ihrem AI SEO Turbo-Dashboard an und navigieren Sie zu Ihren Kontoeinstellungen."
+            },
+            {
+              "title": "Gehen Sie zur Abrechnung",
+              "description": "Klicken Sie im Bereich Kontoeinstellungen auf 'Abrechnung' oder 'Abonnement'.",
+              "details": [
+                "Suchen Sie den Bereich Abonnementverwaltung",
+                "Suchen Sie Ihre aktuellen Plandetails",
+                "Suchen Sie die Kündigungsoption"
+              ]
+            },
+            {
+              "title": "Abonnement kündigen",
+              "description": "Klicken Sie auf die Schaltfläche 'Abonnement kündigen' und folgen Sie den Bestätigungsaufforderungen.",
+              "details": [
+                "Überprüfen Sie die Kündigungsbedingungen",
+                "Bestätigen Sie Ihre Entscheidung",
+                "Erhalten Sie eine Bestätigungs-E-Mail"
+              ]
+            },
+            {
+              "title": "Zugriff bleibt bestehen",
+              "description": "Ihre Premium-Funktionen bleiben bis zum Ende Ihres aktuellen Abrechnungszeitraums aktiv.",
+              "details": [
+                "Voller Zugriff bis zum Ende des Abrechnungszyklus",
+                "Keine sofortige Dienstunterbrechung",
+                "Anteilige Rückerstattung falls zutreffend"
+              ]
+            }
+          ]
+        },
+        "introduction": {
+          "title": "Kündigungsrichtlinien",
+          "description": "Wir verstehen, dass sich Umstände ändern. Unser Kündigungsprozess ist so gestaltet, dass er einfach und transparent ist."
+        },
+        "whenToCancel": {
+          "title": "Wann können Sie kündigen?",
+          "description": "Sie können Ihr Abonnement jederzeit kündigen. Ihr Zugang bleibt bis zum Ende Ihres aktuellen Abrechnungszeitraums bestehen.",
+          "scenarios": [
+            {
+              "icon": "Clock",
+              "title": "Ende des Abrechnungszyklus",
+              "description": "Kündigen Sie jederzeit - Ihr Abonnement bleibt bis zum Ende Ihres aktuellen Abrechnungszeitraums aktiv."
+            },
+            {
+              "icon": "TrendingDown",
+              "title": "Planänderungen",
+              "description": "Wechseln Sie zu einem niedrigeren Tarif oder ändern Sie die Abrechnungszyklen, anstatt komplett zu kündigen."
+            },
+            {
+              "icon": "Pause",
+              "title": "Vorübergehende Pause",
+              "description": "Kontaktieren Sie den Support, wenn Sie Ihr Abonnement aufgrund längerer Abwesenheit vorübergehend pausieren müssen."
+            }
+          ]
+        },
+        "howToCancel": {
+          "title": "So kündigen Sie Ihr Abonnement",
+          "description": "Befolgen Sie diese einfachen Schritte, um Ihr Abonnement zu kündigen.",
+          "steps": [
+            {
+              "title": "Melden Sie sich in Ihrem Konto an",
+              "description": "Melden Sie sich mit Ihrer E-Mail-Adresse und Ihrem Passwort in Ihrem AI SEO Turbo-Konto an."
+            },
+            {
+              "title": "Gehen Sie zu den Kontoeinstellungen",
+              "description": "Navigieren Sie zu den Kontoeinstellungen über das Hauptmenü oder das Benutzer-Dropdown-Menü."
+            },
+            {
+              "title": "Greifen Sie auf den Abrechnungsbereich zu",
+              "description": "Klicken Sie in Ihren Kontoeinstellungen auf 'Abonnement' oder 'Abrechnung'."
+            },
+            {
+              "title": "Abonnement kündigen",
+              "description": "Suchen Sie die Option 'Abonnement kündigen' und folgen Sie den Anweisungen zur Bestätigung."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Rückerstattungsrichtlinien",
+          "description": "Unsere Rückerstattungsrichtlinien gewährleisten faire Behandlung für alle Kunden.",
+          "policy": [
+            {
+              "icon": "Calendar",
+              "title": "14-tägige Geld-zurück-Garantie",
+              "description": "Wenn Sie innerhalb der ersten 14 Tage nicht zufrieden sind, erhalten Sie eine vollständige Rückerstattung, keine Fragen gestellt."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Anteilige Rückerstattungen",
+              "description": "Bei Kündigungen nach 14 Tagen erhalten Sie eine anteilige Rückerstattung für ungenutzte Zeit in Ihrem Abrechnungszyklus."
+            },
+            {
+              "icon": "Clock",
+              "title": "Bearbeitungszeit",
+              "description": "Rückerstattungen werden in der Regel innerhalb von 5-7 Werktagen bearbeitet und erscheinen auf Ihrer ursprünglichen Zahlungsmethode."
+            }
+          ],
+          "scenarios": [
+            {
+              "title": "Innerhalb von 14 Tagen",
+              "description": "Vollständige Rückerstattung verfügbar für Kündigungen innerhalb der ersten 14 Tage des Services.",
+              "eligible": true
+            },
+            {
+              "title": "Nach 14 Tagen",
+              "description": "Anteilige Rückerstattung für ungenutzte Zeit im aktuellen Abrechnungszyklus.",
+              "eligible": true
+            },
+            {
+              "title": "Kostenlose Plan-Benutzer",
+              "description": "Benutzer des kostenlosen Plans sind nicht für Rückerstattungen berechtigt, da keine Zahlung erfolgt ist.",
+              "eligible": false
+            }
+          ],
+          "eligible": "Berechtigt",
+          "notEligible": "Nicht berechtigt"
+        },
+        "whatHappens": {
+          "title": "Was passiert nach der Kündigung?",
+          "description": "Verstehen Sie, was Sie nach der Kündigung Ihres Abonnements erwartet.",
+          "timeline": [
+            {
+              "title": "Sofortige Auswirkungen",
+              "description": "Ihr Abonnement bleibt bis zum Ende Ihres aktuellen Abrechnungszeitraums aktiv. Sie haben weiterhin vollen Zugang zu allen Funktionen."
+            },
+            {
+              "title": "Ende des Abrechnungszyklus",
+              "description": "Am Ende Ihres aktuellen Abrechnungszeitraums wird Ihr Abonnement deaktiviert. Sie verlieren den Zugang zu Premium-Funktionen."
+            },
+            {
+              "title": "Datenaufbewahrung",
+              "description": "Ihr Audit-Verlauf und Berichte werden 30 Tage nach der Kündigung aufbewahrt. Laden Sie wichtige Daten vorher herunter."
+            },
+            {
+              "title": "Kontozugang",
+              "description": "Sie behalten den Zugang zu Ihrem Konto, sind aber auf kostenlose Funktionen und Nutzungsbeschränkungen beschränkt."
+            }
+          ]
+        },
+        "beforeCancelling": {
+          "title": "Bevor Sie kündigen",
+          "description": "Ziehen Sie diese Alternativen zur Kündigung Ihres Abonnements in Betracht.",
+          "alternatives": [
+            {
+              "icon": "TrendingDown",
+              "title": "Ihren Plan herabstufen",
+              "description": "Wechseln Sie zu einem niedrigeren Tarif, der besser zu Ihren aktuellen Bedürfnissen und Ihrem Budget passt."
+            },
+            {
+              "icon": "Pause",
+              "title": "Abonnement pausieren",
+              "description": "Kontaktieren Sie unser Support-Team, um vorübergehende Abonnementpausen für längere Abwesenheiten zu besprechen."
+            },
+            {
+              "icon": "MessageSquare",
+              "title": "Support kontaktieren",
+              "description": "Wenden Sie sich an unser Support-Team, um Ihre Bedenken zu besprechen und Lösungen zu erkunden."
+            },
+            {
+              "icon": "Gift",
+              "title": "Rabatt oder Verlängerung",
+              "description": "Fragen Sie nach Sonderrabatten oder Abrechnungsverlängerungen, die die Fortsetzung erschwinglicher machen könnten."
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "Was passiert nach der Kündigung?",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Zugriff bleibt bis zum Ende des Abrechnungszyklus",
+              "description": "Ihre Premium-Funktionen bleiben bis zum Ablauf Ihres aktuellen Abrechnungszeitraums aktiv."
+            },
+            {
+              "icon": "shield",
+              "title": "Daten bleiben sicher",
+              "description": "Ihr Audit-Verlauf und Berichte werden sicher gespeichert und 30 Tage lang zugänglich."
+            },
+            {
+              "icon": "credit-card",
+              "title": "Keine weiteren Belastungen",
+              "description": "Sie werden nicht mehr belastet, und ungenutzte Anteile können basierend auf unserer Richtlinie erstattet werden."
+            }
+          ]
+        },
+
+        "needHelp": {
+          "title": "Brauchen Sie Hilfe?",
+          "description": "Unser Support-Team steht Ihnen bei Fragen zu Kündigung oder Abrechnung zur Verfügung.",
+          "contacts": [
+            {
+              "text": "Support kontaktieren",
+              "href": "/help/support"
+            },
+            {
+              "text": "Abrechnungs-FAQ",
+              "href": "/help/billing"
+            }
+          ]
+        },
+        "reasonsToStay": {
+          "title": "Warum Kunden bleiben",
+          "description": "Hören Sie von Kunden, die zunächst über eine Kündigung nachgedacht, aber sich entschieden haben zu bleiben.",
+          "testimonials": [
+            {
+              "quote": "Ich wollte kündigen, weil ich dachte, das Tool sei zu teuer, aber nachdem ich mit dem Support gesprochen hatte, boten sie mir einen maßgeschneiderten Plan an, der perfekt zu meinem Budget passte.",
+              "author": "Sarah M., Marketing Managerin"
+            },
+            {
+              "quote": "Die KI-Empfehlungen halfen mir, den SEO-Score meiner Website in nur zwei Monaten um 40 Punkte zu verbessern. Vollkommen lohnenswert, das Abonnement zu behalten.",
+              "author": "Mike R., Website-Besitzer"
+            },
+            {
+              "quote": "Ich habe zunächst gekündigt, aber bin zurückgekommen, nachdem ich gesehen habe, wie viel meine Konkurrenten ihre SEO verbesserten. Dieses Tool gibt mir einen echten Vorteil.",
+              "author": "Jennifer L., E-Commerce-Besitzerin"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Zahlungsmethoden verwalten",
+        "subtitle": "Erfahren Sie, wie Sie Zahlungsmethoden hinzufügen, aktualisieren und verwalten für nahtlose Abrechnung.",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "paymentMethods": "Zahlungsmethoden"
+        },
+        "acceptedMethods": {
+          "title": "Akzeptierte Zahlungsmethoden",
+          "description": "Wir akzeptieren eine Vielzahl sicherer Zahlungsmethoden, um die Abrechnung für Sie praktisch zu gestalten.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Kredit- und Debitkarten",
+              "description": "Visa, MasterCard, American Express und Discover Karten akzeptiert.",
+              "features": ["Sofortige Verarbeitung", "Sichere Verschlüsselung", "Weltweite Akzeptanz"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Digitale Geldbörsen",
+              "description": "PayPal, Apple Pay, Google Pay und andere digitale Geldbörsenoptionen.",
+              "features": ["Ein-Klick-Zahlungen", "Erhöhte Sicherheit", "Mobilfreundlich"]
+            },
+            {
+              "icon": "Building",
+              "name": "Banküberweisungen",
+              "description": "ACH- und Drahtüberweisungen für Jahrespläne und Unternehmenskonten.",
+              "features": ["Niedrigere Gebühren", "Direkt von der Bank", "Stapelverarbeitung"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Verwaltung Ihrer Zahlungsmethoden",
+          "description": "Halten Sie Ihre Zahlungsinformationen aktuell und sicher.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Eine Zahlungsmethode hinzufügen",
+              "description": "Fügen Sie Ihrem Konto eine neue Kreditkarte, Debitkarte oder digitale Geldbörse hinzu.",
+              "steps": [
+                "Zu Kontoeinstellungen gehen",
+                "Auf 'Abrechnung & Zahlungen' klicken",
+                "'Zahlungsmethode hinzufügen' auswählen",
+                "Ihre Zahlungsdetails eingeben",
+                "Überprüfen und speichern"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Zahlungsinformationen aktualisieren",
+              "description": "Ändern Sie Kartendetails, Ablaufdaten oder Rechnungsadressen.",
+              "steps": [
+                "Zu Zahlungsmethoden navigieren",
+                "Die zu aktualisierende Methode auswählen",
+                "Die Informationen bearbeiten",
+                "Änderungen speichern",
+                "Bei Bedarf mit Testtransaktion überprüfen"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Zahlungsmethoden entfernen",
+              "description": "Entfernen Sie alte oder ungenutzte Zahlungsmethoden von Ihrem Konto.",
+              "steps": [
+                "Auf Zahlungsmethoden-Liste zugreifen",
+                "Methode zum Entfernen auswählen",
+                "Entfernung bestätigen",
+                "Sicherstellen, dass eine andere Methode existiert",
+                "Support kontaktieren bei Problemen"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Sicherheit & Datenschutz",
+          "description": "Ihre Zahlungsinformationen sind durch branchenführende Sicherheitsmaßnahmen geschützt.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "PCI DSS konform",
+              "description": "Wir halten uns an die Zahlungskarten-Branchen-Datensicherheitsstandards für maximalen Schutz."
+            },
+            {
+              "icon": "Lock",
+              "title": "End-to-End-Verschlüsselung",
+              "description": "Alle Zahlungsdaten werden während der Übertragung und Speicherung mit SSL/TLS-Protokollen verschlüsselt."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Tokenisierung",
+              "description": "Sensible Karteninformationen werden durch sichere Token ersetzt, die nicht rückentwickelt werden können."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Betrugsschutz",
+              "description": "Erweiterte Betrugserkennungssysteme überwachen und verhindern nicht autorisierte Transaktionen."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Brauchen Sie Hilfe?",
+          "description": "Unser Support-Team ist da, um Ihnen bei allen Fragen zu Zahlungsmethoden oder Problemen zu helfen.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Support kontaktieren",
+              "description": "Holen Sie sich Hilfe bei Zahlungsmethoden, Abrechnungsproblemen oder Kontofragen.",
+              "link": "/help/support",
+              "linkText": "Unterhaltung beginnen"
+            },
+            {
+              "icon": "FileText",
+              "title": "Abrechnungs-FAQ",
+              "description": "Finden Sie Antworten auf häufige Fragen zu Abrechnung und Zahlung.",
+              "link": "/help/billing",
+              "linkText": "FAQ ansehen"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Ihre Rechnungen verstehen",
+        "subtitle": "Erfahren Sie, wie Sie auf Ihre Abrechnungsrechnungen zugreifen, sie lesen und herunterladen.",
+        "backToBilling": "Zurück zur Abrechnung",
+        "breadcrumb": {
+          "help": "Hilfe",
+          "billing": "Abrechnung",
+          "invoices": "Rechnungen"
+        },
+        "accessInvoices": {
+          "title": "Zugriff auf Ihre Rechnungen",
+          "description": "Zeigen Sie Ihren Abrechnungsverlauf an und laden Sie Rechnungen von Ihrem Kontodashboard herunter.",
+          "steps": [
+            {
+              "title": "Bei Ihrem Konto anmelden",
+              "description": "Melden Sie sich bei Ihrem AI SEO Turbo Dashboard mit Ihrer E-Mail und Ihrem Passwort an."
+            },
+            {
+              "title": "Zur Abrechnung navigieren",
+              "description": "Klicken Sie auf 'Kontoeinstellungen' dann 'Abrechnung & Zahlungen' aus dem Hauptmenü."
+            },
+            {
+              "title": "Rechnungshistorie anzeigen",
+              "description": "Wählen Sie 'Rechnungen' oder 'Abrechnungsverlauf', um alle Ihre vergangenen Rechnungen zu sehen."
+            },
+            {
+              "title": "Herunterladen oder drucken",
+              "description": "Klicken Sie auf 'PDF herunterladen' oder 'Drucken', um Ihre Rechnungen zu speichern oder zu drucken."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Rechnungsdetails verstehen",
+          "description": "Erfahren Sie, was jeder Abschnitt Ihrer Rechnung enthält und wie Sie die Informationen interpretieren.",
+          "items": [
+            {
+              "icon": "Calendar",
+              "title": "Abrechnungszeitraum",
+              "description": "Zeigt den Datumsbereich an, für den Sie belastet werden (z. B. monatlicher oder jährlicher Zyklus)."
+            },
+            {
+              "icon": "Tag",
+              "title": "Plandetails",
+              "description": "Ihr Abonnementplanname, Stufe und alle angewendeten Add-ons oder Rabatte."
+            },
+            {
+              "icon": "DollarSign",
+              "title": "Gebührenaufschlüsselung",
+              "description": "Detaillierte Liste aller Gebühren einschließlich Grundplan, Steuern und zusätzlichen Gebühren."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Zahlungsmethode",
+              "description": "Die verwendete Zahlungsmethode und die letzten vier Ziffern zur Überprüfung."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Abrechnungsverlauf und Aufzeichnungen",
+          "description": "Behalten Sie den Überblick über alle Ihre Zahlungen und führen Sie Aufzeichnungen für buchhalterische Zwecke.",
+          "features": [
+            {
+              "title": "Vollständiger Transaktionsverlauf",
+              "description": "Zeigen Sie alle Zahlungen, Rückerstattungen und Anpassungen in chronologischer Reihenfolge an."
+            },
+            {
+              "title": "PDF-Downloads",
+              "description": "Laden Sie professionelle PDF-Rechnungen für Ihre Buchhaltungsaufzeichnungen herunter."
+            },
+            {
+              "title": "E-Mail-Belege",
+              "description": "Automatische E-Mail-Belege, die für jede Transaktion gesendet werden."
+            },
+            {
+              "title": "Steuerdokumentation",
+              "description": "Greifen Sie bei Bedarf auf steuerbezogene Informationen und Dokumentationen zu."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Brauchen Sie Hilfe mit Rechnungen?",
+          "description": "Holen Sie sich Hilfe bei Rechnungsfragen, Abrechnungsstreitigkeiten oder Kontoproblemen.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Abrechnungssupport kontaktieren",
+              "description": "Wenden Sie sich an unsere Abrechnungsspezialisten für rechnungsbezogene Fragen.",
+              "link": "/help/support",
+              "linkText": "Support kontaktieren"
+            },
+            {
+              "icon": "FileText",
+              "title": "Abrechnungs-FAQ",
+              "description": "Finden Sie Antworten auf häufige Fragen zu Abrechnung und Rechnungen.",
+              "link": "/help/billing",
+              "linkText": "FAQ ansehen"
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API & Integrationen",
         "description": "Verbinden Sie AISEOTurbo mit Ihren Tools",
@@ -11066,6 +11531,218 @@
       "compliance": {
         "title": "Compliance & Rechtsrahmen",
         "description": "Wir halten uns an DSGVO, CCPA und andere geltende Datenschutzvorschriften. Unsere Praktiken werden regelmäßig überprüft, um sich an sich entwickelnde Standards und bewährte Praktiken anzupassen, mit Unterstützung von Rechtsexperten im Datenschutz."
+      }
+    }
+  },
+  "status": {
+    "title": "Systemstatus",
+    "description": "Echtzeitstatus aller AI SEO Turbo Dienste und Infrastruktur",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "hero": {
+      "title": "System",
+      "titleHighlight": "Status",
+      "description": "Echtzeitstatus aller AI SEO Turbo Dienste und Infrastruktur",
+      "lastUpdated": "Zuletzt aktualisiert",
+      "allSystemsOperational": "Alle Systeme in Betrieb"
+    },
+    "overallStatus": {
+      "allSystems": "Alle Systeme",
+      "operational": "In Betrieb",
+      "thirtyDayUptime": "Verfügbarkeit (30 Tage)",
+      "avgResponseTime": "Durchschnittliche Antwortzeit"
+    },
+    "services": {
+      "title": "Servicestatus",
+      "uptimeLabel": "Verfügbarkeit (30 Tage)",
+      "statusLabels": {
+        "operational": "In Betrieb"
+      },
+      "items": {
+        "apiServices": {
+          "name": "API-Dienste",
+          "description": "Alle API-Endpunkte funktionieren normal"
+        },
+        "webApplication": {
+          "name": "Webanwendung",
+          "description": "Dashboard und Weboberfläche sind voll funktionsfähig"
+        },
+        "database": {
+          "name": "Datenbank",
+          "description": "Datenbankdienste laufen reibungslos"
+        },
+        "seoCrawler": {
+          "name": "SEO Crawler",
+          "description": "Website-Crawling und Analyse-Dienste sind aktiv"
+        },
+        "authentication": {
+          "name": "Authentifizierung",
+          "description": "Anmeldungs- und Authentifizierungsdienste sind betriebsbereit"
+        }
+      }
+    },
+    "incidents": {
+      "title": "Kürzliche Vorfälle",
+      "statusLabels": {
+        "resolved": "Gelöst"
+      },
+      "durationLabel": "Dauer",
+      "noIncidents": "Keine kürzlichen Vorfälle zu berichten",
+      "items": {
+        "maintenance": {
+          "date": "10. März 2025",
+          "title": "Geplante Wartung",
+          "description": "Routinemäßige Datenbankwartung erfolgreich abgeschlossen ohne Serviceunterbrechung.",
+          "duration": "30 Minuten"
+        },
+        "optimization": {
+          "date": "28. Februar 2025",
+          "title": "API-Leistungsoptimierung",
+          "description": "Leistungsverbesserungen für API-Endpunkte implementiert. Durchschnittliche Antwortzeit um 40% verbessert.",
+          "duration": "15 Minuten"
+        }
+      }
+    },
+    "maintenance": {
+      "title": "Geplante Wartung",
+      "noMaintenance": "Derzeit keine geplante Wartung",
+      "items": {
+        "infrastructure": {
+          "date": "20. März 2025",
+          "time": "02:00 - 04:00 Uhr UTC",
+          "title": "Infrastruktur-Upgrade",
+          "description": "Aktualisierung der Serverinfrastruktur für verbesserte Leistung und Zuverlässigkeit."
+        }
+      }
+    },
+    "subscribe": {
+      "title": "Bleiben Sie informiert",
+      "description": "Erhalten Sie Benachrichtigungen über Systemupdates und geplante Wartungen",
+      "followText": "Folgen Sie uns in den sozialen Medien, um Echtzeit-Statusupdates zu erhalten"
+    },
+    "reliability": {
+      "title": "Engagement für Zuverlässigkeit & Transparenz",
+      "description": "Bei AI SEO Turbo wissen wir, dass Ihr SEO-Erfolg von zuverlässigen Tools und Diensten abhängt, auf die Sie sich verlassen können. Aus diesem Grund haben wir unsere Infrastruktur mit Unternehmensstandard-Zuverlässigkeit aufgebaut und bieten vollständige Transparenz bezüglich unserer Systemleistung und möglicher Vorfälle.",
+      "uptime": {
+        "title": "Branchenführende Verfügbarkeitsstandards",
+        "description": "Wir gewährleisten 99,9 % Verfügbarkeit für all unsere Dienste, wobei die meisten Services eine Erreichbarkeit von 99,99 % erreichen. Diese Zuverlässigkeit garantiert, dass Sie SEO-Audits durchführen, Rankings überwachen und jederzeit auf Ihre Daten zugreifen können – ohne Angst vor Serviceunterbrechungen.",
+        "features": [
+          {
+            "title": "99,9 % Service-Verfügbarkeit",
+            "description": "Infrastruktur auf Unternehmensniveau mit automatischem Failover"
+          },
+          {
+            "title": "Echtzeitüberwachung",
+            "description": "24/7 Systemüberwachung mit sofortigen Benachrichtigungen bei Problemen"
+          },
+          {
+            "title": "Automatische Skalierung",
+            "description": "Unsere Systeme skalieren automatisch bei erhöhter Nachfrage"
+          },
+          {
+            "title": "Daten-Redundanz",
+            "description": "Mehrfache Backups stellen die Sicherheit und Verfügbarkeit Ihrer Daten sicher"
+          },
+          {
+            "title": "Globales CDN",
+            "description": "Weltweit schnelle Ladezeiten durch unser Content Delivery Network"
+          }
+        ]
+      },
+      "transparency": {
+        "title": "Transparente Kommunikation",
+        "description": "Wir legen großen Wert auf vollständige Transparenz gegenüber unseren Nutzern. Sollten einmal Probleme auftreten (was selten ist), informieren wir Sie umgehend über verschiedene Kanäle. Unsere Statusseite wird in Echtzeit aktualisiert und Benachrichtigungen zu Störungen oder Wartungsmaßnahmen senden wir per E-Mail.",
+        "methods": [
+          {
+            "title": "Echtzeit-Statusupdates",
+            "description": "Diese Seite wird automatisch aktualisiert, sobald Änderungen erkannt werden"
+          },
+          {
+            "title": "E-Mail-Benachrichtigungen",
+            "description": "Wichtige Updates werden an alle registrierten Nutzer gesendet"
+          },
+          {
+            "title": "Incident Post-Mortems",
+            "description": "Detaillierte Analysen aller Vorfälle mit Maßnahmen zur Prävention"
+          },
+          {
+            "title": "Wartungsplanung",
+            "description": "Frühzeitige Information über geplante Wartungsfenster"
+          }
+        ]
+      },
+      "maintenance": {
+        "title": "Proaktive Wartung & Verbesserungen",
+        "description": "Anstatt auf Probleme zu warten, führen wir regelmäßige Wartungen durch und setzen kontinuierliche Verbesserungen um, um optimale Leistung sicherzustellen. Unser Entwicklungsteam arbeitet rund um die Uhr daran, Features zu erweitern, Fehler zu beheben und die Performance zu optimieren – noch bevor Nutzer davon betroffen sind.",
+        "philosophy": [
+          {
+            "title": "Bereitstellungen ohne Ausfallzeiten",
+            "description": "Alle Updates werden unterbrechungsfrei eingespielt"
+          },
+          {
+            "title": "Performance-Optimierung",
+            "description": "Kontinuierliche Überwachung und Verbesserung der Antwortzeiten"
+          },
+          {
+            "title": "Sicherheitsupdates",
+            "description": "Regelmäßige Sicherheitspatches und Schwachstellenanalysen"
+          },
+          {
+            "title": "Feature-Erweiterungen",
+            "description": "Regelmäßige Veröffentlichungen neuer Funktionen und Verbesserungen"
+          },
+          {
+            "title": "Datenbankoptimierung",
+            "description": "Regelmäßige Wartung für schnelle Datenbankabfragen"
+          }
+        ]
+      },
+      "seoImpact": {
+        "title": "Was unsere Verfügbarkeit für Ihr SEO bedeutet",
+        "description": "Zuverlässiger Service bedeutet mehr als nur Erreichbarkeit – er gewährleistet, dass Ihre SEO-Aktivitäten unterbrechungsfrei fortgeführt werden. Ob Sie wöchentliche Audits durchführen, tägliche Ranking-Änderungen überwachen oder Wettbewerber analysieren: Sie brauchen Werkzeuge, die funktionieren, wenn Sie sie benötigen.",
+        "testimonials": {
+          "title": "Warum Zuverlässigkeit zählt",
+          "items": [
+            {
+              "quote": "Während eines wichtigen Algorithmus-Updates musste ich mehrere Audits in kurzer Zeit durchführen. Die Zuverlässigkeit von AI SEO Turbo gab mir das Vertrauen, mich auf die Strategie zu konzentrieren, statt auf die Verfügbarkeit des Tools zu achten.",
+              "author": "Sarah Mitchell, Enterprise SEO Manager"
+            },
+            {
+              "quote": "Ich habe andere SEO-Tools ausprobiert, die während hoher Auslastung ausgefallen sind. Die konstante Verfügbarkeit von AI SEO Turbo ist inzwischen unverzichtbar für meinen Workflow.",
+              "author": "James Rodriguez, Freiberuflicher SEO-Berater"
+            }
+          ]
+        }
+      },
+      "enterprise": {
+        "title": "Entwickelt für Unternehmenszuverlässigkeit",
+        "description": "Unsere Infrastruktur ist darauf ausgelegt, die Anforderungen von Unternehmenskunden zu erfüllen und zugleich die nötige Flexibilität für kleinere Unternehmen zu bieten. Von mehrfachen Datenzentren in verschiedenen Regionen bis hin zu automatischem Lastenausgleich – jeder Aspekt unseres Systems ist auf maximale Verfügbarkeit und Performance optimiert.",
+        "features": [
+          {
+            "title": "Multi-Region-Bereitstellung",
+            "description": "Dienste verteilt auf mehrere Datenzentren"
+          },
+          {
+            "title": "Automatisches Failover",
+            "description": "Sofortiges Umschalten auf Backup-Systeme bei Problemen"
+          },
+          {
+            "title": "Lastenausgleich",
+            "description": "Automatische Verteilung des Datenverkehrs für optimale Leistung"
+          },
+          {
+            "title": "Datenbank-Cluster",
+            "description": "Redundante Datenbanksysteme für maximale Datensicherheit"
+          },
+          {
+            "title": "24/7-Überwachung",
+            "description": "Rund-um-die-Uhr-Überwachung durch unser DevOps-Team"
+          }
+        ]
+      },
+      "success": {
+        "title": "Ihr Erfolg ist unsere Priorität",
+        "description1": "Unser Erfolg misst sich an Ihrem Erfolg. Deshalb investieren wir stark in Infrastruktur, Monitoring und Support-Systeme – damit AI SEO Turbo immer verfügbar ist, wenn Sie es brauchen. Unser Engagement für Zuverlässigkeit wird durch unsere 99,9 % Verfügbarkeitsgarantie und transparente Kommunikation gestützt.",
+        "description2": "Wenn Sie einmal Probleme haben oder Fragen zum Servicestatus auftreten, wenden Sie sich jederzeit gerne an unser Support-Team. Wir sind da, um Ihre SEO-Aktivitäten mit den zuverlässigsten Tools der Branche zu unterstützen."
       }
     }
   }

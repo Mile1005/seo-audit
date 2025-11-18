@@ -106,14 +106,6 @@ export default function TroubleshootingTranslatedPage() {
                 <p className="text-sm text-gray-600">{t('additionalResources.systemStatus.description')}</p>
               </Link>
               <Link
-                href="/help/error-codes"
-                className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
-              >
-                <AlertTriangle className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.errorCodes.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.errorCodes.description')}</p>
-              </Link>
-              <Link
                 href="/contact"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >

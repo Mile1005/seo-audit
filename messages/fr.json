@@ -151,6 +151,11 @@
       "description": "Découvrez comment AISEOTurbo protège votre vie privée et gère vos données. Notre politique de confidentialité couvre la conformité RGPD et les mesures de sécurité des données.",
       "keywords": ["politique de confidentialité", "protection des données", "RGPD", "droits de confidentialité"]
     },
+    "status": {
+      "title": "Statut Système - Disponibilité du Service | AI SEO Turbo",
+      "description": "Vérifiez l'état actuel de nos services et surveillez les performances du système. Restez informé des maintenances programmées et des interruptions potentielles.",
+      "keywords": ["statut système", "disponibilité service", "maintenance", "état système", "surveillance"]
+    },
     "defaultTitle": "AI SEO Turbo - Audits SEO Alimentés par l'IA",
     "defaultDescription": "Obtenez des insights SEO actionnables qui boostent les classements et génèrent du trafic organique en quelques minutes",
     "defaultKeywords": "audit SEO, analyse SEO IA, optimisation de site web, trafic organique, classements de recherche",
@@ -8886,6 +8891,466 @@
           ]
         }
       },
+      "cancellation": {
+        "title": "Annuler votre abonnement",
+        "subtitle": "Découvrez notre politique d'annulation, le processus de remboursement et comment annuler votre abonnement AI SEO Turbo.",
+        "backToBilling": "Retour à la facturation",
+        "breadcrumb": {
+          "help": "Aide",
+          "billing": "Facturation",
+          "cancellation": "Annulation"
+        },
+        "importantNotice": {
+          "title": "Avis Important",
+          "description": "Annuler votre abonnement désactivera vos fonctionnalités premium à la fin de votre cycle de facturation actuel. Vous pouvez vous réactiver à tout moment."
+        },
+        "process": {
+          "title": "Processus d'Annulation",
+          "steps": [
+            {
+              "title": "Accédez à Votre Compte",
+              "description": "Connectez-vous à votre tableau de bord AI SEO Turbo et naviguez vers les paramètres de votre compte."
+            },
+            {
+              "title": "Aller à la Facturation",
+              "description": "Cliquez sur la section 'Facturation' ou 'Abonnement' dans les paramètres de votre compte.",
+              "details": [
+                "Trouvez la zone de gestion d'abonnement",
+                "Localisez les détails de votre plan actuel",
+                "Recherchez l'option d'annulation"
+              ]
+            },
+            {
+              "title": "Annuler l'Abonnement",
+              "description": "Cliquez sur le bouton 'Annuler l'Abonnement' et suivez les invites de confirmation.",
+              "details": [
+                "Examinez les conditions d'annulation",
+                "Confirmez votre décision",
+                "Recevez l'e-mail de confirmation"
+              ]
+            },
+            {
+              "title": "L'Accès Continue",
+              "description": "Vos fonctionnalités premium restent actives jusqu'à la fin de votre cycle de facturation actuel.",
+              "details": [
+                "Accès complet jusqu'à la fin du cycle de facturation",
+                "Aucune interruption immédiate de service",
+                "Remboursement au prorata si applicable"
+              ]
+            }
+          ]
+        },
+        "introduction": {
+          "title": "Politique d'annulation",
+          "description": "Nous comprenons que les circonstances changent. Notre processus d'annulation est conçu pour être simple et transparent."
+        },
+        "whenToCancel": {
+          "title": "Quand pouvez-vous annuler ?",
+          "description": "Vous pouvez annuler votre abonnement à tout moment. Votre accès continuera jusqu'à la fin de votre période de facturation actuelle.",
+          "scenarios": [
+            {
+              "icon": "Clock",
+              "title": "Fin du cycle de facturation",
+              "description": "Annulez à tout moment - votre abonnement reste actif jusqu'à la fin de votre période de facturation actuelle."
+            },
+            {
+              "icon": "TrendingDown",
+              "title": "Changements de plan",
+              "description": "Passez à un niveau inférieur ou changez les cycles de facturation au lieu d'annuler complètement."
+            },
+            {
+              "icon": "Pause",
+              "title": "Pause temporaire",
+              "description": "Contactez le support si vous devez mettre temporairement en pause votre abonnement en raison d'une absence prolongée."
+            }
+          ]
+        },
+        "howToCancel": {
+          "title": "Comment annuler votre abonnement",
+          "description": "Suivez ces étapes simples pour annuler votre abonnement.",
+          "steps": [
+            {
+              "title": "Connectez-vous à votre compte",
+              "description": "Connectez-vous à votre compte AI SEO Turbo en utilisant votre email et mot de passe."
+            },
+            {
+              "title": "Allez dans les paramètres du compte",
+              "description": "Naviguez vers les paramètres du compte depuis le menu principal ou le menu déroulant utilisateur."
+            },
+            {
+              "title": "Accédez à la section facturation",
+              "description": "Cliquez sur 'Abonnement' ou 'Facturation' dans vos paramètres de compte."
+            },
+            {
+              "title": "Annuler l'abonnement",
+              "description": "Trouvez l'option 'Annuler l'abonnement' et suivez les invites pour confirmer."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Politique de remboursement",
+          "description": "Notre politique de remboursement garantit un traitement équitable pour tous les clients.",
+          "policy": [
+            {
+              "icon": "Calendar",
+              "title": "Garantie de remboursement de 14 jours",
+              "description": "Si vous n'êtes pas satisfait dans les 14 premiers jours, nous vous rembourserons intégralement, sans questions."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Remboursements au prorata",
+              "description": "Pour les annulations après 14 jours, vous recevrez un remboursement au prorata pour le temps inutilisé dans votre cycle de facturation."
+            },
+            {
+              "icon": "Clock",
+              "title": "Délai de traitement",
+              "description": "Les remboursements sont généralement traités dans les 5-7 jours ouvrables et apparaissent sur votre méthode de paiement originale."
+            }
+          ],
+          "scenarios": [
+            {
+              "title": "Dans les 14 jours",
+              "description": "Remboursement intégral disponible pour les annulations dans les 14 premiers jours de service.",
+              "eligible": true
+            },
+            {
+              "title": "Après 14 jours",
+              "description": "Remboursement au prorata pour le temps inutilisé dans le cycle de facturation actuel.",
+              "eligible": true
+            },
+            {
+              "title": "Utilisateurs du plan gratuit",
+              "description": "Les utilisateurs du plan gratuit ne sont pas éligibles aux remboursements car aucun paiement n'a été effectué.",
+              "eligible": false
+            }
+          ],
+          "eligible": "Éligible",
+          "notEligible": "Non Éligible"
+        },
+        "whatHappens": {
+          "title": "Que se passe-t-il après l'annulation ?",
+          "description": "Comprenez ce à quoi vous attendre après avoir annulé votre abonnement.",
+          "timeline": [
+            {
+              "title": "Effets immédiats",
+              "description": "Votre abonnement reste actif jusqu'à la fin de votre période de facturation actuelle. Vous continuerez à avoir un accès complet à toutes les fonctionnalités."
+            },
+            {
+              "title": "Fin du cycle de facturation",
+              "description": "À la fin de votre période de facturation actuelle, votre abonnement sera désactivé. Vous perdrez l'accès aux fonctionnalités premium."
+            },
+            {
+              "title": "Conservation des données",
+              "description": "Votre historique d'audits et rapports seront conservés pendant 30 jours après l'annulation. Téléchargez les données importantes avant."
+            },
+            {
+              "title": "Accès au compte",
+              "description": "Vous conserverez l'accès à votre compte mais serez limité aux fonctionnalités et limites d'utilisation du niveau gratuit."
+            }
+          ]
+        },
+        "beforeCancelling": {
+          "title": "Avant d'annuler",
+          "description": "Considérez ces alternatives à l'annulation de votre abonnement.",
+          "alternatives": [
+            {
+              "icon": "TrendingDown",
+              "title": "Rétrogradez votre plan",
+              "description": "Passez à un plan de niveau inférieur qui correspond mieux à vos besoins et budget actuels."
+            },
+            {
+              "icon": "Pause",
+              "title": "Suspendre l'abonnement",
+              "description": "Contactez notre équipe de support pour discuter des suspensions temporaires d'abonnement pour les absences prolongées."
+            },
+            {
+              "icon": "MessageSquare",
+              "title": "Contacter le support",
+              "description": "Contactez notre équipe de support pour discuter de vos préoccupations et explorer des solutions."
+            },
+            {
+              "icon": "Gift",
+              "title": "Remise ou extension",
+              "description": "Demandez des remises spéciales ou des extensions de facturation qui pourraient rendre la continuation plus abordable."
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "Que Se Passe-t-il Après l'Annulation ?",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "L'accès continue jusqu'à la fin du cycle de facturation",
+              "description": "Vos fonctionnalités premium restent actives jusqu'à l'expiration de votre période de facturation actuelle."
+            },
+            {
+              "icon": "shield",
+              "title": "Les données restent sécurisées",
+              "description": "Votre historique d'audits et rapports sont stockés en sécurité et accessibles pendant 30 jours."
+            },
+            {
+              "icon": "credit-card",
+              "title": "Pas de frais supplémentaires",
+              "description": "Vous ne serez plus facturé, et toute portion inutilisée peut être remboursée selon notre politique."
+            }
+          ]
+        },
+
+        "needHelp": {
+          "title": "Besoin d'Aide ?",
+          "description": "Notre équipe de support est là pour vous aider avec toutes vos questions sur l'annulation ou la facturation.",
+          "contacts": [
+            {
+              "text": "Contacter le Support",
+              "href": "/help/support"
+            },
+            {
+              "text": "FAQ de Facturation",
+              "href": "/help/billing"
+            }
+          ]
+        },
+        "reasonsToStay": {
+          "title": "Pourquoi les clients choisissent de rester",
+          "description": "Écoutez les clients qui ont initialement envisagé d'annuler mais ont décidé de continuer.",
+          "testimonials": [
+            {
+              "quote": "J'allais annuler parce que je pensais que l'outil était trop cher, mais après avoir parlé au support, ils m'ont offert un plan personnalisé qui correspondait parfaitement à mon budget.",
+              "author": "Sarah M., Responsable Marketing"
+            },
+            {
+              "quote": "Les recommandations IA m'ont aidé à améliorer le score SEO de mon site de 40 points en seulement deux mois. Totalement worth garder l'abonnement.",
+              "author": "Mike R., Propriétaire de site web"
+            },
+            {
+              "quote": "J'ai annulé initialement mais suis revenu après avoir vu combien mes concurrents amélioraient leur SEO. Cet outil me donne un réel avantage.",
+              "author": "Jennifer L., Propriétaire E-commerce"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Gestion des méthodes de paiement",
+        "subtitle": "Apprenez à ajouter, mettre à jour et gérer vos méthodes de paiement pour une facturation transparente.",
+        "backToBilling": "Retour à la facturation",
+        "breadcrumb": {
+          "help": "Aide",
+          "billing": "Facturation",
+          "paymentMethods": "Méthodes de paiement"
+        },
+        "acceptedMethods": {
+          "title": "Méthodes de paiement acceptées",
+          "description": "Nous acceptons une variété de méthodes de paiement sécurisées pour rendre la facturation pratique pour vous.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Cartes de crédit et débit",
+              "description": "Cartes Visa, MasterCard, American Express et Discover acceptées.",
+              "features": ["Traitement instantané", "Chiffrement sécurisé", "Acceptation mondiale"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Portefeuilles numériques",
+              "description": "PayPal, Apple Pay, Google Pay et autres options de portefeuille numérique.",
+              "features": ["Paiements en un clic", "Sécurité renforcée", "Adapté mobile"]
+            },
+            {
+              "icon": "Building",
+              "name": "Virements bancaires",
+              "description": "Virements ACH et bancaires pour les plans annuels et comptes entreprise.",
+              "features": ["Frais réduits", "Direct depuis la banque", "Traitement par lots"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Gestion de vos méthodes de paiement",
+          "description": "Gardez vos informations de paiement à jour et sécurisées.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Ajouter une méthode de paiement",
+              "description": "Ajoutez une nouvelle carte de crédit, carte de débit ou portefeuille numérique à votre compte.",
+              "steps": [
+                "Aller aux paramètres du compte",
+                "Cliquer sur 'Facturation et paiements'",
+                "Sélectionner 'Ajouter une méthode de paiement'",
+                "Saisir vos détails de paiement",
+                "Vérifier et enregistrer"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Mettre à jour les informations de paiement",
+              "description": "Modifier les détails de carte, dates d'expiration ou adresses de facturation.",
+              "steps": [
+                "Naviguer vers les méthodes de paiement",
+                "Sélectionner la méthode à mettre à jour",
+                "Modifier les informations",
+                "Enregistrer les modifications",
+                "Vérifier avec une transaction test si nécessaire"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Supprimer les méthodes de paiement",
+              "description": "Supprimez les anciennes ou inutilisées méthodes de paiement de votre compte.",
+              "steps": [
+                "Accéder à la liste des méthodes de paiement",
+                "Sélectionner la méthode à supprimer",
+                "Confirmer la suppression",
+                "S'assurer qu'une autre méthode existe",
+                "Contacter le support en cas de problèmes"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Sécurité et confidentialité",
+          "description": "Vos informations de paiement sont protégées par des mesures de sécurité de pointe.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "Conforme PCI DSS",
+              "description": "Nous respectons les normes de sécurité des données de l'industrie des cartes de paiement pour une protection maximale."
+            },
+            {
+              "icon": "Lock",
+              "title": "Chiffrement de bout en bout",
+              "description": "Toutes les données de paiement sont chiffrées pendant la transmission et le stockage utilisant les protocoles SSL/TLS."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Tokenisation",
+              "description": "Les informations sensibles de carte sont remplacées par des jetons sécurisés qui ne peuvent pas être rétro-ingénieriés."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Protection contre la fraude",
+              "description": "Systèmes avancés de détection de fraude surveillent et empêchent les transactions non autorisées."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Besoin d'aide ?",
+          "description": "Notre équipe de support est là pour vous aider avec toutes les questions sur les méthodes de paiement ou les problèmes.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Contacter le support",
+              "description": "Obtenez de l'aide avec les méthodes de paiement, les problèmes de facturation ou les questions de compte.",
+              "link": "/help/support",
+              "linkText": "Commencer une conversation"
+            },
+            {
+              "icon": "FileText",
+              "title": "FAQ de facturation",
+              "description": "Trouvez des réponses aux questions courantes de facturation et de paiement.",
+              "link": "/help/billing",
+              "linkText": "Voir FAQ"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Comprendre vos factures",
+        "subtitle": "Apprenez à accéder, lire et télécharger vos factures et reçus de facturation.",
+        "backToBilling": "Retour à la facturation",
+        "breadcrumb": {
+          "help": "Aide",
+          "billing": "Facturation",
+          "invoices": "Factures"
+        },
+        "accessInvoices": {
+          "title": "Accès à vos factures",
+          "description": "Visualisez et téléchargez votre historique de facturation et vos factures depuis votre tableau de bord de compte.",
+          "steps": [
+            {
+              "title": "Connectez-vous à votre compte",
+              "description": "Connectez-vous à votre tableau de bord AI SEO Turbo avec votre email et mot de passe."
+            },
+            {
+              "title": "Naviguer vers la facturation",
+              "description": "Cliquez sur 'Paramètres du compte' puis 'Facturation et paiements' depuis le menu principal."
+            },
+            {
+              "title": "Voir l'historique des factures",
+              "description": "Sélectionnez 'Factures' ou 'Historique de facturation' pour voir toutes vos factures passées."
+            },
+            {
+              "title": "Télécharger ou imprimer",
+              "description": "Cliquez sur 'Télécharger PDF' ou 'Imprimer' pour enregistrer ou imprimer vos factures."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Comprendre les détails de la facture",
+          "description": "Apprenez ce que contient chaque section de votre facture et comment interpréter les informations.",
+          "items": [
+            {
+              "icon": "Calendar",
+              "title": "Période de facturation",
+              "description": "Montre la plage de dates pour laquelle vous êtes facturé (par exemple, cycle mensuel ou annuel)."
+            },
+            {
+              "icon": "Tag",
+              "title": "Détails du plan",
+              "description": "Le nom de votre plan d'abonnement, niveau, et tous les modules complémentaires ou remises appliqués."
+            },
+            {
+              "icon": "DollarSign",
+              "title": "Répartition des charges",
+              "description": "Liste détaillée de tous les frais incluant le plan de base, taxes, et frais supplémentaires."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Méthode de paiement",
+              "description": "La méthode de paiement utilisée et les quatre derniers chiffres pour vérification."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Historique de facturation et enregistrements",
+          "description": "Gardez une trace de tous vos paiements et maintenez des enregistrements pour des fins comptables.",
+          "features": [
+            {
+              "title": "Historique complet des transactions",
+              "description": "Visualisez tous les paiements, remboursements et ajustements dans l'ordre chronologique."
+            },
+            {
+              "title": "Téléchargements PDF",
+              "description": "Téléchargez des factures PDF professionnelles pour vos enregistrements comptables."
+            },
+            {
+              "title": "Reçus par email",
+              "description": "Reçus email automatiques envoyés pour chaque transaction."
+            },
+            {
+              "title": "Documentation fiscale",
+              "description": "Accédez aux informations et documentations liées aux taxes quand nécessaire."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Besoin d'aide avec les factures ?",
+          "description": "Obtenez de l'aide avec les questions de factures, litiges de facturation ou problèmes de compte.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Contacter le support de facturation",
+              "description": "Contactez nos spécialistes de facturation pour les questions liées aux factures.",
+              "link": "/help/support",
+              "linkText": "Contacter le support"
+            },
+            {
+              "icon": "FileText",
+              "title": "FAQ de facturation",
+              "description": "Trouvez des réponses aux questions courantes de facturation et de factures.",
+              "link": "/help/billing",
+              "linkText": "Voir FAQ"
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API et Intégrations",
         "description": "Connectez AISEOTurbo à vos outils",
@@ -11381,6 +11846,218 @@
       "compliance": {
         "title": "Conformité et Cadre Légal",
         "description": "Nous nous conformons au RGPD, CCPA et autres réglementations applicables en matière de confidentialité. Nos pratiques sont régulièrement examinées pour s'aligner sur les normes et meilleures pratiques en évolution, avec les conseils d'experts juridiques en protection des données."
+      }
+    }
+  },
+  "status": {
+    "title": "Statut du système",
+    "description": "Statut en temps réel de tous les services et de l'infrastructure AI SEO Turbo",
+    "lastUpdated": "Dernière mise à jour",
+    "hero": {
+      "title": "Système",
+      "titleHighlight": "Statut",
+      "description": "Statut en temps réel de tous les services et de l'infrastructure AI SEO Turbo",
+      "lastUpdated": "Dernière mise à jour",
+      "allSystemsOperational": "Tous les systèmes opérationnels"
+    },
+    "overallStatus": {
+      "allSystems": "Tous les systèmes",
+      "operational": "Opérationnel",
+      "thirtyDayUptime": "Disponibilité sur 30 jours",
+      "avgResponseTime": "Temps de réponse moyen"
+    },
+    "services": {
+      "title": "Statut des services",
+      "uptimeLabel": "Disponibilité sur 30 jours",
+      "statusLabels": {
+        "operational": "Opérationnel"
+      },
+      "items": {
+        "apiServices": {
+          "name": "Services API",
+          "description": "Toutes les interfaces API fonctionnent normalement"
+        },
+        "webApplication": {
+          "name": "Application web",
+          "description": "Tableau de bord et interface web entièrement opérationnels"
+        },
+        "database": {
+          "name": "Base de données",
+          "description": "Les services de base de données fonctionnent sans problème"
+        },
+        "seoCrawler": {
+          "name": "Crawler SEO",
+          "description": "Les services d'exploration et d'analyse de sites web sont actifs"
+        },
+        "authentication": {
+          "name": "Authentification",
+          "description": "Les services de connexion et d'authentification sont opérationnels"
+        }
+      }
+    },
+    "incidents": {
+      "title": "Incidents récents",
+      "statusLabels": {
+        "resolved": "Résolu"
+      },
+      "durationLabel": "Durée",
+      "noIncidents": "Aucun incident récent à signaler",
+      "items": {
+        "maintenance": {
+          "date": "10 mars 2025",
+          "title": "Maintenance planifiée",
+          "description": "Maintenance routinière de la base de données réalisée avec succès, sans interruption de service.",
+          "duration": "30 minutes"
+        },
+        "optimization": {
+          "date": "28 février 2025",
+          "title": "Optimisation des performances de l'API",
+          "description": "Améliorations de performance déployées sur les interfaces API. Le temps de réponse moyen a été amélioré de 40%.",
+          "duration": "15 minutes"
+        }
+      }
+    },
+    "maintenance": {
+      "title": "Maintenance planifiée",
+      "noMaintenance": "Aucune maintenance planifiée pour le moment",
+      "items": {
+        "infrastructure": {
+          "date": "20 mars 2025",
+          "time": "02h00 - 04h00 UTC",
+          "title": "Mise à niveau de l'infrastructure",
+          "description": "Mise à niveau de l'infrastructure serveur pour de meilleures performances et une fiabilité accrue."
+        }
+      }
+    },
+    "subscribe": {
+      "title": "Restez informé",
+      "description": "Recevez des notifications sur les mises à jour système et les maintenances planifiées",
+      "followText": "Suivez-nous sur les réseaux sociaux pour recevoir des mises à jour en temps réel sur le statut"
+    },
+    "reliability": {
+      "title": "Engagés envers la fiabilité et la transparence",
+      "description": "Chez AI SEO Turbo, nous comprenons que le succès de votre SEO dépend d'outils et de services fiables sur lesquels vous pouvez compter. C'est pourquoi nous avons construit notre infrastructure avec une fiabilité de niveau entreprise et maintenons une transparence totale sur les performances de notre système et tout incident pouvant survenir.",
+      "uptime": {
+        "title": "Normes de disponibilité leaders du secteur",
+        "description": "Nous maintenons une disponibilité de 99,9% sur tous nos services, et la plupart atteignent 99,99%. Ce niveau de fiabilité garantit que vous pouvez exécuter des audits SEO, surveiller les positions et accéder à vos données à tout moment, sans vous soucier des interruptions de service.",
+        "features": [
+          {
+            "title": "99,9% de disponibilité du service",
+            "description": "Infrastructure d'entreprise avec basculement automatique"
+          },
+          {
+            "title": "Surveillance en temps réel",
+            "description": "Surveillance système 24/7 avec alertes instantanées en cas de problème"
+          },
+          {
+            "title": "Mise à l'échelle automatique",
+            "description": "Nos systèmes se mettent à l'échelle automatiquement pour répondre à l'augmentation de la demande"
+          },
+          {
+            "title": "Redondance des données",
+            "description": "Plusieurs sauvegardes garantissent que vos données sont toujours sûres et accessibles"
+          },
+          {
+            "title": "CDN global",
+            "description": "Temps de chargement rapides dans le monde entier grâce à notre réseau de distribution de contenu"
+          }
+        ]
+      },
+      "transparency": {
+        "title": "Communication transparente",
+        "description": "Nous croyons en une transparence totale avec nos utilisateurs. Lorsqu'un incident se produit (ce qui est rare), nous fournissons des mises à jour immédiates par plusieurs canaux. Notre page de statut se met à jour en temps réel et nous envoyons des notifications par e-mail pour toute interruption de service ou tâche de maintenance.",
+        "methods": [
+          {
+            "title": "Mises à jour de statut en temps réel",
+            "description": "Cette page se met à jour automatiquement dès que nous détectons un changement"
+          },
+          {
+            "title": "Notifications par e-mail",
+            "description": "Mises à jour critiques envoyées à tous les utilisateurs enregistrés"
+          },
+          {
+            "title": "Analyses post-incident",
+            "description": "Analyses détaillées des incidents et mise en œuvre de mesures préventives"
+          },
+          {
+            "title": "Planification de la maintenance",
+            "description": "Avis préalable des fenêtres de maintenance programmée"
+          }
+        ]
+      },
+      "maintenance": {
+        "title": "Maintenance proactive et améliorations continues",
+        "description": "Plutôt que d'attendre que des problèmes surviennent, nous effectuons des maintenances périodiques et mettons en œuvre des améliorations continues pour assurer des performances optimales. Notre équipe de développement travaille 24/7 pour améliorer les fonctionnalités, corriger les bugs et optimiser les performances avant qu'elles n'impactent les utilisateurs.",
+        "philosophy": [
+          {
+            "title": "Déploiements sans interruption",
+            "description": "Toutes les mises à jour sont déployées sans interruption de service"
+          },
+          {
+            "title": "Optimisation des performances",
+            "description": "Surveillance continue et amélioration des temps de réponse"
+          },
+          {
+            "title": "Mises à jour de sécurité",
+            "description": "Correctifs de sécurité réguliers et évaluations des vulnérabilités"
+          },
+          {
+            "title": "Améliorations fonctionnelles",
+            "description": "Lancements réguliers de nouvelles fonctionnalités et améliorations"
+          },
+          {
+            "title": "Optimisation des bases de données",
+            "description": "Maintenance régulière pour assurer des requêtes rapides"
+          }
+        ]
+      },
+      "seoImpact": {
+        "title": "Ce que signifie notre disponibilité pour votre SEO",
+        "description": "Un service fiable ne signifie pas seulement la disponibilité—il garantit également que vos efforts SEO se poursuivent sans interruption. Que vous exécutiez des audits hebdomadaires, surveilliez les changements quotidiens de positionnement ou analysiez les stratégies des concurrents, vous avez besoin d'outils qui fonctionnent quand vous en avez besoin.",
+        "testimonials": {
+          "title": "Pourquoi la fiabilité compte",
+          "items": [
+            {
+              "quote": "Lors d'une mise à jour critique de l'algorithme, j'avais besoin d'exécuter plusieurs audits rapidement. La fiabilité d'AI SEO Turbo m'a permis de me concentrer sur la stratégie sans m'inquiéter de la disponibilité des outils.",
+              "author": "Sarah Mitchell, Responsable SEO Entreprise"
+            },
+            {
+              "quote": "J'ai essayé d'autres outils SEO qui tombaient en panne aux heures de pointe. La disponibilité constante d'AI SEO Turbo est devenue essentielle à mon flux de travail.",
+              "author": "James Rodriguez, Consultant SEO Freelance"
+            }
+          ]
+        }
+      },
+      "enterprise": {
+        "title": "Conçu pour la fiabilité d'entreprise",
+        "description": "Notre infrastructure est conçue pour répondre aux besoins des utilisateurs d'entreprise tout en maintenant la flexibilité requise par les petites entreprises. Des centres de données multirégionaux à l'équilibrage de charge automatique, chaque aspect de notre système est optimisé pour une disponibilité et des performances maximales.",
+        "features": [
+          {
+            "title": "Déploiement multirégional",
+            "description": "Services distribués sur plusieurs centres de données"
+          },
+          {
+            "title": "Basculement automatique",
+            "description": "Commutation instantanée vers des systèmes de secours en cas d'incident"
+          },
+          {
+            "title": "Équilibrage de charge",
+            "description": "Distribution automatique du trafic pour des performances optimales"
+          },
+          {
+            "title": "Clustering de bases de données",
+            "description": "Bases de données redondantes pour une sécurité maximale des données"
+          },
+          {
+            "title": "Surveillance 24/7",
+            "description": "Surveillance continue par notre équipe DevOps"
+          }
+        ]
+      },
+      "success": {
+        "title": "Votre succès est notre priorité",
+        "description1": "Nous mesurons notre succès par le succès de nos utilisateurs. C'est pourquoi nous investissons massivement dans l'infrastructure, la surveillance et les systèmes de support qui assurent qu'AI SEO Turbo est toujours disponible quand vous en avez besoin. Notre engagement envers la fiabilité est soutenu par notre garantie de disponibilité de 99,9% et notre dévouement à la communication transparente.",
+        "description2": "Si vous rencontrez un problème ou avez des questions sur l'état du service, n'hésitez pas à contacter notre équipe de support. Nous sommes là pour assurer que vos efforts SEO sont soutenus par les outils les plus fiables du secteur."
       }
     }
   }

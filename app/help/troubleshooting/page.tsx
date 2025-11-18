@@ -155,7 +155,7 @@ export default function TroubleshootingPage() {
                 <p className="text-sm text-gray-600">Basic setup and first steps</p>
               </Link>
               <Link
-                href="/help/features/seo-audit"
+                href="/help/seo-tools/seo-audit"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <Settings className="w-8 h-8 text-blue-600 mx-auto mb-2" />

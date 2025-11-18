@@ -156,6 +156,11 @@
       "description": "Pelajari bagaimana AISEOTurbo melindungi privasi Anda dan menangani data Anda. Kebijakan privasi kami mencakup kepatuhan GDPR dan langkah-langkah keamanan data.",
       "keywords": ["kebijakan privasi", "perlindungan data", "GDPR", "hak privasi"]
     },
+    "status": {
+      "title": "Status Sistem - Ketersediaan Layanan | AI SEO Turbo",
+      "description": "Periksa status layanan kami saat ini dan pantau performa sistem. Tetap terinformasi tentang pemeliharaan terjadwal dan gangguan potensial.",
+      "keywords": ["status sistem", "ketersediaan layanan", "pemeliharaan", "status sistem", "pemantauan"]
+    },
     "defaultTitle": "AI SEO Turbo - Audit SEO Bertenaga AI",
     "defaultDescription": "Dapatkan wawasan SEO yang dapat ditindaklanjuti yang meningkatkan peringkat dan mendorong traffic organik dalam hitungan menit",
     "defaultKeywords": "audit SEO, analisis SEO AI, optimasi website, traffic organik, peringkat pencarian",
@@ -8561,6 +8566,466 @@
           ]
         }
       },
+      "cancellation": {
+        "title": "Membatalkan Langganan Anda",
+        "subtitle": "Pelajari tentang kebijakan pembatalan kami, proses pengembalian dana, dan cara membatalkan langganan AI SEO Turbo Anda.",
+        "backToBilling": "Kembali ke Penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "cancellation": "Pembatalan"
+        },
+        "importantNotice": {
+          "title": "Pemberitahuan Penting",
+          "description": "Membatalkan langganan Anda akan menonaktifkan fitur premium Anda di akhir siklus penagihan Anda saat ini. Anda dapat mengaktifkan kembali kapan saja."
+        },
+        "process": {
+          "title": "Proses Pembatalan",
+          "steps": [
+            {
+              "title": "Akses Akun Anda",
+              "description": "Masuk ke dashboard AI SEO Turbo Anda dan navigasi ke pengaturan akun Anda."
+            },
+            {
+              "title": "Pergi ke Penagihan",
+              "description": "Klik pada bagian 'Penagihan' atau 'Langganan' di pengaturan akun Anda.",
+              "details": [
+                "Temukan area manajemen langganan",
+                "Temukan detail paket Anda saat ini",
+                "Cari opsi pembatalan"
+              ]
+            },
+            {
+              "title": "Batalkan Langganan",
+              "description": "Klik tombol 'Batalkan Langganan' dan ikuti petunjuk konfirmasi.",
+              "details": [
+                "Tinjau syarat pembatalan",
+                "Konfirmasi keputusan Anda",
+                "Terima email konfirmasi"
+              ]
+            },
+            {
+              "title": "Akses Terus Berlanjut",
+              "description": "Fitur premium Anda tetap aktif hingga akhir siklus penagihan Anda saat ini.",
+              "details": [
+                "Akses penuh hingga siklus penagihan berakhir",
+                "Tidak ada gangguan layanan segera",
+                "Pengembalian dana proporsional jika berlaku"
+              ]
+            }
+          ]
+        },
+        "introduction": {
+          "title": "Kebijakan Pembatalan",
+          "description": "Kami memahami bahwa keadaan bisa berubah. Proses pembatalan kami dirancang agar sederhana dan transparan."
+        },
+        "whenToCancel": {
+          "title": "Kapan Anda Dapat Membatalkan?",
+          "description": "Anda dapat membatalkan langganan kapan saja. Akses Anda akan berlanjut hingga akhir siklus penagihan Anda saat ini.",
+          "scenarios": [
+            {
+              "icon": "Clock",
+              "title": "Akhir Siklus Penagihan",
+              "description": "Batalkan kapan saja - langganan Anda tetap aktif hingga akhir siklus penagihan Anda saat ini."
+            },
+            {
+              "icon": "TrendingDown",
+              "title": "Perubahan Paket",
+              "description": "Turunkan ke tingkat yang lebih rendah atau ubah siklus penagihan alih-alih membatalkan sepenuhnya."
+            },
+            {
+              "icon": "Pause",
+              "title": "Jeda Sementara",
+              "description": "Hubungi dukungan jika Anda perlu menjeda langganan sementara karena ketidakhadiran yang berkepanjangan."
+            }
+          ]
+        },
+        "howToCancel": {
+          "title": "Cara Membatalkan Langganan Anda",
+          "description": "Ikuti langkah-langkah sederhana ini untuk membatalkan langganan Anda.",
+          "steps": [
+            {
+              "title": "Masuk ke Akun Anda",
+              "description": "Masuk ke akun AI SEO Turbo Anda menggunakan email dan kata sandi Anda."
+            },
+            {
+              "title": "Buka Pengaturan Akun",
+              "description": "Navigasi ke pengaturan akun dari menu utama atau menu dropdown pengguna."
+            },
+            {
+              "title": "Akses Bagian Penagihan",
+              "description": "Klik 'Langganan' atau 'Penagihan' di pengaturan akun Anda."
+            },
+            {
+              "title": "Batalkan Langganan",
+              "description": "Temukan opsi 'Batalkan Langganan' dan ikuti petunjuk untuk mengonfirmasi."
+            }
+          ]
+        },
+        "refundPolicy": {
+          "title": "Kebijakan Pengembalian Dana",
+          "description": "Kebijakan pengembalian dana kami memastikan perlakuan yang adil untuk semua pelanggan.",
+          "policy": [
+            {
+              "icon": "Calendar",
+              "title": "Garansi Uang Kembali 14 Hari",
+              "description": "Jika Anda tidak puas dalam 14 hari pertama, kami berikan pengembalian dana penuh, tanpa pertanyaan."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Pengembalian Dana Proporsional",
+              "description": "Untuk pembatalan setelah 14 hari, Anda akan menerima pengembalian dana proporsional untuk waktu yang tidak digunakan dalam siklus penagihan Anda."
+            },
+            {
+              "icon": "Clock",
+              "title": "Waktu Pemrosesan",
+              "description": "Pengembalian dana biasanya diproses dalam 5-7 hari kerja dan muncul di metode pembayaran asli Anda."
+            }
+          ],
+          "scenarios": [
+            {
+              "title": "Dalam 14 Hari",
+              "description": "Pengembalian dana penuh tersedia untuk pembatalan dalam 14 hari pertama layanan.",
+              "eligible": true
+            },
+            {
+              "title": "Setelah 14 Hari",
+              "description": "Pengembalian dana proporsional untuk waktu yang tidak digunakan dalam siklus penagihan saat ini.",
+              "eligible": true
+            },
+            {
+              "title": "Pengguna Paket Gratis",
+              "description": "Pengguna paket gratis tidak memenuhi syarat untuk pengembalian dana karena tidak ada pembayaran yang dilakukan.",
+              "eligible": false
+            }
+          ],
+          "eligible": "Memenuhi Syarat",
+          "notEligible": "Tidak Memenuhi Syarat"
+        },
+        "whatHappens": {
+          "title": "Apa yang Terjadi Setelah Pembatalan?",
+          "description": "Pahami apa yang diharapkan setelah Anda membatalkan langganan Anda.",
+          "timeline": [
+            {
+              "title": "Efek Segera",
+              "description": "Langganan Anda tetap aktif hingga akhir siklus penagihan Anda saat ini. Anda akan terus memiliki akses penuh ke semua fitur."
+            },
+            {
+              "title": "Akhir Siklus Penagihan",
+              "description": "Di akhir siklus penagihan Anda saat ini, langganan Anda akan dinonaktifkan. Anda akan kehilangan akses ke fitur premium."
+            },
+            {
+              "title": "Penyimpanan Data",
+              "description": "Riwayat audit dan laporan Anda akan disimpan selama 30 hari setelah pembatalan. Unduh data penting sebelumnya."
+            },
+            {
+              "title": "Akses Akun",
+              "description": "Anda akan mempertahankan akses ke akun Anda tetapi terbatas pada fitur gratis dan batas penggunaan."
+            }
+          ]
+        },
+        "beforeCancelling": {
+          "title": "Sebelum Membatalkan",
+          "description": "Pertimbangkan alternatif ini untuk membatalkan langganan Anda.",
+          "alternatives": [
+            {
+              "icon": "TrendingDown",
+              "title": "Turunkan Paket Anda",
+              "description": "Beralih ke paket tingkat yang lebih rendah yang lebih sesuai dengan kebutuhan dan anggaran Anda saat ini."
+            },
+            {
+              "icon": "Pause",
+              "title": "Jeda Langganan",
+              "description": "Hubungi tim dukungan kami untuk membahas jeda langganan sementara untuk ketidakhadiran yang berkepanjangan."
+            },
+            {
+              "icon": "MessageSquare",
+              "title": "Hubungi Dukungan",
+              "description": "Hubungi tim dukungan kami untuk membahas kekhawatiran Anda dan menjelajahi solusi."
+            },
+            {
+              "icon": "Gift",
+              "title": "Diskon atau Perpanjangan",
+              "description": "Tanyakan diskon khusus atau perpanjangan penagihan yang mungkin membuat kelanjutan lebih terjangkau."
+            }
+          ]
+        },
+        "afterCancellation": {
+          "title": "Apa yang Terjadi Setelah Pembatalan?",
+          "items": [
+            {
+              "icon": "clock",
+              "title": "Akses berlanjut hingga akhir siklus penagihan",
+              "description": "Fitur premium Anda tetap aktif hingga periode penagihan Anda saat ini berakhir."
+            },
+            {
+              "icon": "shield",
+              "title": "Data tetap aman",
+              "description": "Riwayat audit dan laporan Anda disimpan dengan aman dan dapat diakses selama 30 hari."
+            },
+            {
+              "icon": "credit-card",
+              "title": "Tidak ada biaya lebih lanjut",
+              "description": "Anda tidak akan ditagih lagi, dan bagian yang tidak digunakan dapat dikembalikan berdasarkan kebijakan kami."
+            }
+          ]
+        },
+
+        "needHelp": {
+          "title": "Butuh Bantuan?",
+          "description": "Tim dukungan kami di sini untuk membantu Anda dengan pertanyaan apa pun tentang pembatalan atau penagihan.",
+          "contacts": [
+            {
+              "text": "Hubungi Dukungan",
+              "href": "/help/support"
+            },
+            {
+              "text": "FAQ Penagihan",
+              "href": "/help/billing"
+            }
+          ]
+        },
+        "reasonsToStay": {
+          "title": "Mengapa Pelanggan Memilih Tetap",
+          "description": "Dengarkan dari pelanggan yang awalnya mempertimbangkan pembatalan tetapi memutuskan untuk melanjutkan.",
+          "testimonials": [
+            {
+              "quote": "Saya akan membatalkan karena saya pikir alat ini terlalu mahal, tetapi setelah berbicara dengan dukungan, mereka menawarkan paket khusus yang cocok sempurna dengan anggaran saya.",
+              "author": "Sarah M., Manajer Pemasaran"
+            },
+            {
+              "quote": "Rekomendasi AI membantu saya meningkatkan skor SEO situs saya sebesar 40 poin dalam waktu hanya dua bulan. Sepenuhnya worth mempertahankan langganan.",
+              "author": "Mike R., Pemilik Situs Web"
+            },
+            {
+              "quote": "Saya membatalkan awalnya tetapi kembali setelah melihat seberapa banyak pesaing saya meningkatkan SEO mereka. Alat ini memberi saya keunggulan nyata.",
+              "author": "Jennifer L., Pemilik E-commerce"
+            }
+          ]
+        }
+      },
+      "paymentMethods": {
+        "title": "Mengelola Metode Pembayaran",
+        "subtitle": "Pelajari cara menambah, memperbarui, dan mengelola metode pembayaran Anda untuk penagihan yang lancar.",
+        "backToBilling": "Kembali ke penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "paymentMethods": "Metode Pembayaran"
+        },
+        "acceptedMethods": {
+          "title": "Metode Pembayaran yang Diterima",
+          "description": "Kami menerima berbagai metode pembayaran aman untuk membuat penagihan nyaman bagi Anda.",
+          "methods": [
+            {
+              "icon": "CreditCard",
+              "name": "Kartu Kredit dan Debit",
+              "description": "Kartu Visa, MasterCard, American Express, dan Discover diterima.",
+              "features": ["Pemrosesan instan", "Enkripsi aman", "Penerimaan global"]
+            },
+            {
+              "icon": "Wallet",
+              "name": "Dompet Digital",
+              "description": "PayPal, Apple Pay, Google Pay, dan opsi dompet digital lainnya.",
+              "features": ["Pembayaran satu klik", "Keamanan ditingkatkan", "Ramah seluler"]
+            },
+            {
+              "icon": "Building",
+              "name": "Transfer Bank",
+              "description": "Transfer ACH dan wire untuk paket tahunan dan akun perusahaan.",
+              "features": ["Biaya lebih rendah", "Langsung dari bank", "Pemrosesan batch"]
+            }
+          ]
+        },
+        "managingMethods": {
+          "title": "Mengelola Metode Pembayaran Anda",
+          "description": "Jaga informasi pembayaran Anda tetap terkini dan aman.",
+          "actions": [
+            {
+              "icon": "Plus",
+              "title": "Menambahkan Metode Pembayaran",
+              "description": "Tambahkan kartu kredit, debit, atau dompet digital baru ke akun Anda.",
+              "steps": [
+                "Pergi ke pengaturan akun",
+                "Klik 'Penagihan dan pembayaran'",
+                "Pilih 'Tambah metode pembayaran'",
+                "Masukkan detail pembayaran Anda",
+                "Verifikasi dan simpan"
+              ]
+            },
+            {
+              "icon": "Edit",
+              "title": "Memperbarui Informasi Pembayaran",
+              "description": "Ubah detail kartu, tanggal kedaluwarsa, atau alamat penagihan.",
+              "steps": [
+                "Navigasi ke metode pembayaran",
+                "Pilih metode untuk diperbarui",
+                "Edit informasi",
+                "Simpan perubahan",
+                "Verifikasi dengan transaksi uji jika diperlukan"
+              ]
+            },
+            {
+              "icon": "Trash2",
+              "title": "Menghapus Metode Pembayaran",
+              "description": "Hapus metode pembayaran lama atau yang tidak digunakan dari akun Anda.",
+              "steps": [
+                "Akses daftar metode pembayaran",
+                "Pilih metode untuk dihapus",
+                "Konfirmasi penghapusan",
+                "Pastikan metode lain ada",
+                "Hubungi dukungan jika ada masalah"
+              ]
+            }
+          ]
+        },
+        "security": {
+          "title": "Keamanan dan Privasi",
+          "description": "Informasi pembayaran Anda dilindungi dengan langkah-langkah keamanan terdepan industri.",
+          "features": [
+            {
+              "icon": "Shield",
+              "title": "Sesuai PCI DSS",
+              "description": "Kami mematuhi Standar Keamanan Data Industri Kartu Pembayaran untuk perlindungan maksimal."
+            },
+            {
+              "icon": "Lock",
+              "title": "Enkripsi End-to-End",
+              "description": "Semua data pembayaran dienkripsi selama transmisi dan penyimpanan menggunakan protokol SSL/TLS."
+            },
+            {
+              "icon": "EyeOff",
+              "title": "Tokenisasi",
+              "description": "Informasi kartu sensitif diganti dengan token aman yang tidak dapat direverse-engineer."
+            },
+            {
+              "icon": "CheckCircle",
+              "title": "Perlindungan Penipuan",
+              "description": "Sistem deteksi penipuan canggih memantau dan mencegah transaksi yang tidak sah."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Butuh Bantuan?",
+          "description": "Tim dukungan kami di sini untuk membantu Anda dengan pertanyaan apa pun tentang metode pembayaran atau masalah.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Hubungi dukungan",
+              "description": "Dapatkan bantuan dengan metode pembayaran, masalah penagihan, atau pertanyaan akun.",
+              "link": "/help/support",
+              "linkText": "Mulai percakapan"
+            },
+            {
+              "icon": "FileText",
+              "title": "FAQ penagihan",
+              "description": "Temukan jawaban untuk pertanyaan umum penagihan dan pembayaran.",
+              "link": "/help/billing",
+              "linkText": "Lihat FAQ"
+            }
+          ]
+        }
+      },
+      "invoices": {
+        "title": "Memahami Faktur Anda",
+        "subtitle": "Pelajari cara mengakses, membaca, dan mengunduh faktur dan tanda terima penagihan Anda.",
+        "backToBilling": "Kembali ke penagihan",
+        "breadcrumb": {
+          "help": "Bantuan",
+          "billing": "Penagihan",
+          "invoices": "Faktur"
+        },
+        "accessInvoices": {
+          "title": "Mengakses Faktur Anda",
+          "description": "Lihat dan unduh riwayat penagihan dan faktur Anda dari dasbor akun.",
+          "steps": [
+            {
+              "title": "Masuk ke akun Anda",
+              "description": "Masuk ke dasbor AI SEO Turbo Anda dengan email dan kata sandi."
+            },
+            {
+              "title": "Navigasi ke penagihan",
+              "description": "Klik 'Pengaturan akun' lalu 'Penagihan dan pembayaran' dari menu utama."
+            },
+            {
+              "title": "Lihat riwayat faktur",
+              "description": "Pilih 'Faktur' atau 'Riwayat penagihan' untuk melihat semua faktur masa lalu Anda."
+            },
+            {
+              "title": "Unduh atau cetak",
+              "description": "Klik 'Unduh PDF' atau 'Cetak' untuk menyimpan atau mencetak faktur Anda."
+            }
+          ]
+        },
+        "invoiceDetails": {
+          "title": "Memahami Detail Faktur",
+          "description": "Pelajari apa yang terkandung di setiap bagian faktur Anda dan bagaimana menafsirkan informasi.",
+          "items": [
+            {
+              "icon": "Calendar",
+              "title": "Periode Penagihan",
+              "description": "Menunjukkan rentang tanggal untuk periode Anda ditagih (misalnya, siklus bulanan atau tahunan)."
+            },
+            {
+              "icon": "Tag",
+              "title": "Detail Paket",
+              "description": "Nama paket langganan Anda, tingkat, dan add-on atau diskon apa pun yang diterapkan."
+            },
+            {
+              "icon": "DollarSign",
+              "title": "Rincian Biaya",
+              "description": "Daftar detail semua biaya termasuk paket dasar, pajak, dan biaya tambahan."
+            },
+            {
+              "icon": "CreditCard",
+              "title": "Metode Pembayaran",
+              "description": "Metode pembayaran yang digunakan dan empat digit terakhir untuk verifikasi."
+            }
+          ]
+        },
+        "billingHistory": {
+          "title": "Riwayat Penagihan dan Catatan",
+          "description": "Lacak semua pembayaran Anda dan pertahankan catatan untuk tujuan akuntansi.",
+          "features": [
+            {
+              "title": "Riwayat Transaksi Lengkap",
+              "description": "Lihat semua pembayaran, pengembalian dana, dan penyesuaian dalam urutan kronologis."
+            },
+            {
+              "title": "Unduhan PDF",
+              "description": "Unduh faktur PDF profesional untuk catatan akuntansi Anda."
+            },
+            {
+              "title": "Tanda Terima Email",
+              "description": "Tanda terima otomatis melalui email dikirim untuk setiap transaksi."
+            },
+            {
+              "title": "Dokumentasi Pajak",
+              "description": "Akses informasi dan dokumentasi terkait pajak saat diperlukan."
+            }
+          ]
+        },
+        "needHelp": {
+          "title": "Butuh Bantuan dengan Faktur?",
+          "description": "Dapatkan bantuan dengan pertanyaan faktur, sengketa penagihan, atau masalah akun.",
+          "contacts": [
+            {
+              "icon": "MessageSquare",
+              "title": "Hubungi dukungan penagihan",
+              "description": "Hubungi spesialis penagihan kami untuk pertanyaan terkait faktur.",
+              "link": "/help/support",
+              "linkText": "Hubungi dukungan"
+            },
+            {
+              "icon": "FileText",
+              "title": "FAQ penagihan",
+              "description": "Temukan jawaban untuk pertanyaan umum penagihan dan faktur.",
+              "link": "/help/billing",
+              "linkText": "Lihat FAQ"
+            }
+          ]
+        }
+      },
       "api": {
         "title": "API & Integrasi",
         "description": "Hubungkan AISEOTurbo dengan alat Anda",
@@ -11056,6 +11521,218 @@
       "compliance": {
         "title": "Kepatuhan dan Kerangka Hukum",
         "description": "Kami mematuhi GDPR, CCPA dan peraturan privasi yang berlaku lainnya. Praktik kami secara teratur ditinjau untuk menyelaraskan dengan standar dan praktik terbaik yang berkembang, dengan panduan dari ahli hukum dalam perlindungan data."
+      }
+    }
+  },
+  "status": {
+    "title": "Status Sistem",
+    "description": "Status waktu nyata dari semua layanan dan infrastruktur AI SEO Turbo",
+    "lastUpdated": "Terakhir diperbarui",
+    "hero": {
+      "title": "Sistem",
+      "titleHighlight": "Status",
+      "description": "Status waktu nyata dari semua layanan dan infrastruktur AI SEO Turbo",
+      "lastUpdated": "Terakhir diperbarui",
+      "allSystemsOperational": "Semua Sistem Beroperasi Normal"
+    },
+    "overallStatus": {
+      "allSystems": "Semua Sistem",
+      "operational": "Beroperasi Normal",
+      "thirtyDayUptime": "Waktu Aktif 30 Hari",
+      "avgResponseTime": "Rata-rata Waktu Respons"
+    },
+    "services": {
+      "title": "Status Layanan",
+      "uptimeLabel": "Waktu aktif 30 hari",
+      "statusLabels": {
+        "operational": "Beroperasi Normal"
+      },
+      "items": {
+        "apiServices": {
+          "name": "Layanan API",
+          "description": "Semua endpoint API berfungsi normal"
+        },
+        "webApplication": {
+          "name": "Aplikasi Web",
+          "description": "Dashboard dan antarmuka web beroperasi sepenuhnya"
+        },
+        "database": {
+          "name": "Basis Data",
+          "description": "Layanan basis data berjalan dengan lancar"
+        },
+        "seoCrawler": {
+          "name": "Perayap SEO",
+          "description": "Layanan perayapan dan analisis situs web aktif"
+        },
+        "authentication": {
+          "name": "Otentikasi",
+          "description": "Layanan login dan otentikasi beroperasi normal"
+        }
+      }
+    },
+    "incidents": {
+      "title": "Insiden Terbaru",
+      "statusLabels": {
+        "resolved": "Terselesaikan"
+      },
+      "durationLabel": "Durasi",
+      "noIncidents": "Tidak ada insiden terbaru untuk dilaporkan",
+      "items": {
+        "maintenance": {
+          "date": "10 Maret 2025",
+          "title": "Pemeliharaan Terjadwal",
+          "description": "Pemeliharaan rutin basis data selesai dengan sukses tanpa gangguan layanan.",
+          "duration": "30 menit"
+        },
+        "optimization": {
+          "date": "28 Februari 2025",
+          "title": "Optimalisasi Performa API",
+          "description": "Peningkatan performa telah diterapkan ke endpoint API. Rata-rata waktu respons membaik sebesar 40%.",
+          "duration": "15 menit"
+        }
+      }
+    },
+    "maintenance": {
+      "title": "Pemeliharaan Terjadwal",
+      "noMaintenance": "Tidak ada pemeliharaan terjadwal saat ini",
+      "items": {
+        "infrastructure": {
+          "date": "20 Maret 2025",
+          "time": "02:00 - 04:00 WIB UTC",
+          "title": "Peningkatan Infrastruktur",
+          "description": "Meningkatkan infrastruktur server untuk meningkatkan kinerja dan keandalan."
+        }
+      }
+    },
+    "subscribe": {
+      "title": "Tetap Terinformasi",
+      "description": "Dapatkan notifikasi tentang pembaruan sistem dan pemeliharaan terjadwal",
+      "followText": "Ikuti kami di media sosial untuk mendapatkan pembaruan status secara real-time"
+    },
+    "reliability": {
+      "title": "Berkomitmen pada Keandalan dan Transparansi",
+      "description": "Di AI SEO Turbo, kami memahami bahwa kesuksesan SEO Anda bergantung pada alat dan layanan yang andal. Itulah sebabnya kami membangun infrastruktur kami dengan keandalan tingkat perusahaan dan menjaga transparansi total tentang performa sistem dan insiden apa pun yang mungkin terjadi.",
+      "uptime": {
+        "title": "Standar Waktu Aktif Terdepan di Industri",
+        "description": "Kami mempertahankan waktu aktif 99,9% di semua layanan kami, dan sebagian besar mencapai 99,99%. Tingkat keandalan ini memastikan Anda dapat menjalankan audit SEO, memantau peringkat, dan mengakses data Anda kapan saja, tanpa khawatir tentang gangguan layanan.",
+        "features": [
+          {
+            "title": "99,9% Ketersediaan Layanan",
+            "description": "Infrastruktur perusahaan dengan failover otomatis"
+          },
+          {
+            "title": "Pemantauan Real-Time",
+            "description": "Pemantauan sistem 24/7 dengan peringatan instan untuk masalah apa pun"
+          },
+          {
+            "title": "Penskalaan Otomatis",
+            "description": "Sistem kami secara otomatis diskalakan untuk menangani peningkatan permintaan"
+          },
+          {
+            "title": "Redundansi Data",
+            "description": "Beberapa cadangan memastikan data Anda selalu aman dan dapat diakses"
+          },
+          {
+            "title": "CDN Global",
+            "description": "Waktu pemuatan cepat di seluruh dunia melalui jaringan distribusi konten kami"
+          }
+        ]
+      },
+      "transparency": {
+        "title": "Komunikasi Transparan",
+        "description": "Kami percaya pada transparansi total dengan pengguna kami. Ketika insiden terjadi (yang jarang terjadi), kami memberikan pembaruan langsung melalui beberapa saluran. Halaman status kami diperbarui secara real-time, dan kami mengirim notifikasi email untuk gangguan layanan atau tugas pemeliharaan apa pun.",
+        "methods": [
+          {
+            "title": "Pembaruan Status Real-Time",
+            "description": "Halaman ini diperbarui secara otomatis segera setelah kami mendeteksi perubahan apa pun"
+          },
+          {
+            "title": "Notifikasi Email",
+            "description": "Pembaruan kritis dikirim ke semua pengguna terdaftar"
+          },
+          {
+            "title": "Analisis Pasca-Insiden",
+            "description": "Analisis terperinci dari insiden dan penerapan langkah pencegahan"
+          },
+          {
+            "title": "Perencanaan Pemeliharaan",
+            "description": "Pemberitahuan awal tentang jendela pemeliharaan terjadwal"
+          }
+        ]
+      },
+      "maintenance": {
+        "title": "Pemeliharaan Proaktif dan Peningkatan Berkelanjutan",
+        "description": "Alih-alih menunggu masalah terjadi, kami melakukan pemeliharaan berkala dan menerapkan peningkatan berkelanjutan untuk memastikan performa optimal. Tim pengembangan kami bekerja 24/7 untuk meningkatkan fitur, memperbaiki bug, dan mengoptimalkan performa sebelum memengaruhi pengguna.",
+        "philosophy": [
+          {
+            "title": "Penyebaran Tanpa Gangguan",
+            "description": "Semua pembaruan diterapkan tanpa gangguan layanan"
+          },
+          {
+            "title": "Optimasi Performa",
+            "description": "Pemantauan berkelanjutan dan peningkatan waktu respons"
+          },
+          {
+            "title": "Pembaruan Keamanan",
+            "description": "Patch keamanan reguler dan penilaian kerentanan"
+          },
+          {
+            "title": "Peningkatan Fungsionalitas",
+            "description": "Peluncuran reguler fitur baru dan peningkatan"
+          },
+          {
+            "title": "Optimasi Basis Data",
+            "description": "Pemeliharaan reguler untuk memastikan kueri cepat"
+          }
+        ]
+      },
+      "seoImpact": {
+        "title": "Apa Artinya Waktu Aktif Kami untuk SEO Anda",
+        "description": "Layanan yang andal bukan hanya tentang ketersediaan—ini juga memastikan upaya SEO Anda berlanjut tanpa gangguan. Baik Anda menjalankan audit mingguan, memantau perubahan peringkat harian, atau menganalisis strategi pesaing, Anda membutuhkan alat yang berfungsi saat Anda membutuhkannya.",
+        "testimonials": {
+          "title": "Mengapa Keandalan Penting",
+          "items": [
+            {
+              "quote": "Selama pembaruan algoritma kritis, saya perlu menjalankan beberapa audit dengan cepat. Keandalan AI SEO Turbo memungkinkan saya untuk fokus pada strategi tanpa khawatir tentang ketersediaan alat.",
+              "author": "Sarah Mitchell, Manajer SEO Perusahaan"
+            },
+            {
+              "quote": "Saya telah mencoba alat SEO lain yang mogok saat jam sibuk. Waktu aktif konstan AI SEO Turbo telah menjadi penting untuk alur kerja saya.",
+              "author": "James Rodriguez, Konsultan SEO Freelance"
+            }
+          ]
+        }
+      },
+      "enterprise": {
+        "title": "Dirancang untuk Keandalan Perusahaan",
+        "description": "Infrastruktur kami dirancang untuk memenuhi kebutuhan pengguna perusahaan sambil mempertahankan fleksibilitas yang dibutuhkan bisnis kecil. Dari pusat data multiregion hingga penyeimbangan beban otomatis, setiap aspek sistem kami dioptimalkan untuk waktu aktif dan performa maksimal.",
+        "features": [
+          {
+            "title": "Penyebaran Multiregion",
+            "description": "Layanan didistribusikan di beberapa pusat data"
+          },
+          {
+            "title": "Failover Otomatis",
+            "description": "Pengalihan instan ke sistem cadangan jika terjadi insiden"
+          },
+          {
+            "title": "Penyeimbangan Beban",
+            "description": "Distribusi lalu lintas otomatis untuk performa optimal"
+          },
+          {
+            "title": "Kluster Basis Data",
+            "description": "Basis data redundan untuk keamanan data maksimal"
+          },
+          {
+            "title": "Pemantauan 24/7",
+            "description": "Pemantauan berkelanjutan oleh tim DevOps kami"
+          }
+        ]
+      },
+      "success": {
+        "title": "Kesuksesan Anda adalah Prioritas Kami",
+        "description1": "Kami mengukur kesuksesan kami dari kesuksesan pengguna kami. Itulah sebabnya kami berinvestasi besar-besaran dalam infrastruktur, pemantauan, dan sistem dukungan yang memastikan AI SEO Turbo selalu tersedia saat Anda membutuhkannya. Komitmen kami terhadap keandalan didukung oleh jaminan waktu aktif 99,9% kami dan dedikasi kami untuk komunikasi transparan.",
+        "description2": "Jika Anda mengalami masalah atau memiliki pertanyaan tentang status layanan, jangan ragu untuk menghubungi tim dukungan kami. Kami di sini untuk memastikan upaya SEO Anda didukung oleh alat paling andal di industri."
       }
     }
   }
