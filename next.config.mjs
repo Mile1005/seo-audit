@@ -55,18 +55,28 @@ const nextConfig = {
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/category/api-integrations',
-        destination: '/help/api-integrations',
+        source: '/help/category/api',
+        destination: '/help/api',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/category/seo-tools-features',
-        destination: '/help/seo-tools-features',
+        source: '/help/category/seo-tools',
+        destination: '/help/seo-tools',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/category/security-privacy',
-        destination: '/help/security-privacy',
+        source: '/help/category/security',
+        destination: '/help/security',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/help/api-integrations',
+        destination: '/help/api/api-integrations',
+        permanent: true, // 301 permanent redirect
+      },
+      {
+        source: '/:locale/help/api-integrations',
+        destination: '/:locale/help/api/api-integrations',
         permanent: true, // 301 permanent redirect
       },
       // Redirect /index.html to root
@@ -83,83 +93,68 @@ const nextConfig = {
       },
       // Redirect old help URLs to new structure
       {
-        source: '/help/features',
-        destination: '/help/seo-tools-features',
+        source: '/help/seo-tools',
+        destination: '/help/seo-tools',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/:locale/help/features',
-        destination: '/:locale/help/seo-tools-features',
+        source: '/:locale/help/seo-tools',
+        destination: '/:locale/help/seo-tools',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/seo-tools-features/competitor-analysis',
-        destination: '/help/features/competitor-analysis',
+        source: '/help/features/competitor-analysis',
+        destination: '/help/seo-tools/competitor-analysis',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/:locale/help/seo-tools-features/competitor-analysis',
-        destination: '/:locale/help/features/competitor-analysis',
+        source: '/:locale/help/features/competitor-analysis',
+        destination: '/:locale/help/seo-tools/competitor-analysis',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/seo-tools-features/seo-audit-guide',
-        destination: '/help/features/seo-audit',
+        source: '/help/features/seo-audit',
+        destination: '/help/seo-tools/seo-audit',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/:locale/help/seo-tools-features/seo-audit-guide',
-        destination: '/:locale/help/features/seo-audit',
+        source: '/:locale/help/features/seo-audit',
+        destination: '/:locale/help/seo-tools/seo-audit',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/seo-tools-features/site-crawling',
-        destination: '/help/features/site-crawler',
+        source: '/help/features/site-crawler',
+        destination: '/help/seo-tools/site-crawler',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/:locale/help/seo-tools-features/site-crawling',
-        destination: '/:locale/help/features/site-crawler',
+        source: '/:locale/help/features/site-crawler',
+        destination: '/:locale/help/seo-tools/site-crawler',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/seo-tools-features/content-optimization',
-        destination: '/help/seo-tools-features',
+        source: '/help/api-integrations',
+        destination: '/help/api/api-integrations',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/:locale/help/seo-tools-features/content-optimization',
-        destination: '/:locale/help/seo-tools-features',
+        source: '/:locale/help/api-integrations',
+        destination: '/:locale/help/api/api-integrations',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/seo-tools-features/enterprise-reporting',
-        destination: '/help/seo-tools-features',
+        source: '/:locale/help/features/site-crawler',
+        destination: '/:locale/help/seo-tools/site-crawler',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/:locale/help/seo-tools-features/enterprise-reporting',
-        destination: '/:locale/help/seo-tools-features',
+        source: '/help/api-integrations',
+        destination: '/help/api/api-integrations',
         permanent: true, // 301 permanent redirect
       },
       {
-        source: '/help/seo-tools-features/keyword-research',
-        destination: '/help/seo-tools-features',
-        permanent: true, // 301 permanent redirect
-      },
-      {
-        source: '/:locale/help/seo-tools-features/keyword-research',
-        destination: '/:locale/help/seo-tools-features',
-        permanent: true, // 301 permanent redirect
-      },
-      {
-        source: '/help/seo-tools-features/performance-monitoring',
-        destination: '/help/seo-tools-features',
-        permanent: true, // 301 permanent redirect
-      },
-      {
-        source: '/:locale/help/seo-tools-features/performance-monitoring',
-        destination: '/:locale/help/seo-tools-features',
+        source: '/:locale/help/api-integrations',
+        destination: '/:locale/help/api/api-integrations',
         permanent: true, // 301 permanent redirect
       },
       // Redirect /en/* to /* for English paths (as-needed locale prefix)

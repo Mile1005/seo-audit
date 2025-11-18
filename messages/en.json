@@ -970,7 +970,7 @@
           {
             "title": "Complete SEO audit walkthrough",
             "description": "Deep dive into our comprehensive audit process and how to interpret detailed results",
-            "href": "/help/features/seo-audit"
+            "href": "/help/seo-tools/seo-audit"
           },
           {
             "title": "Quick start guide",
@@ -8692,7 +8692,7 @@
           "contacts": [
             {
               "text": "Contact Support",
-              "href": "/help/support"
+              "href": "/help"
             },
             {
               "text": "Billing FAQ",
@@ -8810,7 +8810,7 @@
               "icon": "MessageSquare",
               "title": "Contact Support",
               "description": "Get help with payment methods, billing issues, or account questions.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Start a conversation"
             },
             {
@@ -8910,7 +8910,7 @@
               "icon": "MessageSquare",
               "title": "Contact Billing Support",
               "description": "Reach out to our billing specialists for invoice-related questions.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Contact Support"
             },
             {

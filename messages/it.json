@@ -1079,7 +1079,7 @@
           {
             "title": "Guida completa all'audit SEO",
             "description": "Approfondisci il nostro processo di audit completo e come interpretare i risultati dettagliati",
-            "href": "/help/features/seo-audit"
+            "href": "/help/seo-tools/seo-audit"
           },
           {
             "title": "Guida rapida",
@@ -8776,7 +8776,7 @@
           "contacts": [
             {
               "text": "Contatta il Supporto",
-              "href": "/help/support"
+              "href": "/help"
             },
             {
               "text": "FAQ Fatturazione",
@@ -8912,7 +8912,7 @@
               "icon": "MessageSquare",
               "title": "Contatta supporto",
               "description": "Ottieni aiuto con metodi di pagamento, problemi di fatturazione o domande account.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Inizia conversazione"
             },
             {
@@ -9012,7 +9012,7 @@
               "icon": "MessageSquare",
               "title": "Contatta supporto fatturazione",
               "description": "Contatta i nostri specialisti fatturazione per domande relative alle fatture.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Contatta supporto"
             },
             {

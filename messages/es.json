@@ -975,7 +975,7 @@
           {
             "title": "Recorrido completo por la auditoría SEO",
             "description": "Análisis detallado de nuestro proceso de auditoría integral y cómo interpretar los resultados a fondo",
-            "href": "/help/features/seo-audit"
+            "href": "/help/seo-tools/seo-audit"
           },
           {
             "title": "Guía de inicio rápido",
@@ -8615,7 +8615,7 @@
           "contacts": [
             {
               "text": "Contactar Soporte",
-              "href": "/help/support"
+              "href": "/help"
             },
             {
               "text": "FAQ de Facturación",
@@ -8733,7 +8733,7 @@
               "icon": "MessageSquare",
               "title": "Contactar soporte",
               "description": "Obtenga ayuda con métodos de pago, problemas de facturación o preguntas de cuenta.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Iniciar conversación"
             },
             {
@@ -8833,7 +8833,7 @@
               "icon": "MessageSquare",
               "title": "Contactar soporte de facturación",
               "description": "Comuníquese con nuestros especialistas en facturación para preguntas relacionadas con facturas.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Contactar soporte"
             },
             {

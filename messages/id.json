@@ -1055,7 +1055,7 @@
           {
             "title": "Panduan audit SEO lengkap",
             "description": "Telusuri proses audit kami secara menyeluruh dan bagaimana cara menafsirkan hasil secara detail",
-            "href": "/help/features/seo-audit"
+            "href": "/help/seo-tools/seo-audit"
           },
           {
             "title": "Panduan mulai cepat",
@@ -8777,7 +8777,7 @@
           "contacts": [
             {
               "text": "Hubungi Dukungan",
-              "href": "/help/support"
+              "href": "/help"
             },
             {
               "text": "FAQ Penagihan",
@@ -8913,7 +8913,7 @@
               "icon": "MessageSquare",
               "title": "Hubungi dukungan",
               "description": "Dapatkan bantuan dengan metode pembayaran, masalah penagihan, atau pertanyaan akun.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Mulai percakapan"
             },
             {
@@ -9013,7 +9013,7 @@
               "icon": "MessageSquare",
               "title": "Hubungi dukungan penagihan",
               "description": "Hubungi spesialis penagihan kami untuk pertanyaan terkait faktur.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Hubungi dukungan"
             },
             {

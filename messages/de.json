@@ -1377,7 +1377,7 @@
           {
             "title": "SEO-Audit Schritt-für-Schritt-Anleitung",
             "description": "Detaillierte Einblicke in unseren umfassenden Audit-Prozess und wie Sie die Ergebnisse interpretieren können",
-            "href": "/help/features/seo-audit"
+            "href": "/help/seo-tools/seo-audit"
           },
           {
             "title": "Schnellstart-Anleitung",
@@ -8787,7 +8787,7 @@
           "contacts": [
             {
               "text": "Support kontaktieren",
-              "href": "/help/support"
+              "href": "/help"
             },
             {
               "text": "Abrechnungs-FAQ",
@@ -8923,7 +8923,7 @@
               "icon": "MessageSquare",
               "title": "Support kontaktieren",
               "description": "Holen Sie sich Hilfe bei Zahlungsmethoden, Abrechnungsproblemen oder Kontofragen.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Unterhaltung beginnen"
             },
             {
@@ -9023,7 +9023,7 @@
               "icon": "MessageSquare",
               "title": "Abrechnungssupport kontaktieren",
               "description": "Wenden Sie sich an unsere Abrechnungsspezialisten für rechnungsbezogene Fragen.",
-              "link": "/help/support",
+              "link": "/help",
               "linkText": "Support kontaktieren"
             },
             {

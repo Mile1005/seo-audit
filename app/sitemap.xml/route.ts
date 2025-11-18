@@ -75,7 +75,6 @@ const routes: Route[] = [
   { path: '/help/troubleshooting/audit-issues', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/troubleshooting/performance', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/troubleshooting/sync-issues', priority: 0.4, changeFrequency: 'monthly' },
-  { path: '/help/api-integrations', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/api/authentication', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/api/webhooks', priority: 0.4, changeFrequency: 'monthly' },
 ]
