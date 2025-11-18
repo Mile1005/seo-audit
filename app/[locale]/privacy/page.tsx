@@ -3,11 +3,24 @@
 import { MainLayout } from "../../../components/layout/main-layout"
 import { motion } from 'framer-motion'
 import { Shield, Lock, Eye, Database, Settings, Users } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 
 export default function PrivacyPage() {
+  const t = useTranslations('privacy')
   return (
     <MainLayout>
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-x-hidden">
+        {/* Breadcrumbs */}
+        <div className="pt-8 pb-4 px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Privacy Policy', url: 'https://www.aiseoturbo.com/privacy' }
+            ]}
+            includeHome={true}
+          />
+        </div>
+
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}
@@ -47,13 +60,13 @@ export default function PrivacyPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-medium mb-6 border border-emerald-500/20">
                 <Shield className="w-4 h-4 mr-2" />
-                Privacy & Security
+                {t('hero.badge')}
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">AI SEO Turbo Privacy Policy</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{t('hero.title')}</h1>
               <p className="text-xl text-gray-300 mb-4">
-                This Privacy Policy describes how AI SEO Turbo (“the tool”, “we”, “us”, or “our”) collects, uses, and protects your information when you use our website and services.
+                {t('hero.description')}
               </p>
-              <p className="text-sm text-gray-400">Last updated: August 28, 2025</p>
+              <p className="text-sm text-gray-400">{t('hero.lastUpdated')}</p>
             </motion.div>
           </div>
         </section>
@@ -81,17 +94,17 @@ export default function PrivacyPage() {
                     <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center mr-4 border border-blue-500/20">
                       <Database className="w-5 h-5 text-blue-400" />
                     </div>
-                    Information We Collect
+                    {t('sections.informationWeCollect.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us.</p>
+                    <p>{t('sections.informationWeCollect.description')}</p>
                     <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                      <h4 className="font-semibold text-foreground mb-2">Types of data we collect:</h4>
+                      <h4 className="font-semibold text-foreground mb-2">{t('sections.informationWeCollect.dataTypes.title')}</h4>
                       <ul className="list-disc list-inside space-y-1">
-                        <li>Email address and contact information</li>
-                        <li>Website URLs you submit for analysis</li>
-                        <li>Usage data and analytics</li>
-                        <li>Device and browser information</li>
+                        <li>{t('sections.informationWeCollect.dataTypes.email')}</li>
+                        <li>{t('sections.informationWeCollect.dataTypes.urls')}</li>
+                        <li>{t('sections.informationWeCollect.dataTypes.usage')}</li>
+                        <li>{t('sections.informationWeCollect.dataTypes.device')}</li>
                       </ul>
                     </div>
                   </div>
@@ -107,22 +120,22 @@ export default function PrivacyPage() {
                     <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center mr-4 border border-purple-500/20">
                       <Settings className="w-5 h-5 text-purple-400" />
                     </div>
-                    How We Use Your Information
+                    {t('sections.howWeUse.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>We use the information we collect to provide, maintain, and improve our services.</p>
+                    <p>{t('sections.howWeUse.description')}</p>
                     <div className="grid gap-4">
                       <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                        <h4 className="font-semibold text-foreground mb-2">Service Provision</h4>
-                        <p>To perform SEO audits, generate reports, and provide technical analysis of your websites.</p>
+                        <h4 className="font-semibold text-foreground mb-2">{t('sections.howWeUse.serviceProvision.title')}</h4>
+                        <p>{t('sections.howWeUse.serviceProvision.description')}</p>
                       </div>
                       <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                        <h4 className="font-semibold text-foreground mb-2">Communication</h4>
-                        <p>To send you service updates, security alerts, and support messages.</p>
+                        <h4 className="font-semibold text-foreground mb-2">{t('sections.howWeUse.communication.title')}</h4>
+                        <p>{t('sections.howWeUse.communication.description')}</p>
                       </div>
                       <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                        <h4 className="font-semibold text-foreground mb-2">Improvement</h4>
-                        <p>To analyze usage patterns and improve our algorithms and user experience.</p>
+                        <h4 className="font-semibold text-foreground mb-2">{t('sections.howWeUse.improvement.title')}</h4>
+                        <p>{t('sections.howWeUse.improvement.description')}</p>
                       </div>
                     </div>
                   </div>
@@ -138,24 +151,24 @@ export default function PrivacyPage() {
                     <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-4 border border-emerald-500/20">
                       <Lock className="w-5 h-5 text-emerald-400" />
                     </div>
-                    Data Security
+                    {t('sections.dataSecurity.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>We implement appropriate technical and organizational measures to protect your personal information.</p>
+                    <p>{t('sections.dataSecurity.description')}</p>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="bg-emerald-500/5 rounded-lg p-4 border border-emerald-500/20">
                         <div className="flex items-center mb-2">
                           <Lock className="w-4 h-4 text-emerald-400 mr-2" />
-                          <span className="font-semibold text-foreground">Encryption</span>
+                          <span className="font-semibold text-foreground">{t('sections.dataSecurity.encryption.title')}</span>
                         </div>
-                        <p className="text-sm">All data is encrypted in transit and at rest using industry-standard protocols.</p>
+                        <p className="text-sm">{t('sections.dataSecurity.encryption.description')}</p>
                       </div>
                       <div className="bg-blue-500/5 rounded-lg p-4 border border-blue-500/20">
                         <div className="flex items-center mb-2">
                           <Shield className="w-4 h-4 text-blue-400 mr-2" />
-                          <span className="font-semibold text-foreground">Access Control</span>
+                          <span className="font-semibold text-foreground">{t('sections.dataSecurity.accessControl.title')}</span>
                         </div>
-                        <p className="text-sm">Strict access controls ensure only authorized personnel can access your data.</p>
+                        <p className="text-sm">{t('sections.dataSecurity.accessControl.description')}</p>
                       </div>
                     </div>
                   </div>
@@ -171,16 +184,16 @@ export default function PrivacyPage() {
                     <div className="w-10 h-10 bg-orange-500/10 rounded-lg flex items-center justify-center mr-4 border border-orange-500/20">
                       <Eye className="w-5 h-5 text-orange-400" />
                     </div>
-                    Your Rights
+                    {t('sections.yourRights.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>You have several rights regarding your personal information:</p>
+                    <p>{t('sections.yourRights.description')}</p>
                     <div className="space-y-3">
                       {[
-                        { title: "Access", description: "Request a copy of your personal data" },
-                        { title: "Correction", description: "Update or correct inaccurate information" },
-                        { title: "Deletion", description: "Request deletion of your personal data" },
-                        { title: "Portability", description: "Receive your data in a machine-readable format" }
+                        { title: t('sections.yourRights.rights.access.title'), description: t('sections.yourRights.rights.access.description') },
+                        { title: t('sections.yourRights.rights.correction.title'), description: t('sections.yourRights.rights.correction.description') },
+                        { title: t('sections.yourRights.rights.deletion.title'), description: t('sections.yourRights.rights.deletion.description') },
+                        { title: t('sections.yourRights.rights.portability.title'), description: t('sections.yourRights.rights.portability.description') }
                       ].map((right, index) => (
                         <div key={index} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -204,19 +217,19 @@ export default function PrivacyPage() {
                     <div className="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center mr-4 border border-red-500/20">
                       <Users className="w-5 h-5 text-red-400" />
                     </div>
-                    Contact Us
+                    {t('sections.contactUs.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>If you have any questions about this Privacy Policy or want to exercise your rights, please contact us:</p>
+                    <p>{t('sections.contactUs.description')}</p>
                     <div className="bg-muted/50 rounded-lg p-6 border border-border/50">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">Email</h4>
+                          <h4 className="font-semibold text-foreground mb-2">{t('sections.contactUs.email.title')}</h4>
                           <a href="mailto:support@aiseoturbo.com" className="text-primary hover:underline">support@aiseoturbo.com</a>
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground mb-2">Response Time</h4>
-                          <p>We respond within 30 days</p>
+                          <h4 className="font-semibold text-foreground mb-2">{t('sections.contactUs.responseTime.title')}</h4>
+                          <p>{t('sections.contactUs.responseTime.description')}</p>
                         </div>
                       </div>
                     </div>
@@ -248,13 +261,11 @@ export default function PrivacyPage() {
                     <div className="w-10 h-10 bg-emerald-500/10 rounded-lg flex items-center justify-center mr-4 border border-emerald-500/20">
                       <Shield className="w-5 h-5 text-emerald-400" />
                     </div>
-                    Privacy in SEO Tools
+                    {t('sections.privacyInSeoTools.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      Privacy and data security are paramount when analyzing websites and business intelligence. Our commitment goes beyond
-                      legal compliance—it’s fundamental to building trust. We handle web data, analytics information, and user-generated content
-                      with enterprise-grade security and strict handling protocols.
+                      {t('sections.privacyInSeoTools.description')}
                     </p>
                   </div>
                 </motion.section>
@@ -273,11 +284,11 @@ export default function PrivacyPage() {
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li><strong>Data Minimization:</strong> We collect only what’s necessary to provide SEO analysis services.</li>
-                      <li><strong>Purpose Limitation:</strong> Your data is used solely for the purposes stated in this policy.</li>
-                      <li><strong>Security First:</strong> Encryption and access controls protect your information.</li>
-                      <li><strong>Transparency:</strong> Clear communication about how we handle and protect your data.</li>
-                      <li><strong>User Control:</strong> You control your data and can request deletion at any time.</li>
+                      <li><strong>{t('sections.privacyCommitments.dataMinimization.title')}:</strong> {t('sections.privacyCommitments.dataMinimization.description')}</li>
+                      <li><strong>{t('sections.privacyCommitments.purposeLimitation.title')}:</strong> {t('sections.privacyCommitments.purposeLimitation.description')}</li>
+                      <li><strong>{t('sections.privacyCommitments.securityFirst.title')}:</strong> {t('sections.privacyCommitments.securityFirst.description')}</li>
+                      <li><strong>{t('sections.privacyCommitments.transparency.title')}:</strong> {t('sections.privacyCommitments.transparency.description')}</li>
+                      <li><strong>{t('sections.privacyCommitments.userControl.title')}:</strong> {t('sections.privacyCommitments.userControl.description')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -296,17 +307,15 @@ export default function PrivacyPage() {
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      Our AI-powered audits process website data to surface SEO opportunities. We analyze public web content, technical structure,
-                      and performance metrics while maintaining strict privacy boundaries. We don’t collect or store personally identifiable
-                      information from your website visitors.
+                      {t('sections.dataProcessing.description')}
                     </p>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li>Public website content and metadata</li>
-                      <li>Technical SEO elements (meta tags, headers, schema markup)</li>
-                      <li>Site structure and internal linking patterns</li>
-                      <li>Performance metrics and loading speeds</li>
-                      <li>Mobile-friendliness and accessibility features</li>
-                      <li>Search engine visibility and indexing status</li>
+                      <li>{t('sections.dataProcessing.analysis.publicContent')}</li>
+                      <li>{t('sections.dataProcessing.analysis.technicalElements')}</li>
+                      <li>{t('sections.dataProcessing.analysis.siteStructure')}</li>
+                      <li>{t('sections.dataProcessing.analysis.performance')}</li>
+                      <li>{t('sections.dataProcessing.analysis.mobile')}</li>
+                      <li>{t('sections.dataProcessing.analysis.visibility')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -325,14 +334,14 @@ export default function PrivacyPage() {
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      We protect data throughout its lifecycle with layered controls and monitoring.
+                      {t('sections.securityMeasures.description')}
                     </p>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li><strong>End‑to‑End Encryption:</strong> AES‑256 in transit and at rest.</li>
-                      <li><strong>Zero‑Trust Architecture:</strong> Every request is verified and authorized.</li>
-                      <li><strong>Regular Security Audits:</strong> Independent third‑party assessments.</li>
-                      <li><strong>Incident Response:</strong> 24/7 monitoring with rapid response.</li>
-                      <li><strong>Data Residency:</strong> Secure, SOC 2 compliant data centers.</li>
+                      <li><strong>{t('sections.securityMeasures.measures.encryption.title')}:</strong> {t('sections.securityMeasures.measures.encryption.description')}</li>
+                      <li><strong>{t('sections.securityMeasures.measures.zeroTrust.title')}:</strong> {t('sections.securityMeasures.measures.zeroTrust.description')}</li>
+                      <li><strong>{t('sections.securityMeasures.measures.audits.title')}:</strong> {t('sections.securityMeasures.measures.audits.description')}</li>
+                      <li><strong>{t('sections.securityMeasures.measures.incident.title')}:</strong> {t('sections.securityMeasures.measures.incident.description')}</li>
+                      <li><strong>{t('sections.securityMeasures.measures.residency.title')}:</strong> {t('sections.securityMeasures.measures.residency.description')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -351,8 +360,7 @@ export default function PrivacyPage() {
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      We comply with GDPR, CCPA, and other applicable privacy regulations. Our practices are reviewed regularly to align with
-                      evolving standards and best practices, with guidance from legal experts in data protection.
+                      {t('sections.compliance.description')}
                     </p>
                   </div>
                 </motion.section>

@@ -61,6 +61,16 @@
       "description": "Transform your SEO with AI-powered audits identifying 47+ critical issues. Get data-driven insights to boost organic traffic and dominate rankings.",
       "keywords": ["AI SEO audit", "SEO optimization tool", "website ranking boost", "organic traffic growth", "technical SEO analysis"]
     },
+    "terms": {
+      "title": "Terms of Service - Legal Agreement | AI SEO Turbo",
+      "description": "Read our terms of service and legal agreement for using AI SEO Turbo. Understand your rights and responsibilities when using our SEO audit tools.",
+      "keywords": ["terms of service", "legal agreement", "SEO terms", "user agreement"]
+    },
+    "privacy": {
+      "title": "Privacy Policy - Data Protection | AI SEO Turbo",
+      "description": "Learn how AISEOTurbo protects your privacy and handles your data. Our privacy policy covers GDPR compliance and data security measures.",
+      "keywords": ["privacy policy", "data protection", "GDPR", "privacy rights"]
+    },
     "defaultTitle": "AI SEO Turbo - AI-Powered SEO Audits",
     "defaultDescription": "Get actionable SEO insights that boost rankings and drive organic traffic in minutes",
     "defaultKeywords": "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
@@ -10751,6 +10761,272 @@
         "securityNotice": "🔒 Your email is secure • No spam ever",
         "successMessage": "Content unlocked! Here's your exclusive {type}.",
         "enterEmail": "Enter your email"
+      }
+    }
+  },
+  "terms": {
+    "hero": {
+      "badge": "Legal Information",
+      "title": "Terms of Service",
+      "subtitle": "Please read these terms carefully before using our services.",
+      "lastUpdated": "Last updated: August 28, 2025"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": [
+          "By accessing and using AISEOTurbo (the \"Service\"), you accept and agree to be bound by the terms and provisions of this agreement.",
+          "If you do not agree to abide by the above, please do not use this service."
+        ]
+      },
+      "license": {
+        "title": "Use License",
+        "content": [
+          "Permission is granted to temporarily access AISEOTurbo for personal, non-commercial transitory viewing only.",
+          "This is the grant of a license, not a transfer of title, and under this license you may not:"
+        ],
+        "restrictions": [
+          "modify or copy the materials",
+          "use the materials for any commercial purpose or for any public display",
+          "attempt to decompile or reverse engineer any software contained on our website",
+          "remove any copyright or other proprietary notations from the materials"
+        ]
+      },
+      "privacy": {
+        "title": "Privacy and Data Protection",
+        "content": [
+          "Your privacy is important to us. We collect and use information about you to provide and improve our services.",
+          "For detailed information about how we handle your data, please review our Privacy Policy."
+        ]
+      },
+      "limitations": {
+        "title": "Limitations",
+        "content": [
+          "In no event shall AISEOTurbo or its suppliers be liable for any damages arising out of the use or inability to use the materials on our website.",
+          "This limitation applies to all damages of any kind, including but not limited to compensatory, direct, indirect or consequential damages."
+        ]
+      },
+      "contact": {
+        "title": "Contact Information",
+        "content": "If you have any questions about these Terms of Service, please contact us at:",
+        "email": "support@aiseoturbo.com",
+        "address": "Legal Department, AISEOTurbo"
+      },
+      "overview": {
+        "title": "Overview",
+        "content": [
+          "Welcome to AI SEO Turbo. These Terms of Service (\"Terms\") govern your use of our AI-powered search engine optimization platform, including our website, mobile applications, and related services (collectively, the \"Service\"). By accessing or using our Service, you agree to be bound by these Terms.",
+          "Our platform leverages advanced artificial intelligence and machine learning technologies to provide comprehensive SEO analysis, competitor intelligence, and optimization recommendations. These Terms ensure fair use of our technology while protecting both users and our intellectual property."
+        ]
+      },
+      "aiInsights": {
+        "title": "AI-Generated SEO Insights",
+        "intro": "AI SEO Turbo uses sophisticated algorithms to analyze websites, search engine results, and user behavior patterns. While our AI systems are highly accurate and continuously improved, SEO analysis involves inherent uncertainties related to search engine algorithms, which can change without notice.",
+        "limitationsTitle": "Service Limitations & Disclaimers",
+        "limitations": [
+          "AI Accuracy: Our AI provides insights based on available data and current SEO best practices.",
+          "Search Engine Independence: We do not control or guarantee search engine ranking outcomes.",
+          "Algorithm Changes: Search engines may modify their algorithms, affecting the relevance of our recommendations.",
+          "Third-Party Data: Some insights rely on publicly available data from various sources.",
+          "Professional Judgment: Users should combine our AI insights with their own SEO expertise."
+        ]
+      },
+      "acceptableUse": {
+        "title": "Acceptable Use & Fair Usage",
+        "intro": "Our service is designed for legitimate SEO professionals, agencies, and website owners. We maintain strict usage policies to ensure fair access and prevent abuse of our AI systems.",
+        "permittedTitle": "Permitted Uses",
+        "permitted": [
+          "Analyzing websites you own or have permission to audit",
+          "Competitor analysis for legitimate business intelligence",
+          "Educational and professional SEO research",
+          "Generating reports for clients with proper authorization",
+          "Internal business optimization and strategy development"
+        ],
+        "prohibitedTitle": "Prohibited Activities",
+        "prohibited": [
+          "Using the service for illegal activities or violating applicable laws",
+          "Attempting to reverse engineer or copy our AI algorithms",
+          "Excessive API calls that disrupt service availability",
+          "Sharing login credentials or circumventing access controls",
+          "Using automated tools to bypass rate limits or usage restrictions",
+          "Generating misleading or fraudulent SEO reports"
+        ]
+      },
+      "dataOwnership": {
+        "title": "Data Ownership & Intellectual Property",
+        "intro": "Understanding data ownership is crucial when using AI-powered SEO tools. Our service processes various types of data, and these Terms clarify ownership rights and usage permissions.",
+        "yourRightsTitle": "Your Data Rights",
+        "yourRights": [
+          "Website Content: You retain full ownership of content submitted for analysis.",
+          "Generated Reports: You own the reports generated from your account.",
+          "Account Data: You control your account information and usage history.",
+          "Export Rights: You may export your data in standard formats."
+        ],
+        "ourRightsTitle": "Our Intellectual Property",
+        "ourRights": [
+          "AI Algorithms: Our proprietary machine learning models and algorithms.",
+          "Platform Technology: The underlying software and infrastructure.",
+          "Branding & Content: Our trademarks, logos, and marketing materials.",
+          "Analysis Methodology: Our unique approach to SEO analysis and recommendations."
+        ]
+      },
+      "serviceLevels": {
+        "title": "Service Levels & Performance",
+        "content": [
+          "We strive to provide reliable, high-performance SEO analysis tools. Our service level commitments ensure that you can depend on our platform for critical business decisions.",
+          "While we aim for 99.9% uptime, SEO analysis involves complex computations and external data dependencies that may occasionally affect performance. We provide transparent status updates and maintenance schedules to minimize disruptions to your workflow."
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "hero": {
+      "badge": "Privacy & Security",
+      "title": "AI SEO Turbo Privacy Policy",
+      "description": "This Privacy Policy describes how AI SEO Turbo (\"the tool\", \"we\", \"us\", or \"our\") collects, uses, and protects your information when you use our website and services.",
+      "lastUpdated": "Last updated: August 28, 2025"
+    },
+    "sections": {
+      "informationWeCollect": {
+        "title": "Information We Collect",
+        "description": "We collect information you provide directly to us, such as when you create an account, use our services, or contact us.",
+        "dataTypes": {
+          "title": "Types of data we collect:",
+          "email": "Email address and contact information",
+          "urls": "Website URLs you submit for analysis",
+          "usage": "Usage data and analytics",
+          "device": "Device and browser information"
+        }
+      },
+      "howWeUse": {
+        "title": "How We Use Your Information",
+        "description": "We use the information we collect to provide, maintain, and improve our services.",
+        "serviceProvision": {
+          "title": "Service Provision",
+          "description": "To perform SEO audits, generate reports, and provide technical analysis of your websites."
+        },
+        "communication": {
+          "title": "Communication",
+          "description": "To send you service updates, security alerts, and support messages."
+        },
+        "improvement": {
+          "title": "Improvement",
+          "description": "To analyze usage patterns and improve our algorithms and user experience."
+        }
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "description": "We implement appropriate technical and organizational measures to protect your personal information.",
+        "encryption": {
+          "title": "Encryption",
+          "description": "All data is encrypted in transit and at rest using industry-standard protocols."
+        },
+        "accessControl": {
+          "title": "Access Control",
+          "description": "Strict access controls ensure only authorized personnel can access your data."
+        }
+      },
+      "yourRights": {
+        "title": "Your Rights",
+        "description": "You have several rights regarding your personal information:",
+        "rights": {
+          "access": {
+            "title": "Access",
+            "description": "Request a copy of your personal data"
+          },
+          "correction": {
+            "title": "Correction",
+            "description": "Update or correct inaccurate information"
+          },
+          "deletion": {
+            "title": "Deletion",
+            "description": "Request deletion of your personal data"
+          },
+          "portability": {
+            "title": "Portability",
+            "description": "Receive your data in a machine-readable format"
+          }
+        }
+      },
+      "contactUs": {
+        "title": "Contact Us",
+        "description": "If you have any questions about this Privacy Policy or want to exercise your rights, please contact us:",
+        "email": {
+          "title": "Email"
+        },
+        "responseTime": {
+          "title": "Response Time",
+          "description": "We respond within 30 days"
+        }
+      },
+      "privacyInSeoTools": {
+        "title": "Privacy in SEO Tools",
+        "description": "Privacy and data security are paramount when analyzing websites and business intelligence. Our commitment goes beyond legal compliance—it's fundamental to building trust. We handle web data, analytics information, and user-generated content with enterprise-grade security and strict handling protocols."
+      },
+      "privacyCommitments": {
+        "title": "Our Privacy Commitments",
+        "dataMinimization": {
+          "title": "Data Minimization",
+          "description": "We collect only what's necessary to provide SEO analysis services."
+        },
+        "purposeLimitation": {
+          "title": "Purpose Limitation",
+          "description": "Your data is used solely for the purposes stated in this policy."
+        },
+        "securityFirst": {
+          "title": "Security First",
+          "description": "Encryption and access controls protect your information."
+        },
+        "transparency": {
+          "title": "Transparency",
+          "description": "Clear communication about how we handle and protect your data."
+        },
+        "userControl": {
+          "title": "User Control",
+          "description": "You control your data and can request deletion at any time."
+        }
+      },
+      "dataProcessing": {
+        "title": "Data Processing & What We Analyze",
+        "description": "Our AI-powered audits process website data to surface SEO opportunities. We analyze public web content, technical structure, and performance metrics while maintaining strict privacy boundaries. We don't collect or store personally identifiable information from your website visitors.",
+        "analysis": {
+          "publicContent": "Public website content and metadata",
+          "technicalElements": "Technical SEO elements (meta tags, headers, schema markup)",
+          "siteStructure": "Site structure and internal linking patterns",
+          "performance": "Performance metrics and loading speeds",
+          "mobile": "Mobile-friendliness and accessibility features",
+          "visibility": "Search engine visibility and indexing status"
+        }
+      },
+      "securityMeasures": {
+        "title": "Security Measures & Technologies",
+        "description": "We protect data throughout its lifecycle with layered controls and monitoring.",
+        "measures": {
+          "encryption": {
+            "title": "End-to-End Encryption",
+            "description": "AES-256 in transit and at rest."
+          },
+          "zeroTrust": {
+            "title": "Zero-Trust Architecture",
+            "description": "Every request is verified and authorized."
+          },
+          "audits": {
+            "title": "Regular Security Audits",
+            "description": "Independent third-party assessments."
+          },
+          "incident": {
+            "title": "Incident Response",
+            "description": "24/7 monitoring with rapid response."
+          },
+          "residency": {
+            "title": "Data Residency",
+            "description": "Secure, SOC 2 compliant data centers."
+          }
+        }
+      },
+      "compliance": {
+        "title": "Compliance & Legal Framework",
+        "description": "We comply with GDPR, CCPA, and other applicable privacy regulations. Our practices are reviewed regularly to align with evolving standards and best practices, with guidance from legal experts in data protection."
       }
     }
   }

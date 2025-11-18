@@ -146,6 +146,16 @@
       "description": "Transformasikan SEO Anda dengan audit bertenaga AI yang mengidentifikasi 47+ masalah kritis. Dapatkan wawasan berbasis data untuk meningkatkan traffic organik dan mendominasi peringkat.",
       "keywords": ["audit SEO AI", "alat optimasi SEO", "boost peringkat website", "pertumbuhan traffic organik", "analisis SEO teknis"]
     },
+    "terms": {
+      "title": "Syarat Layanan - Perjanjian Hukum | AI SEO Turbo",
+      "description": "Baca syarat layanan dan perjanjian hukum kami untuk penggunaan AI SEO Turbo. Pahami hak dan kewajiban Anda saat menggunakan alat audit SEO kami.",
+      "keywords": ["Syarat Layanan", "Perjanjian Hukum", "Ketentuan SEO", "Perjanjian Pengguna"]
+    },
+    "privacy": {
+      "title": "Kebijakan Privasi - Perlindungan Data | AI SEO Turbo",
+      "description": "Pelajari bagaimana AISEOTurbo melindungi privasi Anda dan menangani data Anda. Kebijakan privasi kami mencakup kepatuhan GDPR dan langkah-langkah keamanan data.",
+      "keywords": ["kebijakan privasi", "perlindungan data", "GDPR", "hak privasi"]
+    },
     "defaultTitle": "AI SEO Turbo - Audit SEO Bertenaga AI",
     "defaultDescription": "Dapatkan wawasan SEO yang dapat ditindaklanjuti yang meningkatkan peringkat dan mendorong traffic organik dalam hitungan menit",
     "defaultKeywords": "audit SEO, analisis SEO AI, optimasi website, traffic organik, peringkat pencarian",
@@ -10780,6 +10790,272 @@
         "securityNotice": "🔒 Email Anda aman • Tidak pernah spam",
         "successMessage": "Konten terbuka! Berikut {type} eksklusif Anda.",
         "enterEmail": "Masukkan email Anda"
+      }
+    }
+  },
+  "terms": {
+    "hero": {
+      "badge": "Informasi Hukum",
+      "title": "Syarat Layanan",
+      "subtitle": "Silakan baca syarat-syarat ini dengan cermat sebelum menggunakan layanan kami.",
+      "lastUpdated": "Terakhir diperbarui: 28 Agustus 2025"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "Penerimaan Syarat",
+        "content": [
+          "Dengan mengakses dan menggunakan AISEOTurbo (\"Layanan\"), Anda menerima dan setuju untuk terikat oleh syarat dan ketentuan perjanjian ini.",
+          "Jika Anda tidak setuju untuk mematuhi hal di atas, silakan jangan gunakan layanan ini."
+        ]
+      },
+      "license": {
+        "title": "Lisensi Penggunaan",
+        "content": [
+          "Izin diberikan untuk mengakses AISEOTurbo sementara untuk penayangan pribadi, non-komersial, dan sementara saja.",
+          "Ini adalah pemberian lisensi, bukan pemindahan hak kepemilikan, dan berdasarkan lisensi ini Anda tidak boleh:"
+        ],
+        "restrictions": [
+          "memodifikasi atau menyalin materi",
+          "menggunakan materi untuk tujuan komersial apa pun atau untuk tampilan publik",
+          "berusaha untuk mendekompilasi atau merekayasa balik perangkat lunak apa pun di situs web kami",
+          "menghapus hak cipta atau notasi kepemilikan lain dari materi"
+        ]
+      },
+      "privacy": {
+        "title": "Privasi dan Perlindungan Data",
+        "content": [
+          "Privasi Anda penting bagi kami. Kami mengumpulkan dan menggunakan informasi tentang Anda untuk menyediakan dan meningkatkan layanan kami.",
+          "Untuk informasi terperinci tentang bagaimana kami menangani data Anda, silakan tinjau Kebijakan Privasi kami."
+        ]
+      },
+      "limitations": {
+        "title": "Batasan",
+        "content": [
+          "Dalam hal apa pun AISEOTurbo atau pemasoknya tidak bertanggung jawab atas kerusakan apa pun yang timbul dari penggunaan atau ketidakmampuan menggunakan materi di situs web kami.",
+          "Batasan ini berlaku untuk semua jenis kerusakan, termasuk namun tidak terbatas pada kompensasi, langsung, tidak langsung, atau kerusakan konsekuensial."
+        ]
+      },
+      "contact": {
+        "title": "Informasi Kontak",
+        "content": "Jika Anda memiliki pertanyaan tentang Syarat Layanan ini, silakan hubungi kami di:",
+        "email": "support@aiseoturbo.com",
+        "address": "Departemen Legal, AISEOTurbo"
+      },
+      "overview": {
+        "title": "Ringkasan",
+        "content": [
+          "Selamat datang di AI SEO Turbo. Syarat Layanan ini (\"Syarat\") mengatur penggunaan Anda terhadap platform optimasi mesin pencari bertenaga AI kami, termasuk situs web, aplikasi seluler, dan layanan terkait (secara kolektif disebut \"Layanan\"). Dengan mengakses atau menggunakan Layanan kami, Anda setuju untuk terikat oleh Syarat ini.",
+          "Platform kami memanfaatkan teknologi kecerdasan buatan dan pembelajaran mesin canggih untuk menyediakan analisis SEO yang komprehensif, kecerdasan tentang pesaing, dan rekomendasi optimasi. Syarat ini memastikan penggunaan teknologi kami secara adil sekaligus melindungi pengguna dan kekayaan intelektual kami."
+        ]
+      },
+      "aiInsights": {
+        "title": "Wawasan SEO yang Dihasilkan AI",
+        "intro": "AI SEO Turbo menggunakan algoritma canggih untuk menganalisis situs web, hasil mesin pencari, dan pola perilaku pengguna. Walaupun sistem AI kami sangat akurat dan terus ditingkatkan, analisis SEO melibatkan ketidakpastian bawaan terkait algoritma mesin pencari yang dapat berubah sewaktu-waktu tanpa pemberitahuan.",
+        "limitationsTitle": "Batasan Layanan & Pernyataan Penyangkalan",
+        "limitations": [
+          "Akurasi AI: AI kami memberikan wawasan berdasarkan data yang tersedia dan praktik terbaik SEO saat ini.",
+          "Independensi Mesin Pencari: Kami tidak mengontrol atau menjamin hasil peringkat mesin pencari.",
+          "Perubahan Algoritma: Mesin pencari dapat memodifikasi algoritma mereka, yang memengaruhi relevansi rekomendasi kami.",
+          "Data Pihak Ketiga: Beberapa wawasan bergantung pada data publik yang tersedia dari berbagai sumber.",
+          "Penilaian Profesional: Pengguna sebaiknya menggabungkan wawasan AI kami dengan keahlian SEO mereka sendiri."
+        ]
+      },
+      "acceptableUse": {
+        "title": "Penggunaan yang Diperbolehkan & Pemakaian Wajar",
+        "intro": "Layanan kami dirancang untuk profesional SEO, agensi, dan pemilik situs web yang sah. Kami menerapkan kebijakan penggunaan yang ketat untuk memastikan akses yang adil dan mencegah penyalahgunaan sistem AI kami.",
+        "permittedTitle": "Penggunaan yang Diperbolehkan",
+        "permitted": [
+          "Menganalisis situs web yang Anda miliki atau memiliki izin untuk diaudit",
+          "Analisis pesaing untuk kecerdasan bisnis yang sah",
+          "Penelitian SEO edukasi dan profesional",
+          "Membuat laporan untuk klien dengan otorisasi yang semestinya",
+          "Optimasi bisnis internal dan pengembangan strategi"
+        ],
+        "prohibitedTitle": "Aktivitas yang Dilarang",
+        "prohibited": [
+          "Menggunakan layanan untuk aktivitas ilegal atau melanggar hukum yang berlaku",
+          "Mencoba merekayasa balik atau menyalin algoritma AI kami",
+          "Permintaan API berlebihan yang mengganggu ketersediaan layanan",
+          "Membagikan kredensial login atau mengakali kontrol akses",
+          "Menggunakan alat otomatis untuk melewati batas penggunaan atau pembatasan penggunaan",
+          "Membuat laporan SEO yang menyesatkan atau curang"
+        ]
+      },
+      "dataOwnership": {
+        "title": "Kepemilikan Data & Kekayaan Intelektual",
+        "intro": "Memahami kepemilikan data sangat penting ketika menggunakan alat SEO bertenaga AI. Layanan kami memproses berbagai jenis data, dan Syarat ini mengklarifikasi hak kepemilikan dan izin penggunaan.",
+        "yourRightsTitle": "Hak Data Anda",
+        "yourRights": [
+          "Konten Situs Web: Anda tetap memiliki kepemilikan penuh atas konten yang dikirimkan untuk analisis.",
+          "Laporan yang Dihasilkan: Anda memiliki laporan yang dihasilkan dari akun Anda.",
+          "Data Akun: Anda mengontrol informasi akun dan riwayat penggunaan Anda.",
+          "Hak Ekspor: Anda dapat mengekspor data Anda dalam format standar."
+        ],
+        "ourRightsTitle": "Kekayaan Intelektual Kami",
+        "ourRights": [
+          "Algoritma AI: Model pembelajaran mesin dan algoritma milik kami.",
+          "Teknologi Platform: Perangkat lunak dan infrastruktur yang mendasarinya.",
+          "Branding & Konten: Merek dagang, logo, dan materi pemasaran kami.",
+          "Metodologi Analisis: Pendekatan unik kami untuk analisis SEO dan rekomendasi."
+        ]
+      },
+      "serviceLevels": {
+        "title": "Tingkat Layanan & Performa",
+        "content": [
+          "Kami berupaya menyediakan alat analisis SEO yang andal dan berkinerja tinggi. Komitmen tingkat layanan kami memastikan Anda dapat mengandalkan platform kami untuk keputusan bisnis yang kritis.",
+          "Walaupun kami menargetkan waktu aktif 99,9%, analisis SEO melibatkan komputasi kompleks dan ketergantungan data eksternal yang kadang dapat mempengaruhi performa. Kami memberikan pembaruan status transparan dan jadwal pemeliharaan untuk meminimalkan gangguan pada alur kerja Anda."
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "hero": {
+      "badge": "Privasi dan Keamanan",
+      "title": "Kebijakan Privasi AI SEO Turbo",
+      "description": "Kebijakan Privasi ini menjelaskan bagaimana AI SEO Turbo (\"alat\", \"kami\" atau \"milik kami\") mengumpulkan, menggunakan dan melindungi informasi Anda saat menggunakan situs web dan layanan kami.",
+      "lastUpdated": "Terakhir diperbarui: 28 Agustus 2025"
+    },
+    "sections": {
+      "informationWeCollect": {
+        "title": "Informasi yang Kami Kumpulkan",
+        "description": "Kami mengumpulkan informasi yang Anda berikan langsung kepada kami, seperti saat membuat akun, menggunakan layanan kami atau berkomunikasi dengan kami.",
+        "dataTypes": {
+          "title": "Jenis data yang kami kumpulkan:",
+          "email": "Alamat email dan informasi kontak",
+          "urls": "URL situs web yang Anda kirimkan untuk analisis",
+          "usage": "Data penggunaan dan analitik",
+          "device": "Informasi perangkat dan browser"
+        }
+      },
+      "howWeUse": {
+        "title": "Bagaimana Kami Menggunakan Informasi Anda",
+        "description": "Kami menggunakan informasi yang dikumpulkan untuk menyediakan, memelihara dan meningkatkan layanan kami.",
+        "serviceProvision": {
+          "title": "Penyediaan Layanan",
+          "description": "Untuk melakukan audit SEO, menghasilkan laporan dan menyediakan analisis teknis situs web Anda."
+        },
+        "communication": {
+          "title": "Komunikasi",
+          "description": "Untuk mengirimkan pembaruan layanan, peringatan keamanan dan pesan dukungan kepada Anda."
+        },
+        "improvement": {
+          "title": "Perbaikan",
+          "description": "Untuk menganalisis pola penggunaan dan meningkatkan algoritma serta pengalaman pengguna kami."
+        }
+      },
+      "dataSecurity": {
+        "title": "Keamanan Data",
+        "description": "Kami menerapkan langkah-langkah teknis dan organisasi yang sesuai untuk melindungi informasi pribadi Anda.",
+        "encryption": {
+          "title": "Enkripsi",
+          "description": "Semua data dienkripsi saat transit dan saat istirahat menggunakan protokol standar industri."
+        },
+        "accessControl": {
+          "title": "Kontrol Akses",
+          "description": "Kontrol akses yang ketat memastikan hanya personel yang berwenang yang dapat mengakses data Anda."
+        }
+      },
+      "yourRights": {
+        "title": "Hak-Hak Anda",
+        "description": "Anda memiliki beberapa hak terkait informasi pribadi Anda:",
+        "rights": {
+          "access": {
+            "title": "Akses",
+            "description": "Meminta salinan data pribadi Anda"
+          },
+          "correction": {
+            "title": "Koreksi",
+            "description": "Memperbarui atau memperbaiki informasi yang tidak akurat"
+          },
+          "deletion": {
+            "title": "Penghapusan",
+            "description": "Meminta penghapusan data pribadi Anda"
+          },
+          "portability": {
+            "title": "Portabilitas",
+            "description": "Menerima data Anda dalam format yang dapat dibaca mesin"
+          }
+        }
+      },
+      "contactUs": {
+        "title": "Hubungi Kami",
+        "description": "Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini atau ingin menggunakan hak Anda, silakan hubungi kami:",
+        "email": {
+          "title": "Email"
+        },
+        "responseTime": {
+          "title": "Waktu Respons",
+          "description": "Kami merespons dalam 30 hari"
+        }
+      },
+      "privacyInSeoTools": {
+        "title": "Privasi dalam Alat SEO",
+        "description": "Privasi dan keamanan data sangat penting saat menganalisis situs web dan intelijen bisnis. Komitmen kami melampaui kepatuhan hukum; itu penting untuk membangun kepercayaan. Kami menangani data web, informasi analitik dan konten yang dihasilkan pengguna dengan keamanan tingkat perusahaan dan protokol manajemen yang ketat."
+      },
+      "privacyCommitments": {
+        "title": "Komitmen Privasi Kami",
+        "dataMinimization": {
+          "title": "Minimasi Data",
+          "description": "Kami hanya mengumpulkan apa yang diperlukan untuk menyediakan layanan analisis SEO."
+        },
+        "purposeLimitation": {
+          "title": "Keterbatasan Tujuan",
+          "description": "Data Anda digunakan hanya untuk tujuan yang ditetapkan dalam kebijakan ini."
+        },
+        "securityFirst": {
+          "title": "Keamanan Terlebih Dahulu",
+          "description": "Enkripsi dan kontrol akses melindungi informasi Anda."
+        },
+        "transparency": {
+          "title": "Transparansi",
+          "description": "Komunikasi yang jelas tentang bagaimana kami mengelola dan melindungi data Anda."
+        },
+        "userControl": {
+          "title": "Kontrol Pengguna",
+          "description": "Anda mengontrol data Anda dan dapat meminta penghapusan kapan saja."
+        }
+      },
+      "dataProcessing": {
+        "title": "Pemrosesan Data dan Apa yang Kami Analisis",
+        "description": "Audit kami yang didukung AI memproses data situs web untuk mengidentifikasi peluang SEO. Kami menganalisis konten web publik, struktur teknis dan metrik kinerja sambil mempertahankan batas privasi yang ketat. Kami tidak mengumpulkan atau menyimpan informasi identitas pribadi pengunjung situs web Anda.",
+        "analysis": {
+          "publicContent": "Konten dan metadata publik situs web",
+          "technicalElements": "Elemen teknis SEO (meta tag, header, markup schema)",
+          "siteStructure": "Struktur situs dan pola tautan internal",
+          "performance": "Metrik kinerja dan kecepatan pemuatan",
+          "mobile": "Responsivitas seluler dan fitur aksesibilitas",
+          "visibility": "Visibilitas di mesin pencari dan status pengindeksan"
+        }
+      },
+      "securityMeasures": {
+        "title": "Langkah dan Teknologi Keamanan",
+        "description": "Kami melindungi data sepanjang siklus hidupnya dengan kontrol dan pemantauan berlapis.",
+        "measures": {
+          "encryption": {
+            "title": "Enkripsi End-to-End",
+            "description": "AES-256 saat transit dan istirahat."
+          },
+          "zeroTrust": {
+            "title": "Arsitektur Zero-Trust",
+            "description": "Setiap permintaan diverifikasi dan diotorisasi."
+          },
+          "audits": {
+            "title": "Audit Keamanan Reguler",
+            "description": "Evaluasi independen pihak ketiga."
+          },
+          "incident": {
+            "title": "Respons Insiden",
+            "description": "Pemantauan 24/7 dengan respons cepat."
+          },
+          "residency": {
+            "title": "Residensi Data",
+            "description": "Pusat data aman, sesuai SOC 2."
+          }
+        }
+      },
+      "compliance": {
+        "title": "Kepatuhan dan Kerangka Hukum",
+        "description": "Kami mematuhi GDPR, CCPA dan peraturan privasi yang berlaku lainnya. Praktik kami secara teratur ditinjau untuk menyelaraskan dengan standar dan praktik terbaik yang berkembang, dengan panduan dari ahli hukum dalam perlindungan data."
       }
     }
   }

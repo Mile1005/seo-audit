@@ -66,6 +66,16 @@
       "description": "Transforma tu SEO con auditorías impulsadas por IA que identifican 47+ problemas críticos. Obtén insights basados en datos para aumentar el tráfico orgánico y dominar los rankings.",
       "keywords": ["auditoría SEO IA", "herramienta optimización SEO", "mejora ranking sitio web", "crecimiento tráfico orgánico", "análisis SEO técnico"]
     },
+    "terms": {
+      "title": "Términos de Servicio - Acuerdo Legal | AI SEO Turbo",
+      "description": "Lee nuestros términos de servicio y acuerdo legal para el uso de AI SEO Turbo. Comprende tus derechos y obligaciones al usar nuestras herramientas de auditoría SEO.",
+      "keywords": ["Términos de Servicio", "Acuerdo Legal", "Condiciones SEO", "Acuerdo de Usuario"]
+    },
+    "privacy": {
+      "title": "Política de Privacidad - Protección de Datos | AI SEO Turbo",
+      "description": "Aprende cómo AISEOTurbo protege tu privacidad y maneja tus datos. Nuestra política de privacidad cubre el cumplimiento de GDPR y las medidas de seguridad de datos.",
+      "keywords": ["política de privacidad", "protección de datos", "GDPR", "derechos de privacidad"]
+    },
     "defaultTitle": "AI SEO Turbo - Audits SEO impulsados por AI",
     "defaultDescription": "Obtén insights SEO accionables que mejoran los rankings y generan tráfico orgánico en minutos",
     "defaultKeywords": "auditoría SEO, análisis SEO IA, optimización sitio web, tráfico orgánico, rankings de búsqueda",
@@ -10794,6 +10804,272 @@
         "securityNotice": "🔒 Tu email está seguro • Sin spam nunca",
         "successMessage": "¡Contenido desbloqueado! Aquí tienes tu {type} exclusivo.",
         "enterEmail": "Ingresa tu email"
+      }
+    }
+  },
+  "terms": {
+    "hero": {
+      "badge": "Información legal",
+      "title": "Términos de servicio",
+      "subtitle": "Por favor, lee estos términos cuidadosamente antes de usar nuestros servicios.",
+      "lastUpdated": "Última actualización: 28 de agosto de 2025"
+    },
+    "sections": {
+      "acceptance": {
+        "title": "Aceptación de los términos",
+        "content": [
+          "Al acceder y usar AISEOTurbo (el \"Servicio\"), aceptas y acuerdas estar sujeto a los términos y disposiciones de este acuerdo.",
+          "Si no estás de acuerdo con lo anterior, por favor no uses este servicio."
+        ]
+      },
+      "license": {
+        "title": "Licencia de uso",
+        "content": [
+          "Se concede permiso para acceder temporalmente a AISEOTurbo solo para visualización personal, transitoria y no comercial.",
+          "Esto constituye la concesión de una licencia, no una transferencia de título, y bajo esta licencia no puedes:"
+        ],
+        "restrictions": [
+          "modificar o copiar los materiales",
+          "usar los materiales para cualquier propósito comercial o exhibición pública",
+          "intentar descompilar o realizar ingeniería inversa de cualquier software contenido en nuestro sitio web",
+          "eliminar cualquier nota de derechos de autor u otras anotaciones de propiedad de los materiales"
+        ]
+      },
+      "privacy": {
+        "title": "Privacidad y protección de datos",
+        "content": [
+          "Tu privacidad es importante para nosotros. Recopilamos y usamos información sobre ti para proporcionar y mejorar nuestros servicios.",
+          "Para información detallada sobre cómo manejamos tus datos, consulta nuestra Política de privacidad."
+        ]
+      },
+      "limitations": {
+        "title": "Limitaciones",
+        "content": [
+          "AISEOTurbo ni sus proveedores serán responsables en ningún caso por daños que surjan del uso o la imposibilidad de usar los materiales en nuestro sitio web.",
+          "Esta limitación se aplica a cualquier tipo de daño, incluyendo, pero no limitado a, daños compensatorios, directos, indirectos o consecuentes."
+        ]
+      },
+      "contact": {
+        "title": "Información de contacto",
+        "content": "Si tienes alguna pregunta sobre estos Términos de servicio, por favor contáctanos en:",
+        "email": "support@aiseoturbo.com",
+        "address": "Departamento Legal, AISEOTurbo"
+      },
+      "overview": {
+        "title": "Resumen",
+        "content": [
+          "Bienvenido a AI SEO Turbo. Estos Términos de servicio (\"Términos\") regulan el uso de nuestra plataforma de optimización para motores de búsqueda impulsada por IA, incluyendo nuestro sitio web, aplicaciones móviles y servicios relacionados (colectivamente, el \"Servicio\"). Al acceder o usar nuestro Servicio, aceptas estar sujeto a estos Términos.",
+          "Nuestra plataforma utiliza tecnologías avanzadas de inteligencia artificial y aprendizaje automático para ofrecer análisis SEO completos, inteligencia competitiva y recomendaciones de optimización. Estos Términos aseguran el uso justo de nuestra tecnología y protegen tanto a los usuarios como nuestra propiedad intelectual."
+        ]
+      },
+      "aiInsights": {
+        "title": "Información SEO generada por IA",
+        "intro": "AI SEO Turbo utiliza algoritmos sofisticados para analizar sitios web, resultados de motores de búsqueda y patrones de comportamiento de los usuarios. Aunque nuestros sistemas de IA son altamente precisos y se mejoran continuamente, el análisis SEO implica incertidumbres inherentes relacionadas con los algoritmos de los motores de búsqueda, que pueden cambiar sin previo aviso.",
+        "limitationsTitle": "Limitaciones y descargos de responsabilidad del servicio",
+        "limitations": [
+          "Precisión de la IA: Nuestra IA proporciona información basada en los datos disponibles y las mejores prácticas SEO actuales.",
+          "Independencia de los motores de búsqueda: No controlamos ni garantizamos los resultados en rankings de motores de búsqueda.",
+          "Cambios de algoritmos: Los motores de búsqueda pueden modificar sus algoritmos, afectando la relevancia de nuestras recomendaciones.",
+          "Datos de terceros: Algunas informaciones dependen de datos públicos provenientes de diversas fuentes.",
+          "Juicio profesional: Los usuarios deben combinar la información de nuestra IA con su propia experiencia en SEO."
+        ]
+      },
+      "acceptableUse": {
+        "title": "Uso permitido y uso justo",
+        "intro": "Nuestro servicio está diseñado para profesionales SEO legítimos, agencias y propietarios de sitios web. Mantenemos políticas estrictas de uso para asegurar acceso justo y evitar el abuso de nuestros sistemas de IA.",
+        "permittedTitle": "Usos permitidos",
+        "permitted": [
+          "Analizar sitios web que posees o tienes permiso para auditar",
+          "Análisis de la competencia con fines de inteligencia comercial legítima",
+          "Investigación educativa y profesional en SEO",
+          "Generación de informes para clientes con la debida autorización",
+          "Optimización interna del negocio y desarrollo de estrategias"
+        ],
+        "prohibitedTitle": "Actividades prohibidas",
+        "prohibited": [
+          "Usar el servicio para actividades ilegales o infringir leyes aplicables",
+          "Intentar realizar ingeniería inversa o copiar nuestros algoritmos de IA",
+          "Realizar llamadas excesivas a la API que afecten la disponibilidad del servicio",
+          "Compartir credenciales de acceso o eludir controles de acceso",
+          "Usar herramientas automáticas para evadir límites o restricciones de uso",
+          "Generar informes SEO engañosos o fraudulentos"
+        ]
+      },
+      "dataOwnership": {
+        "title": "Propiedad de datos y propiedad intelectual",
+        "intro": "Comprender la propiedad de los datos es esencial al utilizar herramientas SEO basadas en IA. Nuestro servicio procesa diversos tipos de datos y estos Términos aclaran los derechos de propiedad y permisos de uso.",
+        "yourRightsTitle": "Tus derechos sobre los datos",
+        "yourRights": [
+          "Contenido de sitios web: Conservas la propiedad total del contenido enviado para análisis.",
+          "Informes generados: Eres dueño de los informes generados desde tu cuenta.",
+          "Datos de la cuenta: Tienes control sobre tu información de cuenta e historial de uso.",
+          "Derechos de exportación: Puedes exportar tus datos en formatos estándar."
+        ],
+        "ourRightsTitle": "Nuestra propiedad intelectual",
+        "ourRights": [
+          "Algoritmos de IA: Nuestros modelos y algoritmos de aprendizaje automático propietarios.",
+          "Tecnología de la plataforma: El software e infraestructura subyacentes.",
+          "Marca y contenido: Nuestros logotipos, marcas comerciales y materiales de marketing.",
+          "Metodología de análisis: Nuestro enfoque único para el análisis SEO y las recomendaciones."
+        ]
+      },
+      "serviceLevels": {
+        "title": "Niveles y rendimiento del servicio",
+        "content": [
+          "Nos esforzamos por ofrecer herramientas de análisis SEO confiables y de alto rendimiento. Nuestros compromisos de nivel de servicio aseguran que puedas depender de nuestra plataforma para decisiones comerciales críticas.",
+          "Aunque apuntamos a un tiempo de actividad del 99,9%, el análisis SEO implica cálculos complejos y dependencias de datos externos que pueden afectar ocasionalmente el rendimiento. Proporcionamos actualizaciones transparentes sobre el estado y horarios de mantenimiento para minimizar las interrupciones en tu flujo de trabajo."
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "hero": {
+      "badge": "Privacidad y Seguridad",
+      "title": "Política de Privacidad de AI SEO Turbo",
+      "description": "Esta Política de Privacidad describe cómo AI SEO Turbo (\"la herramienta\", \"nosotros\" o \"nuestro\") recopila, utiliza y protege su información cuando utiliza nuestro sitio web y servicios.",
+      "lastUpdated": "Última actualización: 28 de agosto de 2025"
+    },
+    "sections": {
+      "informationWeCollect": {
+        "title": "Información que Recopilamos",
+        "description": "Recopilamos la información que usted nos proporciona directamente, como cuando crea una cuenta, utiliza nuestros servicios o se comunica con nosotros.",
+        "dataTypes": {
+          "title": "Tipos de datos que recopilamos:",
+          "email": "Dirección de correo electrónico e información de contacto",
+          "urls": "URLs de sitios web que envía para análisis",
+          "usage": "Datos de uso y analíticas",
+          "device": "Información del dispositivo y del navegador"
+        }
+      },
+      "howWeUse": {
+        "title": "Cómo Usamos Su Información",
+        "description": "Utilizamos la información recopilada para proveer, mantener y mejorar nuestros servicios.",
+        "serviceProvision": {
+          "title": "Prestación de Servicios",
+          "description": "Para realizar auditorías SEO, generar informes y proporcionar análisis técnicos de sus sitios web."
+        },
+        "communication": {
+          "title": "Comunicación",
+          "description": "Para enviarle actualizaciones del servicio, alertas de seguridad y mensajes de soporte."
+        },
+        "improvement": {
+          "title": "Mejora",
+          "description": "Para analizar patrones de uso y mejorar nuestros algoritmos y la experiencia del usuario."
+        }
+      },
+      "dataSecurity": {
+        "title": "Seguridad de los Datos",
+        "description": "Implementamos medidas técnicas y organizativas apropiadas para proteger su información personal.",
+        "encryption": {
+          "title": "Cifrado",
+          "description": "Todos los datos están cifrados en tránsito y en reposo utilizando protocolos estándar de la industria."
+        },
+        "accessControl": {
+          "title": "Control de Acceso",
+          "description": "Controles de acceso estrictos garantizan que solo el personal autorizado pueda acceder a sus datos."
+        }
+      },
+      "yourRights": {
+        "title": "Sus Derechos",
+        "description": "Usted tiene varios derechos respecto a su información personal:",
+        "rights": {
+          "access": {
+            "title": "Acceso",
+            "description": "Solicitar una copia de sus datos personales"
+          },
+          "correction": {
+            "title": "Corrección",
+            "description": "Actualizar o corregir información inexacta"
+          },
+          "deletion": {
+            "title": "Eliminación",
+            "description": "Solicitar la eliminación de sus datos personales"
+          },
+          "portability": {
+            "title": "Portabilidad",
+            "description": "Recibir sus datos en un formato legible por máquina"
+          }
+        }
+      },
+      "contactUs": {
+        "title": "Contáctenos",
+        "description": "Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos, por favor contáctenos:",
+        "email": {
+          "title": "Correo electrónico"
+        },
+        "responseTime": {
+          "title": "Tiempo de Respuesta",
+          "description": "Respondemos dentro de los 30 días"
+        }
+      },
+      "privacyInSeoTools": {
+        "title": "Privacidad en Herramientas SEO",
+        "description": "La privacidad y la seguridad de los datos son fundamentales al analizar sitios web e inteligencia empresarial. Nuestro compromiso va más allá del cumplimiento legal; es esencial para generar confianza. Manejamos datos web, información analítica y contenido generado por el usuario con seguridad de nivel empresarial y estrictos protocolos de gestión."
+      },
+      "privacyCommitments": {
+        "title": "Nuestros Compromisos de Privacidad",
+        "dataMinimization": {
+          "title": "Minimización de Datos",
+          "description": "Recopilamos solo lo necesario para prestar servicios de análisis SEO."
+        },
+        "purposeLimitation": {
+          "title": "Limitación de Finalidad",
+          "description": "Sus datos se usan únicamente para los fines establecidos en esta política."
+        },
+        "securityFirst": {
+          "title": "Seguridad ante Todo",
+          "description": "El cifrado y los controles de acceso protegen su información."
+        },
+        "transparency": {
+          "title": "Transparencia",
+          "description": "Comunicación clara sobre cómo gestionamos y protegemos sus datos."
+        },
+        "userControl": {
+          "title": "Control del Usuario",
+          "description": "Usted controla sus datos y puede solicitar la eliminación en cualquier momento."
+        }
+      },
+      "dataProcessing": {
+        "title": "Procesamiento de Datos y Qué Analizamos",
+        "description": "Nuestras auditorías impulsadas por IA procesan datos de sitios web para identificar oportunidades SEO. Analizamos contenido web público, estructura técnica y métricas de rendimiento manteniendo límites estrictos de privacidad. No recopilamos ni almacenamos información personal identificable de los visitantes de su sitio web.",
+        "analysis": {
+          "publicContent": "Contenido y metadatos públicos del sitio web",
+          "technicalElements": "Elementos técnicos SEO (metaetiquetas, encabezados, marcado schema)",
+          "siteStructure": "Estructura del sitio y patrones de enlaces internos",
+          "performance": "Métricas de rendimiento y velocidades de carga",
+          "mobile": "Adaptabilidad móvil y características de accesibilidad",
+          "visibility": "Visibilidad en motores de búsqueda y estado de indexación"
+        }
+      },
+      "securityMeasures": {
+        "title": "Medidas y Tecnologías de Seguridad",
+        "description": "Protegemos los datos durante todo su ciclo de vida con controles y monitoreo en capas.",
+        "measures": {
+          "encryption": {
+            "title": "Cifrado de Extremo a Extremo",
+            "description": "AES-256 en tránsito y en reposo."
+          },
+          "zeroTrust": {
+            "title": "Arquitectura Zero-Trust",
+            "description": "Cada solicitud es verificada y autorizada."
+          },
+          "audits": {
+            "title": "Auditorías de Seguridad Regulares",
+            "description": "Evaluaciones independientes de terceros."
+          },
+          "incident": {
+            "title": "Respuesta ante Incidentes",
+            "description": "Monitoreo 24/7 con respuesta rápida."
+          },
+          "residency": {
+            "title": "Residencia de Datos",
+            "description": "Centros de datos seguros, conformes con SOC 2."
+          }
+        }
+      },
+      "compliance": {
+        "title": "Cumplimiento y Marco Legal",
+        "description": "Cumplimos con GDPR, CCPA y otras normativas de privacidad aplicables. Nuestras prácticas se revisan regularmente para alinearse con los estándares y mejores prácticas en evolución, con la orientación de expertos legales en protección de datos."
       }
     }
   }

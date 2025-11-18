@@ -45,7 +45,7 @@ export function Breadcrumbs({
       >
         {breadcrumbItems.map((item, index) => {
           const isLast = index === breadcrumbItems.length - 1
-          const isHome = includeHome && index === 0
+          const isHome = item.name === 'Home'
 
           return (
             <React.Fragment key={item.url}>

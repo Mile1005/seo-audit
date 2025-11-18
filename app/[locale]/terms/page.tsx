@@ -3,11 +3,24 @@
 import { MainLayout } from "../../../components/layout/main-layout"
 import { motion } from 'framer-motion'
 import { Shield, FileText, Users, AlertCircle, CheckCircle, Scale } from 'lucide-react'
+import { useTranslations } from 'next-intl'
+import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 
 export default function TermsPage() {
+  const t = useTranslations('terms')
   return (
     <MainLayout>
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-x-hidden">
+        {/* Breadcrumbs */}
+        <div className="pt-8 pb-4 px-4 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[
+              { name: 'Terms of Service', url: 'https://www.aiseoturbo.com/terms' }
+            ]}
+            includeHome={true}
+          />
+        </div>
+
         {/* Hero Section */}
         <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
           {/* Background Elements */}
@@ -47,13 +60,13 @@ export default function TermsPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-6 border border-blue-500/20">
                 <Scale className="w-4 h-4 mr-2" />
-                Legal Information
+                {t('hero.badge')}
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Terms of Service</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">{t('hero.title')}</h1>
               <p className="text-xl text-gray-300 mb-4">
-                Please read these terms carefully before using our services.
+                {t('hero.subtitle')}
               </p>
-              <p className="text-sm text-gray-400">Last updated: August 28, 2025</p>
+              <p className="text-sm text-gray-400">{t('hero.lastUpdated')}</p>
             </motion.div>
           </div>
         </section>
@@ -81,11 +94,11 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center mr-4 border border-blue-500/20">
                       <CheckCircle className="w-5 h-5 text-blue-400" />
                     </div>
-                    Acceptance of Terms
+                    {t('sections.acceptance.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>By accessing and using AISEOTurbo (the "Service"), you accept and agree to be bound by the terms and provisions of this agreement.</p>
-                    <p>If you do not agree to abide by the above, please do not use this service.</p>
+                    <p>{t('sections.acceptance.content.0')}</p>
+                    <p>{t('sections.acceptance.content.1')}</p>
                   </div>
                 </motion.section>
 
@@ -99,16 +112,16 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center mr-4 border border-purple-500/20">
                       <FileText className="w-5 h-5 text-purple-400" />
                     </div>
-                    Use License
+                    {t('sections.license.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>Permission is granted to temporarily access AISEOTurbo for personal, non-commercial transitory viewing only.</p>
-                    <p>This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                    <p>{t('sections.license.content.0')}</p>
+                    <p>{t('sections.license.content.1')}</p>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li>modify or copy the materials</li>
-                      <li>use the materials for any commercial purpose or for any public display</li>
-                      <li>attempt to decompile or reverse engineer any software contained on our website</li>
-                      <li>remove any copyright or other proprietary notations from the materials</li>
+                      <li>{t('sections.license.restrictions.0')}</li>
+                      <li>{t('sections.license.restrictions.1')}</li>
+                      <li>{t('sections.license.restrictions.2')}</li>
+                      <li>{t('sections.license.restrictions.3')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -123,11 +136,11 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center mr-4 border border-green-500/20">
                       <Shield className="w-5 h-5 text-green-400" />
                     </div>
-                    Privacy and Data Protection
+                    {t('sections.privacy.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>Your privacy is important to us. We collect and use information about you to provide and improve our services.</p>
-                    <p>For detailed information about how we handle your data, please review our Privacy Policy.</p>
+                    <p>{t('sections.privacy.content.0')}</p>
+                    <p>{t('sections.privacy.content.1')}</p>
                   </div>
                 </motion.section>
 
@@ -141,11 +154,11 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-red-500/10 rounded-lg flex items-center justify-center mr-4 border border-red-500/20">
                       <AlertCircle className="w-5 h-5 text-red-400" />
                     </div>
-                    Limitations
+                    {t('sections.limitations.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>In no event shall AISEOTurbo or its suppliers be liable for any damages arising out of the use or inability to use the materials on our website.</p>
-                    <p>This limitation applies to all damages of any kind, including but not limited to compensatory, direct, indirect or consequential damages.</p>
+                    <p>{t('sections.limitations.content.0')}</p>
+                    <p>{t('sections.limitations.content.1')}</p>
                   </div>
                 </motion.section>
 
@@ -159,13 +172,13 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-yellow-500/10 rounded-lg flex items-center justify-center mr-4 border border-yellow-500/20">
                       <Users className="w-5 h-5 text-yellow-400" />
                     </div>
-                    Contact Information
+                    {t('sections.contact.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>If you have any questions about these Terms of Service, please contact us at:</p>
+                    <p>{t('sections.contact.content')}</p>
                     <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                      <p><strong>Email:</strong> <a href="mailto:support@aiseoturbo.com" className="text-primary hover:underline">support@aiseoturbo.com</a></p>
-                      <p><strong>Address:</strong> Legal Department, AISEOTurbo</p>
+                      <p><strong>Email:</strong> <a href="mailto:support@aiseoturbo.com" className="text-primary hover:underline">{t('sections.contact.email')}</a></p>
+                      <p><strong>Address:</strong> {t('sections.contact.address')}</p>
                     </div>
                   </div>
                 </motion.section>
@@ -195,18 +208,14 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center mr-4 border border-blue-500/20">
                       <CheckCircle className="w-5 h-5 text-blue-400" />
                     </div>
-                    Overview
+                    {t('sections.overview.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      Welcome to AI SEO Turbo. These Terms of Service ("Terms") govern your use of our AI-powered search engine
-                      optimization platform, including our website, mobile applications, and related services (collectively, the "Service").
-                      By accessing or using our Service, you agree to be bound by these Terms.
+                      {t('sections.overview.content.0')}
                     </p>
                     <p>
-                      Our platform leverages advanced artificial intelligence and machine learning technologies to provide comprehensive
-                      SEO analysis, competitor intelligence, and optimization recommendations. These Terms ensure fair use of our
-                      technology while protecting both users and our intellectual property.
+                      {t('sections.overview.content.1')}
                     </p>
                   </div>
                 </motion.section>
@@ -221,21 +230,19 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-green-500/10 rounded-lg flex items-center justify-center mr-4 border border-green-500/20">
                       <Shield className="w-5 h-5 text-green-400" />
                     </div>
-                    AI-Generated SEO Insights
+                    {t('sections.aiInsights.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      AI SEO Turbo uses sophisticated algorithms to analyze websites, search engine results, and user behavior patterns.
-                      While our AI systems are highly accurate and continuously improved, SEO analysis involves inherent uncertainties
-                      related to search engine algorithms, which can change without notice.
+                      {t('sections.aiInsights.intro')}
                     </p>
-                    <h3 className="text-lg font-semibold text-foreground">Service Limitations & Disclaimers</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{t('sections.aiInsights.limitationsTitle')}</h3>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li><strong>AI Accuracy:</strong> Our AI provides insights based on available data and current SEO best practices.</li>
-                      <li><strong>Search Engine Independence:</strong> We do not control or guarantee search engine ranking outcomes.</li>
-                      <li><strong>Algorithm Changes:</strong> Search engines may modify their algorithms, affecting the relevance of our recommendations.</li>
-                      <li><strong>Third-Party Data:</strong> Some insights rely on publicly available data from various sources.</li>
-                      <li><strong>Professional Judgment:</strong> Users should combine our AI insights with their own SEO expertise.</li>
+                      <li>{t('sections.aiInsights.limitations.0')}</li>
+                      <li>{t('sections.aiInsights.limitations.1')}</li>
+                      <li>{t('sections.aiInsights.limitations.2')}</li>
+                      <li>{t('sections.aiInsights.limitations.3')}</li>
+                      <li>{t('sections.aiInsights.limitations.4')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -250,29 +257,28 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-purple-500/10 rounded-lg flex items-center justify-center mr-4 border border-purple-500/20">
                       <Users className="w-5 h-5 text-purple-400" />
                     </div>
-                    Acceptable Use & Fair Usage
+                    {t('sections.acceptableUse.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      Our service is designed for legitimate SEO professionals, agencies, and website owners. We maintain strict
-                      usage policies to ensure fair access and prevent abuse of our AI systems.
+                      {t('sections.acceptableUse.intro')}
                     </p>
-                    <h3 className="text-lg font-semibold text-foreground">Permitted Uses</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{t('sections.acceptableUse.permittedTitle')}</h3>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li>Analyzing websites you own or have permission to audit</li>
-                      <li>Competitor analysis for legitimate business intelligence</li>
-                      <li>Educational and professional SEO research</li>
-                      <li>Generating reports for clients with proper authorization</li>
-                      <li>Internal business optimization and strategy development</li>
+                      <li>{t('sections.acceptableUse.permitted.0')}</li>
+                      <li>{t('sections.acceptableUse.permitted.1')}</li>
+                      <li>{t('sections.acceptableUse.permitted.2')}</li>
+                      <li>{t('sections.acceptableUse.permitted.3')}</li>
+                      <li>{t('sections.acceptableUse.permitted.4')}</li>
                     </ul>
-                    <h3 className="text-lg font-semibold text-foreground">Prohibited Activities</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{t('sections.acceptableUse.prohibitedTitle')}</h3>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li>Using the service for illegal activities or violating applicable laws</li>
-                      <li>Attempting to reverse engineer or copy our AI algorithms</li>
-                      <li>Excessive API calls that disrupt service availability</li>
-                      <li>Sharing login credentials or circumventing access controls</li>
-                      <li>Using automated tools to bypass rate limits or usage restrictions</li>
-                      <li>Generating misleading or fraudulent SEO reports</li>
+                      <li>{t('sections.acceptableUse.prohibited.0')}</li>
+                      <li>{t('sections.acceptableUse.prohibited.1')}</li>
+                      <li>{t('sections.acceptableUse.prohibited.2')}</li>
+                      <li>{t('sections.acceptableUse.prohibited.3')}</li>
+                      <li>{t('sections.acceptableUse.prohibited.4')}</li>
+                      <li>{t('sections.acceptableUse.prohibited.5')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -287,26 +293,25 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center mr-4 border border-blue-500/20">
                       <FileText className="w-5 h-5 text-blue-400" />
                     </div>
-                    Data Ownership & Intellectual Property
+                    {t('sections.dataOwnership.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      Understanding data ownership is crucial when using AI-powered SEO tools. Our service processes various types
-                      of data, and these Terms clarify ownership rights and usage permissions.
+                      {t('sections.dataOwnership.intro')}
                     </p>
-                    <h3 className="text-lg font-semibold text-foreground">Your Data Rights</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{t('sections.dataOwnership.yourRightsTitle')}</h3>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li><strong>Website Content:</strong> You retain full ownership of content submitted for analysis.</li>
-                      <li><strong>Generated Reports:</strong> You own the reports generated from your account.</li>
-                      <li><strong>Account Data:</strong> You control your account information and usage history.</li>
-                      <li><strong>Export Rights:</strong> You may export your data in standard formats.</li>
+                      <li>{t('sections.dataOwnership.yourRights.0')}</li>
+                      <li>{t('sections.dataOwnership.yourRights.1')}</li>
+                      <li>{t('sections.dataOwnership.yourRights.2')}</li>
+                      <li>{t('sections.dataOwnership.yourRights.3')}</li>
                     </ul>
-                    <h3 className="text-lg font-semibold text-foreground">Our Intellectual Property</h3>
+                    <h3 className="text-lg font-semibold text-foreground">{t('sections.dataOwnership.ourRightsTitle')}</h3>
                     <ul className="list-disc list-inside space-y-2 ml-4">
-                      <li><strong>AI Algorithms:</strong> Our proprietary machine learning models and algorithms.</li>
-                      <li><strong>Platform Technology:</strong> The underlying software and infrastructure.</li>
-                      <li><strong>Branding & Content:</strong> Our trademarks, logos, and marketing materials.</li>
-                      <li><strong>Analysis Methodology:</strong> Our unique approach to SEO analysis and recommendations.</li>
+                      <li>{t('sections.dataOwnership.ourRights.0')}</li>
+                      <li>{t('sections.dataOwnership.ourRights.1')}</li>
+                      <li>{t('sections.dataOwnership.ourRights.2')}</li>
+                      <li>{t('sections.dataOwnership.ourRights.3')}</li>
                     </ul>
                   </div>
                 </motion.section>
@@ -321,17 +326,14 @@ export default function TermsPage() {
                     <div className="w-10 h-10 bg-yellow-500/10 rounded-lg flex items-center justify-center mr-4 border border-yellow-500/20">
                       <Scale className="w-5 h-5 text-yellow-400" />
                     </div>
-                    Service Levels & Performance
+                    {t('sections.serviceLevels.title')}
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
                     <p>
-                      We strive to provide reliable, high-performance SEO analysis tools. Our service level commitments ensure
-                      that you can depend on our platform for critical business decisions.
+                      {t('sections.serviceLevels.content.0')}
                     </p>
                     <p>
-                      While we aim for 99.9% uptime, SEO analysis involves complex computations and external data dependencies
-                      that may occasionally affect performance. We provide transparent status updates and maintenance schedules
-                      to minimize disruptions to your workflow.
+                      {t('sections.serviceLevels.content.1')}
                     </p>
                   </div>
                 </motion.section>
