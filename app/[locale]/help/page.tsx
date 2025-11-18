@@ -90,10 +90,10 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
       icon: BarChart,
       color: "from-blue-500 to-cyan-500",
       articles: [
-        { key: "auditWalkthrough", href: "/help/features/seo-audit" },
-        { key: "competitorGuide", href: "/help/features/competitor-analysis" },
-        { key: "crawlerConfig", href: "/help/features/site-crawler" },
-        { key: "aiAssistant", href: "/help/features/ai-assistant" }
+        { key: "auditWalkthrough", href: "/help/seo-tools/seo-audit" },
+        { key: "competitorGuide", href: "/help/seo-tools/competitor-analysis" },
+        { key: "crawlerConfig", href: "/help/seo-tools/site-crawler" },
+        { key: "aiAssistant", href: "/help/seo-tools/ai-assistant" }
       ]
     },
     {
@@ -113,7 +113,8 @@ export default async function HelpPage({ params }: { params: Promise<{ locale: s
       color: "from-orange-500 to-red-500",
       articles: [
         { key: "authentication", href: "/help/api/authentication" },
-        { key: "webhooks", href: "/help/api/webhooks" }
+        { key: "webhooks", href: "/help/api/webhooks" },
+        { key: "apiIntegrations", href: "/help/api/api-integrations" }
       ]
     },
     {

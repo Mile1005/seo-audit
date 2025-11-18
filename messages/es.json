@@ -62,6 +62,7 @@
   },
   "meta": {
     "home": {
+      "title": "Herramienta de Audit SEO - Mejora Rankings Rápidamente | AI SEO Turbo",
       "description": "Transforma tu SEO con auditorías impulsadas por IA que identifican 47+ problemas críticos. Obtén insights basados en datos para aumentar el tráfico orgánico y dominar los rankings.",
       "keywords": ["auditoría SEO IA", "herramienta optimización SEO", "mejora ranking sitio web", "crecimiento tráfico orgánico", "análisis SEO técnico"]
     },
@@ -1104,11 +1105,328 @@
         "subtitle": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
         "backToHelp": "Volver al Centro de Ayuda",
         "articles": {
+          "auditWalkthrough": {
+            "title": "Guía completa de auditoría SEO",
+            "time": "12 min"
+          },
+          "competitorGuide": {
+            "title": "Guía de análisis de competidores",
+            "time": "8 min"
+          },
+          "crawlerConfig": {
+            "title": "Configuración del crawler del sitio",
+            "time": "6 min"
+          },
+          "aiAssistant": {
+            "title": "Asistente SEO IA",
+            "href": "/help/seo-tools/ai-assistant",
+            "time": "4 min",
+            "description": "Obtenga recomendaciones SEO personalizadas de nuestro asistente IA inteligente.",
+            "backToCategory": "Volver a Herramientas y Funciones SEO",
+            "backToHelp": "Volver al Centro de Ayuda",
+            "breadcrumb": {
+              "home": "Inicio",
+              "help": "Ayuda",
+              "seoTools": "Herramientas y Funciones SEO",
+              "aiAssistant": "Resumen del Asistente IA"
+            },
+            "header": {
+              "title": "Mejores Prácticas del Asistente IA",
+              "description": "Domine nuestro asistente SEO IA para obtener resultados máximos. Aprenda a hacer preguntas efectivas, interpretar las recomendaciones de la IA y combinar los insights de IA con su experiencia SEO."
+            },
+            "intro": {
+              "title": "Entendiendo el Asistente SEO IA",
+              "description": "Nuestro asistente IA combina el aprendizaje automático con la experiencia SEO para proporcionar recomendaciones personalizadas. Entrenado en millones de sitios web y las últimas mejores prácticas SEO, le ayuda a tomar decisiones basadas en datos."
+            },
+            "capabilities": {
+              "keywordResearch": {
+                "title": "Investigación de Palabras Clave",
+                "description": "Análisis avanzado de palabras clave y oportunidades"
+              },
+              "contentOptimization": {
+                "title": "Optimización de Contenido",
+                "description": "Sugerencias inteligentes de mejora de contenido"
+              },
+              "technicalSEO": {
+                "title": "SEO Técnico",
+                "description": "Identificación y corrección de problemas técnicos"
+              },
+              "strategyDevelopment": {
+                "title": "Desarrollo de Estrategia",
+                "description": "Recomendaciones de estrategia SEO personalizada"
+              }
+            },
+            "bestPractices": {
+              "title": "Mejores Prácticas para Interacciones IA",
+              "beSpecific": {
+                "title": "Sea Específico en Sus Preguntas",
+                "description": "Cuanto más específica sea su pregunta, mejor puede la IA proporcionar consejos dirigidos y accionables. Incluya contexto sobre su industria, objetivos y situación actual.",
+                "examplesTitle": "Buenos Ejemplos:",
+                "example1": "¿Cómo mejorar el ranking de mi sitio de e-commerce para 'auriculares inalámbricos'?",
+                "example2": "¿Qué problemas SEO técnicos debería priorizar para mi página de destino SaaS?",
+                "example3": "Sugerir temas de contenido para mi blog B2B sobre ciberseguridad"
+              },
+              "provideContext": {
+                "title": "Proporcionar Contexto y Datos",
+                "description": "Comparta datos relevantes de sus auditorías, análisis o métricas de rendimiento actuales. Esto ayuda a la IA a dar recomendaciones más precisas y personalizadas.",
+                "includeTitle": "Incluya en sus preguntas:",
+                "item1": "Rankings de búsqueda actuales y datos de tráfico",
+                "item2": "Palabras clave objetivo y competidores",
+                "item3": "Su industria y público objetivo",
+                "item4": "Cambios o campañas recientes"
+              },
+              "followUp": {
+                "title": "Hacer Preguntas de Seguimiento",
+                "description": "No se detenga en la primera respuesta. Haga preguntas de aclaración o pida más detalles sobre recomendaciones específicas para profundizar su comprensión.",
+                "strategiesTitle": "Estrategias de seguimiento:",
+                "strategy1": "¿Puede explicar por qué esta recomendación ayudaría?",
+                "strategy2": "¿Qué métricas debería rastrear para medir el éxito?",
+                "strategy3": "¿Hay riesgos potenciales con este enfoque?",
+                "strategy4": "¿Cómo se integra esto con mi estrategia SEO global?"
+              },
+              "combineExpertise": {
+                "title": "Combinar Insights IA con Su Experiencia",
+                "description": "Use las recomendaciones IA como punto de partida, pero aplique sus conocimientos y experiencia de la industria para determinar qué tiene sentido para su situación específica.",
+                "bestApproachTitle": "Mejor enfoque:",
+                "approach1": "Evalúe las recomendaciones contra sus objetivos comerciales",
+                "approach2": "Considere sus recursos y restricciones de tiempo",
+                "approach3": "Pruebe las recomendaciones a pequeña escala primero",
+                "approach4": "Use IA para investigación, usted para estrategia y ejecución"
+              }
+            },
+            "useCases": {
+              "title": "Casos de Uso Comunes del Asistente IA",
+              "contentStrategy": {
+                "title": "Estrategia de Contenido",
+                "description": "Obtenga ayuda para la planificación de contenido, ideación de temas y estrategias de optimización.",
+                "item1": "Investigación de palabras clave y brechas de contenido",
+                "item2": "Planificación del calendario de contenido",
+                "item3": "Sugerencias de título y meta SEO-friendly",
+                "item4": "Recomendaciones de estructura de contenido"
+              },
+              "technicalSEO": {
+                "title": "SEO Técnico",
+                "description": "Identifique y corrija problemas SEO técnicos con análisis impulsado por IA.",
+                "item1": "Análisis y corrección de errores de rastreo",
+                "item2": "Optimización de Core Web Vitals",
+                "item3": "Implementación de marcado Schema",
+                "item4": "Consejos de optimización móvil"
+              },
+              "competitorAnalysis": {
+                "title": "Análisis de Competidores",
+                "description": "Comprenda las estrategias de los competidores y encuentre oportunidades.",
+                "item1": "Análisis de palabras clave de competidores",
+                "item2": "Comparación de estrategias de contenido",
+                "item3": "Identificación de oportunidades de backlinks",
+                "item4": "Objetivos de características SERP"
+              },
+              "performanceOptimization": {
+                "title": "Optimización de Rendimiento",
+                "description": "Mejore el rendimiento del sitio y la experiencia del usuario.",
+                "item1": "Consejos de optimización de velocidad de página",
+                "item2": "Mejoras en la experiencia del usuario",
+                "item3": "Optimización de tasa de conversión",
+                "item4": "Recomendaciones de pruebas A/B"
+              }
+            },
+            "tipsForSuccess": {
+              "title": "Consejos para el Éxito",
+              "dos": {
+                "title": "Hacer",
+                "item1": "Comience con preguntas específicas y bien definidas",
+                "item2": "Proporcione contexto y datos de rendimiento actuales",
+                "item3": "Experimente diferentes formatos de preguntas",
+                "item4": "Rastree y mida el impacto de las recomendaciones IA"
+              },
+              "donts": {
+                "title": "No Hacer",
+                "item1": "Hacer preguntas vagas o demasiado amplias",
+                "item2": "Esperar que la IA reemplace su experiencia SEO",
+                "item3": "Implementar recomendaciones sin prueba",
+                "item4": "Ignorar sus conocimientos específicos de la industria"
+              }
+            },
+            "gettingStarted": {
+              "title": "Comenzar con el Asistente IA",
+              "step1": {
+                "title": "Acceder al Asistente IA",
+                "description": "Navegue a la sección Asistente IA en su panel de control."
+              },
+              "step2": {
+                "title": "Comenzar con una Pregunta Simple",
+                "description": "Comience con una pregunta específica sobre sus desafíos SEO actuales."
+              },
+              "step3": {
+                "title": "Refinar e Iterar",
+                "description": "Use preguntas de seguimiento para obtener insights más detallados."
+              },
+              "step4": {
+                "title": "Aplicar y Rastrear Resultados",
+                "description": "Implemente las recomendaciones y monitoree su impacto en su rendimiento SEO."
+              }
+            }
+          },
           "seoAudit": {
             "title": "Guía de Auditoría SEO",
             "href": "/help/seo-tools/seo-audit",
             "time": "8 min",
-            "description": "Aprende a realizar auditorías SEO completas que cubren 47+ factores técnicos."
+            "description": "Aprende a realizar auditorías SEO completas que abarcan más de 47 factores técnicos.",
+            "backToCategory": "Volver a Herramientas y Funciones SEO",
+            "breadcrumb": {
+              "home": "Inicio",
+              "help": "Ayuda",
+              "seoTools": "Herramientas y Funciones SEO",
+              "seoAudit": "Guía de Auditoría SEO"
+            },
+            "header": {
+              "category": "Guía de Función",
+              "title": "Recorrido por la Auditoría SEO",
+              "description": "Guía completa para realizar auditorías SEO exhaustivas con análisis impulsado por IA",
+              "author": "Equipo AISEOTurbo",
+              "readTime": "Lectura de 8 min",
+              "lastUpdated": "Última actualización: marzo de 2025"
+            },
+            "intro": {
+              "title": "Comprendiendo las Auditorías SEO",
+              "description": "Una auditoría SEO es un análisis exhaustivo del rendimiento de la optimización para motores de búsqueda de tu sitio web. Nuestra auditoría impulsada por IA examina 47 factores distintos, incluyendo SEO técnico, calidad de contenido, experiencia de usuario y posicionamiento competitivo, para proporcionar recomendaciones prácticas de mejora."
+            },
+            "auditAnalyzes": {
+              "title": "Qué analiza nuestra auditoría",
+              "technical": {
+                "title": "SEO técnico",
+                "pageSpeed": "Velocidad de página y Core Web Vitals",
+                "mobile": "Compatibilidad móvil",
+                "ssl": "Certificado SSL y seguridad",
+                "sitemap": "Mapa del sitio XML y robots.txt",
+                "structuredData": "Marcado de datos estructurados"
+              }
+            },
+            "sections": {
+              "understanding": {
+                "title": "Comprendiendo las Auditorías SEO",
+                "description": "Una auditoría SEO es un análisis exhaustivo del rendimiento de la optimización para motores de búsqueda de tu sitio web. Nuestra auditoría impulsada por IA examina 47 factores distintos, incluyendo SEO técnico, calidad de contenido, experiencia de usuario y posicionamiento competitivo, para proporcionar recomendaciones prácticas de mejora.",
+                "benefits": {
+                  "1": "Identificar problemas técnicos que afectan los resultados de búsqueda",
+                  "2": "Descubrir oportunidades de optimización de contenido",
+                  "3": "Analizar estrategias de la competencia",
+                  "4": "Controlar las mejoras de rendimiento a lo largo del tiempo"
+                }
+              },
+              "analysis": {
+                "title": "Qué analiza nuestra auditoría",
+                "categories": {
+                  "technical": {
+                    "title": "SEO técnico",
+                    "items": {
+                      "1": "Velocidad de página y Core Web Vitals",
+                      "2": "Compatibilidad móvil y diseño responsivo",
+                      "3": "Certificado SSL y seguridad HTTPS",
+                      "4": "Configuración de mapa del sitio XML y robots.txt"
+                    }
+                  },
+                  "content": {
+                    "title": "Calidad del contenido",
+                    "items": {
+                      "1": "Optimización y unicidad de etiquetas de título",
+                      "2": "Eficacia de las meta descripciones",
+                      "3": "Estructura y jerarquía de encabezados",
+                      "4": "Profundidad del contenido y uso de palabras clave"
+                    }
+                  },
+                  "performance": {
+                    "title": "Métricas de rendimiento",
+                    "items": {
+                      "1": "Puntuaciones de Core Web Vitals",
+                      "2": "Auditoría de rendimiento Lighthouse",
+                      "3": "Optimización y compresión de imágenes",
+                      "4": "Minificación de JavaScript y CSS"
+                    }
+                  },
+                  "mobile": {
+                    "title": "Optimización móvil",
+                    "items": {
+                      "1": "Diseño amigable para móviles",
+                      "2": "Objetivos táctiles y usabilidad",
+                      "3": "Velocidad de página móvil",
+                      "4": "Implementación de AMP (si corresponde)"
+                    }
+                  }
+                }
+              },
+              "running": {
+                "title": "Cómo ejecutar una auditoría SEO",
+                "steps": {
+                  "1": {
+                    "title": "Introduce la URL de tu sitio web",
+                    "description": "Navega a la herramienta de Auditoría SEO e introduce la URL de tu sitio. Nuestro rastreador comenzará a analizar tu sitio de inmediato."
+                  },
+                  "2": {
+                    "title": "Revisa los resultados de la auditoría",
+                    "description": "Examina el informe completo con puntuaciones, problemas y recomendaciones organizadas por categoría."
+                  },
+                  "3": {
+                    "title": "Implementa las recomendaciones",
+                    "description": "Sigue las acciones priorizadas para corregir los problemas identificados y mejorar tu rendimiento SEO."
+                  }
+                }
+              },
+              "results": {
+                "title": "Interpretando los resultados",
+                "statuses": {
+                  "passed": {
+                    "title": "Aprobado",
+                    "description": "Elementos que cumplen con las mejores prácticas SEO y no requieren acciones."
+                  },
+                  "warnings": {
+                    "title": "Advertencias",
+                    "description": "Elementos que pueden afectar el rendimiento pero no son problemas críticos."
+                  },
+                  "errors": {
+                    "title": "Errores",
+                    "description": "Problemas críticos que necesitan atención inmediata para mejorar los rankings."
+                  }
+                }
+              },
+              "issues": {
+                "title": "Problemas comunes y soluciones",
+                "common": {
+                  "1": {
+                    "title": "Velocidad de página lenta",
+                    "description": "Las páginas que cargan en más de 3 segundos pueden perjudicar la experiencia del usuario y el posicionamiento.",
+                    "solution": "Optimiza imágenes, minimiza el código y utiliza caché para mejorar los tiempos de carga."
+                  },
+                  "2": {
+                    "title": "Meta descripciones ausentes",
+                    "description": "Las páginas sin meta descripciones pueden tener bajas tasas de clics en los resultados de búsqueda.",
+                    "solution": "Agrega meta descripciones únicas y atractivas de hasta 160 caracteres para cada página."
+                  },
+                  "3": {
+                    "title": "Enlaces internos rotos",
+                    "description": "Los enlaces rotos generan mala experiencia de usuario y desperdician presupuesto de rastreo.",
+                    "solution": "Audita y corrige regularmente los enlaces rotos, o configura redireccionamientos apropiados."
+                  }
+                }
+              },
+              "practices": {
+                "title": "Buenas prácticas",
+                "do": {
+                  "title": "Qué hacer",
+                  "items": {
+                    "1": "Ejecuta auditorías regularmente (mensualmente recomendado)",
+                    "2": "Prioriza primero las correcciones de mayor impacto",
+                    "3": "Monitorea las mejoras con herramientas de seguimiento"
+                  }
+                },
+                "dont": {
+                  "title": "Qué evitar",
+                  "items": {
+                    "1": "Ignorar la optimización móvil",
+                    "2": "Sobreoptimizar para palabras clave",
+                    "3": "Descuidar los fundamentos del SEO técnico"
+                  }
+                }
+              }
+            }
           },
           "competitorAnalysis": {
             "title": "Análisis de Competidores",
@@ -1117,16 +1435,342 @@
             "description": "Analiza las estrategias SEO de tus competidores y obtén insights competitivos."
           },
           "siteCrawler": {
-            "title": "Herramienta Rastreador de Sitio",
+            "title": "Guía del rastreador de sitio",
             "href": "/help/seo-tools/site-crawler",
-            "time": "5 min",
-            "description": "Descubre todas las páginas de tu sitio web e identifica problemas de rastreabilidad."
+            "time": "7 min",
+            "description": "Aprende a usar nuestro rastreador de sitio inteligente para análisis completos del sitio web y auditorías SEO técnicas.",
+            "backToCategory": "Volver a Herramientas SEO",
+            "backToHelp": "Volver al Centro de Ayuda",
+            "breadcrumb": {
+              "home": "Inicio",
+              "help": "Ayuda",
+              "seoTools": "Herramientas SEO",
+              "siteCrawler": "Guía del Rastreador de Sitio"
+            },
+            "header": {
+              "category": "Guía de Funciones",
+              "title": "Guía del Rastreador de Sitio",
+              "description": "Domina nuestro rastreador de sitio inteligente para análisis completos, detección de problemas técnicos y optimización SEO",
+              "author": "Equipo AISEOTurbo",
+              "readTime": "7 min de lectura",
+              "lastUpdated": "Última actualización: Marzo 2025"
+            },
+            "intro": {
+              "title": "Entendiendo el Rastreo de Sitio",
+              "description": "Nuestro rastreador de sitio actúa como una araña de motor de búsqueda, explorando sistemáticamente tu sitio web para identificar páginas, analizar contenido y detectar problemas técnicos de SEO. Proporciona insights completos sobre la salud y el rendimiento de tu sitio."
+            },
+            "keyFeatures": {
+              "title": "Funciones Clave",
+              "completeCoverage": {
+                "title": "Cobertura Completa",
+                "description": "Rastrea todas las páginas y tipos de contenido"
+              },
+              "technicalAnalysis": {
+                "title": "Análisis Técnico",
+                "description": "Identifica problemas de SEO y rendimiento"
+              },
+              "contentInsights": {
+                "title": "Insights de Contenido",
+                "description": "Analiza la calidad y optimización del contenido"
+              },
+              "fastResults": {
+                "title": "Resultados Rápidos",
+                "description": "Rastreo rápido con informes detallados"
+              }
+            },
+            "howItWorks": {
+              "title": "Cómo Funciona el Rastreo de Sitio",
+              "startCrawl": {
+                "title": "Iniciar el Rastreo",
+                "description": "Ingresa la URL de tu sitio web y configura los ajustes de rastreo. Elige entre escaneos rápidos para sitios pequeños o rastreos completos para sitios más grandes.",
+                "crawlOptions": {
+                  "title": "Opciones de Rastreo:",
+                  "quickScan": "Escaneo rápido (hasta 100 páginas)",
+                  "fullCrawl": "Rastreo completo del sitio (páginas ilimitadas)",
+                  "customDepth": "Límites de profundidad personalizados",
+                  "includeExclude": "Patrones de inclusión/exclusión"
+                }
+              },
+              "intelligentDiscovery": {
+                "title": "Descubrimiento Inteligente",
+                "description": "Nuestro rastreador explora sistemáticamente tu sitio, siguiendo enlaces internos y descubriendo todas las páginas, imágenes y recursos. Respeta robots.txt y los retrasos de rastreo.",
+                "crawls": {
+                  "title": "Qué rastrea:",
+                  "htmlPages": "Páginas HTML",
+                  "xmlSitemaps": "Sitemaps XML",
+                  "imagesMedia": "Imágenes y medios",
+                  "cssJs": "Archivos CSS y JavaScript"
+                },
+                "analyzes": {
+                  "title": "Qué analiza:",
+                  "titlesMeta": "Títulos de página y meta descripciones",
+                  "headings": "Estructura de encabezados",
+                  "links": "Enlaces internos/externos",
+                  "performance": "Rendimiento de carga de páginas"
+                }
+              },
+              "comprehensiveAnalysis": {
+                "title": "Análisis Completo",
+                "description": "Cada página se analiza por factores SEO, problemas técnicos y oportunidades de optimización. El rastreador identifica problemas y proporciona recomendaciones accionables.",
+                "categories": {
+                  "title": "Categorías de Análisis:",
+                  "onPage": "Optimización SEO en página",
+                  "technical": "Problemas técnicos de SEO",
+                  "content": "Evaluación de calidad de contenido",
+                  "linking": "Oportunidades de enlazado interno",
+                  "mobile": "Verificaciones de compatibilidad móvil"
+                }
+              },
+              "generateReports": {
+                "title": "Generar Informes",
+                "description": "Recibe informes detallados con problemas priorizados, recomendaciones accionables y seguimiento del progreso. Exporta resultados para colaboración en equipo y monitoreo continuo.",
+                "reporting": {
+                  "title": "Informes completos",
+                  "description": "Problemas priorizados con próximos pasos claros"
+                }
+              }
+            },
+            "keyBenefits": {
+              "title": "Beneficios Clave del Rastreo de Sitio",
+              "completeVisibility": {
+                "title": "Visibilidad Completa del Sitio",
+                "description": "Descubre todas las páginas de tu sitio, incluyendo las no en el sitemap"
+              },
+              "technicalDetection": {
+                "title": "Detección de Problemas Técnicos",
+                "description": "Encuentra enlaces rotos, contenido duplicado y problemas de rastreabilidad"
+              },
+              "seoMonitoring": {
+                "title": "Monitoreo de Salud SEO",
+                "description": "Rastrea la salud SEO de tu sitio con el tiempo mediante rastreos regulares"
+              },
+              "contentOptimization": {
+                "title": "Optimización de Contenido",
+                "description": "Identifica brechas de contenido y oportunidades de optimización"
+              },
+              "performanceInsights": {
+                "title": "Insights de Rendimiento",
+                "description": "Analiza la velocidad de páginas y factores de experiencia de usuario"
+              },
+              "actionableRecommendations": {
+                "title": "Recomendaciones Accionables",
+                "description": "Obtén correcciones específicas y priorizadas para problemas identificados"
+              }
+            },
+            "commonIssues": {
+              "title": "Problemas Comunes que Detecta Nuestro Rastreador",
+              "criticalIssues": {
+                "title": "Problemas Críticos",
+                "issues": [
+                  "Enlaces internos/externos rotos",
+                  "Páginas que devuelven errores 4xx/5xx",
+                  "Etiquetas de título faltantes o duplicadas",
+                  "Páginas bloqueadas por robots.txt"
+                ]
+              },
+              "warningIssues": {
+                "title": "Problemas de Advertencia",
+                "issues": [
+                  "Páginas de carga lenta",
+                  "Meta descripciones faltantes",
+                  "Páginas no aptas para móviles",
+                  "Imágenes grandes sin optimización"
+                ]
+              },
+              "optimizationOpportunities": {
+                "title": "Oportunidades de Optimización",
+                "issues": [
+                  "Contenido delgado o duplicado",
+                  "Estructura de encabezados faltante",
+                  "Oportunidades de enlazado interno",
+                  "Brechas de contenido para llenar"
+                ]
+              },
+              "performanceIssues": {
+                "title": "Problemas de Rendimiento",
+                "issues": [
+                  "Recursos no comprimidos",
+                  "JavaScript que bloquea el renderizado",
+                  "Encabezados de caché faltantes",
+                  "Tamaños de página grandes"
+                ]
+              }
+            },
+            "bestPractices": {
+              "title": "Mejores Prácticas para el Rastreo de Sitio",
+              "configureSettings": {
+                "title": "Configura Tus Ajustes de Rastreo",
+                "description": "Establece límites de rastreo apropiados y respeta la capacidad de tu servidor.",
+                "practices": [
+                  "Usa retrasos de rastreo para evitar sobrecargar tu servidor",
+                  "Establece agentes de usuario para identificar tu rastreador",
+                  "Excluye áreas de administración y páginas de desarrollo"
+                ]
+              },
+              "scheduleCrawls": {
+                "title": "Programa Rastreos Regulares",
+                "description": "Rastrea tu sitio regularmente para monitorear cambios y detectar problemas temprano.",
+                "practices": [
+                  "Rastreos semanales para sitios activos",
+                  "Rastreos mensuales para sitios estables",
+                  "Después de cambios mayores de contenido o técnicos"
+                ]
+              },
+              "prioritizeIssues": {
+                "title": "Prioriza Problemas",
+                "description": "Enfócate en problemas de alto impacto que afectan la rastreabilidad y la experiencia de usuario.",
+                "practices": [
+                  "Corrige errores críticos primero (404, enlaces rotos)",
+                  "Aborda problemas de rendimiento que afectan Core Web Vitals",
+                  "Optimiza contenido y metadatos para mejores rankings"
+                ]
+              }
+            },
+            "gettingStarted": {
+              "title": "¿Listo para Rastrear Tu Sitio?",
+              "description": "Comienza con un escaneo rápido para familiarizarte con el rastreador, luego ejecuta análisis completos para optimizar el rendimiento SEO de tu sitio.",
+              "startCrawl": "Iniciar Rastreo de Sitio",
+              "quickStartGuide": "Ver Guía de Inicio Rápido"
+            }
           },
-          "aiAssistant": {
-            "title": "Asistente SEO de IA",
-            "href": "/help/seo-tools/ai-assistant",
-            "time": "4 min",
-            "description": "Obtén recomendaciones SEO personalizadas de nuestro asistente inteligente de IA."
+          "competitorGuide": {
+            "title": "Guía de Análisis de Competidores",
+            "href": "/help/seo-tools/competitor-analysis",
+            "time": "8 min",
+            "description": "Aprende a analizar las estrategias SEO de tus competidores y obtener insights competitivos.",
+            "backToCategory": "Volver a Herramientas SEO",
+            "backToHelp": "Volver al Centro de Ayuda",
+            "breadcrumb": {
+              "home": "Inicio",
+              "help": "Ayuda",
+              "seoTools": "Herramientas SEO",
+              "competitorGuide": "Guía de Análisis de Competidores"
+            },
+            "header": {
+              "title": "Guía de Análisis de Competidores",
+              "description": "Domina el análisis de competidores para obtener ventajas estratégicas. Aprende a identificar competidores, analizar sus estrategias y descubrir oportunidades para tus campañas SEO."
+            },
+            "intro": {
+              "title": "Entendiendo el Análisis de Competidores",
+              "description": "El análisis de competidores te ayuda a entender qué funciona en tu industria. Estudiando competidores exitosos, puedes identificar estrategias probadas, descubrir oportunidades de palabras clave y desarrollar tácticas SEO basadas en datos."
+            },
+            "benefits": {
+              "keywordGaps": {
+                "title": "Brechas de Palabras Clave",
+                "description": "Encuentra palabras clave en las que los competidores se posicionan pero tú no"
+              },
+              "strategyInsights": {
+                "title": "Insights Estratégicos",
+                "description": "Aprende de las tácticas exitosas de los competidores"
+              },
+              "contentIdeas": {
+                "title": "Ideas de Contenido",
+                "description": "Descubre temas de contenido que generan resultados"
+              },
+              "performanceTracking": {
+                "title": "Seguimiento de Rendimiento",
+                "description": "Monitorea cambios en el posicionamiento de competidores"
+              }
+            },
+            "howItWorks": {
+              "title": "Cómo Funciona el Análisis de Competidores",
+              "identifyCompetitors": {
+                "title": "Identifica a Tus Competidores",
+                "description": "Comienza encontrando sitios web que compiten contigo por las mismas palabras clave y público objetivo. Mira más allá de competidores directos para incluir competidores indirectos en nichos relacionados.",
+                "whereToFind": {
+                  "title": "Dónde encontrar competidores:",
+                  "googleSearch": "Resultados de búsqueda de Google para tus palabras clave objetivo",
+                  "industryDirectories": "Directorios de industria y sitios de reseñas",
+                  "socialMedia": "Redes sociales y foros de industria",
+                  "seoTools": "Reportes de competidores de SimilarWeb o SEMrush"
+                }
+              },
+              "analyzeStrategy": {
+                "title": "Analiza Su Estrategia SEO",
+                "description": "Examina el SEO on-page de los competidores, estrategia de contenido, perfil de backlinks e implementación SEO técnica. Busca patrones en sus páginas exitosas e identifica oportunidades.",
+                "onPageFactors": {
+                  "title": "Factores On-Page",
+                  "titleTags": "Etiquetas de título y meta descripciones",
+                  "headings": "Estructura de encabezados (H1-H6)",
+                  "contentQuality": "Profundidad y calidad del contenido",
+                  "internalLinking": "Patrones de enlazado interno"
+                },
+                "offPageFactors": {
+                  "title": "Factores Off-Page",
+                  "backlinks": "Calidad y cantidad de backlinks",
+                  "socialMedia": "Presencia en redes sociales",
+                  "brandMentions": "Menciones de marca y citas",
+                  "domainAuthority": "Tendencias de autoridad de dominio"
+                }
+              },
+              "identifyOpportunities": {
+                "title": "Identifica Oportunidades",
+                "description": "Usa insights de competidores para encontrar brechas en tu estrategia. Busca oportunidades de palabras clave, temas de contenido que los competidores no han cubierto y mejoras SEO técnicas.",
+                "commonOpportunities": {
+                  "title": "Oportunidades comunes:",
+                  "lowCompetition": "Palabras clave con baja competencia que los competidores ignoran",
+                  "contentFormats": "Formatos de contenido que los competidores no han probado",
+                  "technicalIssues": "Problemas SEO técnicos que los competidores han corregido",
+                  "linkStrategies": "Estrategias de link building que funcionan en tu nicho"
+                }
+              },
+              "trackMonitor": {
+                "title": "Rastrea y Monitorea",
+                "description": "Configura monitoreo continuo para rastrear cambios en el rendimiento de competidores e identificar nuevas oportunidades a medida que evoluciona el panorama competitivo.",
+                "continuousMonitoring": {
+                  "title": "Monitoreo continuo",
+                  "description": "Mantente adelante de los cambios en estrategia de competidores"
+                }
+              }
+            },
+            "bestPractices": {
+              "title": "Mejores Prácticas para Análisis de Competidores",
+              "focusDirect": {
+                "title": "Enfócate en Competidores Directos",
+                "description": "Prioriza competidores que apuntan al mismo público y palabras clave que tú."
+              },
+              "lookPatterns": {
+                "title": "Busca Patrones",
+                "description": "Identifica estrategias comunes entre múltiples competidores exitosos."
+              },
+              "dontCopyBlindly": {
+                "title": "No Copies Ciegamente",
+                "description": "Adapta estrategias para que se ajusten a tu marca y recursos únicos."
+              },
+              "monitorRegularly": {
+                "title": "Monitorea Regularmente",
+                "description": "Las estrategias de competidores cambian, así que revisa el análisis trimestralmente."
+              },
+              "combineData": {
+                "title": "Combina con Tus Datos",
+                "description": "Usa insights de competidores junto con tus propios análisis."
+              },
+              "trackImplementation": {
+                "title": "Rastrea la Implementación",
+                "description": "Mide resultados cuando implementas estrategias derivadas de competidores."
+              }
+            },
+            "toolsFeatures": {
+              "title": "Herramientas de Análisis de Competidores",
+              "keywordGap": {
+                "title": "Análisis de Brechas de Palabras Clave",
+                "description": "Encuentra palabras clave en las que los competidores se posicionan pero tú no"
+              },
+              "backlinkAnalysis": {
+                "title": "Análisis de Backlinks",
+                "description": "Analiza perfiles de enlaces y estrategias de competidores"
+              },
+              "serpTracking": {
+                "title": "Seguimiento SERP",
+                "description": "Monitorea cambios en el posicionamiento de competidores con el tiempo"
+              }
+            },
+            "gettingStarted": {
+              "title": "¿Listo para Analizar a Tus Competidores?",
+              "description": "Comienza identificando 3-5 competidores principales y ejecutando un análisis completo. Usa los insights para mejorar tu estrategia SEO y obtener ventajas competitivas.",
+              "startAnalysis": "Iniciar Análisis de Competidores",
+              "viewGuide": "Ver Guía de Inicio Rápido"
+            }
           }
         },
         "additionalResources": {
@@ -1267,6 +1911,8 @@
             "header": {
               "category": "Solución de problemas",
               "title": "Problemas de inicio de sesión",
+              "description": "Guía completa para resolver problemas de acceso, problemas de acceso y errores de autenticación de cuenta",
+              "author": "Equipo de soporte AISEOTurbo",
               "readTime": "Tiempo de lectura: 6 min",
               "lastUpdated": "Última actualización: Marzo 2025"
             },
@@ -1497,6 +2143,8 @@
             "header": {
               "category": "Resolución de Problemas",
               "title": "Problemas de sincronización",
+              "description": "Guía completa para resolver problemas de sincronización de datos, problemas de conectividad y errores de sincronización",
+              "author": "Equipo de soporte AISEOTurbo",
               "readTime": "Lectura de 5 minutos",
               "lastUpdated": "Última actualización: marzo de 2025"
             },
@@ -1725,6 +2373,8 @@
             "header": {
               "category": "Solución de Problemas",
               "title": "Problemas de rendimiento",
+              "description": "Guía completa para resolver problemas de carga lenta, retrasos, capacidad de respuesta y optimización del rendimiento",
+              "author": "Equipo de soporte AISEOTurbo",
               "readTime": "Lectura de 6 min",
               "lastUpdated": "Última actualización: marzo 2025"
             },
@@ -1954,6 +2604,8 @@
             "header": {
               "category": "Resolución de Problemas",
               "title": "La auditoría no se completa",
+              "description": "Guía completa para corregir auditorías incompletas, procesos bloqueados, errores de tiempo de espera y problemas técnicos de auditoría",
+              "author": "Equipo de soporte AISEOTurbo",
               "readTime": "Lectura de 6 min",
               "lastUpdated": "Última actualización: marzo de 2025"
             },
@@ -2218,6 +2870,10 @@
     }
   },
   "home": {
+    "meta": {
+      "title": "Herramienta de Audit SEO - Mejora Rankings Rápidamente | AI SEO Turbo",
+      "description": "Transforme su SEO con audits impulsados por IA que identifican más de 47 problemas críticos. Obtenga insights basados en datos para aumentar el tráfico orgánico y dominar los rankings."
+    },
     "hero": {
       "badge": "Análisis SEO Impulsado por IA",
       "title": "AI SEO Turbo: Audits SEO Profesionales Hechos Simples",
@@ -2806,6 +3462,12 @@
     "meta": {
       "title": "Optimización de Rendimiento - Ayuda AISEOTurbo",
       "description": "Mejore la velocidad de auditoría, resuelva problemas de carga lenta y optimice el rendimiento."
+    }
+  },
+  "seoAudit": {
+    "meta": {
+      "title": "Guía de Auditoría SEO - Ayuda AISEOTurbo",
+      "description": "Aprenda a realizar auditorías SEO completas que cubren más de 47 factores técnicos."
     }
   },
   "login-issues": {
@@ -7488,390 +8150,191 @@
       },
       "seoTools": {
         "title": "Herramientas y Funciones SEO",
-        "description": "Domine nuestro kit de herramientas SEO impulsado por IA",
+        "description": "Domina nuestro kit de herramientas SEO potenciadas por IA",
         "articles": {
           "auditWalkthrough": {
             "title": "Guía completa de auditoría SEO",
             "time": "12 min"
           },
           "competitorGuide": {
-            "title": "Guía de análisis de competencia",
+            "title": "Guía de análisis de competidores",
             "time": "8 min"
           },
           "crawlerConfig": {
-            "title": "Configuración del rastreador de sitios",
+            "title": "Configuración del crawler del sitio",
             "time": "6 min"
           },
           "aiAssistant": {
-            "title": "Mejores prácticas del asistente IA",
-            "time": "9 min"
+            "title": "Asistente SEO IA",
+            "href": "/help/seo-tools/ai-assistant",
+            "time": "4 min",
+            "description": "Obtén recomendaciones SEO personalizadas de nuestro asistente IA inteligente.",
+            "backToCategory": "Volver a Herramientas y Funciones SEO",
+            "backToHelp": "Volver al Centro de Ayuda",
+            "breadcrumb": {
+              "home": "Inicio",
+              "help": "Ayuda",
+              "seoTools": "Herramientas y Funciones SEO",
+              "aiAssistant": "Resumen del Asistente IA"
+            },
+            "header": {
+              "title": "Mejores Prácticas del Asistente IA",
+              "description": "Domina nuestro asistente SEO IA para obtener resultados máximos. Aprende a hacer preguntas efectivas, interpretar recomendaciones de IA y combinar insights de IA con tu experiencia SEO."
+            },
+            "intro": {
+              "title": "Entendiendo el Asistente SEO IA",
+              "description": "Nuestro asistente IA combina aprendizaje automático con experiencia SEO para proporcionar recomendaciones personalizadas. Entrenado en millones de sitios web y las últimas mejores prácticas SEO, te ayuda a tomar decisiones basadas en datos."
+            },
+            "capabilities": {
+              "keywordResearch": {
+                "title": "Investigación de Palabras Clave",
+                "description": "Análisis avanzado de palabras clave y oportunidades"
+              },
+              "contentOptimization": {
+                "title": "Optimización de Contenido",
+                "description": "Sugerencias inteligentes de mejora de contenido"
+              },
+              "technicalSEO": {
+                "title": "SEO Técnico",
+                "description": "Identificación y corrección de problemas técnicos"
+              },
+              "strategyDevelopment": {
+                "title": "Desarrollo de Estrategia",
+                "description": "Recomendaciones de estrategia SEO personalizada"
+              }
+            },
+            "bestPractices": {
+              "title": "Mejores Prácticas para Interacciones IA",
+              "beSpecific": {
+                "title": "Sé Específico en Tus Preguntas",
+                "description": "Cuanto más específica sea tu pregunta, mejor podrá la IA proporcionar consejos dirigidos y accionables. Incluye contexto sobre tu industria, objetivos y situación actual.",
+                "examplesTitle": "Buenos Ejemplos:",
+                "example1": "¿Cómo puedo mejorar el ranking de mi sitio de e-commerce para 'auriculares inalámbricos'?",
+                "example2": "¿Qué problemas SEO técnicos debería priorizar para mi página de destino SaaS?",
+                "example3": "Sugiere temas de contenido para mi blog B2B sobre ciberseguridad"
+              },
+              "provideContext": {
+                "title": "Proporciona Contexto y Datos",
+                "description": "Comparte datos relevantes de tus auditorías, análisis o métricas de rendimiento actuales. Esto ayuda a la IA a dar recomendaciones más precisas y personalizadas.",
+                "includeTitle": "Incluye en tus preguntas:",
+                "item1": "Rankings de búsqueda actuales y datos de tráfico",
+                "item2": "Palabras clave objetivo y competidores",
+                "item3": "Tu industria y público objetivo",
+                "item4": "Cambios o campañas recientes"
+              },
+              "followUp": {
+                "title": "Haz Preguntas de Seguimiento",
+                "description": "No te detengas en la primera respuesta. Haz preguntas aclaratorias o solicita más detalles sobre recomendaciones específicas para profundizar tu comprensión.",
+                "strategiesTitle": "Estrategias de seguimiento:",
+                "strategy1": "¿Puedes explicar por qué esta recomendación ayudaría?",
+                "strategy2": "¿Qué métricas debería rastrear para medir el éxito?",
+                "strategy3": "¿Hay riesgos potenciales con este enfoque?",
+                "strategy4": "¿Cómo encaja esto con mi estrategia SEO general?"
+              },
+              "combineExpertise": {
+                "title": "Combina Insights de IA con Tu Experiencia",
+                "description": "Usa las recomendaciones de IA como punto de partida, pero aplica tu conocimiento y experiencia de la industria para determinar qué tiene sentido para tu situación específica.",
+                "bestApproachTitle": "Mejor enfoque:",
+                "approach1": "Evalúa recomendaciones contra tus objetivos comerciales",
+                "approach2": "Considera tus recursos y restricciones de tiempo",
+                "approach3": "Prueba recomendaciones a pequeña escala primero",
+                "approach4": "Usa IA para investigación, tú para estrategia y ejecución"
+              }
+            },
+            "useCases": {
+              "title": "Casos de Uso Comunes del Asistente IA",
+              "contentStrategy": {
+                "title": "Estrategia de Contenido",
+                "description": "Obtén ayuda con planificación de contenido, ideación de temas y estrategias de optimización.",
+                "item1": "Investigación de palabras clave y brechas de contenido",
+                "item2": "Planificación de calendario de contenido",
+                "item3": "Sugerencias de título y meta SEO-friendly",
+                "item4": "Recomendaciones de estructura de contenido"
+              },
+              "technicalSEO": {
+                "title": "SEO Técnico",
+                "description": "Identifica y corrige problemas SEO técnicos con análisis impulsado por IA.",
+                "item1": "Análisis y corrección de errores de crawling",
+                "item2": "Optimización de Core Web Vitals",
+                "item3": "Implementación de marcado Schema",
+                "item4": "Guía de optimización móvil"
+              },
+              "competitorAnalysis": {
+                "title": "Análisis de Competidores",
+                "description": "Entiende estrategias de competidores y encuentra oportunidades.",
+                "item1": "Análisis de palabras clave de competidores",
+                "item2": "Comparación de estrategia de contenido",
+                "item3": "Identificación de oportunidades de backlinks",
+                "item4": "Segmentación de características SERP"
+              },
+              "performanceOptimization": {
+                "title": "Optimización de Rendimiento",
+                "description": "Mejora el rendimiento del sitio y la experiencia del usuario.",
+                "item1": "Consejos de optimización de velocidad de página",
+                "item2": "Mejoras en experiencia de usuario",
+                "item3": "Optimización de tasa de conversión",
+                "item4": "Recomendaciones de pruebas A/B"
+              }
+            },
+            "tipsForSuccess": {
+              "title": "Consejos para el Éxito",
+              "dos": {
+                "title": "Hacer",
+                "item1": "Comienza con preguntas específicas y bien definidas",
+                "item2": "Proporciona contexto y datos de rendimiento actuales",
+                "item3": "Experimenta con diferentes formatos de preguntas",
+                "item4": "Rastrea y mide el impacto de las recomendaciones de IA"
+              },
+              "donts": {
+                "title": "No Hacer",
+                "item1": "Hacer preguntas vagas o demasiado amplias",
+                "item2": "Esperar que la IA reemplace tu experiencia SEO",
+                "item3": "Implementar recomendaciones sin pruebas",
+                "item4": "Ignorar tu conocimiento específico de la industria"
+              }
+            },
+            "gettingStarted": {
+              "title": "Comenzando con el Asistente IA",
+              "step1": {
+                "title": "Accede al Asistente IA",
+                "description": "Navega a la sección del Asistente IA en tu panel de control."
+              },
+              "step2": {
+                "title": "Comienza con una Pregunta Simple",
+                "description": "Comienza con una pregunta específica sobre tus desafíos SEO actuales."
+              },
+              "step3": {
+                "title": "Refina e Itera",
+                "description": "Usa preguntas de seguimiento para obtener insights más detallados."
+              },
+              "step4": {
+                "title": "Aplica y Rastrea Resultados",
+                "description": "Implementa recomendaciones y monitorea su impacto en tu rendimiento SEO."
+              }
+            }
           }
         }
       },
       "billing": {
-        "title": "Cuenta y Facturación",
-        "description": "Administre su suscripción y pagos",
+        "title": "Facturación y Pagos",
+        "description": "Gestiona tu suscripción, pagos e información de facturación",
         "articles": {
           "upgrade": {
-            "title": "Actualización de su plan",
-            "time": "4 min"
-          },
-          "paymentMethods": {
-            "title": "Gestión de métodos de pago",
+            "title": "Actualización de tu plan",
             "time": "5 min"
           },
+          "paymentMethods": {
+            "title": "Métodos de pago",
+            "time": "3 min"
+          },
           "invoices": {
-            "title": "Comprender su factura",
+            "title": "Facturas y recibos",
             "time": "4 min"
           },
           "cancellation": {
             "title": "Cancelación y reembolsos",
-            "time": "5 min"
+            "time": "6 min"
           }
-        }
-      },
-      "cancellation": {
-        "title": "Cancelación de Cuenta y Reembolsos",
-        "subtitle": "Aprende cómo cancelar tu suscripción, conoce las políticas de reembolso y gestiona el cierre de tu cuenta",
-        "backToBilling": "Volver a Facturación",
-        "breadcrumb": {
-          "help": "Ayuda",
-          "billing": "Facturación",
-          "cancellation": "Cancelación"
-        },
-        "importantNotice": {
-          "title": "Aviso Importante",
-          "description": "Antes de cancelar, considera pausar tu suscripción. Esto preserva tus datos y permite una reactivación sencilla."
-        },
-        "process": {
-          "title": "Proceso de Cancelación",
-          "steps": [
-            {
-              "title": "Acceder a la Configuración de la Cuenta",
-              "description": "Inicia sesión en tu cuenta y navega a Configuración → Suscripción → Cancelar suscripción.",
-              "details": [
-                "Ve al panel de tu cuenta",
-                "Haz clic en 'Suscripción' en el menú izquierdo",
-                "Desplázate hasta la sección 'Cancelar suscripción'"
-              ]
-            },
-            {
-              "title": "Elegir Motivo de Cancelación",
-              "description": "Selecciona el motivo de la cancelación de entre nuestras opciones predefinidas o proporciona comentarios personalizados.",
-              "details": [
-                "Ayúdanos a mejorar compartiendo tu motivo",
-                "Tu opinión es valiosa para el desarrollo de nuestro servicio",
-                "Este paso es opcional, pero agradecido"
-              ]
-            },
-            {
-              "title": "Confirmar Cancelación",
-              "description": "Revisa los términos de la cancelación y confirma tu decisión.",
-              "details": [
-                "Revisa qué sucede tras la cancelación",
-                "Confirma que comprendes la política de reembolso",
-                "Haz clic en 'Cancelar suscripción' para continuar"
-              ]
-            },
-            {
-              "title": "Recibir Confirmación",
-              "description": "Recibirás una confirmación por correo electrónico con los próximos pasos y la información sobre retención de datos.",
-              "details": [
-                "Verifica tu correo electrónico para la confirmación",
-                "Guarda la confirmación para tus registros",
-                "Contacta con soporte si no la recibes"
-              ]
-            }
-          ]
-        },
-        "afterCancellation": {
-          "title": "Qué Ocurre Después de la Cancelación",
-          "items": [
-            {
-              "icon": "clock",
-              "title": "Acceso Inmediato",
-              "description": "Conservarás acceso completo a tu cuenta y datos hasta el final de tu periodo de facturación actual."
-            },
-            {
-              "icon": "shield",
-              "title": "Retención de Datos",
-              "description": "Tus datos se almacenan de forma segura durante 30 días después de la cancelación, permitiendo reactivar tu cuenta si lo deseas."
-            },
-            {
-              "icon": "credit-card",
-              "title": "Sin Cargos Adicionales",
-              "description": "No se volverá a cargar tu método de pago y cualquier factura pendiente será anulada."
-            }
-          ]
-        },
-        "refundPolicy": {
-          "title": "Política de Reembolsos",
-          "eligible": "Elegible para reembolso",
-          "notEligible": "No elegible",
-          "scenarios": [
-            {
-              "title": "Suscripción mensual – Dentro de 14 días",
-              "eligible": true,
-              "description": "Reembolso total disponible si cancelas dentro de los 14 días posteriores a tu suscripción inicial o renovación."
-            },
-            {
-              "title": "Suscripción mensual – Después de 14 días",
-              "eligible": false,
-              "description": "No hay reembolso para el periodo de facturación actual. El servicio continuará hasta que finalice el periodo."
-            },
-            {
-              "title": "Suscripción anual – Dentro de 30 días",
-              "eligible": true,
-              "description": "Reembolso total disponible dentro de los 30 días de la suscripción. Reembolso proporcional después de los 30 días."
-            },
-            {
-              "title": "Suscripción anual – Después de 30 días",
-              "eligible": true,
-              "description": "Reembolso proporcional por los meses restantes. No hay reembolso para el mes en curso."
-            }
-          ]
-        },
-        "needHelp": {
-          "title": "¿Necesitas ayuda con la cancelación?",
-          "description": "Nuestro equipo de soporte de facturación está disponible para asistirte durante el proceso de cancelación.",
-          "contacts": [
-            {
-              "text": "Contactar con Soporte de Facturación",
-              "href": "/contact?subject=cancellation"
-            },
-            {
-              "text": "Chat en Vivo",
-              "href": "#chat"
-            }
-          ]
-        }
-      },
-      "invoices": {
-        "title": "Entender tus Facturas",
-        "subtitle": "Aprende cómo acceder, descargar y entender el historial de facturación y los detalles de las facturas con AI SEO Turbo.",
-        "backToBilling": "Volver a Facturación",
-        "breadcrumb": {
-          "help": "Ayuda",
-          "billing": "Facturación",
-          "invoices": "Facturas"
-        },
-        "accessInvoices": {
-          "title": "Cómo Acceder a tus Facturas",
-          "description": "Tu historial de facturación completo está disponible en cualquier momento en el panel de control de tu cuenta.",
-          "steps": [
-            {
-              "title": "Inicia sesión en tu cuenta",
-              "description": "Accede al panel de control de AI SEO Turbo utilizando tu email registrado y contraseña."
-            },
-            {
-              "title": "Navega a Facturación",
-              "description": "Haz clic en 'Facturación' o 'Suscripción' en el menú de tu cuenta para acceder a la información de pagos."
-            },
-            {
-              "title": "Ver Historial de Facturas",
-              "description": "Selecciona 'Facturas' o 'Historial de Facturación' para ver todas tus facturas pasadas y actuales."
-            },
-            {
-              "title": "Descargar o Imprimir",
-              "description": "Haz clic en el botón de descarga junto a cualquier factura para guardar una copia PDF para tus registros."
-            }
-          ]
-        },
-        "invoiceDetails": {
-          "title": "Qué se Incluye en tu Factura",
-          "description": "Cada factura contiene información completa de facturación y detalles de transacciones.",
-          "items": [
-            {
-              "icon": "FileText",
-              "title": "Número de Factura y Fecha",
-              "description": "Identificador único de factura, fecha de emisión y fecha de vencimiento del pago para tus registros."
-            },
-            {
-              "icon": "CreditCard",
-              "title": "Detalles del Servicio",
-              "description": "Desglose de servicios, tipo de plan, período de facturación y descuentos aplicables."
-            },
-            {
-              "icon": "Calendar",
-              "title": "Estado del Pago",
-              "description": "Estado actual del pago, cantidad pagada y saldos pendientes."
-            },
-            {
-              "icon": "Download",
-              "title": "Información Fiscal",
-              "description": "Impuestos aplicables, información de IVA y precios con impuestos incluidos cuando sea requerido."
-            }
-          ]
-        },
-        "billingHistory": {
-          "title": "Gestionar tu Historial de Facturación",
-          "description": "Mantén un registro de todas tus transacciones y conserva registros financieros organizados.",
-          "features": [
-            {
-              "title": "Historial de Transacciones Completo",
-              "description": "Visualiza todos los pagos, reembolsos y ajustes de facturación en orden cronológico."
-            },
-            {
-              "title": "Descargar Múltiples Facturas",
-              "description": "Descarga facturas en lote para fines contables o preparación de impuestos."
-            },
-            {
-              "title": "Seguimiento de Métodos de Pago",
-              "description": "Ve qué métodos de pago se utilizaron para cada transacción."
-            },
-            {
-              "title": "Cambios de Suscripción",
-              "description": "Rastrea actualizaciones de plan, degradaciones y modificaciones de suscripción a lo largo del tiempo."
-            }
-          ]
-        },
-        "needHelp": {
-          "title": "¿Necesitas Ayuda con las Facturas?",
-          "description": "Nuestro equipo de soporte de facturación puede ayudarte con preguntas sobre facturas, problemas de pago o discrepancias de facturación.",
-          "contacts": [
-            {
-              "icon": "Mail",
-              "title": "Soporte por Email",
-              "description": "Envíanos un email con tus preguntas sobre facturas",
-              "link": "mailto:billing@aiseoturbo.com",
-              "linkText": "billing@aiseoturbo.com"
-            },
-            {
-              "icon": "MessageCircle",
-              "title": "Chat en Vivo",
-              "description": "Chatea en tiempo real con nuestros especialistas en facturación",
-              "link": "#chat",
-              "linkText": "Iniciar Chat en Vivo"
-            }
-          ]
-        }
-      },
-      "paymentMethods": {
-        "title": "Gestionar Métodos de Pago",
-        "subtitle": "Aprende cómo agregar, actualizar y gestionar tus métodos de pago para una facturación fluida con AI SEO Turbo.",
-        "backToBilling": "Volver a Facturación",
-        "breadcrumb": {
-          "help": "Ayuda",
-          "billing": "Facturación",
-          "paymentMethods": "Métodos de Pago"
-        },
-        "acceptedMethods": {
-          "title": "Métodos de Pago Aceptados",
-          "description": "Aceptamos una amplia gama de métodos de pago para hacer que la gestión de tu suscripción sea lo más conveniente posible.",
-          "methods": [
-            {
-              "icon": "CreditCard",
-              "name": "Tarjetas de Crédito y Débito",
-              "description": "Todas las principales tarjetas de crédito y débito incluyendo Visa, MasterCard, American Express y Discover.",
-              "features": ["Procesamiento instantáneo", "Encriptación segura", "Aceptación global"]
-            },
-            {
-              "icon": "Wallet",
-              "name": "Billeteras Digitales",
-              "description": "PayPal, Apple Pay, Google Pay y otras soluciones de billetera digital populares.",
-              "features": ["Pagos con un clic", "Seguridad mejorada", "Optimizado para móvil"]
-            },
-            {
-              "icon": "Building",
-              "name": "Transferencias Bancarias",
-              "description": "Transferencias bancarias directas y transferencias cablegráficas para suscripciones anuales y cuentas empresariales.",
-              "features": ["Sin tarifas de procesamiento", "Pagos masivos", "Generación de facturas"]
-            },
-            {
-              "icon": "Coins",
-              "name": "Criptomonedas",
-              "description": "Bitcoin, Ethereum y otras criptomonedas principales a través de nuestros socios de pago de confianza.",
-              "features": ["Pagos sin fronteras", "Transacciones rápidas", "Enfocado en la privacidad"]
-            }
-          ]
-        },
-        "managingMethods": {
-          "title": "Gestionar tus Métodos de Pago",
-          "description": "Mantén actualizada tu información de pago y gestiona múltiples opciones de pago para tu cuenta.",
-          "actions": [
-            {
-              "icon": "Plus",
-              "title": "Agregar un Método de Pago",
-              "description": "Agrega una nueva tarjeta de crédito, débito o billetera digital a tu cuenta.",
-              "steps": [
-                "Ve a la configuración de tu cuenta",
-                "Navega a 'Facturación y Pagos'",
-                "Haz clic en 'Agregar Método de Pago'",
-                "Ingresa tus detalles de pago",
-                "Verifica y guarda la información"
-              ]
-            },
-            {
-              "icon": "Edit",
-              "title": "Actualizar Información de Pago",
-              "description": "Cambia los detalles de tu tarjeta, dirección de facturación o cambia a un método de pago diferente.",
-              "steps": [
-                "Accede a tu lista de métodos de pago",
-                "Selecciona el método a actualizar",
-                "Haz clic en 'Editar' o 'Actualizar'",
-                "Modifica la información requerida",
-                "Guarda tus cambios de forma segura"
-              ]
-            },
-            {
-              "icon": "Trash2",
-              "title": "Eliminar Métodos de Pago",
-              "description": "Elimina métodos de pago antiguos o no utilizados de tu cuenta manteniendo al menos un método activo.",
-              "steps": [
-                "Ve a tus métodos de pago",
-                "Selecciona el método a eliminar",
-                "Haz clic en 'Eliminar' o 'Borrar'",
-                "Confirma la eliminación",
-                "Asegúrate de que otro método permanezca activo"
-              ]
-            }
-          ]
-        },
-        "security": {
-          "title": "Seguridad y Privacidad de Pagos",
-          "description": "Tu información de pago está protegida con medidas de seguridad líderes en la industria y encriptación.",
-          "features": [
-            {
-              "icon": "Shield",
-              "title": "Compatible con PCI DSS",
-              "description": "Cumplimos con los más altos estándares de seguridad de datos de la industria de tarjetas de pago para el procesamiento seguro de pagos."
-            },
-            {
-              "icon": "Lock",
-              "title": "Encriptación de Extremo a Extremo",
-              "description": "Todos los datos de pago se encriptan durante la transmisión y el almacenamiento usando encriptación SSL de 256 bits."
-            },
-            {
-              "icon": "EyeOff",
-              "title": "Sin Almacenamiento de Tarjetas",
-              "description": "No almacenamos los detalles completos de tu tarjeta en nuestros servidores. El procesamiento de pagos es manejado por socios certificados."
-            },
-            {
-              "icon": "CheckCircle",
-              "title": "Protección contra Fraudes",
-              "description": "Sistemas avanzados de detección y prevención de fraudes protegen contra transacciones no autorizadas."
-            }
-          ]
-        },
-        "needHelp": {
-          "title": "¿Necesitas Ayuda con Métodos de Pago?",
-          "description": "Nuestro equipo de soporte de facturación puede ayudarte con problemas de métodos de pago, transacciones fallidas o preguntas de facturación.",
-          "contacts": [
-            {
-              "icon": "Mail",
-              "title": "Soporte por Email",
-              "description": "Envíanos un email con tus preguntas sobre pagos",
-              "link": "mailto:billing@aiseoturbo.com",
-              "linkText": "billing@aiseoturbo.com"
-            },
-            {
-              "icon": "MessageCircle",
-              "title": "Chat en Vivo",
-              "description": "Chatea en tiempo real con nuestros especialistas en facturación",
-              "link": "#chat",
-              "linkText": "Iniciar Chat en Vivo"
-            }
-          ]
         }
       },
       "upgradePlan": {
@@ -8033,6 +8496,10 @@
           "webhooks": {
             "title": "Configuración de webhooks",
             "time": "7 min"
+          },
+          "apiIntegrations": {
+            "title": "Guía de Integraciones API",
+            "time": "10 min"
           }
         }
       },

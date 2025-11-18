@@ -142,6 +142,7 @@
   },
   "meta": {
     "home": {
+      "title": "Alat Audit SEO - Tingkatkan Peringkat dengan Cepat | AI SEO Turbo",
       "description": "Transformasikan SEO Anda dengan audit bertenaga AI yang mengidentifikasi 47+ masalah kritis. Dapatkan wawasan berbasis data untuk meningkatkan traffic organik dan mendominasi peringkat.",
       "keywords": ["audit SEO AI", "alat optimasi SEO", "boost peringkat website", "pertumbuhan traffic organik", "analisis SEO teknis"]
     },
@@ -1184,11 +1185,183 @@
         "subtitle": "Jelajahi rangkaian lengkap alat SEO kami yang dirancang untuk meningkatkan peringkat pencarian Anda, menganalisis pesaing, dan mengoptimalkan kinerja situs web.",
         "backToHelp": "Kembali ke Pusat Bantuan",
         "articles": {
+          "auditWalkthrough": {
+            "title": "Panduan lengkap audit SEO",
+            "time": "12 menit"
+          },
+          "competitorGuide": {
+            "title": "Panduan analisis kompetitor",
+            "time": "8 menit"
+          },
+          "crawlerConfig": {
+            "title": "Konfigurasi crawler situs",
+            "time": "6 menit"
+          },
+          "aiAssistant": {
+            "title": "Praktik terbaik asisten AI",
+            "time": "9 menit"
+          },
           "seoAudit": {
             "title": "Panduan Audit SEO",
             "href": "/help/seo-tools/seo-audit",
-            "time": "8 min",
-            "description": "Pelajari cara melakukan audit SEO komprehensif yang mencakup 47+ faktor teknis."
+            "time": "8 menit",
+            "description": "Pelajari cara melakukan audit SEO secara komprehensif yang mencakup lebih dari 47 faktor teknis.",
+            "backToCategory": "Kembali ke Alat & Fitur SEO",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "seoTools": "Alat & Fitur SEO",
+              "seoAudit": "Panduan Audit SEO"
+            },
+            "header": {
+              "category": "Panduan Fitur",
+              "title": "Langkah-langkah Audit SEO",
+              "description": "Panduan lengkap untuk melakukan audit SEO menyeluruh dengan analisis berbasis AI",
+              "author": "Tim AISEOTurbo",
+              "readTime": "Baca 8 menit",
+              "lastUpdated": "Terakhir diperbarui: Maret 2025"
+            },
+            "intro": {
+              "title": "Memahami Audit SEO",
+              "description": "Audit SEO adalah analisis menyeluruh terhadap kinerja optimasi mesin pencari situs web Anda. Audit berbasis AI kami memeriksa 47 faktor berbeda di bidang SEO teknis, kualitas konten, pengalaman pengguna, dan posisi kompetitif untuk memberikan wawasan yang dapat ditindaklanjuti demi peningkatan."
+            },
+            "auditAnalyzes": {
+              "title": "Apa Saja yang Dianalisis oleh Audit Kami",
+              "technical": {
+                "title": "SEO Teknis",
+                "pageSpeed": "Kecepatan halaman dan Core Web Vitals",
+                "mobile": "Kesesuaian untuk perangkat seluler",
+                "ssl": "Sertifikat SSL dan keamanan",
+                "sitemap": "Sitemap XML dan robots.txt",
+                "structuredData": "Markup data terstruktur"
+              }
+            },
+            "sections": {
+              "understanding": {
+                "title": "Memahami Audit SEO",
+                "description": "Audit SEO adalah analisis menyeluruh terhadap kinerja optimasi mesin pencari situs web Anda. Audit berbasis AI kami memeriksa 47 faktor berbeda di bidang SEO teknis, kualitas konten, pengalaman pengguna, dan posisi kompetitif untuk memberikan wawasan yang dapat ditindaklanjuti demi peningkatan.",
+                "benefits": {
+                  "1": "Mengidentifikasi masalah teknis yang mempengaruhi peringkat pencarian",
+                  "2": "Menemukan peluang optimasi konten",
+                  "3": "Menganalisis strategi pesaing",
+                  "4": "Melacak peningkatan kinerja dari waktu ke waktu"
+                }
+              },
+              "analysis": {
+                "title": "Apa Saja yang Dianalisis oleh Audit Kami",
+                "categories": {
+                  "technical": {
+                    "title": "SEO Teknis",
+                    "items": {
+                      "1": "Kecepatan halaman dan Core Web Vitals",
+                      "2": "Kesesuaian dan desain responsif untuk perangkat seluler",
+                      "3": "Sertifikat SSL dan keamanan HTTPS",
+                      "4": "Konfigurasi sitemap XML dan robots.txt"
+                    }
+                  },
+                  "content": {
+                    "title": "Kualitas Konten",
+                    "items": {
+                      "1": "Optimasi dan keunikan tag judul",
+                      "2": "Efektivitas meta deskripsi",
+                      "3": "Struktur dan hierarki heading",
+                      "4": "Kedalaman konten dan penggunaan kata kunci"
+                    }
+                  },
+                  "performance": {
+                    "title": "Metode Performa",
+                    "items": {
+                      "1": "Skor Core Web Vitals",
+                      "2": "Audit performa Lighthouse",
+                      "3": "Optimasi dan kompresi gambar",
+                      "4": "Minifikasi JavaScript dan CSS"
+                    }
+                  },
+                  "mobile": {
+                    "title": "Optimasi Mobile",
+                    "items": {
+                      "1": "Desain ramah perangkat seluler",
+                      "2": "Target sentuh dan kegunaan",
+                      "3": "Kecepatan halaman di perangkat seluler",
+                      "4": "Implementasi AMP (jika berlaku)"
+                    }
+                  }
+                }
+              },
+              "running": {
+                "title": "Cara Menjalankan Audit SEO",
+                "steps": {
+                  "1": {
+                    "title": "Masukkan URL Situs Web Anda",
+                    "description": "Masuk ke alat Audit SEO dan masukkan URL situs Anda. Perayap kami akan langsung mulai menganalisis situs Anda."
+                  },
+                  "2": {
+                    "title": "Tinjau Hasil Audit",
+                    "description": "Periksa laporan lengkap dengan skor, masalah, dan rekomendasi yang dikelompokkan per kategori."
+                  },
+                  "3": {
+                    "title": "Terapkan Rekomendasi",
+                    "description": "Ikuti prioritas tindakan untuk memperbaiki masalah yang ditemukan dan meningkatkan performa SEO Anda."
+                  }
+                }
+              },
+              "results": {
+                "title": "Menginterpretasi Hasil",
+                "statuses": {
+                  "passed": {
+                    "title": "Lolos",
+                    "description": "Item yang sudah sesuai praktik terbaik SEO dan tidak memerlukan tindakan."
+                  },
+                  "warnings": {
+                    "title": "Peringatan",
+                    "description": "Item yang dapat memengaruhi performa namun bukan masalah kritis."
+                  },
+                  "errors": {
+                    "title": "Kesalahan",
+                    "description": "Masalah kritis yang memerlukan perhatian segera untuk meningkatkan peringkat."
+                  }
+                }
+              },
+              "issues": {
+                "title": "Masalah Umum & Solusinya",
+                "common": {
+                  "1": {
+                    "title": "Kecepatan Halaman Lambat",
+                    "description": "Halaman yang memuat lebih dari 3 detik dapat menurunkan pengalaman pengguna dan peringkat.",
+                    "solution": "Optimasi gambar, minifikasi kode, dan gunakan cache untuk mempercepat waktu muat."
+                  },
+                  "2": {
+                    "title": "Meta Deskripsi Hilang",
+                    "description": "Halaman tanpa meta deskripsi dapat memiliki rasio klik-tayang yang rendah di hasil pencarian.",
+                    "solution": "Tambahkan meta deskripsi unik dan menarik kurang dari 160 karakter pada setiap halaman."
+                  },
+                  "3": {
+                    "title": "Tautan Internal Rusak",
+                    "description": "Tautan rusak menurunkan pengalaman pengguna dan menyia-nyiakan anggaran crawl.",
+                    "solution": "Audit dan perbaiki tautan rusak secara berkala, atau atur pengalihan yang sesuai."
+                  }
+                }
+              },
+              "practices": {
+                "title": "Praktik Terbaik",
+                "do": {
+                  "title": "Yang Harus Dilakukan",
+                  "items": {
+                    "1": "Jalankan audit secara berkala (disarankan bulanan)",
+                    "2": "Prioritaskan perbaikan dengan dampak besar terlebih dahulu",
+                    "3": "Pantau peningkatan dengan alat pelacakan"
+                  }
+                },
+                "dont": {
+                  "title": "Yang Tidak Boleh Dilakukan",
+                  "items": {
+                    "1": "Abaikan optimasi mobile",
+                    "2": "Terlalu banyak optimasi kata kunci",
+                    "3": "Mengabaikan dasar-dasar SEO teknis"
+                  }
+                }
+              }
+            }
           },
           "competitorAnalysis": {
             "title": "Analisis Pesaing",
@@ -1197,16 +1370,491 @@
             "description": "Analisis strategi SEO pesaing Anda dan dapatkan wawasan kompetitif."
           },
           "siteCrawler": {
-            "title": "Alat Crawler Situs",
+            "title": "Panduan Crawler Situs",
             "href": "/help/seo-tools/site-crawler",
-            "time": "5 min",
-            "description": "Temukan semua halaman situs web Anda dan identifikasi masalah crawlability."
+            "time": "7 min",
+            "description": "Pelajari cara menggunakan crawler situs cerdas kami untuk analisis situs web yang komprehensif dan audit SEO teknis.",
+            "backToCategory": "Kembali ke Alat SEO",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "seoTools": "Alat SEO",
+              "siteCrawler": "Panduan Crawler Situs"
+            },
+            "header": {
+              "category": "Panduan Fitur",
+              "title": "Panduan Crawler Situs",
+              "description": "Kuasi crawler situs cerdas kami untuk analisis komprehensif, deteksi masalah teknis, dan optimasi SEO",
+              "author": "Tim AISEOTurbo",
+              "readTime": "7 menit baca",
+              "lastUpdated": "Terakhir diperbarui: Maret 2025"
+            },
+            "intro": {
+              "title": "Memahami Crawling Situs",
+              "description": "Crawler situs kami bertindak seperti spider mesin pencari, menjelajahi situs web Anda secara sistematis untuk mengidentifikasi halaman, menganalisis konten, dan mendeteksi masalah SEO teknis. Memberikan wawasan komprehensif tentang kesehatan dan performa situs Anda."
+            },
+            "keyFeatures": {
+              "title": "Fitur Utama",
+              "completeCoverage": {
+                "title": "Cakupan Lengkap",
+                "description": "Melakukan crawling semua halaman dan jenis konten"
+              },
+              "technicalAnalysis": {
+                "title": "Analisis Teknis",
+                "description": "Mengidentifikasi masalah SEO dan performa"
+              },
+              "contentInsights": {
+                "title": "Wawasan Konten",
+                "description": "Menganalisis kualitas dan optimasi konten"
+              },
+              "fastResults": {
+                "title": "Hasil Cepat",
+                "description": "Crawling cepat dengan laporan detail"
+              }
+            },
+            "howItWorks": {
+              "title": "Cara Kerja Crawling Situs",
+              "startCrawl": {
+                "title": "Mulai Crawling",
+                "description": "Masukkan URL situs web Anda dan konfigurasikan pengaturan crawling. Pilih antara pemindaian cepat untuk situs kecil atau crawling komprehensif untuk situs yang lebih besar.",
+                "crawlOptions": {
+                  "title": "Opsi Crawling:",
+                  "quickScan": "Pemindaian cepat (hingga 100 halaman)",
+                  "fullCrawl": "Crawling situs lengkap (halaman tak terbatas)",
+                  "customDepth": "Batas kedalaman kustom",
+                  "includeExclude": "Pola sertakan/kecualikan"
+                }
+              },
+              "intelligentDiscovery": {
+                "title": "Penemuan Cerdas",
+                "description": "Crawler kami menjelajahi situs Anda secara sistematis, mengikuti tautan internal dan menemukan semua halaman, gambar, dan sumber daya. Menghormati robots.txt dan penundaan crawling.",
+                "crawls": {
+                  "title": "Yang dilakukan crawling:",
+                  "htmlPages": "Halaman HTML",
+                  "xmlSitemaps": "Sitemap XML",
+                  "imagesMedia": "Gambar dan media",
+                  "cssJs": "File CSS dan JavaScript"
+                },
+                "analyzes": {
+                  "title": "Yang dianalisis:",
+                  "titlesMeta": "Judul halaman dan meta deskripsi",
+                  "headings": "Struktur heading",
+                  "links": "Tautan internal/eksternal",
+                  "performance": "Performa pemuatan halaman"
+                }
+              },
+              "comprehensiveAnalysis": {
+                "title": "Analisis Komprehensif",
+                "description": "Setiap halaman dianalisis untuk faktor SEO, masalah teknis, dan peluang optimasi. Crawler mengidentifikasi masalah dan memberikan rekomendasi yang dapat ditindaklanjuti.",
+                "categories": {
+                  "title": "Kategori Analisis:",
+                  "onPage": "Optimasi SEO on-page",
+                  "technical": "Masalah teknis SEO",
+                  "content": "Penilaian kualitas konten",
+                  "linking": "Peluang linking internal",
+                  "mobile": "Pemeriksaan kesesuaian mobile"
+                }
+              },
+              "generateReports": {
+                "title": "Hasilkan Laporan",
+                "description": "Terima laporan detail dengan masalah yang diprioritaskan, rekomendasi yang dapat ditindaklanjuti, dan pelacakan kemajuan. Ekspor hasil untuk kolaborasi tim dan pemantauan berkelanjutan.",
+                "reporting": {
+                  "title": "Pelaporan komprehensif",
+                  "description": "Masalah yang diprioritaskan dengan langkah selanjutnya yang jelas"
+                }
+              }
+            },
+            "keyBenefits": {
+              "title": "Manfaat Utama Crawling Situs",
+              "completeVisibility": {
+                "title": "Visibilitas Situs Lengkap",
+                "description": "Temukan semua halaman di situs Anda, termasuk yang tidak di sitemap"
+              },
+              "technicalDetection": {
+                "title": "Deteksi Masalah Teknis",
+                "description": "Temukan tautan rusak, konten duplikat, dan masalah crawlability"
+              },
+              "seoMonitoring": {
+                "title": "Pemantauan Kesehatan SEO",
+                "description": "Lacak kesehatan SEO situs Anda dari waktu ke waktu dengan crawling reguler"
+              },
+              "contentOptimization": {
+                "title": "Optimasi Konten",
+                "description": "Identifikasi kesenjangan konten dan peluang optimasi"
+              },
+              "performanceInsights": {
+                "title": "Wawasan Performa",
+                "description": "Analisis kecepatan halaman dan faktor pengalaman pengguna"
+              },
+              "actionableRecommendations": {
+                "title": "Rekomendasi yang Dapat Ditindaklanjuti",
+                "description": "Dapatkan perbaikan spesifik dan diprioritaskan untuk masalah yang diidentifikasi"
+              }
+            },
+            "commonIssues": {
+              "title": "Masalah Umum yang Dideteksi Crawler Kami",
+              "criticalIssues": {
+                "title": "Masalah Kritis",
+                "issues": [
+                  "Tautan internal/eksternal rusak",
+                  "Halaman yang mengembalikan error 4xx/5xx",
+                  "Tag judul hilang atau duplikat",
+                  "Halaman diblokir oleh robots.txt"
+                ]
+              },
+              "warningIssues": {
+                "title": "Masalah Peringatan",
+                "issues": [
+                  "Halaman pemuatan lambat",
+                  "Meta deskripsi hilang",
+                  "Halaman tidak mobile-friendly",
+                  "Gambar besar tanpa optimasi"
+                ]
+              },
+              "optimizationOpportunities": {
+                "title": "Peluang Optimasi",
+                "issues": [
+                  "Konten tipis atau duplikat",
+                  "Struktur heading hilang",
+                  "Peluang linking internal",
+                  "Kesenjangan konten untuk diisi"
+                ]
+              },
+              "performanceIssues": {
+                "title": "Masalah Performa",
+                "issues": [
+                  "Sumber daya tidak dikompresi",
+                  "JavaScript yang memblokir rendering",
+                  "Header cache hilang",
+                  "Ukuran halaman besar"
+                ]
+              }
+            },
+            "bestPractices": {
+              "title": "Praktik Terbaik untuk Crawling Situs",
+              "configureSettings": {
+                "title": "Konfigurasi Pengaturan Crawling Anda",
+                "description": "Tetapkan batas crawling yang sesuai dan hormati kapasitas server Anda.",
+                "practices": [
+                  "Gunakan penundaan crawling untuk menghindari membebani server",
+                  "Tetapkan user agent untuk mengidentifikasi crawler Anda",
+                  "Kecualikan area admin dan halaman pengembangan"
+                ]
+              },
+              "scheduleCrawls": {
+                "title": "Jadwalkan Crawling Reguler",
+                "description": "Lakukan crawling situs Anda secara teratur untuk memantau perubahan dan menangkap masalah lebih awal.",
+                "practices": [
+                  "Crawling mingguan untuk situs aktif",
+                  "Crawling bulanan untuk situs stabil",
+                  "Setelah perubahan konten atau teknis besar"
+                ]
+              },
+              "prioritizeIssues": {
+                "title": "Prioritaskan Masalah",
+                "description": "Fokus pada masalah dampak tinggi yang memengaruhi crawlability dan pengalaman pengguna.",
+                "practices": [
+                  "Perbaiki error kritis terlebih dahulu (404, tautan rusak)",
+                  "Tangani masalah performa yang memengaruhi Core Web Vitals",
+                  "Optimasi konten dan metadata untuk ranking yang lebih baik"
+                ]
+              }
+            },
+            "gettingStarted": {
+              "title": "Siap untuk Melakukan Crawling Situs Anda?",
+              "description": "Mulai dengan pemindaian cepat untuk membiasakan diri dengan crawler, lalu jalankan analisis lengkap untuk mengoptimalkan performa SEO situs Anda.",
+              "startCrawl": "Mulai Crawling Situs",
+              "quickStartGuide": "Lihat Panduan Mulai Cepat"
+            }
+          },
+          "competitorGuide": {
+            "title": "Panduan Analisis Kompetitor",
+            "href": "/help/seo-tools/competitor-analysis",
+            "time": "8 min",
+            "description": "Pelajari cara menganalisis strategi SEO kompetitor Anda dan mendapatkan wawasan kompetitif.",
+            "backToCategory": "Kembali ke Alat SEO",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "seoTools": "Alat SEO",
+              "competitorGuide": "Panduan Analisis Kompetitor"
+            },
+            "header": {
+              "title": "Panduan Analisis Kompetitor",
+              "description": "Kuasi analisis kompetitor untuk mendapatkan keuntungan strategis. Pelajari cara mengidentifikasi kompetitor, menganalisis strategi mereka, dan menemukan peluang untuk kampanye SEO Anda."
+            },
+            "intro": {
+              "title": "Memahami Analisis Kompetitor",
+              "description": "Analisis kompetitor membantu Anda memahami apa yang berhasil di industri Anda. Dengan mempelajari kompetitor yang sukses, Anda dapat mengidentifikasi strategi terbukti, menemukan peluang kata kunci, dan mengembangkan taktik SEO berbasis data."
+            },
+            "benefits": {
+              "keywordGaps": {
+                "title": "Kesenjangan Kata Kunci",
+                "description": "Temukan kata kunci yang diberi peringkat kompetitor tetapi tidak Anda"
+              },
+              "strategyInsights": {
+                "title": "Wawasan Strategis",
+                "description": "Belajar dari taktik sukses kompetitor"
+              },
+              "contentIdeas": {
+                "title": "Ide Konten",
+                "description": "Temukan topik konten yang menghasilkan hasil"
+              },
+              "performanceTracking": {
+                "title": "Pelacakan Performa",
+                "description": "Pantau perubahan peringkat kompetitor"
+              }
+            },
+            "howItWorks": {
+              "title": "Cara Kerja Analisis Kompetitor",
+              "identifyCompetitors": {
+                "title": "Identifikasi Kompetitor Anda",
+                "description": "Mulai dengan menemukan situs web yang bersaing dengan Anda untuk kata kunci dan audiens target yang sama. Lihat melampaui kompetitor langsung untuk menyertakan kompetitor tidak langsung di niche terkait.",
+                "whereToFind": {
+                  "title": "Di mana menemukan kompetitor:",
+                  "googleSearch": "Hasil pencarian Google untuk kata kunci target Anda",
+                  "industryDirectories": "Direktori industri dan situs ulasan",
+                  "socialMedia": "Media sosial dan forum industri",
+                  "seoTools": "Laporan kompetitor SimilarWeb atau SEMrush"
+                }
+              },
+              "analyzeStrategy": {
+                "title": "Analisis Strategi SEO Mereka",
+                "description": "Periksa SEO on-page kompetitor, strategi konten, profil backlink, dan implementasi SEO teknis. Cari pola di halaman sukses mereka dan identifikasi peluang.",
+                "onPageFactors": {
+                  "title": "Faktor On-Page",
+                  "titleTags": "Tag judul dan meta deskripsi",
+                  "headings": "Struktur heading (H1-H6)",
+                  "contentQuality": "Kedalaman dan kualitas konten",
+                  "internalLinking": "Pola linking internal"
+                },
+                "offPageFactors": {
+                  "title": "Faktor Off-Page",
+                  "backlinks": "Kualitas dan kuantitas backlink",
+                  "socialMedia": "Kehadiran di media sosial",
+                  "brandMentions": "Sebutan merek dan kutipan",
+                  "domainAuthority": "Tren otoritas domain"
+                }
+              },
+              "identifyOpportunities": {
+                "title": "Identifikasi Peluang",
+                "description": "Gunakan wawasan kompetitor untuk menemukan kesenjangan dalam strategi Anda. Cari peluang kata kunci, topik konten yang belum dicakup kompetitor, dan peningkatan SEO teknis.",
+                "commonOpportunities": {
+                  "title": "Peluang umum:",
+                  "lowCompetition": "Kata kunci dengan kompetisi rendah yang diabaikan kompetitor",
+                  "contentFormats": "Format konten yang belum dicoba kompetitor",
+                  "technicalIssues": "Masalah SEO teknis yang telah diperbaiki kompetitor",
+                  "linkStrategies": "Strategi link building yang berhasil di niche Anda"
+                }
+              },
+              "trackMonitor": {
+                "title": "Lacak dan Pantau",
+                "description": "Siapkan pemantauan berkelanjutan untuk melacak perubahan performa kompetitor dan mengidentifikasi peluang baru seiring berkembangnya lanskap kompetitif.",
+                "continuousMonitoring": {
+                  "title": "Pemantauan berkelanjutan",
+                  "description": "Tetap di depan perubahan strategi kompetitor"
+                }
+              }
+            },
+            "bestPractices": {
+              "title": "Praktik Terbaik untuk Analisis Kompetitor",
+              "focusDirect": {
+                "title": "Fokus pada Kompetitor Langsung",
+                "description": "Prioritaskan kompetitor yang menargetkan audiens dan kata kunci yang sama dengan Anda."
+              },
+              "lookPatterns": {
+                "title": "Cari Pola",
+                "description": "Identifikasi strategi umum di antara beberapa kompetitor yang sukses."
+              },
+              "dontCopyBlindly": {
+                "title": "Jangan Menyalin Buta",
+                "description": "Sesuaikan strategi agar sesuai dengan merek dan sumber daya unik Anda."
+              },
+              "monitorRegularly": {
+                "title": "Pantau Secara Teratur",
+                "description": "Strategi kompetitor berubah, jadi tinjau analisis setiap kuartal."
+              },
+              "combineData": {
+                "title": "Gabungkan dengan Data Anda",
+                "description": "Gunakan wawasan kompetitor bersama dengan analytics Anda sendiri."
+              },
+              "trackImplementation": {
+                "title": "Lacak Implementasi",
+                "description": "Ukur hasil saat Anda mengimplementasikan strategi yang berasal dari kompetitor."
+              }
+            },
+            "toolsFeatures": {
+              "title": "Alat Analisis Kompetitor",
+              "keywordGap": {
+                "title": "Analisis Kesenjangan Kata Kunci",
+                "description": "Temukan kata kunci yang diberi peringkat kompetitor tetapi tidak Anda"
+              },
+              "backlinkAnalysis": {
+                "title": "Analisis Backlink",
+                "description": "Analisis profil link dan strategi kompetitor"
+              },
+              "serpTracking": {
+                "title": "Pelacakan SERP",
+                "description": "Pantau perubahan peringkat kompetitor dari waktu ke waktu"
+              }
+            },
+            "gettingStarted": {
+              "title": "Siap Menganalisis Kompetitor Anda?",
+              "description": "Mulai dengan mengidentifikasi 3-5 kompetitor utama dan menjalankan analisis lengkap. Gunakan wawasan untuk meningkatkan strategi SEO Anda dan mendapatkan keuntungan kompetitif.",
+              "startAnalysis": "Mulai Analisis Kompetitor",
+              "viewGuide": "Lihat Panduan Mulai Cepat"
+            }
           },
           "aiAssistant": {
             "title": "Asisten SEO AI",
             "href": "/help/seo-tools/ai-assistant",
             "time": "4 min",
-            "description": "Dapatkan rekomendasi SEO yang dipersonalisasi dari asisten AI cerdas kami."
+            "description": "Dapatkan rekomendasi SEO yang dipersonalisasi dari asisten AI cerdas kami.",
+            "backToCategory": "Kembali ke Alat dan Fitur SEO",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "seoTools": "Alat dan Fitur SEO",
+              "aiAssistant": "Ringkasan Asisten AI"
+            },
+            "header": {
+              "title": "Praktik Terbaik Asisten AI",
+              "description": "Kuasi asisten SEO AI kami untuk hasil maksimal. Pelajari cara mengajukan pertanyaan efektif, menafsirkan rekomendasi AI, dan menggabungkan wawasan AI dengan keahlian SEO Anda."
+            },
+            "intro": {
+              "title": "Memahami Asisten SEO AI",
+              "description": "Asisten AI kami menggabungkan pembelajaran mesin dengan keahlian SEO untuk memberikan rekomendasi yang dipersonalisasi. Dilatih pada jutaan situs web dan praktik terbaik SEO terbaru, ini membantu Anda membuat keputusan berbasis data."
+            },
+            "capabilities": {
+              "keywordResearch": {
+                "title": "Penelitian Kata Kunci",
+                "description": "Analisis kata kunci lanjutan dan peluang"
+              },
+              "contentOptimization": {
+                "title": "Optimasi Konten",
+                "description": "Saran peningkatan konten cerdas"
+              },
+              "technicalSEO": {
+                "title": "SEO Teknis",
+                "description": "Identifikasi dan perbaikan masalah teknis"
+              },
+              "strategyDevelopment": {
+                "title": "Pengembangan Strategi",
+                "description": "Rekomendasi strategi SEO kustom"
+              }
+            },
+            "bestPractices": {
+              "title": "Praktik Terbaik untuk Interaksi AI",
+              "beSpecific": {
+                "title": "Jadilah Spesifik dalam Pertanyaan Anda",
+                "description": "Semakin spesifik pertanyaan Anda, semakin baik AI dapat memberikan saran yang ditargetkan dan dapat ditindaklanjuti. Sertakan konteks tentang industri, tujuan, dan situasi Anda saat ini.",
+                "examplesTitle": "Contoh Baik:",
+                "example1": "Bagaimana cara meningkatkan peringkat situs e-commerce saya untuk 'headphone nirkabel'?",
+                "example2": "Masalah SEO teknis apa yang harus saya prioritaskan untuk halaman arahan SaaS saya?",
+                "example3": "Sarankan topik konten untuk blog B2B saya tentang keamanan siber"
+              },
+              "provideContext": {
+                "title": "Berikan Konteks dan Data",
+                "description": "Bagikan data relevan dari audit, analitik, atau metrik performa Anda saat ini. Ini membantu AI memberikan rekomendasi yang lebih akurat dan dipersonalisasi.",
+                "includeTitle": "Sertakan dalam pertanyaan Anda:",
+                "item1": "Peringkat pencarian saat ini dan data lalu lintas",
+                "item2": "Kata kunci target dan pesaing",
+                "item3": "Industri dan audiens target Anda",
+                "item4": "Perubahan atau kampanye terkini"
+              },
+              "followUp": {
+                "title": "Ajukan Pertanyaan Tindak Lanjut",
+                "description": "Jangan berhenti pada respons pertama. Ajukan pertanyaan klarifikasi atau minta detail lebih lanjut tentang rekomendasi spesifik untuk memperdalam pemahaman Anda.",
+                "strategiesTitle": "Strategi tindak lanjut:",
+                "strategy1": "Bisakah Anda jelaskan mengapa rekomendasi ini akan membantu?",
+                "strategy2": "Metrik apa yang harus saya lacak untuk mengukur kesuksesan?",
+                "strategy3": "Apakah ada risiko potensial dengan pendekatan ini?",
+                "strategy4": "Bagaimana ini cocok dengan strategi SEO keseluruhan saya?"
+              },
+              "combineExpertise": {
+                "title": "Gabungkan Wawasan AI dengan Keahlian Anda",
+                "description": "Gunakan rekomendasi AI sebagai titik awal, tetapi terapkan pengetahuan dan pengalaman industri Anda untuk menentukan apa yang masuk akal untuk situasi spesifik Anda.",
+                "bestApproachTitle": "Pendekatan terbaik:",
+                "approach1": "Evaluasi rekomendasi terhadap tujuan bisnis Anda",
+                "approach2": "Pertimbangkan sumber daya dan batasan waktu Anda",
+                "approach3": "Uji rekomendasi dalam skala kecil terlebih dahulu",
+                "approach4": "Gunakan AI untuk penelitian, Anda untuk strategi dan eksekusi"
+              }
+            },
+            "useCases": {
+              "title": "Kasus Penggunaan Asisten AI yang Umum",
+              "contentStrategy": {
+                "title": "Strategi Konten",
+                "description": "Dapatkan bantuan dengan perencanaan konten, ideasi topik, dan strategi optimasi.",
+                "item1": "Penelitian kata kunci dan kesenjangan konten",
+                "item2": "Perencanaan kalender konten",
+                "item3": "Saran judul dan meta yang SEO-friendly",
+                "item4": "Rekomendasi struktur konten"
+              },
+              "technicalSEO": {
+                "title": "SEO Teknis",
+                "description": "Identifikasi dan perbaiki masalah SEO teknis dengan analisis bertenaga AI.",
+                "item1": "Analisis dan perbaikan kesalahan crawling",
+                "item2": "Optimasi Core Web Vitals",
+                "item3": "Implementasi markup Schema",
+                "item4": "Panduan optimasi seluler"
+              },
+              "competitorAnalysis": {
+                "title": "Analisis Kompetitor",
+                "description": "Pahami strategi kompetitor dan temukan peluang.",
+                "item1": "Analisis kata kunci kompetitor",
+                "item2": "Perbandingan strategi konten",
+                "item3": "Identifikasi peluang backlink",
+                "item4": "Targeting fitur SERP"
+              },
+              "performanceOptimization": {
+                "title": "Optimasi Performa",
+                "description": "Tingkatkan performa situs dan pengalaman pengguna.",
+                "item1": "Tips optimasi kecepatan halaman",
+                "item2": "Peningkatan pengalaman pengguna",
+                "item3": "Optimasi tingkat konversi",
+                "item4": "Rekomendasi pengujian A/B"
+              }
+            },
+            "tipsForSuccess": {
+              "title": "Tips untuk Sukses",
+              "dos": {
+                "title": "Hal yang Perlu Dilakukan",
+                "item1": "Mulai dengan pertanyaan yang spesifik dan terdefinisi dengan baik",
+                "item2": "Berikan konteks dan data performa saat ini",
+                "item3": "Eksperimen dengan format pertanyaan yang berbeda",
+                "item4": "Lacak dan ukur dampak rekomendasi AI"
+              },
+              "donts": {
+                "title": "Hal yang Tidak Perlu Dilakukan",
+                "item1": "Mengajukan pertanyaan yang samar atau terlalu luas",
+                "item2": "Berharap AI menggantikan keahlian SEO Anda",
+                "item3": "Mengimplementasikan rekomendasi tanpa pengujian",
+                "item4": "Mengabaikan pengetahuan spesifik industri Anda"
+              }
+            },
+            "gettingStarted": {
+              "title": "Memulai dengan Asisten AI",
+              "step1": {
+                "title": "Akses Asisten AI",
+                "description": "Navigasi ke bagian Asisten AI di dashboard Anda."
+              },
+              "step2": {
+                "title": "Mulai dengan Pertanyaan Sederhana",
+                "description": "Mulai dengan pertanyaan spesifik tentang tantangan SEO Anda saat ini."
+              },
+              "step3": {
+                "title": "Perbaiki dan Iterasi",
+                "description": "Gunakan pertanyaan tindak lanjut untuk mendapatkan wawasan yang lebih detail."
+              },
+              "step4": {
+                "title": "Terapkan dan Lacak Hasil",
+                "description": "Implementasikan rekomendasi dan pantau dampaknya pada performa SEO Anda."
+              }
+            }
           }
         },
         "additionalResources": {
@@ -1347,6 +1995,8 @@
             "header": {
               "category": "Pemecahan Masalah",
               "title": "Masalah login",
+              "description": "Panduan lengkap untuk menyelesaikan masalah login, masalah akses, dan kesalahan autentikasi akun",
+              "author": "Tim Dukungan AISEOTurbo",
               "readTime": "6 menit baca",
               "lastUpdated": "Terakhir diperbarui: Maret 2025"
             },
@@ -1577,6 +2227,8 @@
             "header": {
               "category": "Pemecahan Masalah",
               "title": "Masalah sinkronisasi",
+              "description": "Panduan lengkap untuk menyelesaikan masalah sinkronisasi data, masalah konektivitas, dan kesalahan sinkronisasi",
+              "author": "Tim Dukungan AISEOTurbo",
               "readTime": "Baca 5 menit",
               "lastUpdated": "Terakhir diperbarui: Maret 2025"
             },
@@ -1805,6 +2457,8 @@
             "header": {
               "category": "Pemecahan Masalah",
               "title": "Masalah performa",
+              "description": "Panduan lengkap untuk menyelesaikan masalah pemuatan lambat, lag, responsivitas, dan optimasi performa",
+              "author": "Tim Dukungan AISEOTurbo",
               "readTime": "Baca 6 menit",
               "lastUpdated": "Terakhir diperbarui: Maret 2025"
             },
@@ -2034,6 +2688,8 @@
             "header": {
               "category": "Pemecahan Masalah",
               "title": "Audit tidak selesai",
+              "description": "Panduan lengkap untuk memperbaiki audit yang tidak lengkap, proses yang macet, kesalahan timeout, dan masalah teknis audit",
+              "author": "Tim Dukungan AISEOTurbo",
               "readTime": "Baca 6 menit",
               "lastUpdated": "Terakhir diperbarui: Maret 2025"
             },
@@ -2289,6 +2945,12 @@
     "meta": {
       "title": "Optimasi Performa - Bantuan AISEOTurbo",
       "description": "Tingkatkan kecepatan audit, selesaikan masalah pemuatan lambat, dan optimalkan performa."
+    }
+  },
+  "seoAudit": {
+    "meta": {
+      "title": "Panduan Audit SEO - Bantuan AISEOTurbo",
+      "description": "Pelajari cara melakukan audit SEO komprehensif yang mencakup lebih dari 47 faktor teknis."
     }
   },
   "login-issues": {
@@ -2625,6 +3287,10 @@
     }
   },
   "home": {
+    "meta": {
+      "title": "Alat Audit SEO - Tingkatkan Peringkat dengan Cepat | AI SEO Turbo",
+      "description": "Transformasikan SEO Anda dengan audit bertenaga AI yang mengidentifikasi 47+ masalah kritis. Dapatkan wawasan berbasis data untuk meningkatkan traffic organik dan mendominasi peringkat."
+    },
     "hero": {
       "badge": "Analisis SEO Bertenaga AI",
       "title": "AI SEO Turbo: Audit SEO Profesional Dibuat Sederhana",
@@ -7550,390 +8216,191 @@
       },
       "seoTools": {
         "title": "Alat & Fitur SEO",
-        "description": "Kuasai toolkit SEO berbasis AI kami",
+        "description": "Kuasi toolkit SEO kami yang didukung AI",
         "articles": {
           "auditWalkthrough": {
             "title": "Panduan lengkap audit SEO",
-            "time": "12 mnt"
+            "time": "12 menit"
           },
           "competitorGuide": {
             "title": "Panduan analisis kompetitor",
-            "time": "8 mnt"
+            "time": "8 menit"
           },
           "crawlerConfig": {
             "title": "Konfigurasi crawler situs",
-            "time": "6 mnt"
+            "time": "6 menit"
           },
           "aiAssistant": {
-            "title": "Praktik terbaik asisten AI",
-            "time": "9 mnt"
+            "title": "Asisten SEO AI",
+            "href": "/help/seo-tools/ai-assistant",
+            "time": "4 min",
+            "description": "Dapatkan rekomendasi SEO yang dipersonalisasi dari asisten AI cerdas kami.",
+            "backToCategory": "Kembali ke Alat dan Fitur SEO",
+            "backToHelp": "Kembali ke Pusat Bantuan",
+            "breadcrumb": {
+              "home": "Beranda",
+              "help": "Bantuan",
+              "seoTools": "Alat dan Fitur SEO",
+              "aiAssistant": "Ringkasan Asisten AI"
+            },
+            "header": {
+              "title": "Praktik Terbaik Asisten AI",
+              "description": "Kuasi asisten SEO AI kami untuk hasil maksimal. Pelajari cara mengajukan pertanyaan efektif, menafsirkan rekomendasi AI, dan menggabungkan wawasan AI dengan keahlian SEO Anda."
+            },
+            "intro": {
+              "title": "Memahami Asisten SEO AI",
+              "description": "Asisten AI kami menggabungkan pembelajaran mesin dengan keahlian SEO untuk memberikan rekomendasi yang dipersonalisasi. Dilatih pada jutaan situs web dan praktik terbaik SEO terbaru, ini membantu Anda membuat keputusan berbasis data."
+            },
+            "capabilities": {
+              "keywordResearch": {
+                "title": "Penelitian Kata Kunci",
+                "description": "Analisis kata kunci lanjutan dan peluang"
+              },
+              "contentOptimization": {
+                "title": "Optimasi Konten",
+                "description": "Saran peningkatan konten cerdas"
+              },
+              "technicalSEO": {
+                "title": "SEO Teknis",
+                "description": "Identifikasi dan perbaikan masalah teknis"
+              },
+              "strategyDevelopment": {
+                "title": "Pengembangan Strategi",
+                "description": "Rekomendasi strategi SEO kustom"
+              }
+            },
+            "bestPractices": {
+              "title": "Praktik Terbaik untuk Interaksi AI",
+              "beSpecific": {
+                "title": "Jadilah Spesifik dalam Pertanyaan Anda",
+                "description": "Semakin spesifik pertanyaan Anda, semakin baik AI dapat memberikan saran yang ditargetkan dan dapat ditindaklanjuti. Sertakan konteks tentang industri, tujuan, dan situasi Anda saat ini.",
+                "examplesTitle": "Contoh Baik:",
+                "example1": "Bagaimana cara meningkatkan peringkat situs e-commerce saya untuk 'headphone nirkabel'?",
+                "example2": "Masalah SEO teknis apa yang harus saya prioritaskan untuk halaman arahan SaaS saya?",
+                "example3": "Sarankan topik konten untuk blog B2B saya tentang keamanan siber"
+              },
+              "provideContext": {
+                "title": "Berikan Konteks dan Data",
+                "description": "Bagikan data relevan dari audit, analitik, atau metrik performa Anda saat ini. Ini membantu AI memberikan rekomendasi yang lebih akurat dan dipersonalisasi.",
+                "includeTitle": "Sertakan dalam pertanyaan Anda:",
+                "item1": "Peringkat pencarian saat ini dan data lalu lintas",
+                "item2": "Kata kunci target dan pesaing",
+                "item3": "Industri dan audiens target Anda",
+                "item4": "Perubahan atau kampanye terkini"
+              },
+              "followUp": {
+                "title": "Ajukan Pertanyaan Tindak Lanjut",
+                "description": "Jangan berhenti pada respons pertama. Ajukan pertanyaan klarifikasi atau minta detail lebih lanjut tentang rekomendasi spesifik untuk memperdalam pemahaman Anda.",
+                "strategiesTitle": "Strategi tindak lanjut:",
+                "strategy1": "Bisakah Anda jelaskan mengapa rekomendasi ini akan membantu?",
+                "strategy2": "Metrik apa yang harus saya lacak untuk mengukur kesuksesan?",
+                "strategy3": "Apakah ada risiko potensial dengan pendekatan ini?",
+                "strategy4": "Bagaimana ini cocok dengan strategi SEO keseluruhan saya?"
+              },
+              "combineExpertise": {
+                "title": "Gabungkan Wawasan AI dengan Keahlian Anda",
+                "description": "Gunakan rekomendasi AI sebagai titik awal, tetapi terapkan pengetahuan dan pengalaman industri Anda untuk menentukan apa yang masuk akal untuk situasi spesifik Anda.",
+                "bestApproachTitle": "Pendekatan terbaik:",
+                "approach1": "Evaluasi rekomendasi terhadap tujuan bisnis Anda",
+                "approach2": "Pertimbangkan sumber daya dan batasan waktu Anda",
+                "approach3": "Uji rekomendasi dalam skala kecil terlebih dahulu",
+                "approach4": "Gunakan AI untuk penelitian, Anda untuk strategi dan eksekusi"
+              }
+            },
+            "useCases": {
+              "title": "Kasus Penggunaan Asisten AI yang Umum",
+              "contentStrategy": {
+                "title": "Strategi Konten",
+                "description": "Dapatkan bantuan dengan perencanaan konten, ideasi topik, dan strategi optimasi.",
+                "item1": "Penelitian kata kunci dan kesenjangan konten",
+                "item2": "Perencanaan kalender konten",
+                "item3": "Saran judul dan meta yang SEO-friendly",
+                "item4": "Rekomendasi struktur konten"
+              },
+              "technicalSEO": {
+                "title": "SEO Teknis",
+                "description": "Identifikasi dan perbaiki masalah SEO teknis dengan analisis bertenaga AI.",
+                "item1": "Analisis dan perbaikan kesalahan crawling",
+                "item2": "Optimasi Core Web Vitals",
+                "item3": "Implementasi markup Schema",
+                "item4": "Panduan optimasi seluler"
+              },
+              "competitorAnalysis": {
+                "title": "Analisis Kompetitor",
+                "description": "Pahami strategi kompetitor dan temukan peluang.",
+                "item1": "Analisis kata kunci kompetitor",
+                "item2": "Perbandingan strategi konten",
+                "item3": "Identifikasi peluang backlink",
+                "item4": "Penargetan fitur SERP"
+              },
+              "performanceOptimization": {
+                "title": "Optimasi Performa",
+                "description": "Tingkatkan performa situs dan pengalaman pengguna.",
+                "item1": "Tips optimasi kecepatan halaman",
+                "item2": "Peningkatan pengalaman pengguna",
+                "item3": "Optimasi tingkat konversi",
+                "item4": "Rekomendasi pengujian A/B"
+              }
+            },
+            "tipsForSuccess": {
+              "title": "Tips untuk Sukses",
+              "dos": {
+                "title": "Hal yang Perlu Dilakukan",
+                "item1": "Mulai dengan pertanyaan yang spesifik dan terdefinisi dengan baik",
+                "item2": "Berikan konteks dan data performa saat ini",
+                "item3": "Eksperimen dengan format pertanyaan yang berbeda",
+                "item4": "Lacak dan ukur dampak rekomendasi AI"
+              },
+              "donts": {
+                "title": "Hal yang Tidak Perlu Dilakukan",
+                "item1": "Mengajukan pertanyaan yang samar atau terlalu luas",
+                "item2": "Berharap AI menggantikan keahlian SEO Anda",
+                "item3": "Mengimplementasikan rekomendasi tanpa pengujian",
+                "item4": "Mengabaikan pengetahuan spesifik industri Anda"
+              }
+            },
+            "gettingStarted": {
+              "title": "Memulai dengan Asisten AI",
+              "step1": {
+                "title": "Akses Asisten AI",
+                "description": "Navigasi ke bagian Asisten AI di dashboard Anda."
+              },
+              "step2": {
+                "title": "Mulai dengan Pertanyaan Sederhana",
+                "description": "Mulai dengan pertanyaan spesifik tentang tantangan SEO Anda saat ini."
+              },
+              "step3": {
+                "title": "Perbaiki dan Iterasi",
+                "description": "Gunakan pertanyaan tindak lanjut untuk mendapatkan wawasan yang lebih detail."
+              },
+              "step4": {
+                "title": "Terapkan dan Lacak Hasil",
+                "description": "Implementasikan rekomendasi dan pantau dampaknya pada performa SEO Anda."
+              }
+            }
           }
         }
       },
       "billing": {
-        "title": "Akun & Penagihan",
-        "description": "Kelola langganan dan pembayaran Anda",
+        "title": "Penagihan & Pembayaran",
+        "description": "Kelola langganan, pembayaran, dan informasi penagihan Anda",
         "articles": {
           "upgrade": {
             "title": "Meningkatkan paket Anda",
-            "time": "4 mnt"
+            "time": "5 menit"
           },
           "paymentMethods": {
-            "title": "Mengelola metode pembayaran",
-            "time": "5 mnt"
+            "title": "Metode pembayaran",
+            "time": "3 menit"
           },
           "invoices": {
-            "title": "Memahami faktur Anda",
-            "time": "4 mnt"
+            "title": "Faktur dan tanda terima",
+            "time": "4 menit"
           },
           "cancellation": {
             "title": "Pembatalan dan pengembalian dana",
-            "time": "5 mnt"
+            "time": "6 menit"
           }
-        }
-      },
-      "cancellation": {
-        "title": "Pembatalan Akun & Pengembalian Dana",
-        "subtitle": "Pelajari cara membatalkan langganan Anda, pahami kebijakan pengembalian dana, dan kelola penutupan akun",
-        "backToBilling": "Kembali ke Penagihan",
-        "breadcrumb": {
-          "help": "Bantuan",
-          "billing": "Penagihan",
-          "cancellation": "Pembatalan"
-        },
-        "importantNotice": {
-          "title": "Pemberitahuan Penting",
-          "description": "Sebelum membatalkan, pertimbangkan untuk menjeda langganan Anda sebagai alternatif. Cara ini menjaga data Anda tetap aman dan memungkinkan reaktivasi dengan mudah."
-        },
-        "process": {
-          "title": "Proses Pembatalan",
-          "steps": [
-            {
-              "title": "Akses Pengaturan Akun",
-              "description": "Masuk ke akun Anda dan menuju ke Pengaturan → Langganan → Batalkan Langganan.",
-              "details": [
-                "Masuk ke dasbor akun Anda",
-                "Klik 'Langganan' pada menu sebelah kiri",
-                "Gulir ke bagian 'Batalkan Langganan'"
-              ]
-            },
-            {
-              "title": "Pilih Alasan Pembatalan",
-              "description": "Pilih alasan pembatalan dari opsi yang tersedia atau berikan masukan khusus.",
-              "details": [
-                "Bantu kami berkembang dengan membagikan alasan Anda",
-                "Masukan Anda sangat berharga untuk pengembangan layanan kami",
-                "Langkah ini bersifat opsional namun sangat kami apresiasi"
-              ]
-            },
-            {
-              "title": "Konfirmasi Pembatalan",
-              "description": "Tinjau syarat pembatalan dan konfirmasikan keputusan Anda.",
-              "details": [
-                "Tinjau apa yang terjadi setelah pembatalan",
-                "Pastikan Anda memahami kebijakan pengembalian dana",
-                "Klik 'Batalkan Langganan' untuk melanjutkan"
-              ]
-            },
-            {
-              "title": "Terima Konfirmasi",
-              "description": "Anda akan menerima email konfirmasi berisi langkah lanjutan dan informasi penyimpanan data.",
-              "details": [
-                "Periksa email Anda untuk konfirmasi",
-                "Simpan konfirmasi tersebut untuk arsip Anda",
-                "Hubungi dukungan jika Anda tidak menerimanya"
-              ]
-            }
-          ]
-        },
-        "afterCancellation": {
-          "title": "Apa yang Terjadi Setelah Pembatalan",
-          "items": [
-            {
-              "icon": "clock",
-              "title": "Akses Langsung",
-              "description": "Anda tetap memiliki akses penuh ke akun dan data hingga akhir periode penagihan saat ini."
-            },
-            {
-              "icon": "shield",
-              "title": "Penyimpanan Data",
-              "description": "Data Anda akan disimpan dengan aman selama 30 hari setelah pembatalan, dan Anda dapat mengaktifkan kembali akun selama periode ini."
-            },
-            {
-              "icon": "credit-card",
-              "title": "Tidak Ada Tagihan Lebih Lanjut",
-              "description": "Metode pembayaran Anda tidak akan ditagih lagi dan faktur yang tertunda akan dibatalkan."
-            }
-          ]
-        },
-        "refundPolicy": {
-          "title": "Kebijakan Pengembalian Dana",
-          "eligible": "Memenuhi Syarat Pengembalian Dana",
-          "notEligible": "Tidak Memenuhi Syarat",
-          "scenarios": [
-            {
-              "title": "Langganan Bulanan - Dalam 14 Hari",
-              "eligible": true,
-              "description": "Pengembalian dana penuh tersedia jika Anda membatalkan dalam 14 hari sejak langganan awal atau perpanjangan."
-            },
-            {
-              "title": "Langganan Bulanan - Setelah 14 Hari",
-              "eligible": false,
-              "description": "Tidak ada pengembalian dana untuk periode penagihan berjalan. Layanan tetap tersedia hingga akhir periode."
-            },
-            {
-              "title": "Langganan Tahunan - Dalam 30 Hari",
-              "eligible": true,
-              "description": "Pengembalian dana penuh tersedia dalam 30 hari sejak langganan. Pengembalian dana proporsional setelah 30 hari."
-            },
-            {
-              "title": "Langganan Tahunan - Setelah 30 Hari",
-              "eligible": true,
-              "description": "Pengembalian dana proporsional untuk bulan yang tersisa. Tidak ada pengembalian untuk bulan berjalan."
-            }
-          ]
-        },
-        "needHelp": {
-          "title": "Butuh Bantuan Pembatalan?",
-          "description": "Tim dukungan penagihan kami siap membantu Anda dalam proses pembatalan.",
-          "contacts": [
-            {
-              "text": "Hubungi Dukungan Penagihan",
-              "href": "/contact?subject=cancellation"
-            },
-            {
-              "text": "Obrolan Langsung",
-              "href": "#chat"
-            }
-          ]
-        }
-      },
-      "invoices": {
-        "title": "Memahami Faktur Anda",
-        "subtitle": "Pelajari cara mengakses, mengunduh, dan memahami riwayat penagihan dan detail faktur dengan AI SEO Turbo.",
-        "backToBilling": "Kembali ke Penagihan",
-        "breadcrumb": {
-          "help": "Bantuan",
-          "billing": "Penagihan",
-          "invoices": "Faktur"
-        },
-        "accessInvoices": {
-          "title": "Cara Mengakses Faktur Anda",
-          "description": "Riwayat penagihan lengkap Anda tersedia kapan saja di dasbor akun Anda.",
-          "steps": [
-            {
-              "title": "Masuk ke akun Anda",
-              "description": "Akses dasbor AI SEO Turbo Anda menggunakan email terdaftar dan kata sandi."
-            },
-            {
-              "title": "Navigasi ke Penagihan",
-              "description": "Klik 'Penagihan' atau 'Langganan' di menu akun Anda untuk mengakses informasi pembayaran."
-            },
-            {
-              "title": "Lihat Riwayat Faktur",
-              "description": "Pilih 'Faktur' atau 'Riwayat Penagihan' untuk melihat semua faktur masa lalu dan saat ini."
-            },
-            {
-              "title": "Unduh atau Cetak",
-              "description": "Klik tombol unduh di samping faktur apa pun untuk menyimpan salinan PDF untuk arsip Anda."
-            }
-          ]
-        },
-        "invoiceDetails": {
-          "title": "Apa yang Termasuk dalam Faktur Anda",
-          "description": "Setiap faktur berisi informasi penagihan lengkap dan detail transaksi.",
-          "items": [
-            {
-              "icon": "FileText",
-              "title": "Nomor Faktur & Tanggal",
-              "description": "Pengidentifikasi faktur unik, tanggal penerbitan, dan tanggal jatuh tempo pembayaran untuk arsip Anda."
-            },
-            {
-              "icon": "CreditCard",
-              "title": "Detail Layanan",
-              "description": "Rincian layanan, jenis paket, periode penagihan, dan diskon yang berlaku."
-            },
-            {
-              "icon": "Calendar",
-              "title": "Status Pembayaran",
-              "description": "Status pembayaran saat ini, jumlah yang dibayarkan, dan saldo tertunda apa pun."
-            },
-            {
-              "icon": "Download",
-              "title": "Informasi Pajak",
-              "description": "Pajak yang berlaku, informasi PPN, dan harga termasuk pajak jika diperlukan."
-            }
-          ]
-        },
-        "billingHistory": {
-          "title": "Mengelola Riwayat Penagihan Anda",
-          "description": "Lacak semua transaksi Anda dan jaga catatan keuangan yang terorganisir.",
-          "features": [
-            {
-              "title": "Riwayat Transaksi Lengkap",
-              "description": "Lihat semua pembayaran, pengembalian dana, dan penyesuaian penagihan dalam urutan kronologis."
-            },
-            {
-              "title": "Unduh Beberapa Faktur",
-              "description": "Unduh faktur dalam batch untuk tujuan akuntansi atau persiapan pajak."
-            },
-            {
-              "title": "Pelacakan Metode Pembayaran",
-              "description": "Lihat metode pembayaran mana yang digunakan untuk setiap transaksi."
-            },
-            {
-              "title": "Perubahan Langganan",
-              "description": "Lacak peningkatan paket, penurunan, dan modifikasi langganan dari waktu ke waktu."
-            }
-          ]
-        },
-        "needHelp": {
-          "title": "Butuh Bantuan dengan Faktur?",
-          "description": "Tim dukungan penagihan kami dapat membantu dengan pertanyaan faktur, masalah pembayaran, atau perbedaan penagihan.",
-          "contacts": [
-            {
-              "icon": "Mail",
-              "title": "Dukungan Email",
-              "description": "Kirim email kepada kami dengan pertanyaan faktur Anda",
-              "link": "mailto:billing@aiseoturbo.com",
-              "linkText": "billing@aiseoturbo.com"
-            },
-            {
-              "icon": "MessageCircle",
-              "title": "Obrolan Langsung",
-              "description": "Obrolan secara real-time dengan spesialis penagihan kami",
-              "link": "#chat",
-              "linkText": "Mulai Obrolan Langsung"
-            }
-          ]
-        }
-      },
-      "paymentMethods": {
-        "title": "Mengelola Metode Pembayaran",
-        "subtitle": "Pelajari cara menambah, memperbarui, dan mengelola metode pembayaran Anda untuk penagihan yang lancar dengan AI SEO Turbo.",
-        "backToBilling": "Kembali ke Penagihan",
-        "breadcrumb": {
-          "help": "Bantuan",
-          "billing": "Penagihan",
-          "paymentMethods": "Metode Pembayaran"
-        },
-        "acceptedMethods": {
-          "title": "Metode Pembayaran yang Diterima",
-          "description": "Kami menerima berbagai metode pembayaran untuk membuat pengelolaan langganan Anda semudah mungkin.",
-          "methods": [
-            {
-              "icon": "CreditCard",
-              "name": "Kartu Kredit & Debit",
-              "description": "Semua kartu kredit dan debit utama termasuk Visa, MasterCard, American Express, dan Discover.",
-              "features": ["Pemrosesan instan", "Enkripsi aman", "Penerimaan global"]
-            },
-            {
-              "icon": "Wallet",
-              "name": "Dompet Digital",
-              "description": "PayPal, Apple Pay, Google Pay, dan solusi dompet digital populer lainnya.",
-              "features": ["Pembayaran satu klik", "Keamanan yang ditingkatkan", "Dioptimalkan untuk mobile"]
-            },
-            {
-              "icon": "Building",
-              "name": "Transfer Bank",
-              "description": "Transfer bank langsung dan transfer kawat untuk langganan tahunan dan akun perusahaan.",
-              "features": ["Tidak ada biaya pemrosesan", "Pembayaran massal", "Pembuatan faktur"]
-            },
-            {
-              "icon": "Coins",
-              "name": "Kriptocurrency",
-              "description": "Bitcoin, Ethereum, dan kriptocurrency utama lainnya melalui mitra pembayaran terpercaya kami.",
-              "features": ["Pembayaran tanpa batas", "Transaksi cepat", "Berfokus pada privasi"]
-            }
-          ]
-        },
-        "managingMethods": {
-          "title": "Mengelola Metode Pembayaran Anda",
-          "description": "Jaga informasi pembayaran Anda tetap terbaru dan kelola beberapa opsi pembayaran untuk akun Anda.",
-          "actions": [
-            {
-              "icon": "Plus",
-              "title": "Tambah Metode Pembayaran",
-              "description": "Tambahkan kartu kredit, debit, atau dompet digital baru ke akun Anda.",
-              "steps": [
-                "Buka pengaturan akun Anda",
-                "Navigasi ke 'Penagihan & Pembayaran'",
-                "Klik 'Tambah Metode Pembayaran'",
-                "Masukkan detail pembayaran Anda",
-                "Verifikasi dan simpan informasi"
-              ]
-            },
-            {
-              "icon": "Edit",
-              "title": "Perbarui Informasi Pembayaran",
-              "description": "Ubah detail kartu, alamat penagihan, atau beralih ke metode pembayaran yang berbeda.",
-              "steps": [
-                "Akses daftar metode pembayaran Anda",
-                "Pilih metode yang akan diperbarui",
-                "Klik 'Edit' atau 'Perbarui'",
-                "Modifikasi informasi yang diperlukan",
-                "Simpan perubahan Anda dengan aman"
-              ]
-            },
-            {
-              "icon": "Trash2",
-              "title": "Hapus Metode Pembayaran",
-              "description": "Hapus metode pembayaran lama atau yang tidak digunakan dari akun Anda sambil mempertahankan setidaknya satu metode aktif.",
-              "steps": [
-                "Lihat metode pembayaran Anda",
-                "Pilih metode yang akan dihapus",
-                "Klik 'Hapus' atau 'Delete'",
-                "Konfirmasi penghapusan",
-                "Pastikan metode lain tetap aktif"
-              ]
-            }
-          ]
-        },
-        "security": {
-          "title": "Keamanan & Privasi Pembayaran",
-          "description": "Informasi pembayaran Anda dilindungi dengan langkah-langkah keamanan terdepan industri dan enkripsi.",
-          "features": [
-            {
-              "icon": "Shield",
-              "title": "Sesuai PCI DSS",
-              "description": "Kami mematuhi Standar Keamanan Data Industri Kartu Pembayaran tertinggi untuk pemrosesan pembayaran yang aman."
-            },
-            {
-              "icon": "Lock",
-              "title": "Enkripsi End-to-End",
-              "description": "Semua data pembayaran dienkripsi selama transmisi dan penyimpanan menggunakan enkripsi SSL 256-bit."
-            },
-            {
-              "icon": "EyeOff",
-              "title": "Tidak Menyimpan Kartu",
-              "description": "Kami tidak menyimpan detail kartu lengkap di server kami. Pemrosesan pembayaran ditangani oleh mitra bersertifikat."
-            },
-            {
-              "icon": "CheckCircle",
-              "title": "Perlindungan Penipuan",
-              "description": "Sistem deteksi dan pencegahan penipuan canggih melindungi terhadap transaksi yang tidak sah."
-            }
-          ]
-        },
-        "needHelp": {
-          "title": "Butuh Bantuan dengan Metode Pembayaran?",
-          "description": "Tim dukungan penagihan kami dapat membantu Anda dengan masalah metode pembayaran, transaksi gagal, atau pertanyaan penagihan.",
-          "contacts": [
-            {
-              "icon": "Mail",
-              "title": "Dukungan Email",
-              "description": "Kirim email kepada kami dengan pertanyaan pembayaran Anda",
-              "link": "mailto:billing@aiseoturbo.com",
-              "linkText": "billing@aiseoturbo.com"
-            },
-            {
-              "icon": "MessageCircle",
-              "title": "Obrolan Langsung",
-              "description": "Obrolan secara real-time dengan spesialis penagihan kami",
-              "link": "#chat",
-              "linkText": "Mulai Obrolan Langsung"
-            }
-          ]
         }
       },
       "upgradePlan": {
@@ -8095,6 +8562,10 @@
           "webhooks": {
             "title": "Konfigurasi webhook",
             "time": "7 mnt"
+          },
+          "apiIntegrations": {
+            "title": "Panduan Integrasi API",
+            "time": "10 mnt"
           }
         }
       },
