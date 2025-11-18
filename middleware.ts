@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
-import { locales, defaultLocale, type Locale } from './i18n';
+import { locales, defaultLocale, type Locale } from './lib/i18n-config';
 import { routing } from './lib/navigation';
 
 // Create next-intl middleware with routing configuration
@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware(routing);
 function postProcessResponse(response: NextResponse) {
   // Remove hreflang from Link header if present
   const linkHeader = response.headers.get('Link') || '';
-  const cleanedLink = linkHeader.replace(/<[^>]+>; rel="alternate"; hreflang="[^"]+"(,|$|;)/g, '$1');
+  const cleanedLink = linkHeader.replace(/<[^>]+>; rel="alternate"; hreflang="[^"]+(,|$|;)/g, '$1');
 
   if (cleanedLink !== linkHeader) {
     response.headers.set('Link', cleanedLink);
