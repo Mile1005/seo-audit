@@ -6,7 +6,8 @@ import { locales, defaultLocale } from './i18n-config';
 export const routing = defineRouting({
   locales,
   defaultLocale,
-  localePrefix: 'as-needed' // English at root, others with locale prefix
+  localePrefix: 'as-needed', // English at root, others with locale prefix
+  alternateLinks: false
 });
 
 // Create type-safe navigation utilities for i18n routing

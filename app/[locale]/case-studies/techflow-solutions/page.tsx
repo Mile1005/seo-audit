@@ -27,14 +27,18 @@ import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import { generateSEOMeta, pageSEO } from "@/lib/seo"
 import { type Locale } from '@/i18n'
+import { generateAlternates } from '@/lib/metadata-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return generateSEOMeta({
-    ...pageSEO['case-studies/techflow-solutions'],
-    locale: locale as Locale,
-    path: 'case-studies/techflow-solutions'
-  })
+  return {
+    ...generateSEOMeta({
+      ...pageSEO['case-studies/techflow-solutions'],
+      locale: locale as Locale,
+      path: 'case-studies/techflow-solutions'
+    }),
+    alternates: generateAlternates('/case-studies/techflow-solutions')
+  }
 }
 
 export default async function TechFlowSolutionsCaseStudy({ params }: { params: { locale: string } }) {

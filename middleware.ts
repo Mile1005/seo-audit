@@ -6,19 +6,6 @@ import { routing } from './lib/navigation';
 // Create next-intl middleware with routing configuration
 const intlMiddleware = createMiddleware(routing);
 
-// Post-process intlMiddleware response to remove hreflang from Link headers
-function postProcessResponse(response: NextResponse) {
-  // Remove hreflang from Link header if present
-  const linkHeader = response.headers.get('Link') || '';
-  const cleanedLink = linkHeader.replace(/<[^>]+>; rel="alternate"; hreflang="[^"]+(,|$|;)/g, '$1');
-
-  if (cleanedLink !== linkHeader) {
-    response.headers.set('Link', cleanedLink);
-  }
-
-  return response;
-}
-
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
@@ -80,12 +67,12 @@ export function middleware(req: NextRequest) {
     }
     */
 
-    return postProcessResponse(intlMiddleware(req));
+    return intlMiddleware(req);
   }
 
   // For all other paths (without locale), let intl middleware handle it
   // It will serve English content at root (/) and redirect non-English to /locale
-  return postProcessResponse(intlMiddleware(req));
+  return intlMiddleware(req);
 }
 
 export const config = {

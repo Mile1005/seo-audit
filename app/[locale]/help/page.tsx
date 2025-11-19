@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server'
 import { Metadata } from 'next'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
+import { generateAlternates } from '@/lib/metadata-utils';
 import {
   Search,
   MessageCircle,
@@ -36,13 +37,16 @@ import { StructuredData, generateBreadcrumbSchema, generateFAQSchema } from '@/c
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return generateSEOMeta({
-    title: pageSEO.help.title,
-    description: pageSEO.help.description,
-    keywords: pageSEO.help.keywords,
-    locale: locale as Locale,
-    path: 'help'
-  })
+  return {
+    ...generateSEOMeta({
+      title: pageSEO.help.title,
+      description: pageSEO.help.description,
+      keywords: pageSEO.help.keywords,
+      locale: locale as Locale,
+      path: 'help'
+    }),
+    alternates: generateAlternates('/help')
+  }
 }
 
 export default async function HelpPage({ params }: { params: Promise<{ locale: string }> }) {

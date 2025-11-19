@@ -5,18 +5,22 @@ import { StructuredData, generateBlogPostingSchema, generateHowToSchema } from '
 import { generateSEOMeta } from '@/lib/seo'
 import { Metadata } from 'next'
 import { type Locale } from '@/i18n'
+import { generateAlternates } from '@/lib/metadata-utils';
 
 // SEO metadata for the blog post
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return generateSEOMeta({
-    title: 'Complete SEO Audit Checklist for 2025 | AI SEO Turbo Blog',
-    description: 'A comprehensive 47-point checklist to audit your website for SEO issues and opportunities. Used by 1000+ websites to increase organic traffic.',
-    keywords: ['SEO', 'Audit', 'Technical', 'Checklist', '2025'],
-    ogType: 'article',
-    locale: locale as Locale,
-    path: 'blog/complete-seo-audit-checklist-2025'
-  })
+  return {
+    ...generateSEOMeta({
+      title: 'Complete SEO Audit Checklist for 2025 | AI SEO Turbo Blog',
+      description: 'A comprehensive 47-point checklist to audit your website for SEO issues and opportunities. Used by 1000+ websites to increase organic traffic.',
+      keywords: ['SEO', 'Audit', 'Technical', 'Checklist', '2025'],
+      ogType: 'article',
+      locale: locale as Locale,
+      path: 'blog/complete-seo-audit-checklist-2025'
+    }),
+    alternates: generateAlternates('/blog/complete-seo-audit-checklist-2025')
+  }
 }
 
 export default async function CompleteSEOAuditChecklistPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -9,6 +9,7 @@ import { StructuredData, generateServiceSchema } from "@/components/seo/Structur
 import { CheckCircle, ArrowRight } from 'lucide-react'
 import {setRequestLocale, getTranslations} from 'next-intl/server';
 import { type Locale } from '@/i18n'
+import { generateAlternates } from '@/lib/metadata-utils';
 
 // Optimized dynamic imports with better loading states
 // Import our optimized skeletons
@@ -87,13 +88,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations('meta');
   
-  return generateSEOMeta({
-    description: t('home.description'),
-    keywords: t.raw('home.keywords'),
-    ogImage: '/logo.png',
-    locale: locale as Locale,
-    path: '' // Homepage at root path
-  })
+  return {
+    ...generateSEOMeta({
+      description: t('home.description'),
+      keywords: t.raw('home.keywords'),
+      ogImage: '/logo.png',
+      locale: locale as Locale,
+      path: '' // Homepage at root path
+    }),
+    alternates: generateAlternates('/')
+  }
 }
 
 type Props = {

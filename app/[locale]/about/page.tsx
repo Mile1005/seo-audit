@@ -3,16 +3,20 @@ import type { Metadata } from 'next'
 import AboutPage from '@/app/about/page'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
+import { generateAlternates } from '@/lib/metadata-utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return generateSEOMeta({
-    title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
-    description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
-    keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists'],
-    locale: locale as Locale,
-    path: 'about'
-  })
+  return {
+    ...generateSEOMeta({
+      title: 'About AI SEO Turbo - Expert SEO Team & AI Innovation',
+      description: 'Discover AISEOTurbo\'s mission to revolutionize SEO with AI technology. Meet our team of experts committed to helping businesses succeed online.',
+      keywords: ['SEO company', 'AI SEO experts', 'SEO consultants', 'technical SEO team', 'AI optimization specialists'],
+      locale: locale as Locale,
+      path: 'about'
+    }),
+    alternates: generateAlternates('/about')
+  }
 }
 
 type Props = { params: Promise<{ locale: string }> }

@@ -5,17 +5,21 @@ import { StructuredData, generateBlogPostingSchema, generateHowToSchema } from '
 import { generateSEOMeta } from '@/lib/seo'
 import { Metadata } from 'next'
 import { type Locale } from '@/i18n'
+import { generateAlternates } from '@/lib/metadata-utils';
 
 // SEO metadata for the blog post
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
-  return generateSEOMeta({
-    description: 'Complete guide to optimizing Core Web Vitals. Learn how to improve LCP, FID, and CLS for better Google rankings and user experience.',
-    keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience'],
-    ogType: 'article',
-    locale: locale as Locale,
-    path: 'blog/core-web-vitals-optimization-guide'
-  })
+  return {
+    ...generateSEOMeta({
+      description: 'Complete guide to optimizing Core Web Vitals. Learn how to improve LCP, FID, and CLS for better Google rankings and user experience.',
+      keywords: ['Core Web Vitals', 'LCP optimization', 'FID improvement', 'CLS fixes', 'page experience'],
+      ogType: 'article',
+      locale: locale as Locale,
+      path: 'blog/core-web-vitals-optimization-guide'
+    }),
+    alternates: generateAlternates('/blog/core-web-vitals-optimization-guide')
+  }
 }
 
 export default async function CoreWebVitalsPage({ params }: { params: Promise<{ locale: string }> }) {
