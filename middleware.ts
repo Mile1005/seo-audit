@@ -67,11 +67,13 @@ export function middleware(req: NextRequest) {
     }
     */
 
+    req.headers.set('x-pathname', req.nextUrl.pathname);
     return intlMiddleware(req);
   }
 
   // For all other paths (without locale), let intl middleware handle it
   // It will serve English content at root (/) and redirect non-English to /locale
+  req.headers.set('x-pathname', req.nextUrl.pathname);
   return intlMiddleware(req);
 }
 
