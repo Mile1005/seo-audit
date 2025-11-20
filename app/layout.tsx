@@ -97,10 +97,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const pathname =
     headersList.get('next-url') ||
     headersList.get('x-invoke-path') ||
+    headersList.get('x-vercel-path') ||
+    headersList.get('x-forwarded-path') ||
+    headersList.get('x-pathname') ||
+    headersList.get('x-url') ||
     headersList.get('referer') ||
     '/';
   
-  // Debug log
+  // Debug log all headers
+  console.log('[SEO DEBUG] all headers:', Object.fromEntries(headersList.entries()));
   console.log('[SEO DEBUG]', { pathname });
 
   let htmlLang: Locale = defaultLocale;
