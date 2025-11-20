@@ -12,6 +12,7 @@ import { headers } from 'next/headers';
 import { locales, defaultLocale } from '../i18n';
 import { generateAlternates } from '@/lib/metadata-utils';
 import { getLocale } from 'next-intl/server';
+import { routing } from '../lib/navigation';
 
 // Lazy load Vercel monitoring scripts (not critical for page render)
 const Analytics = dynamicImport(() => import('@vercel/analytics/react').then(mod => ({ default: mod.Analytics })), { 
@@ -91,10 +92,9 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // For now, default to 'en' since getLocale() doesn't work in root layout
-  // The LangSetter component handles setting the correct lang client-side
-  const locale = 'en';
-  
+  // Get locale from next-intl for server-side rendering
+  const locale = await getLocale();
+
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
   // Organization Schema - Company/Business Entity
@@ -286,7 +286,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);} 
+              function gtag(){dataLayer.push(arguments);}
               gtag('consent', 'default', {
                 ad_storage: 'denied',
                 analytics_storage: 'denied',
