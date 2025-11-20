@@ -91,7 +91,27 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const locale = await getLocale();
+  const headersList = headers();
+  const host = headersList.get('host') || '';
+  const pathname = headersList.get('x-pathname') || '';
+  
+  // Try to extract locale from various headers
+  let locale = 'en';
+  
+  // Check x-pathname header
+  const pathnameMatch = pathname.match(/^\/([a-z]{2})\//);
+  if (pathnameMatch) {
+    locale = pathnameMatch[1];
+  }
+  
+  // Check referer header as fallback
+  if (locale === 'en') {
+    const referer = headersList.get('referer') || '';
+    const refererMatch = referer.match(/:\/\/[^\/]+\/([a-z]{2})\//);
+    if (refererMatch) {
+      locale = refererMatch[1];
+    }
+  }
   
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
