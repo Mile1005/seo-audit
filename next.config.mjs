@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  trailingSlash: false, // Prevent trailing slash redirects in hreflang
   reactStrictMode: false,
   poweredByHeader: false,
   eslint: {

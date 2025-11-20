@@ -11,6 +11,7 @@ import { WebVitals } from "@/components/performance/web-vitals";
 import { headers } from 'next/headers';
 import { locales, defaultLocale } from '../i18n';
 import { generateAlternates } from '@/lib/metadata-utils';
+import { getLocale } from 'next-intl/server';
 
 // Lazy load Vercel monitoring scripts (not critical for page render)
 const Analytics = dynamicImport(() => import('@vercel/analytics/react').then(mod => ({ default: mod.Analytics })), { 
@@ -91,13 +92,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Get the current pathname to determine the locale
-  const headersList = await headers();
-  const pathname = headersList.get('x-pathname') || headersList.get('referer') || '';
-  
-  // Extract locale from pathname (e.g., /fr/page -> fr)
-  const pathSegments = pathname.split('/').filter(Boolean);
-  const detectedLocale = pathSegments[0] && locales.includes(pathSegments[0] as any) ? pathSegments[0] : defaultLocale;
+  const locale = await getLocale();
   
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
@@ -282,7 +277,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return (
-    <html lang={detectedLocale} className={inter.variable} suppressHydrationWarning>
+    <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         {/* Consent Mode v2: initialize defaults BEFORE loading gtag.js */}

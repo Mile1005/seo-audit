@@ -553,7 +553,7 @@ export default function APIIntegrationsContent() {
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-yellow-400 transition-colors" />
                 </Link>
                 <Link
-                  href="/help/seo-tools-features"
+                  href="/help/seo-tools"
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
