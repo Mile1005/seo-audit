@@ -92,11 +92,16 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Get locale from next-intl for server-side rendering
-  const intlLocale = await getLocale();
-
-  // Use the locale for HTML lang
-  const htmlLang = intlLocale;
+  // Extract locale from pathname for proper HTML lang attribute
+  const headersList = await headers();
+  const pathname = headersList.get('x-invoke-path') || headersList.get('next-url') || '/';
+  let htmlLang: Locale = defaultLocale;
+  for (const loc of locales) {
+    if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
+      htmlLang = loc;
+      break;
+    }
+  }
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
@@ -351,7 +356,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             @media(max-width:1023px){.desktop-only{display:none!important}}
           `
         }} />
-        {/* version 951613d */}
 
         {/* Early loading of critical scripts */}
         <script dangerouslySetInnerHTML={{
