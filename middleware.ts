@@ -49,9 +49,6 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // Debug log
-  console.log('[MIDDLEWARE] pathname:', pathname, 'locale:', locale);
-
   // Set locale in headers for use in layout
   req.headers.set('x-locale', locale);
 

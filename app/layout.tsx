@@ -95,11 +95,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Extract locale from headers set by middleware
   const headersList = await headers();
   const htmlLang = (headersList.get('x-locale') as Locale) || defaultLocale;
-  
-  // Debug log
-  console.log('[SEO DEBUG] x-locale header:', headersList.get('x-locale'));
-  console.log('[SEO DEBUG] all headers:', Object.fromEntries(headersList.entries()));
-  console.log('[SEO DEBUG]', { htmlLang });
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
