@@ -13,7 +13,7 @@ export default function FirstAuditContent() {
 
   const howToSchema = generateHowToSchema({
     name: "How to Create Your First SEO Audit",
-    description: "Learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. Complete step-by-step guide from entering your URL to reviewing results.",
+    description: "Run Your First Audit. Step-by-step guide to analyzing your site, finding errors, and improving health scores with AI SEO Turbo. Start now.",
     totalTime: "PT5M", // 5 minutes
     url: "https://www.aiseoturbo.com/help/getting-started/first-audit",
     datePublished: "2025-03-01T10:00:00+00:00",

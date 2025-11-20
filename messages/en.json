@@ -354,7 +354,7 @@
     "first-audit": {
       "meta": {
         "title": "How to Create Your First SEO Audit - Step-by-Step Guide | AI SEO Turbo",
-        "description": "Learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. Complete step-by-step guide from entering your URL to reviewing results."
+        "description": "Run Your First Audit. Step-by-step guide to analyzing your site, finding errors, and improving health scores with AI SEO Turbo. Start now."
       },
       "backToCategory": "Back to Getting Started",
       "backToHelp": "Back to Help Center",
@@ -1533,7 +1533,7 @@
             },
             "header": {
               "title": "Competitor Analysis Guide",
-              "description": "Master competitor analysis to gain strategic advantages. Learn how to identify competitors, analyze their strategies, and uncover opportunities for your SEO campaigns."
+              "description": "Competitor Analysis. Spy on rival keywords and strategies. Gain a competitive edge and outrank them with AI insights. Try it now."
             },
             "intro": {
               "title": "Understanding Competitor Analysis",
@@ -1672,7 +1672,7 @@
             },
             "header": {
               "title": "AI Assistant Best Practices",
-              "description": "Master our AI SEO assistant for maximum results. Learn how to ask effective questions, interpret AI recommendations, and combine AI insights with your SEO expertise."
+              "description": "AI SEO Assistant. Get automated recommendations and fix suggestions. Let AI handle the heavy lifting to improve your site faster."
             },
             "intro": {
               "title": "Understanding the AI SEO Assistant",
@@ -1825,7 +1825,7 @@
       },
       "api": {
         "title": "API & Integrations",
-        "subtitle": "Integrate AI SEO Turbo's powerful SEO tools into your applications with our comprehensive REST API. Automate audits, access real-time data, and build custom workflows.",
+        "subtitle": "SEO API Docs. Integrate powerful SEO data into your apps. Access endpoints for audits, keywords & analysis. Get your API key today.",
         "backToHelp": "Back to Help Center",
         "articles": {
           "authentication": {
@@ -8210,7 +8210,7 @@
             },
             "header": {
               "title": "AI Assistant Best Practices",
-              "description": "Master our AI SEO assistant for maximum results. Learn how to ask effective questions, interpret AI recommendations, and combine AI insights with your SEO expertise."
+              "description": "AI SEO Assistant. Get automated recommendations and fix suggestions. Let AI handle the heavy lifting to improve your site faster."
             },
             "intro": {
               "title": "Understanding the AI SEO Assistant",

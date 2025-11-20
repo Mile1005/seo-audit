@@ -19,17 +19,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     it: {
       title: "Strumenti SEO: Guida Completa alle Funzionalità e Uso﻿",
-      description: "Esplora la nostra suite completa di strumenti SEO progettati per migliorare i tuoi ranking di ricerca, analizzare i concorrenti e ottimizzare le prestazioni del tuo sito web.",
+      description: "Strumenti SEO. Dagli audit all'analisi competitor. Scopri funzioni potenti per ottimizzare il traffico organico.",
       keywords: ["strumenti SEO", "funzionalità SEO", "ranking di ricerca", "analisi concorrenti", "ottimizzazione sito web", "toolkit SEO", "SEO tecnico", "ricerca parole chiave", "audit sito"]
     },
     de: {
       title: "SEO-Tools Übersicht - Komplette Funktionsanleitung | AI SEO Turbo",
-      description: "Entdecken Sie unsere umfassende Suite von SEO-Tools, die entwickelt wurden, um Ihre Suchrankings zu verbessern, Wettbewerber zu analysieren und die Leistung Ihrer Website zu optimieren.",
+      description: "SEO-Tools Entdecken. Von Audits bis Konkurrenzanalyse. Optimieren Sie Ihre Website und steigern Sie den Traffic.",
       keywords: ["SEO-Tools", "SEO-Funktionen", "Suchrankings", "Wettbewerberanalyse", "Website-Optimierung", "SEO-Toolkit", "technisches SEO", "Keyword-Recherche", "Site-Audit"]
     },
     fr: {
       title: "Outils SEO : Aperçu Complet et Guide des Fonctionnalités | AI SEO Turbo",
-      description: "Explorez notre suite complète d'outils SEO conçus pour améliorer vos classements de recherche, analyser les concurrents et optimiser les performances de votre site web.",
+      description: "Outils SEO. Des audits à l'analyse concurrentielle. Découvrez nos fonctionnalités pour optimiser votre site et trafic.",
       keywords: ["outils SEO", "fonctionnalités SEO", "classements de recherche", "analyse concurrents", "optimisation site web", "boîte à outils SEO", "SEO technique", "recherche mots-clés", "audit site"]
     },
     es: {

@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     ...generateSEOMeta({
       title: 'Contact AI SEO Turbo - Expert SEO Support & Consultation',
-      description: 'Get expert SEO help from certified specialists. Contact us for personalized consultation, technical support, and partnership inquiries. Join 10,000+ businesses achieving SEO success.',
+      description: 'Contact AI SEO Turbo. Get 24/7 support for your account, SEO tools, or technical questions. We are here to help you grow. Reach out now!',
       keywords: ['SEO support', 'contact SEO experts', 'SEO consultation', 'technical SEO help', 'SEO partnership'],
       locale: locale as Locale,
       path: 'contact'

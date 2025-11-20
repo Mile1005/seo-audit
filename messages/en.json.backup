@@ -333,7 +333,7 @@
     "first-audit": {
       "meta": {
         "title": "How to Create Your First SEO Audit - Step-by-Step Guide | AI SEO Turbo",
-        "description": "Learn how to perform your first comprehensive SEO audit using AISEOTurbo's AI-powered tools. Complete step-by-step guide from entering your URL to reviewing results."
+        "description": "Run Your First Audit. Step-by-step guide to analyzing your site, finding errors, and improving health scores with AI SEO Turbo. Start now."
       },
       "backToCategory": "Back to Getting Started",
       "backToHelp": "Back to Help Center",
@@ -1142,7 +1142,7 @@
       },
       "api": {
         "title": "API & Integrations",
-        "subtitle": "Integrate AI SEO Turbo's powerful SEO tools into your applications with our comprehensive REST API. Automate audits, access real-time data, and build custom workflows.",
+        "subtitle": "SEO API Docs. Integrate powerful SEO data into your apps. Access endpoints for audits, keywords & analysis. Get your API key today.",
         "backToHelp": "Back to Help Center",
         "articles": {
           "authentication": {
