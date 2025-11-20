@@ -2250,7 +2250,7 @@
             "title": "Masalah Sinkronisasi Data",
             "href": "/help/troubleshooting/sync-issues",
             "time": "5 menit",
-            "description": "Atasi masalah sinkronisasi data, kesalahan impor/ekspor, dan masalah konektivitas.",
+            "description": "Atasi kesalahan sinkronisasi data dengan cepat. Perbaiki masalah impor/ekspor dan konektivitas untuk memastikan data SEO Anda selalu akurat dan aman.",
             "backToCategory": "Kembali ke Pemecahan Masalah",
             "backToHelp": "Kembali ke Pusat Bantuan",
             "breadcrumb": {
@@ -2979,13 +2979,13 @@
   "performance": {
     "meta": {
       "title": "Optimasi Performa - Bantuan AISEOTurbo",
-      "description": "Tingkatkan kecepatan audit, selesaikan masalah pemuatan lambat, dan optimalkan performa."
+      "description": "Audit macet atau lambat? Ikuti panduan troubleshooting kami untuk atasi masalah loading, percepat scan, dan optimalkan alur kerja Anda secara instan."
     }
   },
   "seoAudit": {
     "meta": {
       "title": "Panduan Audit SEO - Bantuan AISEOTurbo",
-      "description": "Pelajari cara melakukan audit SEO komprehensif yang mencakup lebih dari 47 faktor teknis."
+      "description": "Kuasai SEO teknis dengan panduan lengkap kami. Pelajari audit 47+ faktor kritis, perbaiki error situs, dan tingkatkan peringkat. Mulai analisis Anda hari ini."
     }
   },
   "login-issues": {
@@ -3003,7 +3003,7 @@
       "header": {
         "backToHelp": "Kembali ke Pusat Bantuan",
         "title": "API & Integrasi",
-        "subtitle": "Hubungkan dan otomatisasi alur kerja dengan API dan integrasi.",
+        "subtitle": "Rampingkan alur kerja SEO dengan integrasi API yang kuat. Hubungkan AI SEO Turbo ke alat favorit Anda, otomatisasi laporan, dan akses data secara program.",
         "lastUpdated": "Terakhir diperbarui: Maret 2025"
       },
       "articles": {

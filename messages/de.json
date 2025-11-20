@@ -88,7 +88,7 @@
       "header": {
         "backToHelp": "Zurück zum Hilfe-Center",
         "title": "API & Integrationen",
-        "subtitle": "Verbinden und automatisieren Sie Workflows mit API und Integrationen.",
+        "subtitle": "Optimieren Sie SEO-Workflows mit robusten API-Integrationen. Verbinden Sie AI SEO Turbo mit Ihren Tools, automatisieren Sie Berichte und Datenzugriff über Code.",
         "lastUpdated": "Zuletzt aktualisiert: März 2025"
       },
       "articles": {
@@ -1564,7 +1564,7 @@
             "title": "SEO Audit Leitfaden",
             "href": "/help/seo-tools/seo-audit",
             "time": "8 Min.",
-            "description": "Erfahren Sie, wie Sie umfassende SEO-Audits mit mehr als 47 technischen Faktoren durchführen.",
+            "description": "Meistern Sie technisches SEO mit unserem Guide. Prüfen Sie 47+ kritische Faktoren, beheben Sie Fehler und verbessern Sie Rankings. Starten Sie die Analyse.",
             "backToCategory": "Zurück zu SEO-Tools & Funktionen",
             "breadcrumb": {
               "home": "Startseite",
@@ -3322,7 +3322,7 @@
   "seoAudit": {
     "meta": {
       "title": "SEO Audit Leitfaden - AISEOTurbo Hilfe",
-      "description": "Erfahren Sie, wie Sie umfassende SEO-Audits mit mehr als 47 technischen Faktoren durchführen."
+      "description": "Meistern Sie technisches SEO mit unserem Guide. Prüfen Sie 47+ kritische Faktoren, beheben Sie Fehler und verbessern Sie Rankings. Starten Sie die Analyse."
     }
   },
   "login-issues": {

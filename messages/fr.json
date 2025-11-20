@@ -1237,7 +1237,7 @@
             "title": "Guide d'Audit SEO",
             "href": "/help/seo-tools/seo-audit",
             "time": "8 min",
-            "description": "Apprenez à réaliser des audits SEO complets couvrant plus de 47 facteurs techniques.",
+            "description": "Maîtrisez le SEO technique avec notre guide complet. Auditez plus de 47 facteurs critiques, corrigez les erreurs et boostez vos rangs. Commencez l'analyse.",
             "backToCategory": "Retour aux outils et fonctionnalités SEO",
             "breadcrumb": {
               "home": "Accueil",
@@ -2982,7 +2982,7 @@
   "seoAudit": {
     "meta": {
       "title": "Guide d'Audit SEO - Aide AISEOTurbo",
-      "description": "Apprenez à réaliser des audits SEO complets couvrant plus de 47 facteurs techniques."
+      "description": "Maîtrisez le SEO technique avec notre guide complet. Auditez plus de 47 facteurs critiques, corrigez les erreurs et boostez vos rangs. Commencez l'analyse."
     }
   },
   "login-issues": {
@@ -3000,7 +3000,7 @@
       "header": {
         "backToHelp": "Retour au Centre d'aide",
         "title": "API & Intégrations",
-        "subtitle": "Connectez et automatisez les flux de travail avec les API et intégrations.",
+        "subtitle": "Optimisez vos flux SEO avec nos intégrations API robustes. Connectez AI SEO Turbo à vos outils, automatisez les rapports et accédez aux données via code.",
         "lastUpdated": "Dernière mise à jour : mars 2025"
       },
       "articles": {

@@ -2895,7 +2895,7 @@
   "performance": {
     "meta": {
       "title": "Optimización de Rendimiento - Ayuda AISEOTurbo",
-      "description": "Mejore la velocidad de auditoría, resuelva problemas de carga lenta y optimice el rendimiento."
+      "description": "Audit lento o atascado? Sigue nuestra guía de solución de problemas para resolver cargas lentas, acelerar escaneos y optimizar tu flujo de trabajo ahora."
     }
   },
   "login-issues": {
@@ -3496,13 +3496,13 @@
   "performance": {
     "meta": {
       "title": "Optimización de Rendimiento - Ayuda AISEOTurbo",
-      "description": "Mejore la velocidad de auditoría, resuelva problemas de carga lenta y optimice el rendimiento."
+      "description": "Audit lento o atascado? Sigue nuestra guía de solución de problemas para resolver cargas lentas, acelerar escaneos y optimizar tu flujo de trabajo ahora."
     }
   },
   "seoAudit": {
     "meta": {
       "title": "Guía de Auditoría SEO - Ayuda AISEOTurbo",
-      "description": "Aprenda a realizar auditorías SEO completas que cubren más de 47 factores técnicos."
+      "description": "Domina el SEO técnico con nuestra guía completa. Audita más de 47 factores críticos, corrige errores del sitio y mejora tu ranking. Inicia tu análisis hoy."
     }
   },
   "login-issues": {
@@ -3520,7 +3520,7 @@
       "header": {
         "backToHelp": "Volver al Centro de Ayuda",
         "title": "API e Integraciones",
-        "subtitle": "Conecta y automatiza flujos de trabajo con la API y las integraciones.",
+        "subtitle": "Optimiza tus flujos SEO con integraciones API robustas. Conecta AI SEO Turbo a tus herramientas, automatiza informes y accede a datos programáticamente.",
         "lastUpdated": "Última actualización: marzo de 2025"
       },
       "articles": {

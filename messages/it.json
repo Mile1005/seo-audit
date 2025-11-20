@@ -426,13 +426,13 @@
   "performance": {
     "meta": {
       "title": "Ottimizzazione Performance - Guida AISEOTurbo",
-      "description": "Migliora la velocità degli audit, risolvi problemi di caricamento lento e ottimizza le performance."
+      "description": "Il tuo audit è lento o bloccato? Segui la nostra guida per risolvere i problemi di caricamento, velocizzare le scansioni e ottimizzare il flusso di lavoro."
     }
   },
   "seoAudit": {
     "meta": {
       "title": "Guida Audit SEO - Guida AISEOTurbo",
-      "description": "Scopri come eseguire audit SEO completi che coprono oltre 47 fattori tecnici."
+      "description": "Padroneggia la SEO tecnica con la nostra guida. Impara ad analizzare oltre 47 fattori critici, correggi errori e migliora il ranking. Inizia la tua analisi."
     }
   },
   "login-issues": {
@@ -1264,7 +1264,7 @@
             "title": "Guida all'Audit SEO",
             "href": "/help/seo-tools/seo-audit",
             "time": "8 min",
-            "description": "Scopri come eseguire audit SEO completi che coprono oltre 47 fattori tecnici.",
+            "description": "Padroneggia la SEO tecnica con la nostra guida. Impara ad analizzare oltre 47 fattori critici, correggi errori e migliora il ranking. Inizia la tua analisi.",
             "backToCategory": "Torna a Strumenti e Funzionalità SEO",
             "breadcrumb": {
               "home": "Home",
@@ -3002,7 +3002,7 @@
       "header": {
         "backToHelp": "Torna al Centro assistenza",
         "title": "API e integrazioni",
-        "subtitle": "Collega e automatizza flussi di lavoro con API e integrazioni.",
+        "subtitle": "Ottimizza i flussi SEO con integrazioni API robuste. Collega AI SEO Turbo ai tuoi strumenti, automatizza report e accedi ai dati in modo programmatico.",
         "lastUpdated": "Ultimo aggiornamento: Marzo 2025"
       },
       "articles": {
