@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { setRequestLocale } from 'next-intl/server';
+import LangSetter from '@/components/layout/lang-setter';
 
 type Props = {
   children: ReactNode;
@@ -215,8 +216,11 @@ export default async function LocaleLayout({ children, params }: Props) {
   };
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      {children}
-    </NextIntlClientProvider>
+    <>
+      <LangSetter locale={locale} />
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        {children}
+      </NextIntlClientProvider>
+    </>
   );
 }
