@@ -94,16 +94,6 @@ const nextConfig = {
       },
       // Redirect old help URLs to new structure
       {
-        source: '/help/seo-tools',
-        destination: '/help/seo-tools',
-        permanent: true, // 301 permanent redirect
-      },
-      {
-        source: '/:locale/help/seo-tools',
-        destination: '/:locale/help/seo-tools',
-        permanent: true, // 301 permanent redirect
-      },
-      {
         source: '/help/features/competitor-analysis',
         destination: '/help/seo-tools/competitor-analysis',
         permanent: true, // 301 permanent redirect
