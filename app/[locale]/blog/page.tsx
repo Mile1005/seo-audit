@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale as Locale,
       path: 'blog'
     }),
-    alternates: generateAlternates('/blog')
+    alternates: generateAlternates('/blog', locale as Locale)
   }
 }
 

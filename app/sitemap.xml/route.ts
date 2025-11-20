@@ -65,7 +65,6 @@ const routes: Route[] = [
   { path: '/help/seo-tools/competitor-analysis', priority: 0.5, changeFrequency: 'monthly' },
   { path: '/help/billing', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/api', priority: 0.4, changeFrequency: 'monthly' },
-  { path: '/help/account-billing', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/billing/payment-methods', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/billing/upgrade-plan', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/billing/invoices', priority: 0.4, changeFrequency: 'monthly' },
@@ -77,6 +76,13 @@ const routes: Route[] = [
   { path: '/help/troubleshooting/sync-issues', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/api/authentication', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/api/webhooks', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/api/api-integrations', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/security', priority: 0.5, changeFrequency: 'monthly' },
+  { path: '/help/security/best-practices', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/security/privacy', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/security/gdpr', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/security/two-factor-authentication', priority: 0.4, changeFrequency: 'monthly' },
+  { path: '/help/security-privacy', priority: 0.4, changeFrequency: 'monthly' },
 ]
 
 function generateAlternates(path: string) {

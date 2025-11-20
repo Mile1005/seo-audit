@@ -280,7 +280,7 @@ export default function BillingOverviewPage() {
                       Contact Billing Support
                     </Link>
                     <Link
-                      href="/help/account-billing"
+                      href="/help/billing"
                       className="inline-flex items-center justify-center px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors"
                     >
                       Billing FAQ

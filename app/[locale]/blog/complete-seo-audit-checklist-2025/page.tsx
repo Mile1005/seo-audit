@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale as Locale,
       path: 'blog/complete-seo-audit-checklist-2025'
     }),
-    alternates: generateAlternates('/blog/complete-seo-audit-checklist-2025')
+    alternates: generateAlternates('/blog/complete-seo-audit-checklist-2025', locale as Locale)
   }
 }
 

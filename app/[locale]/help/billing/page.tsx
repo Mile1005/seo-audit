@@ -1,4 +1,4 @@
-import AccountBillingPage from '../account-billing/page-translated'
+import AccountBillingPage from './page-translated'
 import { generateSEOMeta, pageSEO } from '@/lib/seo'
 import { type Locale } from '@/i18n'
 import { Metadata } from 'next'

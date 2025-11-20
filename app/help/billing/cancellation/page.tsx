@@ -38,7 +38,7 @@ export default function CancellationPage() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    href="/help/account-billing"
+                    href="/help/billing"
                     className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
                   >
                     Pause Subscription Instead
@@ -223,7 +223,7 @@ export default function CancellationPage() {
                     Contact Support
                   </Link>
                   <Link
-                    href="/help/account-billing"
+                    href="/help/billing"
                     className="bg-white border border-blue-300 text-blue-700 hover:bg-blue-50 px-4 py-2 rounded-lg font-medium transition-colors"
                   >
                     Billing Help

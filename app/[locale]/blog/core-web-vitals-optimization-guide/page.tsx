@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale as Locale,
       path: 'blog/core-web-vitals-optimization-guide'
     }),
-    alternates: generateAlternates('/blog/core-web-vitals-optimization-guide')
+    alternates: generateAlternates('/blog/core-web-vitals-optimization-guide', locale as Locale)
   }
 }
 

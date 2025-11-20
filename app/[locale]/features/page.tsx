@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       locale: locale as Locale,
       path: 'features'
     }),
-    alternates: generateAlternates('/features')
+    alternates: generateAlternates('/features', locale as Locale)
   }
 }
 
