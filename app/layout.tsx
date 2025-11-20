@@ -106,6 +106,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     }
   }
 
+  // Get locale from next-intl for server-side rendering
+  const intlLocale = await getLocale();
+  console.log('getLocale():', intlLocale);
+  console.log('htmlLang:', htmlLang);
+
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
   // Organization Schema - Company/Business Entity
