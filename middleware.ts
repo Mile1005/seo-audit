@@ -1,7 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
-import { locales, defaultLocale, type Locale } from '../i18n';
-import { routing } from '../lib/navigation';
+import { locales, defaultLocale, type Locale } from './lib/i18n-config';
+import { routing } from './lib/navigation';
 
 // Create next-intl middleware with routing configuration
 const intlMiddleware = createMiddleware(routing);
