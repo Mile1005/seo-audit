@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       keywords: ["SEO tools", "SEO features", "search rankings", "competitor analysis", "website optimization", "SEO toolkit", "technical SEO", "keyword research", "site audit"]
     },
     it: {
-      title: "Panoramica Strumenti SEO - Guida Completa alle Funzionalità | AI SEO Turbo",
+      title: "Strumenti SEO: Guida Completa alle Funzionalità e Uso﻿",
       description: "Esplora la nostra suite completa di strumenti SEO progettati per migliorare i tuoi ranking di ricerca, analizzare i concorrenti e ottimizzare le prestazioni del tuo sito web.",
       keywords: ["strumenti SEO", "funzionalità SEO", "ranking di ricerca", "analisi concorrenti", "ottimizzazione sito web", "toolkit SEO", "SEO tecnico", "ricerca parole chiave", "audit sito"]
     },
@@ -28,12 +28,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       keywords: ["SEO-Tools", "SEO-Funktionen", "Suchrankings", "Wettbewerberanalyse", "Website-Optimierung", "SEO-Toolkit", "technisches SEO", "Keyword-Recherche", "Site-Audit"]
     },
     fr: {
-      title: "Aperçu des Outils SEO - Guide Complet des Fonctionnalités | AI SEO Turbo",
+      title: "Outils SEO : Aperçu Complet et Guide des Fonctionnalités | AI SEO Turbo",
       description: "Explorez notre suite complète d'outils SEO conçus pour améliorer vos classements de recherche, analyser les concurrents et optimiser les performances de votre site web.",
       keywords: ["outils SEO", "fonctionnalités SEO", "classements de recherche", "analyse concurrents", "optimisation site web", "boîte à outils SEO", "SEO technique", "recherche mots-clés", "audit site"]
     },
     es: {
-      title: "Resumen de Herramientas SEO - Guía Completa de Características | AI SEO Turbo",
+      title: "Herramientas SEO: Resumen y Guía de Características",
       description: "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
       keywords: ["herramientas SEO", "características SEO", "rankings de búsqueda", "análisis competidores", "optimización sitio web", "toolkit SEO", "SEO técnico", "investigación palabras clave", "auditoría sitio"]
     },
