@@ -21,6 +21,23 @@ import {
   PricingSkeleton 
 } from "@/components/ui/skeletons"
 
+// SEO metadata for the homepage with hreflang support
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  setRequestLocale(locale);
+  const t = await getTranslations('meta');
+
+  return {
+    ...generateSEOMeta({
+      description: t('home.description'),
+      keywords: t.raw('home.keywords'),
+      ogImage: '/logo.png',
+      locale: locale as Locale,
+      path: '' // Homepage at root path
+    })
+  }
+}
+
 // Above-the-fold components - Load immediately with minimal JS
 const EmailCaptureInline = dynamic(() => 
   import("@/components/lead/email-capture-inline").then(mod => ({ default: mod.EmailCaptureInline })), 
@@ -81,24 +98,6 @@ const ContentGate = dynamic(() =>
   import("@/components/lead/content-gate").then(mod => ({ default: mod.ContentGate })),
   { ssr: false }  // Client-side only
 )
-
-// SEO metadata for the homepage with hreflang support
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params
-  setRequestLocale(locale);
-  const t = await getTranslations('meta');
-  
-  return {
-    ...generateSEOMeta({
-      description: t('home.description'),
-      keywords: t.raw('home.keywords'),
-      ogImage: '/logo.png',
-      locale: locale as Locale,
-      path: '' // Homepage at root path
-    }),
-    alternates: generateAlternates('/')
-  }
-}
 
 type Props = {
   params: { locale: string };

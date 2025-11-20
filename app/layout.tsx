@@ -88,7 +88,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: generateAlternates('/'),
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
