@@ -9,7 +9,7 @@ import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
 import { WebVitals } from "@/components/performance/web-vitals";
 import { headers } from 'next/headers';
-import { locales, defaultLocale } from '../i18n';
+import { locales, defaultLocale, type Locale } from '../i18n';
 import { generateAlternates } from '@/lib/metadata-utils';
 import { getLocale } from 'next-intl/server';
 import { routing } from '../lib/navigation';
@@ -94,10 +94,10 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Extract locale from pathname using headers
   const headersList = await headers();
-  const pathname = headersList.get('x-invoke-path') || headersList.get('next-url') || '/';
+  const pathname = headersList.get('x-forwarded-uri') || headersList.get('x-invoke-path') || headersList.get('next-url') || '/';
   
   // Determine locale from pathname
-  let htmlLang = defaultLocale;
+  let htmlLang: Locale = defaultLocale;
   for (const loc of locales) {
     if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
       htmlLang = loc;
