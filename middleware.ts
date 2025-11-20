@@ -40,6 +40,18 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(newPathname, req.url), 301);
   }
 
+  // Extract locale from pathname
+  let locale: Locale = defaultLocale;
+  for (const loc of locales) {
+    if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
+      locale = loc;
+      break;
+    }
+  }
+
+  // Set locale in headers for use in layout
+  req.headers.set('x-locale', locale);
+
   // Check if path starts with a locale prefix
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -67,13 +79,13 @@ export function middleware(req: NextRequest) {
     }
     */
 
-    req.headers.set('x-pathname', req.nextUrl.pathname);
+    req.headers.set('x-locale', locale);
     return intlMiddleware(req);
   }
 
   // For all other paths (without locale), let intl middleware handle it
   // It will serve English content at root (/) and redirect non-English to /locale
-  req.headers.set('x-pathname', req.nextUrl.pathname);
+  req.headers.set('x-locale', locale);
   return intlMiddleware(req);
 }
 
