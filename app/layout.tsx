@@ -97,7 +97,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   // Extract HTML lang from pathname for correct server-side rendering
   const headersList = headers();
-  const pathname = headersList.get('x-forwarded-path') || '';
+  const pathname = headersList.get('x-nextjs-pathname') || '';
   const htmlLang = locales.find(loc => loc !== 'en' && pathname.startsWith(`/${loc}`)) || 'en';
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
