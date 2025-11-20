@@ -95,11 +95,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Get locale from next-intl for server-side rendering
   const locale = await getLocale();
 
-  // Extract HTML lang from pathname for correct server-side rendering
-  const headersList = headers();
-  const pathname = headersList.get('x-nextjs-pathname') || '';
-  const htmlLang = locales.find(loc => loc !== 'en' && pathname.startsWith(`/${loc}`)) || 'en';
-
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
   // Organization Schema - Company/Business Entity
@@ -283,7 +278,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return (
-    <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
+    <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
         {/* Consent Mode v2: initialize defaults BEFORE loading gtag.js */}
