@@ -153,7 +153,7 @@
     },
     "privacy": {
       "title": "Informativa sulla Privacy - Protezione dei Dati | AI SEO Turbo",
-      "description": "Scopri come AISEOTurbo protegge la tua privacy e gestisce i tuoi dati. La nostra informativa sulla privacy copre la conformità GDPR e le misure di sicurezza dei dati.",
+      "description": "Scopri come AISEOTurbo protegge la tua privacy e gestisce i tuoi dati. La nostra informativa sulla privacy copre la conformità GDPR e le misure di sicurezza dei dati.Privacy Policy. Scopri come proteggiamo i tuoi dati e la conformità GDPR. La tua sicurezza è la nostra priorità.",
       "keywords": ["informativa sulla privacy", "protezione dei dati", "GDPR", "diritti sulla privacy"]
     },
     "status": {
@@ -463,7 +463,7 @@
     "first-audit": {
       "meta": {
         "title": "Primo Audit SEO: Guida Completa per Iniziare Subito",
-        "description": "Scopri come eseguire il tuo primo audit SEO completo utilizzando gli strumenti AI di AISEOTurbo. Guida completa passo-passo, dall'inserimento dell’URL alla revisione dei risultati."
+        "description": "La Tua Prima Audit. Guida passo-passo per analizzare il sito e correggere errori con AI SEO Turbo. Inizia ora."
       },
       "backToCategory": "Torna alla sezione Inizia subito",
       "backToHelp": "Torna al Centro assistenza",
@@ -556,7 +556,7 @@
     "dashboard-setup": {
       "meta": {
         "title": "Configurazione Dashboard: Personalizza il Tuo Spazio﻿",
-        "description": "Scopri come personalizzare la dashboard di AISEOTurbo per la massima produttività. Imposta notifiche, organizza il tuo spazio di lavoro e configura le preferenze di visualizzazione."
+        "description": "Configurazione Dashboard. Personalizza il tuo spazio e traccia le metriche. Guida semplice alla configurazione."
       },
       "backToCategory": "Torna a Iniziare",
       "backToHelp": "Torna al Centro assistenza",
@@ -885,7 +885,7 @@
     "seo-scores": {
       "meta": {
         "title": "Comprendere i punteggi SEO - Guida completa | AI SEO Turbo",
-        "description": "Scopri come interpretare i tuoi punteggi dell'audit SEO. Comprendi cosa significa ciascun punteggio, come vengono calcolati e come migliorare le prestazioni SEO del tuo sito web."
+        "description": "Capire i Punteggi SEO. Scopri come calcoliamo salute e autorità. Usa questi dati per migliorare il ranking."
       },
       "backToHelp": "Torna al Centro Assistenza",
       "breadcrumb": {
@@ -1781,7 +1781,7 @@
             },
             "header": {
               "title": "Migliori Pratiche dell'Assistente IA",
-              "description": "Padroneggia il nostro assistente SEO IA per risultati massimi. Impara a porre domande efficaci, interpretare le raccomandazioni dell'IA e combinare gli insights IA con la tua esperienza SEO."
+              "description": "Assistente SEO IA. Ottieni raccomandazioni e fix automatici. Lascia fare all'IA il lavoro pesante. Migliora presto."
             },
             "intro": {
               "title": "Comprendere l'Assistente SEO IA",
@@ -1934,7 +1934,7 @@
       },
       "api": {
         "title": "API e Integrazioni",
-        "subtitle": "Integra gli potenti strumenti SEO di AI SEO Turbo nelle tue applicazioni con la nostra completa API REST. Automatizza gli audit, accedi ai dati in tempo reale e crea workflow personalizzati.",
+        "subtitle": "Doc API SEO. Integra potenti dati SEO nelle tue app. Accesso ad audit e keyword. Ottieni la tua chiave API oggi.",
         "backToHelp": "Torna al Centro Assistenza",
         "articles": {
           "authentication": {

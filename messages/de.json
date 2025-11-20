@@ -470,22 +470,22 @@
     },
     "terms": {
       "title": "Nutzungsbedingungen - Rechtsvereinbarung | AI SEO Turbo",
-      "description": "Lesen Sie unsere Nutzungsbedingungen und Rechtsvereinbarung für die Nutzung von AI SEO Turbo. Verstehen Sie Ihre Rechte und Pflichten bei der Nutzung unserer SEO-Audit-Tools.",
+      "description": "Nutzungsbedingungen. Lesen Sie unsere Regeln und Richtlinien. Sorgen Sie für Compliance bei der Nutzung von AI SEO Turbo.",
       "keywords": ["Nutzungsbedingungen", "Rechtsvereinbarung", "SEO-Bedingungen", "Nutzervereinbarung"]
     },
     "privacy": {
       "title": "Datenschutzrichtlinie - Datenschutz | AI SEO Turbo",
-      "description": "Erfahren Sie, wie AISEOTurbo Ihre Privatsphäre schützt und Ihre Daten behandelt. Unsere Datenschutzrichtlinie deckt DSGVO-Konformität und Datenschutzmaßnahmen ab.",
+      "description": "Datenschutzerklärung. Erfahren Sie, wie wir Ihre Daten schützen (DSGVO). Ihre Sicherheit hat für uns oberste Priorität.",
       "keywords": ["Datenschutzrichtlinie", "Datenschutz", "DSGVO", "Datenschutzrechte"]
     },
     "status": {
       "title": "Systemstatus - Serviceverfügbarkeit | AI SEO Turbo",
-      "description": "Überprüfen Sie den aktuellen Status unserer Dienste und überwachen Sie die Systemleistung. Bleiben Sie über geplante Wartungen und mögliche Unterbrechungen informiert.",
+      "description": "Systemstatus. Prüfen Sie die Verfügbarkeit unserer SEO-Tools und API in Echtzeit. Infos zu Wartung und Serverstatus.",
       "keywords": ["Systemstatus", "Serviceverfügbarkeit", "Wartung", "Systemstatus", "Überwachung"]
     },
     "pricing": {
       "title": "SEO-Audit-Preispläne - Wählen Sie Ihren perfekten Plan | AI SEO Turbo",
-      "description": "Wählen Sie den perfekten SEO-Audit-Plan für Ihr Unternehmen. Kostenloser Plan mit Analyse, Pro-Pläne ab 29€/Monat mit erweiterten Funktionen und Prioritätssupport.",
+      "description": "SEO-Preise. Wählen Sie das passende Paket. Nutzen Sie fortgeschrittene Audits & API. Jetzt abonnieren und wachsen!",
       "keywords": ["SEO Audit Preise", "SEO Tools Kosten", "Website Audit Pläne", "SEO Abonnement", "Preispläne"]
     },
     "defaultTitle": "AI SEO Turbo - KI-gestützte SEO Audits",
@@ -761,7 +761,7 @@
     "first-audit": {
       "meta": {
         "title": "Erstes SEO-Audit: Die Große Schritt-für-Schritt Anleitung",
-        "description": "Erfahren Sie, wie Sie mit den KI-gestützten Tools von AISEOTurbo Ihr erstes umfassendes SEO-Audit durchführen. Vollständige Schritt-für-Schritt-Anleitung vom Eingeben Ihrer URL bis zur Überprüfung der Ergebnisse."
+        "description": "Ihr Erster Audit. Schritt-für-Schritt-Anleitung zur Analyse und Fehlerbehebung mit AI SEO Turbo. Jetzt starten."
       },
       "backToCategory": "Zurück zu Erste Schritte",
       "backToHelp": "Zurück zum Hilfecenter",
@@ -854,7 +854,7 @@
     "dashboard-setup": {
       "meta": {
         "title": "Dashboard-Einrichtung: Passen Sie Ihren Arbeitsbereich an",
-        "description": "Erfahren Sie, wie Sie Ihr AISEOTurbo-Dashboard für maximale Produktivität anpassen. Richten Sie Benachrichtigungen ein, organisieren Sie Ihren Arbeitsbereich und konfigurieren Sie Anzeigeeinstellungen."
+        "description": "Dashboard-Setup. Passen Sie Ihren Workspace an und verfolgen Sie Metriken. Einfache Anleitung zur Einrichtung."
       },
       "backToCategory": "Zurück zu Erste Schritte",
       "backToHelp": "Zurück zum Hilfe-Center",
@@ -1183,7 +1183,7 @@
     "seo-scores": {
       "meta": {
         "title": "SEO-Bewertungen verstehen – Kompletter Leitfaden | AI SEO Turbo",
-        "description": "Erfahren Sie, wie Sie Ihre SEO-Audit-Bewertungen interpretieren. Verstehen Sie, was jede Bewertung bedeutet, wie sie berechnet wird und wie Sie die SEO-Leistung Ihrer Website verbessern können."
+        "description": "SEO-Scores verstehen. Lernen Sie, wie wir Gesundheit & Autorität berechnen. Nutzen Sie dies für bessere Rankings."
       },
       "backToHelp": "Zurück zum Hilfe-Center",
       "breadcrumb": {
@@ -1737,7 +1737,7 @@
             },
             "header": {
               "title": "Leitfaden zur Wettbewerberanalyse",
-              "description": "Beherrschen Sie die Wettbewerberanalyse, um strategische Vorteile zu erlangen. Erfahren Sie, wie Sie Wettbewerber identifizieren, ihre Strategien analysieren und Möglichkeiten für Ihre SEO-Kampagnen entdecken."
+              "description": "Konkurrenzanalyse. Spionieren Sie Keywords der Rivalen aus. Gewinnen Sie Vorsprung mit KI-Insights. Jetzt testen."
             },
             "intro": {
               "title": "Wettbewerberanalyse verstehen",
@@ -2228,7 +2228,7 @@
       },
       "api": {
         "title": "API und Integrationen",
-        "subtitle": "Integrieren Sie die leistungsstarken SEO-Tools von AI SEO Turbo in Ihre Anwendungen mit unserer umfassenden REST-API. Automatisieren Sie Audits, greifen Sie auf Echtzeitdaten zu und erstellen Sie benutzerdefinierte Workflows.",
+        "subtitle": "SEO API Doku. Integrieren Sie starke SEO-Daten in Ihre Apps. Zugriff auf Audits & Keywords. Holen Sie Ihren API-Key.",
         "backToHelp": "Zurück zum Hilfe-Center",
         "articles": {
           "authentication": {
@@ -3328,7 +3328,7 @@
   "login-issues": {
     "meta": {
       "title": "Anmeldeprobleme Fehlerbehebung - AISEOTurbo Hilfe",
-      "description": "Vollständige Anleitung zur Fehlerbehebung bei Anmeldeproblemen in AISEOTurbo. Lösungen für ungültige Anmeldedaten, Kontosperren, 2FA-Probleme und Passwort-Reset-Probleme."
+      "description": "Login-Probleme. Kein Zugriff? Folgen Sie diesen Schritten, um Passwörter zurückzusetzen und Ihr Konto freizuschalten."
     }
   },
   "home": {

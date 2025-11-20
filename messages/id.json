@@ -439,7 +439,7 @@
     "first-audit": {
       "meta": {
         "title": "Audit SEO Pertama: Panduan Langkah demi Langkah Lengkap",
-        "description": "Pelajari cara melakukan audit SEO komprehensif pertama Anda menggunakan alat berbasis AI dari AISEOTurbo. Panduan lengkap langkah demi langkah mulai dari memasukkan URL hingga meninjau hasil."
+        "description": "Audit Pertama Anda. Panduan langkah demi langkah menganalisis situs & perbaiki error dengan AI SEO Turbo. Mulai."
       },
       "backToCategory": "Kembali ke Memulai",
       "backToHelp": "Kembali ke Pusat Bantuan",
@@ -532,7 +532,7 @@
     "dashboard-setup": {
       "meta": {
         "title": "Panduan Setup Dashboard - Sesuaikan Ruang Kerja Anda | AI SEO Turbo",
-        "description": "Pelajari cara menyesuaikan dashboard AISEOTurbo Anda untuk produktivitas maksimal. Atur notifikasi, atur ruang kerja Anda, dan konfigurasikan preferensi tampilan."
+        "description": "Pengaturan Dasbor. Sesuaikan ruang kerja dan lacak metrik kunci. Panduan pengaturan mudah dari AI SEO Turbo."
       },
       "backToCategory": "Kembali ke Memulai",
       "backToHelp": "Kembali ke Pusat Bantuan",
@@ -1618,7 +1618,7 @@
             },
             "header": {
               "title": "Panduan Analisis Kompetitor",
-              "description": "Kuasi analisis kompetitor untuk mendapatkan keuntungan strategis. Pelajari cara mengidentifikasi kompetitor, menganalisis strategi mereka, dan menemukan peluang untuk kampanye SEO Anda."
+              "description": "Analisis Kompetitor. Intip kata kunci dan strategi pesaing. Dapatkan keunggulan kompetitif dengan AI. Coba ini."
             },
             "intro": {
               "title": "Memahami Analisis Kompetitor",
@@ -1757,7 +1757,7 @@
             },
             "header": {
               "title": "Praktik Terbaik Asisten AI",
-              "description": "Kuasi asisten SEO AI kami untuk hasil maksimal. Pelajari cara mengajukan pertanyaan efektif, menafsirkan rekomendasi AI, dan menggabungkan wawasan AI dengan keahlian SEO Anda."
+              "description": "Asisten SEO AI. Dapatkan rekomendasi dan perbaikan otomatis. Biarkan AI menangani tugas berat. Tingkatkan cepat."
             },
             "intro": {
               "title": "Memahami Asisten SEO AI",
@@ -1910,7 +1910,7 @@
       },
       "api": {
         "title": "API dan Integrasi",
-        "subtitle": "Integrasikan alat SEO canggih AI SEO Turbo ke dalam aplikasi Anda dengan API REST lengkap kami. Otomatiskan audit, akses data real-time, dan buat alur kerja kustom.",
+        "subtitle": "Dokumentasi API SEO. Integrasikan data SEO ke aplikasi Anda. Akses endpoint audit & keyword. Dapatkan kunci API.",
         "backToHelp": "Kembali ke Pusat Bantuan",
         "articles": {
           "authentication": {
@@ -8295,7 +8295,7 @@
             },
             "header": {
               "title": "Praktik Terbaik Asisten AI",
-              "description": "Kuasi asisten SEO AI kami untuk hasil maksimal. Pelajari cara mengajukan pertanyaan efektif, menafsirkan rekomendasi AI, dan menggabungkan wawasan AI dengan keahlian SEO Anda."
+              "description": "Asisten SEO AI. Dapatkan rekomendasi dan perbaikan otomatis. Biarkan AI menangani tugas berat. Tingkatkan cepat."
             },
             "intro": {
               "title": "Memahami Asisten SEO AI",

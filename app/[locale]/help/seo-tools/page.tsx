@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     es: {
       title: "Herramientas SEO: Resumen y Guía de Características",
-      description: "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
+      description: "Herramientas SEO. Desde auditorías hasta análisis de competencia. Descubre funciones para optimizar tu tráfico.",
       keywords: ["herramientas SEO", "características SEO", "rankings de búsqueda", "análisis competidores", "optimización sitio web", "toolkit SEO", "SEO técnico", "investigación palabras clave", "auditoría sitio"]
     },
     id: {

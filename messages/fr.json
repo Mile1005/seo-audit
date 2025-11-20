@@ -143,12 +143,12 @@
     },
     "terms": {
       "title": "Conditions d'Utilisation - Accord Juridique | AI SEO Turbo",
-      "description": "Lisez nos conditions d'utilisation et accord juridique pour l'utilisation d'AI SEO Turbo. Comprenez vos droits et obligations lors de l'utilisation de nos outils d'audit SEO.",
+      "description": "Conditions d'utilisation. Lisez nos règles d'usage et politiques de compte. Assurez votre conformité avec AI SEO Turbo.",
       "keywords": ["Conditions d'Utilisation", "Accord Juridique", "Conditions SEO", "Accord Utilisateur"]
     },
     "privacy": {
       "title": "Politique de Confidentialité - Protection des Données | AI SEO Turbo",
-      "description": "Découvrez comment AISEOTurbo protège votre vie privée et gère vos données. Notre politique de confidentialité couvre la conformité RGPD et les mesures de sécurité des données.",
+      "description": "Politique de Confidentialité. Protection de vos données et conformité RGPD. Votre sécurité est notre priorité absolue.",
       "keywords": ["politique de confidentialité", "protection des données", "RGPD", "droits de confidentialité"]
     },
     "status": {
@@ -158,7 +158,7 @@
     },
     "pricing": {
       "title": "Plans Tarifaires Audit SEO - Choisissez Votre Plan Parfait | AI SEO Turbo",
-      "description": "Choisissez le plan d'audit SEO parfait pour votre entreprise. Plan gratuit avec analyse, plans Pro à partir de 29€/mois avec fonctionnalités avancées et support prioritaire.",
+      "description": "Tarifs SEO. Choisissez le meilleur forfait. Débloquez audits avancés et API. Abonnez-vous pour booster votre croissance !",
       "keywords": ["prix audit SEO", "coût outils SEO", "plans audit site web", "abonnement SEO", "plans tarifaires"]
     },
     "defaultTitle": "AI SEO Turbo - Audits SEO Alimentés par l'IA",
@@ -529,7 +529,7 @@
     "dashboard-setup": {
       "meta": {
         "title": "Configuration Tableau de Bord : Personnaliser l'Espace",
-        "description": "Apprenez à personnaliser votre tableau de bord AISEOTurbo pour une productivité maximale. Configurez les notifications, organisez votre espace de travail et ajustez les préférences d'affichage."
+        "description": "Config Tableau de Bord. Personnalisez votre espace, ajoutez des projets et suivez vos métriques. Guide de configuration simple."
       },
       "backToCategory": "Retour à Démarrer",
       "backToHelp": "Retour au Centre d'aide",
@@ -858,7 +858,7 @@
     "seo-scores": {
       "meta": {
         "title": "Comprendre les scores SEO - Guide complet | AI SEO Turbo",
-        "description": "Apprenez à interpréter vos scores d'audit SEO. Découvrez la signification de chaque score, comment ils sont calculés et comment améliorer la performance SEO de votre site web."
+        "description": "Scores SEO. Comprenez comment nous calculons la santé et l'autorité du site. Améliorez vos classements grâce à ces infos."
       },
       "backToHelp": "Retour au Centre d'aide",
       "breadcrumb": {
@@ -1615,7 +1615,7 @@
             },
             "header": {
               "title": "Guide d'Analyse des Concurrents",
-              "description": "Maîtrisez l'analyse des concurrents pour gagner des avantages stratégiques. Apprenez à identifier les concurrents, analyser leurs stratégies et découvrir des opportunités pour vos campagnes SEO."
+              "description": "Analyse Concurrentielle. Espionnez les mots-clés rivaux. Gagnez un avantage compétitif avec l'IA. Essayez maintenant."
             },
             "intro": {
               "title": "Comprendre l'Analyse des Concurrents",
@@ -1907,7 +1907,7 @@
       },
       "api": {
         "title": "API et Intégrations",
-        "subtitle": "Intégrez les puissantes outils SEO d'AI SEO Turbo dans vos applications avec notre API REST complète. Automatisez les audits, accédez aux données en temps réel et créez des workflows personnalisés.",
+        "subtitle": "API SEO. Intégrez des données puissantes dans vos apps. Accédez aux endpoints d'audit et mots-clés. Obtenez votre clé API.",
         "backToHelp": "Retour au Centre d'Aide",
         "articles": {
           "authentication": {
@@ -2970,7 +2970,7 @@
   "audit-issues": {
     "meta": {
       "title": "Dépannage des Problèmes d'Audit - Aide AISEOTurbo",
-      "description": "Guide complet de dépannage pour résoudre les problèmes d'audit SEO dans AISEOTurbo. Solutions pour les audits bloqués, erreurs de timeout et problèmes techniques."
+      "description": "Problèmes d'Audit. Résolvez les scans bloqués ou erreurs d'exploration. Guide de dépannage pour relancer vos analyses."
     }
   },
   "performance": {

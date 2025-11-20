@@ -73,12 +73,12 @@
     },
     "privacy": {
       "title": "Política de Privacidad - Protección de Datos | AI SEO Turbo",
-      "description": "Aprende cómo AISEOTurbo protege tu privacidad y maneja tus datos. Nuestra política de privacidad cubre el cumplimiento de GDPR y las medidas de seguridad de datos.",
+      "description": "Política de Privacidad. Cómo protegemos tus datos y cumplimiento GDPR. Tu seguridad es nuestra prioridad absoluta.",
       "keywords": ["política de privacidad", "protección de datos", "GDPR", "derechos de privacidad"]
     },
     "status": {
       "title": "Estado del Sistema - Disponibilidad del Servicio | AI SEO Turbo",
-      "description": "Verifica el estado actual de nuestros servicios y monitorea el rendimiento del sistema. Mantente informado sobre mantenimientos programados e interrupciones potenciales.",
+      "description": "Estado del Sistema. Verifica el tiempo de actividad de herramientas y API en tiempo real. Actualizaciones de mantenimiento.",
       "keywords": ["estado sistema", "disponibilidad servicio", "mantenimiento", "estado sistema", "monitoreo"]
     },
     "pricing": {
@@ -359,7 +359,7 @@
     "first-audit": {
       "meta": {
         "title": "Cómo crear tu primera auditoría SEO - Guía paso a paso | AI SEO Turbo",
-        "description": "Aprende cómo realizar tu primera auditoría SEO integral utilizando las herramientas impulsadas por IA de AISEOTurbo. Guía completa paso a paso desde ingresar tu URL hasta revisar los resultados."
+        "description": "Tu Primera Auditoría. Guía paso a paso para analizar tu sitio y corregir errores con AI SEO Turbo. Empieza ahora."
       },
       "backToCategory": "Volver a Primeros pasos",
       "backToHelp": "Volver al Centro de ayuda",
@@ -452,7 +452,7 @@
     "dashboard-setup": {
       "meta": {
         "title": "Configuración del Panel: Personalice su Espacio de Trabajo",
-        "description": "Aprenda a personalizar su panel de AISEOTurbo para máxima productividad. Configure notificaciones, organice su espacio de trabajo y ajuste las preferencias de visualización."
+        "description": "Configuración del Panel. Personaliza tu espacio, añade proyectos y sigue métricas. Guía fácil de configuración."
       },
       "backToCategory": "Volver a Empezar",
       "backToHelp": "Volver al Centro de ayuda",
@@ -574,7 +574,7 @@
     "quick-start": {
       "meta": {
         "title": "Guía Rápida - Configuración de AISEOTurbo en 10 Minutos | AI SEO Turbo",
-        "description": "Comienza con las herramientas SEO impulsadas por IA de AISEOTurbo en solo 10 minutos. Guía completa desde la configuración de la cuenta hasta los primeros resultados de auditoría."
+        "description": "Inicio Rápido. Configura AI SEO Turbo en 10 min. Conecta tu sitio y ve resultados inmediatos. Acelera tu éxito."
       },
       "backToCategory": "Volver a Primeros Pasos",
       "backToHelp": "Volver al Centro de Ayuda",
@@ -1122,11 +1122,11 @@
       },
       "seoTools": {
         "title": "Guía Completa de Herramientas y Características SEO - Mejora Tus Rankings",
-        "subtitle": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
+        "subtitle": "Herramientas SEO. Desde auditorías hasta análisis de competencia. Descubre funciones para optimizar tu tráfico.",
         "backToHelp": "Volver al Centro de Ayuda",
         "meta": {
           "title": "Herramientas SEO: Resumen y Guía de Características | AI SEO Turbo",
-          "description": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
+          "description": "Herramientas SEO. Desde auditorías hasta análisis de competencia. Descubre funciones para optimizar tu tráfico.",
           "keywords": [
             "herramientas SEO",
             "características SEO",
@@ -1167,7 +1167,7 @@
             },
             "header": {
               "title": "Mejores Prácticas del Asistente IA",
-              "description": "Domine nuestro asistente SEO IA para obtener resultados máximos. Aprenda a hacer preguntas efectivas, interpretar las recomendaciones de la IA y combinar los insights de IA con su experiencia SEO."
+              "description": "Asistente SEO IA. Recibe recomendaciones y correcciones automáticas. Deja que la IA trabaje. Mejora más rápido."
             },
             "intro": {
               "title": "Entendiendo el Asistente SEO IA",
@@ -1683,7 +1683,7 @@
             },
             "header": {
               "title": "Guía de Análisis de Competidores",
-              "description": "Domina el análisis de competidores para obtener ventajas estratégicas. Aprende a identificar competidores, analizar sus estrategias y descubrir oportunidades para tus campañas SEO."
+              "description": "Análisis de Competencia. Espía palabras clave rivales. Obtén ventaja competitiva con IA. Pruébalo ahora mismo."
             },
             "intro": {
               "title": "Entendiendo el Análisis de Competidores",
@@ -1826,7 +1826,7 @@
       },
       "api": {
         "title": "API e Integraciones",
-        "subtitle": "Integra las poderosas herramientas SEO de AI SEO Turbo en tus aplicaciones con nuestra completa API REST. Automatiza auditorías, accede a datos en tiempo real y crea flujos de trabajo personalizados.",
+        "subtitle": "Docs API SEO. Integra datos potentes en tus apps. Acceso a auditorías y palabras clave. Obtén tu clave API hoy.",
         "backToHelp": "Volver al Centro de Ayuda",
         "articles": {
           "authentication": {
@@ -2889,7 +2889,7 @@
   "audit-issues": {
     "meta": {
       "title": "Solución de Problemas de Auditoría - Ayuda AISEOTurbo",
-      "description": "Guía completa de solución de problemas para arreglar problemas de auditoría SEO en AISEOTurbo. Soluciones para auditorías atascadas, errores de tiempo de espera y problemas técnicos."
+      "description": "Problemas de Auditoría. Resuelve escaneos atascados o errores de rastreo. Guía para retomar tu análisis web."
     }
   },
   "performance": {
@@ -2901,7 +2901,7 @@
   "login-issues": {
     "meta": {
       "title": "Solución de Problemas de Inicio de Sesión - Ayuda AISEOTurbo",
-      "description": "Guía completa de solución de problemas para problemas de inicio de sesión en AISEOTurbo. Soluciones para credenciales inválidas, bloqueos de cuenta, problemas 2FA y problemas de restablecimiento de contraseña."
+      "description": "Problemas de Login. ¿No puedes entrar? Sigue estos pasos para restablecer contraseña y desbloquear tu cuenta."
     }
   },
   "home": {
@@ -3490,7 +3490,7 @@
   "audit-issues": {
     "meta": {
       "title": "Solución de Problemas de Auditoría - Ayuda AISEOTurbo",
-      "description": "Guía completa de solución de problemas para arreglar problemas de auditoría SEO en AISEOTurbo. Soluciones para auditorías atascadas, errores de tiempo de espera y problemas técnicos."
+      "description": "Problemas de Auditoría. Resuelve escaneos atascados o errores de rastreo. Guía para retomar tu análisis web."
     }
   },
   "performance": {
@@ -3508,7 +3508,7 @@
   "login-issues": {
     "meta": {
       "title": "Solución de Problemas de Inicio de Sesión - Ayuda AISEOTurbo",
-      "description": "Guía completa de solución de problemas para problemas de inicio de sesión en AISEOTurbo. Soluciones para credenciales inválidas, bloqueos de cuenta, problemas 2FA y problemas de restablecimiento de contraseña."
+      "description": "Problemas de Login. ¿No puedes entrar? Sigue estos pasos para restablecer contraseña y desbloquear tu cuenta."
     }
   },
   "apiContent": {
@@ -8188,7 +8188,7 @@
         "description": "Domina nuestro kit de herramientas SEO potenciadas por IA",
         "meta": {
           "title": "Herramientas SEO: Resumen y Guía de Características | AI SEO Turbo",
-          "description": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
+          "description": "Herramientas SEO. Desde auditorías hasta análisis de competencia. Descubre funciones para optimizar tu tráfico.",
           "keywords": [
             "herramientas SEO",
             "características SEO",
