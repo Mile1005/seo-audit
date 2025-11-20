@@ -76,6 +76,11 @@
       "description": "Check the current status of AI SEO Turbo services including API, web application, database, and crawler services. Monitor uptime and service health.",
       "keywords": ["system status", "service availability", "uptime", "API status", "service health"]
     },
+    "pricing": {
+      "title": "SEO Audit Pricing Plans - Choose Your Perfect Plan | AI SEO Turbo",
+      "description": "Choose the perfect SEO audit plan for your business. Free plan with analysis, Pro plans from $29/month with advanced features and priority support.",
+      "keywords": ["SEO audit pricing", "SEO tools cost", "website audit plans", "SEO subscription", "pricing plans"]
+    },
     "defaultTitle": "AI SEO Turbo - AI-Powered SEO Audits",
     "defaultDescription": "Get actionable SEO insights that boost rankings and drive organic traffic in minutes",
     "defaultKeywords": "SEO audit, AI SEO analysis, website optimization, organic traffic, search rankings",
@@ -1111,9 +1116,24 @@
         }
       },
       "seoTools": {
-        "title": "SEO Tools & Features",
+        "title": "Complete Guide to SEO Tools & Features - Boost Your Rankings",
         "subtitle": "Explore our comprehensive suite of SEO tools designed to boost your search rankings, analyze competitors, and optimize your website performance.",
         "backToHelp": "Back to Help Center",
+        "meta": {
+          "title": "SEO Tools Overview - Complete Feature Guide | AI SEO Turbo",
+          "description": "Explore our comprehensive suite of SEO tools designed to boost your search rankings, analyze competitors, and optimize your website performance.",
+          "keywords": [
+            "SEO tools",
+            "SEO features",
+            "search rankings",
+            "competitor analysis",
+            "website optimization",
+            "SEO toolkit",
+            "technical SEO",
+            "keyword research",
+            "site audit"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Complete SEO audit walkthrough",
@@ -8145,8 +8165,23 @@
         }
       },
       "seoTools": {
-        "title": "SEO Tools",
+        "title": "Complete Guide to SEO Tools & Features - Boost Your Rankings",
         "description": "Master our powerful SEO analysis tools",
+        "meta": {
+          "title": "SEO Tools Overview - Complete Feature Guide | AI SEO Turbo",
+          "description": "Explore our comprehensive suite of SEO tools designed to boost your search rankings, analyze competitors, and optimize your website performance.",
+          "keywords": [
+            "SEO tools",
+            "SEO features",
+            "search rankings",
+            "competitor analysis",
+            "website optimization",
+            "SEO toolkit",
+            "technical SEO",
+            "keyword research",
+            "site audit"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "SEO Audit Walkthrough",

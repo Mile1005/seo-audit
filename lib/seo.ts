@@ -76,7 +76,8 @@ function parseCSVLine(line: string): string[] {
  * Load and cache CSV title data
  */
 function loadCSVTitleData(): Map<string, Map<string, string>> {
-  if (csvTitleCache) return csvTitleCache;
+  // Don't cache in development to allow for CSV file changes
+  if (csvTitleCache && process.env.NODE_ENV === 'production') return csvTitleCache;
 
   csvTitleCache = new Map();
 

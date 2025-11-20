@@ -161,6 +161,11 @@
       "description": "Periksa status layanan kami saat ini dan pantau performa sistem. Tetap terinformasi tentang pemeliharaan terjadwal dan gangguan potensial.",
       "keywords": ["status sistem", "ketersediaan layanan", "pemeliharaan", "status sistem", "pemantauan"]
     },
+    "pricing": {
+      "title": "Paket Harga Audit SEO - Pilih Paket Sempurna Anda | AI SEO Turbo",
+      "description": "Pilih paket audit SEO yang sempurna untuk bisnis Anda. Paket gratis dengan analisis, paket Pro mulai dari 29€/bulan dengan fitur canggih dan dukungan prioritas.",
+      "keywords": ["harga audit SEO", "biaya alat SEO", "paket audit website", "langganan SEO", "paket harga"]
+    },
     "defaultTitle": "AI SEO Turbo - Audit SEO Bertenaga AI",
     "defaultDescription": "Dapatkan wawasan SEO yang dapat ditindaklanjuti yang meningkatkan peringkat dan mendorong traffic organik dalam hitungan menit",
     "defaultKeywords": "audit SEO, analisis SEO AI, optimasi website, traffic organik, peringkat pencarian",
@@ -1196,9 +1201,24 @@
         }
       },
       "seoTools": {
-        "title": "Alat dan Fitur SEO",
+        "title": "Panduan Lengkap Alat dan Fitur SEO - Tingkatkan Peringkat Anda",
         "subtitle": "Jelajahi rangkaian lengkap alat SEO kami yang dirancang untuk meningkatkan peringkat pencarian Anda, menganalisis pesaing, dan mengoptimalkan kinerja situs web.",
         "backToHelp": "Kembali ke Pusat Bantuan",
+        "meta": {
+          "title": "Ringkasan Alat SEO - Panduan Lengkap Fitur | AI SEO Turbo",
+          "description": "Jelajahi rangkaian lengkap alat SEO kami yang dirancang untuk meningkatkan peringkat pencarian Anda, menganalisis pesaing, dan mengoptimalkan kinerja situs web.",
+          "keywords": [
+            "alat SEO",
+            "fitur SEO",
+            "peringkat pencarian",
+            "analisis pesaing",
+            "optimasi situs web",
+            "toolkit SEO",
+            "SEO teknis",
+            "penelitian kata kunci",
+            "audit situs"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Panduan lengkap audit SEO",
@@ -8230,8 +8250,23 @@
         }
       },
       "seoTools": {
-        "title": "Alat & Fitur SEO",
+        "title": "Panduan Lengkap Alat dan Fitur SEO - Tingkatkan Peringkat Anda",
         "description": "Kuasi toolkit SEO kami yang didukung AI",
+        "meta": {
+          "title": "Ringkasan Alat SEO - Panduan Lengkap Fitur | AI SEO Turbo",
+          "description": "Jelajahi rangkaian lengkap alat SEO kami yang dirancang untuk meningkatkan peringkat pencarian Anda, menganalisis pesaing, dan mengoptimalkan kinerja situs web.",
+          "keywords": [
+            "alat SEO",
+            "fitur SEO",
+            "peringkat pencarian",
+            "analisis pesaing",
+            "optimasi situs web",
+            "toolkit SEO",
+            "SEO teknis",
+            "penelitian kata kunci",
+            "audit situs"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Panduan lengkap audit SEO",

@@ -161,6 +161,11 @@
       "description": "Verifica lo stato attuale dei nostri servizi e monitora le prestazioni del sistema. Rimani informato sulle manutenzioni programmate e possibili interruzioni.",
       "keywords": ["stato sistema", "disponibilità servizio", "manutenzione", "stato sistema", "monitoraggio"]
     },
+    "pricing": {
+      "title": "Piani di Prezzo Audit SEO - Scegli il Tuo Piano Perfetto | AI SEO Turbo",
+      "description": "Scegli il piano di audit SEO perfetto per la tua attività. Piano gratuito con analisi, piani Pro da 29€/mese con funzionalità avanzate e supporto prioritario.",
+      "keywords": ["prezzi audit SEO", "costo strumenti SEO", "piani audit sito web", "abbonamento SEO", "piani tariffari"]
+    },
     "defaultTitle": "AI SEO Turbo - Audit SEO alimentati da AI",
     "defaultDescription": "Ottenga insights SEO azionabili che migliorano le classifiche e generano traffico organico in pochi minuti",
     "defaultKeywords": "audit SEO, analisi AI SEO, ottimizzazione sito web, traffico organico, classifiche di ricerca",
@@ -1220,9 +1225,24 @@
         }
       },
       "seoTools": {
-        "title": "Strumenti e Funzionalità SEO",
+        "title": "Guida Completa agli Strumenti e Funzionalità SEO - Migliora i Tuoi Ranking",
         "subtitle": "Esplora la nostra suite completa di strumenti SEO progettati per migliorare i tuoi ranking di ricerca, analizzare i concorrenti e ottimizzare le prestazioni del tuo sito web.",
         "backToHelp": "Torna al Centro Assistenza",
+        "meta": {
+          "title": "Panoramica Strumenti SEO - Guida Completa alle Funzionalità | AI SEO Turbo",
+          "description": "Esplora la nostra suite completa di strumenti SEO progettati per migliorare i tuoi ranking di ricerca, analizzare i concorrenti e ottimizzare le prestazioni del tuo sito web.",
+          "keywords": [
+            "strumenti SEO",
+            "funzionalità SEO",
+            "ranking di ricerca",
+            "analisi concorrenti",
+            "ottimizzazione sito web",
+            "toolkit SEO",
+            "SEO tecnico",
+            "ricerca parole chiave",
+            "audit sito"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Guida completa all'audit SEO",
@@ -8229,8 +8249,23 @@
         }
       },
       "seoTools": {
-        "title": "Strumenti e Funzionalità SEO",
+        "title": "Guida Completa agli Strumenti e Funzionalità SEO - Migliora i Tuoi Ranking",
         "description": "Padroneggia il nostro toolkit SEO potenziato dall'IA",
+        "meta": {
+          "title": "Panoramica Strumenti SEO - Guida Completa alle Funzionalità | AI SEO Turbo",
+          "description": "Esplora la nostra suite completa di strumenti SEO progettati per migliorare i tuoi ranking di ricerca, analizzare i concorrenti e ottimizzare le prestazioni del tuo sito web.",
+          "keywords": [
+            "strumenti SEO",
+            "funzionalità SEO",
+            "ranking di ricerca",
+            "analisi concorrenti",
+            "ottimizzazione sito web",
+            "toolkit SEO",
+            "SEO tecnico",
+            "ricerca parole chiave",
+            "audit sito"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Guida completa all'audit SEO",

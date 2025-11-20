@@ -81,6 +81,11 @@
       "description": "Verifica el estado actual de nuestros servicios y monitorea el rendimiento del sistema. Mantente informado sobre mantenimientos programados e interrupciones potenciales.",
       "keywords": ["estado sistema", "disponibilidad servicio", "mantenimiento", "estado sistema", "monitoreo"]
     },
+    "pricing": {
+      "title": "Planes de Precios Audit SEO - Elige Tu Plan Perfecto | AI SEO Turbo",
+      "description": "Elige el plan de auditoría SEO perfecto para tu negocio. Plan gratuito con análisis, planes Pro desde 29€/mes con funciones avanzadas y soporte prioritario.",
+      "keywords": ["precios auditoría SEO", "costo herramientas SEO", "planes auditoría sitio web", "suscripción SEO", "planes de precios"]
+    },
     "defaultTitle": "AI SEO Turbo - Audits SEO impulsados por AI",
     "defaultDescription": "Obtén insights SEO accionables que mejoran los rankings y generan tráfico orgánico en minutos",
     "defaultKeywords": "auditoría SEO, análisis SEO IA, optimización sitio web, tráfico orgánico, rankings de búsqueda",
@@ -1116,9 +1121,24 @@
         }
       },
       "seoTools": {
-        "title": "Herramientas y Características SEO",
+        "title": "Guía Completa de Herramientas y Características SEO - Mejora Tus Rankings",
         "subtitle": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
         "backToHelp": "Volver al Centro de Ayuda",
+        "meta": {
+          "title": "Resumen de Herramientas SEO - Guía Completa de Características | AI SEO Turbo",
+          "description": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
+          "keywords": [
+            "herramientas SEO",
+            "características SEO",
+            "rankings de búsqueda",
+            "análisis competidores",
+            "optimización sitio web",
+            "toolkit SEO",
+            "SEO técnico",
+            "investigación palabras clave",
+            "auditoría sitio"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Guía completa de auditoría SEO",
@@ -8164,8 +8184,23 @@
         }
       },
       "seoTools": {
-        "title": "Herramientas y Funciones SEO",
+        "title": "Guía Completa de Herramientas y Funciones SEO - Mejora Tus Rankings",
         "description": "Domina nuestro kit de herramientas SEO potenciadas por IA",
+        "meta": {
+          "title": "Resumen de Herramientas SEO - Guía Completa de Características | AI SEO Turbo",
+          "description": "Explora nuestra suite completa de herramientas SEO diseñadas para mejorar tus rankings de búsqueda, analizar competidores y optimizar el rendimiento de tu sitio web.",
+          "keywords": [
+            "herramientas SEO",
+            "características SEO",
+            "rankings de búsqueda",
+            "análisis competidores",
+            "optimización sitio web",
+            "toolkit SEO",
+            "SEO técnico",
+            "investigación palabras clave",
+            "auditoría sitio"
+          ]
+        },
         "articles": {
           "auditWalkthrough": {
             "title": "Guía completa de auditoría SEO",
@@ -8608,6 +8643,101 @@
           ],
           "eligible": "Elegible",
           "notEligible": "No Elegible"
+        },
+        "introduction": {
+          "title": "Política de Cancelación",
+          "description": "Entendemos que las circunstancias cambian. Nuestro proceso de cancelación está diseñado para ser simple y transparente."
+        },
+        "whenToCancel": {
+          "title": "¿Cuándo Puedes Cancelar?",
+          "description": "Puedes cancelar tu suscripción en cualquier momento. Tu acceso continuará hasta el final de tu período de facturación actual.",
+          "scenarios": [
+            {
+              "icon": "Clock",
+              "title": "Fin del Ciclo de Facturación",
+              "description": "Cancela en cualquier momento - tu suscripción permanece activa hasta el final de tu período de facturación actual."
+            },
+            {
+              "icon": "TrendingDown",
+              "title": "Cambios de Plan",
+              "description": "Cambia a un plan de menor nivel o cambia los ciclos de facturación en lugar de cancelar completamente."
+            },
+            {
+              "icon": "Pause",
+              "title": "Pausa Temporal",
+              "description": "Contacta al soporte si necesitas pausar temporalmente tu suscripción debido a una ausencia prolongada."
+            }
+          ]
+        },
+        "howToCancel": {
+          "title": "Cómo Cancelar Tu Suscripción",
+          "description": "Sigue estos pasos simples para cancelar tu suscripción.",
+          "steps": [
+            {
+              "title": "Inicia Sesión en Tu Cuenta",
+              "description": "Inicia sesión en tu cuenta de AI SEO Turbo usando tu correo electrónico y contraseña."
+            },
+            {
+              "title": "Ve a Configuración de Cuenta",
+              "description": "Navega a Configuración de Cuenta desde el menú principal o el menú desplegable de usuario."
+            },
+            {
+              "title": "Accede a la Sección de Facturación",
+              "description": "Haz clic en 'Suscripción' o 'Facturación' en la configuración de tu cuenta."
+            },
+            {
+              "title": "Cancelar Suscripción",
+              "description": "Encuentra la opción 'Cancelar Suscripción' y sigue las indicaciones para confirmar."
+            }
+          ]
+        },
+        "whatHappens": {
+          "title": "¿Qué Sucede Después de la Cancelación?",
+          "description": "Entiende qué esperar después de cancelar tu suscripción.",
+          "timeline": [
+            {
+              "title": "Efectos Inmediatos",
+              "description": "Tu suscripción permanece activa hasta el final de tu período de facturación actual. Continuarás teniendo acceso completo a todas las funciones."
+            },
+            {
+              "title": "Fin del Ciclo de Facturación",
+              "description": "Al final de tu período de facturación actual, tu suscripción será desactivada. Perderás acceso a las funciones premium."
+            },
+            {
+              "title": "Retención de Datos",
+              "description": "Tu historial de auditorías e informes será retenido por 30 días después de la cancelación. Descarga datos importantes antes de entonces."
+            },
+            {
+              "title": "Acceso a la Cuenta",
+              "description": "Retendrás acceso a tu cuenta pero estarás limitado a las funciones y límites de uso del nivel gratuito."
+            }
+          ]
+        },
+        "beforeCancelling": {
+          "title": "Antes de Cancelar",
+          "description": "Considera estas alternativas a cancelar tu suscripción.",
+          "alternatives": [
+            {
+              "icon": "TrendingDown",
+              "title": "Reduce Tu Plan",
+              "description": "Cambia a un plan de menor nivel que se ajuste mejor a tus necesidades y presupuesto actuales."
+            },
+            {
+              "icon": "Pause",
+              "title": "Pausa la Suscripción",
+              "description": "Contacta a nuestro equipo de soporte para discutir pausas temporales de suscripción por ausencias prolongadas."
+            },
+            {
+              "icon": "MessageSquare",
+              "title": "Contacta al Soporte",
+              "description": "Comunícate con nuestro equipo de soporte para discutir tus preocupaciones y explorar soluciones."
+            },
+            {
+              "icon": "Gift",
+              "title": "Descuento o Extensión",
+              "description": "Pregunta sobre descuentos especiales o extensiones de facturación que podrían hacer que continuar sea más asequible."
+            }
+          ]
         },
         "needHelp": {
           "title": "¿Necesitas Ayuda?",

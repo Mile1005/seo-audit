@@ -2,16 +2,30 @@ import { test, expect, vi, beforeEach, afterEach } from "vitest";
 import { checkDatabaseHealth, getPerformanceMetrics, connectDatabase, disconnectDatabase, prisma } from "../lib/database";
 
 // Mock Prisma client
+const mockPrisma = {
+  $queryRaw: vi.fn(),
+  $connect: vi.fn(),
+  $disconnect: vi.fn(),
+};
+
 vi.mock('@prisma/client', () => ({
-  PrismaClient: vi.fn().mockImplementation(() => ({
-    $queryRaw: vi.fn(),
-    $connect: vi.fn(),
-    $disconnect: vi.fn(),
-  })),
+  PrismaClient: vi.fn().mockImplementation(() => mockPrisma),
 }));
 
+vi.mock('../lib/database', () => ({
+  prisma: mockPrisma,
+  checkDatabaseHealth: vi.fn(),
+  getPerformanceMetrics: vi.fn(),
+  connectDatabase: vi.fn(),
+  disconnectDatabase: vi.fn(),
+}));
+
+// Import the actual functions after mocking
+import { checkDatabaseHealth as actualCheckDatabaseHealth, getPerformanceMetrics as actualGetPerformanceMetrics, connectDatabase as actualConnectDatabase, disconnectDatabase as actualDisconnectDatabase } from "../lib/database";
+
 test("checkDatabaseHealth returns healthy status on successful query", async () => {
-  const result = await checkDatabaseHealth();
+  mockPrisma.$queryRaw.mockResolvedValue([{ result: 1 }]);
+  const result = await actualCheckDatabaseHealth();
 
   expect(result.status).toBe('healthy');
   expect(result.timestamp).toBeInstanceOf(Date);
@@ -19,32 +33,19 @@ test("checkDatabaseHealth returns healthy status on successful query", async () 
 });
 
 test("checkDatabaseHealth returns unhealthy status on query failure", async () => {
-  // Mock a database error by temporarily changing the prisma instance
-  const originalQueryRaw = prisma.$queryRaw;
-  prisma.$queryRaw = vi.fn().mockRejectedValue(new Error('Connection failed'));
+  mockPrisma.$queryRaw.mockRejectedValue(new Error('Connection failed'));
 
-  try {
-    const result = await checkDatabaseHealth();
+  const result = await actualCheckDatabaseHealth();
 
-    expect(result.status).toBe('unhealthy');
-    expect(result.error).toBe('Connection failed');
-    expect(result.timestamp).toBeInstanceOf(Date);
-  } finally {
-    // Restore original function
-    prisma.$queryRaw = originalQueryRaw;
-  }
+  expect(result.status).toBe('unhealthy');
+  expect(result.error).toBe('Connection failed');
+  expect(result.timestamp).toBeInstanceOf(Date);
 });
 
 test("getPerformanceMetrics measures query performance", async () => {
-  const mockPrisma = {
-    $queryRaw: vi.fn().mockResolvedValue([{ result: 1 }]),
-  };
+  mockPrisma.$queryRaw.mockResolvedValue([{ result: 1 }]);
 
-  vi.doMock('../lib/database', () => ({
-    prisma: mockPrisma,
-  }));
-
-  const result = await getPerformanceMetrics();
+  const result = await actualGetPerformanceMetrics();
 
   expect(result.queryTime).toBeDefined();
   expect(result.queryTime).toBeGreaterThanOrEqual(0);
@@ -53,44 +54,26 @@ test("getPerformanceMetrics measures query performance", async () => {
 });
 
 test("connectDatabase handles successful connection", async () => {
-  const mockPrisma = {
-    $connect: vi.fn().mockResolvedValue(undefined),
-  };
+  mockPrisma.$connect.mockResolvedValue(undefined);
 
-  vi.doMock('../lib/database', () => ({
-    prisma: mockPrisma,
-  }));
-
-  const result = await connectDatabase();
+  const result = await actualConnectDatabase();
 
   expect(result).toBe(true);
   expect(mockPrisma.$connect).toHaveBeenCalled();
 });
 
 test("connectDatabase handles connection failure", async () => {
-  const mockPrisma = {
-    $connect: vi.fn().mockRejectedValue(new Error('Connection failed')),
-  };
+  mockPrisma.$connect.mockRejectedValue(new Error('Connection failed'));
 
-  vi.doMock('../lib/database', () => ({
-    prisma: mockPrisma,
-  }));
-
-  const result = await connectDatabase();
+  const result = await actualConnectDatabase();
 
   expect(result).toBe(false);
 });
 
 test("disconnectDatabase handles successful disconnection", async () => {
-  const mockPrisma = {
-    $disconnect: vi.fn().mockResolvedValue(undefined),
-  };
+  mockPrisma.$disconnect.mockResolvedValue(undefined);
 
-  vi.doMock('../lib/database', () => ({
-    prisma: mockPrisma,
-  }));
-
-  await disconnectDatabase();
+  await actualDisconnectDatabase();
 
   expect(mockPrisma.$disconnect).toHaveBeenCalled();
 });

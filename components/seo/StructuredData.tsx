@@ -119,50 +119,10 @@ export function generateMultiPlanProductSchema(plans: Array<{
         "@type": "Organization",
         "name": "AISEOTurbo"
       },
-      // Required for digital products
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "applicableCountry": "US",
-        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-        "merchantReturnDays": 14,
-        "returnMethod": "https://schema.org/ReturnByMail",
-        "returnFees": "https://schema.org/FreeReturn"
-      },
-      // Required for digital products - indicates digital delivery
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": plan.currency
-        },
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "US"
-        },
-        "deliveryTime": {
-          "@type": "ShippingDeliveryTime",
-          "handlingTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 0,
-            "maxValue": 1,
-            "unitText": "Day"
-          },
-          "transitTime": {
-            "@type": "QuantitativeValue",
-            "minValue": 0,
-            "maxValue": 0,
-            "unitText": "Day"
-          }
-        }
-      }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "1000",
-      "bestRating": "5",
-      "worstRating": "1"
+      // For digital products, we don't need physical shipping details
+      // Instead, indicate it's a digital service
+      "deliveryMethod": "https://schema.org/DigitalDeliveryMethod",
+      "category": "Software as a Service (SaaS)"
     },
     "additionalType": "https://schema.org/DigitalProduct" // Indicates this is a digital product
   }));
