@@ -97,6 +97,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const htmlLang = (headersList.get('x-locale') as Locale) || defaultLocale;
   
   // Debug log
+  console.log('[SEO DEBUG] x-locale header:', headersList.get('x-locale'));
   console.log('[SEO DEBUG] all headers:', Object.fromEntries(headersList.entries()));
   console.log('[SEO DEBUG]', { htmlLang });
 
