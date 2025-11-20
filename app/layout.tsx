@@ -94,6 +94,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Extract locale from pathname using headers
   const headersList = await headers();
+  console.log('Headers:', Object.fromEntries(headersList.entries()));
   const pathname = headersList.get('x-pathname') || headersList.get('x-forwarded-uri') || headersList.get('x-invoke-path') || headersList.get('next-url') || '/';
   
   // Determine locale from pathname
