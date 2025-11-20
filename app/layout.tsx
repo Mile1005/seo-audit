@@ -94,7 +94,15 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Extract locale from pathname for proper HTML lang attribute
   const headersList = await headers();
-  const pathname = headersList.get('x-invoke-path') || headersList.get('next-url') || '/';
+  const pathname =
+    headersList.get('next-url') ||
+    headersList.get('x-invoke-path') ||
+    headersList.get('referer') ||
+    '/';
+  
+  // Debug log
+  console.log('[SEO DEBUG]', { pathname });
+
   let htmlLang: Locale = defaultLocale;
   for (const loc of locales) {
     if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
@@ -102,6 +110,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       break;
     }
   }
+  console.log('[SEO DEBUG]', { htmlLang });
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
