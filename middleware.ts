@@ -40,53 +40,22 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL(newPathname, req.url), 301);
   }
 
-  // Extract locale from pathname
-  let locale: Locale = defaultLocale;
-  for (const loc of locales) {
-    if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
-      locale = loc;
+  // Detect locale from pathname
+  let detectedLocale: Locale = defaultLocale;
+  for (const locale of locales) {
+    if (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`) {
+      detectedLocale = locale;
       break;
     }
   }
 
-  // Set locale in headers for use in layout
-  req.headers.set('x-locale', locale);
+  // Run intl middleware
+  const response = intlMiddleware(req);
 
-  // Check if path starts with a locale prefix
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
+  // Add custom header with detected locale
+  response.headers.set('x-detected-locale', detectedLocale);
 
-  // If path has locale prefix, use intl middleware for proper routing
-  if (pathnameHasLocale) {
-    // Note: Cookie-based redirects are disabled for now to allow manual testing
-    // When you're ready, uncomment the code below to auto-redirect based on user preference
-
-    /*
-    const localeCookie = req.cookies.get('NEXT_LOCALE');
-
-    if (localeCookie?.value && locales.includes(localeCookie.value as Locale)) {
-      const preferredLocale = localeCookie.value as Locale;
-      const pathnameLocale = locales.find(
-        (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-      );
-
-      // If user is on a different locale than their preference, redirect
-      if (pathnameLocale && pathnameLocale !== preferredLocale) {
-        const newPathname = pathname.replace(`/${pathnameLocale}`, `/${preferredLocale}`);
-        return NextResponse.redirect(new URL(newPathname, req.url));
-      }
-    }
-    */
-
-    req.headers.set('x-locale', locale);
-    return intlMiddleware(req);
-  }
-
-  // For all other paths (without locale), let intl middleware handle it
-  // It will serve English content at root (/) and redirect non-English to /locale
-  req.headers.set('x-locale', locale);
-  return intlMiddleware(req);
+  return response;
 }
 
 export const config = {

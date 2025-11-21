@@ -92,9 +92,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Extract locale from headers set by middleware
+  // Get locale from custom header set by middleware
   const headersList = await headers();
-  const htmlLang = (headersList.get('x-locale') as Locale) || defaultLocale;
+  const htmlLang = (headersList.get('x-detected-locale') as Locale) || defaultLocale;
+  
+  console.log('[SEO DEBUG]', { htmlLang });
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? 'G-VL8V8L4G7X'
