@@ -54,6 +54,7 @@ export function middleware(req: NextRequest) {
 
   // Add custom header with detected locale
   response.headers.set('x-detected-locale', detectedLocale);
+  response.headers.set('x-current-pathname', pathname);
 
   return response;
 }
