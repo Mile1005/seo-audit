@@ -353,7 +353,7 @@
     "bestPractices": "Best Practices",
     "first-audit": {
       "meta": {
-        "title": "How to Create Your First SEO Audit - Step-by-Step Guide | AI SEO Turbo",
+        "title": "First Seo Audit: Step-By-Step Guide To Success",
         "description": "Run Your First Audit. Step-by-step guide to analyzing your site, finding errors, and improving health scores with AI SEO Turbo. Start now."
       },
       "backToCategory": "Back to Getting Started",
@@ -446,8 +446,8 @@
     },
     "dashboard-setup": {
       "meta": {
-        "title": "Dashboard Setup Guide - Customize Your Workspace | AI SEO Turbo",
-        "description": "Learn how to customize your AISEOTurbo dashboard for maximum productivity. Set up notifications, organize your workspace, and configure display preferences."
+        "title": "Dashboard Setup: Customize Your Seo Workspace | AI SEO Turbo",
+        "description": "Set up AI SEO Turbo dashboard quickly. Customize views, add projects, track metrics. Get organized and monitor progress effortlessly"
       },
       "backToCategory": "Back to Getting Started",
       "backToHelp": "Back to Help Center",
@@ -459,7 +459,7 @@
       },
       "header": {
         "category": "Getting Started",
-        "title": "Dashboard Setup Guide - Customize Your Workspace",
+        "title": "Dashboard Setup: Customize Your Seo Workspace",
         "readTime": "3 min read",
         "lastUpdated": "Last updated: March 2025"
       },
@@ -568,7 +568,7 @@
     },
     "quick-start": {
       "meta": {
-        "title": "Quick Start Guide - AISEOTurbo Setup in 10 Minutes | AI SEO Turbo",
+        "title": "Quick Start Guide - AISEOTurbo Setup in 10 Minutes",
         "description": "Get started with AISEOTurbo's AI-powered SEO tools in just 10 minutes. Complete guide from account setup to your first audit results."
       },
       "backToCategory": "Back to Getting Started",
@@ -776,7 +776,7 @@
     "seo-scores": {
       "meta": {
         "title": "Understanding SEO Scores - Complete Guide | AI SEO Turbo",
-        "description": "Learn how to interpret your SEO audit scores. Understand what each score means, how they're calculated, and how to improve your website's SEO performance."
+        "description": "Decode SEO scores and metrics with our guide. Understand health, authority, and tips. Enhance site performance and rankings."
       },
       "backToHelp": "Back to Help Center",
       "breadcrumb": {
@@ -1148,14 +1148,14 @@
             "time": "6 min"
           },
           "aiAssistant": {
-            "title": "AI assistant best practices",
+            "title": "Ai Assistant Tips: Best Practices For Seo Help",
             "time": "9 min"
           },
           "seoAudit": {
             "title": "SEO Audit Guide",
             "href": "/help/seo-tools/seo-audit",
             "time": "8 min",
-            "description": "Master technical SEO with our comprehensive guide. Learn to audit 47+ critical factors, fix site errors, and boost your rankings. Start your analysis today.",
+            "description": "Conduct expert SEO audits with 47+ checks. Identify errors, optimize performance, elevate health. Drive organic traffic today.",
             "backToCategory": "Back to SEO Tools & Features",
             "breadcrumb": {
               "home": "Home",
@@ -1320,7 +1320,7 @@
             "description": "Analyze your competitors' SEO strategies and gain competitive insights."
           },
           "siteCrawler": {
-            "title": "Site crawler guide",
+            "title": "Site Crawler Guide: Optimize Your Seo Scanning",
             "href": "/help/seo-tools/site-crawler",
             "time": "7 min",
             "description": "Learn how to use our intelligent site crawler for comprehensive website analysis and technical SEO audits.",
@@ -1334,7 +1334,7 @@
             },
             "header": {
               "category": "Feature Guide",
-              "title": "Site Crawler Guide",
+              "title": "Site Crawler Guide: Optimize Your Seo Scanning",
               "description": "Master our intelligent site crawler for comprehensive website analysis, technical issue detection, and SEO optimization",
               "author": "AISEOTurbo Team",
               "readTime": "7 min read",
@@ -1519,7 +1519,7 @@
             }
           },
           "competitorGuide": {
-            "title": "Competitor Analysis Guide",
+            "title": "Competitor Analysis: Seo Insights And Strategies",
             "href": "/help/seo-tools/competitor-analysis",
             "time": "8 min",
             "description": "Learn how to analyze competitors' SEO strategies and gain competitive insights.",
@@ -1671,7 +1671,7 @@
               "aiAssistant": "AI Assistant Overview"
             },
             "header": {
-              "title": "AI Assistant Best Practices",
+              "title": "Ai Assistant Tips: Best Practices For Seo Help",
               "description": "AI SEO Assistant. Get automated recommendations and fix suggestions. Let AI handle the heavy lifting to improve your site faster."
             },
             "intro": {
@@ -1824,7 +1824,7 @@
         }
       },
       "api": {
-        "title": "API & Integrations",
+        "title": "Seo Api Integrations: Connect And Automate Workflows",
         "subtitle": "SEO API Docs. Integrate powerful SEO data into your apps. Access endpoints for audits, keywords & analysis. Get your API key today.",
         "backToHelp": "Back to Help Center",
         "articles": {
@@ -1832,7 +1832,7 @@
             "title": "API Authentication",
             "href": "/help/api/authentication",
             "time": "6 min",
-            "description": "Learn how to authenticate with the AI SEO Turbo API and get your API keys."
+            "description": "Authenticate securely with AI SEO Turbo API. Use keys, OAuth, and best practices for data access. Integrate while protecting your info."
           },
           "webhooks": {
             "title": "Webhooks & Notifications",
@@ -2165,7 +2165,7 @@
             "title": "Data Synchronization Issues",
             "href": "/help/troubleshooting/sync-issues",
             "time": "5 min",
-            "description": "Troubleshoot data synchronization errors quickly. Fix import/export problems and connectivity glitches to ensure your SEO data is always accurate and safe.",
+            "description": "Fix data sync errors in AI SEO Turbo effortlessly. Troubleshoot imports, exports, connections. Keep analytics accurate now.",
             "backToCategory": "Back to Troubleshooting",
             "backToHelp": "Back to Help Center",
             "breadcrumb": {
@@ -2906,7 +2906,7 @@
   "login-issues": {
     "meta": {
       "title": "Login Issues Troubleshooting - AISEOTurbo Help",
-      "description": "Complete troubleshooting guide for login problems in AISEOTurbo. Solutions for invalid credentials, account lockouts, 2FA issues, and password reset problems."
+      "description": "Resolve login problems fast with our troubleshooting guide. Reset passwords, clear caches, and regain access. Get back to optimizing without delay. "
     }
   },
   "apiContent": {
@@ -2918,7 +2918,7 @@
       "header": {
         "backToHelp": "Back to Help Center",
         "title": "API & Integrations",
-        "subtitle": "Streamline your SEO workflows with robust API integrations. Connect AI SEO Turbo to your favorite tools, automate reports, and access data programmatically.",
+        "subtitle": "Unlock powerful SEO API integrations. Connect AI SEO Turbo to tools, automate audits and reports. Start building custom workflows today.",
         "lastUpdated": "Last updated: March 2025"
       },
       "articles": {
@@ -8209,7 +8209,7 @@
               "aiAssistant": "AI Assistant Overview"
             },
             "header": {
-              "title": "AI Assistant Best Practices",
+              "title": "Ai Assistant Tips: Best Practices For Seo Help",
               "description": "AI SEO Assistant. Get automated recommendations and fix suggestions. Let AI handle the heavy lifting to improve your site faster."
             },
             "intro": {
@@ -8959,7 +8959,7 @@
         }
       },
       "api": {
-        "title": "API & Integrations",
+        "title": "API & Seo Api Integrations: Connect And Automate Workflows",
         "description": "Connect AISEOTurbo with your tools",
         "articles": {
           "authentication": {
