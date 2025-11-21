@@ -176,7 +176,7 @@ export default function TwoFactorContent() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('relatedArticles.title')}</h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
-                href="/help/security-privacy"
+                href="/help/security"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <Shield className="w-8 h-8 text-blue-600 mx-auto mb-2" />

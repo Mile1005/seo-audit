@@ -82,7 +82,7 @@ const routes: Route[] = [
   { path: '/help/security/privacy', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/security/gdpr', priority: 0.4, changeFrequency: 'monthly' },
   { path: '/help/security/two-factor-authentication', priority: 0.4, changeFrequency: 'monthly' },
-  { path: '/help/security-privacy', priority: 0.4, changeFrequency: 'monthly' },
+  
 ]
 
 function generateAlternates(path: string) {

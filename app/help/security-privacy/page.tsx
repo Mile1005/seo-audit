@@ -50,7 +50,7 @@ export default function SecurityPrivacyPage() {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Help Center
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Security & Privacy</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Security & Privacy | AI SEO Turbo</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
               Your security and privacy are our top priorities. Learn about our comprehensive
               security measures, data protection policies, and privacy controls.

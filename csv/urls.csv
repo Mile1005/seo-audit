@@ -173,12 +173,6 @@ http://localhost:3000/fr/help/api-integrations,fr
 http://localhost:3000/it/help/api-integrations,it
 http://localhost:3000/es/help/api-integrations,es
 http://localhost:3000/id/help/api-integrations,id
-http://localhost:3000/en/help/security-privacy,en
-http://localhost:3000/de/help/security-privacy,de
-http://localhost:3000/fr/help/security-privacy,fr
-http://localhost:3000/it/help/security-privacy,it
-http://localhost:3000/es/help/security-privacy,es
-http://localhost:3000/id/help/security-privacy,id
 http://localhost:3000/en/help/troubleshooting,en
 http://localhost:3000/de/help/troubleshooting,de
 http://localhost:3000/fr/help/troubleshooting,fr
