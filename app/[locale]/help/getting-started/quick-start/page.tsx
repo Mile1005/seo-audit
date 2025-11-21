@@ -69,9 +69,9 @@ export default async function QuickStartPage({ params }: Props) {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumbs
               items={[
-                { name: t('quick-start.breadcrumb.help'), url: `https://www.aiseoturbo.com/${locale}/help` },
-                { name: t('quick-start.breadcrumb.gettingStarted'), url: `https://www.aiseoturbo.com/${locale}/help/getting-started` },
-                { name: t('quick-start.breadcrumb.quickStart'), url: `https://www.aiseoturbo.com/${locale}/help/getting-started/quick-start` }
+                { name: t('quick-start.breadcrumb.help'), url: `https://www.aiseoturbo.com/help` },
+                { name: t('quick-start.breadcrumb.gettingStarted'), url: `https://www.aiseoturbo.com/help/getting-started` },
+                { name: t('quick-start.breadcrumb.quickStart'), url: `https://www.aiseoturbo.com/help/getting-started/quick-start` }
               ]}
               darkMode={true}
             />

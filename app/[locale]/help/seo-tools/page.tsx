@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       keywords: ["SEO-Tools", "SEO-Funktionen", "Suchrankings", "Wettbewerberanalyse", "Website-Optimierung", "SEO-Toolkit", "technisches SEO", "Keyword-Recherche", "Site-Audit"]
     },
     fr: {
-      title: "Outils SEO : Aperçu Complet et Guide des Fonctionnalités | AI SEO Turbo",
+      title: "Outils SEO : Aperçu Complet et Guide des Fonctionnalités",
       description: "Outils SEO. Des audits à l'analyse concurrentielle. Découvrez nos fonctionnalités pour optimiser votre site et trafic.",
       keywords: ["outils SEO", "fonctionnalités SEO", "classements de recherche", "analyse concurrents", "optimisation site web", "boîte à outils SEO", "SEO technique", "recherche mots-clés", "audit site"]
     },
