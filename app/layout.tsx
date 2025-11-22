@@ -375,6 +375,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             };
           `
         }} />
+
+        {/* Ahrefs Web Analytics */}
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="0AVrYH2zbA3TJwWbRnMwlg" async></script>
       </head>
       <body className={`${inter.className} font-inter dark`} style={{ backgroundColor: '#0b1220' }} suppressHydrationWarning>
         <noscript>
