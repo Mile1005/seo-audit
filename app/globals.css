@@ -269,13 +269,20 @@
    ============================================ */
 
 @layer components {
-  /* Main prose container */
+  /* Main prose container - GPU accelerated for smooth scrolling */
   .prose-blog {
     @apply text-gray-200;
     font-size: 18px;
     line-height: 1.75;
     letter-spacing: -0.011em;
     max-width: none;
+    /* Force GPU acceleration */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
   }
 
   /* Spacing between elements */
@@ -545,9 +552,11 @@
     transform: translateX(4px);
   }
 
+  /* CRITICAL FIX: Remove scroll-triggered animation */
   .blog-section {
     margin-bottom: 5rem;
-    animation: fade-in 0.6s ease-out;
+    opacity: 1;
+    /* NO animation on scroll */
   }
 
   .blog-checkpoint {
