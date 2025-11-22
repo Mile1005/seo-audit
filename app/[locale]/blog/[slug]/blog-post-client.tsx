@@ -3,9 +3,9 @@
 import { MainLayout } from '../../../../components/layout/main-layout'
 import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
 import { motion, useScroll, useSpring } from 'framer-motion'
-import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark, ThumbsUp, Eye, TrendingUp, CheckCircle2 } from 'lucide-react'
+import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark, ThumbsUp, Eye } from 'lucide-react'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface BlogPost {
   id: string
@@ -34,6 +34,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   const [isLiked, setIsLiked] = useState(false)
   const [isSaved, setIsSaved] = useState(false)
   const [showShareMenu, setShowShareMenu] = useState(false)
+  const scrollRef = useRef<number>(0)
   
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, {
@@ -42,35 +43,59 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
     restDelta: 0.001
   })
 
-  // Reading progress tracking
+  // Optimized reading progress tracking with RAF
   useEffect(() => {
+    let ticking = false
+
     const updateProgress = () => {
       const scrolled = window.scrollY
       const height = document.documentElement.scrollHeight - window.innerHeight
-      const progress = (scrolled / height) * 100
-      setScrollProgress(Math.min(progress, 100))
+      const progress = Math.min((scrolled / height) * 100, 100)
+      
+      if (Math.abs(progress - scrollProgress) > 0.5) {
+        setScrollProgress(progress)
+      }
+      
+      ticking = false
     }
 
-    window.addEventListener('scroll', updateProgress)
-    return () => window.removeEventListener('scroll', updateProgress)
-  }, [])
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress)
+        ticking = true
+      }
+    }
 
-  // Smooth scroll for anchor links
+    window.addEventListener('scroll', requestTick, { passive: true })
+    return () => window.removeEventListener('scroll', requestTick)
+  }, [scrollProgress])
+
+  // Smooth scroll for anchor links - optimized
   useEffect(() => {
-    const links = document.querySelectorAll('a[href^="#"]')
-    
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault()
-        const target = document.querySelector(
-          link.getAttribute('href') as string
-        )
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const handleAnchorClick = (e: Event) => {
+      const target = e.target as HTMLAnchorElement
+      if (target.tagName === 'A' && target.hash) {
+        const href = target.getAttribute('href')
+        if (href?.startsWith('#')) {
+          e.preventDefault()
+          const element = document.querySelector(href)
+          if (element) {
+            const offset = 80 // Account for fixed header
+            const elementPosition = element.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - offset
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            })
+          }
         }
-      })
-    })
-  }, [post.content])
+      }
+    }
+
+    document.addEventListener('click', handleAnchorClick)
+    return () => document.removeEventListener('click', handleAnchorClick)
+  }, [])
 
   const getRelatedPosts = (currentPost: BlogPost) => {
     const allPosts = [
@@ -129,13 +154,20 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-        {/* Reading Progress Bar */}
-        <div className="reading-progress">
+        {/* Reading Progress Bar - Fixed flickering */}
+        <motion.div 
+          className="fixed top-0 left-0 w-full h-1 bg-slate-900 z-50"
+          style={{ willChange: 'auto' }}
+        >
           <motion.div 
-            className="reading-progress-fill"
-            style={{ scaleX }}
+            className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
+            style={{ 
+              scaleX,
+              transformOrigin: '0%',
+              willChange: 'transform'
+            }}
           />
-        </div>
+        </motion.div>
 
         {/* Article Header */}
         <article className="relative">
@@ -316,11 +348,11 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           </div>
         </article>
 
-        {/* Article Content */}
+        {/* Article Content - Fixed layout shift */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-4xl mx-auto px-6 pb-20"
         >
           <div className="prose-blog">
