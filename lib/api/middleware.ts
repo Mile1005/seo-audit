@@ -25,6 +25,21 @@ const rateLimiters = {
   }),
 }
 
+// Skip rate limiting for localhost/development
+function isLocalhost(ip: string, req: NextRequest): boolean {
+  const localhostIPs = ['127.0.0.1', '::1', 'localhost', '::ffff:127.0.0.1', 'anonymous']
+  if (localhostIPs.includes(ip)) return true
+  
+  // Check host header for localhost
+  const host = req.headers.get('host') || ''
+  if (host.startsWith('localhost') || host.startsWith('127.0.0.1')) return true
+  
+  // Check for development environment
+  if (process.env.NODE_ENV === 'development') return true
+  
+  return false
+}
+
 export type RateLimitType = keyof typeof rateLimiters
 
 export interface AuthenticatedRequest extends NextRequest {
@@ -93,9 +108,14 @@ export function withRateLimit(limitType: RateLimitType = 'standard') {
   return function (handler: (req: NextRequest) => Promise<NextResponse>) {
     return async (req: NextRequest) => {
       try {
-        const rateLimiter = rateLimiters[limitType]
         const key = req.headers.get('x-forwarded-for') || req.ip || 'anonymous'
         
+        // Skip rate limiting for localhost/admin
+        if (isLocalhost(key, req)) {
+          return await handler(req)
+        }
+        
+        const rateLimiter = rateLimiters[limitType]
         await rateLimiter.consume(key)
         return await handler(req)
       } catch (rejRes: any) {

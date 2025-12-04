@@ -3,10 +3,31 @@ import { NextRequest, NextResponse } from 'next/server'
 // Simple in-memory rate limiting (for production, use Redis)
 const rateLimitMap = new Map<string, { count: number; lastReset: number }>()
 
+// Skip rate limiting for localhost/development
+function isLocalhost(ip: string, req: NextRequest): boolean {
+  const localhostIPs = ['127.0.0.1', '::1', 'localhost', '::ffff:127.0.0.1']
+  if (localhostIPs.includes(ip)) return true
+  
+  // Check host header for localhost
+  const host = req.headers.get('host') || ''
+  if (host.startsWith('localhost') || host.startsWith('127.0.0.1')) return true
+  
+  // Check for development environment
+  if (process.env.NODE_ENV === 'development') return true
+  
+  return false
+}
+
 export function rateLimit(limit: number = 5, windowMs: number = 60000) {
   return (handler: (req: NextRequest) => Promise<NextResponse>) => {
     return async (req: NextRequest) => {
       const ip = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown'
+      
+      // Skip rate limiting for localhost/admin
+      if (isLocalhost(ip, req)) {
+        return handler(req)
+      }
+      
       const now = Date.now()
       const windowStart = now - windowMs
 

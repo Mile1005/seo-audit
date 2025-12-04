@@ -4,7 +4,25 @@ import * as cheerio from 'cheerio'
 
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>()
 
-function checkRateLimit(ip: string): boolean {
+// Skip rate limiting for localhost/development
+function isLocalhost(ip: string, request: NextRequest): boolean {
+  const localhostIPs = ['127.0.0.1', '::1', 'localhost', '::ffff:127.0.0.1']
+  if (localhostIPs.includes(ip)) return true
+  
+  // Check host header for localhost
+  const host = request.headers.get('host') || ''
+  if (host.startsWith('localhost') || host.startsWith('127.0.0.1')) return true
+  
+  // Check for development environment
+  if (process.env.NODE_ENV === 'development') return true
+  
+  return false
+}
+
+function checkRateLimit(ip: string, request: NextRequest): boolean {
+  // Skip rate limiting for localhost/admin
+  if (isLocalhost(ip, request)) return true
+  
   const now = Date.now()
   const limit = rateLimitMap.get(ip)
   if (!limit || now > limit.resetTime) {
@@ -64,7 +82,7 @@ interface CheckResult {
 export async function POST(request: NextRequest) {
   try {
     const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'
-    if (!checkRateLimit(ip)) {
+    if (!checkRateLimit(ip, request)) {
       return NextResponse.json(
         { error: 'Rate limit exceeded. Try again in an hour or sign up for unlimited audits.' },
         { status: 429 }

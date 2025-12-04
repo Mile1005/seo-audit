@@ -28,7 +28,12 @@ export function HomepageAuditSearch() {
     setLoading(true)
     setResults(null)
 
+    // Minimum animation time to show all 8 checks completing
+    const MIN_ANIMATION_TIME = 8000
+
     try {
+      const startTime = Date.now()
+      
       const response = await fetch('/api/seo-audit/lite', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -44,6 +49,14 @@ export function HomepageAuditSearch() {
       if (!data.score || !data.stats) {
         throw new Error('Invalid response from server')
       }
+      
+      // Wait for animation to complete all 8 checks before showing results
+      const elapsed = Date.now() - startTime
+      const remainingTime = MIN_ANIMATION_TIME - elapsed
+      if (remainingTime > 0) {
+        await new Promise(resolve => setTimeout(resolve, remainingTime))
+      }
+      
       setResults(data)
     } catch (err) {
       console.error('Audit error:', err)
