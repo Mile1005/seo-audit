@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -10,6 +11,7 @@ import { LiteAuditResults } from './lite-audit-results'
 import { normalizeUrl } from '@/lib/url/normalize'
 
 export function HomepageAuditSearch() {
+  const t = useTranslations('liteAudit.search')
   const [url, setUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<any>(null)
@@ -20,7 +22,7 @@ export function HomepageAuditSearch() {
     
     const normalized = normalizeUrl(url.trim())
     if (!normalized) {
-      setError('Please enter a valid URL (e.g., example.com, www.example.com, or https://example.com)')
+      setError(t('error.invalidUrl'))
       return
     }
 
@@ -41,13 +43,13 @@ export function HomepageAuditSearch() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({ error: 'Failed to analyze website' }))
-        throw new Error(errorData.error || 'Failed to analyze website')
+        const errorData = await response.json().catch(() => ({ error: t('error.failed') }))
+        throw new Error(errorData.error || t('error.failed'))
       }
 
       const data = await response.json()
       if (!data.score || !data.stats) {
-        throw new Error('Invalid response from server')
+        throw new Error(t('error.invalidResponse'))
       }
       
       // Wait for animation to complete all 8 checks before showing results
@@ -60,7 +62,7 @@ export function HomepageAuditSearch() {
       setResults(data)
     } catch (err) {
       console.error('Audit error:', err)
-      setError(err instanceof Error ? err.message : 'An error occurred during analysis')
+      setError(err instanceof Error ? err.message : t('error.failed'))
     } finally {
       setLoading(false)
     }
@@ -93,7 +95,7 @@ export function HomepageAuditSearch() {
                   type="text"
                   inputMode="url"
                   autoComplete="url"
-                  placeholder="Enter your website URL (e.g., example.com)"
+                  placeholder={t('placeholder')}
                   value={url}
                   onChange={(e) => {
                     setUrl(e.target.value)
@@ -109,9 +111,9 @@ export function HomepageAuditSearch() {
                   className="h-14 px-8 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold"
                 >
                   {loading ? (
-                    <><Loader2 className="w-5 h-5 mr-2 animate-spin" />Analyzing...</>
+                    <><Loader2 className="w-5 h-5 mr-2 animate-spin" />{t('analyzing')}</>
                   ) : (
-                    <><Search className="w-5 h-5 mr-2" />Analyze Now</>
+                    <><Search className="w-5 h-5 mr-2" />{t('button')}</>
                   )}
                 </Button>
               </div>

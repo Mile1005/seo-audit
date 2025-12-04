@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { 
   CheckCircle, 
   AlertTriangle, 
@@ -69,6 +70,7 @@ interface CrawlResultsProps {
 }
 
 export function CrawlResults({ result, onReset }: CrawlResultsProps) {
+  const t = useTranslations('crawlResults');
   const [expandedPage, setExpandedPage] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'pages' | 'issues'>('overview');
 
@@ -124,10 +126,10 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
   };
 
   const getScoreLabel = (score: number) => {
-    if (score >= 80) return 'Excellent';
-    if (score >= 60) return 'Good';
-    if (score >= 40) return 'Needs Work';
-    return 'Poor';
+    if (score >= 80) return t('healthScore.excellent');
+    if (score >= 60) return t('healthScore.good');
+    if (score >= 40) return t('healthScore.needsWork');
+    return t('healthScore.poor');
   };
 
   const getStatusIcon = (status: number) => {
@@ -154,13 +156,13 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
       >
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-500/10 text-green-500 text-sm font-medium mb-4">
           <CheckCircle className="w-4 h-4 mr-2" />
-          Crawl Completed Successfully
+          {t('header.completed')}
         </div>
         <h2 className="text-3xl font-bold text-foreground mb-2">
-          Results for {result.startUrl?.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+          {t('header.resultsFor')} {result.startUrl?.replace(/^https?:\/\//, '').replace(/\/$/, '')}
         </h2>
         <p className="text-muted-foreground">
-          Analyzed {result.totalPages} pages in {((result.crawlTime || 0) / 1000).toFixed(1)} seconds
+          {t('header.analyzed', { pages: result.totalPages, seconds: ((result.crawlTime || 0) / 1000).toFixed(1) })}
         </p>
       </motion.div>
 
@@ -177,7 +179,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
         
         <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-medium text-muted-foreground mb-1">SEO Health Score</h3>
+            <h3 className="text-lg font-medium text-muted-foreground mb-1">{t('healthScore.title')}</h3>
             <div className="flex items-baseline gap-3">
               <span className={`text-6xl font-bold ${getScoreColor(healthScore)}`}>{healthScore}</span>
               <span className="text-2xl text-muted-foreground">/100</span>
@@ -194,25 +196,25 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
               <div className="text-2xl font-bold text-red-500 group-hover:scale-110 transition-transform">
                 {result.issues.missing_titles + result.issues.missing_h1 + result.issues.missing_meta_descriptions + result.issues.images_without_alt}
               </div>
-              <div className="text-xs text-muted-foreground group-hover:text-red-400">Issues Found</div>
+              <div className="text-xs text-muted-foreground group-hover:text-red-400">{t('stats.issuesFound')}</div>
             </button>
             <div className="p-3 rounded-lg bg-background/50">
               <div className="text-2xl font-bold text-foreground">{result.totalPages}</div>
-              <div className="text-xs text-muted-foreground">Pages Crawled</div>
+              <div className="text-xs text-muted-foreground">{t('stats.pagesCrawled')}</div>
             </div>
             <div className="p-3 rounded-lg bg-background/50">
               <div className="text-2xl font-bold text-green-500">{result.successfulPages}</div>
-              <div className="text-xs text-muted-foreground">Successful</div>
+              <div className="text-xs text-muted-foreground">{t('stats.successful')}</div>
             </div>
             <div className="p-3 rounded-lg bg-background/50">
               <div className="text-2xl font-bold text-red-500">{result.failedPages}</div>
-              <div className="text-xs text-muted-foreground">Failed</div>
+              <div className="text-xs text-muted-foreground">{t('stats.failed')}</div>
             </div>
             <div className="p-3 rounded-lg bg-background/50">
               <div className={`text-2xl font-bold ${getLoadTimeColor(result.averageLoadTime)}`}>
                 {result.averageLoadTime?.toFixed(0) || 0}ms
               </div>
-              <div className="text-xs text-muted-foreground">Avg Load Time</div>
+              <div className="text-xs text-muted-foreground">{t('stats.avgLoadTime')}</div>
             </div>
           </div>
         </div>
@@ -230,7 +232,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                 : 'text-muted-foreground hover:text-foreground'
             }`}
           >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {t(`tabs.${tab}`)}
             {activeTab === tab && (
               <motion.div 
                 layoutId="activeTab"
@@ -259,7 +261,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground">robots.txt</h4>
-                      <p className="text-sm text-muted-foreground">Search engine directives</p>
+                      <p className="text-sm text-muted-foreground">{t('technical.robotsDescription')}</p>
                     </div>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -267,7 +269,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                       ? 'bg-green-500/10 text-green-500' 
                       : 'bg-red-500/10 text-red-500'
                   }`}>
-                    {result.robotsTxt?.found ? 'Found' : 'Missing'}
+                    {result.robotsTxt?.found ? t('technical.found') : t('technical.missing')}
                   </span>
                 </div>
               </div>
@@ -280,7 +282,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground">sitemap.xml</h4>
-                      <p className="text-sm text-muted-foreground">Page discovery for crawlers</p>
+                      <p className="text-sm text-muted-foreground">{t('technical.sitemapDescription')}</p>
                     </div>
                   </div>
                   <span className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -288,7 +290,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                       ? 'bg-green-500/10 text-green-500' 
                       : 'bg-red-500/10 text-red-500'
                   }`}>
-                    {result.sitemapXml?.found ? 'Found' : 'Missing'}
+                    {result.sitemapXml?.found ? t('technical.found') : t('technical.missing')}
                   </span>
                 </div>
               </div>
@@ -303,14 +305,14 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
             >
               <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-orange-500" />
-                Issues Found
+                {t('overview.issuesFound')}
               </h3>
               
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <FileText className="w-4 h-4 text-red-500" />
-                    <span className="text-sm text-muted-foreground">Missing Titles</span>
+                    <span className="text-sm text-muted-foreground">{t('issues.missingTitles')}</span>
                   </div>
                   <div className="text-2xl font-bold text-red-500">{result.issues.missing_titles}</div>
                 </div>
@@ -318,7 +320,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                 <div className="p-4 rounded-lg bg-orange-500/5 border border-orange-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <BarChart3 className="w-4 h-4 text-orange-500" />
-                    <span className="text-sm text-muted-foreground">Missing H1</span>
+                    <span className="text-sm text-muted-foreground">{t('issues.missingH1')}</span>
                   </div>
                   <div className="text-2xl font-bold text-orange-500">{result.issues.missing_h1}</div>
                 </div>
@@ -326,7 +328,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                 <div className="p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <Search className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm text-muted-foreground">Missing Meta</span>
+                    <span className="text-sm text-muted-foreground">{t('issues.missingMeta')}</span>
                   </div>
                   <div className="text-2xl font-bold text-yellow-500">{result.issues.missing_meta_descriptions}</div>
                 </div>
@@ -334,7 +336,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                 <div className="p-4 rounded-lg bg-purple-500/5 border border-purple-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <Image className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm text-muted-foreground">No Alt Text</span>
+                    <span className="text-sm text-muted-foreground">{t('issues.noAltText')}</span>
                   </div>
                   <div className="text-2xl font-bold text-purple-500">{result.issues.images_without_alt}</div>
                 </div>
@@ -365,7 +367,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                     {getStatusIcon(page.status)}
                     <div className="text-left min-w-0">
                       <div className="font-medium text-foreground truncate max-w-md">
-                        {page.title || 'No Title'}
+                        {page.title || t('pages.noTitle')}
                       </div>
                       <div className="text-sm text-muted-foreground truncate max-w-md">
                         {page.url.replace(result.startUrl, '/')}
@@ -383,7 +385,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                         ? 'bg-red-500/10 text-red-500'
                         : 'bg-yellow-500/10 text-yellow-500'
                     }`}>
-                      {page.status || 'Error'}
+                      {page.status || t('pages.error')}
                     </span>
                     {expandedPage === page.url ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
@@ -398,38 +400,38 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                   >
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">H1 Tags:</span>
+                        <span className="text-muted-foreground">{t('pages.h1Tags')}:</span>
                         <span className={`ml-2 font-medium ${page.h1_count === 1 ? 'text-green-500' : page.h1_count === 0 ? 'text-red-500' : 'text-yellow-500'}`}>
                           {page.h1_count}
                         </span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">H2 Tags:</span>
+                        <span className="text-muted-foreground">{t('pages.h2Tags')}:</span>
                         <span className="ml-2 font-medium">{page.h2_count}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Word Count:</span>
+                        <span className="text-muted-foreground">{t('pages.wordCount')}:</span>
                         <span className="ml-2 font-medium">{page.word_count}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Images:</span>
+                        <span className="text-muted-foreground">{t('pages.images')}:</span>
                         <span className="ml-2 font-medium">{page.images_total}</span>
                         {page.images_missing_alt > 0 && (
-                          <span className="ml-1 text-red-500">({page.images_missing_alt} no alt)</span>
+                          <span className="ml-1 text-red-500">({page.images_missing_alt} {t('pages.noAlt')})</span>
                         )}
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Internal Links:</span>
+                        <span className="text-muted-foreground">{t('pages.internalLinks')}:</span>
                         <span className="ml-2 font-medium">{page.internal_links}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">External Links:</span>
+                        <span className="text-muted-foreground">{t('pages.externalLinks')}:</span>
                         <span className="ml-2 font-medium">{page.external_links}</span>
                       </div>
                       <div className="col-span-2">
-                        <span className="text-muted-foreground">Meta Description:</span>
+                        <span className="text-muted-foreground">{t('pages.metaDescription')}:</span>
                         <span className={`ml-2 ${page.meta_description ? 'text-foreground' : 'text-red-500'}`}>
-                          {page.meta_description ? (page.meta_description.length > 50 ? page.meta_description.substring(0, 50) + '...' : page.meta_description) : 'Missing'}
+                          {page.meta_description ? (page.meta_description.length > 50 ? page.meta_description.substring(0, 50) + '...' : page.meta_description) : t('pages.missing')}
                         </span>
                       </div>
                     </div>
@@ -440,7 +442,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                       >
-                        Open page <ExternalLink className="w-3 h-3" />
+                        {t('pages.openPage')} <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
                   </motion.div>
@@ -461,7 +463,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
               <div className="bg-card rounded-xl border p-6">
                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <XCircle className="w-4 h-4 text-red-500" />
-                  Pages Missing Title ({result.pages.filter(p => !p.title).length})
+                  {t('issuesTab.pagesMissingTitle', { count: result.pages.filter(p => !p.title).length })}
                 </h4>
                 <ul className="space-y-2">
                   {result.pages?.filter(p => !p.title).map(page => (
@@ -479,7 +481,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
               <div className="bg-card rounded-xl border p-6">
                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-yellow-500" />
-                  Pages Missing Meta Description ({result.pages.filter(p => !p.meta_description).length})
+                  {t('issuesTab.pagesMissingMeta', { count: result.pages.filter(p => !p.meta_description).length })}
                 </h4>
                 <ul className="space-y-2">
                   {result.pages?.filter(p => !p.meta_description).slice(0, 10).map(page => (
@@ -490,7 +492,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                   ))}
                   {result.pages.filter(p => !p.meta_description).length > 10 && (
                     <li className="text-sm text-muted-foreground">
-                      ... and {result.pages.filter(p => !p.meta_description).length - 10} more
+                      {t('issuesTab.andMore', { count: result.pages.filter(p => !p.meta_description).length - 10 })}
                     </li>
                   )}
                 </ul>
@@ -502,7 +504,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
               <div className="bg-card rounded-xl border p-6">
                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 text-orange-500" />
-                  Pages Missing H1 Tag ({result.pages.filter(p => !p.h1_presence).length})
+                  {t('issuesTab.pagesMissingH1', { count: result.pages.filter(p => !p.h1_presence).length })}
                 </h4>
                 <ul className="space-y-2">
                   {result.pages?.filter(p => !p.h1_presence).slice(0, 10).map(page => (
@@ -522,8 +524,8 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
              result.issues.images_without_alt === 0 && (
               <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-8 text-center">
                 <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                <h4 className="text-lg font-semibold text-foreground mb-2">No Critical Issues Found!</h4>
-                <p className="text-muted-foreground">Your website passed all basic SEO checks.</p>
+                <h4 className="text-lg font-semibold text-foreground mb-2">{t('issuesTab.noIssuesTitle')}</h4>
+                <p className="text-muted-foreground">{t('issuesTab.noIssuesDescription')}</p>
               </div>
             )}
           </motion.div>
@@ -542,21 +544,21 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-muted text-foreground hover:bg-muted/80 transition-colors font-medium"
         >
           <RefreshCw className="w-4 h-4" />
-          Crawl Another Site
+          {t('actions.crawlAnother')}
         </button>
         <button
           onClick={() => generatePdfReport(result)}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
         >
           <FileDown className="w-4 h-4" />
-          Export PDF Report
+          {t('actions.exportPdf')}
         </button>
         <Link
           href="/dashboard"
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all font-medium shadow-lg hover:shadow-xl"
         >
           <Crown className="w-4 h-4" />
-          Get Full Report
+          {t('actions.getFullReport')}
         </Link>
       </motion.div>
     </div>

@@ -445,6 +445,368 @@
       }
     }
   },
+  "liteAudit": {
+    "search": {
+      "placeholder": "Masukkan URL website Anda (contoh: contoh.com)",
+      "button": "Analisis Sekarang",
+      "analyzing": "Menganalisis...",
+      "error": {
+        "invalidUrl": "Mohon masukkan URL yang valid (contoh: contoh.com, www.contoh.com atau https://contoh.com)",
+        "failed": "Gagal menganalisis website",
+        "invalidResponse": "Respons tidak valid dari server"
+      }
+    },
+    "visualization": {
+      "auditing": "Sedang Mengaudit",
+      "checkItems": {
+        "pageAccessibility": "Aksesibilitas Halaman",
+        "metaTags": "Tag Meta",
+        "htmlStructure": "Struktur HTML",
+        "internalLinks": "Link Internal",
+        "imageOptimization": "Optimasi Gambar",
+        "mobileFriendly": "Ramah Mobile",
+        "pageSpeed": "Kecepatan Halaman",
+        "seoScore": "Skor SEO"
+      },
+      "status": {
+        "connecting": "Menghubungkan ke website...",
+        "parsingHtml": "Menganalisis HTML dan mengekstrak data...",
+        "analyzingMeta": "Menganalisis tag meta...",
+        "runningSeo": "Menjalankan pemeriksaan SEO...",
+        "calculatingScores": "Menghitung skor...",
+        "auditComplete": "Audit selesai!"
+      },
+      "activityFeed": {
+        "fetching": "→ Menghubungkan ke website...",
+        "analyzing": "→ Menganalisis HTML dan mengekstrak data...",
+        "processing": "→ Menjalankan pemeriksaan SEO dan validasi...",
+        "completed": "✓ Audit selesai! Menyiapkan hasil..."
+      },
+      "tags": {
+        "dnsLookup": "Pencarian DNS",
+        "sslCheck": "Pemeriksaan SSL",
+        "metaTags": "Tag Meta",
+        "headings": "Heading",
+        "links": "Link",
+        "performance": "Performa",
+        "accessibility": "Aksesibilitas",
+        "mobile": "Mobile",
+        "ready": "✓ Siap"
+      },
+      "stats": {
+        "checksDone": "Pemeriksaan Selesai",
+        "issuesFound": "Masalah Ditemukan",
+        "quickWins": "Quick Wins"
+      }
+    },
+    "errors": {
+      "invalidResults": "Error: Hasil audit tidak valid"
+    },
+    "stats": {
+      "totalChecks": "Total Pemeriksaan",
+      "passed": "Lulus",
+      "issues": "Masalah",
+      "loadTime": "Waktu Muat"
+    },
+    "results": {
+      "loadingPreview": "Memuat pratinjau...",
+      "seoPerformanceScore": "Skor Performa SEO",
+      "categoryBreakdown": "Rincian Kategori",
+      "passedOfTotal": "{passed} dari {total} lulus",
+      "criticalIssues": "Masalah Kritis",
+      "quickWins": "Quick Wins"
+    },
+    "cta": {
+      "unlockPremium": "Buka Fitur Premium",
+      "getCompleteReport": "Dapatkan Laporan SEO Lengkap Anda",
+      "signUpDescription": "Daftar gratis untuk membuka Core Web Vitals, audit aksesibilitas lengkap, crawling, dan rekomendasi detail",
+      "signUpFree": "Daftar Gratis",
+      "downloadPdf": "Unduh PDF",
+      "tryAnotherUrl": "Coba URL Lain"
+    },
+    "pdf": {
+      "title": "Laporan Performa SEO",
+      "generatedOn": "Dibuat pada",
+      "grade": "Nilai",
+      "excellent": "Sangat Baik - Situs Anda dioptimalkan dengan baik untuk mesin pencari",
+      "good": "Baik - Beberapa perbaikan disarankan untuk peringkat lebih baik",
+      "needsWork": "Perlu Perbaikan - Beberapa masalah mempengaruhi SEO Anda",
+      "poor": "Buruk - Masalah kritis memerlukan perhatian segera",
+      "totalChecks": "Total Pemeriksaan",
+      "passed": "Lulus",
+      "issuesFound": "Masalah Ditemukan",
+      "loadTime": "Waktu Muat",
+      "criticalIssues": "Masalah Kritis",
+      "quickWins": "Quick Wins",
+      "categoryBreakdown": "Rincian Kategori",
+      "moreChecks": "+{count} pemeriksaan lagi",
+      "contentAnalysis": "Analisis Konten",
+      "wordCount": "Jumlah Kata",
+      "readabilityScore": "Skor Keterbacaan",
+      "htmlSize": "Ukuran HTML",
+      "topKeywords": "Kata Kunci Utama",
+      "footer": "Dibuat oleh AI SEO Turbo",
+      "footerNote": "Ini adalah audit ringan. Daftar gratis untuk Core Web Vitals, audit aksesibilitas, dan rekomendasi detail."
+    }
+  },
+  "crawlVisualization": {
+    "header": {
+      "title": "Crawler Situs Aktif",
+      "status": {
+        "analyzing": "Menganalisis",
+        "crawling": "Meng-crawl"
+      }
+    },
+    "progress": {
+      "label": "Progres",
+      "complete": "% selesai"
+    },
+    "actions": {
+      "initializingCrawler": "Menginisialisasi crawler...",
+      "connectingToServer": "Menghubungkan ke server...",
+      "checkingRobots": "Memeriksa robots.txt...",
+      "fetchingSitemap": "Mengambil sitemap.xml...",
+      "startingPageCrawl": "Memulai crawling halaman...",
+      "extractingMetaTags": "Mengekstrak tag meta",
+      "analyzingHeadingStructure": "Menganalisis struktur heading",
+      "checkingInternalLinks": "Memeriksa link internal",
+      "scanningImagesAlt": "Memindai gambar untuk teks alt",
+      "validatingStructuredData": "Memvalidasi data terstruktur",
+      "measuringPerformance": "Mengukur performa halaman",
+      "checkingMobileResponsiveness": "Memeriksa responsivitas mobile",
+      "analyzingContentQuality": "Menganalisis kualitas konten"
+    },
+    "stats": {
+      "pages": "Halaman",
+      "links": "Link",
+      "images": "Gambar",
+      "issues": "Masalah"
+    },
+    "activity": {
+      "title": "Aktivitas Live",
+      "realTime": "Real-time",
+      "crawling": "Meng-crawl:",
+      "metaTagsValid": "✓ Tag meta valid",
+      "missingAltText": "⚠ Teks alt hilang pada {count} gambar",
+      "h1TagPresent": "✓ Tag H1 ada",
+      "longTitleTag": "⚠ Tag judul terlalu panjang ({chars} karakter)",
+      "internalLinks": "✓ Link internal: {count}"
+    },
+    "generatingReport": "Membuat laporan...",
+    "currentlyAnalyzing": "Saat ini:"
+  },
+  "crawlResults": {
+    "completed": {
+      "badge": "Crawl Berhasil Diselesaikan",
+      "resultsFor": "Hasil untuk {url}",
+      "analyzedIn": "Menganalisis {pages} halaman dalam {seconds} detik"
+    },
+    "healthScore": {
+      "title": "Skor Kesehatan SEO",
+      "excellent": "Sangat Baik",
+      "good": "Baik",
+      "needsWork": "Perlu Perbaikan",
+      "poor": "Buruk"
+    },
+    "overview": {
+      "issuesFound": "Masalah Ditemukan",
+      "pagesCrawled": "Halaman Di-crawl",
+      "successful": "Berhasil",
+      "failed": "Gagal",
+      "avgLoadTime": "Waktu Muat Rata-rata"
+    },
+    "tabs": {
+      "overview": "Ringkasan",
+      "pages": "Halaman",
+      "issues": "Masalah"
+    },
+    "technical": {
+      "robotsTxt": {
+        "title": "robots.txt",
+        "description": "Direktif mesin pencari",
+        "found": "Ditemukan",
+        "missing": "Tidak Ada"
+      },
+      "sitemapXml": {
+        "title": "sitemap.xml",
+        "description": "Penemuan halaman untuk crawler",
+        "found": "Ditemukan",
+        "missing": "Tidak Ada"
+      }
+    },
+    "issuesSummary": {
+      "title": "Masalah Ditemukan",
+      "missingTitles": "Judul Hilang",
+      "missingH1": "H1 Hilang",
+      "missingMeta": "Meta Hilang",
+      "noAltText": "Tanpa Teks Alt"
+    },
+    "pages": {
+      "noTitle": "Tanpa Judul",
+      "loadTime": "ms",
+      "h1Tags": "Tag H1:",
+      "h2Tags": "Tag H2:",
+      "wordCount": "Jumlah Kata:",
+      "images": "Gambar:",
+      "noAlt": "tanpa alt",
+      "internalLinks": "Link Internal:",
+      "externalLinks": "Link Eksternal:",
+      "metaDescription": "Deskripsi Meta:",
+      "missing": "Hilang",
+      "openPage": "Buka halaman"
+    },
+    "issuesDetail": {
+      "pagesMissingTitle": "Halaman Tanpa Judul",
+      "pagesMissingMeta": "Halaman Tanpa Deskripsi Meta",
+      "pagesMissingH1": "Halaman Tanpa Tag H1",
+      "andMore": "... dan {count} lagi"
+    },
+    "noIssues": {
+      "title": "Tidak Ditemukan Masalah Kritis!",
+      "description": "Website Anda lulus semua pemeriksaan SEO dasar."
+    },
+    "actions": {
+      "crawlAnother": "Crawl Situs Lain",
+      "exportPdf": "Ekspor Laporan PDF",
+      "getFullReport": "Dapatkan Laporan Lengkap"
+    },
+    "pdf": {
+      "title": "Laporan Crawl SEO",
+      "generatedOn": "Dibuat pada",
+      "healthScore": "Skor Kesehatan SEO",
+      "excellent": "Sangat Baik - Situs Anda dioptimalkan dengan baik",
+      "good": "Baik - Beberapa perbaikan disarankan",
+      "needsWork": "Perlu Perbaikan - Beberapa masalah ditemukan",
+      "poor": "Buruk - Masalah kritis memerlukan perhatian",
+      "issuesFound": "Masalah Ditemukan",
+      "pagesCrawled": "Halaman Di-crawl",
+      "successful": "Berhasil",
+      "failed": "Gagal",
+      "avgLoadTime": "Waktu Muat Rata-rata",
+      "technicalSeoChecks": "Pemeriksaan Teknis SEO",
+      "issuesSummary": "Ringkasan Masalah",
+      "missingTitles": "Judul Hilang",
+      "missingH1": "H1 Hilang",
+      "missingMeta": "Deskripsi Meta Hilang",
+      "imagesNoAlt": "Gambar Tanpa Alt",
+      "pagesAnalyzed": "Halaman Dianalisis",
+      "title": "Judul",
+      "status": "Status",
+      "loadTime": "Waktu Muat",
+      "h1": "H1",
+      "wordCount": "Kata",
+      "images": "Gambar",
+      "links": "Link",
+      "noTitle": "Tanpa Judul",
+      "pass": "Lulus",
+      "fail": "Gagal",
+      "footer": "Dibuat oleh AI SEO Turbo",
+      "footerNote": "Daftar untuk rekomendasi detail dan pemantauan berkelanjutan."
+    },
+    "visualization": {
+      "header": {
+        "title": "Crawler Situs Aktif"
+      },
+      "status": {
+        "crawling": "Menjelajah",
+        "analyzing": "Menganalisis"
+      },
+      "progress": {
+        "label": "Progres",
+        "complete": "{percent}% selesai"
+      },
+      "statsGrid": {
+        "pages": "Halaman",
+        "links": "Tautan",
+        "images": "Gambar",
+        "issues": "Masalah"
+      },
+      "activity": {
+        "title": "Aktivitas Langsung",
+        "realtime": "Real-time"
+      },
+      "current": {
+        "label": "Saat ini"
+      },
+      "actions": {
+        "initializing": "Menginisialisasi crawler...",
+        "connecting": "Menghubungkan ke server...",
+        "checkingRobots": "Memeriksa robots.txt...",
+        "fetchingSitemap": "Mengambil sitemap.xml...",
+        "startingCrawl": "Memulai crawl halaman...",
+        "analyzing": "Menganalisis hasil...",
+        "generatingReport": "Membuat laporan..."
+      },
+      "pageActions": {
+        "extractingMeta": "Mengekstrak tag meta",
+        "analyzingHeadings": "Menganalisis struktur heading",
+        "checkingLinks": "Memeriksa tautan internal",
+        "scanningImages": "Memindai gambar untuk teks alt",
+        "validatingData": "Memvalidasi data terstruktur",
+        "measuringPerformance": "Mengukur performa halaman",
+        "checkingMobile": "Memeriksa responsivitas mobile",
+        "analyzingContent": "Menganalisis kualitas konten"
+      },
+      "checks": {
+        "metaValid": "✓ Tag meta valid",
+        "missingAlt": "⚠ Teks alt tidak ada pada {count} gambar",
+        "h1Present": "✓ Tag H1 ada",
+        "longTitle": "⚠ Judul panjang ({chars} karakter)",
+        "internalLinks": "✓ Tautan internal: {count}"
+      }
+    },
+    "header": {
+      "completed": "Crawl Berhasil Diselesaikan",
+      "resultsFor": "Hasil untuk",
+      "analyzed": "Menganalisis {pages} halaman dalam {seconds} detik"
+    },
+    "stats": {
+      "issuesFound": "Masalah Ditemukan",
+      "pagesCrawled": "Halaman Dijelajahi",
+      "successful": "Berhasil",
+      "failed": "Gagal",
+      "avgLoadTime": "Waktu Muat Rata-rata"
+    },
+    "technical": {
+      "robotsDescription": "Petunjuk mesin pencari",
+      "sitemapDescription": "Penemuan halaman untuk crawler",
+      "found": "Ditemukan",
+      "missing": "Tidak Ada"
+    },
+    "issues": {
+      "missingTitles": "Judul Tidak Ada",
+      "missingH1": "H1 Tidak Ada",
+      "missingMeta": "Meta Tidak Ada",
+      "noAltText": "Tanpa Teks Alt"
+    },
+    "pages": {
+      "noTitle": "Tanpa Judul",
+      "error": "Error",
+      "h1Tags": "Tag H1",
+      "h2Tags": "Tag H2",
+      "wordCount": "Jumlah Kata",
+      "images": "Gambar",
+      "noAlt": "tanpa alt",
+      "internalLinks": "Tautan Internal",
+      "externalLinks": "Tautan Eksternal",
+      "metaDescription": "Deskripsi Meta",
+      "missing": "Tidak Ada",
+      "openPage": "Buka halaman"
+    },
+    "issuesTab": {
+      "pagesMissingTitle": "Halaman Tanpa Judul ({count})",
+      "pagesMissingMeta": "Halaman Tanpa Deskripsi Meta ({count})",
+      "pagesMissingH1": "Halaman Tanpa Tag H1 ({count})",
+      "andMore": "... dan {count} lagi",
+      "noIssuesTitle": "Tidak Ada Masalah Kritis Ditemukan!",
+      "noIssuesDescription": "Situs web Anda lulus semua pemeriksaan SEO dasar."
+    },
+    "actions": {
+      "crawlAnother": "Crawl Situs Lain",
+      "exportPdf": "Ekspor Laporan PDF",
+      "getFullReport": "Dapatkan Laporan Lengkap"
+    }
+  },
   "help": {
     "meta": {
       "title": "Pusat Bantuan - AI SEO Turbo",
@@ -4599,6 +4961,7 @@
         "maxPagesLabel": "Maksimum Halaman untuk Di-crawl",
         "includeSubdomains": "Sertakan Subdomain",
         "startCrawl": "Mulai Crawling",
+        "crawling": "Sedang Crawling...",
         "footer": "Data website Anda diproses dengan aman dan tidak pernah disimpan secara permanen."
       },
       "progress": {

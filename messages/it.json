@@ -469,6 +469,368 @@
       "description": "Guida completa per la risoluzione dei problemi di accesso in AISEOTurbo. Soluzioni per credenziali non valide, blocchi account, problemi 2FA e reset password."
     }
   },
+  "liteAudit": {
+    "search": {
+      "placeholder": "Inserisci l'URL del tuo sito web (es. esempio.it)",
+      "button": "Analizza ora",
+      "analyzing": "Analisi in corso...",
+      "error": {
+        "invalidUrl": "Inserisci un URL valido (es. esempio.it, www.esempio.it o https://esempio.it)",
+        "failed": "Impossibile analizzare il sito web",
+        "invalidResponse": "Risposta non valida dal server"
+      }
+    },
+    "visualization": {
+      "auditing": "Audit in corso",
+      "checkItems": {
+        "pageAccessibility": "Accessibilità pagina",
+        "metaTags": "Meta tag",
+        "htmlStructure": "Struttura HTML",
+        "internalLinks": "Link interni",
+        "imageOptimization": "Ottimizzazione immagini",
+        "mobileFriendly": "Compatibile con mobile",
+        "pageSpeed": "Velocità pagina",
+        "seoScore": "Punteggio SEO"
+      },
+      "status": {
+        "connecting": "Connessione al sito web...",
+        "parsingHtml": "Analisi HTML ed estrazione dati...",
+        "analyzingMeta": "Analisi meta tag...",
+        "runningSeo": "Esecuzione controlli SEO...",
+        "calculatingScores": "Calcolo punteggi...",
+        "auditComplete": "Audit completato!"
+      },
+      "activityFeed": {
+        "fetching": "→ Connessione al sito web...",
+        "analyzing": "→ Analisi HTML ed estrazione dati...",
+        "processing": "→ Esecuzione controlli SEO e validazioni...",
+        "completed": "✓ Audit completato! Preparazione risultati..."
+      },
+      "tags": {
+        "dnsLookup": "Ricerca DNS",
+        "sslCheck": "Verifica SSL",
+        "metaTags": "Meta tag",
+        "headings": "Intestazioni",
+        "links": "Link",
+        "performance": "Prestazioni",
+        "accessibility": "Accessibilità",
+        "mobile": "Mobile",
+        "ready": "✓ Pronto"
+      },
+      "stats": {
+        "checksDone": "Controlli completati",
+        "issuesFound": "Problemi trovati",
+        "quickWins": "Quick Wins"
+      }
+    },
+    "errors": {
+      "invalidResults": "Errore: Risultati audit non validi"
+    },
+    "stats": {
+      "totalChecks": "Controlli totali",
+      "passed": "Superati",
+      "issues": "Problemi",
+      "loadTime": "Tempo di caricamento"
+    },
+    "results": {
+      "loadingPreview": "Caricamento anteprima...",
+      "seoPerformanceScore": "Punteggio prestazioni SEO",
+      "categoryBreakdown": "Ripartizione per categoria",
+      "passedOfTotal": "{passed} su {total} superati",
+      "criticalIssues": "Problemi critici",
+      "quickWins": "Quick Wins"
+    },
+    "cta": {
+      "unlockPremium": "Sblocca funzionalità Premium",
+      "getCompleteReport": "Ottieni il tuo report SEO completo",
+      "signUpDescription": "Registrati gratis per sbloccare Core Web Vitals, audit accessibilità completo, crawling e raccomandazioni dettagliate",
+      "signUpFree": "Registrati gratis",
+      "downloadPdf": "Scarica PDF",
+      "tryAnotherUrl": "Prova un altro URL"
+    },
+    "pdf": {
+      "title": "Report prestazioni SEO",
+      "generatedOn": "Generato il",
+      "grade": "Voto",
+      "excellent": "Eccellente - Il tuo sito è ben ottimizzato per i motori di ricerca",
+      "good": "Buono - Si consigliano alcuni miglioramenti per ranking migliori",
+      "needsWork": "Da migliorare - Diversi problemi influenzano il tuo SEO",
+      "poor": "Scarso - Problemi critici richiedono attenzione immediata",
+      "totalChecks": "Controlli totali",
+      "passed": "Superati",
+      "issuesFound": "Problemi trovati",
+      "loadTime": "Tempo di caricamento",
+      "criticalIssues": "Problemi critici",
+      "quickWins": "Quick Wins",
+      "categoryBreakdown": "Ripartizione per categoria",
+      "moreChecks": "+{count} altri controlli",
+      "contentAnalysis": "Analisi contenuto",
+      "wordCount": "Conteggio parole",
+      "readabilityScore": "Punteggio leggibilità",
+      "htmlSize": "Dimensione HTML",
+      "topKeywords": "Parole chiave principali",
+      "footer": "Generato da AI SEO Turbo",
+      "footerNote": "Questo è un audit lite. Registrati gratis per Core Web Vitals, audit accessibilità e raccomandazioni dettagliate."
+    }
+  },
+  "crawlVisualization": {
+    "header": {
+      "title": "Crawler sito attivo",
+      "status": {
+        "analyzing": "Analisi in corso",
+        "crawling": "Scansione in corso"
+      }
+    },
+    "progress": {
+      "label": "Progresso",
+      "complete": "% completato"
+    },
+    "actions": {
+      "initializingCrawler": "Inizializzazione crawler...",
+      "connectingToServer": "Connessione al server...",
+      "checkingRobots": "Verifica robots.txt...",
+      "fetchingSitemap": "Recupero sitemap.xml...",
+      "startingPageCrawl": "Avvio scansione pagine...",
+      "extractingMetaTags": "Estrazione meta tag",
+      "analyzingHeadingStructure": "Analisi struttura intestazioni",
+      "checkingInternalLinks": "Verifica link interni",
+      "scanningImagesAlt": "Scansione immagini per testo alt",
+      "validatingStructuredData": "Validazione dati strutturati",
+      "measuringPerformance": "Misurazione prestazioni pagina",
+      "checkingMobileResponsiveness": "Verifica responsività mobile",
+      "analyzingContentQuality": "Analisi qualità contenuto"
+    },
+    "stats": {
+      "pages": "Pagine",
+      "links": "Link",
+      "images": "Immagini",
+      "issues": "Problemi"
+    },
+    "activity": {
+      "title": "Attività live",
+      "realTime": "Tempo reale",
+      "crawling": "Scansione:",
+      "metaTagsValid": "✓ Meta tag validi",
+      "missingAltText": "⚠ Testo alt mancante su {count} immagini",
+      "h1TagPresent": "✓ Tag H1 presente",
+      "longTitleTag": "⚠ Tag titolo lungo ({chars} caratteri)",
+      "internalLinks": "✓ Link interni: {count}"
+    },
+    "generatingReport": "Generazione report...",
+    "currentlyAnalyzing": "Attualmente:"
+  },
+  "crawlResults": {
+    "completed": {
+      "badge": "Scansione completata con successo",
+      "resultsFor": "Risultati per {url}",
+      "analyzedIn": "Analizzate {pages} pagine in {seconds} secondi"
+    },
+    "healthScore": {
+      "title": "Punteggio salute SEO",
+      "excellent": "Eccellente",
+      "good": "Buono",
+      "needsWork": "Da migliorare",
+      "poor": "Scarso"
+    },
+    "overview": {
+      "issuesFound": "Problemi trovati",
+      "pagesCrawled": "Pagine scansionate",
+      "successful": "Riuscite",
+      "failed": "Fallite",
+      "avgLoadTime": "Tempo medio di caricamento"
+    },
+    "tabs": {
+      "overview": "Panoramica",
+      "pages": "Pagine",
+      "issues": "Problemi"
+    },
+    "technical": {
+      "robotsTxt": {
+        "title": "robots.txt",
+        "description": "Direttive per i motori di ricerca",
+        "found": "Trovato",
+        "missing": "Mancante"
+      },
+      "sitemapXml": {
+        "title": "sitemap.xml",
+        "description": "Scoperta pagine per crawler",
+        "found": "Trovato",
+        "missing": "Mancante"
+      }
+    },
+    "issuesSummary": {
+      "title": "Problemi trovati",
+      "missingTitles": "Titoli mancanti",
+      "missingH1": "H1 mancante",
+      "missingMeta": "Meta mancante",
+      "noAltText": "Senza testo Alt"
+    },
+    "pages": {
+      "noTitle": "Senza titolo",
+      "loadTime": "ms",
+      "h1Tags": "Tag H1:",
+      "h2Tags": "Tag H2:",
+      "wordCount": "Conteggio parole:",
+      "images": "Immagini:",
+      "noAlt": "senza alt",
+      "internalLinks": "Link interni:",
+      "externalLinks": "Link esterni:",
+      "metaDescription": "Descrizione meta:",
+      "missing": "Mancante",
+      "openPage": "Apri pagina"
+    },
+    "issuesDetail": {
+      "pagesMissingTitle": "Pagine senza titolo",
+      "pagesMissingMeta": "Pagine senza descrizione meta",
+      "pagesMissingH1": "Pagine senza tag H1",
+      "andMore": "... e altri {count}"
+    },
+    "noIssues": {
+      "title": "Nessun problema critico trovato!",
+      "description": "Il tuo sito web ha superato tutti i controlli SEO di base."
+    },
+    "actions": {
+      "crawlAnother": "Scansiona un altro sito",
+      "exportPdf": "Esporta report PDF",
+      "getFullReport": "Ottieni report completo"
+    },
+    "pdf": {
+      "title": "Report scansione SEO",
+      "generatedOn": "Generato il",
+      "healthScore": "Punteggio salute SEO",
+      "excellent": "Eccellente - Il tuo sito è ben ottimizzato",
+      "good": "Buono - Si consigliano alcuni miglioramenti",
+      "needsWork": "Da migliorare - Trovati diversi problemi",
+      "poor": "Scarso - Problemi critici richiedono attenzione",
+      "issuesFound": "Problemi trovati",
+      "pagesCrawled": "Pagine scansionate",
+      "successful": "Riuscite",
+      "failed": "Fallite",
+      "avgLoadTime": "Tempo medio di caricamento",
+      "technicalSeoChecks": "Controlli tecnici SEO",
+      "issuesSummary": "Riepilogo problemi",
+      "missingTitles": "Titoli mancanti",
+      "missingH1": "H1 mancante",
+      "missingMeta": "Descrizioni meta mancanti",
+      "imagesNoAlt": "Immagini senza Alt",
+      "pagesAnalyzed": "Pagine analizzate",
+      "title": "Titolo",
+      "status": "Stato",
+      "loadTime": "Tempo di caricamento",
+      "h1": "H1",
+      "wordCount": "Parole",
+      "images": "Immagini",
+      "links": "Link",
+      "noTitle": "Senza titolo",
+      "pass": "Superato",
+      "fail": "Fallito",
+      "footer": "Generato da AI SEO Turbo",
+      "footerNote": "Registrati per raccomandazioni dettagliate e monitoraggio continuo."
+    },
+    "visualization": {
+      "header": {
+        "title": "Crawler Sito Attivo"
+      },
+      "status": {
+        "crawling": "Scansione",
+        "analyzing": "Analisi"
+      },
+      "progress": {
+        "label": "Progresso",
+        "complete": "{percent}% completato"
+      },
+      "statsGrid": {
+        "pages": "Pagine",
+        "links": "Link",
+        "images": "Immagini",
+        "issues": "Problemi"
+      },
+      "activity": {
+        "title": "Attività in tempo reale",
+        "realtime": "Tempo reale"
+      },
+      "current": {
+        "label": "Attualmente"
+      },
+      "actions": {
+        "initializing": "Inizializzazione crawler...",
+        "connecting": "Connessione al server...",
+        "checkingRobots": "Verifica robots.txt...",
+        "fetchingSitemap": "Recupero sitemap.xml...",
+        "startingCrawl": "Avvio scansione pagine...",
+        "analyzing": "Analisi risultati...",
+        "generatingReport": "Generazione report..."
+      },
+      "pageActions": {
+        "extractingMeta": "Estrazione tag meta",
+        "analyzingHeadings": "Analisi struttura intestazioni",
+        "checkingLinks": "Verifica link interni",
+        "scanningImages": "Scansione immagini per testo alt",
+        "validatingData": "Validazione dati strutturati",
+        "measuringPerformance": "Misurazione prestazioni pagina",
+        "checkingMobile": "Verifica reattività mobile",
+        "analyzingContent": "Analisi qualità contenuti"
+      },
+      "checks": {
+        "metaValid": "✓ Tag meta validi",
+        "missingAlt": "⚠ Testo alt mancante su {count} immagini",
+        "h1Present": "✓ Tag H1 presente",
+        "longTitle": "⚠ Titolo lungo ({chars} caratteri)",
+        "internalLinks": "✓ Link interni: {count}"
+      }
+    },
+    "header": {
+      "completed": "Scansione completata con successo",
+      "resultsFor": "Risultati per",
+      "analyzed": "Analizzate {pages} pagine in {seconds} secondi"
+    },
+    "stats": {
+      "issuesFound": "Problemi trovati",
+      "pagesCrawled": "Pagine scansionate",
+      "successful": "Riuscite",
+      "failed": "Fallite",
+      "avgLoadTime": "Tempo medio di caricamento"
+    },
+    "technical": {
+      "robotsDescription": "Direttive per i motori di ricerca",
+      "sitemapDescription": "Scoperta pagine per crawler",
+      "found": "Trovato",
+      "missing": "Mancante"
+    },
+    "issues": {
+      "missingTitles": "Titoli mancanti",
+      "missingH1": "H1 mancante",
+      "missingMeta": "Meta mancante",
+      "noAltText": "Senza testo alt"
+    },
+    "pages": {
+      "noTitle": "Senza titolo",
+      "error": "Errore",
+      "h1Tags": "Tag H1",
+      "h2Tags": "Tag H2",
+      "wordCount": "Conteggio parole",
+      "images": "Immagini",
+      "noAlt": "senza alt",
+      "internalLinks": "Link interni",
+      "externalLinks": "Link esterni",
+      "metaDescription": "Meta description",
+      "missing": "Mancante",
+      "openPage": "Apri pagina"
+    },
+    "issuesTab": {
+      "pagesMissingTitle": "Pagine senza titolo ({count})",
+      "pagesMissingMeta": "Pagine senza meta description ({count})",
+      "pagesMissingH1": "Pagine senza tag H1 ({count})",
+      "andMore": "... e altri {count}",
+      "noIssuesTitle": "Nessun problema critico trovato!",
+      "noIssuesDescription": "Il tuo sito ha superato tutti i controlli SEO di base."
+    },
+    "actions": {
+      "crawlAnother": "Scansiona un altro sito",
+      "exportPdf": "Esporta PDF",
+      "getFullReport": "Ottieni report completo"
+    }
+  },
   "help": {
     "meta": {
       "title": "Centro assistenza - AI SEO Turbo",
@@ -4599,6 +4961,7 @@
         "maxPagesLabel": "Massimo Pagine da Scansionare",
         "includeSubdomains": "Includi Sottodomini",
         "startCrawl": "Avvia Scansione",
+        "crawling": "Scansione in corso...",
         "footer": "I dati del suo sito web vengono elaborati in sicurezza e non vengono mai memorizzati permanentemente."
       },
       "progress": {

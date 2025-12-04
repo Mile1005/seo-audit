@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 import { 
   Search, 
   FileText, 
@@ -38,15 +39,17 @@ interface CheckItem {
   delay: number
 }
 
-// Default progress for auto-animation mode
-const defaultProgress: AuditProgress = {
-  status: 'fetching',
-  currentStep: 'Connecting to website...',
-  progress: 0,
-  steps: ['Fetching', 'Analyzing', 'Processing', 'Complete']
-}
-
 export function AnimatedAuditVisualization({ progress: propProgress, url = 'Analyzing...' }: AnimatedAuditVisualizationProps) {
+  const t = useTranslations('liteAudit.visualization')
+  
+  // Default progress for auto-animation mode
+  const defaultProgress: AuditProgress = {
+    status: 'fetching',
+    currentStep: t('status.connecting'),
+    progress: 0,
+    steps: ['Fetching', 'Analyzing', 'Processing', 'Complete']
+  }
+  
   // Auto-animate when no progress prop is provided
   const [autoProgress, setAutoProgress] = useState<AuditProgress>(defaultProgress)
   const isAutoMode = !propProgress
@@ -57,12 +60,12 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
     if (!isAutoMode) return
 
     const stages = [
-      { progress: 15, status: 'fetching' as const, step: 'Connecting to website...' },
-      { progress: 35, status: 'analyzing' as const, step: 'Parsing HTML and extracting data...' },
-      { progress: 55, status: 'analyzing' as const, step: 'Analyzing meta tags...' },
-      { progress: 75, status: 'processing' as const, step: 'Running SEO checks...' },
-      { progress: 90, status: 'processing' as const, step: 'Calculating scores...' },
-      { progress: 100, status: 'completed' as const, step: 'Audit complete!' },
+      { progress: 15, status: 'fetching' as const, step: t('status.connecting') },
+      { progress: 35, status: 'analyzing' as const, step: t('status.parsingHtml') },
+      { progress: 55, status: 'analyzing' as const, step: t('status.analyzingMeta') },
+      { progress: 75, status: 'processing' as const, step: t('status.runningSeo') },
+      { progress: 90, status: 'processing' as const, step: t('status.calculatingScores') },
+      { progress: 100, status: 'completed' as const, step: t('status.auditComplete') },
     ]
 
     let currentStage = 0
@@ -79,60 +82,65 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
       } else {
         // Loop back for continuous animation
         currentStage = 0
-        setAutoProgress(defaultProgress)
+        setAutoProgress({
+          status: 'fetching',
+          currentStep: t('status.connecting'),
+          progress: 0,
+          steps: ['Fetching', 'Analyzing', 'Processing', 'Complete']
+        })
       }
     }, 1200)
 
     return () => clearInterval(interval)
-  }, [isAutoMode])
+  }, [isAutoMode, t])
   // Dynamic check items based on progress
   const getCheckItems = (): CheckItem[] => {
     const items: CheckItem[] = [
       {
         icon: <Globe className="w-5 h-5" />,
-        label: 'Page Accessibility',
+        label: t('checkItems.pageAccessibility'),
         status: progress.progress > 15 ? 'complete' : progress.progress > 10 ? 'checking' : 'pending',
         delay: 0.1
       },
       {
         icon: <FileText className="w-5 h-5" />,
-        label: 'Meta Tags',
+        label: t('checkItems.metaTags'),
         status: progress.progress > 35 ? 'complete' : progress.progress > 25 ? 'checking' : 'pending',
         delay: 0.2
       },
       {
         icon: <Code className="w-5 h-5" />,
-        label: 'HTML Structure',
+        label: t('checkItems.htmlStructure'),
         status: progress.progress > 50 ? 'complete' : progress.progress > 40 ? 'checking' : 'pending',
         delay: 0.3
       },
       {
         icon: <Link className="w-5 h-5" />,
-        label: 'Internal Links',
+        label: t('checkItems.internalLinks'),
         status: progress.progress > 65 ? 'complete' : progress.progress > 55 ? 'checking' : 'pending',
         delay: 0.4
       },
       {
         icon: <ImageIcon className="w-5 h-5" />,
-        label: 'Image Optimization',
+        label: t('checkItems.imageOptimization'),
         status: progress.progress > 75 ? 'complete' : progress.progress > 68 ? 'checking' : 'pending',
         delay: 0.5
       },
       {
         icon: <Smartphone className="w-5 h-5" />,
-        label: 'Mobile Friendly',
+        label: t('checkItems.mobileFriendly'),
         status: progress.progress > 85 ? 'complete' : progress.progress > 78 ? 'checking' : 'pending',
         delay: 0.6
       },
       {
         icon: <Zap className="w-5 h-5" />,
-        label: 'Page Speed',
+        label: t('checkItems.pageSpeed'),
         status: progress.progress > 92 ? 'complete' : progress.progress > 87 ? 'checking' : 'pending',
         delay: 0.7
       },
       {
         icon: <Eye className="w-5 h-5" />,
-        label: 'SEO Score',
+        label: t('checkItems.seoScore'),
         status: progress.progress > 98 ? 'complete' : progress.progress > 93 ? 'checking' : 'pending',
         delay: 0.8
       }
@@ -253,10 +261,10 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
             </div>
             <div className="flex-1 space-y-2">
               <p className="text-xs text-gray-600 dark:text-gray-400 font-mono">
-                {progress.status === 'fetching' && '→ Connecting to website...'}
-                {progress.status === 'analyzing' && '→ Parsing HTML and extracting data...'}
-                {progress.status === 'processing' && '→ Running SEO checks and validations...'}
-                {progress.status === 'completed' && '✓ Audit complete! Preparing results...'}
+                {progress.status === 'fetching' && t('activityFeed.fetching')}
+                {progress.status === 'analyzing' && t('activityFeed.analyzing')}
+                {progress.status === 'processing' && t('activityFeed.processing')}
+                {progress.status === 'completed' && t('activityFeed.completed')}
               </p>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -268,26 +276,26 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
                 >
                   {progress.status === 'fetching' && (
                     <>
-                      <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">DNS Lookup</span>
-                      <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">SSL Check</span>
+                      <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">{t('tags.dnsLookup')}</span>
+                      <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">{t('tags.sslCheck')}</span>
                     </>
                   )}
                   {progress.status === 'analyzing' && (
                     <>
-                      <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">Meta Tags</span>
-                      <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">Headings</span>
-                      <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">Links</span>
+                      <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">{t('tags.metaTags')}</span>
+                      <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">{t('tags.headings')}</span>
+                      <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">{t('tags.links')}</span>
                     </>
                   )}
                   {progress.status === 'processing' && (
                     <>
-                      <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded">Performance</span>
-                      <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded">Accessibility</span>
-                      <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded">Mobile</span>
+                      <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded">{t('tags.performance')}</span>
+                      <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded">{t('tags.accessibility')}</span>
+                      <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 rounded">{t('tags.mobile')}</span>
                     </>
                   )}
                   {progress.status === 'completed' && (
-                    <span className="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">✓ Ready</span>
+                    <span className="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">{t('tags.ready')}</span>
                   )}
                 </motion.div>
               </AnimatePresence>
@@ -312,7 +320,7 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
             >
               {Math.min(Math.floor(progress.progress / 10), 8)}
             </motion.div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Checks Done</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">{t('stats.checksDone')}</div>
           </motion.div>
           <motion.div
             initial={{ scale: 0 }}
@@ -327,7 +335,7 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
             >
               {Math.max(0, Math.floor(progress.progress / 15) - 1)}
             </motion.div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Issues Found</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">{t('stats.issuesFound')}</div>
           </motion.div>
           <motion.div
             initial={{ scale: 0 }}
@@ -342,7 +350,7 @@ export function AnimatedAuditVisualization({ progress: propProgress, url = 'Anal
             >
               ~{Math.floor(progress.progress / 20)}
             </motion.div>
-            <div className="text-xs text-gray-600 dark:text-gray-400">Quick Wins</div>
+            <div className="text-xs text-gray-600 dark:text-gray-400">{t('stats.quickWins')}</div>
           </motion.div>
         </div>
       </div>

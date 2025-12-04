@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useEffect, useState, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface CrawlProgress {
   status: 'idle' | 'starting' | 'crawling' | 'analyzing' | 'completed' | 'error'
@@ -41,12 +42,13 @@ interface ActivityItem {
 }
 
 export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawlVisualizationProps) {
+  const t = useTranslations('crawlResults.visualization');
   const [progress, setProgress] = useState<CrawlProgress>({
     status: 'starting',
     currentPage: url,
     pagesScanned: 0,
     totalPages: maxPages,
-    currentAction: 'Initializing crawler...'
+    currentAction: t('actions.initializing')
   })
   const [activities, setActivities] = useState<ActivityItem[]>([])
   const activityIdRef = useRef(0)
@@ -81,21 +83,21 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
   // Simulate crawling progress with realistic activities
   useEffect(() => {
     const actions = [
-      { action: 'Connecting to server...', type: 'info' as const },
-      { action: 'Checking robots.txt...', type: 'check' as const },
-      { action: 'Fetching sitemap.xml...', type: 'check' as const },
-      { action: 'Starting page crawl...', type: 'crawl' as const },
+      { action: t('actions.connecting'), type: 'info' as const },
+      { action: t('actions.checkingRobots'), type: 'check' as const },
+      { action: t('actions.fetchingSitemap'), type: 'check' as const },
+      { action: t('actions.startingCrawl'), type: 'crawl' as const },
     ]
 
     const pageActions = [
-      'Extracting meta tags',
-      'Analyzing heading structure',
-      'Checking internal links',
-      'Scanning images for alt text',
-      'Validating structured data',
-      'Measuring page performance',
-      'Checking mobile responsiveness',
-      'Analyzing content quality'
+      t('pageActions.extractingMeta'),
+      t('pageActions.analyzingHeadings'),
+      t('pageActions.checkingLinks'),
+      t('pageActions.scanningImages'),
+      t('pageActions.validatingData'),
+      t('pageActions.measuringPerformance'),
+      t('pageActions.checkingMobile'),
+      t('pageActions.analyzingContent')
     ]
 
     let currentStep = 0
@@ -149,11 +151,11 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
           if (Math.random() > 0.6) {
             setTimeout(() => {
               const checks = [
-                { type: 'success' as const, msg: `✓ Meta tags valid` },
-                { type: 'warning' as const, msg: `⚠ Missing alt text on ${Math.floor(Math.random() * 5) + 1} images` },
-                { type: 'success' as const, msg: `✓ H1 tag present` },
-                { type: 'warning' as const, msg: `⚠ Long title tag (${60 + Math.floor(Math.random() * 20)} chars)` },
-                { type: 'success' as const, msg: `✓ Internal links: ${Math.floor(Math.random() * 20) + 5}` },
+                { type: 'success' as const, msg: t('checks.metaValid') },
+                { type: 'warning' as const, msg: t('checks.missingAlt', { count: Math.floor(Math.random() * 5) + 1 }) },
+                { type: 'success' as const, msg: t('checks.h1Present') },
+                { type: 'warning' as const, msg: t('checks.longTitle', { chars: 60 + Math.floor(Math.random() * 20) }) },
+                { type: 'success' as const, msg: t('checks.internalLinks', { count: Math.floor(Math.random() * 20) + 5 }) },
               ]
               const check = checks[Math.floor(Math.random() * checks.length)]
               addActivity(check.type, check.msg)
@@ -164,9 +166,9 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
           setProgress(prev => ({
             ...prev,
             status: 'analyzing',
-            currentAction: 'Analyzing results...'
+            currentAction: t('actions.analyzing')
           }))
-          addActivity('info', 'Generating report...')
+          addActivity('info', t('actions.generatingReport'))
         }
       }, 600)
     }
@@ -228,14 +230,14 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
                   />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">Site Crawler Active</h3>
+                  <h3 className="font-semibold text-white">{t('header.title')}</h3>
                   <p className="text-sm text-gray-400 truncate max-w-[300px]">{url}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-500/30">
                 <Loader2 className="w-4 h-4 text-blue-400 animate-spin" />
                 <span className="text-sm font-medium text-blue-300">
-                  {progress.status === 'analyzing' ? 'Analyzing' : 'Crawling'}
+                  {progress.status === 'analyzing' ? t('status.analyzing') : t('status.crawling')}
                 </span>
               </div>
             </div>
@@ -244,9 +246,9 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
           {/* Progress section */}
           <div className="px-6 py-4 border-b border-white/5">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-sm text-gray-400">Progress</span>
+              <span className="text-sm text-gray-400">{t('progress.label')}</span>
               <span className="text-sm font-bold text-white">
-                {progressPercent}% complete
+                {t('progress.complete', { percent: progressPercent })}
               </span>
             </div>
             <div className="relative h-3 bg-slate-700/50 rounded-full overflow-hidden">
@@ -268,10 +270,10 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
           {/* Stats grid */}
           <div className="grid grid-cols-4 gap-px bg-white/5">
             {[
-              { icon: FileText, label: 'Pages', value: progress.pagesScanned, color: 'blue' },
-              { icon: Link, label: 'Links', value: Math.floor(progress.pagesScanned * 8.5), color: 'purple' },
-              { icon: ImageIcon, label: 'Images', value: Math.floor(progress.pagesScanned * 4.2), color: 'cyan' },
-              { icon: Code, label: 'Issues', value: Math.floor(progress.pagesScanned * 1.3), color: 'orange' },
+              { icon: FileText, label: t('statsGrid.pages'), value: progress.pagesScanned, color: 'blue' },
+              { icon: Link, label: t('statsGrid.links'), value: Math.floor(progress.pagesScanned * 8.5), color: 'purple' },
+              { icon: ImageIcon, label: t('statsGrid.images'), value: Math.floor(progress.pagesScanned * 4.2), color: 'cyan' },
+              { icon: Code, label: t('statsGrid.issues'), value: Math.floor(progress.pagesScanned * 1.3), color: 'orange' },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -303,10 +305,10 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
           {/* Activity feed */}
           <div className="p-4">
             <div className="flex items-center justify-between mb-3">
-              <h4 className="text-sm font-medium text-gray-400">Live Activity</h4>
+              <h4 className="text-sm font-medium text-gray-400">{t('activity.title')}</h4>
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-xs text-gray-500">Real-time</span>
+                <span className="text-xs text-gray-500">{t('activity.realtime')}</span>
               </div>
             </div>
             <div 
@@ -338,7 +340,7 @@ export function AnimatedCrawlVisualization({ url, maxPages = 25 }: AnimatedCrawl
             <div className="flex items-center gap-2 p-3 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20">
               <Loader2 className="w-4 h-4 text-blue-400 animate-spin flex-shrink-0" />
               <span className="text-sm text-gray-300 truncate">
-                Currently: <span className="text-blue-300 font-mono">{progress.currentPage}</span>
+                {t('current.label')}: <span className="text-blue-300 font-mono">{progress.currentPage}</span>
               </span>
             </div>
           </div>

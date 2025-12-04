@@ -8,6 +8,7 @@ import { ScoreRing } from '@/components/ui/score-ring'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface CheckResult {
   id: string
@@ -45,6 +46,7 @@ interface LiteAuditResultsProps {
 }
 
 export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAuditResultsProps) {
+  const t = useTranslations('liteAudit')
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set(Object.keys(results.checksByCategory || {}))
   )
@@ -105,7 +107,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
   if (!results || !results.score) {
     return (
       <div className="text-center p-8">
-        <p className="text-red-600">Error: Invalid audit results</p>
+        <p className="text-red-600">{t('errors.invalidResults')}</p>
       </div>
     )
   }
@@ -159,7 +161,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
             <div className="absolute inset-0 z-0 bg-slate-900">
               <div className="absolute inset-0 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 animate-pulse" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-slate-500 text-sm animate-pulse">Loading preview...</div>
+                <div className="text-slate-500 text-sm animate-pulse">{t('results.loadingPreview')}</div>
               </div>
             </div>
           )}
@@ -178,16 +180,16 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
             transition={{ delay: 0.8 }}
             className="mt-6 text-lg text-gray-300 relative z-10"
           >
-            SEO Performance Score
+            {t('results.seoPerformanceScore')}
           </motion.p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-200 dark:bg-gray-800">
           {[
-            { label: 'Total Checks', value: results.stats?.totalChecks || 0, color: 'text-gray-900 dark:text-white' },
-            { label: 'Passed', value: results.stats?.passedChecks || 0, color: 'text-green-600 dark:text-green-400' },
-            { label: 'Issues', value: results.stats?.failedChecks || 0, color: 'text-red-600 dark:text-red-400' },
-            { label: 'Load Time', value: `${results.performance?.loadTime || 0}s`, color: 'text-blue-600 dark:text-blue-400' },
+            { label: t('stats.totalChecks'), value: results.stats?.totalChecks || 0, color: 'text-gray-900 dark:text-white' },
+            { label: t('stats.passed'), value: results.stats?.passedChecks || 0, color: 'text-green-600 dark:text-green-400' },
+            { label: t('stats.issues'), value: results.stats?.failedChecks || 0, color: 'text-red-600 dark:text-red-400' },
+            { label: t('stats.loadTime'), value: `${results.performance?.loadTime || 0}s`, color: 'text-blue-600 dark:text-blue-400' },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -204,7 +206,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
 
         {results.checksByCategory && Object.keys(results.checksByCategory).length > 0 && (
           <div className="p-8 space-y-4">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Category Breakdown</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">{t('results.categoryBreakdown')}</h3>
             <div className="space-y-3">
               {Object.entries(results.checksByCategory).map(([category, data], idx) => {
                 const catScore = getCategoryScore(data)
@@ -230,7 +232,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
                         <div className="text-left">
                           <div className="font-semibold text-gray-900 dark:text-white">{category}</div>
                           <div className="text-sm text-gray-600 dark:text-gray-400">
-                            {data.passed} of {data.total} passed
+                            {t('results.passedOfTotal', { passed: data.passed, total: data.total })}
                           </div>
                         </div>
                       </div>
@@ -283,7 +285,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
           <div className="p-8 border-t border-gray-200 dark:border-gray-800">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-red-500" />
-              Critical Issues
+              {t('results.criticalIssues')}
             </h3>
             <div className="space-y-3">
               {results.criticalIssues.map((issue, i) => (
@@ -313,7 +315,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
           <div className="p-8 border-t border-gray-200 dark:border-gray-800">
             <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <Zap className="w-5 h-5 text-green-500" />
-              Quick Wins
+              {t('results.quickWins')}
             </h3>
             <div className="space-y-2">
               {results.quickWins.map((win, i) => (
@@ -409,7 +411,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
               className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/90 text-sm font-semibold"
             >
               <Lock className="w-4 h-4" />
-              <span>Unlock Premium Features</span>
+              <span>{t('cta.unlockPremium')}</span>
             </motion.div>
             <motion.h4 
               initial={{ opacity: 0, y: 10 }}
@@ -417,7 +419,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
               transition={{ delay: 0.3 }}
               className="text-3xl font-bold text-white"
             >
-              Get Your Complete SEO Report
+              {t('cta.getCompleteReport')}
             </motion.h4>
             <motion.p 
               initial={{ opacity: 0, y: 10 }}
@@ -425,7 +427,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
               transition={{ delay: 0.4 }}
               className="text-lg text-gray-300"
             >
-              Sign up free to unlock Core Web Vitals, full accessibility audit, crawling, and detailed recommendations
+              {t('cta.signUpDescription')}
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
@@ -439,7 +441,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
                   className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold px-8 py-6 text-lg shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all"
                 >
                   <UserPlus className="w-5 h-5 mr-2" />
-                  Sign Up Free
+                  {t('cta.signUpFree')}
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
@@ -450,7 +452,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
                 className="border-2 border-white/30 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/50 px-8 py-6 text-lg transition-all"
               >
                 <FileDown className="w-5 h-5 mr-2" />
-                Download PDF
+                {t('cta.downloadPdf')}
               </Button>
             </motion.div>
             <motion.button
@@ -461,7 +463,7 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
               className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors mt-4"
             >
               <RefreshCw className="w-4 h-4" />
-              Try Another URL
+              {t('cta.tryAnotherUrl')}
             </motion.button>
           </div>
         </div>
