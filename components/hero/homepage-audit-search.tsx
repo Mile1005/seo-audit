@@ -36,11 +36,14 @@ export function HomepageAuditSearch() {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
+        const errorData = await response.json().catch(() => ({ error: 'Failed to analyze website' }))
         throw new Error(errorData.error || 'Failed to analyze website')
       }
 
       const data = await response.json()
+      if (!data.score || !data.stats) {
+        throw new Error('Invalid response from server')
+      }
       setResults(data)
     } catch (err) {
       console.error('Audit error:', err)
@@ -75,6 +78,8 @@ export function HomepageAuditSearch() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Input
                   type="text"
+                  inputMode="url"
+                  autoComplete="url"
                   placeholder="Enter your website URL (e.g., example.com)"
                   value={url}
                   onChange={(e) => {
