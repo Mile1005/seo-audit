@@ -16,6 +16,41 @@ function checkRateLimit(ip: string): boolean {
   return true
 }
 
+function calculateReadability(text: string): number {
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length
+  const words = text.split(/\s+/).filter(w => w.length > 0)
+  const syllables = words.reduce((sum, word) => sum + countSyllables(word), 0)
+  
+  if (sentences === 0 || words.length === 0) return 0
+  
+  const fleschScore = 206.835 - 1.015 * (words.length / sentences) - 84.6 * (syllables / words.length)
+  return Math.max(0, Math.min(100, Math.round(fleschScore)))
+}
+
+function countSyllables(word: string): number {
+  word = word.toLowerCase().replace(/[^a-z]/g, '')
+  if (word.length <= 3) return 1
+  const vowels = word.match(/[aeiouy]+/g)
+  return vowels ? vowels.length : 1
+}
+
+function extractKeywords(text: string, limit = 5): Array<{ word: string; count: number }> {
+  const stopWords = new Set(['the', 'is', 'at', 'which', 'on', 'a', 'an', 'and', 'or', 'but', 'in', 'with', 'to', 'for', 'of', 'as', 'by', 'that', 'this', 'it', 'from', 'are', 'was', 'be', 'been', 'has', 'have', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should'])
+  
+  const words = text.toLowerCase()
+    .replace(/[^a-z\s]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w.length > 3 && !stopWords.has(w))
+  
+  const frequency = new Map<string, number>()
+  words.forEach(word => frequency.set(word, (frequency.get(word) || 0) + 1))
+  
+  return Array.from(frequency.entries())
+    .map(([word, count]) => ({ word, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+}
+
 interface CheckResult {
   id: string
   category: string
@@ -69,9 +104,11 @@ export async function POST(request: NextRequest) {
     const issues: Array<{ title: string; description: string; severity: 'high' | 'medium' | 'low' }> = []
     const quickWins: string[] = []
 
-    // ============ BASIC SEO (8 checks) ============
+    // Extract text for analysis
+    const bodyText = $('body').text().trim()
+    const wordCount = bodyText.split(/\s+/).filter(w => w.length > 0).length
 
-    // 1. Title Tag
+    // ============ BASIC SEO (8 checks) ============
     const title = $('title').text().trim()
     if (!title) {
       checks.push({ id: 'title_exists', category: 'SEO', name: 'Title Tag', passed: false, severity: 'high', message: 'Missing title tag' })
@@ -86,7 +123,6 @@ export async function POST(request: NextRequest) {
       checks.push({ id: 'title_length', category: 'SEO', name: 'Title Length', passed: true, severity: 'low', message: 'Optimal', value: title.length })
     }
 
-    // 2. Meta Description
     const metaDesc = $('meta[name="description"]').attr('content')?.trim()
     if (!metaDesc) {
       checks.push({ id: 'meta_desc', category: 'SEO', name: 'Meta Description', passed: false, severity: 'high', message: 'Missing' })
@@ -98,7 +134,6 @@ export async function POST(request: NextRequest) {
       checks.push({ id: 'meta_desc_length', category: 'SEO', name: 'Meta Description', passed: true, severity: 'low', message: 'Optimal', value: metaDesc.length })
     }
 
-    // 3. H1 Tags
     const h1Tags = $('h1')
     if (h1Tags.length === 0) {
       checks.push({ id: 'h1_exists', category: 'SEO', name: 'H1 Tag', passed: false, severity: 'high', message: 'No H1 found' })
@@ -110,7 +145,6 @@ export async function POST(request: NextRequest) {
       checks.push({ id: 'h1_single', category: 'SEO', name: 'H1 Tag', passed: true, severity: 'low', message: 'Single H1 present' })
     }
 
-    // 4. Heading Hierarchy
     const h2Count = $('h2').length
     const h3Count = $('h3').length
     const hasHierarchy = h1Tags.length === 1 && h2Count > 0
@@ -125,9 +159,6 @@ export async function POST(request: NextRequest) {
     })
     if (!hasHierarchy && h2Count === 0) quickWins.push('Add H2 subheadings to structure your content')
 
-    // 5. Content Length
-    const bodyText = $('body').text().trim()
-    const wordCount = bodyText.split(/\s+/).filter(w => w.length > 0).length
     if (wordCount < 300) {
       checks.push({ id: 'word_count', category: 'Content', name: 'Word Count', passed: false, severity: 'medium', message: `${wordCount} words`, value: wordCount })
       quickWins.push(`Add more content (currently ${wordCount} words, aim for 300+)`)
@@ -135,7 +166,6 @@ export async function POST(request: NextRequest) {
       checks.push({ id: 'word_count', category: 'Content', name: 'Word Count', passed: true, severity: 'low', message: `${wordCount} words`, value: wordCount })
     }
 
-    // 6. Internal Links
     const hostname = new URL(url).hostname
     const allLinks = $('a[href]')
     const internalLinks = allLinks.filter((_, el) => {
@@ -153,56 +183,54 @@ export async function POST(request: NextRequest) {
     })
     if (internalLinks < 5) quickWins.push('Add more internal links for better navigation and SEO')
 
-    // 7. External Links
     const externalLinks = allLinks.filter((_, el) => {
       const href = $(el).attr('href') || ''
       return href.startsWith('http') && !href.includes(hostname)
     }).length
     checks.push({ id: 'external_links', category: 'SEO', name: 'External Links', passed: true, severity: 'low', message: `${externalLinks} found`, value: externalLinks })
 
-    // 8. Canonical Tag
     const canonical = $('link[rel="canonical"]').attr('href')
     checks.push({ id: 'canonical', category: 'Technical', name: 'Canonical Tag', passed: !!canonical, severity: 'medium', message: canonical ? 'Present' : 'Missing' })
     if (!canonical) quickWins.push('Add canonical tag to prevent duplicate content issues')
 
     // ============ TECHNICAL SEO (7 checks) ============
-
-    // 9. HTTPS
     checks.push({ id: 'https', category: 'Technical', name: 'HTTPS', passed: url.startsWith('https://'), severity: 'high', message: url.startsWith('https://') ? 'Secure' : 'Not secure' })
     if (!url.startsWith('https://')) issues.push({ title: 'Not Using HTTPS', description: 'Switch to HTTPS for security and SEO.', severity: 'high' })
 
-    // 10. Robots Meta
     const robotsMeta = $('meta[name="robots"]').attr('content')
     const hasNoIndex = robotsMeta?.includes('noindex')
     checks.push({ id: 'robots_meta', category: 'Technical', name: 'Robots Meta', passed: !hasNoIndex, severity: hasNoIndex ? 'high' : 'low', message: robotsMeta || 'Default (index)' })
     if (hasNoIndex) issues.push({ title: 'Page Set to NoIndex', description: 'Remove noindex directive to allow indexing.', severity: 'high' })
 
-    // 11. Viewport
     const viewport = $('meta[name="viewport"]').attr('content')
     const hasMobileViewport = viewport?.includes('width=device-width')
     checks.push({ id: 'viewport', category: 'Mobile', name: 'Mobile Viewport', passed: !!hasMobileViewport, severity: 'high', message: hasMobileViewport ? 'Mobile-friendly' : 'Missing' })
     if (!hasMobileViewport) issues.push({ title: 'Missing Mobile Viewport', description: 'Add viewport meta for mobile rendering.', severity: 'high' })
 
-    // 12. Language
     const htmlLang = $('html').attr('lang')
     checks.push({ id: 'lang', category: 'Technical', name: 'Language', passed: !!htmlLang, severity: 'medium', message: htmlLang || 'Not set' })
 
-    // 13. Charset
     const charset = $('meta[charset]').attr('charset')
     checks.push({ id: 'charset', category: 'Technical', name: 'Charset', passed: !!charset, severity: 'low', message: charset || 'Not declared' })
 
-    // 14. Favicon
     const favicon = $('link[rel="icon"], link[rel="shortcut icon"]').length > 0
     checks.push({ id: 'favicon', category: 'Technical', name: 'Favicon', passed: favicon, severity: 'low', message: favicon ? 'Present' : 'Missing' })
 
-    // 15. Structured Data
     const jsonLd = $('script[type="application/ld+json"]').length
     checks.push({ id: 'schema', category: 'Technical', name: 'Schema Markup', passed: jsonLd > 0, severity: 'low', message: jsonLd > 0 ? `${jsonLd} blocks` : 'None found', value: jsonLd })
     if (jsonLd === 0) quickWins.push('Add JSON-LD structured data for rich snippets')
 
-    // ============ SOCIAL META (4 checks) ============
+    // ============ SECURITY HEADERS (3 checks) ============
+    const csp = response.headers.get('content-security-policy')
+    checks.push({ id: 'csp', category: 'Security', name: 'Content Security Policy', passed: !!csp, severity: 'medium', message: csp ? 'Configured' : 'Not set' })
 
-    // 16-19. Open Graph & Twitter
+    const xFrame = response.headers.get('x-frame-options')
+    checks.push({ id: 'x_frame', category: 'Security', name: 'X-Frame-Options', passed: !!xFrame, severity: 'medium', message: xFrame || 'Not set' })
+
+    const hsts = response.headers.get('strict-transport-security')
+    checks.push({ id: 'hsts', category: 'Security', name: 'HSTS', passed: !!hsts, severity: 'low', message: hsts ? 'Enabled' : 'Not enabled' })
+
+    // ============ SOCIAL META (4 checks) ============
     const ogTitle = $('meta[property="og:title"]').attr('content')
     const ogDesc = $('meta[property="og:description"]').attr('content')
     const ogImage = $('meta[property="og:image"]').attr('content')
@@ -215,20 +243,16 @@ export async function POST(request: NextRequest) {
     if (!ogImage) quickWins.push('Add Open Graph image for better social sharing')
 
     // ============ ACCESSIBILITY (6 checks) ============
-
-    // 20. Images Alt Text
     const images = $('img')
     const imagesWithoutAlt = images.filter((_, el) => !$(el).attr('alt')).length
     const altPercent = images.length > 0 ? Math.round(((images.length - imagesWithoutAlt) / images.length) * 100) : 100
     checks.push({ id: 'img_alt', category: 'Accessibility', name: 'Image Alt Text', passed: imagesWithoutAlt === 0, severity: 'medium', message: `${altPercent}% have alt`, value: altPercent })
     if (imagesWithoutAlt > 0) issues.push({ title: `${imagesWithoutAlt} Images Missing Alt`, description: 'Add alt text to all images for accessibility.', severity: 'medium' })
 
-    // 21. ARIA Landmarks
     const landmarks = $('main, nav, header, footer, [role="main"], [role="navigation"], [role="banner"], [role="contentinfo"]').length
     checks.push({ id: 'landmarks', category: 'Accessibility', name: 'ARIA Landmarks', passed: landmarks >= 3, severity: 'medium', message: `${landmarks} landmarks`, value: landmarks })
     if (landmarks < 3) quickWins.push('Add semantic HTML5 elements (main, nav, header, footer)')
 
-    // 22. Form Labels
     const inputs = $('input:not([type="hidden"]), textarea, select')
     const labeledInputs = inputs.filter((_, el) => {
       const id = $(el).attr('id')
@@ -241,7 +265,6 @@ export async function POST(request: NextRequest) {
       if (labeledInputs < inputs.length) issues.push({ title: 'Unlabeled Form Inputs', description: `${inputs.length - labeledInputs} inputs need labels or aria-label.`, severity: 'medium' })
     }
 
-    // 23. Button Labels
     const buttons = $('button, [role="button"]')
     const labeledButtons = buttons.filter((_, el) => $(el).text().trim() || $(el).attr('aria-label')).length
     if (buttons.length > 0) {
@@ -249,27 +272,21 @@ export async function POST(request: NextRequest) {
       checks.push({ id: 'button_labels', category: 'Accessibility', name: 'Button Labels', passed: labeledButtons === buttons.length, severity: 'medium', message: `${btnPercent}% labeled`, value: btnPercent })
     }
 
-    // 24. Links Without Text
     const emptyLinks = $('a').filter((_, el) => !$(el).text().trim() && !$(el).attr('aria-label')).length
     checks.push({ id: 'link_text', category: 'Accessibility', name: 'Link Text', passed: emptyLinks === 0, severity: 'medium', message: emptyLinks > 0 ? `${emptyLinks} empty links` : 'All links labeled', value: emptyLinks })
 
-    // 25. Skip Links
     const skipLink = $('a[href^="#"]').first().text().toLowerCase().includes('skip')
     checks.push({ id: 'skip_link', category: 'Accessibility', name: 'Skip to Content', passed: skipLink, severity: 'low', message: skipLink ? 'Present' : 'Missing' })
 
     // ============ PERFORMANCE (5 checks) ============
-
-    // 26. Load Time
     const loadSec = (loadTime / 1000).toFixed(2)
     checks.push({ id: 'load_time', category: 'Performance', name: 'Server Response', passed: loadTime < 1000, severity: loadTime > 2000 ? 'high' : 'medium', message: `${loadSec}s`, value: loadTime })
     if (loadTime > 1000) issues.push({ title: 'Slow Server Response', description: `Server took ${loadSec}s. Aim for under 1s.`, severity: loadTime > 2000 ? 'high' : 'medium' })
 
-    // 27. HTML Size
     const sizeKB = Math.round(htmlSize / 1024)
     checks.push({ id: 'html_size', category: 'Performance', name: 'HTML Size', passed: sizeKB < 100, severity: sizeKB > 150 ? 'medium' : 'low', message: `${sizeKB}KB`, value: sizeKB })
     if (sizeKB > 100) quickWins.push(`Reduce HTML size (${sizeKB}KB, aim for <100KB)`)
 
-    // 28. Images Format
     const nonOptimizedImages = images.filter((_, el) => {
       const src = $(el).attr('src') || ''
       return !src.includes('.webp') && !src.includes('.svg') && !src.includes('.avif')
@@ -277,22 +294,22 @@ export async function POST(request: NextRequest) {
     const imgOptPercent = images.length > 0 ? Math.round(((images.length - nonOptimizedImages) / images.length) * 100) : 100
     checks.push({ id: 'img_format', category: 'Performance', name: 'Image Format', passed: imgOptPercent > 70, severity: 'medium', message: `${imgOptPercent}% optimized`, value: imgOptPercent })
 
-    // 29. External Scripts
     const scripts = $('script[src]').length
     checks.push({ id: 'scripts', category: 'Performance', name: 'External Scripts', passed: scripts < 10, severity: scripts > 15 ? 'medium' : 'low', message: `${scripts} scripts`, value: scripts })
 
-    // 30. Defer/Async Scripts
     const deferredScripts = $('script[defer], script[async]').length
     const deferPercent = scripts > 0 ? Math.round((deferredScripts / scripts) * 100) : 100
     checks.push({ id: 'deferred_scripts', category: 'Performance', name: 'Async Scripts', passed: deferPercent > 60, severity: 'medium', message: `${deferPercent}% async`, value: deferPercent })
 
-    // ============ CALCULATE SCORES ============
+    // ============ CONTENT ANALYSIS ============
+    const readabilityScore = calculateReadability(bodyText)
+    const keywords = extractKeywords(bodyText, 5)
 
+    // ============ CALCULATE SCORES ============
     const totalChecks = checks.length
     const passedChecks = checks.filter(c => c.passed).length
     const failedChecks = totalChecks - passedChecks
 
-    // Weighted score
     const weights = { high: 3, medium: 2, low: 1 }
     let weightedScore = 0
     let totalWeight = 0
@@ -303,7 +320,6 @@ export async function POST(request: NextRequest) {
     })
     const score = Math.round((weightedScore / totalWeight) * 100)
 
-    // Group by category
     const byCategory = checks.reduce((acc, check) => {
       if (!acc[check.category]) acc[check.category] = { total: 0, passed: 0, checks: [] }
       acc[check.category].total++
@@ -323,7 +339,12 @@ export async function POST(request: NextRequest) {
       fullReportAvailable: true,
       message: 'Sign up free to unlock Core Web Vitals, full accessibility audit, crawling, and detailed recommendations',
       stats: { totalChecks, passedChecks, failedChecks },
-      performance: { loadTime: parseFloat(loadSec), htmlSize: sizeKB }
+      performance: { loadTime: parseFloat(loadSec), htmlSize: sizeKB },
+      contentAnalysis: {
+        readability: readabilityScore,
+        keywords: keywords,
+        wordCount
+      }
     })
 
   } catch (error) {
