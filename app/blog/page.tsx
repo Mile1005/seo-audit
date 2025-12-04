@@ -6,19 +6,24 @@ import { Calendar, Clock, User, ArrowRight, Search, Tag, TrendingUp, BookOpen, S
 import Link from 'next/link'
 import { StructuredData, generateItemListSchema } from '@/components/seo/StructuredData'
 import { useTranslations, useLocale } from 'next-intl'
+import { useState, useMemo } from 'react'
 
 export default function BlogPage() {
   const t = useTranslations('blogPage')
   const locale = useLocale()
 
+  // State for search and filtering
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('all')
+
   // Blog posts with translation keys
   const blogPostsConfig = [
-    { id: 1, key: 'completeAudit', slug: 'complete-seo-audit-checklist-2025', featured: true, views: '2.4k', likes: 156 },
-    { id: 2, key: 'aiPowered', slug: 'ai-powered-seo-future', featured: false, views: '1.8k', likes: 89 },
-    { id: 3, key: 'coreWebVitals', slug: 'core-web-vitals-optimization-guide', featured: false, views: '3.2k', likes: 203 },
-    { id: 4, key: 'technicalSEO', slug: 'technical-seo-best-practices-2025', featured: false, views: '1.9k', likes: 127 },
-    { id: 5, key: 'localSEO', slug: 'local-seo-strategies-that-work', featured: false, views: '2.1k', likes: 144 },
-    { id: 6, key: 'contentSEO', slug: 'content-seo-creating-search-friendly-content', featured: false, views: '2.7k', likes: 189 }
+    { id: 1, key: 'completeAudit', slug: 'complete-seo-audit-checklist-2025', featured: true, views: '2.4k', likes: 156, image: '/blog/seo-audit-checklist.webp' },
+    { id: 2, key: 'aiPowered', slug: 'ai-powered-seo-future', featured: false, views: '1.8k', likes: 89, image: '/blog/seo-audit-checklist.webp' },
+    { id: 3, key: 'coreWebVitals', slug: 'core-web-vitals-optimization-guide', featured: false, views: '3.2k', likes: 203, image: '/blog/seo-audit-checklist.webp' },
+    { id: 4, key: 'technicalSEO', slug: 'technical-seo-best-practices-2025', featured: false, views: '1.9k', likes: 127, image: '/blog/seo-audit-checklist.webp' },
+    { id: 5, key: 'localSEO', slug: 'local-seo-strategies-that-work', featured: false, views: '2.1k', likes: 144, image: '/blog/seo-audit-checklist.webp' },
+    { id: 6, key: 'contentSEO', slug: 'content-seo-creating-search-friendly-content', featured: false, views: '2.7k', likes: 189, image: '/blog/seo-audit-checklist.webp' }
   ]
 
   const blogPosts = blogPostsConfig.map(config => ({
@@ -32,19 +37,62 @@ export default function BlogPage() {
     author: t(`posts.${config.key}.author`),
     featured: config.featured,
     views: config.views,
-    likes: config.likes
+    likes: config.likes,
+    image: config.image
   }))
 
-  const categories = [
-    { name: t('categories.allPosts'), count: blogPosts.length, color: 'blue' },
-    { name: t('categories.technicalSEO'), count: 3, color: 'purple' },
-    { name: t('categories.aiSEO'), count: 1, color: 'emerald' },
-    { name: t('categories.performance'), count: 1, color: 'orange' },
-    { name: t('categories.localSEO'), count: 1, color: 'red' },
-    { name: t('categories.contentSEO'), count: 1, color: 'yellow' }
-  ]
   const featuredPost = blogPosts.find(post => post.featured)
   const regularPosts = blogPosts.filter(post => !post.featured)
+
+  // Filter posts based on search and category
+  const filteredPosts = useMemo(() => {
+    return regularPosts.filter(post => {
+      // Search filter
+      const matchesSearch = searchQuery === '' ||
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.category.toLowerCase().includes(searchQuery.toLowerCase())
+
+      // Category filter
+      const matchesCategory = selectedCategory === 'all' ||
+        (selectedCategory === 'technical-seo' && post.category === 'Technical SEO') ||
+        (selectedCategory === 'ai-seo' && post.category === 'AI & SEO') ||
+        (selectedCategory === 'performance' && post.category === 'Performance') ||
+        (selectedCategory === 'local-seo' && post.category === 'Local SEO') ||
+        (selectedCategory === 'content-seo' && post.category === 'Content SEO')
+
+      return matchesSearch && matchesCategory
+    })
+  }, [regularPosts, searchQuery, selectedCategory])
+
+  // Update categories with dynamic counts based on filtered posts
+  const dynamicCategories = useMemo(() => {
+    const baseCategories = [
+      { name: t('categories.allPosts'), key: 'all', color: 'blue' },
+      { name: t('categories.technicalSEO'), key: 'technical-seo', color: 'purple' },
+      { name: t('categories.aiSEO'), key: 'ai-seo', color: 'emerald' },
+      { name: t('categories.performance'), key: 'performance', color: 'orange' },
+      { name: t('categories.localSEO'), key: 'local-seo', color: 'red' },
+      { name: t('categories.contentSEO'), key: 'content-seo', color: 'yellow' }
+    ]
+
+    return baseCategories.map(category => {
+      let count = 0
+      if (category.key === 'all') {
+        count = regularPosts.length
+      } else {
+        count = regularPosts.filter(post => {
+          if (category.key === 'technical-seo') return post.category === 'Technical SEO'
+          if (category.key === 'ai-seo') return post.category === 'AI & SEO'
+          if (category.key === 'performance') return post.category === 'Performance'
+          if (category.key === 'local-seo') return post.category === 'Local SEO'
+          if (category.key === 'content-seo') return post.category === 'Content SEO'
+          return false
+        }).length
+      }
+      return { ...category, count }
+    })
+  }, [regularPosts, t])
 
   // Generate ItemList schema for all blog posts (using fixed dates for schema)
   const blogPostDates: Record<string, string> = {
@@ -130,6 +178,8 @@ export default function BlogPage() {
                   <input
                     type="text"
                     placeholder={t('hero.searchPlaceholder')}
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-12 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                   />
                 </div>
@@ -143,11 +193,12 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap justify-center gap-3 mb-16"
             >
-              {categories.map((category, index) => (
+              {dynamicCategories.map((category, index) => (
                 <button
                   key={category.name}
+                  onClick={() => setSelectedCategory(category.key)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
-                    index === 0
+                    selectedCategory === category.key
                       ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                       : 'bg-white/10 text-gray-300 border border-white/20 hover:bg-white/20 hover:text-white'
                   }`}
@@ -174,63 +225,64 @@ export default function BlogPage() {
                   <span className="text-yellow-400 font-semibold">{t('featured.badge')}</span>
                 </div>
 
-                <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 group">
-                  <div className="grid lg:grid-cols-2 gap-8">
-                    {/* Content */}
-                    <div className="p-8 lg:p-12">
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20">
-                          {featuredPost.category}
-                        </span>
-                        <div className="flex items-center text-gray-400 text-sm">
-                          <TrendingUp className="w-4 h-4 mr-1" />
-                          {featuredPost.views} {t('featured.views')}
+                <Link href={locale === 'en' ? `/blog/${featuredPost.slug}` : `/${locale}/blog/${featuredPost.slug}`}>
+                  <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 group cursor-pointer">
+                    <div className="grid lg:grid-cols-2 gap-8">
+                      {/* Content */}
+                      <div className="p-8 lg:p-12">
+                        <div className="flex items-center gap-4 mb-4">
+                          <span className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20">
+                            {featuredPost.category}
+                          </span>
+                          <div className="flex items-center text-gray-400 text-sm">
+                            <TrendingUp className="w-4 h-4 mr-1" />
+                            {featuredPost.views} {t('featured.views')}
+                          </div>
+                        </div>
+
+                        <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 group-hover:text-blue-400 transition-colors">
+                          {featuredPost.title}
+                        </h2>
+
+                        <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                          {featuredPost.excerpt}
+                        </p>
+
+                        <div className="flex items-center justify-between mb-6">
+                          <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                            <div className="flex items-center">
+                              <User className="w-4 h-4 mr-2" />
+                              {featuredPost.author}
+                            </div>
+                            <div className="flex items-center">
+                              <Calendar className="w-4 h-4 mr-2" />
+                              {featuredPost.date}
+                            </div>
+                            <div className="flex items-center">
+                              <Clock className="w-4 h-4 mr-2" />
+                              {featuredPost.readTime}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25">
+                          {t('featured.readArticle')}
+                          <ArrowRight className="w-4 h-4 ml-2" />
                         </div>
                       </div>
 
-                      <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 group-hover:text-blue-400 transition-colors">
-                        {featuredPost.title}
-                      </h2>
-
-                      <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                        {featuredPost.excerpt}
-                      </p>
-
-                      <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                          <div className="flex items-center">
-                            <User className="w-4 h-4 mr-2" />
-                            {featuredPost.author}
-                          </div>
-                          <div className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-2" />
-                            {featuredPost.date}
-                          </div>
-                          <div className="flex items-center">
-                            <Clock className="w-4 h-4 mr-2" />
-                            {featuredPost.readTime}
-                          </div>
-                        </div>
-                      </div>
-
-                      <Link
-                        href={locale === 'en' ? `/blog/${featuredPost.slug}` : `/${locale}/blog/${featuredPost.slug}`}
-                        className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25"
-                      >
-                        {t('featured.readArticle')}
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </Link>
-                    </div>
-
-                    {/* Image Placeholder */}
-                    <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center min-h-[300px] lg:min-h-full">
-                      <div className="text-center text-white/60">
-                        <BookOpen className="w-16 h-16 mx-auto mb-4" />
-                        <p className="text-lg font-medium">Featured Article</p>
+                      {/* Featured Image */}
+                      <div className="relative overflow-hidden">
+                        <img
+                          src={featuredPost.image}
+                          alt={featuredPost.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             </div>
           </section>
@@ -245,68 +297,96 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {regularPosts.map((post, index) => (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                  className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group hover:scale-105"
-                >
-                  {/* Image Placeholder */}
-                  <div className="bg-gradient-to-br from-gray-700 to-gray-800 h-48 flex items-center justify-center">
-                    <div className="text-center text-white/40">
-                      <Tag className="w-8 h-8 mx-auto mb-2" />
-                      <p className="text-sm">{post.category}</p>
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                        post.category === 'Technical SEO' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' :
-                        post.category === 'AI & SEO' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                        post.category === 'Performance' ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20' :
-                        post.category === 'Local SEO' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-                        'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
-                      }`}>
-                        {post.category}
-                      </span>
-                      <div className="flex items-center text-gray-400 text-xs">
-                        <TrendingUp className="w-3 h-3 mr-1" />
-                        {post.views}
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-blue-400 transition-colors line-clamp-2">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-muted-foreground mb-4 line-clamp-3">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center justify-between text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {post.date}
-                      </div>
-                      <div className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        {post.readTime}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={locale === 'en' ? `/blog/${post.slug}` : `/${locale}/blog/${post.slug}`}
-                      className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300 font-medium transition-colors"
+              {filteredPosts.length > 0 ? (
+                filteredPosts.map((post, index) => (
+                  <Link key={post.id} href={locale === 'en' ? `/blog/${post.slug}` : `/${locale}/blog/${post.slug}`}>
+                    <motion.article
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+                      className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group hover:scale-105 cursor-pointer"
                     >
-                      {t('common.readMore')}
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </Link>
-                  </div>
-                </motion.article>
-              ))}
+                      {/* Post Image */}
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      </div>
+
+                      <div className="p-6">
+                        <div className="flex items-center justify-between mb-3">
+                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                            post.category === 'Technical SEO' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' :
+                            post.category === 'AI & SEO' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                            post.category === 'Performance' ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20' :
+                            post.category === 'Local SEO' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                            'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
+                          }`}>
+                            {post.category}
+                          </span>
+                          <div className="flex items-center text-gray-400 text-xs">
+                            <TrendingUp className="w-3 h-3 mr-1" />
+                            {post.views}
+                          </div>
+                        </div>
+
+                        <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-blue-400 transition-colors line-clamp-2">
+                          {post.title}
+                        </h3>
+
+                        <p className="text-muted-foreground mb-4 line-clamp-3">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="flex items-center justify-between text-sm text-muted-foreground">
+                          <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-1" />
+                            {post.date}
+                          </div>
+                          <div className="flex items-center">
+                            <Clock className="w-4 h-4 mr-1" />
+                            {post.readTime}
+                          </div>
+                        </div>
+
+                        <div className="inline-flex items-center mt-4 text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                          Read More
+                          <ArrowRight className="w-4 h-4 ml-1" />
+                        </div>
+                      </div>
+                    </motion.article>
+                  </Link>
+                ))
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="col-span-full text-center py-16"
+                >
+                  <Search className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+                  <h3 className="text-xl font-semibold text-gray-300 mb-2">No posts found</h3>
+                  <p className="text-gray-400">
+                    {searchQuery && selectedCategory !== 'all'
+                      ? `No posts match "${searchQuery}" in ${dynamicCategories.find(c => c.key === selectedCategory)?.name.toLowerCase()}`
+                      : searchQuery
+                      ? `No posts match "${searchQuery}"`
+                      : `No posts found in ${dynamicCategories.find(c => c.key === selectedCategory)?.name.toLowerCase()}`
+                    }
+                  </p>
+                  <button
+                    onClick={() => {
+                      setSearchQuery('')
+                      setSelectedCategory('all')
+                    }}
+                    className="mt-4 px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors"
+                  >
+                    Clear filters
+                  </button>
+                </motion.div>
+              )}
             </motion.div>
           </div>
         </section>

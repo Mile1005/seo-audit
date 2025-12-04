@@ -1,0 +1,17 @@
+[
+  "pricing.plans.starter.popular",
+  "pricing.plans.professional.popular",
+  "pricing.plans.enterprise.popular",
+  "pricing.testimonials.items.testimonial1.rating",
+  "pricing.testimonials.items.testimonial2.rating",
+  "pricing.testimonials.items.testimonial3.rating",
+  "featurePages.aiAssistant.recommendationTypes.recommendations.technical.coreWebVitals.confidence",
+  "featurePages.aiAssistant.recommendationTypes.recommendations.technical.schemaMarkup.confidence",
+  "featurePages.aiAssistant.recommendationTypes.recommendations.content.contentGap.confidence",
+  "featurePages.aiAssistant.recommendationTypes.recommendations.content.contentOptimization.confidence",
+  "featurePages.aiAssistant.recommendationTypes.recommendations.strategic.competitivePositioning.confidence",
+  "featurePages.aiAssistant.recommendationTypes.recommendations.strategic.linkBuilding.confidence",
+  "helpCenter.categories.cancellation.refundPolicy.scenarios.0.eligible",
+  "helpCenter.categories.cancellation.refundPolicy.scenarios.1.eligible",
+  "helpCenter.categories.cancellation.refundPolicy.scenarios.2.eligible"
+]

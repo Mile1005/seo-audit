@@ -21,7 +21,7 @@ interface DuplicateContent {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    let { url } = body
+    let { url, maxPages: requestedMaxPages } = body
 
     const normalized = normalizeUrl(url)
     if (!normalized) {
@@ -36,7 +36,8 @@ export async function POST(request: NextRequest) {
     const crawledPages: CrawlPage[] = []
     const urlsToCrawl = [url]
     const visited = new Set<string>()
-    const maxPages = 10
+    // Accept 10, 25, or 50 pages - default to 25, max 50 for lite version
+    const maxPages = Math.min(Math.max(requestedMaxPages || 25, 10), 50)
     let totalLoadTime = 0
     const brokenLinks: string[] = []
     const redirectChains: Array<{ from: string; to: string }> = []

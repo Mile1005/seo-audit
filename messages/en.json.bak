@@ -11081,7 +11081,7 @@
           "screamingFrog": "Technical content audit and analysis"
         }
       }
-    ,
+    },
     "conclusion": {
         "title": "Content SEO Success: Quality, Strategy, and Consistency",
         "paragraph1": "Content SEO success in 2025 requires creating high-quality content that serves users while implementing strategic SEO optimization. Focus on understanding user intent, building topical authority, and consistently delivering value.",
@@ -11674,7 +11674,4 @@
       }
     }
   }
-
-}
-}
 }

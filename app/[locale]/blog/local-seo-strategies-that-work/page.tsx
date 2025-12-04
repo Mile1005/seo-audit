@@ -247,7 +247,7 @@ export default async function LocalSEOStrategiesPage({ params }: { params: Promi
     author: t('post.author'),
     authorRole: t('post.authorRole'),
     featured: true,
-    image: '/blog/local-seo.jpg',
+    image: '/blog/seo-audit-checklist.webp',
     tags: ['Local SEO', 'Google Business Profile', 'Local Citations', 'Reviews', 'Local Search', 'Small Business'],
     views: '1.9k',
     likes: 76

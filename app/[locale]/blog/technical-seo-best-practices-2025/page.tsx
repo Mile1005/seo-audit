@@ -282,7 +282,7 @@ export default async function TechnicalSEO2025Page({ params }: { params: Promise
     author: t('post.author'),
     authorRole: t('post.authorRole'),
     featured: true,
-    image: '/blog/technical-seo.jpg',
+    image: '/blog/seo-audit-checklist.webp',
     tags: ['Technical SEO', 'Site Speed', 'Mobile-First', 'Structured Data', 'Schema', 'Crawlability', 'Best Practices'],
     views: '2.1k',
     likes: 98

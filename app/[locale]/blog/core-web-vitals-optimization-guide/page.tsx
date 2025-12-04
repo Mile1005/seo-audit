@@ -243,7 +243,7 @@ export default async function CoreWebVitalsPage({ params }: { params: Promise<{ 
     author: t('post.author'),
     authorRole: t('post.authorRole'),
     featured: true,
-    image: '/blog/core-web-vitals.jpg',
+    image: '/blog/seo-audit-checklist.webp',
     tags: ['Core Web Vitals', 'Page Speed', 'LCP', 'FID', 'CLS', 'Performance', 'SEO', 'Web Performance'],
     views: '3.2k',
     likes: 145

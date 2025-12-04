@@ -71,24 +71,21 @@ export default async function CompleteSEOAuditChecklistPage({ params }: { params
     content: (
       <div className="prose-blog">
         {/* Table of Contents */}
-        <nav className="blog-toc mb-16 pb-8 border-b border-slate-800">
-          <h2 className="text-xl font-semibold text-white mb-6">Table of Contents</h2>
-          <ul className="space-y-3">
-            <li><a href="#importance">Why SEO Audits Matter</a></li>
-            <li><a href="#technical">Technical Foundation (15 Checkpoints)</a></li>
-            <li><a href="#on-page">On-Page Optimization (12 Checkpoints)</a></li>
-            <li><a href="#content">Content Quality (10 Checkpoints)</a></li>
-            <li><a href="#off-page">Off-Page Factors (10 Checkpoints)</a></li>
-            <li><a href="#implementation">How to Use This Checklist</a></li>
+        <nav className="blog-toc mb-12 md:mb-16 pb-8 border-b border-slate-800">
+          <h2 className="text-xl font-semibold text-white mb-4 md:mb-6">{t('toc.title')}</h2>
+          <ul className="space-y-2 md:space-y-3">
+            <li><a href="#importance">{t('toc.importance')}</a></li>
+            <li><a href="#technical">{t('toc.technical')}</a></li>
+            <li><a href="#on-page">{t('toc.onPage')}</a></li>
+            <li><a href="#content">{t('toc.content')}</a></li>
+            <li><a href="#off-page">{t('toc.offPage')}</a></li>
           </ul>
         </nav>
 
         {/* Introduction Section */}
         <section className="blog-section mb-20">
           <p className="text-xl text-gray-200 leading-relaxed mb-8">
-            Regular SEO audits are the backbone of maintaining and improving your website's search engine visibility. 
-            In 2025, with AI-driven algorithms and constantly evolving ranking factors, a systematic approach to 
-            auditing your site is more critical than ever.
+            {t('importance.intro')}
           </p>
 
           <div className="interactive-stat">
@@ -99,8 +96,8 @@ export default async function CompleteSEOAuditChecklistPage({ params }: { params
                 </svg>
               </div>
               <div>
-                <p className="text-2xl font-bold text-white mb-2">40-60% Traffic Increase</p>
-                <p className="text-gray-400">Average organic traffic improvement within 6 months of implementing audit findings</p>
+                <p className="text-2xl font-bold text-white mb-2">{t('importance.impact.label')}</p>
+                <p className="text-gray-400">{t('importance.impact.text')}</p>
               </div>
             </div>
           </div>
@@ -108,69 +105,56 @@ export default async function CompleteSEOAuditChecklistPage({ params }: { params
 
         {/* Why SEO Audits Matter + Traffic Growth Chart */}
         <section id="importance" className="blog-section mb-20">
-          <h2>Why SEO Audits Matter in 2025</h2>
+          <h2>{t('importance.title')}</h2>
           
           <p>
-            The digital landscape is more competitive than ever. With over 1.8 billion websites online, 
-            standing out in search results requires continuous optimization and vigilance. SEO audits 
-            help you identify what's working, what's broken, and where opportunities lie.
+            {t('importance.intro')}
           </p>
 
           <div className="my-12 pl-6 border-l-4 border-blue-500">
             <p className="text-xl text-gray-100 font-medium italic">
-              "A comprehensive SEO audit is like a health checkup for your website. It reveals hidden 
-              issues before they become critical problems and uncovers opportunities for growth that 
-              you might otherwise miss."
+              {t('importance.quote')}
             </p>
           </div>
 
           {/* Interactive Traffic Growth Chart */}
           <TrafficGrowthChart />
 
-          <h3>What an SEO Audit Accomplishes</h3>
+          <h3>{t('importance.accomplish.title')}</h3>
 
           <div className="space-y-8 mt-8">
             <div className="blog-checkpoint">
-              <h4 className="text-lg font-semibold text-white mb-3">Technical Health Assessment</h4>
+              <h4 className="text-lg font-semibold text-white mb-3">{t('importance.accomplish.technical.title')}</h4>
               <p>
-                Identify crawlability issues, broken links, and indexation problems that prevent search 
-                engines from properly accessing your content. Technical issues can silently kill your 
-                rankings, and many site owners don't discover them until it's too late.
+                {t('importance.accomplish.technical.description')}
               </p>
             </div>
 
             <div className="blog-checkpoint">
-              <h4 className="text-lg font-semibold text-white mb-3">Keyword Opportunity Discovery</h4>
+              <h4 className="text-lg font-semibold text-white mb-3">{t('importance.accomplish.keyword.title')}</h4>
               <p>
-                Find untapped keyword opportunities and content gaps that your competitors are ranking 
-                for but you aren't. Modern SEO audits use AI to analyze semantic relationships and 
-                uncover long-tail opportunities with high conversion potential.
+                {t('importance.accomplish.keyword.description')}
               </p>
             </div>
 
             <div className="blog-checkpoint">
-              <h4 className="text-lg font-semibold text-white mb-3">Algorithm Alignment</h4>
+              <h4 className="text-lg font-semibold text-white mb-3">{t('importance.accomplish.algorithm.title')}</h4>
               <p>
-                Ensure your site aligns with current search engine algorithms, including Google's helpful 
-                content updates, E-E-A-T guidelines, and Core Web Vitals requirements. What worked in 
-                2024 might be penalized in 2025.
+                {t('importance.accomplish.algorithm.description')}
               </p>
             </div>
 
             <div className="blog-checkpoint">
-              <h4 className="text-lg font-semibold text-white mb-3">User Experience Optimization</h4>
+              <h4 className="text-lg font-semibold text-white mb-3">{t('importance.accomplish.ux.title')}</h4>
               <p>
-                Improve site speed, mobile responsiveness, and navigation structure to enhance user 
-                experience. Google's algorithms increasingly prioritize sites that provide excellent 
-                user experiences, making UX a critical ranking factor.
+                {t('importance.accomplish.ux.description')}
               </p>
             </div>
 
             <div className="blog-checkpoint">
-              <h4 className="text-lg font-semibold text-white mb-3">Competitive Intelligence</h4>
+              <h4 className="text-lg font-semibold text-white mb-3">{t('importance.accomplish.competitive.title')}</h4>
               <p>
-                Understand how your site compares to competitors in your niche. Identify their strengths 
-                and weaknesses to inform your own strategy and find opportunities to outrank them.
+                {t('importance.accomplish.competitive.description')}
               </p>
             </div>
           </div>
@@ -181,122 +165,269 @@ export default async function CompleteSEOAuditChecklistPage({ params }: { params
 
         {/* Technical Foundation + Core Web Vitals Chart */}
         <section id="technical" className="blog-section mb-20">
-          <h2>Technical Foundation: 15 Critical Checkpoints</h2>
+          <h2>{t('technical.title')}</h2>
           
           <p>
-            Technical SEO forms the foundation of your site's search visibility. Without a solid technical 
-            base, even the best content won't rank as well as it should. These 15 checkpoints cover the 
-            essential technical elements every site must have in order.
+            {t('technical.intro')}
           </p>
 
           <div className="space-y-8 mt-10">
             <div className="blog-checkpoint">
-              <h3>1. Page Speed & Core Web Vitals</h3>
-              <p>
-                Test your site's loading speed using Google PageSpeed Insights and ensure all pages meet 
-                Core Web Vitals thresholds. Focus on Largest Contentful Paint (LCP &lt; 2.5s), First Input 
-                Delay (FID &lt; 100ms), and Cumulative Layout Shift (CLS &lt; 0.1).
-              </p>
-              <ul className="mt-4">
-                <li>Optimize images using next-gen formats (WebP, AVIF)</li>
-                <li>Implement lazy loading for below-the-fold content</li>
-                <li>Minimize JavaScript execution time</li>
-                <li>Use a CDN for static assets</li>
-              </ul>
-            </div>
-
-            {/* Core Web Vitals Interactive Chart */}
-            <CoreWebVitalsChart />
-
-            <div className="blog-checkpoint">
-              <h3>2. Mobile-First Optimization</h3>
-              <p>
-                Verify your site is fully responsive and passes Google's Mobile-Friendly Test. With mobile-first 
-                indexing, Google primarily uses the mobile version of your content for indexing and ranking.
-              </p>
-            </div>
-
-            {/* Continue with remaining checkpoints... */}
-            <div className="blog-checkpoint">
-              <h3>3. HTTPS & Security</h3>
-              <p>
-                Confirm your entire site uses HTTPS with a valid SSL certificate. Security is a confirmed 
-                ranking factor, and browsers warn users about insecure sites.
-              </p>
+              <h3>{t('technical.checkpoints.speed.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.speed.description') }} />
             </div>
 
             <div className="blog-checkpoint">
-              <h3>4-15. Additional Technical Checkpoints</h3>
-              <p>
-                XML Sitemap Optimization, Robots.txt Configuration, Internal Linking Structure, Broken Links, 
-                Canonical Tags, Duplicate Content Detection, Structured Data, Site Architecture, URL Structure, 
-                Redirect Chains, Server Response Time, and JavaScript Rendering.
-              </p>
+              <h3>{t('technical.checkpoints.mobile.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.mobile.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.ssl.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.ssl.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.sitemap.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.sitemap.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.robots.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.robots.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.internalLinking.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.internalLinking.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.brokenLinks.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.brokenLinks.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.canonical.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.canonical.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.duplicate.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.duplicate.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.structuredData.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.structuredData.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.architecture.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.architecture.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.urlStructure.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.urlStructure.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.redirects.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.redirects.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.serverResponse.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.serverResponse.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('technical.checkpoints.javascript.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('technical.checkpoints.javascript.description') }} />
             </div>
           </div>
         </section>
 
-        {/* On-Page, Content, and Off-Page sections */}
+        {/* On-Page SEO Audit */}
         <section id="on-page" className="blog-section mb-20">
-          <h2>On-Page Optimization: 12 Essential Elements</h2>
-          <p>
-            On-page SEO ensures each individual page is optimized for both search engines and users.
-          </p>
-          {/* Checkpoints 1-12 */}
-        </section>
-
-        <section id="content" className="blog-section mb-20">
-          <h2>Content Quality Assessment: 10 Criteria</h2>
-          <p>
-            High-quality content is the cornerstone of successful SEO.
-          </p>
-        </section>
-
-        <section id="off-page" className="blog-section mb-20">
-          <h2>Off-Page Factors: 10 Critical Assessments</h2>
-          <p>
-            Off-page SEO encompasses all activities that happen outside your website but impact your rankings.
-          </p>
-        </section>
-
-        {/* Implementation Guide with Progress Timeline */}
-        <section id="implementation" className="blog-section mb-20">
-          <h2>How to Use This Checklist Effectively</h2>
+          <h2>{t('onPage.title')}</h2>
           
           <p>
-            With 47 checkpoints across five major categories, it's important to approach your SEO audit 
-            systematically rather than trying to tackle everything at once.
+            {t('onPage.intro')}
           </p>
 
-          {/* SEO Progress Timeline Chart */}
-          <SEOProgressTimeline />
-
-          <div className="space-y-6 mt-8">
-            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-white mb-3">Step 1: Prioritize Based on Impact</h3>
-              <p>
-                Start with technical issues that prevent search engines from crawling and indexing your 
-                site properly.
-              </p>
+          <div className="space-y-8 mt-10">
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.title.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.title.description') }} />
             </div>
-            {/* Steps 2-6 */}
+
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.meta.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.meta.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.headers.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.headers.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.keywords.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.keywords.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.content.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.content.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.images.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.images.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('onPage.checkpoints.url.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('onPage.checkpoints.url.description') }} />
+            </div>
+          </div>
+        </section>
+
+        {/* Content Quality Assessment */}
+        <section id="content" className="blog-section mb-20">
+          <h2>{t('content.title')}</h2>
+          
+          <p>
+            {t('content.intro')}
+          </p>
+
+          <div className="space-y-8 mt-10">
+            <div className="blog-checkpoint">
+              <h3>{t('content.checkpoints.quality.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('content.checkpoints.quality.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('content.checkpoints.uniqueness.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('content.checkpoints.uniqueness.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('content.checkpoints.readability.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('content.checkpoints.readability.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('content.checkpoints.engagement.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('content.checkpoints.engagement.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('content.checkpoints.freshness.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('content.checkpoints.freshness.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('content.checkpoints.multimedia.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('content.checkpoints.multimedia.description') }} />
+            </div>
+          </div>
+        </section>
+
+        {/* Off-Page SEO Audit */}
+        <section id="off-page" className="blog-section mb-20">
+          <h2>{t('offPage.title')}</h2>
+          
+          <p>
+            {t('offPage.intro')}
+          </p>
+
+          <div className="space-y-8 mt-10">
+            <div className="blog-checkpoint">
+              <h3>{t('offPage.checkpoints.backlinks.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('offPage.checkpoints.backlinks.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('offPage.checkpoints.authority.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('offPage.checkpoints.authority.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('offPage.checkpoints.social.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('offPage.checkpoints.social.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('offPage.checkpoints.mentions.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('offPage.checkpoints.mentions.description') }} />
+            </div>
+
+            <div className="blog-checkpoint">
+              <h3>{t('offPage.checkpoints.local.title')}</h3>
+              <p dangerouslySetInnerHTML={{ __html: t('offPage.checkpoints.local.description') }} />
+            </div>
+          </div>
+        </section>
+
+        {/* How to Use This Checklist */}
+        <section className="blog-section mb-20">
+          <h2>{t('howToUse.title')}</h2>
+          
+          <p>
+            {t('howToUse.intro')}
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-10">
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">{t('howToUse.step1')}</h3>
+              <p className="text-gray-300">{t('howToUse.step1Desc')}</p>
+            </div>
+
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">{t('howToUse.step2')}</h3>
+              <p className="text-gray-300">{t('howToUse.step2Desc')}</p>
+            </div>
+
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">{t('howToUse.step3')}</h3>
+              <p className="text-gray-300">{t('howToUse.step3Desc')}</p>
+            </div>
+
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">{t('howToUse.step4')}</h3>
+              <p className="text-gray-300">{t('howToUse.step4Desc')}</p>
+            </div>
+
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">{t('howToUse.step5')}</h3>
+              <p className="text-gray-300">{t('howToUse.step5Desc')}</p>
+            </div>
+
+            <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-6">
+              <h3 className="text-lg font-semibold text-white mb-3">{t('howToUse.step6')}</h3>
+              <p className="text-gray-300">{t('howToUse.step6Desc')}</p>
+            </div>
           </div>
         </section>
 
         {/* Conclusion */}
         <section className="blog-section">
-          <h2>Taking Action on Your SEO Audit</h2>
+          <h2>{t('conclusion.title')}</h2>
           
           <p>
-            A comprehensive SEO audit is only valuable if you act on the findings. Start with the 
-            highest-impact issues and work systematically through your checklist.
+            {t('conclusion.paragraph1')}
+          </p>
+
+          <p>
+            {t('conclusion.paragraph2')}
           </p>
 
           <div className="my-10 pl-6 border-l-4 border-blue-500">
             <p className="text-lg text-gray-100 font-medium">
-              Ready to automate your SEO audits? 
-              <a href="/features" className="text-blue-400 hover:text-blue-300 underline">Try AI SEO Turbo's automated auditing tools</a> 
-              or <a href="/pricing" className="text-blue-400 hover:text-blue-300 underline">choose a plan</a> that fits your needs.
+              {t('conclusion.cta')}
             </p>
           </div>
         </section>
@@ -308,7 +439,7 @@ export default async function CompleteSEOAuditChecklistPage({ params }: { params
     author: t('post.author'),
     authorRole: t('post.authorRole'),
     featured: true,
-    image: '/blog/seo-audit-checklist.jpg',
+    image: '/blog/seo-audit-checklist.webp',
     tags: ['SEO Audit', 'Technical SEO', 'On-Page SEO', 'Content Audit', 'Off-Page SEO', 'Checklist', 'Framework'],
     views: '2.4k',
     likes: 156

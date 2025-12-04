@@ -102,7 +102,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         excerpt: 'Comprehensive checklist for conducting thorough SEO audits in 2025.',
         category: 'SEO Audit',
         readTime: '8 min read',
-        image: '/blog/seo-audit.jpg'
+        image: '/blog/seo-audit-checklist.webp'
       },
       {
         id: '2',
@@ -111,7 +111,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         excerpt: 'Complete guide to optimizing Core Web Vitals for better search rankings.',
         category: 'Performance',
         readTime: '12 min read',
-        image: '/blog/core-web-vitals.jpg'
+        image: '/blog/seo-audit-checklist.webp'
       },
       {
         id: '3',
@@ -120,7 +120,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         excerpt: 'Essential technical SEO practices for 2025 and beyond.',
         category: 'Technical SEO',
         readTime: '10 min read',
-        image: '/blog/technical-seo.jpg'
+        image: '/blog/seo-audit-checklist.webp'
       }
     ]
     return allPosts.filter(p => p.slug !== currentPost.slug).slice(0, 3)
@@ -131,12 +131,36 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
   const sharePost = (platform: string) => {
     const url = typeof window !== 'undefined' ? window.location.href : ''
     const text = post.title
+    const description = post.excerpt || text
+    const imageUrl = post.image ? `${window.location.origin}${post.image}` : ''
+    
     const shareUrls: { [key: string]: string } = {
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}&summary=${encodeURIComponent(description)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`,
+      pinterest: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(text + ' - ' + description)}`
     }
-    if (shareUrls[platform]) {
+
+    if (platform === 'instagram') {
+      // Instagram doesn't have a direct web share URL, use Web Share API or copy to clipboard
+      if (navigator.share) {
+        navigator.share({
+          title: text,
+          text: description,
+          url: url
+        }).catch(() => {
+          // Fallback to copying URL
+          navigator.clipboard.writeText(url).then(() => {
+            alert('Link copied to clipboard! You can now share it on Instagram.')
+          })
+        })
+      } else {
+        // Copy URL to clipboard
+        navigator.clipboard.writeText(url).then(() => {
+          alert('Link copied to clipboard! You can now share it on Instagram.')
+        })
+      }
+    } else if (shareUrls[platform]) {
       window.open(shareUrls[platform], '_blank', 'width=600,height=400')
     }
     setShowShareMenu(false)
@@ -160,78 +184,81 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           />
         </motion.div>
 
-        {/* Article Header */}
-        <article className="relative">
-          <div className="relative max-w-4xl mx-auto px-6 pt-24 pb-12">
-            {/* Breadcrumbs */}
-            <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-              <Breadcrumbs
-                items={[
-                  { name: 'Blog', url: '/blog' },
-                  { name: post.title, url: `/blog/${post.slug}` }
-                ]}
-                darkMode={true}
-                className="mb-8"
-              />
-            </motion.div>
-            {/* Back Button */}
-            <Link href="/blog">
-              <motion.button initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.1 }} whileHover={{ x: -4 }} className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group">
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                Back to Blog
-              </motion.button>
-            </Link>
-            {/* Category Badge */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="mb-6">
-              <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">{post.category}</span>
-            </motion.div>
-            {/* Title */}
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }} className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">{post.title}</motion.h1>
-            {/* Meta Information */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-8">
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4" />
-                <span className="text-white">{post.author}</span>
-                {post.authorRole && (<span className="text-gray-500">• {post.authorRole}</span>)}
+        {/* HERO SECTION for ALL blog posts - Featured style */}
+        <article className="relative pb-0">
+            <div className="max-w-4xl mx-auto px-6 pt-24 pb-12">
+              {/* Breadcrumbs */}
+              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+                <Breadcrumbs
+                  items={[
+                    { name: 'Blog', url: '/blog' },
+                    { name: post.title, url: `/blog/${post.slug}` }
+                  ]}
+                  darkMode={true}
+                  className="mb-8"
+                />
+              </motion.div>
+              <div className="flex gap-2 mb-5">
+                <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
+                  {post.category}
+                </span>
               </div>
-              <span className="text-gray-600">•</span>
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span>{post.date}</span>
+              <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 max-w-5xl leading-tight drop-shadow-xl">{post.title}</h1>
+              {post.excerpt && (
+                <p className="text-xl text-slate-300 mb-8 max-w-3xl leading-relaxed drop-shadow">{post.excerpt}</p>
+              )}
+              <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-xl mb-8 shadow-xl">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-64 md:h-80 object-cover object-center"
+                  style={{ filter: "brightness(1.25)" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-950/70 pointer-events-none" />
               </div>
-              <span className="text-gray-600">•</span>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>{post.readTime}</span>
+              {/* Author and Meta Info */}
+              <div className="text-center mb-4">
+                <div className="text-sm text-gray-300">
+                  <span className="text-white font-medium">{post.author}</span>
+                  {post.authorRole && (<span className="text-gray-500"> • {post.authorRole}</span>)}
+                  <span className="text-gray-500"> • {post.date}</span>
+                </div>
               </div>
-              <span className="text-gray-600">•</span>
-              <div className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
-                <span>{post.views} views</span>
+              {/* Action Buttons - Smaller and Inline */}
+              <div className="flex justify-center gap-2 mb-7">
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsLiked(!isLiked)} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-all ${isLiked ? 'bg-blue-600 text-white' : 'bg-slate-800/50 hover:bg-slate-700/50 text-gray-300'}`}>
+                  <ThumbsUp className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
+                  <span>{isLiked ? post.likes + 1 : post.likes}</span>
+                </motion.button>
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSaved(!isSaved)} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-all ${isSaved ? 'bg-blue-600 text-white' : 'bg-slate-800/50 hover:bg-slate-700/50 text-gray-300'}`}>
+                  <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
+                  <span>Save</span>
+                </motion.button>
+                <div className="relative">
+                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowShareMenu(!showShareMenu)} className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-800/50 hover:bg-slate-700/50 text-gray-300 rounded-lg transition-all">
+                    <Share2 className="w-4 h-4" />
+                    <span>Share</span>
+                  </motion.button>
+                  {showShareMenu && (<motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-10 min-w-[150px]">
+                    <button onClick={() => sharePost('twitter')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Twitter</button>
+                    <button onClick={() => sharePost('linkedin')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">LinkedIn</button>
+                    <button onClick={() => sharePost('facebook')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Facebook</button>
+                    <button onClick={() => sharePost('pinterest')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Pinterest</button>
+                    <button onClick={() => sharePost('instagram')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Instagram</button>
+                  </motion.div>)}
+                </div>
               </div>
-            </motion.div>
-            {/* Action Buttons */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }} className="flex flex-wrap gap-3 mb-12">
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsLiked(!isLiked)} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${isLiked ? 'bg-blue-600 text-white' : 'bg-slate-800/50 hover:bg-slate-700/50 text-gray-300'}`}><ThumbsUp className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} /><span>{isLiked ? post.likes + 1 : post.likes}</span></motion.button>
-              <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSaved(!isSaved)} className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${isSaved ? 'bg-blue-600 text-white' : 'bg-slate-800/50 hover:bg-slate-700/50 text-gray-300'}`}><Bookmark className={`w-5 h-5 ${isSaved ? 'fill-current' : ''}`} /><span>Save</span></motion.button>
-              <div className="relative">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowShareMenu(!showShareMenu)} className="flex items-center gap-2 px-4 py-2 bg-slate-800/50 hover:bg-slate-700/50 text-gray-300 rounded-lg transition-all"><Share2 className="w-5 h-5" /><span>Share</span></motion.button>
-                {showShareMenu && (<motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-10 min-w-[150px]">
-                  <button onClick={() => sharePost('twitter')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Twitter</button>
-                  <button onClick={() => sharePost('linkedin')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">LinkedIn</button>
-                  <button onClick={() => sharePost('facebook')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Facebook</button>
-                </motion.div>)}
+              <div className="mt-2 mb-4">
+                <div className="flex items-center gap-3 text-sm text-gray-400">
+                  <div className="flex-1 h-1 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-out" style={{ width: `${scrollProgress}%` }}/>
+                  </div>
+                  <span className="text-xs font-medium">{Math.round(scrollProgress)}%</span>
+                </div>
               </div>
-            </motion.div>
-            {/* Progress Indicator */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="flex items-center gap-3 text-sm text-gray-400">
-              <div className="flex-1 h-1 bg-slate-800 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-out" style={{ width: `${scrollProgress}%` }}/>
-              </div>
-              <span className="text-xs font-medium">{Math.round(scrollProgress)}%</span>
-            </motion.div>
-          </div>
-        </article>
+            </div>
+          </article>
+
         {/* Article Content */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="max-w-4xl mx-auto px-6 pb-20">
           {typeof post.content === 'string'

@@ -1,10 +1,9 @@
 "use client"
 
 import React, { useState, useEffect, useRef } from "react"
-import { Link, useRouter } from "@/lib/navigation"
+import { Link, useRouter, usePathname } from "@/lib/navigation"
 import Image from "next/image"
 import { Menu, X, ChevronDown } from "lucide-react"
-import { usePathname } from "next/navigation"
 import { LanguageSwitcher } from "@/components/layout/language-switcher"
 import { useTranslations } from "next-intl"
 
@@ -173,6 +172,35 @@ function useNavigationData(): NavigationSection[] {
   ]
 }
 
+// Safe router hook that handles missing intl context
+function useSafeRouter() {
+  try {
+    return useRouter()
+  } catch (error) {
+    // Return a fallback router-like object when context is missing
+    return {
+      push: (href: string) => { window.location.href = href },
+      replace: (href: string) => { window.location.replace(href) },
+      prefetch: () => {},
+      back: () => { window.history.back() },
+      forward: () => { window.history.forward() },
+    }
+  }
+}
+
+// Safe pathname hook
+function useSafePathname() {
+  try {
+    return usePathname()
+  } catch (error) {
+    // Return current pathname from window if available
+    if (typeof window !== 'undefined') {
+      return window.location.pathname
+    }
+    return '/'
+  }
+}
+
 export function AdaptiveNavigation() {
   const t = useSafeTranslations('nav')
   const navigationData = useNavigationData()
@@ -180,8 +208,8 @@ export function AdaptiveNavigation() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [isMounted, setIsMounted] = useState(false)
   const mobileMenuRef = useRef<HTMLDivElement | null>(null)
-  const pathname = usePathname()
-  const router = useRouter()
+  const pathname = useSafePathname()
+  const router = useSafeRouter()
   // Deduplicate touch + click sequences to avoid double toggle
   const lastTouchToggleTs = useRef<number>(0)
 

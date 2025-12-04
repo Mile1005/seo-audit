@@ -37,13 +37,39 @@ interface CrawlResult {
   brokenLinks: string[];
 }
 
-async function simpleCrawl(startUrl: string, limit: number = 10): Promise<CrawlResult> {
+// Helper function to extract base domain (e.g., "example.com" from "www.example.com" or "blog.example.com")
+function getBaseDomain(hostname: string): string {
+  const parts = hostname.split('.');
+  // Handle cases like "co.uk", "com.au" etc
+  if (parts.length > 2) {
+    // Check if it's a known TLD pattern
+    const lastTwo = parts.slice(-2).join('.');
+    if (['co.uk', 'com.au', 'co.nz', 'com.br', 'co.jp'].includes(lastTwo)) {
+      return parts.slice(-3).join('.');
+    }
+    return parts.slice(-2).join('.');
+  }
+  return hostname;
+}
+
+// Check if a hostname belongs to the same domain (considering subdomains)
+function isSameDomain(hostname: string, baseDomain: string, includeSubdomains: boolean, originalHostname: string): boolean {
+  if (hostname === originalHostname) return true;
+  if (!includeSubdomains) return false;
+  return hostname.endsWith('.' + baseDomain) || hostname === baseDomain;
+}
+
+async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomains: boolean = false): Promise<CrawlResult> {
   const startTime = Date.now();
   const pages: CrawlPage[] = [];
   const visited = new Set<string>();
   const queue = [startUrl];
   
-  console.log(`Starting simple crawl for: ${startUrl}`);
+  // Get the base domain for subdomain matching
+  const startUrlObj = new URL(startUrl);
+  const baseDomain = getBaseDomain(startUrlObj.hostname);
+  
+  console.log(`Starting simple crawl for: ${startUrl} (includeSubdomains: ${includeSubdomains})`);
   
   // Check robots.txt
   let robotsFound = false;
@@ -144,7 +170,8 @@ async function simpleCrawl(startUrl: string, limit: number = 10): Promise<CrawlR
         if (href) {
           try {
             const linkUrl = new URL(href, url);
-            if (linkUrl.hostname === baseHost) {
+            // Check if this is an internal link (same domain or subdomain if enabled)
+            if (isSameDomain(linkUrl.hostname, baseDomain, includeSubdomains, baseHost)) {
               internalLinks++;
               // Add internal links to queue for crawling
               if (queue.length + pages.length < limit && !visited.has(linkUrl.toString())) {
@@ -233,7 +260,7 @@ async function simpleCrawl(startUrl: string, limit: number = 10): Promise<CrawlR
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { startUrl, limit = 10 } = body;
+    const { startUrl, limit = 10, includeSubdomains = false } = body;
 
     if (!startUrl) {
       return NextResponse.json(
@@ -254,10 +281,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log(`Starting crawl for: ${normalizedUrl} with limit: ${limit}`);
+    console.log(`Starting crawl for: ${normalizedUrl} with limit: ${limit}, includeSubdomains: ${includeSubdomains}`);
 
-    // Perform the crawl
-    const crawlResult = await simpleCrawl(normalizedUrl, Math.min(limit, 25));
+    // Perform the crawl - allow up to 50 pages for lite version
+    const crawlResult = await simpleCrawl(normalizedUrl, Math.min(limit, 50), includeSubdomains);
 
     console.log(`Crawl completed for ${normalizedUrl}:`, {
       totalPages: crawlResult.totalPages,

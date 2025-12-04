@@ -220,7 +220,7 @@ export default async function ContentSEOContentPage({ params }: { params: Promis
     author: t('post.author'),
     authorRole: t('post.authorRole'),
     featured: true,
-    image: '/blog/content-seo.jpg',
+    image: '/blog/seo-audit-checklist.webp',
     tags: ['Content SEO', 'Content Strategy', 'Keyword Research', 'User Intent', 'Blog Writing', 'Content Optimization'],
     views: '2.7k',
     likes: 189

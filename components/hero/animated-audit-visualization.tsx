@@ -17,6 +17,7 @@ import {
   Loader2
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useState, useEffect } from 'react'
 
 interface AuditProgress {
   status: 'idle' | 'fetching' | 'analyzing' | 'processing' | 'completed' | 'error'
@@ -26,8 +27,8 @@ interface AuditProgress {
 }
 
 interface AnimatedAuditVisualizationProps {
-  progress: AuditProgress
-  url: string
+  progress?: AuditProgress
+  url?: string
 }
 
 interface CheckItem {
@@ -37,7 +38,53 @@ interface CheckItem {
   delay: number
 }
 
-export function AnimatedAuditVisualization({ progress, url }: AnimatedAuditVisualizationProps) {
+// Default progress for auto-animation mode
+const defaultProgress: AuditProgress = {
+  status: 'fetching',
+  currentStep: 'Connecting to website...',
+  progress: 0,
+  steps: ['Fetching', 'Analyzing', 'Processing', 'Complete']
+}
+
+export function AnimatedAuditVisualization({ progress: propProgress, url = 'Analyzing...' }: AnimatedAuditVisualizationProps) {
+  // Auto-animate when no progress prop is provided
+  const [autoProgress, setAutoProgress] = useState<AuditProgress>(defaultProgress)
+  const isAutoMode = !propProgress
+  const progress = propProgress || autoProgress
+
+  // Auto-animation effect
+  useEffect(() => {
+    if (!isAutoMode) return
+
+    const stages = [
+      { progress: 15, status: 'fetching' as const, step: 'Connecting to website...' },
+      { progress: 35, status: 'analyzing' as const, step: 'Parsing HTML and extracting data...' },
+      { progress: 55, status: 'analyzing' as const, step: 'Analyzing meta tags...' },
+      { progress: 75, status: 'processing' as const, step: 'Running SEO checks...' },
+      { progress: 90, status: 'processing' as const, step: 'Calculating scores...' },
+      { progress: 100, status: 'completed' as const, step: 'Audit complete!' },
+    ]
+
+    let currentStage = 0
+    const interval = setInterval(() => {
+      if (currentStage < stages.length) {
+        const stage = stages[currentStage]
+        setAutoProgress({
+          status: stage.status,
+          currentStep: stage.step,
+          progress: stage.progress,
+          steps: ['Fetching', 'Analyzing', 'Processing', 'Complete']
+        })
+        currentStage++
+      } else {
+        // Loop back for continuous animation
+        currentStage = 0
+        setAutoProgress(defaultProgress)
+      }
+    }, 1200)
+
+    return () => clearInterval(interval)
+  }, [isAutoMode])
   // Dynamic check items based on progress
   const getCheckItems = (): CheckItem[] => {
     const items: CheckItem[] = [

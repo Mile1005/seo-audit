@@ -257,7 +257,7 @@ export async function POST(request: NextRequest) {
     const labeledInputs = inputs.filter((_, el) => {
       const id = $(el).attr('id')
       const ariaLabel = $(el).attr('aria-label')
-      return (id && $(`label[for="${id}"]`).length > 0) || ariaLabel
+      return !!((id && $(`label[for="${id}"]`).length > 0) || ariaLabel)
     }).length
     if (inputs.length > 0) {
       const labelPercent = Math.round((labeledInputs / inputs.length) * 100)
@@ -266,7 +266,7 @@ export async function POST(request: NextRequest) {
     }
 
     const buttons = $('button, [role="button"]')
-    const labeledButtons = buttons.filter((_, el) => $(el).text().trim() || $(el).attr('aria-label')).length
+    const labeledButtons = buttons.filter((_, el) => !!($(el).text().trim() || $(el).attr('aria-label'))).length
     if (buttons.length > 0) {
       const btnPercent = Math.round((labeledButtons / buttons.length) * 100)
       checks.push({ id: 'button_labels', category: 'Accessibility', name: 'Button Labels', passed: labeledButtons === buttons.length, severity: 'medium', message: `${btnPercent}% labeled`, value: btnPercent })

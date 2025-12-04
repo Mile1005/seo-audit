@@ -11,10 +11,35 @@ interface SiteCrawlerHeroProps {
   submitError?: string;
 }
 
+// Normalize URL - accepts all formats: example.com, www.example.com, https://example.com
+function normalizeUrl(input: string): string {
+  let url = input.trim().toLowerCase();
+  
+  // Remove trailing slashes
+  url = url.replace(/\/+$/, '');
+  
+  // Add https:// if no protocol
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    url = 'https://' + url;
+  }
+  
+  return url;
+}
+
+// Validate URL - accepts domains without protocol
+function isValidUrl(input: string): boolean {
+  const trimmed = input.trim();
+  if (!trimmed) return false;
+  
+  // Pattern that accepts: example.com, www.example.com, https://example.com, etc.
+  const pattern = /^(https?:\/\/)?(www\.)?[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z]{2,})+([\/\w\-._~:?#\[\]@!$&'()*+,;=]*)?$/;
+  return pattern.test(trimmed);
+}
+
 export function SiteCrawlerHero({ onCrawlSubmit, isSubmitting = false, submitError }: SiteCrawlerHeroProps) {
   const t = useTranslations('featurePages.siteCrawler');
   const [url, setUrl] = useState('');
-  const [maxPages, setMaxPages] = useState('1000');
+  const [maxPages, setMaxPages] = useState('25');
   const [includeSubdomains, setIncludeSubdomains] = useState(false);
   const [errors, setErrors] = useState<{ url?: string }>({});
 
@@ -23,14 +48,8 @@ export function SiteCrawlerHero({ onCrawlSubmit, isSubmitting = false, submitErr
 
     if (!url.trim()) {
       newErrors.url = "URL is required";
-    } else {
-      const trimmedUrl = url.trim();
-      const urlPattern = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i;
-      const domainPattern = /^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$/;
-
-      if (!urlPattern.test(trimmedUrl) && !domainPattern.test(trimmedUrl)) {
-        newErrors.url = "Please enter a valid URL";
-      }
+    } else if (!isValidUrl(url)) {
+      newErrors.url = "Please enter a valid URL (e.g., example.com or https://example.com)";
     }
 
     setErrors(newErrors);
@@ -44,8 +63,8 @@ export function SiteCrawlerHero({ onCrawlSubmit, isSubmitting = false, submitErr
 
     if (onCrawlSubmit) {
       onCrawlSubmit({
-        url: url.trim(),
-        maxPages: parseInt(maxPages) || 1000,
+        url: normalizeUrl(url),
+        maxPages: parseInt(maxPages) || 25,
         includeSubdomains
       });
     }
@@ -117,15 +136,14 @@ export function SiteCrawlerHero({ onCrawlSubmit, isSubmitting = false, submitErr
                   {t('form.urlLabel')}
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   id="crawl-url"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  placeholder={t('form.urlPlaceholder')}
+                  placeholder="example.com or https://example.com"
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors ${
                     errors.url ? 'border-red-500' : 'border-muted-foreground/20'
                   }`}
-                  required
                 />
                 {errors.url && (
                   <p className="mt-1 text-sm text-red-600">{errors.url}</p>
@@ -142,10 +160,9 @@ export function SiteCrawlerHero({ onCrawlSubmit, isSubmitting = false, submitErr
                   onChange={(e) => setMaxPages(e.target.value)}
                   className="w-full px-4 py-3 border border-muted-foreground/20 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                 >
-                  <option value="100">100 pages (Quick scan)</option>
-                  <option value="500">500 pages (Standard)</option>
-                  <option value="1000">1000 pages (Comprehensive)</option>
-                  <option value="5000">5000 pages (Full site)</option>
+                  <option value="10">10 pages (Quick scan)</option>
+                  <option value="25">25 pages (Standard)</option>
+                  <option value="50">50 pages (Comprehensive)</option>
                 </select>
               </div>
 

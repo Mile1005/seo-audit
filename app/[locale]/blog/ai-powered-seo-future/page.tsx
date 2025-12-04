@@ -254,7 +254,7 @@ export default async function AIPoweredSEOFuturePage({ params }: { params: Promi
     author: t('post.author'),
     authorRole: t('post.authorRole'),
     featured: true,
-    image: '/blog/ai-seo-future.jpg',
+    image: '/blog/seo-audit-checklist.webp',
     tags: ['AI', 'Machine Learning', 'SEO', 'Future', 'RankBrain', 'BERT', 'Optimization'],
     views: '1.8k',
     likes: 89
