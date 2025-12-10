@@ -12239,81 +12239,81 @@
       },
       "testimonialsData": {
         "testimonial-1": {
-          "quote": "AISEOTurbo reduced our audit time from 6 hours to 20 minutes. Our team can now handle 3x more clients with the same resources.",
+          "quote": "AISEOTurbo ha ridotto il nostro tempo di audit da 6 ore a 20 minuti. Il nostro team può ora gestire 3x più clienti con le stesse risorse.",
           "metric": {
             "value": "300%",
-            "description": "increase in client capacity"
+            "description": "aumento nella capacità clienti"
           },
           "caseStudy": {
-            "beforeMetric": "6 hours per audit",
-            "afterMetric": "20 minutes per audit",
-            "improvement": "95% time reduction",
-            "timeframe": "Within 30 days"
+            "beforeMetric": "6 ore per audit",
+            "afterMetric": "20 minuti per audit",
+            "improvement": "95% riduzione tempo",
+            "timeframe": "Entro 30 giorni"
           }
         },
         "testimonial-2": {
-          "quote": "We increased organic traffic by 180% in 4 months following AISeOTurbo's actionable recommendations. Game-changing insights.",
+          "quote": "Abbiamo aumentato il traffico organico del 180% in 4 mesi seguendo le raccomandazioni actionable di AISeOTurbo. Insights che cambiano il gioco.",
           "metric": {
             "value": "180%",
-            "description": "organic traffic growth"
+            "description": "crescita traffico organico"
           },
           "caseStudy": {
-            "beforeMetric": "2.5K monthly visits",
-            "afterMetric": "7K monthly visits",
-            "improvement": "180% traffic increase",
-            "timeframe": "4 months"
+            "beforeMetric": "2.5K visite mensili",
+            "afterMetric": "7K visite mensili",
+            "improvement": "180% aumento traffico",
+            "timeframe": "4 mesi"
           }
         },
         "testimonial-3": {
-          "quote": "Our e-commerce sales jumped 85% after implementing the technical SEO fixes. The ROI was immediate and measurable.",
+          "quote": "Le nostre vendite e-commerce sono salite dell'85% dopo aver implementato le correzioni tecniche SEO. L'ROI è stato immediato e misurabile.",
           "metric": {
             "value": "85%",
-            "description": "e-commerce sales increase"
+            "description": "aumento vendite e-commerce"
           },
           "caseStudy": {
-            "beforeMetric": "$45K monthly revenue",
-            "afterMetric": "$83K monthly revenue",
-            "improvement": "85% revenue growth",
-            "timeframe": "3 months"
+            "beforeMetric": "45K$ ricavi mensili",
+            "afterMetric": "83K$ ricavi mensili",
+            "improvement": "85% crescita ricavi",
+            "timeframe": "3 mesi"
           }
         },
         "testimonial-4": {
-          "quote": "AISeOTurbo identified critical Core Web Vitals issues that our dev team missed. Page speed improved 60% and conversions followed.",
+          "quote": "AISEOTurbo ha identificato problemi critici di Core Web Vitals che il nostro team dev aveva perso. La velocità pagina è migliorata del 60% e le conversioni hanno seguito.",
           "metric": {
             "value": "60%",
-            "description": "page speed improvement"
+            "description": "miglioramento velocità pagina"
           },
           "caseStudy": {
-            "beforeMetric": "4.2s load time",
-            "afterMetric": "1.7s load time",
-            "improvement": "60% speed increase",
-            "timeframe": "6 weeks"
+            "beforeMetric": "4.2s tempo caricamento",
+            "afterMetric": "1.7s tempo caricamento",
+            "improvement": "60% aumento velocità",
+            "timeframe": "6 settimane"
           }
         },
         "testimonial-5": {
-          "quote": "The competitive analysis feature helped us steal 40% market share from competitors. Our clients love the detailed reports.",
+          "quote": "La funzione di analisi competitiva ci ha aiutato a rubare il 40% di quota mercato ai concorrenti. I nostri clienti amano i rapporti dettagliati.",
           "metric": {
             "value": "40%",
-            "description": "market share gained"
+            "description": "quota mercato guadagnata"
           },
           "caseStudy": {
-            "beforeMetric": "15% market visibility",
-            "afterMetric": "55% market visibility",
-            "improvement": "40% share increase",
-            "timeframe": "5 months"
+            "beforeMetric": "15% visibilità mercato",
+            "afterMetric": "55% visibilità mercato",
+            "improvement": "40% aumento quota",
+            "timeframe": "5 mesi"
           }
         },
         "testimonial-6": {
-          "quote": "Product page optimization suggestions increased our conversion rate by 45%. Every recommendation was data-driven and actionable.",
+          "quote": "I suggerimenti di ottimizzazione pagina prodotto hanno aumentato il nostro tasso di conversione del 45%. Ogni raccomandazione era basata su dati e actionable.",
           "metric": {
             "value": "45%",
-            "description": "conversion rate boost"
+            "description": "boost tasso conversione"
           },
           "caseStudy": {
-            "beforeMetric": "2.1% conversion rate",
-            "afterMetric": "3.8% conversion rate",
-            "improvement": "45% conversion boost",
-            "timeframe": "2 months"
+            "beforeMetric": "2.1% tasso conversione",
+            "afterMetric": "3.8% tasso conversione",
+            "improvement": "45% boost conversione",
+            "timeframe": "2 mesi"
           }
         }
       },

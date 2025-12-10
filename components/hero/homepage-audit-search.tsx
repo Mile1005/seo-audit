@@ -91,7 +91,11 @@ export function HomepageAuditSearch() {
           >
             <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto">
               <div className="flex flex-col sm:flex-row gap-3">
+                <label htmlFor="website-url-input" className="sr-only">
+                  {t('placeholder')}
+                </label>
                 <Input
+                  id="website-url-input"
                   type="text"
                   inputMode="url"
                   autoComplete="url"
@@ -103,6 +107,8 @@ export function HomepageAuditSearch() {
                   }}
                   className="flex-1 h-14 text-lg px-6 bg-white dark:bg-slate-800 border-2"
                   disabled={loading}
+                  aria-describedby={error ? "url-error" : undefined}
+                  aria-invalid={error ? "true" : "false"}
                 />
                 <Button
                   type="submit"
@@ -119,9 +125,12 @@ export function HomepageAuditSearch() {
               </div>
               {error && (
                 <motion.div
+                  id="url-error"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: 'auto' }}
                   className="mt-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm"
+                  role="alert"
+                  aria-live="polite"
                 >
                   {error}
                 </motion.div>

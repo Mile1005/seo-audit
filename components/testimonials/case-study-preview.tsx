@@ -107,8 +107,8 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
       </div>
 
       {/* CTA */}
-      <motion.a
-        href="/blog"
+      <motion.button
+        type="button"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className="
@@ -116,14 +116,14 @@ export function CaseStudyPreview({ testimonial, className = "" }: CaseStudyPrevi
           text-white rounded-lg py-3 px-4 flex items-center justify-center space-x-2 
           transition-all duration-200 group-hover:bg-purple-500/10
         "
-        onClick={(e) => {
-          e.preventDefault()
-          handleCTAClick('/blog', 'Read Full Case Study', 'case-study-preview')
+        onClick={() => {
+          const link = testimonial.caseStudy?.link || '/case-studies'
+          handleCTAClick(link, 'Read Full Case Study', 'case-study-preview')
         }}
       >
         <span className="font-medium">{t('home.testimonials.caseStudies.labels.readFullCaseStudy')}</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-      </motion.a>
+      </motion.button>
     </motion.div>
   )
 }

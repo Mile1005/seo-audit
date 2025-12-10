@@ -69,9 +69,9 @@ export function FlagIcon({ locale, className = 'h-4 w-5 rounded-[2px] overflow-h
       return (
         <svg viewBox="0 0 3 2" className={className} aria-hidden={!title} role={title ? 'img' : 'presentation'}>
           {title ? <title>{title}</title> : null}
-          <rect width="3" height="2" fill="#ffce00"/>
-          <rect width="3" height="1.333" y="0" fill="#000"/>
-          <rect width="3" height="0.666" y="1.333" fill="#dd0000"/>
+          <rect width="3" height="0.666" y="0" fill="#000"/>
+          <rect width="3" height="0.666" y="0.666" fill="#dd0000"/>
+          <rect width="3" height="0.668" y="1.332" fill="#ffce00"/>
         </svg>
       );
     default:

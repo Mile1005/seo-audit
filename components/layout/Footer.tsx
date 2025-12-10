@@ -78,7 +78,7 @@ export default function Footer() {
                 >
                   <Image 
                     src="/logo.png" 
-                    alt="AISEOTurbo Logo" 
+                    alt="AI SEO Turbo - Professional SEO Audits" 
                     width={200} 
                     height={53}
                     className="h-16 sm:h-20 md:h-24 w-auto"

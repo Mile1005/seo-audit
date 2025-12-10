@@ -10000,7 +10000,7 @@
     "placeholder": "Enter your email address",
     "ctaText": "Get Free Checklist",
     "sending": "Sending...",
-    "trustSignal": "ðŸ“§ No spam, unsubscribe anytime â€¢ ðŸ”’ Your data is secure",
+    "trustSignal": "No spam, unsubscribe anytime • Your data is secure",
     "success": {
       "title": "Success! Check Your Email",
       "message": "Your free SEO checklist is on its way. Don't forget to check your spam folder!",
@@ -11443,15 +11443,16 @@
           "ahrefs": "Backlink analysis and content exploration",
           "screamingFrog": "Technical content audit and analysis"
         }
-      }
-    ,
-    "conclusion": {
+      },
+      "conclusion": {
         "title": "Content SEO Success: Quality, Strategy, and Consistency",
         "paragraph1": "Content SEO success in 2025 requires creating high-quality content that serves users while implementing strategic SEO optimization. Focus on understanding user intent, building topical authority, and consistently delivering value.",
         "paragraph2": "Remember that content SEO is a long-term strategy. Quality content compounds over time, building authority and traffic that lasts. While AI tools can enhance your process, human expertise in understanding your audience and business goals remains essential.",
         "paragraph3": "Start by auditing your current content, understanding your audience's intent, and creating a strategic content plan. Measure your results, optimize based on data, and commit to consistent execution. Content SEO mastery leads to sustainable organic growth that outperforms short-term tactics."
       }
-    },
+    }
+    }
+  },
   "testimonialsData": {
     "testimonial-1": {
       "quote": "AISEOTurbo reduced our audit time from 6 hours to 20 minutes. Our team can now handle 3x more clients with the same resources.",
@@ -12037,7 +12038,4 @@
       }
     }
   }
-
-}
-}
 }

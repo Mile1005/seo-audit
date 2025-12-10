@@ -6,7 +6,7 @@ import { locales, localeNames, type Locale } from '@/i18n';
 import { FlagIcon } from '@/components/ui/flag-icons';
 import { useSession } from 'next-auth/react';
 import { useState, useTransition } from 'react';
-import { Languages, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -102,8 +102,7 @@ export function LanguageSwitcher() {
           className="flex items-center gap-2 h-9"
           disabled={isPending}
         >
-          <Languages className="h-4 w-4" />
-          <span className="hidden sm:inline-flex items-center"><FlagIcon locale={currentLocale} title={localeNames[currentLocale]} /></span>
+          <span className="inline-flex items-center"><FlagIcon locale={currentLocale} title={localeNames[currentLocale]} /></span>
           <span className="hidden md:inline">{localeNames[currentLocale]}</span>
         </Button>
       </DropdownMenuTrigger>

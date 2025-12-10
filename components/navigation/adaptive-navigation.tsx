@@ -295,7 +295,7 @@ export function AdaptiveNavigation() {
               <Link href="/" className="flex items-center">
                 <Image 
                   src="/logo.png" 
-                  alt="AISEOTurbo Logo" 
+                  alt="AI SEO Turbo" 
                   width={180} 
                   height={48}
                   priority
@@ -322,7 +322,7 @@ export function AdaptiveNavigation() {
             >
               <Image 
                 src="/logo.png" 
-                alt="AISEOTurbo Logo" 
+                alt="AI SEO Turbo Home" 
                 width={180} 
                 height={48}
                 priority

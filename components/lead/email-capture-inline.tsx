@@ -148,10 +148,14 @@ export function EmailCaptureInline({
       {/* Form */}
       <form onSubmit={handleSubmit} action="/api/lead-capture" method="POST" className="space-y-4">
         <div className="relative">
+          <label htmlFor="email-capture-input" className="sr-only">
+            {finalPlaceholder}
+          </label>
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Mail className="h-5 w-5 text-gray-400" />
           </div>
           <input
+            id="email-capture-input"
             ref={emailInputRef}
             type="email"
             value={email}
@@ -162,10 +166,10 @@ export function EmailCaptureInline({
               focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500
               ${styles.input}
             `}
-            aria-label={finalPlaceholder}
-            aria-describedby="email-error"
+            aria-describedby={result && !result.success ? "email-error" : undefined}
             aria-invalid={result && !result.success ? 'true' : 'false'}
             disabled={isSubmitting}
+            required
           />
         </div>
 

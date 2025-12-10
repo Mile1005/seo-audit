@@ -167,15 +167,21 @@ export function ContentGate({
 
                     {/* Email Form */}
                     <form onSubmit={handleSubmit} action="/api/lead-capture" method="POST" className="space-y-4">
+                      <label htmlFor="content-gate-email" className="sr-only">
+                        {t('messages.enterEmail')}
+                      </label>
                       <input
+                        id="content-gate-email"
                         ref={emailInputRef}
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder={t('messages.enterEmail')}
                         className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all duration-200"
-                        aria-describedby="gate-error"
+                        aria-describedby={result && !result.success ? "gate-error" : undefined}
+                        aria-invalid={result && !result.success ? 'true' : 'false'}
                         disabled={isSubmitting}
+                        required
                       />
 
                       {/* Error Message */}

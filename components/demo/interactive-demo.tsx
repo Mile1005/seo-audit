@@ -178,13 +178,18 @@ export function InteractiveDemo() {
 
                   <div className="space-y-4">
                     <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                      <label htmlFor="demo-url-input" className="sr-only">
+                        {t('form.placeholder')}
+                      </label>
                       <input
+                        id="demo-url-input"
                         type="url"
                         placeholder={t('form.placeholder')}
                         value={inputUrl}
                         onChange={(e) => setInputUrl(e.target.value)}
                         className="flex-1 px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20"
                         onKeyDown={(e) => e.key === 'Enter' && handleStartDemo()}
+                        aria-label={t('form.placeholder')}
                       />
                       <motion.button
                         whileHover={{ scale: 1.05 }}
