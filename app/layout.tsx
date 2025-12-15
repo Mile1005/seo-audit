@@ -25,6 +25,9 @@ const SpeedInsights = dynamicImport(
   }
 );
 
+// Force dynamic rendering for root layout
+export const dynamic = "force-dynamic";
+
 // Ultra-optimized font loading for maximum performance
 const inter = Inter({
   subsets: ["latin"],
