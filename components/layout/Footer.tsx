@@ -77,6 +77,7 @@ export default function Footer() {
                     alt="AI SEO Turbo - Professional SEO Audits"
                     width={200}
                     height={53}
+                    sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
                     className="h-16 sm:h-20 md:h-24 w-auto"
                     style={{ width: "auto" }}
                   />

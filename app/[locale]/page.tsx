@@ -1,5 +1,3 @@
-import { HeroSection } from "@/components/hero/hero-section";
-import { TrustLogos } from "@/components/hero/trust-logos";
 import { MainLayout } from "@/components/layout/main-layout";
 import { generateSEOMeta, generateStructuredData, pageSEO } from "@/lib/seo";
 import { LazyWrapper } from "@/components/performance/LazyWrapper";
@@ -10,6 +8,18 @@ import { CheckCircle, ArrowRight } from "lucide-react";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import { type Locale } from "@/i18n";
 import { generateAlternates } from "@/lib/metadata-utils";
+
+// Hero section with framer-motion - static import for LCP
+import { HeroSection } from "@/components/hero/hero-section";
+
+// Trust logos - dynamic import (below fold, can wait)
+const TrustLogos = dynamic(
+  () => import("@/components/hero/trust-logos").then((mod) => ({ default: mod.TrustLogos })),
+  {
+    loading: () => <div className="h-20 bg-slate-900" />,
+    ssr: true,
+  }
+);
 
 // Optimized dynamic imports with better loading states
 // Import our optimized skeletons

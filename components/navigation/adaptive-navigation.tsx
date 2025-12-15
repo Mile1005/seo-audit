@@ -362,6 +362,7 @@ export function AdaptiveNavigation() {
                   width={180}
                   height={48}
                   priority
+                  sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, 64px"
                   className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
                   style={{ width: "auto" }}
                 />
@@ -389,6 +390,7 @@ export function AdaptiveNavigation() {
                 width={180}
                 height={48}
                 priority
+                sizes="(max-width: 640px) 48px, (max-width: 768px) 56px, 64px"
                 className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
                 style={{ width: "auto" }}
               />
