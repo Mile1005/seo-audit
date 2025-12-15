@@ -78,6 +78,10 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
         `/api/keywords/analytics?keywordId=${keywordId}&days=${days}`
       );
 
+      if (response.status === 401) {
+        throw new Error('Sign in to view traffic analytics.');
+      }
+
       if (!response.ok) {
         throw new Error('Failed to fetch traffic analytics');
       }

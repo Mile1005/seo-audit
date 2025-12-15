@@ -35,11 +35,7 @@ export function KeywordOpportunities({ projectId }: KeywordOpportunitiesProps) {
   const loadOpportunities = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/api/keywords/research?projectId=${projectId}`, {
-        headers: {
-          'x-user-id': 'demo-user' // Demo auth
-        }
-      });
+      const response = await fetch(`/api/keywords/research?projectId=${projectId}`);
 
       const result = await response.json();
       if (result.success) {

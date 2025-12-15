@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getCrawl } from '../../../../../lib/server/crawl-store'
 import { prisma } from '../../../../../lib/prisma'
+import { auth } from '../../../../../auth'
 
 // Force dynamic rendering
 export const dynamic = 'force-dynamic'
@@ -16,14 +17,26 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Crawl ID required' }, { status: 400 })
     }
 
+    const session = await auth()
+    const userId = session?.user?.id
+    if (!userId) {
+      return NextResponse.json({ error: 'Authentication required' }, { status: 401 })
+    }
+
     // First check in-memory store for active crawls
     const job = getCrawl(crawlId)
     
     if (job) {
+      if (job.ownerId && job.ownerId !== userId) {
+        return NextResponse.json({ error: 'Crawl not found' }, { status: 404 })
+      }
       // Active crawl found in memory
       return NextResponse.json({
         id: crawlId,
         status: job.status,
+        stage: job.stage,
+        message: job.message,
+        currentUrl: job.currentUrl,
         progress: job.progress,
         pages: job.pages,
         processed: job.processed,
@@ -38,8 +51,12 @@ export async function GET(req: NextRequest) {
 
     // Not in memory - check if it's a completed crawl in database
     try {
-      const dbCrawl = await (prisma as any).crawl.findUnique({
-        where: { id: crawlId },
+      const dbCrawl = await (prisma as any).crawl.findFirst({
+        where: {
+          id: crawlId,
+          type: 'DASHBOARD',
+          project: { ownerId: userId }
+        },
         include: {
           project: {
             select: {

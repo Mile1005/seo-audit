@@ -55,6 +55,10 @@ export function SERPFeaturesSection({ keywordId, keyword }: SERPFeaturesSectionP
 
       const response = await fetch(`/api/keywords/serp-features?keywordId=${keywordId}`);
 
+      if (response.status === 401) {
+        throw new Error('Sign in to view SERP features.');
+      }
+
       if (!response.ok) {
         throw new Error('Failed to fetch SERP features');
       }

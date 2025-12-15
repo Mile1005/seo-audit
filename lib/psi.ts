@@ -88,7 +88,8 @@ export async function fetchPageSpeed(
   url: string,
   key?: string,
   strategy: "mobile" | "desktop" = "mobile",
-  maxRetries = 2
+  maxRetries = 2,
+  options?: { timeoutMs?: number }
 ): Promise<PSIResult> {
   if (!key) {
     return {
@@ -138,7 +139,7 @@ export async function fetchPageSpeed(
         headers: {
           Accept: "application/json",
         },
-        signal: AbortSignal.timeout(30000), // 30 second timeout
+        signal: AbortSignal.timeout(options?.timeoutMs ?? 30000),
       });
 
       if (!response.ok) {

@@ -75,6 +75,10 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
         `/api/keywords/alerts?keywordId=${keywordId}&projectId=${projectId}`
       );
 
+      if (response.status === 401) {
+        throw new Error('Sign in to view smart alerts.');
+      }
+
       if (!response.ok) {
         throw new Error('Failed to fetch alerts');
       }
@@ -112,6 +116,10 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
           ...updatedConfig
         })
       });
+
+      if (response.status === 401) {
+        throw new Error('Sign in to update alert configuration.');
+      }
 
       if (!response.ok) {
         throw new Error('Failed to update alert configuration');

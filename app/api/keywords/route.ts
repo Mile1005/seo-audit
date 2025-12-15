@@ -1,8 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
+import { auth } from "@/auth"
 
 export async function GET(req: NextRequest) {
   try {
+    const session = await auth()
+    const userId = session?.user?.id
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 },
+      )
+    }
+
     const { searchParams } = new URL(req.url)
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '10')
@@ -15,7 +25,20 @@ export async function GET(req: NextRequest) {
 
     // Build where clause
     const where: any = {}
+    where.project = { ownerId: userId }
     if (projectId) {
+      // Ensure projectId belongs to the current user
+      const project = await prisma.project.findFirst({
+        where: { id: projectId, ownerId: userId },
+        select: { id: true },
+      })
+      if (!project) {
+        return NextResponse.json(
+          { success: false, error: 'Project not found' },
+          { status: 404 },
+        )
+      }
+
       where.projectId = projectId
     }
     if (query) {
@@ -92,6 +115,15 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await auth()
+    const userId = session?.user?.id
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 },
+      )
+    }
+
     const body = await req.json()
     const { projectId, keyword, searchVolume, difficulty, cpc, intent } = body
 
@@ -103,9 +135,9 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Validate project exists
-    const project = await prisma.project.findUnique({
-      where: { id: projectId }
+    // Validate project exists and belongs to user
+    const project = await prisma.project.findFirst({
+      where: { id: projectId, ownerId: userId }
     })
 
     if (!project) {
@@ -180,6 +212,15 @@ export async function POST(req: NextRequest) {
 
 export async function PUT(req: NextRequest) {
   try {
+    const session = await auth()
+    const userId = session?.user?.id
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 },
+      )
+    }
+
     const body = await req.json()
     const { id, searchVolume, difficulty, cpc, intent } = body
 
@@ -191,9 +232,9 @@ export async function PUT(req: NextRequest) {
       )
     }
 
-    // Find existing keyword
-    const existingKeyword = await prisma.keyword.findUnique({
-      where: { id }
+    // Find existing keyword and ensure it belongs to the current user
+    const existingKeyword = await prisma.keyword.findFirst({
+      where: { id, project: { ownerId: userId } }
     })
 
     if (!existingKeyword) {
@@ -252,6 +293,15 @@ export async function PUT(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   try {
+    const session = await auth()
+    const userId = session?.user?.id
+    if (!userId) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 },
+      )
+    }
+
     const { searchParams } = new URL(req.url)
     const id = searchParams.get('id')
 
@@ -262,9 +312,9 @@ export async function DELETE(req: NextRequest) {
       )
     }
 
-    // Check if keyword exists
-    const existingKeyword = await prisma.keyword.findUnique({
-      where: { id }
+    // Check if keyword exists and belongs to current user
+    const existingKeyword = await prisma.keyword.findFirst({
+      where: { id, project: { ownerId: userId } }
     })
 
     if (!existingKeyword) {

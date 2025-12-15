@@ -122,7 +122,7 @@ export async function POST(req: NextRequest) {
           type: 'AUDIT_COMPLETED',
           title: notif.title,
           message: notif.message,
-          metadata: {
+          data: {
             projectId: project.id,
             auditId: siteAudit.id,
             score: auditResult.score,

@@ -385,6 +385,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             src="https://www.googletagmanager.com/ns.html?id=GTM-K7SGKVC9"
             height="0"
             width="0"
+            aria-hidden="true"
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>

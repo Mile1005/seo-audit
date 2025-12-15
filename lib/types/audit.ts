@@ -136,8 +136,13 @@ export interface AuditResultUnified {
 
 export interface AuditStoreRecord {
   status: 'processing' | 'completed' | 'failed';
+  ownerId?: string;
   data?: AuditResultUnified;
   error?: string;
+  stage?: string;
+  progress?: number; // 0-100
+  message?: string;
   startedAt: number;
   updatedAt: number;
 }
+

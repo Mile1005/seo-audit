@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { auth } from '@/auth';
+import { prisma } from '@/lib/prisma';
 
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic';
@@ -20,6 +19,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+
     // Fetch competitor data for this keyword
     const competitors = await prisma.keywordCompetitor.findMany({
       where: { keywordId },
@@ -28,8 +37,14 @@ export async function GET(request: NextRequest) {
     });
 
     // Fetch keyword data to calculate metrics
-    const keyword = await prisma.keyword.findUnique({
-      where: { id: keywordId },
+    const keyword = await prisma.keyword.findFirst({
+      where: {
+        id: keywordId,
+        projectId,
+        project: {
+          ownerId: userId,
+        },
+      },
       include: {
         positions: {
           orderBy: { checkedAt: 'desc' },
@@ -53,7 +68,10 @@ export async function GET(request: NextRequest) {
           where: {
             domain: comp.domain,
             keyword: {
-              projectId
+              projectId,
+              project: {
+                ownerId: userId,
+              },
             }
           },
           include: {
@@ -168,6 +186,14 @@ function calculateOpportunity(
 // POST /api/keywords/competitors - Add competitor to track
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const { keywordId, domain, position, url, title } = body;
 
@@ -175,6 +201,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'keywordId, domain, and position are required' },
         { status: 400 }
+      );
+    }
+
+    const ownedKeyword = await prisma.keyword.findFirst({
+      where: {
+        id: keywordId,
+        project: {
+          ownerId: session.user.id,
+        },
+      },
+      select: { id: true },
+    });
+
+    if (!ownedKeyword) {
+      return NextResponse.json(
+        { success: false, error: 'Keyword not found' },
+        { status: 404 }
       );
     }
 

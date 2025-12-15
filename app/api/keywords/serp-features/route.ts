@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { auth } from '@/auth';
+import { prisma } from '@/lib/prisma';
 
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic';
@@ -19,9 +18,24 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     // Fetch latest positions with SERP features
     const positions = await prisma.keywordPosition.findMany({
-      where: { keywordId },
+      where: {
+        keywordId,
+        keyword: {
+          project: {
+            ownerId: session.user.id,
+          },
+        },
+      },
       orderBy: { checkedAt: 'desc' },
       take: 10
     });
@@ -135,6 +149,14 @@ export async function GET(request: NextRequest) {
 // POST /api/keywords/serp-features - Update SERP features data
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const { keywordId, serpFeatures } = body;
 
@@ -142,6 +164,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'keywordId and serpFeatures are required' },
         { status: 400 }
+      );
+    }
+
+    const ownedKeyword = await prisma.keyword.findFirst({
+      where: {
+        id: keywordId,
+        project: {
+          ownerId: session.user.id,
+        },
+      },
+      select: { id: true },
+    });
+
+    if (!ownedKeyword) {
+      return NextResponse.json(
+        { success: false, error: 'Keyword not found' },
+        { status: 404 }
       );
     }
 

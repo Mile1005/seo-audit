@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
@@ -95,6 +95,14 @@ export default function PageCrawlerPage() {
   const [crawling, setCrawling] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [crawlStage, setCrawlStage] = useState<string | undefined>(undefined);
+  const [crawlMessage, setCrawlMessage] = useState<string | undefined>(undefined);
+  const [crawlCurrentUrl, setCrawlCurrentUrl] = useState<string | undefined>(undefined);
+  const [crawlElapsedMs, setCrawlElapsedMs] = useState<number>(0);
+
+  const pollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pollStopTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const crawlStartedAtRef = useRef<number | null>(null);
   
   // Results state
   const [currentResult, setCurrentResult] = useState<CrawlResult | null>(null);
@@ -115,6 +123,19 @@ export default function PageCrawlerPage() {
       router.push('/login?callbackUrl=/dashboard/page-crawler');
     }
   }, [status, router]);
+
+  useEffect(() => {
+    return () => {
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+        pollIntervalRef.current = null;
+      }
+      if (pollStopTimeoutRef.current) {
+        clearTimeout(pollStopTimeoutRef.current);
+        pollStopTimeoutRef.current = null;
+      }
+    }
+  }, []);
 
   // Load project ID from URL params
   useEffect(() => {
@@ -160,6 +181,20 @@ export default function PageCrawlerPage() {
       setCrawling(true);
       setError(null);
       setProgress(0);
+      setCrawlStage('queued');
+      setCrawlMessage('Starting crawl…');
+      setCrawlCurrentUrl(undefined);
+      crawlStartedAtRef.current = Date.now();
+      setCrawlElapsedMs(0);
+
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+        pollIntervalRef.current = null;
+      }
+      if (pollStopTimeoutRef.current) {
+        clearTimeout(pollStopTimeoutRef.current);
+        pollStopTimeoutRef.current = null;
+      }
       
       const response = await fetch('/api/dashboard/page-crawler/start', {
         method: 'POST',
@@ -190,13 +225,28 @@ export default function PageCrawlerPage() {
     const interval = setInterval(async () => {
       try {
         const response = await fetch(`/api/dashboard/page-crawler/status?id=${crawlId}`);
+
+        if (response.status === 401) {
+          clearInterval(interval);
+          setCrawling(false);
+          setError('Authentication required. Please log in again.');
+          return;
+        }
+
         if (!response.ok) throw new Error('Failed to fetch status');
         
         const data = await response.json();
         setProgress(data.progress || 0);
+        setCrawlStage(data.stage);
+        setCrawlMessage(data.message);
+        setCrawlCurrentUrl(data.currentUrl);
+        if (crawlStartedAtRef.current) {
+          setCrawlElapsedMs(Date.now() - crawlStartedAtRef.current);
+        }
         
         if (data.status === 'completed') {
           clearInterval(interval);
+          pollIntervalRef.current = null;
           setCrawling(false);
           
           // Load the completed crawl
@@ -204,6 +254,7 @@ export default function PageCrawlerPage() {
           await loadHistory();
         } else if (data.status === 'failed') {
           clearInterval(interval);
+          pollIntervalRef.current = null;
           setCrawling(false);
           setError(data.error || 'Crawl failed');
         }
@@ -212,8 +263,15 @@ export default function PageCrawlerPage() {
       }
     }, 2000);
 
+    pollIntervalRef.current = interval;
+
     // Stop polling after 10 minutes
-    setTimeout(() => clearInterval(interval), 600000);
+    pollStopTimeoutRef.current = setTimeout(() => {
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+        pollIntervalRef.current = null;
+      }
+    }, 600000);
   };
 
   const loadCompletedCrawl = async (dbId: string) => {
@@ -492,10 +550,33 @@ export default function PageCrawlerPage() {
             {crawling && (
               <div className="space-y-3">
                 <div className="flex justify-between text-sm text-slate-600 dark:text-slate-400">
-                  <span>Crawling in progress...</span>
+                  <span className="truncate">
+                    {crawlMessage || 'Crawling in progress…'}
+                  </span>
                   <span>{Math.round(progress)}%</span>
                 </div>
                 <Progress value={progress} className="h-2" />
+                {(crawlStage || crawlCurrentUrl) && (
+                  <div className="rounded-md border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/40 p-3 text-xs text-slate-700 dark:text-slate-300 space-y-1">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="font-medium">What’s happening</span>
+                      <span className="flex items-center gap-1 text-slate-600 dark:text-slate-400">
+                        <Clock className="h-3.5 w-3.5" />
+                        {Math.round(crawlElapsedMs / 1000)}s
+                      </span>
+                    </div>
+                    {crawlStage && (
+                      <div>
+                        <span className="text-slate-500 dark:text-slate-400">Stage:</span> {crawlStage}
+                      </div>
+                    )}
+                    {crawlCurrentUrl && (
+                      <div className="truncate">
+                        <span className="text-slate-500 dark:text-slate-400">URL:</span> {crawlCurrentUrl}
+                      </div>
+                    )}
+                  </div>
+                )}
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   This may take a few minutes depending on the number of pages
                 </p>

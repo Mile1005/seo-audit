@@ -40,11 +40,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
   // Load existing keywords when component mounts
   const loadExistingKeywords = useCallback(async () => {
     try {
-      const response = await fetch(`/api/keywords/research?projectId=${projectId}`, {
-        headers: {
-          'x-user-id': 'demo-user'
-        }
-      });
+      const response = await fetch(`/api/keywords/research?projectId=${projectId}`);
       if (response.ok) {
         const result = await response.json();
         if (result.success) {
@@ -84,8 +80,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
       const response = await fetch('/api/keywords/research', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'x-user-id': 'demo-user'
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           projectId,
@@ -182,11 +177,13 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
 
     try {
       const response = await fetch(`/api/keywords/${keywordId}`, {
-        method: 'DELETE',
-        headers: {
-          'x-user-id': 'demo-user'
-        }
+        method: 'DELETE'
       });
+
+      if (response.status === 401) {
+        alert('Sign in to delete saved keywords.');
+        return;
+      }
 
       if (response.ok) {
         // Remove keyword from state

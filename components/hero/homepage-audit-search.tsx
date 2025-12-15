@@ -35,7 +35,7 @@ export function HomepageAuditSearch() {
 
     try {
       const startTime = Date.now()
-      
+
       const response = await fetch('/api/seo-audit/lite', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -51,14 +51,14 @@ export function HomepageAuditSearch() {
       if (!data.score || !data.stats) {
         throw new Error(t('error.invalidResponse'))
       }
-      
+
       // Wait for animation to complete all 8 checks before showing results
       const elapsed = Date.now() - startTime
       const remainingTime = MIN_ANIMATION_TIME - elapsed
       if (remainingTime > 0) {
         await new Promise(resolve => setTimeout(resolve, remainingTime))
       }
-      
+
       setResults(data)
     } catch (err) {
       console.error('Audit error:', err)

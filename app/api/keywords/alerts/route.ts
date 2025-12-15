@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { auth } from '@/auth';
+import { prisma } from '@/lib/prisma';
 
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic';
@@ -18,6 +17,44 @@ export async function GET(request: NextRequest) {
         { success: false, error: 'projectId is required' },
         { status: 400 }
       );
+    }
+
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const ownedProject = await prisma.project.findFirst({
+      where: { id: projectId, ownerId: session.user.id },
+      select: { id: true },
+    });
+
+    if (!ownedProject) {
+      return NextResponse.json(
+        { success: false, error: 'Project not found' },
+        { status: 404 }
+      );
+    }
+
+    if (keywordId) {
+      const ownedKeyword = await prisma.keyword.findFirst({
+        where: {
+          id: keywordId,
+          projectId,
+          project: { ownerId: session.user.id },
+        },
+        select: { id: true },
+      });
+
+      if (!ownedKeyword) {
+        return NextResponse.json(
+          { success: false, error: 'Keyword not found' },
+          { status: 404 }
+        );
+      }
     }
 
     // Fetch alert configurations
@@ -153,6 +190,14 @@ async function generateAlertHistory(projectId: string, keywordId?: string | null
 // POST /api/keywords/alerts - Create or update alert configuration
 export async function POST(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
     const {
       id,
@@ -173,9 +218,54 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const ownedProject = await prisma.project.findFirst({
+      where: { id: projectId, ownerId: session.user.id },
+      select: { id: true },
+    });
+
+    if (!ownedProject) {
+      return NextResponse.json(
+        { success: false, error: 'Project not found' },
+        { status: 404 }
+      );
+    }
+
+    if (keywordId) {
+      const ownedKeyword = await prisma.keyword.findFirst({
+        where: {
+          id: keywordId,
+          projectId,
+          project: { ownerId: session.user.id },
+        },
+        select: { id: true },
+      });
+
+      if (!ownedKeyword) {
+        return NextResponse.json(
+          { success: false, error: 'Keyword not found' },
+          { status: 404 }
+        );
+      }
+    }
+
     let alert;
 
     if (id) {
+      const existing = await prisma.rankingAlert.findFirst({
+        where: {
+          id,
+          project: { ownerId: session.user.id },
+        },
+        select: { id: true },
+      });
+
+      if (!existing) {
+        return NextResponse.json(
+          { success: false, error: 'Alert not found' },
+          { status: 404 }
+        );
+      }
+
       // Update existing alert
       alert = await prisma.rankingAlert.update({
         where: { id },
@@ -219,6 +309,14 @@ export async function POST(request: NextRequest) {
 // DELETE /api/keywords/alerts - Delete an alert configuration
 export async function DELETE(request: NextRequest) {
   try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
 
@@ -226,6 +324,21 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Alert ID is required' },
         { status: 400 }
+      );
+    }
+
+    const existing = await prisma.rankingAlert.findFirst({
+      where: {
+        id,
+        project: { ownerId: session.user.id },
+      },
+      select: { id: true },
+    });
+
+    if (!existing) {
+      return NextResponse.json(
+        { success: false, error: 'Alert not found' },
+        { status: 404 }
       );
     }
 

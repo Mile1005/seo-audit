@@ -42,15 +42,22 @@ export type AuditTranslationKey =
  * @returns Translation function
  */
 export async function getServerTranslations(locale: Locale = 'en') {
+  const load = async (loc: Locale) => getTranslations({ locale: loc, namespace: 'server' })
+
   try {
-    const t = await getTranslations({ locale, namespace: 'server' });
-    return t;
+    return await load(locale)
   } catch (error) {
-    console.warn(`Failed to load translations for locale ${locale}, falling back to English`, error);
-    // Fallback to English if translation fails
-    const t = await getTranslations({ locale: 'en', namespace: 'server' });
-    return t;
+    console.warn(`Failed to load 'server' translations for locale ${locale}, falling back to English`, error)
   }
+
+  try {
+    return await load('en')
+  } catch (error) {
+    console.warn(`Failed to load 'server' translations for locale en; using identity translator`, error)
+  }
+
+  // Last resort: never crash background/API routes because of missing messages.
+  return ((key: string) => key) as any
 }
 
 /**

@@ -4,20 +4,60 @@ import { AuditStoreRecord, AuditResultUnified, ComprehensiveResults } from "../t
 
 const store = new Map<string, AuditStoreRecord>();
 
-export function initAudit(auditId: string) {
+export function initAudit(auditId: string, ownerId?: string) {
   const now = Date.now();
-  store.set(auditId, { status: 'processing', startedAt: now, updatedAt: now });
+  store.set(auditId, {
+    status: 'processing',
+    ownerId,
+    stage: 'queued',
+    progress: 2,
+    message: 'Queued',
+    startedAt: now,
+    updatedAt: now,
+  });
+}
+
+export function setAuditProgress(
+  auditId: string,
+  patch: { stage?: string; progress?: number; message?: string }
+) {
+  const prev = store.get(auditId);
+  if (!prev || prev.status !== 'processing') return;
+  const now = Date.now();
+  store.set(auditId, {
+    ...prev,
+    ...patch,
+    updatedAt: now,
+  });
 }
 
 export function setAuditCompleted(auditId: string, data: AuditResultUnified) {
   const now = Date.now();
-  store.set(auditId, { status: 'completed', data, startedAt: (store.get(auditId)?.startedAt)||now, updatedAt: now });
+  const prev = store.get(auditId);
+  store.set(auditId, {
+    status: 'completed',
+    ownerId: prev?.ownerId,
+    data,
+    stage: 'completed',
+    progress: 100,
+    message: 'Completed',
+    startedAt: prev?.startedAt || now,
+    updatedAt: now,
+  });
 }
 
 export function setAuditFailed(auditId: string, error: string) {
   const now = Date.now();
   const prev = store.get(auditId);
-  store.set(auditId, { status: 'failed', error, startedAt: prev?.startedAt||now, updatedAt: now });
+  store.set(auditId, {
+    status: 'failed',
+    ownerId: prev?.ownerId,
+    error,
+    stage: 'failed',
+    message: error,
+    startedAt: prev?.startedAt || now,
+    updatedAt: now,
+  });
 }
 
 export function getAudit(auditId: string): AuditStoreRecord | undefined {

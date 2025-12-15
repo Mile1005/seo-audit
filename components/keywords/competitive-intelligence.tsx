@@ -68,6 +68,10 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
         `/api/keywords/competitors?keywordId=${keywordId}&projectId=${projectId}`
       );
 
+      if (response.status === 401) {
+        throw new Error('Sign in to view competitor intelligence.');
+      }
+
       if (!response.ok) {
         throw new Error('Failed to fetch competitor data');
       }

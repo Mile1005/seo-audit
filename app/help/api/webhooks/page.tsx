@@ -389,7 +389,7 @@ export default function WebhooksPage() {
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Code example</h3>
                     <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300">
-                      <div className="text-gray-500 mb-2">// Node.js example</div>
+                      <div className="text-gray-500 mb-2">{'// Node.js example'}</div>
                       <div>const crypto = require('crypto');</div>
                       <div>const signature = req.headers['x-webhook-signature'];</div>
                       <div>const timestamp = req.headers['x-webhook-timestamp'];</div>

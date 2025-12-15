@@ -117,9 +117,16 @@ export interface ComprehensiveAuditResult {
   lists_count?: number;
 }
 
-export async function performComprehensiveAudit(html: string, baseUrl: string): Promise<ComprehensiveAuditResult> {
+export async function performComprehensiveAudit(
+  html: string,
+  baseUrl: string,
+  opts?: { onProgress?: (stage: string, progress: number, message: string) => void }
+): Promise<ComprehensiveAuditResult> {
+  const onProgress = opts?.onProgress;
   const $ = cheerio.load(html);
   const baseUrlObj = new URL(baseUrl);
+
+  onProgress?.('analyzing', 25, 'Parsing HTML and extracting key SEO signals');
   
   // Extract basic elements
   const title = $("title").first().text().trim() || null;
@@ -199,6 +206,7 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
   const seoChecks = performSEOChecks($, title, metaDescription, canonical);
   
   // Get real performance metrics from Google PageSpeed Insights
+  onProgress?.('pagespeed', 55, 'Fetching PageSpeed Insights (mobile)');
   console.log('Fetching real PageSpeed Insights data...');
   const psiApiKey = process.env.PSI_API_KEY;
   let performanceMetrics;
@@ -208,11 +216,9 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
   
   if (psiApiKey && psiApiKey !== 'your-psi-api-key') {
     try {
-      // Fetch ONLY mobile data for faster audits (was fetching both mobile AND desktop - too slow!)
-      const mobileData = await Promise.race([
-        fetchPageSpeed(baseUrl, psiApiKey, 'mobile'),
-        new Promise((_, reject) => setTimeout(() => reject(new Error('PSI timeout')), 8000)) // 8s timeout
-      ]) as any;
+      // Fetch ONLY mobile data for faster audits
+      // Use an abortable timeout so we don't keep a long PSI request running in the background.
+      const mobileData = await fetchPageSpeed(baseUrl, psiApiKey, 'mobile', 0, { timeoutMs: 8000 }) as any;
       
       const psiData = mobileData;
       
@@ -263,6 +269,8 @@ export async function performComprehensiveAudit(html: string, baseUrl: string): 
     performanceOpportunities = getFallbackPerformanceOpportunities();
     performanceDiagnostics = getFallbackPerformanceDiagnostics();
   }
+
+  onProgress?.('scoring', 75, 'Scoring results and generating recommendations');
   
   // Generate issues
   const issues = generateIssues($, title, metaDescription, canonical, h1, images, baseUrl, baseUrlObj, allLinks);

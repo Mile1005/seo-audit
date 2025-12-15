@@ -28,8 +28,12 @@ export interface CrawlPageResult {
 
 export interface CrawlJobRecord {
   id: string
+  ownerId?: string
   rootUrl: string
   status: 'processing' | 'completed' | 'failed'
+  stage?: string
+  message?: string
+  currentUrl?: string
   error?: string
   startedAt: number
   updatedAt: number
@@ -49,12 +53,15 @@ export interface CrawlJobRecord {
 
 const crawlStore = new Map<string, CrawlJobRecord>()
 
-export function initCrawl(id: string, params: { rootUrl: string; maxPages: number; maxDepth: number }) {
+export function initCrawl(id: string, params: { rootUrl: string; maxPages: number; maxDepth: number; ownerId?: string }) {
   const now = Date.now()
   crawlStore.set(id, {
     id,
+    ownerId: params.ownerId,
     rootUrl: params.rootUrl,
     status: 'processing',
+    stage: 'queued',
+    message: 'Queued',
     startedAt: now,
     updatedAt: now,
     pages: [],
@@ -78,6 +85,10 @@ export function updateCrawl(id: string, mut: (job: CrawlJobRecord) => void) {
 export function completeCrawl(id: string) {
   updateCrawl(id, job => {
     job.status = 'completed'
+    job.stage = 'completed'
+    job.message = 'Completed'
+    job.currentUrl = undefined
+    job.progress = 100
     // summary compute
     if (job.pages.length) {
       const wc = job.pages.map(p=>p.wordCount||0)
@@ -96,6 +107,9 @@ export function failCrawl(id: string, error: string) {
   updateCrawl(id, job => {
     job.status = 'failed'
     job.error = error
+    job.stage = 'failed'
+    job.message = error
+    job.currentUrl = undefined
   })
 }
 
@@ -105,6 +119,9 @@ export function cancelCrawl(id: string) {
     if (job.status === 'processing') {
       job.status = 'failed'
       job.error = 'cancelled'
+      job.stage = 'cancelled'
+      job.message = 'Cancelled'
+      job.currentUrl = undefined
     }
   })
 }

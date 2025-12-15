@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2, Search, Globe, Link, ExternalLink, FileText, Image, Zap as ZapIcon, TrendingDown, TrendingUp as TrendingUpIcon, Minus } from 'lucide-react'
 import { MainLayout } from '@/components/layout/main-layout'
@@ -9,6 +10,7 @@ import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
 import { ApiErrorBoundary } from '@/components/ui/error-boundary'
 import { useFormSubmission } from '@/hooks/use-api'
 import { api } from '@/lib/api-client'
+import type { KeywordResult } from '@/types/keywords'
 
 // Dynamic imports to prevent lambda issues
 import dynamic from 'next/dynamic'
@@ -17,24 +19,17 @@ const TrackingCapabilities = dynamic(() => import('@/components/features/keyword
 const SERPFeatures = dynamic(() => import('@/components/features/keyword-tracking/serp-features'), { ssr: false })
 const PerformanceAnalytics = dynamic(() => import('@/components/features/keyword-tracking/performance-analytics'), { ssr: false })
 const AlertSystem = dynamic(() => import('@/components/features/keyword-tracking/alert-system'), { ssr: false })
-const KeywordTrackingHero = dynamic(() => import('@/components/features/keyword-tracking/keyword-tracking-hero').then(mod => ({ default: mod.KeywordTrackingHero })), { ssr: false })
-
-interface KeywordResult {
-  id: string;
-  keyword: string;
-  searchVolume: number;
-  difficulty: number;
-  cpc: number;
-  competition: number;
-  intent: string;
-  status: string;
-  country: string;
-  device: string;
-  createdAt: string;
-}
+const KeywordTrackingHero = dynamic(
+  () =>
+    import('@/components/features/keyword-tracking/keyword-tracking-hero').then(mod => ({
+      default: mod.KeywordTrackingHero,
+    })),
+  { ssr: false },
+)
 
 export default function KeywordTrackingFeaturePage() {
   const t = useTranslations('featurePages.keywordTracking');
+  const router = useRouter();
   const [showResults, setShowResults] = useState(false);
   const [keywordResults, setKeywordResults] = useState<KeywordResult[]>([]);
 
@@ -71,6 +66,17 @@ export default function KeywordTrackingFeaturePage() {
       }
     );
   };
+
+  // MVP persistence for dashboard visibility (free tier / no DB required)
+  useEffect(() => {
+    if (!showResults || keywordResults.length === 0) return;
+    try {
+      const existing = JSON.parse(localStorage.getItem('ai-seo-keywords') ?? '[]') as KeywordResult[];
+      localStorage.setItem('ai-seo-keywords', JSON.stringify([...keywordResults, ...existing]));
+    } catch {
+      // ignore
+    }
+  }, [showResults, keywordResults]);
 
   const getIntentColor = (intent: string) => {
     switch (intent.toLowerCase()) {
@@ -225,7 +231,10 @@ export default function KeywordTrackingFeaturePage() {
                   >
                     Research More Keywords
                   </button>
-                  <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors">
+                  <button
+                    onClick={() => router.push('/dashboard/keywords')}
+                    className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
+                  >
                     Start Tracking Keywords
                   </button>
                 </motion.div>
@@ -262,7 +271,10 @@ export default function KeywordTrackingFeaturePage() {
               <p className="text-xl text-muted-foreground mb-8">
                 {t('cta.subtitle')}
               </p>
-              <button className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+              <button
+                onClick={() => router.push('/pricing')}
+                className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+              >
                 {t('cta.button')}
               </button>
             </motion.div>

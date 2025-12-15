@@ -353,7 +353,7 @@ export default function AuthenticationPage() {
                     JavaScript/Node.js
                   </h3>
                   <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300">
-                    <div className="text-gray-500 mb-2">// Using fetch</div>
+                    <div className="text-gray-500 mb-2">{'// Using fetch'}</div>
                     <div>const response = await fetch('https://api.seo-audit.com/v1/audits', {'{'}'</div>
                     <div className="ml-4">method: 'GET',</div>
                     <div className="ml-4">headers: {'{'}'</div>
@@ -361,7 +361,7 @@ export default function AuthenticationPage() {
                     <div className="ml-8">'Content-Type': 'application/json'</div>
                     <div className="ml-4">{'}'}</div>
                     <div>{'}'});</div>
-                    <div className="text-gray-500 mt-2 mb-2">// Using axios</div>
+                    <div className="text-gray-500 mt-2 mb-2">{'// Using axios'}</div>
                     <div>const axios = require('axios');</div>
                     <div>const response = await axios.get('https://api.seo-audit.com/v1/audits', {'{'}'</div>
                     <div className="ml-4">headers: {'{'}'</div>

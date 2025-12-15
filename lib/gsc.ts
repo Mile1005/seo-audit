@@ -1,28 +1,45 @@
-import { google } from "googleapis";
-import { prisma } from "./db";
+import { google } from 'googleapis'
+import { prisma } from './prisma'
 
-// OAuth2 client setup with explicit redirect URI
-// We use the same Google OAuth client as NextAuth (GOOGLE_CLIENT_ID)
-const redirectUri =
-  process.env.GSC_REDIRECT_URI || `${process.env.NEXTAUTH_URL}/api/gsc/callback`;
+function getDefaultGscRedirectUri(originOverride?: string) {
+  if (originOverride) {
+    return new URL('/api/gsc/callback', originOverride).toString()
+  }
 
-// Use GOOGLE_CLIENT_ID (same as login OAuth) or fall back to GSC_CLIENT_ID
-const clientId = process.env.GOOGLE_CLIENT_ID || process.env.GSC_CLIENT_ID;
-const clientSecret = process.env.GOOGLE_CLIENT_SECRET || process.env.GSC_CLIENT_SECRET;
+  // Backward compatible: allow explicitly specifying the full redirect URI.
+  // (This must match an Authorized redirect URI in Google Cloud Console.)
+  if (process.env.GSC_REDIRECT_URI) {
+    return process.env.GSC_REDIRECT_URI
+  }
 
-if (!clientId || !clientSecret) {
-  console.error('❌ GSC Configuration Error: Missing Google OAuth credentials!');
-  console.error('Required: GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET');
-  throw new Error('GSC OAuth not configured - missing client credentials');
+  if (!process.env.NEXTAUTH_URL) {
+    throw new Error(
+      'GSC redirect URI is not configured (set NEXTAUTH_URL, or pass request origin, or set GSC_REDIRECT_URI)'
+    )
+  }
+
+  return new URL('/api/gsc/callback', process.env.NEXTAUTH_URL).toString()
 }
 
-const oauth2Client = new google.auth.OAuth2(
-  clientId,
-  clientSecret,
-  redirectUri
-);
+function getGscConfig(redirectUriOverride?: string) {
+  const redirectUri = redirectUriOverride || getDefaultGscRedirectUri()
+  const clientId = process.env.GOOGLE_CLIENT_ID || process.env.GSC_CLIENT_ID
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || process.env.GSC_CLIENT_SECRET
 
-export async function getGscAuthUrl(state: string): Promise<string> {
+  return { clientId, clientSecret, redirectUri }
+}
+
+function createOauthClientOrThrow(redirectUriOverride?: string) {
+  const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride)
+  if (!clientId || !clientSecret) {
+    throw new Error('GSC OAuth not configured (missing Google OAuth credentials)')
+  }
+  return new google.auth.OAuth2(clientId, clientSecret, redirectUri)
+}
+
+export async function getGscAuthUrl(state: string, redirectUriOverride?: string): Promise<string> {
+  const oauth2Client = createOauthClientOrThrow(redirectUriOverride)
+  const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride)
   const scopes = ["https://www.googleapis.com/auth/webmasters.readonly"];
 
   console.log("🔐 GSC Auth URL Generation:", {
@@ -45,8 +62,15 @@ export async function getGscAuthUrl(state: string): Promise<string> {
   return authUrl;
 }
 
-export async function handleGscCallback(code: string, state: string): Promise<boolean> {
+export async function handleGscCallback(
+  code: string,
+  state: string,
+  redirectUriOverride?: string
+): Promise<boolean> {
   try {
+    const oauth2Client = createOauthClientOrThrow(redirectUriOverride)
+    const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride)
+
     console.log("GSC Callback: Getting tokens for state:", state);
     console.log("GSC Callback: Environment check:", {
       hasClientId: !!clientId,
@@ -64,11 +88,14 @@ export async function handleGscCallback(code: string, state: string): Promise<bo
     
     console.log("GSC Callback: Storing tokens in database for state:", state);
     
+    const [userIdFromState] = state.split(':')
+    const userId = userIdFromState || null
+
     // Store tokens in database
     await (prisma as any).gscToken.upsert({
       where: { state },
-      update: { tokens },
-      create: { state, tokens },
+      update: { tokens, userId },
+      create: { state, tokens, userId },
     });
     
     oauth2Client.setCredentials(tokens);
@@ -94,9 +121,17 @@ let gscFailureWindowStart = Date.now();
 const GSC_FAILURE_WINDOW = 10 * 60 * 1000; // 10 minutes
 const GSC_FAILURE_THRESHOLD = 5;
 
-export async function fetchGscInsightsForUrl(url: string, state?: string): Promise<any> {
+export async function fetchGscInsightsForUrl(
+  url: string,
+  stateOrOptions?: string | { userId?: string; state?: string }
+): Promise<any> {
+  const options =
+    typeof stateOrOptions === 'string'
+      ? ({ state: stateOrOptions } as { userId?: string; state?: string })
+      : (stateOrOptions || {})
+
   // Check cache first
-  const cacheKey = `${url}|${state || ''}`;
+  const cacheKey = `${url}|${options.userId || ''}|${options.state || ''}`;
   const now = Date.now();
   const cached = gscCache.get(cacheKey);
   if (cached && now - cached.timestamp < GSC_CACHE_TTL) {
@@ -104,9 +139,21 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
   }
 
   try {
-    let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
-    if (!tokenRecord) {
-      tokenRecord = await (prisma as any).gscToken.findFirst({ orderBy: { createdAt: 'desc' } });
+    const oauth2Client = createOauthClientOrThrow()
+
+    let tokenRecord: any = null
+    if (options.userId) {
+      tokenRecord = await (prisma as any).gscToken.findFirst({
+        where: { userId: options.userId },
+        orderBy: { createdAt: 'desc' }
+      })
+    } else if (options.state) {
+      tokenRecord = await (prisma as any).gscToken.findFirst({
+        where: { state: options.state },
+        orderBy: { createdAt: 'desc' }
+      })
+    } else {
+      tokenRecord = null
     }
 
     if (!tokenRecord) {
@@ -185,6 +232,14 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
     return result;
 
   } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+
+    // If OAuth refresh token is revoked/expired, let the caller handle reconnect flows
+    // (e.g. API route can delete stored tokens and respond with 401).
+    if (/invalid_grant/i.test(message)) {
+      throw error
+    }
+
     // Monitoring logic
     const now = Date.now();
     if (now - gscFailureWindowStart > GSC_FAILURE_WINDOW) {
@@ -203,14 +258,15 @@ export async function fetchGscInsightsForUrl(url: string, state?: string): Promi
       ctr: null,
       impressions: null,
       clicks: null,
-      message: `GSC error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      message: `GSC error: ${message || 'Unknown error'}`,
     };
   }
 }
 
 // Helper function to check if GSC is configured
 export function isGscConfigured(): boolean {
-  return !!(process.env.GSC_CLIENT_ID && process.env.GSC_CLIENT_SECRET);
+  const { clientId, clientSecret } = getGscConfig()
+  return !!(clientId && clientSecret)
 }
 
 // Helper function to check if we have any tokens stored
@@ -220,8 +276,7 @@ export async function hasGscTokens(state?: string): Promise<boolean> {
       const tokenCountForState = await (prisma as any).gscToken.count({ where: { state } });
       return tokenCountForState > 0;
     }
-    const tokenCount = await (prisma as any).gscToken.count();
-    return tokenCount > 0;
+    return false;
   } catch (error) {
     console.error("Error checking GSC tokens:", error);
     return false;
@@ -231,26 +286,20 @@ export async function hasGscTokens(state?: string): Promise<boolean> {
 // Helper function to validate GSC tokens and check if they're working
 export async function validateGscTokens(state?: string): Promise<{ isValid: boolean; hasProperties: boolean; message: string }> {
   try {
-    let tokenRecord = await (prisma as any).gscToken.findFirst({ where: state ? { state } : undefined, orderBy: { createdAt: 'desc' } });
+    const oauth2Client = createOauthClientOrThrow()
+    let tokenRecord = await (prisma as any).gscToken.findFirst({
+      where: state ? { state } : undefined,
+      orderBy: { createdAt: 'desc' }
+    })
 
-    // Fallback to latest token if no record for this state
     if (!tokenRecord) {
-      tokenRecord = await (prisma as any).gscToken.findFirst({ orderBy: { createdAt: 'desc' } });
-      if (!tokenRecord) {
-        console.log("validateGscTokens: No token record found in database", { state });
-        return { isValid: false, hasProperties: false, message: "No GSC tokens found" };
-      }
+      console.log('validateGscTokens: No token record found in database', { state })
+      return { isValid: false, hasProperties: false, message: 'No GSC tokens found' }
     }
 
     console.log("validateGscTokens: Found token record, validating...", { state });
 
-    const oauth2Client = new google.auth.OAuth2(
-      process.env.GSC_CLIENT_ID,
-      process.env.GSC_CLIENT_SECRET,
-      process.env.GSC_REDIRECT_URI
-    );
-
-    oauth2Client.setCredentials(tokenRecord.tokens as any);
+    oauth2Client.setCredentials(tokenRecord.tokens as any)
 
     const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
 
@@ -258,7 +307,11 @@ export async function validateGscTokens(state?: string): Promise<{ isValid: bool
     const siteCount = sitesResponse.data.siteEntry?.length || 0;
     console.log("validateGscTokens: API call successful, sites found:", siteCount);
 
-    return { isValid: true, hasProperties: siteCount > 0, message: siteCount > 0 ? "GSC tokens are valid" : "Connected, but no properties found on this Google account" };
+    return {
+      isValid: true,
+      hasProperties: siteCount > 0,
+      message: siteCount > 0 ? 'GSC tokens are valid' : 'Connected, but no properties found on this Google account'
+    }
   } catch (error) {
     console.error("validateGscTokens: Error validating GSC tokens:", error);
     return {

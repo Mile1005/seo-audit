@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { auth } from '@/auth';
+import { prisma } from '@/lib/prisma';
 
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic';
@@ -20,9 +19,22 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { success: false, error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
     // Get keyword and its positions
-    const keyword = await prisma.keyword.findUnique({
-      where: { id: keywordId },
+    const keyword = await prisma.keyword.findFirst({
+      where: {
+        id: keywordId,
+        project: {
+          ownerId: session.user.id,
+        },
+      },
       include: {
         positions: {
           orderBy: { checkedAt: 'desc' },

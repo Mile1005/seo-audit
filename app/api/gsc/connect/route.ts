@@ -6,6 +6,15 @@ import crypto from 'crypto'
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic'
 
+function getRequestOrigin(req: NextRequest) {
+  const forwardedProto = req.headers.get('x-forwarded-proto')
+  const forwardedHost = req.headers.get('x-forwarded-host')
+  const host = forwardedHost || req.headers.get('host')
+  const proto = forwardedProto || req.nextUrl.protocol.replace(':', '')
+  if (host) return `${proto}://${host}`
+  return req.nextUrl.origin
+}
+
 /**
  * GET /api/gsc/connect
  * Initiates the Google Search Console OAuth flow
@@ -47,15 +56,30 @@ export async function GET(req: NextRequest) {
       clientIdSource: process.env.GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : 'GSC_CLIENT_ID'
     })
 
-    // Generate the OAuth URL
-    const authUrl = await getGscAuthUrl(state)
+    const origin = getRequestOrigin(req)
+    const redirectUri = new URL('/api/gsc/callback', origin).toString()
+
+    // Generate the OAuth URL (use request-origin aware redirectUri to avoid redirect_uri_mismatch)
+    const authUrl = await getGscAuthUrl(state, redirectUri)
 
     console.log('✅ GSC Auth URL generated successfully')
 
-    // Return the auth URL for the frontend to redirect to
+    const shouldRedirect =
+      req.nextUrl.searchParams.get('redirect') === '1' ||
+      (req.headers.get('accept')?.includes('text/html') &&
+        !req.headers.get('accept')?.includes('application/json'))
+
+    // Support both modes:
+    // - JSON (used by DashboardOverview fetch)
+    // - 302 redirect (used by buttons that navigate directly to /api/gsc/connect)
+    if (shouldRedirect) {
+      return NextResponse.redirect(authUrl)
+    }
+
     return NextResponse.json({
       success: true,
       authUrl,
+      redirectUri,
       message: 'Redirect to this URL to authenticate'
     })
   } catch (error) {

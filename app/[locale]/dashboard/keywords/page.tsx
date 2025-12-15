@@ -57,15 +57,58 @@ function TabSkeleton() {
 export default function KeywordsPage() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<'research' | 'rankings' | 'opportunities'>('research');
-  const [projectId, setProjectId] = useState('demo-project-1');
+  const [projectId, setProjectId] = useState<string | null>(null);
+  const [isProjectLoading, setIsProjectLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [isTabLoading, setIsTabLoading] = useState(false);
   const [tabContent, setTabContent] = useState<React.ReactNode>(null);
 
   useEffect(() => {
-    const id = searchParams.get('project');
-    if (id) {
-      setProjectId(id);
+    let cancelled = false;
+
+    async function resolveProjectId() {
+      setIsProjectLoading(true);
+      const idFromQuery = searchParams.get('project');
+      if (idFromQuery) {
+        if (!cancelled) {
+          setProjectId(idFromQuery);
+          setIsAuthenticated(true);
+          setIsProjectLoading(false);
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/projects?limit=1');
+        if (res.status === 401) {
+          if (!cancelled) {
+            setIsAuthenticated(false);
+            setProjectId('demo-keyword-project');
+            setIsProjectLoading(false);
+          }
+          return;
+        }
+
+        const json = await res.json();
+        const firstProjectId = json?.success && Array.isArray(json?.data) && json.data[0]?.id ? String(json.data[0].id) : null;
+        if (!cancelled) {
+          setIsAuthenticated(true);
+          setProjectId(firstProjectId ?? 'demo-keyword-project');
+          setIsProjectLoading(false);
+        }
+      } catch {
+        if (!cancelled) {
+          setIsAuthenticated(null);
+          setProjectId('demo-keyword-project');
+          setIsProjectLoading(false);
+        }
+      }
     }
+
+    resolveProjectId();
+    return () => {
+      cancelled = true;
+    };
   }, [searchParams]);
 
   const handleTabChange = async (newTab: 'research' | 'rankings' | 'opportunities') => {
@@ -82,6 +125,7 @@ export default function KeywordsPage() {
   };
 
   const renderTabContent = (tab: 'research' | 'rankings' | 'opportunities') => {
+    if (!projectId) return null;
     switch (tab) {
       case 'research':
         return <KeywordResearch projectId={projectId} />;
@@ -96,8 +140,14 @@ export default function KeywordsPage() {
 
   // Initialize with first tab content
   useEffect(() => {
-    setTabContent(renderTabContent(activeTab));
+    if (projectId) setTabContent(renderTabContent(activeTab));
   }, []);
+
+  // Refresh tab content when projectId resolves
+  useEffect(() => {
+    if (!projectId) return;
+    setTabContent(renderTabContent(activeTab));
+  }, [projectId]);
 
   return (
     <div className="space-y-6">
@@ -145,7 +195,7 @@ export default function KeywordsPage() {
           </button>
         </div>
         
-        {isTabLoading ? <TabSkeleton /> : tabContent}
+        {isProjectLoading ? <TabSkeleton /> : (isTabLoading ? <TabSkeleton /> : tabContent)}
       </div>
     </div>
   );

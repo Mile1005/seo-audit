@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     }
 
     const id = crypto.randomUUID()
-    initCrawl(id, { rootUrl: url, maxPages, maxDepth })
+    initCrawl(id, { rootUrl: url, maxPages, maxDepth, ownerId: userId || undefined })
 
     // Persist initial Crawl DB record (associate with or create a project for this domain if user present)
     let crawlDbId: string | null = null

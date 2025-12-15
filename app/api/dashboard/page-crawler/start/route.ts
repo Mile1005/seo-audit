@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     }
 
     const id = crypto.randomUUID()
-    initCrawl(id, { rootUrl: url, maxPages, maxDepth })
+    initCrawl(id, { rootUrl: url, maxPages, maxDepth, ownerId: userId })
 
     // Persist initial Crawl DB record
     let crawlDbId: string | null = null
@@ -121,6 +121,12 @@ export async function POST(req: NextRequest) {
           
           console.log(`[dashboard-crawl] ${id} processing ${pages.length +1}/${maxPages}: ${current} (depth: ${depth})`)
 
+          updateCrawl(id, job => {
+            job.stage = 'fetching'
+            job.currentUrl = current
+            job.message = `Fetching (${job.processed + 1}/${job.maxPages})`
+          })
+
           
           let status = 0
           let html = ''
@@ -141,6 +147,8 @@ export async function POST(req: NextRequest) {
             }
           } catch (err) {
             updateCrawl(id, job => {
+              job.stage = 'analyzing'
+              job.message = 'Recording fetch error'
               job.pages.push({ 
                 url: current, 
                 status: status || 0, 
@@ -154,6 +162,10 @@ export async function POST(req: NextRequest) {
 
           // Lightweight audit each page; comprehensive audit on root page
           try {
+            updateCrawl(id, job => {
+              job.stage = 'analyzing'
+              job.message = `Analyzing (${job.processed + 1}/${job.maxPages})`
+            })
             const result = lightPageAudit(html, origin)
             let comprehensiveSummary: any = undefined
             
@@ -195,6 +207,8 @@ export async function POST(req: NextRequest) {
             })
           } catch (err) {
             updateCrawl(id, job => {
+              job.stage = 'analyzing'
+              job.message = 'Recording analysis error'
               job.pages.push({ 
                 url: current, 
                 status, 
@@ -208,6 +222,10 @@ export async function POST(req: NextRequest) {
           // Extract links for next level
           if (depth < maxDepth && html) {
             try {
+              updateCrawl(id, job => {
+                job.stage = 'queueing'
+                job.message = 'Discovering internal links'
+              })
               const $ = cheerio.load(html)
               const candidate = new Set<string>()
               
@@ -246,10 +264,16 @@ export async function POST(req: NextRequest) {
           updateCrawl(id, job => { 
             job.queued = queue.length 
             job.progress = Math.round((job.processed / maxPages) * 100)
+            job.stage = 'processing'
+            job.message = `Processed ${job.processed}/${job.maxPages} • Queue ${job.queued}`
           })
         }
 
         console.log(`[dashboard-crawl] ${id} completed: ${pages.length} pages crawled (max: ${maxPages}), queue remaining: ${queue.length}`)
+        updateCrawl(id, job => {
+          job.stage = 'finalizing'
+          job.message = 'Finalizing'
+        })
         completeCrawl(id)
         if (userId) incrementUsage(userId, 'SITE_CRAWL').catch(() => {})
         

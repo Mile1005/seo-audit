@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { handleGscCallback } from '@/lib/gsc'
-import { prisma } from '@/lib/db'
+import { prisma } from '@/lib/prisma'
 
 // Force dynamic rendering for this API route
 export const dynamic = 'force-dynamic'
 
-/**
- * GET /api/gsc/callback { NextRequest, NextResponse } from 'next/server'
-import { handleGscCallback } from '@/lib/gsc'
-import { prisma } from '@/lib/prisma'
+function getRequestOrigin(req: NextRequest) {
+  const forwardedProto = req.headers.get('x-forwarded-proto')
+  const forwardedHost = req.headers.get('x-forwarded-host')
+  const host = forwardedHost || req.headers.get('host')
+  const proto = forwardedProto || req.nextUrl.protocol.replace(':', '')
+  if (host) return `${proto}://${host}`
+  return req.nextUrl.origin
+}
 
 /**
  * GET /api/gsc/callback
@@ -71,8 +75,11 @@ export async function GET(req: NextRequest) {
 
     console.log('✅ User verified:', user.email)
 
-    // Handle the OAuth callback and get tokens
-    const success = await handleGscCallback(code, state)
+    const origin = getRequestOrigin(req)
+    const redirectUri = new URL('/api/gsc/callback', origin).toString()
+
+    // Handle the OAuth callback and get tokens (must use the same redirect_uri)
+    const success = await handleGscCallback(code, state, redirectUri)
 
     if (!success) {
       console.error('❌ Failed to get GSC tokens')

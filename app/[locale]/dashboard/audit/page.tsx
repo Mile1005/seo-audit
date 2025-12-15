@@ -71,7 +71,11 @@ import { CrawledPagesAnalysis } from '../../../../components/audit/CrawledPagesA
 // Unified comprehensive audit page. Legacy variants (simple/new/comprehensive) removed (Phase A consolidation).
 export default function ComprehensiveAuditPage() {
   const [url, setUrl] = useState('')
-  const { data: result, error, loading: isLoading, status, start, reset, loadCached, isCached } = useAudit()
+  const { data: result, error, loading: isLoading, status, progress: auditProgress, start, reset, loadCached, isCached } = useAudit()
+  const [gsc, setGsc] = useState<any>(null)
+  const [gscLoading, setGscLoading] = useState(false)
+  const [gscError, setGscError] = useState<string | null>(null)
+  const [gscNeedsReconnect, setGscNeedsReconnect] = useState(false)
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     coreWebVitals: true,
     technicalSEO: false,
@@ -90,24 +94,70 @@ export default function ComprehensiveAuditPage() {
     }
 
     // Load cached audit results
-    loadCached()
+    loadCached(domainParam ?? undefined)
   }, [loadCached])
 
-  // Debug logging for audit results
+  // Clear GSC state while a new audit is running (prevents showing stale metrics for a different URL)
+  useEffect(() => {
+    if (status === 'completed') return
+    setGsc(null)
+    setGscError(null)
+    setGscLoading(false)
+    setGscNeedsReconnect(false)
+  }, [status])
+
+  // Debug logging for audit results (dev-only)
   React.useEffect(() => {
-    if (result) {
-      console.log('📊 Dashboard received audit result:', {
-        auditId: result.auditId,
-        score: result.score,
-        url: result.url,
-        hasComprehensiveResults: !!result.comprehensiveResults,
-        performanceOpportunities: result.comprehensiveResults?.performance_opportunities?.length || 0,
-        issues: result.comprehensiveResults?.issues?.length || 0,
-        quickWins: result.comprehensiveResults?.quick_wins?.length || 0,
-        isCached
-      })
-    }
+    if (process.env.NODE_ENV !== 'development') return
+    if (!result) return
+    console.log('📊 Dashboard received audit result:', {
+      auditId: result.auditId,
+      score: result.score,
+      url: result.url,
+      hasComprehensiveResults: !!result.comprehensiveResults,
+      performanceOpportunities: result.comprehensiveResults?.performance_opportunities?.length || 0,
+      issues: result.comprehensiveResults?.issues?.length || 0,
+      quickWins: result.comprehensiveResults?.quick_wins?.length || 0,
+      isCached
+    })
   }, [result, isCached])
+
+  // Fetch GSC metrics (user-scoped) when an audit completes
+  useEffect(() => {
+    const auditedUrl = result?.url
+    if (!auditedUrl || status !== 'completed') return
+
+    const fetchGsc = async () => {
+      try {
+        setGscLoading(true)
+        setGscError(null)
+        setGsc(null)
+        setGscNeedsReconnect(false)
+        const res = await fetch(`/api/gsc/insights?url=${encodeURIComponent(auditedUrl)}`, { cache: 'no-store' })
+        const json = await res.json()
+        if (!res.ok || !json?.success) {
+          setGsc(null)
+          if (res.status === 401) {
+            const code = typeof json?.code === 'string' ? json.code : ''
+            const reconnect = code === 'gsc_reconnect_required' || /expired|reconnect|required|invalid_grant/i.test(String(json?.error || ''))
+            setGscNeedsReconnect(reconnect)
+            setGscError(json?.error || 'Google Search Console is not connected. Connect it in your dashboard to see real metrics for this site.')
+          } else {
+            setGscError(json?.error || 'Failed to load GSC metrics')
+          }
+          return
+        }
+        setGsc(json.data)
+      } catch (e: any) {
+        setGsc(null)
+        setGscError(e?.message || 'Failed to load GSC metrics')
+      } finally {
+        setGscLoading(false)
+      }
+    }
+
+    fetchGsc()
+  }, [result?.url, status])
 
   const handleStartAudit = () => {
     const normalized = normalizeUrl(url)
@@ -276,39 +326,174 @@ export default function ComprehensiveAuditPage() {
               </Alert>
             )}
 
-            {/* Development Debug Info */}
-            {process.env.NODE_ENV === 'development' && result && (
-              <Alert>
-                <Info className="h-4 w-4" />
-                <AlertDescription>
-                  <strong>Debug Info:</strong> Performance opportunities: {result.comprehensiveResults?.performance_opportunities?.length || 0}, 
-                  Issues: {result.comprehensiveResults?.issues?.length || 0}, 
-                  Quick wins: {result.comprehensiveResults?.quick_wins?.length || 0}
-                  {result.comprehensiveResults?.performance_opportunities?.[0]?.includes('PSI_API_KEY') && (
-                    <span className="text-yellow-600"> - Using fallback data (PSI not configured)</span>
-                  )}
-                </AlertDescription>
-              </Alert>
-            )}
-
             {isLoading && !error && (
-              <Alert>
-                <RefreshCw className="h-4 w-4 animate-spin" />
-                <AlertDescription>
-                  Running comprehensive analysis... polling results.
-                </AlertDescription>
-              </Alert>
+              <Card className="border-dashed">
+                <CardContent className="pt-6 space-y-4">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <RefreshCw className="h-4 w-4 animate-spin" />
+                        <div className="font-medium">Audit in progress</div>
+                      </div>
+                      <div className="text-sm text-slate-600 dark:text-slate-300">
+                        {auditProgress?.message || 'Running comprehensive analysis…'}
+                      </div>
+                      {typeof auditProgress?.elapsedMs === 'number' && (
+                        <div className="text-xs text-slate-500">
+                          Elapsed: {Math.max(1, Math.round(auditProgress.elapsedMs / 1000))}s
+                        </div>
+                      )}
+                    </div>
+                    <Button variant="outline" size="sm" onClick={reset}>
+                      Stop
+                    </Button>
+                  </div>
+
+                  <Progress value={typeof auditProgress?.progress === 'number' ? auditProgress.progress : 20} />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                    {[
+                      { key: 'queued', label: 'Queued' },
+                      { key: 'fetching', label: 'Fetching page' },
+                      { key: 'analyzing', label: 'Analyzing SEO + content' },
+                      { key: 'pagespeed', label: 'Fetching PageSpeed' },
+                      { key: 'scoring', label: 'Scoring + recommendations' },
+                      { key: 'saving', label: 'Finalizing' },
+                    ].map((step) => {
+                      const current = auditProgress?.stage === step.key
+                      const doneOrder = ['queued','fetching','analyzing','pagespeed','scoring','saving']
+                      const currentIdx = doneOrder.indexOf(String(auditProgress?.stage || 'queued'))
+                      const stepIdx = doneOrder.indexOf(step.key)
+                      const done = currentIdx > stepIdx
+                      return (
+                        <div
+                          key={step.key}
+                          className={`rounded-md border px-3 py-2 flex items-center justify-between ${
+                            current ? 'bg-slate-50 dark:bg-slate-900/40' : ''
+                          }`}
+                        >
+                          <span className={current ? 'font-medium' : 'text-slate-700 dark:text-slate-300'}>
+                            {step.label}
+                          </span>
+                          <span className="text-xs text-slate-500">
+                            {done ? 'Done' : current ? 'Now' : 'Pending'}
+                          </span>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <div className="text-xs text-slate-500">
+                    If this takes unusually long, the site may be blocking requests or responding slowly.
+                  </div>
+                </CardContent>
+              </Card>
             )}
           </CardContent>
         </Card>
 
-        {/* Results / Loading Skeleton */}
-        {isLoading && !result && (
-          <div className="space-y-6" aria-busy="true" aria-live="polite">
-            <ScoreSkeleton />
-            <IssuesSkeleton />
-          </div>
+        {/* Google Search Console */}
+        {status === 'completed' && result?.url && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <BarChart3 className="h-5 w-5" />
+                {(() => {
+                  try {
+                    const host = new URL(result.url).hostname.replace(/^www\./, '')
+                    return `Google Search Console — ${host} (last 28 days)`
+                  } catch {
+                    return 'Google Search Console (last 28 days)'
+                  }
+                })()}
+              </CardTitle>
+              <CardDescription>
+                Real clicks / impressions / CTR from your connected GSC account (if this site is verified in GSC).
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {gscLoading ? (
+                <div className="text-sm text-slate-600 dark:text-slate-300">Loading GSC metrics…</div>
+              ) : gscError ? (
+                <Alert>
+                  <AlertDescription className="flex items-center justify-between gap-3">
+                    <span>{gscError}</span>
+                    {(gscNeedsReconnect || /expired|reconnect|required|invalid_grant|not connected/i.test(gscError)) && (
+                      <Button variant="outline" size="sm" onClick={() => { window.location.href = '/api/gsc/connect?redirect=1' }}>
+                        {gscNeedsReconnect || /expired|reconnect|required|invalid_grant/i.test(gscError) ? 'Reconnect' : 'Connect'}
+                      </Button>
+                    )}
+                  </AlertDescription>
+                </Alert>
+              ) : gsc ? (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="rounded-lg border p-3">
+                      <div className="text-xs text-slate-500">Clicks</div>
+                      <div className="text-lg font-semibold">{gsc.clicks ?? '—'}</div>
+                    </div>
+                    <div className="rounded-lg border p-3">
+                      <div className="text-xs text-slate-500">Impressions</div>
+                      <div className="text-lg font-semibold">{gsc.impressions ?? '—'}</div>
+                    </div>
+                    <div className="rounded-lg border p-3">
+                      <div className="text-xs text-slate-500">CTR</div>
+                      <div className="text-lg font-semibold">
+                        {typeof gsc.ctr === 'number' ? `${(gsc.ctr * 100).toFixed(2)}%` : '—'}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-sm text-slate-600 dark:text-slate-300">{gsc.message || ''}</div>
+
+                  {Array.isArray(gsc.top_queries) && gsc.top_queries.length > 0 ? (
+                    <div className="space-y-2">
+                      <div className="text-sm font-medium">Top queries</div>
+                      <div className="rounded-lg border overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead className="bg-slate-50 dark:bg-slate-900">
+                            <tr>
+                              <th className="text-left p-2">Query</th>
+                              <th className="text-right p-2">Clicks</th>
+                              <th className="text-right p-2">Impr.</th>
+                              <th className="text-right p-2">CTR</th>
+                              <th className="text-right p-2">Pos.</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {gsc.top_queries.map((q: any, idx: number) => (
+                              <tr key={idx} className="border-t">
+                                <td className="p-2">{q.query}</td>
+                                <td className="p-2 text-right">{q.clicks ?? 0}</td>
+                                <td className="p-2 text-right">{q.impressions ?? 0}</td>
+                                <td className="p-2 text-right">
+                                  {typeof q.ctr === 'number' ? `${(q.ctr * 100).toFixed(2)}%` : '—'}
+                                </td>
+                                <td className="p-2 text-right">{typeof q.position === 'number' ? q.position.toFixed(1) : '—'}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-sm text-slate-600 dark:text-slate-300">
+                      No queries returned yet (this is normal for new/low-traffic properties).
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="text-sm text-slate-600 dark:text-slate-300">
+                  {gscLoading
+                    ? 'Loading Google Search Console metrics…'
+                    : (gscError || 'Google Search Console is not connected. Connect it in your dashboard to see real metrics for this page.')}
+                </div>
+              )}
+            </CardContent>
+          </Card>
         )}
+
+        {/* Results */}
         {result && (
           <div className="space-y-6">
             {isCached && (
@@ -316,7 +501,7 @@ export default function ComprehensiveAuditPage() {
                 <Clock className="h-4 w-4" />
                 <AlertDescription className="flex items-center justify-between">
                   <span>Showing cached audit results. Run a new audit to get fresh data.</span>
-                  <Button size="sm" variant="outline" onClick={() => { reset(); loadCached(); }}>
+                  <Button size="sm" variant="outline" onClick={() => { reset(); loadCached(result?.url); }}>
                     <RefreshCw className="h-3 w-3 mr-1" />
                     Reload Cache
                   </Button>

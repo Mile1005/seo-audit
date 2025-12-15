@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2, Search, Globe, Link, ExternalLink, FileText, Image, Zap as ZapIcon, TrendingDown, TrendingUp as TrendingUpIcon, Minus } from 'lucide-react'
 import { Button } from '../../ui/button'
@@ -15,6 +16,7 @@ interface KeywordTrackingHeroProps {
 export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, submitError }: KeywordTrackingHeroProps) {
   const t = useTranslations('featurePages.keywordTracking');
   const tHero = useTranslations('featurePages.keywordTracking.hero');
+  const router = useRouter();
   const [keywords, setKeywords] = useState('');
   const [domain, setDomain] = useState('');
   const [location, setLocation] = useState('US');
@@ -125,17 +127,29 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                   {tHero('title')}
                 </h1>
 
-                <p className="text-xl text-slate-300 leading-relaxed">
+                <p className="text-xl text-muted-foreground leading-relaxed">
                   {tHero('subtitle')}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                  onClick={() => router.push('/signup')}
+                >
                   <Target className="w-5 h-5 mr-2" />
                   {tHero('cta.track')}
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    document
+                      .getElementById('keyword-form')
+                      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }}
+                >
                   <Play className="w-5 h-5 mr-2" />
                   {tHero('cta.demo')}
                 </Button>
@@ -143,11 +157,11 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
 
               {/* Trust Indicators */}
               <div className="flex flex-wrap items-center gap-6 pt-4">
-                <div className="flex items-center space-x-2 text-sm text-slate-400">
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <CheckCircle className="w-4 h-4 text-green-600" />
                   <span>{tHero('trustIndicators.uptime')}</span>
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-slate-400">
+                <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <CheckCircle className="w-4 h-4 text-green-600" />
                   <span>{tHero('trustIndicators.dailyUpdates')}</span>
                 </div>
@@ -276,7 +290,7 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
       </section>
 
       {/* Keyword Research Form Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
+      <section id="keyword-form" className="py-16 px-4 sm:px-6 lg:px-8 bg-muted/30">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -299,20 +313,32 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">Keywords (one per line)</label>
+                  <label htmlFor="keywords-input" className="block text-sm font-medium text-foreground mb-2">
+                    Keywords (one per line)
+                  </label>
                   <textarea
+                    id="keywords-input"
+                    name="keywords"
+                    aria-describedby="keywords-help"
                     value={keywords}
                     onChange={(e) => setKeywords(e.target.value)}
                     placeholder="Enter keywords to track..."
                     className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                     rows={4}
                   />
+                  <p id="keywords-help" className="text-xs text-muted-foreground mt-1">
+                    Enter one keyword per line.
+                  </p>
                   {errors.keywords && <p className="text-red-500 text-sm mt-1">{errors.keywords}</p>}
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Domain (Optional)</label>
+                    <label htmlFor="domain-input" className="block text-sm font-medium text-foreground mb-2">
+                      Domain (Optional)
+                    </label>
                     <input
+                      id="domain-input"
+                      name="domain"
                       type="text"
                       value={domain}
                       onChange={(e) => setDomain(e.target.value)}
@@ -321,8 +347,12 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">Location</label>
+                    <label htmlFor="location-select" className="block text-sm font-medium text-foreground mb-2">
+                      Location
+                    </label>
                     <select
+                      id="location-select"
+                      name="location"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                       className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"

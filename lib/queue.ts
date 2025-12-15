@@ -43,6 +43,7 @@ export type AuditJobData = {
   targetKeyword?: string;
   email?: string;
   locale?: string; // locale hint for worker/reporting
+  userId?: string; // used for user-scoped integrations like GSC
 };
 
 export async function addAuditJob(data: AuditJobData) {

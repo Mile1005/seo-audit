@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useRouter } from 'next/navigation';
 import { 
   Bell, 
   TrendingUp, 
@@ -32,6 +33,7 @@ import { Button } from "../../ui/button";
 
 export default function AlertSystem() {
   const t = useTranslations('featurePages.keywordTracking.alertSystem');
+  const router = useRouter();
   const [selectedAlert, setSelectedAlert] = useState("ranking-changes");
   const [alertFilter, setAlertFilter] = useState("all");
 
@@ -473,11 +475,15 @@ export default function AlertSystem() {
               {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+                onClick={() => router.push('/dashboard/keywords')}
+              >
                 <Bell className="w-5 h-5 mr-2" />
                 {t('cta.setup')}
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => router.push('/dashboard/keywords')}>
                 <Settings className="w-5 h-5 mr-2" />
                 {t('cta.configure')}
               </Button>

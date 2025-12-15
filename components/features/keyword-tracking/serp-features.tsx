@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import Link from 'next/link';
 import { 
   Search, 
   MapPin, 
@@ -434,14 +435,21 @@ export default function SerpFeatures() {
               {t('cta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                <BarChart3 className="w-5 h-5 mr-2" />
-                {t('cta.startTracking')}
-              </Button>
-              <Button variant="outline" size="lg">
-                <TrendingUp className="w-5 h-5 mr-2" />
-                {t('cta.viewOpportunities')}
-              </Button>
+              <Link href="/dashboard/keywords">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                >
+                  <BarChart3 className="w-5 h-5 mr-2" />
+                  {t('cta.startTracking')}
+                </Button>
+              </Link>
+              <Link href="/dashboard/keywords">
+                <Button variant="outline" size="lg">
+                  <TrendingUp className="w-5 h-5 mr-2" />
+                  {t('cta.viewOpportunities')}
+                </Button>
+              </Link>
             </div>
           </div>
         </motion.div>

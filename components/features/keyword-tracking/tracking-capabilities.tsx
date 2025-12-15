@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from 'next/navigation';
 import { motion } from "framer-motion";
 import { 
   Globe, 
@@ -21,6 +22,7 @@ import { Button } from "../../ui/button";
 
 export default function TrackingCapabilities() {
   const t = useTranslations('featurePages.keywordTracking.trackingCapabilities');
+  const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState("professional");
 
   const plans = [
@@ -221,7 +223,7 @@ export default function TrackingCapabilities() {
           </div>
           
           <div className="text-center mt-6">
-            <Button variant="outline">
+            <Button variant="outline" onClick={() => router.push('/pricing')}>
               <MapPin className="w-4 h-4 mr-2" />
               {t('globalCoverage.viewAll')}
             </Button>
@@ -311,6 +313,7 @@ export default function TrackingCapabilities() {
                         ? "bg-primary text-primary-foreground" 
                         : "bg-muted text-foreground hover:bg-primary hover:text-primary-foreground"
                     }`}
+                    onClick={() => router.push('/pricing')}
                   >
                     {selectedPlan === plan.id ? t('plansSection.selected') : t('plansSection.choosePlan')}
                   </Button>
@@ -336,11 +339,15 @@ export default function TrackingCapabilities() {
               {t('setupCta.description')}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
+                onClick={() => router.push('/dashboard/keywords')}
+              >
                 <Plus className="w-5 h-5 mr-2" />
                 {t('setupCta.addKeywords')}
               </Button>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" onClick={() => router.push('/dashboard/keywords')}>
                 <Settings className="w-5 h-5 mr-2" />
                 {t('setupCta.configure')}
               </Button>

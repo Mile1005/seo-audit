@@ -19,7 +19,7 @@ const connection = new IORedis(process.env.REDIS_URL || "redis://localhost:6379"
 // If needed later, reintroduce a snapshot queue and workers guarded by a feature flag.
 
 async function processJob(job: any) {
-  const { runId, pageUrl, targetKeyword, email, locale = 'en' } = job.data;
+  const { runId, pageUrl, targetKeyword, email, locale = 'en', userId } = job.data;
 
   console.log(`Starting audit job for run ${runId}, URL: ${pageUrl}, Locale: ${locale}`);
 
@@ -56,7 +56,7 @@ async function processJob(job: any) {
       })(),
       (async () => {
         try {
-          gscData = await fetchGscInsightsForUrl(pageUrl);
+          gscData = await fetchGscInsightsForUrl(pageUrl, userId ? { userId } : undefined);
         } catch (err) {
           gscError = err;
         }

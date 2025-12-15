@@ -1,31 +1,26 @@
-import { test, expect, vi, beforeEach, afterEach } from "vitest";
-import { checkDatabaseHealth, getPerformanceMetrics, connectDatabase, disconnectDatabase, prisma } from "../lib/database";
+import { test, expect, vi, beforeEach } from "vitest";
 
-// Mock Prisma client
-const mockPrisma = {
+// Mock Prisma client (must be hoisted because vi.mock is hoisted)
+const mockPrisma = vi.hoisted(() => ({
   $queryRaw: vi.fn(),
   $connect: vi.fn(),
   $disconnect: vi.fn(),
-};
+}));
 
 vi.mock('@prisma/client', () => ({
   PrismaClient: vi.fn().mockImplementation(() => mockPrisma),
 }));
 
-vi.mock('../lib/database', () => ({
-  prisma: mockPrisma,
-  checkDatabaseHealth: vi.fn(),
-  getPerformanceMetrics: vi.fn(),
-  connectDatabase: vi.fn(),
-  disconnectDatabase: vi.fn(),
-}));
+// Import the actual functions after mocking PrismaClient
+import { checkDatabaseHealth, getPerformanceMetrics, connectDatabase, disconnectDatabase } from "../lib/database";
 
-// Import the actual functions after mocking
-import { checkDatabaseHealth as actualCheckDatabaseHealth, getPerformanceMetrics as actualGetPerformanceMetrics, connectDatabase as actualConnectDatabase, disconnectDatabase as actualDisconnectDatabase } from "../lib/database";
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 test("checkDatabaseHealth returns healthy status on successful query", async () => {
   mockPrisma.$queryRaw.mockResolvedValue([{ result: 1 }]);
-  const result = await actualCheckDatabaseHealth();
+  const result = await checkDatabaseHealth();
 
   expect(result.status).toBe('healthy');
   expect(result.timestamp).toBeInstanceOf(Date);
@@ -35,7 +30,7 @@ test("checkDatabaseHealth returns healthy status on successful query", async () 
 test("checkDatabaseHealth returns unhealthy status on query failure", async () => {
   mockPrisma.$queryRaw.mockRejectedValue(new Error('Connection failed'));
 
-  const result = await actualCheckDatabaseHealth();
+  const result = await checkDatabaseHealth();
 
   expect(result.status).toBe('unhealthy');
   expect(result.error).toBe('Connection failed');
@@ -45,7 +40,7 @@ test("checkDatabaseHealth returns unhealthy status on query failure", async () =
 test("getPerformanceMetrics measures query performance", async () => {
   mockPrisma.$queryRaw.mockResolvedValue([{ result: 1 }]);
 
-  const result = await actualGetPerformanceMetrics();
+  const result = await getPerformanceMetrics();
 
   expect(result.queryTime).toBeDefined();
   expect(result.queryTime).toBeGreaterThanOrEqual(0);
@@ -56,7 +51,7 @@ test("getPerformanceMetrics measures query performance", async () => {
 test("connectDatabase handles successful connection", async () => {
   mockPrisma.$connect.mockResolvedValue(undefined);
 
-  const result = await actualConnectDatabase();
+  const result = await connectDatabase();
 
   expect(result).toBe(true);
   expect(mockPrisma.$connect).toHaveBeenCalled();
@@ -65,7 +60,7 @@ test("connectDatabase handles successful connection", async () => {
 test("connectDatabase handles connection failure", async () => {
   mockPrisma.$connect.mockRejectedValue(new Error('Connection failed'));
 
-  const result = await actualConnectDatabase();
+  const result = await connectDatabase();
 
   expect(result).toBe(false);
 });
@@ -73,7 +68,7 @@ test("connectDatabase handles connection failure", async () => {
 test("disconnectDatabase handles successful disconnection", async () => {
   mockPrisma.$disconnect.mockResolvedValue(undefined);
 
-  await actualDisconnectDatabase();
+  await disconnectDatabase();
 
   expect(mockPrisma.$disconnect).toHaveBeenCalled();
 });
