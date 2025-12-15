@@ -2,6 +2,17 @@
   "framework": "nextjs",
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
+  "headers": [
+    {
+      "source": "/((?!api|_next|dashboard|login|signup|reset-password|forgot-password|verify-email|onboarding|share).*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, no-cache, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ],
   "functions": {
     "app/**/*.tsx": {
       "maxDuration": 30

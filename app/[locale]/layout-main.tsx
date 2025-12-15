@@ -27,9 +27,6 @@ const SpeedInsights = dynamicImport(
   }
 );
 
-// Force dynamic rendering to avoid Vercel lambda routing issues
-export const dynamic = "force-dynamic";
-
 // Ultra-optimized font loading for maximum performance
 const inter = Inter({
   subsets: ["latin"],
@@ -43,8 +40,6 @@ const inter = Inter({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 type Props = {

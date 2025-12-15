@@ -9,11 +9,7 @@ import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
 import { ConsentControlledScripts } from "@/components/privacy/consent-controlled-scripts";
 import { WebVitals } from "@/components/performance/web-vitals";
-import { headers } from "next/headers";
-import { locales, defaultLocale, type Locale } from "../i18n";
-import { generateAlternates } from "@/lib/metadata-utils";
-import { getLocale } from "next-intl/server";
-import { routing } from "../lib/navigation";
+import { defaultLocale } from "../i18n";
 
 // Lazy load Vercel monitoring scripts (not critical for page render)
 const Analytics = dynamicImport(
@@ -28,9 +24,6 @@ const SpeedInsights = dynamicImport(
     ssr: false,
   }
 );
-
-// Force dynamic rendering to avoid Vercel lambda routing issues
-export const dynamic = "force-dynamic";
 
 // Ultra-optimized font loading for maximum performance
 const inter = Inter({
@@ -99,20 +92,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // Get locale from custom header set by middleware
-  const headersList = await headers();
-  const pathname = headersList.get("x-current-pathname") || "/";
-
-  let htmlLang: Locale = defaultLocale;
-  for (const loc of locales) {
-    if (pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`) {
-      htmlLang = loc;
-      break;
-    }
-  }
-
-  console.log("[SEO DEBUG]", { pathname, htmlLang });
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // Use default locale for html lang; the [locale] layout handles locale-specific content
+  const htmlLang = defaultLocale;
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-VL8V8L4G7X";
@@ -382,15 +364,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         style={{ backgroundColor: "#0b1220" }}
         suppressHydrationWarning
       >
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-K7SGKVC9"
-            height="0"
-            width="0"
-            aria-hidden="true"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+
 
         <a
           href="#main-content"
