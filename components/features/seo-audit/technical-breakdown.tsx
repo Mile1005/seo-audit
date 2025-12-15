@@ -6,13 +6,13 @@ import { CheckCircle, AlertCircle, Clock, TrendingUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function TechnicalBreakdown() {
-  const t = useTranslations('featurePages.seoAudit.technicalBreakdown');
-  
+  const t = useTranslations("featurePages.seoAudit.technicalBreakdown");
+
   const items = [
-    { label: t('items.metaTags'), score: 92, status: "excellent", icon: CheckCircle },
-    { label: t('items.headings'), score: 88, status: "good", icon: CheckCircle },
-    { label: t('items.coreWebVitals'), score: 76, status: "needs-work", icon: AlertCircle },
-    { label: t('items.indexation'), score: 95, status: "excellent", icon: CheckCircle },
+    { label: t("items.metaTags"), score: 92, status: "excellent", icon: CheckCircle },
+    { label: t("items.headings"), score: 88, status: "good", icon: CheckCircle },
+    { label: t("items.coreWebVitals"), score: 76, status: "needs-work", icon: AlertCircle },
+    { label: t("items.indexation"), score: 95, status: "excellent", icon: CheckCircle },
   ];
 
   const getScoreColor = (score: number) => {
@@ -24,27 +24,31 @@ export default function TechnicalBreakdown() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "excellent": return "text-green-500";
-      case "good": return "text-blue-500";
-      case "needs-work": return "text-yellow-500";
-      default: return "text-red-500";
+      case "excellent":
+        return "text-green-500";
+      case "good":
+        return "text-blue-500";
+      case "needs-work":
+        return "text-yellow-500";
+      default:
+        return "text-red-500";
     }
   };
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-3xl lg:text-4xl font-bold text-foreground mb-8"
         >
-          {t('header.title')}
+          {t("header.title")}
         </motion.h2>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -52,7 +56,7 @@ export default function TechnicalBreakdown() {
           className="rounded-xl border bg-background p-6 shadow-sm hover:shadow-lg transition-shadow duration-300"
         >
           {/* Overall Score */}
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
@@ -64,11 +68,11 @@ export default function TechnicalBreakdown() {
                 <TrendingUp className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h3 className="font-semibold text-foreground">{t('overallScore.title')}</h3>
-                <p className="text-sm text-muted-foreground">{t('overallScore.subtitle')}</p>
+                <h3 className="font-semibold text-foreground">{t("overallScore.title")}</h3>
+                <p className="text-sm text-muted-foreground">{t("overallScore.subtitle")}</p>
               </div>
             </div>
-            <motion.div 
+            <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
@@ -83,7 +87,7 @@ export default function TechnicalBreakdown() {
             {items.map((item, index) => {
               const Icon = item.icon;
               return (
-                <motion.div 
+                <motion.div
                   key={item.label}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -98,7 +102,7 @@ export default function TechnicalBreakdown() {
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="w-40 h-2 bg-muted rounded-full overflow-hidden">
-                      <motion.div 
+                      <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${item.score}%` }}
                         viewport={{ once: true }}
@@ -108,7 +112,7 @@ export default function TechnicalBreakdown() {
                         <div className="absolute inset-0 bg-white/20 animate-pulse" />
                       </motion.div>
                     </div>
-                    <motion.span 
+                    <motion.span
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}

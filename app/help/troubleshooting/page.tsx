@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, Settings, ArrowRight, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, Settings, ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const categoryArticles = [
   {
@@ -11,30 +11,30 @@ const categoryArticles = [
     href: "/help/troubleshooting/login-issues",
     time: "6 min",
     description: "Resolve login issues, password problems, and account access difficulties.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Data synchronization issues",
     href: "/help/troubleshooting/sync-issues",
     time: "5 min",
     description: "Fix data syncing problems and ensure your information stays up to date.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Performance optimization",
     href: "/help/troubleshooting/performance",
     time: "6 min",
     description: "Improve audit speed, reduce lag, and optimize your experience.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Audit not completing",
     href: "/help/troubleshooting/audit-issues",
     time: "6 min",
     description: "Fix stuck audits, timeouts, and common analysis failures.",
-    icon: BookOpen
-  }
-]
+    icon: BookOpen,
+  },
+];
 
 export default function TroubleshootingPage() {
   return (
@@ -52,8 +52,8 @@ export default function TroubleshootingPage() {
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Troubleshooting</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Having issues with AI SEO Turbo? Find solutions to common problems and get your
-              SEO audits running smoothly again.
+              Having issues with AI SEO Turbo? Find solutions to common problems and get your SEO
+              audits running smoothly again.
             </p>
           </div>
 
@@ -113,20 +113,30 @@ export default function TroubleshootingPage() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Quick Solutions</h2>
             <div className="space-y-6">
               <div className="border-l-4 border-green-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Audit Stuck or Not Loading</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Audit Stuck or Not Loading
+                </h3>
                 <p className="text-gray-600 mb-3">
-                  Try refreshing the page, clearing your browser cache, or checking your internet connection.
+                  Try refreshing the page, clearing your browser cache, or checking your internet
+                  connection.
                 </p>
-                <Link href="/help/troubleshooting/audit-issues" className="text-blue-600 hover:text-blue-800 font-medium">
+                <Link
+                  href="/help/troubleshooting/audit-issues"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
                   View detailed solution →
                 </Link>
               </div>
               <div className="border-l-4 border-blue-500 pl-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Login Problems</h3>
                 <p className="text-gray-600 mb-3">
-                  Reset your password, check your email for verification, or try a different browser.
+                  Reset your password, check your email for verification, or try a different
+                  browser.
                 </p>
-                <Link href="/help/troubleshooting/login-issues" className="text-blue-600 hover:text-blue-800 font-medium">
+                <Link
+                  href="/help/troubleshooting/login-issues"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
                   View detailed solution →
                 </Link>
               </div>
@@ -135,7 +145,10 @@ export default function TroubleshootingPage() {
                 <p className="text-gray-600 mb-3">
                   Close other tabs, update your browser, or try using a different device.
                 </p>
-                <Link href="/help/troubleshooting/performance" className="text-blue-600 hover:text-blue-800 font-medium">
+                <Link
+                  href="/help/troubleshooting/performance"
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
                   View detailed solution →
                 </Link>
               </div>
@@ -175,5 +188,5 @@ export default function TroubleshootingPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

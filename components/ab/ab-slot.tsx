@@ -1,53 +1,53 @@
-"use client"
+"use client";
 
-import React, { ReactNode, useState, useEffect } from "react"
-import { handleCTAClick } from "@/lib/cta-utils"
-import { useVariant } from '@/lib/ab'
-import { track } from '@/lib/analytics'
+import React, { ReactNode, useState, useEffect } from "react";
+import { handleCTAClick } from "@/lib/cta-utils";
+import { useVariant } from "@/lib/ab";
+import { track } from "@/lib/analytics";
 
 interface ABSlotProps {
-  testId: string
-  variants: Record<string, ReactNode>
-  trackExposure?: boolean
-  className?: string
-  dataTestId?: string // For data-testid attribute
+  testId: string;
+  variants: Record<string, ReactNode>;
+  trackExposure?: boolean;
+  className?: string;
+  dataTestId?: string; // For data-testid attribute
 }
 
 /**
  * Component that renders different variants based on A/B test bucketing
  */
-export function ABSlot({ 
-  testId, 
-  variants, 
-  trackExposure = true, 
+export function ABSlot({
+  testId,
+  variants,
+  trackExposure = true,
   className,
-  dataTestId 
+  dataTestId,
 }: ABSlotProps) {
-  const variant = useVariant(testId)
-  const [isHydrated, setIsHydrated] = useState(false)
-  
+  const variant = useVariant(testId);
+  const [isHydrated, setIsHydrated] = useState(false);
+
   // Fix hydration mismatch by waiting for client-side hydration
   useEffect(() => {
-    setIsHydrated(true)
-  }, [])
-  
+    setIsHydrated(true);
+  }, []);
+
   // Track exposure to this variant
   React.useEffect(() => {
-    if (trackExposure && typeof window !== 'undefined' && isHydrated) {
-      track('ab_exposure', {
+    if (trackExposure && typeof window !== "undefined" && isHydrated) {
+      track("ab_exposure", {
         test_id: testId,
         variant: variant,
-        timestamp: Date.now()
-      })
+        timestamp: Date.now(),
+      });
     }
-  }, [testId, variant, trackExposure, isHydrated])
+  }, [testId, variant, trackExposure, isHydrated]);
 
   // Always render control variant during SSR to prevent hydration mismatch
-  const displayVariant = isHydrated ? variant : 'control'
-  const content = variants[displayVariant] || variants.control || Object.values(variants)[0]
+  const displayVariant = isHydrated ? variant : "control";
+  const content = variants[displayVariant] || variants.control || Object.values(variants)[0];
 
   return (
-    <div 
+    <div
       className={className}
       data-testid={dataTestId || `ab-${testId}-${displayVariant}`}
       data-ab-test={testId}
@@ -55,7 +55,7 @@ export function ABSlot({
     >
       {content}
     </div>
-  )
+  );
 }
 
 /**
@@ -71,13 +71,18 @@ export function HeroHeadlineAB() {
         control: (
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Professional
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> SEO Audits </span>
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {" "}
+              SEO Audits{" "}
+            </span>
             Made Simple
           </h2>
         ),
         ai_powered: (
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">AI-Powered </span>
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              AI-Powered{" "}
+            </span>
             SEO Audits That
             <span className="block">Drive Real Results</span>
           </h2>
@@ -85,26 +90,29 @@ export function HeroHeadlineAB() {
         results_focused: (
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Get More Traffic with
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"> Expert SEO </span>
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              {" "}
+              Expert SEO{" "}
+            </span>
             <span className="block">Recommendations</span>
           </h2>
-        )
+        ),
       }}
     />
-  )
+  );
 }
 
 /**
  * CTA button text variants for A/B testing
  */
-export function CTATextAB({ 
+export function CTATextAB({
   baseClassName = "",
   onClick,
-  size = "default" 
-}: { 
-  baseClassName?: string
-  onClick?: () => void
-  size?: "default" | "large"
+  size = "default",
+}: {
+  baseClassName?: string;
+  onClick?: () => void;
+  size?: "default" | "large";
 }) {
   const buttonClasses = `
     ${baseClassName}
@@ -112,15 +120,15 @@ export function CTATextAB({
     bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-xl
     hover:from-purple-700 hover:to-purple-800 transform hover:scale-105
     transition-all duration-200 font-semibold shadow-lg hover:shadow-xl
-  `.trim()
+  `.trim();
 
   const handleClick = (e: React.MouseEvent, variant: string) => {
-    e.preventDefault()
+    e.preventDefault();
     // Call the provided onClick for analytics tracking
-    if (onClick) onClick()
+    if (onClick) onClick();
     // Navigate to the audit page
-    handleCTAClick('START_AUDIT', `CTA Variant: ${variant}`, 'hero')
-  }
+    handleCTAClick("START_AUDIT", `CTA Variant: ${variant}`, "hero");
+  };
 
   return (
     <ABSlot
@@ -132,7 +140,7 @@ export function CTATextAB({
           <a
             href="/dashboard"
             className={buttonClasses}
-            onClick={(e) => handleClick(e, 'control')}
+            onClick={(e) => handleClick(e, "control")}
             data-event="cta_click"
             data-cta-variant="control"
           >
@@ -143,7 +151,7 @@ export function CTATextAB({
           <a
             href="/dashboard"
             className={buttonClasses}
-            onClick={(e) => handleClick(e, 'urgent')}
+            onClick={(e) => handleClick(e, "urgent")}
             data-event="cta_click"
             data-cta-variant="urgent"
           >
@@ -154,16 +162,16 @@ export function CTATextAB({
           <a
             href="/dashboard"
             className={buttonClasses}
-            onClick={(e) => handleClick(e, 'benefit_focused')}
+            onClick={(e) => handleClick(e, "benefit_focused")}
             data-event="cta_click"
             data-cta-variant="benefit_focused"
           >
             Boost Your Rankings Now
           </a>
-        )
+        ),
       }}
     />
-  )
+  );
 }
 
 /**
@@ -192,8 +200,8 @@ export function PricingDisplayAB() {
               <span className="line-through">$49/month</span> • Billed annually
             </div>
           </div>
-        )
+        ),
       }}
     />
-  )
+  );
 }

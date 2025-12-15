@@ -1,15 +1,15 @@
 /**
  * SMART String Extraction Script for AI SEO Turbo
- * 
+ *
  * This enhanced version uses better filtering and pattern recognition
  * to extract only user-facing strings, excluding code artifacts.
- * 
+ *
  * Usage: tsx scripts/extract-strings-smart.ts
  */
 
-import fs from 'fs';
-import path from 'path';
-import { glob } from 'glob';
+import fs from "fs";
+import path from "path";
+import { glob } from "glob";
 
 interface TranslationEntry {
   value: string;
@@ -19,21 +19,21 @@ interface TranslationEntry {
 
 // Patterns to EXCLUDE (code artifacts, not user-facing text)
 const EXCLUDE_PATTERNS = [
-  /^[\d\s\-+%$,.]+$/,                // Pure numbers/symbols: "123", "$45", "12%", "1,000"
-  /^[a-z\-]+:[a-z\-]+$/,             // CSS-like: "text-center", "bg-red-500"
-  /^(px|em|rem|vh|vw|ms|s)$/i,       // Units
-  /^#[0-9a-fA-F]{3,8}$/,             // Hex colors
-  /^https?:\/\//,                     // URLs
-  /^\/[\w\-/]*$/,                    // Paths: "/dashboard", "/api/audit"
-  /^@\//,                            // Import paths
-  /^\d{1,2}:\d{2}$/,                 // Times: "9:41"
-  /^[A-Z_]{2,}$/,                    // CONSTANTS
-  /^(true|false|null|undefined)$/,    // Literals
-  /^(className|id|key|ref|type|name|value)$/i,  // Common prop names
-  /^[a-z]+\.[a-z]+$/,                // File extensions or dot notation
-  /\{.*\}/,                          // Template brackets (handled separately)
-  /^(GET|POST|PUT|DELETE|PATCH)$/,   // HTTP methods
-  /^[\W]+$/,                         // Only special characters
+  /^[\d\s\-+%$,.]+$/, // Pure numbers/symbols: "123", "$45", "12%", "1,000"
+  /^[a-z\-]+:[a-z\-]+$/, // CSS-like: "text-center", "bg-red-500"
+  /^(px|em|rem|vh|vw|ms|s)$/i, // Units
+  /^#[0-9a-fA-F]{3,8}$/, // Hex colors
+  /^https?:\/\//, // URLs
+  /^\/[\w\-/]*$/, // Paths: "/dashboard", "/api/audit"
+  /^@\//, // Import paths
+  /^\d{1,2}:\d{2}$/, // Times: "9:41"
+  /^[A-Z_]{2,}$/, // CONSTANTS
+  /^(true|false|null|undefined)$/, // Literals
+  /^(className|id|key|ref|type|name|value)$/i, // Common prop names
+  /^[a-z]+\.[a-z]+$/, // File extensions or dot notation
+  /\{.*\}/, // Template brackets (handled separately)
+  /^(GET|POST|PUT|DELETE|PATCH)$/, // HTTP methods
+  /^[\W]+$/, // Only special characters
 ];
 
 // Minimum requirements for valid strings
@@ -43,9 +43,33 @@ const MAX_LENGTH = 200;
 
 // Words that indicate this is user-facing content
 const USER_FACING_INDICATORS = [
-  'the', 'your', 'you', 'our', 'we', 'is', 'are', 'have', 'get', 'see',
-  'click', 'start', 'stop', 'show', 'hide', 'open', 'close', 'add', 'edit',
-  'delete', 'save', 'cancel', 'submit', 'send', 'load', 'view', 'download',
+  "the",
+  "your",
+  "you",
+  "our",
+  "we",
+  "is",
+  "are",
+  "have",
+  "get",
+  "see",
+  "click",
+  "start",
+  "stop",
+  "show",
+  "hide",
+  "open",
+  "close",
+  "add",
+  "edit",
+  "delete",
+  "save",
+  "cancel",
+  "submit",
+  "send",
+  "load",
+  "view",
+  "download",
 ];
 
 class SmartStringExtractor {
@@ -61,7 +85,7 @@ class SmartStringExtractor {
    */
   private isValidUserFacingString(str: string): boolean {
     const cleaned = str.trim();
-    
+
     // Length checks
     if (cleaned.length < MIN_LENGTH || cleaned.length > MAX_LENGTH) {
       return false;
@@ -81,7 +105,7 @@ class SmartStringExtractor {
 
     // Check if it's likely user-facing content
     const words = cleaned.toLowerCase().split(/\s+/);
-    
+
     // Single word checks
     if (words.length === 1) {
       const word = words[0];
@@ -91,14 +115,24 @@ class SmartStringExtractor {
       }
       // Single words should be capitalized or common UI words
       const isCapitalized = /^[A-Z]/.test(cleaned);
-      const isCommonUI = ['save', 'cancel', 'delete', 'edit', 'create', 'update', 'close', 'back', 'next'].includes(word);
+      const isCommonUI = [
+        "save",
+        "cancel",
+        "delete",
+        "edit",
+        "create",
+        "update",
+        "close",
+        "back",
+        "next",
+      ].includes(word);
       return isCapitalized || isCommonUI;
     }
 
     // Multi-word strings: should contain user-facing indicators or be capitalized
     const startsWithCapital = /^[A-Z]/.test(cleaned);
-    const hasUserFacingWord = words.some(w => USER_FACING_INDICATORS.includes(w));
-    
+    const hasUserFacingWord = words.some((w) => USER_FACING_INDICATORS.includes(w));
+
     return startsWithCapital || hasUserFacingWord;
   }
 
@@ -106,19 +140,27 @@ class SmartStringExtractor {
    * Get namespace from file path
    */
   private getNamespace(filePath: string): string {
-    if (filePath.includes('/dashboard/') || filePath.includes('\\dashboard\\')) return 'dashboard';
-    if (filePath.includes('/audit/') || filePath.includes('\\audit\\')) return 'audit';
-    if (filePath.includes('/keywords/') || filePath.includes('\\keywords\\')) return 'keywords';
-    if (filePath.includes('/backlinks/') || filePath.includes('\\backlinks\\')) return 'backlinks';
-    if (filePath.includes('/pricing/') || filePath.includes('\\pricing\\')) return 'pricing';
-    if (filePath.includes('/features/') || filePath.includes('\\features\\')) return 'features';
-    if (filePath.includes('/login/') || filePath.includes('/signup/') || filePath.includes('\\login\\') || filePath.includes('\\signup\\') || filePath.includes('/auth/') || filePath.includes('\\auth\\')) return 'auth';
-    if (filePath.includes('/navigation/') || filePath.includes('\\navigation\\')) return 'nav';
-    if (filePath.includes('/forms/') || filePath.includes('\\forms\\')) return 'forms';
-    if (filePath.includes('/hero/') || filePath.includes('\\hero\\')) return 'hero';
-    if (filePath.includes('/page.tsx') || filePath.includes('\\page.tsx')) return 'pages';
-    if (filePath.includes('/layout.tsx') || filePath.includes('\\layout.tsx')) return 'layout';
-    return 'common';
+    if (filePath.includes("/dashboard/") || filePath.includes("\\dashboard\\")) return "dashboard";
+    if (filePath.includes("/audit/") || filePath.includes("\\audit\\")) return "audit";
+    if (filePath.includes("/keywords/") || filePath.includes("\\keywords\\")) return "keywords";
+    if (filePath.includes("/backlinks/") || filePath.includes("\\backlinks\\")) return "backlinks";
+    if (filePath.includes("/pricing/") || filePath.includes("\\pricing\\")) return "pricing";
+    if (filePath.includes("/features/") || filePath.includes("\\features\\")) return "features";
+    if (
+      filePath.includes("/login/") ||
+      filePath.includes("/signup/") ||
+      filePath.includes("\\login\\") ||
+      filePath.includes("\\signup\\") ||
+      filePath.includes("/auth/") ||
+      filePath.includes("\\auth\\")
+    )
+      return "auth";
+    if (filePath.includes("/navigation/") || filePath.includes("\\navigation\\")) return "nav";
+    if (filePath.includes("/forms/") || filePath.includes("\\forms\\")) return "forms";
+    if (filePath.includes("/hero/") || filePath.includes("\\hero\\")) return "hero";
+    if (filePath.includes("/page.tsx") || filePath.includes("\\page.tsx")) return "pages";
+    if (filePath.includes("/layout.tsx") || filePath.includes("\\layout.tsx")) return "layout";
+    return "common";
   }
 
   /**
@@ -127,14 +169,14 @@ class SmartStringExtractor {
   private generateKey(str: string, namespace: string): string {
     const cleaned = str
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/[^a-z0-9\s]/g, " ")
       .trim()
       .split(/\s+/)
-      .filter(w => w.length > 2)
+      .filter((w) => w.length > 2)
       .slice(0, 4)
-      .join('_');
-    
-    return `${namespace}.${cleaned || 'text'}`;
+      .join("_");
+
+    return `${namespace}.${cleaned || "text"}`;
   }
 
   /**
@@ -142,7 +184,7 @@ class SmartStringExtractor {
    */
   private extractFromJSX(content: string, filePath: string): void {
     const namespace = this.getNamespace(filePath);
-    
+
     // Pattern 1: JSX text content: >Text<
     const jsxTextRegex = />([^<>{}\n]+)</g;
     let match;
@@ -178,7 +220,7 @@ class SmartStringExtractor {
    */
   private addTranslation(value: string, filePath: string, namespace: string): void {
     const key = this.generateKey(value, namespace);
-    
+
     if (!this.translations.has(key)) {
       this.translations.set(key, {
         value,
@@ -194,7 +236,7 @@ class SmartStringExtractor {
    */
   private scanFile(filePath: string): void {
     try {
-      const content = fs.readFileSync(filePath, 'utf-8');
+      const content = fs.readFileSync(filePath, "utf-8");
       this.extractFromJSX(content, filePath);
       this.stats.filesScanned++;
     } catch (error) {
@@ -206,21 +248,18 @@ class SmartStringExtractor {
    * Scan entire project
    */
   async scanProject(): Promise<void> {
-    console.log('🔍 Smart Extraction Started\n');
+    console.log("🔍 Smart Extraction Started\n");
 
-    const patterns = [
-      'app/**/*.{tsx,ts}',
-      'components/**/*.{tsx,ts}',
-    ];
+    const patterns = ["app/**/*.{tsx,ts}", "components/**/*.{tsx,ts}"];
 
     for (const pattern of patterns) {
       const files = await glob(pattern, {
-        ignore: ['**/node_modules/**', '**/.next/**', '**/messages/**'],
+        ignore: ["**/node_modules/**", "**/.next/**", "**/messages/**"],
         cwd: process.cwd(),
       });
 
       console.log(`📂 Scanning ${files.length} files for ${pattern}`);
-      
+
       for (const file of files) {
         this.scanFile(path.join(process.cwd(), file));
       }
@@ -238,7 +277,7 @@ class SmartStringExtractor {
     const result: any = {};
 
     this.translations.forEach((entry, key) => {
-      const parts = key.split('.');
+      const parts = key.split(".");
       let current = result;
 
       parts.forEach((part, index) => {
@@ -258,7 +297,7 @@ class SmartStringExtractor {
    * Sort object keys alphabetically
    */
   private sortKeys(obj: any): any {
-    if (typeof obj !== 'object' || obj === null || Array.isArray(obj)) {
+    if (typeof obj !== "object" || obj === null || Array.isArray(obj)) {
       return obj;
     }
 
@@ -276,20 +315,16 @@ class SmartStringExtractor {
   async generateOutput(): Promise<void> {
     // Generate JSON
     const nested = this.buildNested();
-    const outputPath = path.join(process.cwd(), 'messages', 'en-smart-extracted.json');
-    
-    fs.writeFileSync(
-      outputPath,
-      JSON.stringify(nested, null, 2),
-      'utf-8'
-    );
+    const outputPath = path.join(process.cwd(), "messages", "en-smart-extracted.json");
+
+    fs.writeFileSync(outputPath, JSON.stringify(nested, null, 2), "utf-8");
 
     console.log(`\n📝 Generated: ${outputPath}`);
 
     // Generate report
-    const reportPath = path.join(process.cwd(), 'scripts', 'smart-extraction-report.txt');
-    let report = 'Smart String Extraction Report\n';
-    report += '='.repeat(60) + '\n\n';
+    const reportPath = path.join(process.cwd(), "scripts", "smart-extraction-report.txt");
+    let report = "Smart String Extraction Report\n";
+    report += "=".repeat(60) + "\n\n";
     report += `Files Scanned: ${this.stats.filesScanned}\n`;
     report += `Unique Strings Extracted: ${this.stats.totalExtracted}\n\n`;
 
@@ -299,16 +334,16 @@ class SmartStringExtractor {
       byNamespace[entry.namespace] = (byNamespace[entry.namespace] || 0) + 1;
     });
 
-    report += 'Distribution by Namespace:\n';
-    report += '-'.repeat(60) + '\n';
+    report += "Distribution by Namespace:\n";
+    report += "-".repeat(60) + "\n";
     Object.entries(byNamespace)
       .sort((a, b) => b[1] - a[1])
       .forEach(([ns, count]) => {
         report += `  ${ns.padEnd(20)} ${count.toString().padStart(5)} strings\n`;
       });
 
-    report += '\n' + '='.repeat(60) + '\n';
-    report += 'Sample Extracted Strings (First 30):\n\n';
+    report += "\n" + "=".repeat(60) + "\n";
+    report += "Sample Extracted Strings (First 30):\n\n";
 
     Array.from(this.translations.entries())
       .slice(0, 30)
@@ -318,20 +353,20 @@ class SmartStringExtractor {
         report += `  (${entry.context})\n\n`;
       });
 
-    fs.writeFileSync(reportPath, report, 'utf-8');
+    fs.writeFileSync(reportPath, report, "utf-8");
     console.log(`📄 Report: ${reportPath}`);
   }
 }
 
 // Main execution
 async function main() {
-  console.log('🚀 AI SEO Turbo - Smart String Extractor\n');
-  
+  console.log("🚀 AI SEO Turbo - Smart String Extractor\n");
+
   const extractor = new SmartStringExtractor();
   await extractor.scanProject();
   await extractor.generateOutput();
-  
-  console.log('\n✨ Done! Review the generated files and merge into messages/en.json\n');
+
+  console.log("\n✨ Done! Review the generated files and merge into messages/en.json\n");
 }
 
 main().catch(console.error);

@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
-import { 
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import {
   ChartBarIcon,
   EyeIcon,
   MagnifyingGlassIcon,
@@ -11,210 +11,218 @@ import {
   ExclamationTriangleIcon,
   ArrowTrendingUpIcon,
   ClockIcon,
-  DocumentMagnifyingGlassIcon
-} from '@heroicons/react/24/outline'
-import { MetricWidget, ProgressBar, StatusBadge, Sparkline } from '@/components/dashboard/MetricWidget'
-import { useProjects, useProjectOverview } from '../../hooks/useApi'
-import DashboardEmptyState from './DashboardEmptyState'
-import LatestAuditWidget from './LatestAuditWidget'
+  DocumentMagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import {
+  MetricWidget,
+  ProgressBar,
+  StatusBadge,
+  Sparkline,
+} from "@/components/dashboard/MetricWidget";
+import { useProjects, useProjectOverview } from "../../hooks/useApi";
+import DashboardEmptyState from "./DashboardEmptyState";
+import LatestAuditWidget from "./LatestAuditWidget";
 
 export default function DashboardOverview() {
-  const t = useTranslations('dashboard')
-  const [loading, setLoading] = useState(true)
-  const [stats, setStats] = useState<any>(null)
-  const [recentActivity, setRecentActivity] = useState<any[]>([])
-  const [gscConnected, setGscConnected] = useState(false)
-  const [gscLoading, setGscLoading] = useState(false)
-  const [gscError, setGscError] = useState<string | null>(null)
+  const t = useTranslations("dashboard");
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<any>(null);
+  const [recentActivity, setRecentActivity] = useState<any[]>([]);
+  const [gscConnected, setGscConnected] = useState(false);
+  const [gscLoading, setGscLoading] = useState(false);
+  const [gscError, setGscError] = useState<string | null>(null);
 
   // Fetch real dashboard stats
   useEffect(() => {
-    fetchDashboardStats()
-  }, [])
+    fetchDashboardStats();
+  }, []);
 
   const fetchDashboardStats = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const response = await fetch('/api/dashboard/stats')
+      const response = await fetch("/api/dashboard/stats");
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
         if (data.success) {
-          setStats(data.stats)
-          
+          setStats(data.stats);
+
           // Process recent activity from API data
-          const activities = []
-          
+          const activities = [];
+
           // Add recent audits
           if (data.recentActivity?.audits && data.recentActivity.audits.length > 0) {
             for (const audit of data.recentActivity.audits) {
-              const timeAgo = getTimeAgo(new Date(audit.createdAt))
+              const timeAgo = getTimeAgo(new Date(audit.createdAt));
               activities.push({
-                type: audit.status === 'COMPLETED' ? 'audit-completed' : 'audit-started',
-                message: audit.status === 'COMPLETED' 
-                  ? `Site audit completed${audit.overallScore ? ` with score ${audit.overallScore}/100` : ''}`
-                  : 'Site audit in progress',
-                timestamp: timeAgo
-              })
+                type: audit.status === "COMPLETED" ? "audit-completed" : "audit-started",
+                message:
+                  audit.status === "COMPLETED"
+                    ? `Site audit completed${audit.overallScore ? ` with score ${audit.overallScore}/100` : ""}`
+                    : "Site audit in progress",
+                timestamp: timeAgo,
+              });
             }
           }
-          
+
           // Add backlink activity
           if (data.stats?.backlinks?.new_this_month > 0) {
             activities.push({
-              type: 'backlinks',
+              type: "backlinks",
               message: `${data.stats.backlinks.new_this_month} new backlinks detected this month`,
-              timestamp: 'This month'
-            })
+              timestamp: "This month",
+            });
           }
-          
+
           // Add keyword improvements
           if (data.stats?.keywords?.improved > 0) {
             activities.push({
-              type: 'keyword-improvement',
+              type: "keyword-improvement",
               message: `${data.stats.keywords.improved} keywords improved`,
-              timestamp: 'Last 30 days'
-            })
+              timestamp: "Last 30 days",
+            });
           }
-          
-          setRecentActivity(activities.slice(0, 5))
+
+          setRecentActivity(activities.slice(0, 5));
         }
       }
     } catch (error) {
-      console.error('Failed to fetch dashboard stats:', error)
+      console.error("Failed to fetch dashboard stats:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
-  
+  };
+
   // Helper function to format time ago
   const getTimeAgo = (date: Date) => {
-    const now = new Date()
-    const diffMs = now.getTime() - date.getTime()
-    const diffMins = Math.floor(diffMs / 60000)
-    const diffHours = Math.floor(diffMs / 3600000)
-    const diffDays = Math.floor(diffMs / 86400000)
-    
-    if (diffMins < 60) return `${diffMins} minute${diffMins !== 1 ? 's' : ''} ago`
-    if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? 's' : ''} ago`
-    if (diffDays === 1) return 'Yesterday'
-    if (diffDays < 7) return `${diffDays} days ago`
-    return date.toLocaleDateString()
-  }
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 60) return `${diffMins} minute${diffMins !== 1 ? "s" : ""} ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours !== 1 ? "s" : ""} ago`;
+    if (diffDays === 1) return "Yesterday";
+    if (diffDays < 7) return `${diffDays} days ago`;
+    return date.toLocaleDateString();
+  };
 
   // Check GSC connection status
   useEffect(() => {
-    checkGscStatus()
-  }, [])
+    checkGscStatus();
+  }, []);
 
   const checkGscStatus = async () => {
     try {
-      const response = await fetch('/api/gsc/status')
+      const response = await fetch("/api/gsc/status");
       if (response.ok) {
-        const data = await response.json()
-        setGscConnected(data.connected)
+        const data = await response.json();
+        setGscConnected(data.connected);
       }
     } catch (error) {
-      console.error('Failed to check GSC status:', error)
+      console.error("Failed to check GSC status:", error);
     }
-  }
+  };
 
   const handleGscConnect = async () => {
-    setGscLoading(true)
-    setGscError(null)
-    
+    setGscLoading(true);
+    setGscError(null);
+
     try {
-      const response = await fetch('/api/gsc/connect')
-      const data = await response.json()
-      
+      const response = await fetch("/api/gsc/connect");
+      const data = await response.json();
+
       if (data.success && data.authUrl) {
         // Redirect to Google OAuth
-        window.location.href = data.authUrl
+        window.location.href = data.authUrl;
       } else {
-        setGscError(data.error || 'Failed to initiate connection')
+        setGscError(data.error || "Failed to initiate connection");
       }
     } catch (error) {
-      console.error('GSC Connect error:', error)
-      setGscError('Network error. Please try again.')
+      console.error("GSC Connect error:", error);
+      setGscError("Network error. Please try again.");
     } finally {
-      setGscLoading(false)
+      setGscLoading(false);
     }
-  }
+  };
 
   const handleGscDisconnect = async () => {
-    if (!confirm('Are you sure you want to disconnect Google Search Console?')) {
-      return
+    if (!confirm("Are you sure you want to disconnect Google Search Console?")) {
+      return;
     }
-    
-    setGscLoading(true)
-    
+
+    setGscLoading(true);
+
     try {
-      const response = await fetch('/api/gsc/status', { method: 'DELETE' })
-      const data = await response.json()
-      
+      const response = await fetch("/api/gsc/status", { method: "DELETE" });
+      const data = await response.json();
+
       if (data.success) {
-        setGscConnected(false)
-        alert('Google Search Console disconnected successfully')
+        setGscConnected(false);
+        alert("Google Search Console disconnected successfully");
       } else {
-        alert('Failed to disconnect: ' + data.error)
+        alert("Failed to disconnect: " + data.error);
       }
     } catch (error) {
-      console.error('GSC Disconnect error:', error)
-      alert('Network error. Please try again.')
+      console.error("GSC Disconnect error:", error);
+      alert("Network error. Please try again.");
     } finally {
-      setGscLoading(false)
+      setGscLoading(false);
     }
-  }
+  };
 
   // Transform real stats into display format
-  const data = stats ? {
-    metrics: {
-      healthScore: stats.health_score,
-      searchVisibility: stats.search_visibility,
-      keywords: {
-        total: stats.keywords.total,
-        improved: stats.keywords.improved,
-        top10: stats.keywords.top10
-      },
-      backlinks: {
-        total: stats.backlinks.total,
-        newThisMonth: stats.backlinks.new_this_month,
-        referringDomains: stats.backlinks.referring_domains
-      },
-      traffic: {
-        organicVisitors: stats.traffic.organic_visitors,
-        changePercent: stats.traffic.change_percent
-      },
-      audits: {
-        criticalIssues: stats.audits.critical_issues,
-        warnings: stats.audits.warnings,
-        total: stats.audits.total
+  const data = stats
+    ? {
+        metrics: {
+          healthScore: stats.health_score,
+          searchVisibility: stats.search_visibility,
+          keywords: {
+            total: stats.keywords.total,
+            improved: stats.keywords.improved,
+            top10: stats.keywords.top10,
+          },
+          backlinks: {
+            total: stats.backlinks.total,
+            newThisMonth: stats.backlinks.new_this_month,
+            referringDomains: stats.backlinks.referring_domains,
+          },
+          traffic: {
+            organicVisitors: stats.traffic.organic_visitors,
+            changePercent: stats.traffic.change_percent,
+          },
+          audits: {
+            criticalIssues: stats.audits.critical_issues,
+            warnings: stats.audits.warnings,
+            total: stats.audits.total,
+          },
+        },
+        trends: {
+          keywords: [45, 52, 48, 61, 55, 67, 72, 58, 63, 71, 69, 76],
+          traffic: [1200, 1350, 1180, 1420, 1380, 1650, 1480, 1590, 1720, 1650, 1780, 1850],
+        },
       }
-    },
-    trends: {
-      keywords: [45, 52, 48, 61, 55, 67, 72, 58, 63, 71, 69, 76],
-      traffic: [1200, 1350, 1180, 1420, 1380, 1650, 1480, 1590, 1720, 1650, 1780, 1850]
-    }
-  } : {
-    metrics: {
-      healthScore: 0,
-      searchVisibility: 0,
-      keywords: { total: 0, improved: 0, top10: 0 },
-      backlinks: { total: 0, newThisMonth: 0, referringDomains: 0 },
-      traffic: { organicVisitors: 0, changePercent: 0 },
-      audits: { criticalIssues: 0, warnings: 0, total: 0 }
-    },
-    trends: {
-      keywords: [],
-      traffic: []
-    }
-  }
+    : {
+        metrics: {
+          healthScore: 0,
+          searchVisibility: 0,
+          keywords: { total: 0, improved: 0, top10: 0 },
+          backlinks: { total: 0, newThisMonth: 0, referringDomains: 0 },
+          traffic: { organicVisitors: 0, changePercent: 0 },
+          audits: { criticalIssues: 0, warnings: 0, total: 0 },
+        },
+        trends: {
+          keywords: [],
+          traffic: [],
+        },
+      };
 
-  const isDataLoading = loading
+  const isDataLoading = loading;
 
   // Check if user has data
-  const hasProjects = stats?.projects > 0
-  const hasAudits = stats?.audits?.total > 0
-  
+  const hasProjects = stats?.projects > 0;
+  const hasAudits = stats?.audits?.total > 0;
+
   // Don't replace entire page - integrate CTAs into metric cards instead
 
   return (
@@ -225,40 +233,44 @@ export default function DashboardOverview() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Health Score */}
         <MetricWidget
-          title={t('cards.healthScore.title')}
+          title={t("cards.healthScore.title")}
           value={data.metrics.healthScore}
-          change={{ value: 8.5, type: 'increase', period: '30d' }}
+          change={{ value: 8.5, type: "increase", period: "30d" }}
           icon={<ChartBarIcon className="w-5 h-5 text-blue-600" />}
-          description={t('cards.healthScore.description')}
+          description={t("cards.healthScore.description")}
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {t('cards.healthScore.empty')}
+                {t("cards.healthScore.empty")}
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-                  {t('cards.healthScore.cta')}
+                  {t("cards.healthScore.cta")}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-3">
-              <ProgressBar 
-                value={data.metrics.healthScore} 
-                max={100} 
-                color="green" 
-                showLabel 
-                label={t('cards.healthScore.scoreLabel')}
+              <ProgressBar
+                value={data.metrics.healthScore}
+                max={100}
+                color="green"
+                showLabel
+                label={t("cards.healthScore.scoreLabel")}
               />
               <div className="flex justify-between text-sm">
-                <span className="text-slate-600 dark:text-slate-400">{t('cards.issues.critical')}</span>
-                <StatusBadge status="warning" size="sm">{data.metrics.audits.criticalIssues} {t('cards.common.found')}</StatusBadge>
+                <span className="text-slate-600 dark:text-slate-400">
+                  {t("cards.issues.critical")}
+                </span>
+                <StatusBadge status="warning" size="sm">
+                  {data.metrics.audits.criticalIssues} {t("cards.common.found")}
+                </StatusBadge>
               </div>
               <a href="/dashboard/audit">
                 <button className="w-full mt-2 px-3 py-1.5 text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
-                  {t('cards.healthScore.viewLatest')}
+                  {t("cards.healthScore.viewLatest")}
                 </button>
               </a>
             </div>
@@ -267,29 +279,31 @@ export default function DashboardOverview() {
 
         {/* Search Visibility */}
         <MetricWidget
-          title={t('cards.searchVisibility.title')}
+          title={t("cards.searchVisibility.title")}
           value={data.metrics.searchVisibility}
-          change={{ value: 12.3, type: 'increase', period: '30d' }}
+          change={{ value: 12.3, type: "increase", period: "30d" }}
           icon={<EyeIcon className="w-5 h-5 text-emerald-600" />}
-          description={t('cards.searchVisibility.description')}
+          description={t("cards.searchVisibility.description")}
           loading={isDataLoading}
         >
           {!gscConnected ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {t('cards.searchVisibility.connectHelp')}
+                {t("cards.searchVisibility.connectHelp")}
               </p>
-              <button 
+              <button
                 onClick={handleGscConnect}
                 disabled={gscLoading}
                 className="w-full px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {gscLoading ? t('gsc.connecting') : t('cards.searchVisibility.cta')}
+                {gscLoading ? t("gsc.connecting") : t("cards.searchVisibility.cta")}
               </button>
             </div>
           ) : (
             <div className="space-y-2">
-              <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">{t('cards.searchVisibility.trend')}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 mb-1">
+                {t("cards.searchVisibility.trend")}
+              </div>
               <Sparkline data={data.trends.keywords} color="green" />
             </div>
           )}
@@ -297,33 +311,45 @@ export default function DashboardOverview() {
 
         {/* Top Keywords */}
         <MetricWidget
-          title={t('cards.keywords.title')}
+          title={t("cards.keywords.title")}
           value={data.metrics.keywords.total}
-          change={data.metrics.keywords.total > 0 ? { value: data.metrics.keywords.improved, type: 'increase', period: '30d' } : undefined}
+          change={
+            data.metrics.keywords.total > 0
+              ? { value: data.metrics.keywords.improved, type: "increase", period: "30d" }
+              : undefined
+          }
           icon={<MagnifyingGlassIcon className="w-5 h-5 text-purple-600" />}
-          description={t('cards.keywords.description')}
+          description={t("cards.keywords.description")}
           loading={isDataLoading}
         >
           {data.metrics.keywords.total === 0 ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {t('cards.keywords.empty')}
+                {t("cards.keywords.empty")}
               </p>
               <a href="/dashboard/keywords">
                 <button className="w-full px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-sm font-medium">
-                  {t('cards.keywords.cta')}
+                  {t("cards.keywords.cta")}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.keywords.top10')}</span>
-                <StatusBadge status="success" size="sm">{data.metrics.keywords.top10}</StatusBadge>
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {t("cards.keywords.top10")}
+                </span>
+                <StatusBadge status="success" size="sm">
+                  {data.metrics.keywords.top10}
+                </StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.keywords.improved30')}</span>
-                <StatusBadge status="info" size="sm">{data.metrics.keywords.improved}</StatusBadge>
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {t("cards.keywords.improved30")}
+                </span>
+                <StatusBadge status="info" size="sm">
+                  {data.metrics.keywords.improved}
+                </StatusBadge>
               </div>
             </div>
           )}
@@ -331,33 +357,45 @@ export default function DashboardOverview() {
 
         {/* Backlinks */}
         <MetricWidget
-          title={t('cards.backlinks.title')}
+          title={t("cards.backlinks.title")}
           value={data.metrics.backlinks.total}
-          change={data.metrics.backlinks.total > 0 ? { value: data.metrics.backlinks.newThisMonth, type: 'increase', period: '30d' } : undefined}
+          change={
+            data.metrics.backlinks.total > 0
+              ? { value: data.metrics.backlinks.newThisMonth, type: "increase", period: "30d" }
+              : undefined
+          }
           icon={<LinkIcon className="w-5 h-5 text-indigo-600" />}
-          description={t('cards.backlinks.description')}
+          description={t("cards.backlinks.description")}
           loading={isDataLoading}
         >
           {data.metrics.backlinks.total === 0 ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {t('cards.backlinks.empty')}
+                {t("cards.backlinks.empty")}
               </p>
               <a href="/dashboard/backlinks">
                 <button className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium">
-                  {t('cards.backlinks.cta')}
+                  {t("cards.backlinks.cta")}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.backlinks.refDomains')}</span>
-                <span className="text-sm font-medium text-slate-900 dark:text-white">{data.metrics.backlinks.referringDomains}</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {t("cards.backlinks.refDomains")}
+                </span>
+                <span className="text-sm font-medium text-slate-900 dark:text-white">
+                  {data.metrics.backlinks.referringDomains}
+                </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.backlinks.newThisMonth')}</span>
-                <StatusBadge status="success" size="sm">+{data.metrics.backlinks.newThisMonth}</StatusBadge>
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {t("cards.backlinks.newThisMonth")}
+                </span>
+                <StatusBadge status="success" size="sm">
+                  +{data.metrics.backlinks.newThisMonth}
+                </StatusBadge>
               </div>
             </div>
           )}
@@ -365,35 +403,44 @@ export default function DashboardOverview() {
 
         {/* Technical SEO - Replaces Organic Traffic */}
         <MetricWidget
-          title={t('cards.technicalSeo.title')}
+          title={t("cards.technicalSeo.title")}
           value={hasAudits ? data.metrics.healthScore : 0}
-          change={hasAudits ? { value: 8.5, type: 'increase', period: '7d' } : undefined}
+          change={hasAudits ? { value: 8.5, type: "increase", period: "7d" } : undefined}
           icon={<ChartBarIcon className="w-5 h-5 text-blue-600" />}
-          description={t('cards.technicalSeo.description')}
+          description={t("cards.technicalSeo.description")}
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {t('cards.technicalSeo.empty')}
+                {t("cards.technicalSeo.empty")}
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium">
-                  {t('cards.technicalSeo.cta')}
+                  {t("cards.technicalSeo.cta")}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.technicalSeo.seoScore')}</span>
-                <StatusBadge status={data.metrics.healthScore >= 80 ? 'success' : 'warning'} size="sm">
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {t("cards.technicalSeo.seoScore")}
+                </span>
+                <StatusBadge
+                  status={data.metrics.healthScore >= 80 ? "success" : "warning"}
+                  size="sm"
+                >
                   {data.metrics.healthScore}/100
                 </StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">{t('cards.technicalSeo.performance')}</span>
-                <StatusBadge status="info" size="sm">{t('cards.technicalSeo.performanceGood')}</StatusBadge>
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {t("cards.technicalSeo.performance")}
+                </span>
+                <StatusBadge status="info" size="sm">
+                  {t("cards.technicalSeo.performanceGood")}
+                </StatusBadge>
               </div>
             </div>
           )}
@@ -401,41 +448,58 @@ export default function DashboardOverview() {
 
         {/* All Issues */}
         <MetricWidget
-          title={t('cards.issues.title')}
+          title={t("cards.issues.title")}
           value={data.metrics.audits.total}
-          change={hasAudits ? { value: -5, type: 'decrease', period: '7d' } : undefined}
+          change={hasAudits ? { value: -5, type: "decrease", period: "7d" } : undefined}
           icon={<ExclamationTriangleIcon className="w-5 h-5 text-red-600" />}
-          description={t('cards.issues.description')}
+          description={t("cards.issues.description")}
           loading={isDataLoading}
         >
           {!hasAudits ? (
             <div className="space-y-3 text-center py-3">
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {t('cards.issues.empty')}
+                {t("cards.issues.empty")}
               </p>
               <a href="/dashboard/audit">
                 <button className="w-full px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm font-medium">
-                  {t('cards.healthScore.cta')}
+                  {t("cards.healthScore.cta")}
                 </button>
               </a>
             </div>
           ) : (
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{t('cards.issues.critical')}</span>
-                <StatusBadge status="error" size="sm">{data.metrics.audits.criticalIssues}</StatusBadge>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                  {t("cards.issues.critical")}
+                </span>
+                <StatusBadge status="error" size="sm">
+                  {data.metrics.audits.criticalIssues}
+                </StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{t('cards.issues.warnings')}</span>
-                <StatusBadge status="warning" size="sm">{data.metrics.audits.warnings}</StatusBadge>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                  {t("cards.issues.warnings")}
+                </span>
+                <StatusBadge status="warning" size="sm">
+                  {data.metrics.audits.warnings}
+                </StatusBadge>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">{t('cards.issues.notices')}</span>
-                <StatusBadge status="info" size="sm">{Math.max(0, data.metrics.audits.total - data.metrics.audits.criticalIssues - data.metrics.audits.warnings)}</StatusBadge>
+                <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+                  {t("cards.issues.notices")}
+                </span>
+                <StatusBadge status="info" size="sm">
+                  {Math.max(
+                    0,
+                    data.metrics.audits.total -
+                      data.metrics.audits.criticalIssues -
+                      data.metrics.audits.warnings
+                  )}
+                </StatusBadge>
               </div>
               <a href="/dashboard/audit">
                 <button className="w-full mt-3 px-3 py-2 text-xs font-medium bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors">
-                  {t('cards.issues.viewAll')}
+                  {t("cards.issues.viewAll")}
                 </button>
               </a>
             </div>
@@ -449,7 +513,9 @@ export default function DashboardOverview() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">{t('quickActions.title')}</h3>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+            {t("quickActions.title")}
+          </h3>
           <div className="space-y-3">
             <a href="/dashboard/audit" className="block">
               <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
@@ -457,33 +523,45 @@ export default function DashboardOverview() {
                   <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center group-hover:bg-blue-200 dark:group-hover:bg-blue-900/40 transition-colors">
                     <DocumentMagnifyingGlassIcon className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">{t('quickActions.runAudit')}</span>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">
+                    {t("quickActions.runAudit")}
+                  </span>
                 </div>
-                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">{t('quickActions.free')}</span>
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                  {t("quickActions.free")}
+                </span>
               </button>
             </a>
-            
+
             <a href="/dashboard/keywords" className="block">
               <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all group">
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center group-hover:bg-emerald-200 dark:group-hover:bg-emerald-900/40 transition-colors">
                     <MagnifyingGlassIcon className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">{t('quickActions.addKeywords')}</span>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">
+                    {t("quickActions.addKeywords")}
+                  </span>
                 </div>
-                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">{t('quickActions.pro')}</span>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                  {t("quickActions.pro")}
+                </span>
               </button>
             </a>
-            
+
             <a href="/dashboard/competitors" className="block">
               <button className="w-full flex items-center justify-between p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 hover:border-purple-300 dark:hover:border-purple-700 transition-all group">
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center group-hover:bg-purple-200 dark:group-hover:bg-purple-900/40 transition-colors">
                     <UsersIcon className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                   </div>
-                  <span className="text-sm font-medium text-slate-900 dark:text-white">{t('quickActions.analyzeCompetitors')}</span>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">
+                    {t("quickActions.analyzeCompetitors")}
+                  </span>
                 </div>
-                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">{t('quickActions.pro')}</span>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                  {t("quickActions.pro")}
+                </span>
               </button>
             </a>
           </div>
@@ -491,29 +569,43 @@ export default function DashboardOverview() {
 
         {/* Recent Activity */}
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">{t('recentActivity.title')}</h3>
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
+            {t("recentActivity.title")}
+          </h3>
           <div className="space-y-4">
             {recentActivity && recentActivity.length > 0 ? (
               recentActivity.map((activity: any, index: number) => (
                 <div key={index} className="flex items-start space-x-3">
-                  <div className={`w-2 h-2 rounded-full mt-2 ${
-                    activity.type === 'audit-completed' ? 'bg-emerald-500' :
-                    activity.type === 'backlinks' ? 'bg-blue-500' :
-                    activity.type === 'keyword-improvement' ? 'bg-yellow-500' :
-                    activity.type === 'critical-issue' ? 'bg-red-500' :
-                    'bg-slate-400'
-                  }`}></div>
+                  <div
+                    className={`w-2 h-2 rounded-full mt-2 ${
+                      activity.type === "audit-completed"
+                        ? "bg-emerald-500"
+                        : activity.type === "backlinks"
+                          ? "bg-blue-500"
+                          : activity.type === "keyword-improvement"
+                            ? "bg-yellow-500"
+                            : activity.type === "critical-issue"
+                              ? "bg-red-500"
+                              : "bg-slate-400"
+                    }`}
+                  ></div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-slate-900 dark:text-white">{activity.message}</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">{activity.timestamp}</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                      {activity.timestamp}
+                    </p>
                   </div>
                 </div>
               ))
             ) : (
               <div className="text-center py-6">
-                <p className="text-sm text-slate-500 dark:text-slate-400">{t('recentActivity.empty')}</p>
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  {t("recentActivity.empty")}
+                </p>
                 <a href="/dashboard/audit" className="inline-block mt-3">
-                  <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">{t('cards.healthScore.cta')}</button>
+                  <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                    {t("cards.healthScore.cta")}
+                  </button>
                 </a>
               </div>
             )}
@@ -522,17 +614,29 @@ export default function DashboardOverview() {
       </div>
 
       {/* Google Search Console Integration */}
-      <div className={`bg-gradient-to-r rounded-xl border p-6 ${
-        gscConnected 
-          ? 'from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-emerald-200 dark:border-emerald-800'
-          : 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-800'
-      }`}>
+      <div
+        className={`bg-gradient-to-r rounded-xl border p-6 ${
+          gscConnected
+            ? "from-emerald-50 to-green-50 dark:from-emerald-900/20 dark:to-green-900/20 border-emerald-200 dark:border-emerald-800"
+            : "from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-blue-200 dark:border-blue-800"
+        }`}
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-lg flex items-center justify-center shadow-sm">
               {gscConnected ? (
-                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <svg
+                  className="w-6 h-6 text-emerald-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               ) : (
                 <div className="w-6 h-6 bg-gradient-to-r from-blue-500 to-emerald-500 rounded"></div>
@@ -540,43 +644,42 @@ export default function DashboardOverview() {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                {t('gsc.title')}
-                {gscConnected && <span className="ml-2 text-sm font-normal text-emerald-600 dark:text-emerald-400">● {t('gsc.connected')}</span>}
+                {t("gsc.title")}
+                {gscConnected && (
+                  <span className="ml-2 text-sm font-normal text-emerald-600 dark:text-emerald-400">
+                    ● {t("gsc.connected")}
+                  </span>
+                )}
               </h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                {gscConnected 
-                  ? t('gsc.connectedDesc')
-                  : t('gsc.disconnectedDesc')
-                }
+                {gscConnected ? t("gsc.connectedDesc") : t("gsc.disconnectedDesc")}
               </p>
               {gscError && (
-                <p className="text-sm text-red-600 dark:text-red-400 mt-1">
-                  {gscError}
-                </p>
+                <p className="text-sm text-red-600 dark:text-red-400 mt-1">{gscError}</p>
               )}
             </div>
           </div>
           <div className="flex gap-2">
             {gscConnected ? (
-              <button 
+              <button
                 onClick={handleGscDisconnect}
                 disabled={gscLoading}
                 className="px-4 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {gscLoading ? t('gsc.disconnecting') : t('gsc.disconnect')}
+                {gscLoading ? t("gsc.disconnecting") : t("gsc.disconnect")}
               </button>
             ) : (
-              <button 
+              <button
                 onClick={handleGscConnect}
                 disabled={gscLoading}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium disabled:opacity-50"
               >
-                {gscLoading ? t('gsc.connecting') : t('gsc.connect')}
+                {gscLoading ? t("gsc.connecting") : t("gsc.connect")}
               </button>
             )}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

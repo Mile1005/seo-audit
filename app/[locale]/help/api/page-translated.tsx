@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, Database, Webhook, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, Database, Webhook, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function ApiPage() {
-  const t = useTranslations('help.categories.api')
+  const t = useTranslations("help.categories.api");
 
   const categoryArticles = [
     {
-      title: t('articles.authentication.title'),
-      href: t('articles.authentication.href'),
-      time: t('articles.authentication.time'),
-      description: t('articles.authentication.description'),
-      icon: Database
+      title: t("articles.authentication.title"),
+      href: t("articles.authentication.href"),
+      time: t("articles.authentication.time"),
+      description: t("articles.authentication.description"),
+      icon: Database,
     },
     {
-      title: t('articles.webhooks.title'),
-      href: t('articles.webhooks.href'),
-      time: t('articles.webhooks.time'),
-      description: t('articles.webhooks.description'),
-      icon: Webhook
+      title: t("articles.webhooks.title"),
+      href: t("articles.webhooks.href"),
+      time: t("articles.webhooks.time"),
+      description: t("articles.webhooks.description"),
+      icon: Webhook,
     },
     {
-      title: t('articles.apiIntegrations.title'),
-      href: t('articles.apiIntegrations.href'),
-      time: t('articles.apiIntegrations.time'),
-      description: t('articles.apiIntegrations.description'),
-      icon: BookOpen
-    }
-  ]
+      title: t("articles.apiIntegrations.title"),
+      href: t("articles.apiIntegrations.href"),
+      time: t("articles.apiIntegrations.time"),
+      description: t("articles.apiIntegrations.description"),
+      icon: BookOpen,
+    },
+  ];
 
   return (
     <MainLayout>
@@ -44,12 +44,10 @@ export default function ApiPage() {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('backToHelp')}
+              {t("backToHelp")}
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl">
-              {t('subtitle')}
-            </p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl">{t("subtitle")}</p>
           </div>
 
           {/* Articles Grid */}
@@ -88,36 +86,48 @@ export default function ApiPage() {
 
           {/* Additional Resources */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('additionalResources.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              {t("additionalResources.title")}
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/api/docs"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <BookOpen className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.documentation.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.documentation.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.documentation.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.documentation.description")}
+                </p>
               </Link>
               <Link
                 href="/api/sdks"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <Database className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.sdks.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.sdks.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.sdks.title")}
+                </h3>
+                <p className="text-sm text-gray-600">{t("additionalResources.sdks.description")}</p>
               </Link>
               <Link
                 href="/contact"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <ArrowLeft className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.contactSupport.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.contactSupport.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.contactSupport.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.contactSupport.description")}
+                </p>
               </Link>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

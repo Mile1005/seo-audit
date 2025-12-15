@@ -1,5 +1,5 @@
-import StatusPage from '../[locale]/status/page'
+import StatusPage from "../[locale]/status/page";
 
 export default function RootStatusPage() {
-  return <StatusPage />
+  return <StatusPage />;
 }

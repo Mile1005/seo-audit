@@ -75,12 +75,7 @@
     "terms": {
       "title": "Términos de Servicio - Acuerdo Legal | AI SEO Turbo",
       "description": "Términos de Servicio. Lee nuestras reglas de uso y políticas. Asegura el cumplimiento al usar herramientas AI SEO Turbo.",
-      "keywords": [
-        "Términos de Servicio",
-        "Acuerdo Legal",
-        "Condiciones SEO",
-        "Acuerdo de Usuario"
-      ]
+      "keywords": ["Términos de Servicio", "Acuerdo Legal", "Condiciones SEO", "Acuerdo de Usuario"]
     },
     "privacy": {
       "title": "Política de Privacidad - Protección de Datos | AI SEO Turbo",
@@ -1068,11 +1063,7 @@
                 "Revisión de optimización de contenidos",
                 "Auditoría técnica SEO"
               ],
-              [
-                "Métricas de rendimiento",
-                "Optimización móvil",
-                "Evaluación de seguridad"
-              ]
+              ["Métricas de rendimiento", "Optimización móvil", "Evaluación de seguridad"]
             ]
           },
           "feature": {
@@ -9288,31 +9279,19 @@
               "icon": "CreditCard",
               "name": "Tarjetas de crédito y débito",
               "description": "Tarjetas Visa, MasterCard, American Express y Discover aceptadas.",
-              "features": [
-                "Procesamiento instantáneo",
-                "Encriptación segura",
-                "Aceptación global"
-              ]
+              "features": ["Procesamiento instantáneo", "Encriptación segura", "Aceptación global"]
             },
             {
               "icon": "Wallet",
               "name": "Billeteras digitales",
               "description": "PayPal, Apple Pay, Google Pay y otras opciones de billetera digital.",
-              "features": [
-                "Pagos con un clic",
-                "Seguridad mejorada",
-                "Amigable con móviles"
-              ]
+              "features": ["Pagos con un clic", "Seguridad mejorada", "Amigable con móviles"]
             },
             {
               "icon": "Building",
               "name": "Transferencias bancarias",
               "description": "Transferencias ACH y cable para planes anuales y cuentas empresariales.",
-              "features": [
-                "Tarifas más bajas",
-                "Directo desde el banco",
-                "Procesamiento por lotes"
-              ]
+              "features": ["Tarifas más bajas", "Directo desde el banco", "Procesamiento por lotes"]
             }
           ]
         },
@@ -9582,10 +9561,7 @@
           "smsAuth": {
             "title": "Autenticación por SMS",
             "description": "Recibe códigos de verificación por mensaje de texto en tu número de teléfono registrado.",
-            "features": [
-              "Fácil de configurar",
-              "Funciona en cualquier teléfono"
-            ],
+            "features": ["Fácil de configurar", "Funciona en cualquier teléfono"],
             "limitation": "Requiere servicio celular"
           }
         },

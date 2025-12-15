@@ -1,95 +1,93 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter, useParams } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle, Globe, Target, Zap, BarChart3 } from 'lucide-react'
-import { AuthGuard } from '@/components/auth/auth-guard'
-import { UserInfo } from '@/components/auth/logout-button'
-import { useTranslations } from 'next-intl'
+import { useState } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { motion } from "framer-motion";
+import { ArrowRight, CheckCircle, Globe, Target, Zap, BarChart3 } from "lucide-react";
+import { AuthGuard } from "@/components/auth/auth-guard";
+import { UserInfo } from "@/components/auth/logout-button";
+import { useTranslations } from "next-intl";
 
 const ONBOARDING_STEPS = [
   {
-    id: 'welcome',
-    title: 'Welcome to AI SEO Turbo! 🎉',
-    description: 'Let\'s get you set up for SEO success',
-    icon: Zap
+    id: "welcome",
+    title: "Welcome to AI SEO Turbo! 🎉",
+    description: "Let's get you set up for SEO success",
+    icon: Zap,
   },
   {
-    id: 'goals',
-    title: 'What are your SEO goals?',
-    description: 'Help us personalize your experience',
-    icon: Target
+    id: "goals",
+    title: "What are your SEO goals?",
+    description: "Help us personalize your experience",
+    icon: Target,
   },
   {
-    id: 'website',
-    title: 'Tell us about your website',
-    description: 'We\'ll run your first SEO audit',
-    icon: Globe
+    id: "website",
+    title: "Tell us about your website",
+    description: "We'll run your first SEO audit",
+    icon: Globe,
   },
   {
-    id: 'complete',
-    title: 'You\'re all set! 🚀',
-    description: 'Ready to boost your SEO performance',
-    icon: CheckCircle
-  }
-]
+    id: "complete",
+    title: "You're all set! 🚀",
+    description: "Ready to boost your SEO performance",
+    icon: CheckCircle,
+  },
+];
 
 const SEO_GOALS = [
-  'Improve search rankings',
-  'Increase organic traffic',
-  'Fix technical SEO issues',
-  'Monitor competitors',
-  'Track keyword performance',
-  'Generate SEO reports'
-]
+  "Improve search rankings",
+  "Increase organic traffic",
+  "Fix technical SEO issues",
+  "Monitor competitors",
+  "Track keyword performance",
+  "Generate SEO reports",
+];
 
 export default function OnboardingPage() {
-  const [currentStep, setCurrentStep] = useState(0)
-  const [selectedGoals, setSelectedGoals] = useState<string[]>([])
+  const [currentStep, setCurrentStep] = useState(0);
+  const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [websiteData, setWebsiteData] = useState({
-    url: '',
-    industry: '',
-    company: ''
-  })
-  const [loading, setLoading] = useState(false)
-  
-  const router = useRouter()
-  const currentStepData = ONBOARDING_STEPS[currentStep]
+    url: "",
+    industry: "",
+    company: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+  const currentStepData = ONBOARDING_STEPS[currentStep];
 
   const handleGoalToggle = (goal: string) => {
-    setSelectedGoals(prev => 
-      prev.includes(goal) 
-        ? prev.filter(g => g !== goal)
-        : [...prev, goal]
-    )
-  }
+    setSelectedGoals((prev) =>
+      prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
+    );
+  };
 
   const handleNext = async () => {
     if (currentStep === ONBOARDING_STEPS.length - 1) {
       // Complete onboarding
-      setLoading(true)
+      setLoading(true);
       try {
         // Save user preferences and run first audit
-        await new Promise(resolve => setTimeout(resolve, 2000))
-        router.push('/dashboard')
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        router.push("/dashboard");
       } catch (error) {
-        console.error('Onboarding completion error:', error)
+        console.error("Onboarding completion error:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     } else {
-      setCurrentStep(prev => prev + 1)
+      setCurrentStep((prev) => prev + 1);
     }
-  }
+  };
 
   const handleSkip = () => {
-    router.push('/dashboard')
-  }
+    router.push("/dashboard");
+  };
 
   const renderStepContent = () => {
     switch (currentStepData.id) {
-      case 'welcome':
+      case "welcome":
         return (
           <div className="text-center">
             <motion.div
@@ -100,11 +98,10 @@ export default function OnboardingPage() {
             >
               <Zap className="w-12 h-12 text-white" />
             </motion.div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Welcome to AI SEO Turbo! 🎉
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Welcome to AI SEO Turbo! 🎉</h1>
             <p className="text-lg text-gray-600 mb-8">
-              You're about to join thousands of marketers who've boosted their SEO performance. Let's get you set up for success!
+              You're about to join thousands of marketers who've boosted their SEO performance.
+              Let's get you set up for success!
             </p>
             <h2 className="text-xl font-semibold text-gray-800 mb-6">Key Features</h2>
             <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
@@ -131,16 +128,14 @@ export default function OnboardingPage() {
               </div>
             </div>
           </div>
-        )
+        );
 
-      case 'goals':
+      case "goals":
         return (
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <Target className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                What are your SEO goals?
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">What are your SEO goals?</h2>
               <p className="text-lg text-gray-600">
                 Select all that apply to personalize your experience
               </p>
@@ -155,8 +150,8 @@ export default function OnboardingPage() {
                   onClick={() => handleGoalToggle(goal)}
                   className={`p-4 rounded-xl border-2 text-left transition-all duration-200 ${
                     selectedGoals.includes(goal)
-                      ? 'border-blue-500 bg-blue-50'
-                      : 'border-gray-200 hover:border-gray-300'
+                      ? "border-blue-500 bg-blue-50"
+                      : "border-gray-200 hover:border-gray-300"
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -169,16 +164,14 @@ export default function OnboardingPage() {
               ))}
             </div>
           </div>
-        )
+        );
 
-      case 'website':
+      case "website":
         return (
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
               <Globe className="w-16 h-16 text-blue-600 mx-auto mb-4" />
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Tell us about your website
-              </h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Tell us about your website</h2>
               <p className="text-lg text-gray-600">
                 We'll run your first SEO audit to get you started
               </p>
@@ -191,7 +184,7 @@ export default function OnboardingPage() {
                 <input
                   type="url"
                   value={websiteData.url}
-                  onChange={(e) => setWebsiteData(prev => ({ ...prev, url: e.target.value }))}
+                  onChange={(e) => setWebsiteData((prev) => ({ ...prev, url: e.target.value }))}
                   placeholder="https://yourwebsite.com"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -203,7 +196,9 @@ export default function OnboardingPage() {
                 <input
                   type="text"
                   value={websiteData.industry}
-                  onChange={(e) => setWebsiteData(prev => ({ ...prev, industry: e.target.value }))}
+                  onChange={(e) =>
+                    setWebsiteData((prev) => ({ ...prev, industry: e.target.value }))
+                  }
                   placeholder="e.g., E-commerce, SaaS, Local Business"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
@@ -215,16 +210,16 @@ export default function OnboardingPage() {
                 <input
                   type="text"
                   value={websiteData.company}
-                  onChange={(e) => setWebsiteData(prev => ({ ...prev, company: e.target.value }))}
+                  onChange={(e) => setWebsiteData((prev) => ({ ...prev, company: e.target.value }))}
                   placeholder="Your company name"
                   className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
             </div>
           </div>
-        )
+        );
 
-      case 'complete':
+      case "complete":
         return (
           <div className="text-center">
             <motion.div
@@ -235,9 +230,7 @@ export default function OnboardingPage() {
             >
               <CheckCircle className="w-12 h-12 text-white" />
             </motion.div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              You're all set! 🚀
-            </h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">You're all set! 🚀</h2>
             <p className="text-lg text-gray-600 mb-8">
               Your account is ready. Let's start improving your SEO performance!
             </p>
@@ -251,12 +244,12 @@ export default function OnboardingPage() {
               </ul>
             </div>
           </div>
-        )
+        );
 
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <AuthGuard>
@@ -267,8 +260,18 @@ export default function OnboardingPage() {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 10V3L4 14h7v7l9-11h-7z"
+                    />
                   </svg>
                 </div>
                 <h1 className="text-xl font-bold text-gray-900">AI SEO Turbo</h1>
@@ -288,7 +291,7 @@ export default function OnboardingPage() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <motion.div
-                initial={{ width: '0%' }}
+                initial={{ width: "0%" }}
                 animate={{ width: `${((currentStep + 1) / ONBOARDING_STEPS.length) * 100}%` }}
                 transition={{ duration: 0.5 }}
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 h-2 rounded-full"
@@ -324,7 +327,7 @@ export default function OnboardingPage() {
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => setCurrentStep(prev => prev - 1)}
+                      onClick={() => setCurrentStep((prev) => prev - 1)}
                       className="px-6 py-3 border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-200"
                     >
                       Back
@@ -335,10 +338,14 @@ export default function OnboardingPage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleNext}
-                    disabled={loading || (currentStepData.id === 'website' && !websiteData.url)}
+                    disabled={loading || (currentStepData.id === "website" && !websiteData.url)}
                     className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {loading ? 'Setting up...' : currentStep === ONBOARDING_STEPS.length - 1 ? 'Go to Dashboard' : 'Continue'}
+                    {loading
+                      ? "Setting up..."
+                      : currentStep === ONBOARDING_STEPS.length - 1
+                        ? "Go to Dashboard"
+                        : "Continue"}
                     {!loading && <ArrowRight className="w-5 h-5" />}
                   </motion.button>
                 </div>
@@ -348,5 +355,5 @@ export default function OnboardingPage() {
         </div>
       </div>
     </AuthGuard>
-  )
+  );
 }

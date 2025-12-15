@@ -1,30 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/auth';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 // Force dynamic rendering for this API route
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // GET /api/keywords/alerts - Fetch alerts for a project/keyword
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const projectId = searchParams.get('projectId');
-    const keywordId = searchParams.get('keywordId');
+    const projectId = searchParams.get("projectId");
+    const keywordId = searchParams.get("keywordId");
 
     if (!projectId) {
-      return NextResponse.json(
-        { success: false, error: 'projectId is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, error: "projectId is required" }, { status: 400 });
     }
 
     const session = await auth();
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
     const ownedProject = await prisma.project.findFirst({
@@ -33,10 +27,7 @@ export async function GET(request: NextRequest) {
     });
 
     if (!ownedProject) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 });
     }
 
     if (keywordId) {
@@ -50,10 +41,7 @@ export async function GET(request: NextRequest) {
       });
 
       if (!ownedKeyword) {
-        return NextResponse.json(
-          { success: false, error: 'Keyword not found' },
-          { status: 404 }
-        );
+        return NextResponse.json({ success: false, error: "Keyword not found" }, { status: 404 });
       }
     }
 
@@ -66,8 +54,8 @@ export async function GET(request: NextRequest) {
     const alertConfigs = await prisma.rankingAlert.findMany({
       where,
       include: {
-        keyword: true
-      }
+        keyword: true,
+      },
     });
 
     // Generate recent alert history by checking position changes
@@ -84,20 +72,19 @@ export async function GET(request: NextRequest) {
           emailEnabled: config.emailEnabled,
           slackEnabled: config.slackEnabled,
           lastTriggered: config.lastTriggered,
-          keyword: config.keyword ? {
-            id: config.keyword.id,
-            keyword: config.keyword.keyword
-          } : null
+          keyword: config.keyword
+            ? {
+                id: config.keyword.id,
+                keyword: config.keyword.keyword,
+              }
+            : null,
         })),
-        recentAlerts
-      }
+        recentAlerts,
+      },
     });
   } catch (error) {
-    console.error('Error fetching alerts:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to fetch alerts' },
-      { status: 500 }
-    );
+    console.error("Error fetching alerts:", error);
+    return NextResponse.json({ success: false, error: "Failed to fetch alerts" }, { status: 500 });
   }
 }
 
@@ -112,11 +99,11 @@ async function generateAlertHistory(projectId: string, keywordId?: string | null
     where,
     include: {
       positions: {
-        orderBy: { checkedAt: 'desc' },
-        take: 10
-      }
+        orderBy: { checkedAt: "desc" },
+        take: 10,
+      },
     },
-    take: 5 // Limit to 5 keywords for performance
+    take: 5, // Limit to 5 keywords for performance
   });
 
   const alerts: any[] = [];
@@ -135,15 +122,15 @@ async function generateAlertHistory(projectId: string, keywordId?: string | null
     if (change < -3) {
       alerts.push({
         id: `ranking-drop-${keyword.id}-${latestPos.id}`,
-        type: 'ranking',
-        severity: 'critical',
-        title: 'Ranking Drop Detected',
+        type: "ranking",
+        severity: "critical",
+        title: "Ranking Drop Detected",
         description: `Your ranking for "${keyword.keyword}" dropped from #${previousPos.position} to #${latestPos.position}`,
         change: `${change} positions`,
         timestamp: latestPos.checkedAt,
         isRead: false,
         actionable: true,
-        actionText: 'Analyze Changes'
+        actionText: "Analyze Changes",
       });
     }
 
@@ -151,14 +138,14 @@ async function generateAlertHistory(projectId: string, keywordId?: string | null
     if (change > 3) {
       alerts.push({
         id: `ranking-gain-${keyword.id}-${latestPos.id}`,
-        type: 'ranking',
-        severity: 'info',
-        title: 'Ranking Improved',
+        type: "ranking",
+        severity: "info",
+        title: "Ranking Improved",
         description: `Your ranking improved by ${change} positions - now at #${latestPos.position}`,
         change: `+${change} positions`,
         timestamp: latestPos.checkedAt,
         isRead: false,
-        actionable: false
+        actionable: false,
       });
     }
 
@@ -168,23 +155,23 @@ async function generateAlertHistory(projectId: string, keywordId?: string | null
       if (serpData.featuredSnippet && !serpData.featuredSnippet.isYours) {
         alerts.push({
           id: `serp-feature-${keyword.id}-${latestPos.id}`,
-          type: 'serp',
-          severity: 'info',
-          title: 'Featured Snippet Opportunity',
+          type: "serp",
+          severity: "info",
+          title: "Featured Snippet Opportunity",
           description: `New featured snippet appeared for "${keyword.keyword}" - high opportunity score`,
-          change: 'New opportunity',
+          change: "New opportunity",
           timestamp: latestPos.checkedAt,
           isRead: false,
           actionable: true,
-          actionText: 'Optimize Content'
+          actionText: "Optimize Content",
         });
       }
     }
   }
 
-  return alerts.sort((a, b) =>
-    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-  ).slice(0, 20);
+  return alerts
+    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
+    .slice(0, 20);
 }
 
 // POST /api/keywords/alerts - Create or update alert configuration
@@ -192,10 +179,7 @@ export async function POST(request: NextRequest) {
   try {
     const session = await auth();
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
     const body = await request.json();
@@ -208,12 +192,12 @@ export async function POST(request: NextRequest) {
       isActive,
       emailEnabled,
       slackEnabled,
-      webhookUrl
+      webhookUrl,
     } = body;
 
     if (!projectId || !type) {
       return NextResponse.json(
-        { success: false, error: 'projectId and type are required' },
+        { success: false, error: "projectId and type are required" },
         { status: 400 }
       );
     }
@@ -224,10 +208,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!ownedProject) {
-      return NextResponse.json(
-        { success: false, error: 'Project not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 });
     }
 
     if (keywordId) {
@@ -241,10 +222,7 @@ export async function POST(request: NextRequest) {
       });
 
       if (!ownedKeyword) {
-        return NextResponse.json(
-          { success: false, error: 'Keyword not found' },
-          { status: 404 }
-        );
+        return NextResponse.json({ success: false, error: "Keyword not found" }, { status: 404 });
       }
     }
 
@@ -260,10 +238,7 @@ export async function POST(request: NextRequest) {
       });
 
       if (!existing) {
-        return NextResponse.json(
-          { success: false, error: 'Alert not found' },
-          { status: 404 }
-        );
+        return NextResponse.json({ success: false, error: "Alert not found" }, { status: 404 });
       }
 
       // Update existing alert
@@ -274,8 +249,8 @@ export async function POST(request: NextRequest) {
           isActive,
           emailEnabled,
           slackEnabled,
-          webhookUrl
-        }
+          webhookUrl,
+        },
       });
     } else {
       // Create new alert
@@ -288,21 +263,18 @@ export async function POST(request: NextRequest) {
           isActive: isActive ?? true,
           emailEnabled: emailEnabled ?? true,
           slackEnabled: slackEnabled ?? false,
-          webhookUrl
-        }
+          webhookUrl,
+        },
       });
     }
 
     return NextResponse.json({
       success: true,
-      data: alert
+      data: alert,
     });
   } catch (error) {
-    console.error('Error saving alert:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to save alert' },
-      { status: 500 }
-    );
+    console.error("Error saving alert:", error);
+    return NextResponse.json({ success: false, error: "Failed to save alert" }, { status: 500 });
   }
 }
 
@@ -311,20 +283,14 @@ export async function DELETE(request: NextRequest) {
   try {
     const session = await auth();
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const id = searchParams.get("id");
 
     if (!id) {
-      return NextResponse.json(
-        { success: false, error: 'Alert ID is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, error: "Alert ID is required" }, { status: 400 });
     }
 
     const existing = await prisma.rankingAlert.findFirst({
@@ -336,25 +302,19 @@ export async function DELETE(request: NextRequest) {
     });
 
     if (!existing) {
-      return NextResponse.json(
-        { success: false, error: 'Alert not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Alert not found" }, { status: 404 });
     }
 
     await prisma.rankingAlert.delete({
-      where: { id }
+      where: { id },
     });
 
     return NextResponse.json({
       success: true,
-      message: 'Alert deleted successfully'
+      message: "Alert deleted successfully",
     });
   } catch (error) {
-    console.error('Error deleting alert:', error);
-    return NextResponse.json(
-      { success: false, error: 'Failed to delete alert' },
-      { status: 500 }
-    );
+    console.error("Error deleting alert:", error);
+    return NextResponse.json({ success: false, error: "Failed to delete alert" }, { status: 500 });
   }
 }

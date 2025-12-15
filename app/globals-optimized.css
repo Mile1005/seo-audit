@@ -23,7 +23,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 25.5%;
     --input: 217.2 32.6% 25.5%;
-    --ring: 224.3 76.3% 94.0%;
+    --ring: 224.3 76.3% 94%;
     --radius: 0.5rem;
     color-scheme: dark;
   }
@@ -55,13 +55,13 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     margin: 0;
     height: 100%;
   }
-  
+
   html {
     height: 100%;
   }
@@ -76,22 +76,24 @@
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
   @keyframes bounce {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(-25%);
-      animation-timing-function: cubic-bezier(0.8,0,1,1);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
     50% {
       transform: none;
-      animation-timing-function: cubic-bezier(0,0,0.2,1);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
   }
 
@@ -114,7 +116,7 @@
     background-color: hsl(var(--input)) !important;
     border: 2px solid hsl(var(--border)) !important;
   }
-  
+
   input[type="text"]::placeholder,
   input[type="email"]::placeholder,
   input[type="url"]::placeholder,
@@ -123,18 +125,18 @@
     color: hsl(var(--muted-foreground)) !important;
     opacity: 0.8;
   }
-  
+
   /* Ensure buttons have proper contrast */
   button[type="submit"] {
     color: hsl(var(--primary-foreground)) !important;
     background-color: hsl(var(--primary)) !important;
   }
-  
+
   /* Better contrast for code/small text elements */
   .bg-slate-700 {
     background-color: hsl(var(--secondary)) !important;
   }
-  
+
   .text-gray-400 {
     color: hsl(var(--muted-foreground)) !important;
   }

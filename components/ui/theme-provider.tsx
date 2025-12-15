@@ -20,8 +20,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     setMounted(true);
-    const saved = typeof window !== "undefined" ? (localStorage.getItem("theme-mode") as Mode | null) : null;
-    const preferredDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const saved =
+      typeof window !== "undefined" ? (localStorage.getItem("theme-mode") as Mode | null) : null;
+    const preferredDark =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
     const nextMode: Mode = saved ?? (preferredDark ? "dark" : "light");
     apply(nextMode);
   }, []);
@@ -38,11 +42,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setMode = (m: Mode) => apply(m);
 
-  return (
-    <ThemeContext.Provider value={{ mode, setMode }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ mode, setMode }}>{children}</ThemeContext.Provider>;
 }
 
 export function ThemeSwitcher() {

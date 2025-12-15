@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 // Simple test for CSV loading
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync } from "fs";
+import { join } from "path";
 
-console.log('Testing CSV file access...');
+console.log("Testing CSV file access...");
 
 try {
-  const csvPath = join(process.cwd(), 'all-page-titles-complete.csv');
-  console.log('CSV path:', csvPath);
+  const csvPath = join(process.cwd(), "all-page-titles-complete.csv");
+  console.log("CSV path:", csvPath);
 
-  const csvContent = readFileSync(csvPath, 'utf8');
-  const lines = csvContent.split('\n');
+  const csvContent = readFileSync(csvPath, "utf8");
+  const lines = csvContent.split("\n");
 
   console.log(`CSV loaded: ${lines.length} lines`);
 
@@ -20,8 +20,7 @@ try {
     console.log(`Line ${i}: ${lines[i].substring(0, 100)}...`);
   }
 
-  console.log('✅ CSV file access works!');
-
+  console.log("✅ CSV file access works!");
 } catch (error) {
-  console.error('❌ Error:', error.message);
+  console.error("❌ Error:", error.message);
 }

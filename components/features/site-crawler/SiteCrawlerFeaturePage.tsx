@@ -1,24 +1,44 @@
 "use client";
 
-import React, { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { motion, AnimatePresence } from 'framer-motion'
-import { MainLayout } from '@/components/layout/main-layout'
-import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
-import { useFormSubmission } from '@/hooks/use-api'
-import { api } from '@/lib/api-client'
-import { AnimatedCrawlVisualization } from '@/components/crawl/animated-crawl-visualization'
-import { CrawlResults } from '@/components/crawl/crawl-results'
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import { MainLayout } from "@/components/layout/main-layout";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { useFormSubmission } from "@/hooks/use-api";
+import { api } from "@/lib/api-client";
+import { AnimatedCrawlVisualization } from "@/components/crawl/animated-crawl-visualization";
+import { CrawlResults } from "@/components/crawl/crawl-results";
 
 // Dynamic imports to prevent lambda issues
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const SiteArchitecture = dynamic(() => import('@/components/features/site-crawler/site-architecture'), { ssr: false })
-const MonitoringFeatures = dynamic(() => import('@/components/features/site-crawler/monitoring-features'), { ssr: false })
-const IssueDetection = dynamic(() => import('@/components/features/site-crawler/issue-detection'), { ssr: false })
-const IntegrationOptions = dynamic(() => import('@/components/features/site-crawler/integration-options'), { ssr: false })
-const CrawlCapabilities = dynamic(() => import('@/components/features/site-crawler/crawl-capabilities'), { ssr: false })
-const SiteCrawlerHero = dynamic(() => import('@/components/features/site-crawler/site-crawler-hero').then(mod => ({ default: mod.SiteCrawlerHero })), { ssr: false })
+const SiteArchitecture = dynamic(
+  () => import("@/components/features/site-crawler/site-architecture"),
+  { ssr: false }
+);
+const MonitoringFeatures = dynamic(
+  () => import("@/components/features/site-crawler/monitoring-features"),
+  { ssr: false }
+);
+const IssueDetection = dynamic(() => import("@/components/features/site-crawler/issue-detection"), {
+  ssr: false,
+});
+const IntegrationOptions = dynamic(
+  () => import("@/components/features/site-crawler/integration-options"),
+  { ssr: false }
+);
+const CrawlCapabilities = dynamic(
+  () => import("@/components/features/site-crawler/crawl-capabilities"),
+  { ssr: false }
+);
+const SiteCrawlerHero = dynamic(
+  () =>
+    import("@/components/features/site-crawler/site-crawler-hero").then((mod) => ({
+      default: mod.SiteCrawlerHero,
+    })),
+  { ssr: false }
+);
 
 // Define the result type to match API response
 interface CrawlPage {
@@ -57,24 +77,28 @@ interface CrawlResultData {
 }
 
 export default function SiteCrawlerFeaturePage() {
-  const t = useTranslations('featurePages.siteCrawler');
+  const t = useTranslations("featurePages.siteCrawler");
   const [showResults, setShowResults] = useState(false);
   const [crawlResult, setCrawlResult] = useState<CrawlResultData | null>(null);
-  const [crawlingUrl, setCrawlingUrl] = useState<string>('');
+  const [crawlingUrl, setCrawlingUrl] = useState<string>("");
   const [crawlingMaxPages, setCrawlingMaxPages] = useState<number>(25);
 
   const { isSubmitting, submitError, submit } = useFormSubmission<any, any>();
 
-  const handleCrawl = async (data: { url: string; maxPages?: number; includeSubdomains?: boolean }) => {
+  const handleCrawl = async (data: {
+    url: string;
+    maxPages?: number;
+    includeSubdomains?: boolean;
+  }) => {
     setCrawlingUrl(data.url);
     setCrawlingMaxPages(data.maxPages || 25);
     setShowResults(false);
     setCrawlResult(null);
-    
+
     await submit(
       (formData) => api.crawl.start(formData),
       {
-        startUrl: data.url.startsWith('http') ? data.url : `https://${data.url}`,
+        startUrl: data.url.startsWith("http") ? data.url : `https://${data.url}`,
         limit: data.maxPages || 25,
         includeSubdomains: data.includeSubdomains || false,
       },
@@ -88,7 +112,7 @@ export default function SiteCrawlerFeaturePage() {
           setCrawlResult(response);
           setShowResults(true);
         }
-        setCrawlingUrl('');
+        setCrawlingUrl("");
       }
     );
   };
@@ -96,7 +120,7 @@ export default function SiteCrawlerFeaturePage() {
   const handleReset = () => {
     setShowResults(false);
     setCrawlResult(null);
-    setCrawlingUrl('');
+    setCrawlingUrl("");
   };
 
   return (
@@ -106,8 +130,8 @@ export default function SiteCrawlerFeaturePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <Breadcrumbs
             items={[
-              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
-              { name: 'Site Crawler', url: 'https://www.aiseoturbo.com/features/site-crawler' }
+              { name: "Features", url: "https://www.aiseoturbo.com/features" },
+              { name: "Site Crawler", url: "https://www.aiseoturbo.com/features/site-crawler" },
             ]}
             className="mb-4"
           />
@@ -185,14 +209,10 @@ export default function SiteCrawlerFeaturePage() {
                   viewport={{ once: true }}
                   className="bg-card rounded-2xl shadow-xl p-8 border"
                 >
-                  <h2 className="text-3xl font-bold text-foreground mb-4">
-                    {t('cta.title')}
-                  </h2>
-                  <p className="text-xl text-muted-foreground mb-8">
-                    {t('cta.subtitle')}
-                  </p>
+                  <h2 className="text-3xl font-bold text-foreground mb-4">{t("cta.title")}</h2>
+                  <p className="text-xl text-muted-foreground mb-8">{t("cta.subtitle")}</p>
                   <button className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
-                    {t('cta.button')}
+                    {t("cta.button")}
                   </button>
                 </motion.div>
               </div>

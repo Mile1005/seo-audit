@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { X, Target, Download, Lightbulb, TrendingUp, Zap } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import React, { useState, useEffect } from "react";
+import { X, Target, Download, Lightbulb, TrendingUp, Zap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 interface KeywordStrategyData {
   mainKeyword: string;
@@ -18,24 +18,24 @@ interface KeywordStrategyModalProps {
   baseVolume: number;
 }
 
-export function KeywordStrategyModal({ 
-  isOpen, 
-  onClose, 
-  baseKeyword, 
-  baseVolume
+export function KeywordStrategyModal({
+  isOpen,
+  onClose,
+  baseKeyword,
+  baseVolume,
 }: KeywordStrategyModalProps) {
   // Close on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
@@ -52,23 +52,41 @@ export function KeywordStrategyModal({
       `${baseKeyword} examples`,
       `${baseKeyword} best practices`,
       `professional ${baseKeyword}`,
-      `${baseKeyword} checklist`
+      `${baseKeyword} checklist`,
     ];
 
     // Long-tail keywords (20+ opportunities)
-    const longtailPrefixes = ['how to', 'what is', 'best way to', 'top', 'free', 'quick', 'easy', 'step by step'];
-    const longtailSuffixes = ['for beginners', 'for small business', 'guide', 'tutorial', '2024', '2025', 'tips', 'examples'];
-    
+    const longtailPrefixes = [
+      "how to",
+      "what is",
+      "best way to",
+      "top",
+      "free",
+      "quick",
+      "easy",
+      "step by step",
+    ];
+    const longtailSuffixes = [
+      "for beginners",
+      "for small business",
+      "guide",
+      "tutorial",
+      "2024",
+      "2025",
+      "tips",
+      "examples",
+    ];
+
     const longTailKeywords: string[] = [];
-    longtailPrefixes.forEach(prefix => {
-      longtailSuffixes.forEach(suffix => {
+    longtailPrefixes.forEach((prefix) => {
+      longtailSuffixes.forEach((suffix) => {
         longTailKeywords.push(`${prefix} ${baseKeyword} ${suffix}`);
       });
     });
 
     // Add more variations
     longTailKeywords.push(
-      ...(`complete ${baseKeyword} guide for beginners,
+      ...`complete ${baseKeyword} guide for beginners,
       ${baseKeyword} for small businesses,
       ${baseKeyword} vs alternative,
       ${baseKeyword} comparison,
@@ -77,13 +95,15 @@ export function KeywordStrategyModal({
       ${baseKeyword} pricing,
       ${baseKeyword} features,
       ${baseKeyword} benefits,
-      ${baseKeyword} disadvantages`).split(',').map(k => k.trim())
+      ${baseKeyword} disadvantages`
+        .split(",")
+        .map((k) => k.trim())
     );
 
     return {
       mainKeyword: baseKeyword,
       supportingKeywords: supportingKeywords.slice(0, 10),
-      longTailKeywords: longTailKeywords.slice(0, 25)
+      longTailKeywords: longTailKeywords.slice(0, 25),
     };
   };
 
@@ -106,7 +126,7 @@ Create comprehensive, authoritative content around this topic.
 ========================================
 SUPPORTING KEYWORDS (5-10 Terms)
 ========================================
-${strategy.supportingKeywords.map((k, i) => `${i + 1}. ${k}`).join('\n')}
+${strategy.supportingKeywords.map((k, i) => `${i + 1}. ${k}`).join("\n")}
 
 Target these keywords in related articles and blog posts.
 Link these articles back to your pillar content.
@@ -114,7 +134,7 @@ Link these articles back to your pillar content.
 ========================================
 LONG-TAIL OPPORTUNITIES (20+ Keywords)
 ========================================
-${strategy.longTailKeywords.map((k, i) => `${i + 1}. ${k}`).join('\n')}
+${strategy.longTailKeywords.map((k, i) => `${i + 1}. ${k}`).join("\n")}
 
 Target these in FAQ sections, blog posts, and supporting content.
 These typically have lower competition and faster ranking potential.
@@ -139,9 +159,9 @@ PRO TIPS
 - Build high-quality backlinks to pillar content
     `.trim();
 
-    const blob = new Blob([content], { type: 'text/plain' });
+    const blob = new Blob([content], { type: "text/plain" });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `${baseKeyword}-strategy.txt`;
     a.click();
@@ -152,11 +172,8 @@ PRO TIPS
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
-        onClick={onClose}
-      />
-      
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+
       {/* Modal */}
       <div className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300">
         {/* Header */}
@@ -170,7 +187,11 @@ PRO TIPS
                 Keyword Strategy
               </h2>
               <p className="text-slate-600 dark:text-slate-400 font-medium mt-1">
-                Complete content strategy for "<span className="font-semibold text-green-700 dark:text-green-300">{baseKeyword}</span>"
+                Complete content strategy for "
+                <span className="font-semibold text-green-700 dark:text-green-300">
+                  {baseKeyword}
+                </span>
+                "
               </p>
             </div>
             <div className="flex items-center gap-2">
@@ -183,12 +204,7 @@ PRO TIPS
                 <Download className="h-4 w-4 mr-2" />
                 Export Strategy
               </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onClose}
-                className="hover:bg-green-100"
-              >
+              <Button variant="ghost" size="icon" onClick={onClose} className="hover:bg-green-100">
                 <X className="h-5 w-5" />
               </Button>
             </div>
@@ -205,7 +221,9 @@ PRO TIPS
                 <div className="w-5 h-5 bg-white rounded-full shadow-md animate-pulse"></div>
                 <span className="font-bold text-white text-xl">{strategy.mainKeyword}</span>
               </div>
-              <p className="text-sm text-blue-100 font-medium mb-3">Main target keyword - Pillar Content</p>
+              <p className="text-sm text-blue-100 font-medium mb-3">
+                Main target keyword - Pillar Content
+              </p>
               <Badge className="bg-white/20 text-white border-0 px-3 py-1.5 text-xs font-bold">
                 PRIMARY FOCUS
               </Badge>
@@ -220,10 +238,15 @@ PRO TIPS
             <div className="group p-6 bg-white dark:bg-slate-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-5 h-5 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full shadow-md"></div>
-                <span className="font-bold text-slate-900 dark:text-slate-100 text-xl">Supporting Keywords</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-xl">
+                  Supporting Keywords
+                </span>
               </div>
               <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-3">
-                <span className="text-2xl font-black text-blue-600 dark:text-blue-400">{strategy.supportingKeywords.length}</span> related terms
+                <span className="text-2xl font-black text-blue-600 dark:text-blue-400">
+                  {strategy.supportingKeywords.length}
+                </span>{" "}
+                related terms
               </p>
               <Badge className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-0 px-3 py-1.5 text-xs font-bold">
                 SECONDARY TARGETS
@@ -239,10 +262,15 @@ PRO TIPS
             <div className="group p-6 bg-white dark:bg-slate-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border-2 border-slate-200 dark:border-slate-600">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-5 h-5 bg-gradient-to-br from-slate-300 to-slate-400 rounded-full shadow-md"></div>
-                <span className="font-bold text-slate-900 dark:text-slate-100 text-xl">Long-tail</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100 text-xl">
+                  Long-tail
+                </span>
               </div>
               <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-3">
-                <span className="text-2xl font-black text-green-600 dark:text-green-400">{strategy.longTailKeywords.length}</span> opportunities
+                <span className="text-2xl font-black text-green-600 dark:text-green-400">
+                  {strategy.longTailKeywords.length}
+                </span>{" "}
+                opportunities
               </p>
               <Badge className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-0 px-3 py-1.5 text-xs font-bold">
                 EASY WINS
@@ -259,7 +287,9 @@ PRO TIPS
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-5 w-5 text-blue-600" />
-              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Supporting Keywords ({strategy.supportingKeywords.length})</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                Supporting Keywords ({strategy.supportingKeywords.length})
+              </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {strategy.supportingKeywords.map((keyword, index) => (
@@ -287,7 +317,9 @@ PRO TIPS
           <div className="mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Zap className="h-5 w-5 text-green-600" />
-              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">Long-tail Opportunities ({strategy.longTailKeywords.length})</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                Long-tail Opportunities ({strategy.longTailKeywords.length})
+              </h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {strategy.longTailKeywords.map((keyword, index) => (
@@ -310,36 +342,53 @@ PRO TIPS
                 <Lightbulb className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
-                <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-3 text-lg">Implementation Strategy</h4>
+                <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-3 text-lg">
+                  Implementation Strategy
+                </h4>
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <Badge className="bg-blue-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 1</Badge>
+                    <Badge className="bg-blue-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">
+                      STEP 1
+                    </Badge>
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <strong>Pillar Content:</strong> Create comprehensive guide targeting "{strategy.mainKeyword}" (2,000+ words with H2/H3 structure)
+                      <strong>Pillar Content:</strong> Create comprehensive guide targeting "
+                      {strategy.mainKeyword}" (2,000+ words with H2/H3 structure)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Badge className="bg-purple-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 2</Badge>
+                    <Badge className="bg-purple-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">
+                      STEP 2
+                    </Badge>
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <strong>Supporting Articles:</strong> Write 5-10 blog posts targeting supporting keywords (800-1,500 words each)
+                      <strong>Supporting Articles:</strong> Write 5-10 blog posts targeting
+                      supporting keywords (800-1,500 words each)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Badge className="bg-green-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 3</Badge>
+                    <Badge className="bg-green-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">
+                      STEP 3
+                    </Badge>
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <strong>Long-tail Content:</strong> Add FAQ sections, mini-guides, and question-based content (300-800 words)
+                      <strong>Long-tail Content:</strong> Add FAQ sections, mini-guides, and
+                      question-based content (300-800 words)
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Badge className="bg-orange-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 4</Badge>
+                    <Badge className="bg-orange-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">
+                      STEP 4
+                    </Badge>
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <strong>Internal Linking:</strong> Link all supporting and long-tail content back to your pillar article
+                      <strong>Internal Linking:</strong> Link all supporting and long-tail content
+                      back to your pillar article
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Badge className="bg-red-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">STEP 5</Badge>
+                    <Badge className="bg-red-600 text-white border-0 px-2 py-1 text-xs font-bold shrink-0">
+                      STEP 5
+                    </Badge>
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <strong>Monitor & Optimize:</strong> Track rankings monthly and update content based on performance
+                      <strong>Monitor & Optimize:</strong> Track rankings monthly and update content
+                      based on performance
                     </p>
                   </div>
                 </div>
@@ -351,7 +400,10 @@ PRO TIPS
         {/* Footer */}
         <div className="px-6 py-4 bg-slate-50 dark:bg-slate-700 border-t border-slate-200 dark:border-slate-600 flex items-center justify-between">
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            <span className="font-bold text-green-700 dark:text-green-300">{strategy.supportingKeywords.length + strategy.longTailKeywords.length + 1}</span> total keywords in strategy
+            <span className="font-bold text-green-700 dark:text-green-300">
+              {strategy.supportingKeywords.length + strategy.longTailKeywords.length + 1}
+            </span>{" "}
+            total keywords in strategy
           </p>
           <div className="flex gap-2">
             <Button variant="outline" onClick={onClose}>

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Activity,
   Eye,
@@ -14,11 +14,11 @@ import {
   Calendar,
   ArrowUpRight,
   Loader2,
-  AlertCircle
-} from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+  AlertCircle,
+} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 interface TrafficMetrics {
   date: string;
@@ -49,7 +49,7 @@ interface TrafficAnalyticsProps {
 }
 
 export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: TrafficAnalyticsProps) {
-  const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d'>('30d');
+  const [timeRange, setTimeRange] = useState<"7d" | "30d" | "90d">("30d");
   const [trafficData, setTrafficData] = useState<TrafficMetrics[]>([]);
   const [summary, setSummary] = useState<TrafficSummary | null>(null);
   const [loading, setLoading] = useState(true);
@@ -61,10 +61,14 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
   const getDaysCount = () => {
     switch (timeRange) {
-      case '7d': return 7;
-      case '30d': return 30;
-      case '90d': return 90;
-      default: return 30;
+      case "7d":
+        return 7;
+      case "30d":
+        return 30;
+      case "90d":
+        return 90;
+      default:
+        return 30;
     }
   };
 
@@ -74,16 +78,14 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
       setError(null);
 
       const days = getDaysCount();
-      const response = await fetch(
-        `/api/keywords/analytics?keywordId=${keywordId}&days=${days}`
-      );
+      const response = await fetch(`/api/keywords/analytics?keywordId=${keywordId}&days=${days}`);
 
       if (response.status === 401) {
-        throw new Error('Sign in to view traffic analytics.');
+        throw new Error("Sign in to view traffic analytics.");
       }
 
       if (!response.ok) {
-        throw new Error('Failed to fetch traffic analytics');
+        throw new Error("Failed to fetch traffic analytics");
       }
 
       const result = await response.json();
@@ -92,19 +94,19 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
         setTrafficData(result.data.trafficData);
         setSummary(result.data.summary);
       } else {
-        throw new Error(result.error || 'Unknown error');
+        throw new Error(result.error || "Unknown error");
       }
     } catch (err) {
-      console.error('Error fetching traffic analytics:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load traffic analytics');
+      console.error("Error fetching traffic analytics:", err);
+      setError(err instanceof Error ? err.message : "Failed to load traffic analytics");
     } finally {
       setLoading(false);
     }
   };
 
   // Calculate peak values for visualization
-  const maxImpressions = Math.max(...trafficData.map(d => d.impressions), 1);
-  const maxClicks = Math.max(...trafficData.map(d => d.clicks), 1);
+  const maxImpressions = Math.max(...trafficData.map((d) => d.impressions), 1);
+  const maxClicks = Math.max(...trafficData.map((d) => d.clicks), 1);
 
   if (loading) {
     return (
@@ -198,19 +200,19 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
           <Calendar className="h-4 w-4 text-slate-600" />
           <span className="text-sm text-slate-600 mr-2">Time Range:</span>
           <div className="flex gap-2">
-            {['7d', '30d', '90d'].map((range) => (
+            {["7d", "30d", "90d"].map((range) => (
               <button
                 key={range}
                 onClick={() => setTimeRange(range as any)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   timeRange === range
-                    ? 'bg-indigo-600 text-white shadow-md'
-                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-600 hover:border-indigo-300 dark:hover:border-indigo-500'
+                    ? "bg-indigo-600 text-white shadow-md"
+                    : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-600 hover:border-indigo-300 dark:hover:border-indigo-500"
                 }`}
               >
-                {range === '7d' && 'Last 7 Days'}
-                {range === '30d' && 'Last 30 Days'}
-                {range === '90d' && 'Last 90 Days'}
+                {range === "7d" && "Last 7 Days"}
+                {range === "30d" && "Last 30 Days"}
+                {range === "90d" && "Last 90 Days"}
               </button>
             ))}
           </div>
@@ -225,15 +227,27 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                 <Eye className="h-6 w-6 text-white" />
               </div>
               {summary && summary.impressionsChange !== 0 && (
-                <Badge className={summary.impressionsChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                  {summary.impressionsChange > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                <Badge
+                  className={
+                    summary.impressionsChange > 0
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }
+                >
+                  {summary.impressionsChange > 0 ? (
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                  ) : (
+                    <TrendingDown className="h-3 w-3 mr-1" />
+                  )}
                   {Math.abs(summary.impressionsChange)}%
                 </Badge>
               )}
             </div>
             <p className="text-xs text-blue-100 mb-1">Total Impressions</p>
             <p className="text-3xl font-bold text-white mb-2">
-              {summary && summary.totalImpressions ? summary.totalImpressions.toLocaleString() : '0'}
+              {summary && summary.totalImpressions
+                ? summary.totalImpressions.toLocaleString()
+                : "0"}
             </p>
             <div className="flex items-center gap-2 text-xs text-blue-100">
               <Progress value={75} className="h-1 bg-blue-400" />
@@ -248,20 +262,35 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                 <MousePointer className="h-6 w-6 text-white" />
               </div>
               {summary && summary.clicksChange !== 0 && (
-                <Badge className={summary.clicksChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                  {summary.clicksChange > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                <Badge
+                  className={
+                    summary.clicksChange > 0
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }
+                >
+                  {summary.clicksChange > 0 ? (
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                  ) : (
+                    <TrendingDown className="h-3 w-3 mr-1" />
+                  )}
                   {Math.abs(summary.clicksChange)}%
                 </Badge>
               )}
             </div>
             <p className="text-xs text-purple-100 mb-1">Total Clicks</p>
             <p className="text-3xl font-bold text-white mb-2">
-              {summary && summary.totalClicks ? summary.totalClicks.toLocaleString() : '0'}
+              {summary && summary.totalClicks ? summary.totalClicks.toLocaleString() : "0"}
             </p>
             <div className="flex items-center gap-2 text-xs text-purple-100">
-              <span>CTR: {summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : '0.00'}%</span>
+              <span>
+                CTR: {summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : "0.00"}%
+              </span>
               <span>•</span>
-              <span>Avg Pos: {summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : '0.0'}</span>
+              <span>
+                Avg Pos:{" "}
+                {summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : "0.0"}
+              </span>
             </div>
           </div>
 
@@ -272,19 +301,31 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                 <DollarSign className="h-6 w-6 text-white" />
               </div>
               {summary && summary.revenueChange !== 0 && (
-                <Badge className={summary.revenueChange > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                  {summary.revenueChange > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                <Badge
+                  className={
+                    summary.revenueChange > 0
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }
+                >
+                  {summary.revenueChange > 0 ? (
+                    <TrendingUp className="h-3 w-3 mr-1" />
+                  ) : (
+                    <TrendingDown className="h-3 w-3 mr-1" />
+                  )}
                   {Math.abs(summary.revenueChange)}%
                 </Badge>
               )}
             </div>
             <p className="text-xs text-green-100 mb-1">Total Revenue</p>
             <p className="text-3xl font-bold text-white mb-2">
-              ${summary && summary.totalRevenue ? (summary.totalRevenue / 1000).toFixed(1) : '0.0'}K
+              ${summary && summary.totalRevenue ? (summary.totalRevenue / 1000).toFixed(1) : "0.0"}K
             </p>
             <div className="flex items-center gap-2 text-xs text-green-100">
               <Target className="h-3 w-3" />
-              <span>{summary && summary.totalConversions ? summary.totalConversions : 0} conversions</span>
+              <span>
+                {summary && summary.totalConversions ? summary.totalConversions : 0} conversions
+              </span>
             </div>
           </div>
         </div>
@@ -310,15 +351,24 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
 
           <div className="space-y-2">
             {trafficData.map((day, idx) => (
-              <div key={idx} className="group hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg p-3 transition-colors">
+              <div
+                key={idx}
+                className="group hover:bg-slate-50 dark:hover:bg-slate-700 rounded-lg p-3 transition-colors"
+              >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-xs text-slate-600 dark:text-slate-400 w-24">{day.date}</span>
+                  <span className="text-xs text-slate-600 dark:text-slate-400 w-24">
+                    {day.date}
+                  </span>
                   <div className="flex-1 flex items-center gap-2">
                     {/* Impressions Bar */}
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-xs text-slate-600 dark:text-slate-400">Impressions</span>
-                        <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300">{day.impressions.toLocaleString()}</span>
+                        <span className="text-xs text-slate-600 dark:text-slate-400">
+                          Impressions
+                        </span>
+                        <span className="text-xs font-bold text-indigo-700 dark:text-indigo-300">
+                          {day.impressions.toLocaleString()}
+                        </span>
                       </div>
                       <div className="h-2 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
                         <div
@@ -332,7 +382,9 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs text-slate-600 dark:text-slate-400">Clicks</span>
-                        <span className="text-xs font-bold text-purple-700 dark:text-purple-300">{day.clicks.toLocaleString()}</span>
+                        <span className="text-xs font-bold text-purple-700 dark:text-purple-300">
+                          {day.clicks.toLocaleString()}
+                        </span>
                       </div>
                       <div className="h-2 bg-slate-200 dark:bg-slate-600 rounded-full overflow-hidden">
                         <div
@@ -352,7 +404,7 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
                       Pos: {day.averagePosition}
                     </Badge>
                     <Badge className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300">
-                      ${day && day.revenue ? (day.revenue / 1000).toFixed(1) : '0.0'}K
+                      ${day && day.revenue ? (day.revenue / 1000).toFixed(1) : "0.0"}K
                     </Badge>
                   </div>
                 </div>
@@ -371,22 +423,34 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600 dark:text-slate-400">Average CTR</span>
-                <span className="font-bold text-slate-900 dark:text-slate-100">{summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : '0.00'}%</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">
+                  {summary && summary.averageCTR ? summary.averageCTR.toFixed(2) : "0.00"}%
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600 dark:text-slate-400">Average Position</span>
-                <span className="font-bold text-slate-900 dark:text-slate-100">#{summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : '0.0'}</span>
+                <span className="font-bold text-slate-900 dark:text-slate-100">
+                  #{summary && summary.averagePosition ? summary.averagePosition.toFixed(1) : "0.0"}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-600 dark:text-slate-400">Conversion Rate</span>
                 <span className="font-bold text-slate-900 dark:text-slate-100">
-                  {summary && summary.totalConversions && summary.totalClicks ? ((summary.totalConversions / summary.totalClicks) * 100).toFixed(2) : '0.00'}%
+                  {summary && summary.totalConversions && summary.totalClicks
+                    ? ((summary.totalConversions / summary.totalClicks) * 100).toFixed(2)
+                    : "0.00"}
+                  %
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-slate-600 dark:text-slate-400">Revenue per Click</span>
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  Revenue per Click
+                </span>
                 <span className="font-bold text-slate-900 dark:text-slate-100">
-                  ${summary && summary.totalRevenue && summary.totalClicks ? (summary.totalRevenue / summary.totalClicks).toFixed(2) : '0.00'}
+                  $
+                  {summary && summary.totalRevenue && summary.totalClicks
+                    ? (summary.totalRevenue / summary.totalClicks).toFixed(2)
+                    : "0.00"}
                 </span>
               </div>
             </div>
@@ -400,21 +464,18 @@ export function TrafficAnalytics({ keywordId, keyword, currentRank = 5 }: Traffi
             <div className="space-y-3 text-sm text-white">
               <div className="flex items-start gap-2">
                 <div className="w-2 h-2 rounded-full bg-white mt-1.5"></div>
-                <p>
-                  Improving position by 1 spot could increase CTR by ~5-7%
-                </p>
+                <p>Improving position by 1 spot could increase CTR by ~5-7%</p>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-2 h-2 rounded-full bg-white mt-1.5"></div>
                 <p>
-                  Current trajectory suggests {summary.clicksChange > 0 ? 'continued growth' : 'optimization needed'}
+                  Current trajectory suggests{" "}
+                  {summary.clicksChange > 0 ? "continued growth" : "optimization needed"}
                 </p>
               </div>
               <div className="flex items-start gap-2">
                 <div className="w-2 h-2 rounded-full bg-white mt-1.5"></div>
-                <p>
-                  Focus on SERP features to maximize visibility
-                </p>
+                <p>Focus on SERP features to maximize visibility</p>
               </div>
             </div>
           </div>

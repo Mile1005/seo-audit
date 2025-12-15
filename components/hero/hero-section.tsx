@@ -1,59 +1,92 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Clock, Users, Zap } from "lucide-react"
-import { useIsMobile } from "@/hooks/use-is-mobile"
-import { HomepageAuditSearch } from "./homepage-audit-search"
-import { useTranslations } from 'next-intl'
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Clock, Users, Zap } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-is-mobile";
+import { HomepageAuditSearch } from "./homepage-audit-search";
+import { useTranslations } from "next-intl";
 
 interface HeroTranslations {
-  badge: string
-  title: string
-  subtitle: string
-  cta: string
-  ctaSecondary: string
+  badge: string;
+  title: string;
+  subtitle: string;
+  cta: string;
+  ctaSecondary: string;
 }
 
 interface KpiTranslations {
-  checks: string
-  avgAuditTime: string
-  marketers: string
+  checks: string;
+  avgAuditTime: string;
+  marketers: string;
 }
 
 interface HeroSectionProps {
-  heroTranslations?: HeroTranslations
-  kpiTranslations?: KpiTranslations
+  heroTranslations?: HeroTranslations;
+  kpiTranslations?: KpiTranslations;
 }
 
 export function HeroSection({ heroTranslations, kpiTranslations }: HeroSectionProps) {
-  const isMobile = useIsMobile()
-  const [showBackgroundAnimations, setShowBackgroundAnimations] = useState(false)
+  const isMobile = useIsMobile();
+  const [showBackgroundAnimations, setShowBackgroundAnimations] = useState(false);
 
-  const tHero = useTranslations('home.hero')
-  const tKpis = useTranslations('home.kpis')
+  const tHero = useTranslations("home.hero");
+  const tKpis = useTranslations("home.kpis");
 
-  const badge = (heroTranslations?.badge && !heroTranslations.badge.includes('home.hero')) ? heroTranslations.badge : (tHero('badge') && !tHero('badge').includes('home.hero') ? tHero('badge') : 'AI-Powered SEO Analysis')
-  const title = (heroTranslations?.title && !heroTranslations.title.includes('home.hero')) ? heroTranslations.title : (tHero('title') && !tHero('title').includes('home.hero') ? tHero('title') : 'AI SEO Turbo: Professional SEO Audits Made Simple')
-  const subtitle = (heroTranslations?.subtitle && !heroTranslations.subtitle.includes('home.hero')) ? heroTranslations.subtitle : (tHero('subtitle') && !tHero('subtitle').includes('home.hero') ? tHero('subtitle') : "Get actionable insights that <highlight>boost your rankings</highlight> and <highlight>drive organic traffic</highlight>. Join 1,000+ marketers who trust <brand>AI SEO Turbo</brand>'s audits to identify critical SEO issues in minutes.")
-  
-  const kpiChecks = (kpiTranslations?.checks && !kpiTranslations.checks.includes('home.kpis')) ? kpiTranslations.checks : (tKpis('checks') && !tKpis('checks').includes('home.kpis') ? tKpis('checks') : 'SEO Checks')
-  const kpiAvgAuditTime = (kpiTranslations?.avgAuditTime && !kpiTranslations.avgAuditTime.includes('home.kpis')) ? kpiTranslations.avgAuditTime : (tKpis('avgAuditTime') && !tKpis('avgAuditTime').includes('home.kpis') ? tKpis('avgAuditTime') : 'Avg Audit Time')
-  const kpiMarketers = (kpiTranslations?.marketers && !kpiTranslations.marketers.includes('home.kpis')) ? kpiTranslations.marketers : (tKpis('marketers') && !tKpis('marketers').includes('home.kpis') ? tKpis('marketers') : 'Marketers')
+  const badge =
+    heroTranslations?.badge && !heroTranslations.badge.includes("home.hero")
+      ? heroTranslations.badge
+      : tHero("badge") && !tHero("badge").includes("home.hero")
+        ? tHero("badge")
+        : "AI-Powered SEO Analysis";
+  const title =
+    heroTranslations?.title && !heroTranslations.title.includes("home.hero")
+      ? heroTranslations.title
+      : tHero("title") && !tHero("title").includes("home.hero")
+        ? tHero("title")
+        : "AI SEO Turbo: Professional SEO Audits Made Simple";
+  const subtitle =
+    heroTranslations?.subtitle && !heroTranslations.subtitle.includes("home.hero")
+      ? heroTranslations.subtitle
+      : tHero("subtitle") && !tHero("subtitle").includes("home.hero")
+        ? tHero("subtitle")
+        : "Get actionable insights that <highlight>boost your rankings</highlight> and <highlight>drive organic traffic</highlight>. Join 1,000+ marketers who trust <brand>AI SEO Turbo</brand>'s audits to identify critical SEO issues in minutes.";
+
+  const kpiChecks =
+    kpiTranslations?.checks && !kpiTranslations.checks.includes("home.kpis")
+      ? kpiTranslations.checks
+      : tKpis("checks") && !tKpis("checks").includes("home.kpis")
+        ? tKpis("checks")
+        : "SEO Checks";
+  const kpiAvgAuditTime =
+    kpiTranslations?.avgAuditTime && !kpiTranslations.avgAuditTime.includes("home.kpis")
+      ? kpiTranslations.avgAuditTime
+      : tKpis("avgAuditTime") && !tKpis("avgAuditTime").includes("home.kpis")
+        ? tKpis("avgAuditTime")
+        : "Avg Audit Time";
+  const kpiMarketers =
+    kpiTranslations?.marketers && !kpiTranslations.marketers.includes("home.kpis")
+      ? kpiTranslations.marketers
+      : tKpis("marketers") && !tKpis("marketers").includes("home.kpis")
+        ? tKpis("marketers")
+        : "Marketers";
 
   useEffect(() => {
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(() => {
-        setShowBackgroundAnimations(true)
-      }, { timeout: 2500 })
-      return () => cancelIdleCallback(id)
+      const id = requestIdleCallback(
+        () => {
+          setShowBackgroundAnimations(true);
+        },
+        { timeout: 2500 }
+      );
+      return () => cancelIdleCallback(id);
     } else {
       const timer = setTimeout(() => {
-        setShowBackgroundAnimations(true)
-      }, 2500)
-      return () => clearTimeout(timer)
+        setShowBackgroundAnimations(true);
+      }, 2500);
+      return () => clearTimeout(timer);
     }
-  }, [])
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -61,19 +94,19 @@ export function HeroSection({ heroTranslations, kpiTranslations }: HeroSectionPr
       opacity: 1,
       transition: {
         duration: 0.4,
-        staggerChildren: 0.05
-      }
-    }
-  }
+        staggerChildren: 0.05,
+      },
+    },
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4 }
-    }
-  }
+      transition: { duration: 0.4 },
+    },
+  };
 
   const floatingShapeVariants = {
     floating: {
@@ -81,19 +114,19 @@ export function HeroSection({ heroTranslations, kpiTranslations }: HeroSectionPr
       transition: {
         duration: 3,
         repeat: Infinity,
-        repeatType: "loop" as const
-      }
-    }
-  }
+        repeatType: "loop" as const,
+      },
+    },
+  };
 
   return (
-    <section 
+    <section
       data-testid="hero-section"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
       {/* Main H1 - visually hidden for SEO compliance */}
       <h1 className="sr-only">{title}</h1>
-      
+
       {/* Background Elements */}
       <div className="absolute inset-0">
         {!isMobile && showBackgroundAnimations && (
@@ -142,34 +175,32 @@ export function HeroSection({ heroTranslations, kpiTranslations }: HeroSectionPr
               className="text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-3xl mx-auto mb-12"
               dangerouslySetInnerHTML={{
                 __html: (() => {
-                  if (!subtitle || 
-                      subtitle.includes('home.hero.subtitle') || 
-                      subtitle === 'subtitle' || 
-                      subtitle === 'hero.subtitle' ||
-                      subtitle.length < 20) {
-                    return "Get actionable insights that <span class='text-cyan-400 font-semibold'>boost your rankings</span> and <span class='text-cyan-400 font-semibold'>drive organic traffic</span>. Join 1,000+ marketers who trust <span class='font-semibold'>AI SEO Turbo</span>'s audits to identify critical SEO issues in minutes."
+                  if (
+                    !subtitle ||
+                    subtitle.includes("home.hero.subtitle") ||
+                    subtitle === "subtitle" ||
+                    subtitle === "hero.subtitle" ||
+                    subtitle.length < 20
+                  ) {
+                    return "Get actionable insights that <span class='text-cyan-400 font-semibold'>boost your rankings</span> and <span class='text-cyan-400 font-semibold'>drive organic traffic</span>. Join 1,000+ marketers who trust <span class='font-semibold'>AI SEO Turbo</span>'s audits to identify critical SEO issues in minutes.";
                   }
-                  
+
                   try {
                     return subtitle
                       .replace(/<highlight>/g, '<span class="text-cyan-400 font-semibold">')
-                      .replace(/<\/highlight>/g, '</span>')
+                      .replace(/<\/highlight>/g, "</span>")
                       .replace(/<brand>/g, '<span class="font-semibold">')
-                      .replace(/<\/brand>/g, '</span>')
+                      .replace(/<\/brand>/g, "</span>");
                   } catch (error) {
-                    return "Get actionable insights that <span class='text-cyan-400 font-semibold'>boost your rankings</span> and <span class='text-cyan-400 font-semibold'>drive organic traffic</span>. Join 1,000+ marketers who trust <span class='font-semibold'>AI SEO Turbo</span>'s audits to identify critical SEO issues in minutes."
+                    return "Get actionable insights that <span class='text-cyan-400 font-semibold'>boost your rankings</span> and <span class='text-cyan-400 font-semibold'>drive organic traffic</span>. Join 1,000+ marketers who trust <span class='font-semibold'>AI SEO Turbo</span>'s audits to identify critical SEO issues in minutes.";
                   }
-                })()
+                })(),
               }}
             />
           </div>
 
           {/* Interactive Audit Search - REPLACES OLD BUTTONS */}
-          <motion.div
-            variants={itemVariants}
-            initial={false}
-            className="mb-12"
-          >
+          <motion.div variants={itemVariants} initial={false} className="mb-12">
             <HomepageAuditSearch />
           </motion.div>
 
@@ -206,5 +237,5 @@ export function HeroSection({ heroTranslations, kpiTranslations }: HeroSectionPr
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

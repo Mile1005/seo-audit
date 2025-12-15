@@ -5,6 +5,7 @@
 ## Issues Identified
 
 From Screaming Frog audit:
+
 - **52 pages**: "Google rich results validation error"
 - **7 pages**: "Schema.org validation error + Google rich results validation error"
 - **1 page**: "Google rich results validation error + Schema.org validation warning"
@@ -12,16 +13,19 @@ From Screaming Frog audit:
 ## Root Causes
 
 ### 1. **Organization Schema Issues**
+
 **Problem**: Missing or invalid required fields for Organization
 **Affected**: ALL 60 pages (Organization appears on every page)
 
 **Current Issues**:
+
 - ❌ Missing `image` as ImageObject (has string URL instead)
 - ❌ Missing required `address` property
 - ❌ `logo` should be ImageObject, not string
 - ❌ Missing `telephone` for contact
 
 **Fix Required**:
+
 ```json
 {
   "@type": "Organization",
@@ -49,15 +53,18 @@ From Screaming Frog audit:
 ```
 
 ### 2. **SoftwareApplication Schema Issues**
+
 **Problem**: Missing required fields for Google rich results
 **Affected**: ALL 60 pages
 
 **Current Issues**:
+
 - ❌ `image` is string URL (should be ImageObject)
 - ❌ Missing `author` as proper reference
 - ❌ `aggregateRating` needs more specific counts
 
 **Fix Required**:
+
 ```json
 {
   "@type": "SoftwareApplication",
@@ -83,14 +90,17 @@ From Screaming Frog audit:
 ```
 
 ### 3. **FAQPage Schema Issues**
+
 **Problem**: Schema.org validation errors in FAQ structure
 **Affected**: 7 pages (features pages with FAQs)
 
 **Current Issues**:
+
 - ❌ Missing `mainEntity` wrapper
 - ❌ Answer text may have HTML that needs escaping
 
 **Fix Required**:
+
 ```json
 {
   "@type": "FAQPage",
@@ -108,33 +118,40 @@ From Screaming Frog audit:
 ```
 
 ### 4. **BlogPosting Schema Issues**
+
 **Problem**: Missing publisher logo dimensions
 **Affected**: 6 blog post pages
 
 **Current Issues**:
+
 - ❌ `publisher.logo` missing width/height
 - ❌ `image` needs to be ImageObject with dimensions
 
 **Fix Required**: Already correct in StructuredData.tsx - just needs consistent use
 
 ### 5. **ItemList Schema Issues**
+
 **Problem**: Missing required properties
 **Affected**: 2 pages (blog index, case studies index)
 
 **Current Issues**:
+
 - ❌ Need proper `itemListElement` structure
 - ❌ Missing position numbering
 
 ### 6. **HowTo Schema Issues**
+
 **Problem**: Steps need proper structure
 **Affected**: 4 help article pages
 
 **Current Issues**:
+
 - ✅ Actually looks correct - may be false positive
 
 ## Fix Priority
 
 ### HIGH PRIORITY (Fixes 52 pages immediately)
+
 1. **Fix Organization Schema** in `app/layout.tsx`
    - Convert logo and image to ImageObject
    - Add complete address
@@ -145,11 +162,13 @@ From Screaming Frog audit:
    - Fix aggregateRating structure
 
 ### MEDIUM PRIORITY (Fixes 7 pages)
+
 3. **Fix FAQPage Schema** in `components/seo/StructuredData.tsx`
    - Ensure proper mainEntity structure
    - Sanitize HTML in answers
 
 ### LOW PRIORITY (Fixes 2 pages)
+
 4. **Fix ItemList Schema** in blog and case studies pages
    - Add proper itemListElement
    - Add position to each item
@@ -174,7 +193,7 @@ From Screaming Frog audit:
 ## Expected Results After Fix
 
 - ✅ **0 Google rich results validation errors** (currently 52)
-- ✅ **0 Schema.org validation errors** (currently 7)  
+- ✅ **0 Schema.org validation errors** (currently 7)
 - ✅ **0 Schema.org validation warnings** (currently 1)
 - ✅ **Rich snippets eligible** for Organization, Product, FAQs
 - ✅ **Knowledge Graph eligible** for Organization

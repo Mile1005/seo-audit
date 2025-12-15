@@ -14,7 +14,7 @@ if exist .env.local (
 )
 
 echo # PageSpeed Insights API Key > .env.local
-echo PSI_API_KEY=AIzaSyA9x1N0poqiewfF6YL2Cyqcty57MhzrMPU >> .env.local
+echo PSI_API_KEY=YOUR_PSI_API_KEY >> .env.local
 echo. >> .env.local
 echo # Google Search Console OAuth >> .env.local
 echo GSC_CLIENT_ID=[YOUR_GSC_CLIENT_ID] >> .env.local
@@ -58,7 +58,7 @@ echo.
 echo ✅ Setup completed successfully!
 echo.
 echo 📋 Configuration Summary:
-echo   - PSI API Key: AIzaSyA9x1N0poqiewfF6YL2Cyqcty57MhzrMPU
+echo   - PSI API Key: YOUR_PSI_API_KEY
 echo   - GSC Client ID: [YOUR_GSC_CLIENT_ID]
 echo   - GSC Client Secret: [YOUR_GSC_CLIENT_SECRET]
 echo   - GSC Redirect URI: https://seo-audit-seven.vercel.app/api/auth/gsc/callback

@@ -100,7 +100,7 @@ export default {
   },
   // Purge unused CSS aggressively in production
   purge: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: process.env.NODE_ENV === "production",
     content: [
       "./app/**/*.{js,ts,jsx,tsx}",
       "./pages/**/*.{js,ts,jsx,tsx}",
@@ -110,11 +110,11 @@ export default {
     options: {
       safelist: [
         // Keep critical classes that might be added dynamically
-        'animate-spin',
-        'animate-pulse',
-        'sr-only',
-        'focus:not-sr-only',
-      ]
-    }
-  }
+        "animate-spin",
+        "animate-pulse",
+        "sr-only",
+        "focus:not-sr-only",
+      ],
+    },
+  },
 } satisfies Config;

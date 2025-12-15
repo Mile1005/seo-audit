@@ -1,0 +1,8 @@
+# Files that currently break Prettier parsing (binary/corrupted backups).
+# Ignored so `pnpm format` can run reliably during the dashboard redesign.
+
+app/features/seo-audit/seo-audit-original.tsx
+app/globals-backup.css
+hooks/use-auth-required.ts
+lib/crawl-store.ts
+lib/crawl.ts

@@ -4,11 +4,15 @@
  */
 
 // Main function to create appropriate fallback
-export const createImageFallback = (type: 'hero' | 'mobile' | 'general', width = 800, height = 600) => {
+export const createImageFallback = (
+  type: "hero" | "mobile" | "general",
+  width = 800,
+  height = 600
+) => {
   switch (type) {
-    case 'hero':
+    case "hero":
       return generateHeroDashboardFallback(width, height);
-    case 'mobile':
+    case "mobile":
       return generateMobileAuditFallback(width, height);
     default:
       return generateGeneralFallback(width, height);
@@ -26,7 +30,7 @@ export const generateGeneralFallback = (width = 800, height = 600) => {
         Image Loading...
       </text>
     </svg>
-  `)}`; 
+  `)}`;
 };
 
 // Generate hero dashboard fallback SVG
@@ -91,8 +95,8 @@ export const generateHeroDashboardFallback = (width = 1200, height = 750) => {
       <!-- Watermark -->
       <text x="${width - 150}" y="${height - 20}" fill="#64748b" font-family="Arial, sans-serif" font-size="10" opacity="0.7">AI SEO Turbo</text>
     </svg>
-  `)}`
-}
+  `)}`;
+};
 
 // Generate mobile audit interface fallback SVG
 export const generateMobileAuditFallback = (width = 375, height = 667) => {
@@ -145,10 +149,10 @@ export const generateMobileAuditFallback = (width = 375, height = 667) => {
       
       <!-- Bottom Action -->
       <rect x="20" y="${height - 100}" width="${width - 40}" height="50" rx="25" fill="#3b82f6"/>
-      <text x="${width/2}" y="${height - 70}" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="600">View Full Report</text>
+      <text x="${width / 2}" y="${height - 70}" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="16" font-weight="600">View Full Report</text>
       
       <!-- Home Indicator -->
-      <rect x="${width/2 - 67}" y="${height - 20}" width="134" height="5" rx="2.5" fill="#64748b"/>
+      <rect x="${width / 2 - 67}" y="${height - 20}" width="134" height="5" rx="2.5" fill="#64748b"/>
     </svg>
-  `)}`
-}
+  `)}`;
+};

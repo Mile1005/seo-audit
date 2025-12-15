@@ -1,21 +1,32 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, CheckCircle, CreditCard, DollarSign, FileText, Settings, Star, Shield, Zap } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  CheckCircle,
+  CreditCard,
+  DollarSign,
+  FileText,
+  Settings,
+  Star,
+  Shield,
+  Zap,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function BillingOverviewPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'Billing & Account', url: 'https://www.aiseoturbo.com/help/billing' }
+            { name: "Help", url: "https://www.aiseoturbo.com/help" },
+            { name: "Billing & Account", url: "https://www.aiseoturbo.com/help/billing" },
           ]}
           includeHome={false}
         />
@@ -75,14 +86,16 @@ export default function BillingOverviewPage() {
               <div>
                 <h2 className="text-3xl font-bold text-white mb-4">Account & Billing Overview</h2>
                 <p className="text-gray-300 text-lg">
-                  Manage your AI SEO Turbo subscription, payment methods, invoices, and account settings
-                  with our comprehensive billing and account management tools.
+                  Manage your AI SEO Turbo subscription, payment methods, invoices, and account
+                  settings with our comprehensive billing and account management tools.
                 </p>
               </div>
 
               {/* Billing Topics */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Billing & Subscription Management</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Billing & Subscription Management
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Link
                     href="/help/billing/upgrade-plan"
@@ -97,8 +110,8 @@ export default function BillingOverviewPage() {
                           Upgrade Your Plan
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Learn about our pricing plans, features, and how to upgrade your subscription
-                          to unlock more SEO tools and higher limits.
+                          Learn about our pricing plans, features, and how to upgrade your
+                          subscription to unlock more SEO tools and higher limits.
                         </p>
                         <span className="text-green-400 text-sm group-hover:text-green-300 transition-colors">
                           Learn more →
@@ -120,8 +133,8 @@ export default function BillingOverviewPage() {
                           Payment Methods
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Add, update, or remove payment methods. Learn about supported payment options
-                          and billing cycles.
+                          Add, update, or remove payment methods. Learn about supported payment
+                          options and billing cycles.
                         </p>
                         <span className="text-blue-400 text-sm group-hover:text-blue-300 transition-colors">
                           Learn more →
@@ -188,8 +201,8 @@ export default function BillingOverviewPage() {
                       Account Security & Settings
                     </h4>
                     <p className="text-gray-300 mb-4">
-                      Manage your account security settings, including password changes, two-factor authentication,
-                      and account preferences.
+                      Manage your account security settings, including password changes, two-factor
+                      authentication, and account preferences.
                     </p>
                     <div className="flex gap-4">
                       <Link
@@ -269,8 +282,8 @@ export default function BillingOverviewPage() {
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-white mb-4">Need Billing Support?</h3>
                   <p className="text-gray-300 mb-6">
-                    Our support team is available to help with any billing questions, account issues,
-                    or subscription concerns.
+                    Our support team is available to help with any billing questions, account
+                    issues, or subscription concerns.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
@@ -293,5 +306,5 @@ export default function BillingOverviewPage() {
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

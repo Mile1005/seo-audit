@@ -1,276 +1,359 @@
-"use client"
+"use client";
 
-import { MainLayout } from '../../../../components/layout/main-layout'
-import { Breadcrumbs } from '../../../../components/navigation/breadcrumbs'
-import { motion, useScroll, useSpring } from 'framer-motion'
-import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark, ThumbsUp, Eye } from 'lucide-react'
-import Link from 'next/link'
-import { useState, useEffect, useRef, ReactNode } from 'react'
+import { MainLayout } from "../../../../components/layout/main-layout";
+import { Breadcrumbs } from "../../../../components/navigation/breadcrumbs";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark, ThumbsUp, Eye } from "lucide-react";
+import Link from "next/link";
+import { useState, useEffect, useRef, ReactNode } from "react";
 
 interface BlogPost {
-  id: string
-  slug: string
-  title: string
-  excerpt: string
-  content: string | ReactNode
-  date: string
-  readTime: string
-  category: string
-  author: string
-  authorRole?: string
-  featured: boolean
-  image: string
-  tags: string[]
-  views: string
-  likes: number
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string | ReactNode;
+  date: string;
+  readTime: string;
+  category: string;
+  author: string;
+  authorRole?: string;
+  featured: boolean;
+  image: string;
+  tags: string[];
+  views: string;
+  likes: number;
 }
 
 interface BlogPostClientProps {
-  post: BlogPost
+  post: BlogPost;
 }
 
 export default function BlogPostClient({ post }: BlogPostClientProps) {
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const [isLiked, setIsLiked] = useState(false)
-  const [isSaved, setIsSaved] = useState(false)
-  const [showShareMenu, setShowShareMenu] = useState(false)
-  const scrollRef = useRef<number>(0)
-  
-  const { scrollYProgress } = useScroll()
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+  const scrollRef = useRef<number>(0);
+
+  const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
-  })
+    restDelta: 0.001,
+  });
 
   // Optimized reading progress tracking with RAF
   useEffect(() => {
-    let ticking = false
+    let ticking = false;
 
     const updateProgress = () => {
-      const scrolled = window.scrollY
-      const height = document.documentElement.scrollHeight - window.innerHeight
-      const progress = Math.min((scrolled / height) * 100, 100)
+      const scrolled = window.scrollY;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min((scrolled / height) * 100, 100);
       if (Math.abs(progress - scrollProgress) > 0.5) {
-        setScrollProgress(progress)
+        setScrollProgress(progress);
       }
-      ticking = false
-    }
+      ticking = false;
+    };
 
     const requestTick = () => {
       if (!ticking) {
-        requestAnimationFrame(updateProgress)
-        ticking = true
+        requestAnimationFrame(updateProgress);
+        ticking = true;
       }
-    }
+    };
 
-    window.addEventListener('scroll', requestTick, { passive: true })
-    return () => window.removeEventListener('scroll', requestTick)
-  }, [scrollProgress])
+    window.addEventListener("scroll", requestTick, { passive: true });
+    return () => window.removeEventListener("scroll", requestTick);
+  }, [scrollProgress]);
 
   // Smooth scroll for anchor links - optimized
   useEffect(() => {
     const handleAnchorClick = (e: Event) => {
-      const target = e.target as HTMLAnchorElement
-      if (target.tagName === 'A' && target.hash) {
-        const href = target.getAttribute('href')
-        if (href?.startsWith('#')) {
-          e.preventDefault()
-          const element = document.querySelector(href)
+      const target = e.target as HTMLAnchorElement;
+      if (target.tagName === "A" && target.hash) {
+        const href = target.getAttribute("href");
+        if (href?.startsWith("#")) {
+          e.preventDefault();
+          const element = document.querySelector(href);
           if (element) {
-            const offset = 80 // Account for fixed header
-            const elementPosition = element.getBoundingClientRect().top
-            const offsetPosition = elementPosition + window.pageYOffset - offset
+            const offset = 80; // Account for fixed header
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
             window.scrollTo({
               top: offsetPosition,
-              behavior: 'smooth'
-            })
+              behavior: "smooth",
+            });
           }
         }
       }
-    }
-    document.addEventListener('click', handleAnchorClick)
-    return () => document.removeEventListener('click', handleAnchorClick)
-  }, [])
+    };
+    document.addEventListener("click", handleAnchorClick);
+    return () => document.removeEventListener("click", handleAnchorClick);
+  }, []);
 
   const getRelatedPosts = (currentPost: BlogPost) => {
     const allPosts = [
       {
-        id: '1',
-        slug: 'complete-seo-audit-checklist-2025',
-        title: 'Complete SEO Audit Checklist 2025',
-        excerpt: 'Comprehensive checklist for conducting thorough SEO audits in 2025.',
-        category: 'SEO Audit',
-        readTime: '8 min read',
-        image: '/blog/seo-audit-checklist.webp'
+        id: "1",
+        slug: "complete-seo-audit-checklist-2025",
+        title: "Complete SEO Audit Checklist 2025",
+        excerpt: "Comprehensive checklist for conducting thorough SEO audits in 2025.",
+        category: "SEO Audit",
+        readTime: "8 min read",
+        image: "/blog/seo-audit-checklist.webp",
       },
       {
-        id: '2',
-        slug: 'core-web-vitals-optimization-guide',
-        title: 'Core Web Vitals Optimization Guide',
-        excerpt: 'Complete guide to optimizing Core Web Vitals for better search rankings.',
-        category: 'Performance',
-        readTime: '12 min read',
-        image: '/blog/seo-audit-checklist.webp'
+        id: "2",
+        slug: "core-web-vitals-optimization-guide",
+        title: "Core Web Vitals Optimization Guide",
+        excerpt: "Complete guide to optimizing Core Web Vitals for better search rankings.",
+        category: "Performance",
+        readTime: "12 min read",
+        image: "/blog/seo-audit-checklist.webp",
       },
       {
-        id: '3',
-        slug: 'technical-seo-best-practices-2025',
-        title: 'Technical SEO Best Practices 2025',
-        excerpt: 'Essential technical SEO practices for 2025 and beyond.',
-        category: 'Technical SEO',
-        readTime: '10 min read',
-        image: '/blog/seo-audit-checklist.webp'
-      }
-    ]
-    return allPosts.filter(p => p.slug !== currentPost.slug).slice(0, 3)
-  }
+        id: "3",
+        slug: "technical-seo-best-practices-2025",
+        title: "Technical SEO Best Practices 2025",
+        excerpt: "Essential technical SEO practices for 2025 and beyond.",
+        category: "Technical SEO",
+        readTime: "10 min read",
+        image: "/blog/seo-audit-checklist.webp",
+      },
+    ];
+    return allPosts.filter((p) => p.slug !== currentPost.slug).slice(0, 3);
+  };
 
-  const relatedPosts = getRelatedPosts(post)
+  const relatedPosts = getRelatedPosts(post);
 
   const sharePost = (platform: string) => {
-    const url = typeof window !== 'undefined' ? window.location.href : ''
-    const text = post.title
-    const description = post.excerpt || text
-    const imageUrl = post.image ? `${window.location.origin}${post.image}` : ''
-    
+    const url = typeof window !== "undefined" ? window.location.href : "";
+    const text = post.title;
+    const description = post.excerpt || text;
+    const imageUrl = post.image ? `${window.location.origin}${post.image}` : "";
+
     const shareUrls: { [key: string]: string } = {
       twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}&summary=${encodeURIComponent(description)}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(text)}`,
-      pinterest: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(text + ' - ' + description)}`
-    }
+      pinterest: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(url)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(text + " - " + description)}`,
+    };
 
-    if (platform === 'instagram') {
+    if (platform === "instagram") {
       // Instagram doesn't have a direct web share URL, use Web Share API or copy to clipboard
       if (navigator.share) {
-        navigator.share({
-          title: text,
-          text: description,
-          url: url
-        }).catch(() => {
-          // Fallback to copying URL
-          navigator.clipboard.writeText(url).then(() => {
-            alert('Link copied to clipboard! You can now share it on Instagram.')
+        navigator
+          .share({
+            title: text,
+            text: description,
+            url: url,
           })
-        })
+          .catch(() => {
+            // Fallback to copying URL
+            navigator.clipboard.writeText(url).then(() => {
+              alert("Link copied to clipboard! You can now share it on Instagram.");
+            });
+          });
       } else {
         // Copy URL to clipboard
         navigator.clipboard.writeText(url).then(() => {
-          alert('Link copied to clipboard! You can now share it on Instagram.')
-        })
+          alert("Link copied to clipboard! You can now share it on Instagram.");
+        });
       }
     } else if (shareUrls[platform]) {
-      window.open(shareUrls[platform], '_blank', 'width=600,height=400')
+      window.open(shareUrls[platform], "_blank", "width=600,height=400");
     }
-    setShowShareMenu(false)
-  }
+    setShowShareMenu(false);
+  };
 
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
         {/* Reading Progress Bar - Fixed flickering */}
-        <motion.div 
+        <motion.div
           className="fixed top-0 left-0 w-full h-1 bg-slate-900 z-50"
-          style={{ willChange: 'auto' }}
+          style={{ willChange: "auto" }}
         >
-          <motion.div 
+          <motion.div
             className="h-full bg-gradient-to-r from-blue-600 to-purple-600"
-            style={{ 
+            style={{
               scaleX,
-              transformOrigin: '0%',
-              willChange: 'transform'
+              transformOrigin: "0%",
+              willChange: "transform",
             }}
           />
         </motion.div>
 
         {/* HERO SECTION for ALL blog posts - Featured style */}
         <article className="relative pb-0">
-            <div className="max-w-4xl mx-auto px-6 pt-24 pb-12">
-              {/* Breadcrumbs */}
-              <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-                <Breadcrumbs
-                  items={[
-                    { name: 'Blog', url: '/blog' },
-                    { name: post.title, url: `/blog/${post.slug}` }
-                  ]}
-                  darkMode={true}
-                  className="mb-8"
-                />
-              </motion.div>
-              <div className="flex gap-2 mb-5">
-                <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
-                  {post.category}
-                </span>
-              </div>
-              <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 max-w-5xl leading-tight drop-shadow-xl">{post.title}</h1>
-              {post.excerpt && (
-                <p className="text-xl text-slate-300 mb-8 max-w-3xl leading-relaxed drop-shadow">{post.excerpt}</p>
-              )}
-              <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-xl mb-8 shadow-xl">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-64 md:h-80 object-cover object-center"
-                  style={{ filter: "brightness(1.25)" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-950/70 pointer-events-none" />
-              </div>
-              {/* Author and Meta Info */}
-              <div className="text-center mb-4">
-                <div className="text-sm text-gray-300">
-                  <span className="text-white font-medium">{post.author}</span>
-                  {post.authorRole && (<span className="text-gray-500"> • {post.authorRole}</span>)}
-                  <span className="text-gray-500"> • {post.date}</span>
-                </div>
-              </div>
-              {/* Action Buttons - Smaller and Inline */}
-              <div className="flex justify-center gap-2 mb-7">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsLiked(!isLiked)} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-all ${isLiked ? 'bg-blue-600 text-white' : 'bg-slate-800/50 hover:bg-slate-700/50 text-gray-300'}`}>
-                  <ThumbsUp className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
-                  <span>{isLiked ? post.likes + 1 : post.likes}</span>
-                </motion.button>
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setIsSaved(!isSaved)} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-all ${isSaved ? 'bg-blue-600 text-white' : 'bg-slate-800/50 hover:bg-slate-700/50 text-gray-300'}`}>
-                  <Bookmark className={`w-4 h-4 ${isSaved ? 'fill-current' : ''}`} />
-                  <span>Save</span>
-                </motion.button>
-                <div className="relative">
-                  <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowShareMenu(!showShareMenu)} className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-800/50 hover:bg-slate-700/50 text-gray-300 rounded-lg transition-all">
-                    <Share2 className="w-4 h-4" />
-                    <span>Share</span>
-                  </motion.button>
-                  {showShareMenu && (<motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="absolute top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-10 min-w-[150px]">
-                    <button onClick={() => sharePost('twitter')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Twitter</button>
-                    <button onClick={() => sharePost('linkedin')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">LinkedIn</button>
-                    <button onClick={() => sharePost('facebook')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Facebook</button>
-                    <button onClick={() => sharePost('pinterest')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Pinterest</button>
-                    <button onClick={() => sharePost('instagram')} className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors">Instagram</button>
-                  </motion.div>)}
-                </div>
-              </div>
-              <div className="mt-2 mb-4">
-                <div className="flex items-center gap-3 text-sm text-gray-400">
-                  <div className="flex-1 h-1 bg-slate-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-out" style={{ width: `${scrollProgress}%` }}/>
-                  </div>
-                  <span className="text-xs font-medium">{Math.round(scrollProgress)}%</span>
-                </div>
+          <div className="max-w-4xl mx-auto px-6 pt-24 pb-12">
+            {/* Breadcrumbs */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Breadcrumbs
+                items={[
+                  { name: "Blog", url: "/blog" },
+                  { name: post.title, url: `/blog/${post.slug}` },
+                ]}
+                darkMode={true}
+                className="mb-8"
+              />
+            </motion.div>
+            <div className="flex gap-2 mb-5">
+              <span className="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
+                {post.category}
+              </span>
+            </div>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 max-w-5xl leading-tight drop-shadow-xl">
+              {post.title}
+            </h1>
+            {post.excerpt && (
+              <p className="text-xl text-slate-300 mb-8 max-w-3xl leading-relaxed drop-shadow">
+                {post.excerpt}
+              </p>
+            )}
+            <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-xl mb-8 shadow-xl">
+              <img
+                src={post.image}
+                alt={post.title}
+                className="w-full h-64 md:h-80 object-cover object-center"
+                style={{ filter: "brightness(1.25)" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-transparent to-slate-950/70 pointer-events-none" />
+            </div>
+            {/* Author and Meta Info */}
+            <div className="text-center mb-4">
+              <div className="text-sm text-gray-300">
+                <span className="text-white font-medium">{post.author}</span>
+                {post.authorRole && <span className="text-gray-500"> • {post.authorRole}</span>}
+                <span className="text-gray-500"> • {post.date}</span>
               </div>
             </div>
-          </article>
+            {/* Action Buttons - Smaller and Inline */}
+            <div className="flex justify-center gap-2 mb-7">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsLiked(!isLiked)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-all ${isLiked ? "bg-blue-600 text-white" : "bg-slate-800/50 hover:bg-slate-700/50 text-gray-300"}`}
+              >
+                <ThumbsUp className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
+                <span>{isLiked ? post.likes + 1 : post.likes}</span>
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setIsSaved(!isSaved)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-all ${isSaved ? "bg-blue-600 text-white" : "bg-slate-800/50 hover:bg-slate-700/50 text-gray-300"}`}
+              >
+                <Bookmark className={`w-4 h-4 ${isSaved ? "fill-current" : ""}`} />
+                <span>Save</span>
+              </motion.button>
+              <div className="relative">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setShowShareMenu(!showShareMenu)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-800/50 hover:bg-slate-700/50 text-gray-300 rounded-lg transition-all"
+                >
+                  <Share2 className="w-4 h-4" />
+                  <span>Share</span>
+                </motion.button>
+                {showShareMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="absolute top-full mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-xl overflow-hidden z-10 min-w-[150px]"
+                  >
+                    <button
+                      onClick={() => sharePost("twitter")}
+                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors"
+                    >
+                      Twitter
+                    </button>
+                    <button
+                      onClick={() => sharePost("linkedin")}
+                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors"
+                    >
+                      LinkedIn
+                    </button>
+                    <button
+                      onClick={() => sharePost("facebook")}
+                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors"
+                    >
+                      Facebook
+                    </button>
+                    <button
+                      onClick={() => sharePost("pinterest")}
+                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors"
+                    >
+                      Pinterest
+                    </button>
+                    <button
+                      onClick={() => sharePost("instagram")}
+                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-slate-700 transition-colors"
+                    >
+                      Instagram
+                    </button>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+            <div className="mt-2 mb-4">
+              <div className="flex items-center gap-3 text-sm text-gray-400">
+                <div className="flex-1 h-1 bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-blue-600 to-purple-600 transition-all duration-300 ease-out"
+                    style={{ width: `${scrollProgress}%` }}
+                  />
+                </div>
+                <span className="text-xs font-medium">{Math.round(scrollProgress)}%</span>
+              </div>
+            </div>
+          </div>
+        </article>
 
         {/* Article Content */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="max-w-4xl mx-auto px-6 pb-20">
-          {typeof post.content === 'string'
-            ? <div className="prose-blog"><div dangerouslySetInnerHTML={{ __html: post.content }} /></div>
-            : post.content }
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-4xl mx-auto px-6 pb-20"
+        >
+          {typeof post.content === "string" ? (
+            <div className="prose-blog">
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            </div>
+          ) : (
+            post.content
+          )}
         </motion.div>
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
           <div className="max-w-4xl mx-auto px-6 pb-12">
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="flex flex-wrap gap-2">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="flex flex-wrap gap-2"
+            >
               {post.tags.map((tag, index) => (
-                <motion.span key={tag} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: index * 0.05 }} whileHover={{ scale: 1.05 }} className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-full text-sm text-gray-300 hover:border-blue-500/50 hover:text-blue-400 transition-all cursor-pointer">#{tag}</motion.span>
+                <motion.span
+                  key={tag}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  whileHover={{ scale: 1.05 }}
+                  className="px-3 py-1.5 bg-slate-800/50 border border-slate-700/50 rounded-full text-sm text-gray-300 hover:border-blue-500/50 hover:text-blue-400 transition-all cursor-pointer"
+                >
+                  #{tag}
+                </motion.span>
               ))}
             </motion.div>
           </div>
@@ -279,19 +362,57 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         {relatedPosts.length > 0 && (
           <section className="py-20 bg-slate-900/30 border-t border-slate-800">
             <div className="max-w-7xl mx-auto px-6">
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl font-bold text-white mb-12">Continue Reading</motion.h2>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-3xl font-bold text-white mb-12"
+              >
+                Continue Reading
+              </motion.h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {relatedPosts.map((relatedPost, index) => (
-                  <motion.div key={relatedPost.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
+                  <motion.div
+                    key={relatedPost.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
                     <Link href={`/blog/${relatedPost.slug}`}>
-                      <motion.div whileHover={{ y: -8 }} className="group h-full bg-slate-800/30 rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all">
+                      <motion.div
+                        whileHover={{ y: -8 }}
+                        className="group h-full bg-slate-800/30 rounded-xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all"
+                      >
                         <div className="p-6">
-                          <p className="inline-block px-2 py-1 text-xs font-medium text-blue-400 bg-blue-500/10 rounded mb-3">{relatedPost.category}</p>
-                          <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">{relatedPost.title}</h3>
+                          <p className="inline-block px-2 py-1 text-xs font-medium text-blue-400 bg-blue-500/10 rounded mb-3">
+                            {relatedPost.category}
+                          </p>
+                          <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
+                            {relatedPost.title}
+                          </h3>
                           <p className="text-gray-400 mb-4 line-clamp-2">{relatedPost.excerpt}</p>
                           <div className="flex items-center justify-between text-sm">
-                            <span className="flex items-center gap-1.5 text-gray-500"><Clock className="w-4 h-4" />{relatedPost.readTime}</span>
-                            <span className="text-blue-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Read More<svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></span>
+                            <span className="flex items-center gap-1.5 text-gray-500">
+                              <Clock className="w-4 h-4" />
+                              {relatedPost.readTime}
+                            </span>
+                            <span className="text-blue-400 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">
+                              Read More
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth={2}
+                                  d="M9 5l7 7-7 7"
+                                />
+                              </svg>
+                            </span>
                           </div>
                         </div>
                       </motion.div>
@@ -304,5 +425,5 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
         )}
       </div>
     </MainLayout>
-  )
+  );
 }

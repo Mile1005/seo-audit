@@ -1,9 +1,19 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, AlertTriangle, MessageSquare, CreditCard, Calendar, ArrowRight, CheckCircle, XCircle, Clock } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  AlertTriangle,
+  MessageSquare,
+  CreditCard,
+  Calendar,
+  ArrowRight,
+  CheckCircle,
+  XCircle,
+  Clock,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function CancellationPage() {
   return (
@@ -19,10 +29,12 @@ export default function CancellationPage() {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Help Center
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Account Cancellation & Refunds</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Account Cancellation & Refunds
+            </h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Learn about our cancellation policy, refund process, and how to properly
-              close your AI SEO Turbo account when needed.
+              Learn about our cancellation policy, refund process, and how to properly close your AI
+              SEO Turbo account when needed.
             </p>
           </div>
 
@@ -64,7 +76,8 @@ export default function CancellationPage() {
                   <h3 className="text-lg font-semibold text-green-900">Pause Subscription</h3>
                 </div>
                 <p className="text-green-800 mb-4">
-                  Temporarily suspend your subscription while keeping all your data and settings intact.
+                  Temporarily suspend your subscription while keeping all your data and settings
+                  intact.
                 </p>
                 <ul className="space-y-2 text-sm text-green-700">
                   <li>• No charges during pause period</li>
@@ -94,15 +107,21 @@ export default function CancellationPage() {
 
           {/* How to Cancel */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">How to Cancel Your Account</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              How to Cancel Your Account
+            </h2>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <span className="text-blue-600 font-semibold">1</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Sign In to Your Account</h3>
-                  <p className="text-gray-600">Access your dashboard and navigate to account settings.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Sign In to Your Account
+                  </h3>
+                  <p className="text-gray-600">
+                    Access your dashboard and navigate to account settings.
+                  </p>
                 </div>
               </div>
 
@@ -111,8 +130,12 @@ export default function CancellationPage() {
                   <span className="text-blue-600 font-semibold">2</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Go to Billing Settings</h3>
-                  <p className="text-gray-600">Find the "Billing & Subscription" section in your account settings.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Go to Billing Settings
+                  </h3>
+                  <p className="text-gray-600">
+                    Find the "Billing & Subscription" section in your account settings.
+                  </p>
                 </div>
               </div>
 
@@ -121,8 +144,12 @@ export default function CancellationPage() {
                   <span className="text-blue-600 font-semibold">3</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Choose Cancellation Option</h3>
-                  <p className="text-gray-600">Select between pausing or permanently canceling your subscription.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Choose Cancellation Option
+                  </h3>
+                  <p className="text-gray-600">
+                    Select between pausing or permanently canceling your subscription.
+                  </p>
                 </div>
               </div>
 
@@ -132,7 +159,9 @@ export default function CancellationPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Confirm Cancellation</h3>
-                  <p className="text-gray-600">Review the terms and confirm your cancellation decision.</p>
+                  <p className="text-gray-600">
+                    Review the terms and confirm your cancellation decision.
+                  </p>
                 </div>
               </div>
             </div>
@@ -143,10 +172,12 @@ export default function CancellationPage() {
             <h2 className="text-2xl font-semibold text-gray-900 mb-6">Refund Policy</h2>
             <div className="space-y-6">
               <div className="border-l-4 border-green-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">30-Day Money-Back Guarantee</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  30-Day Money-Back Guarantee
+                </h3>
                 <p className="text-gray-600 mb-3">
-                  If you're not satisfied within the first 30 days, we'll provide a full refund.
-                  No questions asked, no hassle.
+                  If you're not satisfied within the first 30 days, we'll provide a full refund. No
+                  questions asked, no hassle.
                 </p>
                 <div className="bg-green-50 p-3 rounded text-sm">
                   <strong>Eligibility:</strong> Must be within 30 days of first payment
@@ -210,10 +241,12 @@ export default function CancellationPage() {
             <div className="flex items-start gap-4">
               <MessageSquare className="w-8 h-8 text-blue-600 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold text-blue-900 mb-2">Need Help with Cancellation?</h3>
+                <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                  Need Help with Cancellation?
+                </h3>
                 <p className="text-blue-800 mb-4">
-                  Our support team is here to help you through the cancellation process.
-                  We can also discuss alternatives or answer any questions you have.
+                  Our support team is here to help you through the cancellation process. We can also
+                  discuss alternatives or answer any questions you have.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -235,5 +268,5 @@ export default function CancellationPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

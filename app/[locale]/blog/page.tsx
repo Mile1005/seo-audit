@@ -1,28 +1,33 @@
-import { setRequestLocale } from 'next-intl/server'
-import type { Metadata } from 'next'
-import BlogPage from '@/app/blog/page'
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
-import { type Locale } from '@/i18n'
-import { generateAlternates } from '@/lib/metadata-utils';
+import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import BlogPage from "@/app/blog/page";
+import { generateSEOMeta, pageSEO } from "@/lib/seo";
+import { type Locale } from "@/i18n";
+import { generateAlternates } from "@/lib/metadata-utils";
 
 // SEO metadata for the blog page with hreflang support
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale } = await params
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
   return {
     ...generateSEOMeta({
-      description: 'Stay updated with the latest SEO tips, strategies, and best practices. Learn expert insights on technical SEO, content optimization, and algorithms.',
-      keywords: ['SEO blog', 'SEO tips', 'SEO strategies', 'search engine optimization'],
+      description:
+        "Stay updated with the latest SEO tips, strategies, and best practices. Learn expert insights on technical SEO, content optimization, and algorithms.",
+      keywords: ["SEO blog", "SEO tips", "SEO strategies", "search engine optimization"],
       locale: locale as Locale,
-      path: 'blog'
+      path: "blog",
     }),
-    alternates: generateAlternates('/blog', locale as Locale)
-  }
+    alternates: generateAlternates("/blog", locale as Locale),
+  };
 }
 
-type Props = { params: Promise<{ locale: string }> }
+type Props = { params: Promise<{ locale: string }> };
 
 export default async function LocalizedBlogPage({ params }: Props) {
-  const { locale } = await params
-  setRequestLocale(locale)
-  return <BlogPage />
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <BlogPage />;
 }

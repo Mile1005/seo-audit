@@ -15,6 +15,7 @@ The Dashboard Page Crawler is a comprehensive website analysis tool that allows 
 ## ✨ Key Features
 
 ### Crawling Capabilities
+
 - **Page Limits:** 10 to 100 pages per crawl
 - **Depth Control:** 1 to 5 levels deep
 - **Smart Crawling:** Breadth-first search with depth tracking
@@ -22,6 +23,7 @@ The Dashboard Page Crawler is a comprehensive website analysis tool that allows 
 - **User Agent:** `Mozilla/5.0 (compatible; AISEOTurbo-PageCrawler/1.0)`
 
 ### Analysis Features
+
 - ✅ Title tag analysis
 - ✅ Meta description checking
 - ✅ H1/H2 heading analysis
@@ -32,6 +34,7 @@ The Dashboard Page Crawler is a comprehensive website analysis tool that allows 
 - ✅ Comprehensive root page audit
 
 ### User Experience
+
 - 📊 Real-time progress tracking
 - 📁 Crawl history with filtering
 - 🔍 Advanced search and filtering
@@ -77,11 +80,13 @@ docs/
 ## 🔌 API Endpoints
 
 ### 1. Start Crawl
+
 **Endpoint:** `POST /api/dashboard/page-crawler/start`
 
 **Authentication:** Required
 
 **Request Body:**
+
 ```json
 {
   "url": "https://example.com",
@@ -92,6 +97,7 @@ docs/
 ```
 
 **Response:**
+
 ```json
 {
   "crawlId": "uuid",
@@ -102,6 +108,7 @@ docs/
 ```
 
 **Features:**
+
 - Validates and normalizes URLs
 - Enforces authentication
 - Checks quota limits
@@ -111,6 +118,7 @@ docs/
 - Returns immediately with job ID
 
 **Limits:**
+
 - Min pages: 10
 - Max pages: 100
 - Min depth: 1
@@ -119,11 +127,13 @@ docs/
 ---
 
 ### 2. Get Crawl Status
+
 **Endpoint:** `GET /api/dashboard/page-crawler/status?id={crawlId}`
 
 **Authentication:** Not required (job-based)
 
 **Response:**
+
 ```json
 {
   "id": "uuid",
@@ -140,22 +150,26 @@ docs/
 ```
 
 **Usage:**
+
 - Poll every 2 seconds during crawl
 - Automatically stops when status is 'completed' or 'failed'
 
 ---
 
 ### 3. List Crawls
+
 **Endpoint:** `GET /api/dashboard/page-crawler/list`
 
 **Authentication:** Required
 
 **Query Parameters:**
+
 - `projectId` (optional): Filter by project
 - `limit` (default: 20): Number of results
 - `offset` (default: 0): Pagination offset
 
 **Response:**
+
 ```json
 {
   "crawls": [
@@ -217,6 +231,7 @@ model Crawl {
 ```
 
 **New Fields:**
+
 - `type`: Distinguishes between standard crawls and dashboard crawls
 - Indexed for efficient querying
 
@@ -225,6 +240,7 @@ model Crawl {
 ## 📊 Results Data Structure
 
 ### Summary Object
+
 ```typescript
 {
   totalPages: number;
@@ -239,6 +255,7 @@ model Crawl {
 ```
 
 ### Page Object
+
 ```typescript
 {
   url: string;
@@ -283,17 +300,20 @@ model Crawl {
 ### Results View
 
 **Summary Cards:**
+
 - Total Pages
 - Pages with Issues
 - Average Word Count
 - Images without Alt Text
 
 **Issue Breakdown:**
+
 - Missing Titles count
 - Missing H1 count
 - Missing Meta Descriptions count
 
 **Detailed Table:**
+
 - Sortable columns (URL, Status, H1, Words, Images)
 - Filter options:
   - All Pages
@@ -307,6 +327,7 @@ model Crawl {
 - CSV export button
 
 **Table Columns:**
+
 - URL (clickable, external link)
 - Status Code (color-coded badge)
 - H1 Presence (checkmark/X)
@@ -316,6 +337,7 @@ model Crawl {
 - Details (expand button)
 
 **Expanded Row Details:**
+
 - Full title
 - Full meta description
 - H1 Count
@@ -328,6 +350,7 @@ model Crawl {
 ## 🔐 Authentication & Quotas
 
 ### Authentication
+
 - **Required** for all dashboard page crawler endpoints
 - Uses NextAuth.js session
 - Validated via `auth()` function
@@ -335,12 +358,14 @@ model Crawl {
 ### Quota System
 
 **Free Tier Limits:**
+
 - **Site Crawls per Month:** 5 (increased from 2)
 - Resets monthly (tracks by YYYY-MM)
 - Enforced before starting crawl
 - Returns 402 Payment Required if exceeded
 
 **Quota Tracking:**
+
 - Stored in `UserUsage` model
 - Keyed by userId + monthKey
 - Incremented after successful crawl
@@ -360,10 +385,11 @@ model Crawl {
    - Start async background job
 
 2. **Breadth-First Crawling**
+
    ```
    Queue: [{ url: startUrl, depth: 0 }]
    Visited: Set()
-   
+
    While queue not empty AND pages < maxPages:
      - Dequeue next URL
      - Skip if already visited
@@ -392,6 +418,7 @@ model Crawl {
    - Increment usage quota
 
 ### Error Handling
+
 - Page fetch failures: Log error, continue
 - Timeout: Abort after 15s, continue
 - Parse errors: Log, continue
@@ -402,18 +429,21 @@ model Crawl {
 ## 📈 Performance Characteristics
 
 ### Speed
+
 - **Pages per minute:** 4-8 (with 15s timeout)
 - **100 pages:** ~12-25 minutes
 - **50 pages:** ~6-12 minutes
 - **Background execution:** Non-blocking
 
 ### Timeouts
+
 - **Per page:** 15 seconds
 - **Polling interval:** 2 seconds
 - **Max poll duration:** 10 minutes
 - **Overall:** No hard limit (async)
 
 ### Resource Usage
+
 - **Memory:** In-memory job tracking
 - **Database:** One record per crawl
 - **Network:** Sequential page fetching
@@ -424,24 +454,28 @@ model Crawl {
 ## 🎯 Use Cases
 
 ### Website Audit
+
 - Identify pages with missing titles
 - Find H1 tag issues across entire site
 - Detect meta description problems
 - Track image optimization needs
 
 ### Content Analysis
+
 - Average word count across site
 - Content distribution analysis
 - Identify thin content pages
 - Monitor content quality
 
 ### Technical SEO
+
 - HTTP status code monitoring
 - Internal linking structure
 - Site depth analysis
 - Crawlability issues
 
 ### Reporting
+
 - Export data to CSV
 - Historical comparison
 - Progress tracking over time
@@ -451,27 +485,28 @@ model Crawl {
 
 ## 🔄 Comparison with Original Site Crawler
 
-| Feature | Original Crawler | Dashboard Page Crawler |
-|---------|-----------------|----------------------|
-| Max Pages | 25 (simple), 200 (advanced) | **100** |
-| Authentication | Optional | **Required** |
-| Quota | 2/month | **5/month** |
-| UI Location | /features/site-crawler | **/dashboard/page-crawler** |
-| Results Storage | Temporary | **Persistent in DB** |
-| History | No | **Yes, full history** |
-| Export | No | **CSV export** |
-| Project Association | No | **Yes, auto-links** |
-| Progress Tracking | Basic | **Real-time with polling** |
-| Results View | Simple table | **Comprehensive with filters** |
-| Search | No | **Yes** |
-| Sorting | No | **Yes, multiple fields** |
-| Mobile Friendly | Partial | **Fully responsive** |
+| Feature             | Original Crawler            | Dashboard Page Crawler         |
+| ------------------- | --------------------------- | ------------------------------ |
+| Max Pages           | 25 (simple), 200 (advanced) | **100**                        |
+| Authentication      | Optional                    | **Required**                   |
+| Quota               | 2/month                     | **5/month**                    |
+| UI Location         | /features/site-crawler      | **/dashboard/page-crawler**    |
+| Results Storage     | Temporary                   | **Persistent in DB**           |
+| History             | No                          | **Yes, full history**          |
+| Export              | No                          | **CSV export**                 |
+| Project Association | No                          | **Yes, auto-links**            |
+| Progress Tracking   | Basic                       | **Real-time with polling**     |
+| Results View        | Simple table                | **Comprehensive with filters** |
+| Search              | No                          | **Yes**                        |
+| Sorting             | No                          | **Yes, multiple fields**       |
+| Mobile Friendly     | Partial                     | **Fully responsive**           |
 
 ---
 
 ## 🛠️ Migration from Old Crawler
 
 No migration needed - this is a new parallel feature. Users can:
+
 - Use the public site crawler at `/features/site-crawler` for quick 15-page scans
 - Use the dashboard page crawler at `/dashboard/page-crawler` for comprehensive 100-page analysis
 
@@ -482,19 +517,21 @@ No migration needed - this is a new parallel feature. Users can:
 ### For Developers
 
 1. **Database Setup**
+
    ```bash
    # Generate Prisma client with new schema
    npx prisma generate
-   
+
    # Create migration
    npx prisma migrate dev --name add_crawl_type_field
    ```
 
 2. **Test the Feature**
+
    ```bash
    # Start development server
    npm run dev
-   
+
    # Navigate to
    http://localhost:3000/dashboard/page-crawler
    ```
@@ -574,6 +611,7 @@ No migration needed - this is a new parallel feature. Users can:
 ## 🔮 Future Enhancements
 
 ### Short Term
+
 - [ ] Add rate limiting configuration
 - [ ] Implement crawl cancellation
 - [ ] Add email notifications on completion
@@ -581,6 +619,7 @@ No migration needed - this is a new parallel feature. Users can:
 - [ ] Add more export formats (JSON, PDF)
 
 ### Medium Term
+
 - [ ] Scheduled crawls
 - [ ] Crawl comparison (before/after)
 - [ ] AI-powered insights
@@ -588,6 +627,7 @@ No migration needed - this is a new parallel feature. Users can:
 - [ ] Webhooks for crawl completion
 
 ### Long Term
+
 - [ ] Distributed crawling
 - [ ] Real-time monitoring
 - [ ] Change detection alerts
@@ -649,6 +689,7 @@ No migration needed - this is a new parallel feature. Users can:
 ## 📞 API Testing with cURL
 
 ### Start a Crawl
+
 ```bash
 curl -X POST https://aiseoturbo.com/api/dashboard/page-crawler/start \
   -H "Content-Type: application/json" \
@@ -661,12 +702,14 @@ curl -X POST https://aiseoturbo.com/api/dashboard/page-crawler/start \
 ```
 
 ### Check Status
+
 ```bash
 curl "https://aiseoturbo.com/api/dashboard/page-crawler/status?id=CRAWL_ID" \
   -H "Cookie: your-auth-cookie"
 ```
 
 ### List Crawls
+
 ```bash
 curl "https://aiseoturbo.com/api/dashboard/page-crawler/list?limit=10" \
   -H "Cookie: your-auth-cookie"
@@ -685,10 +728,10 @@ The Dashboard Page Crawler is now **fully implemented and ready to use**. It pro
 ✅ **Crawl history** with persistent storage  
 ✅ **Real-time progress** tracking  
 ✅ **Project association** for organization  
-✅ **Increased quota** (5 crawls/month)  
+✅ **Increased quota** (5 crawls/month)
 
 This feature matches and exceeds the functionality shown in your Semrush screenshot reference, providing a professional-grade page crawler tool directly in your dashboard!
 
 ---
 
-*Documentation created on October 14, 2025*
+_Documentation created on October 14, 2025_

@@ -1,9 +1,15 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('localized features routing', () => {
-  const slugs = ['seo-audit', 'site-crawler', 'keyword-tracking', 'competitor-analysis', 'ai-assistant'];
+test.describe("localized features routing", () => {
+  const slugs = [
+    "seo-audit",
+    "site-crawler",
+    "keyword-tracking",
+    "competitor-analysis",
+    "ai-assistant",
+  ];
 
-  for (const locale of ['fr','it','es','id','de']) {
+  for (const locale of ["fr", "it", "es", "id", "de"]) {
     for (const slug of slugs) {
       test(`${locale}/features/${slug} resolves`, async ({ page }) => {
         const resp = await page.goto(`/${locale}/features/${slug}`);

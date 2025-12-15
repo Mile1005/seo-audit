@@ -5,7 +5,7 @@
       "command": "npx",
       "args": ["-y", "server-perplexity-ask"],
       "env": {
-        "PERPLEXITY_API_KEY": "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"
+        "PERPLEXITY_API_KEY": "YOUR_PPLX_API_KEY"
       }
     }
   }

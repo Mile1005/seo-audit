@@ -1,223 +1,229 @@
 "use client";
-import { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { AlertTriangle, Filter } from 'lucide-react';
-import { Badge } from '../ui/badge';
-import { Issue } from '../../lib/types/audit';
-import { Button } from '../ui/button';
+import { useMemo, useState } from "react";
+import { AlertTriangle, Filter } from "lucide-react";
+import { Badge } from "../ui/badge";
+import { Issue } from "../../lib/types/audit";
+import { Button } from "../ui/button";
+import { GlassCard } from "../ui/GlassCard";
 
-interface Props { issues: Issue[] }
+interface Props {
+  issues: Issue[];
+}
 
 const severityOrder: Record<string, number> = { high: 1, medium: 2, low: 3 };
 const effortOrder: Record<string, number> = { low: 1, medium: 2, high: 3 };
 const impactOrder: Record<string, number> = { low: 1, medium: 2, high: 3 };
 
 export const IssuesList = ({ issues }: Props) => {
-  const [selectedSeverities, setSelectedSeverities] = useState<string[]>(['high', 'medium', 'low']);
-  const [category, setCategory] = useState<string>('all');
-  const [sort, setSort] = useState<'severity' | 'impact' | 'effort'>('severity');
+  const [selectedSeverities, setSelectedSeverities] = useState<string[]>(["high", "medium", "low"]);
+  const [category, setCategory] = useState<string>("all");
+  const [sort, setSort] = useState<"severity" | "impact" | "effort">("severity");
+  const [showAll, setShowAll] = useState(false);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
-    issues?.forEach(i=> { if (i.category) set.add(i.category) });
+    issues?.forEach((i) => {
+      if (i.category) set.add(i.category);
+    });
     return Array.from(set).sort();
   }, [issues]);
 
   const toggleSeverity = (sev: string) => {
-    setSelectedSeverities(prev => prev.includes(sev) ? prev.filter(s=>s!==sev) : [...prev, sev]);
+    setSelectedSeverities((prev) =>
+      prev.includes(sev) ? prev.filter((s) => s !== sev) : [...prev, sev]
+    );
   };
 
   const filteredIssues = useMemo(() => {
-    return (issues ?? []).filter(i => selectedSeverities.includes((i.severity||'').toLowerCase()))
-      .filter(i => category === 'all' || i.category === category);
+    return (issues ?? [])
+      .filter((i) => selectedSeverities.includes((i.severity || "").toLowerCase()))
+      .filter((i) => category === "all" || i.category === category);
   }, [issues, selectedSeverities, category]);
 
   const sortedIssues = useMemo(() => {
     const arr = [...filteredIssues];
-    arr.sort((a,b) => {
-      if (sort === 'severity') {
-        return (severityOrder[a.severity?.toLowerCase()||'low']||9) - (severityOrder[b.severity?.toLowerCase()||'low']||9);
-      } else if (sort === 'impact') {
-        return (impactOrder[b.impact?.toLowerCase()||'low']||0) - (impactOrder[a.impact?.toLowerCase()||'low']||0);
-      } else if (sort === 'effort') {
-        return (effortOrder[a.effort?.toLowerCase()||'low']||0) - (effortOrder[b.effort?.toLowerCase()||'low']||0); // lower effort first
+    arr.sort((a, b) => {
+      if (sort === "severity") {
+        return (
+          (severityOrder[a.severity?.toLowerCase() || "low"] || 9) -
+          (severityOrder[b.severity?.toLowerCase() || "low"] || 9)
+        );
+      } else if (sort === "impact") {
+        return (
+          (impactOrder[b.impact?.toLowerCase() || "low"] || 0) -
+          (impactOrder[a.impact?.toLowerCase() || "low"] || 0)
+        );
+      } else if (sort === "effort") {
+        return (
+          (effortOrder[a.effort?.toLowerCase() || "low"] || 0) -
+          (effortOrder[b.effort?.toLowerCase() || "low"] || 0)
+        ); // lower effort first
       }
       return 0;
     });
     return arr;
   }, [filteredIssues, sort]);
 
+  const visibleCount = 8;
+  const visibleIssues = useMemo(
+    () => (showAll ? sortedIssues : sortedIssues.slice(0, visibleCount)),
+    [sortedIssues, showAll]
+  );
+
   // After hooks are declared, it's safe to early-return without violating the Rules of Hooks
   if (!issues || issues.length === 0) return null;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, type: "spring", stiffness: 80 }}
-    >
-    <Card className="bg-gradient-to-br from-red-50 via-rose-50 to-red-100 border-2 border-red-200 dark:from-red-900/10 dark:via-rose-900/10 dark:to-red-900/10 dark:border-red-700">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-lg font-bold flex items-center gap-3 text-red-900 dark:text-red-100">
-          <motion.div 
-            className="p-2 bg-red-500 rounded-lg"
-            whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <AlertTriangle className="h-5 w-5 text-white" />
-          </motion.div>
-          All Issues ({issues.length})
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        {/* Filter Bar */}
-        <div className="mb-6 p-4 border border-red-200 dark:border-red-700 rounded-xl bg-white dark:bg-slate-700 space-y-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200">
-            <Filter className="h-4 w-4" /> 
-            Filters
+    <GlassCard>
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <div className="h-9 w-9 rounded-lg bg-white/10 border border-white/10 flex items-center justify-center">
+              <AlertTriangle className="h-4 w-4 text-amber-300" />
+            </div>
+            <h3 className="text-base font-semibold text-white truncate">Issues</h3>
+            <span className="text-xs text-white/60">({issues.length})</span>
           </div>
-          <div className="flex flex-wrap gap-3 items-center">
-            {['high','medium','low'].map(sev => (
-              <motion.div
-                key={sev}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  type="button" 
-                  size="sm" 
-                  variant={selectedSeverities.includes(sev)?'default':'outline'} 
-                  onClick={()=>toggleSeverity(sev)} 
-                  className={`text-xs font-medium capitalize transition-all duration-200 ${
-                    selectedSeverities.includes(sev) 
-                      ? sev === 'high' ? 'bg-red-500 hover:bg-red-600 text-white shadow-lg shadow-red-500/30' :
-                        sev === 'medium' ? 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/30' :
-                        'bg-blue-500 hover:bg-blue-600 text-white shadow-lg shadow-blue-500/30'
-                      : 'border-slate-300 dark:border-slate-500 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-600'
-                  }`}
+          <p className="mt-1 text-sm text-white/60">Prioritized items to fix for better SEO.</p>
+        </div>
+
+        {sortedIssues.length > visibleCount && (
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/15 text-white"
+            onClick={() => setShowAll((v) => !v)}
+          >
+            {showAll ? "Show less" : "Show all"}
+          </Button>
+        )}
+      </div>
+
+          {/* Filter Bar */}
+          <div className="mb-5 rounded-xl border border-white/10 bg-white/5 p-4 space-y-4">
+            <div className="flex items-center gap-2 text-sm font-semibold text-white">
+              <Filter className="h-4 w-4 text-sky-300" />
+              Filters
+            </div>
+            <div className="flex flex-wrap gap-3 items-center">
+              {["high", "medium", "low"].map((sev) => (
+                <Button
+                  key={sev}
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => toggleSeverity(sev)}
+                  className={
+                    selectedSeverities.includes(sev)
+                      ? "bg-white/15 border-white/20 text-white"
+                      : "bg-white/5 border-white/10 text-white/80 hover:bg-white/10 hover:border-white/15"
+                  }
                 >
                   {sev}
                 </Button>
-              </motion.div>
-            ))}
-            <div className="h-6 w-px bg-slate-300 dark:bg-slate-600 mx-2" />
-            <select 
-              value={category} 
-              onChange={e=>setCategory(e.target.value)} 
-              className="text-sm border border-slate-300 dark:border-slate-500 rounded-lg px-3 py-2 bg-white dark:bg-slate-600 text-slate-900 dark:text-slate-100 hover:border-slate-400 dark:hover:border-slate-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors"
-            >
-              <option value="all">All Categories</option>
-              {categories.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <div className="h-6 w-px bg-slate-300 dark:bg-slate-600 mx-2" />
-            <select 
-              value={sort} 
-              onChange={e=>setSort(e.target.value as any)} 
-              className="text-sm border border-slate-300 dark:border-slate-500 rounded-lg px-3 py-2 bg-white dark:bg-slate-600 text-slate-900 dark:text-slate-100 hover:border-slate-400 dark:hover:border-slate-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-colors"
-            >
-              <option value="severity">Sort: Severity</option>
-              <option value="impact">Sort: Impact (desc)</option>
-              <option value="effort">Sort: Effort (asc)</option>
-            </select>
-            <Button 
-              type="button" 
-              size="sm" 
-              variant="ghost" 
-              className="text-sm text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700" 
-              onClick={()=>{setSelectedSeverities(['high','medium','low']); setCategory('all'); setSort('severity')}}
-            >
-              Reset
-            </Button>
+              ))}
+              <div className="h-6 w-px bg-white/10 mx-2" />
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                className="text-sm rounded-lg px-3 py-2 bg-white/5 border border-white/10 text-white hover:border-white/20 outline-none transition-colors"
+              >
+                <option value="all">All Categories</option>
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+              <div className="h-6 w-px bg-white/10 mx-2" />
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as any)}
+                className="text-sm rounded-lg px-3 py-2 bg-white/5 border border-white/10 text-white hover:border-white/20 outline-none transition-colors"
+              >
+                <option value="severity">Sort: Severity</option>
+                <option value="impact">Sort: Impact (desc)</option>
+                <option value="effort">Sort: Effort (asc)</option>
+              </select>
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                className="bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/15 text-white/80"
+                onClick={() => {
+                  setSelectedSeverities(["high", "medium", "low"]);
+                  setCategory("all");
+                  setSort("severity");
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+            <div className="text-sm text-white/70 bg-black/10 px-3 py-2 rounded-lg border border-white/10">
+              Showing <span className="font-semibold">{sortedIssues.length}</span> of{" "}
+              <span className="font-semibold">{issues.length}</span> issues
+            </div>
           </div>
-          <div className="text-sm text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-600 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-500">
-            Showing <span className="font-semibold">{sortedIssues.length}</span> of <span className="font-semibold">{issues.length}</span> issues
-          </div>
-        </div>
 
-        <div className="space-y-4">
-          <AnimatePresence mode="popLayout">
-            {sortedIssues.map((issue,i)=> {
-              const getSeverityStyles = (severity: string) => {
-                switch(severity) {
-                  case 'high': return 'bg-red-500 text-white';
-                  case 'medium': return 'bg-orange-500 text-white';
-                  case 'low': return 'bg-blue-500 text-white';
-                  default: return 'bg-slate-500 text-white';
-                }
-              };
-              
-              return (
-                <motion.div 
-                  key={`${issue.title}-${i}`}
-                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
-                  transition={{ 
-                    duration: 0.3, 
-                    delay: i * 0.05,
-                    type: "spring",
-                    stiffness: 100
-                  }}
-                  whileHover={{ 
-                    y: -4,
-                    scale: 1.01,
-                    transition: { duration: 0.2 }
-                  }}
-                  className="flex flex-col p-5 border border-slate-200 dark:border-slate-600 rounded-xl hover:shadow-xl hover:border-blue-400/50 dark:hover:border-blue-500/50 transition-all duration-300 bg-white dark:bg-slate-700/50 cursor-pointer group"
-                >
-                <div className="flex items-start gap-3 mb-3">
-                  <motion.div 
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold flex-shrink-0 ${getSeverityStyles(issue.severity || 'medium')}`}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    transition={{ duration: 0.2, type: "spring", stiffness: 300 }}
-                  >
-                    {(issue.severity || 'medium').toUpperCase()}
-                  </motion.div>
+          <div className="space-y-4">
+            {visibleIssues.map((issue, i) => (
+              <div
+                key={`${issue.title}-${i}`}
+                className="rounded-xl border border-white/10 bg-white/5 p-5 hover:bg-white/8 transition-colors"
+              >
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <Badge variant="secondary" className="bg-white/10 text-white/80">
+                    {(issue.severity || "medium").toLowerCase()}
+                  </Badge>
+                  {issue.category && (
+                    <Badge variant="outline" className="border-white/15 text-white/70">
+                      {issue.category}
+                    </Badge>
+                  )}
+                  {issue.impact && (
+                    <Badge variant="outline" className="border-white/15 text-white/70">
+                      {issue.impact} impact
+                    </Badge>
+                  )}
+                  {issue.effort && (
+                    <Badge variant="outline" className="border-white/15 text-white/70">
+                      {issue.effort} effort
+                    </Badge>
+                  )}
                 </div>
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-semibold text-slate-900 dark:text-slate-100 text-base leading-tight mb-2 break-words">{issue.title}</h4>
-                  <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed mb-3 break-words">{issue.description}</p>
-                  {issue.recommendation && (
-                    <div className="mt-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-                      <div className="flex items-start gap-2">
-                        <div className="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <span className="text-white text-xs font-bold">!</span>
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <strong className="text-blue-800 dark:text-blue-200 text-sm">Recommendation:</strong>
-                          <p className="text-blue-700 dark:text-blue-300 text-sm mt-1 leading-relaxed break-words">{issue.recommendation}</p>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {issue.current_value && issue.expected_value && (
-                    <div className="mt-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-600 overflow-hidden">
-                      <div className="flex flex-col gap-2 text-sm">
-                        <div className="flex flex-col gap-1">
-                          <span className="font-medium text-slate-600 dark:text-slate-300 text-xs">Current:</span>
-                          <span className="font-mono text-red-700 dark:text-red-300 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded text-xs break-all">{issue.current_value}</span>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <span className="font-medium text-slate-600 dark:text-slate-300 text-xs">Expected:</span>
-                          <span className="font-mono text-green-700 dark:text-green-300 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded text-xs break-all">{issue.expected_value}</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div className="flex gap-2 mt-4 flex-wrap">
-                    {issue.category && <Badge variant="outline" className="text-xs font-medium bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-600">{issue.category}</Badge>}
-                    {issue.impact && <Badge variant="outline" className="text-xs font-medium bg-purple-50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700">{issue.impact} impact</Badge>}
-                    {issue.effort && <Badge variant="outline" className="text-xs font-medium bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700">{issue.effort} effort</Badge>}
+
+                <h4 className="font-medium text-white mb-1 break-words">{issue.title}</h4>
+                <p className="text-sm text-white/70 leading-relaxed break-words">{issue.description}</p>
+
+                {issue.recommendation && (
+                  <div className="mt-3 rounded-lg border border-white/10 bg-black/10 p-3">
+                    <div className="text-xs text-white/60 mb-1">Recommendation</div>
+                    <p className="text-sm text-white/80 leading-relaxed break-words">
+                      {issue.recommendation}
+                    </p>
                   </div>
-                </div>
-              </motion.div>
-            );
-          })}
-          </AnimatePresence>
-        </div>
-      </CardContent>
-    </Card>
-    </motion.div>
+                )}
+
+                {issue.current_value && issue.expected_value && (
+                  <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="rounded-lg border border-white/10 bg-black/10 p-3">
+                      <div className="text-xs text-white/60 mb-1">Current</div>
+                      <div className="text-xs text-white/80 break-all font-mono">
+                        {issue.current_value}
+                      </div>
+                    </div>
+                    <div className="rounded-lg border border-white/10 bg-black/10 p-3">
+                      <div className="text-xs text-white/60 mb-1">Expected</div>
+                      <div className="text-xs text-white/80 break-all font-mono">
+                        {issue.expected_value}
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+    </GlassCard>
   );
 };

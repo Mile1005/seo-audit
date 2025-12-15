@@ -102,7 +102,7 @@ export async function fetchPageSpeed(
       performanceScore: null,
       notes: ["PSI API key not provided - performance data unavailable"],
       opportunities: [],
-      diagnostics: []
+      diagnostics: [],
     };
   }
 
@@ -172,7 +172,7 @@ export async function fetchPageSpeed(
         performanceScore,
         notes,
         opportunities,
-        diagnostics
+        diagnostics,
       };
 
       // Store in cache
@@ -195,10 +195,7 @@ export async function fetchPageSpeed(
         );
         // In production, send alert to monitoring system here
       }
-      console.error(
-        `PageSpeed Insights error (attempt ${attempt + 1}):`,
-        error
-      );
+      console.error(`PageSpeed Insights error (attempt ${attempt + 1}):`, error);
       if (attempt === maxRetries) {
         return {
           lcp: null,
@@ -214,7 +211,7 @@ export async function fetchPageSpeed(
             }`,
           ],
           opportunities: [],
-          diagnostics: []
+          diagnostics: [],
         };
       }
     }
@@ -228,13 +225,9 @@ export async function fetchPageSpeed(
     tbt: null,
     si: null,
     performanceScore: null,
-    notes: [
-      `PSI API error: ${
-        lastError instanceof Error ? lastError.message : "Unknown error"
-      }`,
-    ],
+    notes: [`PSI API error: ${lastError instanceof Error ? lastError.message : "Unknown error"}`],
     opportunities: [],
-    diagnostics: []
+    diagnostics: [],
   };
 }
 
@@ -294,38 +287,52 @@ function generatePerformanceOpportunities(
 
   // Core Web Vitals Optimizations
   if (lcp && lcp > 2.5) {
-    opportunities.push(`Optimize Largest Contentful Paint: currently ${lcp.toFixed(2)}s, target ≤2.5s`);
-    opportunities.push("Optimize Critical Resource Priority: Ensure main content elements load first");
+    opportunities.push(
+      `Optimize Largest Contentful Paint: currently ${lcp.toFixed(2)}s, target ≤2.5s`
+    );
+    opportunities.push(
+      "Optimize Critical Resource Priority: Ensure main content elements load first"
+    );
     opportunities.push("Implement Resource Preloading: Preload critical images and fonts");
     opportunities.push("Optimize Server Response Time: Reduce TTFB to improve LCP");
   }
-  
+
   if (cls && cls > 0.1) {
     opportunities.push(`Reduce Cumulative Layout Shift: currently ${cls.toFixed(3)}, target ≤0.1`);
-    opportunities.push("Specify Image Dimensions: Add width and height attributes to prevent layout shifts");
+    opportunities.push(
+      "Specify Image Dimensions: Add width and height attributes to prevent layout shifts"
+    );
     opportunities.push("Reserve Space for Ads: Use CSS to allocate space for dynamic content");
-    opportunities.push("Avoid Non-Composited Animations: Use transform and opacity for smooth animations");
+    opportunities.push(
+      "Avoid Non-Composited Animations: Use transform and opacity for smooth animations"
+    );
   }
-  
+
   if (inp && inp > 200) {
     opportunities.push(`Improve Interaction to Next Paint: currently ${inp}ms, target ≤200ms`);
-    opportunities.push("Minimize JavaScript Execution Time: Optimize heavy scripts and event handlers");
+    opportunities.push(
+      "Minimize JavaScript Execution Time: Optimize heavy scripts and event handlers"
+    );
     opportunities.push("Use Efficient Event Listeners: Implement passive and debounced listeners");
   }
-  
+
   if (fcp && fcp > 1.8) {
-    opportunities.push(`Optimize First Contentful Paint: currently ${fcp.toFixed(2)}s, target ≤1.8s`);
-    opportunities.push("Eliminate Render-Blocking Resources: Defer non-critical CSS and JavaScript");
+    opportunities.push(
+      `Optimize First Contentful Paint: currently ${fcp.toFixed(2)}s, target ≤1.8s`
+    );
+    opportunities.push(
+      "Eliminate Render-Blocking Resources: Defer non-critical CSS and JavaScript"
+    );
     opportunities.push("Optimize Web Fonts: Use font-display: swap and preload key fonts");
   }
-  
+
   if (tbt && tbt > 200) {
     opportunities.push(`Reduce Total Blocking Time: currently ${tbt}ms, target ≤200ms`);
     opportunities.push("Code Split JavaScript: Break large bundles into smaller chunks");
     opportunities.push("Remove Unused JavaScript: Eliminate dead code and unnecessary libraries");
     opportunities.push("Optimize Third-Party Scripts: Lazy load or defer non-essential scripts");
   }
-  
+
   if (si && si > 3.4) {
     opportunities.push(`Improve Speed Index: currently ${si.toFixed(2)}s, target ≤3.4s`);
     opportunities.push("Optimize Images: Use WebP format and responsive images");
@@ -333,17 +340,29 @@ function generatePerformanceOpportunities(
   }
 
   // Additional comprehensive optimization opportunities
-  opportunities.push("Minify CSS and JavaScript: Reduce file sizes by removing whitespace and comments");
+  opportunities.push(
+    "Minify CSS and JavaScript: Reduce file sizes by removing whitespace and comments"
+  );
   opportunities.push("Enable Browser Caching: Set appropriate cache headers for static resources");
-  opportunities.push("Use a Content Delivery Network (CDN): Serve assets from geographically closer servers");
-  opportunities.push("Optimize Database Queries: Reduce server processing time for dynamic content");
-  opportunities.push("Implement Progressive Web App Features: Add service workers for offline functionality");
+  opportunities.push(
+    "Use a Content Delivery Network (CDN): Serve assets from geographically closer servers"
+  );
+  opportunities.push(
+    "Optimize Database Queries: Reduce server processing time for dynamic content"
+  );
+  opportunities.push(
+    "Implement Progressive Web App Features: Add service workers for offline functionality"
+  );
   opportunities.push("Reduce HTTP Requests: Combine CSS/JS files and use CSS sprites for images");
-  opportunities.push("Optimize Critical Rendering Path: Inline critical CSS and defer non-critical styles");
+  opportunities.push(
+    "Optimize Critical Rendering Path: Inline critical CSS and defer non-critical styles"
+  );
   opportunities.push("Use HTTP/2 Server Push: Push critical resources before they're requested");
   opportunities.push("Implement Lazy Loading: Load images and content only when needed");
-  opportunities.push("Optimize Mobile Performance: Ensure responsive design works efficiently on mobile devices");
-  
+  opportunities.push(
+    "Optimize Mobile Performance: Ensure responsive design works efficiently on mobile devices"
+  );
+
   return opportunities;
 }
 
@@ -360,7 +379,9 @@ function generatePerformanceDiagnostics(
     if (performanceScore >= 90) {
       diagnostics.push("Performance is excellent - maintain current optimization level");
       diagnostics.push("Continue monitoring Core Web Vitals to ensure consistent performance");
-      diagnostics.push("Consider implementing advanced techniques like Service Workers for offline functionality");
+      diagnostics.push(
+        "Consider implementing advanced techniques like Service Workers for offline functionality"
+      );
     } else if (performanceScore >= 70) {
       diagnostics.push("Performance is good - minor optimizations could improve score");
       diagnostics.push("Focus on fine-tuning image optimization and JavaScript execution");
@@ -379,15 +400,25 @@ function generatePerformanceDiagnostics(
   }
 
   // Comprehensive diagnostics based on common performance patterns
-  diagnostics.push("Consider optimizing images, enabling compression, and reducing JavaScript execution time");
-  diagnostics.push("Evaluate loading strategies: critical resource prioritization and progressive enhancement");
+  diagnostics.push(
+    "Consider optimizing images, enabling compression, and reducing JavaScript execution time"
+  );
+  diagnostics.push(
+    "Evaluate loading strategies: critical resource prioritization and progressive enhancement"
+  );
   diagnostics.push("Review mobile performance specifically - ensure responsive design efficiency");
   diagnostics.push("Analyze network payload: minimize resource sizes and eliminate unused code");
-  diagnostics.push("Implement performance monitoring: track metrics over time and set performance budgets");
+  diagnostics.push(
+    "Implement performance monitoring: track metrics over time and set performance budgets"
+  );
   diagnostics.push("Optimize for perceived performance: skeleton screens and progressive loading");
-  diagnostics.push("Consider modern web technologies: HTTP/2, WebAssembly for compute-intensive tasks");
-  diagnostics.push("Evaluate hosting and infrastructure: server response times and geographic distribution");
-  
+  diagnostics.push(
+    "Consider modern web technologies: HTTP/2, WebAssembly for compute-intensive tasks"
+  );
+  diagnostics.push(
+    "Evaluate hosting and infrastructure: server response times and geographic distribution"
+  );
+
   return diagnostics;
 }
 

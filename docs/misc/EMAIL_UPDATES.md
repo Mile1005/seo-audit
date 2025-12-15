@@ -1,14 +1,17 @@
 # Professional Email Addresses Update
 
 ## Overview
+
 Updated all email addresses across the website to use the new professional mailbox addresses for better customer support and organization.
 
 ## Email Addresses Implemented
 
 ### 1. **support@aiseoturbo.com**
+
 **Purpose:** General inquiries, customer support, privacy requests, legal questions, and security reports
 
 **Used in:**
+
 - Contact page (main contact email)
 - Help Center
 - Privacy Policy page
@@ -18,29 +21,36 @@ Updated all email addresses across the website to use the new professional mailb
 - Footer
 
 ### 2. **sales@aiseoturbo.com**
+
 **Purpose:** Sales inquiries, business partnerships, and enterprise customers
 
 **Used in:**
+
 - Contact page (sales & partnerships section)
 - Footer
 
 ### 3. **billing@aiseoturbo.com**
+
 **Purpose:** Billing questions, payment issues, invoice requests, and subscription management
 
 **Used in:**
+
 - Contact page (billing & payments section)
 - Footer
 
 ### 4. **noreply@aiseoturbo.com** (Existing)
+
 **Purpose:** Transactional emails (password resets, verification emails, etc.)
 
 **Used in:**
+
 - .env.example (AUTH_EMAIL_FROM)
 - System-generated emails
 
 ## Files Updated
 
 ### Primary Pages
+
 1. ✅ `/app/contact/page.tsx` - Added all three professional emails with clear sections
 2. ✅ `/app/privacy/page.tsx` - Updated to support@aiseoturbo.com
 3. ✅ `/app/privacy/page-new.tsx` - Updated to support@aiseoturbo.com
@@ -48,21 +58,25 @@ Updated all email addresses across the website to use the new professional mailb
 5. ✅ `/app/terms/page-new.tsx` - Updated to support@aiseoturbo.com
 
 ### Help & Security Pages
+
 6. ✅ `/app/help/page.tsx` - Already had support@aiseoturbo.com
 7. ✅ `/app/help/security/best-practices/page.tsx` - Updated security contact
 8. ✅ `/app/help/security/gdpr/page.tsx` - Updated DPO contact
 
 ### Layout Components
+
 9. ✅ `/components/layout/Footer.tsx` - Added Contact section with all three emails
 
 ## Benefits
 
 ### For Users
+
 - **Clear Communication Channels:** Users know exactly which email to contact for their specific needs
 - **Faster Response Times:** Emails are routed to the right department immediately
 - **Professional Image:** Multiple department-specific emails signal a mature, organized company
 
 ### For Business
+
 - **Better Organization:** Separate inboxes for support, sales, and billing
 - **Analytics:** Track volume and response times by department
 - **Scalability:** Easy to assign team members to specific mailboxes
@@ -71,6 +85,7 @@ Updated all email addresses across the website to use the new professional mailb
 ## Email Routing Recommendations
 
 ### Support Mailbox (support@aiseoturbo.com)
+
 - General questions
 - Technical support
 - Account issues
@@ -79,6 +94,7 @@ Updated all email addresses across the website to use the new professional mailb
 - Documentation questions
 
 ### Sales Mailbox (sales@aiseoturbo.com)
+
 - Product inquiries
 - Enterprise plans
 - Partnership opportunities
@@ -86,6 +102,7 @@ Updated all email addresses across the website to use the new professional mailb
 - Bulk licensing
 
 ### Billing Mailbox (billing@aiseoturbo.com)
+
 - Payment issues
 - Invoice requests
 - Subscription changes

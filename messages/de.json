@@ -487,23 +487,12 @@
     "privacy": {
       "title": "Datenschutzrichtlinie - Datenschutz | AI SEO Turbo",
       "description": "Datenschutzerklärung. Erfahren Sie, wie wir Ihre Daten schützen (DSGVO). Ihre Sicherheit hat für uns oberste Priorität.",
-      "keywords": [
-        "Datenschutzrichtlinie",
-        "Datenschutz",
-        "DSGVO",
-        "Datenschutzrechte"
-      ]
+      "keywords": ["Datenschutzrichtlinie", "Datenschutz", "DSGVO", "Datenschutzrechte"]
     },
     "status": {
       "title": "Systemstatus - Serviceverfügbarkeit | AI SEO Turbo",
       "description": "Systemstatus. Prüfen Sie die Verfügbarkeit unserer SEO-Tools und API in Echtzeit. Infos zu Wartung und Serverstatus.",
-      "keywords": [
-        "Systemstatus",
-        "Serviceverfügbarkeit",
-        "Wartung",
-        "Systemstatus",
-        "Überwachung"
-      ]
+      "keywords": ["Systemstatus", "Serviceverfügbarkeit", "Wartung", "Systemstatus", "Überwachung"]
     },
     "pricing": {
       "title": "SEO-Audit-Preispläne - Wählen Sie Ihren perfekten Plan | AI SEO Turbo",
@@ -1422,11 +1411,7 @@
           "description": "Starten Sie Ihre SEO-Reise, indem Sie ein kostenloses AISEOTurbo-Konto erstellen. Sie erhalten sofortigen Zugriff auf unsere leistungsstarken Prüftools.",
           "requirements": {
             "title": "Was Sie benötigen:",
-            "items": [
-              "Eine gültige E-Mail-Adresse",
-              "Ihre Website-URL",
-              "2 Minuten Ihrer Zeit"
-            ]
+            "items": ["Eine gültige E-Mail-Adresse", "Ihre Website-URL", "2 Minuten Ihrer Zeit"]
           },
           "tip": {
             "title": "💡 Profi-Tipp",
@@ -1470,11 +1455,7 @@
                 "Überprüfung der Inhaltsoptimierung",
                 "Technische SEO-Prüfung"
               ],
-              [
-                "Leistungskennzahlen",
-                "Mobile Optimierung",
-                "Sicherheitsbewertung"
-              ]
+              ["Leistungskennzahlen", "Mobile Optimierung", "Sicherheitsbewertung"]
             ]
           },
           "feature": {
@@ -9409,21 +9390,13 @@
               "icon": "Wallet",
               "name": "Digitale Geldbörsen",
               "description": "PayPal, Apple Pay, Google Pay und andere digitale Geldbörsenoptionen.",
-              "features": [
-                "Ein-Klick-Zahlungen",
-                "Erhöhte Sicherheit",
-                "Mobilfreundlich"
-              ]
+              "features": ["Ein-Klick-Zahlungen", "Erhöhte Sicherheit", "Mobilfreundlich"]
             },
             {
               "icon": "Building",
               "name": "Banküberweisungen",
               "description": "ACH- und Drahtüberweisungen für Jahrespläne und Unternehmenskonten.",
-              "features": [
-                "Niedrigere Gebühren",
-                "Direkt von der Bank",
-                "Stapelverarbeitung"
-              ]
+              "features": ["Niedrigere Gebühren", "Direkt von der Bank", "Stapelverarbeitung"]
             }
           ]
         },
@@ -9693,10 +9666,7 @@
           "smsAuth": {
             "title": "SMS-Authentifizierung",
             "description": "Empfangen Sie Bestätigungscodes per SMS an Ihre registrierte Telefonnummer.",
-            "features": [
-              "Einfach einzurichten",
-              "Funktioniert auf jedem Telefon"
-            ],
+            "features": ["Einfach einzurichten", "Funktioniert auf jedem Telefon"],
             "limitation": "Erfordert Mobilfunknetz"
           }
         },

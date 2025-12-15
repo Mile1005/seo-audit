@@ -1,71 +1,77 @@
-'use client'
+"use client";
 
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { 
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
   DocumentMagnifyingGlassIcon,
   ChartBarIcon,
   LinkIcon,
-  ArrowRightIcon
-} from '@heroicons/react/24/outline'
-import Link from 'next/link'
+  ArrowRightIcon,
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 interface EmptyStateCardProps {
-  icon: React.ReactNode
-  title: string
-  description: string
+  icon: React.ReactNode;
+  title: string;
+  description: string;
   action: {
-    label: string
-    href?: string
-    onClick?: () => void
-  }
-  variant?: 'primary' | 'secondary'
+    label: string;
+    href?: string;
+    onClick?: () => void;
+  };
+  variant?: "primary" | "secondary";
 }
 
-function EmptyStateCard({ icon, title, description, action, variant = 'secondary' }: EmptyStateCardProps) {
-  const bgGradient = variant === 'primary' 
-    ? 'from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20' 
-    : 'from-slate-50 to-gray-50 dark:from-slate-900/20 dark:to-gray-900/20'
-  
-  const borderColor = variant === 'primary'
-    ? 'border-blue-200 dark:border-blue-800'
-    : 'border-slate-200 dark:border-slate-800'
+function EmptyStateCard({
+  icon,
+  title,
+  description,
+  action,
+  variant = "secondary",
+}: EmptyStateCardProps) {
+  const bgGradient =
+    variant === "primary"
+      ? "from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20"
+      : "from-slate-50 to-gray-50 dark:from-slate-900/20 dark:to-gray-900/20";
 
-  const ActionComponent = action.href ? Link : 'button'
-  
+  const borderColor =
+    variant === "primary"
+      ? "border-blue-200 dark:border-blue-800"
+      : "border-slate-200 dark:border-slate-800";
+
+  const ActionComponent = action.href ? Link : "button";
+
   return (
-    <Card className={`bg-gradient-to-br ${bgGradient} border-2 ${borderColor} p-6 hover:shadow-lg transition-shadow`}>
+    <Card
+      className={`bg-gradient-to-br ${bgGradient} border-2 ${borderColor} p-6 hover:shadow-lg transition-shadow`}
+    >
       <div className="flex flex-col items-center text-center space-y-4">
-        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
-          variant === 'primary' 
-            ? 'bg-blue-600 text-white' 
-            : 'bg-slate-600 text-white'
-        }`}>
+        <div
+          className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
+            variant === "primary" ? "bg-blue-600 text-white" : "bg-slate-600 text-white"
+          }`}
+        >
           {icon}
         </div>
-        
+
         <div className="space-y-2">
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-            {title}
-          </h3>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            {description}
-          </p>
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white">{title}</h3>
+          <p className="text-sm text-slate-600 dark:text-slate-400">{description}</p>
         </div>
 
         {action.href ? (
           <Link href={action.href} passHref legacyBehavior>
-            <Button 
-              className={`w-full ${variant === 'primary' ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
+            <Button
+              className={`w-full ${variant === "primary" ? "bg-blue-600 hover:bg-blue-700" : ""}`}
             >
               {action.label}
               <ArrowRightIcon className="w-4 h-4 ml-2" />
             </Button>
           </Link>
         ) : (
-          <Button 
+          <Button
             onClick={action.onClick}
-            className={`w-full ${variant === 'primary' ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
+            className={`w-full ${variant === "primary" ? "bg-blue-600 hover:bg-blue-700" : ""}`}
           >
             {action.label}
             <ArrowRightIcon className="w-4 h-4 ml-2" />
@@ -73,21 +79,21 @@ function EmptyStateCard({ icon, title, description, action, variant = 'secondary
         )}
       </div>
     </Card>
-  )
+  );
 }
 
 interface DashboardEmptyStateProps {
-  hasAudits: boolean
-  hasProjects: boolean
-  gscConnected: boolean
-  onGscConnect: () => void
+  hasAudits: boolean;
+  hasProjects: boolean;
+  gscConnected: boolean;
+  onGscConnect: () => void;
 }
 
-export default function DashboardEmptyState({ 
-  hasAudits, 
-  hasProjects, 
-  gscConnected, 
-  onGscConnect 
+export default function DashboardEmptyState({
+  hasAudits,
+  hasProjects,
+  gscConnected,
+  onGscConnect,
 }: DashboardEmptyStateProps) {
   return (
     <div className="space-y-8">
@@ -109,8 +115,8 @@ export default function DashboardEmptyState({
           title="Run First Audit"
           description="Analyze your website's SEO performance with our comprehensive audit tool"
           action={{
-            label: 'Start Audit',
-            href: '/dashboard/audit'
+            label: "Start Audit",
+            href: "/dashboard/audit",
           }}
           variant="primary"
         />
@@ -121,8 +127,8 @@ export default function DashboardEmptyState({
           title="Track Keywords"
           description="Monitor your keyword rankings and discover new opportunities"
           action={{
-            label: 'Add Keywords',
-            href: '/dashboard/keywords'
+            label: "Add Keywords",
+            href: "/dashboard/keywords",
           }}
         />
 
@@ -132,8 +138,8 @@ export default function DashboardEmptyState({
           title="Monitor Backlinks"
           description="Track your backlink profile and identify link building opportunities"
           action={{
-            label: 'View Backlinks',
-            href: '/dashboard/backlinks'
+            label: "View Backlinks",
+            href: "/dashboard/backlinks",
           }}
         />
       </div>
@@ -152,11 +158,12 @@ export default function DashboardEmptyState({
                     Connect Google Search Console
                   </h2>
                   <p className="text-slate-600 dark:text-slate-400 mt-1">
-                    Get real-time search analytics, impressions, and click data directly in your dashboard
+                    Get real-time search analytics, impressions, and click data directly in your
+                    dashboard
                   </p>
                 </div>
               </div>
-              <Button 
+              <Button
                 onClick={onGscConnect}
                 size="lg"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 whitespace-nowrap"
@@ -177,7 +184,9 @@ export default function DashboardEmptyState({
           <ul className="space-y-3 text-sm text-slate-600 dark:text-slate-400">
             <li className="flex items-start">
               <span className="text-blue-600 font-bold mr-2">1.</span>
-              <span>Run your first SEO audit to identify technical issues and optimization opportunities</span>
+              <span>
+                Run your first SEO audit to identify technical issues and optimization opportunities
+              </span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 font-bold mr-2">2.</span>
@@ -195,5 +204,5 @@ export default function DashboardEmptyState({
         </Card>
       </div>
     </div>
-  )
+  );
 }

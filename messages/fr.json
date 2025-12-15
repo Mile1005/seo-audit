@@ -1145,11 +1145,7 @@
                 "Vérification de l'optimisation du contenu",
                 "Analyse SEO technique"
               ],
-              [
-                "Indicateurs de performance",
-                "Optimisation mobile",
-                "Évaluation de la sécurité"
-              ]
+              ["Indicateurs de performance", "Optimisation mobile", "Évaluation de la sécurité"]
             ]
           },
           "feature": {
@@ -9384,31 +9380,19 @@
               "icon": "CreditCard",
               "name": "Cartes de crédit et débit",
               "description": "Cartes Visa, MasterCard, American Express et Discover acceptées.",
-              "features": [
-                "Traitement instantané",
-                "Chiffrement sécurisé",
-                "Acceptation mondiale"
-              ]
+              "features": ["Traitement instantané", "Chiffrement sécurisé", "Acceptation mondiale"]
             },
             {
               "icon": "Wallet",
               "name": "Portefeuilles numériques",
               "description": "PayPal, Apple Pay, Google Pay et autres options de portefeuille numérique.",
-              "features": [
-                "Paiements en un clic",
-                "Sécurité renforcée",
-                "Adapté mobile"
-              ]
+              "features": ["Paiements en un clic", "Sécurité renforcée", "Adapté mobile"]
             },
             {
               "icon": "Building",
               "name": "Virements bancaires",
               "description": "Virements ACH et bancaires pour les plans annuels et comptes entreprise.",
-              "features": [
-                "Frais réduits",
-                "Direct depuis la banque",
-                "Traitement par lots"
-              ]
+              "features": ["Frais réduits", "Direct depuis la banque", "Traitement par lots"]
             }
           ]
         },
@@ -9678,10 +9662,7 @@
           "smsAuth": {
             "title": "Authentification par SMS",
             "description": "Recevez des codes de vérification par message texte sur votre numéro de téléphone enregistré.",
-            "features": [
-              "Facile à configurer",
-              "Fonctionne sur n'importe quel téléphone"
-            ],
+            "features": ["Facile à configurer", "Fonctionne sur n'importe quel téléphone"],
             "limitation": "Nécessite un service cellulaire"
           }
         },

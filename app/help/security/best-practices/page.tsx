@@ -1,9 +1,20 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Shield, Lock, Eye, Key, AlertTriangle, CheckCircle, Users, Server, Smartphone } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Shield,
+  Lock,
+  Eye,
+  Key,
+  AlertTriangle,
+  CheckCircle,
+  Users,
+  Server,
+  Smartphone,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function BestPracticesPage() {
   return (
@@ -21,8 +32,8 @@ export default function BestPracticesPage() {
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Security Best Practices</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Protect your AI SEO Turbo account with these essential security practices
-              and recommendations for keeping your data safe.
+              Protect your AI SEO Turbo account with these essential security practices and
+              recommendations for keeping your data safe.
             </p>
           </div>
 
@@ -48,8 +59,8 @@ export default function BestPracticesPage() {
                 <Lock className="w-8 h-8 text-green-600 mb-3" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Strong Passwords</h3>
                 <p className="text-gray-600 text-sm mb-4">
-                  Use complex passwords with 12+ characters, mixing uppercase, lowercase,
-                  numbers, and symbols.
+                  Use complex passwords with 12+ characters, mixing uppercase, lowercase, numbers,
+                  and symbols.
                 </p>
                 <div className="space-y-2 text-sm">
                   <div className="flex items-center gap-2">
@@ -69,7 +80,9 @@ export default function BestPracticesPage() {
 
               <div className="border border-gray-200 rounded-lg p-6">
                 <Key className="w-8 h-8 text-blue-600 mb-3" />
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Two-Factor Authentication</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Two-Factor Authentication
+                </h3>
                 <p className="text-gray-600 text-sm mb-4">
                   Enable 2FA to add an extra layer of security beyond your password.
                 </p>
@@ -194,7 +207,9 @@ export default function BestPracticesPage() {
             <div className="flex items-start gap-4 mb-6">
               <AlertTriangle className="w-8 h-8 text-red-600 flex-shrink-0 mt-1" />
               <div>
-                <h2 className="text-2xl font-semibold text-red-900 mb-2">Common Security Threats</h2>
+                <h2 className="text-2xl font-semibold text-red-900 mb-2">
+                  Common Security Threats
+                </h2>
                 <p className="text-red-800">
                   Be aware of these common threats and how to protect against them.
                 </p>
@@ -243,9 +258,7 @@ export default function BestPracticesPage() {
 
               <div className="bg-white p-6 rounded-lg border border-red-200">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Brute Force Attacks</h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Automated attempts to guess passwords.
-                </p>
+                <p className="text-gray-600 text-sm mb-4">Automated attempts to guess passwords.</p>
                 <div className="space-y-2 text-sm text-gray-700">
                   <div>• Use strong, unique passwords</div>
                   <div>• Enable account lockouts</div>
@@ -265,8 +278,12 @@ export default function BestPracticesPage() {
                   <span className="text-blue-600 font-semibold">1</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-900 mb-2">Change Password Immediately</h3>
-                  <p className="text-blue-800">Reset your password and any other accounts using the same credentials.</p>
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                    Change Password Immediately
+                  </h3>
+                  <p className="text-blue-800">
+                    Reset your password and any other accounts using the same credentials.
+                  </p>
                 </div>
               </div>
 
@@ -275,8 +292,12 @@ export default function BestPracticesPage() {
                   <span className="text-blue-600 font-semibold">2</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-900 mb-2">Review Account Activity</h3>
-                  <p className="text-blue-800">Check recent login activity and revoke suspicious sessions.</p>
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                    Review Account Activity
+                  </h3>
+                  <p className="text-blue-800">
+                    Check recent login activity and revoke suspicious sessions.
+                  </p>
                 </div>
               </div>
 
@@ -286,7 +307,9 @@ export default function BestPracticesPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-blue-900 mb-2">Contact Support</h3>
-                  <p className="text-blue-800">Report the incident to our security team for assistance.</p>
+                  <p className="text-blue-800">
+                    Report the incident to our security team for assistance.
+                  </p>
                 </div>
               </div>
 
@@ -295,8 +318,12 @@ export default function BestPracticesPage() {
                   <span className="text-blue-600 font-semibold">4</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-blue-900 mb-2">Monitor for Unusual Activity</h3>
-                  <p className="text-blue-800">Keep an eye on your accounts for any further suspicious behavior.</p>
+                  <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                    Monitor for Unusual Activity
+                  </h3>
+                  <p className="text-blue-800">
+                    Keep an eye on your accounts for any further suspicious behavior.
+                  </p>
                 </div>
               </div>
             </div>
@@ -304,7 +331,9 @@ export default function BestPracticesPage() {
 
           {/* Security Resources */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Additional Security Resources</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Additional Security Resources
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/help/security/two-factor-authentication"
@@ -335,5 +364,5 @@ export default function BestPracticesPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

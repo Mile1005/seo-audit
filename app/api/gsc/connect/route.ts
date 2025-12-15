@@ -1,18 +1,18 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/auth'
-import { getGscAuthUrl } from '@/lib/gsc'
-import crypto from 'crypto'
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { getGscAuthUrl } from "@/lib/gsc";
+import crypto from "crypto";
 
 // Force dynamic rendering for this API route
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 function getRequestOrigin(req: NextRequest) {
-  const forwardedProto = req.headers.get('x-forwarded-proto')
-  const forwardedHost = req.headers.get('x-forwarded-host')
-  const host = forwardedHost || req.headers.get('host')
-  const proto = forwardedProto || req.nextUrl.protocol.replace(':', '')
-  if (host) return `${proto}://${host}`
-  return req.nextUrl.origin
+  const forwardedProto = req.headers.get("x-forwarded-proto");
+  const forwardedHost = req.headers.get("x-forwarded-host");
+  const host = forwardedHost || req.headers.get("host");
+  const proto = forwardedProto || req.nextUrl.protocol.replace(":", "");
+  if (host) return `${proto}://${host}`;
+  return req.nextUrl.origin;
 }
 
 /**
@@ -21,77 +21,78 @@ function getRequestOrigin(req: NextRequest) {
  */
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth()
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
       return NextResponse.json(
-        { success: false, error: 'Unauthorized - Please log in' },
+        { success: false, error: "Unauthorized - Please log in" },
         { status: 401 }
-      )
+      );
     }
 
     // Check if credentials are configured
     const clientId = process.env.GOOGLE_CLIENT_ID || process.env.GSC_CLIENT_ID;
-    if (!clientId || clientId.includes('your-')) {
-      console.error('❌ GSC Connect: Google OAuth credentials not configured');
+    if (!clientId || clientId.includes("your-")) {
+      console.error("❌ GSC Connect: Google OAuth credentials not configured");
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'GSC OAuth not configured',
-          details: 'GOOGLE_CLIENT_ID environment variable is missing or using placeholder value. Please configure Google OAuth credentials in Vercel.'
+        {
+          success: false,
+          error: "GSC OAuth not configured",
+          details:
+            "GOOGLE_CLIENT_ID environment variable is missing or using placeholder value. Please configure Google OAuth credentials in Vercel.",
         },
         { status: 500 }
-      )
+      );
     }
 
     // Generate a unique state token for CSRF protection
     // Format: userId:randomToken
-    const randomToken = crypto.randomBytes(32).toString('hex')
-    const state = `${session.user.id}:${randomToken}`
+    const randomToken = crypto.randomBytes(32).toString("hex");
+    const state = `${session.user.id}:${randomToken}`;
 
-    console.log('🔐 GSC Connect initiated for user:', {
+    console.log("🔐 GSC Connect initiated for user:", {
       userId: session.user.id,
       email: session.user.email,
-      state: state.substring(0, 20) + '...',
-      clientIdSource: process.env.GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : 'GSC_CLIENT_ID'
-    })
+      state: state.substring(0, 20) + "...",
+      clientIdSource: process.env.GOOGLE_CLIENT_ID ? "GOOGLE_CLIENT_ID" : "GSC_CLIENT_ID",
+    });
 
-    const origin = getRequestOrigin(req)
-    const redirectUri = new URL('/api/gsc/callback', origin).toString()
+    const origin = getRequestOrigin(req);
+    const redirectUri = new URL("/api/gsc/callback", origin).toString();
 
     // Generate the OAuth URL (use request-origin aware redirectUri to avoid redirect_uri_mismatch)
-    const authUrl = await getGscAuthUrl(state, redirectUri)
+    const authUrl = await getGscAuthUrl(state, redirectUri);
 
-    console.log('✅ GSC Auth URL generated successfully')
+    console.log("✅ GSC Auth URL generated successfully");
 
     const shouldRedirect =
-      req.nextUrl.searchParams.get('redirect') === '1' ||
-      (req.headers.get('accept')?.includes('text/html') &&
-        !req.headers.get('accept')?.includes('application/json'))
+      req.nextUrl.searchParams.get("redirect") === "1" ||
+      (req.headers.get("accept")?.includes("text/html") &&
+        !req.headers.get("accept")?.includes("application/json"));
 
     // Support both modes:
     // - JSON (used by DashboardOverview fetch)
     // - 302 redirect (used by buttons that navigate directly to /api/gsc/connect)
     if (shouldRedirect) {
-      return NextResponse.redirect(authUrl)
+      return NextResponse.redirect(authUrl);
     }
 
     return NextResponse.json({
       success: true,
       authUrl,
       redirectUri,
-      message: 'Redirect to this URL to authenticate'
-    })
+      message: "Redirect to this URL to authenticate",
+    });
   } catch (error) {
-    console.error('❌ GSC Connect error:', error)
+    console.error("❌ GSC Connect error:", error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Failed to initiate GSC connection',
-        details: error instanceof Error ? error.message : 'Unknown error',
-        hint: 'Try visiting /api/gsc/debug for diagnostic information'
+      {
+        success: false,
+        error: "Failed to initiate GSC connection",
+        details: error instanceof Error ? error.message : "Unknown error",
+        hint: "Try visiting /api/gsc/debug for diagnostic information",
       },
       { status: 500 }
-    )
+    );
   }
 }

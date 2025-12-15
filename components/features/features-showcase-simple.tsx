@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
+import React from "react";
+import { motion } from "framer-motion";
 
 // Simple features data without external dependencies
 const simpleFeatures = [
@@ -10,23 +10,23 @@ const simpleFeatures = [
     title: "AI-Powered Analysis",
     description: "Advanced AI algorithms analyze your website for comprehensive SEO insights.",
     icon: "🚀",
-    category: "Analysis"
+    category: "Analysis",
   },
   {
     id: 2,
     title: "Real-Time Monitoring",
     description: "Track your SEO performance with live monitoring and alerts.",
     icon: "📊",
-    category: "Monitoring"
+    category: "Monitoring",
   },
   {
     id: 3,
     title: "Competitor Analysis",
     description: "Compare your performance against competitors and identify opportunities.",
     icon: "🎯",
-    category: "Research"
-  }
-]
+    category: "Research",
+  },
+];
 
 export function FeaturesShowcaseSimple() {
   return (
@@ -39,7 +39,7 @@ export function FeaturesShowcaseSimple() {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -74,9 +74,7 @@ export function FeaturesShowcaseSimple() {
               <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors">
                 {feature.title}
               </h3>
-              <p className="text-gray-300 leading-relaxed">
-                {feature.description}
-              </p>
+              <p className="text-gray-300 leading-relaxed">{feature.description}</p>
               <div className="mt-4">
                 <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-sm rounded-full">
                   {feature.category}
@@ -87,5 +85,5 @@ export function FeaturesShowcaseSimple() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-const fs = require('fs');
-const csv = fs.readFileSync('csv/all-page-titles-complete.csv', 'utf8');
-const lines = csv.split('\n').filter(line => line.trim());
+const fs = require("fs");
+const csv = fs.readFileSync("csv/all-page-titles-complete.csv", "utf8");
+const lines = csv.split("\n").filter((line) => line.trim());
 
 const titles = new Map();
 const descriptions = new Map(); // Assuming we have descriptions too
 
 lines.forEach((line, index) => {
   if (index === 0) return; // skip header
-  const cols = line.split('","').map(col => col.replace(/^"|"$/g, ''));
+  const cols = line.split('","').map((col) => col.replace(/^"|"$/g, ""));
   if (cols.length >= 4) {
     const url = cols[0];
     const locale = cols[1];
@@ -21,12 +21,12 @@ lines.forEach((line, index) => {
   }
 });
 
-console.log('Duplicate Titles by Locale:');
+console.log("Duplicate Titles by Locale:");
 titles.forEach((urls, key) => {
   if (urls.length > 1) {
     console.log(`\n${key} (${urls.length} pages):`);
-    urls.forEach(url => console.log(`  ${url}`));
+    urls.forEach((url) => console.log(`  ${url}`));
   }
 });
 
-console.log('\nTotal unique title-locale combinations:', titles.size);
+console.log("\nTotal unique title-locale combinations:", titles.size);

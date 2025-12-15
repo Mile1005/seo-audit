@@ -88,11 +88,26 @@
     "menu": {
       "features": {
         "items": {
-          "seoAudit": { "title": "Audit SEO", "desc": "Analyse complète du site et recommandations" },
-          "competitorAnalysis": { "title": "Analyse Concurrentielle", "desc": "Comparez vos performances à celles des concurrents" },
-          "keywordTracking": { "title": "Suivi des Mots-Clés", "desc": "Surveillez les classements et les performances de recherche" },
-          "siteCrawler": { "title": "Crawler de Site", "desc": "Analyse SEO technique approfondie et suivi" },
-          "aiAssistant": { "title": "Assistant IA", "desc": "Recommandations et insights SEO intelligents" }
+          "seoAudit": {
+            "title": "Audit SEO",
+            "desc": "Analyse complète du site et recommandations"
+          },
+          "competitorAnalysis": {
+            "title": "Analyse Concurrentielle",
+            "desc": "Comparez vos performances à celles des concurrents"
+          },
+          "keywordTracking": {
+            "title": "Suivi des Mots-Clés",
+            "desc": "Surveillez les classements et les performances de recherche"
+          },
+          "siteCrawler": {
+            "title": "Crawler de Site",
+            "desc": "Analyse SEO technique approfondie et suivi"
+          },
+          "aiAssistant": {
+            "title": "Assistant IA",
+            "desc": "Recommandations et insights SEO intelligents"
+          }
         }
       }
     }
@@ -226,7 +241,13 @@
     "meta": {
       "title": "Démo - Essayez Notre Outil d'Audit SEO IA",
       "description": "Essayez notre outil d'audit SEO alimenté par l'IA gratuitement. Analysez n'importe quel site web instantanément et obtenez des recommandations pour améliorer les classements de recherche et générer du trafic.",
-      "keywords": ["démo audit SEO", "outil SEO gratuit", "analyse de site web", "vérificateur SEO", "audit SEO gratuit"]
+      "keywords": [
+        "démo audit SEO",
+        "outil SEO gratuit",
+        "analyse de site web",
+        "vérificateur SEO",
+        "audit SEO gratuit"
+      ]
     },
     "hero": {
       "backToHome": "Retour à l'Accueil",
@@ -286,7 +307,14 @@
     "meta": {
       "title": "Centre d'Aide - AI SEO Turbo",
       "description": "Obtenez de l'aide avec AI SEO Turbo. Trouvez des réponses aux questions courantes, des tutoriels, des guides de dépannage et contactez le support pour une assistance personnalisée.",
-      "keywords": ["aide SEO", "centre de support", "tutoriels SEO", "dépannage", "guides SEO", "support client"]
+      "keywords": [
+        "aide SEO",
+        "centre de support",
+        "tutoriels SEO",
+        "dépannage",
+        "guides SEO",
+        "support client"
+      ]
     },
     "title": "Centre d'Aide",
     "searchPlaceholder": "Rechercher de l'aide...",
@@ -316,8 +344,8 @@
         }
       },
       "col2": {
-        "stat1": {"label": "Augmentation moyenne du trafic en 90 jours"},
-        "stat2": {"label": "Entreprises optimisées"}
+        "stat1": { "label": "Augmentation moyenne du trafic en 90 jours" },
+        "stat2": { "label": "Entreprises optimisées" }
       }
     },
     "audit": {
@@ -326,10 +354,22 @@
       "desc": "Arrêtez de deviner ce qui nuit à votre SEO. Notre outil d'audit alimenté par l'IA analyse plus de 47 facteurs techniques, identifie les problèmes critiques et fournit des recommandations actionnables qui font vraiment la différence."
     },
     "benefits": {
-      "analysis": {"title": "Analyse en 47 Points", "desc": "Audit SEO technique complet couvrant chaque facteur critique"},
-      "ai": {"title": "Alimenté par l'IA", "desc": "Algorithmes avancés qui rivalisent avec les consultants SEO experts"},
-      "fixes": {"title": "Corrections Actionnables", "desc": "Recommandations priorisées qui améliorent réellement les classements"},
-      "results": {"title": "Résultats Réels", "desc": "Augmentation moyenne du trafic de 300% dans les 90 premiers jours"}
+      "analysis": {
+        "title": "Analyse en 47 Points",
+        "desc": "Audit SEO technique complet couvrant chaque facteur critique"
+      },
+      "ai": {
+        "title": "Alimenté par l'IA",
+        "desc": "Algorithmes avancés qui rivalisent avec les consultants SEO experts"
+      },
+      "fixes": {
+        "title": "Corrections Actionnables",
+        "desc": "Recommandations priorisées qui améliorent réellement les classements"
+      },
+      "results": {
+        "title": "Résultats Réels",
+        "desc": "Augmentation moyenne du trafic de 300% dans les 90 premiers jours"
+      }
     },
     "case": {
       "title": "Résultats Réels d'Entreprises Réelles",
@@ -339,12 +379,21 @@
     "tools": {
       "title": "Outils SEO de Qualité Professionnelle",
       "subtitle": "Que vous soyez développeur, spécialiste SEO ou propriétaire d'entreprise, nous fournissons les outils dont vous avez besoin pour réussir.",
-      "dev": {"title": "Pour les Développeurs", "desc": "Intégrations API et rapports techniques qui complètent votre flux de travail"},
-      "seo": {"title": "Pour les Spécialistes SEO", "desc": "Analyse concurrentielle avancée et surveillance à l'échelle entreprise"},
-      "biz": {"title": "Pour les Propriétaires d'Entreprise", "desc": "Aucune expérience SEO requise - l'IA vous guide vers le succès"}
+      "dev": {
+        "title": "Pour les Développeurs",
+        "desc": "Intégrations API et rapports techniques qui complètent votre flux de travail"
+      },
+      "seo": {
+        "title": "Pour les Spécialistes SEO",
+        "desc": "Analyse concurrentielle avancée et surveillance à l'échelle entreprise"
+      },
+      "biz": {
+        "title": "Pour les Propriétaires d'Entreprise",
+        "desc": "Aucune expérience SEO requise - l'IA vous guide vers le succès"
+      }
     },
     "mid": {
-      "offer": {"title": "Checklist SEO Gratuite", "desc": "47 points d'optimisation prouvés"}
+      "offer": { "title": "Checklist SEO Gratuite", "desc": "47 points d'optimisation prouvés" }
     },
     "premium": {
       "title1": "Contenu",
@@ -796,20 +845,44 @@
       "title": "Support SEO Expert Quand Vous en Avez Besoin",
       "subtitle": "Des audits SEO techniques à la consultation stratégique, nos experts certifiés sont prêts à vous aider à surmonter les défis et atteindre vos objectifs de croissance organique.",
       "cards": {
-        "technical": {"title": "SEO Technique", "desc": "Core Web Vitals, balisage schema et défis techniques"},
-        "strategy": {"title": "Support Stratégique", "desc": "Feuilles de route SEO et frameworks d'analyse concurrentielle"},
-        "training": {"title": "Formation Plateforme", "desc": "Maximisez le ROI avec des sessions de formation personnalisées"},
-        "partnerships": {"title": "Partenariats", "desc": "Solutions en marque blanche et intégrations API"}
+        "technical": {
+          "title": "SEO Technique",
+          "desc": "Core Web Vitals, balisage schema et défis techniques"
+        },
+        "strategy": {
+          "title": "Support Stratégique",
+          "desc": "Feuilles de route SEO et frameworks d'analyse concurrentielle"
+        },
+        "training": {
+          "title": "Formation Plateforme",
+          "desc": "Maximisez le ROI avec des sessions de formation personnalisées"
+        },
+        "partnerships": {
+          "title": "Partenariats",
+          "desc": "Solutions en marque blanche et intégrations API"
+        }
       }
     },
     "why": {
       "title": "Pourquoi Choisir AI SEO Turbo ?",
       "subtitle": "Plus de 15 ans d'expérience combinée aidant plus de 10 000 entreprises à obtenir une croissance SEO mesurable",
       "items": {
-        "certified": {"title": "Spécialistes SEO Certifiés", "desc": "Accompagnement personnalisé par des experts avec des antécédents prouvés"},
-        "fast": {"title": "Temps de Réponse Rapides", "desc": "24h pour les demandes, 4h pour les problèmes techniques urgents"},
-        "steps": {"title": "Solutions Étape par Étape", "desc": "Nous n'identifions pas seulement les problèmes—nous fournissons des corrections actionnables"},
-        "results": {"title": "Approche Orientée Résultats", "desc": "Focus sur des stratégies qui produisent un impact commercial mesurable"}
+        "certified": {
+          "title": "Spécialistes SEO Certifiés",
+          "desc": "Accompagnement personnalisé par des experts avec des antécédents prouvés"
+        },
+        "fast": {
+          "title": "Temps de Réponse Rapides",
+          "desc": "24h pour les demandes, 4h pour les problèmes techniques urgents"
+        },
+        "steps": {
+          "title": "Solutions Étape par Étape",
+          "desc": "Nous n'identifions pas seulement les problèmes—nous fournissons des corrections actionnables"
+        },
+        "results": {
+          "title": "Approche Orientée Résultats",
+          "desc": "Focus sur des stratégies qui produisent un impact commercial mesurable"
+        }
       },
       "guarantee": {
         "title": "Garantie de Temps de Réponse",
@@ -834,12 +907,12 @@
     "info": {
       "title": "Entamons une Conversation",
       "subtitle": "Vous avez des questions sur nos services SEO ? Vous voulez discuter de vos besoins spécifiques ? Nous sommes là pour vous aider à réussir en ligne.",
-      "general": {"title": "Demandes Générales"},
-      "sales": {"title": "Ventes & Partenariats"},
-      "billing": {"title": "Facturation & Paiements"},
-      "phone": {"title": "Téléphone"},
-      "address": {"title": "Adresse"},
-      "hours": {"title": "Heures d'Ouverture", "value": "Lun-Ven : 9h-18h EST"}
+      "general": { "title": "Demandes Générales" },
+      "sales": { "title": "Ventes & Partenariats" },
+      "billing": { "title": "Facturation & Paiements" },
+      "phone": { "title": "Téléphone" },
+      "address": { "title": "Adresse" },
+      "hours": { "title": "Heures d'Ouverture", "value": "Lun-Ven : 9h-18h EST" }
     }
   },
   "privacy": {

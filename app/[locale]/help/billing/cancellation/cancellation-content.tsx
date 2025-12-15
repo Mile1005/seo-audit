@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { MainLayout } from '@/components/layout/main-layout';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft, AlertTriangle, Clock, Shield, CreditCard } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowLeft, AlertTriangle, Clock, Shield, CreditCard } from "lucide-react";
 
 export default function CancellationContent() {
-  const t = useTranslations('helpCenter.categories.cancellation');
+  const t = useTranslations("helpCenter.categories.cancellation");
 
   return (
     <MainLayout>
@@ -17,14 +17,17 @@ export default function CancellationContent() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
               <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                {t('breadcrumb.help')}
+                {t("breadcrumb.help")}
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/billing" className="text-gray-400 hover:text-white transition-colors">
-                {t('breadcrumb.billing')}
+              <Link
+                href="/help/billing"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                {t("breadcrumb.billing")}
               </Link>
               <span className="text-gray-600">/</span>
-              <span className="text-white">{t('breadcrumb.cancellation')}</span>
+              <span className="text-white">{t("breadcrumb.cancellation")}</span>
             </nav>
           </div>
         </section>
@@ -37,7 +40,7 @@ export default function CancellationContent() {
               className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-6 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              {t('backToBilling')}
+              {t("backToBilling")}
             </Link>
 
             <motion.div
@@ -45,8 +48,8 @@ export default function CancellationContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl font-bold text-white mb-4">{t('title')}</h1>
-              <p className="text-xl text-gray-300 max-w-3xl">{t('subtitle')}</p>
+              <h1 className="text-4xl font-bold text-white mb-4">{t("title")}</h1>
+              <p className="text-xl text-gray-300 max-w-3xl">{t("subtitle")}</p>
             </motion.div>
           </div>
 
@@ -62,11 +65,9 @@ export default function CancellationContent() {
                 <AlertTriangle className="w-6 h-6 text-amber-400 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-semibold text-amber-100 mb-2">
-                    {t('importantNotice.title')}
+                    {t("importantNotice.title")}
                   </h3>
-                  <p className="text-amber-200">
-                    {t('importantNotice.description')}
-                  </p>
+                  <p className="text-amber-200">{t("importantNotice.description")}</p>
                 </div>
               </div>
             </div>
@@ -79,12 +80,10 @@ export default function CancellationContent() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold text-white mb-6">
-              {t('process.title')}
-            </h2>
+            <h2 className="text-3xl font-bold text-white mb-6">{t("process.title")}</h2>
 
             <div className="space-y-6">
-              {t.raw('process.steps').map((step: any, index: number) => (
+              {t.raw("process.steps").map((step: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -97,12 +96,8 @@ export default function CancellationContent() {
                       {index + 1}
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        {step.title}
-                      </h3>
-                      <p className="text-gray-300 mb-4">
-                        {step.description}
-                      </p>
+                      <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
+                      <p className="text-gray-300 mb-4">{step.description}</p>
                       {step.details && (
                         <ul className="space-y-2">
                           {step.details.map((detail: string, detailIndex: number) => (
@@ -127,12 +122,10 @@ export default function CancellationContent() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold text-white mb-6">
-              {t('afterCancellation.title')}
-            </h2>
+            <h2 className="text-3xl font-bold text-white mb-6">{t("afterCancellation.title")}</h2>
 
             <div className="grid md:grid-cols-2 gap-6">
-              {t.raw('afterCancellation.items').map((item: any, index: number) => (
+              {t.raw("afterCancellation.items").map((item: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -141,16 +134,14 @@ export default function CancellationContent() {
                   className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
                 >
                   <div className="flex items-center gap-3 mb-3">
-                    {item.icon === 'clock' && <Clock className="w-5 h-5 text-blue-400" />}
-                    {item.icon === 'shield' && <Shield className="w-5 h-5 text-green-400" />}
-                    {item.icon === 'credit-card' && <CreditCard className="w-5 h-5 text-purple-400" />}
-                    <h3 className="text-lg font-semibold text-white">
-                      {item.title}
-                    </h3>
+                    {item.icon === "clock" && <Clock className="w-5 h-5 text-blue-400" />}
+                    {item.icon === "shield" && <Shield className="w-5 h-5 text-green-400" />}
+                    {item.icon === "credit-card" && (
+                      <CreditCard className="w-5 h-5 text-purple-400" />
+                    )}
+                    <h3 className="text-lg font-semibold text-white">{item.title}</h3>
                   </div>
-                  <p className="text-gray-300">
-                    {item.description}
-                  </p>
+                  <p className="text-gray-300">{item.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -163,12 +154,10 @@ export default function CancellationContent() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-bold text-white mb-6">
-              {t('refundPolicy.title')}
-            </h2>
+            <h2 className="text-3xl font-bold text-white mb-6">{t("refundPolicy.title")}</h2>
 
             <div className="space-y-6">
-              {t.raw('refundPolicy.scenarios').map((scenario: any, index: number) => (
+              {t.raw("refundPolicy.scenarios").map((scenario: any, index: number) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -176,25 +165,25 @@ export default function CancellationContent() {
                   transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
                   className={`rounded-lg p-6 border ${
                     scenario.eligible
-                      ? 'bg-green-900/20 border-green-800'
-                      : 'bg-red-900/20 border-red-800'
+                      ? "bg-green-900/20 border-green-800"
+                      : "bg-red-900/20 border-red-800"
                   }`}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-lg font-semibold text-white">
-                      {scenario.title}
-                    </h3>
-                    <span className={`px-3 py-1 text-sm font-medium rounded-full ${
-                      scenario.eligible
-                        ? 'bg-green-800 text-green-100'
-                        : 'bg-red-800 text-red-100'
-                    }`}>
-                      {scenario.eligible ? t('refundPolicy.eligible') : t('refundPolicy.notEligible')}
+                    <h3 className="text-lg font-semibold text-white">{scenario.title}</h3>
+                    <span
+                      className={`px-3 py-1 text-sm font-medium rounded-full ${
+                        scenario.eligible
+                          ? "bg-green-800 text-green-100"
+                          : "bg-red-800 text-red-100"
+                      }`}
+                    >
+                      {scenario.eligible
+                        ? t("refundPolicy.eligible")
+                        : t("refundPolicy.notEligible")}
                     </span>
                   </div>
-                  <p className={`${
-                    scenario.eligible ? 'text-green-200' : 'text-red-200'
-                  }`}>
+                  <p className={`${scenario.eligible ? "text-green-200" : "text-red-200"}`}>
                     {scenario.description}
                   </p>
                 </motion.div>
@@ -210,15 +199,11 @@ export default function CancellationContent() {
             className="mb-12"
           >
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 text-white">
-              <h2 className="text-3xl font-bold mb-4">
-                {t('needHelp.title')}
-              </h2>
-              <p className="text-xl mb-6 opacity-90">
-                {t('needHelp.description')}
-              </p>
+              <h2 className="text-3xl font-bold mb-4">{t("needHelp.title")}</h2>
+              <p className="text-xl mb-6 opacity-90">{t("needHelp.description")}</p>
 
               <div className="flex flex-wrap gap-4">
-                {t.raw('needHelp.contacts').map((contact: any, index: number) => (
+                {t.raw("needHelp.contacts").map((contact: any, index: number) => (
                   <a
                     key={index}
                     href={contact.href}

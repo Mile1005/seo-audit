@@ -1,62 +1,101 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2, Search, Globe, Link, ExternalLink, FileText, Image, Zap as ZapIcon, TrendingDown, TrendingUp as TrendingUpIcon, Minus } from 'lucide-react'
-import { MainLayout } from '@/components/layout/main-layout'
-import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
-import { ApiErrorBoundary } from '@/components/ui/error-boundary'
-import { useFormSubmission } from '@/hooks/use-api'
-import { api } from '@/lib/api-client'
-import type { KeywordResult } from '@/types/keywords'
+import React, { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowRight,
+  CheckCircle,
+  Target,
+  Zap,
+  TrendingUp,
+  Shield,
+  Play,
+  ChevronRight,
+  Clock,
+  BarChart,
+  Users,
+  Star,
+  AlertTriangle,
+  Loader2,
+  Search,
+  Globe,
+  Link,
+  ExternalLink,
+  FileText,
+  Image,
+  Zap as ZapIcon,
+  TrendingDown,
+  TrendingUp as TrendingUpIcon,
+  Minus,
+} from "lucide-react";
+import { MainLayout } from "@/components/layout/main-layout";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { ApiErrorBoundary } from "@/components/ui/error-boundary";
+import { useFormSubmission } from "@/hooks/use-api";
+import { api } from "@/lib/api-client";
+import type { KeywordResult } from "@/types/keywords";
 
 // Dynamic imports to prevent lambda issues
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 
-const TrackingCapabilities = dynamic(() => import('@/components/features/keyword-tracking/tracking-capabilities'), { ssr: false })
-const SERPFeatures = dynamic(() => import('@/components/features/keyword-tracking/serp-features'), { ssr: false })
-const PerformanceAnalytics = dynamic(() => import('@/components/features/keyword-tracking/performance-analytics'), { ssr: false })
-const AlertSystem = dynamic(() => import('@/components/features/keyword-tracking/alert-system'), { ssr: false })
+const TrackingCapabilities = dynamic(
+  () => import("@/components/features/keyword-tracking/tracking-capabilities"),
+  { ssr: false }
+);
+const SERPFeatures = dynamic(() => import("@/components/features/keyword-tracking/serp-features"), {
+  ssr: false,
+});
+const PerformanceAnalytics = dynamic(
+  () => import("@/components/features/keyword-tracking/performance-analytics"),
+  { ssr: false }
+);
+const AlertSystem = dynamic(() => import("@/components/features/keyword-tracking/alert-system"), {
+  ssr: false,
+});
 const KeywordTrackingHero = dynamic(
   () =>
-    import('@/components/features/keyword-tracking/keyword-tracking-hero').then(mod => ({
+    import("@/components/features/keyword-tracking/keyword-tracking-hero").then((mod) => ({
       default: mod.KeywordTrackingHero,
     })),
-  { ssr: false },
-)
+  { ssr: false }
+);
 
 export default function KeywordTrackingFeaturePage() {
-  const t = useTranslations('featurePages.keywordTracking');
+  const t = useTranslations("featurePages.keywordTracking");
   const router = useRouter();
   const [showResults, setShowResults] = useState(false);
   const [keywordResults, setKeywordResults] = useState<KeywordResult[]>([]);
 
   const { isSubmitting, submitError, submit } = useFormSubmission<any, any>();
 
-  const handleKeywordSubmit = async (data: { keywords: string[]; domain?: string; location?: string }) => {
+  const handleKeywordSubmit = async (data: {
+    keywords: string[];
+    domain?: string;
+    location?: string;
+  }) => {
     await submit(
       async (formData) => {
-        const response = await fetch('/api/keywords/research', {
-          method: 'POST',
+        const response = await fetch("/api/keywords/research", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         });
         if (!response.ok) {
-          throw new Error('Failed to research keywords');
+          throw new Error("Failed to research keywords");
         }
         return response.json();
       },
       {
         keywords: data.keywords,
-        projectId: 'demo-keyword-project',
-        location: data.location || 'US',
-        language: 'en',
-        device: 'DESKTOP',
-        domain: data.domain
+        projectId: "demo-keyword-project",
+        location: data.location || "US",
+        language: "en",
+        device: "DESKTOP",
+        domain: data.domain,
       },
       (response: any) => {
         if (response.data?.keywords) {
@@ -71,8 +110,10 @@ export default function KeywordTrackingFeaturePage() {
   useEffect(() => {
     if (!showResults || keywordResults.length === 0) return;
     try {
-      const existing = JSON.parse(localStorage.getItem('ai-seo-keywords') ?? '[]') as KeywordResult[];
-      localStorage.setItem('ai-seo-keywords', JSON.stringify([...keywordResults, ...existing]));
+      const existing = JSON.parse(
+        localStorage.getItem("ai-seo-keywords") ?? "[]"
+      ) as KeywordResult[];
+      localStorage.setItem("ai-seo-keywords", JSON.stringify([...keywordResults, ...existing]));
     } catch {
       // ignore
     }
@@ -80,18 +121,23 @@ export default function KeywordTrackingFeaturePage() {
 
   const getIntentColor = (intent: string) => {
     switch (intent.toLowerCase()) {
-      case 'commercial': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
-      case 'informational': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
-      case 'navigational': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300';
-      case 'transactional': return 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300';
-      default: return 'bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300';
+      case "commercial":
+        return "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300";
+      case "informational":
+        return "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300";
+      case "navigational":
+        return "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300";
+      case "transactional":
+        return "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300";
+      default:
+        return "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300";
     }
   };
 
   const getDifficultyColor = (difficulty: number) => {
-    if (difficulty < 30) return 'text-green-600';
-    if (difficulty < 60) return 'text-yellow-600';
-    return 'text-red-600';
+    if (difficulty < 30) return "text-green-600";
+    if (difficulty < 60) return "text-yellow-600";
+    return "text-red-600";
   };
 
   return (
@@ -101,8 +147,11 @@ export default function KeywordTrackingFeaturePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <Breadcrumbs
             items={[
-              { name: 'Features', url: 'https://www.aiseoturbo.com/features' },
-              { name: 'Keyword Tracking', url: 'https://www.aiseoturbo.com/features/keyword-tracking' }
+              { name: "Features", url: "https://www.aiseoturbo.com/features" },
+              {
+                name: "Keyword Tracking",
+                url: "https://www.aiseoturbo.com/features/keyword-tracking",
+              },
             ]}
             className="mb-4"
           />
@@ -145,7 +194,8 @@ export default function KeywordTrackingFeaturePage() {
                     Keyword Research Results
                   </h2>
                   <p className="text-xl text-muted-foreground">
-                    Found {keywordResults.length} keyword{keywordResults.length !== 1 ? 's' : ''} with detailed metrics
+                    Found {keywordResults.length} keyword{keywordResults.length !== 1 ? "s" : ""}{" "}
+                    with detailed metrics
                   </p>
                 </motion.div>
 
@@ -179,33 +229,38 @@ export default function KeywordTrackingFeaturePage() {
                             className="border-b hover:bg-muted/30"
                           >
                             <td className="py-3 px-4">
-                              <div className="font-medium text-foreground">
-                                {keyword.keyword}
-                              </div>
+                              <div className="font-medium text-foreground">{keyword.keyword}</div>
                             </td>
                             <td className="py-3 px-4 text-center">
                               <div className="font-semibold text-blue-600">
-                                {keyword.searchVolume?.toLocaleString() || 'N/A'}
+                                {keyword.searchVolume?.toLocaleString() || "N/A"}
                               </div>
                             </td>
                             <td className="py-3 px-4 text-center">
-                              <div className={`font-semibold ${getDifficultyColor(keyword.difficulty || 0)}`}>
-                                {keyword.difficulty?.toFixed(1) || 'N/A'}%
+                              <div
+                                className={`font-semibold ${getDifficultyColor(keyword.difficulty || 0)}`}
+                              >
+                                {keyword.difficulty?.toFixed(1) || "N/A"}%
                               </div>
                             </td>
                             <td className="py-3 px-4 text-center">
                               <div className="font-semibold text-green-600">
-                                ${keyword.cpc?.toFixed(2) || 'N/A'}
+                                ${keyword.cpc?.toFixed(2) || "N/A"}
                               </div>
                             </td>
                             <td className="py-3 px-4 text-center">
                               <div className="font-semibold text-purple-600">
-                                {keyword.competition ? (keyword.competition * 100).toFixed(1) : 'N/A'}%
+                                {keyword.competition
+                                  ? (keyword.competition * 100).toFixed(1)
+                                  : "N/A"}
+                                %
                               </div>
                             </td>
                             <td className="py-3 px-4 text-center">
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getIntentColor(keyword.intent || '')}`}>
-                                {keyword.intent || 'Unknown'}
+                              <span
+                                className={`px-2 py-1 rounded-full text-xs font-medium ${getIntentColor(keyword.intent || "")}`}
+                              >
+                                {keyword.intent || "Unknown"}
                               </span>
                             </td>
                           </motion.tr>
@@ -232,7 +287,7 @@ export default function KeywordTrackingFeaturePage() {
                     Research More Keywords
                   </button>
                   <button
-                    onClick={() => router.push('/dashboard/keywords')}
+                    onClick={() => router.push("/dashboard/keywords")}
                     className="bg-primary text-primary-foreground px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors"
                   >
                     Start Tracking Keywords
@@ -265,17 +320,13 @@ export default function KeywordTrackingFeaturePage() {
               viewport={{ once: true }}
               className="bg-card rounded-2xl shadow-xl p-8 border"
             >
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                {t('cta.title')}
-              </h2>
-              <p className="text-xl text-muted-foreground mb-8">
-                {t('cta.subtitle')}
-              </p>
+              <h2 className="text-3xl font-bold text-foreground mb-4">{t("cta.title")}</h2>
+              <p className="text-xl text-muted-foreground mb-8">{t("cta.subtitle")}</p>
               <button
-                onClick={() => router.push('/pricing')}
+                onClick={() => router.push("/pricing")}
                 className="bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold hover:bg-primary/90 transition-colors"
               >
-                {t('cta.button')}
+                {t("cta.button")}
               </button>
             </motion.div>
           </div>

@@ -1,7 +1,7 @@
 # AI SEO Turbo – Keyword Tracking Feature Implementation Plan
 
 You are an expert TypeScript/Next.js AI coding agent working in the `seo-audit` repo.  
-Your task is to implement a fully working, **free** keyword research and tracking MVP for the `KeywordTrackingFeaturePage` and related flows, **without any paid APIs**.  
+Your task is to implement a fully working, **free** keyword research and tracking MVP for the `KeywordTrackingFeaturePage` and related flows, **without any paid APIs**.
 
 Follow the steps below in order. Each step contains:
 
@@ -34,7 +34,7 @@ Use idiomatic, clean, well-typed TypeScript. Keep the existing UX/UI intact.
 
 **Repository:** `Mile1005/seo-audit`  
 **Feature page:** `components/features/keyword-tracking/KeywordTrackingFeaturePage.tsx`  
-**Hero form:** `components/features/keyword-tracking/keyword-tracking-hero.tsx`  
+**Hero form:** `components/features/keyword-tracking/keyword-tracking-hero.tsx`
 
 Currently:
 
@@ -94,7 +94,6 @@ device: string; // DESKTOP | MOBILE
 createdAt: string;
 }
 
-
 Update `KeywordTrackingFeaturePage.tsx` to import this type instead of its internal `interface`.
 
 **1.2. Implement free keyword research logic**
@@ -146,20 +145,20 @@ text
 
 const results: KeywordResult[] = [];
 for (const kw of keywords) {
-  const result = await runFreeKeywordResearch({
-    keyword: kw,
-    location,
-    language,
-    device,
-    projectId,
-    domain,
-  });
-  results.push(result);
+const result = await runFreeKeywordResearch({
+keyword: kw,
+location,
+language,
+device,
+projectId,
+domain,
+});
+results.push(result);
 }
 
 return NextResponse.json({
-  success: true,
-  data: { keywords: results },
+success: true,
+data: { keywords: results },
 });
 } catch (error) {
 console.error('[keywords/research] error', error);
@@ -260,7 +259,7 @@ text
 
 Update CTAs:
 
-- Hero primary: go to **signup / app**  
+- Hero primary: go to **signup / app**
 - Hero primary: go to signup (`/signup`).
 - Hero secondary (demo): scroll to keyword research form:  
   `document.getElementById('keyword-form')?.scrollIntoView({ behavior: 'smooth' })`.
@@ -305,13 +304,13 @@ className="block text-sm font-medium text-foreground mb-2"
 Keywords (one per line)
 </label>
 
-<textarea id="keywords-input" name="keywords" aria-describedby="keywords-help" ... /> <p id="keywords-help" className="text-xs text-muted-foreground mt-1"> Enter one keyword per line to analyze. </p> ``` Fix any “orphaned labels” by either binding them or removing unused labels. 
+<textarea id="keywords-input" name="keywords" aria-describedby="keywords-help" ... /> <p id="keywords-help" className="text-xs text-muted-foreground mt-1"> Enter one keyword per line to analyze. </p> ``` Fix any “orphaned labels” by either binding them or removing unused labels.
 
 **5.2. Select label** Add `htmlFor` for the location `<select>`.
 
- **5.3. Contrast** - Increase text color contrast in dark areas (`text-slate-400` → `text-slate-200/300`). - Avoid very low opacity backgrounds for critical text. 
- 
- **5.4. Noscript element**
+**5.3. Contrast** - Increase text color contrast in dark areas (`text-slate-400` → `text-slate-200/300`). - Avoid very low opacity backgrounds for critical text.
+
+**5.4. Noscript element**
 
 Your `<noscript>` with GTM is fine, but ensure it has no a11y issue:
 

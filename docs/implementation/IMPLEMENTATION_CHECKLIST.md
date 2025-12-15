@@ -3,6 +3,7 @@
 ## 📋 Phase 1: Immediate Actions (Start Today!)
 
 ### ✅ Pre-Implementation
+
 - [ ] Read `docs/QUICK_START_PHASE_1.md`
 - [ ] Run current audit: `npm run mobile:audit` - **Note baseline LCP**
 - [ ] Check DevTools Network tab - note render-blocking resources
@@ -10,6 +11,7 @@
 ### ✅ Step 1: Update `components/hero/hero-section.tsx` (15 min)
 
 **Checklist:**
+
 - [ ] Line 1: Add import at top: `import { useIsMobile } from "@/hooks/use-is-mobile"`
 - [ ] Line ~30: Add hook call in component: `const isMobile = useIsMobile()`
 - [ ] Line ~35: Update `containerVariants` to: `const containerVariants = isMobile ? {} : { ... }`
@@ -26,6 +28,7 @@
 **Location:** Find `<head>` section around line 232
 
 **Checklist:**
+
 - [ ] After preconnect links, add preload links (see code below)
 - [ ] Replace generic critical CSS with hero-specific styles
 - [ ] Add non-critical CSS deferral link
@@ -35,23 +38,23 @@
 
 ```tsx
 {/* LCP OPTIMIZATION: Preload hero images */}
-<link 
-  rel="preload" 
-  as="image" 
+<link
+  rel="preload"
+  as="image"
   href="/images/hero/hero-mobile-portrait.webp"
   media="(max-width: 1024px)"
   fetchpriority="high"
   type="image/webp"
 />
-<link 
-  rel="preload" 
+<link
+  rel="preload"
   as="image"
   href="/images/hero/hero-mobile-portrait.jpg"
   media="(max-width: 1024px)"
   fetchpriority="high"
 />
-<link 
-  rel="preload" 
+<link
+  rel="preload"
   as="image"
   href="/images/hero/hero-desktop-landscape.webp"
   media="(min-width: 1025px)"
@@ -92,6 +95,7 @@
 ### ✅ Step 3: Verify Changes
 
 **Checklist:**
+
 - [ ] Run `npm run type-check` - no errors
 - [ ] Build locally: `npm run build` - succeeds
 - [ ] Start dev server: `npm run dev`
@@ -114,15 +118,17 @@ npm run perf:audit --form-factor=mobile
 ```
 
 **What to look for:**
+
 - [ ] LCP improved (target: 5.2s → 4.0s for Phase 1)
 - [ ] First Contentful Paint < 1.5s
 - [ ] No layout shifts from animations
 - [ ] Mobile score > 50 (currently likely < 40)
 
 **Record metrics:**
-- **Before:** LCP = ___s, FCP = ___s, CLS = ___
-- **After Phase 1:** LCP = ___s, FCP = ___s, CLS = ___
-- **Improvement:** ___% ↓
+
+- **Before:** LCP = **_s, FCP = _**s, CLS = \_\_\_
+- **After Phase 1:** LCP = **_s, FCP = _**s, CLS = \_\_\_
+- **Improvement:** \_\_\_% ↓
 
 ---
 
@@ -131,6 +137,7 @@ npm run perf:audit --form-factor=mobile
 ### ✅ Prepare Hero Images
 
 **What you need:**
+
 - [ ] Mobile hero image (375px wide, WebP + JPG fallback)
 - [ ] Desktop hero image (1200px wide, WebP + JPG fallback)
 - [ ] All files < 50KB each
@@ -138,12 +145,14 @@ npm run perf:audit --form-factor=mobile
 **How to optimize:**
 
 Option 1: Online tools
+
 - [ ] Go to TinyPNG.com
 - [ ] Upload current hero images
 - [ ] Download WebP versions
 - [ ] Move to `public/images/hero/`
 
 Option 2: Command line
+
 ```bash
 # Convert to WebP (requires ffmpeg)
 ffmpeg -i hero-mobile.jpg -c:v libwebp -quality 80 hero-mobile.webp
@@ -151,11 +160,13 @@ ffmpeg -i hero-desktop.jpg -c:v libwebp -quality 85 hero-desktop.webp
 ```
 
 Option 3: OS-specific tools
+
 - Mac: ImageOptim
 - Windows: XnConvert
 - Linux: `imagemagick`
 
 **Checklist:**
+
 - [ ] hero-mobile-portrait.webp (< 40KB)
 - [ ] hero-mobile-portrait.jpg (< 50KB, fallback)
 - [ ] hero-desktop-landscape.webp (< 80KB)
@@ -170,6 +181,7 @@ Option 3: OS-specific tools
 ### ✅ Split CSS Files
 
 **Checklist:**
+
 - [ ] Create `public/css/non-critical.css`
 - [ ] Copy all Tailwind utilities (except those in critical CSS)
 - [ ] File size: 30-40KB (uncompressed)
@@ -182,6 +194,7 @@ Option 3: OS-specific tools
 ## 🧪 Performance Testing Matrix
 
 ### Test Environment 1: Mobile Emulation
+
 ```bash
 npm run dev
 # DevTools → Device toolbar → iPhone 12 Pro
@@ -193,6 +206,7 @@ npm run dev
 ```
 
 ### Test Environment 2: Lighthouse (Simulated)
+
 ```bash
 npm run mobile:audit
 # Check:
@@ -203,6 +217,7 @@ npm run mobile:audit
 ```
 
 ### Test Environment 3: DevTools Network
+
 ```
 DevTools → Network tab → Throttle to "Slow 4G"
 1. Hard refresh (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows)
@@ -218,18 +233,21 @@ DevTools → Network tab → Throttle to "Slow 4G"
 ## 📊 Success Criteria
 
 ### Phase 1 (Minimum):
+
 - [ ] LCP: 5.2s → < 4.5s (15% improvement)
 - [ ] No visual jank on mobile
 - [ ] Desktop mockup hidden on mobile
 - [ ] Build size same or smaller
 
 ### Phase 1 (Target):
+
 - [ ] LCP: 5.2s → < 4.0s (23% improvement)
 - [ ] FCP: < 1.5s
 - [ ] CLS: < 0.1
 - [ ] Lighthouse Performance: 40 → 55+
 
 ### All Phases (Full Optimization):
+
 - [ ] LCP: 5.2s → 2.0-2.5s (60% improvement ✅)
 - [ ] FCP: < 1.0s
 - [ ] CLS: < 0.05
@@ -240,25 +258,33 @@ DevTools → Network tab → Throttle to "Slow 4G"
 ## 🐛 Common Issues & Fixes
 
 ### Issue: "Preload links causing errors"
+
 **Fix:**
+
 - Check file paths are absolute: `/images/hero/...`
 - Verify images exist in `public/` folder
 - Remove `media=""` attribute if causing issues
 
 ### Issue: "Hero section looks broken on mobile"
+
 **Fix:**
+
 - Verify `use-is-mobile` hook is imported
 - Clear browser cache (Cmd+Shift+Delete)
 - Check console for JavaScript errors
 
 ### Issue: "Desktop animations not working"
+
 **Fix:**
+
 - Verify `isMobile === false` on desktop (check console)
 - Check Framer Motion is installed: `npm ls framer-motion`
 - Ensure motion imports are correct
 
 ### Issue: "CSS not being applied"
+
 **Fix:**
+
 - Check class names match (e.g., `.hero-section`)
 - Verify critical CSS is in correct format
 - Check tailwind.config.ts includes hero-section class
@@ -268,6 +294,7 @@ DevTools → Network tab → Throttle to "Slow 4G"
 ## 📚 Reference Documents
 
 All in `docs/` folder:
+
 - `LCP_OPTIMIZATION_COMPREHENSIVE_GUIDE.md` - Full strategy (25 pages)
 - `PHASE_1_IMMEDIATE_IMPLEMENTATION.ts` - Complete code samples
 - `LCP_IMPLEMENTATION_REFERENCE.ts` - All phases with examples
@@ -278,12 +305,14 @@ All in `docs/` folder:
 ## 🎯 Final Notes
 
 **Important:**
+
 1. **Start with Phase 1** - Highest impact, lowest effort
 2. **Test between phases** - Measure actual LCP improvements
 3. **Monitor production** - Use Sentry/New Relic for real user metrics
 4. **Iterate** - Some optimizations may need refinement
 
 **Expected Timeline:**
+
 - Phase 1: 1-2 hours (25% LCP improvement)
 - Phase 2: 1 hour (additional 15% improvement)
 - Phase 3: 1-2 hours (additional 20% improvement)

@@ -5,7 +5,7 @@ import { ParsedHtml } from "../lib/parse";
 test("content scoring - good word count gets high score", () => {
   const url = "https://example.com";
   const longContent = "This is a comprehensive article about SEO best practices. ".repeat(50);
-  
+
   const parsed: ParsedHtml = {
     title: "SEO Best Practices Guide",
     metaDescription: "Learn SEO best practices for 2024.",
@@ -28,9 +28,9 @@ test("content scoring - good word count gets high score", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
-  
+
   expect(res.scores.answerability).toBeGreaterThanOrEqual(70);
   expect(res.scores.headings).toBeGreaterThanOrEqual(80);
   expect(res.stats.word_count).toBeGreaterThan(400);
@@ -47,7 +47,7 @@ test("image optimization scoring - images with alt text get high score", () => {
     h3: [],
     images: [
       { src: "/image1.jpg", alt: "SEO optimization flowchart" },
-      { src: "/image2.jpg", alt: "Google Analytics dashboard" }
+      { src: "/image2.jpg", alt: "Google Analytics dashboard" },
     ],
     internalLinks: [],
     jsonLdTypes: [],
@@ -63,11 +63,11 @@ test("image optimization scoring - images with alt text get high score", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
-  
+
   expect(res.scores.images).toBeGreaterThanOrEqual(80);
-  const altTextIssues = res.issues.filter(issue => issue.id === "missing-alt-text");
+  const altTextIssues = res.issues.filter((issue) => issue.id === "missing-alt-text");
   expect(altTextIssues.length).toBe(0);
 });
 
@@ -95,10 +95,10 @@ test("schema markup scoring - presence of schema gets high score", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
-  
+
   expect(res.scores.schema).toBeGreaterThanOrEqual(80);
-  const schemaIssues = res.issues.filter(issue => issue.category === "schema");
+  const schemaIssues = res.issues.filter((issue) => issue.category === "schema");
   expect(schemaIssues.length).toBe(0);
 });

@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import { 
-  CheckCircle, 
-  AlertTriangle, 
-  XCircle, 
-  ExternalLink, 
-  FileText, 
-  Image, 
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import {
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  ExternalLink,
+  FileText,
+  Image,
   Link2,
   Clock,
   Globe,
@@ -26,8 +26,8 @@ import {
   AlertCircle,
   BarChart3,
   Crown,
-  FileDown
-} from 'lucide-react';
+  FileDown,
+} from "lucide-react";
 
 interface CrawlPage {
   url: string;
@@ -70,66 +70,71 @@ interface CrawlResultsProps {
 }
 
 export function CrawlResults({ result, onReset }: CrawlResultsProps) {
-  const t = useTranslations('crawlResults');
+  const t = useTranslations("crawlResults");
   const [expandedPage, setExpandedPage] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'pages' | 'issues'>('overview');
+  const [activeTab, setActiveTab] = useState<"overview" | "pages" | "issues">("overview");
 
   // Calculate health score (0-100)
   const calculateHealthScore = () => {
     if (!result.pages || result.pages.length === 0) return 0;
-    
+
     let score = 100;
     const totalPages = result.totalPages || 1;
-    
+
     // Deduct for missing titles (15 points max)
     score -= Math.min(15, (result.issues.missing_titles / totalPages) * 30);
-    
+
     // Deduct for missing meta descriptions (15 points max)
     score -= Math.min(15, (result.issues.missing_meta_descriptions / totalPages) * 30);
-    
+
     // Deduct for missing H1 (10 points max)
     score -= Math.min(10, (result.issues.missing_h1 / totalPages) * 20);
-    
+
     // Deduct for images without alt (10 points max)
-    score -= Math.min(10, (result.issues.images_without_alt / (result.pages.reduce((sum, p) => sum + p.images_total, 0) || 1)) * 20);
-    
+    score -= Math.min(
+      10,
+      (result.issues.images_without_alt /
+        (result.pages.reduce((sum, p) => sum + p.images_total, 0) || 1)) *
+        20
+    );
+
     // Deduct for failed pages (20 points max)
     score -= Math.min(20, (result.failedPages / totalPages) * 40);
-    
+
     // Deduct for missing robots.txt (5 points)
     if (!result.robotsTxt?.found) score -= 5;
-    
+
     // Deduct for missing sitemap (5 points)
     if (!result.sitemapXml?.found) score -= 5;
-    
+
     // Deduct for slow pages (10 points max)
     if (result.averageLoadTime > 3000) score -= 10;
     else if (result.averageLoadTime > 2000) score -= 5;
-    
+
     return Math.max(0, Math.round(score));
   };
 
   const healthScore = calculateHealthScore();
-  
+
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-500';
-    if (score >= 60) return 'text-yellow-500';
-    if (score >= 40) return 'text-orange-500';
-    return 'text-red-500';
+    if (score >= 80) return "text-green-500";
+    if (score >= 60) return "text-yellow-500";
+    if (score >= 40) return "text-orange-500";
+    return "text-red-500";
   };
 
   const getScoreBgColor = (score: number) => {
-    if (score >= 80) return 'bg-green-500/10 border-green-500/20';
-    if (score >= 60) return 'bg-yellow-500/10 border-yellow-500/20';
-    if (score >= 40) return 'bg-orange-500/10 border-orange-500/20';
-    return 'bg-red-500/10 border-red-500/20';
+    if (score >= 80) return "bg-green-500/10 border-green-500/20";
+    if (score >= 60) return "bg-yellow-500/10 border-yellow-500/20";
+    if (score >= 40) return "bg-orange-500/10 border-orange-500/20";
+    return "bg-red-500/10 border-red-500/20";
   };
 
   const getScoreLabel = (score: number) => {
-    if (score >= 80) return t('healthScore.excellent');
-    if (score >= 60) return t('healthScore.good');
-    if (score >= 40) return t('healthScore.needsWork');
-    return t('healthScore.poor');
+    if (score >= 80) return t("healthScore.excellent");
+    if (score >= 60) return t("healthScore.good");
+    if (score >= 40) return t("healthScore.needsWork");
+    return t("healthScore.poor");
   };
 
   const getStatusIcon = (status: number) => {
@@ -140,29 +145,32 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
   };
 
   const getLoadTimeColor = (ms: number) => {
-    if (ms < 1000) return 'text-green-500';
-    if (ms < 2000) return 'text-yellow-500';
-    if (ms < 3000) return 'text-orange-500';
-    return 'text-red-500';
+    if (ms < 1000) return "text-green-500";
+    if (ms < 2000) return "text-yellow-500";
+    if (ms < 3000) return "text-orange-500";
+    return "text-red-500";
   };
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header with Score */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center"
       >
         <div className="inline-flex items-center px-4 py-2 rounded-full bg-green-500/10 text-green-500 text-sm font-medium mb-4">
           <CheckCircle className="w-4 h-4 mr-2" />
-          {t('header.completed')}
+          {t("header.completed")}
         </div>
         <h2 className="text-3xl font-bold text-foreground mb-2">
-          {t('header.resultsFor')} {result.startUrl?.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+          {t("header.resultsFor")} {result.startUrl?.replace(/^https?:\/\//, "").replace(/\/$/, "")}
         </h2>
         <p className="text-muted-foreground">
-          {t('header.analyzed', { pages: result.totalPages, seconds: ((result.crawlTime || 0) / 1000).toFixed(1) })}
+          {t("header.analyzed", {
+            pages: result.totalPages,
+            seconds: ((result.crawlTime || 0) / 1000).toFixed(1),
+          })}
         </p>
       </motion.div>
 
@@ -174,47 +182,60 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
         className={`relative overflow-hidden rounded-2xl border ${getScoreBgColor(healthScore)} p-8`}
       >
         <div className="absolute top-0 right-0 w-64 h-64 opacity-10">
-          <div className={`w-full h-full rounded-full ${healthScore >= 60 ? 'bg-green-500' : 'bg-orange-500'} blur-3xl`} />
+          <div
+            className={`w-full h-full rounded-full ${healthScore >= 60 ? "bg-green-500" : "bg-orange-500"} blur-3xl`}
+          />
         </div>
-        
+
         <div className="relative flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
-            <h3 className="text-lg font-medium text-muted-foreground mb-1">{t('healthScore.title')}</h3>
+            <h3 className="text-lg font-medium text-muted-foreground mb-1">
+              {t("healthScore.title")}
+            </h3>
             <div className="flex items-baseline gap-3">
-              <span className={`text-6xl font-bold ${getScoreColor(healthScore)}`}>{healthScore}</span>
+              <span className={`text-6xl font-bold ${getScoreColor(healthScore)}`}>
+                {healthScore}
+              </span>
               <span className="text-2xl text-muted-foreground">/100</span>
             </div>
-            <p className={`text-lg font-medium ${getScoreColor(healthScore)} mt-1`}>{getScoreLabel(healthScore)}</p>
+            <p className={`text-lg font-medium ${getScoreColor(healthScore)} mt-1`}>
+              {getScoreLabel(healthScore)}
+            </p>
           </div>
-          
+
           {/* Score Breakdown */}
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
             <button
-              onClick={() => setActiveTab('issues')}
+              onClick={() => setActiveTab("issues")}
               className="p-3 rounded-lg bg-background/50 hover:bg-red-500/10 transition-colors cursor-pointer group"
             >
               <div className="text-2xl font-bold text-red-500 group-hover:scale-110 transition-transform">
-                {result.issues.missing_titles + result.issues.missing_h1 + result.issues.missing_meta_descriptions + result.issues.images_without_alt}
+                {result.issues.missing_titles +
+                  result.issues.missing_h1 +
+                  result.issues.missing_meta_descriptions +
+                  result.issues.images_without_alt}
               </div>
-              <div className="text-xs text-muted-foreground group-hover:text-red-400">{t('stats.issuesFound')}</div>
+              <div className="text-xs text-muted-foreground group-hover:text-red-400">
+                {t("stats.issuesFound")}
+              </div>
             </button>
             <div className="p-3 rounded-lg bg-background/50">
               <div className="text-2xl font-bold text-foreground">{result.totalPages}</div>
-              <div className="text-xs text-muted-foreground">{t('stats.pagesCrawled')}</div>
+              <div className="text-xs text-muted-foreground">{t("stats.pagesCrawled")}</div>
             </div>
             <div className="p-3 rounded-lg bg-background/50">
               <div className="text-2xl font-bold text-green-500">{result.successfulPages}</div>
-              <div className="text-xs text-muted-foreground">{t('stats.successful')}</div>
+              <div className="text-xs text-muted-foreground">{t("stats.successful")}</div>
             </div>
             <div className="p-3 rounded-lg bg-background/50">
               <div className="text-2xl font-bold text-red-500">{result.failedPages}</div>
-              <div className="text-xs text-muted-foreground">{t('stats.failed')}</div>
+              <div className="text-xs text-muted-foreground">{t("stats.failed")}</div>
             </div>
             <div className="p-3 rounded-lg bg-background/50">
               <div className={`text-2xl font-bold ${getLoadTimeColor(result.averageLoadTime)}`}>
                 {result.averageLoadTime?.toFixed(0) || 0}ms
               </div>
-              <div className="text-xs text-muted-foreground">{t('stats.avgLoadTime')}</div>
+              <div className="text-xs text-muted-foreground">{t("stats.avgLoadTime")}</div>
             </div>
           </div>
         </div>
@@ -222,21 +243,19 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
 
       {/* Tab Navigation */}
       <div className="flex gap-2 border-b border-border">
-        {(['overview', 'pages', 'issues'] as const).map((tab) => (
+        {(["overview", "pages", "issues"] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-3 font-medium text-sm transition-colors relative ${
-              activeTab === tab 
-                ? 'text-primary' 
-                : 'text-muted-foreground hover:text-foreground'
+              activeTab === tab ? "text-primary" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             {t(`tabs.${tab}`)}
             {activeTab === tab && (
-              <motion.div 
+              <motion.div
                 layoutId="activeTab"
-                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" 
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
               />
             )}
           </button>
@@ -245,7 +264,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
 
       {/* Tab Content */}
       <div className="space-y-6">
-        {activeTab === 'overview' && (
+        {activeTab === "overview" && (
           <>
             {/* Technical Checks */}
             <motion.div
@@ -253,44 +272,64 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
               animate={{ opacity: 1, y: 0 }}
               className="grid md:grid-cols-2 gap-4"
             >
-              <div className={`p-6 rounded-xl border ${result.robotsTxt?.found ? 'bg-green-500/5 border-green-500/20' : 'bg-red-500/5 border-red-500/20'}`}>
+              <div
+                className={`p-6 rounded-xl border ${result.robotsTxt?.found ? "bg-green-500/5 border-green-500/20" : "bg-red-500/5 border-red-500/20"}`}
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${result.robotsTxt?.found ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
-                      <FileText className={`w-5 h-5 ${result.robotsTxt?.found ? 'text-green-500' : 'text-red-500'}`} />
+                    <div
+                      className={`p-2 rounded-lg ${result.robotsTxt?.found ? "bg-green-500/10" : "bg-red-500/10"}`}
+                    >
+                      <FileText
+                        className={`w-5 h-5 ${result.robotsTxt?.found ? "text-green-500" : "text-red-500"}`}
+                      />
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground">robots.txt</h4>
-                      <p className="text-sm text-muted-foreground">{t('technical.robotsDescription')}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {t("technical.robotsDescription")}
+                      </p>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    result.robotsTxt?.found 
-                      ? 'bg-green-500/10 text-green-500' 
-                      : 'bg-red-500/10 text-red-500'
-                  }`}>
-                    {result.robotsTxt?.found ? t('technical.found') : t('technical.missing')}
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      result.robotsTxt?.found
+                        ? "bg-green-500/10 text-green-500"
+                        : "bg-red-500/10 text-red-500"
+                    }`}
+                  >
+                    {result.robotsTxt?.found ? t("technical.found") : t("technical.missing")}
                   </span>
                 </div>
               </div>
-              
-              <div className={`p-6 rounded-xl border ${result.sitemapXml?.found ? 'bg-green-500/5 border-green-500/20' : 'bg-red-500/5 border-red-500/20'}`}>
+
+              <div
+                className={`p-6 rounded-xl border ${result.sitemapXml?.found ? "bg-green-500/5 border-green-500/20" : "bg-red-500/5 border-red-500/20"}`}
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${result.sitemapXml?.found ? 'bg-green-500/10' : 'bg-red-500/10'}`}>
-                      <Globe className={`w-5 h-5 ${result.sitemapXml?.found ? 'text-green-500' : 'text-red-500'}`} />
+                    <div
+                      className={`p-2 rounded-lg ${result.sitemapXml?.found ? "bg-green-500/10" : "bg-red-500/10"}`}
+                    >
+                      <Globe
+                        className={`w-5 h-5 ${result.sitemapXml?.found ? "text-green-500" : "text-red-500"}`}
+                      />
                     </div>
                     <div>
                       <h4 className="font-medium text-foreground">sitemap.xml</h4>
-                      <p className="text-sm text-muted-foreground">{t('technical.sitemapDescription')}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {t("technical.sitemapDescription")}
+                      </p>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    result.sitemapXml?.found 
-                      ? 'bg-green-500/10 text-green-500' 
-                      : 'bg-red-500/10 text-red-500'
-                  }`}>
-                    {result.sitemapXml?.found ? t('technical.found') : t('technical.missing')}
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      result.sitemapXml?.found
+                        ? "bg-green-500/10 text-green-500"
+                        : "bg-red-500/10 text-red-500"
+                    }`}
+                  >
+                    {result.sitemapXml?.found ? t("technical.found") : t("technical.missing")}
                   </span>
                 </div>
               </div>
@@ -305,52 +344,58 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
             >
               <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-orange-500" />
-                {t('overview.issuesFound')}
+                {t("overview.issuesFound")}
               </h3>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="p-4 rounded-lg bg-red-500/5 border border-red-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <FileText className="w-4 h-4 text-red-500" />
-                    <span className="text-sm text-muted-foreground">{t('issues.missingTitles')}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {t("issues.missingTitles")}
+                    </span>
                   </div>
-                  <div className="text-2xl font-bold text-red-500">{result.issues.missing_titles}</div>
+                  <div className="text-2xl font-bold text-red-500">
+                    {result.issues.missing_titles}
+                  </div>
                 </div>
-                
+
                 <div className="p-4 rounded-lg bg-orange-500/5 border border-orange-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <BarChart3 className="w-4 h-4 text-orange-500" />
-                    <span className="text-sm text-muted-foreground">{t('issues.missingH1')}</span>
+                    <span className="text-sm text-muted-foreground">{t("issues.missingH1")}</span>
                   </div>
-                  <div className="text-2xl font-bold text-orange-500">{result.issues.missing_h1}</div>
+                  <div className="text-2xl font-bold text-orange-500">
+                    {result.issues.missing_h1}
+                  </div>
                 </div>
-                
+
                 <div className="p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <Search className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm text-muted-foreground">{t('issues.missingMeta')}</span>
+                    <span className="text-sm text-muted-foreground">{t("issues.missingMeta")}</span>
                   </div>
-                  <div className="text-2xl font-bold text-yellow-500">{result.issues.missing_meta_descriptions}</div>
+                  <div className="text-2xl font-bold text-yellow-500">
+                    {result.issues.missing_meta_descriptions}
+                  </div>
                 </div>
-                
+
                 <div className="p-4 rounded-lg bg-purple-500/5 border border-purple-500/10">
                   <div className="flex items-center gap-2 mb-2">
                     <Image className="w-4 h-4 text-purple-500" />
-                    <span className="text-sm text-muted-foreground">{t('issues.noAltText')}</span>
+                    <span className="text-sm text-muted-foreground">{t("issues.noAltText")}</span>
                   </div>
-                  <div className="text-2xl font-bold text-purple-500">{result.issues.images_without_alt}</div>
+                  <div className="text-2xl font-bold text-purple-500">
+                    {result.issues.images_without_alt}
+                  </div>
                 </div>
               </div>
             </motion.div>
           </>
         )}
 
-        {activeTab === 'pages' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="space-y-3"
-          >
+        {activeTab === "pages" && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
             {result.pages?.map((page, index) => (
               <motion.div
                 key={page.url}
@@ -367,10 +412,10 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                     {getStatusIcon(page.status)}
                     <div className="text-left min-w-0">
                       <div className="font-medium text-foreground truncate max-w-md">
-                        {page.title || t('pages.noTitle')}
+                        {page.title || t("pages.noTitle")}
                       </div>
                       <div className="text-sm text-muted-foreground truncate max-w-md">
-                        {page.url.replace(result.startUrl, '/')}
+                        {page.url.replace(result.startUrl, "/")}
                       </div>
                     </div>
                   </div>
@@ -378,60 +423,76 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                     <span className={`text-sm font-medium ${getLoadTimeColor(page.load_time_ms)}`}>
                       {page.load_time_ms}ms
                     </span>
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      page.status >= 200 && page.status < 300 
-                        ? 'bg-green-500/10 text-green-500'
-                        : page.status >= 400
-                        ? 'bg-red-500/10 text-red-500'
-                        : 'bg-yellow-500/10 text-yellow-500'
-                    }`}>
-                      {page.status || t('pages.error')}
+                    <span
+                      className={`px-2 py-1 rounded text-xs font-medium ${
+                        page.status >= 200 && page.status < 300
+                          ? "bg-green-500/10 text-green-500"
+                          : page.status >= 400
+                            ? "bg-red-500/10 text-red-500"
+                            : "bg-yellow-500/10 text-yellow-500"
+                      }`}
+                    >
+                      {page.status || t("pages.error")}
                     </span>
-                    {expandedPage === page.url ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    {expandedPage === page.url ? (
+                      <ChevronUp className="w-4 h-4" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4" />
+                    )}
                   </div>
                 </button>
-                
+
                 {expandedPage === page.url && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     className="border-t p-4 bg-muted/30"
                   >
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">{t('pages.h1Tags')}:</span>
-                        <span className={`ml-2 font-medium ${page.h1_count === 1 ? 'text-green-500' : page.h1_count === 0 ? 'text-red-500' : 'text-yellow-500'}`}>
+                        <span className="text-muted-foreground">{t("pages.h1Tags")}:</span>
+                        <span
+                          className={`ml-2 font-medium ${page.h1_count === 1 ? "text-green-500" : page.h1_count === 0 ? "text-red-500" : "text-yellow-500"}`}
+                        >
                           {page.h1_count}
                         </span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">{t('pages.h2Tags')}:</span>
+                        <span className="text-muted-foreground">{t("pages.h2Tags")}:</span>
                         <span className="ml-2 font-medium">{page.h2_count}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">{t('pages.wordCount')}:</span>
+                        <span className="text-muted-foreground">{t("pages.wordCount")}:</span>
                         <span className="ml-2 font-medium">{page.word_count}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">{t('pages.images')}:</span>
+                        <span className="text-muted-foreground">{t("pages.images")}:</span>
                         <span className="ml-2 font-medium">{page.images_total}</span>
                         {page.images_missing_alt > 0 && (
-                          <span className="ml-1 text-red-500">({page.images_missing_alt} {t('pages.noAlt')})</span>
+                          <span className="ml-1 text-red-500">
+                            ({page.images_missing_alt} {t("pages.noAlt")})
+                          </span>
                         )}
                       </div>
                       <div>
-                        <span className="text-muted-foreground">{t('pages.internalLinks')}:</span>
+                        <span className="text-muted-foreground">{t("pages.internalLinks")}:</span>
                         <span className="ml-2 font-medium">{page.internal_links}</span>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">{t('pages.externalLinks')}:</span>
+                        <span className="text-muted-foreground">{t("pages.externalLinks")}:</span>
                         <span className="ml-2 font-medium">{page.external_links}</span>
                       </div>
                       <div className="col-span-2">
-                        <span className="text-muted-foreground">{t('pages.metaDescription')}:</span>
-                        <span className={`ml-2 ${page.meta_description ? 'text-foreground' : 'text-red-500'}`}>
-                          {page.meta_description ? (page.meta_description.length > 50 ? page.meta_description.substring(0, 50) + '...' : page.meta_description) : t('pages.missing')}
+                        <span className="text-muted-foreground">{t("pages.metaDescription")}:</span>
+                        <span
+                          className={`ml-2 ${page.meta_description ? "text-foreground" : "text-red-500"}`}
+                        >
+                          {page.meta_description
+                            ? page.meta_description.length > 50
+                              ? page.meta_description.substring(0, 50) + "..."
+                              : page.meta_description
+                            : t("pages.missing")}
                         </span>
                       </div>
                     </div>
@@ -442,7 +503,7 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                       >
-                        {t('pages.openPage')} <ExternalLink className="w-3 h-3" />
+                        {t("pages.openPage")} <ExternalLink className="w-3 h-3" />
                       </a>
                     </div>
                   </motion.div>
@@ -452,82 +513,105 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
           </motion.div>
         )}
 
-        {activeTab === 'issues' && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="space-y-6"
-          >
+        {activeTab === "issues" && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
             {/* Pages with Missing Titles */}
-            {result.pages?.filter(p => !p.title).length > 0 && (
+            {result.pages?.filter((p) => !p.title).length > 0 && (
               <div className="bg-card rounded-xl border p-6">
                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <XCircle className="w-4 h-4 text-red-500" />
-                  {t('issuesTab.pagesMissingTitle', { count: result.pages.filter(p => !p.title).length })}
+                  {t("issuesTab.pagesMissingTitle", {
+                    count: result.pages.filter((p) => !p.title).length,
+                  })}
                 </h4>
                 <ul className="space-y-2">
-                  {result.pages?.filter(p => !p.title).map(page => (
-                    <li key={page.url} className="text-sm text-muted-foreground flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-red-500" />
-                      {page.url.replace(result.startUrl, '/')}
-                    </li>
-                  ))}
+                  {result.pages
+                    ?.filter((p) => !p.title)
+                    .map((page) => (
+                      <li
+                        key={page.url}
+                        className="text-sm text-muted-foreground flex items-center gap-2"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-red-500" />
+                        {page.url.replace(result.startUrl, "/")}
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}
-            
+
             {/* Pages with Missing Meta */}
-            {result.pages?.filter(p => !p.meta_description).length > 0 && (
+            {result.pages?.filter((p) => !p.meta_description).length > 0 && (
               <div className="bg-card rounded-xl border p-6">
                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4 text-yellow-500" />
-                  {t('issuesTab.pagesMissingMeta', { count: result.pages.filter(p => !p.meta_description).length })}
+                  {t("issuesTab.pagesMissingMeta", {
+                    count: result.pages.filter((p) => !p.meta_description).length,
+                  })}
                 </h4>
                 <ul className="space-y-2">
-                  {result.pages?.filter(p => !p.meta_description).slice(0, 10).map(page => (
-                    <li key={page.url} className="text-sm text-muted-foreground flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-yellow-500" />
-                      {page.url.replace(result.startUrl, '/')}
-                    </li>
-                  ))}
-                  {result.pages.filter(p => !p.meta_description).length > 10 && (
+                  {result.pages
+                    ?.filter((p) => !p.meta_description)
+                    .slice(0, 10)
+                    .map((page) => (
+                      <li
+                        key={page.url}
+                        className="text-sm text-muted-foreground flex items-center gap-2"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-yellow-500" />
+                        {page.url.replace(result.startUrl, "/")}
+                      </li>
+                    ))}
+                  {result.pages.filter((p) => !p.meta_description).length > 10 && (
                     <li className="text-sm text-muted-foreground">
-                      {t('issuesTab.andMore', { count: result.pages.filter(p => !p.meta_description).length - 10 })}
+                      {t("issuesTab.andMore", {
+                        count: result.pages.filter((p) => !p.meta_description).length - 10,
+                      })}
                     </li>
                   )}
                 </ul>
               </div>
             )}
-            
+
             {/* Pages with Missing H1 */}
-            {result.pages?.filter(p => !p.h1_presence).length > 0 && (
+            {result.pages?.filter((p) => !p.h1_presence).length > 0 && (
               <div className="bg-card rounded-xl border p-6">
                 <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 text-orange-500" />
-                  {t('issuesTab.pagesMissingH1', { count: result.pages.filter(p => !p.h1_presence).length })}
+                  {t("issuesTab.pagesMissingH1", {
+                    count: result.pages.filter((p) => !p.h1_presence).length,
+                  })}
                 </h4>
                 <ul className="space-y-2">
-                  {result.pages?.filter(p => !p.h1_presence).slice(0, 10).map(page => (
-                    <li key={page.url} className="text-sm text-muted-foreground flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-orange-500" />
-                      {page.url.replace(result.startUrl, '/')}
-                    </li>
-                  ))}
+                  {result.pages
+                    ?.filter((p) => !p.h1_presence)
+                    .slice(0, 10)
+                    .map((page) => (
+                      <li
+                        key={page.url}
+                        className="text-sm text-muted-foreground flex items-center gap-2"
+                      >
+                        <span className="w-1 h-1 rounded-full bg-orange-500" />
+                        {page.url.replace(result.startUrl, "/")}
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}
 
             {/* No Issues */}
-            {result.issues.missing_titles === 0 && 
-             result.issues.missing_meta_descriptions === 0 && 
-             result.issues.missing_h1 === 0 && 
-             result.issues.images_without_alt === 0 && (
-              <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-8 text-center">
-                <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
-                <h4 className="text-lg font-semibold text-foreground mb-2">{t('issuesTab.noIssuesTitle')}</h4>
-                <p className="text-muted-foreground">{t('issuesTab.noIssuesDescription')}</p>
-              </div>
-            )}
+            {result.issues.missing_titles === 0 &&
+              result.issues.missing_meta_descriptions === 0 &&
+              result.issues.missing_h1 === 0 &&
+              result.issues.images_without_alt === 0 && (
+                <div className="bg-green-500/5 border border-green-500/20 rounded-xl p-8 text-center">
+                  <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
+                  <h4 className="text-lg font-semibold text-foreground mb-2">
+                    {t("issuesTab.noIssuesTitle")}
+                  </h4>
+                  <p className="text-muted-foreground">{t("issuesTab.noIssuesDescription")}</p>
+                </div>
+              )}
           </motion.div>
         )}
       </div>
@@ -544,21 +628,21 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-muted text-foreground hover:bg-muted/80 transition-colors font-medium"
         >
           <RefreshCw className="w-4 h-4" />
-          {t('actions.crawlAnother')}
+          {t("actions.crawlAnother")}
         </button>
         <button
           onClick={() => generatePdfReport(result)}
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"
         >
           <FileDown className="w-4 h-4" />
-          {t('actions.exportPdf')}
+          {t("actions.exportPdf")}
         </button>
         <Link
           href="/dashboard"
           className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 transition-all font-medium shadow-lg hover:shadow-xl"
         >
           <Crown className="w-4 h-4" />
-          {t('actions.getFullReport')}
+          {t("actions.getFullReport")}
         </Link>
       </motion.div>
     </div>
@@ -568,10 +652,11 @@ export function CrawlResults({ result, onReset }: CrawlResultsProps) {
 // PDF Report Generation Function
 function generatePdfReport(result: CrawlResultData) {
   // Calculate total issues
-  const totalIssues = result.issues.missing_titles + 
-                      result.issues.missing_h1 + 
-                      result.issues.missing_meta_descriptions + 
-                      result.issues.images_without_alt;
+  const totalIssues =
+    result.issues.missing_titles +
+    result.issues.missing_h1 +
+    result.issues.missing_meta_descriptions +
+    result.issues.images_without_alt;
 
   // Calculate health score
   let healthScore = 100;
@@ -600,7 +685,7 @@ function generatePdfReport(result: CrawlResultData) {
         .header h1 { font-size: 28px; color: #1a1a2e; margin-bottom: 8px; }
         .header p { color: #666; font-size: 14px; }
         .score-section { display: flex; justify-content: center; align-items: center; gap: 40px; margin-bottom: 40px; padding: 30px; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%); border-radius: 16px; }
-        .score-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: ${healthScore >= 80 ? '#10b981' : healthScore >= 60 ? '#f59e0b' : '#ef4444'}; color: white; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: ${healthScore >= 80 ? "#10b981" : healthScore >= 60 ? "#f59e0b" : "#ef4444"}; color: white; }
         .score-circle .number { font-size: 42px; font-weight: bold; line-height: 1; }
         .score-circle .label { font-size: 12px; opacity: 0.9; }
         .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 40px; }
@@ -642,7 +727,7 @@ function generatePdfReport(result: CrawlResultData) {
     <body>
       <div class="header">
         <h1>🔍 SEO Crawl Report</h1>
-        <p><strong>${result.startUrl}</strong> • Generated on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p><strong>${result.startUrl}</strong> • Generated on ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
       </div>
 
       <div class="score-section">
@@ -653,10 +738,15 @@ function generatePdfReport(result: CrawlResultData) {
         <div style="text-align: left;">
           <h3 style="font-size: 24px; margin-bottom: 8px;">SEO Health Score</h3>
           <p style="color: #666;">
-            ${healthScore >= 80 ? '✅ Excellent - Your site is well optimized' : 
-              healthScore >= 60 ? '⚠️ Good - Some improvements recommended' : 
-              healthScore >= 40 ? '🔶 Needs Work - Several issues found' : 
-              '❌ Poor - Critical issues need attention'}
+            ${
+              healthScore >= 80
+                ? "✅ Excellent - Your site is well optimized"
+                : healthScore >= 60
+                  ? "⚠️ Good - Some improvements recommended"
+                  : healthScore >= 40
+                    ? "🔶 Needs Work - Several issues found"
+                    : "❌ Poor - Critical issues need attention"
+            }
           </p>
         </div>
       </div>
@@ -689,11 +779,11 @@ function generatePdfReport(result: CrawlResultData) {
         <div class="tech-checks">
           <div class="tech-check">
             <span>robots.txt</span>
-            <span class="status ${result.robotsTxt?.found ? 'found' : 'missing'}">${result.robotsTxt?.found ? 'Found' : 'Missing'}</span>
+            <span class="status ${result.robotsTxt?.found ? "found" : "missing"}">${result.robotsTxt?.found ? "Found" : "Missing"}</span>
           </div>
           <div class="tech-check">
             <span>sitemap.xml</span>
-            <span class="status ${result.sitemapXml?.found ? 'found' : 'missing'}">${result.sitemapXml?.found ? 'Found' : 'Missing'}</span>
+            <span class="status ${result.sitemapXml?.found ? "found" : "missing"}">${result.sitemapXml?.found ? "Found" : "Missing"}</span>
           </div>
         </div>
       </div>
@@ -734,16 +824,23 @@ function generatePdfReport(result: CrawlResultData) {
             </tr>
           </thead>
           <tbody>
-            ${result.pages?.slice(0, 50).map(page => `
+            ${
+              result.pages
+                ?.slice(0, 50)
+                .map(
+                  (page) => `
               <tr>
-                <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${page.url.replace(result.startUrl, '/')}</td>
+                <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${page.url.replace(result.startUrl, "/")}</td>
                 <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${page.title || '<span style="color: #dc2626;">Missing</span>'}</td>
-                <td><span class="status-badge ${page.status >= 200 && page.status < 400 ? 'success' : 'error'}">${page.status}</span></td>
+                <td><span class="status-badge ${page.status >= 200 && page.status < 400 ? "success" : "error"}">${page.status}</span></td>
                 <td>${page.load_time_ms}ms</td>
-                <td>${page.h1_presence ? '✅' : '❌'}</td>
-                <td>${page.meta_description ? '✅' : '❌'}</td>
+                <td>${page.h1_presence ? "✅" : "❌"}</td>
+                <td>${page.meta_description ? "✅" : "❌"}</td>
               </tr>
-            `).join('') || ''}
+            `
+                )
+                .join("") || ""
+            }
           </tbody>
         </table>
       </div>
@@ -757,11 +854,11 @@ function generatePdfReport(result: CrawlResultData) {
   `;
 
   // Open print dialog with the HTML content
-  const printWindow = window.open('', '_blank');
+  const printWindow = window.open("", "_blank");
   if (printWindow) {
     printWindow.document.write(htmlContent);
     printWindow.document.close();
-    
+
     // Wait for content to load then trigger print
     printWindow.onload = () => {
       setTimeout(() => {

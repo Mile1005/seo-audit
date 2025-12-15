@@ -5,9 +5,11 @@ This directory contains all visual components and image assets for the aiseoturb
 ## Components
 
 ### HeroMockup
+
 Responsive hero mockup container with desktop and mobile device frames.
 
 **Features:**
+
 - Next/Image optimization with responsive sizing
 - Animation placeholders for device frames
 - Accessibility support with proper alt text
@@ -15,19 +17,19 @@ Responsive hero mockup container with desktop and mobile device frames.
 - Priority loading for above-the-fold content
 
 **Usage:**
-```tsx
-import { HeroMockup } from '@/components/visuals'
 
-<HeroMockup 
-  className="w-full max-w-4xl mx-auto"
-  priority={true}
-/>
+```tsx
+import { HeroMockup } from "@/components/visuals";
+
+<HeroMockup className="w-full max-w-4xl mx-auto" priority={true} />;
 ```
 
 ### FeatureMockups
+
 Interactive feature showcase with lightbox and thumbnail grid.
 
 **Features:**
+
 - Responsive grid layout (1-4 columns based on screen size)
 - Lightbox modal with keyboard navigation (ESC to close)
 - Touch/swipe support for mobile devices
@@ -36,6 +38,7 @@ Interactive feature showcase with lightbox and thumbnail grid.
 - Accessible ARIA labels and focus management
 
 **Usage:**
+
 ```tsx
 import { FeatureMockups } from '@/components/visuals'
 
@@ -50,7 +53,7 @@ const customMockups = [
   }
 ]
 
-<FeatureMockups 
+<FeatureMockups
   mockups={customMockups}
   className="my-12"
 />
@@ -59,6 +62,7 @@ const customMockups = [
 ## Image Requirements
 
 All images should be:
+
 - **Format**: WebP for optimal compression
 - **Sizes**: Multiple breakpoints for responsive loading
 - **Alt Text**: Descriptive and accessible
@@ -84,10 +88,12 @@ public/images/
 ### Image Specifications
 
 #### Hero Images
+
 - **hero-laptop-dashboard.webp**: 1600x1000px, showing main dashboard
 - **hero-mobile-preview.webp**: 400x800px, mobile interface
 
 #### Feature Images
+
 - **Desktop mockups**: 1400x875px (16:10 aspect ratio)
 - **Mobile mockups**: 375x812px (iPhone 13 dimensions)
 - **Report mockups**: 800x1035px (A4-like proportions)
@@ -95,6 +101,7 @@ public/images/
 ## Accessibility
 
 All visual components include:
+
 - Proper ARIA labels and roles
 - Keyboard navigation support
 - Screen reader compatibility
@@ -114,10 +121,12 @@ All visual components include:
 Current placeholder files need to be replaced with final assets:
 
 ### Hero Section
+
 - [ ] `hero-laptop-dashboard.webp` - Main dashboard on laptop screen
 - [ ] `mobile-audit-interface.webp` - Mobile SEO audit interface
 
 ### Feature Mockups
+
 - [ ] `competitor-analysis-desktop.webp` - Competitor comparison dashboard
 - [ ] `pdf-report-generation.webp` - Professional PDF report preview
 - [ ] `ai-chat-interface.webp` - AI assistant chat interface

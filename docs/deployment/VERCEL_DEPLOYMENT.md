@@ -5,6 +5,7 @@ This document outlines the configuration needed for successful Vercel deployment
 ## Prisma + Vercel Configuration
 
 ### 1. Build Scripts (package.json)
+
 ```json
 {
   "scripts": {
@@ -15,6 +16,7 @@ This document outlines the configuration needed for successful Vercel deployment
 ```
 
 ### 2. Vercel Configuration (vercel.json)
+
 ```json
 {
   "buildCommand": "pnpm run build",
@@ -33,11 +35,12 @@ This document outlines the configuration needed for successful Vercel deployment
 ```
 
 ### 3. Next.js Configuration (next.config.mjs)
+
 ```javascript
 const nextConfig = {
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.externals.push('_http_common');
+      config.externals.push("_http_common");
     }
     return config;
   },
@@ -47,6 +50,7 @@ const nextConfig = {
 ## Environment Variables
 
 ### Required Environment Variables for Vercel:
+
 1. `DATABASE_URL` - PostgreSQL connection string
 2. `NEXTAUTH_SECRET` - Random secret for NextAuth.js
 3. `NEXTAUTH_URL` - Your deployment URL
@@ -55,6 +59,7 @@ const nextConfig = {
 6. `RESEND_API_KEY` - Resend API key for emails
 
 ### Setting Environment Variables:
+
 ```bash
 # In Vercel dashboard or CLI
 vercel env add DATABASE_URL
@@ -68,6 +73,7 @@ vercel env add RESEND_API_KEY
 ## Deployment Steps
 
 1. **Commit and push changes**:
+
    ```bash
    git add .
    git commit -m "fix: Configure Prisma for Vercel deployment"

@@ -3,68 +3,74 @@
  * This provides translation capabilities outside of React components
  */
 
-import { getTranslations } from 'next-intl/server';
-import type { Locale } from '../i18n';
+import { getTranslations } from "next-intl/server";
+import type { Locale } from "../i18n";
 
 // Type-safe translation keys for audit reports
-export type AuditTranslationKey = 
-  | 'audit.title'
-  | 'audit.description'
-  | 'audit.score'
-  | 'audit.issues'
-  | 'audit.recommendations'
-  | 'audit.critical'
-  | 'audit.warning'
-  | 'audit.info'
-  | 'audit.passed'
-  | 'audit.failed'
-  | 'audit.processing'
-  | 'audit.completed'
-  | 'audit.error'
-  | 'notification.ranking_alert'
-  | 'notification.audit_complete'
-  | 'notification.backlink_change'
-  | 'notification.keyword_opportunity'
-  | 'error.quota_exceeded'
-  | 'error.invalid_url'
-  | 'error.crawl_failed'
-  | 'error.network_error'
-  | 'export.pdf_header'
-  | 'export.csv_header'
-  | 'export.generated_at'
-  | 'export.page_url'
-  | 'export.score'
-  | 'export.issues_found';
+export type AuditTranslationKey =
+  | "audit.title"
+  | "audit.description"
+  | "audit.score"
+  | "audit.issues"
+  | "audit.recommendations"
+  | "audit.critical"
+  | "audit.warning"
+  | "audit.info"
+  | "audit.passed"
+  | "audit.failed"
+  | "audit.processing"
+  | "audit.completed"
+  | "audit.error"
+  | "notification.ranking_alert"
+  | "notification.audit_complete"
+  | "notification.backlink_change"
+  | "notification.keyword_opportunity"
+  | "error.quota_exceeded"
+  | "error.invalid_url"
+  | "error.crawl_failed"
+  | "error.network_error"
+  | "export.pdf_header"
+  | "export.csv_header"
+  | "export.generated_at"
+  | "export.page_url"
+  | "export.score"
+  | "export.issues_found";
 
 /**
  * Get translations for server-side contexts (API routes, background jobs, etc.)
  * @param locale - The user's locale (e.g., 'en', 'es', 'fr')
  * @returns Translation function
  */
-export async function getServerTranslations(locale: Locale = 'en') {
-  const load = async (loc: Locale) => getTranslations({ locale: loc })
+export async function getServerTranslations(locale: Locale = "en") {
+  const load = async (loc: Locale) => getTranslations({ locale: loc });
 
   try {
-    return await load(locale)
+    return await load(locale);
   } catch (error) {
-    console.warn(`Failed to load 'server' translations for locale ${locale}, falling back to English`, error)
+    console.warn(
+      `Failed to load 'server' translations for locale ${locale}, falling back to English`,
+      error
+    );
   }
 
   try {
-    return await load('en')
+    return await load("en");
   } catch (error) {
-    console.warn(`Failed to load 'server' translations for locale en; using identity translator`, error)
+    console.warn(
+      `Failed to load 'server' translations for locale en; using identity translator`,
+      error
+    );
   }
 
   // Last resort: never crash background/API routes because of missing messages.
-  return ((key: string) => key) as any
+  return ((key: string) => key) as any;
 }
 
 function looksLikeUntranslatedKey(value: string) {
   // Heuristic: dot-separated key with no spaces, common when next-intl returns a key instead of text.
-  if (!value) return false
-  if (/\s/.test(value)) return false
-  return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(value)
+  if (!value) return false;
+  if (/\s/.test(value)) return false;
+  return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(value);
 }
 
 function safeTranslate(
@@ -73,13 +79,13 @@ function safeTranslate(
   values?: Record<string, string | number>
 ): string | null {
   try {
-    const result = t(key as any, values as any)
-    if (!result) return null
-    if (result === key) return null
-    if (looksLikeUntranslatedKey(result)) return null
-    return result
+    const result = t(key as any, values as any);
+    if (!result) return null;
+    if (result === key) return null;
+    if (looksLikeUntranslatedKey(result)) return null;
+    return result;
   } catch {
-    return null
+    return null;
   }
 }
 
@@ -91,21 +97,21 @@ function safeTranslate(
  */
 export async function translateAuditCheck(
   checkId: string,
-  locale: Locale = 'en'
+  locale: Locale = "en"
 ): Promise<{ name: string; description: string }> {
   const t = await getServerTranslations(locale);
-  
+
   try {
     return {
       name: t(`audit.checks.${checkId}.name` as any),
-      description: t(`audit.checks.${checkId}.description` as any)
+      description: t(`audit.checks.${checkId}.description` as any),
     };
   } catch (error) {
     // Fallback to check ID if translation missing
     console.warn(`Translation missing for audit check: ${checkId}`);
     return {
-      name: checkId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-      description: `Check for ${checkId}`
+      name: checkId.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+      description: `Check for ${checkId}`,
     };
   }
 }
@@ -119,11 +125,11 @@ export async function translateAuditCheck(
  */
 export async function translateError(
   errorKey: string,
-  locale: Locale = 'en',
+  locale: Locale = "en",
   details?: Record<string, string | number>
 ): Promise<string> {
   const t = await getServerTranslations(locale);
-  
+
   try {
     return t(`errors.${errorKey}` as any, details as any);
   } catch (error) {
@@ -141,31 +147,31 @@ export async function translateError(
  */
 export async function translateNotification(
   notificationType: string,
-  locale: Locale = 'en',
+  locale: Locale = "en",
   data?: Record<string, string | number>
 ): Promise<{ title: string; message: string }> {
   const t = await getServerTranslations(locale);
 
   // Current message files use a flat `notifications.*` structure (no `.title`/`.message` nesting).
   // Keep backwards compatibility with existing callsites (e.g. `audit_complete`).
-  const camelType = notificationType.replace(/_([a-z])/g, (_, c) => String(c).toUpperCase())
+  const camelType = notificationType.replace(/_([a-z])/g, (_, c) => String(c).toUpperCase());
 
-  if (notificationType === 'audit_complete' || camelType === 'auditComplete') {
+  if (notificationType === "audit_complete" || camelType === "auditComplete") {
     const text =
-      safeTranslate(t as any, 'notifications.auditComplete', data) ||
-      'Audit completed successfully!'
-    return { title: text, message: text }
+      safeTranslate(t as any, "notifications.auditComplete", data) ||
+      "Audit completed successfully!";
+    return { title: text, message: text };
   }
 
-  const titleKey = `notifications.${camelType}`
-  const translated = safeTranslate(t as any, titleKey, data)
-  if (translated) return { title: translated, message: translated }
+  const titleKey = `notifications.${camelType}`;
+  const translated = safeTranslate(t as any, titleKey, data);
+  if (translated) return { title: translated, message: translated };
 
-  console.warn(`Translation missing for notification: ${notificationType}`)
+  console.warn(`Translation missing for notification: ${notificationType}`);
   return {
-    title: 'Notification',
-    message: notificationType
-  }
+    title: "Notification",
+    message: notificationType,
+  };
 }
 
 /**
@@ -177,7 +183,7 @@ export async function translateNotification(
  */
 export function formatNumber(
   value: number,
-  locale: Locale = 'en',
+  locale: Locale = "en",
   options?: Intl.NumberFormatOptions
 ): string {
   try {
@@ -196,12 +202,12 @@ export function formatNumber(
  */
 export function formatCurrency(
   value: number,
-  locale: Locale = 'en',
-  currency: string = 'USD'
+  locale: Locale = "en",
+  currency: string = "USD"
 ): string {
   return formatNumber(value, locale, {
-    style: 'currency',
-    currency
+    style: "currency",
+    currency,
   });
 }
 
@@ -214,16 +220,19 @@ export function formatCurrency(
  */
 export function formatDate(
   date: Date | string | number,
-  locale: Locale = 'en',
+  locale: Locale = "en",
   options?: Intl.DateTimeFormatOptions
 ): string {
   try {
-    const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
-    return new Intl.DateTimeFormat(locale, options || {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }).format(dateObj);
+    const dateObj = typeof date === "string" || typeof date === "number" ? new Date(date) : date;
+    return new Intl.DateTimeFormat(
+      locale,
+      options || {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    ).format(dateObj);
   } catch (error) {
     return date.toString();
   }
@@ -237,34 +246,34 @@ export function formatDate(
  */
 export function getLocaleFromHeaders(headers: Headers): Locale {
   // Check custom locale header first
-  const customLocale = headers.get('X-Locale');
+  const customLocale = headers.get("X-Locale");
   if (customLocale && isValidLocale(customLocale)) {
     return customLocale as Locale;
   }
-  
+
   // Parse Accept-Language header
-  const acceptLanguage = headers.get('Accept-Language');
+  const acceptLanguage = headers.get("Accept-Language");
   if (acceptLanguage) {
-    const languages = acceptLanguage.split(',').map(lang => {
-      const [code] = lang.trim().split(';');
-      return code.split('-')[0]; // Get just the language code (e.g., 'en' from 'en-US')
+    const languages = acceptLanguage.split(",").map((lang) => {
+      const [code] = lang.trim().split(";");
+      return code.split("-")[0]; // Get just the language code (e.g., 'en' from 'en-US')
     });
-    
+
     for (const lang of languages) {
       if (isValidLocale(lang)) {
         return lang as Locale;
       }
     }
   }
-  
-  return 'en'; // Default to English
+
+  return "en"; // Default to English
 }
 
 /**
  * Check if a string is a valid locale
  */
 function isValidLocale(locale: string): boolean {
-  const validLocales: Locale[] = ['en', 'es', 'fr', 'de', 'it', 'id'];
+  const validLocales: Locale[] = ["en", "es", "fr", "de", "it", "id"];
   return validLocales.includes(locale as Locale);
 }
 
@@ -275,17 +284,13 @@ function isValidLocale(locale: string): boolean {
  * @param params - Additional parameters
  * @returns Locale-aware cache key
  */
-export function getLocaleCacheKey(
-  baseKey: string,
-  locale: Locale,
-  ...params: string[]
-): string {
+export function getLocaleCacheKey(baseKey: string, locale: Locale, ...params: string[]): string {
   const parts = [baseKey, locale, ...params].filter(Boolean);
-  return parts.join(':');
+  return parts.join(":");
 }
 
 // Example usage:
-// const cacheKey = getLocaleCacheKey('audit', 'en', 'example.com') 
+// const cacheKey = getLocaleCacheKey('audit', 'en', 'example.com')
 // Result: 'audit:en:example.com'
 
 /**
@@ -293,61 +298,61 @@ export function getLocaleCacheKey(
  */
 export const SEO_CHECK_IDS = [
   // Technical Foundation (10 checks)
-  'site_crawlability',
-  'xml_sitemap',
-  'robots_txt',
-  'url_structure',
-  'internal_linking',
-  'canonical_tags',
-  'schema_markup',
-  'https_implementation',
-  'redirect_chains',
-  'error_404',
-  
+  "site_crawlability",
+  "xml_sitemap",
+  "robots_txt",
+  "url_structure",
+  "internal_linking",
+  "canonical_tags",
+  "schema_markup",
+  "https_implementation",
+  "redirect_chains",
+  "error_404",
+
   // Page Speed (10 checks)
-  'core_web_vitals',
-  'image_optimization',
-  'css_js_optimization',
-  'server_response',
-  'browser_caching',
-  'cdn_implementation',
-  'lazy_loading',
-  'font_optimization',
-  'third_party_scripts',
-  'database_optimization',
-  
+  "core_web_vitals",
+  "image_optimization",
+  "css_js_optimization",
+  "server_response",
+  "browser_caching",
+  "cdn_implementation",
+  "lazy_loading",
+  "font_optimization",
+  "third_party_scripts",
+  "database_optimization",
+
   // Mobile Optimization (8 checks)
-  'mobile_first_indexing',
-  'responsive_design',
-  'touch_targets',
-  'viewport_config',
-  'mobile_speed',
-  'app_store_optimization',
-  'amp_implementation',
-  'mobile_usability',
-  
+  "mobile_first_indexing",
+  "responsive_design",
+  "touch_targets",
+  "viewport_config",
+  "mobile_speed",
+  "app_store_optimization",
+  "amp_implementation",
+  "mobile_usability",
+
   // Content Optimization (12 checks)
-  'title_tags',
-  'meta_descriptions',
-  'header_structure',
-  'keyword_density',
-  'content_length',
-  'readability',
-  'internal_link_strategy',
-  'image_alt_text',
-  'content_freshness',
-  'duplicate_content',
-  'content_quality',
-  'structured_content',
-  
+  "title_tags",
+  "meta_descriptions",
+  "header_structure",
+  "keyword_density",
+  "content_length",
+  "readability",
+  "internal_link_strategy",
+  "image_alt_text",
+  "content_freshness",
+  "duplicate_content",
+  "content_quality",
+  "structured_content",
+
   // Link Building (7 checks)
-  'backlink_profile',
-  'anchor_text_distribution',
-  'domain_authority',
-  'toxic_links',
-  'link_velocity',
-  'broken_backlinks',
-  'competitor_backlinks'
+  "backlink_profile",
+  "anchor_text_distribution",
+  "domain_authority",
+  "toxic_links",
+  "link_velocity",
+  "broken_backlinks",
+  "competitor_backlinks",
 ] as const;
 
-export type SEOCheckId = typeof SEO_CHECK_IDS[number];
+export type SEOCheckId = (typeof SEO_CHECK_IDS)[number];

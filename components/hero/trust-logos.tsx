@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const logos = [
-  { name: 'Shopify Stores', width: '120px' },
-  { name: 'Local Businesses', width: '130px' },
-  { name: 'E-commerce Brands', width: '140px' },
-  { name: 'Marketing Agencies', width: '140px' },
-  { name: 'SaaS Companies', width: '120px' },
-  { name: 'Content Publishers', width: '130px' }
-]
+  { name: "Shopify Stores", width: "120px" },
+  { name: "Local Businesses", width: "130px" },
+  { name: "E-commerce Brands", width: "140px" },
+  { name: "Marketing Agencies", width: "140px" },
+  { name: "SaaS Companies", width: "120px" },
+  { name: "Content Publishers", width: "130px" },
+];
 
 // CSS animation style for better performance (runs on GPU)
 const carouselStyle = `
@@ -26,32 +26,32 @@ const carouselStyle = `
   .carousel-container:hover {
     animation-play-state: paused;
   }
-`
+`;
 
 export function TrustLogos() {
-  const t = useTranslations('home')
+  const t = useTranslations("home");
   // Duplicate logos for seamless loop
-  const duplicatedLogos = [...logos, ...logos]
+  const duplicatedLogos = [...logos, ...logos];
 
   return (
     <section className="py-12 bg-slate-950/50 border-t border-slate-800/50">
       <style>{carouselStyle}</style>
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-8"
         >
           <h2 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-6">
-            {t('trustedBy', { count: '1,000' }).replace('1,000+', '').trim()}
+            {t("trustedBy", { count: "1,000" }).replace("1,000+", "").trim()}
           </h2>
         </motion.div>
 
         {/* Animated Logo Carousel - Using CSS for better performance */}
         <div className="relative overflow-hidden">
-          <div className="flex items-center carousel-container" style={{ width: '200%' }}>
+          <div className="flex items-center carousel-container" style={{ width: "200%" }}>
             <div className="flex items-center space-x-8">
               {duplicatedLogos.map((logo, index) => (
                 <div
@@ -74,7 +74,7 @@ export function TrustLogos() {
         </div>
 
         {/* Social Proof Stats */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -93,7 +93,8 @@ export function TrustLogos() {
               ))}
             </div>
             <span className="text-gray-400 text-sm">
-              <span className="text-blue-400 font-semibold">{t('trustLogos.marketersText')}</span> {t('trustLogos.trustText')}
+              <span className="text-blue-400 font-semibold">{t("trustLogos.marketersText")}</span>{" "}
+              {t("trustLogos.trustText")}
             </span>
           </div>
 
@@ -107,11 +108,12 @@ export function TrustLogos() {
               ))}
             </div>
             <span className="text-gray-400 text-sm ml-2">
-              <span className="text-white font-semibold">{t('trustLogos.ratingText')}</span> {t('trustLogos.ratingLabel')}
+              <span className="text-white font-semibold">{t("trustLogos.ratingText")}</span>{" "}
+              {t("trustLogos.ratingLabel")}
             </span>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

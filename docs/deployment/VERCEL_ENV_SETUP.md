@@ -1,6 +1,7 @@
 # 🔧 Vercel Environment Setup Guide
 
 ## Problem
+
 Your dashboard redirects to `localhost:3001` instead of staying on your Vercel domain because the environment variables are set for local development.
 
 ## Solution
@@ -8,7 +9,7 @@ Your dashboard redirects to `localhost:3001` instead of staying on your Vercel d
 ### Step 1: Update Vercel Environment Variables
 
 1. **Go to Vercel Dashboard**: https://vercel.com/dashboard
-2. **Select your `seo-audit` project**  
+2. **Select your `seo-audit` project**
 3. **Go to Settings → Environment Variables**
 4. **Update these variables:**
 
@@ -36,6 +37,7 @@ NEXT_PUBLIC_APP_URL = https://seo-audit-git-feature-homepage-revamp-miles-projec
 ### Step 3: Redeploy
 
 After updating environment variables, trigger a new deployment:
+
 - Push any small change to your repository, or
 - Go to Vercel dashboard → Deployments → Redeploy
 
@@ -60,6 +62,7 @@ NEXT_PUBLIC_APP_URL=https://your-vercel-url.vercel.app
 ```
 
 ## ✅ After Setup
+
 - Login will work properly
 - Dashboard will be accessible
 - No more localhost redirects

@@ -155,12 +155,7 @@
     "terms": {
       "title": "Termini di Servizio - Accordo Legale | AI SEO Turbo",
       "description": "Leggi i nostri termini di servizio e accordo legale per l'uso di AI SEO Turbo. Comprendi i tuoi diritti e doveri nell'uso dei nostri strumenti di audit SEO.",
-      "keywords": [
-        "Termini di Servizio",
-        "Accordo Legale",
-        "Condizioni SEO",
-        "Accordo Utente"
-      ]
+      "keywords": ["Termini di Servizio", "Accordo Legale", "Condizioni SEO", "Accordo Utente"]
     },
     "privacy": {
       "title": "Informativa sulla Privacy - Protezione dei Dati | AI SEO Turbo",
@@ -1172,11 +1167,7 @@
                 "Verifica ottimizzazione contenuti",
                 "Revisione tecnica SEO"
               ],
-              [
-                "Metriche di performance",
-                "Ottimizzazione mobile",
-                "Analisi della sicurezza"
-              ]
+              ["Metriche di performance", "Ottimizzazione mobile", "Analisi della sicurezza"]
             ]
           },
           "feature": {
@@ -9386,21 +9377,13 @@
               "icon": "CreditCard",
               "name": "Carte di credito e debito",
               "description": "Carte Visa, MasterCard, American Express e Discover accettate.",
-              "features": [
-                "Elaborazione istantanea",
-                "Crittografia sicura",
-                "Accettazione globale"
-              ]
+              "features": ["Elaborazione istantanea", "Crittografia sicura", "Accettazione globale"]
             },
             {
               "icon": "Wallet",
               "name": "Portafogli digitali",
               "description": "PayPal, Apple Pay, Google Pay e altre opzioni di portafoglio digitale.",
-              "features": [
-                "Pagamenti con un clic",
-                "Sicurezza migliorata",
-                "Mobile-friendly"
-              ]
+              "features": ["Pagamenti con un clic", "Sicurezza migliorata", "Mobile-friendly"]
             },
             {
               "icon": "Building",
@@ -9680,10 +9663,7 @@
           "smsAuth": {
             "title": "Autenticazione via SMS",
             "description": "Ricevi codici di verifica tramite SMS al tuo numero di telefono registrato.",
-            "features": [
-              "Facile da configurare",
-              "Funziona su qualsiasi telefono"
-            ],
+            "features": ["Facile da configurare", "Funziona su qualsiasi telefono"],
             "limitation": "Richiede il servizio cellulare"
           }
         },

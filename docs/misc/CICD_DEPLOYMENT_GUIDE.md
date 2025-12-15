@@ -1,11 +1,13 @@
 # 🚀 CI/CD & Production Deployment Guide
 
 ## Overview
+
 This guide covers the complete CI/CD pipeline setup and production deployment process for AI SEO Turbo.
 
 ## 🔄 CI/CD Pipeline
 
 ### Pipeline Overview
+
 Our CI/CD pipeline consists of 6 main jobs:
 
 1. **Test Suite** - Linting, type checking, unit tests, and build verification
@@ -16,6 +18,7 @@ Our CI/CD pipeline consists of 6 main jobs:
 6. **Deploy Production** - Production deployment on main branch
 
 ### Pipeline Triggers
+
 - **Push to `main`**: Full pipeline + production deployment
 - **Push to `develop`**: Full pipeline (no deployment)
 - **Pull Requests to `main`**: Full pipeline + preview deployment
@@ -23,6 +26,7 @@ Our CI/CD pipeline consists of 6 main jobs:
 ## 🛠️ Setup Instructions
 
 ### 1. Repository Secrets
+
 Configure the following secrets in your GitHub repository:
 
 ```bash
@@ -41,6 +45,7 @@ SLACK_WEBHOOK=your_slack_webhook_url
 ```
 
 ### 2. Branch Protection Rules
+
 Set up branch protection for `main`:
 
 ```bash
@@ -59,6 +64,7 @@ Set up branch protection for `main`:
 ```
 
 ### 3. Vercel Configuration
+
 Ensure your `vercel.json` is properly configured:
 
 ```json
@@ -78,18 +84,21 @@ Ensure your `vercel.json` is properly configured:
 ## 📊 Quality Gates
 
 ### Accessibility Requirements
+
 - **WCAG 2.1 AA Compliance**: 90% pass rate minimum
 - **Color Contrast**: 4.5:1 ratio for normal text, 3:1 for large text
 - **Touch Targets**: Minimum 44x44px for mobile interactions
 - **Screen Reader**: All interactive elements must have accessible names
 
 ### Performance Requirements
+
 - **Performance Score**: 80+ (Lighthouse)
 - **Accessibility Score**: 90+ (Lighthouse)
 - **Best Practices**: 90+ (Lighthouse)
 - **SEO Score**: 90+ (Lighthouse)
 
 ### Security Requirements
+
 - **No high-severity vulnerabilities** in dependencies
 - **CodeQL analysis** must pass
 - **Security headers** properly configured
@@ -97,6 +106,7 @@ Ensure your `vercel.json` is properly configured:
 ## 🔧 Test Commands
 
 ### Local Testing
+
 ```bash
 # Run all tests
 pnpm test
@@ -118,6 +128,7 @@ pnpm lhci
 ```
 
 ### CI Environment
+
 ```bash
 # CI-optimized E2E tests
 pnpm test:e2e:ci
@@ -132,6 +143,7 @@ pnpm audit
 ## 🚀 Deployment Process
 
 ### Preview Deployments
+
 1. Create/update a Pull Request to `main`
 2. Pipeline automatically runs all tests
 3. If tests pass, preview deployment is created
@@ -139,6 +151,7 @@ pnpm audit
 5. Manual testing and review can be performed
 
 ### Production Deployment
+
 1. Merge PR to `main` branch
 2. Full pipeline runs with all quality gates
 3. If all checks pass, production deployment starts
@@ -146,6 +159,7 @@ pnpm audit
 5. Slack notification sent (if configured)
 
 ### Rollback Procedure
+
 ```bash
 # Using Vercel CLI
 vercel rollback [deployment-url]
@@ -158,12 +172,14 @@ git push origin main
 ## 📋 Pre-Deployment Checklist
 
 ### Code Quality
+
 - [ ] All tests passing
 - [ ] TypeScript compilation successful
 - [ ] ESLint/Prettier checks passed
 - [ ] No console.log statements in production code
 
 ### Accessibility
+
 - [ ] WCAG 2.1 AA compliance verified
 - [ ] Color contrast ratios meet standards
 - [ ] All interactive elements have proper labels
@@ -171,18 +187,21 @@ git push origin main
 - [ ] Screen reader compatibility tested
 
 ### Performance
+
 - [ ] Lighthouse scores meet requirements
 - [ ] Core Web Vitals optimized
 - [ ] Images optimized and compressed
 - [ ] Bundle size analyzed and optimized
 
 ### Security
+
 - [ ] Environment variables properly configured
 - [ ] No secrets in codebase
 - [ ] Dependencies audited
 - [ ] Security headers configured
 
 ### SEO
+
 - [ ] Meta tags properly configured
 - [ ] Structured data implemented
 - [ ] Sitemap generated
@@ -191,16 +210,19 @@ git push origin main
 ## 🔍 Monitoring & Alerts
 
 ### Health Monitoring
+
 - **Health Check Endpoint**: `/api/health`
 - **Uptime Monitoring**: Configure external monitoring
 - **Error Tracking**: Implement error reporting service
 
 ### Performance Monitoring
+
 - **Core Web Vitals**: Track real user metrics
 - **Lighthouse CI**: Automated performance regression detection
 - **Bundle Analysis**: Monitor bundle size changes
 
 ### Accessibility Monitoring
+
 - **Automated Testing**: Run accessibility tests on every deployment
 - **Manual Testing**: Regular screen reader testing
 - **User Feedback**: Accessibility feedback collection
@@ -210,6 +232,7 @@ git push origin main
 ### Common Issues
 
 #### Build Failures
+
 ```bash
 # Clear dependencies and rebuild
 rm -rf node_modules pnpm-lock.yaml
@@ -218,6 +241,7 @@ pnpm build
 ```
 
 #### Test Failures
+
 ```bash
 # Update Playwright browsers
 pnpm playwright install
@@ -227,6 +251,7 @@ pnpm test:e2e:headed
 ```
 
 #### Deployment Issues
+
 ```bash
 # Check Vercel logs
 vercel logs [deployment-url]
@@ -236,6 +261,7 @@ vercel env ls
 ```
 
 ### Getting Help
+
 - Check GitHub Actions logs for detailed error information
 - Review Vercel deployment logs
 - Monitor health check endpoint for runtime issues
@@ -244,11 +270,13 @@ vercel env ls
 ## 📈 Continuous Improvement
 
 ### Regular Maintenance
+
 - **Weekly**: Review test results and performance metrics
 - **Monthly**: Update dependencies and security patches
 - **Quarterly**: Review and update quality gate thresholds
 
 ### Optimization Opportunities
+
 - **Performance**: Monitor Core Web Vitals trends
 - **Accessibility**: Regular user testing sessions
 - **Security**: Stay updated with security best practices

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Globe,
   Smartphone,
@@ -15,10 +15,10 @@ import {
   ChevronDown,
   Loader2,
   AlertCircle,
-  Plus
-} from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+  Plus,
+} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 interface LocationRanking {
   country: string;
@@ -27,7 +27,7 @@ interface LocationRanking {
   rank: number;
   previousRank: number;
   searchVolume: number;
-  device: 'desktop' | 'mobile' | 'tablet';
+  device: "desktop" | "mobile" | "tablet";
   change: number;
   url?: string;
 }
@@ -45,7 +45,9 @@ interface MultiLocationTrackingProps {
 }
 
 export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrackingProps) {
-  const [selectedDevice, setSelectedDevice] = useState<'all' | 'desktop' | 'mobile' | 'tablet'>('all');
+  const [selectedDevice, setSelectedDevice] = useState<"all" | "desktop" | "mobile" | "tablet">(
+    "all"
+  );
   const [rankings, setRankings] = useState<LocationRanking[]>([]);
   const [deviceStats, setDeviceStats] = useState<DeviceStats[]>([]);
   const [loading, setLoading] = useState(true);
@@ -60,13 +62,13 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
       setLoading(true);
       setError(null);
 
-      const deviceParam = selectedDevice === 'all' ? '' : `&device=${selectedDevice}`;
+      const deviceParam = selectedDevice === "all" ? "" : `&device=${selectedDevice}`;
       const response = await fetch(
         `/api/keywords/rankings/locations?keywordId=${keywordId}${deviceParam}`
       );
 
       if (!response.ok) {
-        throw new Error('Failed to fetch location rankings');
+        throw new Error("Failed to fetch location rankings");
       }
 
       const result = await response.json();
@@ -75,11 +77,11 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
         setRankings(result.data.rankings);
         setDeviceStats(result.data.deviceStats || []);
       } else {
-        throw new Error(result.error || 'Unknown error');
+        throw new Error(result.error || "Unknown error");
       }
     } catch (err) {
-      console.error('Error fetching location rankings:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load location data');
+      console.error("Error fetching location rankings:", err);
+      setError(err instanceof Error ? err.message : "Failed to load location data");
     } finally {
       setLoading(false);
     }
@@ -87,20 +89,19 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
   const getDeviceIcon = (device: string) => {
     switch (device) {
-      case 'desktop':
+      case "desktop":
         return <Monitor className="h-4 w-4" />;
-      case 'mobile':
+      case "mobile":
         return <Smartphone className="h-4 w-4" />;
-      case 'tablet':
+      case "tablet":
         return <Tablet className="h-4 w-4" />;
       default:
         return <Globe className="h-4 w-4" />;
     }
   };
 
-  const filteredRankings = selectedDevice === 'all'
-    ? rankings
-    : rankings.filter(r => r.device === selectedDevice);
+  const filteredRankings =
+    selectedDevice === "all" ? rankings : rankings.filter((r) => r.device === selectedDevice);
 
   if (loading) {
     return (
@@ -164,7 +165,9 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
         <CardContent className="p-6">
           <div className="text-center py-12">
             <Globe className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-            <p className="text-slate-700 dark:text-slate-300 mb-2">No location data available yet</p>
+            <p className="text-slate-700 dark:text-slate-300 mb-2">
+              No location data available yet
+            </p>
             <p className="text-sm text-slate-600 dark:text-slate-400">
               Location rankings will appear here once tracking data is collected
             </p>
@@ -226,21 +229,23 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
 
         {/* Device Filter */}
         <div className="flex flex-wrap items-center gap-2 mb-6">
-          <span className="text-sm text-slate-600 dark:text-slate-400 font-medium">Filter by Device:</span>
+          <span className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+            Filter by Device:
+          </span>
           <div className="flex gap-2">
             {[
-              { value: 'all', label: 'All Devices', icon: <Globe className="h-4 w-4" /> },
-              { value: 'desktop', label: 'Desktop', icon: <Monitor className="h-4 w-4" /> },
-              { value: 'mobile', label: 'Mobile', icon: <Smartphone className="h-4 w-4" /> },
-              { value: 'tablet', label: 'Tablet', icon: <Tablet className="h-4 w-4" /> }
+              { value: "all", label: "All Devices", icon: <Globe className="h-4 w-4" /> },
+              { value: "desktop", label: "Desktop", icon: <Monitor className="h-4 w-4" /> },
+              { value: "mobile", label: "Mobile", icon: <Smartphone className="h-4 w-4" /> },
+              { value: "tablet", label: "Tablet", icon: <Tablet className="h-4 w-4" /> },
             ].map((device) => (
               <button
                 key={device.value}
                 onClick={() => setSelectedDevice(device.value as any)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   selectedDevice === device.value
-                    ? 'bg-teal-600 text-white shadow-md'
-                    : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600'
+                    ? "bg-teal-600 text-white shadow-md"
+                    : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-2 border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-600"
                 }`}
               >
                 {device.icon}
@@ -256,20 +261,33 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
             <table className="w-full">
               <thead className="bg-slate-50 dark:bg-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Location</th>
-                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Device</th>
-                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Rank</th>
-                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Change</th>
-                  <th className="px-4 py-3 text-right text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">Search Volume</th>
+                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">
+                    Location
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">
+                    Device
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">
+                    Rank
+                  </th>
+                  <th className="px-4 py-3 text-center text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">
+                    Change
+                  </th>
+                  <th className="px-4 py-3 text-right text-xs font-bold text-slate-600 dark:text-slate-400 uppercase">
+                    Search Volume
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                 {filteredRankings.map((ranking, idx) => {
                   const change = ranking.rank - ranking.previousRank;
                   const changeAbs = Math.abs(change);
-                  
+
                   return (
-                    <tr key={idx} className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <tr
+                      key={idx}
+                      className="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                    >
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-2">
                           <MapPin className="h-4 w-4 text-teal-600" />
@@ -278,7 +296,9 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
                               {ranking.country}
                             </p>
                             {ranking.city && (
-                              <p className="text-xs text-slate-600 dark:text-slate-400">{ranking.city}</p>
+                              <p className="text-xs text-slate-600 dark:text-slate-400">
+                                {ranking.city}
+                              </p>
                             )}
                           </div>
                         </div>
@@ -290,37 +310,39 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
                         </Badge>
                       </td>
                       <td className="px-4 py-4 text-center">
-                        <Badge className={
-                          ranking.rank <= 3
-                            ? 'bg-green-100 text-green-700'
-                            : ranking.rank <= 10
-                            ? 'bg-blue-100 text-blue-700'
-                            : ranking.rank <= 20
-                            ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-slate-100 text-slate-700'
-                        }>
+                        <Badge
+                          className={
+                            ranking.rank <= 3
+                              ? "bg-green-100 text-green-700"
+                              : ranking.rank <= 10
+                                ? "bg-blue-100 text-blue-700"
+                                : ranking.rank <= 20
+                                  ? "bg-yellow-100 text-yellow-700"
+                                  : "bg-slate-100 text-slate-700"
+                          }
+                        >
                           #{ranking.rank}
                         </Badge>
                       </td>
                       <td className="px-4 py-4 text-center">
                         {change !== 0 ? (
-                          <Badge className={change < 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
+                          <Badge
+                            className={
+                              change < 0 ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
+                            }
+                          >
                             {change < 0 ? (
                               <>
-                                <TrendingUp className="h-3 w-3 mr-1" />
-                                +{changeAbs}
+                                <TrendingUp className="h-3 w-3 mr-1" />+{changeAbs}
                               </>
                             ) : (
                               <>
-                                <TrendingDown className="h-3 w-3 mr-1" />
-                                -{changeAbs}
+                                <TrendingDown className="h-3 w-3 mr-1" />-{changeAbs}
                               </>
                             )}
                           </Badge>
                         ) : (
-                          <Badge className="bg-slate-100 text-slate-600">
-                            No change
-                          </Badge>
+                          <Badge className="bg-slate-100 text-slate-600">No change</Badge>
                         )}
                       </td>
                       <td className="px-4 py-4 text-right">
@@ -346,21 +368,30 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
               <Globe className="h-5 w-5 text-teal-600" />
               <h5 className="font-bold text-slate-900 dark:text-slate-100">Total Locations</h5>
             </div>
-            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">{filteredRankings.length}</p>
-            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Across {selectedDevice === 'all' ? 'all devices' : selectedDevice}</p>
+            <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
+              {filteredRankings.length}
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+              Across {selectedDevice === "all" ? "all devices" : selectedDevice}
+            </p>
           </div>
-          
+
           <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
             <div className="flex items-center gap-2 mb-2">
               <BarChart3 className="h-5 w-5 text-blue-600" />
               <h5 className="font-bold text-slate-900 dark:text-slate-100">Average Rank</h5>
             </div>
             <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
-              #{(filteredRankings.reduce((sum, r) => sum + r.rank, 0) / filteredRankings.length).toFixed(1)}
+              #
+              {(
+                filteredRankings.reduce((sum, r) => sum + r.rank, 0) / filteredRankings.length
+              ).toFixed(1)}
             </p>
-            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Across tracked locations</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+              Across tracked locations
+            </p>
           </div>
-          
+
           <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
             <div className="flex items-center gap-2 mb-2">
               <Search className="h-5 w-5 text-green-600" />
@@ -369,7 +400,9 @@ export function MultiLocationTracking({ keywordId, keyword }: MultiLocationTrack
             <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
               {(filteredRankings.reduce((sum, r) => sum + r.searchVolume, 0) / 1000).toFixed(1)}K
             </p>
-            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Combined monthly searches</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+              Combined monthly searches
+            </p>
           </div>
         </div>
       </CardContent>

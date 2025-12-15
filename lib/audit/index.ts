@@ -3,10 +3,10 @@
  * Comprehensive SEO audit system with advanced crawling and analysis
  */
 
-export * from './types';
-export * from './engine';
-export * from './analyzer';
-export * from './helpers';
+export * from "./types";
+export * from "./engine";
+export * from "./analyzer";
+export * from "./helpers";
 
 // Default configuration for quick start
 export const defaultAuditConfig = {
@@ -15,8 +15,8 @@ export const defaultAuditConfig = {
   pageLimit: 10,
   includeExternal: false,
   respectRobotsTxt: true,
-  userAgent: 'AISEOTurbo-Bot/2.0 (+https://aiseoturbo.com)',
-  
+  userAgent: "AISEOTurbo-Bot/2.0 (+https://aiseoturbo.com)",
+
   // Analysis Options
   targetKeywords: [],
   includePerformance: true,
@@ -24,17 +24,17 @@ export const defaultAuditConfig = {
   includeSecurity: true,
   includeCompetitor: false,
   competitorUrls: [],
-  
+
   // Advanced Options
   mobileFirst: true,
   includeSchemaValidation: true,
   checkBrokenLinks: false,
   analyzePageSpeed: true,
   generateScreenshots: false,
-  
+
   // Thresholds
   performanceThreshold: 80,
   accessibilityThreshold: 95,
   minWordCount: 300,
-  maxPageSize: 1024 // In KB
+  maxPageSize: 1024, // In KB
 };

@@ -1,82 +1,88 @@
 "use client";
 
-import { useState } from 'react'
-import { Button } from '../../../components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card'
-import { Badge } from '../../../components/ui/badge'
-import { Input } from '../../../components/ui/input'
-import { Label } from '../../../components/ui/label'
-import { Progress } from '../../../components/ui/progress'
-import { Alert, AlertDescription } from '../../../components/ui/alert'
-import { 
-  Search, 
-  Globe, 
-  Shield, 
-  Zap, 
-  TrendingUp, 
+import { useState } from "react";
+import { Button } from "../../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../../components/ui/card";
+import { Badge } from "../../../components/ui/badge";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
+import { Progress } from "../../../components/ui/progress";
+import { Alert, AlertDescription } from "../../../components/ui/alert";
+import {
+  Search,
+  Globe,
+  Shield,
+  Zap,
+  TrendingUp,
   AlertTriangle,
   CheckCircle,
-  RefreshCw
-} from 'lucide-react'
+  RefreshCw,
+} from "lucide-react";
 
 interface SimpleAuditResult {
-  url: string
-  timestamp: string
-  overall_score: number
-  seo_score: number
-  performance_score: number
-  accessibility_score: number
-  title: string
-  meta_description: string
-  h1_count: number
-  images_count: number
-  internal_links: number
+  url: string;
+  timestamp: string;
+  overall_score: number;
+  seo_score: number;
+  performance_score: number;
+  accessibility_score: number;
+  title: string;
+  meta_description: string;
+  h1_count: number;
+  images_count: number;
+  internal_links: number;
   recommendations: Array<{
-    priority: string
-    category: string
-    issue: string
-    fix: string
-  }>
+    priority: string;
+    category: string;
+    issue: string;
+    fix: string;
+  }>;
 }
 
 export default function SimpleAuditPage() {
-  const [url, setUrl] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [result, setResult] = useState<SimpleAuditResult | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [url, setUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<SimpleAuditResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleStartAudit = async () => {
     if (!url.trim()) {
-      setError('Please enter a valid URL')
-      return
+      setError("Please enter a valid URL");
+      return;
     }
 
-    setIsLoading(true)
-    setError(null)
-    setResult(null)
-    
-    try {
-      console.log('Starting audit for:', url)
-      
-      const response = await fetch('/api/seo-audit/start', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url: url.trim() })
-      })
+    setIsLoading(true);
+    setError(null);
+    setResult(null);
 
-      console.log('Response status:', response.status)
-      const data = await response.json()
-      console.log('Response data:', data)
-      
+    try {
+      console.log("Starting audit for:", url);
+
+      const response = await fetch("/api/seo-audit/start", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url: url.trim() }),
+      });
+
+      console.log("Response status:", response.status);
+      const data = await response.json();
+      console.log("Response data:", data);
+
       if (!response.ok) {
-        throw new Error(data.error || 'Audit failed')
+        throw new Error(data.error || "Audit failed");
       }
 
       if (data.success && data.data) {
         // Transform API response to our simple format
-        const auditData = data.data
+        const auditData = data.data;
         const simpleResult: SimpleAuditResult = {
           url: auditData.url,
           timestamp: auditData.fetched_at,
@@ -84,43 +90,44 @@ export default function SimpleAuditPage() {
           seo_score: auditData.scores.seo,
           performance_score: auditData.scores.performance,
           accessibility_score: auditData.scores.accessibility,
-          title: auditData.seo_meta.title || 'No title found',
-          meta_description: auditData.seo_meta.description || 'No meta description found',
+          title: auditData.seo_meta.title || "No title found",
+          meta_description: auditData.seo_meta.description || "No meta description found",
           h1_count: auditData.h_tags.h1.length,
           images_count: auditData.stats.images_count,
           internal_links: auditData.stats.internal_links,
-          recommendations: auditData.recommendations || []
-        }
-        
-        setResult(simpleResult)
-        console.log('Audit completed successfully:', simpleResult)
+          recommendations: auditData.recommendations || [],
+        };
+
+        setResult(simpleResult);
+        console.log("Audit completed successfully:", simpleResult);
       } else {
-        throw new Error('Invalid response format')
+        throw new Error("Invalid response format");
       }
     } catch (error) {
-      console.error('Audit error:', error)
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      console.error("Audit error:", error);
+      setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const getScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-500'
-    if (score >= 70) return 'text-yellow-500'
-    return 'text-red-500'
-  }
+    if (score >= 90) return "text-green-500";
+    if (score >= 70) return "text-yellow-500";
+    return "text-red-500";
+  };
 
   const getScoreBadgeVariant = (score: number) => {
-    if (score >= 90) return 'default' // Green
-    if (score >= 70) return 'secondary' // Yellow/Orange
-    return 'destructive' // Red
-  }
+    if (score >= 90) return "default"; // Green
+    if (score >= 70) return "secondary"; // Yellow/Orange
+    return "destructive"; // Red
+  };
 
   return (
     <div>
       <div className="rounded-md border border-amber-300 bg-amber-50 p-4 text-sm mb-6">
-        <strong>Deprecated:</strong> This legacy simple audit view will be removed soon. Please use the Professional SEO Audit page for full features.
+        <strong>Deprecated:</strong> This legacy simple audit view will be removed soon. Please use
+        the Professional SEO Audit page for full features.
       </div>
       <div className="space-y-6">
         {/* Header */}
@@ -139,7 +146,8 @@ export default function SimpleAuditPage() {
               Start New Audit
             </CardTitle>
             <CardDescription>
-              Enter a website URL to get comprehensive SEO analysis with real data and actionable insights
+              Enter a website URL to get comprehensive SEO analysis with real data and actionable
+              insights
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -154,7 +162,7 @@ export default function SimpleAuditPage() {
                   disabled={isLoading}
                   className="flex-1"
                 />
-                <Button 
+                <Button
                   onClick={handleStartAudit}
                   disabled={isLoading || !url.trim()}
                   className="px-6"
@@ -223,14 +231,18 @@ export default function SimpleAuditPage() {
                     <Progress value={result.seo_score} className="mt-2" />
                   </div>
                   <div className="text-center">
-                    <div className={`text-3xl font-bold ${getScoreColor(result.performance_score)}`}>
+                    <div
+                      className={`text-3xl font-bold ${getScoreColor(result.performance_score)}`}
+                    >
                       {result.performance_score}
                     </div>
                     <div className="text-sm text-muted-foreground">Performance</div>
                     <Progress value={result.performance_score} className="mt-2" />
                   </div>
                   <div className="text-center">
-                    <div className={`text-3xl font-bold ${getScoreColor(result.accessibility_score)}`}>
+                    <div
+                      className={`text-3xl font-bold ${getScoreColor(result.accessibility_score)}`}
+                    >
                       {result.accessibility_score}
                     </div>
                     <div className="text-sm text-muted-foreground">Accessibility</div>
@@ -300,8 +312,15 @@ export default function SimpleAuditPage() {
                   <div className="space-y-4">
                     {result.recommendations.slice(0, 10).map((rec, index) => (
                       <div key={index} className="flex items-start gap-3 p-4 border rounded-lg">
-                        <Badge variant={rec.priority === 'critical' ? 'destructive' : 
-                                      rec.priority === 'high' ? 'default' : 'secondary'}>
+                        <Badge
+                          variant={
+                            rec.priority === "critical"
+                              ? "destructive"
+                              : rec.priority === "high"
+                                ? "default"
+                                : "secondary"
+                          }
+                        >
                           {rec.priority}
                         </Badge>
                         <div className="flex-1">
@@ -321,5 +340,5 @@ export default function SimpleAuditPage() {
         )}
       </div>
     </div>
-  )
+  );
 }

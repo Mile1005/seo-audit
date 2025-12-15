@@ -1,6 +1,6 @@
 /**
  * LCP Optimization Implementation Guide
- * 
+ *
  * This file documents the critical optimizations needed to improve
  * Mobile LCP from 5.2s to target 2.8s+ (80+ Lighthouse score)
  */
@@ -348,37 +348,37 @@ export const LCP_OPTIMIZATION_CHECKLIST = {
     "✓ Update hero-section.tsx to disable animations on mobile",
     "✓ Create critical hero CSS only (~2.8KB)",
     "✓ Preload hero image with fetchpriority=high",
-    "✓ Test with: npm run mobile:audit"
+    "✓ Test with: npm run mobile:audit",
   ],
-  
+
   PHASE_2: [
     "✓ Create WebP/JPG hero images at mobile sizes",
     "✓ Update optimized-image.tsx with mobile quality settings",
     "✓ Verify image loading with DevTools Network tab",
-    "✓ Check image sizes: mobile <40KB, desktop <80KB"
+    "✓ Check image sizes: mobile <40KB, desktop <80KB",
   ],
-  
+
   PHASE_3: [
     "✓ Extract non-critical CSS to separate file",
     "✓ Use <link rel='preload'> with onLoad deferral",
     "✓ Verify CSS is deferred: ~15KB initial, ~35KB deferred",
-    "✓ Check: DevTools -> Network -> CSS files"
+    "✓ Check: DevTools -> Network -> CSS files",
   ],
-  
+
   PHASE_4: [
     "✓ Run npm run analyze:build",
     "✓ Ensure unused JS < 50KB",
     "✓ Verify all below-fold components use dynamic import",
-    "✓ Set ssr: false for heavy components"
+    "✓ Set ssr: false for heavy components",
   ],
-  
+
   VERIFICATION: [
     "✓ Run: npm run mobile:audit",
     "✓ Target LCP < 2.5s (blue), ideally < 2.0s (green)",
     "✓ Check FCP < 1.5s",
     "✓ Verify CLS < 0.1",
-    "✓ Monitor TTFB < 200ms"
-  ]
+    "✓ Monitor TTFB < 200ms",
+  ],
 };
 
 export default {
@@ -388,5 +388,5 @@ export default {
   NON_CRITICAL_CSS_INSTRUCTIONS,
   DEFER_JAVASCRIPT_STRATEGY,
   MAIN_THREAD_OPTIMIZATION,
-  LCP_OPTIMIZATION_CHECKLIST
+  LCP_OPTIMIZATION_CHECKLIST,
 };

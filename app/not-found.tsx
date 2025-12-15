@@ -1,7 +1,7 @@
-import Link from "next/link"
-import { MainLayout } from "@/components/layout/main-layout"
-import { Button } from "@/components/ui/button"
-import { ArrowLeft, Home, Search } from "lucide-react"
+import Link from "next/link";
+import { MainLayout } from "@/components/layout/main-layout";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Home, Search } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -17,12 +17,10 @@ export default function NotFound() {
           </div>
 
           {/* Content */}
-          <h1 className="text-3xl font-bold text-white mb-4">
-            Page Not Found
-          </h1>
+          <h1 className="text-3xl font-bold text-white mb-4">Page Not Found</h1>
           <p className="text-gray-400 text-lg mb-8 leading-relaxed">
-            Sorry, the page you're looking for doesn't exist or has been moved.
-            Let's get you back on track.
+            Sorry, the page you're looking for doesn't exist or has been moved. Let's get you back
+            on track.
           </p>
 
           {/* Actions */}
@@ -34,7 +32,10 @@ export default function NotFound() {
               </Button>
             </Link>
             <Link href="/features/seo-audit">
-              <Button variant="outline" className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+              <Button
+                variant="outline"
+                className="border-slate-600 text-slate-300 hover:text-white hover:border-slate-500 px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+              >
                 <Search className="w-4 h-4 mr-2" />
                 Free SEO Audit
               </Button>
@@ -43,9 +44,7 @@ export default function NotFound() {
 
           {/* Additional Help */}
           <div className="mt-12 pt-8 border-t border-slate-800">
-            <p className="text-sm text-gray-500 mb-4">
-              Need help finding something specific?
-            </p>
+            <p className="text-sm text-gray-500 mb-4">Need help finding something specific?</p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Link href="/contact" className="text-blue-400 hover:text-blue-300 transition-colors">
                 Contact Support
@@ -63,5 +62,5 @@ export default function NotFound() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

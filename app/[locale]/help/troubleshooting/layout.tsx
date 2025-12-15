@@ -1,31 +1,38 @@
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo',
-  description: 'Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.',
-  keywords: ['troubleshooting', 'SEO issues', 'fix problems', 'audit errors', 'login issues', 'performance problems', 'sync issues'],
+  title: "Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo",
+  description:
+    "Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.",
+  keywords: [
+    "troubleshooting",
+    "SEO issues",
+    "fix problems",
+    "audit errors",
+    "login issues",
+    "performance problems",
+    "sync issues",
+  ],
   alternates: {
-    canonical: 'https://www.aiseoturbo.com/help/troubleshooting'
+    canonical: "https://www.aiseoturbo.com/help/troubleshooting",
   },
   openGraph: {
-    images: ['/logo.png'],
-    url: 'https://www.aiseoturbo.com/help/troubleshooting',
-    siteName: 'AI SEO Turbo',
-    title: 'Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo',
-    description: 'Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.',
-    type: 'article',
+    images: ["/logo.png"],
+    url: "https://www.aiseoturbo.com/help/troubleshooting",
+    siteName: "AI SEO Turbo",
+    title: "Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo",
+    description:
+      "Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.",
+    type: "article",
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo',
-    description: 'Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.',
-  }
-}
+    card: "summary_large_image",
+    title: "Troubleshooting Guide - Fix SEO Issues | AI SEO Turbo",
+    description:
+      "Solve common SEO problems with AI SEO Turbo. Find solutions for audit issues, login problems, performance errors, and sync issues.",
+  },
+};
 
-export default function TroubleshootingLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function TroubleshootingLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

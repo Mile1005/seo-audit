@@ -1,15 +1,27 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, Key, Shield, Lock, AlertTriangle, CheckCircle, Smartphone, Mail, Code, Settings } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  Key,
+  Shield,
+  Lock,
+  AlertTriangle,
+  CheckCircle,
+  Smartphone,
+  Mail,
+  Code,
+  Settings,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function AuthenticationPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +30,10 @@ export default function AuthenticationPage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/api/api-integrations" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="/help/api/api-integrations"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 API
               </Link>
               <span className="text-gray-600">/</span>
@@ -49,9 +64,7 @@ export default function AuthenticationPage() {
                 </div>
                 <div>
                   <span className="text-blue-400 text-sm font-medium">API</span>
-                  <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    API Authentication
-                  </h1>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white">API Authentication</h1>
                 </div>
               </div>
 
@@ -78,7 +91,6 @@ export default function AuthenticationPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="prose prose-lg prose-invert max-w-none"
             >
-
               {/* Introduction */}
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -86,8 +98,8 @@ export default function AuthenticationPage() {
                   <div>
                     <h2 className="text-white text-lg font-semibold mb-2">Secure API access</h2>
                     <p className="text-gray-300 mb-0">
-                      Learn how to authenticate with our API using API keys and implement secure authentication
-                      patterns for your applications.
+                      Learn how to authenticate with our API using API keys and implement secure
+                      authentication patterns for your applications.
                     </p>
                   </div>
                 </div>
@@ -97,7 +109,6 @@ export default function AuthenticationPage() {
               <h2 className="text-2xl font-bold text-white mb-6">Authentication methods</h2>
 
               <div className="space-y-6 mb-8">
-
                 {/* API Keys */}
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-start gap-4">
@@ -110,8 +121,8 @@ export default function AuthenticationPage() {
                         API Keys
                       </h3>
                       <p className="text-gray-300 mb-4">
-                        Use API keys to authenticate your requests. Each key is unique to your account and can be
-                        managed in your dashboard.
+                        Use API keys to authenticate your requests. Each key is unique to your
+                        account and can be managed in your dashboard.
                       </p>
 
                       <div className="bg-slate-900/50 rounded-lg p-4 mb-4">
@@ -125,11 +136,15 @@ export default function AuthenticationPage() {
                       </div>
 
                       <div className="bg-slate-900/50 rounded-lg p-4">
-                        <h4 className="text-green-400 font-medium mb-2">Using API keys in requests:</h4>
+                        <h4 className="text-green-400 font-medium mb-2">
+                          Using API keys in requests:
+                        </h4>
                         <div className="bg-slate-950 rounded p-3 font-mono text-sm text-gray-300">
                           <div className="text-gray-500 mb-1"># Header method</div>
                           <div>Authorization: Bearer your_api_key_here</div>
-                          <div className="text-gray-500 mt-2 mb-1"># Query parameter (less secure)</div>
+                          <div className="text-gray-500 mt-2 mb-1">
+                            # Query parameter (less secure)
+                          </div>
                           <div>GET /api/audits?api_key=your_api_key_here</div>
                         </div>
                       </div>
@@ -149,8 +164,8 @@ export default function AuthenticationPage() {
                         OAuth 2.0 (Coming Soon)
                       </h3>
                       <p className="text-gray-300 mb-4">
-                        OAuth 2.0 authentication will be available for enterprise customers requiring more advanced
-                        access control and user delegation.
+                        OAuth 2.0 authentication will be available for enterprise customers
+                        requiring more advanced access control and user delegation.
                       </p>
 
                       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
@@ -159,20 +174,19 @@ export default function AuthenticationPage() {
                           <span className="text-yellow-400 font-medium">Coming Soon</span>
                         </div>
                         <p className="text-gray-300 text-sm">
-                          OAuth 2.0 support is planned for Q2 2025. Contact our sales team for enterprise requirements.
+                          OAuth 2.0 support is planned for Q2 2025. Contact our sales team for
+                          enterprise requirements.
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* API Key Management */}
               <h3 className="text-2xl font-bold text-white mb-6">Managing API keys</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                     <Settings className="w-5 h-5 text-blue-400" />
@@ -200,21 +214,20 @@ export default function AuthenticationPage() {
                     <li>• Instant revocation</li>
                   </ul>
                 </div>
-
               </div>
 
               {/* Best Practices */}
               <h3 className="text-2xl font-bold text-white mb-6">Security best practices</h3>
 
               <div className="space-y-4 mb-8">
-
                 <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
                       <h4 className="text-white font-medium">Store keys securely</h4>
                       <p className="text-gray-300 text-sm">
-                        Never commit API keys to version control. Use environment variables or secure key management services.
+                        Never commit API keys to version control. Use environment variables or
+                        secure key management services.
                       </p>
                     </div>
                   </div>
@@ -226,7 +239,8 @@ export default function AuthenticationPage() {
                     <div>
                       <h4 className="text-white font-medium">Use read-only keys when possible</h4>
                       <p className="text-gray-300 text-sm">
-                        Create separate read-only API keys for applications that only need to retrieve data.
+                        Create separate read-only API keys for applications that only need to
+                        retrieve data.
                       </p>
                     </div>
                   </div>
@@ -250,12 +264,12 @@ export default function AuthenticationPage() {
                     <div>
                       <h4 className="text-white font-medium">Monitor API usage</h4>
                       <p className="text-gray-300 text-sm">
-                        Regularly check your API usage logs for suspicious activity or unauthorized access.
+                        Regularly check your API usage logs for suspicious activity or unauthorized
+                        access.
                       </p>
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* Rate Limiting */}
@@ -263,12 +277,14 @@ export default function AuthenticationPage() {
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
-
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-3">Understanding rate limits</h3>
+                    <h3 className="text-white text-lg font-semibold mb-3">
+                      Understanding rate limits
+                    </h3>
                     <p className="text-gray-300">
-                      API requests are subject to rate limiting to ensure fair usage and system stability.
-                      Different endpoints have different limits based on their resource requirements.
+                      API requests are subject to rate limiting to ensure fair usage and system
+                      stability. Different endpoints have different limits based on their resource
+                      requirements.
                     </p>
                   </div>
 
@@ -298,7 +314,6 @@ export default function AuthenticationPage() {
                       <div>X-RateLimit-Reset: 1640995200</div>
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -307,7 +322,6 @@ export default function AuthenticationPage() {
 
               <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
-
                   <div className="flex items-start gap-3">
                     <AlertTriangle className="w-5 h-5 text-red-400 mt-0.5" />
                     <div>
@@ -337,7 +351,6 @@ export default function AuthenticationPage() {
                       </p>
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -345,7 +358,6 @@ export default function AuthenticationPage() {
               <h3 className="text-2xl font-bold text-white mb-6">Code examples</h3>
 
               <div className="space-y-6 mb-8">
-
                 {/* JavaScript/Node.js */}
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
@@ -353,21 +365,25 @@ export default function AuthenticationPage() {
                     JavaScript/Node.js
                   </h3>
                   <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300">
-                    <div className="text-gray-500 mb-2">{'// Using fetch'}</div>
-                    <div>const response = await fetch('https://api.seo-audit.com/v1/audits', {'{'}'</div>
+                    <div className="text-gray-500 mb-2">{"// Using fetch"}</div>
+                    <div>
+                      const response = await fetch('https://api.seo-audit.com/v1/audits', {"{"}'
+                    </div>
                     <div className="ml-4">method: 'GET',</div>
-                    <div className="ml-4">headers: {'{'}'</div>
+                    <div className="ml-4">headers: {"{"}'</div>
                     <div className="ml-8">'Authorization': 'Bearer YOUR_API_KEY',</div>
                     <div className="ml-8">'Content-Type': 'application/json'</div>
-                    <div className="ml-4">{'}'}</div>
-                    <div>{'}'});</div>
-                    <div className="text-gray-500 mt-2 mb-2">{'// Using axios'}</div>
+                    <div className="ml-4">{"}"}</div>
+                    <div>{"}"});</div>
+                    <div className="text-gray-500 mt-2 mb-2">{"// Using axios"}</div>
                     <div>const axios = require('axios');</div>
-                    <div>const response = await axios.get('https://api.seo-audit.com/v1/audits', {'{'}'</div>
-                    <div className="ml-4">headers: {'{'}'</div>
+                    <div>
+                      const response = await axios.get('https://api.seo-audit.com/v1/audits', {"{"}'
+                    </div>
+                    <div className="ml-4">headers: {"{"}'</div>
                     <div className="ml-8">'Authorization': 'Bearer YOUR_API_KEY'</div>
-                    <div className="ml-4">{'}'}</div>
-                    <div>{'}'});</div>
+                    <div className="ml-4">{"}"}</div>
+                    <div>{"}"});</div>
                   </div>
                 </div>
 
@@ -380,11 +396,14 @@ export default function AuthenticationPage() {
                   <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300">
                     <div className="text-gray-500 mb-2"># Using requests</div>
                     <div>import requests</div>
-                    <div>headers = {'{'}'</div>
+                    <div>headers = {"{"}'</div>
                     <div className="ml-4">'Authorization': 'Bearer YOUR_API_KEY',</div>
                     <div className="ml-4">'Content-Type': 'application/json'</div>
-                    <div>{'}'}</div>
-                    <div>response = requests.get('https://api.seo-audit.com/v1/audits', headers=headers)</div>
+                    <div>{"}"}</div>
+                    <div>
+                      response = requests.get('https://api.seo-audit.com/v1/audits',
+                      headers=headers)
+                    </div>
                   </div>
                 </div>
 
@@ -400,15 +419,16 @@ export default function AuthenticationPage() {
                     <div className="ml-4">-H "Content-Type: application/json"</div>
                   </div>
                 </div>
-
               </div>
 
               {/* Need Help */}
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mt-8">
-                <h3 className="text-white text-lg font-semibold mb-3">Need help with authentication?</h3>
+                <h3 className="text-white text-lg font-semibold mb-3">
+                  Need help with authentication?
+                </h3>
                 <p className="text-gray-300 mb-4">
-                  If you're having trouble with API authentication or need help setting up your integration,
-                  our developer support team is here to help.
+                  If you're having trouble with API authentication or need help setting up your
+                  integration, our developer support team is here to help.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -431,11 +451,10 @@ export default function AuthenticationPage() {
                   </Link>
                 </div>
               </div>
-
             </motion.div>
           </div>
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

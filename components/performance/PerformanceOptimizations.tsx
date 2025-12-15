@@ -1,4 +1,4 @@
-import Script from 'next/script'
+import Script from "next/script";
 
 export function PerformanceOptimizations() {
   return (
@@ -11,18 +11,19 @@ export function PerformanceOptimizations() {
         type="font/woff2"
         crossOrigin="anonymous"
       />
-      
+
       {/* DNS prefetch for external services */}
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />
       <link rel="dns-prefetch" href="//fonts.gstatic.com" />
-      
+
       {/* Preconnect to critical domains */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      
+
       {/* Critical CSS for above-the-fold content */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           /* Critical CSS for hero section - inline for fastest rendering */
           .hero-gradient {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -44,9 +45,10 @@ export function PerformanceOptimizations() {
           .font-display-swap {
             font-display: swap;
           }
-        `
-      }} />
-      
+        `,
+        }}
+      />
+
       {/* Service Worker for caching */}
       <Script
         id="service-worker"
@@ -58,9 +60,9 @@ export function PerformanceOptimizations() {
                 navigator.serviceWorker.register('/sw.js');
               });
             }
-          `
+          `,
         }}
       />
     </>
-  )
+  );
 }

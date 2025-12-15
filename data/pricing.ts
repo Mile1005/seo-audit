@@ -1,20 +1,20 @@
 export interface PricingPlan {
-  id: string
-  name: string
-  description: string
-  priceMonthly: number
-  priceAnnual: number
-  features: string[]
+  id: string;
+  name: string;
+  description: string;
+  priceMonthly: number;
+  priceAnnual: number;
+  features: string[];
   limits: {
-    audits: string
-    sites: string
-    reports: string
-    support: string
-  }
-  highlight?: boolean
-  ctaText: string
-  ctaVariant: 'primary' | 'secondary' | 'outline'
-  popular?: boolean
+    audits: string;
+    sites: string;
+    reports: string;
+    support: string;
+  };
+  highlight?: boolean;
+  ctaText: string;
+  ctaVariant: "primary" | "secondary" | "outline";
+  popular?: boolean;
 }
 
 export const pricingPlans: PricingPlan[] = [
@@ -31,16 +31,16 @@ export const pricingPlans: PricingPlan[] = [
       "Meta tags optimization",
       "Basic keyword insights",
       "PDF report export",
-      "Email support"
+      "Email support",
     ],
     limits: {
       audits: "3 per month",
       sites: "1 website",
       reports: "Basic reports",
-      support: "Email support"
+      support: "Email support",
     },
     ctaText: "Start Free",
-    ctaVariant: "outline"
+    ctaVariant: "outline",
   },
   {
     id: "pro",
@@ -58,18 +58,18 @@ export const pricingPlans: PricingPlan[] = [
       "White-label reports",
       "API access",
       "Priority support",
-      "Weekly automated reports"
+      "Weekly automated reports",
     ],
     limits: {
       audits: "Unlimited",
       sites: "5 websites",
       reports: "Advanced reports",
-      support: "Priority support"
+      support: "Priority support",
     },
     highlight: true,
     popular: true,
     ctaText: "Start Pro Trial",
-    ctaVariant: "primary"
+    ctaVariant: "primary",
   },
   {
     id: "agency",
@@ -87,76 +87,79 @@ export const pricingPlans: PricingPlan[] = [
       "Custom reporting",
       "Phone & Slack support",
       "Training & onboarding",
-      "SLA guarantees"
+      "SLA guarantees",
     ],
     limits: {
       audits: "Unlimited",
       sites: "Unlimited",
       reports: "Custom reports",
-      support: "Dedicated support"
+      support: "Dedicated support",
     },
     ctaText: "Contact Sales",
-    ctaVariant: "secondary"
-  }
-]
+    ctaVariant: "secondary",
+  },
+];
 
 export interface ROICalculatorInputs {
-  monthlyVisits: number
-  conversionRate: number
-  averageOrderValue: number
+  monthlyVisits: number;
+  conversionRate: number;
+  averageOrderValue: number;
 }
 
 export interface ROICalculatorResults {
-  currentRevenue: number
-  potentialIncrease: number
-  projectedRevenue: number
-  monthlyROI: number
-  annualROI: number
-  paybackPeriod: number
+  currentRevenue: number;
+  potentialIncrease: number;
+  projectedRevenue: number;
+  monthlyROI: number;
+  annualROI: number;
+  paybackPeriod: number;
 }
 
-export const calculateROI = (inputs: ROICalculatorInputs, planPrice: number): ROICalculatorResults => {
-  const { monthlyVisits, conversionRate, averageOrderValue } = inputs
-  
+export const calculateROI = (
+  inputs: ROICalculatorInputs,
+  planPrice: number
+): ROICalculatorResults => {
+  const { monthlyVisits, conversionRate, averageOrderValue } = inputs;
+
   // Current monthly revenue
-  const currentRevenue = monthlyVisits * (conversionRate / 100) * averageOrderValue
-  
+  const currentRevenue = monthlyVisits * (conversionRate / 100) * averageOrderValue;
+
   // Conservative estimate: 25-40% traffic increase based on our testimonials data
-  const trafficIncrease = 0.30 // 30% average increase
-  const conversionImprovement = 0.15 // 15% conversion rate improvement
-  
-  const newVisits = monthlyVisits * (1 + trafficIncrease)
-  const newConversionRate = conversionRate * (1 + conversionImprovement)
-  
-  const projectedRevenue = newVisits * (newConversionRate / 100) * averageOrderValue
-  const potentialIncrease = projectedRevenue - currentRevenue
-  
-  const monthlyROI = potentialIncrease - planPrice
-  const annualROI = (monthlyROI * 12)
-  const paybackPeriod = planPrice / potentialIncrease // months to pay back investment
-  
+  const trafficIncrease = 0.3; // 30% average increase
+  const conversionImprovement = 0.15; // 15% conversion rate improvement
+
+  const newVisits = monthlyVisits * (1 + trafficIncrease);
+  const newConversionRate = conversionRate * (1 + conversionImprovement);
+
+  const projectedRevenue = newVisits * (newConversionRate / 100) * averageOrderValue;
+  const potentialIncrease = projectedRevenue - currentRevenue;
+
+  const monthlyROI = potentialIncrease - planPrice;
+  const annualROI = monthlyROI * 12;
+  const paybackPeriod = planPrice / potentialIncrease; // months to pay back investment
+
   return {
     currentRevenue,
     potentialIncrease,
     projectedRevenue,
     monthlyROI,
     annualROI,
-    paybackPeriod
-  }
-}
+    paybackPeriod,
+  };
+};
 
 // Helper function to format currency
 export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(amount)
-}
+  }).format(amount);
+};
 
 // Helper function to calculate savings percentage
 export const calculateSavings = (monthly: number, annual: number): number => {
-  const monthlyTotal = monthly * 12
-  return Math.round(((monthlyTotal - annual) / monthlyTotal) * 100)
-}
+  const monthlyTotal = monthly * 12;
+  return Math.round(((monthlyTotal - annual) / monthlyTotal) * 100);
+};

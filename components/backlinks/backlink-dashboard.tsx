@@ -1,19 +1,25 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect, useCallback } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Progress } from '@/components/ui/progress'
-import { 
-  ExternalLink, 
-  AlertTriangle, 
-  TrendingUp, 
-  TrendingDown, 
-  Shield, 
+import React, { useState, useEffect, useCallback } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import {
+  ExternalLink,
+  AlertTriangle,
+  TrendingUp,
+  TrendingDown,
+  Shield,
   Target,
   Download,
   RefreshCw,
@@ -21,211 +27,229 @@ import {
   Search,
   Mail,
   Globe,
-  Link as LinkIcon
-} from 'lucide-react'
-import { 
-  ResponsiveContainer, 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
-  PieChart, 
-  Pie, 
+  Link as LinkIcon,
+} from "lucide-react";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  PieChart,
+  Pie,
   Cell,
   LineChart,
-  Line
-} from 'recharts'
+  Line,
+} from "recharts";
 
 interface Backlink {
-  id: string
-  sourceUrl: string
-  sourceDomain: string
-  targetUrl: string
-  anchorText: string
-  linkType: 'FOLLOW' | 'NOFOLLOW'
-  status: 'ACTIVE' | 'LOST' | 'REDIRECT' | 'BROKEN'
-  domainRating: number
-  pageRating: number
-  traffic: number
-  isToxic: boolean
-  toxicScore: number
-  linkStrength: 'WEAK' | 'NORMAL' | 'STRONG' | 'VERY_STRONG'
-  firstSeen: string
-  lastSeen: string
-  lastChecked: string
+  id: string;
+  sourceUrl: string;
+  sourceDomain: string;
+  targetUrl: string;
+  anchorText: string;
+  linkType: "FOLLOW" | "NOFOLLOW";
+  status: "ACTIVE" | "LOST" | "REDIRECT" | "BROKEN";
+  domainRating: number;
+  pageRating: number;
+  traffic: number;
+  isToxic: boolean;
+  toxicScore: number;
+  linkStrength: "WEAK" | "NORMAL" | "STRONG" | "VERY_STRONG";
+  firstSeen: string;
+  lastSeen: string;
+  lastChecked: string;
 }
 
 interface BacklinkStats {
-  total: number
-  byStatus: Record<string, number>
-  byLinkType: Record<string, number>
-  toxic: number
-  referringDomains: number
+  total: number;
+  byStatus: Record<string, number>;
+  byLinkType: Record<string, number>;
+  toxic: number;
+  referringDomains: number;
   domainRating: {
-    average: number
-    max: number
-    min: number
-  }
+    average: number;
+    max: number;
+    min: number;
+  };
 }
 
 interface BacklinkDashboardProps {
-  projectId: string
+  projectId: string;
 }
 
 export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps) {
-  const [backlinks, setBacklinks] = useState<Backlink[]>([])
-  const [stats, setStats] = useState<BacklinkStats | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [backlinks, setBacklinks] = useState<Backlink[]>([]);
+  const [stats, setStats] = useState<BacklinkStats | null>(null);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState({
-    status: 'all',
-    linkType: 'all',
-    toxic: 'all',
-    domain: '',
-    minDomainRating: '',
-    maxDomainRating: ''
-  })
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
+    status: "all",
+    linkType: "all",
+    toxic: "all",
+    domain: "",
+    minDomainRating: "",
+    maxDomainRating: "",
+  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const fetchBacklinks = useCallback(async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const params = new URLSearchParams({
         projectId,
         page: currentPage.toString(),
-        limit: '50',
-        ...filter
-      })
-      const response = await fetch(`/api/backlinks?${params}`)
-      const data = await response.json()
+        limit: "50",
+        ...filter,
+      });
+      const response = await fetch(`/api/backlinks?${params}`);
+      const data = await response.json();
       if (response.ok) {
-        setBacklinks(data.backlinks)
-        setStats(data.stats)
-        setTotalPages(data.pagination.pages)
+        setBacklinks(data.backlinks);
+        setStats(data.stats);
+        setTotalPages(data.pagination.pages);
       } else {
-        console.error('Failed to fetch backlinks:', data.error)
+        console.error("Failed to fetch backlinks:", data.error);
       }
     } catch (error) {
-      console.error('Error fetching backlinks:', error)
+      console.error("Error fetching backlinks:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [projectId, currentPage, filter])
+  }, [projectId, currentPage, filter]);
 
   const generateMockData = async () => {
     try {
-      setLoading(true)
-      const response = await fetch('/api/backlinks/mock-data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ projectId, count: 100 })
-      })
+      setLoading(true);
+      const response = await fetch("/api/backlinks/mock-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ projectId, count: 100 }),
+      });
 
       if (response.ok) {
-        fetchBacklinks()
+        fetchBacklinks();
       } else {
-        console.error('Failed to generate mock data')
+        console.error("Failed to generate mock data");
       }
     } catch (error) {
-      console.error('Error generating mock data:', error)
+      console.error("Error generating mock data:", error);
     }
-  }
+  };
 
   const collectRealBacklinks = async () => {
     try {
-      setLoading(true)
-      const response = await fetch('/api/backlinks/collect', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+      setLoading(true);
+      const response = await fetch("/api/backlinks/collect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           projectId,
-          targetDomain: 'your-domain.com', // TODO: Get from project settings
+          targetDomain: "your-domain.com", // TODO: Get from project settings
           options: {
             maxResults: 500,
             includeCommonCrawl: true,
-            includeSearch: true
-          }
-        })
-      })
+            includeSearch: true,
+          },
+        }),
+      });
 
-      const data = await response.json()
-      
+      const data = await response.json();
+
       if (response.ok) {
-        alert(`Successfully collected ${data.data.collected.totalBacklinks} backlinks from ${data.data.collected.totalDomains} domains!`)
-        fetchBacklinks()
+        alert(
+          `Successfully collected ${data.data.collected.totalBacklinks} backlinks from ${data.data.collected.totalDomains} domains!`
+        );
+        fetchBacklinks();
       } else {
-        console.error('Failed to collect backlinks:', data.error)
-        alert('Failed to collect backlinks: ' + data.error)
+        console.error("Failed to collect backlinks:", data.error);
+        alert("Failed to collect backlinks: " + data.error);
       }
     } catch (error) {
-      console.error('Error collecting backlinks:', error)
-      alert('Error collecting backlinks. Check console for details.')
+      console.error("Error collecting backlinks:", error);
+      alert("Error collecting backlinks. Check console for details.");
     }
-  }
+  };
 
   useEffect(() => {
-    fetchBacklinks()
-  }, [fetchBacklinks])
+    fetchBacklinks();
+  }, [fetchBacklinks]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'ACTIVE': return 'bg-green-100 text-green-800'
-      case 'LOST': return 'bg-red-100 text-red-800'
-      case 'BROKEN': return 'bg-orange-100 text-orange-800'
-      case 'REDIRECT': return 'bg-blue-100 text-blue-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case "ACTIVE":
+        return "bg-green-100 text-green-800";
+      case "LOST":
+        return "bg-red-100 text-red-800";
+      case "BROKEN":
+        return "bg-orange-100 text-orange-800";
+      case "REDIRECT":
+        return "bg-blue-100 text-blue-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const getLinkStrengthColor = (strength: string) => {
     switch (strength) {
-      case 'VERY_STRONG': return 'bg-emerald-100 text-emerald-800'
-      case 'STRONG': return 'bg-green-100 text-green-800'
-      case 'NORMAL': return 'bg-yellow-100 text-yellow-800'
-      case 'WEAK': return 'bg-red-100 text-red-800'
-      default: return 'bg-gray-100 text-gray-800'
+      case "VERY_STRONG":
+        return "bg-emerald-100 text-emerald-800";
+      case "STRONG":
+        return "bg-green-100 text-green-800";
+      case "NORMAL":
+        return "bg-yellow-100 text-yellow-800";
+      case "WEAK":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
-  const domainRatingDistribution = stats ? [
-    { range: '0-20', count: 0 },
-    { range: '21-40', count: 0 },
-    { range: '41-60', count: 0 },
-    { range: '61-80', count: 0 },
-    { range: '81-100', count: 0 }
-  ] : []
+  const domainRatingDistribution = stats
+    ? [
+        { range: "0-20", count: 0 },
+        { range: "21-40", count: 0 },
+        { range: "41-60", count: 0 },
+        { range: "61-80", count: 0 },
+        { range: "81-100", count: 0 },
+      ]
+    : [];
 
   // Populate domain rating distribution
-  backlinks.forEach(backlink => {
-    const rating = backlink.domainRating
-    if (rating <= 20) domainRatingDistribution[0].count++
-    else if (rating <= 40) domainRatingDistribution[1].count++
-    else if (rating <= 60) domainRatingDistribution[2].count++
-    else if (rating <= 80) domainRatingDistribution[3].count++
-    else domainRatingDistribution[4].count++
-  })
+  backlinks.forEach((backlink) => {
+    const rating = backlink.domainRating;
+    if (rating <= 20) domainRatingDistribution[0].count++;
+    else if (rating <= 40) domainRatingDistribution[1].count++;
+    else if (rating <= 60) domainRatingDistribution[2].count++;
+    else if (rating <= 80) domainRatingDistribution[3].count++;
+    else domainRatingDistribution[4].count++;
+  });
 
-  const statusData = stats ? Object.entries(stats.byStatus).map(([status, count]) => ({
-    status,
-    count
-  })) : []
+  const statusData = stats
+    ? Object.entries(stats.byStatus).map(([status, count]) => ({
+        status,
+        count,
+      }))
+    : [];
 
-  const linkTypeData = stats ? Object.entries(stats.byLinkType).map(([type, count]) => ({
-    type,
-    count,
-    percentage: Math.round((count / stats.total) * 100)
-  })) : []
+  const linkTypeData = stats
+    ? Object.entries(stats.byLinkType).map(([type, count]) => ({
+        type,
+        count,
+        percentage: Math.round((count / stats.total) * 100),
+      }))
+    : [];
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8']
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
   if (loading && backlinks.length === 0) {
     return (
       <div className="flex items-center justify-center h-64">
         <RefreshCw className="h-8 w-8 animate-spin" />
       </div>
-    )
+    );
   }
 
   return (
@@ -239,15 +263,30 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Button onClick={collectRealBacklinks} variant="default" size="sm" className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+          <Button
+            onClick={collectRealBacklinks}
+            variant="default"
+            size="sm"
+            className="whitespace-nowrap bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+          >
             <Target className="h-4 w-4 mr-2" />
             Collect Real Backlinks
           </Button>
-          <Button onClick={generateMockData} variant="outline" size="sm" className="whitespace-nowrap">
+          <Button
+            onClick={generateMockData}
+            variant="outline"
+            size="sm"
+            className="whitespace-nowrap"
+          >
             <RefreshCw className="h-4 w-4 mr-2" />
             Generate Mock Data
           </Button>
-          <Button onClick={fetchBacklinks} variant="outline" size="sm" className="whitespace-nowrap">
+          <Button
+            onClick={fetchBacklinks}
+            variant="outline"
+            size="sm"
+            className="whitespace-nowrap"
+          >
             <RefreshCw className="h-4 w-4 mr-2" />
             Refresh
           </Button>
@@ -324,13 +363,27 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
       <Tabs defaultValue="overview" className="space-y-4">
         <div className="w-full overflow-x-auto pb-2">
           <TabsList className="inline-flex min-w-full sm:min-w-0">
-            <TabsTrigger value="overview" className="whitespace-nowrap flex-shrink-0">Overview</TabsTrigger>
-            <TabsTrigger value="backlinks" className="whitespace-nowrap flex-shrink-0">Backlinks</TabsTrigger>
-            <TabsTrigger value="anchors" className="whitespace-nowrap flex-shrink-0">Anchor Analysis</TabsTrigger>
-            <TabsTrigger value="velocity" className="whitespace-nowrap flex-shrink-0">Link Velocity</TabsTrigger>
-            <TabsTrigger value="domains" className="whitespace-nowrap flex-shrink-0">Referring Domains</TabsTrigger>
-            <TabsTrigger value="toxic" className="whitespace-nowrap flex-shrink-0">Toxic Analysis</TabsTrigger>
-            <TabsTrigger value="prospects" className="whitespace-nowrap flex-shrink-0">Link Prospects</TabsTrigger>
+            <TabsTrigger value="overview" className="whitespace-nowrap flex-shrink-0">
+              Overview
+            </TabsTrigger>
+            <TabsTrigger value="backlinks" className="whitespace-nowrap flex-shrink-0">
+              Backlinks
+            </TabsTrigger>
+            <TabsTrigger value="anchors" className="whitespace-nowrap flex-shrink-0">
+              Anchor Analysis
+            </TabsTrigger>
+            <TabsTrigger value="velocity" className="whitespace-nowrap flex-shrink-0">
+              Link Velocity
+            </TabsTrigger>
+            <TabsTrigger value="domains" className="whitespace-nowrap flex-shrink-0">
+              Referring Domains
+            </TabsTrigger>
+            <TabsTrigger value="toxic" className="whitespace-nowrap flex-shrink-0">
+              Toxic Analysis
+            </TabsTrigger>
+            <TabsTrigger value="prospects" className="whitespace-nowrap flex-shrink-0">
+              Link Prospects
+            </TabsTrigger>
           </TabsList>
         </div>
 
@@ -340,9 +393,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             <Card>
               <CardHeader>
                 <CardTitle>Domain Rating Distribution</CardTitle>
-                <CardDescription>
-                  Backlinks grouped by domain authority ranges
-                </CardDescription>
+                <CardDescription>Backlinks grouped by domain authority ranges</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -361,9 +412,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             <Card>
               <CardHeader>
                 <CardTitle>Link Type Distribution</CardTitle>
-                <CardDescription>
-                  Follow vs NoFollow link breakdown
-                </CardDescription>
+                <CardDescription>Follow vs NoFollow link breakdown</CardDescription>
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
@@ -393,20 +442,19 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           <Card>
             <CardHeader>
               <CardTitle>Recent Backlinks</CardTitle>
-              <CardDescription>
-                Latest discovered backlinks
-              </CardDescription>
+              <CardDescription>Latest discovered backlinks</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {backlinks.slice(0, 5).map((backlink) => (
-                  <div key={backlink.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={backlink.id}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
                         <span className="font-medium">{backlink.sourceDomain}</span>
-                        <Badge className={getStatusColor(backlink.status)}>
-                          {backlink.status}
-                        </Badge>
+                        <Badge className={getStatusColor(backlink.status)}>{backlink.status}</Badge>
                         {backlink.isToxic && (
                           <Badge variant="destructive">
                             <AlertTriangle className="h-3 w-3 mr-1" />
@@ -414,9 +462,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                           </Badge>
                         )}
                       </div>
-                      <p className="text-sm text-muted-foreground mb-1">
-                        "{backlink.anchorText}"
-                      </p>
+                      <p className="text-sm text-muted-foreground mb-1">"{backlink.anchorText}"</p>
                       <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         <span>DR: {backlink.domainRating}</span>
                         <span>{backlink.linkType}</span>
@@ -441,9 +487,14 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                 <Input
                   placeholder="Search domain..."
                   value={filter.domain}
-                  onChange={(e) => setFilter(prev => ({ ...prev, domain: e.target.value }))}
+                  onChange={(e) => setFilter((prev) => ({ ...prev, domain: e.target.value }))}
                 />
-                <Select value={filter.status} onValueChange={(value: string) => setFilter(prev => ({ ...prev, status: value }))}>
+                <Select
+                  value={filter.status}
+                  onValueChange={(value: string) =>
+                    setFilter((prev) => ({ ...prev, status: value }))
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Status" />
                   </SelectTrigger>
@@ -454,7 +505,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <SelectItem value="BROKEN">Broken</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select value={filter.linkType} onValueChange={(value: string) => setFilter(prev => ({ ...prev, linkType: value }))}>
+                <Select
+                  value={filter.linkType}
+                  onValueChange={(value: string) =>
+                    setFilter((prev) => ({ ...prev, linkType: value }))
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Link Type" />
                   </SelectTrigger>
@@ -464,7 +520,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <SelectItem value="NOFOLLOW">NoFollow</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select value={filter.toxic} onValueChange={(value: string) => setFilter(prev => ({ ...prev, toxic: value }))}>
+                <Select
+                  value={filter.toxic}
+                  onValueChange={(value: string) =>
+                    setFilter((prev) => ({ ...prev, toxic: value }))
+                  }
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Toxic Status" />
                   </SelectTrigger>
@@ -478,13 +539,17 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   type="number"
                   placeholder="Min DR"
                   value={filter.minDomainRating}
-                  onChange={(e) => setFilter(prev => ({ ...prev, minDomainRating: e.target.value }))}
+                  onChange={(e) =>
+                    setFilter((prev) => ({ ...prev, minDomainRating: e.target.value }))
+                  }
                 />
                 <Input
                   type="number"
                   placeholder="Max DR"
                   value={filter.maxDomainRating}
-                  onChange={(e) => setFilter(prev => ({ ...prev, maxDomainRating: e.target.value }))}
+                  onChange={(e) =>
+                    setFilter((prev) => ({ ...prev, maxDomainRating: e.target.value }))
+                  }
                 />
               </div>
             </CardContent>
@@ -502,9 +567,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="font-medium text-blue-600">
-                            {backlink.sourceDomain}
-                          </span>
+                          <span className="font-medium text-blue-600">{backlink.sourceDomain}</span>
                           <Badge className={getStatusColor(backlink.status)}>
                             {backlink.status}
                           </Badge>
@@ -518,11 +581,11 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                             </Badge>
                           )}
                         </div>
-                        
+
                         <p className="text-sm mb-2">
                           <span className="font-medium">Anchor:</span> "{backlink.anchorText}"
                         </p>
-                        
+
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                           <div>
                             <span className="text-muted-foreground">Domain Rating:</span>
@@ -534,20 +597,22 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                           </div>
                           <div>
                             <span className="text-muted-foreground">Traffic:</span>
-                            <span className="ml-1 font-medium">{backlink.traffic?.toLocaleString() || 'N/A'}</span>
+                            <span className="ml-1 font-medium">
+                              {backlink.traffic?.toLocaleString() || "N/A"}
+                            </span>
                           </div>
                           <div>
                             <span className="text-muted-foreground">Type:</span>
                             <span className="ml-1 font-medium">{backlink.linkType}</span>
                           </div>
                         </div>
-                        
+
                         <div className="mt-2 text-xs text-muted-foreground">
-                          First seen: {new Date(backlink.firstSeen).toLocaleDateString()} • 
-                          Last seen: {new Date(backlink.lastSeen).toLocaleDateString()}
+                          First seen: {new Date(backlink.firstSeen).toLocaleDateString()} • Last
+                          seen: {new Date(backlink.lastSeen).toLocaleDateString()}
                         </div>
                       </div>
-                      
+
                       <div className="flex gap-2">
                         <Button variant="ghost" size="sm">
                           <ExternalLink className="h-4 w-4" />
@@ -557,7 +622,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   </div>
                 ))}
               </div>
-              
+
               {/* Pagination */}
               {totalPages > 1 && (
                 <div className="flex justify-center gap-2 mt-6">
@@ -565,7 +630,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     variant="outline"
                     size="sm"
                     disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(prev => prev - 1)}
+                    onClick={() => setCurrentPage((prev) => prev - 1)}
                   >
                     Previous
                   </Button>
@@ -576,7 +641,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     variant="outline"
                     size="sm"
                     disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(prev => prev + 1)}
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
                   >
                     Next
                   </Button>
@@ -592,9 +657,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             <Card>
               <CardHeader>
                 <CardTitle>Anchor Text Distribution</CardTitle>
-                <CardDescription>
-                  Natural vs optimized anchor text patterns
-                </CardDescription>
+                <CardDescription>Natural vs optimized anchor text patterns</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -652,23 +715,24 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             <Card>
               <CardHeader>
                 <CardTitle>Top Anchor Texts</CardTitle>
-                <CardDescription>
-                  Most frequently used anchor texts
-                </CardDescription>
+                <CardDescription>Most frequently used anchor texts</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {[
-                    { text: 'Your Brand Name', count: 145, type: 'branded' },
-                    { text: 'click here', count: 89, type: 'generic' },
-                    { text: 'SEO tool', count: 67, type: 'partial' },
-                    { text: 'best seo audit tool', count: 52, type: 'exact' },
-                    { text: 'website', count: 48, type: 'generic' },
-                    { text: 'https://your-site.com', count: 41, type: 'naked' },
-                    { text: 'learn more', count: 35, type: 'generic' },
-                    { text: 'audit platform', count: 28, type: 'partial' }
+                    { text: "Your Brand Name", count: 145, type: "branded" },
+                    { text: "click here", count: 89, type: "generic" },
+                    { text: "SEO tool", count: 67, type: "partial" },
+                    { text: "best seo audit tool", count: 52, type: "exact" },
+                    { text: "website", count: 48, type: "generic" },
+                    { text: "https://your-site.com", count: 41, type: "naked" },
+                    { text: "learn more", count: 35, type: "generic" },
+                    { text: "audit platform", count: 28, type: "partial" },
                   ].map((anchor, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div
+                      key={idx}
+                      className="flex items-center justify-between p-3 border rounded-lg"
+                    >
                       <div className="flex-1">
                         <p className="font-medium text-sm">{anchor.text}</p>
                         <p className="text-xs text-muted-foreground capitalize">{anchor.type}</p>
@@ -697,21 +761,27 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   <div className="text-green-600">✅</div>
                   <div>
                     <p className="font-medium text-green-900">Good branded anchor ratio</p>
-                    <p className="text-sm text-green-700">45% branded anchors is within healthy range (40-60%)</p>
+                    <p className="text-sm text-green-700">
+                      45% branded anchors is within healthy range (40-60%)
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
                   <div className="text-blue-600">ℹ️</div>
                   <div>
                     <p className="font-medium text-blue-900">Monitor exact match percentage</p>
-                    <p className="text-sm text-blue-700">Keep exact match below 20% to avoid over-optimization penalties</p>
+                    <p className="text-sm text-blue-700">
+                      Keep exact match below 20% to avoid over-optimization penalties
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-lg">
                   <div className="text-purple-600">🎯</div>
                   <div>
                     <p className="font-medium text-purple-900">Continue maintaining diversity</p>
-                    <p className="text-sm text-purple-700">Your anchor text variety helps maintain a natural link profile</p>
+                    <p className="text-sm text-purple-700">
+                      Your anchor text variety helps maintain a natural link profile
+                    </p>
                   </div>
                 </div>
               </div>
@@ -768,21 +838,21 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           <Card>
             <CardHeader>
               <CardTitle>Link Acquisition Over Time</CardTitle>
-              <CardDescription>
-                Track your backlink growth patterns
-              </CardDescription>
+              <CardDescription>Track your backlink growth patterns</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={[
-                  { date: 'Jan', count: 120 },
-                  { date: 'Feb', count: 145 },
-                  { date: 'Mar', count: 178 },
-                  { date: 'Apr', count: 192 },
-                  { date: 'May', count: 215 },
-                  { date: 'Jun', count: 243 },
-                  { date: 'Jul', count: 278 }
-                ]}>
+                <LineChart
+                  data={[
+                    { date: "Jan", count: 120 },
+                    { date: "Feb", count: 145 },
+                    { date: "Mar", count: 178 },
+                    { date: "Apr", count: 192 },
+                    { date: "May", count: 215 },
+                    { date: "Jun", count: 243 },
+                    { date: "Jul", count: 278 },
+                  ]}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis />
@@ -804,21 +874,27 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   <div className="text-green-600">✅</div>
                   <div>
                     <p className="font-medium text-green-900">Natural growth pattern detected</p>
-                    <p className="text-sm text-green-700">Your link acquisition rate is consistent and appears organic</p>
+                    <p className="text-sm text-green-700">
+                      Your link acquisition rate is consistent and appears organic
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
                   <div className="text-blue-600">📊</div>
                   <div>
                     <p className="font-medium text-blue-900">Average: 6-8 new backlinks per week</p>
-                    <p className="text-sm text-blue-700">This is a healthy acquisition rate for your domain size</p>
+                    <p className="text-sm text-blue-700">
+                      This is a healthy acquisition rate for your domain size
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-lg">
                   <div className="text-purple-600">🎯</div>
                   <div>
                     <p className="font-medium text-purple-900">No suspicious spikes detected</p>
-                    <p className="text-sm text-purple-700">Your growth curve shows no signs of artificial link building</p>
+                    <p className="text-sm text-purple-700">
+                      Your growth curve shows no signs of artificial link building
+                    </p>
                   </div>
                 </div>
               </div>
@@ -837,9 +913,9 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   {stats ? Math.round(((stats.total - stats.toxic) / stats.total) * 100) : 0}%
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">Overall link quality</p>
-                <Progress 
-                  value={stats ? ((stats.total - stats.toxic) / stats.total) * 100 : 0} 
-                  className="mt-4" 
+                <Progress
+                  value={stats ? ((stats.total - stats.toxic) / stats.total) * 100 : 0}
+                  className="mt-4"
                 />
               </CardContent>
             </Card>
@@ -881,28 +957,60 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           <Card>
             <CardHeader>
               <CardTitle>Toxicity Distribution</CardTitle>
-              <CardDescription>
-                Classification of backlinks by toxicity level
-              </CardDescription>
+              <CardDescription>Classification of backlinks by toxicity level</CardDescription>
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={[
-                  { category: 'Safe', count: stats ? stats.total - stats.toxic : 0, color: '#10b981' },
-                  { category: 'Warning', count: stats ? Math.floor(stats.toxic * 0.4) : 0, color: '#f59e0b' },
-                  { category: 'Toxic', count: stats ? Math.floor(stats.toxic * 0.4) : 0, color: '#ef4444' },
-                  { category: 'Dangerous', count: stats ? Math.floor(stats.toxic * 0.2) : 0, color: '#dc2626' }
-                ]}>
+                <BarChart
+                  data={[
+                    {
+                      category: "Safe",
+                      count: stats ? stats.total - stats.toxic : 0,
+                      color: "#10b981",
+                    },
+                    {
+                      category: "Warning",
+                      count: stats ? Math.floor(stats.toxic * 0.4) : 0,
+                      color: "#f59e0b",
+                    },
+                    {
+                      category: "Toxic",
+                      count: stats ? Math.floor(stats.toxic * 0.4) : 0,
+                      color: "#ef4444",
+                    },
+                    {
+                      category: "Dangerous",
+                      count: stats ? Math.floor(stats.toxic * 0.2) : 0,
+                      color: "#dc2626",
+                    },
+                  ]}
+                >
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="category" />
                   <YAxis />
                   <Tooltip />
                   <Bar dataKey="count" fill="#8884d8">
                     {[
-                      { category: 'Safe', count: stats ? stats.total - stats.toxic : 0, color: '#10b981' },
-                      { category: 'Warning', count: stats ? Math.floor(stats.toxic * 0.4) : 0, color: '#f59e0b' },
-                      { category: 'Toxic', count: stats ? Math.floor(stats.toxic * 0.4) : 0, color: '#ef4444' },
-                      { category: 'Dangerous', count: stats ? Math.floor(stats.toxic * 0.2) : 0, color: '#dc2626' }
+                      {
+                        category: "Safe",
+                        count: stats ? stats.total - stats.toxic : 0,
+                        color: "#10b981",
+                      },
+                      {
+                        category: "Warning",
+                        count: stats ? Math.floor(stats.toxic * 0.4) : 0,
+                        color: "#f59e0b",
+                      },
+                      {
+                        category: "Toxic",
+                        count: stats ? Math.floor(stats.toxic * 0.4) : 0,
+                        color: "#ef4444",
+                      },
+                      {
+                        category: "Dangerous",
+                        count: stats ? Math.floor(stats.toxic * 0.2) : 0,
+                        color: "#dc2626",
+                      },
                     ].map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
@@ -916,43 +1024,49 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           <Card>
             <CardHeader>
               <CardTitle>High-Risk Backlinks</CardTitle>
-              <CardDescription>
-                Links that may negatively impact your SEO
-              </CardDescription>
+              <CardDescription>Links that may negatively impact your SEO</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {backlinks.filter(b => b.isToxic).slice(0, 10).map((backlink) => (
-                  <div key={backlink.id} className="p-4 border border-red-200 rounded-lg bg-red-50">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-medium text-red-900">{backlink.sourceDomain}</span>
-                          <Badge variant="destructive">
-                            Score: {Math.round(backlink.toxicScore)}
-                          </Badge>
+                {backlinks
+                  .filter((b) => b.isToxic)
+                  .slice(0, 10)
+                  .map((backlink) => (
+                    <div
+                      key={backlink.id}
+                      className="p-4 border border-red-200 rounded-lg bg-red-50"
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="font-medium text-red-900">
+                              {backlink.sourceDomain}
+                            </span>
+                            <Badge variant="destructive">
+                              Score: {Math.round(backlink.toxicScore)}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-red-800 mb-1">
+                            Anchor: "{backlink.anchorText}"
+                          </p>
+                          <div className="flex gap-4 text-xs text-red-700">
+                            <span>DR: {backlink.domainRating}</span>
+                            <span>{backlink.linkType}</span>
+                            <span>{backlink.linkStrength}</span>
+                          </div>
                         </div>
-                        <p className="text-sm text-red-800 mb-1">
-                          Anchor: "{backlink.anchorText}"
-                        </p>
-                        <div className="flex gap-4 text-xs text-red-700">
-                          <span>DR: {backlink.domainRating}</span>
-                          <span>{backlink.linkType}</span>
-                          <span>{backlink.linkStrength}</span>
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="text-xs">
+                            Mark Safe
+                          </Button>
+                          <Button variant="destructive" size="sm" className="text-xs">
+                            Disavow
+                          </Button>
                         </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="text-xs">
-                          Mark Safe
-                        </Button>
-                        <Button variant="destructive" size="sm" className="text-xs">
-                          Disavow
-                        </Button>
                       </div>
                     </div>
-                  </div>
-                ))}
-                {backlinks.filter(b => b.isToxic).length === 0 && (
+                  ))}
+                {backlinks.filter((b) => b.isToxic).length === 0 && (
                   <div className="text-center py-8 text-muted-foreground">
                     <Shield className="h-12 w-12 mx-auto mb-4 text-green-500" />
                     <p className="text-green-600 font-medium">No toxic links detected!</p>
@@ -975,9 +1089,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <div className="flex items-start gap-3 p-4 bg-red-50 rounded-lg">
                       <div className="text-red-600">🚨</div>
                       <div>
-                        <p className="font-medium text-red-900">Review toxic backlinks immediately</p>
+                        <p className="font-medium text-red-900">
+                          Review toxic backlinks immediately
+                        </p>
                         <p className="text-sm text-red-700">
-                          {stats.toxic} potentially harmful links detected. Review and disavow high-risk links.
+                          {stats.toxic} potentially harmful links detected. Review and disavow
+                          high-risk links.
                         </p>
                       </div>
                     </div>
@@ -1010,9 +1127,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           <Card>
             <CardHeader>
               <CardTitle>Link Building Prospects</CardTitle>
-              <CardDescription>
-                Manage outreach opportunities for link building
-              </CardDescription>
+              <CardDescription>Manage outreach opportunities for link building</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -1026,11 +1141,13 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     Start Outreach Campaign
                   </Button>
                 </div>
-                
+
                 <div className="text-center py-8 text-muted-foreground">
                   <Target className="h-12 w-12 mx-auto mb-4" />
                   <p>Link building prospects will be displayed here</p>
-                  <p className="text-sm">This feature helps identify and manage outreach opportunities</p>
+                  <p className="text-sm">
+                    This feature helps identify and manage outreach opportunities
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -1038,5 +1155,5 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }

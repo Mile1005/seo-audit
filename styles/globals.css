@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 @layer base {
   :root {
@@ -24,7 +24,7 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -111,22 +111,32 @@ html {
   }
   /* Hero noise overlay */
   .bg-noise {
-    background-image: url('/brand/noise.svg');
+    background-image: url("/brand/noise.svg");
     background-repeat: repeat;
-    opacity: .35;
+    opacity: 0.35;
     pointer-events: none;
   }
   /* Soft radial backdrop */
   .bg-soft-radial {
-    background-image: radial-gradient(1200px 600px at 50% -10%, rgba(59,130,246,.18), transparent), radial-gradient(800px 400px at 90% 10%, rgba(124,58,237,.12), transparent), radial-gradient(600px 300px at 10% 20%, rgba(16,185,129,.10), transparent);
+    background-image:
+      radial-gradient(1200px 600px at 50% -10%, rgba(59, 130, 246, 0.18), transparent),
+      radial-gradient(800px 400px at 90% 10%, rgba(124, 58, 237, 0.12), transparent),
+      radial-gradient(600px 300px at 10% 20%, rgba(16, 185, 129, 0.1), transparent);
   }
   /* Marquee */
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
   .marquee-track {
-    display: flex; align-items: center; gap: 3rem; width: max-content;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    width: max-content;
     animation: marquee 20s linear infinite;
   }
   .marquee-mask {
@@ -141,16 +151,23 @@ html {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, rgba(255,255,255,0.35) 10%, transparent 10.01%) center/0 0 no-repeat;
-    transition: background-size .6s ease;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 10%, transparent 10.01%) center/0
+      0 no-repeat;
+    transition: background-size 0.6s ease;
   }
   .ripple:active:after {
     background-size: 1200% 1200%;
     transition: 0s;
   }
   /* Card tilt */
-  .tilt:hover { transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px); }
-  .tilt { transition: transform .25s ease, box-shadow .25s ease; }
+  .tilt:hover {
+    transform: perspective(800px) rotateX(2deg) rotateY(-2deg) translateY(-2px);
+  }
+  .tilt {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
   /* Shimmer border */
   .shimmer-border {
     position: relative;
@@ -159,23 +176,31 @@ html {
   }
   .shimmer-border:before {
     content: "";
-    position: absolute; inset: -2px;
+    position: absolute;
+    inset: -2px;
     background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6, #60a5fa);
     background-size: 300% 300%;
     animation: gradientShift 6s ease infinite;
-    z-index: -1; border-radius: inherit;
+    z-index: -1;
+    border-radius: inherit;
   }
   /* Tiny parallax dots utility (optional) */
   .parallax-dots {
     background-image:
-      radial-gradient(circle at 20% 30%, rgba(59,130,246,0.15) 2px, transparent 3px),
-      radial-gradient(circle at 80% 60%, rgba(147,51,234,0.12) 2px, transparent 3px);
-    background-size: 1200px 800px, 1200px 800px;
+      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.15) 2px, transparent 3px),
+      radial-gradient(circle at 80% 60%, rgba(147, 51, 234, 0.12) 2px, transparent 3px);
+    background-size:
+      1200px 800px,
+      1200px 800px;
     background-attachment: fixed;
   }
   /* Prose tweaks */
-  .prose h2 { @apply text-3xl md:text-4xl font-bold text-gray-900; }
-  .prose p { @apply text-gray-700 leading-relaxed; }
+  .prose h2 {
+    @apply text-3xl md:text-4xl font-bold text-gray-900;
+  }
+  .prose p {
+    @apply text-gray-700 leading-relaxed;
+  }
 }
 
 /* Loading spinner */
@@ -189,6 +214,10 @@ html {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

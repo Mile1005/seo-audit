@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export const ScoreSkeleton = () => {
   return (
@@ -10,7 +10,7 @@ export const ScoreSkeleton = () => {
           <div className="h-3 w-24 bg-slate-200 mx-auto rounded" />
           <div className="h-2 w-28 bg-slate-200 mx-auto rounded" />
         </div>
-        {Array.from({length:4}).map((_,i)=>(
+        {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="text-center space-y-2">
             <div className="h-10 w-10 rounded-full bg-slate-200 mx-auto" />
             <div className="h-3 w-20 bg-slate-200 mx-auto rounded" />
@@ -19,7 +19,7 @@ export const ScoreSkeleton = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ScoreSkeleton
+export default ScoreSkeleton;

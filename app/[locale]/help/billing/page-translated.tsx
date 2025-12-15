@@ -1,44 +1,44 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, CreditCard, ArrowRight, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, CreditCard, ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function AccountBillingPage() {
-  const t = useTranslations('help.categories.accountBilling')
+  const t = useTranslations("help.categories.accountBilling");
 
   const categoryArticles = [
     {
-      title: t('articles.upgradePlan.title'),
-      href: t('articles.upgradePlan.href'),
-      time: t('articles.upgradePlan.time'),
-      description: t('articles.upgradePlan.description'),
-      icon: BookOpen
+      title: t("articles.upgradePlan.title"),
+      href: t("articles.upgradePlan.href"),
+      time: t("articles.upgradePlan.time"),
+      description: t("articles.upgradePlan.description"),
+      icon: BookOpen,
     },
     {
-      title: t('articles.paymentMethods.title'),
-      href: t('articles.paymentMethods.href'),
-      time: t('articles.paymentMethods.time'),
-      description: t('articles.paymentMethods.description'),
-      icon: CreditCard
+      title: t("articles.paymentMethods.title"),
+      href: t("articles.paymentMethods.href"),
+      time: t("articles.paymentMethods.time"),
+      description: t("articles.paymentMethods.description"),
+      icon: CreditCard,
     },
     {
-      title: t('articles.invoices.title'),
-      href: t('articles.invoices.href'),
-      time: t('articles.invoices.time'),
-      description: t('articles.invoices.description'),
-      icon: BookOpen
+      title: t("articles.invoices.title"),
+      href: t("articles.invoices.href"),
+      time: t("articles.invoices.time"),
+      description: t("articles.invoices.description"),
+      icon: BookOpen,
     },
     {
-      title: t('articles.cancellation.title'),
-      href: t('articles.cancellation.href'),
-      time: t('articles.cancellation.time'),
-      description: t('articles.cancellation.description'),
-      icon: BookOpen
-    }
-  ]
+      title: t("articles.cancellation.title"),
+      href: t("articles.cancellation.href"),
+      time: t("articles.cancellation.time"),
+      description: t("articles.cancellation.description"),
+      icon: BookOpen,
+    },
+  ];
 
   return (
     <MainLayout>
@@ -51,17 +51,17 @@ export default function AccountBillingPage() {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('backToHelp')}
+              {t("backToHelp")}
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl">
-              {t('subtitle')}
-            </p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl">{t("subtitle")}</p>
           </div>
 
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('accountManagement.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              {t("accountManagement.title")}
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Link
                 href="/dashboard"
@@ -69,8 +69,12 @@ export default function AccountBillingPage() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">{t('accountManagement.accessDashboard.title')}</h3>
-                    <p className="text-blue-100">{t('accountManagement.accessDashboard.description')}</p>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("accountManagement.accessDashboard.title")}
+                    </h3>
+                    <p className="text-blue-100">
+                      {t("accountManagement.accessDashboard.description")}
+                    </p>
                   </div>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -81,8 +85,10 @@ export default function AccountBillingPage() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">{t('accountManagement.viewPlans.title')}</h3>
-                    <p className="text-gray-600">{t('accountManagement.viewPlans.description')}</p>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("accountManagement.viewPlans.title")}
+                    </h3>
+                    <p className="text-gray-600">{t("accountManagement.viewPlans.description")}</p>
                   </div>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -126,61 +132,75 @@ export default function AccountBillingPage() {
 
           {/* Billing Information */}
           <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('billingFAQ.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t("billingFAQ.title")}</h2>
             <div className="space-y-6">
               <div className="border-l-4 border-blue-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('billingFAQ.whenCharged.question')}</h3>
-                <p className="text-gray-600">
-                  {t('billingFAQ.whenCharged.answer')}
-                </p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {t("billingFAQ.whenCharged.question")}
+                </h3>
+                <p className="text-gray-600">{t("billingFAQ.whenCharged.answer")}</p>
               </div>
               <div className="border-l-4 border-green-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('billingFAQ.changePlans.question')}</h3>
-                <p className="text-gray-600">
-                  {t('billingFAQ.changePlans.answer')}
-                </p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {t("billingFAQ.changePlans.question")}
+                </h3>
+                <p className="text-gray-600">{t("billingFAQ.changePlans.answer")}</p>
               </div>
               <div className="border-l-4 border-purple-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('billingFAQ.paymentMethods.question')}</h3>
-                <p className="text-gray-600">
-                  {t('billingFAQ.paymentMethods.answer')}
-                </p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  {t("billingFAQ.paymentMethods.question")}
+                </h3>
+                <p className="text-gray-600">{t("billingFAQ.paymentMethods.answer")}</p>
               </div>
             </div>
           </div>
 
           {/* Additional Resources */}
           <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('additionalResources.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              {t("additionalResources.title")}
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/help/security"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <BookOpen className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.securityPrivacy.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.securityPrivacy.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.securityPrivacy.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.securityPrivacy.description")}
+                </p>
               </Link>
               <Link
                 href="/help/api/api-integrations"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <ArrowRight className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.apiIntegrations.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.apiIntegrations.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.apiIntegrations.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.apiIntegrations.description")}
+                </p>
               </Link>
               <Link
                 href="/contact"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <CreditCard className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.contactSupport.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.contactSupport.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.contactSupport.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.contactSupport.description")}
+                </p>
               </Link>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

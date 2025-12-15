@@ -1,150 +1,151 @@
-"use client"
+"use client";
 
-import React, { useState, useRef, useEffect } from "react"
-import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
-import { X, ChevronLeft, ChevronRight, Maximize2, Download } from "lucide-react"
-import { useTranslations } from 'next-intl'
+import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, ChevronLeft, ChevronRight, Maximize2, Download } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export interface FeatureMockup {
-  id: string
-  titleKey: string
-  descriptionKey: string
-  imageSrc: string
-  imageAltKey: string
-  category: 'desktop' | 'mobile' | 'report'
+  id: string;
+  titleKey: string;
+  descriptionKey: string;
+  imageSrc: string;
+  imageAltKey: string;
+  category: "desktop" | "mobile" | "report";
 }
 
 export interface FeatureMockupsProps {
-  mockups?: FeatureMockup[]
-  className?: string
+  mockups?: FeatureMockup[];
+  className?: string;
 }
 
 const defaultMockups: FeatureMockup[] = [
   {
-    id: 'competitor-analysis',
-    titleKey: 'home.images.features.competitorAnalysis.title',
-    descriptionKey: 'home.images.features.competitorAnalysis.description',
-    imageSrc: '/images/features/competitor-analysis-desktop.webp',
-    imageAltKey: 'home.images.competitorAnalysis',
-    category: 'desktop'
+    id: "competitor-analysis",
+    titleKey: "home.images.features.competitorAnalysis.title",
+    descriptionKey: "home.images.features.competitorAnalysis.description",
+    imageSrc: "/images/features/competitor-analysis-desktop.webp",
+    imageAltKey: "home.images.competitorAnalysis",
+    category: "desktop",
   },
   {
-    id: 'pdf-reports',
-    titleKey: 'home.images.features.pdfReports.title',
-    descriptionKey: 'home.images.features.pdfReports.description',
-    imageSrc: '/images/features/pdf-report-generation.webp',
-    imageAltKey: 'home.images.pdfReport',
-    category: 'report'
+    id: "pdf-reports",
+    titleKey: "home.images.features.pdfReports.title",
+    descriptionKey: "home.images.features.pdfReports.description",
+    imageSrc: "/images/features/pdf-report-generation.webp",
+    imageAltKey: "home.images.pdfReport",
+    category: "report",
   },
   {
-    id: 'ai-chat',
-    titleKey: 'home.images.features.aiChat.title',
-    descriptionKey: 'home.images.features.aiChat.description',
-    imageSrc: '/images/features/ai-chat-interface.webp',
-    imageAltKey: 'home.images.aiChat',
-    category: 'desktop'
+    id: "ai-chat",
+    titleKey: "home.images.features.aiChat.title",
+    descriptionKey: "home.images.features.aiChat.description",
+    imageSrc: "/images/features/ai-chat-interface.webp",
+    imageAltKey: "home.images.aiChat",
+    category: "desktop",
   },
   {
-    id: 'team-collaboration',
-    titleKey: 'home.images.features.teamCollaboration.title',
-    descriptionKey: 'home.images.features.teamCollaboration.description',
-    imageSrc: '/images/features/team-collaboration-dashboard.webp',
-    imageAltKey: 'home.images.teamCollaboration',
-    category: 'desktop'
-  }
-]
+    id: "team-collaboration",
+    titleKey: "home.images.features.teamCollaboration.title",
+    descriptionKey: "home.images.features.teamCollaboration.description",
+    imageSrc: "/images/features/team-collaboration-dashboard.webp",
+    imageAltKey: "home.images.teamCollaboration",
+    category: "desktop",
+  },
+];
 
-export function FeatureMockups({ 
-  mockups = defaultMockups, 
-  className = "" 
-}: FeatureMockupsProps) {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
-  const lightboxRef = useRef<HTMLDivElement>(null)
-  const t = useTranslations()
+export function FeatureMockups({ mockups = defaultMockups, className = "" }: FeatureMockupsProps) {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   // Handle escape key for lightbox
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && selectedIndex !== null) {
-        setSelectedIndex(null)
+      if (e.key === "Escape" && selectedIndex !== null) {
+        setSelectedIndex(null);
       }
-    }
+    };
 
     if (selectedIndex !== null) {
-      document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [selectedIndex])
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedIndex]);
 
   // Touch handlers for mobile swipe
   const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
-  }
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-    
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
 
     if (selectedIndex !== null) {
       if (isLeftSwipe && selectedIndex < mockups.length - 1) {
-        setSelectedIndex(selectedIndex + 1)
+        setSelectedIndex(selectedIndex + 1);
       }
       if (isRightSwipe && selectedIndex > 0) {
-        setSelectedIndex(selectedIndex - 1)
+        setSelectedIndex(selectedIndex - 1);
       }
     }
-  }
+  };
 
   const openLightbox = (index: number) => {
-    setSelectedIndex(index)
-  }
+    setSelectedIndex(index);
+  };
 
   const closeLightbox = () => {
-    setSelectedIndex(null)
-  }
+    setSelectedIndex(null);
+  };
 
   const goToPrevious = () => {
     if (selectedIndex !== null && selectedIndex > 0) {
-      setSelectedIndex(selectedIndex - 1)
+      setSelectedIndex(selectedIndex - 1);
     }
-  }
+  };
 
   const goToNext = () => {
     if (selectedIndex !== null && selectedIndex < mockups.length - 1) {
-      setSelectedIndex(selectedIndex + 1)
+      setSelectedIndex(selectedIndex + 1);
     }
-  }
+  };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      closeLightbox()
+      closeLightbox();
     }
-  }
+  };
 
-  const getCategoryIcon = (category: FeatureMockup['category']) => {
+  const getCategoryIcon = (category: FeatureMockup["category"]) => {
     switch (category) {
-      case 'desktop': return '🖥️'
-      case 'mobile': return '📱'
-      case 'report': return '📄'
-      default: return '🖼️'
+      case "desktop":
+        return "🖥️";
+      case "mobile":
+        return "📱";
+      case "report":
+        return "📄";
+      default:
+        return "🖼️";
     }
-  }
+  };
 
   return (
     <div className={className}>
@@ -182,10 +183,10 @@ export function FeatureMockups({
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   onError={() => {
-                    console.log(`Feature mockup image failed to load: ${mockup.imageSrc}`)
+                    console.log(`Feature mockup image failed to load: ${mockup.imageSrc}`);
                   }}
                 />
-                
+
                 {/* Fallback content */}
                 <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
                   <div className="text-center text-white p-6">
@@ -195,7 +196,7 @@ export function FeatureMockups({
                     <h4 className="font-semibold mb-2">{t(mockup.titleKey)}</h4>
                     <p className="text-xs text-gray-400 mb-2">{t(mockup.descriptionKey)}</p>
                     <div className="text-xs text-purple-400">
-                      TODO: {mockup.imageSrc.split('/').pop()}
+                      TODO: {mockup.imageSrc.split("/").pop()}
                     </div>
                   </div>
                 </div>
@@ -206,9 +207,7 @@ export function FeatureMockups({
                 <h3 className="font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors duration-300">
                   {t(mockup.titleKey)}
                 </h3>
-                <p className="text-gray-400 text-sm line-clamp-2">
-                  {t(mockup.descriptionKey)}
-                </p>
+                <p className="text-gray-400 text-sm line-clamp-2">{t(mockup.descriptionKey)}</p>
               </div>
             </div>
           </motion.div>
@@ -242,7 +241,9 @@ export function FeatureMockups({
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-slate-700/50">
                 <div className="flex items-center space-x-3">
-                  <span className="text-2xl">{getCategoryIcon(mockups[selectedIndex].category)}</span>
+                  <span className="text-2xl">
+                    {getCategoryIcon(mockups[selectedIndex].category)}
+                  </span>
                   <div>
                     <h3 className="text-lg font-semibold text-white">
                       {t(mockups[selectedIndex].titleKey)}
@@ -283,7 +284,9 @@ export function FeatureMockups({
                     className="object-contain"
                     priority
                     onError={() => {
-                      console.log(`Lightbox image failed to load: ${mockups[selectedIndex].imageSrc}`)
+                      console.log(
+                        `Lightbox image failed to load: ${mockups[selectedIndex].imageSrc}`
+                      );
                     }}
                   />
                 </div>
@@ -323,7 +326,7 @@ export function FeatureMockups({
                   <div
                     key={index}
                     className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-                      index === selectedIndex ? 'bg-purple-500' : 'bg-gray-600'
+                      index === selectedIndex ? "bg-purple-500" : "bg-gray-600"
                     }`}
                   />
                 ))}
@@ -333,5 +336,5 @@ export function FeatureMockups({
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }

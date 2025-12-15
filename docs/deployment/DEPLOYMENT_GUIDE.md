@@ -3,6 +3,7 @@
 ## 🚀 Quick Setup
 
 ### 1. Run the Complete Setup Script
+
 ```bash
 # Windows
 deploy-setup.bat
@@ -13,7 +14,9 @@ pnpm build
 ```
 
 ### 2. Environment Variables
+
 The setup script automatically configures:
+
 - **PageSpeed Insights API**: Core Web Vitals data
 - **Google Search Console**: Search analytics data
 - **Database**: SQLite for development
@@ -22,11 +25,13 @@ The setup script automatically configures:
 ## 🔧 API Configuration
 
 ### PageSpeed Insights (Core Web Vitals)
-- **API Key**: `AIzaSyA9x1N0poqiewfF6YL2Cyqcty57MhzrMPU`
+
+- **API Key**: `YOUR_PSI_API_KEY`
 - **Features**: LCP, CLS, INP metrics with performance insights
 - **Status**: ✅ Fully implemented
 
 ### Google Search Console
+
 - **Client ID**: `[YOUR_GSC_CLIENT_ID]`
 - **Client Secret**: `[YOUR_GSC_CLIENT_SECRET]`
 - **Redirect URI**: `https://seo-audit-seven.vercel.app/api/auth/gsc/callback`
@@ -36,6 +41,7 @@ The setup script automatically configures:
 ## 📊 New Features
 
 ### 1. Core Web Vitals Panel
+
 - **LCP** (Largest Contentful Paint) with target ≤2.5s
 - **CLS** (Cumulative Layout Shift) with target ≤0.1
 - **INP** (Interaction to Next Paint) with target ≤200ms
@@ -43,12 +49,14 @@ The setup script automatically configures:
 - **Color-coded status indicators** (Good/Needs Improvement/Poor)
 
 ### 2. Google Search Console Integration
+
 - **Search analytics** for the last 28 days
 - **Top performing queries** with metrics
 - **Click-through rates** and impressions
 - **Domain-specific data** for audited websites
 
 ### 3. Enhanced Audit Results
+
 - **Performance data** from PageSpeed Insights
 - **GSC insights** when available
 - **Comprehensive scoring** across all SEO factors
@@ -57,14 +65,16 @@ The setup script automatically configures:
 ## 🚀 Deployment
 
 ### Vercel Deployment
+
 1. **Push to GitHub**: All changes are ready for deployment
 2. **Automatic Deployment**: Vercel will build and deploy automatically
 3. **Environment Variables**: Add the same environment variables to Vercel
 
 ### Environment Variables for Vercel
+
 ```bash
 # PageSpeed Insights
-PSI_API_KEY=AIzaSyA9x1N0poqiewfF6YL2Cyqcty57MhzrMPU
+PSI_API_KEY=YOUR_PSI_API_KEY
 
 # Google Search Console
 GSC_CLIENT_ID=[YOUR_GSC_CLIENT_ID]
@@ -78,6 +88,7 @@ NEXT_PUBLIC_APP_URL=https://seo-audit-seven.vercel.app
 ## 🧪 Testing
 
 ### Local Testing
+
 ```bash
 # Start development server
 pnpm dev
@@ -90,6 +101,7 @@ curl http://localhost:3000/api/debug/gsc-config
 ```
 
 ### Production Testing
+
 1. **Run an audit** on any website
 2. **Check Core Web Vitals** section in results
 3. **Verify GSC integration** (requires authentication)
@@ -97,24 +109,26 @@ curl http://localhost:3000/api/debug/gsc-config
 
 ## 📋 Feature Status
 
-| Feature | Status | Notes |
-|---------|--------|-------|
-| PageSpeed Insights | ✅ Complete | Core Web Vitals working |
+| Feature               | Status      | Notes                        |
+| --------------------- | ----------- | ---------------------------- |
+| PageSpeed Insights    | ✅ Complete | Core Web Vitals working      |
 | Google Search Console | ✅ Complete | Requires user authentication |
-| Site Crawl | ✅ Complete | Basic crawling implemented |
-| Competitor Analysis | ⚠️ Basic | SERP scraping available |
-| AI Insights | ⚠️ Basic | Local AI models working |
-| Email Notifications | ⚠️ Basic | Console logging only |
+| Site Crawl            | ✅ Complete | Basic crawling implemented   |
+| Competitor Analysis   | ⚠️ Basic    | SERP scraping available      |
+| AI Insights           | ⚠️ Basic    | Local AI models working      |
+| Email Notifications   | ⚠️ Basic    | Console logging only         |
 
 ## 🔍 Troubleshooting
 
 ### Common Issues
+
 1. **GSC not working**: Check authentication flow
 2. **PSI data missing**: Verify API key is set
 3. **Build errors**: Run `pnpm typecheck` to check TypeScript
 4. **Deployment fails**: Check environment variables in Vercel
 
 ### Debug Endpoints
+
 - **GSC Config**: `/api/debug/gsc-config`
 - **Health Check**: `/api/health`
 - **Sample Data**: `/debug` (shows sample audit results)
@@ -122,6 +136,7 @@ curl http://localhost:3000/api/debug/gsc-config
 ## 🎉 Ready for Production!
 
 Your SEO Audit Tool now includes:
+
 - ✅ **Core Web Vitals** from PageSpeed Insights
 - ✅ **Search Console** integration
 - ✅ **Enhanced audit results**

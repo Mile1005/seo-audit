@@ -1,41 +1,41 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect, useRef } from "react"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown } from "lucide-react"
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown } from "lucide-react";
 // import { DesktopDropdown } from "./desktop-dropdown"
 
 // Temporary inline dropdown component to fix TypeScript issues
 interface DropdownItem {
-  label: string
-  href: string
-  description?: string
+  label: string;
+  href: string;
+  description?: string;
 }
 
 interface DesktopDropdownProps {
-  items: DropdownItem[]
-  isOpen: boolean
-  onClose: () => void
+  items: DropdownItem[];
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isOpen) return
+    if (!isOpen) return;
 
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        onClose()
+        onClose();
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [isOpen, onClose])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen, onClose]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <motion.div
@@ -54,25 +54,23 @@ function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
           onClick={onClose}
         >
           <div className="font-medium text-gray-900">{item.label}</div>
-          {item.description && (
-            <div className="text-sm text-gray-500 mt-1">{item.description}</div>
-          )}
+          {item.description && <div className="text-sm text-gray-500 mt-1">{item.description}</div>}
         </Link>
       ))}
     </motion.div>
-  )
+  );
 }
 
 export interface NavigationItem {
-  label: string
-  href: string
-  description?: string
+  label: string;
+  href: string;
+  description?: string;
 }
 
 export interface NavigationSection {
-  label: string
-  href?: string
-  items?: NavigationItem[]
+  label: string;
+  href?: string;
+  items?: NavigationItem[];
 }
 
 const navigationData: NavigationSection[] = [
@@ -82,33 +80,33 @@ const navigationData: NavigationSection[] = [
       {
         label: "SEO Audit",
         href: "/features/seo-audit",
-        description: "Comprehensive website analysis and recommendations"
+        description: "Comprehensive website analysis and recommendations",
       },
       {
         label: "Competitor Analysis",
         href: "/features/competitor-analysis",
-        description: "Compare your performance against competitors"
+        description: "Compare your performance against competitors",
       },
       {
         label: "Keyword Tracking",
         href: "/features/keyword-tracking",
-        description: "Monitor rankings and search performance"
+        description: "Monitor rankings and search performance",
       },
       {
         label: "Site Crawler",
         href: "/features/site-crawler",
-        description: "Deep technical SEO analysis and monitoring"
+        description: "Deep technical SEO analysis and monitoring",
       },
       {
         label: "AI Assistant",
         href: "/features/ai-assistant",
-        description: "Get personalized SEO recommendations"
-      }
-    ]
+        description: "Get personalized SEO recommendations",
+      },
+    ],
   },
   {
     label: "Pricing",
-    href: "/pricing"
+    href: "/pricing",
   },
   {
     label: "Case Studies",
@@ -116,19 +114,19 @@ const navigationData: NavigationSection[] = [
       {
         label: "E-commerce Success",
         href: "/case-studies/ecommerce",
-        description: "How we helped increase organic traffic by 300%"
+        description: "How we helped increase organic traffic by 300%",
       },
       {
         label: "SaaS Growth",
         href: "/case-studies/saas",
-        description: "B2B software company scales with SEO"
+        description: "B2B software company scales with SEO",
       },
       {
         label: "Local Business",
         href: "/case-studies/local",
-        description: "Local SEO strategy drives foot traffic"
-      }
-    ]
+        description: "Local SEO strategy drives foot traffic",
+      },
+    ],
   },
   {
     label: "Resources",
@@ -136,145 +134,141 @@ const navigationData: NavigationSection[] = [
       {
         label: "Blog",
         href: "/blog",
-        description: "Latest SEO insights and strategies"
+        description: "Latest SEO insights and strategies",
       },
       {
         label: "Documentation",
         href: "/docs",
-        description: "Complete guides and API reference"
+        description: "Complete guides and API reference",
       },
       {
         label: "Help Center",
         href: "/help",
-        description: "Get support and find answers"
+        description: "Get support and find answers",
       },
       {
         label: "Webinars",
         href: "/webinars",
-        description: "Live SEO training and workshops"
-      }
-    ]
-  }
-]
+        description: "Live SEO training and workshops",
+      },
+    ],
+  },
+];
 
 export interface AdaptiveNavigationProps {
-  className?: string
+  className?: string;
 }
 
 export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const mobileMenuRef = useRef<HTMLDivElement>(null)
-  const timeoutRef = useRef<NodeJS.Timeout>()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
+      setIsScrolled(window.scrollY > 20);
+    };
 
     // Use passive listeners for better performance and ensure mobile compatibility
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Handle mobile menu focus trap and touch events
   useEffect(() => {
     if (isMobileMenuOpen) {
       // Store current scroll position
-      const scrollY = window.scrollY
-      
+      const scrollY = window.scrollY;
+
       // Modern approach: Use viewport units and prevent scroll without position changes
-      document.body.style.overflow = 'hidden'
-      document.body.style.position = 'relative' // Keep natural flow
-      
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "relative"; // Keep natural flow
+
       // Store scroll position in CSS custom property for mobile menu positioning
-      document.documentElement.style.setProperty('--scroll-y', `${scrollY}px`)
-      
+      document.documentElement.style.setProperty("--scroll-y", `${scrollY}px`);
+
       // Add specific class to prevent scroll on mobile devices
-      document.body.classList.add('mobile-menu-open')
-      
+      document.body.classList.add("mobile-menu-open");
+
       // Focus first focusable element
       const firstFocusable = mobileMenuRef.current?.querySelector(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      ) as HTMLElement
-      firstFocusable?.focus()
+      ) as HTMLElement;
+      firstFocusable?.focus();
     } else {
       // Restore body scroll and properties
-      document.body.style.overflow = ''
-      document.body.style.position = ''
-      
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+
       // Remove CSS custom property and class
-      document.documentElement.style.removeProperty('--scroll-y')
-      document.body.classList.remove('mobile-menu-open')
+      document.documentElement.style.removeProperty("--scroll-y");
+      document.body.classList.remove("mobile-menu-open");
     }
 
     return () => {
       // Cleanup on unmount
-      document.body.style.overflow = ''
-      document.body.style.position = ''
-      document.documentElement.style.removeProperty('--scroll-y')
-      document.body.classList.remove('mobile-menu-open')
-    }
-  }, [isMobileMenuOpen])
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.documentElement.style.removeProperty("--scroll-y");
+      document.body.classList.remove("mobile-menu-open");
+    };
+  }, [isMobileMenuOpen]);
 
   // Handle escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setIsMobileMenuOpen(false)
-        setActiveDropdown(null)
+      if (e.key === "Escape") {
+        setIsMobileMenuOpen(false);
+        setActiveDropdown(null);
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleEscape)
-    return () => document.removeEventListener('keydown', handleEscape)
-  }, [])
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
 
   const handleDropdownEnter = (label: string) => {
     if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
+      clearTimeout(timeoutRef.current);
     }
-    setActiveDropdown(label)
-  }
+    setActiveDropdown(label);
+  };
 
   const handleDropdownLeave = () => {
     timeoutRef.current = setTimeout(() => {
-      setActiveDropdown(null)
-    }, 150) // Small delay to prevent flicker
-  }
+      setActiveDropdown(null);
+    }, 150); // Small delay to prevent flicker
+  };
 
   const handleMobileMenuToggle = () => {
     // Force close any open dropdowns when opening mobile menu
-    setActiveDropdown(null)
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+    setActiveDropdown(null);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false)
-  }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg' 
-          : 'bg-transparent'
+        isScrolled
+          ? "bg-slate-950/95 backdrop-blur-md border-b border-slate-800/50 shadow-lg"
+          : "bg-transparent"
       } ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-[110]">
         <div className="flex items-center justify-between h-16">
-          
           {/* Logo */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0"
-          >
-            <Link 
-              href="/" 
+          <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
+            <Link
+              href="/"
               className="text-2xl font-bold text-white hover:text-purple-400 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 rounded-lg px-2 py-1"
             >
               AISEOTurbo
@@ -284,7 +278,7 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigationData.map((section) => (
-              <div 
+              <div
                 key={section.label}
                 className="relative"
                 onMouseEnter={() => section.items && handleDropdownEnter(section.label)}
@@ -306,10 +300,10 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
                     aria-haspopup="true"
                   >
                     <span>{section.label}</span>
-                    <ChevronDown 
+                    <ChevronDown
                       className={`w-4 h-4 transition-transform duration-200 ${
-                        activeDropdown === section.label ? 'rotate-180' : ''
-                      }`} 
+                        activeDropdown === section.label ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
                 )}
@@ -351,13 +345,9 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
             className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-300 hover:text-white hover:bg-slate-800 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-950 z-[110] relative"
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation menu"
-            style={{ touchAction: 'manipulation' }}
+            style={{ touchAction: "manipulation" }}
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </motion.button>
         </div>
       </div>
@@ -374,8 +364,8 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[95]"
               style={{
-                backdropFilter: 'blur(8px) saturate(120%)',
-                WebkitBackdropFilter: 'blur(8px) saturate(120%)',
+                backdropFilter: "blur(8px) saturate(120%)",
+                WebkitBackdropFilter: "blur(8px) saturate(120%)",
               }}
               onClick={closeMobileMenu}
             />
@@ -389,11 +379,11 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="fixed inset-0 bg-slate-900/95 backdrop-blur-xl shadow-2xl z-[105] overflow-y-auto"
               style={{
-                backdropFilter: 'blur(20px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-                paddingTop: '4rem', // Space for fixed navigation
-                height: '100vh',
-                width: '100vw'
+                backdropFilter: "blur(20px) saturate(180%)",
+                WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                paddingTop: "4rem", // Space for fixed navigation
+                height: "100vh",
+                width: "100vw",
               }}
             >
               {/* Mobile Header - No duplicate X button */}
@@ -467,5 +457,5 @@ export function AdaptiveNavigation({ className = "" }: AdaptiveNavigationProps) 
         )}
       </AnimatePresence>
     </motion.nav>
-  )
+  );
 }

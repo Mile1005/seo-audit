@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { Play, Pause, Maximize2, Minimize2 } from "lucide-react"
-import { HeroImage } from "@/components/ui/optimized-image"
+import React, { useState } from "react";
+import { Play, Pause, Maximize2, Minimize2 } from "lucide-react";
+import { HeroImage } from "@/components/ui/optimized-image";
 
 export interface HeroMockupProps {
-  className?: string
+  className?: string;
 }
 
 export function HeroMockup({ className = "" }: HeroMockupProps) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying)
-  }
+    setIsPlaying(!isPlaying);
+  };
 
   const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen)
-  }
+    setIsFullscreen(!isFullscreen);
+  };
 
   return (
     <div className={`relative w-full max-w-4xl mx-auto ${className}`}>
@@ -39,7 +39,10 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
           </div>
 
           {/* Main Content Area */}
-          <div className="relative bg-white rounded-lg overflow-hidden" style={{ aspectRatio: '16/10' }}>
+          <div
+            className="relative bg-white rounded-lg overflow-hidden"
+            style={{ aspectRatio: "16/10" }}
+          >
             {/* Dashboard Content */}
             <HeroImage
               src="/images/hero/hero-laptop-dashboard.svg"
@@ -51,16 +54,16 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
 
             {/* Status Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/10" />
-            
+
             {/* Performance Badges */}
             <div className="absolute top-4 left-4 bg-emerald-500 rounded px-3 py-1 text-white text-sm font-medium">
               ● LIVE SEO SCAN
             </div>
-            
+
             <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-semibold shadow-lg">
               ✓ 98 SEO Score
             </div>
-            
+
             <div className="absolute bottom-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg">
               🚀 Performance: 95/100
             </div>
@@ -73,11 +76,7 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
                   aria-label={isPlaying ? "Pause demo" : "Play demo"}
                   className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
                 >
-                  {isPlaying ? (
-                    <Pause className="h-5 w-5" />
-                  ) : (
-                    <Play className="h-5 w-5" />
-                  )}
+                  {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                 </button>
 
                 <button
@@ -114,5 +113,5 @@ export function HeroMockup({ className = "" }: HeroMockupProps) {
         ⚡ Real-time Updates
       </div>
     </div>
-  )
+  );
 }

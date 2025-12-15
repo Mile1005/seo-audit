@@ -1,96 +1,67 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "Run typecheck",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"type-check"
-			],
-			"problemMatcher": [
-				"$tsc"
-			]
-		},
-		{
-			"label": "Run typecheck",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"type-check"
-			],
-			"problemMatcher": [
-				"$tsc"
-			]
-		},
-		{
-			"label": "Run typecheck",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"type-check"
-			],
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "build"
-		},
-		{
-			"label": "Run typecheck",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"type-check"
-			],
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "build"
-		},
-		{
-			"label": "Run typecheck",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"type-check"
-			],
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "build"
-		},
-		{
-			"label": "Run typecheck",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"type-check"
-			],
-			"problemMatcher": [
-				"$tsc"
-			],
-			"group": "build"
-		}
-	,
-		{
-			"label": "Run i18n tests",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"test:i18n"
-			],
-			"group": "build",
-			"problemMatcher": []
-		},
-		{
-			"label": "Validate i18n messages",
-			"type": "shell",
-			"command": "pnpm",
-			"args": [
-				"validate:i18n"
-			],
-			"group": "build",
-			"problemMatcher": []
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run typecheck",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["type-check"],
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Run typecheck",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["type-check"],
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Run typecheck",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["type-check"],
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Run typecheck",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["type-check"],
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Run typecheck",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["type-check"],
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Run typecheck",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["type-check"],
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Run i18n tests",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["test:i18n"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Validate i18n messages",
+      "type": "shell",
+      "command": "pnpm",
+      "args": ["validate:i18n"],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
 }

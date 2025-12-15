@@ -51,3 +51,6 @@ cache-cleaner.html
 # Vercel
 .vercel
 .env*.local
+
+# Local editor tooling secrets
+.vscode/mcp.json

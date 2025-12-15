@@ -1,11 +1,36 @@
 "use client";
 
-import React, { useState } from 'react'
-import { useTranslations } from 'next-intl'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { ArrowRight, CheckCircle, Target, Zap, TrendingUp, Shield, Play, ChevronRight, Clock, BarChart, Users, Star, AlertTriangle, Loader2, Search, Globe, Link, ExternalLink, FileText, Image, Zap as ZapIcon, TrendingDown, TrendingUp as TrendingUpIcon, Minus } from 'lucide-react'
-import { Button } from '../../ui/button'
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CheckCircle,
+  Target,
+  Zap,
+  TrendingUp,
+  Shield,
+  Play,
+  ChevronRight,
+  Clock,
+  BarChart,
+  Users,
+  Star,
+  AlertTriangle,
+  Loader2,
+  Search,
+  Globe,
+  Link,
+  ExternalLink,
+  FileText,
+  Image,
+  Zap as ZapIcon,
+  TrendingDown,
+  TrendingUp as TrendingUpIcon,
+  Minus,
+} from "lucide-react";
+import { Button } from "../../ui/button";
 
 interface KeywordTrackingHeroProps {
   onKeywordSubmit?: (data: { keywords: string[]; domain?: string; location?: string }) => void;
@@ -13,13 +38,17 @@ interface KeywordTrackingHeroProps {
   submitError?: string;
 }
 
-export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, submitError }: KeywordTrackingHeroProps) {
-  const t = useTranslations('featurePages.keywordTracking');
-  const tHero = useTranslations('featurePages.keywordTracking.hero');
+export function KeywordTrackingHero({
+  onKeywordSubmit,
+  isSubmitting = false,
+  submitError,
+}: KeywordTrackingHeroProps) {
+  const t = useTranslations("featurePages.keywordTracking");
+  const tHero = useTranslations("featurePages.keywordTracking.hero");
   const router = useRouter();
-  const [keywords, setKeywords] = useState('');
-  const [domain, setDomain] = useState('');
-  const [location, setLocation] = useState('US');
+  const [keywords, setKeywords] = useState("");
+  const [domain, setDomain] = useState("");
+  const [location, setLocation] = useState("US");
   const [errors, setErrors] = useState<{ keywords?: string }>({});
 
   const validateForm = () => {
@@ -40,7 +69,10 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
 
     if (onKeywordSubmit) {
       onKeywordSubmit({
-        keywords: keywords.split('\n').map(k => k.trim()).filter(k => k),
+        keywords: keywords
+          .split("\n")
+          .map((k) => k.trim())
+          .filter((k) => k),
         domain: domain.trim() || undefined,
         location: location || undefined,
       });
@@ -48,10 +80,26 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
   };
 
   const heroMetrics = [
-    { label: tHero('metrics.keywordsTracked.label'), value: tHero('metrics.keywordsTracked.value'), description: tHero('metrics.keywordsTracked.description') },
-    { label: tHero('metrics.dailyUpdates.label'), value: tHero('metrics.dailyUpdates.value'), description: tHero('metrics.dailyUpdates.description') },
-    { label: tHero('metrics.globalLocations.label'), value: tHero('metrics.globalLocations.value'), description: tHero('metrics.globalLocations.description') },
-    { label: tHero('metrics.serpFeatures.label'), value: tHero('metrics.serpFeatures.value'), description: tHero('metrics.serpFeatures.description') }
+    {
+      label: tHero("metrics.keywordsTracked.label"),
+      value: tHero("metrics.keywordsTracked.value"),
+      description: tHero("metrics.keywordsTracked.description"),
+    },
+    {
+      label: tHero("metrics.dailyUpdates.label"),
+      value: tHero("metrics.dailyUpdates.value"),
+      description: tHero("metrics.dailyUpdates.description"),
+    },
+    {
+      label: tHero("metrics.globalLocations.label"),
+      value: tHero("metrics.globalLocations.value"),
+      description: tHero("metrics.globalLocations.description"),
+    },
+    {
+      label: tHero("metrics.serpFeatures.label"),
+      value: tHero("metrics.serpFeatures.value"),
+      description: tHero("metrics.serpFeatures.description"),
+    },
   ];
 
   const rankingPreview = [
@@ -61,7 +109,7 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
       change: +2,
       volume: 12100,
       url: "/features/seo-audit",
-      featured: ["organic", "related-questions"]
+      featured: ["organic", "related-questions"],
     },
     {
       keyword: "competitor analysis tool",
@@ -69,7 +117,7 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
       change: +3,
       volume: 8200,
       url: "/features/competitor-analysis",
-      featured: ["organic"]
+      featured: ["organic"],
     },
     {
       keyword: "website crawler",
@@ -77,7 +125,7 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
       change: 0,
       volume: 5400,
       url: "/features/site-crawler",
-      featured: ["organic", "people-also-ask", "related-searches"]
+      featured: ["organic", "people-also-ask", "related-searches"],
     },
     {
       keyword: "ai seo assistant",
@@ -85,8 +133,8 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
       change: -1,
       volume: 3200,
       url: "/features/ai-assistant",
-      featured: ["organic"]
-    }
+      featured: ["organic"],
+    },
   ];
 
   const getChangeColor = (change: number) => {
@@ -109,7 +157,6 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
         <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
         <div className="relative max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-
             {/* Left Content */}
             <motion.div
               initial={false}
@@ -120,38 +167,34 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
               <div className="space-y-6">
                 <div className="inline-flex items-center px-4 py-2 bg-green-500/10 rounded-full text-green-400 text-sm font-medium">
                   <BarChart className="w-4 h-4 mr-2" />
-                  {tHero('badge')}
+                  {tHero("badge")}
                 </div>
 
-                <h1 className="text-4xl lg:text-6xl font-bold text-foreground">
-                  {tHero('title')}
-                </h1>
+                <h1 className="text-4xl lg:text-6xl font-bold text-foreground">{tHero("title")}</h1>
 
-                <p className="text-xl text-muted-foreground leading-relaxed">
-                  {tHero('subtitle')}
-                </p>
+                <p className="text-xl text-muted-foreground leading-relaxed">{tHero("subtitle")}</p>
               </div>
 
               <div className="flex flex-wrap gap-4">
                 <Button
                   size="lg"
                   className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700"
-                  onClick={() => router.push('/signup')}
+                  onClick={() => router.push("/signup")}
                 >
                   <Target className="w-5 h-5 mr-2" />
-                  {tHero('cta.track')}
+                  {tHero("cta.track")}
                 </Button>
                 <Button
                   variant="outline"
                   size="lg"
                   onClick={() => {
                     document
-                      .getElementById('keyword-form')
-                      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                      .getElementById("keyword-form")
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
                   }}
                 >
                   <Play className="w-5 h-5 mr-2" />
-                  {tHero('cta.demo')}
+                  {tHero("cta.demo")}
                 </Button>
               </div>
 
@@ -159,11 +202,11 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
               <div className="flex flex-wrap items-center gap-6 pt-4">
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>{tHero('trustIndicators.uptime')}</span>
+                  <span>{tHero("trustIndicators.uptime")}</span>
                 </div>
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span>{tHero('trustIndicators.dailyUpdates')}</span>
+                  <span>{tHero("trustIndicators.dailyUpdates")}</span>
                 </div>
               </div>
             </motion.div>
@@ -180,12 +223,12 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                 <div className="bg-gradient-to-r from-green-600 to-blue-600 p-6 text-white">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-lg font-semibold">{tHero('dashboard.title')}</h2>
-                      <p className="text-sm opacity-90">{tHero('dashboard.subtitle')}</p>
+                      <h2 className="text-lg font-semibold">{tHero("dashboard.title")}</h2>
+                      <p className="text-sm opacity-90">{tHero("dashboard.subtitle")}</p>
                     </div>
                     <div className="flex items-center space-x-2">
                       <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span className="text-sm">{tHero('dashboard.live')}</span>
+                      <span className="text-sm">{tHero("dashboard.live")}</span>
                     </div>
                   </div>
                 </div>
@@ -202,25 +245,30 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                         className="flex items-center justify-between p-4 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
                       >
                         <div className="flex-1">
-                          <div className="font-medium text-foreground mb-1">
-                            {item.keyword}
-                          </div>
+                          <div className="font-medium text-foreground mb-1">{item.keyword}</div>
                           <div className="text-sm text-muted-foreground">
-                            {item.volume.toLocaleString()} {tHero('dashboard.monthlySearches')}
+                            {item.volume.toLocaleString()} {tHero("dashboard.monthlySearches")}
                           </div>
                         </div>
 
                         <div className="flex items-center space-x-4">
                           <div className="text-center">
-                            <div className="text-lg font-bold text-foreground">#{item.position}</div>
-                            <div className="text-xs text-muted-foreground">{tHero('dashboard.position')}</div>
+                            <div className="text-lg font-bold text-foreground">
+                              #{item.position}
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              {tHero("dashboard.position")}
+                            </div>
                           </div>
 
                           <div className="text-center">
                             <div className={`text-sm font-medium ${getChangeColor(item.change)}`}>
-                              {getChangeIcon(item.change)} {item.change > 0 ? '+' : ''}{item.change}
+                              {getChangeIcon(item.change)} {item.change > 0 ? "+" : ""}
+                              {item.change}
                             </div>
-                            <div className="text-xs text-muted-foreground">{tHero('dashboard.change')}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {tHero("dashboard.change")}
+                            </div>
                           </div>
 
                           <div className="flex space-x-1">
@@ -242,15 +290,21 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div>
                         <div className="text-lg font-bold text-emerald-400">+12</div>
-                        <div className="text-xs text-muted-foreground">{tHero('dashboard.improved')}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {tHero("dashboard.improved")}
+                        </div>
                       </div>
                       <div>
                         <div className="text-lg font-bold text-rose-400">-3</div>
-                        <div className="text-xs text-muted-foreground">{tHero('dashboard.declined')}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {tHero("dashboard.declined")}
+                        </div>
                       </div>
                       <div>
                         <div className="text-lg font-bold text-muted-foreground">5</div>
-                        <div className="text-xs text-muted-foreground">{tHero('dashboard.unchanged')}</div>
+                        <div className="text-xs text-muted-foreground">
+                          {tHero("dashboard.unchanged")}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -300,7 +354,9 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
             className="text-center mb-8"
           >
             <h2 className="text-3xl font-bold text-foreground mb-4">Start Tracking Keywords</h2>
-            <p className="text-lg text-muted-foreground">Enter keywords to research and start monitoring their rankings</p>
+            <p className="text-lg text-muted-foreground">
+              Enter keywords to research and start monitoring their rankings
+            </p>
           </motion.div>
 
           <motion.div
@@ -313,7 +369,10 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="keywords-input" className="block text-sm font-medium text-foreground mb-2">
+                  <label
+                    htmlFor="keywords-input"
+                    className="block text-sm font-medium text-foreground mb-2"
+                  >
                     Keywords (one per line)
                   </label>
                   <textarea
@@ -329,11 +388,16 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                   <p id="keywords-help" className="text-xs text-muted-foreground mt-1">
                     Enter one keyword per line.
                   </p>
-                  {errors.keywords && <p className="text-red-500 text-sm mt-1">{errors.keywords}</p>}
+                  {errors.keywords && (
+                    <p className="text-red-500 text-sm mt-1">{errors.keywords}</p>
+                  )}
                 </div>
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="domain-input" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="domain-input"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Domain (Optional)
                     </label>
                     <input
@@ -347,7 +411,10 @@ export function KeywordTrackingHero({ onKeywordSubmit, isSubmitting = false, sub
                     />
                   </div>
                   <div>
-                    <label htmlFor="location-select" className="block text-sm font-medium text-foreground mb-2">
+                    <label
+                      htmlFor="location-select"
+                      className="block text-sm font-medium text-foreground mb-2"
+                    >
                       Location
                     </label>
                     <select

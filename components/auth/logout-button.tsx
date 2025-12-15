@@ -1,33 +1,33 @@
-'use client'
+"use client";
 
-import { signOut } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
-import { LogOut, User } from 'lucide-react'
-import { useAuth } from '../../hooks/use-auth'
-import Image from 'next/image'
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { LogOut, User } from "lucide-react";
+import { useAuth } from "../../hooks/use-auth";
+import Image from "next/image";
 
 interface LogoutButtonProps {
-  variant?: 'button' | 'menu-item'
-  className?: string
+  variant?: "button" | "menu-item";
+  className?: string;
 }
 
-export function LogoutButton({ variant = 'button', className = '' }: LogoutButtonProps) {
-  const { user } = useAuth()
-  const router = useRouter()
+export function LogoutButton({ variant = "button", className = "" }: LogoutButtonProps) {
+  const { user } = useAuth();
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
       await signOut({
-        redirect: false
-      })
-      router.push('/')
+        redirect: false,
+      });
+      router.push("/");
     } catch (error) {
-      console.error('Logout error:', error)
+      console.error("Logout error:", error);
     }
-  }
+  };
 
-  if (variant === 'menu-item') {
+  if (variant === "menu-item") {
     return (
       <button
         onClick={handleLogout}
@@ -36,7 +36,7 @@ export function LogoutButton({ variant = 'button', className = '' }: LogoutButto
         <LogOut className="w-4 h-4" />
         Sign out
       </button>
-    )
+    );
   }
 
   return (
@@ -49,21 +49,21 @@ export function LogoutButton({ variant = 'button', className = '' }: LogoutButto
       <LogOut className="w-4 h-4" />
       Sign out
     </motion.button>
-  )
+  );
 }
 
 export function UserInfo() {
-  const { user } = useAuth()
+  const { user } = useAuth();
 
-  if (!user) return null
+  if (!user) return null;
 
   return (
     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
       <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center">
         {user.image ? (
-          <Image 
-            src={user.image} 
-            alt={user.name || 'User'} 
+          <Image
+            src={user.image}
+            alt={user.name || "User"}
             width={40}
             height={40}
             className="w-10 h-10 rounded-full object-cover"
@@ -73,9 +73,9 @@ export function UserInfo() {
         )}
       </div>
       <div>
-        <p className="font-semibold text-gray-900">{user.name || 'User'}</p>
+        <p className="font-semibold text-gray-900">{user.name || "User"}</p>
         <p className="text-sm text-gray-600">{user.email}</p>
       </div>
     </div>
-  )
+  );
 }

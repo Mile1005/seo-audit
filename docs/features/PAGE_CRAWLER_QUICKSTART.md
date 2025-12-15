@@ -71,6 +71,7 @@ Navigate to: `http://localhost:3000/dashboard/page-crawler`
 ## 📈 What Gets Analyzed
 
 For each page crawled:
+
 - ✅ Title tag
 - ✅ Meta description
 - ✅ H1 and H2 headings
@@ -91,9 +92,9 @@ For each page crawled:
 ## 📝 Limits & Quotas
 
 | Tier | Crawls/Month | Max Pages | Max Depth |
-|------|--------------|-----------|-----------|
-| Free | 5 | 100 | 5 |
-| Pro | Unlimited | 1000+ | 10 |
+| ---- | ------------ | --------- | --------- |
+| Free | 5            | 100       | 5         |
+| Pro  | Unlimited    | 1000+     | 10        |
 
 ## 🔗 Related Features
 
@@ -104,21 +105,26 @@ For each page crawled:
 ## 📚 Documentation
 
 Full documentation available at:
+
 - `docs/PAGE_CRAWLER_IMPLEMENTATION.md` - Complete technical guide
 - `docs/SITE_CRAWLER_ANALYSIS.md` - Original crawler analysis
 
 ## 🆘 Troubleshooting
 
 ### "Authentication required" error
+
 → Make sure you're logged in to the dashboard
 
 ### Crawl not starting
+
 → Check your quota (5 crawls/month for free users)
 
 ### Results not showing
+
 → Wait for crawl to complete (check progress bar)
 
 ### Database error
+
 → Run `npx prisma migrate dev` to apply schema changes
 
 ## 🎉 That's It!

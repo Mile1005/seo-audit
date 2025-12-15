@@ -1,22 +1,13 @@
-import { 
-  Zap, 
-  Brain, 
-  Target, 
-  TrendingUp, 
-  Shield, 
-  Clock, 
-  BarChart3, 
-  Search 
-} from "lucide-react"
+import { Zap, Brain, Target, TrendingUp, Shield, Clock, BarChart3, Search } from "lucide-react";
 
 export interface Feature {
-  id: string
-  iconName: string
-  icon: React.ComponentType<{ className?: string }>
-  title: string
-  benefit: string
-  details: string
-  imageSrc?: string
+  id: string;
+  iconName: string;
+  icon: React.ComponentType<{ className?: string }>;
+  title: string;
+  benefit: string;
+  details: string;
+  imageSrc?: string;
 }
 
 export const features: Feature[] = [
@@ -27,7 +18,7 @@ export const features: Feature[] = [
     title: "home.features.cards.ai-powered-analysis.title",
     benefit: "home.features.cards.ai-powered-analysis.benefit",
     details: "home.features.cards.ai-powered-analysis.details",
-    imageSrc: "/features/ai-analysis.png"
+    imageSrc: "/features/ai-analysis.png",
   },
   {
     id: "instant-results",
@@ -36,7 +27,7 @@ export const features: Feature[] = [
     title: "home.features.cards.instant-results.title",
     benefit: "home.features.cards.instant-results.benefit",
     details: "home.features.cards.instant-results.details",
-    imageSrc: "/features/instant-results.png"
+    imageSrc: "/features/instant-results.png",
   },
   {
     id: "actionable-priorities",
@@ -45,7 +36,7 @@ export const features: Feature[] = [
     title: "home.features.cards.actionable-priorities.title",
     benefit: "home.features.cards.actionable-priorities.benefit",
     details: "home.features.cards.actionable-priorities.details",
-    imageSrc: "/features/priority-fixes.png"
+    imageSrc: "/features/priority-fixes.png",
   },
   {
     id: "traffic-predictions",
@@ -54,7 +45,7 @@ export const features: Feature[] = [
     title: "home.features.cards.traffic-predictions.title",
     benefit: "home.features.cards.traffic-predictions.benefit",
     details: "home.features.cards.traffic-predictions.details",
-    imageSrc: "/features/traffic-forecast.png"
+    imageSrc: "/features/traffic-forecast.png",
   },
   {
     id: "competitor-analysis",
@@ -63,7 +54,7 @@ export const features: Feature[] = [
     title: "home.features.cards.competitor-analysis.title",
     benefit: "home.features.cards.competitor-analysis.benefit",
     details: "home.features.cards.competitor-analysis.details",
-    imageSrc: "/features/competitor-analysis.png"
+    imageSrc: "/features/competitor-analysis.png",
   },
   {
     id: "technical-depth",
@@ -72,7 +63,7 @@ export const features: Feature[] = [
     title: "home.features.cards.technical-depth.title",
     benefit: "home.features.cards.technical-depth.benefit",
     details: "home.features.cards.technical-depth.details",
-    imageSrc: "/features/technical-seo.png"
+    imageSrc: "/features/technical-seo.png",
   },
   {
     id: "real-time-monitoring",
@@ -81,7 +72,7 @@ export const features: Feature[] = [
     title: "home.features.cards.real-time-monitoring.title",
     benefit: "home.features.cards.real-time-monitoring.benefit",
     details: "home.features.cards.real-time-monitoring.details",
-    imageSrc: "/features/progress-tracking.png"
+    imageSrc: "/features/progress-tracking.png",
   },
   {
     id: "implementation-guide",
@@ -90,6 +81,6 @@ export const features: Feature[] = [
     title: "home.features.cards.implementation-guide.title",
     benefit: "home.features.cards.implementation-guide.benefit",
     details: "home.features.cards.implementation-guide.details",
-    imageSrc: "/features/implementation-guide.png"
-  }
-]
+    imageSrc: "/features/implementation-guide.png",
+  },
+];

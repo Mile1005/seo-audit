@@ -1,25 +1,25 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface LoadingButtonProps {
-  loading?: boolean
-  loadingText?: string
-  children: React.ReactNode
-  disabled?: boolean
-  className?: string
-  onClick?: () => void
-  type?: 'button' | 'submit' | 'reset'
+  loading?: boolean;
+  loadingText?: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+  className?: string;
+  onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
 export const LoadingButton: React.FC<LoadingButtonProps> = ({
   loading = false,
-  loadingText = 'Loading...',
+  loadingText = "Loading...",
   children,
   disabled,
   className,
   onClick,
-  type = 'button',
+  type = "button",
 }) => {
   return (
     <motion.button
@@ -49,16 +49,13 @@ export const LoadingButton: React.FC<LoadingButtonProps> = ({
           </div>
         </motion.div>
       )}
-      
-      <motion.div
-        animate={{ opacity: loading ? 0 : 1 }}
-        className="flex items-center gap-2"
-      >
+
+      <motion.div animate={{ opacity: loading ? 0 : 1 }} className="flex items-center gap-2">
         {children}
       </motion.div>
     </motion.button>
-  )
-}
+  );
+};
 
 // Skeleton Loader Component
 export const SkeletonLoader: React.FC<{ className?: string }> = ({ className }) => {
@@ -66,14 +63,14 @@ export const SkeletonLoader: React.FC<{ className?: string }> = ({ className }) 
     <div className={cn("animate-pulse bg-gray-200 rounded", className)}>
       <div className="h-full w-full bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]" />
     </div>
-  )
-}
+  );
+};
 
 // Progress Indicator
 export const ProgressIndicator: React.FC<{
-  steps: string[]
-  currentStep: number
-  className?: string
+  steps: string[];
+  currentStep: number;
+  className?: string;
 }> = ({ steps, currentStep, className }) => {
   return (
     <div className={cn("w-full", className)}>
@@ -86,13 +83,17 @@ export const ProgressIndicator: React.FC<{
                 index < currentStep
                   ? "bg-green-500 text-white"
                   : index === currentStep
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-500"
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-200 text-gray-500"
               )}
             >
               {index < currentStep ? (
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               ) : (
                 index + 1
@@ -116,5 +117,5 @@ export const ProgressIndicator: React.FC<{
         </p>
       </div>
     </div>
-  )
-}
+  );
+};

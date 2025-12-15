@@ -4,17 +4,24 @@
  * Scans the entire workspace for untranslated strings and generates a detailed report
  */
 
-import fs from 'fs';
-import path from 'path';
-import { glob } from 'glob';
+import fs from "fs";
+import path from "path";
+import { glob } from "glob";
 
 interface UntranslatedItem {
   file: string;
   line: number;
   column: number;
   text: string;
-  type: 'jsx-text' | 'string-literal' | 'template-literal' | 'attribute' | 'aria-label' | 'placeholder' | 'alt-text';
-  severity: 'high' | 'medium' | 'low';
+  type:
+    | "jsx-text"
+    | "string-literal"
+    | "template-literal"
+    | "attribute"
+    | "aria-label"
+    | "placeholder"
+    | "alt-text";
+  severity: "high" | "medium" | "low";
   context: string;
 }
 
@@ -42,15 +49,21 @@ class I18nAuditor {
     /playwright-report/,
   ];
 
-  private i18nFunctions = ['t(', 'useTranslations(', 'getTranslations(', 'formatDate(', 'formatNumber('];
+  private i18nFunctions = [
+    "t(",
+    "useTranslations(",
+    "getTranslations(",
+    "formatDate(",
+    "formatNumber(",
+  ];
 
   async audit(rootDir: string): Promise<AuditReport> {
-    console.log('🔍 Starting comprehensive i18n audit...\n');
+    console.log("🔍 Starting comprehensive i18n audit...\n");
 
     const patterns = [
-      'app/**/*.{tsx,ts,jsx,js}',
-      'components/**/*.{tsx,ts,jsx,js}',
-      'lib/**/*.{tsx,ts,jsx,js}',
+      "app/**/*.{tsx,ts,jsx,js}",
+      "components/**/*.{tsx,ts,jsx,js}",
+      "lib/**/*.{tsx,ts,jsx,js}",
     ];
 
     for (const pattern of patterns) {
@@ -66,20 +79,24 @@ class I18nAuditor {
   }
 
   private shouldExclude(filePath: string): boolean {
-    return this.excludePatterns.some(pattern => pattern.test(filePath));
+    return this.excludePatterns.some((pattern) => pattern.test(filePath));
   }
 
   private async scanFile(filePath: string): Promise<void> {
     this.filesScanned.add(filePath);
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const lines = content.split('\n');
+    const content = fs.readFileSync(filePath, "utf-8");
+    const lines = content.split("\n");
 
     // Check if file uses i18n functions
-    const usesI18n = this.i18nFunctions.some(fn => content.includes(fn));
+    const usesI18n = this.i18nFunctions.some((fn) => content.includes(fn));
 
     lines.forEach((line, lineIndex) => {
       // Skip comments
-      if (line.trim().startsWith('//') || line.trim().startsWith('/*') || line.trim().startsWith('*')) {
+      if (
+        line.trim().startsWith("//") ||
+        line.trim().startsWith("/*") ||
+        line.trim().startsWith("*")
+      ) {
         return;
       }
 
@@ -110,14 +127,14 @@ class I18nAuditor {
 
     while ((match = jsxTextRegex.exec(line)) !== null) {
       const text = match[1].trim();
-      
+
       // Skip if empty, only whitespace, or looks like a variable
       if (!text || text.length < 3 || /^[{}\[\]$]/.test(text) || /^\d+$/.test(text)) {
         continue;
       }
 
       // Skip if it's already using translation function
-      if (line.includes('t(') || line.includes('{t(')) {
+      if (line.includes("t(") || line.includes("{t(")) {
         continue;
       }
 
@@ -128,18 +145,28 @@ class I18nAuditor {
           line: lineIndex + 1,
           column: match.index,
           text,
-          type: 'jsx-text',
-          severity: 'high',
+          type: "jsx-text",
+          severity: "high",
           context: line.trim(),
         });
       }
     }
   }
 
-  private checkStringLiterals(filePath: string, line: string, lineIndex: number, usesI18n: boolean): void {
+  private checkStringLiterals(
+    filePath: string,
+    line: string,
+    lineIndex: number,
+    usesI18n: boolean
+  ): void {
     // Pattern: "text" or 'text' but not in imports, requires, or type definitions
-    if (line.includes('import ') || line.includes('from ') || line.includes('require(') || 
-        line.includes('type ') || line.includes('interface ')) {
+    if (
+      line.includes("import ") ||
+      line.includes("from ") ||
+      line.includes("require(") ||
+      line.includes("type ") ||
+      line.includes("interface ")
+    ) {
       return;
     }
 
@@ -148,34 +175,36 @@ class I18nAuditor {
 
     while ((match = stringRegex.exec(line)) !== null) {
       const text = match[1];
-      
+
       // Skip certain patterns
       if (
-        text.startsWith('/') || // URLs/paths
-        text.startsWith('http') || // URLs
-        text.includes('\\') || // Escaped chars
-        /^[\w-]+$/.test(text) && text.length < 10 || // Identifiers
+        text.startsWith("/") || // URLs/paths
+        text.startsWith("http") || // URLs
+        text.includes("\\") || // Escaped chars
+        (/^[\w-]+$/.test(text) && text.length < 10) || // Identifiers
         /^\d+$/.test(text) || // Numbers
-        text === 'utf-8' || text === 'application/json' || // Technical strings
-        line.includes('className=') || line.includes('class=') // CSS classes
+        text === "utf-8" ||
+        text === "application/json" || // Technical strings
+        line.includes("className=") ||
+        line.includes("class=") // CSS classes
       ) {
         continue;
       }
 
       // Skip if already in translation function
-      if (line.substring(0, match.index).includes('t(')) {
+      if (line.substring(0, match.index).includes("t(")) {
         continue;
       }
 
       // Only report user-facing strings
-      if (/[a-zA-Z\s]{5,}/.test(text) && !text.includes('_') && !text.includes('-')) {
+      if (/[a-zA-Z\s]{5,}/.test(text) && !text.includes("_") && !text.includes("-")) {
         this.addIssue({
           file: filePath,
           line: lineIndex + 1,
           column: match.index,
           text,
-          type: 'string-literal',
-          severity: usesI18n ? 'high' : 'medium',
+          type: "string-literal",
+          severity: usesI18n ? "high" : "medium",
           context: line.trim(),
         });
       }
@@ -189,15 +218,15 @@ class I18nAuditor {
 
     while ((match = attrRegex.exec(line)) !== null) {
       const text = match[2];
-      
-      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes('t(')) {
+
+      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes("t(")) {
         this.addIssue({
           file: filePath,
           line: lineIndex + 1,
           column: match.index,
           text,
-          type: 'attribute',
-          severity: 'medium',
+          type: "attribute",
+          severity: "medium",
           context: line.trim(),
         });
       }
@@ -210,15 +239,15 @@ class I18nAuditor {
 
     while ((match = ariaRegex.exec(line)) !== null) {
       const text = match[1];
-      
-      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes('t(')) {
+
+      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes("t(")) {
         this.addIssue({
           file: filePath,
           line: lineIndex + 1,
           column: match.index,
           text,
-          type: 'aria-label',
-          severity: 'high',
+          type: "aria-label",
+          severity: "high",
           context: line.trim(),
         });
       }
@@ -231,15 +260,15 @@ class I18nAuditor {
 
     while ((match = placeholderRegex.exec(line)) !== null) {
       const text = match[1];
-      
-      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes('t(')) {
+
+      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes("t(")) {
         this.addIssue({
           file: filePath,
           line: lineIndex + 1,
           column: match.index,
           text,
-          type: 'placeholder',
-          severity: 'high',
+          type: "placeholder",
+          severity: "high",
           context: line.trim(),
         });
       }
@@ -252,15 +281,15 @@ class I18nAuditor {
 
     while ((match = altRegex.exec(line)) !== null) {
       const text = match[1];
-      
-      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes('t(')) {
+
+      if (/[a-zA-Z\s]{3,}/.test(text) && !line.includes("t(")) {
         this.addIssue({
           file: filePath,
           line: lineIndex + 1,
           column: match.index,
           text,
-          type: 'alt-text',
-          severity: 'high',
+          type: "alt-text",
+          severity: "high",
           context: line.trim(),
         });
       }
@@ -275,14 +304,14 @@ class I18nAuditor {
     const issuesByType: Record<string, number> = {};
     const issuesBySeverity: Record<string, number> = {};
 
-    this.issues.forEach(issue => {
+    this.issues.forEach((issue) => {
       issuesByType[issue.type] = (issuesByType[issue.type] || 0) + 1;
       issuesBySeverity[issue.severity] = (issuesBySeverity[issue.severity] || 0) + 1;
     });
 
     const totalFiles = this.filesScanned.size;
     const totalIssues = this.issues.length;
-    const coverage = totalIssues === 0 ? 100 : Math.max(0, 100 - (totalIssues / totalFiles * 10));
+    const coverage = totalIssues === 0 ? 100 : Math.max(0, 100 - (totalIssues / totalFiles) * 10);
 
     return {
       timestamp: new Date().toISOString(),
@@ -300,28 +329,28 @@ class I18nAuditor {
 async function main() {
   const auditor = new I18nAuditor();
   const rootDir = process.cwd();
-  
+
   const report = await auditor.audit(rootDir);
 
   // Console output
-  console.log('📊 AUDIT RESULTS\n');
+  console.log("📊 AUDIT RESULTS\n");
   console.log(`Total Files Scanned: ${report.totalFiles}`);
   console.log(`Total Issues Found: ${report.totalIssues}`);
   console.log(`Estimated Coverage: ${report.coverage}%\n`);
 
-  console.log('Issues by Type:');
+  console.log("Issues by Type:");
   Object.entries(report.issuesByType).forEach(([type, count]) => {
     console.log(`  ${type}: ${count}`);
   });
 
-  console.log('\nIssues by Severity:');
+  console.log("\nIssues by Severity:");
   Object.entries(report.issuesBySeverity).forEach(([severity, count]) => {
     console.log(`  ${severity}: ${count}`);
   });
 
   // Group issues by file
   const issuesByFile: Record<string, UntranslatedItem[]> = {};
-  report.issues.forEach(issue => {
+  report.issues.forEach((issue) => {
     const relativePath = path.relative(rootDir, issue.file);
     if (!issuesByFile[relativePath]) {
       issuesByFile[relativePath] = [];
@@ -329,7 +358,7 @@ async function main() {
     issuesByFile[relativePath].push(issue);
   });
 
-  console.log('\n\n📁 ISSUES BY FILE (Top 20):\n');
+  console.log("\n\n📁 ISSUES BY FILE (Top 20):\n");
   const sortedFiles = Object.entries(issuesByFile)
     .sort((a, b) => b[1].length - a[1].length)
     .slice(0, 20);
@@ -337,7 +366,7 @@ async function main() {
   sortedFiles.forEach(([file, issues]) => {
     console.log(`\n${file} (${issues.length} issues)`);
     const sampleIssues = issues.slice(0, 5);
-    sampleIssues.forEach(issue => {
+    sampleIssues.forEach((issue) => {
       console.log(`  Line ${issue.line}: [${issue.type}] "${issue.text.substring(0, 60)}..."`);
     });
     if (issues.length > 5) {
@@ -346,18 +375,21 @@ async function main() {
   });
 
   // Save detailed report
-  const reportPath = path.join(rootDir, 'I18N_AUDIT_REPORT.json');
+  const reportPath = path.join(rootDir, "I18N_AUDIT_REPORT.json");
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   console.log(`\n\n✅ Detailed report saved to: ${reportPath}`);
 
   // Generate markdown summary
   const mdReport = generateMarkdownReport(report, issuesByFile);
-  const mdPath = path.join(rootDir, 'I18N_AUDIT_REPORT.md');
+  const mdPath = path.join(rootDir, "I18N_AUDIT_REPORT.md");
   fs.writeFileSync(mdPath, mdReport);
   console.log(`✅ Markdown report saved to: ${mdPath}`);
 }
 
-function generateMarkdownReport(report: AuditReport, issuesByFile: Record<string, UntranslatedItem[]>): string {
+function generateMarkdownReport(
+  report: AuditReport,
+  issuesByFile: Record<string, UntranslatedItem[]>
+): string {
   const sortedFiles = Object.entries(issuesByFile).sort((a, b) => b[1].length - a[1].length);
 
   return `# i18n Audit Report
@@ -374,27 +406,41 @@ function generateMarkdownReport(report: AuditReport, issuesByFile: Record<string
 
 | Type | Count |
 |------|-------|
-${Object.entries(report.issuesByType).map(([type, count]) => `| ${type} | ${count} |`).join('\n')}
+${Object.entries(report.issuesByType)
+  .map(([type, count]) => `| ${type} | ${count} |`)
+  .join("\n")}
 
 ## Issues by Severity
 
 | Severity | Count |
 |----------|-------|
-${Object.entries(report.issuesBySeverity).map(([severity, count]) => `| ${severity} | ${count} |`).join('\n')}
+${Object.entries(report.issuesBySeverity)
+  .map(([severity, count]) => `| ${severity} | ${count} |`)
+  .join("\n")}
 
 ## Detailed Issues by File
 
-${sortedFiles.slice(0, 50).map(([file, issues]) => `
+${sortedFiles
+  .slice(0, 50)
+  .map(
+    ([file, issues]) => `
 ### ${file} (${issues.length} issues)
 
-${issues.slice(0, 10).map(issue => `
+${issues
+  .slice(0, 10)
+  .map(
+    (issue) => `
 - **Line ${issue.line}** [\`${issue.type}\`] [${issue.severity}]
   - Text: "${issue.text}"
   - Context: \`${issue.context}\`
-`).join('\n')}
+`
+  )
+  .join("\n")}
 
-${issues.length > 10 ? `_...and ${issues.length - 10} more issues_\n` : ''}
-`).join('\n---\n')}
+${issues.length > 10 ? `_...and ${issues.length - 10} more issues_\n` : ""}
+`
+  )
+  .join("\n---\n")}
 
 ## Recommendations
 

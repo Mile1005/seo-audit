@@ -1,15 +1,28 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, Shield, Eye, EyeOff, Database, Lock, FileText, AlertTriangle, CheckCircle, Settings, Trash2 } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  Shield,
+  Eye,
+  EyeOff,
+  Database,
+  Lock,
+  FileText,
+  AlertTriangle,
+  CheckCircle,
+  Settings,
+  Trash2,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function PrivacyPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +31,10 @@ export default function PrivacyPage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/security" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="/help/security"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 Security
               </Link>
               <span className="text-gray-600">/</span>
@@ -49,9 +65,7 @@ export default function PrivacyPage() {
                 </div>
                 <div>
                   <span className="text-purple-400 text-sm font-medium">Security</span>
-                  <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    Privacy settings
-                  </h1>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white">Privacy settings</h1>
                 </div>
               </div>
 
@@ -78,7 +92,6 @@ export default function PrivacyPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="prose prose-lg prose-invert max-w-none"
             >
-
               {/* Introduction */}
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -86,8 +99,9 @@ export default function PrivacyPage() {
                   <div>
                     <h2 className="text-white text-lg font-semibold mb-2">Your privacy matters</h2>
                     <p className="text-gray-300 mb-0">
-                      Take control of your data and privacy settings. Learn how to manage your personal information,
-                      data collection preferences, and privacy controls within our platform.
+                      Take control of your data and privacy settings. Learn how to manage your
+                      personal information, data collection preferences, and privacy controls within
+                      our platform.
                     </p>
                   </div>
                 </div>
@@ -97,7 +111,6 @@ export default function PrivacyPage() {
               <h2 className="text-2xl font-bold text-white mb-6">What information we collect</h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                     <Database className="w-5 h-5 text-blue-400" />
@@ -153,14 +166,12 @@ export default function PrivacyPage() {
                     <li>• Crash reports and diagnostics</li>
                   </ul>
                 </div>
-
               </div>
 
               {/* Privacy Controls */}
               <h3 className="text-2xl font-bold text-white mb-6">Managing your privacy settings</h3>
 
               <div className="space-y-6 mb-8">
-
                 {/* Data Collection */}
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-start gap-4">
@@ -168,13 +179,18 @@ export default function PrivacyPage() {
                       1
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Data collection preferences</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">
+                        Data collection preferences
+                      </h3>
                       <p className="text-gray-300 mb-4">
-                        Control what data we collect and how we use it for analytics and improvements.
+                        Control what data we collect and how we use it for analytics and
+                        improvements.
                       </p>
                       <div className="space-y-3">
                         <div className="bg-slate-900/50 rounded-lg p-3">
-                          <div className="text-blue-400 font-medium mb-2">Analytics & Performance</div>
+                          <div className="text-blue-400 font-medium mb-2">
+                            Analytics & Performance
+                          </div>
                           <p className="text-gray-300 text-sm mb-2">
                             Help us improve our service by allowing anonymous usage analytics.
                           </p>
@@ -205,7 +221,9 @@ export default function PrivacyPage() {
                       2
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Data retention settings</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">
+                        Data retention settings
+                      </h3>
                       <p className="text-gray-300 mb-4">
                         Choose how long we keep your audit data and account information.
                       </p>
@@ -284,7 +302,8 @@ export default function PrivacyPage() {
                           <span className="text-red-400 font-medium">Irreversible action</span>
                         </div>
                         <p className="text-gray-300 text-sm">
-                          Account deletion cannot be undone. All data, audits, and history will be permanently removed.
+                          Account deletion cannot be undone. All data, audits, and history will be
+                          permanently removed.
                         </p>
                       </div>
                       <div className="space-y-3">
@@ -301,7 +320,6 @@ export default function PrivacyPage() {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* Privacy Rights */}
@@ -361,7 +379,6 @@ export default function PrivacyPage() {
               <h3 className="text-2xl font-bold text-white mb-6">How we protect your data</h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                     <Lock className="w-5 h-5 text-green-400" />
@@ -413,20 +430,23 @@ export default function PrivacyPage() {
                     <li>• Data processing agreements</li>
                   </ul>
                 </div>
-
               </div>
 
               {/* Privacy Policy */}
-              <h3 className="text-2xl font-bold text-white mb-6">Privacy policy and legal compliance</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Privacy policy and legal compliance
+              </h3>
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
-
                   <div>
-                    <h3 className="text-white text-lg font-semibold mb-3">Our commitment to privacy</h3>
+                    <h3 className="text-white text-lg font-semibold mb-3">
+                      Our commitment to privacy
+                    </h3>
                     <p className="text-gray-300">
-                      We are committed to protecting your privacy and complying with all applicable data protection laws.
-                      Our privacy practices are designed to give you control over your personal information.
+                      We are committed to protecting your privacy and complying with all applicable
+                      data protection laws. Our privacy practices are designed to give you control
+                      over your personal information.
                     </p>
                   </div>
 
@@ -441,8 +461,8 @@ export default function PrivacyPage() {
                     <div>
                       <h4 className="text-white font-medium mb-2">CCPA Compliance</h4>
                       <p className="text-gray-300 text-sm">
-                        California users have additional rights under the California Consumer Privacy Act (CCPA),
-                        including the right to opt-out of data sales.
+                        California users have additional rights under the California Consumer
+                        Privacy Act (CCPA), including the right to opt-out of data sales.
                       </p>
                     </div>
                   </div>
@@ -450,7 +470,8 @@ export default function PrivacyPage() {
                   <div className="bg-slate-900/50 rounded-lg p-4">
                     <div className="text-blue-400 font-medium mb-2">Full Privacy Policy</div>
                     <p className="text-gray-300 text-sm mb-3">
-                      For complete details about our data practices, please read our comprehensive privacy policy.
+                      For complete details about our data practices, please read our comprehensive
+                      privacy policy.
                     </p>
                     <Link
                       href="/privacy"
@@ -459,13 +480,14 @@ export default function PrivacyPage() {
                       Read our Privacy Policy →
                     </Link>
                   </div>
-
                 </div>
               </div>
 
               {/* Contact for Privacy */}
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mt-8">
-                <h3 className="text-white text-lg font-semibold mb-3">Questions about your privacy?</h3>
+                <h3 className="text-white text-lg font-semibold mb-3">
+                  Questions about your privacy?
+                </h3>
                 <p className="text-gray-300 mb-4">
                   If you have questions about your privacy settings or need help managing your data,
                   our privacy team is here to help.
@@ -491,11 +513,10 @@ export default function PrivacyPage() {
                   </Link>
                 </div>
               </div>
-
             </motion.div>
           </div>
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

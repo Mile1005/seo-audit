@@ -5,24 +5,24 @@
  * This ensures Prisma Client is properly generated for Vercel deployments
  */
 
-const { execSync } = require('child_process');
-const path = require('path');
+const { execSync } = require("child_process");
+const path = require("path");
 
 async function setupPrisma() {
   try {
-    console.log('🔄 Setting up Prisma...');
-    
+    console.log("🔄 Setting up Prisma...");
+
     // Ensure we're in the right directory
-    const projectRoot = path.resolve(__dirname, '..');
+    const projectRoot = path.resolve(__dirname, "..");
     process.chdir(projectRoot);
-    
+
     // Generate Prisma client
-    console.log('📦 Generating Prisma Client...');
-    execSync('npx prisma generate', { stdio: 'inherit' });
-    
-    console.log('✅ Prisma setup completed successfully!');
+    console.log("📦 Generating Prisma Client...");
+    execSync("npx prisma generate", { stdio: "inherit" });
+
+    console.log("✅ Prisma setup completed successfully!");
   } catch (error) {
-    console.error('❌ Error setting up Prisma:', error.message);
+    console.error("❌ Error setting up Prisma:", error.message);
     process.exit(1);
   }
 }

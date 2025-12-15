@@ -1,4 +1,5 @@
 # 🚀 Largest Contentful Paint (LCP) Optimization Guide
+
 ## Mobile Performance Enhancement Strategy for AISEOTurbo
 
 **Current Status:** Mobile LCP = 5.2s (Poor) | Desktop LCP = Good (99 Score)  
@@ -9,17 +10,18 @@
 ## 📊 Current Performance Issues Analysis
 
 ### 1. **LCP Bottleneck Identification**
+
 Based on your Lighthouse audit findings:
 
-| Issue | Current | Target | Impact |
-|-------|---------|--------|--------|
-| **LCP Element** | Hero text/image (~750ms delay) | < 100ms | Critical |
-| **Total Blocking Time** | 90ms | < 100ms | Medium |
-| **Unused JavaScript** | 318KB | < 100KB | High |
-| **Unused CSS** | 115KB | < 30KB | High |
-| **Render-blocking Requests** | 5 | 0 | Critical |
-| **Main-thread Work** | 1.5s | < 0.5s | Critical |
-| **Layout Shifts** | 3.47ms (CLS) | < 0.1 | Low |
+| Issue                        | Current                        | Target  | Impact   |
+| ---------------------------- | ------------------------------ | ------- | -------- |
+| **LCP Element**              | Hero text/image (~750ms delay) | < 100ms | Critical |
+| **Total Blocking Time**      | 90ms                           | < 100ms | Medium   |
+| **Unused JavaScript**        | 318KB                          | < 100KB | High     |
+| **Unused CSS**               | 115KB                          | < 30KB  | High     |
+| **Render-blocking Requests** | 5                              | 0       | Critical |
+| **Main-thread Work**         | 1.5s                           | < 0.5s  | Critical |
+| **Layout Shifts**            | 3.47ms (CLS)                   | < 0.1   | Low      |
 
 ### 2. **Root Causes**
 
@@ -37,9 +39,11 @@ Based on your Lighthouse audit findings:
 ## 🎯 Optimization Strategy
 
 ### Phase 1: Critical Path (Immediate - Do First)
+
 **Estimated LCP Improvement:** 750ms → 450ms (40% reduction)
 
 #### 1.1 Create Mobile-Specific Hero Component
+
 **File:** `components/hero/hero-section.tsx`
 
 ```tsx
@@ -48,12 +52,14 @@ Based on your Lighthouse audit findings:
 ```
 
 **Changes:**
+
 - Extract text hero into separate `MobileHero` component (server-rendered)
 - Move `DesktopHeroMockup` to client-side only render
 - Use `loading="lazy"` for desktop mockup on mobile
 - Remove unnecessary animations from mobile view
 
 **Code Impact:**
+
 ```tsx
 // BEFORE
 <motion.div className="hidden lg:block">
@@ -76,6 +82,7 @@ Based on your Lighthouse audit findings:
 ---
 
 #### 1.2 Inline Critical Hero CSS
+
 **File:** `app/layout.tsx`
 
 Current critical CSS is too generic. Replace with targeted critical styles:
@@ -91,14 +98,14 @@ Current critical CSS is too generic. Replace with targeted critical styles:
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       overflow: hidden;
     }
-    
+
     .hero-content {
       position: relative;
       z-index: 10;
       padding: 1.5rem;
       max-width: 100%;
     }
-    
+
     .hero-headline {
       font-size: clamp(1.5rem, 5vw, 3.5rem);
       font-weight: 700;
@@ -107,14 +114,14 @@ Current critical CSS is too generic. Replace with targeted critical styles:
       margin: 0;
       opacity: 1; /* Prevent layout shift */
     }
-    
+
     .hero-subheadline {
       font-size: clamp(1rem, 3vw, 1.25rem);
       color: #cbd5e1;
       margin-top: 1rem;
       max-width: 90vw;
     }
-    
+
     .hero-cta {
       display: inline-block;
       margin-top: 1.5rem;
@@ -128,14 +135,14 @@ Current critical CSS is too generic. Replace with targeted critical styles:
       text-decoration: none;
       font-size: 1rem;
     }
-    
+
     /* Prevent layout shift from animations */
     .hero-background {
       position: absolute;
       inset: 0;
       pointer-events: none;
     }
-    
+
     @media (max-width: 1024px) {
       .hero-mockup { display: none !important; }
     }
@@ -148,68 +155,66 @@ Current critical CSS is too generic. Replace with targeted critical styles:
 ---
 
 #### 1.3 Defer Framer Motion & Complex Animations on Mobile
+
 **File:** `components/hero/hero-section.tsx`
 
 ```tsx
-"use client"
+"use client";
 
-import { useIsMobile } from '@/hooks/use-is-mobile' // NEW hook
+import { useIsMobile } from "@/hooks/use-is-mobile"; // NEW hook
 
 export function HeroSection() {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   // Disable complex animations on mobile for LCP
-  const containerVariants = isMobile ? {} : {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.4, staggerChildren: 0.05 }
-    }
-  }
+  const containerVariants = isMobile
+    ? {}
+    : {
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { duration: 0.4, staggerChildren: 0.05 },
+        },
+      };
 
   // Use static background on mobile instead of animated gradient orbs
   return (
-    <section 
+    <section
       data-testid="hero-section"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
       {/* Animated orbs only on desktop */}
-      {!isMobile && (
-        <div className="absolute inset-0">
-          {/* Floating shape animations */}
-        </div>
-      )}
-      
+      {!isMobile && <div className="absolute inset-0">{/* Floating shape animations */}</div>}
+
       {/* Content always renders */}
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        {/* Hero content */}
-      </div>
+      <div className="container mx-auto px-4 py-20 relative z-10">{/* Hero content */}</div>
     </section>
-  )
+  );
 }
 ```
 
 **Create:** `hooks/use-is-mobile.ts`
+
 ```typescript
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Check on mount
-    setIsMobile(window.innerWidth < 1024)
+    setIsMobile(window.innerWidth < 1024);
 
     // Listen for resize
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024)
-    }
+      setIsMobile(window.innerWidth < 1024);
+    };
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  return isMobile
+  return isMobile;
 }
 ```
 
@@ -218,14 +223,17 @@ export function useIsMobile() {
 ---
 
 ### Phase 2: Image & Media Optimization (High Priority)
+
 **Estimated Additional Improvement:** 300ms
 
 #### 2.1 Create Mobile-Optimized Hero Image Strategy
+
 **File:** `public/images/hero/` structure
 
 Currently using SVG mockups which render entire UI. Instead:
 
 **Option A: Compressed Static Images (Recommended)**
+
 ```bash
 # Generate optimized hero images
 hero-mobile-portrait.webp      # 375px wide (mobile) - <40KB
@@ -235,11 +243,13 @@ hero-desktop-landscape.avif    # Modern format - <50KB
 ```
 
 **Option B: Dynamic Image Generation** (if mockups must be rendered)
+
 - Don't render interactive dashboard mockup on mobile
 - Use static hero image instead
 - Load mockup separately below fold
 
 #### 2.2 Update Image Component with Mobile-Specific Sizing
+
 **File:** `components/ui/optimized-image.tsx`
 
 Add mobile-specific optimization:
@@ -254,12 +264,12 @@ export function OptimizedImage({
   ...props
 }: OptimizedImageProps) {
   const isMobile = useIsMobile()
-  
+
   // Adjust quality based on device
   const quality = isMobile ? mobileQuality : desktopQuality
-  
+
   // Use mobile-specific srcset
-  const mobileSrcSet = isMobile 
+  const mobileSrcSet = isMobile
     ? `${src}?w=375 375w, ${src}?w=540 540w`
     : undefined
 
@@ -269,7 +279,7 @@ export function OptimizedImage({
       alt={alt}
       quality={quality}
       srcSet={mobileSrcSet}
-      sizes={isMobile 
+      sizes={isMobile
         ? "(max-width: 390px) 375px, 100vw"
         : "(max-width: 1200px) 100vw, 1200px"
       }
@@ -279,28 +289,29 @@ export function OptimizedImage({
 ```
 
 #### 2.3 Preload LCP Candidate Image
+
 **File:** `app/layout.tsx`
 
 ```tsx
 <head>
   {/* Preload hero image for faster LCP */}
-  <link 
-    rel="preload" 
-    as="image" 
+  <link
+    rel="preload"
+    as="image"
     href="/images/hero/hero-mobile-portrait.webp"
     media="(max-width: 1024px)"
     fetchpriority="high"
   />
-  <link 
-    rel="preload" 
+  <link
+    rel="preload"
     as="image"
     href="/images/hero/hero-desktop-landscape.webp"
     media="(min-width: 1025px)"
     fetchpriority="high"
   />
-  
+
   {/* WebP fallbacks */}
-  <link 
+  <link
     rel="preload"
     as="image"
     href="/images/hero/hero-mobile-portrait.jpg"
@@ -314,9 +325,11 @@ export function OptimizedImage({
 ---
 
 ### Phase 3: Render-Blocking Resources (High Priority)
+
 **Estimated Additional Improvement:** 200ms
 
 #### 3.1 Defer Non-Critical CSS
+
 **File:** `app/layout.tsx` + `app/globals.css`
 
 Split CSS into critical and deferred:
@@ -325,12 +338,12 @@ Split CSS into critical and deferred:
 <head>
   {/* CRITICAL CSS - Inlined, <4KB */}
   <style dangerouslySetInnerHTML={{ __html: criticalCss }} />
-  
+
   {/* DEFERRED CSS - Load after page interactive */}
-  <link 
-    rel="preload" 
-    href="/css/non-critical.css" 
-    as="style" 
+  <link
+    rel="preload"
+    href="/css/non-critical.css"
+    as="style"
     onLoad="this.onload=null;this.rel='stylesheet'"
   />
   <noscript>
@@ -340,12 +353,14 @@ Split CSS into critical and deferred:
 ```
 
 **Create:** `public/css/non-critical.css`
+
 - Move 80% of Tailwind utilities to this file
 - Keep only hero/above-fold styles in critical CSS
 
 **Expected Improvement:** 150ms
 
 #### 3.2 Defer Unused JavaScript
+
 **File:** `package.json` analyze script
 
 ```bash
@@ -354,24 +369,28 @@ npm run analyze:build 2>&1 | head -50
 ```
 
 Current unused JS: 318KB from:
+
 - Dynamic imports not tree-shaking
 - Large dependencies in page.tsx
 - Framer Motion fully imported but only used for hero
 
 **Solution:**
+
 ```tsx
 // BEFORE - All imported at top
-import { DynamicFeaturesShowcase } from "@/components/dynamic/heavy-components"
+import { DynamicFeaturesShowcase } from "@/components/dynamic/heavy-components";
 
 // AFTER - Import only when needed
 const DynamicFeaturesShowcase = dynamic(
-  () => import("@/components/dynamic/heavy-components")
-    .then(mod => ({ default: mod.DynamicFeaturesShowcase })),
-  { 
+  () =>
+    import("@/components/dynamic/heavy-components").then((mod) => ({
+      default: mod.DynamicFeaturesShowcase,
+    })),
+  {
     loading: () => <Skeleton />,
-    ssr: false  // Render on client only
+    ssr: false, // Render on client only
   }
-)
+);
 ```
 
 **Expected Improvement:** 200ms
@@ -379,37 +398,41 @@ const DynamicFeaturesShowcase = dynamic(
 ---
 
 ### Phase 4: Main-Thread Work Optimization
+
 **Estimated Additional Improvement:** 150ms
 
 #### 4.1 Break Up Long Tasks with Web Workers
+
 Current main-thread work: 1.5s → Target: < 0.5s
 
 For SEO audit parsing (if done on page load):
+
 ```typescript
 // web/parser.worker.ts
 self.onmessage = (event: MessageEvent) => {
-  const { data } = event.data
-  const result = heavyJsonParsing(data)
-  self.postMessage(result)
-}
+  const { data } = event.data;
+  const result = heavyJsonParsing(data);
+  self.postMessage(result);
+};
 
 // Usage in component
-const worker = new Worker('/web/parser.worker.js')
-worker.postMessage({ data: auditData })
-worker.onmessage = (e) => setResults(e.data)
+const worker = new Worker("/web/parser.worker.js");
+worker.postMessage({ data: auditData });
+worker.onmessage = (e) => setResults(e.data);
 ```
 
 #### 4.2 Defer Non-Critical JavaScript Execution
+
 ```typescript
 // Defer Google Analytics to idle time
-if ('requestIdleCallback' in window) {
+if ("requestIdleCallback" in window) {
   requestIdleCallback(() => {
     // Load GA
-  })
+  });
 } else {
   setTimeout(() => {
     // Load GA after 2s
-  }, 2000)
+  }, 2000);
 }
 ```
 
@@ -420,6 +443,7 @@ if ('requestIdleCallback' in window) {
 ## 📋 Implementation Checklist
 
 ### Immediate Actions (Do First - < 2 hours)
+
 - [ ] **Create mobile hero component** → Remove desktop mockup from mobile
 - [ ] **Inline critical CSS** → Replace generic styles with hero-specific
 - [ ] **Preload hero image** → Add preload link tags
@@ -428,6 +452,7 @@ if ('requestIdleCallback' in window) {
 - [ ] **Test with Lighthouse** → Compare before/after
 
 ### Medium-term (< 1 day)
+
 - [ ] **Split CSS into critical/deferred** → Move 80% of utilities
 - [ ] **Optimize hero images** → Create WebP/AVIF versions
 - [ ] **Analyze unused JS** → Run `npm run analyze:build`
@@ -435,6 +460,7 @@ if ('requestIdleCallback' in window) {
 - [ ] **Add Web Worker** → For heavy parsing tasks
 
 ### Long-term (1-3 days)
+
 - [ ] **Implement edge caching** → CDN for static assets
 - [ ] **Server-side rendering** → Ensure hero renders on server
 - [ ] **Reduce TTFB** → Optimize backend response time
@@ -445,32 +471,37 @@ if ('requestIdleCallback' in window) {
 ## 🔧 Code Changes Summary
 
 ### 1. Create Mobile Hero Component
+
 **File:** `components/hero/hero-section.tsx`
 
 ```tsx
 // Add at top
-"use client"
+"use client";
 
-import { useIsMobile } from '@/hooks/use-is-mobile'
+import { useIsMobile } from "@/hooks/use-is-mobile";
 
 export function HeroSection() {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
-  const containerVariants = isMobile ? {} : {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.4, staggerChildren: 0.05 }
-    }
-  }
+  const containerVariants = isMobile
+    ? {}
+    : {
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: { duration: 0.4, staggerChildren: 0.05 },
+        },
+      };
 
-  const itemVariants = isMobile ? {} : {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-  }
+  const itemVariants = isMobile
+    ? {}
+    : {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+      };
 
   return (
-    <section 
+    <section
       data-testid="hero-section"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
@@ -479,12 +510,16 @@ export function HeroSection() {
         {!isMobile && (
           <>
             <motion.div
-              variants={{ floating: { y: [0, -10, 0], transition: { duration: 3, repeat: Infinity } } }}
+              variants={{
+                floating: { y: [0, -10, 0], transition: { duration: 3, repeat: Infinity } },
+              }}
               animate="floating"
               className="absolute top-20 left-10 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"
             />
             <motion.div
-              variants={{ floating: { y: [0, -10, 0], transition: { duration: 3, repeat: Infinity } } }}
+              variants={{
+                floating: { y: [0, -10, 0], transition: { duration: 3, repeat: Infinity } },
+              }}
               animate="floating"
               className="absolute bottom-20 right-10 w-80 h-80 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl"
             />
@@ -501,9 +536,7 @@ export function HeroSection() {
           className="grid lg:grid-cols-2 gap-12 items-center"
         >
           {/* Content always visible */}
-          <div className="space-y-8">
-            {/* Content... */}
-          </div>
+          <div className="space-y-8">{/* Content... */}</div>
 
           {/* Desktop mockup - skip on mobile, lazy load below fold */}
           {!isMobile && (
@@ -514,53 +547,56 @@ export function HeroSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
 ```
 
 ### 2. Create Mobile Detection Hook
+
 **File:** `hooks/use-is-mobile.ts`
 
 ```typescript
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 1024)
+    setIsMobile(window.innerWidth < 1024);
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024)
-    }
+      setIsMobile(window.innerWidth < 1024);
+    };
 
-    const resizeObserver = window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    const resizeObserver = window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  return isMobile
+  return isMobile;
 }
 ```
 
 ### 3. Update Layout with Preload & Critical CSS
+
 **File:** `app/layout.tsx` - Update head section
 
 ```tsx
 <head>
   {/* Preload hero images for LCP */}
-  <link 
-    rel="preload" 
-    as="image" 
+  <link
+    rel="preload"
+    as="image"
     href="/images/hero/hero-mobile-portrait.webp"
     media="(max-width: 1024px)"
     fetchpriority="high"
   />
-  
+
   {/* Critical CSS - Hero section only */}
-  <style dangerouslySetInnerHTML={{
-    __html: `
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
       /* Hero Critical Styles - ~2.5KB */
       .hero-section {
         min-height: 100vh;
@@ -602,9 +638,10 @@ export function useIsMobile() {
       @media (max-width: 1023px) {
         .desktop-only { display: none; }
       }
-    `
-  }} />
-  
+    `,
+    }}
+  />
+
   {/* Defer non-critical CSS */}
   <link
     rel="preload"
@@ -622,13 +659,13 @@ export function useIsMobile() {
 
 ## 📊 Expected Performance Gains
 
-| Phase | Optimization | Current | Target | Improvement |
-|-------|--------------|---------|--------|------------|
-| **1** | Mobile hero only | 5.2s | 4.5s | **700ms** ↓ |
-| **2** | Image optimization | 4.5s | 4.1s | **400ms** ↓ |
-| **3** | Defer CSS/JS | 4.1s | 3.4s | **700ms** ↓ |
-| **4** | Main-thread work | 3.4s | 2.8s | **600ms** ↓ |
-| | **TOTAL** | **5.2s** | **2.8s** | **2.4s** ↓ ✅ |
+| Phase | Optimization       | Current  | Target   | Improvement   |
+| ----- | ------------------ | -------- | -------- | ------------- |
+| **1** | Mobile hero only   | 5.2s     | 4.5s     | **700ms** ↓   |
+| **2** | Image optimization | 4.5s     | 4.1s     | **400ms** ↓   |
+| **3** | Defer CSS/JS       | 4.1s     | 3.4s     | **700ms** ↓   |
+| **4** | Main-thread work   | 3.4s     | 2.8s     | **600ms** ↓   |
+|       | **TOTAL**          | **5.2s** | **2.8s** | **2.4s** ↓ ✅ |
 
 **Estimated Final Result:** 2.8s LCP (Good - 80 Lighthouse score)
 
@@ -637,13 +674,15 @@ export function useIsMobile() {
 ## 🧪 Testing & Validation
 
 ### Desktop Testing
+
 ```bash
 npm run perf:audit
 # Or with mobile simulation:
 npm run mobile:audit
 ```
 
-### Mobile Testing  
+### Mobile Testing
+
 ```bash
 npm run mobile:test
 # Or locally with device:
@@ -652,11 +691,13 @@ npm run dev
 ```
 
 ### Performance Budget
+
 ```bash
 npm run perf:budget
 ```
 
 ### Key Metrics to Monitor
+
 1. **LCP (Largest Contentful Paint)** → Target: < 2.5s
 2. **FCP (First Contentful Paint)** → Target: < 1.5s
 3. **CLS (Cumulative Layout Shift)** → Target: < 0.1

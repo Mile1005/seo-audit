@@ -1,30 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@/auth';
-import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
 
 // Force dynamic rendering for this API route
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // GET /api/keywords/analytics - Fetch traffic analytics for a keyword
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const keywordId = searchParams.get('keywordId');
-    const days = parseInt(searchParams.get('days') || '30');
+    const keywordId = searchParams.get("keywordId");
+    const days = parseInt(searchParams.get("days") || "30");
 
     if (!keywordId) {
-      return NextResponse.json(
-        { success: false, error: 'keywordId is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, error: "keywordId is required" }, { status: 400 });
     }
 
     const session = await auth();
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      );
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
     // Get keyword and its positions
@@ -37,24 +31,29 @@ export async function GET(request: NextRequest) {
       },
       include: {
         positions: {
-          orderBy: { checkedAt: 'desc' },
-          take: days
-        }
-      }
+          orderBy: { checkedAt: "desc" },
+          take: days,
+        },
+      },
     });
 
     if (!keyword) {
-      return NextResponse.json(
-        { success: false, error: 'Keyword not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ success: false, error: "Keyword not found" }, { status: 404 });
     }
 
     // CTR by position (realistic Google CTR data)
     const getCTR = (position: number): number => {
       const ctrMap: Record<number, number> = {
-        1: 31.7, 2: 24.7, 3: 18.7, 4: 13.6, 5: 9.5,
-        6: 6.3, 7: 4.3, 8: 3.1, 9: 2.4, 10: 1.9
+        1: 31.7,
+        2: 24.7,
+        3: 18.7,
+        4: 13.6,
+        5: 9.5,
+        6: 6.3,
+        7: 4.3,
+        8: 3.1,
+        9: 2.4,
+        10: 1.9,
       };
       return ctrMap[position] || (position <= 20 ? 1.5 : 0.5);
     };
@@ -69,13 +68,13 @@ export async function GET(request: NextRequest) {
       const revenue = conversions * (50 + Math.random() * 150);
 
       return {
-        date: pos.checkedAt.toISOString().split('T')[0],
+        date: pos.checkedAt.toISOString().split("T")[0],
         impressions,
         clicks,
         ctr: parseFloat(ctr.toFixed(2)),
         averagePosition: position,
         conversions,
-        revenue: parseFloat(revenue.toFixed(2))
+        revenue: parseFloat(revenue.toFixed(2)),
       };
     });
 
@@ -83,7 +82,8 @@ export async function GET(request: NextRequest) {
     const totalImpressions = trafficData.reduce((sum, d) => sum + d.impressions, 0);
     const totalClicks = trafficData.reduce((sum, d) => sum + d.clicks, 0);
     const avgCTR = trafficData.reduce((sum, d) => sum + d.ctr, 0) / trafficData.length;
-    const avgPosition = trafficData.reduce((sum, d) => sum + d.averagePosition, 0) / trafficData.length;
+    const avgPosition =
+      trafficData.reduce((sum, d) => sum + d.averagePosition, 0) / trafficData.length;
     const totalConversions = trafficData.reduce((sum, d) => sum + d.conversions, 0);
     const totalRevenue = trafficData.reduce((sum, d) => sum + d.revenue, 0);
 
@@ -94,15 +94,13 @@ export async function GET(request: NextRequest) {
 
     const firstHalfClicks = firstHalf.reduce((sum, d) => sum + d.clicks, 0);
     const secondHalfClicks = secondHalf.reduce((sum, d) => sum + d.clicks, 0);
-    const clicksChange = firstHalfClicks > 0
-      ? ((secondHalfClicks - firstHalfClicks) / firstHalfClicks) * 100
-      : 0;
+    const clicksChange =
+      firstHalfClicks > 0 ? ((secondHalfClicks - firstHalfClicks) / firstHalfClicks) * 100 : 0;
 
     const firstHalfRevenue = firstHalf.reduce((sum, d) => sum + d.revenue, 0);
     const secondHalfRevenue = secondHalf.reduce((sum, d) => sum + d.revenue, 0);
-    const revenueChange = firstHalfRevenue > 0
-      ? ((secondHalfRevenue - firstHalfRevenue) / firstHalfRevenue) * 100
-      : 0;
+    const revenueChange =
+      firstHalfRevenue > 0 ? ((secondHalfRevenue - firstHalfRevenue) / firstHalfRevenue) * 100 : 0;
 
     return NextResponse.json({
       success: true,
@@ -116,14 +114,14 @@ export async function GET(request: NextRequest) {
           totalConversions,
           totalRevenue: parseFloat(totalRevenue.toFixed(2)),
           clicksChange: parseFloat(clicksChange.toFixed(1)),
-          revenueChange: parseFloat(revenueChange.toFixed(1))
-        }
-      }
+          revenueChange: parseFloat(revenueChange.toFixed(1)),
+        },
+      },
     });
   } catch (error) {
-    console.error('Error fetching analytics:', error);
+    console.error("Error fetching analytics:", error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch analytics' },
+      { success: false, error: "Failed to fetch analytics" },
       { status: 500 }
     );
   }

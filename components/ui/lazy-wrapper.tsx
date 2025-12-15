@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef, ReactNode } from 'react';
-import { cn } from '@/lib/utils';
+import React, { useState, useEffect, useRef, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 interface LazyWrapperProps {
   children: ReactNode;
@@ -23,7 +23,7 @@ export function LazyWrapper({
   children,
   fallback = null,
   className,
-  rootMargin = '100px',
+  rootMargin = "100px",
   threshold = 0.1,
   triggerOnce = true,
   fadeIn = false,
@@ -72,17 +72,14 @@ export function LazyWrapper({
     }
   }, [isVisible, hasAnimated]);
 
-  const baseClasses = cn(
-    'transition-all ease-out',
-    className
-  );
+  const baseClasses = cn("transition-all ease-out", className);
 
   const animationClasses = cn({
     [`duration-${animationDuration}`]: fadeIn || slideIn,
-    'opacity-0': fadeIn && !isVisible,
-    'opacity-100': fadeIn && isVisible,
-    'translate-y-4': slideIn && !isVisible,
-    'translate-y-0': slideIn && isVisible,
+    "opacity-0": fadeIn && !isVisible,
+    "opacity-100": fadeIn && isVisible,
+    "translate-y-4": slideIn && !isVisible,
+    "translate-y-0": slideIn && isVisible,
   });
 
   const combinedClasses = cn(baseClasses, animationClasses);

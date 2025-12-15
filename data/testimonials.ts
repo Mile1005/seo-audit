@@ -1,24 +1,24 @@
 export interface Testimonial {
-  id: string
-  name: string
-  title: string
-  company: string
-  companyLogo: string
-  avatar: string
-  rating: number
-  quoteKey: string
+  id: string;
+  name: string;
+  title: string;
+  company: string;
+  companyLogo: string;
+  avatar: string;
+  rating: number;
+  quoteKey: string;
   metric: {
-    value: string
-    descriptionKey: string
-  }
-  category: 'agency' | 'smb' | 'ecommerce' | 'saas'
+    value: string;
+    descriptionKey: string;
+  };
+  category: "agency" | "smb" | "ecommerce" | "saas";
   caseStudy?: {
-    beforeMetricKey: string
-    afterMetricKey: string
-    improvementKey: string
-    timeframeKey: string
-    link: string // placeholder for now
-  }
+    beforeMetricKey: string;
+    afterMetricKey: string;
+    improvementKey: string;
+    timeframeKey: string;
+    link: string; // placeholder for now
+  };
 }
 
 export const testimonials: Testimonial[] = [
@@ -33,7 +33,7 @@ export const testimonials: Testimonial[] = [
     quoteKey: "testimonialsData.testimonial-1.quote",
     metric: {
       value: "300%",
-      descriptionKey: "testimonialsData.testimonial-1.metric.description"
+      descriptionKey: "testimonialsData.testimonial-1.metric.description",
     },
     category: "agency",
     caseStudy: {
@@ -41,8 +41,8 @@ export const testimonials: Testimonial[] = [
       afterMetricKey: "testimonialsData.testimonial-1.caseStudy.afterMetric",
       improvementKey: "testimonialsData.testimonial-1.caseStudy.improvement",
       timeframeKey: "testimonialsData.testimonial-1.caseStudy.timeframe",
-      link: "/case-studies/digital-growth-agency"
-    }
+      link: "/case-studies/digital-growth-agency",
+    },
   },
   {
     id: "testimonial-2",
@@ -55,7 +55,7 @@ export const testimonials: Testimonial[] = [
     quoteKey: "testimonialsData.testimonial-2.quote",
     metric: {
       value: "180%",
-      descriptionKey: "testimonialsData.testimonial-2.metric.description"
+      descriptionKey: "testimonialsData.testimonial-2.metric.description",
     },
     category: "smb",
     caseStudy: {
@@ -63,8 +63,8 @@ export const testimonials: Testimonial[] = [
       afterMetricKey: "testimonialsData.testimonial-2.caseStudy.afterMetric",
       improvementKey: "testimonialsData.testimonial-2.caseStudy.improvement",
       timeframeKey: "testimonialsData.testimonial-2.caseStudy.timeframe",
-      link: "/case-studies/techflow-solutions"
-    }
+      link: "/case-studies/techflow-solutions",
+    },
   },
   {
     id: "testimonial-3",
@@ -77,7 +77,7 @@ export const testimonials: Testimonial[] = [
     quoteKey: "testimonialsData.testimonial-3.quote",
     metric: {
       value: "85%",
-      descriptionKey: "testimonialsData.testimonial-3.metric.description"
+      descriptionKey: "testimonialsData.testimonial-3.metric.description",
     },
     category: "ecommerce",
     caseStudy: {
@@ -85,8 +85,8 @@ export const testimonials: Testimonial[] = [
       afterMetricKey: "testimonialsData.testimonial-3.caseStudy.afterMetric",
       improvementKey: "testimonialsData.testimonial-3.caseStudy.improvement",
       timeframeKey: "testimonialsData.testimonial-3.caseStudy.timeframe",
-      link: "/case-studies/stylecraft-boutique"
-    }
+      link: "/case-studies/stylecraft-boutique",
+    },
   },
   {
     id: "testimonial-4",
@@ -99,7 +99,7 @@ export const testimonials: Testimonial[] = [
     quoteKey: "testimonialsData.testimonial-4.quote",
     metric: {
       value: "60%",
-      descriptionKey: "testimonialsData.testimonial-4.metric.description"
+      descriptionKey: "testimonialsData.testimonial-4.metric.description",
     },
     category: "saas",
     caseStudy: {
@@ -107,8 +107,8 @@ export const testimonials: Testimonial[] = [
       afterMetricKey: "testimonialsData.testimonial-4.caseStudy.afterMetric",
       improvementKey: "testimonialsData.testimonial-4.caseStudy.improvement",
       timeframeKey: "testimonialsData.testimonial-4.caseStudy.timeframe",
-      link: "/case-studies/cloudsync-pro"
-    }
+      link: "/case-studies/cloudsync-pro",
+    },
   },
   {
     id: "testimonial-5",
@@ -121,7 +121,7 @@ export const testimonials: Testimonial[] = [
     quoteKey: "testimonialsData.testimonial-5.quote",
     metric: {
       value: "40%",
-      descriptionKey: "testimonialsData.testimonial-5.metric.description"
+      descriptionKey: "testimonialsData.testimonial-5.metric.description",
     },
     category: "agency",
     caseStudy: {
@@ -129,8 +129,8 @@ export const testimonials: Testimonial[] = [
       afterMetricKey: "testimonialsData.testimonial-5.caseStudy.afterMetric",
       improvementKey: "testimonialsData.testimonial-5.caseStudy.improvement",
       timeframeKey: "testimonialsData.testimonial-5.caseStudy.timeframe",
-      link: "/case-studies/peak-performance"
-    }
+      link: "/case-studies/peak-performance",
+    },
   },
   {
     id: "testimonial-6",
@@ -143,7 +143,7 @@ export const testimonials: Testimonial[] = [
     quoteKey: "testimonialsData.testimonial-6.quote",
     metric: {
       value: "45%",
-      descriptionKey: "testimonialsData.testimonial-6.metric.description"
+      descriptionKey: "testimonialsData.testimonial-6.metric.description",
     },
     category: "ecommerce",
     caseStudy: {
@@ -151,17 +151,17 @@ export const testimonials: Testimonial[] = [
       afterMetricKey: "testimonialsData.testimonial-6.caseStudy.afterMetric",
       improvementKey: "testimonialsData.testimonial-6.caseStudy.improvement",
       timeframeKey: "testimonialsData.testimonial-6.caseStudy.timeframe",
-      link: "/case-studies/gearhub-pro"
-    }
-  }
-]
+      link: "/case-studies/gearhub-pro",
+    },
+  },
+];
 
 // Helper function to get testimonials by category
-export const getTestimonialsByCategory = (category: Testimonial['category']) => {
-  return testimonials.filter(testimonial => testimonial.category === category)
-}
+export const getTestimonialsByCategory = (category: Testimonial["category"]) => {
+  return testimonials.filter((testimonial) => testimonial.category === category);
+};
 
 // Helper function to get testimonials with case studies
 export const getTestimonialsWithCaseStudies = () => {
-  return testimonials.filter(testimonial => testimonial.caseStudy)
-}
+  return testimonials.filter((testimonial) => testimonial.caseStudy);
+};

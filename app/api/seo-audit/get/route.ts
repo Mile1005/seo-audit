@@ -1,34 +1,34 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 
 // Force dynamic rendering since this route uses request.url
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
-    const id = searchParams.get('id')
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
 
     if (!id) {
       return NextResponse.json(
-        { 
-          success: false, 
-          error: 'Audit ID is required' 
+        {
+          success: false,
+          error: "Audit ID is required",
         },
         { status: 400 }
-      )
+      );
     }
 
     // For now, return a mock response since we don't have persistent storage
     // In a real implementation, you'd fetch from database/cache
     const mockResult = {
       auditId: id,
-      status: 'completed' as const,
-      url: 'https://example.com',
+      status: "completed" as const,
+      url: "https://example.com",
       score: 85,
       timestamp: new Date().toISOString(),
       pageData: {
-        title: 'Example Page',
-        metaDescription: 'Example meta description',
+        title: "Example Page",
+        metaDescription: "Example meta description",
         h1Count: 1,
         h2Count: 3,
         h3Count: 5,
@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
         internalLinks: 15,
         externalLinks: 5,
         loadTime: 1200,
-        canonical: 'https://example.com',
+        canonical: "https://example.com",
         noindex: false,
       },
       issues: [],
@@ -47,22 +47,21 @@ export async function GET(request: NextRequest) {
       sitemapXml: null,
       keyword: null,
       email: null,
-    }
+    };
 
     return NextResponse.json({
       success: true,
-      data: mockResult
-    })
-
+      data: mockResult,
+    });
   } catch (error) {
-    console.error('Get Audit Error:', error)
-    
+    console.error("Get Audit Error:", error);
+
     return NextResponse.json(
-      { 
-        success: false, 
-        error: error instanceof Error ? error.message : 'Internal server error' 
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Internal server error",
       },
       { status: 500 }
-    )
+    );
   }
 }

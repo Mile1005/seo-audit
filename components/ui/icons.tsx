@@ -2,17 +2,9 @@
 // This reduces bundle size significantly
 
 // Navigation icons
-export { 
-  Menu,
-  X,
-  ChevronDown,
-  Home,
-  User,
-  Settings,
-  LogOut
-} from 'lucide-react'
+export { Menu, X, ChevronDown, Home, User, Settings, LogOut } from "lucide-react";
 
-// Feature icons  
+// Feature icons
 export {
   Search,
   BarChart3,
@@ -25,8 +17,8 @@ export {
   Target,
   Globe,
   Smartphone,
-  Monitor
-} from 'lucide-react'
+  Monitor,
+} from "lucide-react";
 
 // Action icons
 export {
@@ -39,16 +31,8 @@ export {
   ArrowRight,
   ArrowLeft,
   ChevronRight,
-  ChevronLeft
-} from 'lucide-react'
+  ChevronLeft,
+} from "lucide-react";
 
 // Social icons
-export {
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
-  Star,
-  Heart,
-  ThumbsUp
-} from 'lucide-react'
+export { Mail, Phone, MapPin, Calendar, Star, Heart, ThumbsUp } from "lucide-react";

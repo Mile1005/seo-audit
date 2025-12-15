@@ -1,50 +1,50 @@
-import { google } from 'googleapis'
-import { prisma } from './prisma'
+import { google } from "googleapis";
+import { prisma } from "./prisma";
 
 function getDefaultGscRedirectUri(originOverride?: string) {
   if (originOverride) {
-    return new URL('/api/gsc/callback', originOverride).toString()
+    return new URL("/api/gsc/callback", originOverride).toString();
   }
 
   // Backward compatible: allow explicitly specifying the full redirect URI.
   // (This must match an Authorized redirect URI in Google Cloud Console.)
   if (process.env.GSC_REDIRECT_URI) {
-    return process.env.GSC_REDIRECT_URI
+    return process.env.GSC_REDIRECT_URI;
   }
 
   if (!process.env.NEXTAUTH_URL) {
     throw new Error(
-      'GSC redirect URI is not configured (set NEXTAUTH_URL, or pass request origin, or set GSC_REDIRECT_URI)'
-    )
+      "GSC redirect URI is not configured (set NEXTAUTH_URL, or pass request origin, or set GSC_REDIRECT_URI)"
+    );
   }
 
-  return new URL('/api/gsc/callback', process.env.NEXTAUTH_URL).toString()
+  return new URL("/api/gsc/callback", process.env.NEXTAUTH_URL).toString();
 }
 
 function getGscConfig(redirectUriOverride?: string) {
-  const redirectUri = redirectUriOverride || getDefaultGscRedirectUri()
-  const clientId = process.env.GOOGLE_CLIENT_ID || process.env.GSC_CLIENT_ID
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || process.env.GSC_CLIENT_SECRET
+  const redirectUri = redirectUriOverride || getDefaultGscRedirectUri();
+  const clientId = process.env.GOOGLE_CLIENT_ID || process.env.GSC_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || process.env.GSC_CLIENT_SECRET;
 
-  return { clientId, clientSecret, redirectUri }
+  return { clientId, clientSecret, redirectUri };
 }
 
 function createOauthClientOrThrow(redirectUriOverride?: string) {
-  const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride)
+  const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride);
   if (!clientId || !clientSecret) {
-    throw new Error('GSC OAuth not configured (missing Google OAuth credentials)')
+    throw new Error("GSC OAuth not configured (missing Google OAuth credentials)");
   }
-  return new google.auth.OAuth2(clientId, clientSecret, redirectUri)
+  return new google.auth.OAuth2(clientId, clientSecret, redirectUri);
 }
 
 export async function getGscAuthUrl(state: string, redirectUriOverride?: string): Promise<string> {
-  const oauth2Client = createOauthClientOrThrow(redirectUriOverride)
-  const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride)
+  const oauth2Client = createOauthClientOrThrow(redirectUriOverride);
+  const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride);
   const scopes = ["https://www.googleapis.com/auth/webmasters.readonly"];
 
   console.log("🔐 GSC Auth URL Generation:", {
     hasClientId: !!clientId,
-    clientIdSource: process.env.GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : 'GSC_CLIENT_ID',
+    clientIdSource: process.env.GOOGLE_CLIENT_ID ? "GOOGLE_CLIENT_ID" : "GSC_CLIENT_ID",
     hasClientSecret: !!clientSecret,
     redirectUri: redirectUri,
     stateLength: state.length,
@@ -68,28 +68,28 @@ export async function handleGscCallback(
   redirectUriOverride?: string
 ): Promise<boolean> {
   try {
-    const oauth2Client = createOauthClientOrThrow(redirectUriOverride)
-    const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride)
+    const oauth2Client = createOauthClientOrThrow(redirectUriOverride);
+    const { clientId, clientSecret, redirectUri } = getGscConfig(redirectUriOverride);
 
     console.log("GSC Callback: Getting tokens for state:", state);
     console.log("GSC Callback: Environment check:", {
       hasClientId: !!clientId,
-      clientIdSource: process.env.GOOGLE_CLIENT_ID ? 'GOOGLE_CLIENT_ID' : 'GSC_CLIENT_ID',
+      clientIdSource: process.env.GOOGLE_CLIENT_ID ? "GOOGLE_CLIENT_ID" : "GSC_CLIENT_ID",
       hasClientSecret: !!clientSecret,
-      redirectUri: redirectUri
+      redirectUri: redirectUri,
     });
-    
+
     const { tokens } = await oauth2Client.getToken(code);
     console.log("GSC Callback: Tokens received:", {
       hasAccessToken: !!tokens.access_token,
       hasRefreshToken: !!tokens.refresh_token,
-      tokenType: tokens.token_type
+      tokenType: tokens.token_type,
     });
-    
+
     console.log("GSC Callback: Storing tokens in database for state:", state);
-    
-    const [userIdFromState] = state.split(':')
-    const userId = userIdFromState || null
+
+    const [userIdFromState] = state.split(":");
+    const userId = userIdFromState || null;
 
     // Store tokens in database
     await (prisma as any).gscToken.upsert({
@@ -97,15 +97,15 @@ export async function handleGscCallback(
       update: { tokens, userId },
       create: { state, tokens, userId },
     });
-    
+
     oauth2Client.setCredentials(tokens);
     console.log("GSC Callback: Success! Tokens stored in database for state:", state);
     return true;
   } catch (error) {
     console.error("Error getting GSC tokens:", error);
     console.error("Error details:", {
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined
+      message: error instanceof Error ? error.message : "Unknown error",
+      stack: error instanceof Error ? error.stack : undefined,
     });
     return false;
   }
@@ -126,12 +126,12 @@ export async function fetchGscInsightsForUrl(
   stateOrOptions?: string | { userId?: string; state?: string }
 ): Promise<any> {
   const options =
-    typeof stateOrOptions === 'string'
+    typeof stateOrOptions === "string"
       ? ({ state: stateOrOptions } as { userId?: string; state?: string })
-      : (stateOrOptions || {})
+      : stateOrOptions || {};
 
   // Check cache first
-  const cacheKey = `${url}|${options.userId || ''}|${options.state || ''}`;
+  const cacheKey = `${url}|${options.userId || ""}|${options.state || ""}`;
   const now = Date.now();
   const cached = gscCache.get(cacheKey);
   if (cached && now - cached.timestamp < GSC_CACHE_TTL) {
@@ -139,21 +139,21 @@ export async function fetchGscInsightsForUrl(
   }
 
   try {
-    const oauth2Client = createOauthClientOrThrow()
+    const oauth2Client = createOauthClientOrThrow();
 
-    let tokenRecord: any = null
+    let tokenRecord: any = null;
     if (options.userId) {
       tokenRecord = await (prisma as any).gscToken.findFirst({
         where: { userId: options.userId },
-        orderBy: { createdAt: 'desc' }
-      })
+        orderBy: { createdAt: "desc" },
+      });
     } else if (options.state) {
       tokenRecord = await (prisma as any).gscToken.findFirst({
         where: { state: options.state },
-        orderBy: { createdAt: 'desc' }
-      })
+        orderBy: { createdAt: "desc" },
+      });
     } else {
-      tokenRecord = null
+      tokenRecord = null;
     }
 
     if (!tokenRecord) {
@@ -168,7 +168,7 @@ export async function fetchGscInsightsForUrl(
     }
 
     oauth2Client.setCredentials(tokenRecord.tokens as any);
-    const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
+    const searchConsole = google.searchconsole({ version: "v1", auth: oauth2Client });
 
     const siteUrl = await resolveSiteUrlForDomain(searchConsole, url);
     if (!siteUrl) {
@@ -187,16 +187,18 @@ export async function fetchGscInsightsForUrl(
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - 28);
 
-    console.log(`Fetching GSC data for ${siteUrl} from ${startDate.toISOString()} to ${endDate.toISOString()}`);
+    console.log(
+      `Fetching GSC data for ${siteUrl} from ${startDate.toISOString()} to ${endDate.toISOString()}`
+    );
 
     const response = await searchConsole.searchanalytics.query({
       siteUrl,
       requestBody: {
-        startDate: startDate.toISOString().split('T')[0],
-        endDate: endDate.toISOString().split('T')[0],
-        dimensions: ['query'],
-        rowLimit: 10
-      }
+        startDate: startDate.toISOString().split("T")[0],
+        endDate: endDate.toISOString().split("T")[0],
+        dimensions: ["query"],
+        rowLimit: 10,
+      },
     });
 
     const rows = response.data.rows || [];
@@ -207,15 +209,15 @@ export async function fetchGscInsightsForUrl(
       totalClicks += row.clicks || 0;
       totalImpressions += row.impressions || 0;
       return {
-        query: row.keys?.[0] || '',
+        query: row.keys?.[0] || "",
         clicks: row.clicks || 0,
         impressions: row.impressions || 0,
         ctr: row.ctr || 0,
-        position: row.position || 0
+        position: row.position || 0,
       };
     });
 
-    const avgCtr = totalImpressions > 0 ? (totalClicks / totalImpressions) : 0;
+    const avgCtr = totalImpressions > 0 ? totalClicks / totalImpressions : 0;
 
     const result = {
       available: true,
@@ -230,14 +232,13 @@ export async function fetchGscInsightsForUrl(
     gscCache.set(cacheKey, { result, timestamp: now });
 
     return result;
-
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error)
+    const message = error instanceof Error ? error.message : String(error);
 
     // If OAuth refresh token is revoked/expired, let the caller handle reconnect flows
     // (e.g. API route can delete stored tokens and respond with 401).
     if (/invalid_grant/i.test(message)) {
-      throw error
+      throw error;
     }
 
     // Monitoring logic
@@ -248,7 +249,9 @@ export async function fetchGscInsightsForUrl(
     }
     gscFailureCount++;
     if (gscFailureCount >= GSC_FAILURE_THRESHOLD) {
-      console.warn(`GSC API has failed ${gscFailureCount} times in the last 10 minutes. Check API quota or service health.`);
+      console.warn(
+        `GSC API has failed ${gscFailureCount} times in the last 10 minutes. Check API quota or service health.`
+      );
       // In production, send alert to monitoring system here
     }
     console.error("Error fetching GSC data:", error);
@@ -258,15 +261,15 @@ export async function fetchGscInsightsForUrl(
       ctr: null,
       impressions: null,
       clicks: null,
-      message: `GSC error: ${message || 'Unknown error'}`,
+      message: `GSC error: ${message || "Unknown error"}`,
     };
   }
 }
 
 // Helper function to check if GSC is configured
 export function isGscConfigured(): boolean {
-  const { clientId, clientSecret } = getGscConfig()
-  return !!(clientId && clientSecret)
+  const { clientId, clientSecret } = getGscConfig();
+  return !!(clientId && clientSecret);
 }
 
 // Helper function to check if we have any tokens stored
@@ -284,24 +287,26 @@ export async function hasGscTokens(state?: string): Promise<boolean> {
 }
 
 // Helper function to validate GSC tokens and check if they're working
-export async function validateGscTokens(state?: string): Promise<{ isValid: boolean; hasProperties: boolean; message: string }> {
+export async function validateGscTokens(
+  state?: string
+): Promise<{ isValid: boolean; hasProperties: boolean; message: string }> {
   try {
-    const oauth2Client = createOauthClientOrThrow()
+    const oauth2Client = createOauthClientOrThrow();
     let tokenRecord = await (prisma as any).gscToken.findFirst({
       where: state ? { state } : undefined,
-      orderBy: { createdAt: 'desc' }
-    })
+      orderBy: { createdAt: "desc" },
+    });
 
     if (!tokenRecord) {
-      console.log('validateGscTokens: No token record found in database', { state })
-      return { isValid: false, hasProperties: false, message: 'No GSC tokens found' }
+      console.log("validateGscTokens: No token record found in database", { state });
+      return { isValid: false, hasProperties: false, message: "No GSC tokens found" };
     }
 
     console.log("validateGscTokens: Found token record, validating...", { state });
 
-    oauth2Client.setCredentials(tokenRecord.tokens as any)
+    oauth2Client.setCredentials(tokenRecord.tokens as any);
 
-    const searchConsole = google.searchconsole({ version: 'v1', auth: oauth2Client });
+    const searchConsole = google.searchconsole({ version: "v1", auth: oauth2Client });
 
     const sitesResponse = await searchConsole.sites.list();
     const siteCount = sitesResponse.data.siteEntry?.length || 0;
@@ -310,20 +315,26 @@ export async function validateGscTokens(state?: string): Promise<{ isValid: bool
     return {
       isValid: true,
       hasProperties: siteCount > 0,
-      message: siteCount > 0 ? 'GSC tokens are valid' : 'Connected, but no properties found on this Google account'
-    }
+      message:
+        siteCount > 0
+          ? "GSC tokens are valid"
+          : "Connected, but no properties found on this Google account",
+    };
   } catch (error) {
     console.error("validateGscTokens: Error validating GSC tokens:", error);
     return {
       isValid: false,
       hasProperties: false,
-      message: `Token validation failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      message: `Token validation failed: ${error instanceof Error ? error.message : "Unknown error"}`,
     };
   }
 }
 
 // Choose a siteUrl for a given page URL by inspecting available properties
-async function resolveSiteUrlForDomain(searchConsole: any, pageUrl: string): Promise<string | null> {
+async function resolveSiteUrlForDomain(
+  searchConsole: any,
+  pageUrl: string
+): Promise<string | null> {
   const urlObj = new URL(pageUrl);
   const hostname = urlObj.hostname.toLowerCase();
   const rootDomain = hostname.replace(/^www\./, "");
@@ -332,17 +343,19 @@ async function resolveSiteUrlForDomain(searchConsole: any, pageUrl: string): Pro
   const entries: Array<{ siteUrl?: string }> = (sitesResponse.data.siteEntry || []) as any;
 
   // Prefer domain property if present
-  const domainProp = entries.find(e => (e.siteUrl || "").toLowerCase() === `sc-domain:${rootDomain}`);
+  const domainProp = entries.find(
+    (e) => (e.siteUrl || "").toLowerCase() === `sc-domain:${rootDomain}`
+  );
   if (domainProp?.siteUrl) return domainProp.siteUrl;
 
   // Try exact hostname URL-prefix
   const urlPrefix = `https://${hostname}/`;
-  const urlProp = entries.find(e => (e.siteUrl || "").toLowerCase() === urlPrefix);
+  const urlProp = entries.find((e) => (e.siteUrl || "").toLowerCase() === urlPrefix);
   if (urlProp?.siteUrl) return urlProp.siteUrl;
 
   // Try http version
   const httpPrefix = `http://${hostname}/`;
-  const httpProp = entries.find(e => (e.siteUrl || "").toLowerCase() === httpPrefix);
+  const httpProp = entries.find((e) => (e.siteUrl || "").toLowerCase() === httpPrefix);
   if (httpProp?.siteUrl) return httpProp.siteUrl;
 
   return null;

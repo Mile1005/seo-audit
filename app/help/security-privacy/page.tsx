@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, Shield, ArrowRight, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, Shield, ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const categoryArticles = [
   {
@@ -11,30 +11,30 @@ const categoryArticles = [
     href: "/help/security/two-factor-authentication",
     time: "7 min",
     description: "Set up 2FA to add an extra layer of security to your account.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Privacy settings",
     href: "/help/security/privacy",
     time: "8 min",
     description: "Control your data, manage privacy preferences, and understand your rights.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "GDPR compliance",
     href: "/help/security/gdpr",
     time: "10 min",
     description: "Learn about your data protection rights and how we comply with GDPR.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Security best practices",
     href: "/help/security/best-practices",
     time: "6 min",
     description: "Essential security tips to keep your account and data safe.",
-    icon: BookOpen
-  }
-]
+    icon: BookOpen,
+  },
+];
 
 export default function SecurityPrivacyPage() {
   return (
@@ -50,7 +50,9 @@ export default function SecurityPrivacyPage() {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Help Center
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Security & Privacy | AI SEO Turbo</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Security & Privacy | AI SEO Turbo
+            </h1>
             <p className="text-xl text-gray-600 max-w-3xl">
               Your security and privacy are our top priorities. Learn about our comprehensive
               security measures, data protection policies, and privacy controls.
@@ -120,13 +122,15 @@ export default function SecurityPrivacyPage() {
               <div className="border-l-4 border-green-500 pl-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Your Data Rights</h3>
                 <p className="text-gray-600">
-                  You have full control over your data. Access, download, or delete your information anytime.
+                  You have full control over your data. Access, download, or delete your information
+                  anytime.
                 </p>
               </div>
               <div className="border-l-4 border-blue-500 pl-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Secure Storage</h3>
                 <p className="text-gray-600">
-                  All data is encrypted at rest and in transit using industry-standard AES-256 encryption.
+                  All data is encrypted at rest and in transit using industry-standard AES-256
+                  encryption.
                 </p>
               </div>
               <div className="border-l-4 border-purple-500 pl-6">
@@ -171,5 +175,5 @@ export default function SecurityPrivacyPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

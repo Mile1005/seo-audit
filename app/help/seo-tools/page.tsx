@@ -1,22 +1,36 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, CheckCircle, BarChart, Search, AlertTriangle, TrendingUp, Settings, FileText, Target, Zap, Globe, Bot } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  CheckCircle,
+  BarChart,
+  Search,
+  AlertTriangle,
+  TrendingUp,
+  Settings,
+  FileText,
+  Target,
+  Zap,
+  Globe,
+  Bot,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function SEOToolsOverviewPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Home', url: 'https://www.aiseoturbo.com' },
-            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'SEO Tools & Features', url: 'https://www.aiseoturbo.com/help/seo-tools' }
+            { name: "Home", url: "https://www.aiseoturbo.com" },
+            { name: "Help", url: "https://www.aiseoturbo.com/help" },
+            { name: "SEO Tools & Features", url: "https://www.aiseoturbo.com/help/seo-tools" },
           ]}
         />
 
@@ -49,8 +63,8 @@ export default function SEOToolsOverviewPage() {
               </div>
 
               <p className="text-xl text-gray-400 mb-8">
-                Discover our comprehensive suite of SEO tools designed to boost your search rankings,
-                analyze competitors, and optimize your website performance.
+                Discover our comprehensive suite of SEO tools designed to boost your search
+                rankings, analyze competitors, and optimize your website performance.
               </p>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">
@@ -75,9 +89,9 @@ export default function SEOToolsOverviewPage() {
               <div>
                 <h2 className="text-3xl font-bold text-white mb-4">Our SEO Tools Suite</h2>
                 <p className="text-gray-300 text-lg">
-                  AI SEO Turbo provides a comprehensive set of tools powered by advanced AI technology
-                  to help you improve your search engine rankings, understand your competitors, and
-                  optimize your website for better performance.
+                  AI SEO Turbo provides a comprehensive set of tools powered by advanced AI
+                  technology to help you improve your search engine rankings, understand your
+                  competitors, and optimize your website for better performance.
                 </p>
               </div>
 
@@ -98,8 +112,8 @@ export default function SEOToolsOverviewPage() {
                           SEO Audit
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Comprehensive website analysis covering 47+ SEO factors including technical SEO,
-                          content quality, and user experience.
+                          Comprehensive website analysis covering 47+ SEO factors including
+                          technical SEO, content quality, and user experience.
                         </p>
                         <span className="text-blue-400 text-sm group-hover:text-blue-300 transition-colors">
                           Learn more →
@@ -121,8 +135,8 @@ export default function SEOToolsOverviewPage() {
                           Competitor Analysis
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Analyze your competitors' SEO strategies, backlink profiles, and content performance
-                          to gain competitive insights.
+                          Analyze your competitors' SEO strategies, backlink profiles, and content
+                          performance to gain competitive insights.
                         </p>
                         <span className="text-purple-400 text-sm group-hover:text-purple-300 transition-colors">
                           Learn more →
@@ -144,8 +158,8 @@ export default function SEOToolsOverviewPage() {
                           Site Crawler
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Comprehensive website crawling tool that discovers all pages, analyzes internal linking,
-                          and identifies crawlability issues.
+                          Comprehensive website crawling tool that discovers all pages, analyzes
+                          internal linking, and identifies crawlability issues.
                         </p>
                         <span className="text-orange-400 text-sm group-hover:text-orange-300 transition-colors">
                           Learn more →
@@ -181,10 +195,13 @@ export default function SEOToolsOverviewPage() {
 
               {/* Getting Started */}
               <div className="bg-slate-800/30 border border-slate-700/50 rounded-lg p-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Getting Started with Our SEO Tools</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Getting Started with Our SEO Tools
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  New to SEO or looking to improve your existing strategy? Start with our beginner-friendly guides
-                  that will walk you through each tool and help you understand the results.
+                  New to SEO or looking to improve your existing strategy? Start with our
+                  beginner-friendly guides that will walk you through each tool and help you
+                  understand the results.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Link
@@ -192,7 +209,9 @@ export default function SEOToolsOverviewPage() {
                     className="flex items-center gap-3 p-4 bg-slate-800/50 rounded-lg hover:bg-slate-700/50 transition-colors group"
                   >
                     <Target className="w-5 h-5 text-green-400 group-hover:text-green-300" />
-                    <span className="text-gray-300 group-hover:text-white">Run Your First SEO Audit</span>
+                    <span className="text-gray-300 group-hover:text-white">
+                      Run Your First SEO Audit
+                    </span>
                   </Link>
                   <Link
                     href="/help/getting-started/quick-start"
@@ -209,10 +228,12 @@ export default function SEOToolsOverviewPage() {
                 <h3 className="text-2xl font-bold text-white mb-6">Advanced Features</h3>
                 <div className="space-y-4">
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
-                    <h4 className="text-lg font-semibold text-white mb-3">Keyword Tracking & Research</h4>
+                    <h4 className="text-lg font-semibold text-white mb-3">
+                      Keyword Tracking & Research
+                    </h4>
                     <p className="text-gray-300 mb-4">
-                      Track keyword rankings, discover new opportunities, and analyze search volume trends
-                      with our comprehensive keyword research tools.
+                      Track keyword rankings, discover new opportunities, and analyze search volume
+                      trends with our comprehensive keyword research tools.
                     </p>
                     <Link
                       href="/features/keyword-tracking"
@@ -225,8 +246,8 @@ export default function SEOToolsOverviewPage() {
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
                     <h4 className="text-lg font-semibold text-white mb-3">Backlink Analysis</h4>
                     <p className="text-gray-300 mb-4">
-                      Monitor your backlink profile, discover new link building opportunities, and analyze
-                      competitor backlink strategies.
+                      Monitor your backlink profile, discover new link building opportunities, and
+                      analyze competitor backlink strategies.
                     </p>
                     <Link
                       href="/dashboard/backlinks"
@@ -243,8 +264,8 @@ export default function SEOToolsOverviewPage() {
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-white mb-4">Need Help Getting Started?</h3>
                   <p className="text-gray-300 mb-6">
-                    Our support team is here to help you make the most of our SEO tools.
-                    Get personalized guidance and answers to your questions.
+                    Our support team is here to help you make the most of our SEO tools. Get
+                    personalized guidance and answers to your questions.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link
@@ -267,5 +288,5 @@ export default function SEOToolsOverviewPage() {
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

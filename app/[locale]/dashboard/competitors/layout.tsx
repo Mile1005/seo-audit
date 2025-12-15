@@ -1,12 +1,8 @@
-import { Metadata } from 'next'
-import { generateSEOMeta, pageSEO } from '@/lib/seo'
+import { Metadata } from "next";
+import { generateSEOMeta, pageSEO } from "@/lib/seo";
 
-export const metadata: Metadata = generateSEOMeta(pageSEO['dashboard/competitors'])
+export const metadata: Metadata = generateSEOMeta(pageSEO["dashboard/competitors"]);
 
-export default function CompetitorsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return children
+export default function CompetitorsLayout({ children }: { children: React.ReactNode }) {
+  return children;
 }

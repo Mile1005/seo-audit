@@ -7,13 +7,13 @@
 
 ### Issue Categories
 
-| Issue Type | Count | Examples |
-|-----------|-------|----------|
-| MISSING_H1 | ~30 | Blog pages, help pages, auth pages |
-| HIERARCHY_SKIP (H1→H3) | ~20 | Help pages (H1→H3 skips), dashboard |
-| H2→H4 SKIP | ~10 | Blog posts, help pages |
-| H3→H5 SKIP | ~5 | Feature pages with nested components |
-| MIXED HIERARCHY | ~4 | Pages importing multiple heading components |
+| Issue Type             | Count | Examples                                    |
+| ---------------------- | ----- | ------------------------------------------- |
+| MISSING_H1             | ~30   | Blog pages, help pages, auth pages          |
+| HIERARCHY_SKIP (H1→H3) | ~20   | Help pages (H1→H3 skips), dashboard         |
+| H2→H4 SKIP             | ~10   | Blog posts, help pages                      |
+| H3→H5 SKIP             | ~5    | Feature pages with nested components        |
+| MIXED HIERARCHY        | ~4    | Pages importing multiple heading components |
 
 ---
 
@@ -24,20 +24,23 @@
 **Problem:** Missing H1 tag on index + H2→H4 skips within content
 
 Pages affected:
+
 - `/blog` (MISSING_H1: h2 "{featuredPost.title}")
 - `/blog/[slug]` (MISSING_H1: h2 "Introduction")
 - `ai-powered-seo-future` (H2→H4 skip + MISSING_H1)
 - `complete-seo-audit-checklist-2025` (2x H2→H4 skip + MISSING_H1)
 - Other 5 blog posts (each has MISSING_H1)
 
-**Root Cause:** 
+**Root Cause:**
+
 - Blog layout imports `blog-post-client.tsx` which outputs h2 "Related Articles" at root level
 - Blog post pages have H2 "Related Articles" without H1 parent
 - Content sections skip from H2 to H4
 
 **Fix Strategy:**
+
 1. Add H1 to each blog page (title of post)
-2. Downgrade h2→h3 for "Related Articles" 
+2. Downgrade h2→h3 for "Related Articles"
 3. Upgrade H4→H3 in content sections (1. Content Performance Analysis, etc.)
 
 ### B. Case Studies (7 pages) - 7 Issues
@@ -45,11 +48,13 @@ Pages affected:
 **Problem:** All missing H1 tags
 
 Pages: 7 case study pages + index
+
 - cloudsync-pro, digital-growth-agency, gearhub-pro, peak-performance, stylecraft-boutique, techflow-solutions, case-studies index
 
 **Root Cause:** Pages start with H2 "The Challenge: ..." instead of H1
 
 **Fix Strategy:**
+
 - Add H1 to each case study page (company name or heading)
 - Downgrade h2 "The Challenge" → h2 (keep as is, this should be h2 under h1)
 
@@ -58,6 +63,7 @@ Pages: 7 case study pages + index
 **Problem:** Help pages have H1→H3 skips (missing H2 middle layer)
 
 Example pages:
+
 - `/help/api/authentication` (H1→H3 skip)
 - `/help/billing/*` (4 pages, all H1→H3 skip)
 - `/help/features/*` (4 pages, all H1→H3 skip)
@@ -65,13 +71,15 @@ Example pages:
 - `/help/security/*` (5 pages, all H1→H3 skip)
 - `/help/troubleshooting/*` (3 pages, all H1→H3 skip)
 
-**Pattern:** 
+**Pattern:**
+
 ```html
 <h1>Title</h1>
 <h3>Subtitle (should be h2)</h3>
 ```
 
 **Fix Strategy:**
+
 - Downgrade all h3 after h1 to h2 in help pages
 - This affects 15+ help pages
 
@@ -80,6 +88,7 @@ Example pages:
 **Problem:** Feature pages missing H1 or have H3→H5 skips
 
 Pages:
+
 - `/features/ai-assistant` (MISSING_H1: h3 "AI SEO Assistant", H3→H5 skip)
 - `/features/competitor-analysis` (MISSING_H1: h2 in component)
 - `/features/keyword-tracking` (MISSING_H1: h3 "Keyword Rankings")
@@ -87,12 +96,14 @@ Pages:
 - `/features/site-crawler` (MISSING_H1: h2 "Loading Site Crawler")
 
 **Root Cause:**
+
 - Feature pages import `recommendation-types.tsx` which has:
   - H2 "Intelligent Recommendation Types"
   - H3 "title" for each recommendation
   - H5 "Implementation Example" (skips h4)
 
 **Fix Strategy:**
+
 - Add H1 to feature page (feature name)
 - Downgrade h2→h2, h3→h2 for recommendations (same level)
 - Downgrade h5→h4 for "Implementation Example"
@@ -102,6 +113,7 @@ Pages:
 **Problem:** H1→H3 skips in dashboard components
 
 Pages:
+
 - `/dashboard/audit` (2x H2→H4 skips)
 - `/dashboard/page-crawler` (H1→H3 skip)
 - `/dashboard` (H1→H3 skip)
@@ -110,6 +122,7 @@ Pages:
 **Root Cause:** Components like `DashboardEmptyState.tsx` output h3 without h2
 
 **Fix Strategy:**
+
 - Downgrade h3→h2 in component
 - Add H1 to projects page
 
@@ -118,17 +131,20 @@ Pages:
 **Problem:** Missing H1
 
 Pages:
+
 - `/login` (MISSING_H1: h2 "Access Your SEO Dashboard")
 - `/forgot-password` (MISSING_H1: h2 "Password Security Best Practices")
 - `/onboarding` (H1→H3 skip)
 
 **Fix Strategy:**
+
 - Add H1 to login/forgot-password
 - Downgrade h3→h2 in onboarding
 
 ### G. Other Pages (Multiple Issues)
 
 **Missing H1 pages:**
+
 - `/about` (MISSING_H1: h2 "Our Story")
 - `/careers` (MISSING_H1: h2 "Shape the Future of SEO")
 - `/community` (MISSING_H1: h2 "Why Join Our Community?")
@@ -141,6 +157,7 @@ Pages:
 - `/privacy` (H2→H4 skip)
 
 **Fix Strategy:**
+
 - Add H1 to each main page
 - Downgrade problematic h3 tags to h2
 
@@ -150,18 +167,18 @@ Pages:
 
 ### Components Adding Headings
 
-| Component | Headings Added | Level | Issue |
-|-----------|---|---|---|
-| `recommendation-types.tsx` | h2, h3, h5 | - | H3→H5 skip (missing h4) |
-| `industry-specialization.tsx` | h2, h3, h4 | - | Correct hierarchy |
-| `features-showcase.tsx` | h2, h3 | - | Correct hierarchy |
-| `email-capture-inline.tsx` | h2, h3 | - | Output h3 at wrong level |
-| `exit-intent-modal.tsx` | h3, h2 | - | Mixed order (h3 before h2) |
-| `DashboardEmptyState.tsx` | h1, h3 | - | H1→H3 skip (should be h2) |
-| `pricing-cards.tsx` | h2, h3, h4 | - | Correct hierarchy |
-| `keyword-research.tsx` | h2, h3 | - | Correct hierarchy |
-| `trust-logos.tsx` | h2 | - | Correct |
-| `hero components` | h1 | - | OK |
+| Component                     | Headings Added | Level | Issue                      |
+| ----------------------------- | -------------- | ----- | -------------------------- |
+| `recommendation-types.tsx`    | h2, h3, h5     | -     | H3→H5 skip (missing h4)    |
+| `industry-specialization.tsx` | h2, h3, h4     | -     | Correct hierarchy          |
+| `features-showcase.tsx`       | h2, h3         | -     | Correct hierarchy          |
+| `email-capture-inline.tsx`    | h2, h3         | -     | Output h3 at wrong level   |
+| `exit-intent-modal.tsx`       | h3, h2         | -     | Mixed order (h3 before h2) |
+| `DashboardEmptyState.tsx`     | h1, h3         | -     | H1→H3 skip (should be h2)  |
+| `pricing-cards.tsx`           | h2, h3, h4     | -     | Correct hierarchy          |
+| `keyword-research.tsx`        | h2, h3         | -     | Correct hierarchy          |
+| `trust-logos.tsx`             | h2             | -     | Correct                    |
+| `hero components`             | h1             | -     | OK                         |
 
 ### Problematic Patterns
 
@@ -175,8 +192,10 @@ Pages:
    - Output structure:
      ```html
      <h2>Intelligent Recommendation Types</h2>
-     <h3>{rec.title}</h3>  <!-- Multiple recommendations -->
-     <h5>Implementation Example</h5>  <!-- Should be h4 -->
+     <h3>{rec.title}</h3>
+     <!-- Multiple recommendations -->
+     <h5>Implementation Example</h5>
+     <!-- Should be h4 -->
      ```
    - Fix: Change h5→h4
 
@@ -193,25 +212,32 @@ Pages:
 ## Implementation Plan (Priority Order)
 
 ### Phase 1: Quick Fixes (Lowest Risk) - 30 minutes
+
 Components to fix (3 files):
+
 - [ ] `recommendation-types.tsx`: h5 → h4 (1 change)
 - [ ] `DashboardEmptyState.tsx`: h1→h3→h2 (1 change)
 - [ ] `email-capture-inline.tsx`: h3 handling (1 change)
 
 ### Phase 2: Add Missing H1s (High Impact) - 45 minutes
+
 Pages to fix (16 files):
+
 - [ ] Homepage (`/page.tsx`): Add H1
 - [ ] Blog pages (7 files): Add H1 to each
 - [ ] Case studies (7 files): Add H1 to each
 - [ ] Feature pages (5 files): Add H1 to each
 
 ### Phase 3: Help Pages H1→H2 Downgrades (Systematic) - 30 minutes
+
 - [ ] 15 help pages: Change first h3 after h1 → h2
 
 ### Phase 4: Blog Post Content H2→H4 Fixes - 15 minutes
+
 - [ ] Blog post templates: Upgrade h4→h3 in content sections
 
 ### Phase 5: Miscellaneous Fixes - 20 minutes
+
 - [ ] Auth pages: Add H1
 - [ ] Dashboard pages: Add H1, downgrade h3→h2
 - [ ] Other single issues: Fix individually
@@ -255,6 +281,7 @@ From your CSV, 6 pages have non-sequential H2s:
 ## Validation Steps
 
 After fixes:
+
 ```bash
 node scripts/audit-headings.js
 ```

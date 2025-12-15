@@ -2,46 +2,46 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { 
-  BarChart3, 
-  TrendingUp, 
-  TrendingDown, 
-  Search, 
+import {
+  BarChart3,
+  TrendingUp,
+  TrendingDown,
+  Search,
   Target,
   Eye,
   Filter,
-  Calendar
+  Calendar,
 } from "lucide-react";
 import { Button } from "../../ui/button";
 import { useTranslations } from "next-intl";
 
 export default function SerpComparison() {
-  const t = useTranslations('featurePages.competitorAnalysis.serpComparison');
+  const t = useTranslations("featurePages.competitorAnalysis.serpComparison");
   const [selectedKeyword, setSelectedKeyword] = useState("seo audit tool");
   const [timeRange, setTimeRange] = useState("30d");
 
   const keywords = [
     "seo audit tool",
-    "website analyzer", 
+    "website analyzer",
     "seo checker",
     "site audit software",
-    "technical seo"
+    "technical seo",
   ];
 
   const serpData = [
-    { 
-      keyword: "seo audit tool", 
-      yourRank: 4, 
+    {
+      keyword: "seo audit tool",
+      yourRank: 4,
       yourChange: +2,
       competitors: [
         { name: "semrush.com", rank: 1, change: 0 },
         { name: "ahrefs.com", rank: 2, change: +1 },
         { name: "screaming-frog.co.uk", rank: 3, change: -1 },
         { name: "yoursite.com", rank: 4, change: +2 },
-        { name: "sitechecker.pro", rank: 5, change: -1 }
+        { name: "sitechecker.pro", rank: 5, change: -1 },
       ],
       volume: 12100,
-      difficulty: 67
+      difficulty: 67,
     },
     {
       keyword: "website analyzer",
@@ -54,20 +54,20 @@ export default function SerpComparison() {
         { name: "webpagetest.org", rank: 4, change: -1 },
         { name: "tools.google.com", rank: 5, change: 0 },
         { name: "seoptimer.com", rank: 6, change: +1 },
-        { name: "yoursite.com", rank: 7, change: +3 }
+        { name: "yoursite.com", rank: 7, change: +3 },
       ],
       volume: 8200,
-      difficulty: 54
-    }
+      difficulty: 54,
+    },
   ];
 
-  const currentData = serpData.find(data => data.keyword === selectedKeyword);
+  const currentData = serpData.find((data) => data.keyword === selectedKeyword);
 
   const performanceMetrics = [
-    { label: t('metrics.avgPosition'), value: "4.2", change: "+1.8", positive: true },
-    { label: t('metrics.visibility'), value: "78%", change: "+12%", positive: true },
-    { label: t('metrics.clickShare'), value: "23%", change: "+8%", positive: true },
-    { label: t('metrics.impressions'), value: "45.2K", change: "+15%", positive: true }
+    { label: t("metrics.avgPosition"), value: "4.2", change: "+1.8", positive: true },
+    { label: t("metrics.visibility"), value: "78%", change: "+12%", positive: true },
+    { label: t("metrics.clickShare"), value: "23%", change: "+8%", positive: true },
+    { label: t("metrics.impressions"), value: "45.2K", change: "+15%", positive: true },
   ];
 
   return (
@@ -81,12 +81,8 @@ export default function SerpComparison() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t('subtitle')}
-          </p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{t("title")}</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t("subtitle")}</p>
         </motion.div>
 
         {/* Controls */}
@@ -100,24 +96,30 @@ export default function SerpComparison() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center space-x-2">
               <Search className="w-4 h-4 text-muted-foreground" />
-              <label htmlFor="keyword-selector" className="sr-only">Select keyword to analyze</label>
-              <select 
+              <label htmlFor="keyword-selector" className="sr-only">
+                Select keyword to analyze
+              </label>
+              <select
                 id="keyword-selector"
                 value={selectedKeyword}
                 onChange={(e) => setSelectedKeyword(e.target.value)}
                 className="bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 aria-label="Select keyword to analyze"
               >
-                {keywords.map(keyword => (
-                  <option key={keyword} value={keyword}>{keyword}</option>
+                {keywords.map((keyword) => (
+                  <option key={keyword} value={keyword}>
+                    {keyword}
+                  </option>
                 ))}
               </select>
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <Calendar className="w-4 h-4 text-muted-foreground" />
-              <label htmlFor="time-range-selector" className="sr-only">Select time range</label>
-              <select 
+              <label htmlFor="time-range-selector" className="sr-only">
+                Select time range
+              </label>
+              <select
                 id="time-range-selector"
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value)}
@@ -157,9 +159,11 @@ export default function SerpComparison() {
             >
               <div className="text-2xl font-bold text-foreground mb-1">{metric.value}</div>
               <div className="text-sm text-muted-foreground mb-2">{metric.label}</div>
-              <div className={`text-sm font-medium flex items-center justify-center ${
-                metric.positive ? "text-green-600" : "text-red-600"
-              }`}>
+              <div
+                className={`text-sm font-medium flex items-center justify-center ${
+                  metric.positive ? "text-green-600" : "text-red-600"
+                }`}
+              >
                 {metric.positive ? (
                   <TrendingUp className="w-3 h-3 mr-1" />
                 ) : (
@@ -183,21 +187,22 @@ export default function SerpComparison() {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-semibold text-foreground">
-                  {t('serpTable.title', { keyword: selectedKeyword })}
+                  {t("serpTable.title", { keyword: selectedKeyword })}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {t('serpTable.volume', { volume: currentData?.volume.toLocaleString() || '0' })} • {t('serpTable.difficulty', { difficulty: currentData?.difficulty || 0 })}
+                  {t("serpTable.volume", { volume: currentData?.volume.toLocaleString() || "0" })} •{" "}
+                  {t("serpTable.difficulty", { difficulty: currentData?.difficulty || 0 })}
                 </p>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-muted-foreground">{t('serpTable.liveData')}</span>
+                <span className="text-sm text-muted-foreground">{t("serpTable.liveData")}</span>
               </div>
             </div>
           </div>
 
-          <div 
-            className="overflow-x-auto" 
+          <div
+            className="overflow-x-auto"
             tabIndex={0}
             role="region"
             aria-label="SERP comparison table"
@@ -205,11 +210,21 @@ export default function SerpComparison() {
             <table className="w-full">
               <thead className="bg-muted/50">
                 <tr>
-                  <th className="text-left p-4 font-semibold text-foreground">{t('serpTable.rank')}</th>
-                  <th className="text-left p-4 font-semibold text-foreground">{t('serpTable.domain')}</th>
-                  <th className="text-center p-4 font-semibold text-foreground">{t('serpTable.change')}</th>
-                  <th className="text-center p-4 font-semibold text-foreground">{t('serpTable.trend')}</th>
-                  <th className="text-center p-4 font-semibold text-foreground">{t('serpTable.estTraffic')}</th>
+                  <th className="text-left p-4 font-semibold text-foreground">
+                    {t("serpTable.rank")}
+                  </th>
+                  <th className="text-left p-4 font-semibold text-foreground">
+                    {t("serpTable.domain")}
+                  </th>
+                  <th className="text-center p-4 font-semibold text-foreground">
+                    {t("serpTable.change")}
+                  </th>
+                  <th className="text-center p-4 font-semibold text-foreground">
+                    {t("serpTable.trend")}
+                  </th>
+                  <th className="text-center p-4 font-semibold text-foreground">
+                    {t("serpTable.estTraffic")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -225,30 +240,43 @@ export default function SerpComparison() {
                     }`}
                   >
                     <td className="p-4">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                        competitor.rank === 1 ? "bg-yellow-500 text-white" :
-                        competitor.rank === 2 ? "bg-gray-400 text-white" :
-                        competitor.rank === 3 ? "bg-orange-500 text-white" :
-                        "bg-muted text-foreground"
-                      }`}>
+                      <div
+                        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                          competitor.rank === 1
+                            ? "bg-yellow-500 text-white"
+                            : competitor.rank === 2
+                              ? "bg-gray-400 text-white"
+                              : competitor.rank === 3
+                                ? "bg-orange-500 text-white"
+                                : "bg-muted text-foreground"
+                        }`}
+                      >
                         {competitor.rank}
                       </div>
                     </td>
                     <td className="p-4">
                       <div className="font-medium text-foreground">{competitor.name}</div>
                       {competitor.name === "yoursite.com" && (
-                        <div className="text-xs text-blue-600 font-medium">{t('serpTable.yourSite')}</div>
+                        <div className="text-xs text-blue-600 font-medium">
+                          {t("serpTable.yourSite")}
+                        </div>
                       )}
                     </td>
                     <td className="p-4 text-center">
-                      <div className={`font-medium ${
-                        competitor.change > 0 ? "text-green-600" :
-                        competitor.change < 0 ? "text-red-600" :
-                        "text-muted-foreground"
-                      }`}>
-                        {competitor.change > 0 ? `+${competitor.change}` : 
-                         competitor.change < 0 ? competitor.change : 
-                         "—"}
+                      <div
+                        className={`font-medium ${
+                          competitor.change > 0
+                            ? "text-green-600"
+                            : competitor.change < 0
+                              ? "text-red-600"
+                              : "text-muted-foreground"
+                        }`}
+                      >
+                        {competitor.change > 0
+                          ? `+${competitor.change}`
+                          : competitor.change < 0
+                            ? competitor.change
+                            : "—"}
                       </div>
                     </td>
                     <td className="p-4 text-center">
@@ -261,10 +289,16 @@ export default function SerpComparison() {
                       )}
                     </td>
                     <td className="p-4 text-center text-muted-foreground">
-                      {Math.round((currentData?.volume || 0) * (competitor.rank === 1 ? 0.35 : 
-                        competitor.rank === 2 ? 0.18 : 
-                        competitor.rank === 3 ? 0.12 : 
-                        0.08))}
+                      {Math.round(
+                        (currentData?.volume || 0) *
+                          (competitor.rank === 1
+                            ? 0.35
+                            : competitor.rank === 2
+                              ? 0.18
+                              : competitor.rank === 3
+                                ? 0.12
+                                : 0.08)
+                      )}
                     </td>
                   </motion.tr>
                 ))}
@@ -286,13 +320,13 @@ export default function SerpComparison() {
               <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-3">
                 <TrendingUp className="w-4 h-4 text-white" />
               </div>
-              <h4 className="font-semibold text-foreground">{t('insights.opportunity.title')}</h4>
+              <h4 className="font-semibold text-foreground">{t("insights.opportunity.title")}</h4>
             </div>
             <p className="text-sm text-muted-foreground mb-3">
-              {t('insights.opportunity.description', { keyword: selectedKeyword })}
+              {t("insights.opportunity.description", { keyword: selectedKeyword })}
             </p>
             <Button size="sm" variant="outline">
-              {t('insights.opportunity.btn')}
+              {t("insights.opportunity.btn")}
             </Button>
           </div>
 
@@ -301,13 +335,11 @@ export default function SerpComparison() {
               <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                 <Eye className="w-4 h-4 text-white" />
               </div>
-              <h4 className="font-semibold text-foreground">{t('insights.alert.title')}</h4>
+              <h4 className="font-semibold text-foreground">{t("insights.alert.title")}</h4>
             </div>
-            <p className="text-sm text-muted-foreground mb-3">
-              {t('insights.alert.description')}
-            </p>
+            <p className="text-sm text-muted-foreground mb-3">{t("insights.alert.description")}</p>
             <Button size="sm" variant="outline">
-              {t('insights.alert.btn')}
+              {t("insights.alert.btn")}
             </Button>
           </div>
         </motion.div>

@@ -155,22 +155,12 @@
     "terms": {
       "title": "Syarat Layanan - Perjanjian Hukum | AI SEO Turbo",
       "description": "Baca syarat layanan dan perjanjian hukum kami untuk penggunaan AI SEO Turbo. Pahami hak dan kewajiban Anda saat menggunakan alat audit SEO kami.",
-      "keywords": [
-        "Syarat Layanan",
-        "Perjanjian Hukum",
-        "Ketentuan SEO",
-        "Perjanjian Pengguna"
-      ]
+      "keywords": ["Syarat Layanan", "Perjanjian Hukum", "Ketentuan SEO", "Perjanjian Pengguna"]
     },
     "privacy": {
       "title": "Kebijakan Privasi - Perlindungan Data | AI SEO Turbo",
       "description": "Pelajari bagaimana AISEOTurbo melindungi privasi Anda dan menangani data Anda. Kebijakan privasi kami mencakup kepatuhan GDPR dan langkah-langkah keamanan data.",
-      "keywords": [
-        "kebijakan privasi",
-        "perlindungan data",
-        "GDPR",
-        "hak privasi"
-      ]
+      "keywords": ["kebijakan privasi", "perlindungan data", "GDPR", "hak privasi"]
     },
     "status": {
       "title": "Status Sistem - Ketersediaan Layanan | AI SEO Turbo",
@@ -1063,11 +1053,7 @@
       "intro": {
         "title": "Mulai dalam 10 menit",
         "description": "Selamat datang di AISEOTurbo! Panduan cepat ini akan membantu Anda menjalankan audit SEO pertama yang didukung AI hanya dalam 10 menit. Ikuti langkah sederhana ini untuk membuka wawasan tentang performa pencarian situs Anda.",
-        "highlights": [
-          "4 langkah mudah",
-          "Hasil instan",
-          "Tidak butuh pengetahuan teknis"
-        ]
+        "highlights": ["4 langkah mudah", "Hasil instan", "Tidak butuh pengetahuan teknis"]
       },
       "progressTracker": {
         "title": "Perjalanan Anda menuju sukses SEO",
@@ -1100,11 +1086,7 @@
           "description": "Mulai perjalanan SEO Anda dengan membuat akun AISEOTurbo gratis. Anda akan langsung mendapatkan akses ke alat audit kami yang bertenaga.",
           "requirements": {
             "title": "Yang Anda butuhkan:",
-            "items": [
-              "Alamat email yang valid",
-              "URL situs web Anda",
-              "2 menit waktu Anda"
-            ]
+            "items": ["Alamat email yang valid", "URL situs web Anda", "2 menit waktu Anda"]
           },
           "tip": {
             "title": "💡 Tip pro",
@@ -1143,16 +1125,8 @@
           "analysis": {
             "title": "Yang terjadi selama audit:",
             "categories": [
-              [
-                "Analisis struktur halaman",
-                "Pemeriksaan optimisasi konten",
-                "Review SEO teknis"
-              ],
-              [
-                "Metode performa",
-                "Optimisasi seluler",
-                "Penilaian keamanan"
-              ]
+              ["Analisis struktur halaman", "Pemeriksaan optimisasi konten", "Review SEO teknis"],
+              ["Metode performa", "Optimisasi seluler", "Penilaian keamanan"]
             ]
           },
           "feature": {
@@ -9386,31 +9360,19 @@
               "icon": "CreditCard",
               "name": "Kartu Kredit dan Debit",
               "description": "Kartu Visa, MasterCard, American Express, dan Discover diterima.",
-              "features": [
-                "Pemrosesan instan",
-                "Enkripsi aman",
-                "Penerimaan global"
-              ]
+              "features": ["Pemrosesan instan", "Enkripsi aman", "Penerimaan global"]
             },
             {
               "icon": "Wallet",
               "name": "Dompet Digital",
               "description": "PayPal, Apple Pay, Google Pay, dan opsi dompet digital lainnya.",
-              "features": [
-                "Pembayaran satu klik",
-                "Keamanan ditingkatkan",
-                "Ramah seluler"
-              ]
+              "features": ["Pembayaran satu klik", "Keamanan ditingkatkan", "Ramah seluler"]
             },
             {
               "icon": "Building",
               "name": "Transfer Bank",
               "description": "Transfer ACH dan wire untuk paket tahunan dan akun perusahaan.",
-              "features": [
-                "Biaya lebih rendah",
-                "Langsung dari bank",
-                "Pemrosesan batch"
-              ]
+              "features": ["Biaya lebih rendah", "Langsung dari bank", "Pemrosesan batch"]
             }
           ]
         },
@@ -9680,10 +9642,7 @@
           "smsAuth": {
             "title": "Otentikasi SMS",
             "description": "Terima kode verifikasi melalui pesan teks ke nomor ponsel yang terdaftar.",
-            "features": [
-              "Mudah diatur",
-              "Berfungsi di semua jenis ponsel"
-            ],
+            "features": ["Mudah diatur", "Berfungsi di semua jenis ponsel"],
             "limitation": "Memerlukan layanan seluler"
           }
         },

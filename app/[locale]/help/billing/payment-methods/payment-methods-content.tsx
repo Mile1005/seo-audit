@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { MainLayout } from '@/components/layout/main-layout';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft, CreditCard, Shield, Plus, Edit, Trash2 } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowLeft, CreditCard, Shield, Plus, Edit, Trash2 } from "lucide-react";
 
 export default function PaymentMethodsContent() {
-  const t = useTranslations('helpCenter.categories.paymentMethods');
+  const t = useTranslations("helpCenter.categories.paymentMethods");
 
   return (
     <MainLayout>
@@ -17,14 +17,17 @@ export default function PaymentMethodsContent() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
               <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                {t('breadcrumb.help')}
+                {t("breadcrumb.help")}
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/billing" className="text-gray-400 hover:text-white transition-colors">
-                {t('breadcrumb.billing')}
+              <Link
+                href="/help/billing"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                {t("breadcrumb.billing")}
               </Link>
               <span className="text-gray-600">/</span>
-              <span className="text-white">{t('breadcrumb.paymentMethods')}</span>
+              <span className="text-white">{t("breadcrumb.paymentMethods")}</span>
             </nav>
           </div>
         </section>
@@ -37,7 +40,7 @@ export default function PaymentMethodsContent() {
               className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-6 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              {t('backToBilling')}
+              {t("backToBilling")}
             </Link>
 
             <motion.div
@@ -45,8 +48,8 @@ export default function PaymentMethodsContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl font-bold text-white mb-4">{t('title')}</h1>
-              <p className="text-xl text-gray-300 max-w-3xl">{t('subtitle')}</p>
+              <h1 className="text-4xl font-bold text-white mb-4">{t("title")}</h1>
+              <p className="text-xl text-gray-300 max-w-3xl">{t("subtitle")}</p>
             </motion.div>
           </div>
 
@@ -61,13 +64,15 @@ export default function PaymentMethodsContent() {
               <div className="flex items-start gap-4 mb-6">
                 <CreditCard className="w-8 h-8 text-blue-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('acceptedMethods.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('acceptedMethods.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    {t("acceptedMethods.title")}
+                  </h2>
+                  <p className="text-gray-300 mb-6">{t("acceptedMethods.description")}</p>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {t.raw('acceptedMethods.methods').map((method: any, index: number) => (
+                {t.raw("acceptedMethods.methods").map((method: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -107,13 +112,15 @@ export default function PaymentMethodsContent() {
               <div className="flex items-start gap-4 mb-6">
                 <Edit className="w-8 h-8 text-green-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('managingMethods.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('managingMethods.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    {t("managingMethods.title")}
+                  </h2>
+                  <p className="text-gray-300 mb-6">{t("managingMethods.description")}</p>
                 </div>
               </div>
 
               <div className="space-y-6">
-                {t.raw('managingMethods.actions').map((action: any, index: number) => (
+                {t.raw("managingMethods.actions").map((action: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -131,7 +138,9 @@ export default function PaymentMethodsContent() {
                         {action.steps.map((step: string, stepIndex: number) => (
                           <div key={stepIndex} className="flex items-start gap-3">
                             <div className="w-6 h-6 bg-green-600/20 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <span className="text-green-400 text-sm font-semibold">{stepIndex + 1}</span>
+                              <span className="text-green-400 text-sm font-semibold">
+                                {stepIndex + 1}
+                              </span>
                             </div>
                             <p className="text-gray-300 text-sm">{step}</p>
                           </div>
@@ -155,13 +164,13 @@ export default function PaymentMethodsContent() {
               <div className="flex items-start gap-4 mb-6">
                 <Shield className="w-8 h-8 text-purple-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('security.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('security.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">{t("security.title")}</h2>
+                  <p className="text-gray-300 mb-6">{t("security.description")}</p>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {t.raw('security.features').map((feature: any, index: number) => (
+                {t.raw("security.features").map((feature: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -191,13 +200,13 @@ export default function PaymentMethodsContent() {
               <div className="flex items-start gap-4 mb-6">
                 <Plus className="w-8 h-8 text-orange-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('needHelp.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('needHelp.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">{t("needHelp.title")}</h2>
+                  <p className="text-gray-300 mb-6">{t("needHelp.description")}</p>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {t.raw('needHelp.contacts').map((contact: any, index: number) => (
+                {t.raw("needHelp.contacts").map((contact: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}

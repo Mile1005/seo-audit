@@ -1,49 +1,42 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { signOut } from "next-auth/react"
-import { motion } from "framer-motion"
-import { 
-  User, 
-  Settings, 
-  LogOut, 
-  ChevronDown,
-  Plus,
-  FolderOpen
-} from "lucide-react"
-import { useRouter } from "next/navigation"
-import { LanguageSwitcher } from "@/components/layout/language-switcher"
+import { useState } from "react";
+import { signOut } from "next-auth/react";
+import { motion } from "framer-motion";
+import { User, Settings, LogOut, ChevronDown, Plus, FolderOpen } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 interface User {
-  id: string
-  email: string
-  name?: string | null
+  id: string;
+  email: string;
+  name?: string | null;
 }
 
 interface Project {
-  id: string
-  name: string
+  id: string;
+  name: string;
 }
 
 export function DashboardHeader({ user }: { user: User }) {
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
-  const [isProjectMenuOpen, setIsProjectMenuOpen] = useState(false)
-  const [projects, setProjects] = useState<Project[]>([])
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-  const router = useRouter()
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isProjectMenuOpen, setIsProjectMenuOpen] = useState(false);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const router = useRouter();
 
   const handleSignOut = async () => {
-    await signOut({ callbackUrl: "/login" })
-  }
+    await signOut({ callbackUrl: "/login" });
+  };
 
   const handleCreateProject = () => {
-    router.push("/dashboard/projects/new")
-  }
+    router.push("/dashboard/projects/new");
+  };
 
   const handleProjectSelect = (project: Project) => {
-    setSelectedProject(project)
-    setIsProjectMenuOpen(false)
-  }
+    setSelectedProject(project);
+    setIsProjectMenuOpen(false);
+  };
 
   return (
     <header className="bg-gray-900/50 backdrop-blur-sm border-b border-gray-700/50">
@@ -68,9 +61,7 @@ export function DashboardHeader({ user }: { user: User }) {
                 className="flex items-center space-x-2 px-4 py-2 bg-gray-800/50 border border-gray-600 rounded-lg text-white hover:bg-gray-700/50 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-200"
               >
                 <FolderOpen className="w-4 h-4" />
-                <span>
-                  {selectedProject ? selectedProject.name : "Select Project"}
-                </span>
+                <span>{selectedProject ? selectedProject.name : "Select Project"}</span>
                 <ChevronDown className="w-4 h-4" />
               </button>
 
@@ -165,5 +156,5 @@ export function DashboardHeader({ user }: { user: User }) {
         </div>
       </div>
     </header>
-  )
+  );
 }

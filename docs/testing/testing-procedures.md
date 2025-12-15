@@ -1,11 +1,13 @@
 # Comprehensive Testing Procedures
 
 ## Overview
+
 This document outlines the complete testing procedures for ensuring WCAG 2.1 AA accessibility compliance, cross-browser compatibility, mobile responsiveness, and overall quality assurance.
 
 ## Automated Testing
 
 ### Prerequisites
+
 - Node.js 18+ installed
 - pnpm package manager
 - All dependencies installed: `pnpm install`
@@ -13,6 +15,7 @@ This document outlines the complete testing procedures for ensuring WCAG 2.1 AA 
 ### Running Automated Tests
 
 #### Accessibility Tests
+
 ```bash
 # Run accessibility tests with axe-core
 pnpm test tests/accessibility.spec.ts
@@ -24,6 +27,7 @@ pnpm test tests/accessibility.spec.ts --project=webkit
 ```
 
 #### E2E Test Suite
+
 ```bash
 # Run all E2E tests
 pnpm test tests/e2e/
@@ -43,6 +47,7 @@ pnpm test tests/e2e/mobile.spec.ts
 ```
 
 #### Performance Tests
+
 ```bash
 # Run Lighthouse CI for performance auditing
 npx lhci autorun
@@ -52,6 +57,7 @@ node performance-test.js
 ```
 
 ### Test Reports
+
 - Test results are saved in `test-results/` directory
 - HTML reports available in `playwright-report/`
 - Screenshots and videos for failed tests in `test-results/`
@@ -61,13 +67,16 @@ node performance-test.js
 ### 1. Accessibility Testing (WCAG 2.1 AA)
 
 #### Screen Reader Testing
+
 **Required Tools:**
+
 - NVDA (Windows) - Free
 - JAWS (Windows) - Commercial
 - VoiceOver (macOS) - Built-in
 - Orca (Linux) - Free
 
 **Testing Steps:**
+
 1. **Navigation Testing**
    - Use Tab key to navigate through all interactive elements
    - Verify logical tab order
@@ -88,6 +97,7 @@ node performance-test.js
    - Check modal and dropdown keyboard interaction
 
 #### Visual Accessibility Testing
+
 1. **Color Contrast**
    - Use WebAIM Contrast Checker
    - Verify 4.5:1 ratio for normal text
@@ -106,6 +116,7 @@ node performance-test.js
    - Check focus indicator contrast
 
 #### Testing Checklist
+
 - [ ] All images have appropriate alt text
 - [ ] Headings are properly structured (H1-H6)
 - [ ] Form inputs have associated labels
@@ -120,7 +131,9 @@ node performance-test.js
 ### 2. Cross-Browser Testing
 
 #### Required Browsers
+
 **Desktop:**
+
 - Chrome (latest)
 - Firefox (latest)
 - Safari (latest)
@@ -129,12 +142,14 @@ node performance-test.js
 - Firefox ESR
 
 **Mobile:**
+
 - Safari on iOS (latest)
 - Chrome on Android (latest)
 - Samsung Internet
 - Firefox Mobile
 
 #### Testing Procedures
+
 1. **Functional Testing**
    - Test all critical user journeys
    - Verify form submissions
@@ -155,17 +170,21 @@ node performance-test.js
    - Test async operations
 
 #### Browser-Specific Checks
+
 **Safari:**
+
 - [ ] Test WebKit-specific CSS properties
 - [ ] Verify date/time input fallbacks
 - [ ] Check iOS Safari viewport handling
 
 **Firefox:**
+
 - [ ] Test Gecko-specific rendering
 - [ ] Verify CSS Grid/Flexbox behavior
 - [ ] Check privacy features impact
 
 **Chrome/Edge:**
+
 - [ ] Test Chromium-specific features
 - [ ] Verify Lighthouse performance scores
 - [ ] Check PWA functionality
@@ -173,18 +192,22 @@ node performance-test.js
 ### 3. Mobile Device Testing
 
 #### Physical Device Testing
+
 **iOS Devices:**
+
 - iPhone 12/13/14 (standard)
 - iPhone SE (small screen)
 - iPad (tablet)
 - iPad Pro (large tablet)
 
 **Android Devices:**
+
 - Pixel 5/6/7 (standard Android)
 - Samsung Galaxy S21/S22/S23
 - Samsung Galaxy Tab (tablet)
 
 #### Mobile Testing Procedures
+
 1. **Touch Interaction**
    - Test tap targets (minimum 44x44px)
    - Verify swipe gestures
@@ -210,6 +233,7 @@ node performance-test.js
    - Test mobile-specific CSS
 
 #### Mobile Checklist
+
 - [ ] Touch targets are large enough (44x44px minimum)
 - [ ] Content is readable without zooming
 - [ ] Navigation works on small screens
@@ -222,23 +246,28 @@ node performance-test.js
 ### 4. Performance Testing
 
 #### Tools Required
+
 - Lighthouse (built into Chrome DevTools)
 - WebPageTest.org
 - GTmetrix
 - PageSpeed Insights
 
 #### Performance Metrics
+
 **Core Web Vitals:**
+
 - Largest Contentful Paint (LCP) < 2.5s
 - First Input Delay (FID) < 100ms
 - Cumulative Layout Shift (CLS) < 0.1
 
 **Additional Metrics:**
+
 - First Contentful Paint < 1.8s
 - Time to Interactive < 3.8s
 - Speed Index < 3.4s
 
 #### Performance Testing Steps
+
 1. **Lighthouse Audits**
    - Run on desktop and mobile
    - Test both authenticated and unauthenticated pages
@@ -260,6 +289,7 @@ node performance-test.js
 ### 5. Security Testing
 
 #### Manual Security Checks
+
 1. **HTTPS Configuration**
    - Verify SSL certificate validity
    - Check HSTS headers
@@ -281,6 +311,7 @@ node performance-test.js
 ### 6. SEO Testing
 
 #### Technical SEO
+
 1. **Meta Tags**
    - Title tags (unique, descriptive, <60 chars)
    - Meta descriptions (<160 chars)
@@ -299,6 +330,7 @@ node performance-test.js
    - 404 error handling
 
 #### SEO Tools
+
 - Google Search Console
 - Screaming Frog SEO Spider
 - SEMrush Site Audit
@@ -307,6 +339,7 @@ node performance-test.js
 ### 7. Content Testing
 
 #### Content Quality Checks
+
 1. **Text Content**
    - Grammar and spelling
    - Readability scores
@@ -322,6 +355,7 @@ node performance-test.js
 ### 8. User Experience Testing
 
 #### Usability Testing
+
 1. **Task-Based Testing**
    - Complete primary user journeys
    - Time task completion
@@ -337,6 +371,7 @@ node performance-test.js
 ### Testing Schedule
 
 #### Pre-Release Testing
+
 - [ ] Run full automated test suite
 - [ ] Complete accessibility manual testing
 - [ ] Perform cross-browser testing
@@ -345,6 +380,7 @@ node performance-test.js
 - [ ] Complete security review
 
 #### Post-Release Monitoring
+
 - [ ] Monitor Core Web Vitals
 - [ ] Track accessibility metrics
 - [ ] Check error rates
@@ -354,6 +390,7 @@ node performance-test.js
 ## Reporting and Documentation
 
 ### Test Reports
+
 1. **Automated Test Reports**
    - Playwright HTML reports
    - Lighthouse CI reports
@@ -366,12 +403,14 @@ node performance-test.js
    - Performance test outcomes
 
 ### Issue Tracking
+
 - Use GitHub Issues for bug tracking
 - Tag issues by severity and type
 - Include reproduction steps
 - Link to test evidence
 
 ### Continuous Improvement
+
 - Review test results weekly
 - Update test procedures based on findings
 - Add new tests for discovered edge cases
@@ -380,6 +419,7 @@ node performance-test.js
 ## Emergency Testing Procedures
 
 ### Hotfix Testing
+
 1. Run smoke tests
 2. Test affected functionality
 3. Verify no regression in critical paths
@@ -387,6 +427,7 @@ node performance-test.js
 5. Performance spot check
 
 ### Rollback Testing
+
 1. Verify rollback functionality
 2. Test data integrity
 3. Check user sessions

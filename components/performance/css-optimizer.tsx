@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { injectCriticalCSS, preloadNonCriticalCSS } from '@/lib/critical-css';
+import { useEffect } from "react";
+import { injectCriticalCSS, preloadNonCriticalCSS } from "@/lib/critical-css";
 
 /**
  * CSS Optimizer Component
@@ -15,22 +15,34 @@ export function CSSOptimizer() {
     // Remove unused CSS classes and optimize critical path
     const optimizeCSS = () => {
       // Remove unused Tailwind classes from DOM (for production only)
-      if (process.env.NODE_ENV === 'production') {
+      if (process.env.NODE_ENV === "production") {
         const unusedClasses = [
           // Animation classes that might not be used
-          'animate-bounce',
-          'animate-ping',
+          "animate-bounce",
+          "animate-ping",
           // Large spacing classes for mobile
-          'p-32', 'p-40', 'p-48', 'p-56', 'p-64',
-          'm-32', 'm-40', 'm-48', 'm-56', 'm-64',
+          "p-32",
+          "p-40",
+          "p-48",
+          "p-56",
+          "p-64",
+          "m-32",
+          "m-40",
+          "m-48",
+          "m-56",
+          "m-64",
           // Rarely used position classes
-          'top-96', 'left-96', 'right-96', 'bottom-96',
+          "top-96",
+          "left-96",
+          "right-96",
+          "bottom-96",
           // Large text sizes for mobile
-          'text-8xl', 'text-9xl',
+          "text-8xl",
+          "text-9xl",
         ];
-        
+
         // Remove unused styles from stylesheets
-        document.querySelectorAll('style, link[rel="stylesheet"]').forEach(element => {
+        document.querySelectorAll('style, link[rel="stylesheet"]').forEach((element) => {
           if (element instanceof HTMLStyleElement && element.sheet) {
             try {
               const rules = element.sheet.cssRules || element.sheet.rules;
@@ -38,7 +50,7 @@ export function CSSOptimizer() {
                 const rule = rules[i];
                 if (rule instanceof CSSStyleRule) {
                   const selector = rule.selectorText;
-                  unusedClasses.forEach(className => {
+                  unusedClasses.forEach((className) => {
                     if (selector.includes(className) && !document.querySelector(`.${className}`)) {
                       element.sheet?.deleteRule(i);
                     }
@@ -57,11 +69,11 @@ export function CSSOptimizer() {
     const optimizeFonts = () => {
       // Add font-display: swap to improve loading performance
       const fontLinks = document.querySelectorAll('link[href*="fonts.googleapis.com"]');
-      fontLinks.forEach(link => {
+      fontLinks.forEach((link) => {
         if (link instanceof HTMLLinkElement) {
           const href = link.href;
-          if (!href.includes('display=swap')) {
-            const separator = href.includes('?') ? '&' : '?';
+          if (!href.includes("display=swap")) {
+            const separator = href.includes("?") ? "&" : "?";
             link.href = `${href}${separator}display=swap`;
           }
         }
@@ -70,11 +82,11 @@ export function CSSOptimizer() {
       // Preload critical fonts
       const preloadFont = (href: string, family: string) => {
         if (!document.querySelector(`link[rel="preload"][href*="${family}"]`)) {
-          const link = document.createElement('link');
-          link.rel = 'preload';
-          link.as = 'font';
-          link.type = 'font/woff2';
-          link.crossOrigin = 'anonymous';
+          const link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "font";
+          link.type = "font/woff2";
+          link.crossOrigin = "anonymous";
           link.href = href;
           document.head.appendChild(link);
         }
@@ -88,22 +100,22 @@ export function CSSOptimizer() {
     const optimizeCriticalCSS = () => {
       // Move non-critical CSS to load asynchronously
       const stylesheets = document.querySelectorAll('link[rel="stylesheet"]');
-      stylesheets.forEach(link => {
+      stylesheets.forEach((link) => {
         if (link instanceof HTMLLinkElement) {
           const href = link.href;
-          
+
           // Skip critical CSS files (globals.css contains critical styles)
-          if (href.includes('globals.css') || href.includes('critical')) {
+          if (href.includes("globals.css") || href.includes("critical")) {
             return;
           }
-          
+
           // For mobile performance, load non-critical CSS with lower priority
           if (window.innerWidth <= 768) {
             // On mobile, defer non-critical CSS even more
-            link.media = 'print';
-            link.onload = function() {
+            link.media = "print";
+            link.onload = function () {
               if (link instanceof HTMLLinkElement) {
-                link.media = 'all';
+                link.media = "all";
               }
             };
           }
@@ -112,12 +124,12 @@ export function CSSOptimizer() {
     };
 
     // Run optimizations after page load
-    if (document.readyState === 'complete') {
+    if (document.readyState === "complete") {
       optimizeCSS();
       optimizeFonts();
       preloadNonCriticalCSS();
     } else {
-      window.addEventListener('load', () => {
+      window.addEventListener("load", () => {
         optimizeCSS();
         optimizeFonts();
         preloadNonCriticalCSS();
@@ -131,7 +143,7 @@ export function CSSOptimizer() {
     const optimizeForMobile = () => {
       if (window.innerWidth <= 768) {
         // Reduce animations on mobile for better performance
-        const style = document.createElement('style');
+        const style = document.createElement("style");
         style.textContent = `
           @media (max-width: 768px) {
             *, *::before, *::after {
@@ -148,12 +160,11 @@ export function CSSOptimizer() {
 
     // Apply mobile optimizations
     optimizeForMobile();
-    window.addEventListener('resize', optimizeForMobile);
+    window.addEventListener("resize", optimizeForMobile);
 
     return () => {
-      window.removeEventListener('resize', optimizeForMobile);
+      window.removeEventListener("resize", optimizeForMobile);
     };
-
   }, []);
 
   return null; // This is a utility component

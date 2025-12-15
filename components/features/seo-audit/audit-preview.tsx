@@ -2,52 +2,60 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { AlertTriangle, CheckCircle, Clock, ArrowRight, FileText, BarChart3, Target } from "lucide-react";
+import {
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  ArrowRight,
+  FileText,
+  BarChart3,
+  Target,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export default function AuditPreview() {
-  const t = useTranslations('featurePages.seoAudit.auditPreview');
-  
+  const t = useTranslations("featurePages.seoAudit.auditPreview");
+
   const mockIssues = [
     {
       type: "critical",
-      title: t('mockIssues.metaDescriptions'),
+      title: t("mockIssues.metaDescriptions"),
       count: 12,
       icon: AlertTriangle,
-      color: "text-red-500"
+      color: "text-red-500",
     },
     {
       type: "warning",
-      title: t('mockIssues.slowImages'),
+      title: t("mockIssues.slowImages"),
       count: 8,
       icon: Clock,
-      color: "text-yellow-500"
+      color: "text-yellow-500",
     },
     {
       type: "success",
-      title: t('mockIssues.optimizedHeadings'),
+      title: t("mockIssues.optimizedHeadings"),
       count: 45,
       icon: CheckCircle,
-      color: "text-green-500"
-    }
+      color: "text-green-500",
+    },
   ];
 
   const features = [
     {
       icon: Target,
-      title: t('features.priorityMatrix.title'),
-      desc: t('features.priorityMatrix.desc')
+      title: t("features.priorityMatrix.title"),
+      desc: t("features.priorityMatrix.desc"),
     },
     {
       icon: BarChart3,
-      title: t('features.aiSuggestions.title'),
-      desc: t('features.aiSuggestions.desc')
+      title: t("features.aiSuggestions.title"),
+      desc: t("features.aiSuggestions.desc"),
     },
     {
       icon: FileText,
-      title: t('features.benchmark.title'),
-      desc: t('features.benchmark.desc')
-    }
+      title: t("features.benchmark.title"),
+      desc: t("features.benchmark.desc"),
+    },
   ];
 
   return (
@@ -60,12 +68,10 @@ export default function AuditPreview() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            {t('header.title')}
+            {t("header.title")}
           </h2>
-          <p className="text-muted-foreground mb-8 text-lg">
-            {t('header.subtitle')}
-          </p>
-          
+          <p className="text-muted-foreground mb-8 text-lg">{t("header.subtitle")}</p>
+
           <div className="space-y-4">
             {features.map((feature, index) => {
               const Icon = feature.icon;
@@ -102,8 +108,8 @@ export default function AuditPreview() {
           <div className="rounded-xl border bg-background p-6 shadow-lg relative overflow-hidden">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-foreground">{t('report.title')}</h3>
-              <div className="text-sm text-muted-foreground">{t('report.domain')}</div>
+              <h3 className="text-lg font-semibold text-foreground">{t("report.title")}</h3>
+              <div className="text-sm text-muted-foreground">{t("report.domain")}</div>
             </div>
 
             {/* Overall Score */}
@@ -115,7 +121,7 @@ export default function AuditPreview() {
               className="text-center mb-6 p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-lg"
             >
               <div className="text-3xl font-bold text-blue-600 mb-1">78</div>
-              <div className="text-sm text-muted-foreground">{t('report.overallScore')}</div>
+              <div className="text-sm text-muted-foreground">{t("report.overallScore")}</div>
               <div className="w-full bg-muted rounded-full h-2 mt-2">
                 <motion.div
                   initial={{ width: 0 }}
@@ -129,7 +135,7 @@ export default function AuditPreview() {
 
             {/* Issues List */}
             <div className="space-y-3">
-              <h4 className="font-medium text-foreground mb-3">{t('report.keyIssues')}</h4>
+              <h4 className="font-medium text-foreground mb-3">{t("report.keyIssues")}</h4>
               {mockIssues.map((issue, index) => {
                 const Icon = issue.icon;
                 return (
@@ -168,7 +174,7 @@ export default function AuditPreview() {
               className="mt-6 p-3 bg-primary/5 rounded-lg border border-primary/20"
             >
               <div className="text-sm text-center text-muted-foreground">
-                {t('report.moreInsights')}
+                {t("report.moreInsights")}
               </div>
             </motion.div>
           </div>
@@ -177,25 +183,25 @@ export default function AuditPreview() {
           <motion.div
             animate={{
               y: [0, -5, 0],
-              rotate: [0, 2, 0]
+              rotate: [0, 2, 0],
             }}
             transition={{
               duration: 4,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
             className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full opacity-20 blur-sm"
           />
           <motion.div
             animate={{
               y: [0, 8, 0],
-              rotate: [0, -3, 0]
+              rotate: [0, -3, 0],
             }}
             transition={{
               duration: 6,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 2
+              delay: 2,
             }}
             className="absolute -bottom-6 -left-6 w-12 h-12 bg-gradient-to-br from-pink-400 to-orange-600 rounded-full opacity-20 blur-sm"
           />

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Users,
   TrendingUp,
@@ -12,11 +12,11 @@ import {
   AlertCircle,
   Trophy,
   Zap,
-  Loader2
-} from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
+  Loader2,
+} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 
 interface Competitor {
   id: string;
@@ -38,7 +38,7 @@ interface CompetitiveGap {
   yourRank: number | null;
   volume: number;
   difficulty: number;
-  opportunity: 'high' | 'medium' | 'low';
+  opportunity: "high" | "medium" | "low";
 }
 
 interface CompetitiveIntelligenceProps {
@@ -48,7 +48,12 @@ interface CompetitiveIntelligenceProps {
   yourRank?: number;
 }
 
-export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRank = 5 }: CompetitiveIntelligenceProps) {
+export function CompetitiveIntelligence({
+  keywordId,
+  projectId,
+  keyword,
+  yourRank = 5,
+}: CompetitiveIntelligenceProps) {
   const [selectedCompetitor, setSelectedCompetitor] = useState<string | null>(null);
   const [competitors, setCompetitors] = useState<Competitor[]>([]);
   const [yourShareOfVoice, setYourShareOfVoice] = useState<number>(0);
@@ -69,11 +74,11 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
       );
 
       if (response.status === 401) {
-        throw new Error('Sign in to view competitor intelligence.');
+        throw new Error("Sign in to view competitor intelligence.");
       }
 
       if (!response.ok) {
-        throw new Error('Failed to fetch competitor data');
+        throw new Error("Failed to fetch competitor data");
       }
 
       const result = await response.json();
@@ -82,11 +87,11 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
         setCompetitors(result.data.competitors);
         setYourShareOfVoice(result.data.yourShareOfVoice);
       } else {
-        throw new Error(result.error || 'Unknown error');
+        throw new Error(result.error || "Unknown error");
       }
     } catch (err) {
-      console.error('Error fetching competitors:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load competitor data');
+      console.error("Error fetching competitors:", err);
+      setError(err instanceof Error ? err.message : "Failed to load competitor data");
     } finally {
       setLoading(false);
     }
@@ -100,14 +105,14 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
 
   const getOpportunityColor = (opportunity: string) => {
     switch (opportunity) {
-      case 'high':
-        return 'text-green-600 bg-green-100';
-      case 'medium':
-        return 'text-yellow-600 bg-yellow-100';
-      case 'low':
-        return 'text-gray-600 bg-gray-100';
+      case "high":
+        return "text-green-600 bg-green-100";
+      case "medium":
+        return "text-yellow-600 bg-yellow-100";
+      case "low":
+        return "text-gray-600 bg-gray-100";
       default:
-        return 'text-gray-600 bg-gray-100';
+        return "text-gray-600 bg-gray-100";
     }
   };
 
@@ -125,7 +130,9 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
         <CardContent className="p-6">
           <div className="flex items-center justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin text-purple-600" />
-            <span className="ml-3 text-slate-600 dark:text-slate-400">Loading competitor data...</span>
+            <span className="ml-3 text-slate-600 dark:text-slate-400">
+              Loading competitor data...
+            </span>
           </div>
         </CardContent>
       </Card>
@@ -173,7 +180,9 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
         <CardContent className="p-6">
           <div className="text-center py-12">
             <Users className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-            <p className="text-slate-700 dark:text-slate-300 mb-2">No competitor data available yet</p>
+            <p className="text-slate-700 dark:text-slate-300 mb-2">
+              No competitor data available yet
+            </p>
             <p className="text-sm text-slate-600 dark:text-slate-400">
               Competitors will appear here once ranking data is collected
             </p>
@@ -250,7 +259,9 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
                     key={competitor.id}
                     onClick={() => setSelectedCompetitor(isSelected ? null : competitor.id)}
                     className={`w-full group bg-white dark:bg-slate-800 rounded-xl border-2 ${
-                      isSelected ? 'border-purple-400 bg-purple-50 dark:bg-purple-900/20' : 'border-slate-200 dark:border-slate-700 hover:border-purple-300 dark:hover:border-purple-600'
+                      isSelected
+                        ? "border-purple-400 bg-purple-50 dark:bg-purple-900/20"
+                        : "border-slate-200 dark:border-slate-700 hover:border-purple-300 dark:hover:border-purple-600"
                     } transition-all duration-200 overflow-hidden hover:shadow-lg`}
                   >
                     <div className="p-4">
@@ -259,12 +270,12 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
                         <div
                           className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
                             idx === 0
-                              ? 'bg-yellow-100 text-yellow-700'
+                              ? "bg-yellow-100 text-yellow-700"
                               : idx === 1
-                              ? 'bg-slate-200 text-slate-700'
-                              : idx === 2
-                              ? 'bg-orange-100 text-orange-700'
-                              : 'bg-slate-100 text-slate-600'
+                                ? "bg-slate-200 text-slate-700"
+                                : idx === 2
+                                  ? "bg-orange-100 text-orange-700"
+                                  : "bg-slate-100 text-slate-600"
                           }`}
                         >
                           #{competitor.rank}
@@ -273,10 +284,22 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
                         {/* Competitor Info */}
                         <div className="flex-1 text-left">
                           <div className="flex items-center gap-2 mb-2">
-                            <h4 className="font-bold text-slate-900 dark:text-slate-100">{competitor.domain}</h4>
+                            <h4 className="font-bold text-slate-900 dark:text-slate-100">
+                              {competitor.domain}
+                            </h4>
                             {change !== 0 && (
-                              <Badge className={change > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                                {change > 0 ? <TrendingUp className="h-3 w-3 mr-1" /> : <TrendingDown className="h-3 w-3 mr-1" />}
+                              <Badge
+                                className={
+                                  change > 0
+                                    ? "bg-green-100 text-green-700"
+                                    : "bg-red-100 text-red-700"
+                                }
+                              >
+                                {change > 0 ? (
+                                  <TrendingUp className="h-3 w-3 mr-1" />
+                                ) : (
+                                  <TrendingDown className="h-3 w-3 mr-1" />
+                                )}
                                 {Math.abs(change)}
                               </Badge>
                             )}
@@ -287,20 +310,34 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
 
                           <div className="grid grid-cols-4 gap-3 text-xs">
                             <div>
-                              <p className="text-slate-600 dark:text-slate-400 mb-1">Share of Voice</p>
-                              <p className="font-bold text-slate-900 dark:text-slate-100">{competitor.shareOfVoice}%</p>
+                              <p className="text-slate-600 dark:text-slate-400 mb-1">
+                                Share of Voice
+                              </p>
+                              <p className="font-bold text-slate-900 dark:text-slate-100">
+                                {competitor.shareOfVoice}%
+                              </p>
                               <Progress value={competitor.shareOfVoice} className="h-1 mt-1" />
                             </div>
                             <div>
-                              <p className="text-slate-600 dark:text-slate-400 mb-1">Common Keywords</p>
-                              <p className="font-bold text-slate-900 dark:text-slate-100">{competitor.commonKeywords.toLocaleString()}</p>
+                              <p className="text-slate-600 dark:text-slate-400 mb-1">
+                                Common Keywords
+                              </p>
+                              <p className="font-bold text-slate-900 dark:text-slate-100">
+                                {competitor.commonKeywords.toLocaleString()}
+                              </p>
                             </div>
                             <div>
-                              <p className="text-slate-600 dark:text-slate-400 mb-1">Est. Traffic</p>
-                              <p className="font-bold text-slate-900 dark:text-slate-100">{(competitor.estimatedTraffic / 1000).toFixed(1)}K</p>
+                              <p className="text-slate-600 dark:text-slate-400 mb-1">
+                                Est. Traffic
+                              </p>
+                              <p className="font-bold text-slate-900 dark:text-slate-100">
+                                {(competitor.estimatedTraffic / 1000).toFixed(1)}K
+                              </p>
                             </div>
                             <div>
-                              <p className="text-slate-600 dark:text-slate-400 mb-1">Opportunities</p>
+                              <p className="text-slate-600 dark:text-slate-400 mb-1">
+                                Opportunities
+                              </p>
                               <Badge className="bg-green-100 text-green-700">
                                 <Target className="h-3 w-3 mr-1" />
                                 {competitor.opportunities}
@@ -311,7 +348,7 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
 
                         {/* Expand Icon */}
                         <AlertCircle
-                          className={`h-5 w-5 text-slate-400 ${isSelected ? 'rotate-180' : ''} transition-transform`}
+                          className={`h-5 w-5 text-slate-400 ${isSelected ? "rotate-180" : ""} transition-transform`}
                         />
                       </div>
                     </div>
@@ -326,10 +363,15 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
                           </h5>
                           <div className="space-y-2">
                             {competitiveGaps.map((gap, gapIdx) => (
-                              <div key={gapIdx} className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3">
+                              <div
+                                key={gapIdx}
+                                className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 p-3"
+                              >
                                 <div className="flex items-center justify-between mb-2">
                                   <div className="flex-1">
-                                    <p className="font-semibold text-slate-900 dark:text-slate-100 text-sm">{gap.keyword}</p>
+                                    <p className="font-semibold text-slate-900 dark:text-slate-100 text-sm">
+                                      {gap.keyword}
+                                    </p>
                                   </div>
                                   <Badge className={getOpportunityColor(gap.opportunity)}>
                                     {gap.opportunity.toUpperCase()}
@@ -338,25 +380,33 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
                                 <div className="grid grid-cols-4 gap-2 text-xs">
                                   <div>
                                     <p className="text-slate-600 dark:text-slate-400">Their Rank</p>
-                                    <Badge className="bg-purple-100 text-purple-700 mt-1">#{gap.theirRank}</Badge>
+                                    <Badge className="bg-purple-100 text-purple-700 mt-1">
+                                      #{gap.theirRank}
+                                    </Badge>
                                   </div>
                                   <div>
                                     <p className="text-slate-600 dark:text-slate-400">Your Rank</p>
                                     <Badge
                                       className={
-                                        gap.yourRank ? 'bg-blue-100 text-blue-700 mt-1' : 'bg-gray-100 text-gray-700 mt-1'
+                                        gap.yourRank
+                                          ? "bg-blue-100 text-blue-700 mt-1"
+                                          : "bg-gray-100 text-gray-700 mt-1"
                                       }
                                     >
-                                      {gap.yourRank ? `#${gap.yourRank}` : 'Not Ranking'}
+                                      {gap.yourRank ? `#${gap.yourRank}` : "Not Ranking"}
                                     </Badge>
                                   </div>
                                   <div>
                                     <p className="text-slate-600 dark:text-slate-400">Volume</p>
-                                    <p className="font-bold text-slate-900 mt-1">{gap.volume.toLocaleString()}</p>
+                                    <p className="font-bold text-slate-900 mt-1">
+                                      {gap.volume.toLocaleString()}
+                                    </p>
                                   </div>
                                   <div>
                                     <p className="text-slate-600 dark:text-slate-400">Difficulty</p>
-                                    <p className="font-bold text-slate-900 dark:text-slate-100 mt-1">{gap.difficulty}/100</p>
+                                    <p className="font-bold text-slate-900 dark:text-slate-100 mt-1">
+                                      {gap.difficulty}/100
+                                    </p>
                                   </div>
                                 </div>
                               </div>
@@ -376,7 +426,9 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
             <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <BarChart3 className="h-5 w-5 text-purple-600" />
-                <h5 className="font-bold text-slate-900 dark:text-slate-100">Avg. Competitor Rank</h5>
+                <h5 className="font-bold text-slate-900 dark:text-slate-100">
+                  Avg. Competitor Rank
+                </h5>
               </div>
               <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                 #{Math.round(competitors.reduce((sum, c) => sum + c.rank, 0) / competitors.length)}
@@ -385,7 +437,9 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
             <div className="bg-white dark:bg-slate-800 rounded-xl border-2 border-slate-200 dark:border-slate-700 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Target className="h-5 w-5 text-green-600" />
-                <h5 className="font-bold text-slate-900 dark:text-slate-100">Total Opportunities</h5>
+                <h5 className="font-bold text-slate-900 dark:text-slate-100">
+                  Total Opportunities
+                </h5>
               </div>
               <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">
                 {competitors.reduce((sum, c) => sum + c.opportunities, 0)}
@@ -397,7 +451,9 @@ export function CompetitiveIntelligence({ keywordId, projectId, keyword, yourRan
                 <h5 className="font-bold text-slate-900 dark:text-slate-100">Market Position</h5>
               </div>
               <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">#{yourRank}</p>
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">of {competitors.length + 1} competitors</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                of {competitors.length + 1} competitors
+              </p>
             </div>
           </div>
         </CardContent>

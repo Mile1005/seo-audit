@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { MainLayout } from '@/components/layout/main-layout';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft, FileText, Download, Calendar, CreditCard, Mail } from 'lucide-react';
+import { useTranslations } from "next-intl";
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowLeft, FileText, Download, Calendar, CreditCard, Mail } from "lucide-react";
 
 export default function InvoicesContent() {
-  const t = useTranslations('helpCenter.categories.invoices');
+  const t = useTranslations("helpCenter.categories.invoices");
 
   return (
     <MainLayout>
@@ -17,14 +17,17 @@ export default function InvoicesContent() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav className="flex items-center gap-2 text-sm" aria-label="Breadcrumb">
               <Link href="/help" className="text-gray-400 hover:text-white transition-colors">
-                {t('breadcrumb.help')}
+                {t("breadcrumb.help")}
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/billing" className="text-gray-400 hover:text-white transition-colors">
-                {t('breadcrumb.billing')}
+              <Link
+                href="/help/billing"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                {t("breadcrumb.billing")}
               </Link>
               <span className="text-gray-600">/</span>
-              <span className="text-white">{t('breadcrumb.invoices')}</span>
+              <span className="text-white">{t("breadcrumb.invoices")}</span>
             </nav>
           </div>
         </section>
@@ -37,7 +40,7 @@ export default function InvoicesContent() {
               className="inline-flex items-center text-blue-400 hover:text-blue-300 mb-6 group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              {t('backToBilling')}
+              {t("backToBilling")}
             </Link>
 
             <motion.div
@@ -45,8 +48,8 @@ export default function InvoicesContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl font-bold text-white mb-4">{t('title')}</h1>
-              <p className="text-xl text-gray-300 max-w-3xl">{t('subtitle')}</p>
+              <h1 className="text-4xl font-bold text-white mb-4">{t("title")}</h1>
+              <p className="text-xl text-gray-300 max-w-3xl">{t("subtitle")}</p>
             </motion.div>
           </div>
 
@@ -61,13 +64,15 @@ export default function InvoicesContent() {
               <div className="flex items-start gap-4 mb-6">
                 <FileText className="w-8 h-8 text-blue-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('accessInvoices.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('accessInvoices.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    {t("accessInvoices.title")}
+                  </h2>
+                  <p className="text-gray-300 mb-6">{t("accessInvoices.description")}</p>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {t.raw('accessInvoices.steps').map((step: any, index: number) => (
+                {t.raw("accessInvoices.steps").map((step: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -99,13 +104,15 @@ export default function InvoicesContent() {
               <div className="flex items-start gap-4 mb-6">
                 <Download className="w-8 h-8 text-green-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('invoiceDetails.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('invoiceDetails.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    {t("invoiceDetails.title")}
+                  </h2>
+                  <p className="text-gray-300 mb-6">{t("invoiceDetails.description")}</p>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {t.raw('invoiceDetails.items').map((item: any, index: number) => (
+                {t.raw("invoiceDetails.items").map((item: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
@@ -135,13 +142,15 @@ export default function InvoicesContent() {
               <div className="flex items-start gap-4 mb-6">
                 <Calendar className="w-8 h-8 text-purple-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('billingHistory.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('billingHistory.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">
+                    {t("billingHistory.title")}
+                  </h2>
+                  <p className="text-gray-300 mb-6">{t("billingHistory.description")}</p>
                 </div>
               </div>
 
               <div className="space-y-4">
-                {t.raw('billingHistory.features').map((feature: any, index: number) => (
+                {t.raw("billingHistory.features").map((feature: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -171,13 +180,13 @@ export default function InvoicesContent() {
               <div className="flex items-start gap-4 mb-6">
                 <Mail className="w-8 h-8 text-orange-400 mt-1" />
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-4">{t('needHelp.title')}</h2>
-                  <p className="text-gray-300 mb-6">{t('needHelp.description')}</p>
+                  <h2 className="text-2xl font-bold text-white mb-4">{t("needHelp.title")}</h2>
+                  <p className="text-gray-300 mb-6">{t("needHelp.description")}</p>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
-                {t.raw('needHelp.contacts').map((contact: any, index: number) => (
+                {t.raw("needHelp.contacts").map((contact: any, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}

@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '../../../auth';
-import { enforceQuota, incrementUsage } from '../../../lib/server/quota';
-import { getLocaleFromHeaders, translateError } from '@/lib/i18n-server';
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "../../../auth";
+import { enforceQuota, incrementUsage } from "../../../lib/server/quota";
+import { getLocaleFromHeaders, translateError } from "@/lib/i18n-server";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,23 +14,28 @@ export async function POST(request: NextRequest) {
 
     if (userId) {
       try {
-        const user = await (await import('../../../lib/prisma')).prisma.user.findUnique({ where: { id: userId } });
+        const user = await (
+          await import("../../../lib/prisma")
+        ).prisma.user.findUnique({ where: { id: userId } });
         if (!user) {
-          console.warn('Skipping quota enforcement: user id not found in DB', userId);
+          console.warn("Skipping quota enforcement: user id not found in DB", userId);
         } else {
-          const quota = await enforceQuota(userId, 'AUDIT');
+          const quota = await enforceQuota(userId, "AUDIT");
           if (!quota.allowed) {
-            return NextResponse.json({ success: false, error: quota.reason, upgrade: quota.upgrade }, { status: 402 });
+            return NextResponse.json(
+              { success: false, error: quota.reason, upgrade: quota.upgrade },
+              { status: 402 }
+            );
           }
         }
       } catch (e) {
-        console.warn('Quota/user existence check failed, allowing chat', e);
+        console.warn("Quota/user existence check failed, allowing chat", e);
       }
     }
 
     // Validate required fields
-    if (!message || typeof message !== 'string' || message.trim().length === 0) {
-      const msg = await translateError('invalid_message', locale);
+    if (!message || typeof message !== "string" || message.trim().length === 0) {
+      const msg = await translateError("invalid_message", locale);
       return NextResponse.json({ success: false, error: msg }, { status: 400 });
     }
 
@@ -40,24 +45,20 @@ export async function POST(request: NextRequest) {
     // Increment usage if user is authenticated
     if (userId) {
       try {
-        await incrementUsage(userId, 'AUDIT');
+        await incrementUsage(userId, "AUDIT");
       } catch (e) {
-        console.warn('Failed to increment usage', e);
+        console.warn("Failed to increment usage", e);
       }
     }
 
     return NextResponse.json({
       success: true,
       response: aiResponse,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
-    console.error('AI Assistant error:', error);
-    return NextResponse.json(
-      { success: false, error: 'Internal server error' },
-      { status: 500 }
-    );
+    console.error("AI Assistant error:", error);
+    return NextResponse.json({ success: false, error: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -65,7 +66,7 @@ async function generateAIResponse(message: string, history: any[]): Promise<stri
   const lowerMessage = message.toLowerCase();
 
   // SEO-specific responses based on keywords
-  if (lowerMessage.includes('keyword research') || lowerMessage.includes('keywords')) {
+  if (lowerMessage.includes("keyword research") || lowerMessage.includes("keywords")) {
     return `For effective keyword research, I recommend:
 
 1. **Use Multiple Tools**: Combine data from Google Keyword Planner, Ahrefs, SEMrush, and Moz for comprehensive insights.
@@ -87,7 +88,7 @@ async function generateAIResponse(message: string, history: any[]): Promise<stri
 Would you like me to help you research specific keywords for your niche?`;
   }
 
-  if (lowerMessage.includes('backlinks') || lowerMessage.includes('link building')) {
+  if (lowerMessage.includes("backlinks") || lowerMessage.includes("link building")) {
     return `Here's my comprehensive link building strategy:
 
 **1. Content-Based Link Building:**
@@ -120,7 +121,11 @@ Remember: Quality over quantity. One high-authority link is worth more than doze
 What type of backlinks are you focusing on right now?`;
   }
 
-  if (lowerMessage.includes('technical seo') || lowerMessage.includes('site speed') || lowerMessage.includes('core web vitals')) {
+  if (
+    lowerMessage.includes("technical seo") ||
+    lowerMessage.includes("site speed") ||
+    lowerMessage.includes("core web vitals")
+  ) {
     return `Technical SEO is crucial for your website's performance. Here's what you should focus on:
 
 **Core Web Vitals (Priority #1):**
@@ -158,7 +163,11 @@ What type of backlinks are you focusing on right now?`;
 Would you like me to help you audit a specific technical SEO issue?`;
   }
 
-  if (lowerMessage.includes('content') || lowerMessage.includes('blog') || lowerMessage.includes('writing')) {
+  if (
+    lowerMessage.includes("content") ||
+    lowerMessage.includes("blog") ||
+    lowerMessage.includes("writing")
+  ) {
     return `Content is king in SEO! Here's my content strategy framework:
 
 **1. Content Planning:**
@@ -196,7 +205,11 @@ Would you like me to help you audit a specific technical SEO issue?`;
 What type of content are you planning to create?`;
   }
 
-  if (lowerMessage.includes('rankings') || lowerMessage.includes('serp') || lowerMessage.includes('position')) {
+  if (
+    lowerMessage.includes("rankings") ||
+    lowerMessage.includes("serp") ||
+    lowerMessage.includes("position")
+  ) {
     return `Improving your search rankings requires a systematic approach. Here's my ranking improvement strategy:
 
 **1. Foundation (Month 1-2):**

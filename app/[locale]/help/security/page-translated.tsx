@@ -1,44 +1,44 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, Shield, Key, Eye, FileText, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, Shield, Key, Eye, FileText, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function SecurityPage() {
-  const t = useTranslations('help.categories.security')
+  const t = useTranslations("help.categories.security");
 
   const categoryArticles = [
     {
-      title: t('articles.bestPractices.title'),
-      href: t('articles.bestPractices.href'),
-      time: t('articles.bestPractices.time'),
-      description: t('articles.bestPractices.description'),
-      icon: Shield
+      title: t("articles.bestPractices.title"),
+      href: t("articles.bestPractices.href"),
+      time: t("articles.bestPractices.time"),
+      description: t("articles.bestPractices.description"),
+      icon: Shield,
     },
     {
-      title: t('articles.twoFactorAuth.title'),
-      href: t('articles.twoFactorAuth.href'),
-      time: t('articles.twoFactorAuth.time'),
-      description: t('articles.twoFactorAuth.description'),
-      icon: Key
+      title: t("articles.twoFactorAuth.title"),
+      href: t("articles.twoFactorAuth.href"),
+      time: t("articles.twoFactorAuth.time"),
+      description: t("articles.twoFactorAuth.description"),
+      icon: Key,
     },
     {
-      title: t('articles.privacy.title'),
-      href: t('articles.privacy.href'),
-      time: t('articles.privacy.time'),
-      description: t('articles.privacy.description'),
-      icon: Eye
+      title: t("articles.privacy.title"),
+      href: t("articles.privacy.href"),
+      time: t("articles.privacy.time"),
+      description: t("articles.privacy.description"),
+      icon: Eye,
     },
     {
-      title: t('articles.gdpr.title'),
-      href: t('articles.gdpr.href'),
-      time: t('articles.gdpr.time'),
-      description: t('articles.gdpr.description'),
-      icon: FileText
-    }
-  ]
+      title: t("articles.gdpr.title"),
+      href: t("articles.gdpr.href"),
+      time: t("articles.gdpr.time"),
+      description: t("articles.gdpr.description"),
+      icon: FileText,
+    },
+  ];
 
   return (
     <MainLayout>
@@ -51,12 +51,10 @@ export default function SecurityPage() {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('backToHelp')}
+              {t("backToHelp")}
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl">
-              {t('subtitle')}
-            </p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl">{t("subtitle")}</p>
           </div>
 
           {/* Articles Grid */}
@@ -95,36 +93,50 @@ export default function SecurityPage() {
 
           {/* Additional Resources */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('additionalResources.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              {t("additionalResources.title")}
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/help/security"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <Shield className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.securityCenter.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.securityCenter.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.securityCenter.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.securityCenter.description")}
+                </p>
               </Link>
               <Link
                 href="/privacy"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <FileText className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.privacyPolicy.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.privacyPolicy.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.privacyPolicy.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.privacyPolicy.description")}
+                </p>
               </Link>
               <Link
                 href="/contact"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <ArrowLeft className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.contactSupport.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.contactSupport.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.contactSupport.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.contactSupport.description")}
+                </p>
               </Link>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

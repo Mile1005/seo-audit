@@ -49,11 +49,11 @@ import { useRouter } from '@/lib/navigation';
 
 export function MyButton() {
   const router = useRouter();
-  
+
   const handleClick = () => {
     router.push('/dashboard'); // Respects current locale
   };
-  
+
   return <button onClick={handleClick}>Go to Dashboard</button>;
 }
 ```
@@ -88,6 +88,7 @@ export function Header() {
 ### Adding New Translations
 
 1. **Add to English first** (`messages/en.json`):
+
 ```json
 {
   "features": {
@@ -100,6 +101,7 @@ export function Header() {
 ```
 
 2. **Translate to other languages** (`messages/fr.json`, etc.):
+
 ```json
 {
   "features": {
@@ -112,6 +114,7 @@ export function Header() {
 ```
 
 3. **Use in component**:
+
 ```typescript
 const t = useTranslations('features');
 <h1>{t('title')}</h1>
@@ -121,6 +124,7 @@ const t = useTranslations('features');
 ### Translation with Variables
 
 Add to `messages/en.json`:
+
 ```json
 {
   "greeting": "Hello {name}, you have {count} notifications"
@@ -128,14 +132,16 @@ Add to `messages/en.json`:
 ```
 
 Use in component:
+
 ```typescript
 const t = useTranslations();
-t('greeting', { name: 'John', count: 5 }); // "Hello John, you have 5 notifications"
+t("greeting", { name: "John", count: 5 }); // "Hello John, you have 5 notifications"
 ```
 
 ### Pluralization
 
 Add to `messages/en.json`:
+
 ```json
 {
   "items": "{count, plural, =0 {No items} =1 {One item} other {# items}}"
@@ -143,11 +149,12 @@ Add to `messages/en.json`:
 ```
 
 Use in component:
+
 ```typescript
 const t = useTranslations();
-t('items', { count: 0 });  // "No items"
-t('items', { count: 1 });  // "One item"
-t('items', { count: 5 });  // "5 items"
+t("items", { count: 0 }); // "No items"
+t("items", { count: 1 }); // "One item"
+t("items", { count: 5 }); // "5 items"
 ```
 
 ### Rich Text / HTML in Translations
@@ -176,7 +183,7 @@ import { useFormatter } from 'next-intl';
 export function DateDisplay() {
   const format = useFormatter();
   const date = new Date('2025-11-01');
-  
+
   return (
     <div>
       {format.dateTime(date, {
@@ -199,7 +206,7 @@ import { useFormatter } from 'next-intl';
 
 export function PriceDisplay() {
   const format = useFormatter();
-  
+
   return (
     <div>
       {format.number(29.99, {
@@ -216,15 +223,15 @@ export function PriceDisplay() {
 ### Metadata & SEO (Server Components)
 
 ```typescript
-import { getTranslations } from 'next-intl/server';
-import type { Metadata } from 'next';
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('meta');
-  
+  const t = await getTranslations("meta");
+
   return {
-    title: t('features.title'),
-    description: t('features.description'),
+    title: t("features.title"),
+    description: t("features.description"),
   };
 }
 ```
@@ -232,6 +239,7 @@ export async function generateMetadata(): Promise<Metadata> {
 ### Organizing Translation Files
 
 #### Flat Structure (Current):
+
 ```json
 {
   "nav": { "home": "Home" },
@@ -240,6 +248,7 @@ export async function generateMetadata(): Promise<Metadata> {
 ```
 
 #### Nested Structure (For large apps):
+
 ```json
 {
   "nav": {
@@ -250,22 +259,24 @@ export async function generateMetadata(): Promise<Metadata> {
 ```
 
 Access nested:
+
 ```typescript
-const t = useTranslations('nav.main');
-t('home'); // "Home"
+const t = useTranslations("nav.main");
+t("home"); // "Home"
 ```
 
 ### Type Safety
 
 Thanks to TypeScript configuration, you get:
+
 - ✅ Autocomplete for all translation keys
 - ✅ Compile-time errors for missing translations
 - ✅ IntelliSense in VS Code
 
 ```typescript
-const t = useTranslations('common');
-t('save');     // ✅ Works - key exists
-t('invalid');  // ❌ TypeScript error - key doesn't exist
+const t = useTranslations("common");
+t("save"); // ✅ Works - key exists
+t("invalid"); // ❌ TypeScript error - key doesn't exist
 ```
 
 ### Best Practices
@@ -281,6 +292,7 @@ t('invalid');  // ❌ TypeScript error - key doesn't exist
 ### Common Patterns
 
 #### Form Labels & Validation
+
 ```json
 {
   "forms": {
@@ -295,6 +307,7 @@ t('invalid');  // ❌ TypeScript error - key doesn't exist
 ```
 
 #### Error Messages
+
 ```json
 {
   "errors": {
@@ -307,6 +320,7 @@ t('invalid');  // ❌ TypeScript error - key doesn't exist
 ```
 
 #### Success Messages
+
 ```json
 {
   "success": {
@@ -332,7 +346,7 @@ test('renders translated text', () => {
       <MyComponent />
     </NextIntlClientProvider>
   );
-  
+
   expect(screen.getByText('Save')).toBeInTheDocument();
 });
 ```
@@ -340,6 +354,7 @@ test('renders translated text', () => {
 ### Debugging
 
 Enable debug logging:
+
 ```typescript
 // In i18n.ts
 export default getRequestConfig(async ({ locale }) => {
@@ -347,7 +362,7 @@ export default getRequestConfig(async ({ locale }) => {
     locale,
     messages: (await import(`./messages/${locale}.json`)).default,
     onError: (error) => {
-      console.error('i18n error:', error);
+      console.error("i18n error:", error);
     },
     getMessageFallback: ({ namespace, key }) => {
       return `${namespace}.${key}`; // Shows key path when translation missing

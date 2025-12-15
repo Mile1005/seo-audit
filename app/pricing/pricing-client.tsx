@@ -1,65 +1,84 @@
-"use client"
+"use client";
 
-import React from "react"
-import { MainLayout } from "../../components/layout/main-layout"
-import { PricingCards } from "../../components/pricing/pricing-cards"
-import { ROICalculator } from "../../components/pricing/roi-calculator"
-import { motion } from "framer-motion"
-import { ArrowRight, CheckCircle, Zap, Star, Crown, Users, Clock, Shield, Phone } from "lucide-react"
-import { EmailCaptureInline } from "../../components/lead/email-capture-inline"
-import { handleCTAClick } from "../../lib/cta-utils"
+import React from "react";
+import { MainLayout } from "../../components/layout/main-layout";
+import { PricingCards } from "../../components/pricing/pricing-cards";
+import { ROICalculator } from "../../components/pricing/roi-calculator";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CheckCircle,
+  Zap,
+  Star,
+  Crown,
+  Users,
+  Clock,
+  Shield,
+  Phone,
+} from "lucide-react";
+import { EmailCaptureInline } from "../../components/lead/email-capture-inline";
+import { handleCTAClick } from "../../lib/cta-utils";
 
 export default function PricingClientComponent() {
   const faqData = [
     {
       question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription at any time. There are no long-term contracts or cancellation fees. Your account will remain active until the end of your current billing period."
+      answer:
+        "Yes, you can cancel your subscription at any time. There are no long-term contracts or cancellation fees. Your account will remain active until the end of your current billing period.",
     },
     {
       question: "Is there a free trial for paid plans?",
-      answer: "Yes! We offer a 14-day free trial for both Pro and Agency plans. No credit card required to start your trial."
+      answer:
+        "Yes! We offer a 14-day free trial for both Pro and Agency plans. No credit card required to start your trial.",
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual subscriptions."
+      answer:
+        "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and bank transfers for annual subscriptions.",
     },
     {
       question: "Can I upgrade or downgrade my plan?",
-      answer: "Absolutely! You can upgrade or downgrade your plan at any time from your account settings. Changes take effect immediately, and we'll prorate the billing accordingly."
+      answer:
+        "Absolutely! You can upgrade or downgrade your plan at any time from your account settings. Changes take effect immediately, and we'll prorate the billing accordingly.",
     },
     {
       question: "Do you offer custom enterprise plans?",
-      answer: "Yes, for large organizations with specific needs, we offer custom enterprise solutions. Contact our sales team to discuss your requirements."
+      answer:
+        "Yes, for large organizations with specific needs, we offer custom enterprise solutions. Contact our sales team to discuss your requirements.",
     },
     {
       question: "What kind of support do you provide?",
-      answer: "Free users get email support, Pro users get priority email support, and Agency users get dedicated phone and Slack support with a dedicated account manager."
-    }
-  ]
+      answer:
+        "Free users get email support, Pro users get priority email support, and Agency users get dedicated phone and Slack support with a dedicated account manager.",
+    },
+  ];
 
   const testimonials = [
     {
       name: "Sarah Chen",
       role: "Digital Marketing Director",
       company: "TechFlow Solutions",
-      content: "The Pro plan has been incredible value. We've increased our organic traffic by 40% in just 3 months. The automated reports save me hours each week.",
-      rating: 5
+      content:
+        "The Pro plan has been incredible value. We've increased our organic traffic by 40% in just 3 months. The automated reports save me hours each week.",
+      rating: 5,
     },
     {
       name: "Marcus Rodriguez",
       role: "SEO Agency Owner",
       company: "Growth Digital",
-      content: "The Agency plan's white-label reports and multi-client dashboard are game-changers for our business. We're now managing 20+ clients more efficiently than ever.",
-      rating: 5
+      content:
+        "The Agency plan's white-label reports and multi-client dashboard are game-changers for our business. We're now managing 20+ clients more efficiently than ever.",
+      rating: 5,
     },
     {
       name: "Emily Thompson",
       role: "E-commerce Manager",
       company: "StyleHub",
-      content: "Started with the free plan and quickly upgraded to Pro. The competitor analysis features alone have helped us identify new opportunities worth thousands in revenue.",
-      rating: 5
-    }
-  ]
+      content:
+        "Started with the free plan and quickly upgraded to Pro. The competitor analysis features alone have helped us identify new opportunities worth thousands in revenue.",
+      rating: 5,
+    },
+  ];
 
   return (
     <MainLayout>
@@ -67,7 +86,7 @@ export default function PricingClientComponent() {
         {/* Hero Section */}
         <section className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-slate-950 py-24 overflow-hidden">
           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-          
+
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
@@ -76,11 +95,14 @@ export default function PricingClientComponent() {
                 transition={{ duration: 0.6 }}
               >
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                  Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">Growth Plan</span>
+                  Choose Your{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-400">
+                    Growth Plan
+                  </span>
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
-                  Start with our free plan and scale as you grow. No hidden fees, no long-term contracts.
-                  Cancel anytime.
+                  Start with our free plan and scale as you grow. No hidden fees, no long-term
+                  contracts. Cancel anytime.
                 </p>
               </motion.div>
 
@@ -121,9 +143,7 @@ export default function PricingClientComponent() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">
-                Compare All Features
-              </h2>
+              <h2 className="text-4xl font-bold text-white mb-4">Compare All Features</h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Detailed breakdown of what's included in each plan
               </p>
@@ -162,9 +182,24 @@ export default function PricingClientComponent() {
                 </thead>
                 <tbody className="text-gray-300">
                   {[
-                    { feature: "SEO Audits", free: "3 per month", pro: "Unlimited", agency: "Unlimited" },
-                    { feature: "Websites", free: "1 website", pro: "5 websites", agency: "Unlimited" },
-                    { feature: "Technical Analysis", free: "Basic", pro: "Advanced", agency: "Advanced" },
+                    {
+                      feature: "SEO Audits",
+                      free: "3 per month",
+                      pro: "Unlimited",
+                      agency: "Unlimited",
+                    },
+                    {
+                      feature: "Websites",
+                      free: "1 website",
+                      pro: "5 websites",
+                      agency: "Unlimited",
+                    },
+                    {
+                      feature: "Technical Analysis",
+                      free: "Basic",
+                      pro: "Advanced",
+                      agency: "Advanced",
+                    },
                     { feature: "Competitor Analysis", free: "❌", pro: "✅", agency: "✅" },
                     { feature: "Keyword Tracking", free: "❌", pro: "✅", agency: "✅" },
                     { feature: "White-label Reports", free: "❌", pro: "✅", agency: "✅" },
@@ -172,7 +207,12 @@ export default function PricingClientComponent() {
                     { feature: "Multi-client Dashboard", free: "❌", pro: "❌", agency: "✅" },
                     { feature: "Team Collaboration", free: "❌", pro: "❌", agency: "✅" },
                     { feature: "Custom Branding", free: "❌", pro: "❌", agency: "✅" },
-                    { feature: "Support", free: "Email", pro: "Priority Email", agency: "Phone & Slack" },
+                    {
+                      feature: "Support",
+                      free: "Email",
+                      pro: "Priority Email",
+                      agency: "Phone & Slack",
+                    },
                   ].map((row, index) => (
                     <tr key={index} className="border-b border-slate-700/30">
                       <td className="py-3 font-medium">{row.feature}</td>
@@ -200,9 +240,7 @@ export default function PricingClientComponent() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">
-                What Our Customers Say
-              </h2>
+              <h2 className="text-4xl font-bold text-white mb-4">What Our Customers Say</h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Real results from real customers across all our plans
               </p>
@@ -245,9 +283,7 @@ export default function PricingClientComponent() {
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl font-bold text-white mb-4">
-                Frequently Asked Questions
-              </h2>
+              <h2 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Everything you need to know about our pricing and plans
               </p>
@@ -264,12 +300,8 @@ export default function PricingClientComponent() {
                   className="mb-6"
                 >
                   <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-6">
-                    <h3 className="text-xl font-semibold text-white mb-3">
-                      {faq.question}
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      {faq.answer}
-                    </p>
+                    <h3 className="text-xl font-semibold text-white mb-3">{faq.question}</h3>
+                    <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
                   </div>
                 </motion.div>
               ))}
@@ -291,9 +323,10 @@ export default function PricingClientComponent() {
                 Ready to Boost Your SEO?
               </h2>
               <p className="text-xl text-gray-300 mb-8">
-                Join thousands of businesses that have improved their search rankings with our AI-powered SEO tools.
+                Join thousands of businesses that have improved their search rankings with our
+                AI-powered SEO tools.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <motion.a
                   href="/signup"
@@ -301,22 +334,22 @@ export default function PricingClientComponent() {
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 inline-flex items-center justify-center space-x-2"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleCTAClick('FREE_TRIAL', 'Start Free Trial', 'pricing-final-cta')
+                    e.preventDefault();
+                    handleCTAClick("FREE_TRIAL", "Start Free Trial", "pricing-final-cta");
                   }}
                 >
                   <span>Start Free Trial</span>
                   <ArrowRight className="w-5 h-5" />
                 </motion.a>
-                
+
                 <motion.a
                   href="/contact"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white/10 hover:bg-white/20 border border-white/20 hover:border-white/30 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 inline-flex items-center justify-center space-x-2"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleCTAClick('CONTACT', 'Contact Sales', 'pricing-final-cta')
+                    e.preventDefault();
+                    handleCTAClick("CONTACT", "Contact Sales", "pricing-final-cta");
                   }}
                 >
                   <Phone className="w-5 h-5" />
@@ -357,5 +390,5 @@ export default function PricingClientComponent() {
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

@@ -3,6 +3,7 @@
 ## ✅ You're Correct! Same OAuth Client
 
 Your `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are used for **BOTH**:
+
 1. **NextAuth Login** - When users click "Sign in with Google"
 2. **GSC Integration** - When users connect Google Search Console
 
@@ -35,19 +36,23 @@ Your `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are used for **BOTH**:
 ## 📋 What You Need to Add (Safe!)
 
 ### Current Setup (Don't Delete These!)
+
 Your OAuth client **already has** these redirect URIs for login:
+
 ```
 ✅ https://www.aiseoturbo.com/api/auth/callback/google
 ✅ http://localhost:3000/api/auth/callback/google
 ```
 
 ### Add These New URIs (For GSC)
+
 ```
 ➕ https://www.aiseoturbo.com/api/gsc/callback
 ➕ http://localhost:3000/api/gsc/callback
 ```
 
 ### Final Configuration
+
 ```
 Your Google OAuth Client should have:
 
@@ -65,8 +70,9 @@ Authorized redirect URIs:
 ✅ **Login Won't Break** - NextAuth uses `/api/auth/callback/google`  
 ✅ **GSC Will Work** - GSC integration uses `/api/gsc/callback`  
 ✅ **Same Scopes** - Both use Google APIs with different scopes:
-   - Login: `profile`, `email`
-   - GSC: `webmasters.readonly`
+
+- Login: `profile`, `email`
+- GSC: `webmasters.readonly`
 
 ---
 
@@ -74,23 +80,27 @@ Authorized redirect URIs:
 
 ❌ **DON'T** delete existing redirect URIs  
 ❌ **DON'T** create a new OAuth client (unnecessary)  
-❌ **DON'T** change the Client ID or Secret  
+❌ **DON'T** change the Client ID or Secret
 
 ---
 
 ## ✅ Step-by-Step (Safe Instructions)
 
 ### 1. Open Google Cloud Console
+
 - Go to: https://console.cloud.google.com/
 - Navigate to: **APIs & Services** → **Credentials**
 
 ### 2. Find Your OAuth Client
+
 - Look for "OAuth 2.0 Client IDs"
 - Find the one with your `GOOGLE_CLIENT_ID`
 - Click the **pencil icon** (edit)
 
 ### 3. Check Existing URIs
+
 You should see something like:
+
 ```
 Authorized redirect URIs:
   https://www.aiseoturbo.com/api/auth/callback/google
@@ -98,16 +108,20 @@ Authorized redirect URIs:
 ```
 
 ### 4. Click "ADD URI" Button
+
 Add these **TWO** new URIs (one at a time):
+
 ```
 https://www.aiseoturbo.com/api/gsc/callback
 http://localhost:3000/api/gsc/callback
 ```
 
 ### 5. Save
+
 Click **Save** at the bottom
 
 ### 6. Wait 5 Minutes
+
 Google needs time to propagate the changes
 
 ---
@@ -115,11 +129,13 @@ Google needs time to propagate the changes
 ## 🧪 Test Both Features Work
 
 ### Test 1: Login (Should Still Work)
+
 1. Go to: https://www.aiseoturbo.com/login
 2. Click "Sign in with Google"
 3. ✅ Should work normally
 
 ### Test 2: GSC Connection (New)
+
 1. Go to: https://www.aiseoturbo.com/dashboard
 2. Click "Connect" in Google Integration section
 3. ✅ Should redirect to Google OAuth consent screen

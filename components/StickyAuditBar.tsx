@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 const ensureHttps = (url: string) => {
   const t = url.trim();
@@ -22,38 +22,41 @@ const isValidDomainOrUrl = (value: string) => {
 
 export default function StickyAuditBar() {
   const router = useRouter();
-  const t = useTranslations('common');
+  const t = useTranslations("common");
   const [visible, setVisible] = useState(false);
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string|null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY || document.documentElement.scrollTop;
       setVisible(y > 500);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValidDomainOrUrl(url)) { setError(t('enterValidDomain')); return; }
+    if (!isValidDomainOrUrl(url)) {
+      setError(t("enterValidDomain"));
+      return;
+    }
     setError(null);
     setLoading(true);
     try {
-      const res = await fetch('/api/seo-audit/run', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: ensureHttps(url) })
+      const res = await fetch("/api/seo-audit/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: ensureHttps(url) }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data?.error || 'Failed');
+      if (!res.ok) throw new Error(data?.error || "Failed");
       router.push(`/seo-audit/results?id=${data.auditId || data.id}`);
     } catch (err) {
-      setError(t('tryAgain'));
+      setError(t("tryAgain"));
       setLoading(false);
     }
   };
@@ -70,20 +73,25 @@ export default function StickyAuditBar() {
         >
           <div className="max-w-3xl mx-auto px-4">
             <div className="bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-2xl p-3">
-              <form onSubmit={submit} action="/api/audit" method="POST" className="flex items-center gap-2">
+              <form
+                onSubmit={submit}
+                action="/api/audit"
+                method="POST"
+                className="flex items-center gap-2"
+              >
                 <input
                   type="text"
                   className="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
                   placeholder="Enter domain (example.com)"
                   value={url}
-                  onChange={(e)=>setUrl(e.target.value)}
+                  onChange={(e) => setUrl(e.target.value)}
                 />
                 <button
                   type="submit"
                   disabled={loading}
                   className="btn-primary ripple whitespace-nowrap"
                 >
-                  {loading ? t('analyzing') : t('startFreeAudit')}
+                  {loading ? t("analyzing") : t("startFreeAudit")}
                 </button>
               </form>
               {error && <div className="text-red-600 text-xs mt-1 px-1">{error}</div>}

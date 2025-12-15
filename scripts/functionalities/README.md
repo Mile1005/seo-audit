@@ -5,9 +5,11 @@ This folder contains specialized automation scripts for various project function
 ## I18n Automation Scripts
 
 ### `i18n-folder-scanner.js` - **NEW FREE SCANNER**
+
 **Purpose:** Free page-focused internationalization scanner using Perplexity AI (no OpenAI costs).
 
 **Features:**
+
 - Scans specific page folders (not entire app)
 - Extracts only user-facing text content (filters out CSS, code, styling)
 - Uses **Perplexity AI** for free translations (no API keys needed)
@@ -16,6 +18,7 @@ This folder contains specialized automation scripts for various project function
 - Supports: German (de), French (fr), Italian (it), Spanish (es), Indonesian (id)
 
 **Usage:**
+
 ```bash
 # Scan a specific page folder
 node scripts/functionalities/i18n-folder-scanner.js /help/security/two-factor-authentication
@@ -26,21 +29,25 @@ node scripts/functionalities/i18n-folder-scanner.js /dashboard/settings
 ```
 
 **What it processes:**
+
 - `layout.tsx` - Layout components
 - `page.tsx` - Main page content
 - `page-translate.tsx` - Translation-specific content
 - Any other `.tsx/.jsx/.ts/.js` files in the page folder
 
 **Smart filtering:**
+
 - ✅ Extracts: User-facing text, titles, descriptions, labels
 - ❌ Ignores: CSS classes, styling, code, URLs, technical content
 
 **Output:**
+
 - Creates `translations-ready-to-copy.json` with all translations
 - Ready-to-copy format for easy integration
 - Includes usage instructions
 
 **Free Translation Process:**
+
 1. Scans only the specified page folder
 2. Extracts user-facing text (not CSS/styling/code)
 3. Generates unique translation keys
@@ -49,15 +56,18 @@ node scripts/functionalities/i18n-folder-scanner.js /dashboard/settings
 6. Outputs complete translation file
 
 ### `i18n-automate-simple.js`
+
 **Purpose:** Automated internationalization of React components using regex-based string detection.
 
 **Usage:**
+
 ```bash
 # Direct execution only
 node scripts/functionalities/i18n-automate-simple.js path/to/component.tsx
 ```
 
 **Features:**
+
 - Detects hardcoded strings in React components
 - Transforms components to use `t()` function calls
 - Updates English source messages (`messages/en.json`)
@@ -67,18 +77,22 @@ node scripts/functionalities/i18n-automate-simple.js path/to/component.tsx
 **Supported Languages:** German (de), Italian (it), Indonesian (id), Spanish (es), French (fr)
 
 ### `i18n-automate.js`
+
 **Purpose:** Full production-ready internationalization automation with AST parsing and AI translation.
 
 **Requirements:**
+
 - Babel dependencies: `@babel/parser`, `@babel/traverse`, `@babel/generator`, `@babel/types`
 - OpenAI API key for real translations
 
 **Usage:**
+
 ```bash
 node scripts/functionalities/i18n-automate.js path/to/component.tsx
 ```
 
 **Features:**
+
 - Advanced AST parsing for complex JSX structures
 - Real AI-powered translations via OpenAI GPT-4
 - Comprehensive error handling and validation
@@ -97,12 +111,14 @@ Both scripts implement the proven 5-step internationalization formula:
 ## Example Output
 
 **Before:**
+
 ```tsx
 <h1>Welcome to our platform</h1>
 <p>This is a test component</p>
 ```
 
 **After:**
+
 ```tsx
 <h1>{t('welcome_to_our_platf_0')}</h1>
 <p>{t('this_is_a_test_compo_1')}</p>

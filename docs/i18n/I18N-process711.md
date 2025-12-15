@@ -17,13 +17,13 @@ This document consolidates the current i18n implementation status and provides a
   - Typecheck: Passing
 - Pages fully translated: All feature pages, pricing, case studies, help center, contact, blog index, 6 technical blog posts
 - Blog articles: All 6 translated via t() namespaces- Remaining top items to achieve "fully translated"
-  1) Localize legal pages (Privacy, Terms) and decide routing strategy
-  2) Make blog structured data + canonical URLs locale-aware (include inLanguage)
-  3) Enable preferred-locale redirect logic in middleware (currently commented out)
-  4) Add automation: tests to catch raw English content and schema URL mismatches
-  5) (Optional) Split translation files by namespace to reduce bundle overhead
-  6) Hreflang alternates in sitemap for all localized routes
-  7) Audit & localize trust pages (careers, community, status, onboarding) if public
+  1. Localize legal pages (Privacy, Terms) and decide routing strategy
+  2. Make blog structured data + canonical URLs locale-aware (include inLanguage)
+  3. Enable preferred-locale redirect logic in middleware (currently commented out)
+  4. Add automation: tests to catch raw English content and schema URL mismatches
+  5. (Optional) Split translation files by namespace to reduce bundle overhead
+  6. Hreflang alternates in sitemap for all localized routes
+  7. Audit & localize trust pages (careers, community, status, onboarding) if public
 
 ---
 
@@ -56,6 +56,7 @@ This document consolidates the current i18n implementation status and provides a
 ## Problems to finish (with IDs, strategies, estimates)
 
 P1. Legal pages not localized
+
 - Affected files:
   - `app/privacy/page.tsx` (English-only)
   - `app/terms/page.tsx` (English-only)
@@ -82,6 +83,7 @@ P1. Legal pages not localized
 - Estimate: 8–12 hours (depends on legal review)
 
 P2. Blog structured data and canonical not locale-aware
+
 - Affected: all blog article pages
 - Strategy
   - Centralize a locale-aware URL builder (respecting EN at `/` and others at `/<locale>`)
@@ -92,6 +94,7 @@ P2. Blog structured data and canonical not locale-aware
 - Estimate: 1–2 hours
 
 P3. Preferred-locale redirect disabled in middleware
+
 - Strategy
   - Uncomment and verify cookie-based redirect logic
   - Add safety exclusions for paths where redirect could be confusing (e.g., auth callbacks)
@@ -100,6 +103,7 @@ P3. Preferred-locale redirect disabled in middleware
 - Estimate: 0.5–1 hour
 
 P4. Missing automation for untranslated content
+
 - Strategy
   - Add test to scan `app/[locale]/blog/**/*.tsx` for large raw English blocks in non-EN pages (heuristic: > N contiguous A–Z characters outside `t(` usage)
   - Add CI step to fail on detection
@@ -108,6 +112,7 @@ P4. Missing automation for untranslated content
 - Estimate: 1–3 hours
 
 P5. Monolithic translation files (performance/maintainability)
+
 - Strategy (optional but recommended)
   - Split messages by namespace, e.g., `messages/en/blog.coreWebVitals2025.json`
   - Update `getRequestConfig` to lazy-load namespaces as needed
@@ -116,6 +121,7 @@ P5. Monolithic translation files (performance/maintainability)
 - Estimate: 6–10 hours (mechanical + QA)
 
 P6. Help center subpages audit
+
 - Strategy
   - Verify each `app/[locale]/help/**/page.tsx` uses `t()`; extract any remaining English strings
 - Acceptance
@@ -123,6 +129,7 @@ P6. Help center subpages audit
 - Estimate: 3–6 hours
 
 P7. Hreflang alternates in sitemap
+
 - Strategy
   - Extend sitemap generator to emit alternates per locale for every localized page
 - Acceptance
@@ -130,6 +137,7 @@ P7. Hreflang alternates in sitemap
 - Estimate: 1–2 hours
 
 P8. Trust pages localization (if public): careers, community, status, onboarding
+
 - Strategy
   - Add namespaces and integrate translations; remove from `nonLocalizedPaths`
 - Acceptance
@@ -137,6 +145,7 @@ P8. Trust pages localization (if public): careers, community, status, onboarding
 - Estimate: 4–8 hours
 
 P9. Fallback detection at runtime (dev-only)
+
 - Strategy
   - Wrap `useTranslations` to warn in dev when non-EN locale returns an EN string (heuristic)
 - Acceptance
@@ -144,6 +153,7 @@ P9. Fallback detection at runtime (dev-only)
 - Estimate: 1–2 hours
 
 P10. Locale addition guide + RTL readiness
+
 - Strategy
   - Add `I18N_LOCALE_ADD_GUIDE.md` covering adding locales, flags, RTL handling, tests
 - Acceptance
@@ -155,19 +165,23 @@ P10. Locale addition guide + RTL readiness
 ## Phased execution plan
 
 ### Phase 1 – Immediate (Highest ROI)
+
 Scope: P1, P2, P3
 
 Tasks
-1) Localize legal pages and finalize routing approach
-2) Implement locale-aware schema/canonical URLs (`inLanguage`)
-3) Enable preferred-locale redirect logic in middleware
+
+1. Localize legal pages and finalize routing approach
+2. Implement locale-aware schema/canonical URLs (`inLanguage`)
+3. Enable preferred-locale redirect logic in middleware
 
 Acceptance criteria
+
 - Legal pages localized (and/or canonical/hreflang strategy documented and implemented)
 - Blog schemas show locale URLs + `inLanguage`
 - Preferred-locale redirect works end-to-end
 
 Verification
+
 - Run i18n parity tests and typecheck
 - Manual spot-check in each locale for the legal pages
 - Validate structured data in Rich Results Test (optional)
@@ -175,50 +189,62 @@ Verification
 Estimate: 9–15 hours
 
 ### Phase 2 – Content parity & trust
+
 Scope: P6, P8
 
 Tasks
-1) Audit help center subpages for any remaining hardcoded strings
-2) Localize careers/community/status/onboarding (if intended public pages)
+
+1. Audit help center subpages for any remaining hardcoded strings
+2. Localize careers/community/status/onboarding (if intended public pages)
 
 Acceptance criteria
+
 - All help subpages and trust pages use `t()`; parity holds across locales
 
 Verification
+
 - i18n tests pass; manual spot-checks on key subpages
 
 Estimate: 7–14 hours
 
 ### Phase 3 – Quality & automation
+
 Scope: P4, P7, P10
 
 Tasks
-1) Add untranslated-content detection test for blog/content pages
-2) Emit hreflang alternates in sitemap
-3) Write locale addition guide and document RTL readiness
+
+1. Add untranslated-content detection test for blog/content pages
+2. Emit hreflang alternates in sitemap
+3. Write locale addition guide and document RTL readiness
 
 Acceptance criteria
+
 - CI fails on new raw English in localized pages
 - Sitemap contains alternate hreflang entries per locale
 - Guide empowers a new contributor to add a locale quickly
 
 Verification
+
 - CI runs green, sitemap validated in Search Console (post-deploy)
 
 Estimate: 3–6 hours
 
 ### Phase 4 – Performance & ergonomics (optional but recommended)
+
 Scope: P5, P9
 
 Tasks
-1) Split translation files by namespace; update loader to lazy-load
-2) Add dev-only runtime fallback warnings around `useTranslations`
+
+1. Split translation files by namespace; update loader to lazy-load
+2. Add dev-only runtime fallback warnings around `useTranslations`
 
 Acceptance criteria
+
 - Measurable build/runtime improvement (documented)
 - Dev warnings surface missed translations during QA
 
 Verification
+
 - Compare before/after timings; ensure parity tests keep passing
 
 Estimate: 7–12 hours
@@ -228,6 +254,7 @@ Estimate: 7–12 hours
 ## Detailed task guidance
 
 ### T1. Localize legal pages (P1)
+
 - If choosing localized routing
   - Move to `app/[locale]/privacy` and `app/[locale]/terms`
   - Create `legal.privacy` and `legal.terms` namespaces
@@ -246,6 +273,7 @@ Estimate: 7–12 hours
   - Add a disclaimer if legal requires EN precedence
 
 ### T2. Locale-aware schema & canonical (P2)
+
 - Centralize a helper: `lib/localeUrl.ts`:
   - `blogUrl(locale, slug): string`
   - EN → `/blog/${slug}`; non-EN → `/${locale}/blog/${slug}`
@@ -253,16 +281,19 @@ Estimate: 7–12 hours
   - Add `inLanguage: locale` in schema
 
 ### T3. Enable preferred-locale redirects (P3)
+
 - In `middleware.ts` uncomment cookie logic; ensure it doesn't affect asset routes
 - Verify redirect loop protections
 
 ### T4. Automation tests (P4)
+
 - Add a vitest file e.g., `__tests__/i18n.content-coverage.test.ts`
   - Crawl `app/[locale]/blog/**/*.tsx`
   - Heuristic regex to detect long English-only blocks not within `t(` usage
   - Allowlist metadata and code identifiers
 
 ### T5. Namespace splitting (P5)
+
 - File structure example
   - `messages/en/common.json`, `messages/en/blog.coreWebVitals2025.json`, …
 - Loader approach
@@ -270,14 +301,17 @@ Estimate: 7–12 hours
   - Or maintain a small manifest per route to bundle minimal sets
 
 ### T6. Hreflang in sitemap (P7)
+
 - For each URL, include `<xhtml:link rel="alternate" hreflang="{locale}" href="{localizedUrl}"/>`
   - Ensure `x-default` points to English root
 
 ### T7. Trust pages (P8)
+
 - Add namespaces for `careers`, `community`, `status`, `onboarding` if these pages are user-facing
 - Remove them from `nonLocalizedPaths` once localized
 
 ### T8. Fallback warnings (P9)
+
 - Wrap `useTranslations` once in a small utility
 - In dev, log warning when non-EN locale returns EN default for a key### T9. Locale addition guide (P10)
 - Create `I18N_LOCALE_ADD_GUIDE.md` including
@@ -336,16 +370,19 @@ Total remaining: ~22–40 hours (without optional phase: ~15–28 hours)
 ## Appendix
 
 Key files
+
 - `i18n.ts`, `middleware.ts`, `lib/navigation.ts`, `components/layout/language-switcher.tsx`
 - Blog pages under: `app/[locale]/blog/**`
 - Messages: `messages/{locale}.json`
 
 Coding patterns
+
 - Server components: `getTranslations('namespace')`
 - Client components: `useTranslations('namespace')`
 - Blog composition: build HTML with `t()` strings; keep structure in code, sentences in messages
 
 Operational tips
+
 - When adding large prose, prefer smaller granular keys over single huge paragraphs to ease translator iteration
 - Keep consistent namespace naming: `blog.coreWebVitals2025`, `blog.technicalSEO2025`, `blog.localSEOStrategiesThatWork`, …
 

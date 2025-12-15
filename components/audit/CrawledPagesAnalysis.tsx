@@ -1,12 +1,12 @@
 "use client";
-import { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
-import { 
-  FileText, 
-  AlertTriangle, 
-  AlertCircle, 
+import { useState } from "react";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import {
+  FileText,
+  AlertTriangle,
+  AlertCircle,
   CheckCircle,
   XCircle,
   Search,
@@ -18,15 +18,15 @@ import {
   Clock,
   Target,
   Info,
-  ChevronRight
-} from 'lucide-react';
+  ChevronRight,
+} from "lucide-react";
 
 interface PageIssue {
-  type: 'error' | 'warning' | 'notice';
+  type: "error" | "warning" | "notice";
   category: string;
   title: string;
   description: string;
-  impact: 'high' | 'medium' | 'low';
+  impact: "high" | "medium" | "low";
   count?: number;
 }
 
@@ -61,49 +61,72 @@ interface Props {
 const mockPages: CrawledPage[] = [];
 
 export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: Props) => {
-  const [filter, setFilter] = useState<'all' | 'errors' | 'warnings' | 'healthy'>('all');
-  const [sortBy, setSortBy] = useState<'url' | 'issues' | 'status' | 'wordCount'>('issues');
+  const [filter, setFilter] = useState<"all" | "errors" | "warnings" | "healthy">("all");
+  const [sortBy, setSortBy] = useState<"url" | "issues" | "status" | "wordCount">("issues");
   const [expandedPages, setExpandedPages] = useState<Set<string>>(new Set());
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const getIssueIcon = (type: string) => {
     switch (type) {
-      case 'error': return <XCircle className="h-4 w-4 text-red-500" />;
-      case 'warning': return <AlertTriangle className="h-4 w-4 text-orange-500" />;
-      case 'notice': return <AlertCircle className="h-4 w-4 text-blue-500" />;
-      default: return <Info className="h-4 w-4 text-slate-500" />;
+      case "error":
+        return <XCircle className="h-4 w-4 text-red-500" />;
+      case "warning":
+        return <AlertTriangle className="h-4 w-4 text-orange-500" />;
+      case "notice":
+        return <AlertCircle className="h-4 w-4 text-blue-500" />;
+      default:
+        return <Info className="h-4 w-4 text-slate-500" />;
     }
   };
 
   const getStatusBadge = (statusCode: number) => {
     if (statusCode >= 200 && statusCode < 300) {
-      return <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Healthy</Badge>;
+      return (
+        <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+          Healthy
+        </Badge>
+      );
     } else if (statusCode >= 300 && statusCode < 400) {
-      return <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">Redirect</Badge>;
+      return (
+        <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">
+          Redirect
+        </Badge>
+      );
     } else if (statusCode >= 400) {
-      return <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Error</Badge>;
+      return (
+        <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+          Error
+        </Badge>
+      );
     }
-    return <Badge className="bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Unknown</Badge>;
+    return (
+      <Badge className="bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
+        Unknown
+      </Badge>
+    );
   };
 
   const getIssueCountByType = (issues: PageIssue[], type: string) => {
-    return issues.filter(issue => issue.type === type).length;
+    return issues.filter((issue) => issue.type === type).length;
   };
 
-  const filteredPages = pages.filter(page => {
+  const filteredPages = pages.filter((page) => {
     // Apply search filter
-    if (searchTerm && !page.url.toLowerCase().includes(searchTerm.toLowerCase()) && 
-        !page.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+    if (
+      searchTerm &&
+      !page.url.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !page.title.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
       return false;
     }
 
     // Apply status filter
     switch (filter) {
-      case 'errors':
-        return page.statusCode >= 400 || page.issues.some(issue => issue.type === 'error');
-      case 'warnings':
-        return page.issues.some(issue => issue.type === 'warning');
-      case 'healthy':
+      case "errors":
+        return page.statusCode >= 400 || page.issues.some((issue) => issue.type === "error");
+      case "warnings":
+        return page.issues.some((issue) => issue.type === "warning");
+      case "healthy":
         return page.statusCode >= 200 && page.statusCode < 300 && page.issues.length === 0;
       default:
         return true;
@@ -112,13 +135,13 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
 
   const sortedPages = [...filteredPages].sort((a, b) => {
     switch (sortBy) {
-      case 'url':
+      case "url":
         return a.url.localeCompare(b.url);
-      case 'issues':
+      case "issues":
         return b.issues.length - a.issues.length;
-      case 'status':
+      case "status":
         return a.statusCode - b.statusCode;
-      case 'wordCount':
+      case "wordCount":
         return b.wordCount - a.wordCount;
       default:
         return 0;
@@ -136,9 +159,17 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
   };
 
   const totalIssues = pages.reduce((sum, page) => sum + page.issues.length, 0);
-  const totalErrors = pages.reduce((sum, page) => sum + getIssueCountByType(page.issues, 'error'), 0);
-  const totalWarnings = pages.reduce((sum, page) => sum + getIssueCountByType(page.issues, 'warning'), 0);
-  const healthyPages = pages.filter(page => page.statusCode >= 200 && page.statusCode < 300 && page.issues.length === 0).length;
+  const totalErrors = pages.reduce(
+    (sum, page) => sum + getIssueCountByType(page.issues, "error"),
+    0
+  );
+  const totalWarnings = pages.reduce(
+    (sum, page) => sum + getIssueCountByType(page.issues, "warning"),
+    0
+  );
+  const healthyPages = pages.filter(
+    (page) => page.statusCode >= 200 && page.statusCode < 300 && page.issues.length === 0
+  ).length;
 
   if (isLoading) {
     return (
@@ -176,20 +207,30 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
         {/* Summary Statistics */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{totalErrors}</div>
+            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {totalErrors}
+            </div>
             <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">Errors</div>
           </div>
           <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{totalWarnings}</div>
+            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {totalWarnings}
+            </div>
             <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">Warnings</div>
           </div>
           <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{healthyPages}</div>
+            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {healthyPages}
+            </div>
             <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">Healthy</div>
           </div>
           <div className="text-center p-4 bg-white dark:bg-slate-700 rounded-lg border border-slate-200 dark:border-slate-600">
-            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">{pages.length}</div>
-            <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">Total Pages</div>
+            <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+              {pages.length}
+            </div>
+            <div className="text-sm text-slate-700 dark:text-slate-200 font-medium">
+              Total Pages
+            </div>
           </div>
         </div>
 
@@ -235,11 +276,14 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
         <div className="space-y-3 max-h-[600px] overflow-y-auto">
           {sortedPages.map((page) => {
             const isExpanded = expandedPages.has(page.url);
-            const errorCount = getIssueCountByType(page.issues, 'error');
-            const warningCount = getIssueCountByType(page.issues, 'warning');
-            
+            const errorCount = getIssueCountByType(page.issues, "error");
+            const warningCount = getIssueCountByType(page.issues, "warning");
+
             return (
-              <div key={page.url} className="border border-slate-200 dark:border-slate-600 rounded-xl overflow-hidden bg-white dark:bg-slate-700">
+              <div
+                key={page.url}
+                className="border border-slate-200 dark:border-slate-600 rounded-xl overflow-hidden bg-white dark:bg-slate-700"
+              >
                 <button
                   onClick={() => togglePageExpansion(page.url)}
                   className="w-full flex items-start gap-4 p-4 text-left hover:bg-slate-50 dark:hover:bg-slate-600 transition-colors"
@@ -251,7 +295,7 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                       <ChevronDown className="h-4 w-4 text-slate-500" />
                     )}
                   </div>
-                  
+
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1 min-w-0">
@@ -271,7 +315,7 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                         )}
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-4 text-xs text-slate-700 dark:text-slate-200">
                       {errorCount > 0 && (
                         <div className="flex items-center gap-1 text-red-600 dark:text-red-300">
@@ -298,85 +342,126 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                     </div>
                   </div>
                 </button>
-                
+
                 {isExpanded && (
                   <div className="border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 p-4">
                     <div className="space-y-4">
                       {/* Page Details */}
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <div className="p-3 bg-white dark:bg-slate-800 rounded-lg border">
-                          <h5 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">SEO Metrics</h5>
+                          <h5 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                            SEO Metrics
+                          </h5>
                           <div className="space-y-1 text-xs">
                             <div className="flex justify-between">
-                              <span className="text-slate-600 dark:text-slate-300">Title Length:</span>
-                              <span className={`font-medium ${
-                                page.titleLength > 60 ? 'text-red-600 dark:text-red-400' : 
-                                page.titleLength < 30 ? 'text-orange-600 dark:text-orange-400' : 
-                                'text-green-600 dark:text-green-400'
-                              }`}>
+                              <span className="text-slate-600 dark:text-slate-300">
+                                Title Length:
+                              </span>
+                              <span
+                                className={`font-medium ${
+                                  page.titleLength > 60
+                                    ? "text-red-600 dark:text-red-400"
+                                    : page.titleLength < 30
+                                      ? "text-orange-600 dark:text-orange-400"
+                                      : "text-green-600 dark:text-green-400"
+                                }`}
+                              >
                                 {page.titleLength} chars
                               </span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-slate-600 dark:text-slate-300">Meta Description:</span>
-                              <span className={`font-medium ${
-                                !page.metaDescription ? 'text-red-600 dark:text-red-400' :
-                                (page.metaDescriptionLength || 0) > 160 ? 'text-orange-600 dark:text-orange-400' :
-                                'text-green-600 dark:text-green-400'
-                              }`}>
+                              <span className="text-slate-600 dark:text-slate-300">
+                                Meta Description:
+                              </span>
+                              <span
+                                className={`font-medium ${
+                                  !page.metaDescription
+                                    ? "text-red-600 dark:text-red-400"
+                                    : (page.metaDescriptionLength || 0) > 160
+                                      ? "text-orange-600 dark:text-orange-400"
+                                      : "text-green-600 dark:text-green-400"
+                                }`}
+                              >
                                 {page.metaDescriptionLength || 0} chars
                               </span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-slate-600 dark:text-slate-300">Word Count:</span>
-                              <span className={`font-medium ${
-                                page.wordCount < 300 ? 'text-orange-600 dark:text-orange-400' : 
-                                'text-green-600 dark:text-green-400'
-                              }`}>
+                              <span className="text-slate-600 dark:text-slate-300">
+                                Word Count:
+                              </span>
+                              <span
+                                className={`font-medium ${
+                                  page.wordCount < 300
+                                    ? "text-orange-600 dark:text-orange-400"
+                                    : "text-green-600 dark:text-green-400"
+                                }`}
+                              >
                                 {page.wordCount.toLocaleString()}
                               </span>
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="p-3 bg-white dark:bg-slate-800 rounded-lg border">
-                          <h5 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Structure</h5>
+                          <h5 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                            Structure
+                          </h5>
                           <div className="space-y-1 text-xs">
                             <div className="flex justify-between">
                               <span className="text-slate-600 dark:text-slate-300">H1 Tags:</span>
-                              <span className={`font-medium ${
-                                page.headings.h1 === 0 ? 'text-red-600 dark:text-red-400' :
-                                page.headings.h1 > 1 ? 'text-orange-600 dark:text-orange-400' :
-                                'text-green-600 dark:text-green-400'
-                              }`}>
+                              <span
+                                className={`font-medium ${
+                                  page.headings.h1 === 0
+                                    ? "text-red-600 dark:text-red-400"
+                                    : page.headings.h1 > 1
+                                      ? "text-orange-600 dark:text-orange-400"
+                                      : "text-green-600 dark:text-green-400"
+                                }`}
+                              >
                                 {page.headings.h1}
                               </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-slate-600 dark:text-slate-300">H2 Tags:</span>
-                              <span className="font-medium text-slate-900 dark:text-slate-100">{page.headings.h2}</span>
+                              <span className="font-medium text-slate-900 dark:text-slate-100">
+                                {page.headings.h2}
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-slate-600 dark:text-slate-300">H3 Tags:</span>
-                              <span className="font-medium text-slate-900 dark:text-slate-100">{page.headings.h3}</span>
+                              <span className="font-medium text-slate-900 dark:text-slate-100">
+                                {page.headings.h3}
+                              </span>
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="p-3 bg-white dark:bg-slate-800 rounded-lg border">
-                          <h5 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Links & Media</h5>
+                          <h5 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                            Links & Media
+                          </h5>
                           <div className="space-y-1 text-xs">
                             <div className="flex justify-between">
-                              <span className="text-slate-600 dark:text-slate-300">Internal Links:</span>
-                              <span className="font-medium text-slate-900 dark:text-slate-100">{page.internalLinks}</span>
+                              <span className="text-slate-600 dark:text-slate-300">
+                                Internal Links:
+                              </span>
+                              <span className="font-medium text-slate-900 dark:text-slate-100">
+                                {page.internalLinks}
+                              </span>
                             </div>
                             <div className="flex justify-between">
-                              <span className="text-slate-600 dark:text-slate-300">External Links:</span>
-                              <span className="font-medium text-slate-900 dark:text-slate-100">{page.externalLinks}</span>
+                              <span className="text-slate-600 dark:text-slate-300">
+                                External Links:
+                              </span>
+                              <span className="font-medium text-slate-900 dark:text-slate-100">
+                                {page.externalLinks}
+                              </span>
                             </div>
                             <div className="flex justify-between">
                               <span className="text-slate-600 dark:text-slate-300">Images:</span>
-                              <span className="font-medium text-slate-900 dark:text-slate-100">{page.images}</span>
+                              <span className="font-medium text-slate-900 dark:text-slate-100">
+                                {page.images}
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -391,7 +476,10 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                           </h5>
                           <div className="space-y-3">
                             {page.issues.map((issue, index) => (
-                              <div key={index} className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg">
+                              <div
+                                key={index}
+                                className="flex items-start gap-3 p-3 bg-slate-50 dark:bg-slate-900/50 rounded-lg"
+                              >
                                 {getIssueIcon(issue.type)}
                                 <div className="flex-1 min-w-0">
                                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
@@ -399,11 +487,15 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                                       {issue.title}
                                     </h6>
                                     <div className="hidden sm:flex items-center gap-2 flex-shrink-0">
-                                      <Badge className={`text-xs ${
-                                        issue.impact === 'high' ? 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400' :
-                                        issue.impact === 'medium' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400' :
-                                        'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400'
-                                      }`}>
+                                      <Badge
+                                        className={`text-xs ${
+                                          issue.impact === "high"
+                                            ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
+                                            : issue.impact === "medium"
+                                              ? "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
+                                              : "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400"
+                                        }`}
+                                      >
                                         {issue.impact} impact
                                       </Badge>
                                       <Badge className="text-xs bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">
@@ -411,7 +503,9 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                                       </Badge>
                                     </div>
                                   </div>
-                                  <p className="text-sm text-slate-600 dark:text-slate-300 break-words">{issue.description}</p>
+                                  <p className="text-sm text-slate-600 dark:text-slate-300 break-words">
+                                    {issue.description}
+                                  </p>
                                   {issue.count && (
                                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                                       Affects {issue.count} elements
@@ -429,17 +523,13 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => window.open(page.url, '_blank')}
+                          onClick={() => window.open(page.url, "_blank")}
                           className="text-xs"
                         >
                           <ExternalLink className="h-3 w-3 mr-1" />
                           View Page
                         </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="text-xs"
-                        >
+                        <Button variant="outline" size="sm" className="text-xs">
                           <Eye className="h-3 w-3 mr-1" />
                           Re-analyze
                         </Button>
@@ -466,12 +556,11 @@ export const CrawledPagesAnalysis = ({ pages = mockPages, isLoading = false }: P
             🎯 Analysis Summary
           </h4>
           <div className="text-sm text-blue-800 dark:text-blue-200">
-            {totalErrors > 0 ? 
-              `⚠️ Critical: ${totalErrors} pages have errors that need immediate attention. Focus on fixing HTTP errors, missing meta descriptions, and structural issues.` :
-              totalWarnings > 0 ?
-              `✅ Good: No critical errors found. Address ${totalWarnings} warnings to improve SEO performance.` :
-              `🎉 Excellent: All crawled pages are healthy with no major issues detected!`
-            }
+            {totalErrors > 0
+              ? `⚠️ Critical: ${totalErrors} pages have errors that need immediate attention. Focus on fixing HTTP errors, missing meta descriptions, and structural issues.`
+              : totalWarnings > 0
+                ? `✅ Good: No critical errors found. Address ${totalWarnings} warnings to improve SEO performance.`
+                : `🎉 Excellent: All crawled pages are healthy with no major issues detected!`}
           </div>
         </div>
       </CardContent>

@@ -1,23 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 // Force dynamic rendering for this API route
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // GET /api/keywords/rankings/locations - Fetch rankings by location and device
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const keywordId = searchParams.get('keywordId');
-    const device = searchParams.get('device') as 'DESKTOP' | 'MOBILE' | 'TABLET' | null;
+    const keywordId = searchParams.get("keywordId");
+    const device = searchParams.get("device") as "DESKTOP" | "MOBILE" | "TABLET" | null;
 
     if (!keywordId) {
-      return NextResponse.json(
-        { success: false, error: 'keywordId is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ success: false, error: "keywordId is required" }, { status: 400 });
     }
 
     // Build where clause
@@ -29,8 +26,8 @@ export async function GET(request: NextRequest) {
     // Fetch position history for different locations and devices
     const positions = await prisma.keywordPosition.findMany({
       where,
-      orderBy: { checkedAt: 'desc' },
-      take: 500 // Get recent positions
+      orderBy: { checkedAt: "desc" },
+      take: 500, // Get recent positions
     });
 
     // Group by location and device
@@ -42,10 +39,7 @@ export async function GET(request: NextRequest) {
       if (!existing) {
         // Get previous position for change calculation
         const previousPos = positions.find(
-          (p) =>
-            p.location === pos.location &&
-            p.device === pos.device &&
-            p.id !== pos.id
+          (p) => p.location === pos.location && p.device === pos.device && p.id !== pos.id
         );
 
         acc.push({
@@ -55,7 +49,7 @@ export async function GET(request: NextRequest) {
           previousRank: previousPos?.position || pos.position,
           url: pos.url,
           lastChecked: pos.checkedAt,
-          serpFeatures: pos.serpFeatures || {}
+          serpFeatures: pos.serpFeatures || {},
         });
       }
 
@@ -64,7 +58,7 @@ export async function GET(request: NextRequest) {
 
     // Get keyword data for search volume
     const keyword = await prisma.keyword.findUnique({
-      where: { id: keywordId }
+      where: { id: keywordId },
     });
 
     // Enhance with search volume (in real implementation, this would come from location-specific data)
@@ -72,23 +66,23 @@ export async function GET(request: NextRequest) {
       ...ranking,
       searchVolume: keyword?.searchVolume
         ? Math.floor(keyword.searchVolume * (0.5 + Math.random() * 0.5))
-        : 0
+        : 0,
     }));
 
     // Calculate device statistics
     const deviceStats = {
       desktop: {
-        avgRank: calculateAvgRank(enhancedRankings, 'DESKTOP'),
-        change: calculateChange(enhancedRankings, 'DESKTOP')
+        avgRank: calculateAvgRank(enhancedRankings, "DESKTOP"),
+        change: calculateChange(enhancedRankings, "DESKTOP"),
       },
       mobile: {
-        avgRank: calculateAvgRank(enhancedRankings, 'MOBILE'),
-        change: calculateChange(enhancedRankings, 'MOBILE')
+        avgRank: calculateAvgRank(enhancedRankings, "MOBILE"),
+        change: calculateChange(enhancedRankings, "MOBILE"),
       },
       tablet: {
-        avgRank: calculateAvgRank(enhancedRankings, 'TABLET'),
-        change: calculateChange(enhancedRankings, 'TABLET')
-      }
+        avgRank: calculateAvgRank(enhancedRankings, "TABLET"),
+        change: calculateChange(enhancedRankings, "TABLET"),
+      },
     };
 
     return NextResponse.json({
@@ -96,13 +90,13 @@ export async function GET(request: NextRequest) {
       data: {
         rankings: enhancedRankings,
         deviceStats,
-        totalLocations: locationRankings.length
-      }
+        totalLocations: locationRankings.length,
+      },
     });
   } catch (error) {
-    console.error('Error fetching location rankings:', error);
+    console.error("Error fetching location rankings:", error);
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch rankings' },
+      { success: false, error: "Failed to fetch rankings" },
       { status: 500 }
     );
   }
@@ -118,7 +112,7 @@ function calculateAvgRank(rankings: any[], device: string): number {
 
 function calculateChange(rankings: any[], device: string): string {
   const deviceRankings = rankings.filter((r) => r.device === device);
-  if (deviceRankings.length === 0) return '0';
+  if (deviceRankings.length === 0) return "0";
 
   const changes = deviceRankings.map((r) => (r.previousRank || r.rank) - (r.rank || 0));
   const avgChange = changes.reduce((acc, c) => acc + c, 0) / changes.length;
@@ -134,7 +128,7 @@ export async function POST(request: NextRequest) {
 
     if (!keywordId || !location || !device) {
       return NextResponse.json(
-        { success: false, error: 'keywordId, location, and device are required' },
+        { success: false, error: "keywordId, location, and device are required" },
         { status: 400 }
       );
     }
@@ -145,18 +139,18 @@ export async function POST(request: NextRequest) {
         location,
         device,
         position,
-        url
-      }
+        url,
+      },
     });
 
     return NextResponse.json({
       success: true,
-      data: ranking
+      data: ranking,
     });
   } catch (error) {
-    console.error('Error adding location ranking:', error);
+    console.error("Error adding location ranking:", error);
     return NextResponse.json(
-      { success: false, error: 'Failed to add location ranking' },
+      { success: false, error: "Failed to add location ranking" },
       { status: 500 }
     );
   }

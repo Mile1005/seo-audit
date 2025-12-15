@@ -14,11 +14,13 @@
 ## 🎯 Priority 1: Critical User-Facing Pages (15 files)
 
 ### ✅ Layout & Core Structure
+
 - [ ] `app/[locale]/layout-main.tsx` - **ALREADY COMPLETE** ✨
 - [ ] `app/page.tsx` - Homepage with hero, features, pricing
 - [ ] `app/[locale]/page.tsx` - Localized homepage wrapper
 
 ### 🔍 Audit Interface (47-Point Analysis)
+
 - [ ] `app/dashboard/audit/page.tsx` - Main audit interface
 - [ ] `components/audit/ScoreSummary.tsx` - Score cards (SEO, Performance, Accessibility)
 - [ ] `components/audit/CoreWebVitalsGrid.tsx` - LCP, FID, CLS metrics
@@ -38,20 +40,24 @@
 ## 🎯 Priority 2: Dashboard Pages (8 files)
 
 ### 📊 Dashboard Main
+
 - [ ] `app/dashboard/page.tsx` - Dashboard overview
 - [ ] `components/dashboard/overview-stats.tsx` - Statistics cards
 - [ ] `components/dashboard/recent-audits.tsx` - Recent audits list
 
 ### 🔑 Keywords Tool (1100+ Variations)
+
 - [ ] `app/dashboard/keywords/page.tsx` - Keyword research interface
 - [ ] `components/keywords/keyword-table.tsx` - Search volume, difficulty, CPC
 - [ ] `components/keywords/variations-generator.tsx` - 1100+ keyword variations
 
 ### 🔗 Backlink Monitor
+
 - [ ] `app/dashboard/backlinks/page.tsx` - Backlink analysis
 - [ ] `components/backlinks/backlink-table.tsx` - DA, PA, anchor text
 
 ### 🏆 Competitor Analysis
+
 - [ ] `app/dashboard/competitors/page.tsx` - Competitor tracking
 
 ---
@@ -59,6 +65,7 @@
 ## 🎯 Priority 3: Authentication & User Management (10 files)
 
 ### 🔐 Auth Pages
+
 - [ ] `app/login/page.tsx` - Login page
 - [ ] `app/signup/page.tsx` - Signup page
 - [ ] `app/forgot-password/page.tsx` - Password reset
@@ -70,6 +77,7 @@
 - [ ] `components/auth/oauth-buttons.tsx` - Google/GitHub OAuth
 
 ### 👤 User Profile
+
 - [ ] `app/dashboard/profile/page.tsx` - User profile page
 - [ ] `app/dashboard/settings/page.tsx` - Account settings
 
@@ -78,6 +86,7 @@
 ## 🎯 Priority 4: Marketing Pages (12 files)
 
 ### 💰 Pricing & Features
+
 - [ ] `app/pricing/page.tsx` - Pricing tiers (Free, Pro, Enterprise)
 - [ ] `components/pricing/pricing-cards.tsx` - Plan cards
 - [ ] `components/pricing/pricing-faq.tsx` - Pricing FAQ
@@ -86,6 +95,7 @@
 - [ ] `components/features/interactive-demo.tsx` - Demo widget
 
 ### 📚 Content Pages
+
 - [ ] `app/about/page.tsx` - About page
 - [ ] `app/contact/page.tsx` - Contact page
 - [ ] `app/help/page.tsx` - Help center
@@ -98,6 +108,7 @@
 ## 🎯 Priority 5: Navigation & Layout (8 files)
 
 ### 🧭 Navigation Components
+
 - [ ] `components/layout/main-layout.tsx` - Main layout wrapper
 - [ ] `components/navigation/main-nav.tsx` - Primary navigation
 - [ ] `components/navigation/mobile-nav.tsx` - Mobile menu
@@ -112,6 +123,7 @@
 ## 🎯 Priority 6: Shared UI Components (15 files)
 
 ### 🎨 Reusable Components
+
 - [ ] `components/hero/hero-section.tsx` - Homepage hero
 - [ ] `components/hero/trust-logos.tsx` - Social proof logos
 - [ ] `components/testimonials/testimonials-carousel.tsx` - Customer reviews
@@ -131,12 +143,14 @@
 ## 🎯 Priority 7: Projects & Reports (8 files)
 
 ### 📁 Project Management
+
 - [ ] `app/dashboard/projects/page.tsx` - Projects list
 - [ ] `components/projects/project-card.tsx` - Project card
 - [ ] `components/projects/project-form.tsx` - Create/edit project
 - [ ] `components/projects/delete-dialog.tsx` - Delete confirmation
 
 ### 📄 Reports & Exports
+
 - [ ] `app/dashboard/reports/page.tsx` - Reports page
 - [ ] `components/reports/export-button.tsx` - PDF/CSV export
 - [ ] `components/reports/scheduled-reports.tsx` - Report scheduling
@@ -147,6 +161,7 @@
 ## 🎯 Priority 8: Legal & Compliance (4 files)
 
 ### ⚖️ Legal Pages
+
 - [ ] `app/privacy/page.tsx` - Privacy policy
 - [ ] `app/terms/page.tsx` - Terms of service
 - [ ] `components/privacy/consent-banner.tsx` - Cookie consent
@@ -157,6 +172,7 @@
 ## 🎯 Priority 9: Error Pages (5 files)
 
 ### ❌ Error Handling
+
 - [ ] `app/not-found.tsx` - 404 page
 - [ ] `app/error.tsx` - 500 error page
 - [ ] `components/errors/network-error.tsx` - Network error
@@ -168,6 +184,7 @@
 ## 📋 Refactoring Patterns
 
 ### Pattern 1: Server Components (use `getTranslations`)
+
 ```typescript
 // ❌ BEFORE
 export default function Page() {
@@ -184,6 +201,7 @@ export default async function Page() {
 ```
 
 ### Pattern 2: Client Components (use `useTranslations`)
+
 ```typescript
 // ❌ BEFORE
 'use client';
@@ -202,6 +220,7 @@ export default function Button() {
 ```
 
 ### Pattern 3: Dynamic Values with Interpolation
+
 ```typescript
 // ❌ BEFORE
 <p>Welcome back, {userName}!</p>
@@ -212,6 +231,7 @@ const t = useTranslations('dashboard');
 ```
 
 ### Pattern 4: Pluralization
+
 ```typescript
 // ❌ BEFORE
 <span>{count === 1 ? '1 Point' : `${count} Points`}</span>
@@ -222,6 +242,7 @@ const t = useTranslations('audit');
 ```
 
 ### Pattern 5: Nested Keys
+
 ```typescript
 // ❌ BEFORE
 <h2>Core Web Vitals</h2>
@@ -234,21 +255,22 @@ const t = useTranslations('audit');
 ```
 
 ### Pattern 6: Metadata (Server-Side)
+
 ```typescript
 // ❌ BEFORE
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: "Monitor your SEO performance"
+  description: "Monitor your SEO performance",
 };
 
 // ✅ AFTER
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({ params: { locale } }) {
-  const t = await getTranslations({ locale, namespace: 'dashboard' });
+  const t = await getTranslations({ locale, namespace: "dashboard" });
   return {
-    title: t('title'),
-    description: t('subtitle')
+    title: t("title"),
+    description: t("subtitle"),
   };
 }
 ```
@@ -258,6 +280,7 @@ export async function generateMetadata({ params: { locale } }) {
 ## 🔍 Testing Checklist
 
 ### Per-Component Testing
+
 - [ ] Component renders in all 6 locales (en, fr, it, es, id, de)
 - [ ] Dynamic values interpolate correctly (`{name}`, `{count}`)
 - [ ] Pluralization works for different counts
@@ -269,6 +292,7 @@ export async function generateMetadata({ params: { locale } }) {
 - [ ] Error states display translated messages
 
 ### Page-Level Testing
+
 - [ ] All text visible and translated (no hardcoded English)
 - [ ] Metadata (title, description) translated
 - [ ] Hreflang tags present for all locales
@@ -280,6 +304,7 @@ export async function generateMetadata({ params: { locale } }) {
 - [ ] Currency formatting correct per locale
 
 ### SEO Testing
+
 - [ ] Translated meta tags in `<head>`
 - [ ] Hreflang links for all locales
 - [ ] Canonical URL set correctly
@@ -294,24 +319,28 @@ export async function generateMetadata({ params: { locale } }) {
 ## 🚀 Migration Strategy
 
 ### Phase 4A: Critical Path (Week 1)
+
 1. ✅ Layout and providers (DONE)
 2. Homepage (`app/page.tsx`)
 3. Audit page (`app/dashboard/audit/page.tsx`)
 4. Login/Signup (`app/login`, `app/signup`)
 
 ### Phase 4B: Dashboard (Week 2)
+
 5. Dashboard overview
 6. Keywords tool
 7. Backlink monitor
 8. Competitor analysis
 
 ### Phase 4C: Marketing (Week 3)
+
 9. Pricing page
 10. Features page
 11. Contact page
 12. Help center
 
 ### Phase 4D: Supporting Pages (Week 4)
+
 13. Profile & settings
 14. Projects & reports
 15. Error pages
@@ -321,18 +350,18 @@ export async function generateMetadata({ params: { locale } }) {
 
 ## 📊 Progress Tracking
 
-| Priority | Files | Status | Completion |
-|----------|-------|--------|------------|
-| P1: Critical Pages | 15 | 🟡 In Progress | 6% (1/15) |
-| P2: Dashboard | 8 | ⚪ Pending | 0% (0/8) |
-| P3: Auth & User | 10 | ⚪ Pending | 0% (0/10) |
-| P4: Marketing | 12 | ⚪ Pending | 0% (0/12) |
-| P5: Navigation | 8 | 🟢 Partial | 12% (1/8) |
-| P6: Shared UI | 15 | ⚪ Pending | 0% (0/15) |
-| P7: Projects | 8 | ⚪ Pending | 0% (0/8) |
-| P8: Legal | 4 | ⚪ Pending | 0% (0/4) |
-| P9: Errors | 5 | ⚪ Pending | 0% (0/5) |
-| **TOTAL** | **85** | **🟡** | **2% (2/85)** |
+| Priority           | Files  | Status         | Completion    |
+| ------------------ | ------ | -------------- | ------------- |
+| P1: Critical Pages | 15     | 🟡 In Progress | 6% (1/15)     |
+| P2: Dashboard      | 8      | ⚪ Pending     | 0% (0/8)      |
+| P3: Auth & User    | 10     | ⚪ Pending     | 0% (0/10)     |
+| P4: Marketing      | 12     | ⚪ Pending     | 0% (0/12)     |
+| P5: Navigation     | 8      | 🟢 Partial     | 12% (1/8)     |
+| P6: Shared UI      | 15     | ⚪ Pending     | 0% (0/15)     |
+| P7: Projects       | 8      | ⚪ Pending     | 0% (0/8)      |
+| P8: Legal          | 4      | ⚪ Pending     | 0% (0/4)      |
+| P9: Errors         | 5      | ⚪ Pending     | 0% (0/5)      |
+| **TOTAL**          | **85** | **🟡**         | **2% (2/85)** |
 
 ---
 

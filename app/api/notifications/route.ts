@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/auth'
-import { prisma } from '@/lib/db'
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/db";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 /**
  * GET /api/notifications
@@ -11,52 +11,49 @@ export const dynamic = 'force-dynamic'
  */
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth()
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      )
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
-    const { searchParams } = new URL(req.url)
-    const unreadOnly = searchParams.get('unreadOnly') === 'true'
-    const limit = parseInt(searchParams.get('limit') || '50')
+    const { searchParams } = new URL(req.url);
+    const unreadOnly = searchParams.get("unreadOnly") === "true";
+    const limit = parseInt(searchParams.get("limit") || "50");
 
     const where = {
       userId: session.user.id,
-      ...(unreadOnly && { read: false })
-    }
+      ...(unreadOnly && { read: false }),
+    };
 
     const notifications = await (prisma as any).notification.findMany({
       where,
-      orderBy: { createdAt: 'desc' },
-      take: limit
-    })
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    });
 
     const unreadCount = await (prisma as any).notification.count({
       where: {
         userId: session.user.id,
-        read: false
-      }
-    })
+        read: false,
+      },
+    });
 
     return NextResponse.json({
       success: true,
       notifications,
-      unreadCount
-    })
+      unreadCount,
+    });
   } catch (error) {
-    console.error('❌ Error fetching notifications:', error)
+    console.error("❌ Error fetching notifications:", error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Failed to fetch notifications',
-        details: error instanceof Error ? error.message : 'Unknown error'
+      {
+        success: false,
+        error: "Failed to fetch notifications",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
-    )
+    );
   }
 }
 
@@ -66,23 +63,20 @@ export async function GET(req: NextRequest) {
  */
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth()
-    
+    const session = await auth();
+
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { success: false, error: 'Unauthorized' },
-        { status: 401 }
-      )
+      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await req.json()
-    const { type, title, message, data } = body
+    const body = await req.json();
+    const { type, title, message, data } = body;
 
     if (!type || !title || !message) {
       return NextResponse.json(
-        { success: false, error: 'Missing required fields: type, title, message' },
+        { success: false, error: "Missing required fields: type, title, message" },
         { status: 400 }
-      )
+      );
     }
 
     const notification = await (prisma as any).notification.create({
@@ -91,23 +85,23 @@ export async function POST(req: NextRequest) {
         type,
         title,
         message,
-        data: data || {}
-      }
-    })
+        data: data || {},
+      },
+    });
 
     return NextResponse.json({
       success: true,
-      notification
-    })
+      notification,
+    });
   } catch (error) {
-    console.error('❌ Error creating notification:', error)
+    console.error("❌ Error creating notification:", error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: 'Failed to create notification',
-        details: error instanceof Error ? error.message : 'Unknown error'
+      {
+        success: false,
+        error: "Failed to create notification",
+        details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
-    )
+    );
   }
 }

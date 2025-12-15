@@ -3,12 +3,14 @@
 ## 📋 Environment Alignment & Subdomain Strategy
 
 ### DNS Configuration
+
 - **Production**: `app.aiseoturbo.com` → Product app (SEO Audit Tool)
 - **Marketing**: `aiseoturbo.com` → Marketing site
 - **Preview**: Inherits Vercel preview subdomains per repository
 - **Local Development**: Product app on port 3001, Marketing on port 3000
 
 ### Port Configuration
+
 ```bash
 # Local Development
 Marketing Site: http://localhost:3000
@@ -20,6 +22,7 @@ Product App:   https://app.aiseoturbo.com
 ```
 
 ### CORS Strategy
+
 - **Local**: CORS disabled by colocating APIs within product app
 - **Production**: APIs served from same domain as frontend
 - **Cross-domain**: Configured for marketing → product app communication
@@ -27,6 +30,7 @@ Product App:   https://app.aiseoturbo.com
 ## 🔧 Environment Variables
 
 ### Required Variables
+
 ```bash
 # Database
 DATABASE_URL=file:./dev.db                    # SQLite for dev, Postgres for prod
@@ -54,6 +58,7 @@ PSI_API_KEY=your_psi_api_key
 ```
 
 ### Optional Variables
+
 ```bash
 # Feature Flags
 FEATURE_PLAYWRIGHT_FALLBACK=false
@@ -74,6 +79,7 @@ GSC_CACHE_TTL=600     # 10 minutes
 ## 🚦 Rate Limiting Configuration
 
 ### Default Limits (Configurable via Environment)
+
 ```bash
 # PageSpeed Insights API
 PSI_RATE_LIMIT_QPS=1          # 1 request per second per user
@@ -90,6 +96,7 @@ JOB_CONCURRENCY_PER_DOMAIN=1  # 1 concurrent job per domain
 ```
 
 ### Rate Limit Implementation
+
 - **PSI API**: In-memory tracking with exponential backoff
 - **User Limits**: Per-IP tracking for free tier enforcement
 - **Job Queues**: BullMQ with Redis for background processing
@@ -98,6 +105,7 @@ JOB_CONCURRENCY_PER_DOMAIN=1  # 1 concurrent job per domain
 ## 🏗️ Deployment Architecture
 
 ### Local Development
+
 ```bash
 # Terminal 1: Marketing Site
 cd aiseoturbo-site
@@ -109,6 +117,7 @@ pnpm dev  # Runs on http://localhost:3001
 ```
 
 ### Production Deployment
+
 1. **Marketing Site**: Deploy to `aiseoturbo.com`
 2. **Product App**: Deploy to `app.aiseoturbo.com`
 3. **Database**: PostgreSQL on Vercel
@@ -118,6 +127,7 @@ pnpm dev  # Runs on http://localhost:3001
 ### Environment-Specific Configurations
 
 #### Development
+
 ```bash
 DATABASE_URL=file:./dev.db
 REDIS_URL=redis://localhost:6379
@@ -126,6 +136,7 @@ GSC_REDIRECT_URI=http://localhost:3001/api/auth/gsc/callback
 ```
 
 #### Preview (Vercel)
+
 ```bash
 DATABASE_URL=postgresql://...
 REDIS_URL=redis://...
@@ -134,6 +145,7 @@ GSC_REDIRECT_URI=https://seo-audit-git-feature-branch.vercel.app/api/auth/gsc/ca
 ```
 
 #### Production
+
 ```bash
 DATABASE_URL=postgresql://...
 REDIS_URL=redis://...
@@ -144,12 +156,14 @@ GSC_REDIRECT_URI=https://app.aiseoturbo.com/api/auth/gsc/callback
 ## 🔄 Background Job Processing
 
 ### Queue Configuration
+
 - **Redis**: Required for background processing
 - **Fallback**: Inline processing when Redis unavailable
 - **Concurrency**: Configurable per domain to prevent abuse
 - **Retry Logic**: Exponential backoff for transient failures
 
 ### Job Types
+
 1. **SEO Audits**: HTML parsing, PSI calls, GSC data
 2. **Site Crawls**: Multi-page analysis with configurable limits
 3. **Email Notifications**: Audit completion alerts
@@ -158,12 +172,14 @@ GSC_REDIRECT_URI=https://app.aiseoturbo.com/api/auth/gsc/callback
 ## 🛡️ Security & Authentication
 
 ### OAuth Flow
+
 1. **Google Search Console**: OAuth2 with state validation
 2. **Token Storage**: Encrypted in database
 3. **Scope**: Read-only access to search analytics
 4. **Refresh**: Automatic token refresh handling
 
 ### API Security
+
 - **Rate Limiting**: Per-user and per-endpoint limits
 - **CORS**: Configured for marketing → product communication
 - **Validation**: Zod schemas for all API inputs
@@ -172,12 +188,14 @@ GSC_REDIRECT_URI=https://app.aiseoturbo.com/api/auth/gsc/callback
 ## 📊 Monitoring & Analytics
 
 ### Health Checks
+
 - **Database**: Connection status and query performance
 - **Redis**: Queue health and job processing
 - **External APIs**: PSI and GSC availability
 - **Endpoints**: `/api/health` for comprehensive status
 
 ### Error Tracking
+
 - **PSI Failures**: Automatic retry with exponential backoff
 - **GSC Errors**: Graceful degradation when unavailable
 - **Job Failures**: Permanent vs transient error classification
@@ -186,6 +204,7 @@ GSC_REDIRECT_URI=https://app.aiseoturbo.com/api/auth/gsc/callback
 ## 🚀 Quick Start
 
 ### 1. Environment Setup
+
 ```bash
 # Copy environment template
 cp env.sample .env.local
@@ -195,6 +214,7 @@ nano .env.local
 ```
 
 ### 2. Database Setup
+
 ```bash
 # Install dependencies
 pnpm install
@@ -207,6 +227,7 @@ pnpm dev
 ```
 
 ### 3. Verify Configuration
+
 ```bash
 # Test health endpoint
 curl http://localhost:3001/api/health
@@ -218,12 +239,14 @@ curl http://localhost:3001/api/debug/gsc-config
 ## 📈 Scaling Considerations
 
 ### Free Tier Limits
+
 - **Audits**: 5 per day
 - **Crawls**: 30 pages per crawl
 - **PSI Calls**: 20 per day
 - **Storage**: SQLite for development
 
 ### Paid Tier Scaling
+
 - **Database**: PostgreSQL with connection pooling
 - **Redis**: Dedicated instance for job queues
 - **CDN**: Global edge caching
@@ -232,12 +255,14 @@ curl http://localhost:3001/api/debug/gsc-config
 ## 🔍 Troubleshooting
 
 ### Common Issues
+
 1. **PSI API Limits**: Check rate limiting configuration
 2. **GSC Authentication**: Verify OAuth credentials and redirect URI
 3. **Database Connection**: Ensure DATABASE_URL is correct
 4. **Redis Connection**: Check REDIS_URL and network access
 
 ### Debug Endpoints
+
 - `/api/health` - System health status
 - `/api/debug/gsc-config` - GSC configuration check
 - `/debug` - Sample audit results for testing

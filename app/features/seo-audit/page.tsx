@@ -4,7 +4,8 @@ export default function SEOAuditPage() {
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-4xl font-bold text-center mb-8">SEO Audit Tool</h1>
         <p className="text-xl text-center text-gray-300 mb-12">
-          Comprehensive SEO audit tool that analyzes your website for technical issues, on-page optimization, performance, and provides actionable recommendations.
+          Comprehensive SEO audit tool that analyzes your website for technical issues, on-page
+          optimization, performance, and provides actionable recommendations.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="bg-gray-800 p-6 rounded-lg">

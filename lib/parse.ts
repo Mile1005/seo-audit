@@ -223,7 +223,7 @@ export function parseHtml(html: string, baseUrl: string): ParsedHtml {
   // Check for images missing alt (already done above, but add selector)
   $("img").each((_, el) => {
     const $img = $(el);
-    const src = $img.attr("src") || '';
+    const src = $img.attr("src") || "";
     const alt = $img.attr("alt");
     if (!alt || alt.trim() === "") {
       accessibilityIssues.push({
@@ -255,7 +255,40 @@ export function parseHtml(html: string, baseUrl: string): ParsedHtml {
     const $el = $(el);
     const role = $el.attr("role");
     const validRoles = [
-      "banner", "navigation", "main", "complementary", "contentinfo", "region", "form", "search", "alert", "dialog", "button", "checkbox", "grid", "link", "listbox", "menu", "menubar", "menuitem", "option", "progressbar", "radio", "radiogroup", "scrollbar", "slider", "spinbutton", "status", "switch", "tab", "tabpanel", "textbox", "timer", "tooltip", "tree", "treeitem"
+      "banner",
+      "navigation",
+      "main",
+      "complementary",
+      "contentinfo",
+      "region",
+      "form",
+      "search",
+      "alert",
+      "dialog",
+      "button",
+      "checkbox",
+      "grid",
+      "link",
+      "listbox",
+      "menu",
+      "menubar",
+      "menuitem",
+      "option",
+      "progressbar",
+      "radio",
+      "radiogroup",
+      "scrollbar",
+      "slider",
+      "spinbutton",
+      "status",
+      "switch",
+      "tab",
+      "tabpanel",
+      "textbox",
+      "timer",
+      "tooltip",
+      "tree",
+      "treeitem",
     ];
     if (role && !validRoles.includes(role)) {
       accessibilityIssues.push({

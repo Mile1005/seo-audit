@@ -1,4 +1,4 @@
-import { MainLayout } from '@/components/layout/main-layout'
+import { MainLayout } from "@/components/layout/main-layout";
 
 export default function CompetitorAnalysisPage() {
   return (
@@ -7,7 +7,8 @@ export default function CompetitorAnalysisPage() {
         <div className="container mx-auto px-4 py-16">
           <h1 className="text-4xl font-bold text-center mb-8">Competitor Analysis</h1>
           <p className="text-xl text-center text-muted-foreground mb-12">
-            Analyze your competitors' SEO strategies and identify opportunities to gain competitive advantage.
+            Analyze your competitors' SEO strategies and identify opportunities to gain competitive
+            advantage.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-card p-6 rounded-lg border">
@@ -20,7 +21,9 @@ export default function CompetitorAnalysisPage() {
             </div>
             <div className="bg-card p-6 rounded-lg border">
               <h3 className="text-xl font-semibold mb-4">Strategy Insights</h3>
-              <p className="text-muted-foreground">Actionable competitor strategy recommendations</p>
+              <p className="text-muted-foreground">
+                Actionable competitor strategy recommendations
+              </p>
             </div>
           </div>
         </div>

@@ -4,26 +4,26 @@
  */
 
 export interface CoreWebVitals {
-  lcp: number | null;           // Largest Contentful Paint
-  cls: number | null;           // Cumulative Layout Shift
-  inp: number | null;           // Interaction to Next Paint
-  fcp: number | null;           // First Contentful Paint
-  ttfb: number | null;          // Time to First Byte
-  tbt: number | null;           // Total Blocking Time
-  si: number | null;            // Speed Index
-  tti: number | null;           // Time to Interactive
+  lcp: number | null; // Largest Contentful Paint
+  cls: number | null; // Cumulative Layout Shift
+  inp: number | null; // Interaction to Next Paint
+  fcp: number | null; // First Contentful Paint
+  ttfb: number | null; // Time to First Byte
+  tbt: number | null; // Total Blocking Time
+  si: number | null; // Speed Index
+  tti: number | null; // Time to Interactive
 }
 
 export interface PerformanceMetrics extends CoreWebVitals {
-  performanceScore: number;     // 0-100 score
+  performanceScore: number; // 0-100 score
   opportunitiesCount: number;
   diagnosticsCount: number;
   strategies: Array<{
     id: string;
     title: string;
     description: string;
-    impact: 'high' | 'medium' | 'low';
-    savings: number;            // Estimated time savings in ms
+    impact: "high" | "medium" | "low";
+    savings: number; // Estimated time savings in ms
   }>;
   labData: {
     firstContentfulPaint: number;
@@ -42,7 +42,7 @@ export interface PerformanceMetrics extends CoreWebVitals {
 export interface SecurityAudit {
   httpsEnabled: boolean;
   mixedContent: Array<{
-    type: 'image' | 'script' | 'stylesheet' | 'iframe' | 'other';
+    type: "image" | "script" | "stylesheet" | "iframe" | "other";
     url: string;
     description: string;
   }>;
@@ -57,7 +57,7 @@ export interface SecurityAudit {
   };
   vulnerabilities: Array<{
     type: string;
-    severity: 'critical' | 'high' | 'medium' | 'low';
+    severity: "critical" | "high" | "medium" | "low";
     description: string;
     recommendation: string;
   }>;
@@ -76,9 +76,9 @@ export interface MobileUsability {
     isTooSmall: boolean;
   }>;
   textReadability: {
-    score: number;           // 0-100
+    score: number; // 0-100
     issues: Array<{
-      type: 'small-text' | 'unreadable-font';
+      type: "small-text" | "unreadable-font";
       selector: string;
       fontSize: number;
     }>;
@@ -112,11 +112,11 @@ export interface SchemaMarkup {
 
 export interface ContentAnalysis {
   wordCount: number;
-  readabilityScore: number;     // Flesch-Kincaid
+  readabilityScore: number; // Flesch-Kincaid
   keywordDensity: Array<{
     keyword: string;
     count: number;
-    density: number;           // Percentage
+    density: number; // Percentage
   }>;
   headingStructure: {
     h1Count: number;
@@ -125,7 +125,7 @@ export interface ContentAnalysis {
     h4Count: number;
     h5Count: number;
     h6Count: number;
-    isStructured: boolean;     // Proper hierarchy
+    isStructured: boolean; // Proper hierarchy
     missingHeadings: string[];
   };
   internalLinks: {
@@ -212,10 +212,10 @@ export interface TechnicalSEO {
 }
 
 export interface AccessibilityAudit {
-  score: number;               // 0-100
+  score: number; // 0-100
   violations: Array<{
     id: string;
-    impact: 'critical' | 'serious' | 'moderate' | 'minor';
+    impact: "critical" | "serious" | "moderate" | "minor";
     description: string;
     help: string;
     helpUrl: string;
@@ -254,28 +254,35 @@ export interface CompetitorInsights {
 }
 
 export interface CategoryScores {
-  technical: number;         // 0-100
-  performance: number;       // 0-100
-  accessibility: number;     // 0-100
-  seo: number;              // 0-100
-  content: number;          // 0-100
-  security: number;         // 0-100
-  mobile: number;           // 0-100
+  technical: number; // 0-100
+  performance: number; // 0-100
+  accessibility: number; // 0-100
+  seo: number; // 0-100
+  content: number; // 0-100
+  security: number; // 0-100
+  mobile: number; // 0-100
 }
 
 export interface AuditIssue {
   id: string;
-  category: 'technical' | 'performance' | 'accessibility' | 'seo' | 'content' | 'security' | 'mobile';
-  priority: 'critical' | 'important' | 'low';
+  category:
+    | "technical"
+    | "performance"
+    | "accessibility"
+    | "seo"
+    | "content"
+    | "security"
+    | "mobile";
+  priority: "critical" | "important" | "low";
   title: string;
   description: string;
   impact: string;
-  effort: 'low' | 'medium' | 'high';
+  effort: "low" | "medium" | "high";
   recommendation: string;
   resources: Array<{
     title: string;
     url: string;
-    type: 'documentation' | 'tool' | 'guide';
+    type: "documentation" | "tool" | "guide";
   }>;
   affectedElements: string[];
 }
@@ -292,11 +299,11 @@ export interface EnhancedAuditResult {
   url: string;
   scannedAt: string;
   version: string;
-  
+
   // Overall Scores
-  overallScore: number;        // 0-100 composite score
+  overallScore: number; // 0-100 composite score
   categoryScores: CategoryScores;
-  
+
   // Detailed Analysis
   technicalSEO: TechnicalSEO;
   performance: PerformanceMetrics;
@@ -305,32 +312,32 @@ export interface EnhancedAuditResult {
   security: SecurityAudit;
   mobile: MobileUsability;
   schema: SchemaMarkup;
-  
+
   // Issues & Recommendations
   issues: AuditIssue[];
-  
+
   // Quick Wins
   quickWins: Array<{
     title: string;
     description: string;
-    effort: 'low' | 'medium';
-    impact: 'high' | 'medium';
+    effort: "low" | "medium";
+    impact: "high" | "medium";
     category: string;
     steps: string[];
   }>;
-  
+
   // Historical Comparison
   comparison: {
     previousScore: number | null;
     scoreChange: number | null;
     newIssues: number;
     resolvedIssues: number;
-    trendDirection: 'improving' | 'declining' | 'stable' | null;
+    trendDirection: "improving" | "declining" | "stable" | null;
   } | null;
-  
+
   // Competitor Context
   competitorInsights: CompetitorInsights | null;
-  
+
   // Executive Summary
   summary: ExecutiveSummary;
 }
@@ -342,7 +349,7 @@ export interface AuditConfiguration {
   includeExternal: boolean;
   respectRobotsTxt: boolean;
   userAgent: string;
-  
+
   // Analysis Options
   targetKeywords: string[];
   includePerformance: boolean;
@@ -350,24 +357,24 @@ export interface AuditConfiguration {
   includeSecurity: boolean;
   includeCompetitor: boolean;
   competitorUrls: string[];
-  
+
   // Advanced Options
   mobileFirst: boolean;
   includeSchemaValidation: boolean;
   checkBrokenLinks: boolean;
   analyzePageSpeed: boolean;
   generateScreenshots: boolean;
-  
+
   // Thresholds
-  performanceThreshold: number;   // Target performance score
+  performanceThreshold: number; // Target performance score
   accessibilityThreshold: number; // Target accessibility score
   minWordCount: number;
-  maxPageSize: number;           // In KB
+  maxPageSize: number; // In KB
 }
 
 export interface AuditProgress {
-  stage: 'initializing' | 'crawling' | 'analyzing' | 'generating' | 'complete' | 'error';
-  progress: number;              // 0-100
+  stage: "initializing" | "crawling" | "analyzing" | "generating" | "complete" | "error";
+  progress: number; // 0-100
   currentTask: string;
   estimatedTimeRemaining: number; // In seconds
   pagesProcessed: number;

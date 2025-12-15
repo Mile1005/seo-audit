@@ -1,27 +1,27 @@
-'use client'
+"use client";
 
-import { useAuth } from '../../hooks/use-auth'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useAuth } from "../../hooks/use-auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface AuthGuardProps {
-  children: React.ReactNode
-  requireAuth?: boolean
-  redirectTo?: string
+  children: React.ReactNode;
+  requireAuth?: boolean;
+  redirectTo?: string;
 }
 
-export function AuthGuard({ children, requireAuth = true, redirectTo = '/login' }: AuthGuardProps) {
-  const { user, isLoading } = useAuth()
-  const router = useRouter()
+export function AuthGuard({ children, requireAuth = true, redirectTo = "/login" }: AuthGuardProps) {
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (!isLoading && requireAuth && !user) {
-      const currentPath = window.location.pathname + window.location.search
-      const loginUrl = `${redirectTo}?returnUrl=${encodeURIComponent(currentPath)}`
-      router.push(loginUrl)
+      const currentPath = window.location.pathname + window.location.search;
+      const loginUrl = `${redirectTo}?returnUrl=${encodeURIComponent(currentPath)}`;
+      router.push(loginUrl);
     }
-  }, [isLoading, user, requireAuth, redirectTo, router])
+  }, [isLoading, user, requireAuth, redirectTo, router]);
 
   if (isLoading) {
     return (
@@ -40,19 +40,24 @@ export function AuthGuard({ children, requireAuth = true, redirectTo = '/login' 
               stroke="currentColor"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
             </motion.svg>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Loading...</h3>
           <p className="text-gray-600">Getting things ready for you</p>
         </motion.div>
       </div>
-    )
+    );
   }
 
   if (requireAuth && !user) {
-    return null // Will redirect via useEffect
+    return null; // Will redirect via useEffect
   }
 
-  return <>{children}</>
+  return <>{children}</>;
 }

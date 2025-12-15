@@ -25,6 +25,7 @@ Source files: `audit_summary.json`, `audit_results.csv` (found at repo root).
 - Note: an explicit re-run of `node seo_bestaudit.js` was requested but skipped; the current audit files were used as the latest data.
 
 Files examined:
+
 - `audit_summary.json` — top-level counts and averages
 - `audit_results.csv` — per-URL detailed results (CSV; first ~200 rows reviewed)
 
@@ -240,7 +241,8 @@ Import-Csv .\audit_results.csv | Where-Object { $_."Canonical Status" -eq 'fail'
 ---
 
 If you'd like, I can now:
+
 - Run the audit script live (re-run `node seo_bestaudit.js`) and attach the fresh CSV/JSON to the report (I left that as an optional step since running was skipped earlier).
 - Start implementing the top-priority code fixes (canonical/hreflang generation) and run the audit again to show progress.
 
-Tell me which of those you'd like me to do next: re-run audit now, or start applying fixes to `lib/seo.ts` and relevant wrappers? 
+Tell me which of those you'd like me to do next: re-run audit now, or start applying fixes to `lib/seo.ts` and relevant wrappers?

@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { 
-  Target, 
-  TrendingUp, 
-  Users, 
+import {
+  Target,
+  TrendingUp,
+  Users,
   Zap,
   ArrowRight,
   Search,
@@ -13,30 +13,25 @@ import {
   BookOpen,
   ExternalLink,
   ChevronDown,
-  Plus
+  Plus,
 } from "lucide-react";
 import { Button } from "../../ui/button";
 import { handleCTAClick } from "@/lib/cta-utils";
 import { useTranslations } from "next-intl";
 
 export default function GapAnalysis() {
-  const t = useTranslations('featurePages.competitorAnalysis.gapAnalysis');
+  const t = useTranslations("featurePages.competitorAnalysis.gapAnalysis");
   const [selectedCompetitor, setSelectedCompetitor] = useState("semrush.com");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  const competitors = [
-    "semrush.com",
-    "ahrefs.com", 
-    "screaming-frog.co.uk",
-    "sitechecker.pro"
-  ];
+  const competitors = ["semrush.com", "ahrefs.com", "screaming-frog.co.uk", "sitechecker.pro"];
 
   const gapCategories = [
-    { id: "all", label: t('categories.all'), count: 247 },
-    { id: "keywords", label: t('categories.keywords'), count: 156 },
-    { id: "content", label: t('categories.content'), count: 43 },
-    { id: "backlinks", label: t('categories.backlinks'), count: 32 },
-    { id: "technical", label: t('categories.technical'), count: 16 }
+    { id: "all", label: t("categories.all"), count: 247 },
+    { id: "keywords", label: t("categories.keywords"), count: 156 },
+    { id: "content", label: t("categories.content"), count: 43 },
+    { id: "backlinks", label: t("categories.backlinks"), count: 32 },
+    { id: "technical", label: t("categories.technical"), count: 16 },
   ];
 
   const keywordGaps = [
@@ -47,7 +42,7 @@ export default function GapAnalysis() {
       volume: 18000,
       difficulty: 45,
       opportunity: "high",
-      intent: "commercial"
+      intent: "commercial",
     },
     {
       keyword: "website seo checker",
@@ -56,7 +51,7 @@ export default function GapAnalysis() {
       volume: 14500,
       difficulty: 52,
       opportunity: "medium",
-      intent: "commercial"
+      intent: "commercial",
     },
     {
       keyword: "seo analysis tool",
@@ -65,7 +60,7 @@ export default function GapAnalysis() {
       volume: 9800,
       difficulty: 48,
       opportunity: "high",
-      intent: "commercial"
+      intent: "commercial",
     },
     {
       keyword: "technical seo audit",
@@ -74,7 +69,7 @@ export default function GapAnalysis() {
       volume: 7200,
       difficulty: 61,
       opportunity: "medium",
-      intent: "informational"
+      intent: "informational",
     },
     {
       keyword: "seo crawl tool",
@@ -83,47 +78,51 @@ export default function GapAnalysis() {
       volume: 5400,
       difficulty: 43,
       opportunity: "high",
-      intent: "commercial"
-    }
+      intent: "commercial",
+    },
   ];
 
   const contentGaps = [
     {
-      topic: t('contentGaps.gap1.topic'),
+      topic: t("contentGaps.gap1.topic"),
       competitorPages: 3,
       yourPages: 0,
       traffic: 15000,
-      opportunity: t('contentGaps.gap1.opportunity')
+      opportunity: t("contentGaps.gap1.opportunity"),
     },
     {
-      topic: t('contentGaps.gap2.topic'),
+      topic: t("contentGaps.gap2.topic"),
       competitorPages: 5,
       yourPages: 1,
       traffic: 12000,
-      opportunity: t('contentGaps.gap2.opportunity')
+      opportunity: t("contentGaps.gap2.opportunity"),
     },
     {
-      topic: t('contentGaps.gap3.topic'),
+      topic: t("contentGaps.gap3.topic"),
       competitorPages: 2,
       yourPages: 0,
       traffic: 8500,
-      opportunity: t('contentGaps.gap3.opportunity')
-    }
+      opportunity: t("contentGaps.gap3.opportunity"),
+    },
   ];
 
   const opportunityMetrics = [
-    { label: t('metrics.totalTraffic'), value: "245K", description: t('metrics.totalTrafficDesc') },
-    { label: t('metrics.keywordOpps'), value: "156", description: t('metrics.keywordOppsDesc') },
-    { label: t('metrics.contentGaps'), value: "43", description: t('metrics.contentGapsDesc') },
-    { label: t('metrics.revenue'), value: "$18K", description: t('metrics.revenueDesc') }
+    { label: t("metrics.totalTraffic"), value: "245K", description: t("metrics.totalTrafficDesc") },
+    { label: t("metrics.keywordOpps"), value: "156", description: t("metrics.keywordOppsDesc") },
+    { label: t("metrics.contentGaps"), value: "43", description: t("metrics.contentGapsDesc") },
+    { label: t("metrics.revenue"), value: "$18K", description: t("metrics.revenueDesc") },
   ];
 
   const getOpportunityColor = (opportunity: string) => {
     switch (opportunity) {
-      case "high": return "text-green-400 bg-green-500/10";
-      case "medium": return "text-yellow-400 bg-yellow-500/10";
-      case "low": return "text-red-400 bg-red-500/10";
-      default: return "text-muted-foreground bg-muted";
+      case "high":
+        return "text-green-400 bg-green-500/10";
+      case "medium":
+        return "text-yellow-400 bg-yellow-500/10";
+      case "low":
+        return "text-red-400 bg-red-500/10";
+      default:
+        return "text-muted-foreground bg-muted";
     }
   };
 
@@ -138,12 +137,8 @@ export default function GapAnalysis() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            {t('title')}
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t('subtitle')}
-          </p>
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">{t("title")}</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t("subtitle")}</p>
         </motion.div>
 
         {/* Controls */}
@@ -157,22 +152,26 @@ export default function GapAnalysis() {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center space-x-2">
               <Globe className="w-4 h-4 text-muted-foreground" />
-              <label htmlFor="competitor-selector" className="sr-only">Select competitor to analyze</label>
-              <select 
+              <label htmlFor="competitor-selector" className="sr-only">
+                Select competitor to analyze
+              </label>
+              <select
                 id="competitor-selector"
                 value={selectedCompetitor}
                 onChange={(e) => setSelectedCompetitor(e.target.value)}
                 className="bg-background border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 aria-label="Select competitor to analyze"
               >
-                {competitors.map(competitor => (
-                  <option key={competitor} value={competitor}>{competitor}</option>
+                {competitors.map((competitor) => (
+                  <option key={competitor} value={competitor}>
+                    {competitor}
+                  </option>
                 ))}
               </select>
             </div>
-            
+
             <div className="flex space-x-1 bg-muted rounded-lg p-1">
-              {gapCategories.map(category => (
+              {gapCategories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setSelectedCategory(category.id)}
@@ -190,7 +189,7 @@ export default function GapAnalysis() {
 
           <Button variant="outline" size="sm">
             <Plus className="w-4 h-4 mr-2" />
-            {t('addCompetitor')}
+            {t("addCompetitor")}
           </Button>
         </motion.div>
 
@@ -235,20 +234,22 @@ export default function GapAnalysis() {
                     <Search className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground">{t('keywordGaps.title')}</h3>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {t("keywordGaps.title")}
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      {t('keywordGaps.subtitle', { competitor: selectedCompetitor })}
+                      {t("keywordGaps.subtitle", { competitor: selectedCompetitor })}
                     </p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
-                  {t('keywordGaps.exportBtn')}
+                  {t("keywordGaps.exportBtn")}
                 </Button>
               </div>
             </div>
 
-            <div 
-              className="overflow-x-auto" 
+            <div
+              className="overflow-x-auto"
               tabIndex={0}
               role="region"
               aria-label="Keyword gap analysis table"
@@ -256,13 +257,27 @@ export default function GapAnalysis() {
               <table className="w-full">
                 <thead className="bg-muted/50">
                   <tr>
-                    <th className="text-left p-4 font-semibold text-foreground">{t('keywordGaps.table.keyword')}</th>
-                    <th className="text-center p-4 font-semibold text-foreground">{t('keywordGaps.table.theirRank')}</th>
-                    <th className="text-center p-4 font-semibold text-foreground">{t('keywordGaps.table.yourRank')}</th>
-                    <th className="text-center p-4 font-semibold text-foreground">{t('keywordGaps.table.volume')}</th>
-                    <th className="text-center p-4 font-semibold text-foreground">{t('keywordGaps.table.difficulty')}</th>
-                    <th className="text-center p-4 font-semibold text-foreground">{t('keywordGaps.table.opportunity')}</th>
-                    <th className="text-center p-4 font-semibold text-foreground">{t('keywordGaps.table.action')}</th>
+                    <th className="text-left p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.keyword")}
+                    </th>
+                    <th className="text-center p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.theirRank")}
+                    </th>
+                    <th className="text-center p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.yourRank")}
+                    </th>
+                    <th className="text-center p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.volume")}
+                    </th>
+                    <th className="text-center p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.difficulty")}
+                    </th>
+                    <th className="text-center p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.opportunity")}
+                    </th>
+                    <th className="text-center p-4 font-semibold text-foreground">
+                      {t("keywordGaps.table.action")}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -290,30 +305,38 @@ export default function GapAnalysis() {
                             {gap.yourRank}
                           </div>
                         ) : (
-                          <span className="text-muted-foreground text-sm">{t('keywordGaps.table.notRanking')}</span>
+                          <span className="text-muted-foreground text-sm">
+                            {t("keywordGaps.table.notRanking")}
+                          </span>
                         )}
                       </td>
                       <td className="p-4 text-center text-muted-foreground">
                         {gap.volume.toLocaleString()}
                       </td>
                       <td className="p-4 text-center">
-                        <div className={`text-xs px-2 py-1 rounded-full ${
-                          gap.difficulty < 30 ? "bg-green-500/10 text-green-400" :
-                          gap.difficulty < 60 ? "bg-yellow-500/10 text-yellow-400" :
-                          "bg-red-500/10 text-red-400"
-                        }`}>
+                        <div
+                          className={`text-xs px-2 py-1 rounded-full ${
+                            gap.difficulty < 30
+                              ? "bg-green-500/10 text-green-400"
+                              : gap.difficulty < 60
+                                ? "bg-yellow-500/10 text-yellow-400"
+                                : "bg-red-500/10 text-red-400"
+                          }`}
+                        >
                           {gap.difficulty}%
                         </div>
                       </td>
                       <td className="p-4 text-center">
-                        <div className={`text-xs px-2 py-1 rounded-full capitalize ${getOpportunityColor(gap.opportunity)}`}>
+                        <div
+                          className={`text-xs px-2 py-1 rounded-full capitalize ${getOpportunityColor(gap.opportunity)}`}
+                        >
                           {gap.opportunity}
                         </div>
                       </td>
                       <td className="p-4 text-center">
                         <Button variant="ghost" size="sm">
                           <Target className="w-3 h-3 mr-1" />
-                          {t('keywordGaps.table.targetBtn')}
+                          {t("keywordGaps.table.targetBtn")}
                         </Button>
                       </td>
                     </motion.tr>
@@ -338,14 +361,16 @@ export default function GapAnalysis() {
                     <BookOpen className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground">{t('contentGapsSection.title')}</h3>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {t("contentGapsSection.title")}
+                    </h3>
                     <p className="text-sm text-muted-foreground">
-                      {t('contentGapsSection.subtitle')}
+                      {t("contentGapsSection.subtitle")}
                     </p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
-                  {t('contentGapsSection.strategyBtn')}
+                  {t("contentGapsSection.strategyBtn")}
                 </Button>
               </div>
             </div>
@@ -364,19 +389,25 @@ export default function GapAnalysis() {
                     <h4 className="font-medium text-foreground mb-1">{gap.topic}</h4>
                     <p className="text-sm text-muted-foreground mb-2">{gap.opportunity}</p>
                     <div className="flex items-center space-x-4 text-xs text-muted-foreground">
-                      <span>{t('contentGapsSection.theirPages', { count: gap.competitorPages })}</span>
-                      <span>{t('contentGapsSection.yourPages', { count: gap.yourPages })}</span>
-                      <span>{t('contentGapsSection.trafficPotential', { traffic: gap.traffic.toLocaleString() })}</span>
+                      <span>
+                        {t("contentGapsSection.theirPages", { count: gap.competitorPages })}
+                      </span>
+                      <span>{t("contentGapsSection.yourPages", { count: gap.yourPages })}</span>
+                      <span>
+                        {t("contentGapsSection.trafficPotential", {
+                          traffic: gap.traffic.toLocaleString(),
+                        })}
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Button variant="ghost" size="sm">
                       <ExternalLink className="w-3 h-3 mr-1" />
-                      {t('contentGapsSection.analyzeBtn')}
+                      {t("contentGapsSection.analyzeBtn")}
                     </Button>
                     <Button size="sm">
                       <Plus className="w-3 h-3 mr-1" />
-                      {t('contentGapsSection.createBtn')}
+                      {t("contentGapsSection.createBtn")}
                     </Button>
                   </div>
                 </motion.div>
@@ -394,27 +425,23 @@ export default function GapAnalysis() {
           className="mt-12 bg-card border rounded-xl p-8"
         >
           <div className="text-center">
-            <h3 className="text-xl font-bold text-foreground mb-4">
-              {t('cta.title')}
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              {t('cta.description')}
-            </p>
+            <h3 className="text-xl font-bold text-foreground mb-4">{t("cta.title")}</h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">{t("cta.description")}</p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button 
+              <Button
                 size="lg"
-                onClick={() => handleCTAClick('START_AUDIT', t('cta.generateBtn'), 'gap-analysis')}
+                onClick={() => handleCTAClick("START_AUDIT", t("cta.generateBtn"), "gap-analysis")}
               >
                 <Zap className="w-4 h-4 mr-2" />
-                {t('cta.generateBtn')}
+                {t("cta.generateBtn")}
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 size="lg"
-                onClick={() => handleCTAClick('FEATURES', t('cta.prioritizeBtn'), 'gap-analysis')}
+                onClick={() => handleCTAClick("FEATURES", t("cta.prioritizeBtn"), "gap-analysis")}
               >
                 <Target className="w-4 h-4 mr-2" />
-                {t('cta.prioritizeBtn')}
+                {t("cta.prioritizeBtn")}
               </Button>
             </div>
           </div>

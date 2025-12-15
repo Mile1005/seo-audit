@@ -1,16 +1,19 @@
 # Schema.org Structured Data Implementation Guide
 
 ## Overview
+
 Comprehensive Schema.org implementation across AISEOTurbo to improve SEO, rich snippets, and search engine understanding.
 
 ## Global Schemas (app/layout.tsx)
 
 ### 1. Organization/SoftwareApplication Schema
+
 **Location:** Every page (via root layout)
 
 **Purpose:** Tells search engines about your business, contact info, and software
 
 **Includes:**
+
 - Company name and logo
 - Contact points (support, sales, billing)
 - Founder information (Mile Stoev)
@@ -21,11 +24,13 @@ Comprehensive Schema.org implementation across AISEOTurbo to improve SEO, rich s
 - Pricing range ($0-$99)
 
 ### 2. WebSite Schema
+
 **Location:** Every page (via root layout)
 
 **Purpose:** Enables sitewide search in Google
 
 **Includes:**
+
 - Site name and URL
 - Search action capability
 - Language (en-US)
@@ -37,6 +42,7 @@ Comprehensive Schema.org implementation across AISEOTurbo to improve SEO, rich s
 **Schema Type:** Product + AggregateOffer
 
 **Implementation:**
+
 ```typescript
 import { StructuredData, generateProductSchema } from '@/components/seo/StructuredData'
 
@@ -68,6 +74,7 @@ const pricingSchemas = [
 **Schema Type:** Article
 
 **Implementation:**
+
 ```typescript
 import { StructuredData, generateArticleSchema } from '@/components/seo/StructuredData'
 
@@ -89,6 +96,7 @@ const articleSchema = generateArticleSchema({
 **Schema Type:** FAQPage
 
 **Implementation:**
+
 ```typescript
 import { StructuredData, generateFAQSchema } from '@/components/seo/StructuredData'
 
@@ -111,6 +119,7 @@ const faqSchema = generateFAQSchema([
 **Schema Type:** HowTo
 
 **Implementation:**
+
 ```typescript
 import { StructuredData, generateHowToSchema } from '@/components/seo/StructuredData'
 
@@ -133,6 +142,7 @@ const howToSchema = generateHowToSchema({
 **Schema Type:** BreadcrumbList
 
 **Implementation:**
+
 ```typescript
 import { StructuredData, generateBreadcrumbSchema } from '@/components/seo/StructuredData'
 
@@ -167,32 +177,38 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ## Schema Priority by Page Type
 
 ### Homepage
+
 - ✅ Organization (Global)
 - ✅ WebSite (Global)
 - ⭐ Service (Add this)
 
 ### Pricing Page
+
 - ✅ Organization (Global)
 - ⭐ Product/Offer (Add this)
 - ⭐ AggregateOffer for multiple plans
 
 ### Blog Posts
+
 - ✅ Organization (Global)
 - ⭐ Article
 - ⭐ Breadcrumb
 - ⭐ Author Person schema
 
 ### Help/Documentation
+
 - ✅ Organization (Global)
 - ⭐ FAQPage
 - ⭐ HowTo (for guides)
 - ⭐ Breadcrumb
 
 ### Contact Page
+
 - ✅ Organization (Global - includes contact points)
 - ⭐ ContactPage type
 
 ### About Page
+
 - ✅ Organization (Global - includes founder)
 - ⭐ AboutPage type
 - ⭐ Team members (Person schema)
@@ -200,6 +216,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ## Benefits of Schema Implementation
 
 ### SEO Benefits
+
 - 📈 **Rich Snippets** - Enhanced search results with ratings, prices, etc.
 - 🎯 **Better Click-Through Rate** - More attractive search results
 - 🔍 **Knowledge Panel** - Potential for branded knowledge panel
@@ -207,6 +224,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 - 💰 **Price Display** - Show pricing directly in results
 
 ### Search Features Enabled
+
 - **Sitewide Search** - Users can search your site from Google
 - **FAQ Rich Results** - FAQ accordion in search results
 - **How-To Rich Results** - Step-by-step guides in search
@@ -214,6 +232,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 - **Product Rich Results** - Pricing page with product cards
 
 ### AI & Voice Search
+
 - Better understanding by AI assistants (ChatGPT, Gemini, etc.)
 - Improved voice search results
 - More accurate AI-generated summaries
@@ -221,6 +240,7 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ## Implementation Checklist
 
 ### Phase 1: Global (✅ Complete)
+
 - [x] Organization schema in layout
 - [x] WebSite schema with search action
 - [x] Social media links
@@ -229,18 +249,21 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 - [x] Ratings and reviews
 
 ### Phase 2: Key Pages (To Do)
+
 - [ ] Add Product schema to pricing page
 - [ ] Add FAQ schema to help pages
 - [ ] Add Service schema to features pages
 - [ ] Add Breadcrumb to all pages
 
 ### Phase 3: Content (To Do)
+
 - [ ] Article schema for blog posts
 - [ ] HowTo schema for guides
 - [ ] Video schema (if adding videos)
 - [ ] Review schema (for testimonials)
 
 ### Phase 4: Advanced (Future)
+
 - [ ] Event schema (for webinars/launches)
 - [ ] Course schema (if adding courses)
 - [ ] JobPosting schema (for careers page)
@@ -249,16 +272,19 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ## Monitoring & Maintenance
 
 ### Weekly
+
 - Check Google Search Console for schema errors
 - Monitor rich results impressions
 - Review structured data coverage report
 
 ### Monthly
+
 - Validate all schemas after content updates
 - Check for new schema types to implement
 - Update aggregate ratings based on new reviews
 
 ### Quarterly
+
 - Review schema best practices (Google updates)
 - Audit all pages for missing schemas
 - Update company information if changed
@@ -266,21 +292,27 @@ const breadcrumbSchema = generateBreadcrumbSchema([
 ## Common Issues & Solutions
 
 ### Issue: Schema Not Showing in Search
-**Solution:** 
+
+**Solution:**
+
 - Wait 2-4 weeks for Google to process
 - Ensure schema is valid (use validator)
 - Check robots.txt isn't blocking indexing
 - Verify page is indexed in Search Console
 
 ### Issue: Schema Validation Errors
+
 **Solution:**
+
 - Use schema validator tools
 - Check for required fields
 - Ensure proper JSON formatting
 - Remove any non-standard fields
 
 ### Issue: Duplicate Schema
+
 **Solution:**
+
 - Check for multiple schema blocks
 - Ensure child pages don't duplicate parent schemas
 - Use @id to link related entities

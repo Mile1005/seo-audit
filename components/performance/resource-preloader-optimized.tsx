@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface PreloadResource {
   href: string;
-  as: 'script' | 'style' | 'font' | 'image' | 'document' | 'fetch';
+  as: "script" | "style" | "font" | "image" | "document" | "fetch";
   type?: string;
-  crossOrigin?: 'anonymous' | 'use-credentials';
-  fetchPriority?: 'high' | 'low' | 'auto';
+  crossOrigin?: "anonymous" | "use-credentials";
+  fetchPriority?: "high" | "low" | "auto";
   media?: string;
 }
 
@@ -19,32 +19,27 @@ interface ResourcePreloaderProps {
 // Critical resources that should be preloaded immediately (reduced for mobile)
 const CRITICAL_RESOURCES: PreloadResource[] = [
   {
-    href: '/images/hero/hero-laptop-dashboard.svg',
-    as: 'image',
-    fetchPriority: 'high'
-  }
+    href: "/images/hero/hero-laptop-dashboard.svg",
+    as: "image",
+    fetchPriority: "high",
+  },
 ];
 
 // DNS prefetch domains (only essential ones)
-const DNS_PREFETCH_DOMAINS = [
-  'fonts.googleapis.com',
-  'fonts.gstatic.com'
-];
+const DNS_PREFETCH_DOMAINS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 // Preconnect domains (more important than prefetch)
-const PRECONNECT_DOMAINS = [
-  'https://fonts.googleapis.com',
-  'https://fonts.gstatic.com'
-];
+const PRECONNECT_DOMAINS = ["https://fonts.googleapis.com", "https://fonts.gstatic.com"];
 
 export function ResourcePreloader({ resources = [], enabled = true }: ResourcePreloaderProps) {
   useEffect(() => {
-    if (!enabled || typeof window === 'undefined') return;
+    if (!enabled || typeof window === "undefined") return;
 
     // Mobile-optimized resource loading strategy
     const isMobile = window.innerWidth <= 768;
     const connection = (navigator as any).connection;
-    const isSlowConnection = connection && (connection.effectiveType === '2g' || connection.effectiveType === '3g');
+    const isSlowConnection =
+      connection && (connection.effectiveType === "2g" || connection.effectiveType === "3g");
 
     // Create preload links with error handling
     const createPreloadLink = (resource: PreloadResource): HTMLLinkElement | null => {
@@ -54,24 +49,24 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
       }
 
       try {
-        const link = document.createElement('link');
-        link.rel = 'preload';
+        const link = document.createElement("link");
+        link.rel = "preload";
         link.href = resource.href;
         link.as = resource.as;
-        link.dataset.autoPreload = 'true';
-        
+        link.dataset.autoPreload = "true";
+
         if (resource.crossOrigin) {
           link.crossOrigin = resource.crossOrigin;
         }
-        
+
         if (resource.fetchPriority) {
           (link as any).fetchPriority = resource.fetchPriority;
         }
-        
+
         if (resource.type) {
           link.type = resource.type;
         }
-        
+
         if (resource.media) {
           link.media = resource.media;
         }
@@ -91,8 +86,8 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
     // Intelligent DNS prefetching
     const addDNSPrefetch = (domain: string) => {
       if (!document.querySelector(`link[rel="dns-prefetch"][href="//${domain}"]`)) {
-        const link = document.createElement('link');
-        link.rel = 'dns-prefetch';
+        const link = document.createElement("link");
+        link.rel = "dns-prefetch";
         link.href = `//${domain}`;
         document.head.appendChild(link);
       }
@@ -101,17 +96,17 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
     // Intelligent preconnecting
     const addPreconnect = (url: string) => {
       if (!document.querySelector(`link[rel="preconnect"][href="${url}"]`)) {
-        const link = document.createElement('link');
-        link.rel = 'preconnect';
+        const link = document.createElement("link");
+        link.rel = "preconnect";
         link.href = url;
-        link.crossOrigin = 'anonymous';
+        link.crossOrigin = "anonymous";
         document.head.appendChild(link);
       }
     };
 
     // Add DNS prefetch for critical domains
     DNS_PREFETCH_DOMAINS.forEach(addDNSPrefetch);
-    
+
     // Add preconnect for critical domains (higher priority)
     PRECONNECT_DOMAINS.forEach(addPreconnect);
 
@@ -121,7 +116,7 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
       if (isMobile || isSlowConnection) {
         // Only load critical resources on mobile/slow connections
         const criticalOnly = CRITICAL_RESOURCES.slice(0, 1);
-        criticalOnly.forEach(resource => {
+        criticalOnly.forEach((resource) => {
           const link = createPreloadLink(resource);
           if (link) document.head.appendChild(link);
         });
@@ -129,14 +124,14 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
       }
 
       // Load critical resources immediately for desktop
-      CRITICAL_RESOURCES.forEach(resource => {
+      CRITICAL_RESOURCES.forEach((resource) => {
         const link = createPreloadLink(resource);
         if (link) document.head.appendChild(link);
       });
-      
+
       // Load additional resources with delay for non-critical
       setTimeout(() => {
-        resources.forEach(resource => {
+        resources.forEach((resource) => {
           const link = createPreloadLink(resource);
           if (link) document.head.appendChild(link);
         });
@@ -144,7 +139,7 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
     };
 
     // Use requestIdleCallback for non-blocking resource loading
-    if ('requestIdleCallback' in window) {
+    if ("requestIdleCallback" in window) {
       window.requestIdleCallback(loadResourcesProgressively, { timeout: 2000 });
     } else {
       setTimeout(loadResourcesProgressively, 500);
@@ -153,7 +148,7 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
     // Cleanup function
     return () => {
       // Remove preload links that are no longer needed
-      document.querySelectorAll('link[rel="preload"][data-auto-preload="true"]').forEach(link => {
+      document.querySelectorAll('link[rel="preload"][data-auto-preload="true"]').forEach((link) => {
         link.remove();
       });
     };
@@ -165,66 +160,66 @@ export function ResourcePreloader({ resources = [], enabled = true }: ResourcePr
 // Hook for programmatic resource preloading
 export function useResourcePreloader() {
   const preloadResource = (resource: PreloadResource) => {
-    if (typeof window === 'undefined') return;
-    
-    const link = document.createElement('link');
-    link.rel = 'preload';
+    if (typeof window === "undefined") return;
+
+    const link = document.createElement("link");
+    link.rel = "preload";
     link.href = resource.href;
     link.as = resource.as;
-    
+
     if (resource.crossOrigin) {
       link.crossOrigin = resource.crossOrigin;
     }
-    
+
     document.head.appendChild(link);
   };
 
-  const preloadImage = (src: string, priority: 'high' | 'low' = 'low') => {
+  const preloadImage = (src: string, priority: "high" | "low" = "low") => {
     preloadResource({
       href: src,
-      as: 'image',
-      fetchPriority: priority
+      as: "image",
+      fetchPriority: priority,
     });
   };
 
   const preloadFont = (href: string) => {
     preloadResource({
       href,
-      as: 'font',
-      crossOrigin: 'anonymous'
+      as: "font",
+      crossOrigin: "anonymous",
     });
   };
 
   return {
     preloadResource,
     preloadImage,
-    preloadFont
+    preloadFont,
   };
 }
 
 // Intelligent route prefetching based on user behavior
 export function useRoutePrefetching() {
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // Mobile optimization - reduce prefetching on mobile
     const isMobile = window.innerWidth <= 768;
     if (isMobile) return;
 
     let prefetchTimeout: NodeJS.Timeout;
-    
+
     const handleMouseEnter = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      const link = target.closest('a[href]') as HTMLAnchorElement;
-      
+      const link = target.closest("a[href]") as HTMLAnchorElement;
+
       if (link && link.hostname === window.location.hostname) {
         clearTimeout(prefetchTimeout);
-        
+
         // Delay prefetch to avoid unnecessary requests
         prefetchTimeout = setTimeout(() => {
           if (!document.querySelector(`link[rel="prefetch"][href="${link.href}"]`)) {
-            const prefetchLink = document.createElement('link');
-            prefetchLink.rel = 'prefetch';
+            const prefetchLink = document.createElement("link");
+            prefetchLink.rel = "prefetch";
             prefetchLink.href = link.href;
             document.head.appendChild(prefetchLink);
           }
@@ -236,12 +231,12 @@ export function useRoutePrefetching() {
       clearTimeout(prefetchTimeout);
     };
 
-    document.addEventListener('mouseenter', handleMouseEnter, true);
-    document.addEventListener('mouseleave', handleMouseLeave, true);
+    document.addEventListener("mouseenter", handleMouseEnter, true);
+    document.addEventListener("mouseleave", handleMouseLeave, true);
 
     return () => {
-      document.removeEventListener('mouseenter', handleMouseEnter, true);
-      document.removeEventListener('mouseleave', handleMouseLeave, true);
+      document.removeEventListener("mouseenter", handleMouseEnter, true);
+      document.removeEventListener("mouseleave", handleMouseLeave, true);
       clearTimeout(prefetchTimeout);
     };
   }, []);

@@ -10,17 +10,17 @@ This document shows **before/after** refactored code samples demonstrating next-
 
 ### ✅ Key Changes Summary
 
-| Change | Before | After |
-|--------|--------|-------|
-| **Hook Import** | ❌ None | ✅ `import { useTranslations } from 'next-intl'` |
-| **Hook Usage** | ❌ None | ✅ `const t = useTranslations('audit')` |
-| **Start Button** | `"Start Audit"` | `t('startAudit')` |
-| **Running State** | `"Running Audit..."` | `t('runningAudit')` |
-| **Title** | `"SEO Audit"` | `t('title')` |
-| **Subtitle** | `"Comprehensive 47-point..."` | `t('subtitle', { points: 47 })` |
-| **URL Placeholder** | `"https://example.com"` | `t('urlPlaceholder')` |
-| **Score Labels** | `"Excellent"`, `"Good"` | `t('results.excellent')`, `t('results.good')` |
-| **Export Button** | `"Export PDF"` | `t('export.pdf')` |
+| Change              | Before                        | After                                            |
+| ------------------- | ----------------------------- | ------------------------------------------------ |
+| **Hook Import**     | ❌ None                       | ✅ `import { useTranslations } from 'next-intl'` |
+| **Hook Usage**      | ❌ None                       | ✅ `const t = useTranslations('audit')`          |
+| **Start Button**    | `"Start Audit"`               | `t('startAudit')`                                |
+| **Running State**   | `"Running Audit..."`          | `t('runningAudit')`                              |
+| **Title**           | `"SEO Audit"`                 | `t('title')`                                     |
+| **Subtitle**        | `"Comprehensive 47-point..."` | `t('subtitle', { points: 47 })`                  |
+| **URL Placeholder** | `"https://example.com"`       | `t('urlPlaceholder')`                            |
+| **Score Labels**    | `"Excellent"`, `"Good"`       | `t('results.excellent')`, `t('results.good')`    |
+| **Export Button**   | `"Export PDF"`                | `t('export.pdf')`                                |
 
 ### 📝 Diff-Style Changes
 
@@ -54,7 +54,7 @@ export default function ComprehensiveAuditPage() {
 +                       <h1 className="text-3xl font-bold tracking-tight">
 +                           {t('title')} {/* ✅ CHANGED: "SEO Audit" → translated */}
 +                       </h1>
-                        
+
 -                       <p className="text-muted-foreground mt-2">
 -                           Comprehensive 47-point SEO analysis with automated recommendations
 -                       </p>
@@ -62,7 +62,7 @@ export default function ComprehensiveAuditPage() {
 +                           {t('subtitle', { points: 47 })} {/* ✅ NEW: Variable interpolation */}
 +                       </p>
                     </div>
-                    
+
                     {result && (
                         <div className="flex gap-2">
                             <Button variant="outline" size="sm" onClick={() => window.print()}>
@@ -87,7 +87,7 @@ export default function ComprehensiveAuditPage() {
 +                               <Label htmlFor="url">
 +                                   {t('enterUrl')} {/* ✅ CHANGED: Translated */}
 +                               </Label>
-                                
+
                                 <Input
                                     id="url"
                                     type="url"
@@ -97,7 +97,7 @@ export default function ComprehensiveAuditPage() {
                                     onChange={(e) => setUrl(e.target.value)}
                                 />
                             </div>
-                            
+
                             <Button type="submit" disabled={isLoading}>
                                 {isLoading ? (
                                     <>
@@ -125,7 +125,7 @@ export default function ComprehensiveAuditPage() {
                     <AlertDescription>
 -                       An error occurred: {error}
 +                       {tErrors('generic.message')}: {error} {/* ✅ CHANGED */}
-                        
+
                         <Button variant="link" onClick={reset}>
 -                           Try again
 +                           {tCommon('retry')} {/* ✅ CHANGED */}
@@ -140,13 +140,13 @@ export default function ComprehensiveAuditPage() {
                     <CardHeader>
 -                       <CardTitle>SEO Audit Results</CardTitle>
 +                       <CardTitle>{t('results.title')}</CardTitle> {/* ✅ CHANGED */}
-                        
+
 -                       <CardDescription>
 -                           Completed on {new Date(result.timestamp).toLocaleString()}
 -                       </CardDescription>
 +                       <CardDescription>
-+                           {t('results.completedOn', { 
-+                               date: new Date(result.timestamp).toLocaleString() 
++                           {t('results.completedOn', {
++                               date: new Date(result.timestamp).toLocaleString()
 +                           })} {/* ✅ NEW: Variable interpolation */}
 +                       </CardDescription>
                     </CardHeader>
@@ -163,30 +163,30 @@ export default function ComprehensiveAuditPage() {
 
 ### ✅ Key Changes Summary
 
-| Change | Before | After |
-|--------|--------|-------|
-| **Hook Import** | ❌ None | ✅ `import { useTranslations } from 'next-intl'` |
-| **Component Type** | Client-side | ✅ Client-side (add `'use client'`) |
-| **Score Labels** | `"Overall SEO Score"` | `t('results.overallScore')` |
-| **Category Names** | `"Performance"`, `"SEO"` | `t('scores.performance')`, `t('scores.seo')` |
-| **Rating Badge** | `"Excellent"` | `t('results.excellent')` |
+| Change             | Before                   | After                                            |
+| ------------------ | ------------------------ | ------------------------------------------------ |
+| **Hook Import**    | ❌ None                  | ✅ `import { useTranslations } from 'next-intl'` |
+| **Component Type** | Client-side              | ✅ Client-side (add `'use client'`)              |
+| **Score Labels**   | `"Overall SEO Score"`    | `t('results.overallScore')`                      |
+| **Category Names** | `"Performance"`, `"SEO"` | `t('scores.performance')`, `t('scores.seo')`     |
+| **Rating Badge**   | `"Excellent"`            | `t('results.excellent')`                         |
 
 ### 📝 Diff-Style Changes
 
 ```diff
 + "use client"; // ✅ NEW: Required for useTranslations hook
-+ 
++
 import React from 'react'
 + import { useTranslations } from 'next-intl' // ✅ NEW: i18n hook
 import { Badge } from '../ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Progress } from '../ui/progress'
-import { 
-    Target, 
-    Zap, 
-    Search, 
-    Accessibility, 
-    Shield 
+import {
+    Target,
+    Zap,
+    Search,
+    Accessibility,
+    Shield
 } from 'lucide-react'
 import { AuditResultUnified } from '../../lib/types/audit'
 
@@ -198,31 +198,31 @@ interface ScoreSummaryProps {
 
 export function ScoreSummary({ result, getScoreColor, getScoreBadge }: ScoreSummaryProps) {
 +   const t = useTranslations('audit') // ✅ NEW: Translation hook
-    
+
     const scores = [
-        { 
--           label: 'Performance', 
+        {
+-           label: 'Performance',
 +           label: t('scores.performance'), // ✅ CHANGED
             value: result.scores.performance,
             icon: Zap,
             color: 'text-yellow-600'
         },
-        { 
--           label: 'SEO', 
+        {
+-           label: 'SEO',
 +           label: t('scores.seo'), // ✅ CHANGED
             value: result.scores.seo,
             icon: Search,
             color: 'text-blue-600'
         },
-        { 
--           label: 'Accessibility', 
+        {
+-           label: 'Accessibility',
 +           label: t('scores.accessibility'), // ✅ CHANGED
             value: result.scores.accessibility,
             icon: Accessibility,
             color: 'text-green-600'
         },
-        { 
--           label: 'Best Practices', 
+        {
+-           label: 'Best Practices',
 +           label: t('scores.bestPractices'), // ✅ CHANGED
             value: result.scores.bestPractices,
             icon: Shield,
@@ -282,19 +282,19 @@ export function ScoreSummary({ result, getScoreColor, getScoreBadge }: ScoreSumm
 
 ### ✅ Key Changes Summary
 
-| Change | Before | After |
-|--------|--------|-------|
-| **Component Type** | Server Component | ✅ Client Component (`'use client'`) |
-| **Hero Heading** | `"Unlock Your Website's..."` | `t('headline')` |
-| **Subheading** | `"Get instant insights..."` | `t('subheadline')` |
-| **CTA Button** | `"Start Free Audit"` | `t('cta.startFree')` |
-| **Trust Badge** | `"No credit card required"` | `t('cta.noCard')` |
+| Change             | Before                       | After                                |
+| ------------------ | ---------------------------- | ------------------------------------ |
+| **Component Type** | Server Component             | ✅ Client Component (`'use client'`) |
+| **Hero Heading**   | `"Unlock Your Website's..."` | `t('headline')`                      |
+| **Subheading**     | `"Get instant insights..."`  | `t('subheadline')`                   |
+| **CTA Button**     | `"Start Free Audit"`         | `t('cta.startFree')`                 |
+| **Trust Badge**    | `"No credit card required"`  | `t('cta.noCard')`                    |
 
 ### 📝 Diff-Style Changes
 
 ```diff
 + "use client"; // ✅ NEW: Required for client-side i18n
-+ 
++
 import React from 'react'
 + import { useTranslations } from 'next-intl' // ✅ NEW
 import { Button } from '../ui/button'
@@ -303,7 +303,7 @@ import Link from 'next/link'
 
 export function HeroSection() {
 +   const t = useTranslations('home.hero') // ✅ NEW: Namespaced translation
-    
+
     return (
         <section className="relative overflow-hidden py-20 lg:py-32">
             <div className="container mx-auto px-4">
@@ -331,7 +331,7 @@ export function HeroSection() {
 
                     {/* Subheadline */}
 -                   <p className="mb-8 text-xl text-muted-foreground lg:text-2xl">
--                       Get instant insights into your website's performance, SEO health, 
+-                       Get instant insights into your website's performance, SEO health,
 -                       and actionable recommendations to rank higher on Google.
 -                   </p>
 +                   <p className="mb-8 text-xl text-muted-foreground lg:text-2xl">
@@ -347,7 +347,7 @@ export function HeroSection() {
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Link>
                         </Button>
-                        
+
                         <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
                             <Link href="/demo">
 -                               Watch Demo
@@ -376,12 +376,12 @@ export function HeroSection() {
 
 ### ✅ Key Changes Summary
 
-| Change | Before | After |
-|--------|--------|-------|
-| **Metadata Function** | Static `export const metadata` | ✅ Dynamic `generateMetadata()` |
-| **Translation Method** | ❌ None | ✅ `getTranslations()` server-side |
-| **Title** | `"AI SEO Turbo - Best..."` | `t('title')` |
-| **Description** | `"Comprehensive SEO..."` | `t('description')` |
+| Change                 | Before                         | After                              |
+| ---------------------- | ------------------------------ | ---------------------------------- |
+| **Metadata Function**  | Static `export const metadata` | ✅ Dynamic `generateMetadata()`    |
+| **Translation Method** | ❌ None                        | ✅ `getTranslations()` server-side |
+| **Title**              | `"AI SEO Turbo - Best..."`     | `t('title')`                       |
+| **Description**        | `"Comprehensive SEO..."`       | `t('description')`                 |
 
 ### 📝 Diff-Style Changes
 
@@ -404,11 +404,11 @@ import { FeaturesShowcase } from '../../components/features/FeaturesShowcase'
 + interface PageProps {
 +     params: { locale: string }
 + }
-+ 
++
 + export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 +     const { locale } = params
 +     const t = await getTranslations({ locale, namespace: 'meta' })
-+     
++
 +     return {
 +         title: t('home.title'),
 +         description: t('home.description'),
@@ -428,7 +428,7 @@ import { FeaturesShowcase } from '../../components/features/FeaturesShowcase'
 - export default function HomePage() {
 + export default async function HomePage({ params }: PageProps) { // ✅ CHANGED: Add params
 +     const { locale } = params
-+     
++
       return (
           <main>
               <HeroSection />
@@ -446,11 +446,11 @@ import { FeaturesShowcase } from '../../components/features/FeaturesShowcase'
 
 ### ✅ Key Changes Summary
 
-| Change | Before | After |
-|--------|--------|-------|
-| **Error Messages** | Hardcoded strings | ✅ `tErrors('fieldRequired')` |
-| **Validation** | English only | ✅ Translated per locale |
-| **Success Toast** | `"Message sent!"` | `tNotifications('messageSent')` |
+| Change             | Before            | After                           |
+| ------------------ | ----------------- | ------------------------------- |
+| **Error Messages** | Hardcoded strings | ✅ `tErrors('fieldRequired')`   |
+| **Validation**     | English only      | ✅ Translated per locale        |
+| **Success Toast**  | `"Message sent!"` | `tNotifications('messageSent')` |
 
 ### 📝 Diff-Style Changes
 
@@ -470,18 +470,18 @@ export function ContactForm() {
 +   const tErrors = useTranslations('errors') // ✅ NEW
 +   const tNotifications = useTranslations('notifications') // ✅ NEW
 +   const { toast } = useToast()
-    
+
     const [formData, setFormData] = useState({ name: '', email: '', message: '' })
     const [errors, setErrors] = useState<Record<string, string>>({})
 
     const validateForm = () => {
         const newErrors: Record<string, string> = {}
-        
+
         if (!formData.name.trim()) {
 -           newErrors.name = 'Name is required'
 +           newErrors.name = tErrors('fieldRequired', { field: t('name') }) // ✅ CHANGED
         }
-        
+
         if (!formData.email.trim()) {
 -           newErrors.email = 'Email is required'
 +           newErrors.email = tErrors('fieldRequired', { field: t('email') }) // ✅ CHANGED
@@ -489,23 +489,23 @@ export function ContactForm() {
 -           newErrors.email = 'Invalid email format'
 +           newErrors.email = tErrors('invalidEmail') // ✅ CHANGED
         }
-        
+
         if (!formData.message.trim()) {
 -           newErrors.message = 'Message is required'
 +           newErrors.message = tErrors('fieldRequired', { field: t('message') }) // ✅ CHANGED
         }
-        
+
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        
+
         if (!validateForm()) return
-        
+
         // Submit logic...
-        
+
 -       alert('Message sent successfully!')
 +       toast({ // ✅ CHANGED: Use translated toast
 +           title: tNotifications('success'),
@@ -577,11 +577,11 @@ export function ContactForm() {
 
 ### ✅ Key Changes Summary
 
-| Change | Before | After |
-|--------|--------|-------|
-| **Pluralization** | Manual ternary | ✅ ICU MessageFormat in JSON |
+| Change            | Before                         | After                          |
+| ----------------- | ------------------------------ | ------------------------------ |
+| **Pluralization** | Manual ternary                 | ✅ ICU MessageFormat in JSON   |
 | **Count Display** | `"5 projects"` / `"1 project"` | `t('projectCount', { count })` |
-| **Empty State** | `"No projects yet"` | `t('noProjects')` |
+| **Empty State**   | `"No projects yet"`            | `t('noProjects')`              |
 
 ### 📝 Translation File Update
 
@@ -622,7 +622,7 @@ interface ProjectsListProps {
 
 export function ProjectsList({ projects }: ProjectsListProps) {
 +   const t = useTranslations('dashboard.projects') // ✅ NEW
-    
+
     return (
         <Card>
             <CardHeader className="flex flex-row items-center justify-between">
@@ -630,7 +630,7 @@ export function ProjectsList({ projects }: ProjectsListProps) {
 +               <CardTitle>
 +                   {t('title')} ({t('projectCount', { count: projects.length })}) {/* ✅ CHANGED */}
 +               </CardTitle>
-                
+
                 <Button size="sm">
                     <Plus className="mr-2 h-4 w-4" />
 -                   Create Project
@@ -663,28 +663,28 @@ export function ProjectsList({ projects }: ProjectsListProps) {
 
 ## 📊 Translation Keys Used in Samples
 
-| Namespace | Key | English Value | Usage |
-|-----------|-----|---------------|-------|
-| `audit` | `title` | `"SEO Audit"` | Page title |
-| `audit` | `subtitle` | `"Comprehensive {points}-point SEO analysis..."` | Page subtitle |
-| `audit` | `startAudit` | `"Start Audit"` | Button label |
-| `audit` | `runningAudit` | `"Running Audit..."` | Loading state |
-| `audit.results` | `overallScore` | `"Overall SEO Score"` | Score card title |
-| `audit.results` | `excellent` | `"Excellent"` | Score badge |
-| `audit.results` | `good` | `"Good"` | Score badge |
-| `audit.results` | `needsImprovement` | `"Needs Improvement"` | Score badge |
-| `audit.scores` | `performance` | `"Performance"` | Category label |
-| `audit.scores` | `seo` | `"SEO"` | Category label |
-| `audit.scores` | `accessibility` | `"Accessibility"` | Category label |
-| `home.hero` | `headline` | `"Unlock Your Website's"` | Hero heading |
-| `home.hero` | `headlineHighlight` | `"SEO Potential"` | Hero heading (styled) |
-| `home.hero` | `trustBadge` | `"Trusted by {count}+ websites"` | Trust indicator |
-| `home.hero.cta` | `startFree` | `"Start Free Audit"` | Primary CTA |
-| `home.hero.cta` | `noCard` | `"No credit card required"` | Trust indicator |
-| `errors` | `fieldRequired` | `"{field} is required"` | Form validation |
-| `errors` | `invalidEmail` | `"Invalid email format"` | Email validation |
-| `notifications` | `messageSent` | `"Message sent successfully!"` | Success toast |
-| `dashboard.projects` | `projectCount` | `"{count, plural, ...}"` | Pluralization |
+| Namespace            | Key                 | English Value                                    | Usage                 |
+| -------------------- | ------------------- | ------------------------------------------------ | --------------------- |
+| `audit`              | `title`             | `"SEO Audit"`                                    | Page title            |
+| `audit`              | `subtitle`          | `"Comprehensive {points}-point SEO analysis..."` | Page subtitle         |
+| `audit`              | `startAudit`        | `"Start Audit"`                                  | Button label          |
+| `audit`              | `runningAudit`      | `"Running Audit..."`                             | Loading state         |
+| `audit.results`      | `overallScore`      | `"Overall SEO Score"`                            | Score card title      |
+| `audit.results`      | `excellent`         | `"Excellent"`                                    | Score badge           |
+| `audit.results`      | `good`              | `"Good"`                                         | Score badge           |
+| `audit.results`      | `needsImprovement`  | `"Needs Improvement"`                            | Score badge           |
+| `audit.scores`       | `performance`       | `"Performance"`                                  | Category label        |
+| `audit.scores`       | `seo`               | `"SEO"`                                          | Category label        |
+| `audit.scores`       | `accessibility`     | `"Accessibility"`                                | Category label        |
+| `home.hero`          | `headline`          | `"Unlock Your Website's"`                        | Hero heading          |
+| `home.hero`          | `headlineHighlight` | `"SEO Potential"`                                | Hero heading (styled) |
+| `home.hero`          | `trustBadge`        | `"Trusted by {count}+ websites"`                 | Trust indicator       |
+| `home.hero.cta`      | `startFree`         | `"Start Free Audit"`                             | Primary CTA           |
+| `home.hero.cta`      | `noCard`            | `"No credit card required"`                      | Trust indicator       |
+| `errors`             | `fieldRequired`     | `"{field} is required"`                          | Form validation       |
+| `errors`             | `invalidEmail`      | `"Invalid email format"`                         | Email validation      |
+| `notifications`      | `messageSent`       | `"Message sent successfully!"`                   | Success toast         |
+| `dashboard.projects` | `projectCount`      | `"{count, plural, ...}"`                         | Pluralization         |
 
 ---
 
@@ -693,11 +693,13 @@ export function ProjectsList({ projects }: ProjectsListProps) {
 When refactoring a component, follow these steps:
 
 ### 1️⃣ **Add Client Directive (if needed)**
+
 ```diff
 + "use client"; // Add for client components using hooks
 ```
 
 ### 2️⃣ **Import Translation Hook**
+
 ```diff
 + import { useTranslations } from 'next-intl' // Client components
 + // OR
@@ -705,38 +707,43 @@ When refactoring a component, follow these steps:
 ```
 
 ### 3️⃣ **Initialize Hook**
+
 ```typescript
 // Client component
-const t = useTranslations('namespace')
+const t = useTranslations("namespace");
 
 // Server component (async)
-const t = await getTranslations({ locale, namespace: 'namespace' })
+const t = await getTranslations({ locale, namespace: "namespace" });
 ```
 
 ### 4️⃣ **Replace Hardcoded Strings**
+
 ```diff
 - <h1>SEO Audit</h1>
 + <h1>{t('title')}</h1>
 ```
 
 ### 5️⃣ **Add Variables for Dynamic Content**
+
 ```diff
 - <p>Found {count} issues</p>
 + <p>{t('issuesFound', { count })}</p>
 ```
 
 ### 6️⃣ **Update Metadata (Server Components)**
+
 ```typescript
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const t = await getTranslations({ locale: params.locale, namespace: 'meta' })
+  const t = await getTranslations({ locale: params.locale, namespace: "meta" });
   return {
-    title: t('pageTitle'),
-    description: t('pageDescription')
-  }
+    title: t("pageTitle"),
+    description: t("pageDescription"),
+  };
 }
 ```
 
 ### 7️⃣ **Test in All Locales**
+
 - Switch language in UI
 - Verify all strings render correctly
 - Check variable interpolation
@@ -763,14 +770,14 @@ grep -r "t('.*')" --include="*.tsx" | grep -v "messages/"
 
 ## 📈 Progress Tracking
 
-| Sample | Status | Lines Changed | Translation Keys |
-|--------|--------|---------------|------------------|
-| ✅ Audit Page | Complete | 45 | 15 keys |
-| ✅ Score Summary | Complete | 12 | 6 keys |
-| ✅ Hero Section | Complete | 18 | 9 keys |
-| ✅ Server Metadata | Complete | 22 | 4 keys |
-| ✅ Contact Form | Complete | 25 | 8 keys |
-| ✅ Projects List | Complete | 8 | 4 keys |
+| Sample             | Status   | Lines Changed | Translation Keys |
+| ------------------ | -------- | ------------- | ---------------- |
+| ✅ Audit Page      | Complete | 45            | 15 keys          |
+| ✅ Score Summary   | Complete | 12            | 6 keys           |
+| ✅ Hero Section    | Complete | 18            | 9 keys           |
+| ✅ Server Metadata | Complete | 22            | 4 keys           |
+| ✅ Contact Form    | Complete | 25            | 8 keys           |
+| ✅ Projects List   | Complete | 8             | 4 keys           |
 
 **Total**: 6 samples completed, 130 lines changed, 46 translation keys integrated
 

@@ -1,9 +1,20 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, CheckCircle, CreditCard, TrendingUp, Zap, Star, Crown, ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  CheckCircle,
+  CreditCard,
+  TrendingUp,
+  Zap,
+  Star,
+  Crown,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function UpgradePlanPage() {
   return (
@@ -21,8 +32,8 @@ export default function UpgradePlanPage() {
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Upgrading Your Plan</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Learn how to upgrade your AI SEO Turbo subscription and unlock premium features
-              to boost your SEO performance.
+              Learn how to upgrade your AI SEO Turbo subscription and unlock premium features to
+              boost your SEO performance.
             </p>
           </div>
 
@@ -35,7 +46,9 @@ export default function UpgradePlanPage() {
                   <User className="w-6 h-6 text-gray-600 mr-2" />
                   <h3 className="text-lg font-semibold text-gray-900">Free Plan</h3>
                 </div>
-                <p className="text-gray-600 mb-4">Perfect for getting started with basic SEO audits.</p>
+                <p className="text-gray-600 mb-4">
+                  Perfect for getting started with basic SEO audits.
+                </p>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• 3 audits per month</li>
                   <li>• Basic SEO analysis</li>
@@ -45,7 +58,9 @@ export default function UpgradePlanPage() {
 
               <div className="border-2 border-blue-500 rounded-lg p-6 relative">
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">Popular</span>
+                  <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                    Popular
+                  </span>
                 </div>
                 <div className="flex items-center mb-4">
                   <Star className="w-6 h-6 text-blue-600 mr-2" />
@@ -85,7 +100,9 @@ export default function UpgradePlanPage() {
                   <span className="text-blue-600 font-semibold">1</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Sign In to Your Account</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Sign In to Your Account
+                  </h3>
                   <p className="text-gray-600">Log in to your AI SEO Turbo dashboard.</p>
                 </div>
               </div>
@@ -95,7 +112,9 @@ export default function UpgradePlanPage() {
                   <span className="text-blue-600 font-semibold">2</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Go to Billing Settings</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Go to Billing Settings
+                  </h3>
                   <p className="text-gray-600">Navigate to Account → Billing in the dashboard.</p>
                 </div>
               </div>
@@ -116,7 +135,9 @@ export default function UpgradePlanPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Complete Payment</h3>
-                  <p className="text-gray-600">Enter your payment information and confirm the upgrade.</p>
+                  <p className="text-gray-600">
+                    Enter your payment information and confirm the upgrade.
+                  </p>
                 </div>
               </div>
             </div>
@@ -155,5 +176,5 @@ export default function UpgradePlanPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

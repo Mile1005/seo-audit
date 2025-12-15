@@ -47,14 +47,14 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 25.5%;
     --input: 217.2 32.6% 25.5%;
-    --ring: 224.3 76.3% 94.0%;
+    --ring: 224.3 76.3% 94%;
     color-scheme: dark;
   }
 
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     margin: 0;
@@ -62,7 +62,7 @@
     overflow-x: hidden;
     width: 100%;
   }
-  
+
   html {
     height: 100%;
     overflow-x: hidden;
@@ -80,28 +80,31 @@
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
     }
     50% {
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
   @keyframes bounce {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(-25%);
-      animation-timing-function: cubic-bezier(0.8,0,1,1);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
     50% {
       transform: none;
-      animation-timing-function: cubic-bezier(0,0,0.2,1);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
     }
   }
 
   /* Dashboard Card Animations */
   @keyframes card-glow {
-    0%, 100% {
+    0%,
+    100% {
       box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
     }
     50% {
@@ -110,7 +113,8 @@
   }
 
   @keyframes neon-border {
-    0%, 100% {
+    0%,
+    100% {
       border-color: rgba(59, 130, 246, 0.3);
     }
     50% {
@@ -171,7 +175,10 @@
 
   /* Utility classes for dashboard animations */
   .card-hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease,
+      border-color 0.3s ease;
   }
 
   .card-hover-lift:hover {
@@ -188,7 +195,9 @@
   }
 
   .neon-border-hover {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   .neon-border-hover:hover {
@@ -238,7 +247,7 @@
     background-color: hsl(var(--input)) !important;
     border: 2px solid hsl(var(--border)) !important;
   }
-  
+
   input[type="text"]::placeholder,
   input[type="email"]::placeholder,
   input[type="url"]::placeholder,
@@ -247,18 +256,18 @@
     color: hsl(var(--muted-foreground)) !important;
     opacity: 0.8;
   }
-  
+
   /* Ensure buttons have proper contrast */
   button[type="submit"] {
     color: hsl(var(--primary-foreground)) !important;
     background-color: hsl(var(--primary)) !important;
   }
-  
+
   /* Better contrast for code/small text elements */
   .bg-slate-700 {
     background-color: hsl(var(--secondary)) !important;
   }
-  
+
   .text-gray-400 {
     color: hsl(var(--muted-foreground)) !important;
   }
@@ -313,7 +322,7 @@
   }
 
   .prose-blog h2::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -386,7 +395,7 @@
   }
 
   .prose-blog ul li::before {
-    content: '';
+    content: "";
     position: absolute;
     left: -1.5em;
     top: 0.65em;
@@ -432,7 +441,7 @@
 
   .prose-blog code {
     @apply text-blue-400;
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
     font-size: 0.9em;
   }
 
@@ -475,12 +484,7 @@
   .prose-blog hr {
     border: none;
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(71, 85, 105, 0.5),
-      transparent
-    );
+    background: linear-gradient(90deg, transparent, rgba(71, 85, 105, 0.5), transparent);
     margin: 3rem 0;
   }
 

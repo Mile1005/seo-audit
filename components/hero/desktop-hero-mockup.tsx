@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
+import React from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function DesktopHeroMockup() {
   return (
     <div className="relative">
       {/* Background Glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl scale-110" />
-      
+
       {/* Main Mockup Container */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 30 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        whileHover={{ 
+        whileHover={{
           rotateY: 5,
           rotateX: 5,
           scale: 1.02,
-          transition: { duration: 0.3 }
+          transition: { duration: 0.3 },
         }}
         className="relative transform-gpu perspective-1000"
       >
@@ -99,12 +99,12 @@ export function DesktopHeroMockup() {
         <motion.div
           animate={{
             y: [0, -8, 0],
-            rotate: [0, 2, 0]
+            rotate: [0, 2, 0],
           }}
           transition={{
             duration: 4,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
           className="absolute -top-4 -right-4 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl p-3 shadow-lg"
         >
@@ -114,13 +114,13 @@ export function DesktopHeroMockup() {
         <motion.div
           animate={{
             y: [0, 8, 0],
-            rotate: [0, -2, 0]
+            rotate: [0, -2, 0],
           }}
           transition={{
             duration: 3,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1,
           }}
           className="absolute -bottom-4 -left-4 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl p-3 shadow-lg"
         >
@@ -128,5 +128,5 @@ export function DesktopHeroMockup() {
         </motion.div>
       </motion.div>
     </div>
-  )
+  );
 }

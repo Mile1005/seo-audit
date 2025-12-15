@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { ArrowRight, Play, Zap, Clock, Users } from "lucide-react"
-import { trackCTA, trackDemo } from "@/lib/analytics"
-import { handleCTAClick } from "@/lib/cta-utils"
+import React, { useState, useEffect } from "react";
+import { ArrowRight, Play, Zap, Clock, Users } from "lucide-react";
+import { trackCTA, trackDemo } from "@/lib/analytics";
+import { handleCTAClick } from "@/lib/cta-utils";
 
 // Mobile-optimized hero with minimal animations
 export function MobileOptimizedHero() {
-  const [isMounted, setIsMounted] = useState(false)
-  
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   if (!isMounted) {
     // Critical loading state with minimal HTML
@@ -30,17 +30,18 @@ export function MobileOptimizedHero() {
                 </span>
               </h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Get comprehensive SEO analysis, identify critical issues, and receive actionable recommendations to boost your search rankings.
+                Get comprehensive SEO analysis, identify critical issues, and receive actionable
+                recommendations to boost your search rankings.
               </p>
             </div>
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   return (
-    <section 
+    <section
       data-testid="hero-section"
       className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950"
     >
@@ -66,7 +67,8 @@ export function MobileOptimizedHero() {
             </h1>
 
             <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-              Get comprehensive SEO analysis, identify critical issues, and receive actionable recommendations to boost your search rankings.
+              Get comprehensive SEO analysis, identify critical issues, and receive actionable
+              recommendations to boost your search rankings.
             </p>
 
             {/* Social Proof */}
@@ -89,7 +91,7 @@ export function MobileOptimizedHero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => {
-                  handleCTAClick('START_AUDIT', 'Start Free Audit', 'hero')
+                  handleCTAClick("START_AUDIT", "Start Free Audit", "hero");
                 }}
                 className="group bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-cyan-400 hover:to-blue-500 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/25 flex items-center justify-center"
               >
@@ -99,7 +101,7 @@ export function MobileOptimizedHero() {
 
               <button
                 onClick={() => {
-                  trackDemo('hero-demo-click')
+                  trackDemo("hero-demo-click");
                 }}
                 className="group bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 border border-slate-600 hover:border-slate-500 flex items-center justify-center"
               >
@@ -129,5 +131,5 @@ export function MobileOptimizedHero() {
         </div>
       </div>
     </section>
-  )
+  );
 }

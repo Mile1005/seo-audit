@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, CreditCard, Shield, Plus, Edit, Trash2, ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, CreditCard, Shield, Plus, Edit, Trash2, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function PaymentMethodsPage() {
   return (
@@ -21,8 +21,8 @@ export default function PaymentMethodsPage() {
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Managing Payment Methods</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Learn how to add, update, and manage your payment methods securely
-              in your AI SEO Turbo account.
+              Learn how to add, update, and manage your payment methods securely in your AI SEO
+              Turbo account.
             </p>
           </div>
 
@@ -55,17 +55,21 @@ export default function PaymentMethodsPage() {
 
           {/* How to Manage */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">How to Manage Your Payment Methods</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              How to Manage Your Payment Methods
+            </h2>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
                   <Plus className="w-4 h-4 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Adding a Payment Method</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Adding a Payment Method
+                  </h3>
                   <p className="text-gray-600 mb-3">
-                    Go to Account → Billing → Payment Methods and click "Add Payment Method".
-                    Enter your card details or connect your PayPal account.
+                    Go to Account → Billing → Payment Methods and click "Add Payment Method". Enter
+                    your card details or connect your PayPal account.
                   </p>
                 </div>
               </div>
@@ -75,7 +79,9 @@ export default function PaymentMethodsPage() {
                   <Edit className="w-4 h-4 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Updating Payment Information</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Updating Payment Information
+                  </h3>
                   <p className="text-gray-600 mb-3">
                     Click the edit icon next to any payment method to update card details,
                     expiration date, or billing address.
@@ -88,10 +94,12 @@ export default function PaymentMethodsPage() {
                   <Trash2 className="w-4 h-4 text-red-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Removing Payment Methods</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Removing Payment Methods
+                  </h3>
                   <p className="text-gray-600 mb-3">
-                    You can remove payment methods that are not set as default.
-                    At least one payment method must be on file.
+                    You can remove payment methods that are not set as default. At least one payment
+                    method must be on file.
                   </p>
                 </div>
               </div>
@@ -103,10 +111,12 @@ export default function PaymentMethodsPage() {
             <div className="flex items-start gap-4">
               <Shield className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold text-green-900 mb-2">Your Payment Information is Secure</h3>
+                <h3 className="text-lg font-semibold text-green-900 mb-2">
+                  Your Payment Information is Secure
+                </h3>
                 <p className="text-green-800 mb-3">
-                  We use industry-leading encryption and security measures to protect your payment information.
-                  We never store full credit card numbers on our servers.
+                  We use industry-leading encryption and security measures to protect your payment
+                  information. We never store full credit card numbers on our servers.
                 </p>
                 <ul className="text-green-800 text-sm space-y-1">
                   <li>• PCI DSS Level 1 compliant</li>
@@ -151,5 +161,5 @@ export default function PaymentMethodsPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

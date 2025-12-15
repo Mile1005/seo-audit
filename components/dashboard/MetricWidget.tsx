@@ -1,26 +1,22 @@
-'use client'
+"use client";
 
-import { ReactNode } from 'react'
-import { 
-  ArrowUpIcon, 
-  ArrowDownIcon,
-  InformationCircleIcon
-} from '@heroicons/react/24/outline'
-import { cn } from '@/lib/utils'
+import { ReactNode } from "react";
+import { ArrowUpIcon, ArrowDownIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
+import { cn } from "@/lib/utils";
 
 interface MetricWidgetProps {
-  title: string
-  value: string | number
+  title: string;
+  value: string | number;
   change?: {
-    value: number
-    type: 'increase' | 'decrease' | 'neutral'
-    period: string
-  }
-  icon: ReactNode
-  description?: string
-  loading?: boolean
-  className?: string
-  children?: ReactNode
+    value: number;
+    type: "increase" | "decrease" | "neutral";
+    period: string;
+  };
+  icon: ReactNode;
+  description?: string;
+  loading?: boolean;
+  className?: string;
+  children?: ReactNode;
 }
 
 export function MetricWidget({
@@ -31,14 +27,16 @@ export function MetricWidget({
   description,
   loading = false,
   className,
-  children
+  children,
 }: MetricWidgetProps) {
   if (loading) {
     return (
-      <div className={cn(
-        "bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6",
-        className
-      )}>
+      <div
+        className={cn(
+          "bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6",
+          className
+        )}
+      >
         <div className="animate-pulse">
           <div className="flex items-center justify-between mb-4">
             <div className="h-4 w-24 bg-slate-200 dark:bg-slate-700 rounded"></div>
@@ -48,14 +46,16 @@ export function MetricWidget({
           <div className="h-4 w-20 bg-slate-200 dark:bg-slate-700 rounded"></div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className={cn(
-      "bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow duration-200",
-      className
-    )}>
+    <div
+      className={cn(
+        "bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 hover:shadow-lg transition-shadow duration-200",
+        className
+      )}
+    >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-medium text-slate-600 dark:text-slate-400 flex items-center">
@@ -76,154 +76,148 @@ export function MetricWidget({
 
       {/* Value */}
       <div className="mb-4">
-        <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1">
-          {value}
-        </div>
-        
+        <div className="text-3xl font-bold text-slate-900 dark:text-white mb-1">{value}</div>
+
         {/* Change indicator */}
         {change && (
           <div className="flex items-center">
-            <div className={cn(
-              "flex items-center text-sm font-medium mr-2",
-              change.type === 'increase' && "text-emerald-600",
-              change.type === 'decrease' && "text-red-600",
-              change.type === 'neutral' && "text-slate-500"
-            )}>
-              {change.type === 'increase' && (
-                <ArrowUpIcon className="w-4 h-4 mr-1" />
+            <div
+              className={cn(
+                "flex items-center text-sm font-medium mr-2",
+                change.type === "increase" && "text-emerald-600",
+                change.type === "decrease" && "text-red-600",
+                change.type === "neutral" && "text-slate-500"
               )}
-              {change.type === 'decrease' && (
-                <ArrowDownIcon className="w-4 h-4 mr-1" />
-              )}
+            >
+              {change.type === "increase" && <ArrowUpIcon className="w-4 h-4 mr-1" />}
+              {change.type === "decrease" && <ArrowDownIcon className="w-4 h-4 mr-1" />}
               {Math.abs(change.value)}%
             </div>
-            <span className="text-sm text-slate-500 dark:text-slate-400">
-              vs {change.period}
-            </span>
+            <span className="text-sm text-slate-500 dark:text-slate-400">vs {change.period}</span>
           </div>
         )}
       </div>
 
       {/* Additional content */}
       {children && (
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-700">
-          {children}
-        </div>
+        <div className="pt-4 border-t border-slate-100 dark:border-slate-700">{children}</div>
       )}
     </div>
-  )
+  );
 }
 
 interface ProgressBarProps {
-  value: number
-  max: number
-  color?: 'blue' | 'green' | 'red' | 'yellow'
-  showLabel?: boolean
-  label?: string
+  value: number;
+  max: number;
+  color?: "blue" | "green" | "red" | "yellow";
+  showLabel?: boolean;
+  label?: string;
 }
 
-export function ProgressBar({ 
-  value, 
-  max, 
-  color = 'blue', 
+export function ProgressBar({
+  value,
+  max,
+  color = "blue",
   showLabel = false,
-  label 
+  label,
 }: ProgressBarProps) {
-  const percentage = Math.min((value / max) * 100, 100)
-  
+  const percentage = Math.min((value / max) * 100, 100);
+
   const colorClasses = {
-    blue: 'bg-blue-500',
-    green: 'bg-emerald-500',
-    red: 'bg-red-500',
-    yellow: 'bg-yellow-500'
-  }
-  
+    blue: "bg-blue-500",
+    green: "bg-emerald-500",
+    red: "bg-red-500",
+    yellow: "bg-yellow-500",
+  };
+
   const backgroundClasses = {
-    blue: 'bg-blue-100 dark:bg-blue-900/20',
-    green: 'bg-emerald-100 dark:bg-emerald-900/20',
-    red: 'bg-red-100 dark:bg-red-900/20',
-    yellow: 'bg-yellow-100 dark:bg-yellow-900/20'
-  }
+    blue: "bg-blue-100 dark:bg-blue-900/20",
+    green: "bg-emerald-100 dark:bg-emerald-900/20",
+    red: "bg-red-100 dark:bg-red-900/20",
+    yellow: "bg-yellow-100 dark:bg-yellow-900/20",
+  };
 
   return (
     <div className="space-y-2">
       {showLabel && (
         <div className="flex justify-between items-center text-sm">
-          <span className="text-slate-600 dark:text-slate-400">
-            {label || 'Progress'}
-          </span>
+          <span className="text-slate-600 dark:text-slate-400">{label || "Progress"}</span>
           <span className="font-medium text-slate-900 dark:text-white">
             {value}/{max}
           </span>
         </div>
       )}
-      <div className={cn(
-        "w-full h-2 rounded-full overflow-hidden",
-        backgroundClasses[color]
-      )}>
-        <div 
-          className={cn("h-full rounded-full transition-all duration-500 ease-out", colorClasses[color])}
+      <div className={cn("w-full h-2 rounded-full overflow-hidden", backgroundClasses[color])}>
+        <div
+          className={cn(
+            "h-full rounded-full transition-all duration-500 ease-out",
+            colorClasses[color]
+          )}
           style={{ width: `${percentage}%` }}
         />
       </div>
     </div>
-  )
+  );
 }
 
 interface StatusBadgeProps {
-  status: 'success' | 'warning' | 'error' | 'info'
-  children: ReactNode
-  size?: 'sm' | 'md'
+  status: "success" | "warning" | "error" | "info";
+  children: ReactNode;
+  size?: "sm" | "md";
 }
 
-export function StatusBadge({ status, children, size = 'md' }: StatusBadgeProps) {
+export function StatusBadge({ status, children, size = "md" }: StatusBadgeProps) {
   const statusClasses = {
-    success: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-400',
-    warning: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400',
-    error: 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400',
-    info: 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
-  }
+    success: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-400",
+    warning: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400",
+    error: "bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400",
+    info: "bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400",
+  };
 
   const sizeClasses = {
-    sm: 'px-2 py-1 text-xs',
-    md: 'px-3 py-1 text-sm'
-  }
+    sm: "px-2 py-1 text-xs",
+    md: "px-3 py-1 text-sm",
+  };
 
   return (
-    <span className={cn(
-      "inline-flex items-center font-medium rounded-full",
-      statusClasses[status],
-      sizeClasses[size]
-    )}>
+    <span
+      className={cn(
+        "inline-flex items-center font-medium rounded-full",
+        statusClasses[status],
+        sizeClasses[size]
+      )}
+    >
       {children}
     </span>
-  )
+  );
 }
 
 interface SparklineProps {
-  data: number[]
-  color?: 'blue' | 'green' | 'red'
-  height?: number
+  data: number[];
+  color?: "blue" | "green" | "red";
+  height?: number;
 }
 
-export function Sparkline({ data, color = 'blue', height = 40 }: SparklineProps) {
-  if (!data || data.length === 0) return null
+export function Sparkline({ data, color = "blue", height = 40 }: SparklineProps) {
+  if (!data || data.length === 0) return null;
 
-  const max = Math.max(...data)
-  const min = Math.min(...data)
-  const range = max - min || 1
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const range = max - min || 1;
 
-  const points = data.map((value, index) => {
-    const x = (index / (data.length - 1)) * 100
-    const y = 100 - ((value - min) / range) * 100
-    return `${x},${y}`
-  }).join(' ')
+  const points = data
+    .map((value, index) => {
+      const x = (index / (data.length - 1)) * 100;
+      const y = 100 - ((value - min) / range) * 100;
+      return `${x},${y}`;
+    })
+    .join(" ");
 
   const colorClasses = {
-    blue: 'stroke-blue-500',
-    green: 'stroke-emerald-500',
-    red: 'stroke-red-500'
-  }
+    blue: "stroke-blue-500",
+    green: "stroke-emerald-500",
+    red: "stroke-red-500",
+  };
 
   return (
     <div className="w-full" style={{ height }}>
@@ -242,5 +236,5 @@ export function Sparkline({ data, color = 'blue', height = 40 }: SparklineProps)
         />
       </svg>
     </div>
-  )
+  );
 }

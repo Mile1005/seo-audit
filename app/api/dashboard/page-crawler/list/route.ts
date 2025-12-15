@@ -1,36 +1,36 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { auth } from '../../../../../auth'
-import { prisma } from '../../../../../lib/prisma'
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "../../../../../auth";
+import { prisma } from "../../../../../lib/prisma";
 
 // Force dynamic rendering
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 // Get list of user's crawls
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth()
-    const userId = session?.user?.id
-    
+    const session = await auth();
+    const userId = session?.user?.id;
+
     if (!userId) {
-      return NextResponse.json({ error: 'Authentication required' }, { status: 401 })
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 });
     }
 
-    const { searchParams } = new URL(req.url)
-    const projectId = searchParams.get('projectId')
-    const limit = parseInt(searchParams.get('limit') || '20')
-    const offset = parseInt(searchParams.get('offset') || '0')
+    const { searchParams } = new URL(req.url);
+    const projectId = searchParams.get("projectId");
+    const limit = parseInt(searchParams.get("limit") || "20");
+    const offset = parseInt(searchParams.get("offset") || "0");
 
     // Build query
     const where: any = {
       project: {
-        ownerId: userId
+        ownerId: userId,
       },
-      type: 'DASHBOARD' // Only dashboard crawls
-    }
+      type: "DASHBOARD", // Only dashboard crawls
+    };
 
     if (projectId) {
-      where.projectId = projectId
+      where.projectId = projectId;
     }
 
     // Get crawls with project info
@@ -41,19 +41,19 @@ export async function GET(req: NextRequest) {
           select: {
             id: true,
             name: true,
-            domain: true
-          }
-        }
+            domain: true,
+          },
+        },
       },
       orderBy: {
-        createdAt: 'desc'
+        createdAt: "desc",
       },
       take: limit,
-      skip: offset
-    })
+      skip: offset,
+    });
 
     // Get total count
-    const total = await (prisma as any).crawl.count({ where })
+    const total = await (prisma as any).crawl.count({ where });
 
     return NextResponse.json({
       crawls: crawls.map((crawl: any) => ({
@@ -68,14 +68,14 @@ export async function GET(req: NextRequest) {
         settings: crawl.settings,
         results: crawl.results,
         createdAt: crawl.createdAt,
-        completedAt: crawl.completedAt
+        completedAt: crawl.completedAt,
       })),
       total,
       limit,
-      offset
-    })
+      offset,
+    });
   } catch (err: any) {
-    console.error('[page-crawler] list error:', err)
-    return NextResponse.json({ error: err.message || 'internal error' }, { status: 500 })
+    console.error("[page-crawler] list error:", err);
+    return NextResponse.json({ error: err.message || "internal error" }, { status: 500 });
   }
 }

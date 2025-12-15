@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { fetch } from 'undici';
-import * as cheerio from 'cheerio';
+import { NextRequest, NextResponse } from "next/server";
+import { fetch } from "undici";
+import * as cheerio from "cheerio";
 
 interface CrawlPage {
   url: string;
@@ -39,84 +39,93 @@ interface CrawlResult {
 
 // Helper function to extract base domain (e.g., "example.com" from "www.example.com" or "blog.example.com")
 function getBaseDomain(hostname: string): string {
-  const parts = hostname.split('.');
+  const parts = hostname.split(".");
   // Handle cases like "co.uk", "com.au" etc
   if (parts.length > 2) {
     // Check if it's a known TLD pattern
-    const lastTwo = parts.slice(-2).join('.');
-    if (['co.uk', 'com.au', 'co.nz', 'com.br', 'co.jp'].includes(lastTwo)) {
-      return parts.slice(-3).join('.');
+    const lastTwo = parts.slice(-2).join(".");
+    if (["co.uk", "com.au", "co.nz", "com.br", "co.jp"].includes(lastTwo)) {
+      return parts.slice(-3).join(".");
     }
-    return parts.slice(-2).join('.');
+    return parts.slice(-2).join(".");
   }
   return hostname;
 }
 
 // Check if a hostname belongs to the same domain (considering subdomains)
-function isSameDomain(hostname: string, baseDomain: string, includeSubdomains: boolean, originalHostname: string): boolean {
+function isSameDomain(
+  hostname: string,
+  baseDomain: string,
+  includeSubdomains: boolean,
+  originalHostname: string
+): boolean {
   if (hostname === originalHostname) return true;
   if (!includeSubdomains) return false;
-  return hostname.endsWith('.' + baseDomain) || hostname === baseDomain;
+  return hostname.endsWith("." + baseDomain) || hostname === baseDomain;
 }
 
-async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomains: boolean = false): Promise<CrawlResult> {
+async function simpleCrawl(
+  startUrl: string,
+  limit: number = 10,
+  includeSubdomains: boolean = false
+): Promise<CrawlResult> {
   const startTime = Date.now();
   const pages: CrawlPage[] = [];
   const visited = new Set<string>();
   const queue = [startUrl];
-  
+
   // Get the base domain for subdomain matching
   const startUrlObj = new URL(startUrl);
   const baseDomain = getBaseDomain(startUrlObj.hostname);
-  
+
   console.log(`Starting simple crawl for: ${startUrl} (includeSubdomains: ${includeSubdomains})`);
-  
+
   // Check robots.txt
   let robotsFound = false;
   try {
-    const robotsUrl = new URL('/robots.txt', startUrl).toString();
-    const robotsRes = await fetch(robotsUrl, { 
-      method: 'HEAD',
-      signal: AbortSignal.timeout(5000)
+    const robotsUrl = new URL("/robots.txt", startUrl).toString();
+    const robotsRes = await fetch(robotsUrl, {
+      method: "HEAD",
+      signal: AbortSignal.timeout(5000),
     });
     robotsFound = robotsRes.status === 200;
   } catch (e) {
-    console.log('Robots.txt check failed:', e);
+    console.log("Robots.txt check failed:", e);
   }
 
   // Check sitemap.xml
   let sitemapFound = false;
   try {
-    const sitemapUrl = new URL('/sitemap.xml', startUrl).toString();
-    const sitemapRes = await fetch(sitemapUrl, { 
-      method: 'HEAD',
-      signal: AbortSignal.timeout(5000)
+    const sitemapUrl = new URL("/sitemap.xml", startUrl).toString();
+    const sitemapRes = await fetch(sitemapUrl, {
+      method: "HEAD",
+      signal: AbortSignal.timeout(5000),
     });
     sitemapFound = sitemapRes.status === 200;
   } catch (e) {
-    console.log('Sitemap.xml check failed:', e);
+    console.log("Sitemap.xml check failed:", e);
   }
 
   // Crawl pages
   while (queue.length > 0 && pages.length < limit) {
     const url = queue.shift()!;
-    
+
     if (visited.has(url)) continue;
     visited.add(url);
 
     try {
       const pageStartTime = Date.now();
       console.log(`Crawling: ${url}`);
-      
+
       const response = await fetch(url, {
         headers: {
-          'User-Agent': 'SEO-Audit-Crawler/2.0'
+          "User-Agent": "SEO-Audit-Crawler/2.0",
         },
-        signal: AbortSignal.timeout(10000)
+        signal: AbortSignal.timeout(10000),
       });
 
       const loadTime = Date.now() - pageStartTime;
-      
+
       if (!response.ok) {
         pages.push({
           url,
@@ -131,7 +140,7 @@ async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomai
           external_links: 0,
           images_total: 0,
           load_time_ms: loadTime,
-          status: response.status
+          status: response.status,
         });
         continue;
       }
@@ -140,22 +149,22 @@ async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomai
       const $ = cheerio.load(html);
 
       // Extract page data
-      const title = $('title').text().trim() || null;
-      const metaDescription = $('meta[name="description"]').attr('content') || null;
-      const h1Elements = $('h1');
-      const h2Elements = $('h2');
-      const images = $('img');
-      const links = $('a[href]');
-      
+      const title = $("title").text().trim() || null;
+      const metaDescription = $('meta[name="description"]').attr("content") || null;
+      const h1Elements = $("h1");
+      const h2Elements = $("h2");
+      const images = $("img");
+      const links = $("a[href]");
+
       // Count words in text content
-      const textContent = $('body').text().replace(/\s+/g, ' ').trim();
-      const wordCount = textContent.split(' ').filter(word => word.length > 0).length;
+      const textContent = $("body").text().replace(/\s+/g, " ").trim();
+      const wordCount = textContent.split(" ").filter((word) => word.length > 0).length;
 
       // Count images without alt text
       let imagesWithoutAlt = 0;
       images.each((_, img) => {
-        const alt = $(img).attr('alt');
-        if (!alt || alt.trim() === '') {
+        const alt = $(img).attr("alt");
+        if (!alt || alt.trim() === "") {
           imagesWithoutAlt++;
         }
       });
@@ -164,9 +173,9 @@ async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomai
       const baseHost = new URL(startUrl).hostname;
       let internalLinks = 0;
       let externalLinks = 0;
-      
+
       links.each((_, link) => {
-        const href = $(link).attr('href');
+        const href = $(link).attr("href");
         if (href) {
           try {
             const linkUrl = new URL(href, url);
@@ -199,12 +208,11 @@ async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomai
         external_links: externalLinks,
         images_total: images.length,
         load_time_ms: loadTime,
-        status: response.status
+        status: response.status,
       };
 
       pages.push(page);
-      console.log(`Crawled successfully: ${url} - Title: ${title?.substring(0, 50) || 'No title'}`);
-
+      console.log(`Crawled successfully: ${url} - Title: ${title?.substring(0, 50) || "No title"}`);
     } catch (error) {
       console.error(`Failed to crawl ${url}:`, error);
       pages.push({
@@ -220,24 +228,23 @@ async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomai
         external_links: 0,
         images_total: 0,
         load_time_ms: 0,
-        status: 0
+        status: 0,
       });
     }
   }
 
   const crawlTime = Date.now() - startTime;
-  const successfulPages = pages.filter(p => p.status === 200).length;
+  const successfulPages = pages.filter((p) => p.status === 200).length;
   const failedPages = pages.length - successfulPages;
-  const averageLoadTime = pages.length > 0 
-    ? pages.reduce((sum, p) => sum + p.load_time_ms, 0) / pages.length 
-    : 0;
+  const averageLoadTime =
+    pages.length > 0 ? pages.reduce((sum, p) => sum + p.load_time_ms, 0) / pages.length : 0;
 
   // Calculate issues
   const issues = {
-    missing_titles: pages.filter(p => !p.title).length,
-    missing_h1: pages.filter(p => !p.h1_presence).length,
-    missing_meta_descriptions: pages.filter(p => !p.meta_description).length,
-    images_without_alt: pages.reduce((sum, p) => sum + p.images_missing_alt, 0)
+    missing_titles: pages.filter((p) => !p.title).length,
+    missing_h1: pages.filter((p) => !p.h1_presence).length,
+    missing_meta_descriptions: pages.filter((p) => !p.meta_description).length,
+    images_without_alt: pages.reduce((sum, p) => sum + p.images_missing_alt, 0),
   };
 
   console.log(`Crawl completed: ${pages.length} pages in ${crawlTime}ms`);
@@ -253,7 +260,7 @@ async function simpleCrawl(startUrl: string, limit: number = 10, includeSubdomai
     issues,
     robotsTxt: { found: robotsFound },
     sitemapXml: { found: sitemapFound },
-    brokenLinks: []
+    brokenLinks: [],
   };
 }
 
@@ -263,25 +270,21 @@ export async function POST(req: NextRequest) {
     const { startUrl, limit = 10, includeSubdomains = false } = body;
 
     if (!startUrl) {
-      return NextResponse.json(
-        { error: 'Start URL is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Start URL is required" }, { status: 400 });
     }
 
     // Validate and normalize URL
     let normalizedUrl: string;
     try {
-      const url = new URL(startUrl.startsWith('http') ? startUrl : `https://${startUrl}`);
+      const url = new URL(startUrl.startsWith("http") ? startUrl : `https://${startUrl}`);
       normalizedUrl = url.toString();
     } catch (error) {
-      return NextResponse.json(
-        { error: 'Invalid URL format' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid URL format" }, { status: 400 });
     }
 
-    console.log(`Starting crawl for: ${normalizedUrl} with limit: ${limit}, includeSubdomains: ${includeSubdomains}`);
+    console.log(
+      `Starting crawl for: ${normalizedUrl} with limit: ${limit}, includeSubdomains: ${includeSubdomains}`
+    );
 
     // Perform the crawl - allow up to 50 pages for lite version
     const crawlResult = await simpleCrawl(normalizedUrl, Math.min(limit, 50), includeSubdomains);
@@ -289,21 +292,20 @@ export async function POST(req: NextRequest) {
     console.log(`Crawl completed for ${normalizedUrl}:`, {
       totalPages: crawlResult.totalPages,
       successfulPages: crawlResult.successfulPages,
-      failedPages: crawlResult.failedPages
+      failedPages: crawlResult.failedPages,
     });
 
     return NextResponse.json({
-      status: 'completed',
-      result: crawlResult
+      status: "completed",
+      result: crawlResult,
     });
-
   } catch (error) {
-    console.error('Crawl error:', error);
-    
+    console.error("Crawl error:", error);
+
     return NextResponse.json(
-      { 
-        error: error instanceof Error ? error.message : 'An error occurred during crawling',
-        status: 'failed'
+      {
+        error: error instanceof Error ? error.message : "An error occurred during crawling",
+        status: "failed",
       },
       { status: 500 }
     );
@@ -311,14 +313,14 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
-  return NextResponse.json({ 
-    message: 'Site Crawler API - Use POST to start crawling',
+  return NextResponse.json({
+    message: "Site Crawler API - Use POST to start crawling",
     example: {
-      method: 'POST',
+      method: "POST",
       body: {
-        startUrl: 'https://example.com',
-        limit: 10
-      }
-    }
+        startUrl: "https://example.com",
+        limit: 10,
+      },
+    },
   });
 }

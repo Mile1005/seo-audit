@@ -1,10 +1,10 @@
 /**
  * TypeScript types for next-intl translation keys
  * Auto-generated from messages/en.json
- * 
+ *
  * Usage:
  * import { useTranslations } from 'next-intl';
- * 
+ *
  * const t = useTranslations('dashboard');
  * t('title') // ✅ Type-safe with autocomplete
  * t('invalid') // ❌ TypeScript error

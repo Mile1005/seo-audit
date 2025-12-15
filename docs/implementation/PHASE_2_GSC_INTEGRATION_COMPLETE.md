@@ -10,6 +10,7 @@
 ### **Complete Google Search Console OAuth Flow**
 
 Users can now connect their Google Search Console account to access:
+
 - Search analytics data
 - Impressions & clicks
 - Search queries
@@ -70,9 +71,9 @@ model GscToken {
   tokens    Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt  // 🆕 Track updates
-  
+
   user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
+
   @@index([userId])  // 🆕 Index for performance
 }
 
@@ -85,16 +86,18 @@ model User {
 ### **Migration Required:**
 
 When deploying to production, Vercel will need to run:
+
 ```bash
 npx prisma migrate deploy
 ```
 
 Or you can create the migration manually:
+
 ```sql
 ALTER TABLE "GscToken" ADD COLUMN "userId" TEXT;
 ALTER TABLE "GscToken" ADD COLUMN "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
 CREATE INDEX "GscToken_userId_idx" ON "GscToken"("userId");
-ALTER TABLE "GscToken" ADD CONSTRAINT "GscToken_userId_fkey" 
+ALTER TABLE "GscToken" ADD CONSTRAINT "GscToken_userId_fkey"
   FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 ```
 
@@ -109,11 +112,13 @@ From your screenshot, you have:
 ✅ `GSC_REDIRECT_URI` - Callback URL (https://www.aiseoturbo.com/api/gsc/callback)
 
 **Note:** The redirect URI in your Vercel environment is:
+
 ```
 https://www.aiseoturbo.com/api/...
 ```
 
 Make sure this EXACT URL is added to Google Cloud Console:
+
 1. Go to: https://console.cloud.google.com/apis/credentials
 2. Find your OAuth 2.0 Client ID
 3. Add to "Authorized redirect URIs":
@@ -166,23 +171,27 @@ Make sure this EXACT URL is added to Google Cloud Console:
 ### **Connection Widget:**
 
 **When Disconnected:**
+
 - Blue gradient background
 - "Connect" button
 - Helpful description text
 
 **When Connected:**
-- Green gradient background  
+
+- Green gradient background
 - ✅ Checkmark icon
 - "● Connected" status badge
 - "Disconnect" button
 - Updated description
 
 **During Loading:**
+
 - Disabled buttons
 - "Connecting..." or "Disconnecting..." text
 - Prevents double-clicks
 
 **Error Handling:**
+
 - Red error text below description
 - Clear error messages
 - Auto-clears on retry
@@ -194,6 +203,7 @@ Make sure this EXACT URL is added to Google Cloud Console:
 ### **Step 1: Deploy to Vercel**
 
 Push the code (migration will run automatically):
+
 ```bash
 git add .
 git commit -m "Phase 2: Google Search Console OAuth integration"
@@ -252,7 +262,8 @@ git push origin main
 
 ### **Issue: "redirect_uri_mismatch" Error**
 
-**Solution:** 
+**Solution:**
+
 - Verify `GSC_REDIRECT_URI` in Vercel matches EXACTLY what's in Google Cloud Console
 - Must be: `https://www.aiseoturbo.com/api/gsc/callback`
 - No trailing slash
@@ -261,6 +272,7 @@ git push origin main
 ### **Issue: "invalid_client" Error**
 
 **Solution:**
+
 - Verify `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` are correct
 - Check they're set in the right Vercel environment (Production)
 - Re-generate credentials if needed
@@ -269,6 +281,7 @@ git push origin main
 
 **Solution:**
 If auto-migration fails, run manually:
+
 1. Connect to your PostgreSQL database
 2. Run the migration SQL (see above)
 3. Or use: `npx prisma migrate deploy` in Vercel
@@ -276,6 +289,7 @@ If auto-migration fails, run manually:
 ### **Issue: "State Mismatch" Error**
 
 **Solution:**
+
 - This is a security check
 - Likely caused by cookies being cleared mid-flow
 - Ask user to try again
@@ -286,6 +300,7 @@ If auto-migration fails, run manually:
 ## 📊 Database Monitoring
 
 Check GSC connections:
+
 ```sql
 -- Count connected users
 SELECT COUNT(DISTINCT "userId") FROM "GscToken" WHERE "userId" IS NOT NULL;
@@ -307,6 +322,7 @@ SELECT * FROM "GscToken" WHERE "userId" IS NULL;
 Once GSC is tested and working:
 
 **Phase 3: Notification System**
+
 - Add Notification model to database
 - Create notification API endpoints
 - Build notification dropdown in navbar
@@ -317,6 +333,7 @@ Once GSC is tested and working:
   - Profile updates
 
 **Phase 4: Real Dashboard Metrics**
+
 - Replace mock data with real audit results
 - Display GSC metrics in dashboard
 - Show historical trends
@@ -327,6 +344,7 @@ Once GSC is tested and working:
 ## ✅ Deployment Checklist
 
 Before deploying:
+
 - [x] All files created/modified
 - [x] Prisma schema updated
 - [x] Prisma client regenerated

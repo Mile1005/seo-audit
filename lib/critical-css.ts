@@ -162,15 +162,15 @@ img {
  * Inject critical CSS for faster initial render
  */
 export function injectCriticalCSS() {
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   // Check if critical CSS is already injected
-  if (document.querySelector('[data-critical-css]')) return;
+  if (document.querySelector("[data-critical-css]")) return;
 
-  const style = document.createElement('style');
-  style.setAttribute('data-critical-css', 'true');
+  const style = document.createElement("style");
+  style.setAttribute("data-critical-css", "true");
   style.textContent = CRITICAL_CSS;
-  
+
   // Insert before other stylesheets for priority
   const firstStylesheet = document.querySelector('link[rel="stylesheet"], style');
   if (firstStylesheet) {
@@ -184,16 +184,16 @@ export function injectCriticalCSS() {
  * Preload non-critical CSS after page load
  */
 export function preloadNonCriticalCSS() {
-  if (typeof document === 'undefined') return;
+  if (typeof document === "undefined") return;
 
   const loadCSS = (href: string) => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "style";
     link.href = href;
-    link.onload = function() {
+    link.onload = function () {
       if (link instanceof HTMLLinkElement) {
-        link.rel = 'stylesheet';
+        link.rel = "stylesheet";
       }
     };
     document.head.appendChild(link);

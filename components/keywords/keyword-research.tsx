@@ -1,14 +1,26 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { Search, TrendingUp, Target, BarChart3, Download, Plus, Star, Crown, Zap, ArrowLeft, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { KeywordOverview } from './keyword-overview';
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  Search,
+  TrendingUp,
+  Target,
+  BarChart3,
+  Download,
+  Plus,
+  Star,
+  Crown,
+  Zap,
+  ArrowLeft,
+  Trash2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { KeywordOverview } from "./keyword-overview";
 
 interface KeywordData {
   id: string;
@@ -18,7 +30,7 @@ interface KeywordData {
   cpc: number;
   competition: number;
   intent?: string;
-  status: 'ACTIVE' | 'PAUSED';
+  status: "ACTIVE" | "PAUSED";
   country: string;
   device: string;
   createdAt: string;
@@ -30,12 +42,12 @@ interface KeywordResearchProps {
 
 export function KeywordResearch({ projectId }: KeywordResearchProps) {
   const [keywords, setKeywords] = useState<KeywordData[]>([]);
-  const [keywordInput, setKeywordInput] = useState('');
+  const [keywordInput, setKeywordInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [isPremium, setIsPremium] = useState(false);
   const [selectedKeyword, setSelectedKeyword] = useState<KeywordData | null>(null);
-  const [viewMode, setViewMode] = useState<'list' | 'overview'>('list');
+  const [viewMode, setViewMode] = useState<"list" | "overview">("list");
 
   // Load existing keywords when component mounts
   const loadExistingKeywords = useCallback(async () => {
@@ -48,7 +60,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
         }
       }
     } catch (error) {
-      console.error('Error loading keywords:', error);
+      console.error("Error loading keywords:", error);
     }
   }, [projectId]);
 
@@ -60,75 +72,75 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
 
   const handleResearchKeywords = async () => {
     if (!keywordInput.trim()) {
-      console.log('No keyword input provided');
+      console.log("No keyword input provided");
       return;
     }
-    
+
     setIsLoading(true);
-    console.log('Starting keyword research...');
-    console.log('Raw input:', keywordInput);
-    
+    console.log("Starting keyword research...");
+    console.log("Raw input:", keywordInput);
+
     try {
       const keywordList = keywordInput
-        .split('\n')
-        .map(k => k.trim())
-        .filter(k => k.length > 0);
+        .split("\n")
+        .map((k) => k.trim())
+        .filter((k) => k.length > 0);
 
-      console.log('Parsed keyword list:', keywordList);
-      console.log('Project ID:', projectId);
+      console.log("Parsed keyword list:", keywordList);
+      console.log("Project ID:", projectId);
 
-      const response = await fetch('/api/keywords/research', {
-        method: 'POST',
+      const response = await fetch("/api/keywords/research", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           projectId,
           keywords: keywordList,
-          location: 'US',
-          language: 'en',
-          device: 'DESKTOP'
-        })
+          location: "US",
+          language: "en",
+          device: "DESKTOP",
+        }),
       });
 
-      console.log('Response status:', response.status);
+      console.log("Response status:", response.status);
       const result = await response.json();
-      console.log('API response:', result);
-      
+      console.log("API response:", result);
+
       if (result.success) {
-        console.log('Keywords received:', result.data.keywords);
-        setKeywords(prev => [...result.data.keywords, ...prev]);
-        setKeywordInput('');
-        console.log('State updated successfully');
+        console.log("Keywords received:", result.data.keywords);
+        setKeywords((prev) => [...result.data.keywords, ...prev]);
+        setKeywordInput("");
+        console.log("State updated successfully");
       } else {
-        console.error('Error researching keywords:', result.error);
-        alert('Error researching keywords: ' + (result.error || 'Unknown error'));
+        console.error("Error researching keywords:", result.error);
+        alert("Error researching keywords: " + (result.error || "Unknown error"));
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Network error occurred. Please try again.');
+      console.error("Error:", error);
+      alert("Network error occurred. Please try again.");
     } finally {
       setIsLoading(false);
-      console.log('Research completed');
+      console.log("Research completed");
     }
   };
 
   const getDifficultyColor = (difficulty: number) => {
-    if (difficulty < 30) return 'bg-green-500';
-    if (difficulty < 60) return 'bg-yellow-500';
-    return 'bg-red-500';
+    if (difficulty < 30) return "bg-green-500";
+    if (difficulty < 60) return "bg-yellow-500";
+    return "bg-red-500";
   };
 
   const getDifficultyLabel = (difficulty: number) => {
-    if (difficulty < 30) return 'Easy';
-    if (difficulty < 60) return 'Medium';
-    return 'Hard';
+    if (difficulty < 30) return "Easy";
+    if (difficulty < 60) return "Medium";
+    return "Hard";
   };
 
   const getVolumeColor = (volume: number) => {
-    if (volume > 10000) return 'text-green-600';
-    if (volume > 1000) return 'text-yellow-600';
-    return 'text-gray-600';
+    if (volume > 10000) return "text-green-600";
+    if (volume > 1000) return "text-yellow-600";
+    return "text-gray-600";
   };
 
   const formatNumber = (num: number) => {
@@ -137,14 +149,18 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
     return num.toString();
   };
 
-  const PremiumFeature = ({ children, feature }: { children: React.ReactNode, feature: string }) => {
+  const PremiumFeature = ({
+    children,
+    feature,
+  }: {
+    children: React.ReactNode;
+    feature: string;
+  }) => {
     if (isPremium) return <>{children}</>;
-    
+
     return (
       <div className="relative">
-        <div className="opacity-50 pointer-events-none">
-          {children}
-        </div>
+        <div className="opacity-50 pointer-events-none">{children}</div>
         <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded">
           <div className="bg-white dark:bg-slate-800 p-2 rounded-lg shadow-lg text-center">
             <Crown className="h-6 w-6 text-yellow-500 mx-auto mb-1" />
@@ -159,50 +175,52 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
   // Handle keyword selection
   const handleKeywordClick = (keyword: KeywordData) => {
     setSelectedKeyword(keyword);
-    setViewMode('overview');
+    setViewMode("overview");
   };
 
   const handleBackToList = () => {
-    setViewMode('list');
+    setViewMode("list");
     setSelectedKeyword(null);
   };
 
   // Handle keyword deletion
   const handleDeleteKeyword = async (keywordId: string, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent row click
-    
-    if (!confirm('Are you sure you want to delete this keyword? All associated data will be removed.')) {
+
+    if (
+      !confirm("Are you sure you want to delete this keyword? All associated data will be removed.")
+    ) {
       return;
     }
 
     try {
       const response = await fetch(`/api/keywords/${keywordId}`, {
-        method: 'DELETE'
+        method: "DELETE",
       });
 
       if (response.status === 401) {
-        alert('Sign in to delete saved keywords.');
+        alert("Sign in to delete saved keywords.");
         return;
       }
 
       if (response.ok) {
         // Remove keyword from state
-        setKeywords(prev => prev.filter(k => k.id !== keywordId));
+        setKeywords((prev) => prev.filter((k) => k.id !== keywordId));
       } else {
-        alert('Failed to delete keyword');
+        alert("Failed to delete keyword");
       }
     } catch (error) {
-      console.error('Error deleting keyword:', error);
-      alert('Error deleting keyword');
+      console.error("Error deleting keyword:", error);
+      alert("Error deleting keyword");
     }
   };
 
   // Show detailed overview if a keyword is selected
-  if (viewMode === 'overview' && selectedKeyword) {
+  if (viewMode === "overview" && selectedKeyword) {
     return (
       <div className="space-y-6 animate-in fade-in duration-500">
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           onClick={handleBackToList}
           className="flex items-center gap-2 bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-700 text-blue-700 dark:text-blue-300 font-semibold shadow-md hover:shadow-lg transition-all duration-200 px-6 py-2.5"
         >
@@ -223,23 +241,25 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
             <Search className="h-6 w-6 text-blue-600 dark:text-blue-400" />
             Keyword Research
           </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Discover and analyze keywords for your SEO strategy</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
+            Discover and analyze keywords for your SEO strategy
+          </p>
         </div>
         <div className="flex items-center gap-3">
-          <Badge 
-            variant={isPremium ? "default" : "secondary"} 
-            className={`gap-1 px-3 py-1.5 ${isPremium ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:from-yellow-500 hover:to-orange-600' : 'bg-slate-100 text-slate-800 hover:bg-slate-200'} border-2 ${isPremium ? 'border-yellow-500' : 'border-slate-300'} shadow-sm transition-all duration-200 font-semibold`}
+          <Badge
+            variant={isPremium ? "default" : "secondary"}
+            className={`gap-1 px-3 py-1.5 ${isPremium ? "bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:from-yellow-500 hover:to-orange-600" : "bg-slate-100 text-slate-800 hover:bg-slate-200"} border-2 ${isPremium ? "border-yellow-500" : "border-slate-300"} shadow-sm transition-all duration-200 font-semibold`}
           >
             {isPremium ? <Crown className="h-3 w-3" /> : <Star className="h-3 w-3" />}
-            {isPremium ? 'Premium' : 'Free Tier'}
+            {isPremium ? "Premium" : "Free Tier"}
           </Badge>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
             onClick={() => setIsPremium(!isPremium)}
             className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 border-0 text-white font-medium shadow-md transition-all duration-200 hover:shadow-lg"
           >
-            {isPremium ? 'Switch to Free' : 'Upgrade to Premium'}
+            {isPremium ? "Switch to Free" : "Upgrade to Premium"}
           </Button>
         </div>
       </div>
@@ -254,7 +274,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
             Research Keywords
           </CardTitle>
           <CardDescription className="text-slate-600 dark:text-slate-400">
-            Enter keywords to research (one per line, up to {isPremium ? '1000' : '100'} keywords)
+            Enter keywords to research (one per line, up to {isPremium ? "1000" : "100"} keywords)
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4 p-6">
@@ -269,18 +289,19 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
             <div className="flex justify-between items-center text-sm">
               <span className="text-slate-600 font-medium flex items-center gap-2">
                 <span className="inline-flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">
-                  {keywordInput.split('\n').filter(k => k.trim()).length}
+                  {keywordInput.split("\n").filter((k) => k.trim()).length}
                 </span>
                 keywords entered
               </span>
               <span className="text-slate-500">
-                Limit: <span className="font-semibold text-slate-700">{isPremium ? '1000' : '100'}</span>
+                Limit:{" "}
+                <span className="font-semibold text-slate-700">{isPremium ? "1000" : "100"}</span>
               </span>
             </div>
           </div>
-          
+
           <div className="flex gap-3 pt-2">
-            <Button 
+            <Button
               onClick={handleResearchKeywords}
               disabled={isLoading || !keywordInput.trim()}
               className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2.5 shadow-md hover:shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -298,9 +319,9 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
               )}
             </Button>
             {keywords.length > 0 && (
-              <Button 
+              <Button
                 variant="outline"
-                onClick={() => setKeywordInput('')}
+                onClick={() => setKeywordInput("")}
                 className="bg-slate-100 border-2 border-slate-400 text-slate-800 hover:bg-slate-200 hover:border-slate-500 font-semibold shadow-sm transition-all duration-200"
               >
                 Clear Input
@@ -320,9 +341,12 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                 <Search className="h-12 w-12 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">Start Your Keyword Research</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
+              Start Your Keyword Research
+            </h3>
             <p className="text-slate-600 dark:text-slate-400 text-center max-w-md mb-6 leading-relaxed">
-              Enter keywords above to discover search volume, difficulty, CPC, and actionable insights to boost your SEO strategy.
+              Enter keywords above to discover search volume, difficulty, CPC, and actionable
+              insights to boost your SEO strategy.
             </p>
             <div className="flex flex-wrap gap-2 justify-center mb-4">
               <Badge className="bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-0 px-3 py-1.5 hover:bg-blue-200 dark:hover:bg-blue-800/30 transition-colors cursor-pointer">
@@ -335,7 +359,9 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                 best seo tools
               </Badge>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-500">Click examples to try them out</p>
+            <p className="text-xs text-slate-500 dark:text-slate-500">
+              Click examples to try them out
+            </p>
           </CardContent>
         </Card>
       )}
@@ -350,7 +376,7 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                   <div className="p-1.5 bg-green-500 rounded-lg">
                     <BarChart3 className="h-4 w-4 text-white" />
                   </div>
-                  Researched Keywords 
+                  Researched Keywords
                   <span className="inline-flex items-center justify-center px-3 py-1 text-sm font-bold text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/20 rounded-full">
                     {keywords.length}
                   </span>
@@ -359,9 +385,9 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                   Click on any keyword to see detailed analysis with trends and insights
                 </CardDescription>
               </div>
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 className="flex items-center gap-2 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm transition-all duration-200 hover:shadow-md"
               >
                 <Download className="h-4 w-4" />
@@ -374,19 +400,33 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
               <table className="w-full">
                 <thead className="bg-slate-50 dark:bg-slate-800 border-b-2 border-slate-200 dark:border-slate-700">
                   <tr>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Keyword</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Volume</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Difficulty</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">CPC</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Intent</th>
-                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Competition</th>
-                    <th className="text-center p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">Actions</th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      Keyword
+                    </th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      Volume
+                    </th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      Difficulty
+                    </th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      CPC
+                    </th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      Intent
+                    </th>
+                    <th className="text-left p-4 text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                      Competition
+                    </th>
+                    <th className="text-center p-4 text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {keywords.map((keyword, index) => (
-                    <tr 
-                      key={keyword.id} 
+                    <tr
+                      key={keyword.id}
                       className="hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 cursor-pointer transition-all duration-200 group"
                       onClick={() => handleKeywordClick(keyword)}
                       style={{ animationDelay: `${index * 50}ms` }}
@@ -398,42 +438,58 @@ export function KeywordResearch({ projectId }: KeywordResearchProps) {
                         </div>
                       </td>
                       <td className="p-4">
-                        <span className={`font-bold text-lg ${getVolumeColor(keyword.searchVolume)}`}>
+                        <span
+                          className={`font-bold text-lg ${getVolumeColor(keyword.searchVolume)}`}
+                        >
                           {formatNumber(keyword.searchVolume)}
                         </span>
                         <p className="text-xs text-slate-500 dark:text-slate-400">searches/mo</p>
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
-                          <div className={`w-3 h-3 rounded-full ${getDifficultyColor(keyword.difficulty)} shadow-sm`}></div>
+                          <div
+                            className={`w-3 h-3 rounded-full ${getDifficultyColor(keyword.difficulty)} shadow-sm`}
+                          ></div>
                           <div>
-                            <span className="font-bold text-slate-900 dark:text-slate-100">{Math.round(keyword.difficulty)}%</span>
-                            <p className="text-xs text-slate-500 dark:text-slate-400">{getDifficultyLabel(keyword.difficulty)}</p>
+                            <span className="font-bold text-slate-900 dark:text-slate-100">
+                              {Math.round(keyword.difficulty)}%
+                            </span>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">
+                              {getDifficultyLabel(keyword.difficulty)}
+                            </p>
                           </div>
                         </div>
                       </td>
                       <td className="p-4">
-                        <span className="font-bold text-slate-900 dark:text-slate-100 text-lg">${keyword.cpc.toFixed(2)}</span>
+                        <span className="font-bold text-slate-900 dark:text-slate-100 text-lg">
+                          ${keyword.cpc.toFixed(2)}
+                        </span>
                         <p className="text-xs text-slate-500 dark:text-slate-400">per click</p>
                       </td>
                       <td className="p-4">
-                        <Badge 
-                          variant="outline" 
+                        <Badge
+                          variant="outline"
                           className={`text-xs font-semibold border-0 ${
-                            keyword.intent === 'COMMERCIAL' ? 'bg-blue-100 text-blue-700' :
-                            keyword.intent === 'INFORMATIONAL' ? 'bg-purple-100 text-purple-700' :
-                            keyword.intent === 'NAVIGATIONAL' ? 'bg-green-100 text-green-700' :
-                            keyword.intent === 'TRANSACTIONAL' ? 'bg-orange-100 text-orange-700' :
-                            'bg-slate-100 text-slate-700'
+                            keyword.intent === "COMMERCIAL"
+                              ? "bg-blue-100 text-blue-700"
+                              : keyword.intent === "INFORMATIONAL"
+                                ? "bg-purple-100 text-purple-700"
+                                : keyword.intent === "NAVIGATIONAL"
+                                  ? "bg-green-100 text-green-700"
+                                  : keyword.intent === "TRANSACTIONAL"
+                                    ? "bg-orange-100 text-orange-700"
+                                    : "bg-slate-100 text-slate-700"
                           }`}
                         >
-                          {keyword.intent || 'Unknown'}
+                          {keyword.intent || "Unknown"}
                         </Badge>
                       </td>
                       <td className="p-4">
                         <div className="flex items-center gap-3">
                           <Progress value={keyword.competition * 100} className="w-20 h-2" />
-                          <span className="text-sm font-semibold text-slate-700">{Math.round(keyword.competition * 100)}%</span>
+                          <span className="text-sm font-semibold text-slate-700">
+                            {Math.round(keyword.competition * 100)}%
+                          </span>
                         </div>
                       </td>
                       <td className="p-4 text-center">

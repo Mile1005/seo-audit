@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../../../../lib/prisma'
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "../../../../../lib/prisma";
 
 // Force dynamic rendering since this route reads from request.url
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 /**
  * GET /api/seo-audit/export/pdf?auditId=...
@@ -10,47 +10,48 @@ export const dynamic = 'force-dynamic'
  */
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url)
-    const auditId = searchParams.get('auditId')
-    if (!auditId) return NextResponse.json({ error: 'auditId required' }, { status: 400 })
+    const { searchParams } = new URL(req.url);
+    const auditId = searchParams.get("auditId");
+    if (!auditId) return NextResponse.json({ error: "auditId required" }, { status: 400 });
 
-    const auditRunModel = (prisma as any).auditRun
+    const auditRunModel = (prisma as any).auditRun;
     if (!auditRunModel) {
-      return NextResponse.json({ error: 'storage unavailable' }, { status: 501 })
+      return NextResponse.json({ error: "storage unavailable" }, { status: 501 });
     }
 
     const run = await auditRunModel.findUnique({
       where: { id: auditId },
-      select: { id: true, result: true, createdAt: true }
-    })
+      select: { id: true, result: true, createdAt: true },
+    });
 
-    if (!run) return NextResponse.json({ error: 'not found' }, { status: 404 })
+    if (!run) return NextResponse.json({ error: "not found" }, { status: 404 });
 
-    const html = generateReportHTML(run.result, auditId, run.createdAt)
+    const html = generateReportHTML(run.result, auditId, run.createdAt);
     return new Response(html, {
       status: 200,
       headers: {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Content-Disposition': `inline; filename="seo-audit-report-${auditId}.html"`,
-        'Cache-Control': 'no-store'
-      }
-    })
+        "Content-Type": "text/html; charset=utf-8",
+        "Content-Disposition": `inline; filename="seo-audit-report-${auditId}.html"`,
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (e: any) {
-    return NextResponse.json({ error: e?.message || 'failed' }, { status: 500 })
+    return NextResponse.json({ error: e?.message || "failed" }, { status: 500 });
   }
 }
 
 function generateReportHTML(result: any, auditId: string, createdAt: Date | string): string {
-  const url = result?.url || result?.comprehensiveResults?.url || 'N/A'
-  const comp = result?.comprehensiveResults || {}
-  const scores = comp?.scores || {}
-  const stats = comp?.stats || {}
-  const issues = comp?.issues || []
-  const quickWins = comp?.quick_wins || []
-  const created = new Date(createdAt)
+  const url = result?.url || result?.comprehensiveResults?.url || "N/A";
+  const comp = result?.comprehensiveResults || {};
+  const scores = comp?.scores || {};
+  const stats = comp?.stats || {};
+  const issues = comp?.issues || [];
+  const quickWins = comp?.quick_wins || [];
+  const created = new Date(createdAt);
 
-  const scoreClass = (n: number) => n >= 80 ? 'score-good' : n >= 60 ? 'score-fair' : 'score-poor'
-  const fmt = (v: any) => (v ?? v === 0) ? String(v) : '-'
+  const scoreClass = (n: number) =>
+    n >= 80 ? "score-good" : n >= 60 ? "score-fair" : "score-poor";
+  const fmt = (v: any) => ((v ?? v === 0) ? String(v) : "-");
 
   return `<!doctype html>
 <html lang="en">
@@ -147,50 +148,60 @@ function generateReportHTML(result: any, auditId: string, createdAt: Date | stri
     <div class="section">
       <h2>Quick Wins (${quickWins.length})</h2>
       <div class="content">
-        ${quickWins.length === 0 ? '<div class="muted">None found</div>' : ''}
+        ${quickWins.length === 0 ? '<div class="muted">None found</div>' : ""}
         <ul class="list">
-          ${quickWins.slice(0, 15).map((q:any) => `
+          ${quickWins
+            .slice(0, 15)
+            .map(
+              (q: any) => `
             <li class="quick">
-              <div><strong>${escapeHtml(q.title || 'Quick win')}</strong></div>
-              ${q.description ? `<div class="small">${escapeHtml(q.description)}</div>` : ''}
-              ${q.location ? `<div class="small">Location: ${escapeHtml(q.location)}</div>` : ''}
+              <div><strong>${escapeHtml(q.title || "Quick win")}</strong></div>
+              ${q.description ? `<div class="small">${escapeHtml(q.description)}</div>` : ""}
+              ${q.location ? `<div class="small">Location: ${escapeHtml(q.location)}</div>` : ""}
             </li>
-          `).join('')}
+          `
+            )
+            .join("")}
         </ul>
-        ${quickWins.length > 15 ? `<div class="muted">Showing first 15 of ${quickWins.length}</div>` : ''}
+        ${quickWins.length > 15 ? `<div class="muted">Showing first 15 of ${quickWins.length}</div>` : ""}
       </div>
     </div>
 
     <div class="section">
       <h2>Priority Issues (${issues.length})</h2>
       <div class="content">
-        ${issues.length === 0 ? '<div class="muted">No issues detected</div>' : ''}
+        ${issues.length === 0 ? '<div class="muted">No issues detected</div>' : ""}
         <ul class="list">
-          ${issues.slice(0, 20).map((i:any) => `
+          ${issues
+            .slice(0, 20)
+            .map(
+              (i: any) => `
             <li class="issue">
-              <div><strong>${escapeHtml(i.title || 'Issue')}</strong> ${i.severity ? `<span class="small">(${escapeHtml(String(i.severity))})</span>` : ''}</div>
-              ${i.description ? `<div class="small">${escapeHtml(i.description)}</div>` : ''}
-              ${i.recommendation ? `<div class="small">Recommendation: ${escapeHtml(i.recommendation)}</div>` : ''}
-              ${i.location ? `<div class="small">Location: ${escapeHtml(i.location)}</div>` : ''}
+              <div><strong>${escapeHtml(i.title || "Issue")}</strong> ${i.severity ? `<span class="small">(${escapeHtml(String(i.severity))})</span>` : ""}</div>
+              ${i.description ? `<div class="small">${escapeHtml(i.description)}</div>` : ""}
+              ${i.recommendation ? `<div class="small">Recommendation: ${escapeHtml(i.recommendation)}</div>` : ""}
+              ${i.location ? `<div class="small">Location: ${escapeHtml(i.location)}</div>` : ""}
             </li>
-          `).join('')}
+          `
+            )
+            .join("")}
         </ul>
-        ${issues.length > 20 ? `<div class="muted">Showing first 20 of ${issues.length}</div>` : ''}
+        ${issues.length > 20 ? `<div class="muted">Showing first 20 of ${issues.length}</div>` : ""}
       </div>
     </div>
 
     <div class="muted">Generated by SEO Audit • ${created.toLocaleString()}</div>
   </div>
 </body>
-</html>`
+</html>`;
 }
 
 function escapeHtml(input: any): string {
-  const s = String(input ?? '')
+  const s = String(input ?? "");
   return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }

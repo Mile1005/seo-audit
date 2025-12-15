@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { checkDatabaseHealth, getPerformanceMetrics, getDatabaseStats } from '@/lib/database';
+import { NextResponse } from "next/server";
+import { checkDatabaseHealth, getPerformanceMetrics, getDatabaseStats } from "@/lib/database";
 
 export async function GET() {
   try {
@@ -11,7 +11,7 @@ export async function GET() {
     ]);
 
     const response = {
-      status: health.status === 'healthy' ? 'healthy' : 'unhealthy',
+      status: health.status === "healthy" ? "healthy" : "unhealthy",
       timestamp: new Date().toISOString(),
       database: {
         ...health,
@@ -20,20 +20,20 @@ export async function GET() {
       },
       environment: {
         nodeEnv: process.env.NODE_ENV,
-        databaseUrl: process.env.DATABASE_URL ? 'configured' : 'missing',
-        prismaAccelerate: process.env.DATABASE_URL?.includes('prisma') || false,
+        databaseUrl: process.env.DATABASE_URL ? "configured" : "missing",
+        prismaAccelerate: process.env.DATABASE_URL?.includes("prisma") || false,
       },
     };
 
     return NextResponse.json(response, {
-      status: health.status === 'healthy' ? 200 : 503,
+      status: health.status === "healthy" ? 200 : 503,
     });
   } catch (error) {
     return NextResponse.json(
       {
-        status: 'error',
+        status: "error",
         timestamp: new Date().toISOString(),
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
     );

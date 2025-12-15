@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, CreditCard, ArrowRight, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, CreditCard, ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const categoryArticles = [
   {
@@ -11,30 +11,30 @@ const categoryArticles = [
     href: "/help/billing/upgrade-plan",
     time: "4 min",
     description: "Learn how to upgrade your subscription plan and unlock premium features.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Managing payment methods",
     href: "/help/billing/payment-methods",
     time: "5 min",
     description: "Add, update, or remove payment methods and billing information.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Understanding your invoice",
     href: "/help/billing/invoices",
     time: "4 min",
     description: "Learn how to read your invoices and download billing history.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Cancelling your subscription",
     href: "/help/billing/cancellation",
     time: "3 min",
     description: "Learn about our cancellation policy and how to cancel your subscription.",
-    icon: BookOpen
-  }
-]
+    icon: BookOpen,
+  },
+];
 
 export default function AccountBillingPage() {
   return (
@@ -52,8 +52,8 @@ export default function AccountBillingPage() {
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Account & Billing</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Manage your AI SEO Turbo account, subscription plans, billing information,
-              and payment methods with our comprehensive guides.
+              Manage your AI SEO Turbo account, subscription plans, billing information, and payment
+              methods with our comprehensive guides.
             </p>
           </div>
 
@@ -124,24 +124,35 @@ export default function AccountBillingPage() {
 
           {/* Billing Information */}
           <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Billing & Subscription FAQ</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Billing & Subscription FAQ
+            </h2>
             <div className="space-y-6">
               <div className="border-l-4 border-blue-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">When will I be charged?</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  When will I be charged?
+                </h3>
                 <p className="text-gray-600">
-                  You'll be charged at the beginning of your billing cycle. For annual plans, you'll receive a prorated charge for the first partial month.
+                  You'll be charged at the beginning of your billing cycle. For annual plans, you'll
+                  receive a prorated charge for the first partial month.
                 </p>
               </div>
               <div className="border-l-4 border-green-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Can I change plans anytime?</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  Can I change plans anytime?
+                </h3>
                 <p className="text-gray-600">
-                  Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate the billing accordingly.
+                  Yes! You can upgrade or downgrade your plan at any time. Changes take effect
+                  immediately, and we'll prorate the billing accordingly.
                 </p>
               </div>
               <div className="border-l-4 border-purple-500 pl-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">What payment methods do you accept?</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  What payment methods do you accept?
+                </h3>
                 <p className="text-gray-600">
-                  We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers for annual plans.
+                  We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and
+                  bank transfers for annual plans.
                 </p>
               </div>
             </div>
@@ -180,5 +191,5 @@ export default function AccountBillingPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

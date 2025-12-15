@@ -1,34 +1,39 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface DesktopHeroMockupOptimizedProps {
-  deferAnimation?: boolean
+  deferAnimation?: boolean;
 }
 
-export function DesktopHeroMockupOptimized({ deferAnimation = true }: DesktopHeroMockupOptimizedProps) {
-  const [showAnimation, setShowAnimation] = useState(!deferAnimation)
+export function DesktopHeroMockupOptimized({
+  deferAnimation = true,
+}: DesktopHeroMockupOptimizedProps) {
+  const [showAnimation, setShowAnimation] = useState(!deferAnimation);
 
   useEffect(() => {
-    if (!deferAnimation) return
+    if (!deferAnimation) return;
 
     // Defer animation startup to after LCP completes
     // Use requestIdleCallback for low-priority animation setup
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(() => {
-        setShowAnimation(true)
-      }, { timeout: 2000 })
-      return () => cancelIdleCallback(id)
+      const id = requestIdleCallback(
+        () => {
+          setShowAnimation(true);
+        },
+        { timeout: 2000 }
+      );
+      return () => cancelIdleCallback(id);
     } else {
       // Fallback: wait 2 seconds for non-supporting browsers
       const timer = setTimeout(() => {
-        setShowAnimation(true)
-      }, 2000)
-      return () => clearTimeout(timer)
+        setShowAnimation(true);
+      }, 2000);
+      return () => clearTimeout(timer);
     }
-  }, [deferAnimation])
+  }, [deferAnimation]);
 
   return (
     <div className="relative">
@@ -36,18 +41,22 @@ export function DesktopHeroMockupOptimized({ deferAnimation = true }: DesktopHer
       {showAnimation && (
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-3xl scale-110" />
       )}
-      
+
       {/* Main Mockup Container - Static Image for fast LCP */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 30 }}
         animate={showAnimation ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 30 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        whileHover={showAnimation ? { 
-          rotateY: 5,
-          rotateX: 5,
-          scale: 1.02,
-          transition: { duration: 0.3 }
-        } : {}}
+        whileHover={
+          showAnimation
+            ? {
+                rotateY: 5,
+                rotateX: 5,
+                scale: 1.02,
+                transition: { duration: 0.3 },
+              }
+            : {}
+        }
         className="relative transform-gpu perspective-1000"
       >
         {/* Optimized Hero Mockup Image */}
@@ -94,12 +103,12 @@ export function DesktopHeroMockupOptimized({ deferAnimation = true }: DesktopHer
             <motion.div
               animate={{
                 y: [0, -8, 0],
-                rotate: [0, 2, 0]
+                rotate: [0, 2, 0],
               }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute -top-4 -right-4 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl p-3 shadow-lg"
             >
@@ -109,13 +118,13 @@ export function DesktopHeroMockupOptimized({ deferAnimation = true }: DesktopHer
             <motion.div
               animate={{
                 y: [0, 8, 0],
-                rotate: [0, -2, 0]
+                rotate: [0, -2, 0],
               }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: 1
+                delay: 1,
               }}
               className="absolute -bottom-4 -left-4 bg-gradient-to-br from-purple-500 to-pink-600 rounded-xl p-3 shadow-lg"
             >
@@ -125,5 +134,5 @@ export function DesktopHeroMockupOptimized({ deferAnimation = true }: DesktopHer
         )}
       </motion.div>
     </div>
-  )
+  );
 }

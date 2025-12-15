@@ -1,4 +1,4 @@
-import { MainLayout } from '@/components/layout/main-layout'
+import { MainLayout } from "@/components/layout/main-layout";
 
 export default function KeywordTrackingPage() {
   return (
@@ -20,7 +20,9 @@ export default function KeywordTrackingPage() {
             </div>
             <div className="bg-card p-6 rounded-lg border">
               <h3 className="text-xl font-semibold mb-4">Alert System</h3>
-              <p className="text-muted-foreground">Get notified of ranking changes and opportunities</p>
+              <p className="text-muted-foreground">
+                Get notified of ranking changes and opportunities
+              </p>
             </div>
           </div>
         </div>

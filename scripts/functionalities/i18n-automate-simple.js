@@ -7,17 +7,17 @@
  * For production use, install additional dependencies: @babel/parser @babel/traverse @babel/generator @babel/types
  */
 
-console.log('Script starting...');
+console.log("Script starting...");
 
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 // Configuration
 const CONFIG = {
-  supportedLanguages: ['de', 'it', 'id', 'es', 'fr'],
-  sourceLanguage: 'en',
-  messagesDir: './messages',
-  componentsDir: './app'
+  supportedLanguages: ["de", "it", "id", "es", "fr"],
+  sourceLanguage: "en",
+  messagesDir: "./messages",
+  componentsDir: "./app",
 };
 
 class I18nAutomator {
@@ -32,7 +32,7 @@ class I18nAutomator {
   detectUntranslatedContent(componentPath) {
     console.log(`🔍 Analyzing ${componentPath} for untranslated content...`);
 
-    const content = fs.readFileSync(componentPath, 'utf-8');
+    const content = fs.readFileSync(componentPath, "utf-8");
 
     // Simple regex patterns for hardcoded strings
     const jsxTextPattern = />([^><{}$]+)</g;
@@ -45,11 +45,11 @@ class I18nAutomator {
     let match;
     while ((match = jsxTextPattern.exec(content)) !== null) {
       const text = match[1].trim();
-      if (text.length > 3 && !seen.has(text) && !text.includes('t(')) {
+      if (text.length > 3 && !seen.has(text) && !text.includes("t(")) {
         untranslatedStrings.push({
           text,
-          type: 'jsx-text',
-          line: this.getLineNumber(content, match.index)
+          type: "jsx-text",
+          line: this.getLineNumber(content, match.index),
         });
         seen.add(text);
       }
@@ -64,11 +64,11 @@ class I18nAutomator {
   transformComponent(componentPath, untranslatedStrings, namespace) {
     console.log(`🔄 Transforming ${componentPath} to use t() functions...`);
 
-    let content = fs.readFileSync(componentPath, 'utf-8');
+    let content = fs.readFileSync(componentPath, "utf-8");
     const translationKeys = {};
 
     // Ensure useTranslations import
-    if (!content.includes('useTranslations')) {
+    if (!content.includes("useTranslations")) {
       const importMatch = /import.*from ['"']next-intl['"'];?/;
       if (importMatch.test(content)) {
         content = content.replace(importMatch, (match) => {
@@ -80,7 +80,7 @@ class I18nAutomator {
     }
 
     // Add t() hook if not present
-    if (!content.includes('const t = useTranslations(')) {
+    if (!content.includes("const t = useTranslations(")) {
       const componentMatch = /export default function (\w+)/;
       const match = content.match(componentMatch);
       if (match) {
@@ -97,10 +97,10 @@ class I18nAutomator {
       const key = this.generateTranslationKey(text, keyCounter++);
       translationKeys[key] = text;
 
-      if (type === 'jsx-text') {
+      if (type === "jsx-text") {
         // Replace JSX text
-        const escapedText = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        const jsxPattern = new RegExp(`>([^><]*${escapedText}[^><]*)<`, 'g');
+        const escapedText = text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const jsxPattern = new RegExp(`>([^><]*${escapedText}[^><]*)<`, "g");
         content = content.replace(jsxPattern, (match) => {
           return match.replace(text, `{t('${key}')}`);
         });
@@ -117,11 +117,11 @@ class I18nAutomator {
   updateEnglishSource(namespace, translationKeys) {
     console.log(`📝 Updating messages/en.json with new keys...`);
 
-    const enPath = path.join(CONFIG.messagesDir, 'en.json');
-    const enContent = JSON.parse(fs.readFileSync(enPath, 'utf-8'));
+    const enPath = path.join(CONFIG.messagesDir, "en.json");
+    const enContent = JSON.parse(fs.readFileSync(enPath, "utf-8"));
 
     // Navigate to namespace
-    const parts = namespace.split('.');
+    const parts = namespace.split(".");
     let current = enContent;
 
     for (let i = 0; i < parts.length - 1; i++) {
@@ -167,10 +167,10 @@ class I18nAutomator {
       fr: Object.keys(translationKeys).reduce((acc, key) => {
         acc[key] = `[FR] ${translationKeys[key]}`;
         return acc;
-      }, {})
+      }, {}),
     };
 
-    CONFIG.supportedLanguages.forEach(lang => {
+    CONFIG.supportedLanguages.forEach((lang) => {
       translations[lang] = mockTranslations[lang];
     });
 
@@ -185,10 +185,10 @@ class I18nAutomator {
 
     Object.entries(translations).forEach(([lang, keys]) => {
       const filePath = path.join(CONFIG.messagesDir, `${lang}.json`);
-      const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
       // Navigate to namespace
-      const parts = namespace.split('.');
+      const parts = namespace.split(".");
       let current = content;
 
       for (let i = 0; i < parts.length - 1; i++) {
@@ -221,7 +221,11 @@ class I18nAutomator {
       }
 
       // Step 2: Transform component
-      const translationKeys = this.transformComponent(componentPath, untranslatedStrings, namespace);
+      const translationKeys = this.transformComponent(
+        componentPath,
+        untranslatedStrings,
+        namespace
+      );
       console.log(`🔄 Generated ${Object.keys(translationKeys).length} translation keys\n`);
 
       // Step 3: Update English source
@@ -241,7 +245,6 @@ class I18nAutomator {
       console.log(`   ✓ ${Object.keys(translationKeys).length} new translation keys added`);
       console.log(`   ✓ ${CONFIG.supportedLanguages.length + 1} language files updated`);
       console.log(`   ✓ Ready for validation (pnpm type-check && npm run build)`);
-
     } catch (error) {
       console.error(`❌ Automation failed:`, error.message);
       throw error;
@@ -253,36 +256,36 @@ class I18nAutomator {
     const relativePath = path.relative(CONFIG.componentsDir, componentPath);
     const parts = relativePath.split(path.sep);
 
-    if (parts.includes('help')) {
-      const helpIndex = parts.indexOf('help');
+    if (parts.includes("help")) {
+      const helpIndex = parts.indexOf("help");
       const category = parts[helpIndex + 1];
-      const article = path.basename(componentPath, '.tsx').replace('Content', '').toLowerCase();
+      const article = path.basename(componentPath, ".tsx").replace("Content", "").toLowerCase();
       return `help.categories.${category}.articles.${article}`;
     }
 
-    return 'test'; // fallback for test components
+    return "test"; // fallback for test components
   }
 
   generateTranslationKey(text, counter) {
     const sanitized = text
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '')
-      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9\s]/g, "")
+      .replace(/\s+/g, "_")
       .substring(0, 20);
     return `${sanitized}_${counter}`;
   }
 
   getLineNumber(content, index) {
-    const lines = content.substring(0, index).split('\n');
+    const lines = content.substring(0, index).split("\n");
     return lines.length;
   }
 }
 
 // CLI interface
 async function main() {
-  console.log('🚀 Starting I18n Automation Script...');
+  console.log("🚀 Starting I18n Automation Script...");
   const args = process.argv.slice(2);
-  console.log('Arguments received:', args);
+  console.log("Arguments received:", args);
 
   if (args.length === 0) {
     console.log(`
@@ -315,11 +318,11 @@ Supported languages: de, it, id, es, fr
 
   const automator = new I18nAutomator();
   await automator.automateComponent(componentPath);
-  console.log('✅ Script completed successfully');
+  console.log("✅ Script completed successfully");
 }
 
 // Run main if this is the entry point
-if (process.argv[1].endsWith('i18n-automate-simple.js')) {
+if (process.argv[1].endsWith("i18n-automate-simple.js")) {
   main().catch(console.error);
 }
 

@@ -1,13 +1,13 @@
-import { createNavigation } from 'next-intl/navigation';
-import { defineRouting } from 'next-intl/routing';
-import { locales, defaultLocale } from './i18n-config';
+import { createNavigation } from "next-intl/navigation";
+import { defineRouting } from "next-intl/routing";
+import { locales, defaultLocale } from "./i18n-config";
 
 // Define routing configuration
 export const routing = defineRouting({
   locales,
   defaultLocale,
-  localePrefix: 'as-needed', // English at root, others with locale prefix
-  alternateLinks: false
+  localePrefix: "as-needed", // English at root, others with locale prefix
+  alternateLinks: false,
 });
 
 // Create type-safe navigation utilities for i18n routing

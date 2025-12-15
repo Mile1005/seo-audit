@@ -1,86 +1,86 @@
-'use client'
+"use client";
 
-import { useState, useEffect, Suspense } from 'react'
-import { motion } from 'framer-motion'
-import { Mail, CheckCircle, AlertCircle, ArrowRight, RefreshCw } from 'lucide-react'
-import { useRouter, useSearchParams, useParams } from 'next/navigation'
-import { Link } from '@/lib/navigation'
-import { useTranslations } from 'next-intl'
+import { useState, useEffect, Suspense } from "react";
+import { motion } from "framer-motion";
+import { Mail, CheckCircle, AlertCircle, ArrowRight, RefreshCw } from "lucide-react";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
+import { Link } from "@/lib/navigation";
+import { useTranslations } from "next-intl";
 
 function VerifyEmailContent() {
-  const t = useTranslations('auth.verifyEmail');
-  const tErrors = useTranslations('auth.errors');
+  const t = useTranslations("auth.verifyEmail");
+  const tErrors = useTranslations("auth.errors");
   const params = useParams();
   const locale = params.locale as string;
-  
-  const [loading, setLoading] = useState(true)
-  const [verified, setVerified] = useState(false)
-  const [error, setError] = useState('')
-  const [resending, setResending] = useState(false)
-  
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
+
+  const [loading, setLoading] = useState(true);
+  const [verified, setVerified] = useState(false);
+  const [error, setError] = useState("");
+  const [resending, setResending] = useState(false);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
   useEffect(() => {
     if (!token) {
-      setError('Verification token is missing')
-      setLoading(false)
-      return
+      setError("Verification token is missing");
+      setLoading(false);
+      return;
     }
 
     // Verify email with token
-    fetch('/api/auth/verify-email', {
-      method: 'POST',
+    fetch("/api/auth/verify-email", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ token }),
     })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message === 'Email verified successfully') {
-          setVerified(true)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Email verified successfully") {
+          setVerified(true);
           setTimeout(() => {
-            router.push('/login?message=Email verified successfully')
-          }, 3000)
+            router.push("/login?message=Email verified successfully");
+          }, 3000);
         } else {
-          setError(data.message || 'Failed to verify email')
+          setError(data.message || "Failed to verify email");
         }
       })
       .catch(() => {
-        setError('Failed to verify email')
+        setError("Failed to verify email");
       })
       .finally(() => {
-        setLoading(false)
-      })
-  }, [token, router])
+        setLoading(false);
+      });
+  }, [token, router]);
 
   const handleResendVerification = async () => {
-    setResending(true)
-    setError('')
+    setResending(true);
+    setError("");
 
     try {
-      const response = await fetch('/api/auth/send-verification', {
-        method: 'POST',
+      const response = await fetch("/api/auth/send-verification", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: 'placeholder@email.com' }), // You'd get this from session/context
-      })
+        body: JSON.stringify({ email: "placeholder@email.com" }), // You'd get this from session/context
+      });
 
       if (!response.ok) {
-        throw new Error('Failed to resend verification email')
+        throw new Error("Failed to resend verification email");
       }
 
       // Show success message
-      setError('')
+      setError("");
     } catch (error: any) {
-      setError(error.message || 'Failed to resend verification email')
+      setError(error.message || "Failed to resend verification email");
     } finally {
-      setResending(false)
+      setResending(false);
     }
-  }
+  };
 
   // Loading state
   if (loading) {
@@ -91,7 +91,7 @@ function VerifyEmailContent() {
           <p className="text-gray-600">Verifying your email...</p>
         </div>
       </div>
-    )
+    );
   }
 
   // Success state
@@ -101,7 +101,7 @@ function VerifyEmailContent() {
         <div className="absolute inset-0 opacity-50">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-100/20 to-purple-100/20"></div>
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,19 +117,16 @@ function VerifyEmailContent() {
             <CheckCircle className="w-8 h-8 text-white" />
           </motion.div>
 
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Email Verified! 🎉
-          </h1>
-          
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Email Verified! 🎉</h1>
+
           <p className="text-gray-600 mb-8">
-            Your email has been successfully verified. You can now access all features of your account.
+            Your email has been successfully verified. You can now access all features of your
+            account.
           </p>
 
-          <p className="text-sm text-gray-500 mb-4">
-            Redirecting to login page...
-          </p>
+          <p className="text-sm text-gray-500 mb-4">Redirecting to login page...</p>
 
-          <Link 
+          <Link
             href="/login"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl"
           >
@@ -138,7 +135,7 @@ function VerifyEmailContent() {
           </Link>
         </motion.div>
       </div>
-    )
+    );
   }
 
   // Error state
@@ -147,7 +144,7 @@ function VerifyEmailContent() {
       <div className="absolute inset-0 opacity-50">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-100/20 to-purple-100/20"></div>
       </div>
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -158,12 +155,10 @@ function VerifyEmailContent() {
           <AlertCircle className="w-8 h-8 text-red-600" />
         </div>
 
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Verification Failed ❌
-        </h1>
-        
+        <h1 className="text-3xl font-bold text-gray-900 mb-4">Verification Failed ❌</h1>
+
         <p className="text-gray-600 mb-8">
-          {error || 'Unable to verify your email. The verification link may be invalid or expired.'}
+          {error || "Unable to verify your email. The verification link may be invalid or expired."}
         </p>
 
         <div className="space-y-4">
@@ -185,7 +180,7 @@ function VerifyEmailContent() {
             )}
           </button>
 
-          <Link 
+          <Link
             href="/signup"
             className="block text-center text-gray-600 hover:text-gray-800 font-medium transition-colors duration-200"
           >
@@ -194,13 +189,15 @@ function VerifyEmailContent() {
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
 
 export default function VerifyEmailPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+    <Suspense
+      fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}
+    >
       <VerifyEmailContent />
     </Suspense>
-  )
+  );
 }

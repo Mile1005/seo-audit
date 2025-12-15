@@ -5,38 +5,38 @@
  * Comprehensive analysis of duplicate page titles across all locales
  */
 
-import puppeteer from 'puppeteer';
-import { readFileSync } from 'fs';
+import puppeteer from "puppeteer";
+import { readFileSync } from "fs";
 
-const BASE_URL = 'https://www.aiseoturbo.com';
-const LOCALES = ['en', 'fr', 'de', 'es', 'it', 'id'];
+const BASE_URL = "https://www.aiseoturbo.com";
+const LOCALES = ["en", "fr", "de", "es", "it", "id"];
 
 const LOCALE_NAMES = {
-  'en': 'English',
-  'fr': 'Français',
-  'de': 'Deutsch',
-  'es': 'Español',
-  'it': 'Italiano',
-  'id': 'Bahasa Indonesia'
+  en: "English",
+  fr: "Français",
+  de: "Deutsch",
+  es: "Español",
+  it: "Italiano",
+  id: "Bahasa Indonesia",
 };
 
 const LOCALE_COUNTRIES = {
-  'en': 'Global',
-  'fr': 'France',
-  'de': 'Germany',
-  'es': 'Spain',
-  'it': 'Italy',
-  'id': 'Indonesia'
+  en: "Global",
+  fr: "France",
+  de: "Germany",
+  es: "Spain",
+  it: "Italy",
+  id: "Indonesia",
 };
 
 // Load URLs from sitemap
 let KEY_URLS = [];
 try {
-  const sitemapData = JSON.parse(readFileSync('sitemap-valid-urls.json', 'utf8'));
+  const sitemapData = JSON.parse(readFileSync("sitemap-valid-urls.json", "utf8"));
   KEY_URLS = sitemapData.validUrls || [];
   console.log(`Loaded ${KEY_URLS.length} URLs from sitemap`);
 } catch (error) {
-  console.error('Failed to load sitemap URLs:', error.message);
+  console.error("Failed to load sitemap URLs:", error.message);
   process.exit(1);
 }
 
@@ -48,14 +48,14 @@ class TitleDuplicateAnalyzer {
       duplicateGroups: new Map(),
       titleToPages: new Map(),
       localeStats: {},
-      recommendations: []
+      recommendations: [],
     };
 
-    LOCALES.forEach(locale => {
+    LOCALES.forEach((locale) => {
       this.results.localeStats[locale] = {
         totalPages: 0,
         uniqueTitles: 0,
-        duplicates: 0
+        duplicates: 0,
       };
     });
   }
@@ -65,15 +65,15 @@ class TitleDuplicateAnalyzer {
     const page = await browser.newPage();
 
     try {
-      await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+      await page.goto(url, { waitUntil: "networkidle0", timeout: 30000 });
 
       // Get title
       const title = await page.evaluate(() => document.title);
 
       // Get HTML lang attribute
       const htmlLang = await page.evaluate(() => {
-        const html = document.querySelector('html');
-        return html ? html.getAttribute('lang') : null;
+        const html = document.querySelector("html");
+        return html ? html.getAttribute("lang") : null;
       });
 
       await browser.close();
@@ -83,15 +83,14 @@ class TitleDuplicateAnalyzer {
         title,
         htmlLang,
         expectedLocale,
-        localeMatch: htmlLang === expectedLocale
+        localeMatch: htmlLang === expectedLocale,
       };
-
     } catch (error) {
       await browser.close();
       return {
         url,
         error: error.message,
-        expectedLocale
+        expectedLocale,
       };
     }
   }
@@ -119,12 +118,11 @@ class TitleDuplicateAnalyzer {
       this.results.titleToPages.get(title).push(url);
 
       // Mark locales as having duplicates
-      existingPages.forEach(existingUrl => {
+      existingPages.forEach((existingUrl) => {
         const existingLocale = this.extractLocaleFromUrl(existingUrl);
         this.results.localeStats[existingLocale].duplicates++;
       });
       this.results.localeStats[expectedLocale].duplicates++;
-
     } else {
       // First occurrence of this title
       this.results.titleToPages.set(title, [url]);
@@ -137,12 +135,12 @@ class TitleDuplicateAnalyzer {
 
   extractLocaleFromUrl(url) {
     const urlObj = new URL(url);
-    const pathParts = urlObj.pathname.split('/').filter(p => p);
+    const pathParts = urlObj.pathname.split("/").filter((p) => p);
 
-    if (pathParts.length === 0) return 'en'; // Root is English
+    if (pathParts.length === 0) return "en"; // Root is English
 
     const firstPart = pathParts[0];
-    return LOCALES.includes(firstPart) ? firstPart : 'en';
+    return LOCALES.includes(firstPart) ? firstPart : "en";
   }
 
   generateRecommendations() {
@@ -152,7 +150,7 @@ class TitleDuplicateAnalyzer {
     for (const [title, urls] of this.results.duplicateGroups) {
       if (urls.length < 2) continue;
 
-      const locales = urls.map(url => this.extractLocaleFromUrl(url));
+      const locales = urls.map((url) => this.extractLocaleFromUrl(url));
       const uniqueLocales = [...new Set(locales)];
 
       recommendations.push({
@@ -160,7 +158,7 @@ class TitleDuplicateAnalyzer {
         duplicateCount: urls.length,
         affectedLocales: uniqueLocales,
         urls,
-        recommendation: this.generateTitleRecommendation(title, uniqueLocales)
+        recommendation: this.generateTitleRecommendation(title, uniqueLocales),
       });
     }
 
@@ -171,14 +169,14 @@ class TitleDuplicateAnalyzer {
     const recommendations = [];
 
     // Remove brand suffix if present
-    let baseTitle = originalTitle.replace(/\s*\|\s*AI SEO Turbo.*$/i, '').trim();
+    let baseTitle = originalTitle.replace(/\s*\|\s*AI SEO Turbo.*$/i, "").trim();
 
-    locales.forEach(locale => {
-      if (locale === 'en') {
+    locales.forEach((locale) => {
+      if (locale === "en") {
         recommendations.push({
-          locale: 'en',
+          locale: "en",
           title: `${baseTitle} | AI SEO Turbo`,
-          reasoning: 'Keep original English title for global audience'
+          reasoning: "Keep original English title for global audience",
         });
       } else {
         const countryName = LOCALE_COUNTRIES[locale];
@@ -187,7 +185,7 @@ class TitleDuplicateAnalyzer {
         recommendations.push({
           locale,
           title: localizedTitle,
-          reasoning: `Add country name for better localization and targeting`
+          reasoning: `Add country name for better localization and targeting`,
         });
       }
     });
@@ -196,20 +194,25 @@ class TitleDuplicateAnalyzer {
   }
 
   printResults() {
-    console.log('🎯 TITLE DUPLICATE ANALYSIS RESULTS');
-    console.log('=====================================\n');
+    console.log("🎯 TITLE DUPLICATE ANALYSIS RESULTS");
+    console.log("=====================================\n");
 
     console.log(`📊 OVERVIEW:`);
     console.log(`   Total pages analyzed: ${this.results.totalPages}`);
     console.log(`   Unique titles: ${this.results.uniqueTitles.size}`);
     console.log(`   Duplicate title groups: ${this.results.duplicateGroups.size}`);
-    console.log(`   Total duplicate instances: ${Array.from(this.results.duplicateGroups.values()).reduce((sum, urls) => sum + urls.length, 0)}\n`);
+    console.log(
+      `   Total duplicate instances: ${Array.from(this.results.duplicateGroups.values()).reduce((sum, urls) => sum + urls.length, 0)}\n`
+    );
 
     console.log(`🌍 LOCALE BREAKDOWN:`);
     Object.entries(this.results.localeStats).forEach(([locale, stats]) => {
       const localeName = LOCALE_NAMES[locale];
-      const duplicatePercentage = stats.totalPages > 0 ? ((stats.duplicates / stats.totalPages) * 100).toFixed(1) : '0.0';
-      console.log(`   ${localeName} (${locale}): ${stats.totalPages} pages, ${stats.duplicates} duplicates (${duplicatePercentage}%)`);
+      const duplicatePercentage =
+        stats.totalPages > 0 ? ((stats.duplicates / stats.totalPages) * 100).toFixed(1) : "0.0";
+      console.log(
+        `   ${localeName} (${locale}): ${stats.totalPages} pages, ${stats.duplicates} duplicates (${duplicatePercentage}%)`
+      );
     });
 
     console.log(`\n🚨 DUPLICATE TITLE GROUPS (${this.results.duplicateGroups.size}):`);
@@ -220,7 +223,7 @@ class TitleDuplicateAnalyzer {
       console.log(`      Found on ${urls.length} pages:`);
 
       const urlsByLocale = {};
-      urls.forEach(url => {
+      urls.forEach((url) => {
         const locale = this.extractLocaleFromUrl(url);
         if (!urlsByLocale[locale]) urlsByLocale[locale] = [];
         urlsByLocale[locale].push(url);
@@ -229,14 +232,15 @@ class TitleDuplicateAnalyzer {
       Object.entries(urlsByLocale).forEach(([locale, localeUrls]) => {
         const localeName = LOCALE_NAMES[locale];
         console.log(`         ${localeName}: ${localeUrls.length} pages`);
-        localeUrls.forEach(url => {
-          const shortUrl = url.replace(BASE_URL, '');
+        localeUrls.forEach((url) => {
+          const shortUrl = url.replace(BASE_URL, "");
           console.log(`            ${shortUrl}`);
         });
       });
 
       groupCount++;
-      if (groupCount > 10) { // Limit output
+      if (groupCount > 10) {
+        // Limit output
         console.log(`   ... and ${this.results.duplicateGroups.size - 10} more groups`);
         break;
       }
@@ -247,7 +251,7 @@ class TitleDuplicateAnalyzer {
 
     this.results.recommendations.slice(0, 5).forEach((rec, index) => {
       console.log(`\n   ${index + 1}. "${rec.title}" (${rec.duplicateCount} duplicates)`);
-      rec.recommendation.forEach(suggestion => {
+      rec.recommendation.forEach((suggestion) => {
         console.log(`      ${LOCALE_NAMES[suggestion.locale]}: "${suggestion.title}"`);
         console.log(`         ${suggestion.reasoning}`);
       });
@@ -259,15 +263,17 @@ class TitleDuplicateAnalyzer {
 
     console.log(`\n📋 SUMMARY:`);
     console.log(`   • ${this.results.duplicateGroups.size} title groups have duplicates`);
-    console.log(`   • ${Array.from(this.results.duplicateGroups.values()).reduce((sum, urls) => sum + urls.length, 0)} total duplicate instances`);
+    console.log(
+      `   • ${Array.from(this.results.duplicateGroups.values()).reduce((sum, urls) => sum + urls.length, 0)} total duplicate instances`
+    );
     console.log(`   • All localized pages need country-specific titles`);
     console.log(`   • Fix will improve SEO targeting and reduce confusion`);
   }
 
   async run() {
-    console.log('🔍 Starting Title Duplicate Analysis...');
+    console.log("🔍 Starting Title Duplicate Analysis...");
     console.log(`   Base URL: ${BASE_URL}`);
-    console.log(`   Locales: ${LOCALES.join(', ')}`);
+    console.log(`   Locales: ${LOCALES.join(", ")}`);
     console.log(`   Total URLs to analyze: ${KEY_URLS.length}\n`);
 
     // Analyze each URL
@@ -275,7 +281,7 @@ class TitleDuplicateAnalyzer {
       const url = KEY_URLS[i];
       const expectedLocale = this.extractLocaleFromUrl(url);
 
-      console.log(`   [${i + 1}/${KEY_URLS.length}] Checking: ${url.replace(BASE_URL, '')}`);
+      console.log(`   [${i + 1}/${KEY_URLS.length}] Checking: ${url.replace(BASE_URL, "")}`);
       const pageData = await this.analyzePage(url, expectedLocale);
       this.processTitleData(pageData);
     }
@@ -288,8 +294,8 @@ class TitleDuplicateAnalyzer {
 
     // Export detailed results
     console.log(`\n💾 Exporting detailed results to title-analysis-results.json`);
-    const fs = await import('fs');
-    fs.writeFileSync('title-analysis-results.json', JSON.stringify(this.results, null, 2));
+    const fs = await import("fs");
+    fs.writeFileSync("title-analysis-results.json", JSON.stringify(this.results, null, 2));
   }
 }
 

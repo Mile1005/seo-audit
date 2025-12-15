@@ -1,6 +1,7 @@
 # Site Crawler Feature Analysis
 
 ## Overview
+
 Comprehensive analysis of the Site Crawler feature at https://www.aiseoturbo.com/features/site-crawler
 
 **Analysis Date:** October 14, 2025
@@ -8,6 +9,7 @@ Comprehensive analysis of the Site Crawler feature at https://www.aiseoturbo.com
 ---
 
 ## 🎯 Feature Purpose
+
 The Site Crawler is an AI-powered tool that systematically browses and analyzes all pages on a website, discovering pages, analyzing content, checking for SEO issues, and mapping the site's structure.
 
 ---
@@ -15,9 +17,11 @@ The Site Crawler is an AI-powered tool that systematically browses and analyzes 
 ## 📊 Crawling Limits & Quotas
 
 ### Frontend Limits (UI)
+
 Located in: `app/features/site-crawler/site-crawler-content.tsx`
 
 **User-Facing Options:**
+
 - **5 pages** - Quick scan
 - **10 pages** - Recommended (default)
 - **15 pages** - Deep analysis
@@ -27,30 +31,37 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx`
 ### Backend Limits
 
 #### 1. Simple Crawler (`/api/crawl/start`)
+
 Located in: `app/api/crawl/start/route.ts`
+
 - **Hard limit:** Max 25 pages per crawl
 - **Default:** 10 pages
 - **Validation:** `Math.min(limit, 25)`
 - **Usage:** Free tier - no authentication required
 
 #### 2. Advanced Crawler (`/api/seo-audit/site-crawl/start`)
+
 Located in: `app/api/seo-audit/site-crawl/start/route.ts`
+
 - **Hard limit:** Max 200 pages per crawl
 - **Default:** 20 pages
 - **Max depth:** 5 levels (default: 2)
-- **Validation:** 
+- **Validation:**
   - `maxPages = Math.min(200, Math.max(1, maxPages))`
   - `maxDepth = Math.min(5, Math.max(0, maxDepth))`
 
 ### Usage Quotas
+
 Located in: `lib/server/quota.ts`
 
 **Free Tier Limits:**
+
 - **Single-page audits:** 30 per month
 - **Site crawls:** 2 per month
 - **Reset:** Monthly (tracks by YYYY-MM format)
 
 **Quota Enforcement:**
+
 - Enforced only for authenticated users
 - If quota exceeded: Returns 402 status with upgrade message
 - Increments usage counter after successful crawl
@@ -62,8 +73,10 @@ Located in: `lib/server/quota.ts`
 ### Primary Endpoints
 
 #### 1. `/api/crawl/start` (Simple Crawler)
+
 **Method:** POST  
 **Request Body:**
+
 ```json
 {
   "startUrl": "https://example.com",
@@ -72,6 +85,7 @@ Located in: `lib/server/quota.ts`
 ```
 
 **Response:**
+
 ```json
 {
   "status": "completed",
@@ -92,6 +106,7 @@ Located in: `lib/server/quota.ts`
 ```
 
 **Features:**
+
 - Synchronous crawling
 - No authentication required
 - Max 25 pages
@@ -99,8 +114,10 @@ Located in: `lib/server/quota.ts`
 - Checks robots.txt and sitemap.xml
 
 #### 2. `/api/seo-audit/site-crawl/start` (Advanced Crawler)
+
 **Method:** POST  
 **Request Body:**
+
 ```json
 {
   "url": "https://example.com",
@@ -110,6 +127,7 @@ Located in: `lib/server/quota.ts`
 ```
 
 **Response:**
+
 ```json
 {
   "id": "uuid",
@@ -118,6 +136,7 @@ Located in: `lib/server/quota.ts`
 ```
 
 **Features:**
+
 - Asynchronous crawling (background job)
 - Authentication required
 - Quota enforcement (2 crawls/month for free users)
@@ -136,6 +155,7 @@ Located in: `lib/server/quota.ts`
 ### How It Works
 
 #### 1. Simple Crawler Flow
+
 ```
 1. Validate & normalize URL
 2. Check robots.txt (HEAD request)
@@ -152,6 +172,7 @@ Located in: `lib/server/quota.ts`
 ```
 
 #### 2. Advanced Crawler Flow
+
 ```
 1. Authenticate user
 2. Check quota limits
@@ -171,25 +192,27 @@ Located in: `lib/server/quota.ts`
 ```
 
 ### Crawl Store (In-Memory)
+
 Located in: `lib/server/crawl-store.ts`
 
 **Purpose:** Track real-time progress of async crawls
 
 **Data Structure:**
+
 ```typescript
 interface CrawlJobRecord {
-  id: string
-  rootUrl: string
-  status: 'processing' | 'completed' | 'failed'
-  startedAt: number
-  updatedAt: number
-  pages: CrawlPageResult[]
-  maxPages: number
-  maxDepth: number
-  processed: number
-  queued: number
-  progress: number // 0-100
-  cancelled?: boolean
+  id: string;
+  rootUrl: string;
+  status: "processing" | "completed" | "failed";
+  startedAt: number;
+  updatedAt: number;
+  pages: CrawlPageResult[];
+  maxPages: number;
+  maxDepth: number;
+  processed: number;
+  queued: number;
+  progress: number; // 0-100
+  cancelled?: boolean;
 }
 ```
 
@@ -200,6 +223,7 @@ interface CrawlJobRecord {
 ### Per-Page Analysis
 
 **Content Metrics:**
+
 - Title tag presence & content
 - Meta description presence & content
 - H1 presence & count
@@ -208,27 +232,33 @@ interface CrawlJobRecord {
 - Text content analysis
 
 **Image Metrics:**
+
 - Total images count
 - Images missing alt text
 - Image optimization opportunities
 
 **Link Metrics:**
+
 - Internal links count
 - External links count
 - Broken links detection
 
 **Performance Metrics:**
+
 - Page load time (milliseconds)
 - HTTP status codes
 - Fetch errors
 
 **Indexability:**
+
 - Robots.txt compliance
 - Canonical tags
 - Sitemap presence
 
 ### Comprehensive Root Page Audit
+
 Additional metrics for the first page:
+
 - Overall SEO score
 - Social meta tags (Open Graph, Twitter)
 - Accessibility checks
@@ -244,6 +274,7 @@ Additional metrics for the first page:
 ### Database Schema (Prisma)
 
 **Crawl Table:**
+
 - `id` - UUID
 - `projectId` - Foreign key to Project
 - `startUrl` - Starting URL
@@ -255,6 +286,7 @@ Additional metrics for the first page:
 - `completedAt` - Timestamp
 
 **Associations:**
+
 - Each crawl belongs to a Project
 - Projects are owned by Users
 - Auto-creates projects based on domain
@@ -264,16 +296,19 @@ Additional metrics for the first page:
 ## 🚀 Performance Characteristics
 
 ### Timeouts
+
 - **Simple Crawler:** 10 seconds per page
 - **Advanced Crawler:** 12 seconds per page
 - **Overall API timeout:** 30 seconds (client-side)
 
 ### Speed
+
 - **Average:** 50-100 pages per minute
 - **Marketing claim:** < 5 minutes average crawl time
 - **Background processing:** Non-blocking for async crawler
 
 ### User Agent
+
 - Simple: `SEO-Audit-Crawler/2.0`
 - Advanced: `Mozilla/5.0 (compatible; SEO-Audit-Crawler/1.0)`
 
@@ -282,9 +317,11 @@ Additional metrics for the first page:
 ## 🎨 Frontend Implementation
 
 ### Main Component
+
 Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 
 **Key Features:**
+
 - Dynamic import (SSR disabled)
 - Loading states with progress bar
 - Progressive messages during crawl
@@ -295,6 +332,7 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 - Animations with Framer Motion
 
 ### Supporting Components
+
 1. **CrawlCapabilities** - Feature showcase
 2. **IssueDetection** - Issue types display
 3. **SiteArchitecture** - Architecture visualization
@@ -302,6 +340,7 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 5. **IntegrationOptions** - Integration possibilities
 
 ### User Experience
+
 1. Enter URL
 2. Select page limit (5, 10, or 15)
 3. Click "Start Crawling"
@@ -320,6 +359,7 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 ### Types Detected (50+ total)
 
 **Content Issues:**
+
 - Missing title tags
 - Missing H1 tags
 - Missing meta descriptions
@@ -327,11 +367,13 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 - Thin content (low word count)
 
 **Image Issues:**
+
 - Missing alt text
 - Oversized images
 - Incorrect format recommendations
 
 **Technical Issues:**
+
 - Broken links
 - Slow page load times
 - HTTP errors (4xx, 5xx)
@@ -339,6 +381,7 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 - Missing sitemap.xml
 
 **SEO Issues:**
+
 - Missing canonical tags
 - Duplicate titles
 - Missing schema markup
@@ -349,16 +392,19 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 ## 🔐 Security & Rate Limiting
 
 ### Authentication
+
 - Optional for simple crawler
 - Required for advanced crawler
 - Uses NextAuth.js session management
 
 ### Rate Limiting
+
 - Free tier: 2 site crawls per month
 - Enforced at API level
 - Returns 402 Payment Required when exceeded
 
 ### Input Validation
+
 - URL format validation
 - Scheme validation (http/https)
 - Origin checking for internal links
@@ -368,13 +414,13 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 
 ## 🎯 Marketing Claims vs Reality
 
-| Claim | Reality |
-|-------|---------|
-| "10,000+ Pages Per Crawl" | ❌ Max 200 pages (advanced), 25 (simple) |
-| "< 5min Average Crawl Time" | ✅ Realistic for small/medium sites |
-| "50+ Issue Types" | ✅ Comprehensive detection |
-| "99.9% Accuracy Rate" | ⚠️ Not verified/measured |
-| "24/7 Monitoring" | ❌ On-demand only, no continuous monitoring |
+| Claim                       | Reality                                     |
+| --------------------------- | ------------------------------------------- |
+| "10,000+ Pages Per Crawl"   | ❌ Max 200 pages (advanced), 25 (simple)    |
+| "< 5min Average Crawl Time" | ✅ Realistic for small/medium sites         |
+| "50+ Issue Types"           | ✅ Comprehensive detection                  |
+| "99.9% Accuracy Rate"       | ⚠️ Not verified/measured                    |
+| "24/7 Monitoring"           | ❌ On-demand only, no continuous monitoring |
 
 **Note:** The marketing stats in `crawl-capabilities.tsx` show "10,000+ Pages Per Crawl" but this is not currently implemented.
 
@@ -383,9 +429,11 @@ Located in: `app/features/site-crawler/site-crawler-content.tsx` (918 lines)
 ## 🔧 Configuration Files
 
 ### Help Documentation
+
 Located in: `app/help/features/site-crawler/page.tsx`
 
 **Recommended Configurations:**
+
 - **Small sites (< 100 pages):** No limit, crawl all pages
 - **Medium sites (100-1000 pages):** Max 500 pages, depth 3
 - **Large sites (> 1000 pages):** Max 1000 pages, depth 4
@@ -450,30 +498,36 @@ lib/
 ## 🚀 Recommendations for Improvement
 
 ### 1. Align Marketing with Reality
+
 - Update marketing materials to reflect actual limits (200 pages max)
 - OR implement the 10,000+ page crawling capability
 
 ### 2. Implement True Monitoring
+
 - Add scheduled crawls
 - Add webhook notifications
 - Add continuous monitoring dashboard
 
 ### 3. Improve Scalability
+
 - Move from in-memory to database job tracking
 - Add job resumption capability
 - Implement distributed crawling
 
 ### 4. Enhance Quotas
+
 - Add paid tiers with higher limits
 - Implement priority queue for paid users
 - Add crawl scheduling
 
 ### 5. Better Error Handling
+
 - Add retry logic for failed pages
 - Better timeout handling
 - Detailed error reporting
 
 ### 6. Performance Optimization
+
 - Parallel page fetching
 - Smart queue prioritization
 - Caching of common checks (robots.txt, sitemap)
@@ -483,12 +537,14 @@ lib/
 ## 📞 Routes Summary
 
 ### Working Routes
+
 1. `GET /features/site-crawler` - Main feature page
 2. `POST /api/crawl/start` - Simple crawler (up to 25 pages)
 3. `POST /api/seo-audit/site-crawl/start` - Advanced crawler (up to 200 pages)
 4. `GET /help/features/site-crawler` - Help documentation
 
 ### Legacy/Redirect Routes
+
 - `/api/legacy/crawl-start` - Redirects to `/api/crawl/start`
 
 ---
@@ -496,6 +552,7 @@ lib/
 ## 🎯 Current Capabilities Summary
 
 ✅ **Working Features:**
+
 - URL crawling up to 200 pages
 - Depth-based link following (max 5 levels)
 - SEO issue detection (50+ types)
@@ -507,6 +564,7 @@ lib/
 - Database persistence of results
 
 ❌ **Not Implemented:**
+
 - 10,000+ page crawling
 - 24/7 continuous monitoring
 - Scheduled crawls
@@ -559,6 +617,7 @@ Display Results + Export Option
 ## 🏁 Conclusion
 
 The Site Crawler feature is a **functional, well-structured tool** with:
+
 - ✅ Solid backend implementation
 - ✅ Good SEO analysis capabilities
 - ✅ User-friendly interface
@@ -572,4 +631,4 @@ The Site Crawler feature is a **functional, well-structured tool** with:
 
 ---
 
-*Document generated on October 14, 2025*
+_Document generated on October 14, 2025_

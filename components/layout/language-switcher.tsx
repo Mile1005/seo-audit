@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { usePathname, useRouter } from '@/lib/navigation';
-import { useLocale, useTranslations } from 'next-intl';
-import { locales, localeNames, type Locale } from '@/i18n';
-import { FlagIcon } from '@/components/ui/flag-icons';
-import { useSession } from 'next-auth/react';
-import { useState, useTransition } from 'react';
-import { Check } from 'lucide-react';
+import { usePathname, useRouter } from "@/lib/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { locales, localeNames, type Locale } from "@/i18n";
+import { FlagIcon } from "@/components/ui/flag-icons";
+import { useSession } from "next-auth/react";
+import { useState, useTransition } from "react";
+import { Check } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,16 +14,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { toast } from '@/components/ui/use-toast';
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 
 export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const currentLocale = useLocale() as Locale;
   const { data: session, update: updateSession } = useSession();
-  const t = useTranslations('common');
+  const t = useTranslations("common");
   const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,10 +38,10 @@ export function LanguageSwitcher() {
       try {
         // If user is logged in, update their preference in database
         if (session?.user?.email) {
-          const response = await fetch('/api/user/preferences', {
-            method: 'PATCH',
+          const response = await fetch("/api/user/preferences", {
+            method: "PATCH",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
             body: JSON.stringify({
               preferredLocale: newLocale,
@@ -49,7 +49,7 @@ export function LanguageSwitcher() {
           });
 
           if (!response.ok) {
-            console.error('Failed to update user locale preference');
+            console.error("Failed to update user locale preference");
           } else {
             // Update session to reflect new locale
             await updateSession({
@@ -66,28 +66,28 @@ export function LanguageSwitcher() {
         document.cookie = `NEXT_LOCALE=${newLocale}; path=/; max-age=31536000; SameSite=Lax`;
 
         // Navigate to the same page with new locale
-        if (newLocale === 'en') {
+        if (newLocale === "en") {
           // For English (default locale), navigate to root without locale prefix
           window.location.href = pathname;
         } else {
           router.replace(pathname, { locale: newLocale });
         }
-        
+
         // Close dropdown
         setIsOpen(false);
 
         // Show success toast
         toast({
-          title: t('languageChanged'),
+          title: t("languageChanged"),
           description: `${localeNames[newLocale]}`,
           duration: 2000,
         });
       } catch (error) {
-        console.error('Error changing language:', error);
+        console.error("Error changing language:", error);
         toast({
-          title: t('error'),
-          description: t('languageChangeFailed'),
-          variant: 'destructive',
+          title: t("error"),
+          description: t("languageChangeFailed"),
+          variant: "destructive",
         });
       }
     });
@@ -102,13 +102,15 @@ export function LanguageSwitcher() {
           className="flex items-center gap-2 h-9"
           disabled={isPending}
         >
-          <span className="inline-flex items-center"><FlagIcon locale={currentLocale} title={localeNames[currentLocale]} /></span>
+          <span className="inline-flex items-center">
+            <FlagIcon locale={currentLocale} title={localeNames[currentLocale]} />
+          </span>
           <span className="hidden md:inline">{localeNames[currentLocale]}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48">
         <DropdownMenuLabel className="text-xs font-medium text-muted-foreground">
-          {t('selectLanguage')}
+          {t("selectLanguage")}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         {locales.map((locale: Locale) => (
@@ -119,12 +121,12 @@ export function LanguageSwitcher() {
             className="flex items-center justify-between cursor-pointer"
           >
             <span className="flex items-center gap-2">
-              <span className="text-lg inline-flex items-center"><FlagIcon locale={locale} title={localeNames[locale]} /></span>
+              <span className="text-lg inline-flex items-center">
+                <FlagIcon locale={locale} title={localeNames[locale]} />
+              </span>
               <span>{localeNames[locale]}</span>
             </span>
-            {currentLocale === locale && (
-              <Check className="h-4 w-4 text-primary" />
-            )}
+            {currentLocale === locale && <Check className="h-4 w-4 text-primary" />}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

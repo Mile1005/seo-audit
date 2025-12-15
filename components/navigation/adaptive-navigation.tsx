@@ -1,65 +1,66 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect, useRef } from "react"
-import { Link, useRouter, usePathname } from "@/lib/navigation"
-import Image from "next/image"
-import { Menu, X, ChevronDown } from "lucide-react"
-import { LanguageSwitcher } from "@/components/layout/language-switcher"
-import { useTranslations } from "next-intl"
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useRouter, usePathname } from "@/lib/navigation";
+import Image from "next/image";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
+import { useTranslations } from "next-intl";
 
 // Safe translation hook with fallbacks
 function useSafeTranslations(namespace: string) {
   try {
-    return useTranslations(namespace)
+    return useTranslations(namespace);
   } catch (error) {
     // Fallback when context is not available
-    return (key: string) => key
+    return (key: string) => key;
   }
 }
 
 // Lightweight dropdown component with CSS transitions
 interface DropdownItem {
-  id: string
-  label: string
-  href: string
-  description?: string
+  id: string;
+  label: string;
+  href: string;
+  description?: string;
 }
 
 interface DesktopDropdownProps {
-  items: DropdownItem[]
-  isOpen: boolean
-  onClose: () => void
+  items: DropdownItem[];
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isOpen) return
+    if (!isOpen) return;
 
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        onClose()
+        onClose();
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [isOpen, onClose])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen, onClose]);
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div
       ref={dropdownRef}
       className={`absolute top-full left-0 mt-0 pt-2 w-80 z-50 transition-all duration-300 ${
-        isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'
+        isOpen ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-2"
       }`}
     >
       <div
         className="bg-slate-900/80 backdrop-blur-xl rounded-xl shadow-2xl border border-slate-700/50 py-3 before:absolute before:inset-0 before:rounded-xl before:bg-gradient-to-br before:from-slate-800/20 before:to-slate-900/40 before:backdrop-blur-sm"
         style={{
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+          boxShadow:
+            "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
         }}
       >
         {items.map((item) => (
@@ -73,37 +74,91 @@ function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
               {/* Feature Icon */}
               <div className="flex-shrink-0 mt-0.5">
                 {item.id === "seoAudit" && (
-                  <svg className="w-5 h-5 text-blue-400 group-hover:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-5 h-5 text-blue-400 group-hover:text-blue-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 )}
                 {item.id === "competitorAnalysis" && (
-                  <svg className="w-5 h-5 text-purple-400 group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                  <svg
+                    className="w-5 h-5 text-purple-400 group-hover:text-purple-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
                   </svg>
                 )}
                 {item.id === "keywordTracking" && (
-                  <svg className="w-5 h-5 text-green-400 group-hover:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                  <svg
+                    className="w-5 h-5 text-green-400 group-hover:text-green-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                    />
                   </svg>
                 )}
                 {item.id === "siteCrawler" && (
-                  <svg className="w-5 h-5 text-orange-400 group-hover:text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                  <svg
+                    className="w-5 h-5 text-orange-400 group-hover:text-orange-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+                    />
                   </svg>
                 )}
                 {item.id === "aiAssistant" && (
-                  <svg className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  <svg
+                    className="w-5 h-5 text-cyan-400 group-hover:text-cyan-300"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                    />
                   </svg>
                 )}
               </div>
-              
+
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <div className="font-semibold text-white group-hover:text-blue-300 transition-colors duration-200">{item.label}</div>
+                <div className="font-semibold text-white group-hover:text-blue-300 transition-colors duration-200">
+                  {item.label}
+                </div>
                 {item.description && (
-                  <div className="text-sm text-slate-300 group-hover:text-slate-200 mt-1 leading-relaxed">{item.description}</div>
+                  <div className="text-sm text-slate-300 group-hover:text-slate-200 mt-1 leading-relaxed">
+                    {item.description}
+                  </div>
                 )}
               </div>
             </div>
@@ -112,179 +167,187 @@ function DesktopDropdown({ items, isOpen, onClose }: DesktopDropdownProps) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export interface NavigationItem {
-  id: string
-  label: string
-  href: string
-  description?: string
+  id: string;
+  label: string;
+  href: string;
+  description?: string;
 }
 
 export interface NavigationSection {
-  label: string
-  href?: string
-  items?: NavigationItem[]
+  label: string;
+  href?: string;
+  items?: NavigationItem[];
 }
 
 function useNavigationData(): NavigationSection[] {
-  const t = useSafeTranslations('nav')
+  const t = useSafeTranslations("nav");
   return [
     {
-      label: t('features'),
+      label: t("features"),
       items: [
         {
-          id: 'seoAudit',
-          label: t('menu.features.items.seoAudit.title'),
-          href: '/features/seo-audit',
-          description: t('menu.features.items.seoAudit.desc')
+          id: "seoAudit",
+          label: t("menu.features.items.seoAudit.title"),
+          href: "/features/seo-audit",
+          description: t("menu.features.items.seoAudit.desc"),
         },
         {
-          id: 'competitorAnalysis',
-          label: t('menu.features.items.competitorAnalysis.title'),
-          href: '/features/competitor-analysis',
-          description: t('menu.features.items.competitorAnalysis.desc')
+          id: "competitorAnalysis",
+          label: t("menu.features.items.competitorAnalysis.title"),
+          href: "/features/competitor-analysis",
+          description: t("menu.features.items.competitorAnalysis.desc"),
         },
         {
-          id: 'keywordTracking',
-          label: t('menu.features.items.keywordTracking.title'),
-          href: '/features/keyword-tracking',
-          description: t('menu.features.items.keywordTracking.desc')
+          id: "keywordTracking",
+          label: t("menu.features.items.keywordTracking.title"),
+          href: "/features/keyword-tracking",
+          description: t("menu.features.items.keywordTracking.desc"),
         },
         {
-          id: 'siteCrawler',
-          label: t('menu.features.items.siteCrawler.title'),
-          href: '/features/site-crawler',
-          description: t('menu.features.items.siteCrawler.desc')
+          id: "siteCrawler",
+          label: t("menu.features.items.siteCrawler.title"),
+          href: "/features/site-crawler",
+          description: t("menu.features.items.siteCrawler.desc"),
         },
         {
-          id: 'aiAssistant',
-          label: t('menu.features.items.aiAssistant.title'),
-          href: '/features/ai-assistant',
-          description: t('menu.features.items.aiAssistant.desc')
-        }
-      ]
+          id: "aiAssistant",
+          label: t("menu.features.items.aiAssistant.title"),
+          href: "/features/ai-assistant",
+          description: t("menu.features.items.aiAssistant.desc"),
+        },
+      ],
     },
-    { label: t('pricing'), href: '/pricing' },
-    { label: t('about'), href: '/about' },
-    { label: t('contact'), href: '/contact' }
-  ]
+    { label: t("pricing"), href: "/pricing" },
+    { label: t("about"), href: "/about" },
+    { label: t("contact"), href: "/contact" },
+  ];
 }
 
 // Safe router hook that handles missing intl context
 function useSafeRouter() {
   try {
-    return useRouter()
+    return useRouter();
   } catch (error) {
     // Return a fallback router-like object when context is missing
     return {
-      push: (href: string) => { window.location.href = href },
-      replace: (href: string) => { window.location.replace(href) },
+      push: (href: string) => {
+        window.location.href = href;
+      },
+      replace: (href: string) => {
+        window.location.replace(href);
+      },
       prefetch: () => {},
-      back: () => { window.history.back() },
-      forward: () => { window.history.forward() },
-    }
+      back: () => {
+        window.history.back();
+      },
+      forward: () => {
+        window.history.forward();
+      },
+    };
   }
 }
 
 // Safe pathname hook
 function useSafePathname() {
   try {
-    return usePathname()
+    return usePathname();
   } catch (error) {
     // Return current pathname from window if available
-    if (typeof window !== 'undefined') {
-      return window.location.pathname
+    if (typeof window !== "undefined") {
+      return window.location.pathname;
     }
-    return '/'
+    return "/";
   }
 }
 
 export function AdaptiveNavigation() {
-  const t = useSafeTranslations('nav')
-  const navigationData = useNavigationData()
-  const [isOpen, setIsOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [isMounted, setIsMounted] = useState(false)
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null)
-  const pathname = useSafePathname()
-  const router = useSafeRouter()
+  const t = useSafeTranslations("nav");
+  const navigationData = useNavigationData();
+  const [isOpen, setIsOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const pathname = useSafePathname();
+  const router = useSafeRouter();
   // Deduplicate touch + click sequences to avoid double toggle
-  const lastTouchToggleTs = useRef<number>(0)
+  const lastTouchToggleTs = useRef<number>(0);
 
   useEffect(() => {
-    setIsMounted(true)
-  }, [])
+    setIsMounted(true);
+  }, []);
 
   // Close dropdown on scroll (only on desktop, not when mobile menu is open)
   useEffect(() => {
     const handleScroll = () => {
       // Only close dropdown on scroll if we're on desktop (mobile menu is closed)
       if (openDropdown && !isOpen) {
-        setOpenDropdown(null)
+        setOpenDropdown(null);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [openDropdown, isOpen])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [openDropdown, isOpen]);
 
   // Close mobile menu AFTER route changes (prevents closing before navigation)
   useEffect(() => {
     // When the pathname changes, ensure the mobile menu is closed
     if (isOpen || openDropdown) {
-      setIsOpen(false)
-      setOpenDropdown(null)
+      setIsOpen(false);
+      setOpenDropdown(null);
     }
-  }, [pathname])
+  }, [pathname]);
 
   // Close mobile submenu with Escape and close menu on outside tap
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (openDropdown) setOpenDropdown(null)
-        else if (isOpen) setIsOpen(false)
+      if (e.key === "Escape") {
+        if (openDropdown) setOpenDropdown(null);
+        else if (isOpen) setIsOpen(false);
       }
-    }
+    };
 
     const onDocClick = (e: MouseEvent | TouchEvent) => {
-      if (!isOpen) return
-      const target = e.target as HTMLElement
-      
+      if (!isOpen) return;
+      const target = e.target as HTMLElement;
+
       // Don't close if clicking inside the mobile menu
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
-        closeMenu()
+        closeMenu();
       }
-    }
+    };
 
-    document.addEventListener('keydown', onKeyDown)
-    document.addEventListener('mousedown', onDocClick)
-    document.addEventListener('touchstart', onDocClick) // Add touch support
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("touchstart", onDocClick); // Add touch support
     return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.removeEventListener('mousedown', onDocClick)
-      document.removeEventListener('touchstart', onDocClick) // Remove touch listener
-    }
-  }, [isOpen, openDropdown])
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("touchstart", onDocClick); // Remove touch listener
+    };
+  }, [isOpen, openDropdown]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen)
+    setIsOpen(!isOpen);
     // Reset dropdown when closing menu
     if (isOpen) {
-      setOpenDropdown(null)
+      setOpenDropdown(null);
     }
-  }
+  };
 
   const closeMenu = () => {
-    setIsOpen(false)
-    setOpenDropdown(null)
-  }
+    setIsOpen(false);
+    setOpenDropdown(null);
+  };
 
   const toggleDropdown = (label: string) => {
     // Functional updater avoids stale state in rapid taps
-    setOpenDropdown((prev) => (prev === label ? null : label))
-  }
+    setOpenDropdown((prev) => (prev === label ? null : label));
+  };
 
   if (!isMounted) {
     return (
@@ -293,21 +356,21 @@ export function AdaptiveNavigation() {
           <div className="flex justify-between items-center h-16 sm:h-18 md:h-20 lg:h-20">
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center">
-                <Image 
-                  src="/logo.png" 
-                  alt="AI SEO Turbo" 
-                  width={180} 
+                <Image
+                  src="/logo.png"
+                  alt="AI SEO Turbo"
+                  width={180}
                   height={48}
                   priority
                   className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
-                  style={{ width: 'auto' }}
+                  style={{ width: "auto" }}
                 />
               </Link>
             </div>
           </div>
         </div>
       </nav>
-    )
+    );
   }
 
   return (
@@ -316,18 +379,18 @@ export function AdaptiveNavigation() {
         <div className="flex justify-between items-center h-16 sm:h-18 md:h-20 lg:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="flex items-center hover:opacity-80 transition-opacity duration-200"
             >
-              <Image 
-                src="/logo.png" 
-                alt="AI SEO Turbo Home" 
-                width={180} 
+              <Image
+                src="/logo.png"
+                alt="AI SEO Turbo Home"
+                width={180}
                 height={48}
                 priority
                 className="h-12 sm:h-14 md:h-16 lg:h-16 w-auto"
-                style={{ width: 'auto' }}
+                style={{ width: "auto" }}
               />
             </Link>
           </div>
@@ -338,7 +401,7 @@ export function AdaptiveNavigation() {
               {navigationData.map((section) => (
                 <div key={section.label} className="relative">
                   {section.items ? (
-                    <div 
+                    <div
                       className="relative"
                       onMouseEnter={() => setOpenDropdown(section.label)}
                       onMouseLeave={() => setOpenDropdown(null)}
@@ -348,11 +411,13 @@ export function AdaptiveNavigation() {
                         className="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center"
                       >
                         {section.label}
-                        <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                          openDropdown === section.label ? 'rotate-180' : ''
-                        }`} />
+                        <ChevronDown
+                          className={`ml-1 h-4 w-4 transition-transform duration-200 ${
+                            openDropdown === section.label ? "rotate-180" : ""
+                          }`}
+                        />
                       </button>
-                      
+
                       <DesktopDropdown
                         items={section.items}
                         isOpen={openDropdown === section.label}
@@ -379,13 +444,13 @@ export function AdaptiveNavigation() {
               href="/login"
               className="relative group text-white hover:text-blue-400 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 border border-slate-600/50 hover:border-blue-400/70 backdrop-blur-sm hover:bg-slate-800/30 hover:shadow-lg hover:shadow-blue-500/20"
             >
-              <span className="relative z-10">{t('login')}</span>
+              <span className="relative z-10">{t("login")}</span>
             </Link>
             <Link
               href="/signup"
               className="relative group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 shadow-lg shadow-blue-600/25 hover:shadow-xl hover:shadow-blue-500/30 hover:scale-105 border border-blue-500/20"
             >
-              <span className="relative z-10">{t('signup')}</span>
+              <span className="relative z-10">{t("signup")}</span>
               <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </Link>
             <Link
@@ -394,9 +459,14 @@ export function AdaptiveNavigation() {
             >
               <span className="relative z-10 flex items-center">
                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
                 </svg>
-                {t('cta.freeAudit')}
+                {t("cta.freeAudit")}
               </span>
               <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
             </Link>
@@ -408,20 +478,20 @@ export function AdaptiveNavigation() {
               type="button"
               onPointerDown={(e) => {
                 // Close/open immediately on tap down for snappy UX on mobile
-                e.preventDefault()
-                e.stopPropagation()
+                e.preventDefault();
+                e.stopPropagation();
                 if (isOpen) {
-                  setIsOpen(false)
-                  setOpenDropdown(null)
+                  setIsOpen(false);
+                  setOpenDropdown(null);
                 } else {
-                  setIsOpen(true)
+                  setIsOpen(true);
                 }
               }}
-              style={{ touchAction: 'manipulation' }}
+              style={{ touchAction: "manipulation" }}
               className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700 transition-colors duration-200"
               aria-expanded={isOpen}
             >
-              <span className="sr-only">{t('openMenu')}</span>
+              <span className="sr-only">{t("openMenu")}</span>
               {isOpen ? (
                 <X className="block h-6 w-6" aria-hidden="true" />
               ) : (
@@ -432,11 +502,17 @@ export function AdaptiveNavigation() {
         </div>
 
         {/* Mobile Menu - Fixed height to prevent layout shift */}
-        <div ref={mobileMenuRef} className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        }`} style={{ minHeight: isOpen ? '200px' : '0px' }}>
+        <div
+          ref={mobileMenuRef}
+          className={`md:hidden transition-all duration-300 overflow-hidden ${
+            isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+          style={{ minHeight: isOpen ? "200px" : "0px" }}
+        >
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-slate-900/50 rounded-b-lg">
-            <div className="px-3 py-2"><LanguageSwitcher /></div>
+            <div className="px-3 py-2">
+              <LanguageSwitcher />
+            </div>
             {navigationData.map((section) => (
               <div key={section.label}>
                 {section.items ? (
@@ -444,74 +520,76 @@ export function AdaptiveNavigation() {
                     <button
                       type="button"
                       aria-expanded={openDropdown === section.label}
-                      aria-controls={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
+                      aria-controls={`submenu-${section.label.toLowerCase().replace(/\s+/g, "-")}`}
                       onClick={(e) => {
-                        e.stopPropagation()
+                        e.stopPropagation();
                         // If a touch just occurred, ignore the synthetic click
-                        if (Date.now() - lastTouchToggleTs.current < 350) return
-                        toggleDropdown(section.label)
+                        if (Date.now() - lastTouchToggleTs.current < 350) return;
+                        toggleDropdown(section.label);
                       }}
                       onTouchEnd={(e) => {
                         // Support touch devices explicitly
-                        e.stopPropagation()
-                        e.preventDefault()
-                        lastTouchToggleTs.current = Date.now()
-                        toggleDropdown(section.label)
+                        e.stopPropagation();
+                        e.preventDefault();
+                        lastTouchToggleTs.current = Date.now();
+                        toggleDropdown(section.label);
                       }}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          toggleDropdown(section.label)
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          toggleDropdown(section.label);
                         }
                       }}
-                      style={{ touchAction: 'manipulation' }}
+                      style={{ touchAction: "manipulation" }}
                       className="text-slate-300 hover:text-white hover:bg-slate-800/50 px-3 py-2 text-base font-medium w-full text-left transition-colors duration-200 rounded-md flex items-center justify-between active:bg-slate-800"
                     >
                       <span>{section.label}</span>
                       <ChevronDown
                         aria-hidden="true"
                         className={`h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
-                          openDropdown === section.label ? 'rotate-180 text-blue-400' : 'text-slate-400'
+                          openDropdown === section.label
+                            ? "rotate-180 text-blue-400"
+                            : "text-slate-400"
                         }`}
                         onClick={(e) => {
                           // If tapping the chevron, toggle without triggering the parent again
-                          e.stopPropagation()
-                          if (Date.now() - lastTouchToggleTs.current < 350) return
-                          toggleDropdown(section.label)
+                          e.stopPropagation();
+                          if (Date.now() - lastTouchToggleTs.current < 350) return;
+                          toggleDropdown(section.label);
                         }}
                         onTouchEnd={(e) => {
-                          e.stopPropagation()
-                          e.preventDefault()
-                          lastTouchToggleTs.current = Date.now()
-                          toggleDropdown(section.label)
+                          e.stopPropagation();
+                          e.preventDefault();
+                          lastTouchToggleTs.current = Date.now();
+                          toggleDropdown(section.label);
                         }}
                       />
                     </button>
 
                     {/* Submenu: fully clickable with proper touch support */}
                     <div
-                      id={`submenu-${section.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      className={`${openDropdown === section.label ? 'block' : 'hidden'} pl-4 mt-1 space-y-1`}
-                      style={{ 
-                        pointerEvents: openDropdown === section.label ? 'auto' : 'none',
-                        touchAction: 'manipulation'
+                      id={`submenu-${section.label.toLowerCase().replace(/\s+/g, "-")}`}
+                      className={`${openDropdown === section.label ? "block" : "hidden"} pl-4 mt-1 space-y-1`}
+                      style={{
+                        pointerEvents: openDropdown === section.label ? "auto" : "none",
+                        touchAction: "manipulation",
                       }}
                     >
                       {section.items.map((item) => (
                         <button
                           key={item.href}
                           className="text-slate-400 hover:text-white hover:bg-slate-800/30 active:bg-slate-800/50 block px-3 py-2.5 text-sm transition-colors duration-200 rounded-md w-full text-left"
-                          style={{ touchAction: 'manipulation' }}
+                          style={{ touchAction: "manipulation" }}
                           onClick={(e) => {
                             // Stop bubbling to any outside-click handlers
-                            e.stopPropagation()
+                            e.stopPropagation();
                             // Navigate first; menu will close via pathname effect
-                            router.push(item.href)
+                            router.push(item.href);
                           }}
                           onTouchEnd={(e) => {
                             // Ensure touch devices trigger navigation reliably
-                            e.stopPropagation()
-                            router.push(item.href)
+                            e.stopPropagation();
+                            router.push(item.href);
                           }}
                         >
                           {item.label}
@@ -530,7 +608,7 @@ export function AdaptiveNavigation() {
                 )}
               </div>
             ))}
-            
+
             {/* Mobile Auth Links */}
             <div className="pt-4 mt-4 border-t border-slate-700/50">
               <Link
@@ -538,14 +616,14 @@ export function AdaptiveNavigation() {
                 className="relative group text-white hover:text-blue-400 block px-4 py-3 text-base font-semibold transition-all duration-300 border border-slate-600/50 hover:border-blue-400/70 rounded-lg mb-3 backdrop-blur-sm hover:bg-slate-800/30"
                 onClick={closeMenu}
               >
-                <span className="relative z-10">{t('login')}</span>
+                <span className="relative z-10">{t("login")}</span>
               </Link>
               <Link
                 href="/signup"
                 className="relative group bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white block px-4 py-3 rounded-lg text-base font-semibold transition-all duration-300 shadow-lg shadow-blue-600/25 mb-3 border border-blue-500/20"
                 onClick={closeMenu}
               >
-                <span className="relative z-10">{t('signup')}</span>
+                <span className="relative z-10">{t("signup")}</span>
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-400 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </Link>
               <Link
@@ -554,10 +632,20 @@ export function AdaptiveNavigation() {
                 onClick={closeMenu}
               >
                 <span className="relative z-10 flex items-center">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg
+                    className="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
-                  {t('cta.freeAudit')}
+                  {t("cta.freeAudit")}
                 </span>
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
               </Link>
@@ -566,5 +654,5 @@ export function AdaptiveNavigation() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

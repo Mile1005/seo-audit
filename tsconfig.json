@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "Bundler",
@@ -18,24 +14,12 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/hooks/*": [
-        "hooks/*"
-      ],
-      "@/auth": [
-        "auth"
-      ],
-      "@/auth/*": [
-        "auth/*"
-      ]
+      "@/*": ["./*"],
+      "@/lib/*": ["lib/*"],
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/auth": ["auth"],
+      "@/auth/*": ["auth/*"]
     },
     "allowJs": true,
     "esModuleInterop": true,
@@ -48,7 +32,7 @@
   "include": [
     "app/**/*.ts",
     "app/**/*.tsx",
-    "components/**/*.ts", 
+    "components/**/*.ts",
     "components/**/*.tsx",
     "lib/**/*.ts",
     "lib/**/*.tsx",

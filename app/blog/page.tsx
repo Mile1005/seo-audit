@@ -1,32 +1,90 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { Calendar, Clock, User, ArrowRight, Search, Tag, TrendingUp, BookOpen, Star } from 'lucide-react'
-import Link from 'next/link'
-import { StructuredData, generateItemListSchema } from '@/components/seo/StructuredData'
-import { useTranslations, useLocale } from 'next-intl'
-import { useState, useMemo } from 'react'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  Clock,
+  User,
+  ArrowRight,
+  Search,
+  Tag,
+  TrendingUp,
+  BookOpen,
+  Star,
+} from "lucide-react";
+import Link from "next/link";
+import { StructuredData, generateItemListSchema } from "@/components/seo/StructuredData";
+import { useTranslations, useLocale } from "next-intl";
+import { useState, useMemo } from "react";
 
 export default function BlogPage() {
-  const t = useTranslations('blogPage')
-  const locale = useLocale()
+  const t = useTranslations("blogPage");
+  const locale = useLocale();
 
   // State for search and filtering
-  const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Blog posts with translation keys
   const blogPostsConfig = [
-    { id: 1, key: 'completeAudit', slug: 'complete-seo-audit-checklist-2025', featured: true, views: '2.4k', likes: 156, image: '/blog/seo-audit-checklist.webp' },
-    { id: 2, key: 'aiPowered', slug: 'ai-powered-seo-future', featured: false, views: '1.8k', likes: 89, image: '/blog/seo-audit-checklist.webp' },
-    { id: 3, key: 'coreWebVitals', slug: 'core-web-vitals-optimization-guide', featured: false, views: '3.2k', likes: 203, image: '/blog/seo-audit-checklist.webp' },
-    { id: 4, key: 'technicalSEO', slug: 'technical-seo-best-practices-2025', featured: false, views: '1.9k', likes: 127, image: '/blog/seo-audit-checklist.webp' },
-    { id: 5, key: 'localSEO', slug: 'local-seo-strategies-that-work', featured: false, views: '2.1k', likes: 144, image: '/blog/seo-audit-checklist.webp' },
-    { id: 6, key: 'contentSEO', slug: 'content-seo-creating-search-friendly-content', featured: false, views: '2.7k', likes: 189, image: '/blog/seo-audit-checklist.webp' }
-  ]
+    {
+      id: 1,
+      key: "completeAudit",
+      slug: "complete-seo-audit-checklist-2025",
+      featured: true,
+      views: "2.4k",
+      likes: 156,
+      image: "/blog/seo-audit-checklist.webp",
+    },
+    {
+      id: 2,
+      key: "aiPowered",
+      slug: "ai-powered-seo-future",
+      featured: false,
+      views: "1.8k",
+      likes: 89,
+      image: "/blog/seo-audit-checklist.webp",
+    },
+    {
+      id: 3,
+      key: "coreWebVitals",
+      slug: "core-web-vitals-optimization-guide",
+      featured: false,
+      views: "3.2k",
+      likes: 203,
+      image: "/blog/seo-audit-checklist.webp",
+    },
+    {
+      id: 4,
+      key: "technicalSEO",
+      slug: "technical-seo-best-practices-2025",
+      featured: false,
+      views: "1.9k",
+      likes: 127,
+      image: "/blog/seo-audit-checklist.webp",
+    },
+    {
+      id: 5,
+      key: "localSEO",
+      slug: "local-seo-strategies-that-work",
+      featured: false,
+      views: "2.1k",
+      likes: 144,
+      image: "/blog/seo-audit-checklist.webp",
+    },
+    {
+      id: 6,
+      key: "contentSEO",
+      slug: "content-seo-creating-search-friendly-content",
+      featured: false,
+      views: "2.7k",
+      likes: 189,
+      image: "/blog/seo-audit-checklist.webp",
+    },
+  ];
 
-  const blogPosts = blogPostsConfig.map(config => ({
+  const blogPosts = blogPostsConfig.map((config) => ({
     id: config.id,
     slug: config.slug,
     title: t(`posts.${config.key}.title`),
@@ -38,81 +96,83 @@ export default function BlogPage() {
     featured: config.featured,
     views: config.views,
     likes: config.likes,
-    image: config.image
-  }))
+    image: config.image,
+  }));
 
-  const featuredPost = blogPosts.find(post => post.featured)
-  const regularPosts = blogPosts.filter(post => !post.featured)
+  const featuredPost = blogPosts.find((post) => post.featured);
+  const regularPosts = blogPosts.filter((post) => !post.featured);
 
   // Filter posts based on search and category
   const filteredPosts = useMemo(() => {
-    return regularPosts.filter(post => {
+    return regularPosts.filter((post) => {
       // Search filter
-      const matchesSearch = searchQuery === '' ||
+      const matchesSearch =
+        searchQuery === "" ||
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.category.toLowerCase().includes(searchQuery.toLowerCase())
+        post.category.toLowerCase().includes(searchQuery.toLowerCase());
 
       // Category filter
-      const matchesCategory = selectedCategory === 'all' ||
-        (selectedCategory === 'technical-seo' && post.category === 'Technical SEO') ||
-        (selectedCategory === 'ai-seo' && post.category === 'AI & SEO') ||
-        (selectedCategory === 'performance' && post.category === 'Performance') ||
-        (selectedCategory === 'local-seo' && post.category === 'Local SEO') ||
-        (selectedCategory === 'content-seo' && post.category === 'Content SEO')
+      const matchesCategory =
+        selectedCategory === "all" ||
+        (selectedCategory === "technical-seo" && post.category === "Technical SEO") ||
+        (selectedCategory === "ai-seo" && post.category === "AI & SEO") ||
+        (selectedCategory === "performance" && post.category === "Performance") ||
+        (selectedCategory === "local-seo" && post.category === "Local SEO") ||
+        (selectedCategory === "content-seo" && post.category === "Content SEO");
 
-      return matchesSearch && matchesCategory
-    })
-  }, [regularPosts, searchQuery, selectedCategory])
+      return matchesSearch && matchesCategory;
+    });
+  }, [regularPosts, searchQuery, selectedCategory]);
 
   // Update categories with dynamic counts based on filtered posts
   const dynamicCategories = useMemo(() => {
     const baseCategories = [
-      { name: t('categories.allPosts'), key: 'all', color: 'blue' },
-      { name: t('categories.technicalSEO'), key: 'technical-seo', color: 'purple' },
-      { name: t('categories.aiSEO'), key: 'ai-seo', color: 'emerald' },
-      { name: t('categories.performance'), key: 'performance', color: 'orange' },
-      { name: t('categories.localSEO'), key: 'local-seo', color: 'red' },
-      { name: t('categories.contentSEO'), key: 'content-seo', color: 'yellow' }
-    ]
+      { name: t("categories.allPosts"), key: "all", color: "blue" },
+      { name: t("categories.technicalSEO"), key: "technical-seo", color: "purple" },
+      { name: t("categories.aiSEO"), key: "ai-seo", color: "emerald" },
+      { name: t("categories.performance"), key: "performance", color: "orange" },
+      { name: t("categories.localSEO"), key: "local-seo", color: "red" },
+      { name: t("categories.contentSEO"), key: "content-seo", color: "yellow" },
+    ];
 
-    return baseCategories.map(category => {
-      let count = 0
-      if (category.key === 'all') {
-        count = regularPosts.length
+    return baseCategories.map((category) => {
+      let count = 0;
+      if (category.key === "all") {
+        count = regularPosts.length;
       } else {
-        count = regularPosts.filter(post => {
-          if (category.key === 'technical-seo') return post.category === 'Technical SEO'
-          if (category.key === 'ai-seo') return post.category === 'AI & SEO'
-          if (category.key === 'performance') return post.category === 'Performance'
-          if (category.key === 'local-seo') return post.category === 'Local SEO'
-          if (category.key === 'content-seo') return post.category === 'Content SEO'
-          return false
-        }).length
+        count = regularPosts.filter((post) => {
+          if (category.key === "technical-seo") return post.category === "Technical SEO";
+          if (category.key === "ai-seo") return post.category === "AI & SEO";
+          if (category.key === "performance") return post.category === "Performance";
+          if (category.key === "local-seo") return post.category === "Local SEO";
+          if (category.key === "content-seo") return post.category === "Content SEO";
+          return false;
+        }).length;
       }
-      return { ...category, count }
-    })
-  }, [regularPosts, t])
+      return { ...category, count };
+    });
+  }, [regularPosts, t]);
 
   // Generate ItemList schema for all blog posts (using fixed dates for schema)
   const blogPostDates: Record<string, string> = {
-    'complete-seo-audit-checklist-2025': '2025-03-15',
-    'ai-powered-seo-future': '2025-03-10',
-    'core-web-vitals-optimization-guide': '2025-03-05',
-    'technical-seo-best-practices-2025': '2025-02-28',
-    'local-seo-strategies-that-work': '2025-02-20',
-    'content-seo-creating-search-friendly-content': '2025-02-15'
-  }
+    "complete-seo-audit-checklist-2025": "2025-03-15",
+    "ai-powered-seo-future": "2025-03-10",
+    "core-web-vitals-optimization-guide": "2025-03-05",
+    "technical-seo-best-practices-2025": "2025-02-28",
+    "local-seo-strategies-that-work": "2025-02-20",
+    "content-seo-creating-search-friendly-content": "2025-02-15",
+  };
 
   const itemListSchema = generateItemListSchema(
-    blogPosts.map(post => ({
+    blogPosts.map((post) => ({
       name: post.title,
-      url: `https://www.aiseoturbo.com/${locale === 'en' ? '' : locale + '/'}blog/${post.slug}`,
+      url: `https://www.aiseoturbo.com/${locale === "en" ? "" : locale + "/"}blog/${post.slug}`,
       description: post.excerpt,
       image: `https://www.aiseoturbo.com/logo.png`,
-      datePublished: new Date(blogPostDates[post.slug]).toISOString()
+      datePublished: new Date(blogPostDates[post.slug]).toISOString(),
     }))
-  )
+  );
 
   return (
     <MainLayout>
@@ -130,7 +190,7 @@ export default function BlogPage() {
               transition={{
                 duration: 20,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"
             />
@@ -142,7 +202,7 @@ export default function BlogPage() {
               transition={{
                 duration: 25,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"
             />
@@ -157,14 +217,15 @@ export default function BlogPage() {
             >
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-6 border border-blue-500/20">
                 <BookOpen className="w-4 h-4 mr-2" />
-                {t('hero.badge')}
+                {t("hero.badge")}
               </div>
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                {t('hero.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">{t('hero.titleHighlight')}</span>
+                {t("hero.title")}{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                  {t("hero.titleHighlight")}
+                </span>
               </h1>
-              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                {t('hero.subtitle')}
-              </p>
+              <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">{t("hero.subtitle")}</p>
 
               {/* Search Bar */}
               <motion.div
@@ -177,7 +238,7 @@ export default function BlogPage() {
                   <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
                     type="text"
-                    placeholder={t('hero.searchPlaceholder')}
+                    placeholder={t("hero.searchPlaceholder")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-12 pr-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
@@ -199,8 +260,8 @@ export default function BlogPage() {
                   onClick={() => setSelectedCategory(category.key)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:scale-105 ${
                     selectedCategory === category.key
-                      ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                      : 'bg-white/10 text-gray-300 border border-white/20 hover:bg-white/20 hover:text-white'
+                      ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                      : "bg-white/10 text-gray-300 border border-white/20 hover:bg-white/20 hover:text-white"
                   }`}
                 >
                   {category.name} ({category.count})
@@ -222,10 +283,16 @@ export default function BlogPage() {
               >
                 <div className="flex items-center mb-6">
                   <Star className="w-5 h-5 text-yellow-400 mr-2" />
-                  <span className="text-yellow-400 font-semibold">{t('featured.badge')}</span>
+                  <span className="text-yellow-400 font-semibold">{t("featured.badge")}</span>
                 </div>
 
-                <Link href={locale === 'en' ? `/blog/${featuredPost.slug}` : `/${locale}/blog/${featuredPost.slug}`}>
+                <Link
+                  href={
+                    locale === "en"
+                      ? `/blog/${featuredPost.slug}`
+                      : `/${locale}/blog/${featuredPost.slug}`
+                  }
+                >
                   <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300 group cursor-pointer">
                     <div className="grid lg:grid-cols-2 gap-8">
                       {/* Content */}
@@ -236,7 +303,7 @@ export default function BlogPage() {
                           </span>
                           <div className="flex items-center text-gray-400 text-sm">
                             <TrendingUp className="w-4 h-4 mr-1" />
-                            {featuredPost.views} {t('featured.views')}
+                            {featuredPost.views} {t("featured.views")}
                           </div>
                         </div>
 
@@ -266,7 +333,7 @@ export default function BlogPage() {
                         </div>
 
                         <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25">
-                          {t('featured.readArticle')}
+                          {t("featured.readArticle")}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </div>
                       </div>
@@ -299,7 +366,10 @@ export default function BlogPage() {
             >
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((post, index) => (
-                  <Link key={post.id} href={locale === 'en' ? `/blog/${post.slug}` : `/${locale}/blog/${post.slug}`}>
+                  <Link
+                    key={post.id}
+                    href={locale === "en" ? `/blog/${post.slug}` : `/${locale}/blog/${post.slug}`}
+                  >
                     <motion.article
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -318,13 +388,19 @@ export default function BlogPage() {
 
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-3">
-                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                            post.category === 'Technical SEO' ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20' :
-                            post.category === 'AI & SEO' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                            post.category === 'Performance' ? 'bg-orange-500/10 text-orange-400 border border-orange-500/20' :
-                            post.category === 'Local SEO' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-                            'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'
-                          }`}>
+                          <span
+                            className={`px-2 py-1 text-xs font-medium rounded-full ${
+                              post.category === "Technical SEO"
+                                ? "bg-purple-500/10 text-purple-400 border border-purple-500/20"
+                                : post.category === "AI & SEO"
+                                  ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                                  : post.category === "Performance"
+                                    ? "bg-orange-500/10 text-orange-400 border border-orange-500/20"
+                                    : post.category === "Local SEO"
+                                      ? "bg-red-500/10 text-red-400 border border-red-500/20"
+                                      : "bg-yellow-500/10 text-yellow-400 border border-yellow-500/20"
+                            }`}
+                          >
                             {post.category}
                           </span>
                           <div className="flex items-center text-gray-400 text-xs">
@@ -337,9 +413,7 @@ export default function BlogPage() {
                           {post.title}
                         </h3>
 
-                        <p className="text-muted-foreground mb-4 line-clamp-3">
-                          {post.excerpt}
-                        </p>
+                        <p className="text-muted-foreground mb-4 line-clamp-3">{post.excerpt}</p>
 
                         <div className="flex items-center justify-between text-sm text-muted-foreground">
                           <div className="flex items-center">
@@ -369,17 +443,16 @@ export default function BlogPage() {
                   <Search className="w-16 h-16 mx-auto mb-4 text-gray-400" />
                   <h3 className="text-xl font-semibold text-gray-300 mb-2">No posts found</h3>
                   <p className="text-gray-400">
-                    {searchQuery && selectedCategory !== 'all'
-                      ? `No posts match "${searchQuery}" in ${dynamicCategories.find(c => c.key === selectedCategory)?.name.toLowerCase()}`
+                    {searchQuery && selectedCategory !== "all"
+                      ? `No posts match "${searchQuery}" in ${dynamicCategories.find((c) => c.key === selectedCategory)?.name.toLowerCase()}`
                       : searchQuery
-                      ? `No posts match "${searchQuery}"`
-                      : `No posts found in ${dynamicCategories.find(c => c.key === selectedCategory)?.name.toLowerCase()}`
-                    }
+                        ? `No posts match "${searchQuery}"`
+                        : `No posts found in ${dynamicCategories.find((c) => c.key === selectedCategory)?.name.toLowerCase()}`}
                   </p>
                   <button
                     onClick={() => {
-                      setSearchQuery('')
-                      setSelectedCategory('all')
+                      setSearchQuery("");
+                      setSelectedCategory("all");
                     }}
                     className="mt-4 px-4 py-2 bg-blue-500/20 text-blue-400 rounded-lg hover:bg-blue-500/30 transition-colors"
                   >
@@ -401,30 +474,26 @@ export default function BlogPage() {
               className="text-center bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 md:p-12"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                {t('newsletter.title')}
+                {t("newsletter.title")}
               </h2>
-              <p className="text-muted-foreground text-lg mb-8">
-                {t('newsletter.subtitle')}
-              </p>
+              <p className="text-muted-foreground text-lg mb-8">{t("newsletter.subtitle")}</p>
 
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <input
                   type="email"
-                  placeholder={t('newsletter.emailPlaceholder')}
+                  placeholder={t("newsletter.emailPlaceholder")}
                   className="flex-1 px-4 py-3 bg-background border border-border rounded-xl focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20"
                 />
                 <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-600/25">
-                  {t('newsletter.subscribeButton')}
+                  {t("newsletter.subscribeButton")}
                 </button>
               </div>
 
-              <p className="text-xs text-muted-foreground mt-4">
-                {t('newsletter.disclaimer')}
-              </p>
+              <p className="text-xs text-muted-foreground mt-4">{t("newsletter.disclaimer")}</p>
             </motion.div>
           </div>
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

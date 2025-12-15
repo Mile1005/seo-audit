@@ -1,127 +1,281 @@
 "use client";
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Zap, Monitor, Layers, Clock, Users, BarChart3 } from 'lucide-react';
-import { PerformanceMetrics } from '../../lib/types/audit';
+import React, { useEffect, useMemo, useState } from "react";
 
-interface Props { metrics: PerformanceMetrics }
+import { GlassCard } from "../ui/GlassCard";
+import { ScoreCircle } from "./ScoreCircle";
+import { cn } from "@/lib/utils";
+import { Zap, Monitor, Layers, Clock, Users, BarChart3, MousePointerClick } from "lucide-react";
+import type { PerformanceMetrics } from "../../lib/types/audit";
 
-const thresholdMap: Record<string, [number, number]> = {
-  fcp: [1.8,3.0],
-  lcp:[2.5,4.0],
-  cls:[0.1,0.25],
-  tbt:[200,600],
-  si:[3.4,5.8]
-};
-
-function rating(metric: string, value: number){
-  const t = thresholdMap[metric];
-  if(!t) return 'good';
-  if (value <= t[0]) return 'good';
-  if (value <= t[1]) return 'needs-improvement';
-  return 'poor';
-}
-function color(r: string){
-  if (r==='good') return 'text-green-500';
-  if (r==='needs-improvement') return 'text-yellow-500';
-  return 'text-red-500';
-}
-function badgeVariant(r:string){
-  if(r==='good') return 'default';
-  if(r==='needs-improvement') return 'secondary';
-  return 'destructive';
+interface Props {
+  metrics: PerformanceMetrics;
 }
 
-export const CoreWebVitalsGrid = ({ metrics }: Props) => {
-  const metricCards = [
-    { title: "First Contentful Paint", icon: <Zap className="h-4 w-4" />, value: `${metrics.first_contentful_paint.toFixed(1)}s`, ratingKey: "fcp", raw: metrics.first_contentful_paint },
-    { title: "Largest Contentful Paint", icon: <Monitor className="h-4 w-4" />, value: `${metrics.largest_contentful_paint.toFixed(1)}s`, ratingKey: "lcp", raw: metrics.largest_contentful_paint },
-    { title: "Cumulative Layout Shift", icon: <Layers className="h-4 w-4" />, value: metrics.cumulative_layout_shift.toFixed(3), ratingKey: "cls", raw: metrics.cumulative_layout_shift },
-    { title: "Total Blocking Time", icon: <Clock className="h-4 w-4" />, value: `${metrics.total_blocking_time.toFixed(0)}ms`, ratingKey: "tbt", raw: metrics.total_blocking_time },
-    { title: "Time To Interactive", icon: <Users className="h-4 w-4" />, value: `${metrics.time_to_interactive.toFixed(1)}s`, info: true },
-    { title: "Speed Index", icon: <BarChart3 className="h-4 w-4" />, value: `${metrics.speed_index.toFixed(1)}s`, ratingKey: "si", raw: metrics.speed_index }
-  ];
+type VitalStatus = "good" | "warning" | "poor";
+
+const thresholds = {
+  fcp: [1.8, 3.0] as const,
+  lcp: [2.5, 4.0] as const,
+  cls: [0.1, 0.25] as const,
+  tbt: [200, 600] as const,
+  si: [3.4, 5.8] as const,
+  tti: [3.8, 7.3] as const,
+  fid: [100, 300] as const,
+} as const;
+
+function clamp(n: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, n));
+}
+
+function statusFromThreshold(value: number, [good, warning]: readonly [number, number]): VitalStatus {
+  if (value <= good) return "good";
+  if (value <= warning) return "warning";
+  return "poor";
+}
+
+function scoreFromLowerIsBetter(value: number, [good, warning]: readonly [number, number]) {
+  if (!Number.isFinite(value)) return 0;
+  if (value <= good) {
+    // Reward being under the good threshold without making everything 100.
+    const ratio = clamp(value / good, 0, 1);
+    return Math.round(90 + (1 - ratio) * 10);
+  }
+  if (value <= warning) {
+    const t = (value - good) / (warning - good);
+    return Math.round(90 - t * 25); // 90 → 65
+  }
+  const worst = warning * 2;
+  const t = (value - warning) / Math.max(1e-6, worst - warning);
+  return Math.round(clamp(65 - t * 65, 0, 65));
+}
+
+function ringStroke(status: VitalStatus) {
+  if (status === "good") return "stroke-emerald-400";
+  if (status === "warning") return "stroke-amber-400";
+  return "stroke-rose-400";
+}
+
+function statusLabel(status: VitalStatus) {
+  if (status === "good") return "Good";
+  if (status === "warning") return "Needs improvement";
+  return "Poor";
+}
+
+function formatSeconds(value: number) {
+  if (!Number.isFinite(value)) return "—";
+  return `${value.toFixed(1)}s`;
+}
+
+function formatMs(value: number) {
+  if (!Number.isFinite(value)) return "—";
+  return `${Math.round(value)}ms`;
+}
+
+function formatCls(value: number) {
+  if (!Number.isFinite(value)) return "—";
+  return value.toFixed(3);
+}
+
+interface MetricDef {
+  key: string;
+  label: string;
+  icon: React.ReactNode;
+  value: number;
+  display: string;
+  threshold?: readonly [number, number];
+  hint: string;
+}
+
+function useRingMountAnimation(enabled: boolean) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    if (!enabled) return;
+    const id = window.requestAnimationFrame(() => setMounted(true));
+    return () => window.cancelAnimationFrame(id);
+  }, [enabled]);
+  return mounted;
+}
+
+const Ring: React.FC<{ score: number; status: VitalStatus; value: string; animated?: boolean }> = ({
+  score,
+  status,
+  value,
+  animated = true,
+}) => {
+  const radius = 44;
+  const circumference = 2 * Math.PI * radius;
+  const normalized = useMemo(() => clamp(score, 0, 100), [score]);
+  const dashOffset = circumference - (normalized / 100) * circumference;
+
+  const mounted = useRingMountAnimation(animated);
+  const resolved = animated ? (mounted ? dashOffset : circumference) : dashOffset;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {metricCards.map((card, index) => (
-        <MetricCard 
-          key={card.title}
-          index={index}
-          {...card}
+    <div className="relative w-24 h-24">
+      <svg className="w-full h-full -rotate-90" aria-hidden="true">
+        <circle
+          cx="50%"
+          cy="50%"
+          r={radius}
+          className="stroke-white/10"
+          strokeWidth={5}
+          fill="none"
         />
-      ))}
+        <circle
+          cx="50%"
+          cy="50%"
+          r={radius}
+          className={cn(ringStroke(status), "transition-all duration-1000")}
+          strokeWidth={5}
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={resolved}
+          strokeLinecap="round"
+          style={{ transition: animated ? "stroke-dashoffset 1s ease-in-out" : "none" }}
+        />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-sm font-semibold text-white">{value}</span>
+      </div>
     </div>
   );
 };
 
-interface MetricCardProps { title: string; icon: React.ReactNode; value: string; ratingKey?: string; raw?: number; info?: boolean; index: number }
-const MetricCard = ({ title, icon, value, ratingKey, raw, info, index }: MetricCardProps) => {
-  const r = ratingKey && raw!==undefined ? rating(ratingKey, raw) : undefined;
-  
-  // Get gradient colors based on rating
-  const getCardStyle = (rating?: string) => {
-    if (rating === 'good') return 'bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/10 dark:to-emerald-900/10 border-2 border-green-200 dark:border-green-700';
-    if (rating === 'needs-improvement') return 'bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/10 dark:to-orange-900/10 border-2 border-yellow-200 dark:border-yellow-700';
-    if (rating === 'poor') return 'bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/10 dark:to-rose-900/10 border-2 border-red-200 dark:border-red-700';
-    return 'bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/10 dark:to-indigo-900/10 border-2 border-blue-200 dark:border-blue-700';
-  };
-
-  const getIconColor = (rating?: string) => {
-    if (rating === 'good') return 'bg-green-500';
-    if (rating === 'needs-improvement') return 'bg-yellow-500';
-    if (rating === 'poor') return 'bg-red-500';
-    return 'bg-blue-500';
-  };
-
-  const getTitleColor = (rating?: string) => {
-    if (rating === 'good') return 'text-green-900 dark:text-green-100';
-    if (rating === 'needs-improvement') return 'text-yellow-900 dark:text-yellow-100';
-    if (rating === 'poor') return 'text-red-900 dark:text-red-100';
-    return 'text-blue-900 dark:text-blue-100';
-  };
-
-  const getHoverGlow = (rating?: string) => {
-    if (rating === 'good') return 'hover:shadow-green-500/30';
-    if (rating === 'needs-improvement') return 'hover:shadow-yellow-500/30';
-    if (rating === 'poor') return 'hover:shadow-red-500/30';
-    return 'hover:shadow-blue-500/30';
-  };
+export const CoreWebVitalsGrid = ({ metrics }: Props) => {
+  const metricDefs: MetricDef[] = useMemo(
+    () => [
+      {
+        key: "fcp",
+        label: "First Contentful Paint",
+        icon: <Zap className="h-4 w-4 text-sky-300" />,
+        value: metrics.first_contentful_paint,
+        display: formatSeconds(metrics.first_contentful_paint),
+        threshold: thresholds.fcp,
+        hint: "Fast first paint improves perceived speed.",
+      },
+      {
+        key: "lcp",
+        label: "Largest Contentful Paint",
+        icon: <Monitor className="h-4 w-4 text-sky-300" />,
+        value: metrics.largest_contentful_paint,
+        display: formatSeconds(metrics.largest_contentful_paint),
+        threshold: thresholds.lcp,
+        hint: "Main content should load quickly.",
+      },
+      {
+        key: "cls",
+        label: "Cumulative Layout Shift",
+        icon: <Layers className="h-4 w-4 text-sky-300" />,
+        value: metrics.cumulative_layout_shift,
+        display: formatCls(metrics.cumulative_layout_shift),
+        threshold: thresholds.cls,
+        hint: "Unexpected layout shifts reduce usability.",
+      },
+      {
+        key: "tbt",
+        label: "Total Blocking Time",
+        icon: <Clock className="h-4 w-4 text-sky-300" />,
+        value: metrics.total_blocking_time,
+        display: formatMs(metrics.total_blocking_time),
+        threshold: thresholds.tbt,
+        hint: "Long main-thread tasks block interactions.",
+      },
+      {
+        key: "tti",
+        label: "Time to Interactive",
+        icon: <Users className="h-4 w-4 text-sky-300" />,
+        value: metrics.time_to_interactive,
+        display: formatSeconds(metrics.time_to_interactive),
+        threshold: thresholds.tti,
+        hint: "When the page becomes reliably interactive.",
+      },
+      {
+        key: "si",
+        label: "Speed Index",
+        icon: <BarChart3 className="h-4 w-4 text-sky-300" />,
+        value: metrics.speed_index,
+        display: formatSeconds(metrics.speed_index),
+        threshold: thresholds.si,
+        hint: "How quickly content is visually displayed.",
+      },
+      {
+        key: "fid",
+        label: "Max Potential FID",
+        icon: <MousePointerClick className="h-4 w-4 text-sky-300" />,
+        value: metrics.max_potential_first_input_delay,
+        display: formatMs(metrics.max_potential_first_input_delay),
+        threshold: thresholds.fid,
+        hint: "A proxy for input responsiveness under load.",
+      },
+    ],
+    [metrics]
+  );
 
   return (
-    <div className="cursor-pointer">
-      <Card className={`${getCardStyle(r)} ${getHoverGlow(r)} transition-shadow duration-200 hover:shadow-lg`}>
-        <CardHeader className="pb-4">
-          <CardTitle className={`text-lg font-bold flex items-center gap-3 ${getTitleColor(r)}`}>
-            <div className={`p-2 ${getIconColor(r)} rounded-lg`}>
-              <div className="text-white">{icon}</div>
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <GlassCard className="lg:col-span-4" hover>
+        <div className="flex items-start justify-between gap-6">
+          <div className="space-y-2">
+            <div className="text-sm font-medium text-white/60">Lighthouse performance</div>
+            <div className="text-xl font-semibold text-white">Overall score</div>
+            <div className="text-sm text-white/55">
+              Lab metrics from the audit run (not field data).
             </div>
-            <span>{title}</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className={`text-3xl font-bold ${r ? color(r) : 'text-blue-600 dark:text-blue-400'}`}>
-            {value}
           </div>
-          <div className="flex justify-center">
-            {r ? (
-              <Badge 
-                variant={badgeVariant(r)} 
-                className="text-sm font-medium px-3 py-1 capitalize"
-              >
-                {r === 'needs-improvement' ? 'Needs Improvement' : r}
-              </Badge>
-            ) : (
-              <Badge 
-                variant="outline" 
-                className="text-sm font-medium px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700"
-              >
-                Informational
-              </Badge>
-            )}
+          <ScoreCircle score={metrics.performance_score} size="lg" label="Score" />
+        </div>
+
+        <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <div className="text-xs text-white/60">FCP</div>
+            <div className="text-sm font-semibold text-white">{formatSeconds(metrics.first_contentful_paint)}</div>
           </div>
-        </CardContent>
-      </Card>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <div className="text-xs text-white/60">LCP</div>
+            <div className="text-sm font-semibold text-white">
+              {formatSeconds(metrics.largest_contentful_paint)}
+            </div>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <div className="text-xs text-white/60">CLS</div>
+            <div className="text-sm font-semibold text-white">{formatCls(metrics.cumulative_layout_shift)}</div>
+          </div>
+          <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+            <div className="text-xs text-white/60">TBT</div>
+            <div className="text-sm font-semibold text-white">{formatMs(metrics.total_blocking_time)}</div>
+          </div>
+        </div>
+      </GlassCard>
+
+      <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {metricDefs.map((m) => {
+          const threshold = m.threshold;
+          const status = threshold ? statusFromThreshold(m.value, threshold) : "good";
+          const score = threshold ? scoreFromLowerIsBetter(m.value, threshold) : 0;
+
+          return (
+            <GlassCard key={m.key} variant="interactive" className="p-5" hover>
+              <div className="flex items-start justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/8 border border-white/10">
+                      {m.icon}
+                    </span>
+                    <div className="text-sm font-semibold text-white">{m.label}</div>
+                  </div>
+                  <div className="text-xs text-white/55">{m.hint}</div>
+                </div>
+                <Ring score={score} status={status} value={m.display} />
+              </div>
+
+              <div className="mt-4 flex items-center justify-between">
+                <div className="text-xs text-white/55">Status</div>
+                <div className="text-xs font-medium text-white/70">{statusLabel(status)}</div>
+              </div>
+            </GlassCard>
+          );
+        })}
+      </div>
     </div>
   );
 };

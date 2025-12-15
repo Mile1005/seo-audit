@@ -1,22 +1,22 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { X, Download, CheckSquare, ArrowRight, Gift } from "lucide-react"
-import { useLeadCapture } from "../../hooks/use-lead-capture"
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Download, CheckSquare, ArrowRight, Gift } from "lucide-react";
+import { useLeadCapture } from "../../hooks/use-lead-capture";
 
 export interface ExitIntentModalProps {
-  isEnabled?: boolean
-  onClose?: () => void
+  isEnabled?: boolean;
+  onClose?: () => void;
   offer?: {
-    title: string
-    subtitle: string
-    benefits: string[]
-    ctaText: string
-  }
+    title: string;
+    subtitle: string;
+    benefits: string[];
+    ctaText: string;
+  };
 }
 
-export function ExitIntentModal({ 
+export function ExitIntentModal({
   isEnabled = true,
   onClose,
   offer = {
@@ -24,145 +24,143 @@ export function ExitIntentModal({
     subtitle: "Get our 47-point checklist that helped 1000+ websites increase traffic by 40%",
     benefits: [
       "Technical SEO audit checklist (15 critical points)",
-      "Content optimization framework (12 proven strategies)", 
+      "Content optimization framework (12 proven strategies)",
       "Local SEO essentials (10 must-have optimizations)",
-      "Performance optimization guide (10 speed boosters)"
+      "Performance optimization guide (10 speed boosters)",
     ],
-    ctaText: "Get My Free Checklist"
-  }
+    ctaText: "Get My Free Checklist",
+  },
 }: ExitIntentModalProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const [email, setEmail] = useState('')
-  const [hasTriggered, setHasTriggered] = useState(false)
-  const [result, setResult] = useState<{ success: boolean; message: string } | null>(null)
-  const modalRef = useRef<HTMLDivElement>(null)
-  const emailInputRef = useRef<HTMLInputElement>(null)
+  const [isVisible, setIsVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [hasTriggered, setHasTriggered] = useState(false);
+  const [result, setResult] = useState<{ success: boolean; message: string } | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
 
   const { submitLead, isSubmitting } = useLeadCapture({
-    source: 'exit-intent-modal',
+    source: "exit-intent-modal",
     onSuccess: () => {
-      setResult({ success: true, message: 'Perfect! Check your email for the checklist.' })
-      setEmail('')
+      setResult({ success: true, message: "Perfect! Check your email for the checklist." });
+      setEmail("");
       // Auto-close after success
       setTimeout(() => {
-        handleClose()
-      }, 3000)
+        handleClose();
+      }, 3000);
     },
     onError: (error) => {
-      setResult({ success: false, message: error })
-    }
-  })
+      setResult({ success: false, message: error });
+    },
+  });
 
   // Desktop: Mouse exit detection
-  const handleMouseLeave = useCallback((e: MouseEvent) => {
-    if (
-      !hasTriggered && 
-      isEnabled && 
-      e.clientY <= 0 && 
-      e.relatedTarget === null
-    ) {
-      setIsVisible(true)
-      setHasTriggered(true)
-      
-      // Store that user has seen the modal
-      localStorage.setItem('exit-intent-shown', Date.now().toString())
-    }
-  }, [hasTriggered, isEnabled])
+  const handleMouseLeave = useCallback(
+    (e: MouseEvent) => {
+      if (!hasTriggered && isEnabled && e.clientY <= 0 && e.relatedTarget === null) {
+        setIsVisible(true);
+        setHasTriggered(true);
+
+        // Store that user has seen the modal
+        localStorage.setItem("exit-intent-shown", Date.now().toString());
+      }
+    },
+    [hasTriggered, isEnabled]
+  );
 
   // Mobile: Scroll depth detection (80% of page)
   const handleScroll = useCallback(() => {
-    if (hasTriggered || !isEnabled) return
+    if (hasTriggered || !isEnabled) return;
 
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight
-    const scrollPercent = (scrollTop / scrollHeight) * 100
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / scrollHeight) * 100;
 
     // Trigger at 80% scroll depth on mobile
     if (scrollPercent >= 80 && window.innerWidth <= 768) {
-      setIsVisible(true)
-      setHasTriggered(true)
-      localStorage.setItem('exit-intent-shown', Date.now().toString())
+      setIsVisible(true);
+      setHasTriggered(true);
+      localStorage.setItem("exit-intent-shown", Date.now().toString());
     }
-  }, [hasTriggered, isEnabled])
+  }, [hasTriggered, isEnabled]);
 
   // Check if modal was recently shown
   const checkRecentlyShown = useCallback((): boolean => {
-    const lastShown = localStorage.getItem('exit-intent-shown')
+    const lastShown = localStorage.getItem("exit-intent-shown");
     if (lastShown) {
-      const daysSinceShown = (Date.now() - parseInt(lastShown)) / (1000 * 60 * 60 * 24)
-      return daysSinceShown < 7 // Don't show again for 7 days
+      const daysSinceShown = (Date.now() - parseInt(lastShown)) / (1000 * 60 * 60 * 24);
+      return daysSinceShown < 7; // Don't show again for 7 days
     }
-    return false
-  }, [])
+    return false;
+  }, []);
 
   useEffect(() => {
-    if (!isEnabled || checkRecentlyShown()) return
+    if (!isEnabled || checkRecentlyShown()) return;
 
     // Add event listeners
-    document.addEventListener('mouseleave', handleMouseLeave)
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [handleMouseLeave, handleScroll, isEnabled, checkRecentlyShown])
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleMouseLeave, handleScroll, isEnabled, checkRecentlyShown]);
 
   // Focus management
   useEffect(() => {
     if (isVisible && emailInputRef.current) {
       // Small delay to ensure modal is fully rendered
       setTimeout(() => {
-        emailInputRef.current?.focus()
-      }, 100)
+        emailInputRef.current?.focus();
+      }, 100);
     }
-  }, [isVisible])
+  }, [isVisible]);
 
   const handleClose = useCallback(() => {
-    setIsVisible(false)
-    onClose?.()
-  }, [onClose])
+    setIsVisible(false);
+    onClose?.();
+  }, [onClose]);
 
   // Escape key handler
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isVisible) {
-        handleClose()
+      if (e.key === "Escape" && isVisible) {
+        handleClose();
       }
-    }
+    };
 
     if (isVisible) {
-      document.addEventListener('keydown', handleEscape)
+      document.addEventListener("keydown", handleEscape);
       // Prevent body scroll
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isVisible, handleClose])
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
+    };
+  }, [isVisible, handleClose]);
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
-      handleClose()
+      handleClose();
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     if (!email.trim()) {
-      setResult({ success: false, message: 'Please enter your email address' })
-      emailInputRef.current?.focus()
-      return
+      setResult({ success: false, message: "Please enter your email address" });
+      emailInputRef.current?.focus();
+      return;
     }
 
-    await submitLead(email.trim(), { 
+    await submitLead(email.trim(), {
       offer: offer.title,
-      source_detail: 'exit-intent-modal'
-    })
-  }
+      source_detail: "exit-intent-modal",
+    });
+  };
 
   return (
     <AnimatePresence>
@@ -205,11 +203,10 @@ export function ExitIntentModal({
                 <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full mx-auto mb-6">
                   <Download className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">
-                  Perfect! Check Your Email
-                </h3>
+                <h3 className="text-2xl font-bold text-white mb-4">Perfect! Check Your Email</h3>
                 <p className="text-gray-300 mb-6">
-                  Your free SEO checklist is on its way. The download link will arrive in your inbox within 2 minutes.
+                  Your free SEO checklist is on its way. The download link will arrive in your inbox
+                  within 2 minutes.
                 </p>
                 <div className="flex items-center justify-center space-x-2 text-sm text-green-400">
                   <CheckSquare className="w-4 h-4" />
@@ -225,11 +222,17 @@ export function ExitIntentModal({
                     <Gift className="w-6 h-6 text-white" />
                   </div>
 
-                  <h2 id="exit-modal-title" className="text-xl lg:text-2xl font-bold text-white text-center mb-2">
+                  <h2
+                    id="exit-modal-title"
+                    className="text-xl lg:text-2xl font-bold text-white text-center mb-2"
+                  >
                     {offer.title}
                   </h2>
-                  
-                  <p id="exit-modal-description" className="text-gray-300 text-center text-sm lg:text-base">
+
+                  <p
+                    id="exit-modal-description"
+                    className="text-gray-300 text-center text-sm lg:text-base"
+                  >
                     {offer.subtitle}
                   </p>
                 </div>
@@ -248,9 +251,7 @@ export function ExitIntentModal({
                         <div className="flex-shrink-0 w-5 h-5 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mt-0.5">
                           <CheckSquare className="w-3 h-3 text-white" />
                         </div>
-                        <span className="text-gray-300 text-sm leading-relaxed">
-                          {benefit}
-                        </span>
+                        <span className="text-gray-300 text-sm leading-relaxed">{benefit}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -258,7 +259,12 @@ export function ExitIntentModal({
 
                 {/* Form */}
                 <div className="p-6 pt-2">
-                  <form onSubmit={handleSubmit} action="/api/lead-capture" method="POST" className="space-y-4">
+                  <form
+                    onSubmit={handleSubmit}
+                    action="/api/lead-capture"
+                    method="POST"
+                    className="space-y-4"
+                  >
                     <div className="relative">
                       <input
                         ref={emailInputRef}
@@ -277,7 +283,7 @@ export function ExitIntentModal({
                       {result && !result.success && (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
+                          animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           id="exit-modal-error"
                           className="flex items-center space-x-2 text-red-400 text-sm"
@@ -324,5 +330,5 @@ export function ExitIntentModal({
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

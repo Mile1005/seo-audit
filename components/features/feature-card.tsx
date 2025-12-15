@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, ChevronUp } from "lucide-react"
-import { useTranslations } from 'next-intl'
-import type { Feature } from "../../data/features"
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { Feature } from "../../data/features";
 
 interface FeatureCardProps {
-  feature: Feature
-  index: number
+  feature: Feature;
+  index: number;
 }
 
 export function FeatureCard({ feature, index }: FeatureCardProps) {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const t = useTranslations()
+  const [isExpanded, setIsExpanded] = useState(false);
+  const t = useTranslations();
 
-  const IconComponent = feature.icon
+  const IconComponent = feature.icon;
 
   return (
     <motion.div
@@ -23,11 +23,11 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       whileHover={{ y: -8, scale: 1.02 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        duration: 0.6, 
+      transition={{
+        duration: 0.6,
         delay: index * 0.1,
         type: "spring",
-        stiffness: 100
+        stiffness: 100,
       }}
       className="group cursor-pointer"
       onClick={() => setIsExpanded(!isExpanded)}
@@ -36,10 +36,7 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
         {/* Icon */}
         <div className="mb-4">
           <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
-            <IconComponent 
-              className="w-6 h-6 text-white" 
-              aria-hidden="true"
-            />
+            <IconComponent className="w-6 h-6 text-white" aria-hidden="true" />
           </div>
         </div>
 
@@ -51,9 +48,7 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
           </h3>
 
           {/* Benefit */}
-          <p className="text-gray-300 text-sm leading-relaxed">
-            {t(feature.benefit)}
-          </p>
+          <p className="text-gray-300 text-sm leading-relaxed">{t(feature.benefit)}</p>
 
           {/* Expand Button */}
           <button
@@ -62,11 +57,7 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
             aria-controls={`feature-details-${feature.id}`}
           >
             <span>Learn more</span>
-            {isExpanded ? (
-              <ChevronUp className="w-4 h-4" />
-            ) : (
-              <ChevronDown className="w-4 h-4" />
-            )}
+            {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
 
           {/* Expanded Details */}
@@ -81,9 +72,7 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
                 className="overflow-hidden"
               >
                 <div className="pt-2 border-t border-slate-700/50">
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {t(feature.details)}
-                  </p>
+                  <p className="text-gray-400 text-sm leading-relaxed">{t(feature.details)}</p>
                 </div>
               </motion.div>
             )}
@@ -91,5 +80,5 @@ export function FeatureCard({ feature, index }: FeatureCardProps) {
         </div>
       </div>
     </motion.div>
-  )
+  );
 }

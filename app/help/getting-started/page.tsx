@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, Lightbulb, ArrowRight, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, Lightbulb, ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const categoryArticles = [
   {
@@ -11,30 +11,30 @@ const categoryArticles = [
     href: "/help/getting-started/first-audit",
     time: "5 min",
     description: "Get started with your first comprehensive SEO audit in just a few clicks.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Setting up your dashboard",
     href: "/help/getting-started/dashboard-setup",
     time: "3 min",
     description: "Customize your dashboard and learn the interface for optimal workflow.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Understanding SEO scores",
     href: "/help/getting-started/seo-scores",
     time: "7 min",
     description: "Learn what your SEO scores mean and how to interpret audit results.",
-    icon: BookOpen
+    icon: BookOpen,
   },
   {
     title: "Quick start guide",
     href: "/help/getting-started/quick-start",
     time: "10 min",
     description: "Complete guide to get up and running with AI SEO Turbo in minutes.",
-    icon: Lightbulb
-  }
-]
+    icon: Lightbulb,
+  },
+];
 
 export default function GettingStartedPage() {
   return (
@@ -52,8 +52,8 @@ export default function GettingStartedPage() {
             </Link>
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Getting Started</h1>
             <p className="text-xl text-gray-600 max-w-3xl">
-              Welcome to AI SEO Turbo! Get started with comprehensive SEO audits, competitor analysis,
-              and AI-powered insights to boost your website's search performance.
+              Welcome to AI SEO Turbo! Get started with comprehensive SEO audits, competitor
+              analysis, and AI-powered insights to boost your website's search performance.
             </p>
           </div>
 
@@ -155,5 +155,5 @@ export default function GettingStartedPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

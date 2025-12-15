@@ -3,54 +3,70 @@
  * Auto-generates realistic demo data when keywords are added
  */
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 // Realistic competitor domains
 const COMPETITOR_DOMAINS = [
-  'semrush.com',
-  'ahrefs.com',
-  'moz.com',
-  'serpstat.com',
-  'spyfu.com',
-  'ubersuggest.com',
-  'majestic.com',
-  'mangools.com',
-  'seranking.com',
-  'brightlocal.com',
-  'screaming-frog.com',
-  'sitebulb.com',
-  'raven-tools.com',
-  'conductor.com',
-  'searchmetrics.com'
+  "semrush.com",
+  "ahrefs.com",
+  "moz.com",
+  "serpstat.com",
+  "spyfu.com",
+  "ubersuggest.com",
+  "majestic.com",
+  "mangools.com",
+  "seranking.com",
+  "brightlocal.com",
+  "screaming-frog.com",
+  "sitebulb.com",
+  "raven-tools.com",
+  "conductor.com",
+  "searchmetrics.com",
 ];
 
 const COUNTRIES = [
-  { code: 'US', name: 'United States', cities: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'] },
-  { code: 'GB', name: 'United Kingdom', cities: ['London', 'Manchester', 'Birmingham', 'Leeds', 'Glasgow'] },
-  { code: 'CA', name: 'Canada', cities: ['Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Ottawa'] },
-  { code: 'AU', name: 'Australia', cities: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide'] },
-  { code: 'DE', name: 'Germany', cities: ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne'] },
-  { code: 'FR', name: 'France', cities: ['Paris', 'Lyon', 'Marseille', 'Toulouse', 'Nice'] },
-  { code: 'ES', name: 'Spain', cities: ['Madrid', 'Barcelona', 'Valencia', 'Seville', 'Bilbao'] },
-  { code: 'IT', name: 'Italy', cities: ['Rome', 'Milan', 'Naples', 'Turin', 'Florence'] },
-  { code: 'NL', name: 'Netherlands', cities: ['Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven'] },
-  { code: 'IN', name: 'India', cities: ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai'] }
+  {
+    code: "US",
+    name: "United States",
+    cities: ["New York", "Los Angeles", "Chicago", "Houston", "Miami"],
+  },
+  {
+    code: "GB",
+    name: "United Kingdom",
+    cities: ["London", "Manchester", "Birmingham", "Leeds", "Glasgow"],
+  },
+  { code: "CA", name: "Canada", cities: ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa"] },
+  {
+    code: "AU",
+    name: "Australia",
+    cities: ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide"],
+  },
+  { code: "DE", name: "Germany", cities: ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne"] },
+  { code: "FR", name: "France", cities: ["Paris", "Lyon", "Marseille", "Toulouse", "Nice"] },
+  { code: "ES", name: "Spain", cities: ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao"] },
+  { code: "IT", name: "Italy", cities: ["Rome", "Milan", "Naples", "Turin", "Florence"] },
+  {
+    code: "NL",
+    name: "Netherlands",
+    cities: ["Amsterdam", "Rotterdam", "The Hague", "Utrecht", "Eindhoven"],
+  },
+  { code: "IN", name: "India", cities: ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai"] },
 ];
 
-const DEVICES = ['DESKTOP', 'MOBILE', 'TABLET'] as const;
+const DEVICES = ["DESKTOP", "MOBILE", "TABLET"] as const;
 
 const SERP_FEATURES = [
-  'featured-snippet',
-  'local-pack',
-  'people-also-ask',
-  'image-pack',
-  'video-results',
-  'shopping-results',
-  'knowledge-panel',
-  'site-links',
-  'reviews-ratings',
-  'top-stories',
-  'carousel'
+  "featured-snippet",
+  "local-pack",
+  "people-also-ask",
+  "image-pack",
+  "video-results",
+  "shopping-results",
+  "knowledge-panel",
+  "site-links",
+  "reviews-ratings",
+  "top-stories",
+  "carousel",
 ];
 
 /**
@@ -58,9 +74,21 @@ const SERP_FEATURES = [
  */
 function getCTRByPosition(position: number): number {
   const ctrMap: Record<number, number> = {
-    1: 31.7, 2: 24.7, 3: 18.7, 4: 13.6, 5: 9.5,
-    6: 6.3, 7: 4.3, 8: 3.1, 9: 2.4, 10: 1.9,
-    11: 1.5, 12: 1.2, 13: 1.0, 14: 0.9, 15: 0.8
+    1: 31.7,
+    2: 24.7,
+    3: 18.7,
+    4: 13.6,
+    5: 9.5,
+    6: 6.3,
+    7: 4.3,
+    8: 3.1,
+    9: 2.4,
+    10: 1.9,
+    11: 1.5,
+    12: 1.2,
+    13: 1.0,
+    14: 0.9,
+    15: 0.8,
   };
   return ctrMap[position] || 0.5;
 }
@@ -90,12 +118,13 @@ export async function seedKeyword(
       // Add realistic fluctuation (±2 positions)
       const fluctuation = Math.floor(Math.random() * 5) - 2;
       const position = Math.max(1, Math.min(50, basePosition + fluctuation));
-      const previousRank: number = i < 89 ? positions[positions.length - 1]?.position || position : position;
+      const previousRank: number =
+        i < 89 ? positions[positions.length - 1]?.position || position : position;
       const change = previousRank - position;
 
       // Generate SERP features (MORE ACTIVE FEATURES for rich display)
       const serpFeatures: Record<string, boolean> = {};
-      SERP_FEATURES.forEach(feature => {
+      SERP_FEATURES.forEach((feature) => {
         // 70% chance of being present (was 50% before)
         serpFeatures[feature] = Math.random() > 0.3;
       });
@@ -105,18 +134,18 @@ export async function seedKeyword(
         position,
         previousRank,
         change,
-        url: 'https://yourdomain.com/blog/seo-guide',
-        featured: serpFeatures['featured-snippet'],
-        localPack: serpFeatures['local-pack'],
+        url: "https://yourdomain.com/blog/seo-guide",
+        featured: serpFeatures["featured-snippet"],
+        localPack: serpFeatures["local-pack"],
         serpFeatures: JSON.stringify(serpFeatures),
         location: COUNTRIES[Math.floor(Math.random() * COUNTRIES.length)].name,
         device: DEVICES[Math.floor(Math.random() * DEVICES.length)],
-        checkedAt: date
+        checkedAt: date,
       });
     }
 
     await prisma.keywordPosition.createMany({
-      data: positions
+      data: positions,
     });
     console.log(`  ✅ Created ${positions.length} position records`);
 
@@ -127,7 +156,7 @@ export async function seedKeyword(
 
     for (let i = 0; i < competitorCount && usedDomains.size < competitorCount; i++) {
       const domain = COMPETITOR_DOMAINS[Math.floor(Math.random() * COMPETITOR_DOMAINS.length)];
-      
+
       if (usedDomains.has(domain)) continue;
       usedDomains.add(domain);
 
@@ -140,22 +169,22 @@ export async function seedKeyword(
         domain,
         url: `https://${domain}/`,
         position,
-        title: `${keyword} - ${domain.split('.')[0]}`,
+        title: `${keyword} - ${domain.split(".")[0]}`,
         domainRating,
-        backlinks
+        backlinks,
       });
     }
 
     if (competitors.length > 0) {
       await prisma.keywordCompetitor.createMany({
-        data: competitors
+        data: competitors,
       });
       console.log(`  ✅ Created ${competitors.length} competitor records`);
     }
 
     // 3. Generate multi-location rankings (ALL countries × ALL cities × 3 devices = RICH DATA!)
     const locationRankings = [];
-    
+
     for (const country of COUNTRIES) {
       // Add country-level rankings for each device
       for (const device of DEVICES) {
@@ -168,10 +197,10 @@ export async function seedKeyword(
           position: clampedPosition,
           previousRank: clampedPosition - change,
           change,
-          url: 'https://yourdomain.com/blog/seo-guide',
+          url: "https://yourdomain.com/blog/seo-guide",
           location: country.name,
           device,
-          checkedAt: new Date()
+          checkedAt: new Date(),
         });
       }
 
@@ -187,35 +216,38 @@ export async function seedKeyword(
             position: clampedPosition,
             previousRank: clampedPosition - change,
             change,
-            url: 'https://yourdomain.com/blog/seo-guide',
+            url: "https://yourdomain.com/blog/seo-guide",
             location: `${city}, ${country.name}`,
             device,
-            checkedAt: new Date()
+            checkedAt: new Date(),
           });
         }
       }
     }
 
     await prisma.keywordPosition.createMany({
-      data: locationRankings
+      data: locationRankings,
     });
-    console.log(`  ✅ Created ${locationRankings.length} location-specific rankings (countries + cities)`);
+    console.log(
+      `  ✅ Created ${locationRankings.length} location-specific rankings (countries + cities)`
+    );
 
     // 4. Generate alert configurations
-    const alertTypes = ['ranking_drop', 'ranking_gain', 'traffic_drop', 'serp_feature'];
-    const alerts = alertTypes.map(type => ({
+    const alertTypes = ["ranking_drop", "ranking_gain", "traffic_drop", "serp_feature"];
+    const alerts = alertTypes.map((type) => ({
       projectId,
       keywordId,
       type,
-      threshold: type.includes('drop') ? -3 : 3,
+      threshold: type.includes("drop") ? -3 : 3,
       isActive: true,
       emailEnabled: true,
       slackEnabled: false,
-      lastTriggered: Math.random() > 0.5 ? new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000) : null
+      lastTriggered:
+        Math.random() > 0.5 ? new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000) : null,
     }));
 
     await prisma.rankingAlert.createMany({
-      data: alerts
+      data: alerts,
     });
     console.log(`  ✅ Created ${alerts.length} alert configurations`);
 
@@ -240,7 +272,7 @@ export async function seedKeywords(
   }>
 ) {
   console.log(`🌱 Batch seeding ${keywords.length} keywords...`);
-  
+
   const results = [];
   for (const kw of keywords) {
     const basePosition = 5 + Math.floor(Math.random() * 10); // Random position 5-15
@@ -255,8 +287,8 @@ export async function seedKeywords(
     results.push({ keyword: kw.keyword, success });
   }
 
-  const successCount = results.filter(r => r.success).length;
+  const successCount = results.filter((r) => r.success).length;
   console.log(`✅ Seeded ${successCount}/${keywords.length} keywords successfully`);
-  
+
   return results;
 }

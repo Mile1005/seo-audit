@@ -24,9 +24,16 @@ export interface AuditStats {
   lists_count?: number;
 }
 
-export interface HeadingTags { h1: string[]; h2: string[]; h3: string[] }
+export interface HeadingTags {
+  h1: string[];
+  h2: string[];
+  h3: string[];
+}
 
-export interface CheckGroup { passed_checks: string[]; failed_checks: string[] }
+export interface CheckGroup {
+  passed_checks: string[];
+  failed_checks: string[];
+}
 
 export interface PerformanceMetrics {
   first_contentful_paint: number;
@@ -42,7 +49,7 @@ export interface PerformanceMetrics {
 export interface Issue {
   title: string;
   description: string;
-  severity: 'high' | 'medium' | 'low' | string;
+  severity: "high" | "medium" | "low" | string;
   recommendation?: string;
   location?: string;
   selector?: string;
@@ -86,7 +93,7 @@ export interface ComprehensiveResults {
   seo_checks: CheckGroup;
   performance_metrics: PerformanceMetrics;
   performance_opportunities: any; // string[] or richer objects later
-  performance_diagnostics: any;   // string[] or richer objects later
+  performance_diagnostics: any; // string[] or richer objects later
   issues: Issue[];
   quick_wins: QuickWin[];
   json_ld_types?: string[]; // future phase
@@ -111,7 +118,7 @@ export interface PageData {
 }
 
 export interface StructuredRecommendation {
-  type: 'critical' | 'warning' | 'suggestion';
+  type: "critical" | "warning" | "suggestion";
   category: string;
   title: string;
   description: string;
@@ -120,7 +127,7 @@ export interface StructuredRecommendation {
 
 export interface AuditResultUnified {
   auditId: string;
-  status: 'processing' | 'completed' | 'failed';
+  status: "processing" | "completed" | "failed";
   url: string;
   score: number; // overall
   timestamp: string; // ISO
@@ -135,7 +142,7 @@ export interface AuditResultUnified {
 }
 
 export interface AuditStoreRecord {
-  status: 'processing' | 'completed' | 'failed';
+  status: "processing" | "completed" | "failed";
   ownerId?: string;
   data?: AuditResultUnified;
   error?: string;
@@ -145,4 +152,3 @@ export interface AuditStoreRecord {
   startedAt: number;
   updatedAt: number;
 }
-

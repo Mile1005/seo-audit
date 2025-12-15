@@ -21,7 +21,9 @@ lib/backlinks/
 ## 🎯 Immediate Action Items
 
 ### Step 1: Install Dependencies (Already Done ✅)
+
 Your project already has:
+
 - ✅ Cheerio (HTML parsing)
 - ✅ Undici/node-fetch (HTTP requests)
 - ✅ TypeScript types
@@ -51,37 +53,38 @@ GOOGLE_CUSTOM_SEARCH_CX=
 Create `scripts/test-backlinks.ts`:
 
 ```typescript
-import { BacklinkCollector } from '../lib/backlinks/backlink-collector'
+import { BacklinkCollector } from "../lib/backlinks/backlink-collector";
 
 async function testBacklinks() {
-  console.log('🚀 Testing Backlink Collector...\n')
-  
-  const collector = new BacklinkCollector()
-  
-  const result = await collector.collectBacklinks('example.com', {
-    maxBacklinks: 20,  // Small test
+  console.log("🚀 Testing Backlink Collector...\n");
+
+  const collector = new BacklinkCollector();
+
+  const result = await collector.collectBacklinks("example.com", {
+    maxBacklinks: 20, // Small test
     useCommonCrawl: true,
-    useSearch: false,  // Disable search for quick test
-    enrichWithMetrics: false,  // Skip metrics for speed
+    useSearch: false, // Disable search for quick test
+    enrichWithMetrics: false, // Skip metrics for speed
     onProgress: (message, progress) => {
-      console.log(`[${progress}%] ${message}`)
-    }
-  })
-  
-  console.log('\n✅ Test Results:')
-  console.log(JSON.stringify(result.stats, null, 2))
-  console.log(`\nFound ${result.backlinks.length} backlinks!`)
-  
+      console.log(`[${progress}%] ${message}`);
+    },
+  });
+
+  console.log("\n✅ Test Results:");
+  console.log(JSON.stringify(result.stats, null, 2));
+  console.log(`\nFound ${result.backlinks.length} backlinks!`);
+
   if (result.backlinks.length > 0) {
-    console.log('\n🔗 Sample Backlink:')
-    console.log(JSON.stringify(result.backlinks[0], null, 2))
+    console.log("\n🔗 Sample Backlink:");
+    console.log(JSON.stringify(result.backlinks[0], null, 2));
   }
 }
 
-testBacklinks().catch(console.error)
+testBacklinks().catch(console.error);
 ```
 
 Run it:
+
 ```bash
 npx tsx scripts/test-backlinks.ts
 ```
@@ -91,37 +94,37 @@ npx tsx scripts/test-backlinks.ts
 Create `app/api/backlinks/collect/route.ts`:
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server'
-import { BacklinkCollector } from '@/lib/backlinks/backlink-collector'
-import { requireUser } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
+import { NextRequest, NextResponse } from "next/server";
+import { BacklinkCollector } from "@/lib/backlinks/backlink-collector";
+import { requireUser } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   try {
-    const user = await requireUser(request)
-    const { projectId, maxBacklinks = 100 } = await request.json()
-    
+    const user = await requireUser(request);
+    const { projectId, maxBacklinks = 100 } = await request.json();
+
     // Get project domain
     const project = await prisma.project.findUnique({
       where: { id: projectId },
-      select: { domain: true }
-    })
-    
+      select: { domain: true },
+    });
+
     if (!project) {
-      return NextResponse.json({ error: 'Project not found' }, { status: 404 })
+      return NextResponse.json({ error: "Project not found" }, { status: 404 });
     }
-    
+
     // Collect backlinks
-    const collector = new BacklinkCollector()
+    const collector = new BacklinkCollector();
     const result = await collector.collectBacklinks(project.domain, {
       maxBacklinks,
       useCommonCrawl: true,
       useSearch: true,
-      enrichWithMetrics: true
-    })
-    
+      enrichWithMetrics: true,
+    });
+
     // Save to database
-    const saved = []
+    const saved = [];
     for (const backlink of result.backlinks) {
       try {
         const saved_link = await prisma.backlink.upsert({
@@ -129,8 +132,8 @@ export async function POST(request: NextRequest) {
             projectId_sourceUrl_targetUrl: {
               projectId,
               sourceUrl: backlink.sourceUrl,
-              targetUrl: backlink.targetUrl
-            }
+              targetUrl: backlink.targetUrl,
+            },
           },
           update: {
             lastSeen: new Date(),
@@ -143,7 +146,7 @@ export async function POST(request: NextRequest) {
             context: backlink.context,
             isToxic: backlink.isToxic,
             toxicScore: backlink.toxicScore,
-            lastChecked: new Date()
+            lastChecked: new Date(),
           },
           create: {
             projectId,
@@ -152,7 +155,7 @@ export async function POST(request: NextRequest) {
             targetUrl: backlink.targetUrl,
             anchorText: backlink.anchorText,
             linkType: backlink.linkType,
-            status: 'ACTIVE',
+            status: "ACTIVE",
             domainRating: backlink.domainRating,
             pageRating: backlink.pageRating,
             linkStrength: backlink.linkStrength,
@@ -162,28 +165,24 @@ export async function POST(request: NextRequest) {
             toxicScore: backlink.toxicScore,
             firstSeen: new Date(),
             lastSeen: new Date(),
-            lastChecked: new Date()
-          }
-        })
-        saved.push(saved_link)
+            lastChecked: new Date(),
+          },
+        });
+        saved.push(saved_link);
       } catch (error) {
-        console.error('Error saving backlink:', error)
+        console.error("Error saving backlink:", error);
       }
     }
-    
+
     return NextResponse.json({
       success: true,
       collected: result.backlinks.length,
       saved: saved.length,
-      stats: result.stats
-    })
-    
+      stats: result.stats,
+    });
   } catch (error) {
-    console.error('Collection error:', error)
-    return NextResponse.json(
-      { error: 'Failed to collect backlinks' },
-      { status: 500 }
-    )
+    console.error("Collection error:", error);
+    return NextResponse.json({ error: "Failed to collect backlinks" }, { status: 500 });
   }
 }
 ```
@@ -195,8 +194,8 @@ Update `components/backlinks/backlink-dashboard.tsx`:
 Find the "Generate Mock Data" button section and add this new button:
 
 ```typescript
-<Button 
-  onClick={collectRealBacklinks} 
+<Button
+  onClick={collectRealBacklinks}
   disabled={loading}
   className="bg-gradient-to-r from-green-500 to-emerald-600"
 >
@@ -219,34 +218,34 @@ Add the function:
 ```typescript
 const collectRealBacklinks = async () => {
   try {
-    setLoading(true)
-    
-    const response = await fetch('/api/backlinks/collect', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    setLoading(true);
+
+    const response = await fetch("/api/backlinks/collect", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         projectId,
-        maxBacklinks: 100
-      })
-    })
+        maxBacklinks: 100,
+      }),
+    });
 
-    const data = await response.json()
-    
+    const data = await response.json();
+
     if (response.ok) {
-      console.log('✅ Collection complete:', data)
-      alert(`Successfully collected ${data.collected} backlinks!\nSaved: ${data.saved}`)
-      fetchBacklinks() // Refresh the list
+      console.log("✅ Collection complete:", data);
+      alert(`Successfully collected ${data.collected} backlinks!\nSaved: ${data.saved}`);
+      fetchBacklinks(); // Refresh the list
     } else {
-      console.error('Collection failed:', data.error)
-      alert('Failed to collect backlinks')
+      console.error("Collection failed:", data.error);
+      alert("Failed to collect backlinks");
     }
   } catch (error) {
-    console.error('Error:', error)
-    alert('An error occurred')
+    console.error("Error:", error);
+    alert("An error occurred");
   } finally {
-    setLoading(false)
+    setLoading(false);
   }
-}
+};
 ```
 
 ---
@@ -310,27 +309,27 @@ Add to your cron/worker:
 
 ```typescript
 // worker/backlinks-job.ts
-import { BacklinkCollector } from '@/lib/backlinks/backlink-collector'
-import { prisma } from '@/lib/prisma'
+import { BacklinkCollector } from "@/lib/backlinks/backlink-collector";
+import { prisma } from "@/lib/prisma";
 
 export async function refreshBacklinks() {
   const projects = await prisma.project.findMany({
-    where: { status: 'ACTIVE' }
-  })
-  
+    where: { status: "ACTIVE" },
+  });
+
   for (const project of projects) {
-    console.log(`Refreshing backlinks for ${project.domain}...`)
-    
-    const collector = new BacklinkCollector()
+    console.log(`Refreshing backlinks for ${project.domain}...`);
+
+    const collector = new BacklinkCollector();
     const result = await collector.collectBacklinks(project.domain, {
       maxBacklinks: 200,
       useCommonCrawl: true,
       useSearch: true,
-      enrichWithMetrics: true
-    })
-    
+      enrichWithMetrics: true,
+    });
+
     // Save to database...
-    console.log(`✓ Saved ${result.backlinks.length} backlinks for ${project.domain}`)
+    console.log(`✓ Saved ${result.backlinks.length} backlinks for ${project.domain}`);
   }
 }
 
@@ -343,25 +342,33 @@ export async function refreshBacklinks() {
 ## 🔧 Troubleshooting
 
 ### Issue: "No backlinks found"
-**Solution:** 
+
+**Solution:**
+
 - Try a popular domain first (e.g., "github.com", "medium.com")
 - Common Crawl might not have very new or small sites
 - Enable search crawler for better coverage
 
 ### Issue: "OpenPageRank not working"
+
 **Solution:**
+
 - Check API key is correct in `.env`
 - Verify you haven't exceeded daily limit (1000 requests)
 - System works fine without it (just no DR scores)
 
 ### Issue: "Rate limiting errors"
+
 **Solution:**
+
 - Reduce `maxBacklinks` value
 - Increase delays in search crawler
 - Use only Common Crawl (no rate limits)
 
 ### Issue: "Timeout errors"
+
 **Solution:**
+
 - Reduce batch sizes
 - Check internet connection
 - Common Crawl servers might be slow (retry)
@@ -373,40 +380,45 @@ export async function refreshBacklinks() {
 ### For Best Results:
 
 1. **Start Small**
+
    ```typescript
-   maxBacklinks: 50  // Test first
+   maxBacklinks: 50; // Test first
    ```
 
 2. **Use Common Crawl**
+
    ```typescript
-   useCommonCrawl: true  // Best coverage
+   useCommonCrawl: true; // Best coverage
    ```
 
 3. **Enable Metrics**
+
    ```typescript
-   enrichWithMetrics: true  // With OpenPageRank key
+   enrichWithMetrics: true; // With OpenPageRank key
    ```
 
 4. **Monitor Progress**
    ```typescript
-   onProgress: (msg, pct) => console.log(msg)
+   onProgress: (msg, pct) => console.log(msg);
    ```
 
 ### For Speed:
 
 1. **Disable Search**
+
    ```typescript
-   useSearch: false  // Faster
+   useSearch: false; // Faster
    ```
 
 2. **Skip Metrics**
+
    ```typescript
-   enrichWithMetrics: false  // Much faster
+   enrichWithMetrics: false; // Much faster
    ```
 
 3. **Lower Limit**
    ```typescript
-   maxBacklinks: 20  // Quick tests
+   maxBacklinks: 20; // Quick tests
    ```
 
 ---
@@ -414,12 +426,14 @@ export async function refreshBacklinks() {
 ## 🎉 What's Next
 
 ### Ready to Use:
+
 - ✅ Backlink collection
 - ✅ Domain metrics
 - ✅ Quality scoring
 - ✅ Database integration
 
 ### Coming Soon (Phase 2):
+
 - 🔄 Toxicity detection
 - 📊 Anchor text analysis
 - 📈 Velocity tracking
@@ -449,11 +463,13 @@ export async function refreshBacklinks() {
 ## 📞 Need Help?
 
 ### Resources:
+
 - 📖 **Full Plan:** `docs/BACKLINKS_PRO_IMPLEMENTATION_PLAN.md`
 - 🎉 **Phase 1 Summary:** `docs/BACKLINKS_PHASE_1_COMPLETE.md`
 - 💻 **Type Definitions:** `lib/backlinks/types.ts`
 
 ### Quick Commands:
+
 ```bash
 # Test the collector
 npx tsx scripts/test-backlinks.ts
@@ -474,4 +490,4 @@ npm run typecheck
 
 Start with a small test, then scale up to full production usage.
 
-*Last updated: October 4, 2025*
+_Last updated: October 4, 2025_

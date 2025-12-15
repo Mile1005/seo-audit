@@ -7,12 +7,17 @@ const mockPrisma = vi.hoisted(() => ({
   $disconnect: vi.fn(),
 }));
 
-vi.mock('@prisma/client', () => ({
+vi.mock("@prisma/client", () => ({
   PrismaClient: vi.fn().mockImplementation(() => mockPrisma),
 }));
 
 // Import the actual functions after mocking PrismaClient
-import { checkDatabaseHealth, getPerformanceMetrics, connectDatabase, disconnectDatabase } from "../lib/database";
+import {
+  checkDatabaseHealth,
+  getPerformanceMetrics,
+  connectDatabase,
+  disconnectDatabase,
+} from "../lib/database";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -22,18 +27,18 @@ test("checkDatabaseHealth returns healthy status on successful query", async () 
   mockPrisma.$queryRaw.mockResolvedValue([{ result: 1 }]);
   const result = await checkDatabaseHealth();
 
-  expect(result.status).toBe('healthy');
+  expect(result.status).toBe("healthy");
   expect(result.timestamp).toBeInstanceOf(Date);
-  expect('error' in result).toBe(false);
+  expect("error" in result).toBe(false);
 });
 
 test("checkDatabaseHealth returns unhealthy status on query failure", async () => {
-  mockPrisma.$queryRaw.mockRejectedValue(new Error('Connection failed'));
+  mockPrisma.$queryRaw.mockRejectedValue(new Error("Connection failed"));
 
   const result = await checkDatabaseHealth();
 
-  expect(result.status).toBe('unhealthy');
-  expect(result.error).toBe('Connection failed');
+  expect(result.status).toBe("unhealthy");
+  expect(result.error).toBe("Connection failed");
   expect(result.timestamp).toBeInstanceOf(Date);
 });
 
@@ -44,7 +49,7 @@ test("getPerformanceMetrics measures query performance", async () => {
 
   expect(result.queryTime).toBeDefined();
   expect(result.queryTime).toBeGreaterThanOrEqual(0);
-  expect(['fast', 'moderate', 'slow']).toContain(result.status);
+  expect(["fast", "moderate", "slow"]).toContain(result.status);
   expect(result.timestamp).toBeInstanceOf(Date);
 });
 
@@ -58,7 +63,7 @@ test("connectDatabase handles successful connection", async () => {
 });
 
 test("connectDatabase handles connection failure", async () => {
-  mockPrisma.$connect.mockRejectedValue(new Error('Connection failed'));
+  mockPrisma.$connect.mockRejectedValue(new Error("Connection failed"));
 
   const result = await connectDatabase();
 

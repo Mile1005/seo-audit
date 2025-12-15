@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { useState, useEffect, useRef } from 'react'
-import { usePathname } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
-import Link from 'next/link'
-import { 
-  HomeIcon, 
-  FolderIcon, 
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
+import {
+  HomeIcon,
+  FolderIcon,
   MagnifyingGlassIcon,
   DocumentMagnifyingGlassIcon,
   LinkIcon,
@@ -18,68 +18,70 @@ import {
   XMarkIcon,
   SunIcon,
   MoonIcon,
-  GlobeAltIcon
-} from '@heroicons/react/24/outline'
-import { cn } from '@/lib/utils'
-import { NotificationDropdown } from '@/components/notifications/NotificationDropdown'
-import { useTheme } from '@/components/ui/theme-provider'
-import { LanguageSwitcher } from '@/components/layout/language-switcher'
+  GlobeAltIcon,
+} from "@heroicons/react/24/outline";
+import { cn } from "@/lib/utils";
+import { NotificationDropdown } from "@/components/notifications/NotificationDropdown";
+import { useTheme } from "@/components/ui/theme-provider";
+import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Projects', href: '/dashboard/projects', icon: FolderIcon },
-  { name: 'Keywords', href: '/dashboard/keywords', icon: MagnifyingGlassIcon },
-  { name: 'Site Audit', href: '/dashboard/audit', icon: DocumentMagnifyingGlassIcon },
-  { name: 'Page Crawler', href: '/dashboard/page-crawler', icon: GlobeAltIcon },
-  { name: 'Backlinks', href: '/dashboard/backlinks', icon: LinkIcon },
-  { name: 'Competitors', href: '/dashboard/competitors', icon: UsersIcon },
-  { name: 'Reports', href: '/dashboard/reports', icon: DocumentTextIcon },
-]
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
+  { name: "Projects", href: "/dashboard/projects", icon: FolderIcon },
+  { name: "Keywords", href: "/dashboard/keywords", icon: MagnifyingGlassIcon },
+  { name: "Site Audit", href: "/dashboard/audit", icon: DocumentMagnifyingGlassIcon },
+  { name: "Page Crawler", href: "/dashboard/page-crawler", icon: GlobeAltIcon },
+  { name: "Backlinks", href: "/dashboard/backlinks", icon: LinkIcon },
+  { name: "Competitors", href: "/dashboard/competitors", icon: UsersIcon },
+  { name: "Reports", href: "/dashboard/reports", icon: DocumentTextIcon },
+];
 
 export default function LocaleDashboardLayout({ children }: DashboardLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [userMenuOpen, setUserMenuOpen] = useState(false)
-  const pathname = usePathname()
-  const { data: session } = useSession()
-  const { mode, setMode } = useTheme()
-  const userMenuRef = useRef<HTMLDivElement>(null)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const { data: session } = useSession();
+  const { mode, setMode } = useTheme();
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   // Close user menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
-        setUserMenuOpen(false)
+        setUserMenuOpen(false);
       }
     }
 
     if (userMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [userMenuOpen])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [userMenuOpen]);
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-40 bg-slate-900/80 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Mobile sidebar */}
-      <div className={cn(
-        "fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden",
-        sidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
+      <div
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
         <div className="flex items-center justify-between h-16 px-6 border-b border-slate-200 dark:border-slate-700">
           <Link href="/dashboard" className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
@@ -96,7 +98,7 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
         </div>
         <nav className="mt-6 px-3">
           {navigation.map((item) => {
-            const isActive = pathname === item.href
+            const isActive = pathname === item.href;
             return (
               <Link
                 key={item.name}
@@ -112,7 +114,7 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
                 <item.icon className="w-5 h-5 mr-3" />
                 {item.name}
               </Link>
-            )
+            );
           })}
         </nav>
       </div>
@@ -130,7 +132,7 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
           </div>
           <nav className="flex-1 px-3 py-6 space-y-1">
             {navigation.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.name}
@@ -145,7 +147,7 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
                   <item.icon className="w-5 h-5 mr-3" />
                   {item.name}
                 </Link>
-              )
+              );
             })}
           </nav>
           <div className="flex-shrink-0 border-t border-slate-200 dark:border-slate-800 p-4">
@@ -173,28 +175,26 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
             <Bars3Icon className="h-6 w-6" />
           </button>
           <div className="flex flex-1 justify-between px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-1 items-center">
-              {/* Search bar placeholder */}
-            </div>
+            <div className="flex flex-1 items-center">{/* Search bar placeholder */}</div>
             <div className="ml-4 flex items-center space-x-4">
               {/* Language Switcher */}
               <LanguageSwitcher />
-              
+
               {/* Theme toggle */}
               <button
-                onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+                onClick={() => setMode(mode === "dark" ? "light" : "dark")}
                 className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800"
               >
-                {mode === 'dark' ? (
+                {mode === "dark" ? (
                   <SunIcon className="w-5 h-5" />
                 ) : (
                   <MoonIcon className="w-5 h-5" />
                 )}
               </button>
-              
+
               {/* Notifications */}
               <NotificationDropdown />
-              
+
               {/* Profile dropdown */}
               <div className="relative" ref={userMenuRef}>
                 <button
@@ -203,10 +203,10 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
                 >
                   <UserCircleIcon className="w-6 h-6 text-slate-400" />
                   <span className="text-sm font-medium text-slate-700 dark:text-slate-300 hidden sm:block">
-                    {session?.user?.name || session?.user?.email || 'User'}
+                    {session?.user?.name || session?.user?.email || "User"}
                   </span>
                 </button>
-                
+
                 {userMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white dark:bg-slate-800 ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
@@ -218,7 +218,7 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
                         Settings
                       </Link>
                       <button
-                        onClick={() => signOut({ callbackUrl: '/login' })}
+                        onClick={() => signOut({ callbackUrl: "/login" })}
                         className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700"
                       >
                         Sign out
@@ -234,12 +234,10 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
         {/* Page content */}
         <main className="flex-1">
           <div className="py-6">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              {children}
-            </div>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
           </div>
         </main>
       </div>
     </div>
-  )
+  );
 }

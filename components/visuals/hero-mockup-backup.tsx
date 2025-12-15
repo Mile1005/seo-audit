@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { motion } from "framer-motion"
-import { Play, Pause, Maximize2, Minimize2 } from "lucide-react"
-import { HeroImage } from "@/components/ui/optimized-image"
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Play, Pause, Maximize2, Minimize2 } from "lucide-react";
+import { HeroImage } from "@/components/ui/optimized-image";
 
 export interface HeroMockupProps {
-  className?: string
-  showControls?: boolean
-  priority?: boolean
+  className?: string;
+  showControls?: boolean;
+  priority?: boolean;
 }
 
-export function HeroMockup({ 
-  className = "", 
+export function HeroMockup({
+  className = "",
   showControls = true,
-  priority = true 
+  priority = true,
 }: HeroMockupProps) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handlePlayToggle = () => {
-    setIsPlaying(!isPlaying)
+    setIsPlaying(!isPlaying);
     // TODO: Implement video/animation controls when final assets are ready
-  }
+  };
 
   const handleFullscreen = () => {
-    setIsFullscreen(true)
+    setIsFullscreen(true);
     // TODO: Implement fullscreen modal for hero mockup
-  }
+  };
 
   return (
     <div className={`relative ${className}`}>
@@ -50,7 +50,7 @@ export function HeroMockup({
                   className="object-cover object-top"
                   fill
                 />
-                
+
                 {/* Fallback content when image fails to load */}
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white p-8">
@@ -74,22 +74,20 @@ export function HeroMockup({
           </div>
 
           {/* Floating UI Elements */}
-          <div
-            className="absolute -top-4 -right-4 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-semibold shadow-lg animate-bounce"
-          >
+          <div className="absolute -top-4 -right-4 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-semibold shadow-lg animate-bounce">
             ✓ 98 SEO Score
           </div>
 
           <motion.div
-            animate={{ 
+            animate={{
               y: isPlaying ? [0, 8, 0] : 0,
-              x: isPlaying ? [0, -5, 5, 0] : 0
+              x: isPlaying ? [0, -5, 5, 0] : 0,
             }}
-            transition={{ 
-              duration: 4, 
+            transition={{
+              duration: 4,
               repeat: isPlaying ? Infinity : 0,
               ease: "easeInOut",
-              delay: 0.5
+              delay: 0.5,
             }}
             className="absolute -bottom-6 -left-6 bg-blue-500 text-white px-4 py-3 rounded-xl shadow-lg"
           >
@@ -98,15 +96,15 @@ export function HeroMockup({
           </motion.div>
 
           <motion.div
-            animate={{ 
+            animate={{
               scale: isPlaying ? [1, 1.05, 1] : 1,
-              rotate: isPlaying ? [0, -2, 2, 0] : 0
+              rotate: isPlaying ? [0, -2, 2, 0] : 0,
             }}
-            transition={{ 
-              duration: 2.5, 
+            transition={{
+              duration: 2.5,
               repeat: isPlaying ? Infinity : 0,
               ease: "easeInOut",
-              delay: 1
+              delay: 1,
             }}
             className="absolute top-1/4 -left-8 bg-purple-500 text-white px-3 py-2 rounded-lg text-sm shadow-lg"
           >
@@ -124,11 +122,7 @@ export function HeroMockup({
               className="bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label={isPlaying ? "Pause animation" : "Play animation"}
             >
-              {isPlaying ? (
-                <Pause className="w-4 h-4" />
-              ) : (
-                <Play className="w-4 h-4" />
-              )}
+              {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
             </motion.button>
 
             <motion.button
@@ -161,7 +155,7 @@ export function HeroMockup({
               className="object-cover object-top"
               fill
             />
-            
+
             {/* Fallback content */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white p-4">
@@ -176,5 +170,5 @@ export function HeroMockup({
         </div>
       </motion.div>
     </div>
-  )
+  );
 }

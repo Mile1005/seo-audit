@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Bell,
   TrendingUp,
@@ -18,16 +18,16 @@ import {
   Target,
   Clock,
   Loader2,
-  AlertCircle
-} from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Switch } from '@/components/ui/switch';
+  AlertCircle,
+} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 
 interface Alert {
   id: string;
-  type: 'ranking' | 'traffic' | 'competitor' | 'serp' | 'technical';
-  severity: 'critical' | 'warning' | 'info';
+  type: "ranking" | "traffic" | "competitor" | "serp" | "technical";
+  severity: "critical" | "warning" | "info";
   title: string;
   description: string;
   change: string;
@@ -54,7 +54,12 @@ interface SmartAlertSystemProps {
   currentRank?: number;
 }
 
-export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 5 }: SmartAlertSystemProps) {
+export function SmartAlertSystem({
+  keywordId,
+  projectId,
+  keyword,
+  currentRank = 5,
+}: SmartAlertSystemProps) {
   const [showConfig, setShowConfig] = useState(false);
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [configs, setConfigs] = useState<AlertConfig[]>([]);
@@ -76,11 +81,11 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
       );
 
       if (response.status === 401) {
-        throw new Error('Sign in to view smart alerts.');
+        throw new Error("Sign in to view smart alerts.");
       }
 
       if (!response.ok) {
-        throw new Error('Failed to fetch alerts');
+        throw new Error("Failed to fetch alerts");
       }
 
       const result = await response.json();
@@ -89,47 +94,50 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
         setAlerts(result.data.recentAlerts);
         setConfigs(result.data.configs);
       } else {
-        throw new Error(result.error || 'Unknown error');
+        throw new Error(result.error || "Unknown error");
       }
     } catch (err) {
-      console.error('Error fetching alerts:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load alerts');
+      console.error("Error fetching alerts:", err);
+      setError(err instanceof Error ? err.message : "Failed to load alerts");
     } finally {
       setLoading(false);
     }
   };
 
-  const toggleAlertConfig = async (configId: string, field: 'isActive' | 'emailEnabled' | 'slackEnabled') => {
+  const toggleAlertConfig = async (
+    configId: string,
+    field: "isActive" | "emailEnabled" | "slackEnabled"
+  ) => {
     setSavingConfig(true);
     try {
-      const config = configs.find(c => c.id === configId);
+      const config = configs.find((c) => c.id === configId);
       if (!config) return;
 
       const updatedConfig = { ...config, [field]: !config[field] };
 
-      const response = await fetch('/api/keywords/alerts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/keywords/alerts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           keywordId,
           projectId,
-          ...updatedConfig
-        })
+          ...updatedConfig,
+        }),
       });
 
       if (response.status === 401) {
-        throw new Error('Sign in to update alert configuration.');
+        throw new Error("Sign in to update alert configuration.");
       }
 
       if (!response.ok) {
-        throw new Error('Failed to update alert configuration');
+        throw new Error("Failed to update alert configuration");
       }
 
       // Update local state
-      setConfigs(configs.map(c => c.id === configId ? updatedConfig : c));
+      setConfigs(configs.map((c) => (c.id === configId ? updatedConfig : c)));
     } catch (err) {
-      console.error('Error updating alert config:', err);
-      alert('Failed to update alert configuration');
+      console.error("Error updating alert config:", err);
+      alert("Failed to update alert configuration");
     } finally {
       setSavingConfig(false);
     }
@@ -137,15 +145,15 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
 
   const getAlertIcon = (type: string) => {
     switch (type) {
-      case 'ranking':
+      case "ranking":
         return TrendingUp;
-      case 'traffic':
+      case "traffic":
         return Activity;
-      case 'competitor':
+      case "competitor":
         return Users;
-      case 'serp':
+      case "serp":
         return Award;
-      case 'technical':
+      case "technical":
         return AlertTriangle;
       default:
         return Bell;
@@ -154,14 +162,14 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'critical':
-        return 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700';
-      case 'warning':
-        return 'bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 border-yellow-300 dark:border-yellow-700';
-      case 'info':
-        return 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700';
+      case "critical":
+        return "bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-300 border-red-300 dark:border-red-700";
+      case "warning":
+        return "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 border-yellow-300 dark:border-yellow-700";
+      case "info":
+        return "bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-300 dark:border-blue-700";
       default:
-        return 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600';
+        return "bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-600";
     }
   };
 
@@ -213,8 +221,8 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
     );
   }
 
-  const criticalAlerts = alerts.filter(a => a.severity === 'critical').length;
-  const warningAlerts = alerts.filter(a => a.severity === 'warning').length;
+  const criticalAlerts = alerts.filter((a) => a.severity === "critical").length;
+  const warningAlerts = alerts.filter((a) => a.severity === "warning").length;
 
   return (
     <Card className="border-0 shadow-xl bg-gradient-to-br from-rose-50 via-white to-red-50 dark:from-rose-900/10 dark:via-gray-900/10 dark:to-red-900/10 overflow-hidden">
@@ -250,7 +258,9 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
               <h5 className="font-bold text-slate-900 dark:text-slate-100">Critical</h5>
             </div>
             <p className="text-3xl font-bold text-red-600">{criticalAlerts}</p>
-            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Requires immediate attention</p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+              Requires immediate attention
+            </p>
           </div>
 
           <div className="bg-yellow-50 dark:bg-yellow-900/10 rounded-xl border-2 border-yellow-200 dark:border-yellow-800 p-4">
@@ -267,8 +277,12 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
               <Activity className="h-5 w-5 text-blue-600" />
               <h5 className="font-bold text-slate-900 dark:text-slate-100">Active Alerts</h5>
             </div>
-            <p className="text-3xl font-bold text-blue-600">{configs.filter(c => c.isActive).length}</p>
-            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Out of {configs.length} configured</p>
+            <p className="text-3xl font-bold text-blue-600">
+              {configs.filter((c) => c.isActive).length}
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+              Out of {configs.length} configured
+            </p>
           </div>
         </div>
 
@@ -281,17 +295,23 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
             </h3>
             <div className="space-y-4">
               {configs.map((config) => (
-                <div key={config.id} className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 border border-slate-200 dark:border-slate-600">
+                <div
+                  key={config.id}
+                  className="bg-slate-50 dark:bg-slate-700 rounded-xl p-4 border border-slate-200 dark:border-slate-600"
+                >
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex-1">
-                      <h4 className="font-semibold text-slate-900 dark:text-slate-100">{config.type.replace(/_/g, ' ').toUpperCase()}</h4>
+                      <h4 className="font-semibold text-slate-900 dark:text-slate-100">
+                        {config.type.replace(/_/g, " ").toUpperCase()}
+                      </h4>
                       <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                        Threshold: {config.threshold} {config.type.includes('ranking') ? 'positions' : '%'}
+                        Threshold: {config.threshold}{" "}
+                        {config.type.includes("ranking") ? "positions" : "%"}
                       </p>
                     </div>
                     <Switch
                       checked={config.isActive}
-                      onCheckedChange={() => toggleAlertConfig(config.id, 'isActive')}
+                      onCheckedChange={() => toggleAlertConfig(config.id, "isActive")}
                       disabled={savingConfig}
                     />
                   </div>
@@ -303,7 +323,7 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                         <span className="text-xs text-slate-600 dark:text-slate-400">Email</span>
                         <Switch
                           checked={config.emailEnabled}
-                          onCheckedChange={() => toggleAlertConfig(config.id, 'emailEnabled')}
+                          onCheckedChange={() => toggleAlertConfig(config.id, "emailEnabled")}
                           disabled={savingConfig}
                         />
                       </div>
@@ -312,7 +332,7 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                         <span className="text-xs text-slate-600 dark:text-slate-400">Slack</span>
                         <Switch
                           checked={config.slackEnabled}
-                          onCheckedChange={() => toggleAlertConfig(config.id, 'slackEnabled')}
+                          onCheckedChange={() => toggleAlertConfig(config.id, "slackEnabled")}
                           disabled={savingConfig}
                         />
                       </div>
@@ -335,7 +355,9 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
             <div className="text-center py-8">
               <Bell className="h-12 w-12 text-slate-400 mx-auto mb-3" />
               <p className="text-slate-600 dark:text-slate-400 mb-1">No alerts yet</p>
-              <p className="text-xs text-slate-500 dark:text-slate-500">You'll be notified when important changes occur</p>
+              <p className="text-xs text-slate-500 dark:text-slate-500">
+                You'll be notified when important changes occur
+              </p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -355,9 +377,7 @@ export function SmartAlertSystem({ keywordId, projectId, keyword, currentRank = 
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-1">
                           <h4 className="font-bold">{alert.title}</h4>
-                          <Badge className={severityClass}>
-                            {alert.severity.toUpperCase()}
-                          </Badge>
+                          <Badge className={severityClass}>{alert.severity.toUpperCase()}</Badge>
                         </div>
                         <p className="text-sm mb-2">{alert.description}</p>
                         <div className="flex items-center justify-between">

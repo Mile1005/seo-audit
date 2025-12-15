@@ -8,19 +8,19 @@
  * Outputs a ready-to-copy translation file.
  */
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration
 const CONFIG = {
-  supportedLanguages: ['de', 'fr', 'it', 'es', 'id'], // Removed duplicate 'en'
-  sourceLanguage: 'en',
-  messagesDir: './messages',
-  outputFile: './translations-ready-to-copy.json'
+  supportedLanguages: ["de", "fr", "it", "es", "id"], // Removed duplicate 'en'
+  sourceLanguage: "en",
+  messagesDir: "./messages",
+  outputFile: "./translations-ready-to-copy.json",
 };
 
 class FreeI18nScanner {
@@ -37,7 +37,7 @@ class FreeI18nScanner {
     console.log(`🔍 Scanning page: ${pagePath}`);
 
     // Convert page path to file system path
-    const pageFolderPath = path.join('./app', pagePath);
+    const pageFolderPath = path.join("./app", pagePath);
 
     if (!fs.existsSync(pageFolderPath)) {
       throw new Error(`Page folder not found: ${pageFolderPath}`);
@@ -45,8 +45,12 @@ class FreeI18nScanner {
 
     // Get all files in the page folder
     const files = this.getAllFiles(pageFolderPath);
-    const pageFiles = files.filter(file =>
-      file.endsWith('.tsx') || file.endsWith('.jsx') || file.endsWith('.ts') || file.endsWith('.js')
+    const pageFiles = files.filter(
+      (file) =>
+        file.endsWith(".tsx") ||
+        file.endsWith(".jsx") ||
+        file.endsWith(".ts") ||
+        file.endsWith(".js")
     );
 
     console.log(`📁 Found ${pageFiles.length} files in page folder\n`);
@@ -60,11 +64,11 @@ class FreeI18nScanner {
   getAllFiles(dirPath, arrayOfFiles = []) {
     const files = fs.readdirSync(dirPath);
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const fullPath = path.join(dirPath, file);
       if (fs.statSync(fullPath).isDirectory()) {
         // Skip node_modules and other unwanted directories
-        if (!['node_modules', '.git', 'dist', 'build', '.next'].includes(file)) {
+        if (!["node_modules", ".git", "dist", "build", ".next"].includes(file)) {
           arrayOfFiles = this.getAllFiles(fullPath, arrayOfFiles);
         }
       } else {
@@ -79,11 +83,11 @@ class FreeI18nScanner {
    * Extract hardcoded strings from component (improved filtering)
    */
   extractHardcodedStrings(componentPath) {
-    const content = fs.readFileSync(componentPath, 'utf-8');
+    const content = fs.readFileSync(componentPath, "utf-8");
     const strings = [];
 
     // Remove UTF-8 BOM if present
-    const cleanContent = content.replace(/^\uFEFF/, '');
+    const cleanContent = content.replace(/^\uFEFF/, "");
 
     // JSX text pattern: >text< - but filter out CSS classes and styling
     const jsxTextPattern = />([^><{}$]+)</g;
@@ -105,7 +109,7 @@ class FreeI18nScanner {
           position: match.index,
           length: match[0].length,
           filePath: componentPath,
-          type: 'jsx-text'
+          type: "jsx-text",
         });
       }
     }
@@ -125,7 +129,7 @@ class FreeI18nScanner {
           position: match.index,
           length: match[0].length,
           filePath: componentPath,
-          type: 'string-literal'
+          type: "string-literal",
         });
       }
     }
@@ -141,7 +145,12 @@ class FreeI18nScanner {
     if (text.length < 3 || text.length > 200) return false;
 
     // Skip CSS classes and styling patterns
-    if (/^(text-|bg-|border-|p-|m-|w-|h-|flex|grid|items?|justify|space|gap|rounded|shadow|hover|focus|active|disabled|class|className)/.test(text)) return false;
+    if (
+      /^(text-|bg-|border-|p-|m-|w-|h-|flex|grid|items?|justify|space|gap|rounded|shadow|hover|focus|active|disabled|class|className)/.test(
+        text
+      )
+    )
+      return false;
 
     // Skip URLs and technical content
     if (/^https?:\/\//.test(text)) return false;
@@ -150,20 +159,52 @@ class FreeI18nScanner {
 
     // Skip pure numbers and technical patterns
     if (/^\d+$/.test(text)) return false;
-    if (/^[a-z][a-z0-9-]*$/.test(text) && text.includes('-') && !text.includes(' ')) return false; // CSS class patterns
+    if (/^[a-z][a-z0-9-]*$/.test(text) && text.includes("-") && !text.includes(" ")) return false; // CSS class patterns
 
     // Skip strings that look like code or contain code-like patterns
     if (/[{}$()[\]]/.test(text)) return false;
-    if (/^\s*(import|export|const|let|var|function|class|interface|type)\s/.test(text)) return false;
+    if (/^\s*(import|export|const|let|var|function|class|interface|type)\s/.test(text))
+      return false;
     if (/^\s*(if|for|while|switch|try|catch)\s/.test(text)) return false;
 
     // Skip common non-translatable technical words
     const nonTranslatable = [
-      'true', 'false', 'null', 'undefined', 'className', 'style', 'id', 'key', 'ref',
-      'props', 'state', 'children', 'default', 'value', 'onClick', 'onChange', 'onSubmit',
-      'useState', 'useEffect', 'useCallback', 'useMemo', 'React', 'Component',
-      'array', 'object', 'string', 'number', 'boolean', 'function', 'method',
-      'async', 'await', 'promise', 'then', 'catch', 'finally'
+      "true",
+      "false",
+      "null",
+      "undefined",
+      "className",
+      "style",
+      "id",
+      "key",
+      "ref",
+      "props",
+      "state",
+      "children",
+      "default",
+      "value",
+      "onClick",
+      "onChange",
+      "onSubmit",
+      "useState",
+      "useEffect",
+      "useCallback",
+      "useMemo",
+      "React",
+      "Component",
+      "array",
+      "object",
+      "string",
+      "number",
+      "boolean",
+      "function",
+      "method",
+      "async",
+      "await",
+      "promise",
+      "then",
+      "catch",
+      "finally",
     ];
     if (nonTranslatable.includes(text.toLowerCase())) return false;
 
@@ -177,7 +218,7 @@ class FreeI18nScanner {
     if (!/[a-zA-Z]/.test(text)) return false;
 
     // Must be proper sentences or titles (contain spaces or be title-case)
-    const hasSpaces = text.includes(' ');
+    const hasSpaces = text.includes(" ");
     const isTitleCase = /^[A-Z][a-z]/.test(text) && text.length > 4;
     const isSentence = /[.!?]$/.test(text) || text.length > 20;
 
@@ -197,7 +238,11 @@ class FreeI18nScanner {
     const beforeMatch = content.substring(Math.max(0, index - 50), index);
 
     // Check for JSX attribute patterns
-    if (/\b(title|alt|placeholder|label|description|content|text|value|children)\s*=\s*["']?$/.test(beforeMatch)) {
+    if (
+      /\b(title|alt|placeholder|label|description|content|text|value|children)\s*=\s*["']?$/.test(
+        beforeMatch
+      )
+    ) {
       return true;
     }
 
@@ -216,10 +261,10 @@ class FreeI18nScanner {
     // Create a readable key from the text
     const key = text
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '') // Remove special chars
-      .replace(/\s+/g, '_') // Replace spaces with underscores
+      .replace(/[^a-z0-9\s]/g, "") // Remove special chars
+      .replace(/\s+/g, "_") // Replace spaces with underscores
       .substring(0, 30) // Limit length
-      .replace(/_+$/, ''); // Remove trailing underscores
+      .replace(/_+$/, ""); // Remove trailing underscores
 
     return `${key}_${counter}`;
   }
@@ -275,7 +320,7 @@ class FreeI18nScanner {
    * Refactor a single file to use t() functions
    */
   refactorSingleFile(filePath, fileStrings) {
-    let content = fs.readFileSync(filePath, 'utf-8');
+    let content = fs.readFileSync(filePath, "utf-8");
 
     // Sort strings by position (reverse order to avoid position shifts)
     fileStrings.sort((a, b) => b.position - a.position);
@@ -288,11 +333,11 @@ class FreeI18nScanner {
       // Find the exact match in the content
       const matchText = content.substr(position, length);
 
-      if (type === 'jsx-text') {
+      if (type === "jsx-text") {
         // Replace JSX text: >text< becomes >{t('key')}<
         const replacement = `>{t('${namespace}.${globalKey}')}<`;
         content = content.substr(0, position) + replacement + content.substr(position + length);
-      } else if (type === 'string-literal') {
+      } else if (type === "string-literal") {
         // Replace string literal: "text" becomes t('key')
         const replacement = `t('${namespace}.${globalKey}')`;
         content = content.substr(0, position) + replacement + content.substr(position + length);
@@ -300,7 +345,7 @@ class FreeI18nScanner {
     }
 
     // Check if we need to add the useTranslation import
-    if (!content.includes('useTranslation') && fileStrings.length > 0) {
+    if (!content.includes("useTranslation") && fileStrings.length > 0) {
       content = this.addUseTranslationImport(content);
     }
 
@@ -319,18 +364,18 @@ class FreeI18nScanner {
       // Add after the last import
       const lastImport = imports[imports.length - 1];
       const importStatement = `import { useTranslation } from 'next-i18n';\n`;
-      content = content.replace(lastImport, lastImport + '\n' + importStatement);
+      content = content.replace(lastImport, lastImport + "\n" + importStatement);
     } else {
       // Add at the beginning if no imports found
       content = `import { useTranslation } from 'next-i18n';\n\n${content}`;
     }
 
     // Add the t function declaration if it's a React component
-    if (content.includes('export default function') || content.includes('function ')) {
+    if (content.includes("export default function") || content.includes("function ")) {
       // Find the function declaration and add the t hook
       const functionPattern = /(export\s+default\s+)?function\s+\w+\s*\([^)]*\)\s*{/;
       content = content.replace(functionPattern, (match) => {
-        return match + '\n  const { t } = useTranslation();';
+        return match + "\n  const { t } = useTranslation();";
       });
     }
 
@@ -359,18 +404,18 @@ class FreeI18nScanner {
 
     // Create bulk translation text (all texts in one request per language)
     const textsArray = Array.from(uniqueTexts.keys());
-    const bulkText = textsArray.map((text, index) => `${index + 1}. "${text}"`).join('\n');
+    const bulkText = textsArray.map((text, index) => `${index + 1}. "${text}"`).join("\n");
 
     // Translate all texts at once for each language
     for (const lang of CONFIG.supportedLanguages) {
       console.log(`   🌍 Translating all texts to ${lang.toUpperCase()}...`);
 
       const langNames = {
-        'de': 'German',
-        'fr': 'French',
-        'it': 'Italian',
-        'es': 'Spanish',
-        'id': 'Indonesian'
+        de: "German",
+        fr: "French",
+        it: "Italian",
+        es: "Spanish",
+        id: "Indonesian",
       };
 
       const langName = langNames[lang];
@@ -379,12 +424,15 @@ class FreeI18nScanner {
         const messages = [
           {
             role: "user",
-            content: `Translate these ${textsArray.length} English texts to ${langName}. Number each translation exactly like the original list. Only return the numbered translations, nothing else:\n\n${bulkText}`
-          }
+            content: `Translate these ${textsArray.length} English texts to ${langName}. Number each translation exactly like the original list. Only return the numbered translations, nothing else:\n\n${bulkText}`,
+          },
         ];
 
         const bulkTranslationResponse = await this.callPerplexityAPI(messages);
-        const translations = this.parseBulkTranslationResponse(bulkTranslationResponse, textsArray.length);
+        const translations = this.parseBulkTranslationResponse(
+          bulkTranslationResponse,
+          textsArray.length
+        );
 
         // Assign translations to each text
         textsArray.forEach((text, index) => {
@@ -394,9 +442,9 @@ class FreeI18nScanner {
             componentTranslations[key] = { en: text };
           }
 
-          componentTranslations[key][lang] = translations[index] || `[${lang.toUpperCase()}] ${text}`;
+          componentTranslations[key][lang] =
+            translations[index] || `[${lang.toUpperCase()}] ${text}`;
         });
-
       } catch (error) {
         console.log(`⚠️  Bulk translation failed for ${langName}, using fallbacks`);
         // Fallback: assign mock translations
@@ -427,7 +475,7 @@ class FreeI18nScanner {
    */
   parseBulkTranslationResponse(response, expectedCount) {
     const translations = [];
-    const lines = response.split('\n').filter(line => line.trim());
+    const lines = response.split("\n").filter((line) => line.trim());
 
     for (let i = 0; i < expectedCount; i++) {
       const line = lines[i];
@@ -435,12 +483,12 @@ class FreeI18nScanner {
         // Extract translation after the number
         const match = line.match(/^\d+\.\s*(.+)$/);
         if (match) {
-          translations.push(match[1].trim().replace(/^["']|["']$/g, '')); // Remove quotes if present
+          translations.push(match[1].trim().replace(/^["']|["']$/g, "")); // Remove quotes if present
         } else {
           translations.push(line.trim());
         }
       } else {
-        translations.push('');
+        translations.push("");
       }
     }
 
@@ -455,7 +503,12 @@ class FreeI18nScanner {
     if (text.length < 3 || text.length > 200) return false;
 
     // Skip CSS classes and styling
-    if (/^(text-|bg-|border-|p-|m-|w-|h-|flex|grid|items?|justify|space|gap|rounded|shadow|hover|focus|active|disabled|class|className)/.test(text)) return false;
+    if (
+      /^(text-|bg-|border-|p-|m-|w-|h-|flex|grid|items?|justify|space|gap|rounded|shadow|hover|focus|active|disabled|class|className)/.test(
+        text
+      )
+    )
+      return false;
 
     // Skip URLs and technical content
     if (/^https?:\/\//.test(text)) return false;
@@ -466,7 +519,7 @@ class FreeI18nScanner {
     if (/^\d+$/.test(text)) return false;
 
     // Skip technical patterns
-    if (/^[a-z][a-z0-9-]*$/.test(text) && text.includes('-')) return false; // CSS class patterns
+    if (/^[a-z][a-z0-9-]*$/.test(text) && text.includes("-")) return false; // CSS class patterns
 
     // Skip if it contains code-like patterns
     if (/[{}$()]/.test(text)) return false;
@@ -476,7 +529,17 @@ class FreeI18nScanner {
     if (/^\s*function\s/.test(text)) return false;
 
     // Skip common non-translatable words
-    const nonTranslatable = ['true', 'false', 'null', 'undefined', 'className', 'style', 'id', 'key', 'ref'];
+    const nonTranslatable = [
+      "true",
+      "false",
+      "null",
+      "undefined",
+      "className",
+      "style",
+      "id",
+      "key",
+      "ref",
+    ];
     if (nonTranslatable.includes(text.toLowerCase())) return false;
 
     return true;
@@ -490,7 +553,11 @@ class FreeI18nScanner {
     const beforeMatch = content.substring(Math.max(0, index - 50), index);
 
     // Check for JSX attribute patterns
-    if (/\b(title|alt|placeholder|label|description|content|text|value|children)\s*=\s*["']?$/.test(beforeMatch)) {
+    if (
+      /\b(title|alt|placeholder|label|description|content|text|value|children)\s*=\s*["']?$/.test(
+        beforeMatch
+      )
+    ) {
       return true;
     }
 
@@ -509,10 +576,10 @@ class FreeI18nScanner {
     // Create a readable key from the text
     const key = text
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '') // Remove special chars
-      .replace(/\s+/g, '_') // Replace spaces with underscores
+      .replace(/[^a-z0-9\s]/g, "") // Remove special chars
+      .replace(/\s+/g, "_") // Replace spaces with underscores
       .substring(0, 30) // Limit length
-      .replace(/_+$/, ''); // Remove trailing underscores
+      .replace(/_+$/, ""); // Remove trailing underscores
 
     return `${key}_${counter}`;
   }
@@ -522,11 +589,11 @@ class FreeI18nScanner {
    */
   async translateWithPerplexity(text, targetLang) {
     const langNames = {
-      'de': 'German',
-      'fr': 'French',
-      'it': 'Italian',
-      'es': 'Spanish',
-      'id': 'Indonesian'
+      de: "German",
+      fr: "French",
+      it: "Italian",
+      es: "Spanish",
+      id: "Indonesian",
     };
 
     const langName = langNames[targetLang];
@@ -536,14 +603,13 @@ class FreeI18nScanner {
       const messages = [
         {
           role: "user",
-          content: `Translate this English text to ${langName}. Only return the translation, nothing else: "${text}"`
-        }
+          content: `Translate this English text to ${langName}. Only return the translation, nothing else: "${text}"`,
+        },
       ];
 
       // Call Perplexity API
       const response = await this.callPerplexityAPI(messages);
       return response.trim();
-
     } catch (error) {
       console.log(`⚠️  Translation failed for "${text}" to ${langName}, using fallback`);
       return `[${targetLang.toUpperCase()}] ${text}`;
@@ -580,11 +646,11 @@ class FreeI18nScanner {
     // Use the mcp_perplexity_perplexity_ask tool
     try {
       // Make the function call to the Perplexity tool
-      const result = await this.makeToolCall('mcp_perplexity_perplexity_ask', { messages });
+      const result = await this.makeToolCall("mcp_perplexity_perplexity_ask", { messages });
       return result;
     } catch (error) {
       console.log(`⚠️  Perplexity tool call failed: ${error.message}`);
-      return `[FALLBACK_${messages[0].content.split(' to ')[1].split('.')[0].toUpperCase()}] ${messages[0].content.split(': "')[1].split('"')[0]}`;
+      return `[FALLBACK_${messages[0].content.split(" to ")[1].split(".")[0].toUpperCase()}] ${messages[0].content.split(': "')[1].split('"')[0]}`;
     }
   }
 
@@ -602,14 +668,14 @@ class FreeI18nScanner {
     const textMatch = message.match(/: "([^"]+)"/);
 
     if (!langMatch || !textMatch) {
-      throw new Error('Could not parse translation request');
+      throw new Error("Could not parse translation request");
     }
 
     const targetLang = langMatch[1].toLowerCase();
     const text = textMatch[1];
 
     // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Return mock translation (will be replaced by actual tool)
     return this.generateMockTranslation(text, targetLang);
@@ -620,11 +686,11 @@ class FreeI18nScanner {
    */
   generateMockTranslation(text, targetLang) {
     const langPrefixes = {
-      'german': 'DE',
-      'french': 'FR',
-      'italian': 'IT',
-      'spanish': 'ES',
-      'indonesian': 'ID'
+      german: "DE",
+      french: "FR",
+      italian: "IT",
+      spanish: "ES",
+      indonesian: "ID",
     };
 
     const prefix = langPrefixes[targetLang] || targetLang.toUpperCase().substring(0, 2);
@@ -655,7 +721,7 @@ class FreeI18nScanner {
 
       // Add to English
       componentTranslations[key] = {
-        en: text
+        en: text,
       };
 
       // Translate to other languages
@@ -681,14 +747,14 @@ class FreeI18nScanner {
    */
   extractNamespace(componentPath) {
     // For page components, use the page path as namespace
-    const pagePath = path.relative('./app', path.dirname(componentPath));
+    const pagePath = path.relative("./app", path.dirname(componentPath));
     const fileName = path.basename(componentPath, path.extname(componentPath));
 
     // Create namespace like: help.security.two-factor-authentication
-    const namespaceParts = pagePath.split(path.sep).filter(p => p && p !== '[locale]');
+    const namespaceParts = pagePath.split(path.sep).filter((p) => p && p !== "[locale]");
     namespaceParts.push(fileName);
 
-    return namespaceParts.join('.').toLowerCase();
+    return namespaceParts.join(".").toLowerCase();
   }
 
   /**
@@ -700,8 +766,8 @@ class FreeI18nScanner {
     const output = {
       generated: new Date().toISOString(),
       totalNamespaces: Object.keys(this.allTranslations).length,
-      totalKeys: Object.values(this.allTranslations).flatMap(ns => Object.keys(ns)).length,
-      translations: this.allTranslations
+      totalKeys: Object.values(this.allTranslations).flatMap((ns) => Object.keys(ns)).length,
+      translations: this.allTranslations,
     };
 
     fs.writeFileSync(CONFIG.outputFile, JSON.stringify(output, null, 2));
@@ -723,7 +789,9 @@ class FreeI18nScanner {
     console.log(`4. Your components are already updated to use t() functions!`);
     console.log(`\nExample of what was done:`);
     console.log(`Before: <h1>Two-Factor Authentication</h1>`);
-    console.log(`After:  <h1>{t('help.security.two-factor-authentication.page.twofactor_authentication_1')}</h1>`);
+    console.log(
+      `After:  <h1>{t('help.security.two-factor-authentication.page.twofactor_authentication_1')}</h1>`
+    );
   }
 
   /**
@@ -765,11 +833,12 @@ class FreeI18nScanner {
       console.log(`   • Files processed: ${pageFiles.length}`);
       console.log(`   • Strings refactored: ${allStrings.length}`);
       console.log(`   • Namespaces created: ${Object.keys(this.allTranslations).length}`);
-      console.log(`   • Translation keys: ${Object.values(this.allTranslations).flatMap(ns => Object.keys(ns)).length}`);
-      console.log(`   • Languages: en, ${CONFIG.supportedLanguages.join(', ')}`);
+      console.log(
+        `   • Translation keys: ${Object.values(this.allTranslations).flatMap((ns) => Object.keys(ns)).length}`
+      );
+      console.log(`   • Languages: en, ${CONFIG.supportedLanguages.join(", ")}`);
 
       this.generateInstructions();
-
     } catch (error) {
       console.error(`❌ Error:`, error.message);
       throw error;
@@ -782,7 +851,9 @@ const args = process.argv.slice(2);
 
 if (args.length === 0) {
   console.log(`Usage: node scripts/functionalities/i18n-folder-scanner.js <page-path>`);
-  console.log(`Example: node scripts/functionalities/i18n-folder-scanner.js /help/security/two-factor-authentication`);
+  console.log(
+    `Example: node scripts/functionalities/i18n-folder-scanner.js /help/security/two-factor-authentication`
+  );
   console.log(`Note: Page path should start with / and point to a folder in ./app/`);
   process.exit(1);
 }
@@ -790,7 +861,7 @@ if (args.length === 0) {
 const pagePath = args[0];
 
 // Validate page path format
-if (!pagePath.startsWith('/')) {
+if (!pagePath.startsWith("/")) {
   console.error(`❌ Page path must start with / (e.g., /help/security/two-factor-authentication)`);
   process.exit(1);
 }

@@ -1,9 +1,18 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, Shield, Smartphone, Key, CheckCircle, AlertTriangle, ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  Shield,
+  Smartphone,
+  Key,
+  CheckCircle,
+  AlertTriangle,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function TwoFactorAuthPage() {
   return (
@@ -28,15 +37,17 @@ export default function TwoFactorAuthPage() {
 
           {/* Why 2FA */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Why Enable Two-Factor Authentication?</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              Why Enable Two-Factor Authentication?
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex items-start gap-4">
                 <Shield className="w-8 h-8 text-green-600 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Enhanced Security</h3>
                   <p className="text-gray-600">
-                    Protects your account even if your password is compromised.
-                    Requires both something you know (password) and something you have (phone/authenticator).
+                    Protects your account even if your password is compromised. Requires both
+                    something you know (password) and something you have (phone/authenticator).
                   </p>
                 </div>
               </div>
@@ -45,8 +56,8 @@ export default function TwoFactorAuthPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Account Protection</h3>
                   <p className="text-gray-600">
-                    Prevents unauthorized access to your SEO data, audit history,
-                    and billing information.
+                    Prevents unauthorized access to your SEO data, audit history, and billing
+                    information.
                   </p>
                 </div>
               </div>
@@ -63,8 +74,8 @@ export default function TwoFactorAuthPage() {
                   <h3 className="text-lg font-semibold text-gray-900">Authenticator App</h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  Use apps like Google Authenticator, Authy, or Microsoft Authenticator
-                  to generate time-based codes.
+                  Use apps like Google Authenticator, Authy, or Microsoft Authenticator to generate
+                  time-based codes.
                 </p>
                 <div className="space-y-2 text-sm text-gray-600">
                   <div className="flex items-center">
@@ -117,8 +128,12 @@ export default function TwoFactorAuthPage() {
                   <span className="text-blue-600 font-semibold">1</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Go to Account Settings</h3>
-                  <p className="text-gray-600">Navigate to Account → Security → Two-Factor Authentication.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Go to Account Settings
+                  </h3>
+                  <p className="text-gray-600">
+                    Navigate to Account → Security → Two-Factor Authentication.
+                  </p>
                 </div>
               </div>
 
@@ -137,8 +152,12 @@ export default function TwoFactorAuthPage() {
                   <span className="text-blue-600 font-semibold">3</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Scan QR Code or Enter Code</h3>
-                  <p className="text-gray-600">For apps: scan the QR code. For SMS: enter your phone number.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Scan QR Code or Enter Code
+                  </h3>
+                  <p className="text-gray-600">
+                    For apps: scan the QR code. For SMS: enter your phone number.
+                  </p>
                 </div>
               </div>
 
@@ -147,8 +166,12 @@ export default function TwoFactorAuthPage() {
                   <span className="text-blue-600 font-semibold">4</span>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Verify and Save Backup Codes</h3>
-                  <p className="text-gray-600">Enter the verification code and save your backup codes securely.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    Verify and Save Backup Codes
+                  </h3>
+                  <p className="text-gray-600">
+                    Enter the verification code and save your backup codes securely.
+                  </p>
                 </div>
               </div>
             </div>
@@ -159,10 +182,12 @@ export default function TwoFactorAuthPage() {
             <div className="flex items-start gap-4">
               <Key className="w-8 h-8 text-yellow-600 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="text-lg font-semibold text-yellow-900 mb-2">Important: Save Your Backup Codes</h3>
+                <h3 className="text-lg font-semibold text-yellow-900 mb-2">
+                  Important: Save Your Backup Codes
+                </h3>
                 <p className="text-yellow-800 mb-3">
-                  When you enable 2FA, you'll receive backup codes. These are crucial for account recovery
-                  if you lose access to your authenticator app or phone.
+                  When you enable 2FA, you'll receive backup codes. These are crucial for account
+                  recovery if you lose access to your authenticator app or phone.
                 </p>
                 <ul className="text-yellow-800 text-sm space-y-1">
                   <li>• Store backup codes in a secure password manager</li>
@@ -207,5 +232,5 @@ export default function TwoFactorAuthPage() {
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

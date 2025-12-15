@@ -7,11 +7,11 @@ const store = new Map<string, AuditStoreRecord>();
 export function initAudit(auditId: string, ownerId?: string) {
   const now = Date.now();
   store.set(auditId, {
-    status: 'processing',
+    status: "processing",
     ownerId,
-    stage: 'queued',
+    stage: "queued",
     progress: 2,
-    message: 'Queued',
+    message: "Queued",
     startedAt: now,
     updatedAt: now,
   });
@@ -22,7 +22,7 @@ export function setAuditProgress(
   patch: { stage?: string; progress?: number; message?: string }
 ) {
   const prev = store.get(auditId);
-  if (!prev || prev.status !== 'processing') return;
+  if (!prev || prev.status !== "processing") return;
   const now = Date.now();
   store.set(auditId, {
     ...prev,
@@ -35,12 +35,12 @@ export function setAuditCompleted(auditId: string, data: AuditResultUnified) {
   const now = Date.now();
   const prev = store.get(auditId);
   store.set(auditId, {
-    status: 'completed',
+    status: "completed",
     ownerId: prev?.ownerId,
     data,
-    stage: 'completed',
+    stage: "completed",
     progress: 100,
-    message: 'Completed',
+    message: "Completed",
     startedAt: prev?.startedAt || now,
     updatedAt: now,
   });
@@ -50,10 +50,10 @@ export function setAuditFailed(auditId: string, error: string) {
   const now = Date.now();
   const prev = store.get(auditId);
   store.set(auditId, {
-    status: 'failed',
+    status: "failed",
     ownerId: prev?.ownerId,
     error,
-    stage: 'failed',
+    stage: "failed",
     message: error,
     startedAt: prev?.startedAt || now,
     updatedAt: now,
@@ -64,45 +64,58 @@ export function getAudit(auditId: string): AuditStoreRecord | undefined {
   return store.get(auditId);
 }
 
-export function buildUnifiedResult(params: { auditId: string; url: string; audit: ComprehensiveResults; keyword?: string|null; email?: string|null; }): AuditResultUnified {
-  const { auditId, url, audit, keyword=null, email=null } = params;
+export function buildUnifiedResult(params: {
+  auditId: string;
+  url: string;
+  audit: ComprehensiveResults;
+  keyword?: string | null;
+  email?: string | null;
+}): AuditResultUnified {
+  const { auditId, url, audit, keyword = null, email = null } = params;
   // Derive pageData from comprehensive audit
   const pageData = {
-    title: audit.h_tags.h1[0] || 'No Title Found',
-    metaDescription: audit.social_meta.og_description || 'No meta description found',
+    title: audit.h_tags.h1[0] || "No Title Found",
+    metaDescription: audit.social_meta.og_description || "No meta description found",
     h1Count: audit.h_tags.h1.length,
     h2Count: audit.h_tags.h2.length,
     h3Count: audit.h_tags.h3.length,
     wordCount: audit.stats.word_count,
     imagesTotal: audit.stats.images_count,
-    imagesWithoutAlt: audit.accessibility.failed_checks.includes('Images have alt text') ? audit.stats.images_count : 0,
+    imagesWithoutAlt: audit.accessibility.failed_checks.includes("Images have alt text")
+      ? audit.stats.images_count
+      : 0,
     internalLinks: audit.stats.internal_links,
     externalLinks: audit.stats.external_links,
     loadTime: audit.performance_metrics.largest_contentful_paint * 1000,
     canonical: null,
-    noindex: false
+    noindex: false,
   };
 
   const recommendations = [
-    ...audit.issues.map(issue => ({
-      type: issue.severity === 'high' ? 'critical' as const : issue.severity === 'medium' ? 'warning' as const : 'suggestion' as const,
-      category: issue.category || 'SEO',
+    ...audit.issues.map((issue) => ({
+      type:
+        issue.severity === "high"
+          ? ("critical" as const)
+          : issue.severity === "medium"
+            ? ("warning" as const)
+            : ("suggestion" as const),
+      category: issue.category || "SEO",
       title: issue.title,
       description: issue.description,
-      priority: issue.severity === 'high' ? 1 : issue.severity === 'medium' ? 2 : 3,
+      priority: issue.severity === "high" ? 1 : issue.severity === "medium" ? 2 : 3,
     })),
-    ...audit.quick_wins.map(win => ({
-      type: 'suggestion' as const,
-      category: win.category || 'Quick Win',
+    ...audit.quick_wins.map((win) => ({
+      type: "suggestion" as const,
+      category: win.category || "Quick Win",
       title: win.title,
       description: win.description,
       priority: 3,
-    }))
+    })),
   ];
 
   return {
     auditId,
-    status: 'completed',
+    status: "completed",
     url,
     score: audit.scores.overall,
     timestamp: audit.fetched_at || new Date().toISOString(),
@@ -112,6 +125,6 @@ export function buildUnifiedResult(params: { auditId: string; url: string; audit
     keyword,
     email,
     robotsTxt: null,
-    sitemapXml: null
+    sitemapXml: null,
   };
 }

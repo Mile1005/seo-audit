@@ -1,180 +1,178 @@
-'use client'
+"use client";
 
-import { useState, useEffect, useRef } from 'react'
-import { BellIcon } from '@heroicons/react/24/outline'
-import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
+import { useState, useEffect, useRef } from "react";
+import { BellIcon } from "@heroicons/react/24/outline";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 function timeAgo(date: Date): string {
-  const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000)
-  if (seconds < 60) return 'just now'
-  const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return `${minutes}m ago`
-  const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}h ago`
-  const days = Math.floor(hours / 24)
-  if (days < 7) return `${days}d ago`
-  const weeks = Math.floor(days / 7)
-  return `${weeks}w ago`
+  const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+  if (seconds < 60) return "just now";
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  if (days < 7) return `${days}d ago`;
+  const weeks = Math.floor(days / 7);
+  return `${weeks}w ago`;
 }
 
 interface Notification {
-  id: string
-  type: string
-  title: string
-  message: string
-  data?: any
-  read: boolean
-  readAt?: Date
-  createdAt: Date
+  id: string;
+  type: string;
+  title: string;
+  message: string;
+  data?: any;
+  read: boolean;
+  readAt?: Date;
+  createdAt: Date;
 }
 
 export function NotificationDropdown() {
-  const t = useTranslations()
-  const [isOpen, setIsOpen] = useState(false)
-  const [notifications, setNotifications] = useState<Notification[]>([])
-  const [unreadCount, setUnreadCount] = useState(0)
-  const [loading, setLoading] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const t = useTranslations();
+  const [isOpen, setIsOpen] = useState(false);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const looksLikeKey = (value: string) => {
-    if (!value) return false
-    if (/\s/.test(value)) return false
-    return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(value)
-  }
+    if (!value) return false;
+    if (/\s/.test(value)) return false;
+    return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(value);
+  };
 
   const renderNotificationText = (value: string, type: string) => {
-    if (!looksLikeKey(value)) return value
+    if (!looksLikeKey(value)) return value;
 
     // Fix legacy/badly-stored keys (e.g. "server.notifications.audit_complete.title")
-    if (type === 'AUDIT_COMPLETED' && /audit[_\.]complete/i.test(value)) {
-      return t('notifications.auditComplete')
+    if (type === "AUDIT_COMPLETED" && /audit[_\.]complete/i.test(value)) {
+      return t("notifications.auditComplete");
     }
 
     // If we can't confidently map it, show the raw string (better than crashing).
-    return value
-  }
+    return value;
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
+        setIsOpen(false);
       }
     }
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside)
-      return () => document.removeEventListener('mousedown', handleClickOutside)
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   // Fetch notifications when dropdown opens
   useEffect(() => {
     if (isOpen && notifications.length === 0) {
-      fetchNotifications()
+      fetchNotifications();
     }
-  }, [isOpen])
+  }, [isOpen]);
 
   // Fetch unread count on mount and periodically
   useEffect(() => {
-    fetchUnreadCount()
-    const interval = setInterval(fetchUnreadCount, 60000) // Every minute
-    return () => clearInterval(interval)
-  }, [])
+    fetchUnreadCount();
+    const interval = setInterval(fetchUnreadCount, 60000); // Every minute
+    return () => clearInterval(interval);
+  }, []);
 
   const fetchNotifications = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await fetch('/api/notifications?limit=10')
-      const data = await res.json()
+      const res = await fetch("/api/notifications?limit=10");
+      const data = await res.json();
       if (data.success) {
-        setNotifications(data.notifications)
-        setUnreadCount(data.unreadCount)
+        setNotifications(data.notifications);
+        setUnreadCount(data.unreadCount);
       }
     } catch (error) {
-      console.error('Failed to fetch notifications:', error)
+      console.error("Failed to fetch notifications:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const fetchUnreadCount = async () => {
     try {
-      const res = await fetch('/api/notifications?unreadOnly=true&limit=1')
-      const data = await res.json()
+      const res = await fetch("/api/notifications?unreadOnly=true&limit=1");
+      const data = await res.json();
       if (data.success) {
-        setUnreadCount(data.unreadCount)
+        setUnreadCount(data.unreadCount);
       }
     } catch (error) {
-      console.error('Failed to fetch unread count:', error)
+      console.error("Failed to fetch unread count:", error);
     }
-  }
+  };
 
   const markAsRead = async (id: string) => {
     try {
       const res = await fetch(`/api/notifications/${id}`, {
-        method: 'PATCH'
-      })
+        method: "PATCH",
+      });
       if (res.ok) {
-        setNotifications(prev =>
-          prev.map(n => n.id === id ? { ...n, read: true, readAt: new Date() } : n)
-        )
-        setUnreadCount(prev => Math.max(0, prev - 1))
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === id ? { ...n, read: true, readAt: new Date() } : n))
+        );
+        setUnreadCount((prev) => Math.max(0, prev - 1));
       }
     } catch (error) {
-      console.error('Failed to mark as read:', error)
+      console.error("Failed to mark as read:", error);
     }
-  }
+  };
 
   const markAllAsRead = async () => {
     try {
-      const res = await fetch('/api/notifications/mark-all-read', {
-        method: 'POST'
-      })
+      const res = await fetch("/api/notifications/mark-all-read", {
+        method: "POST",
+      });
       if (res.ok) {
-        setNotifications(prev =>
-          prev.map(n => ({ ...n, read: true, readAt: new Date() }))
-        )
-        setUnreadCount(0)
+        setNotifications((prev) => prev.map((n) => ({ ...n, read: true, readAt: new Date() })));
+        setUnreadCount(0);
       }
     } catch (error) {
-      console.error('Failed to mark all as read:', error)
+      console.error("Failed to mark all as read:", error);
     }
-  }
+  };
 
   const deleteNotification = async (id: string) => {
     try {
       const res = await fetch(`/api/notifications/${id}`, {
-        method: 'DELETE'
-      })
+        method: "DELETE",
+      });
       if (res.ok) {
-        setNotifications(prev => prev.filter(n => n.id !== id))
-        if (!notifications.find(n => n.id === id)?.read) {
-          setUnreadCount(prev => Math.max(0, prev - 1))
+        setNotifications((prev) => prev.filter((n) => n.id !== id));
+        if (!notifications.find((n) => n.id === id)?.read) {
+          setUnreadCount((prev) => Math.max(0, prev - 1));
         }
       }
     } catch (error) {
-      console.error('Failed to delete notification:', error)
+      console.error("Failed to delete notification:", error);
     }
-  }
+  };
 
   const getNotificationIcon = (type: string) => {
     const icons: Record<string, string> = {
-      AUDIT_COMPLETED: '✅',
-      AUDIT_FAILED: '❌',
-      KEYWORD_RANK_CHANGE: '📈',
-      NEW_BACKLINK: '🔗',
-      LOST_BACKLINK: '⚠️',
-      CRITICAL_ISSUE: '🚨',
-      REPORT_READY: '📄',
-      GSC_CONNECTED: '🔌',
-      GSC_DISCONNECTED: '🔌',
-      PROJECT_CREATED: '📁',
-      SYSTEM_ALERT: '⚡'
-    }
-    return icons[type] || '📬'
-  }
+      AUDIT_COMPLETED: "✅",
+      AUDIT_FAILED: "❌",
+      KEYWORD_RANK_CHANGE: "📈",
+      NEW_BACKLINK: "🔗",
+      LOST_BACKLINK: "⚠️",
+      CRITICAL_ISSUE: "🚨",
+      REPORT_READY: "📄",
+      GSC_CONNECTED: "🔌",
+      GSC_DISCONNECTED: "🔌",
+      PROJECT_CREATED: "📁",
+      SYSTEM_ALERT: "⚡",
+    };
+    return icons[type] || "📬";
+  };
 
   return (
     <div ref={dropdownRef} className="relative">
@@ -188,7 +186,7 @@ export function NotificationDropdown() {
         )}
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
-            {unreadCount > 9 ? '9+' : unreadCount}
+            {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
       </button>
@@ -197,9 +195,7 @@ export function NotificationDropdown() {
         <div className="absolute right-0 top-full mt-2 w-96 bg-white dark:bg-slate-800 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700 z-50 max-h-[32rem] flex flex-col">
           {/* Header */}
           <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
-            <h3 className="font-semibold text-slate-900 dark:text-white">
-              Notifications
-            </h3>
+            <h3 className="font-semibold text-slate-900 dark:text-white">Notifications</h3>
             {unreadCount > 0 && (
               <button
                 onClick={markAllAsRead}
@@ -228,8 +224,8 @@ export function NotificationDropdown() {
                   <div
                     key={notification.id}
                     className={cn(
-                      'p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer',
-                      !notification.read && 'bg-blue-50/50 dark:bg-blue-900/10'
+                      "p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer",
+                      !notification.read && "bg-blue-50/50 dark:bg-blue-900/10"
                     )}
                     onClick={() => !notification.read && markAsRead(notification.id)}
                   >
@@ -248,8 +244,8 @@ export function NotificationDropdown() {
                       </div>
                       <button
                         onClick={(e) => {
-                          e.stopPropagation()
-                          deleteNotification(notification.id)
+                          e.stopPropagation();
+                          deleteNotification(notification.id);
                         }}
                         className="text-slate-400 hover:text-red-500 transition-colors"
                       >
@@ -267,7 +263,7 @@ export function NotificationDropdown() {
             <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-700 text-center">
               <button
                 onClick={() => {
-                  setIsOpen(false)
+                  setIsOpen(false);
                   // Navigate to notifications page if you create one
                 }}
                 className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
@@ -279,5 +275,5 @@ export function NotificationDropdown() {
         </div>
       )}
     </div>
-  )
+  );
 }

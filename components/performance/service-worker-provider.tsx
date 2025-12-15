@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from "react";
 
 interface SwStats {
   isSupported: boolean;
@@ -15,55 +15,57 @@ export function ServiceWorkerProvider() {
     isSupported: false,
     isRegistered: false,
     isOnline: true,
-    cacheStats: {}
+    cacheStats: {},
   });
 
   useEffect(() => {
     // Only register service worker in production
-    if (typeof window !== 'undefined' && 
-        'serviceWorker' in navigator && 
-        process.env.NODE_ENV === 'production') {
-      setSwStats(prev => ({ ...prev, isSupported: true }));
+    if (
+      typeof window !== "undefined" &&
+      "serviceWorker" in navigator &&
+      process.env.NODE_ENV === "production"
+    ) {
+      setSwStats((prev) => ({ ...prev, isSupported: true }));
       registerServiceWorker();
     }
 
     // Online/offline detection
-    const handleOnline = () => setSwStats(prev => ({ ...prev, isOnline: true }));
-    const handleOffline = () => setSwStats(prev => ({ ...prev, isOnline: false }));
+    const handleOnline = () => setSwStats((prev) => ({ ...prev, isOnline: true }));
+    const handleOffline = () => setSwStats((prev) => ({ ...prev, isOnline: false }));
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const registerServiceWorker = useCallback(async () => {
     try {
-      const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
       });
 
-      setSwStats(prev => ({ 
-        ...prev, 
+      setSwStats((prev) => ({
+        ...prev,
         isRegistered: true,
-        lastUpdate: new Date().toISOString()
+        lastUpdate: new Date().toISOString(),
       }));
 
-      console.log('[SW] Service Worker registered successfully:', registration);
+      console.log("[SW] Service Worker registered successfully:", registration);
 
       // Listen for updates
-      registration.addEventListener('updatefound', () => {
+      registration.addEventListener("updatefound", () => {
         const newWorker = registration.installing;
         if (newWorker) {
-          newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          newWorker.addEventListener("statechange", () => {
+            if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
               // New version available
-              console.log('[SW] New version available');
-              if (confirm('A new version is available. Reload to update?')) {
+              console.log("[SW] New version available");
+              if (confirm("A new version is available. Reload to update?")) {
                 window.location.reload();
               }
             }
@@ -74,11 +76,10 @@ export function ServiceWorkerProvider() {
       // Get cache stats periodically
       setInterval(async () => {
         const stats = await getCacheStats();
-        setSwStats(prev => ({ ...prev, cacheStats: stats }));
+        setSwStats((prev) => ({ ...prev, cacheStats: stats }));
       }, 30000); // Every 30 seconds
-
     } catch (error) {
-      console.error('[SW] Service Worker registration failed:', error);
+      console.error("[SW] Service Worker registration failed:", error);
     }
   }, []);
 
@@ -87,15 +88,12 @@ export function ServiceWorkerProvider() {
 
     return new Promise((resolve) => {
       const channel = new MessageChannel();
-      
+
       channel.port1.onmessage = (event) => {
         resolve(event.data || {});
       };
 
-      navigator.serviceWorker.controller!.postMessage(
-        { type: 'CACHE_STATS' },
-        [channel.port2]
-      );
+      navigator.serviceWorker.controller!.postMessage({ type: "CACHE_STATS" }, [channel.port2]);
 
       // Timeout fallback
       setTimeout(() => resolve({}), 5000);
@@ -105,12 +103,12 @@ export function ServiceWorkerProvider() {
   const clearCache = useCallback(async () => {
     if (!navigator.serviceWorker.controller) return;
 
-    navigator.serviceWorker.controller.postMessage({ type: 'CLEAR_CACHE' });
-    
+    navigator.serviceWorker.controller.postMessage({ type: "CLEAR_CACHE" });
+
     // Update stats after clearing
     setTimeout(async () => {
       const stats = await getCacheStats();
-      setSwStats(prev => ({ ...prev, cacheStats: stats }));
+      setSwStats((prev) => ({ ...prev, cacheStats: stats }));
     }, 1000);
   }, []);
 
@@ -118,22 +116,22 @@ export function ServiceWorkerProvider() {
     if (!navigator.serviceWorker.controller) return;
 
     navigator.serviceWorker.controller.postMessage({
-      type: 'PRELOAD_ROUTES',
-      routes
+      type: "PRELOAD_ROUTES",
+      routes,
     });
   };
 
   // Expose utilities to window for debugging
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       (window as any).swUtils = {
         stats: swStats,
         clearCache,
         preloadRoutes,
-        getCacheStats
+        getCacheStats,
       };
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [swStats]);
 
   return null; // This is a utility component
@@ -146,39 +144,39 @@ export function useServiceWorker() {
 
   useEffect(() => {
     // Get registration
-    if ('serviceWorker' in navigator) {
+    if ("serviceWorker" in navigator) {
       navigator.serviceWorker.ready.then(setSwRegistration);
     }
 
     // Online status
     const updateOnlineStatus = () => setIsOnline(navigator.onLine);
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
 
     return () => {
-      window.removeEventListener('online', updateOnlineStatus);
-      window.removeEventListener('offline', updateOnlineStatus);
+      window.removeEventListener("online", updateOnlineStatus);
+      window.removeEventListener("offline", updateOnlineStatus);
     };
   }, []);
 
   const preloadRoute = (route: string) => {
     if (swRegistration && swRegistration.active) {
       swRegistration.active.postMessage({
-        type: 'PRELOAD_ROUTES',
-        routes: [route]
+        type: "PRELOAD_ROUTES",
+        routes: [route],
       });
     }
   };
 
   const showNotification = async (title: string, options: NotificationOptions = {}) => {
-    if (!swRegistration || !('Notification' in window)) return;
+    if (!swRegistration || !("Notification" in window)) return;
 
     const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
+    if (permission === "granted") {
       return swRegistration.showNotification(title, {
-        icon: '/favicon.ico',
-        badge: '/images/badge.png',
-        ...options
+        icon: "/favicon.ico",
+        badge: "/images/badge.png",
+        ...options,
       });
     }
   };
@@ -187,7 +185,7 @@ export function useServiceWorker() {
     isOnline,
     isRegistered: !!swRegistration,
     preloadRoute,
-    showNotification
+    showNotification,
   };
 }
 
@@ -196,30 +194,30 @@ export function useBackgroundSync() {
   const [swRegistration, setSwRegistration] = useState<ServiceWorkerRegistration | null>(null);
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    if ("serviceWorker" in navigator) {
       navigator.serviceWorker.ready.then(setSwRegistration);
     }
   }, []);
 
   const scheduleSync = async (tag: string, data?: any) => {
-    if (!swRegistration || !('serviceWorker' in navigator)) {
-      console.warn('[SW] Background sync not supported');
+    if (!swRegistration || !("serviceWorker" in navigator)) {
+      console.warn("[SW] Background sync not supported");
       return false;
     }
 
     try {
       // TypeScript doesn't have sync types, so we'll use any
       await (swRegistration as any).sync?.register(tag);
-      
+
       // Store data in IndexedDB for the sync event
       if (data) {
         // This would integrate with IndexedDB
-        console.log('[SW] Sync scheduled:', tag, data);
+        console.log("[SW] Sync scheduled:", tag, data);
       }
-      
+
       return true;
     } catch (error) {
-      console.error('[SW] Failed to schedule sync:', error);
+      console.error("[SW] Failed to schedule sync:", error);
       return false;
     }
   };

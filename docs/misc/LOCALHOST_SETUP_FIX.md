@@ -3,6 +3,7 @@
 ## The Problem
 
 Your `.env.local` is configured for **production**, not localhost:
+
 - `NEXTAUTH_URL="https://www.aiseoturbo.com"` (should be localhost)
 - Database is production PostgreSQL
 
@@ -38,16 +39,19 @@ NEXTAUTH_URL="http://localhost:3000"
 ## Database Setup for Localhost
 
 ### Step 1: Generate Prisma Client
+
 ```bash
 npx prisma generate
 ```
 
 ### Step 2: Create Database Migration
+
 ```bash
 npx prisma migrate dev --name add_crawl_type_field
 ```
 
 ### Step 3: Push Schema to Database (Alternative)
+
 ```bash
 npx prisma db push
 ```
@@ -55,6 +59,7 @@ npx prisma db push
 ## Login Options
 
 ### Option A: Google OAuth (if configured for localhost)
+
 1. Go to Google Cloud Console
 2. Add `http://localhost:3000/api/auth/callback/google` to authorized redirects
 3. Restart server
@@ -63,6 +68,7 @@ npx prisma db push
 ### Option B: Create a Test User Directly
 
 Run this in Prisma Studio:
+
 ```bash
 npx prisma studio
 ```
@@ -83,7 +89,7 @@ Temporarily comment out the auth check in:
 // }
 
 // Use a test user ID:
-const userId = 'test-user-id'
+const userId = "test-user-id";
 ```
 
 ## Recommended Steps
@@ -91,18 +97,21 @@ const userId = 'test-user-id'
 1. **Stop your dev server** (Ctrl+C)
 
 2. **Update NEXTAUTH_URL**:
+
    ```bash
    # In .env.local, change:
    NEXTAUTH_URL="http://localhost:3000"
    ```
 
 3. **Run Database Setup**:
+
    ```bash
    npx prisma generate
    npx prisma migrate dev --name add_crawl_type_field
    ```
 
 4. **Restart Server**:
+
    ```bash
    npm run dev
    ```

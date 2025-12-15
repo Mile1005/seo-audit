@@ -1,44 +1,56 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, UserCheck, RefreshCw, Zap, FileSearch, ChevronRight, Activity, AlertTriangle, MessageSquare } from 'lucide-react'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  BookOpen,
+  UserCheck,
+  RefreshCw,
+  Zap,
+  FileSearch,
+  ChevronRight,
+  Activity,
+  AlertTriangle,
+  MessageSquare,
+} from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function TroubleshootingTranslatedPage() {
-  const t = useTranslations('help.categories.troubleshooting')
+  const t = useTranslations("help.categories.troubleshooting");
 
   const categoryArticles = [
     {
-      title: t('articles.loginIssues.title'),
-      href: t('articles.loginIssues.href'),
-      time: t('articles.loginIssues.time'),
-      description: t('articles.loginIssues.description'),
-      icon: UserCheck
+      title: t("articles.loginIssues.title"),
+      href: t("articles.loginIssues.href"),
+      time: t("articles.loginIssues.time"),
+      description: t("articles.loginIssues.description"),
+      icon: UserCheck,
     },
     {
-      title: t('articles.syncIssues.title'),
-      href: t('articles.syncIssues.href'),
-      time: t('articles.syncIssues.time'),
-      description: t('articles.syncIssues.description'),
-      icon: RefreshCw
+      title: t("articles.syncIssues.title"),
+      href: t("articles.syncIssues.href"),
+      time: t("articles.syncIssues.time"),
+      description: t("articles.syncIssues.description"),
+      icon: RefreshCw,
     },
     {
-      title: t('articles.performance.title'),
-      href: t('articles.performance.href'),
-      time: t('articles.performance.time'),
-      description: t('articles.performance.description'),
-      icon: Zap
+      title: t("articles.performance.title"),
+      href: t("articles.performance.href"),
+      time: t("articles.performance.time"),
+      description: t("articles.performance.description"),
+      icon: Zap,
     },
     {
-      title: t('articles.auditIssues.title'),
-      href: t('articles.auditIssues.href'),
-      time: t('articles.auditIssues.time'),
-      description: t('articles.auditIssues.description'),
-      icon: FileSearch
-    }
-  ]
+      title: t("articles.auditIssues.title"),
+      href: t("articles.auditIssues.href"),
+      time: t("articles.auditIssues.time"),
+      description: t("articles.auditIssues.description"),
+      icon: FileSearch,
+    },
+  ];
 
   return (
     <MainLayout>
@@ -51,12 +63,10 @@ export default function TroubleshootingTranslatedPage() {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('backToHelp')}
+              {t("backToHelp")}
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl">
-              {t('subtitle')}
-            </p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl">{t("subtitle")}</p>
           </div>
 
           {/* Articles Grid */}
@@ -95,28 +105,38 @@ export default function TroubleshootingTranslatedPage() {
 
           {/* Additional Resources */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('additionalResources.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              {t("additionalResources.title")}
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/status"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <Activity className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.systemStatus.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.systemStatus.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.systemStatus.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.systemStatus.description")}
+                </p>
               </Link>
               <Link
                 href="/contact"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <MessageSquare className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.contactSupport.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.contactSupport.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.contactSupport.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.contactSupport.description")}
+                </p>
               </Link>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

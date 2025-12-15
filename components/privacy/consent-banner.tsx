@@ -60,8 +60,8 @@ export function ConsentBanner() {
     function openHandler() {
       setVisible(true);
     }
-    window.addEventListener('open-consent-banner', openHandler as EventListener);
-    return () => window.removeEventListener('open-consent-banner', openHandler as EventListener);
+    window.addEventListener("open-consent-banner", openHandler as EventListener);
+    return () => window.removeEventListener("open-consent-banner", openHandler as EventListener);
   }, []);
 
   // Re-apply consent after hydration if gtag appears later (e.g., network delay)
@@ -83,14 +83,17 @@ export function ConsentBanner() {
     >
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <p className="text-sm text-slate-200">
-          We use Google Analytics to improve our product. Choose whether to allow analytics cookies. You can change your choice later in your browser settings.
+          We use Google Analytics to improve our product. Choose whether to allow analytics cookies.
+          You can change your choice later in your browser settings.
         </p>
         <div className="flex gap-2 justify-end">
           <button
             type="button"
             className="rounded-md border border-slate-600 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800"
             onClick={() => {
-              try { localStorage.setItem(STORAGE_KEY, "rejected"); } catch {}
+              try {
+                localStorage.setItem(STORAGE_KEY, "rejected");
+              } catch {}
               setChoice("rejected");
               setVisible(false);
               applyConsentFromChoice("rejected");
@@ -102,7 +105,9 @@ export function ConsentBanner() {
             type="button"
             className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500"
             onClick={() => {
-              try { localStorage.setItem(STORAGE_KEY, "accepted"); } catch {}
+              try {
+                localStorage.setItem(STORAGE_KEY, "accepted");
+              } catch {}
               setChoice("accepted");
               setVisible(false);
               applyConsentFromChoice("accepted");
@@ -118,6 +123,6 @@ export function ConsentBanner() {
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void
+    gtag: (...args: any[]) => void;
   }
 }

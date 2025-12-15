@@ -1,4 +1,5 @@
 # JSON-LD SCHEMA IMPLEMENTATION ROADMAP
+
 **Step-by-step guide for perfect Google indexing**
 
 ---
@@ -20,6 +21,7 @@
 **Task:** Add BlogPosting schema to all blog posts
 
 **Files to Edit:**
+
 1. `/app/blog/ai-powered-seo-future/page.tsx`
 2. `/app/blog/complete-seo-audit-checklist-2025/page.tsx`
 3. `/app/blog/content-seo-creating-search-friendly-content/page.tsx`
@@ -30,6 +32,7 @@
 **Implementation Steps:**
 
 #### Step 1: Create BlogPosting Helper Function
+
 **File:** `/lib/seo/schema-generators.ts` (create if doesn't exist)
 
 ```typescript
@@ -50,44 +53,45 @@ export function generateBlogPostingSchema(data: BlogPostData) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": data.title,
-    "description": data.description,
-    "image": {
+    headline: data.title,
+    description: data.description,
+    image: {
       "@type": "ImageObject",
-      "url": data.image,
-      "width": 1200,
-      "height": 630
+      url: data.image,
+      width: 1200,
+      height: 630,
     },
-    "datePublished": data.publishDate,
-    "dateModified": data.modifiedDate || data.publishDate,
-    "author": {
+    datePublished: data.publishDate,
+    dateModified: data.modifiedDate || data.publishDate,
+    author: {
       "@type": "Person",
-      "name": data.author,
-      "url": "https://www.aiseoturbo.com/about"
+      name: data.author,
+      url: "https://www.aiseoturbo.com/about",
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "AISEOTurbo",
-      "logo": {
+      name: "AISEOTurbo",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://www.aiseoturbo.com/logo.png",
-        "width": 600,
-        "height": 60
-      }
+        url: "https://www.aiseoturbo.com/logo.png",
+        width: 600,
+        height: 60,
+      },
     },
-    "mainEntityOfPage": {
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": data.url
+      "@id": data.url,
     },
-    ...(data.wordCount && { "wordCount": data.wordCount }),
-    ...(data.keywords && { "keywords": data.keywords }),
-    ...(data.category && { "articleSection": data.category }),
-    "inLanguage": "en-US"
+    ...(data.wordCount && { wordCount: data.wordCount }),
+    ...(data.keywords && { keywords: data.keywords }),
+    ...(data.category && { articleSection: data.category }),
+    inLanguage: "en-US",
   };
 }
 ```
 
 #### Step 2: Add Schema to Each Blog Post
+
 **Example for `/app/blog/ai-powered-seo-future/page.tsx`:**
 
 ```tsx
@@ -102,7 +106,8 @@ export const metadata: Metadata = {
 export default function BlogPost() {
   const blogSchema = generateBlogPostingSchema({
     title: "The Future of SEO: AI-Powered Optimization",
-    description: "Discover how AI is revolutionizing SEO and what it means for your website's ranking strategy in 2025.",
+    description:
+      "Discover how AI is revolutionizing SEO and what it means for your website's ranking strategy in 2025.",
     image: "https://www.aiseoturbo.com/blog/ai-seo-future.jpg",
     publishDate: "2025-01-15T10:00:00+00:00",
     modifiedDate: "2025-01-20T14:30:00+00:00",
@@ -110,7 +115,7 @@ export default function BlogPost() {
     url: "https://www.aiseoturbo.com/blog/ai-powered-seo-future",
     wordCount: 2847,
     keywords: ["AI SEO", "SEO automation", "machine learning", "search optimization"],
-    category: "SEO Technology"
+    category: "SEO Technology",
   });
 
   return (
@@ -126,17 +131,20 @@ export default function BlogPost() {
 ```
 
 #### Step 3: Repeat for All 6 Blog Posts
+
 - Use actual publish dates for each post
 - Calculate word count for each article
 - Choose relevant keywords (5-10 per post)
 - Ensure image URLs are correct
 
 #### Step 4: Test Blog Schemas
+
 - Test each URL with Google Rich Results Test
 - Verify no errors or warnings
 - Check all required properties present
 
 **Checklist:**
+
 - [ ] Create `schema-generators.ts` file
 - [ ] Implement `generateBlogPostingSchema()` function
 - [ ] Add schema to `ai-powered-seo-future` blog post
@@ -176,29 +184,29 @@ export function generateProductSchema(plans: PricingPlan[]) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "AI SEO Turbo Platform",
-    "description": "AI-powered SEO audit and optimization platform for businesses",
-    "brand": {
+    name: "AI SEO Turbo Platform",
+    description: "AI-powered SEO audit and optimization platform for businesses",
+    brand: {
       "@type": "Brand",
-      "name": "AISEOTurbo"
+      name: "AISEOTurbo",
     },
-    "offers": plans.map(plan => ({
+    offers: plans.map((plan) => ({
       "@type": "Offer",
-      "name": plan.name,
-      "price": plan.price,
-      "priceCurrency": plan.currency,
-      "availability": "https://schema.org/InStock",
-      "url": "https://www.aiseoturbo.com/pricing",
-      "priceValidUntil": "2026-12-31",
-      "description": plan.description
+      name: plan.name,
+      price: plan.price,
+      priceCurrency: plan.currency,
+      availability: "https://schema.org/InStock",
+      url: "https://www.aiseoturbo.com/pricing",
+      priceValidUntil: "2026-12-31",
+      description: plan.description,
     })),
-    "aggregateRating": {
+    aggregateRating: {
       "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "247",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
+      ratingValue: "4.8",
+      ratingCount: "247",
+      bestRating: "5",
+      worstRating: "1",
+    },
   };
 }
 
@@ -211,14 +219,14 @@ export function generateFAQSchema(faqs: FAQItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.question,
-      "acceptedAnswer": {
+      name: faq.question,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": faq.answer
-      }
-    }))
+        text: faq.answer,
+      },
+    })),
   };
 }
 ```
@@ -234,43 +242,48 @@ export default function PricingPage() {
       name: "Starter Plan",
       price: "0",
       currency: "USD",
-      description: "Perfect for individuals and small websites"
+      description: "Perfect for individuals and small websites",
     },
     {
       name: "Professional Plan",
       price: "49",
       currency: "USD",
-      description: "For growing businesses and agencies"
+      description: "For growing businesses and agencies",
     },
     {
       name: "Enterprise Plan",
       price: "199",
       currency: "USD",
-      description: "For large organizations with advanced needs"
-    }
+      description: "For large organizations with advanced needs",
+    },
   ]);
 
   const faqSchema = generateFAQSchema([
     {
       question: "What is included in the free plan?",
-      answer: "The free Starter plan includes 1 website audit per month, basic SEO scores, and access to our dashboard. It's perfect for testing our platform and small websites."
+      answer:
+        "The free Starter plan includes 1 website audit per month, basic SEO scores, and access to our dashboard. It's perfect for testing our platform and small websites.",
     },
     {
       question: "Can I upgrade or downgrade my plan at any time?",
-      answer: "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing is prorated."
+      answer:
+        "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately, and billing is prorated.",
     },
     {
       question: "Do you offer refunds?",
-      answer: "We offer a 30-day money-back guarantee on all paid plans. If you're not satisfied, contact us for a full refund."
+      answer:
+        "We offer a 30-day money-back guarantee on all paid plans. If you're not satisfied, contact us for a full refund.",
     },
     {
       question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. Enterprise customers can also pay by invoice."
+      answer:
+        "We accept all major credit cards (Visa, MasterCard, American Express) and PayPal. Enterprise customers can also pay by invoice.",
     },
     {
       question: "Is there a contract or commitment?",
-      answer: "No! All plans are month-to-month with no long-term commitment. Cancel anytime with no penalties."
-    }
+      answer:
+        "No! All plans are month-to-month with no long-term commitment. Cancel anytime with no penalties.",
+    },
   ]);
 
   return (
@@ -290,12 +303,14 @@ export default function PricingPage() {
 ```
 
 #### Step 3: Test Pricing Page
+
 - Test with Rich Results Test
 - Verify Product schema valid
 - Verify FAQPage schema valid
 - Check all pricing data accurate
 
 **Checklist:**
+
 - [ ] Add `generateProductSchema()` to schema generators
 - [ ] Add `generateFAQSchema()` to schema generators
 - [ ] Implement Product schema on pricing page
@@ -314,6 +329,7 @@ export default function PricingPage() {
 **Task:** Comprehensive testing of Week 1 implementations
 
 #### Testing Checklist:
+
 - [ ] Test all 6 blog posts in Rich Results Test
 - [ ] Test pricing page in Rich Results Test
 - [ ] Validate all schemas with Schema.org validator
@@ -325,6 +341,7 @@ export default function PricingPage() {
 - [ ] Review in Search Console (after deployment)
 
 #### Tools:
+
 1. **Google Rich Results Test:** https://search.google.com/test/rich-results
 2. **Schema Validator:** https://validator.schema.org/
 3. **JSON Validator:** https://jsonlint.com/
@@ -338,6 +355,7 @@ export default function PricingPage() {
 **Task:** Deploy Week 1 changes and begin monitoring
 
 #### Deployment Steps:
+
 1. Create feature branch: `feature/schema-week-1`
 2. Commit all changes with clear messages
 3. Push to repository
@@ -347,12 +365,14 @@ export default function PricingPage() {
 7. Deploy to production
 
 #### Monitoring:
+
 - Monitor Google Search Console for schema errors
 - Check for any 404s or broken links
 - Verify schemas appear in page source
 - Document baseline metrics (CTR, impressions)
 
 **Checklist:**
+
 - [ ] Create feature branch
 - [ ] Commit schema generators file
 - [ ] Commit all blog post changes
@@ -375,6 +395,7 @@ export default function PricingPage() {
 **Task:** Add AboutPage and Service schemas
 
 #### About Page Implementation
+
 **File:** `/app/about/page.tsx`
 
 ```typescript
@@ -382,43 +403,45 @@ export function generateAboutPageSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "mainEntity": {
+    mainEntity: {
       "@type": "Organization",
-      "name": "AISEOTurbo",
-      "alternateName": "AI SEO Turbo",
-      "description": "AI-powered SEO audit platform helping businesses optimize their websites for better search engine rankings",
-      "foundingDate": "2024",
-      "founders": [
+      name: "AISEOTurbo",
+      alternateName: "AI SEO Turbo",
+      description:
+        "AI-powered SEO audit platform helping businesses optimize their websites for better search engine rankings",
+      foundingDate: "2024",
+      founders: [
         {
           "@type": "Person",
-          "name": "Founder Name", // Replace with actual
-          "jobTitle": "CEO & Founder"
-        }
+          name: "Founder Name", // Replace with actual
+          jobTitle: "CEO & Founder",
+        },
       ],
-      "numberOfEmployees": {
+      numberOfEmployees: {
         "@type": "QuantitativeValue",
-        "value": "5-10"
+        value: "5-10",
       },
-      "knowsAbout": [
+      knowsAbout: [
         "Search Engine Optimization",
         "Artificial Intelligence",
         "Machine Learning",
         "Web Development",
-        "Digital Marketing"
+        "Digital Marketing",
       ],
-      "url": "https://www.aiseoturbo.com",
-      "logo": "https://www.aiseoturbo.com/logo.png",
-      "email": "contact@aiseoturbo.com",
-      "address": {
+      url: "https://www.aiseoturbo.com",
+      logo: "https://www.aiseoturbo.com/logo.png",
+      email: "contact@aiseoturbo.com",
+      address: {
         "@type": "PostalAddress",
-        "addressCountry": "US" // Update as needed
-      }
-    }
+        addressCountry: "US", // Update as needed
+      },
+    },
   };
 }
 ```
 
 #### Feature Pages Implementation
+
 **Files:** All 5 feature pages
 
 Add to `schema-generators.ts`:
@@ -433,29 +456,30 @@ export function generateServiceSchema(service: {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": service.name,
-    "description": service.description,
-    "url": service.url,
-    "applicationCategory": "BusinessApplication",
-    "applicationSubCategory": "SEO Tool",
-    "operatingSystem": "Web Browser",
-    "featureList": service.features,
-    "provider": {
+    name: service.name,
+    description: service.description,
+    url: service.url,
+    applicationCategory: "BusinessApplication",
+    applicationSubCategory: "SEO Tool",
+    operatingSystem: "Web Browser",
+    featureList: service.features,
+    provider: {
       "@type": "Organization",
-      "name": "AISEOTurbo"
+      name: "AISEOTurbo",
     },
-    "offers": {
+    offers: {
       "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock",
-      "description": "Available in free and paid plans"
-    }
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      description: "Available in free and paid plans",
+    },
   };
 }
 ```
 
 **Checklist:**
+
 - [ ] Add AboutPage schema to about page
 - [ ] Add Service schema to `/features/seo-audit`
 - [ ] Add Service schema to `/features/site-crawler`
@@ -474,23 +498,27 @@ export function generateServiceSchema(service: {
 **Task:** Add FAQ schemas to all feature pages
 
 #### Implementation:
+
 Add FAQs relevant to each feature. Example for SEO Audit:
 
 ```typescript
 const faqSchema = generateFAQSchema([
   {
     question: "How long does an SEO audit take?",
-    answer: "Our AI-powered SEO audit typically completes in 2-5 minutes, analyzing 100+ SEO factors across your website."
+    answer:
+      "Our AI-powered SEO audit typically completes in 2-5 minutes, analyzing 100+ SEO factors across your website.",
   },
   {
     question: "What does the SEO audit check?",
-    answer: "The audit checks technical SEO, on-page optimization, content quality, mobile-friendliness, page speed, and more."
+    answer:
+      "The audit checks technical SEO, on-page optimization, content quality, mobile-friendliness, page speed, and more.",
   },
   // Add 3-5 more relevant FAQs per feature
 ]);
 ```
 
 **Checklist:**
+
 - [ ] Create 5-7 FAQs for each feature page
 - [ ] Implement FAQ schemas on all 5 feature pages
 - [ ] Test with Rich Results Test
@@ -531,6 +559,7 @@ Add to existing Article schema:
 ```
 
 **Checklist:**
+
 - [ ] Enhance all 6 case study schemas
 - [ ] Add review/rating data
 - [ ] Test all case studies
@@ -543,6 +572,7 @@ Add to existing Article schema:
 ### Day 14: Week 2 Testing & Deploy
 
 **Checklist:**
+
 - [ ] Test all Week 2 implementations
 - [ ] Fix any validation errors
 - [ ] Deploy to production
@@ -571,17 +601,18 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": items.map((item, index) => ({
+    itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "name": item.name,
-      ...(item.url && { "item": item.url })
-    }))
+      position: index + 1,
+      name: item.name,
+      ...(item.url && { item: item.url }),
+    })),
   };
 }
 ```
 
 #### Implementation Strategy:
+
 **Option A:** Add to each page individually  
 **Option B:** Create global breadcrumb component
 
@@ -634,6 +665,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 ```
 
 **Pages to Add Breadcrumbs:**
+
 - All 6 blog posts
 - All 6 case studies
 - All 28 help pages
@@ -641,6 +673,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 - Pricing, About, Contact
 
 **Checklist:**
+
 - [ ] Create breadcrumb generator function
 - [ ] Create Breadcrumbs component
 - [ ] Add to all blog posts (6 pages)
@@ -681,23 +714,26 @@ export function generateHowToSchema(data: {
   return {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    "name": data.name,
-    "description": data.description,
-    ...(data.image && { "image": data.image }),
-    ...(data.estimatedCost && { "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": data.estimatedCost } }),
-    ...(data.totalTime && { "totalTime": data.totalTime }),
-    "step": data.steps.map((step, index) => ({
+    name: data.name,
+    description: data.description,
+    ...(data.image && { image: data.image }),
+    ...(data.estimatedCost && {
+      estimatedCost: { "@type": "MonetaryAmount", currency: "USD", value: data.estimatedCost },
+    }),
+    ...(data.totalTime && { totalTime: data.totalTime }),
+    step: data.steps.map((step, index) => ({
       "@type": "HowToStep",
-      "position": index + 1,
-      "name": step.name,
-      "text": step.text,
-      ...(step.image && { "image": step.image })
-    }))
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      ...(step.image && { image: step.image }),
+    })),
   };
 }
 ```
 
 **Checklist:**
+
 - [ ] Identify tutorial pages (15+ pages)
 - [ ] Add HowTo schema to dashboard guides
 - [ ] Add HowTo schema to setup guides
@@ -716,6 +752,7 @@ export function generateHowToSchema(data: {
 **Target:** Add FAQs to 10-15 more help pages
 
 **Checklist:**
+
 - [ ] Add FAQs to understanding reports pages
 - [ ] Add FAQs to troubleshooting pages
 - [ ] Add FAQs to advanced features pages
@@ -731,21 +768,22 @@ export function generateHowToSchema(data: {
 ### ItemList Schema for Index Pages
 
 **Pages:**
+
 - `/blog` - Blog index
 - `/case-studies` - Case studies index
 - `/help` - Help center index
 
 ```typescript
-export function generateItemListSchema(items: Array<{name: string; url: string}>) {
+export function generateItemListSchema(items: Array<{ name: string; url: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": items.map((item, index) => ({
+    itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "url": item.url,
-      "name": item.name
-    }))
+      position: index + 1,
+      url: item.url,
+      name: item.name,
+    })),
   };
 }
 ```
@@ -770,12 +808,12 @@ export function generateVideoSchema(video: {
   return {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    "name": video.name,
-    "description": video.description,
-    "thumbnailUrl": video.thumbnailUrl,
-    "uploadDate": video.uploadDate,
-    "duration": video.duration,
-    "contentUrl": video.contentUrl
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    uploadDate: video.uploadDate,
+    duration: video.duration,
+    contentUrl: video.contentUrl,
   };
 }
 ```
@@ -789,6 +827,7 @@ export function generateVideoSchema(video: {
 ### Pre-Deployment Testing
 
 **For Each Implementation:**
+
 1. Test with Google Rich Results Test
 2. Validate with Schema.org validator
 3. Check JSON syntax
@@ -798,16 +837,19 @@ export function generateVideoSchema(video: {
 ### Post-Deployment Monitoring
 
 **Week 1-2:**
+
 - Daily Search Console checks
 - Monitor for schema errors
 - Track impressions/CTR baseline
 
 **Week 3-4:**
+
 - Weekly Search Console reviews
 - Analyze rich result performance
 - Document improvements
 
 **Month 2-3:**
+
 - Monthly comprehensive reviews
 - Compare before/after metrics
 - Optimize underperforming schemas
@@ -879,6 +921,7 @@ Week X Update:
 ## ✅ FINAL CHECKLIST
 
 ### Before Launch:
+
 - [ ] All schema generators implemented in `/lib/seo/schema-generators.ts`
 - [ ] All Week 1 schemas deployed and tested
 - [ ] All Week 2 schemas deployed and tested
@@ -889,6 +932,7 @@ Week X Update:
 - [ ] Team trained on maintaining schemas
 
 ### Post-Launch:
+
 - [ ] Monitor Search Console daily for first week
 - [ ] Track baseline metrics established
 - [ ] Weekly performance reviews scheduled
@@ -902,23 +946,27 @@ Week X Update:
 ### Ongoing Tasks:
 
 **Weekly:**
+
 - Check Search Console for new schema errors
 - Review rich result performance
 - Fix any validation issues
 
 **Monthly:**
+
 - Update aggregate ratings if changed
 - Review and update FAQ answers
 - Check for outdated dates/information
 - Analyze performance metrics
 
 **Quarterly:**
+
 - Comprehensive schema audit
 - Update best practices
 - Review competitor schemas
 - Plan new schema implementations
 
 **When Adding New Content:**
+
 - Add appropriate schemas to new pages
 - Test before publishing
 - Update sitemap
@@ -929,16 +977,19 @@ Week X Update:
 ## 🎓 RESOURCES & REFERENCES
 
 ### Official Documentation:
+
 - Schema.org: https://schema.org/
 - Google Search Central: https://developers.google.com/search/docs/appearance/structured-data
 - Google Rich Results Test: https://search.google.com/test/rich-results
 
 ### Testing Tools:
+
 - Schema Validator: https://validator.schema.org/
 - JSON-LD Playground: https://json-ld.org/playground/
 - Rich Results Test: https://search.google.com/test/rich-results
 
 ### Internal Documentation:
+
 - Full Audit: `SCHEMA_AUDIT_AND_PLAN.md`
 - Quick Reference: `SCHEMA_QUICK_REFERENCE.md`
 - This Roadmap: `SCHEMA_IMPLEMENTATION_ROADMAP.md`
@@ -949,4 +1000,3 @@ Week X Update:
 **Next Action:** Begin Week 1, Day 1 - Blog Post Schemas  
 **Timeline:** 4-6 weeks to completion  
 **Expected ROI:** +20-40% improvement in rich snippet coverage
-

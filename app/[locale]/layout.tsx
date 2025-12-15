@@ -1,9 +1,9 @@
-import { notFound } from 'next/navigation';
-import { locales, type Locale } from '../../i18n';
-import { ReactNode } from 'react';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { setRequestLocale } from 'next-intl/server';
+import { notFound } from "next/navigation";
+import { locales, type Locale } from "../../i18n";
+import { ReactNode } from "react";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 type Props = {
   children: ReactNode;
@@ -20,7 +20,7 @@ export function generateStaticParams() {
 export default async function LocaleLayout({ children, params }: Props) {
   // Await params (Next.js 15+ requirement)
   const { locale } = await params;
-  
+
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as Locale)) {
     notFound();
@@ -34,7 +34,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   try {
     messages = await getMessages({ locale });
   } catch (error) {
-    console.error('Failed to load messages for locale:', locale, error);
+    console.error("Failed to load messages for locale:", locale, error);
   }
 
   return (

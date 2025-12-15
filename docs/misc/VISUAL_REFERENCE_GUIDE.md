@@ -3,6 +3,7 @@
 ## 🎬 Before & After Comparison
 
 ### BEFORE (Current State)
+
 ```
 Mobile Load Timeline (5.2s LCP)
 ├─ 0ms    ─┬─ HTML Download
@@ -31,6 +32,7 @@ Issues:
 ```
 
 ### AFTER Phase 1 (Target: ~4.0s LCP)
+
 ```
 Mobile Load Timeline (4.0s LCP after Phase 1)
 ├─ 0ms    ─┬─ HTML Download
@@ -61,6 +63,7 @@ Improvements:
 ## 🏗️ Architecture Changes
 
 ### Current Component Structure
+
 ```
 HeroSection (Client-side)
 ├─ Framer Motion Wrapper
@@ -81,6 +84,7 @@ HeroSection (Client-side)
 ```
 
 ### Optimized Component Structure
+
 ```
 HeroSection (Client-side)
 ├─ useIsMobile() hook (new!)
@@ -106,6 +110,7 @@ HeroSection (Client-side)
 ## 📦 CSS & Resource Loading Strategy
 
 ### Current (Blocking)
+
 ```
 <head>
   <style>/* 50KB critical CSS */</style>      ← Blocks render
@@ -117,17 +122,18 @@ Result: CSS → JS → Parse HTML → Render (Slow!)
 ```
 
 ### Optimized (Non-blocking)
+
 ```
 <head>
   {/* Preload images */}
   <link rel="preload" as="image" href="..." fetchpriority="high" />
-  
+
   {/* Inline critical CSS only */}
   <style>/* 2.8KB hero CSS only */</style>    ← Fast inline
-  
+
   {/* Defer non-critical CSS */}
   <link rel="preload" as="style" href="..." onLoad="this.rel='stylesheet'" />
-  
+
   {/* JS deferred in body */}
 </head>
 
@@ -139,6 +145,7 @@ Result: Critical CSS → HTML Parse → First Paint → Rest loads (Fast!)
 ## 🎯 Mobile Detection Hook Logic
 
 ### Implementation
+
 ```
 useIsMobile Hook
 │
@@ -163,14 +170,21 @@ useIsMobile Hook
 ```
 
 ### Usage
+
 ```tsx
-const isMobile = useIsMobile()
+const isMobile = useIsMobile();
 
 // Conditional rendering
-{!isMobile && <DesktopMockup />}
+{
+  !isMobile && <DesktopMockup />;
+}
 
 // Conditional animations
-const variants = isMobile ? {} : { /* animations */ }
+const variants = isMobile
+  ? {}
+  : {
+      /* animations */
+    };
 ```
 
 ---
@@ -180,6 +194,7 @@ const variants = isMobile ? {} : { /* animations */ }
 ### LCP Waterfall Analysis
 
 #### Current (5.2s)
+
 ```
 Initial HTML
     ↓ (50ms)
@@ -195,6 +210,7 @@ Images Load
 ```
 
 #### After Phase 1 (4.0s)
+
 ```
 Initial HTML + Critical CSS (inlined, 0-300ms)
     ↓ (300ms) ✅ 75% faster CSS
@@ -214,6 +230,7 @@ LCP: Hero Text + Image Complete (2800ms) ✅
 ## 🔄 File Changes Map
 
 ### Phase 1 Files Modified
+
 ```
 app/
   └── layout.tsx
@@ -239,6 +256,7 @@ hooks/
 ## ⚡ Specific Code Changes
 
 ### Change 1: Import useIsMobile
+
 ```diff
 + import { useIsMobile } from "@/hooks/use-is-mobile"
 
@@ -246,12 +264,14 @@ hooks/
 ```
 
 ### Change 2: Detect mobile
+
 ```diff
   export function HeroSection() {
 +   const isMobile = useIsMobile()
 ```
 
 ### Change 3: Disable animations on mobile
+
 ```diff
   const containerVariants = isMobile ? {} : {
     hidden: { opacity: 0 },
@@ -266,6 +286,7 @@ hooks/
 ```
 
 ### Change 4: Wrap expensive backgrounds
+
 ```diff
 - <div className="absolute inset-0">
 + {!isMobile && (
@@ -276,6 +297,7 @@ hooks/
 ```
 
 ### Change 5: Conditionally render mockup
+
 ```diff
 - <motion.div className="hidden lg:block">
 + {!isMobile && (
@@ -290,6 +312,7 @@ hooks/
 ## 🧪 Testing Workflow
 
 ### Before Phase 1
+
 ```
 1. Run: npm run mobile:audit
 2. Record LCP: ___s (baseline)
@@ -298,6 +321,7 @@ hooks/
 ```
 
 ### Implement Phase 1
+
 ```
 1. Update components/hero/hero-section.tsx (15 min)
 2. Update app/layout.tsx (20 min)
@@ -306,6 +330,7 @@ hooks/
 ```
 
 ### After Phase 1
+
 ```
 1. Run: npm run mobile:audit
 2. Record new LCP: ___s (should be < 4.5s)
@@ -319,14 +344,16 @@ hooks/
 ## 🐛 Debugging Checklist
 
 ### Check 1: Hook Working?
+
 ```tsx
 // Add to HeroSection component temporarily
 useEffect(() => {
-  console.log('isMobile:', isMobile)
-}, [isMobile])
+  console.log("isMobile:", isMobile);
+}, [isMobile]);
 ```
 
 ### Check 2: Mockup Hidden?
+
 ```tsx
 // In DevTools console on mobile:
 > document.querySelector('.hidden.lg\\:block')
@@ -334,6 +361,7 @@ useEffect(() => {
 ```
 
 ### Check 3: CSS Loaded?
+
 ```
 DevTools → Network tab → Filter: CSS
 - Should see 2 CSS files:
@@ -342,6 +370,7 @@ DevTools → Network tab → Filter: CSS
 ```
 
 ### Check 4: Images Preloading?
+
 ```
 DevTools → Network tab → Filter: Images
 - Should see hero image with fetchpriority=high
@@ -353,6 +382,7 @@ DevTools → Network tab → Filter: Images
 ## 📈 Expected Metrics Dashboard
 
 ### Pre-Optimization
+
 ```
 ┌─────────────────────────────────┐
 │ Mobile Performance (Before)      │
@@ -366,6 +396,7 @@ DevTools → Network tab → Filter: Images
 ```
 
 ### Post-Phase 1 Target
+
 ```
 ┌─────────────────────────────────┐
 │ Mobile Performance (Phase 1)     │
@@ -381,6 +412,7 @@ Improvement: 23% faster! 🎉
 ```
 
 ### Full Optimization Target
+
 ```
 ┌─────────────────────────────────┐
 │ Mobile Performance (All Phases)  │

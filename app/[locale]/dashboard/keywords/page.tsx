@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { KeywordResearch } from '@/components/keywords/keyword-research';
-import { RankingDashboard } from '@/components/keywords/ranking-dashboard';
-import { KeywordOpportunities } from '@/components/keywords/keyword-opportunities';
-import { Search, TrendingUp, Lightbulb } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { KeywordResearch } from "@/components/keywords/keyword-research";
+import { RankingDashboard } from "@/components/keywords/ranking-dashboard";
+import { KeywordOpportunities } from "@/components/keywords/keyword-opportunities";
+import { Search, TrendingUp, Lightbulb } from "lucide-react";
 
 function TabSkeleton() {
   return (
@@ -56,7 +56,7 @@ function TabSkeleton() {
 
 export default function KeywordsPage() {
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState<'research' | 'rankings' | 'opportunities'>('research');
+  const [activeTab, setActiveTab] = useState<"research" | "rankings" | "opportunities">("research");
   const [projectId, setProjectId] = useState<string | null>(null);
   const [isProjectLoading, setIsProjectLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -68,7 +68,7 @@ export default function KeywordsPage() {
 
     async function resolveProjectId() {
       setIsProjectLoading(true);
-      const idFromQuery = searchParams.get('project');
+      const idFromQuery = searchParams.get("project");
       if (idFromQuery) {
         if (!cancelled) {
           setProjectId(idFromQuery);
@@ -79,27 +79,30 @@ export default function KeywordsPage() {
       }
 
       try {
-        const res = await fetch('/api/projects?limit=1');
+        const res = await fetch("/api/projects?limit=1");
         if (res.status === 401) {
           if (!cancelled) {
             setIsAuthenticated(false);
-            setProjectId('demo-keyword-project');
+            setProjectId("demo-keyword-project");
             setIsProjectLoading(false);
           }
           return;
         }
 
         const json = await res.json();
-        const firstProjectId = json?.success && Array.isArray(json?.data) && json.data[0]?.id ? String(json.data[0].id) : null;
+        const firstProjectId =
+          json?.success && Array.isArray(json?.data) && json.data[0]?.id
+            ? String(json.data[0].id)
+            : null;
         if (!cancelled) {
           setIsAuthenticated(true);
-          setProjectId(firstProjectId ?? 'demo-keyword-project');
+          setProjectId(firstProjectId ?? "demo-keyword-project");
           setIsProjectLoading(false);
         }
       } catch {
         if (!cancelled) {
           setIsAuthenticated(null);
-          setProjectId('demo-keyword-project');
+          setProjectId("demo-keyword-project");
           setIsProjectLoading(false);
         }
       }
@@ -111,7 +114,7 @@ export default function KeywordsPage() {
     };
   }, [searchParams]);
 
-  const handleTabChange = async (newTab: 'research' | 'rankings' | 'opportunities') => {
+  const handleTabChange = async (newTab: "research" | "rankings" | "opportunities") => {
     if (newTab === activeTab) return;
 
     setIsTabLoading(true);
@@ -124,14 +127,14 @@ export default function KeywordsPage() {
     }, 150);
   };
 
-  const renderTabContent = (tab: 'research' | 'rankings' | 'opportunities') => {
+  const renderTabContent = (tab: "research" | "rankings" | "opportunities") => {
     if (!projectId) return null;
     switch (tab) {
-      case 'research':
+      case "research":
         return <KeywordResearch projectId={projectId} />;
-      case 'rankings':
+      case "rankings":
         return <RankingDashboard projectId={projectId} />;
-      case 'opportunities':
+      case "opportunities":
         return <KeywordOpportunities projectId={projectId} />;
       default:
         return <KeywordResearch projectId={projectId} />;
@@ -157,45 +160,45 @@ export default function KeywordsPage() {
           Research keywords, track rankings, and identify optimization opportunities
         </p>
       </div>
-      
+
       <div className="w-full">
         <div className="flex space-x-2 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-1.5 rounded-xl mb-6 shadow-sm">
-          <button 
+          <button
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === 'research' 
-                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              activeTab === "research"
+                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+                : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
             }`}
-            onClick={() => handleTabChange('research')}
+            onClick={() => handleTabChange("research")}
           >
             <Search className="h-4 w-4" />
             Research
           </button>
-          <button 
+          <button
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === 'rankings' 
-                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              activeTab === "rankings"
+                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+                : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
             }`}
-            onClick={() => handleTabChange('rankings')}
+            onClick={() => handleTabChange("rankings")}
           >
             <TrendingUp className="h-4 w-4" />
             Rankings
           </button>
-          <button 
+          <button
             className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === 'opportunities' 
-                ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md' 
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+              activeTab === "opportunities"
+                ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+                : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
             }`}
-            onClick={() => handleTabChange('opportunities')}
+            onClick={() => handleTabChange("opportunities")}
           >
             <Lightbulb className="h-4 w-4" />
             Opportunities
           </button>
         </div>
-        
-        {isProjectLoading ? <TabSkeleton /> : (isTabLoading ? <TabSkeleton /> : tabContent)}
+
+        {isProjectLoading ? <TabSkeleton /> : isTabLoading ? <TabSkeleton /> : tabContent}
       </div>
     </div>
   );

@@ -1,17 +1,26 @@
-'use client';
+"use client";
 
-import React, { useState, useMemo, useEffect } from 'react';
-import { X, Eye, Lightbulb, TrendingUp, Download, Plus, Search as SearchIcon, HelpCircle } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import React, { useState, useMemo, useEffect } from "react";
+import {
+  X,
+  Eye,
+  Lightbulb,
+  TrendingUp,
+  Download,
+  Plus,
+  Search as SearchIcon,
+  HelpCircle,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface Question {
   question: string;
   volume: number;
   difficulty: number;
-  type: 'what' | 'how' | 'why' | 'when' | 'where' | 'who';
-  intent: 'INFORMATIONAL' | 'COMMERCIAL' | 'TRANSACTIONAL';
+  type: "what" | "how" | "why" | "when" | "where" | "who";
+  intent: "INFORMATIONAL" | "COMMERCIAL" | "TRANSACTIONAL";
   opportunityScore: number;
 }
 
@@ -23,29 +32,31 @@ interface QuestionsModalProps {
   questions?: string[];
 }
 
-export function QuestionsModal({ 
-  isOpen, 
-  onClose, 
-  baseKeyword, 
+export function QuestionsModal({
+  isOpen,
+  onClose,
+  baseKeyword,
   baseVolume,
-  questions = []
+  questions = [],
 }: QuestionsModalProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filterType, setFilterType] = useState<'all' | 'what' | 'how' | 'why' | 'when' | 'where' | 'who'>('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState<
+    "all" | "what" | "how" | "why" | "when" | "where" | "who"
+  >("all");
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   // Close on Escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
@@ -132,54 +143,60 @@ export function QuestionsModal({
         `who offers ${baseKeyword}`,
         `who provides ${baseKeyword}`,
         `who recommends ${baseKeyword}`,
-      ]
+      ],
     };
 
     const allQuestions: Question[] = [];
 
     // Add provided questions first
     if (questions && questions.length > 0) {
-      questions.forEach(q => {
+      questions.forEach((q) => {
         const type = (
-          q.toLowerCase().startsWith('what') ? 'what' :
-          q.toLowerCase().startsWith('how') ? 'how' :
-          q.toLowerCase().startsWith('why') ? 'why' :
-          q.toLowerCase().startsWith('when') ? 'when' :
-          q.toLowerCase().startsWith('where') ? 'where' :
-          'who'
-        ) as Question['type'];
+          q.toLowerCase().startsWith("what")
+            ? "what"
+            : q.toLowerCase().startsWith("how")
+              ? "how"
+              : q.toLowerCase().startsWith("why")
+                ? "why"
+                : q.toLowerCase().startsWith("when")
+                  ? "when"
+                  : q.toLowerCase().startsWith("where")
+                    ? "where"
+                    : "who"
+        ) as Question["type"];
 
         allQuestions.push({
           question: q,
           volume: Math.floor(baseVolume * (0.05 + Math.random() * 0.15)),
           difficulty: 20 + Math.random() * 40,
           type,
-          intent: 'INFORMATIONAL',
-          opportunityScore: 50 + Math.random() * 40
+          intent: "INFORMATIONAL",
+          opportunityScore: 50 + Math.random() * 40,
         });
       });
     }
 
     // Generate from templates
     Object.entries(questionTemplates).forEach(([type, templates]) => {
-      templates.forEach(template => {
+      templates.forEach((template) => {
         const volume = Math.floor(baseVolume * (0.03 + Math.random() * 0.12));
         const difficulty = 15 + Math.random() * 35;
         const opportunityScore = Math.floor(
-          (volume / 100) * 0.3 + 
-          (100 - difficulty) * 0.5 + 
-          Math.random() * 20
+          (volume / 100) * 0.3 + (100 - difficulty) * 0.5 + Math.random() * 20
         );
 
         allQuestions.push({
           question: template,
           volume,
           difficulty,
-          type: type as Question['type'],
-          intent: type === 'how' && template.includes('buy') ? 'TRANSACTIONAL' : 
-                   type === 'where' && template.includes('buy') ? 'COMMERCIAL' :
-                   'INFORMATIONAL',
-          opportunityScore: Math.min(100, opportunityScore)
+          type: type as Question["type"],
+          intent:
+            type === "how" && template.includes("buy")
+              ? "TRANSACTIONAL"
+              : type === "where" && template.includes("buy")
+                ? "COMMERCIAL"
+                : "INFORMATIONAL",
+          opportunityScore: Math.min(100, opportunityScore),
         });
       });
     });
@@ -192,60 +209,60 @@ export function QuestionsModal({
 
   // Filter questions
   const filteredQuestions = useMemo(() => {
-    let filtered = allQuestions.filter(q => 
+    let filtered = allQuestions.filter((q) =>
       q.question.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    if (filterType !== 'all') {
-      filtered = filtered.filter(q => q.type === filterType);
+    if (filterType !== "all") {
+      filtered = filtered.filter((q) => q.type === filterType);
     }
 
     return filtered;
   }, [allQuestions, searchQuery, filterType]);
 
-  const getQuestionEmoji = (type: Question['type']) => {
+  const getQuestionEmoji = (type: Question["type"]) => {
     const emojis = {
-      what: '❓',
-      how: '🔧',
-      why: '💡',
-      when: '⏰',
-      where: '📍',
-      who: '👤'
+      what: "❓",
+      how: "🔧",
+      why: "💡",
+      when: "⏰",
+      where: "📍",
+      who: "👤",
     };
     return emojis[type];
   };
 
   const getOpportunityColor = (score: number) => {
-    if (score >= 80) return 'text-green-600 bg-green-100';
-    if (score >= 60) return 'text-blue-600 bg-blue-100';
-    if (score >= 40) return 'text-yellow-600 bg-yellow-100';
-    return 'text-orange-600 bg-orange-100';
+    if (score >= 80) return "text-green-600 bg-green-100";
+    if (score >= 60) return "text-blue-600 bg-blue-100";
+    if (score >= 40) return "text-yellow-600 bg-yellow-100";
+    return "text-orange-600 bg-orange-100";
   };
 
   const toggleQuestionSelection = (question: string) => {
-    setSelectedQuestions(prev => 
-      prev.includes(question) 
-        ? prev.filter(q => q !== question)
-        : [...prev, question]
+    setSelectedQuestions((prev) =>
+      prev.includes(question) ? prev.filter((q) => q !== question) : [...prev, question]
     );
   };
 
   const exportToCSV = () => {
     const csvContent = [
-      ['Question', 'Volume', 'Difficulty', 'Type', 'Intent', 'Opportunity Score'],
-      ...filteredQuestions.map(q => [
+      ["Question", "Volume", "Difficulty", "Type", "Intent", "Opportunity Score"],
+      ...filteredQuestions.map((q) => [
         q.question,
         q.volume,
         Math.round(q.difficulty),
         q.type,
         q.intent,
-        Math.round(q.opportunityScore)
-      ])
-    ].map(row => row.join(',')).join('\n');
+        Math.round(q.opportunityScore),
+      ]),
+    ]
+      .map((row) => row.join(","))
+      .join("\n");
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `${baseKeyword}-questions.csv`;
     a.click();
@@ -256,11 +273,8 @@ export function QuestionsModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
-        onClick={onClose}
-      />
-      
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+
       {/* Modal */}
       <div className="relative bg-white rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300">
         {/* Header */}
@@ -274,15 +288,11 @@ export function QuestionsModal({
                 Question Keywords
               </h2>
               <p className="text-slate-600 font-medium mt-1">
-                <span className="text-blue-700 font-bold">{filteredQuestions.length}</span> questions for "<span className="font-semibold">{baseKeyword}</span>"
+                <span className="text-blue-700 font-bold">{filteredQuestions.length}</span>{" "}
+                questions for "<span className="font-semibold">{baseKeyword}</span>"
               </p>
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="hover:bg-blue-100"
-            >
+            <Button variant="ghost" size="icon" onClick={onClose} className="hover:bg-blue-100">
               <X className="h-5 w-5" />
             </Button>
           </div>
@@ -303,17 +313,17 @@ export function QuestionsModal({
           </div>
 
           <div className="flex gap-2 flex-wrap">
-            {(['all', 'what', 'how', 'why', 'when', 'where', 'who'] as const).map(type => (
+            {(["all", "what", "how", "why", "when", "where", "who"] as const).map((type) => (
               <button
                 key={type}
                 onClick={() => setFilterType(type)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 ${
                   filterType === type
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-md"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                 }`}
               >
-                {type === 'all' ? 'All' : type.charAt(0).toUpperCase() + type.slice(1)}
+                {type === "all" ? "All" : type.charAt(0).toUpperCase() + type.slice(1)}
               </button>
             ))}
           </div>
@@ -347,8 +357,8 @@ export function QuestionsModal({
                 key={index}
                 className={`group p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer ${
                   selectedQuestions.includes(q.question)
-                    ? 'border-purple-500 bg-purple-50'
-                    : 'border-slate-200 hover:border-purple-300 hover:bg-slate-50'
+                    ? "border-purple-500 bg-purple-50"
+                    : "border-slate-200 hover:border-purple-300 hover:bg-slate-50"
                 }`}
                 onClick={() => toggleQuestionSelection(q.question)}
               >
@@ -363,17 +373,25 @@ export function QuestionsModal({
                     <div className="flex items-start gap-2 mb-2">
                       <span className="text-xl">{getQuestionEmoji(q.type)}</span>
                       <h4 className="font-semibold text-slate-900 flex-1">{q.question}</h4>
-                      <Badge className={`px-3 py-1 font-bold border-0 whitespace-nowrap ${getOpportunityColor(q.opportunityScore)}`}>
+                      <Badge
+                        className={`px-3 py-1 font-bold border-0 whitespace-nowrap ${getOpportunityColor(q.opportunityScore)}`}
+                      >
                         {Math.round(q.opportunityScore)} Score
                       </Badge>
                     </div>
                     <div className="flex items-center gap-4 flex-wrap ml-8">
                       <span className="text-sm font-medium text-slate-600 flex items-center gap-1">
                         <Eye className="h-3.5 w-3.5 text-blue-600" />
-                        <span className="font-bold text-blue-700">{q.volume.toLocaleString()}</span> /mo
+                        <span className="font-bold text-blue-700">
+                          {q.volume.toLocaleString()}
+                        </span>{" "}
+                        /mo
                       </span>
                       <span className="text-sm font-medium text-slate-600">
-                        KD: <span className="font-bold text-slate-700">{Math.round(q.difficulty)}%</span>
+                        KD:{" "}
+                        <span className="font-bold text-slate-700">
+                          {Math.round(q.difficulty)}%
+                        </span>
                       </span>
                       <Badge className="text-xs bg-blue-100 text-blue-700 border-0 font-semibold">
                         {q.type.toUpperCase()}
@@ -392,7 +410,8 @@ export function QuestionsModal({
         {/* Footer */}
         <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
           <p className="text-sm text-slate-600">
-            Showing <span className="font-bold text-slate-900">{filteredQuestions.length}</span> of <span className="font-bold text-slate-900">{allQuestions.length}</span> questions
+            Showing <span className="font-bold text-slate-900">{filteredQuestions.length}</span> of{" "}
+            <span className="font-bold text-slate-900">{allQuestions.length}</span> questions
           </p>
           <div className="flex gap-2">
             <Button variant="outline" onClick={onClose}>

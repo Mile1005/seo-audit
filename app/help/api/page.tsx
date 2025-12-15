@@ -1,22 +1,33 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { Breadcrumbs } from '@/components/navigation/breadcrumbs'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, CheckCircle, Database, Key, Webhook, Code, Shield, Zap, FileText } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  CheckCircle,
+  Database,
+  Key,
+  Webhook,
+  Code,
+  Shield,
+  Zap,
+  FileText,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function APIOverviewPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumbs */}
         <Breadcrumbs
           items={[
-            { name: 'Home', url: 'https://www.aiseoturbo.com' },
-            { name: 'Help', url: 'https://www.aiseoturbo.com/help' },
-            { name: 'API Integration', url: 'https://www.aiseoturbo.com/help/api' }
+            { name: "Home", url: "https://www.aiseoturbo.com" },
+            { name: "Help", url: "https://www.aiseoturbo.com/help" },
+            { name: "API Integration", url: "https://www.aiseoturbo.com/help/api" },
           ]}
         />
 
@@ -49,8 +60,9 @@ export default function APIOverviewPage() {
               </div>
 
               <p className="text-xl text-gray-400 mb-8">
-                Integrate AI SEO Turbo's powerful SEO tools into your applications with our comprehensive
-                REST API. Automate audits, access real-time data, and build custom workflows.
+                Integrate AI SEO Turbo's powerful SEO tools into your applications with our
+                comprehensive REST API. Automate audits, access real-time data, and build custom
+                workflows.
               </p>
 
               <div className="flex items-center gap-6 text-gray-400 text-sm">
@@ -75,8 +87,9 @@ export default function APIOverviewPage() {
               <div>
                 <h2 className="text-3xl font-bold text-white mb-4">API Overview</h2>
                 <p className="text-gray-300 text-lg">
-                  Our REST API provides programmatic access to all AI SEO Turbo features, allowing you to
-                  integrate SEO analysis, monitoring, and optimization into your existing workflows and applications.
+                  Our REST API provides programmatic access to all AI SEO Turbo features, allowing
+                  you to integrate SEO analysis, monitoring, and optimization into your existing
+                  workflows and applications.
                 </p>
               </div>
 
@@ -97,8 +110,8 @@ export default function APIOverviewPage() {
                           API Authentication
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Learn how to authenticate with our API using API keys, OAuth, and secure token management.
-                          Includes code examples and best practices.
+                          Learn how to authenticate with our API using API keys, OAuth, and secure
+                          token management. Includes code examples and best practices.
                         </p>
                         <span className="text-blue-400 text-sm group-hover:text-blue-300 transition-colors">
                           Learn more →
@@ -120,8 +133,8 @@ export default function APIOverviewPage() {
                           Webhooks & Real-time Updates
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Set up webhooks to receive real-time notifications about audit completions,
-                          keyword ranking changes, and other events.
+                          Set up webhooks to receive real-time notifications about audit
+                          completions, keyword ranking changes, and other events.
                         </p>
                         <span className="text-purple-400 text-sm group-hover:text-purple-300 transition-colors">
                           Learn more →
@@ -140,12 +153,10 @@ export default function APIOverviewPage() {
                           REST API Reference
                         </h4>
                         <p className="text-gray-300 text-sm mb-3">
-                          Complete API documentation with endpoints for SEO audits, keyword tracking,
-                          backlink analysis, and more.
+                          Complete API documentation with endpoints for SEO audits, keyword
+                          tracking, backlink analysis, and more.
                         </p>
-                        <span className="text-green-400 text-sm">
-                          Coming Soon →
-                        </span>
+                        <span className="text-green-400 text-sm">Coming Soon →</span>
                       </div>
                     </div>
                   </div>
@@ -163,9 +174,7 @@ export default function APIOverviewPage() {
                           Understanding API rate limits, security best practices, and how to handle
                           API errors and responses.
                         </p>
-                        <span className="text-orange-400 text-sm">
-                          Coming Soon →
-                        </span>
+                        <span className="text-orange-400 text-sm">Coming Soon →</span>
                       </div>
                     </div>
                   </div>
@@ -176,8 +185,8 @@ export default function APIOverviewPage() {
               <div className="bg-slate-800/30 border border-slate-700/50 rounded-lg p-8">
                 <h3 className="text-2xl font-bold text-white mb-4">Getting Started with the API</h3>
                 <p className="text-gray-300 mb-6">
-                  Ready to integrate AI SEO Turbo into your application? Follow these steps to get started
-                  with our API and begin automating your SEO workflows.
+                  Ready to integrate AI SEO Turbo into your application? Follow these steps to get
+                  started with our API and begin automating your SEO workflows.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
@@ -186,7 +195,10 @@ export default function APIOverviewPage() {
                     </div>
                     <div>
                       <h4 className="text-white font-semibold mb-1">Create an API Key</h4>
-                      <p className="text-gray-300 text-sm">Generate secure API keys in your dashboard settings to authenticate your requests.</p>
+                      <p className="text-gray-300 text-sm">
+                        Generate secure API keys in your dashboard settings to authenticate your
+                        requests.
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -195,7 +207,9 @@ export default function APIOverviewPage() {
                     </div>
                     <div>
                       <h4 className="text-white font-semibold mb-1">Review Authentication Guide</h4>
-                      <p className="text-gray-300 text-sm">Learn about different authentication methods and security best practices.</p>
+                      <p className="text-gray-300 text-sm">
+                        Learn about different authentication methods and security best practices.
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -204,7 +218,9 @@ export default function APIOverviewPage() {
                     </div>
                     <div>
                       <h4 className="text-white font-semibold mb-1">Start with a Test Request</h4>
-                      <p className="text-gray-300 text-sm">Make your first API call and verify everything is working correctly.</p>
+                      <p className="text-gray-300 text-sm">
+                        Make your first API call and verify everything is working correctly.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -218,7 +234,7 @@ export default function APIOverviewPage() {
                     <h4 className="text-lg font-semibold text-white mb-3">Start an SEO Audit</h4>
                     <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto text-sm">
                       <code className="text-gray-300">
-{`curl -X POST https://api.aiseoturbo.com/v1/seo-audit/start \\
+                        {`curl -X POST https://api.aiseoturbo.com/v1/seo-audit/start \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -236,7 +252,7 @@ export default function APIOverviewPage() {
                     <h4 className="text-lg font-semibold text-white mb-3">Check Audit Status</h4>
                     <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto text-sm">
                       <code className="text-gray-300">
-{`curl -X GET https://api.aiseoturbo.com/v1/seo-audit/status/AUDIT_ID \\
+                        {`curl -X GET https://api.aiseoturbo.com/v1/seo-audit/status/AUDIT_ID \\
   -H "Authorization: Bearer YOUR_API_KEY"`}
                       </code>
                     </pre>
@@ -253,7 +269,9 @@ export default function APIOverviewPage() {
                       <Code className="w-6 h-6 text-white" />
                     </div>
                     <h4 className="text-lg font-semibold text-white mb-2">JavaScript SDK</h4>
-                    <p className="text-gray-300 text-sm mb-3">Official SDK for Node.js and browser environments</p>
+                    <p className="text-gray-300 text-sm mb-3">
+                      Official SDK for Node.js and browser environments
+                    </p>
                     <span className="text-blue-400 text-sm">Coming Soon</span>
                   </div>
 
@@ -262,7 +280,9 @@ export default function APIOverviewPage() {
                       <Code className="w-6 h-6 text-white" />
                     </div>
                     <h4 className="text-lg font-semibold text-white mb-2">Python SDK</h4>
-                    <p className="text-gray-300 text-sm mb-3">Python library for easy API integration</p>
+                    <p className="text-gray-300 text-sm mb-3">
+                      Python library for easy API integration
+                    </p>
                     <span className="text-green-400 text-sm">Coming Soon</span>
                   </div>
 
@@ -271,7 +291,9 @@ export default function APIOverviewPage() {
                       <Code className="w-6 h-6 text-white" />
                     </div>
                     <h4 className="text-lg font-semibold text-white mb-2">PHP SDK</h4>
-                    <p className="text-gray-300 text-sm mb-3">PHP library for WordPress and other CMS integrations</p>
+                    <p className="text-gray-300 text-sm mb-3">
+                      PHP library for WordPress and other CMS integrations
+                    </p>
                     <span className="text-purple-400 text-sm">Coming Soon</span>
                   </div>
                 </div>
@@ -306,5 +328,5 @@ export default function APIOverviewPage() {
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

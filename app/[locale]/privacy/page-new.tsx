@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { MainLayout } from "@/components/layout/main-layout"
-import { motion } from 'framer-motion'
-import { Shield, Lock, Eye, Database, Settings, Users } from 'lucide-react'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { Shield, Lock, Eye, Database, Settings, Users } from "lucide-react";
 
 export default function PrivacyPage() {
   return (
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
               transition={{
                 duration: 20,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"
             />
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
               transition={{
                 duration: 25,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "easeInOut",
               }}
               className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"
             />
@@ -51,7 +51,8 @@ export default function PrivacyPage() {
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Privacy Policy</h1>
               <p className="text-xl text-gray-300 mb-4">
-                Your privacy is important to us. This policy explains how we collect, use, and protect your information.
+                Your privacy is important to us. This policy explains how we collect, use, and
+                protect your information.
               </p>
               <p className="text-sm text-gray-400">Last updated: August 28, 2025</p>
             </motion.div>
@@ -68,8 +69,7 @@ export default function PrivacyPage() {
               className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl shadow-2xl p-8 md:p-12"
             >
               <div className="space-y-12">
-                
-                <motion.section 
+                <motion.section
                   className="space-y-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -82,9 +82,14 @@ export default function PrivacyPage() {
                     Information We Collect
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>We collect information you provide directly to us, such as when you create an account, use our services, or contact us.</p>
+                    <p>
+                      We collect information you provide directly to us, such as when you create an
+                      account, use our services, or contact us.
+                    </p>
                     <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
-                      <h4 className="font-semibold text-foreground mb-2">Types of data we collect:</h4>
+                      <h4 className="font-semibold text-foreground mb-2">
+                        Types of data we collect:
+                      </h4>
                       <ul className="list-disc list-inside space-y-1">
                         <li>Email address and contact information</li>
                         <li>Website URLs you submit for analysis</li>
@@ -95,7 +100,7 @@ export default function PrivacyPage() {
                   </div>
                 </motion.section>
 
-                <motion.section 
+                <motion.section
                   className="space-y-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -108,11 +113,17 @@ export default function PrivacyPage() {
                     How We Use Your Information
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>We use the information we collect to provide, maintain, and improve our services.</p>
+                    <p>
+                      We use the information we collect to provide, maintain, and improve our
+                      services.
+                    </p>
                     <div className="grid gap-4">
                       <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
                         <h4 className="font-semibold text-foreground mb-2">Service Provision</h4>
-                        <p>To perform SEO audits, generate reports, and provide technical analysis of your websites.</p>
+                        <p>
+                          To perform SEO audits, generate reports, and provide technical analysis of
+                          your websites.
+                        </p>
                       </div>
                       <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
                         <h4 className="font-semibold text-foreground mb-2">Communication</h4>
@@ -120,13 +131,15 @@ export default function PrivacyPage() {
                       </div>
                       <div className="bg-muted/50 rounded-lg p-4 border border-border/50">
                         <h4 className="font-semibold text-foreground mb-2">Improvement</h4>
-                        <p>To analyze usage patterns and improve our algorithms and user experience.</p>
+                        <p>
+                          To analyze usage patterns and improve our algorithms and user experience.
+                        </p>
                       </div>
                     </div>
                   </div>
                 </motion.section>
 
-                <motion.section 
+                <motion.section
                   className="space-y-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -139,27 +152,36 @@ export default function PrivacyPage() {
                     Data Security
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>We implement appropriate technical and organizational measures to protect your personal information.</p>
+                    <p>
+                      We implement appropriate technical and organizational measures to protect your
+                      personal information.
+                    </p>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="bg-emerald-500/5 rounded-lg p-4 border border-emerald-500/20">
                         <div className="flex items-center mb-2">
                           <Lock className="w-4 h-4 text-emerald-400 mr-2" />
                           <span className="font-semibold text-foreground">Encryption</span>
                         </div>
-                        <p className="text-sm">All data is encrypted in transit and at rest using industry-standard protocols.</p>
+                        <p className="text-sm">
+                          All data is encrypted in transit and at rest using industry-standard
+                          protocols.
+                        </p>
                       </div>
                       <div className="bg-blue-500/5 rounded-lg p-4 border border-blue-500/20">
                         <div className="flex items-center mb-2">
                           <Shield className="w-4 h-4 text-blue-400 mr-2" />
                           <span className="font-semibold text-foreground">Access Control</span>
                         </div>
-                        <p className="text-sm">Strict access controls ensure only authorized personnel can access your data.</p>
+                        <p className="text-sm">
+                          Strict access controls ensure only authorized personnel can access your
+                          data.
+                        </p>
                       </div>
                     </div>
                   </div>
                 </motion.section>
 
-                <motion.section 
+                <motion.section
                   className="space-y-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -176,9 +198,18 @@ export default function PrivacyPage() {
                     <div className="space-y-3">
                       {[
                         { title: "Access", description: "Request a copy of your personal data" },
-                        { title: "Correction", description: "Update or correct inaccurate information" },
-                        { title: "Deletion", description: "Request deletion of your personal data" },
-                        { title: "Portability", description: "Receive your data in a machine-readable format" }
+                        {
+                          title: "Correction",
+                          description: "Update or correct inaccurate information",
+                        },
+                        {
+                          title: "Deletion",
+                          description: "Request deletion of your personal data",
+                        },
+                        {
+                          title: "Portability",
+                          description: "Receive your data in a machine-readable format",
+                        },
                       ].map((right, index) => (
                         <div key={index} className="flex items-start space-x-3">
                           <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
@@ -192,7 +223,7 @@ export default function PrivacyPage() {
                   </div>
                 </motion.section>
 
-                <motion.section 
+                <motion.section
                   className="space-y-6"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -205,12 +236,20 @@ export default function PrivacyPage() {
                     Contact Us
                   </h2>
                   <div className="pl-14 space-y-4 text-muted-foreground">
-                    <p>If you have any questions about this Privacy Policy or want to exercise your rights, please contact us:</p>
+                    <p>
+                      If you have any questions about this Privacy Policy or want to exercise your
+                      rights, please contact us:
+                    </p>
                     <div className="bg-muted/50 rounded-lg p-6 border border-border/50">
                       <div className="grid md:grid-cols-2 gap-4">
                         <div>
                           <h4 className="font-semibold text-foreground mb-2">Email</h4>
-                          <a href="mailto:support@aiseoturbo.com" className="text-primary hover:underline">support@aiseoturbo.com</a>
+                          <a
+                            href="mailto:support@aiseoturbo.com"
+                            className="text-primary hover:underline"
+                          >
+                            support@aiseoturbo.com
+                          </a>
                         </div>
                         <div>
                           <h4 className="font-semibold text-foreground mb-2">Response Time</h4>
@@ -220,12 +259,11 @@ export default function PrivacyPage() {
                     </div>
                   </div>
                 </motion.section>
-
               </div>
             </motion.div>
           </div>
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

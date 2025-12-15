@@ -26,18 +26,18 @@ test("missing meta description triggers high severity issue with snippet", () =>
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
   const metaIssue = res.issues.find((i) => i.id === "missing-meta-description");
-  
+
   expect(metaIssue).toBeTruthy();
   expect(metaIssue?.severity).toBe("high");
   expect(metaIssue?.category).toBe("title_meta");
   expect(metaIssue?.found).toContain("meta description");
   expect(metaIssue?.why_it_matters).toContain("search results");
   expect(metaIssue?.recommendation).toContain("Add");
-  expect(metaIssue?.snippet).toContain("<meta name=\"description\"");
-  expect(metaIssue?.snippet).toContain("meta name=\"description\"");
+  expect(metaIssue?.snippet).toContain('<meta name="description"');
+  expect(metaIssue?.snippet).toContain('meta name="description"');
 });
 
 test("missing title triggers high severity issue", () => {
@@ -64,10 +64,10 @@ test("missing title triggers high severity issue", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
   const titleIssue = res.issues.find((i) => i.id === "missing-title");
-  
+
   expect(titleIssue).toBeTruthy();
   expect(titleIssue?.severity).toBe("high");
   expect(titleIssue?.category).toBe("title_meta");
@@ -99,10 +99,10 @@ test("missing H1 triggers high severity issue", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
   const h1Issue = res.issues.find((i) => i.id === "missing-h1");
-  
+
   expect(h1Issue).toBeTruthy();
   expect(h1Issue?.severity).toBe("high");
   expect(h1Issue?.category).toBe("headings");
@@ -134,10 +134,10 @@ test("multiple H1s trigger medium severity issue", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
   const multipleH1Issue = res.issues.find((i) => i.id === "multiple-h1");
-  
+
   expect(multipleH1Issue).toBeTruthy();
   expect(multipleH1Issue?.severity).toBe("high");
   expect(multipleH1Issue?.category).toBe("headings");
@@ -168,15 +168,15 @@ test("missing canonical URL triggers medium severity issue", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
   const canonicalIssue = res.issues.find((i) => i.id === "missing-canonical");
-  
+
   expect(canonicalIssue).toBeTruthy();
   expect(canonicalIssue?.severity).toBe("medium");
   expect(canonicalIssue?.category).toBe("title_meta");
   expect(canonicalIssue?.found).toContain("canonical");
-  expect(canonicalIssue?.snippet).toContain("<link rel=\"canonical\"");
+  expect(canonicalIssue?.snippet).toContain('<link rel="canonical"');
 });
 
 test("noindex directive triggers high severity issue", () => {
@@ -203,10 +203,10 @@ test("noindex directive triggers high severity issue", () => {
     hasNofollow: false,
     accessibilityIssues: [],
   };
-  
+
   const res = calculateAudit(url, parsed, { targetKeyword: "SEO" });
   const noindexIssue = res.issues.find((i) => i.id === "noindex-found");
-  
+
   expect(noindexIssue).toBeTruthy();
   expect(noindexIssue?.severity).toBe("high");
   expect(noindexIssue?.category).toBe("title_meta");

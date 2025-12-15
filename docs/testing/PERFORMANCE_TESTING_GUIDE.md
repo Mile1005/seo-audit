@@ -5,6 +5,7 @@
 ### 1. **Browser DevTools (Primary Method)**
 
 #### Chrome DevTools:
+
 1. **Open DevTools**: `F12` or `Ctrl+Shift+I`
 2. **Performance Tab**:
    - Click "Performance" tab
@@ -24,6 +25,7 @@
    - Real-time performance data displayed
 
 #### Firefox DevTools:
+
 1. **Open DevTools**: `F12`
 2. **Performance Tab**: Similar to Chrome
 3. **Network Tab**: Check caching effectiveness
@@ -31,43 +33,48 @@
 ### 2. **Real User Monitoring (RUM)**
 
 #### In Your App Console:
+
 ```javascript
 // Our Core Web Vitals optimizer logs to console
 // Look for these messages:
-- "🎯 LCP optimized: [time]ms"
-- "⚡ INP tracked: [time]ms" 
-- "📐 CLS prevented: [score]"
-- "🚀 Performance hint applied"
+-"🎯 LCP optimized: [time]ms" -
+  "⚡ INP tracked: [time]ms" -
+  "📐 CLS prevented: [score]" -
+  "🚀 Performance hint applied";
 ```
 
 #### Browser Console Commands:
+
 ```javascript
 // Check if service worker is active
-navigator.serviceWorker.controller
+navigator.serviceWorker.controller;
 
 // Check cache status
-caches.keys().then(console.log)
+caches.keys().then(console.log);
 
 // Manual Core Web Vitals check
-performance.getEntriesByType('navigation')
-performance.getEntriesByType('measure')
+performance.getEntriesByType("navigation");
+performance.getEntriesByType("measure");
 ```
 
 ### 3. **Online Testing Tools**
 
 #### PageSpeed Insights:
+
 - URL: https://pagespeed.web.dev/
 - Enter your site URL
 - View Core Web Vitals scores
 - Get performance recommendations
 
 #### GTmetrix:
+
 - URL: https://gtmetrix.com/
 - Detailed performance breakdown
 - Core Web Vitals analysis
 - Historical tracking
 
 #### WebPageTest:
+
 - URL: https://www.webpagetest.org/
 - Advanced performance testing
 - Multiple location testing
@@ -87,6 +94,7 @@ pnpm dev
 ```
 
 **What to verify:**
+
 - Service worker registration successful
 - Cache entries created under "Storage > Cache Storage"
 - Network tab shows "(from ServiceWorker)" for cached resources
@@ -103,6 +111,7 @@ pnpm dev
 ```
 
 **What to verify:**
+
 - Images load in optimal format
 - Lazy loading works (check Network tab)
 - Proper aspect ratios maintained
@@ -111,6 +120,7 @@ pnpm dev
 ### 3. **Core Web Vitals Testing**
 
 #### Automated Testing:
+
 ```bash
 # Run this in your browser console on any page
 (async () => {
@@ -124,6 +134,7 @@ pnpm dev
 ```
 
 #### Manual Testing Steps:
+
 1. **LCP (Largest Contentful Paint)**:
    - Refresh page
    - Note when largest element appears
@@ -141,6 +152,7 @@ pnpm dev
 ### 4. **Caching Effectiveness Testing**
 
 #### Test Cache Performance:
+
 ```bash
 # 1. First visit (cold cache)
 # Open DevTools > Network
@@ -152,6 +164,7 @@ pnpm dev
 ```
 
 #### Cache Verification:
+
 ```bash
 # In browser console:
 caches.open('static-v1').then(cache => cache.keys()).then(console.log)
@@ -162,19 +175,22 @@ caches.open('images-v1').then(cache => cache.keys()).then(console.log)
 ## 📈 Performance Monitoring Dashboard
 
 ### Real-Time Metrics (Development):
+
 ```javascript
 // Add this to browser console for real-time monitoring:
 setInterval(() => {
-  console.log('Performance Check:', {
-    navigation: performance.getEntriesByType('navigation')[0],
+  console.log("Performance Check:", {
+    navigation: performance.getEntriesByType("navigation")[0],
     memory: performance.memory,
-    timing: performance.timing
+    timing: performance.timing,
   });
 }, 5000);
 ```
 
 ### Production Analytics:
+
 Our performance optimizer automatically sends metrics to:
+
 - Browser console (development)
 - Your analytics platform (production)
 - Core Web Vitals API (if configured)
@@ -182,11 +198,13 @@ Our performance optimizer automatically sends metrics to:
 ## 🎯 Expected Performance Targets
 
 ### Core Web Vitals Goals:
+
 - **LCP**: < 2.5s (Good), < 4.0s (Needs Improvement)
-- **INP**: < 200ms (Good), < 500ms (Needs Improvement)  
+- **INP**: < 200ms (Good), < 500ms (Needs Improvement)
 - **CLS**: < 0.1 (Good), < 0.25 (Needs Improvement)
 
 ### Additional Metrics:
+
 - **FCP**: < 1.8s (First Contentful Paint)
 - **TTFB**: < 600ms (Time to First Byte)
 - **Performance Score**: 90+ (Lighthouse)
@@ -219,17 +237,20 @@ pnpm dev
 ## 🔧 Troubleshooting
 
 ### If Service Worker Not Working:
+
 1. Check browser console for errors
 2. Verify `sw.js` is accessible at `/sw.js`
 3. Check HTTPS (required for SW in production)
 
 ### If Performance Poor:
+
 1. Check Network tab for large resources
 2. Verify image optimization is working
 3. Check for JavaScript errors blocking rendering
 4. Use Performance tab to identify bottlenecks
 
 ### If Metrics Not Showing:
+
 1. Ensure `web-vitals` package is installed
 2. Check browser console for Core Web Vitals logs
 3. Verify performance monitoring is enabled

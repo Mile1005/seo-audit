@@ -1,86 +1,86 @@
-import { Resend } from 'resend'
+import { Resend } from "resend";
 
 // Initialize Resend lazily to avoid build-time errors
-let resend: Resend | null = null
+let resend: Resend | null = null;
 
 const getResendClient = () => {
   if (!resend) {
-    const apiKey = process.env.RESEND_API_KEY
+    const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.warn('⚠️  RESEND_API_KEY not found. Email functionality will be disabled.')
-      return null
+      console.warn("⚠️  RESEND_API_KEY not found. Email functionality will be disabled.");
+      return null;
     }
-    resend = new Resend(apiKey)
+    resend = new Resend(apiKey);
   }
-  return resend
-}
+  return resend;
+};
 
 // Create a transporter for development and production
 const createTransporter = () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     // For development, log emails to console AND send via Resend
     return {
       sendMail: async (options: any) => {
-        console.log('📧 Sending email via Resend:')
-        console.log('To:', options.to)
-        console.log('Subject:', options.subject)
-        
-        const resendClient = getResendClient()
+        console.log("📧 Sending email via Resend:");
+        console.log("To:", options.to);
+        console.log("Subject:", options.subject);
+
+        const resendClient = getResendClient();
         if (!resendClient) {
-          console.error('❌ Resend API key not configured')
-          throw new Error('Resend API key not configured')
+          console.error("❌ Resend API key not configured");
+          throw new Error("Resend API key not configured");
         }
-        
+
         try {
           const result = await resendClient.emails.send({
             from: options.from,
             to: options.to,
             subject: options.subject,
             html: options.html,
-          })
-          console.log('✅ Email sent successfully:', result)
-          return result
+          });
+          console.log("✅ Email sent successfully:", result);
+          return result;
         } catch (error) {
-          console.error('❌ Email sending failed:', error)
-          throw error
+          console.error("❌ Email sending failed:", error);
+          throw error;
         }
-      }
-    }
+      },
+    };
   }
 
   // For production, use Resend directly
   return {
     sendMail: async (options: any) => {
-      const resendClient = getResendClient()
+      const resendClient = getResendClient();
       if (!resendClient) {
-        throw new Error('Resend API key not configured')
+        throw new Error("Resend API key not configured");
       }
-      
+
       return await resendClient.emails.send({
         from: options.from,
         to: options.to,
         subject: options.subject,
         html: options.html,
-      })
-    }
-  }
-}
+      });
+    },
+  };
+};
 
 export const sendPasswordResetEmail = async ({
   to,
   resetUrl,
-  userName
+  userName,
 }: {
-  to: string
-  resetUrl: string
-  userName?: string
+  to: string;
+  resetUrl: string;
+  userName?: string;
 }) => {
-  const transporter = createTransporter()
+  const transporter = createTransporter();
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM || 'noreply@seoaudit.com',
+    from: process.env.EMAIL_FROM || "noreply@seoaudit.com",
     to,
-    subject: 'Reset Your Password - SEO Audit',
+    subject: "Reset Your Password - SEO Audit",
     html: `
       <!DOCTYPE html>
       <html>
@@ -96,7 +96,7 @@ export const sendPasswordResetEmail = async ({
           
           <div style="background: #f8fafc; padding: 40px 30px; border-radius: 0 0 10px 10px; border: 1px solid #e2e8f0; border-top: none;">
             <p style="font-size: 16px; margin-bottom: 20px;">
-              ${userName ? `Hi ${userName},` : 'Hello,'}
+              ${userName ? `Hi ${userName},` : "Hello,"}
             </p>
             
             <p style="font-size: 16px; margin-bottom: 30px;">
@@ -137,7 +137,7 @@ export const sendPasswordResetEmail = async ({
     text: `
 Reset Your Password
 
-${userName ? `Hi ${userName},` : 'Hello,'}
+${userName ? `Hi ${userName},` : "Hello,"}
 
 We received a request to reset your password for your SEO Audit account. If you didn't make this request, you can safely ignore this email.
 
@@ -150,26 +150,26 @@ If you're having trouble with the link, copy and paste it into your web browser.
 
 This email was sent by SEO Audit. If you have any questions, please contact our support team.
     `,
-  }
+  };
 
-  return await transporter.sendMail(mailOptions)
-}
+  return await transporter.sendMail(mailOptions);
+};
 
 export const sendEmailVerification = async ({
   to,
   verificationUrl,
-  userName
+  userName,
 }: {
-  to: string
-  verificationUrl: string
-  userName?: string
+  to: string;
+  verificationUrl: string;
+  userName?: string;
 }) => {
-  const transporter = createTransporter()
+  const transporter = createTransporter();
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM || 'noreply@seoaudit.com',
+    from: process.env.EMAIL_FROM || "noreply@seoaudit.com",
     to,
-    subject: 'Verify Your Email - SEO Audit',
+    subject: "Verify Your Email - SEO Audit",
     html: `
       <!DOCTYPE html>
       <html>
@@ -185,7 +185,7 @@ export const sendEmailVerification = async ({
           
           <div style="background: #f8fafc; padding: 40px 30px; border-radius: 0 0 10px 10px; border: 1px solid #e2e8f0; border-top: none;">
             <p style="font-size: 16px; margin-bottom: 20px;">
-              ${userName ? `Hi ${userName},` : 'Hello,'}
+              ${userName ? `Hi ${userName},` : "Hello,"}
             </p>
             
             <p style="font-size: 16px; margin-bottom: 30px;">
@@ -226,7 +226,7 @@ export const sendEmailVerification = async ({
     text: `
 Verify Your Email
 
-${userName ? `Hi ${userName},` : 'Hello,'}
+${userName ? `Hi ${userName},` : "Hello,"}
 
 Welcome to SEO Audit! Please verify your email address to complete your account setup and start optimizing your website's SEO.
 
@@ -239,7 +239,7 @@ If you didn't create an account with us, you can safely ignore this email.
 
 This email was sent by SEO Audit. If you have any questions, please contact our support team.
     `,
-  }
+  };
 
-  return await transporter.sendMail(mailOptions)
-}
+  return await transporter.sendMail(mailOptions);
+};

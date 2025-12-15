@@ -1,6 +1,6 @@
 /**
  * LCP Optimization Implementation Steps
- * 
+ *
  * This document provides step-by-step code changes to implement LCP optimization.
  * Follow Phase 1 first for maximum impact with minimum effort.
  */
@@ -11,7 +11,7 @@
 
 /**
  * STEP 1: Update app/layout.tsx - Add Preload + Critical CSS
- * 
+ *
  * LOCATION: app/layout.tsx - In the <head> section, around line 232
  */
 
@@ -135,12 +135,12 @@ export const PHASE_1_STEP_1_PRELOAD_CRITICAL_CSS = `
 
 /**
  * STEP 2: Update components/hero/hero-section.tsx - Disable animations on mobile
- * 
+ *
  * KEY CHANGES:
  * - Import useIsMobile hook
  * - Disable Framer Motion animations on mobile
  * - Don't render desktop mockup on mobile view
- * 
+ *
  * LOCATION: components/hero/hero-section.tsx - Replace entire component
  */
 
@@ -325,7 +325,7 @@ export function HeroSection() {
 
 /**
  * STEP 3: Create the mobile detection hook
- * 
+ *
  * LOCATION: hooks/use-is-mobile.ts
  * This file already created in previous step
  */
@@ -429,21 +429,21 @@ export const PERFORMANCE_TARGETS = {
     FCP: "< 1.5s",
     CLS: "< 0.1",
     TBT: "< 100ms",
-    TTFB: "< 200ms"
+    TTFB: "< 200ms",
   },
   DESKTOP: {
     LCP: "< 1.2s (Already good)",
     FCP: "< 0.8s",
     CLS: "< 0.05",
     TBT: "< 50ms",
-    TTFB: "< 100ms"
+    TTFB: "< 100ms",
   },
   SIZES: {
     CRITICAL_CSS: "< 3KB",
     CRITICAL_JS: "< 50KB",
     HERO_IMAGE_MOBILE: "< 40KB",
-    HERO_IMAGE_DESKTOP: "< 80KB"
-  }
+    HERO_IMAGE_DESKTOP: "< 80KB",
+  },
 };
 
 /**
@@ -453,7 +453,7 @@ export const VERIFICATION_COMMANDS = {
   MOBILE_AUDIT: "npm run mobile:audit",
   LIGHTHOUSE_REPORT: "npm run perf:audit",
   ANALYZE_BUNDLE: "npm run analyze:build",
-  TEST_BUILD: "npm run build && npm run mobile:audit"
+  TEST_BUILD: "npm run build && npm run mobile:audit",
 };
 
 export default {
@@ -463,5 +463,5 @@ export default {
   PHASE_2_IMAGE_OPTIMIZATION,
   PHASE_3_CSS_DEFERRAL,
   PERFORMANCE_TARGETS,
-  VERIFICATION_COMMANDS
+  VERIFICATION_COMMANDS,
 };

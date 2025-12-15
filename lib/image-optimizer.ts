@@ -16,11 +16,11 @@ interface OptimizedImageConfig {
   priority?: boolean;
   sizes?: string;
   quality?: number;
-  placeholder?: 'blur' | 'empty';
+  placeholder?: "blur" | "empty";
   blurDataURL?: string;
   className?: string;
   fill?: boolean;
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
 }
 
 /**
@@ -28,10 +28,10 @@ interface OptimizedImageConfig {
  */
 export function generateResponsiveSizes(breakpoints: Partial<ImageSizes> = {}): string {
   const defaultSizes: ImageSizes = {
-    mobile: '100vw',
-    tablet: '80vw', 
-    desktop: '60vw',
-    wide: '50vw',
+    mobile: "100vw",
+    tablet: "80vw",
+    desktop: "60vw",
+    wide: "50vw",
     ...breakpoints,
   };
 
@@ -54,8 +54,8 @@ export function generateBlurDataURL(width: number = 8, height: number = 6): stri
       <rect width="100%" height="100%" fill="url(#grad)" />
     </svg>
   `;
-  
-  const base64 = Buffer.from(svg).toString('base64');
+
+  const base64 = Buffer.from(svg).toString("base64");
   return `data:image/svg+xml;base64,${base64}`;
 }
 
@@ -66,12 +66,12 @@ export function createOptimizedImageConfig(config: OptimizedImageConfig): Optimi
   const optimized: OptimizedImageConfig = {
     ...config,
     quality: config.quality || 85,
-    placeholder: config.placeholder || 'blur',
-    loading: config.loading || (config.priority ? 'eager' : 'lazy'),
+    placeholder: config.placeholder || "blur",
+    loading: config.loading || (config.priority ? "eager" : "lazy"),
   };
 
   // Auto-generate blur placeholder if not provided
-  if (optimized.placeholder === 'blur' && !optimized.blurDataURL) {
+  if (optimized.placeholder === "blur" && !optimized.blurDataURL) {
     optimized.blurDataURL = generateBlurDataURL();
   }
 
@@ -91,35 +91,35 @@ export const ImageFormats = {
    * Check if browser supports AVIF
    */
   supportsAVIF(): boolean {
-    if (typeof window === 'undefined') return false;
-    
-    const canvas = document.createElement('canvas');
+    if (typeof window === "undefined") return false;
+
+    const canvas = document.createElement("canvas");
     canvas.width = 1;
     canvas.height = 1;
-    
-    return canvas.toDataURL('image/avif').indexOf('data:image/avif') === 0;
+
+    return canvas.toDataURL("image/avif").indexOf("data:image/avif") === 0;
   },
 
   /**
    * Check if browser supports WebP
    */
   supportsWebP(): boolean {
-    if (typeof window === 'undefined') return false;
-    
-    const canvas = document.createElement('canvas');
+    if (typeof window === "undefined") return false;
+
+    const canvas = document.createElement("canvas");
     canvas.width = 1;
     canvas.height = 1;
-    
-    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+
+    return canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0;
   },
 
   /**
    * Get optimal image format for current browser
    */
-  getOptimalFormat(): 'avif' | 'webp' | 'jpg' {
-    if (this.supportsAVIF()) return 'avif';
-    if (this.supportsWebP()) return 'webp';
-    return 'jpg';
+  getOptimalFormat(): "avif" | "webp" | "jpg" {
+    if (this.supportsAVIF()) return "avif";
+    if (this.supportsWebP()) return "webp";
+    return "jpg";
   },
 };
 
@@ -156,20 +156,21 @@ export class ImagePerformanceMonitor {
     return {
       loadTime: metric.endTime - metric.startTime,
       size: metric.size,
-      efficiency: metric.size ? (metric.size / (metric.endTime - metric.startTime)) : null,
+      efficiency: metric.size ? metric.size / (metric.endTime - metric.startTime) : null,
     };
   }
 
   getAllMetrics() {
-    const results: Array<{ src: string; loadTime: number; size?: number; efficiency?: number }> = [];
-    
+    const results: Array<{ src: string; loadTime: number; size?: number; efficiency?: number }> =
+      [];
+
     this.metrics.forEach((metric, src) => {
       if (metric.endTime) {
         results.push({
           src,
           loadTime: metric.endTime - metric.startTime,
           size: metric.size,
-          efficiency: metric.size ? (metric.size / (metric.endTime - metric.startTime)) : undefined,
+          efficiency: metric.size ? metric.size / (metric.endTime - metric.startTime) : undefined,
         });
       }
     });
@@ -182,12 +183,12 @@ export class ImagePerformanceMonitor {
    */
   reportMetrics() {
     const metrics = this.getAllMetrics();
-    
+
     // Report to your analytics service
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      metrics.forEach(metric => {
+    if (typeof window !== "undefined" && "gtag" in window) {
+      metrics.forEach((metric) => {
         // @ts-ignore
-        window.gtag('event', 'image_performance', {
+        window.gtag("event", "image_performance", {
           custom_parameter_1: metric.src,
           custom_parameter_2: metric.loadTime,
           custom_parameter_3: metric.size || 0,
@@ -201,12 +202,12 @@ export class ImagePerformanceMonitor {
  * Preload critical images
  */
 export function preloadCriticalImages(images: string[]): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
-  images.forEach(src => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
+  images.forEach((src) => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
     link.href = src;
     document.head.appendChild(link);
   });
@@ -215,28 +216,31 @@ export function preloadCriticalImages(images: string[]): void {
 /**
  * Lazy load images with Intersection Observer
  */
-export function setupLazyLoading(selector: string = 'img[data-lazy]'): void {
-  if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+export function setupLazyLoading(selector: string = "img[data-lazy]"): void {
+  if (typeof window === "undefined" || !("IntersectionObserver" in window)) return;
 
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const img = entry.target as HTMLImageElement;
-        const src = img.dataset.lazy;
-        
-        if (src) {
-          img.src = src;
-          img.removeAttribute('data-lazy');
-          observer.unobserve(img);
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target as HTMLImageElement;
+          const src = img.dataset.lazy;
+
+          if (src) {
+            img.src = src;
+            img.removeAttribute("data-lazy");
+            observer.unobserve(img);
+          }
         }
-      }
-    });
-  }, {
-    rootMargin: '50px 0px', // Start loading 50px before entering viewport
-    threshold: 0.01,
-  });
+      });
+    },
+    {
+      rootMargin: "50px 0px", // Start loading 50px before entering viewport
+      threshold: 0.01,
+    }
+  );
 
-  document.querySelectorAll(selector).forEach(img => {
+  document.querySelectorAll(selector).forEach((img) => {
     imageObserver.observe(img);
   });
 }

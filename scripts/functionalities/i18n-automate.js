@@ -11,28 +11,28 @@
  * 5. Language File Updates
  */
 
-import fs from 'fs';
-import path from 'path';
-import { parse } from '@babel/parser';
-import traverse from '@babel/traverse';
-import generate from '@babel/generator';
-import * as t from '@babel/types';
-import OpenAI from 'openai';
+import fs from "fs";
+import path from "path";
+import { parse } from "@babel/parser";
+import traverse from "@babel/traverse";
+import generate from "@babel/generator";
+import * as t from "@babel/types";
+import OpenAI from "openai";
 
 // Configuration
 const CONFIG = {
-  supportedLanguages: ['de', 'it', 'id', 'es', 'fr'],
-  sourceLanguage: 'en',
-  messagesDir: './messages',
-  componentsDir: './app',
-  aiModel: 'gpt-4',
+  supportedLanguages: ["de", "it", "id", "es", "fr"],
+  sourceLanguage: "en",
+  messagesDir: "./messages",
+  componentsDir: "./app",
+  aiModel: "gpt-4",
   translationPrompt: `Translate the following JSON content from English to {language}.
 Maintain the exact same JSON structure and key names.
 Only translate the string values, never change keys or structure.
 Provide only valid JSON as output, no additional text or explanations.
 
 Content to translate:
-{jsonContent}`
+{jsonContent}`,
 };
 
 class I18nAutomator {
@@ -47,10 +47,10 @@ class I18nAutomator {
   async detectUntranslatedContent(componentPath) {
     console.log(`🔍 Analyzing ${componentPath} for untranslated content...`);
 
-    const content = fs.readFileSync(componentPath, 'utf-8');
+    const content = fs.readFileSync(componentPath, "utf-8");
     const ast = parse(content, {
-      sourceType: 'module',
-      plugins: ['jsx', 'typescript']
+      sourceType: "module",
+      plugins: ["jsx", "typescript"],
     });
 
     const untranslatedStrings = [];
@@ -59,31 +59,33 @@ class I18nAutomator {
     traverse(ast, {
       JSXText(path) {
         const text = path.node.value.trim();
-        if (text && text.length > 2 && !text.includes('{') && !text.includes('}')) {
+        if (text && text.length > 2 && !text.includes("{") && !text.includes("}")) {
           untranslatedStrings.push({
             text,
             location: `${componentPath}:${path.node.loc.start.line}`,
-            context: 'jsx-text'
+            context: "jsx-text",
           });
         }
       },
       StringLiteral(path) {
         // Skip if it's an import, prop name, or already a t() call
-        if (path.parent.type === 'ImportDeclaration' ||
-            path.parent.type === 'JSXAttribute' && path.parent.name.name === 'key' ||
-            path.parent.callee?.name === 't') {
+        if (
+          path.parent.type === "ImportDeclaration" ||
+          (path.parent.type === "JSXAttribute" && path.parent.name.name === "key") ||
+          path.parent.callee?.name === "t"
+        ) {
           return;
         }
 
         const text = path.node.value;
-        if (text && text.length > 2 && !text.includes('{') && !text.includes('}')) {
+        if (text && text.length > 2 && !text.includes("{") && !text.includes("}")) {
           untranslatedStrings.push({
             text,
             location: `${componentPath}:${path.node.loc.start.line}`,
-            context: 'string-literal'
+            context: "string-literal",
           });
         }
-      }
+      },
     });
 
     return { untranslatedStrings, namespace };
@@ -96,10 +98,10 @@ class I18nAutomator {
   async transformComponent(componentPath, untranslatedStrings, namespace) {
     console.log(`🔄 Transforming ${componentPath} to use t() functions...`);
 
-    const content = fs.readFileSync(componentPath, 'utf-8');
+    const content = fs.readFileSync(componentPath, "utf-8");
     const ast = parse(content, {
-      sourceType: 'module',
-      plugins: ['jsx', 'typescript']
+      sourceType: "module",
+      plugins: ["jsx", "typescript"],
     });
 
     let keyCounter = 0;
@@ -108,41 +110,33 @@ class I18nAutomator {
     traverse(ast, {
       JSXText(path) {
         const text = path.node.value.trim();
-        if (text && untranslatedStrings.some(u => u.text === text)) {
+        if (text && untranslatedStrings.some((u) => u.text === text)) {
           const key = this.generateTranslationKey(text, keyCounter++);
           translationKeys[key] = text;
 
           // Replace JSXText with JSXExpressionContainer containing t() call
           path.replaceWith(
-            t.jsxExpressionContainer(
-              t.callExpression(
-                t.identifier('t'),
-                [t.stringLiteral(key)]
-              )
-            )
+            t.jsxExpressionContainer(t.callExpression(t.identifier("t"), [t.stringLiteral(key)]))
           );
         }
       },
       StringLiteral(path) {
-        if (path.parent.type === 'ImportDeclaration' ||
-            path.parent.type === 'JSXAttribute' && path.parent.name.name === 'key' ||
-            path.parent.callee?.name === 't') {
+        if (
+          path.parent.type === "ImportDeclaration" ||
+          (path.parent.type === "JSXAttribute" && path.parent.name.name === "key") ||
+          path.parent.callee?.name === "t"
+        ) {
           return;
         }
 
         const text = path.node.value;
-        if (text && untranslatedStrings.some(u => u.text === text)) {
+        if (text && untranslatedStrings.some((u) => u.text === text)) {
           const key = this.generateTranslationKey(text, keyCounter++);
           translationKeys[key] = text;
 
-          path.replaceWith(
-            t.callExpression(
-              t.identifier('t'),
-              [t.stringLiteral(key)]
-            )
-          );
+          path.replaceWith(t.callExpression(t.identifier("t"), [t.stringLiteral(key)]));
         }
-      }
+      },
     });
 
     // Ensure useTranslations import exists
@@ -161,11 +155,11 @@ class I18nAutomator {
   async updateEnglishSource(namespace, translationKeys) {
     console.log(`📝 Updating messages/en.json with new keys...`);
 
-    const enPath = path.join(CONFIG.messagesDir, 'en.json');
-    const enContent = JSON.parse(fs.readFileSync(enPath, 'utf-8'));
+    const enPath = path.join(CONFIG.messagesDir, "en.json");
+    const enContent = JSON.parse(fs.readFileSync(enPath, "utf-8"));
 
     // Navigate to the correct namespace path
-    const namespaceParts = namespace.split('.');
+    const namespaceParts = namespace.split(".");
     let current = enContent;
 
     for (let i = 0; i < namespaceParts.length - 1; i++) {
@@ -199,14 +193,14 @@ class I18nAutomator {
 
       const jsonContent = JSON.stringify(translationKeys, null, 2);
       const prompt = CONFIG.translationPrompt
-        .replace('{language}', this.getLanguageName(lang))
-        .replace('{jsonContent}', jsonContent);
+        .replace("{language}", this.getLanguageName(lang))
+        .replace("{jsonContent}", jsonContent);
 
       try {
         const response = await this.openai.chat.completions.create({
           model: CONFIG.aiModel,
-          messages: [{ role: 'user', content: prompt }],
-          temperature: 0.1 // Low temperature for consistency
+          messages: [{ role: "user", content: prompt }],
+          temperature: 0.1, // Low temperature for consistency
         });
 
         const translatedJson = response.choices[0].message.content.trim();
@@ -229,10 +223,10 @@ class I18nAutomator {
 
     for (const [lang, translationKeys] of Object.entries(translations)) {
       const filePath = path.join(CONFIG.messagesDir, `${lang}.json`);
-      const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
       // Navigate to namespace
-      const namespaceParts = namespace.split('.');
+      const namespaceParts = namespace.split(".");
       let current = content;
 
       for (let i = 0; i < namespaceParts.length - 1; i++) {
@@ -260,7 +254,8 @@ class I18nAutomator {
 
     try {
       // Step 1: Detect untranslated content
-      const { untranslatedStrings, namespace } = await this.detectUntranslatedContent(componentPath);
+      const { untranslatedStrings, namespace } =
+        await this.detectUntranslatedContent(componentPath);
 
       if (untranslatedStrings.length === 0) {
         console.log(`✅ No untranslated content found in ${componentPath}`);
@@ -270,7 +265,11 @@ class I18nAutomator {
       console.log(`📋 Found ${untranslatedStrings.length} untranslated strings`);
 
       // Step 2: Transform component
-      const translationKeys = await this.transformComponent(componentPath, untranslatedStrings, namespace);
+      const translationKeys = await this.transformComponent(
+        componentPath,
+        untranslatedStrings,
+        namespace
+      );
 
       // Step 3: Update English source
       await this.updateEnglishSource(namespace, translationKeys);
@@ -284,7 +283,6 @@ class I18nAutomator {
       console.log(`🎉 Successfully internationalized ${componentPath}!`);
       console.log(`   - ${Object.keys(translationKeys).length} new translation keys added`);
       console.log(`   - Updated ${CONFIG.supportedLanguages.length + 1} language files`);
-
     } catch (error) {
       console.error(`❌ Automation failed:`, error.message);
       throw error;
@@ -299,23 +297,23 @@ class I18nAutomator {
     const relativePath = path.relative(CONFIG.componentsDir, componentPath);
     const parts = relativePath.split(path.sep);
 
-    if (parts.includes('help')) {
-      const helpIndex = parts.indexOf('help');
+    if (parts.includes("help")) {
+      const helpIndex = parts.indexOf("help");
       const category = parts[helpIndex + 1]; // troubleshooting
       const article = parts[helpIndex + 2]; // audit-issues
 
       return `help.categories.${category}.articles.${this.toCamelCase(article)}`;
     }
 
-    return 'common'; // fallback
+    return "common"; // fallback
   }
 
   generateTranslationKey(text, counter) {
     // Generate consistent, readable keys
     const sanitized = text
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '')
-      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9\s]/g, "")
+      .replace(/\s+/g, "_")
       .substring(0, 30);
 
     return `${sanitized}_${counter}`;
@@ -329,11 +327,11 @@ class I18nAutomator {
 
   getLanguageName(code) {
     const names = {
-      de: 'German',
-      it: 'Italian',
-      id: 'Indonesian',
-      es: 'Spanish',
-      fr: 'French'
+      de: "German",
+      it: "Italian",
+      id: "Indonesian",
+      es: "Spanish",
+      fr: "French",
     };
     return names[code] || code;
   }

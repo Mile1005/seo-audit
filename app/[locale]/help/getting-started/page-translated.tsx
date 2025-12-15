@@ -1,44 +1,44 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, BookOpen, Lightbulb, ArrowRight, ChevronRight } from 'lucide-react'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import { ArrowLeft, Clock, BookOpen, Lightbulb, ArrowRight, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function GettingStartedPage() {
-  const t = useTranslations('help.categories.gettingStarted')
+  const t = useTranslations("help.categories.gettingStarted");
 
   const categoryArticles = [
     {
-      title: t('articles.firstAudit.title'),
-      href: t('articles.firstAudit.href'),
-      time: t('articles.firstAudit.time'),
-      description: t('articles.firstAudit.description'),
-      icon: BookOpen
+      title: t("articles.firstAudit.title"),
+      href: t("articles.firstAudit.href"),
+      time: t("articles.firstAudit.time"),
+      description: t("articles.firstAudit.description"),
+      icon: BookOpen,
     },
     {
-      title: t('articles.dashboardSetup.title'),
-      href: t('articles.dashboardSetup.href'),
-      time: t('articles.dashboardSetup.time'),
-      description: t('articles.dashboardSetup.description'),
-      icon: BookOpen
+      title: t("articles.dashboardSetup.title"),
+      href: t("articles.dashboardSetup.href"),
+      time: t("articles.dashboardSetup.time"),
+      description: t("articles.dashboardSetup.description"),
+      icon: BookOpen,
     },
     {
-      title: t('articles.seoScores.title'),
-      href: t('articles.seoScores.href'),
-      time: t('articles.seoScores.time'),
-      description: t('articles.seoScores.description'),
-      icon: BookOpen
+      title: t("articles.seoScores.title"),
+      href: t("articles.seoScores.href"),
+      time: t("articles.seoScores.time"),
+      description: t("articles.seoScores.description"),
+      icon: BookOpen,
     },
     {
-      title: t('articles.quickStart.title'),
-      href: t('articles.quickStart.href'),
-      time: t('articles.quickStart.time'),
-      description: t('articles.quickStart.description'),
-      icon: Lightbulb
-    }
-  ]
+      title: t("articles.quickStart.title"),
+      href: t("articles.quickStart.href"),
+      time: t("articles.quickStart.time"),
+      description: t("articles.quickStart.description"),
+      icon: Lightbulb,
+    },
+  ];
 
   return (
     <MainLayout>
@@ -51,17 +51,15 @@ export default function GettingStartedPage() {
               className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              {t('backToHelp')}
+              {t("backToHelp")}
             </Link>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t('title')}</h1>
-            <p className="text-xl text-gray-600 max-w-3xl">
-              {t('subtitle')}
-            </p>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+            <p className="text-xl text-gray-600 max-w-3xl">{t("subtitle")}</p>
           </div>
 
           {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('quickStart.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t("quickStart.title")}</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Link
                 href="/dashboard"
@@ -69,8 +67,10 @@ export default function GettingStartedPage() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">{t('quickStart.startAudit.title')}</h3>
-                    <p className="text-blue-100">{t('quickStart.startAudit.description')}</p>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("quickStart.startAudit.title")}
+                    </h3>
+                    <p className="text-blue-100">{t("quickStart.startAudit.description")}</p>
                   </div>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -81,8 +81,8 @@ export default function GettingStartedPage() {
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">{t('quickStart.tryDemo.title')}</h3>
-                    <p className="text-gray-600">{t('quickStart.tryDemo.description')}</p>
+                    <h3 className="text-lg font-semibold mb-2">{t("quickStart.tryDemo.title")}</h3>
+                    <p className="text-gray-600">{t("quickStart.tryDemo.description")}</p>
                   </div>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -126,36 +126,48 @@ export default function GettingStartedPage() {
 
           {/* Additional Resources */}
           <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">{t('additionalResources.title')}</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+              {t("additionalResources.title")}
+            </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <Link
                 href="/blog"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <BookOpen className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.blog.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.blog.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.blog.title")}
+                </h3>
+                <p className="text-sm text-gray-600">{t("additionalResources.blog.description")}</p>
               </Link>
               <Link
                 href="/help/seo-tools"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <Lightbulb className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.features.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.features.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.features.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.features.description")}
+                </p>
               </Link>
               <Link
                 href="/contact"
                 className="text-center p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
               >
                 <ArrowRight className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                <h3 className="font-semibold text-gray-900 mb-1">{t('additionalResources.contactSupport.title')}</h3>
-                <p className="text-sm text-gray-600">{t('additionalResources.contactSupport.description')}</p>
+                <h3 className="font-semibold text-gray-900 mb-1">
+                  {t("additionalResources.contactSupport.title")}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t("additionalResources.contactSupport.description")}
+                </p>
               </Link>
             </div>
           </div>
         </div>
       </div>
     </MainLayout>
-  )
+  );
 }

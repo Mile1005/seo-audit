@@ -1,47 +1,47 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getAudit } from '../../../../lib/server/audit-store';
-import { saveAuditRun } from '../../../../lib/server/save-audit-run';
-import { auth } from '../../../../auth';
-import { prisma } from '../../../../lib/prisma';
+import { NextRequest, NextResponse } from "next/server";
+import { getAudit } from "../../../../lib/server/audit-store";
+import { saveAuditRun } from "../../../../lib/server/save-audit-run";
+import { auth } from "../../../../auth";
+import { prisma } from "../../../../lib/prisma";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const auditId = searchParams.get('auditId');
+    const auditId = searchParams.get("auditId");
     if (!auditId) {
-      return NextResponse.json({ error: 'Missing auditId' }, { status: 400 });
+      return NextResponse.json({ error: "Missing auditId" }, { status: 400 });
     }
     const record = getAudit(auditId);
     if (!record) {
       // In-memory store may be empty on cold start / different instance.
       // Try persisted AuditRun (Phase 4) as a fallback so the UI stays "alive".
       try {
-        const auditRunModel = (prisma as any)['auditRun']
+        const auditRunModel = (prisma as any)["auditRun"];
         if (auditRunModel) {
-          const db = await auditRunModel.findUnique({ where: { id: auditId } })
+          const db = await auditRunModel.findUnique({ where: { id: auditId } });
           if (db) {
-            const p = (db.result as any)?.progress
-            const startedAt = db.startedAt ? new Date(db.startedAt).getTime() : Date.now()
-            const updatedAt = db.updatedAt ? new Date(db.updatedAt).getTime() : Date.now()
-            const now = Date.now()
-            const elapsedMs = Math.max(0, now - startedAt)
-            if (String(db.status) === 'failed') {
-              return NextResponse.json({ status: 'failed', error: db.error || 'Audit failed' })
+            const p = (db.result as any)?.progress;
+            const startedAt = db.startedAt ? new Date(db.startedAt).getTime() : Date.now();
+            const updatedAt = db.updatedAt ? new Date(db.updatedAt).getTime() : Date.now();
+            const now = Date.now();
+            const elapsedMs = Math.max(0, now - startedAt);
+            if (String(db.status) === "failed") {
+              return NextResponse.json({ status: "failed", error: db.error || "Audit failed" });
             }
-            if (String(db.status) === 'completed' && db.result) {
-              return NextResponse.json({ status: 'completed', data: db.result })
+            if (String(db.status) === "completed" && db.result) {
+              return NextResponse.json({ status: "completed", data: db.result });
             }
             return NextResponse.json({
-              status: 'processing',
-              stage: p?.stage || 'queued',
-              progress: typeof p?.progress === 'number' ? p.progress : undefined,
+              status: "processing",
+              stage: p?.stage || "queued",
+              progress: typeof p?.progress === "number" ? p.progress : undefined,
               message: p?.message || undefined,
               startedAt,
               updatedAt,
               elapsedMs,
-            })
+            });
           }
         }
       } catch {
@@ -49,7 +49,12 @@ export async function GET(request: NextRequest) {
       }
 
       // Not yet initialized vs expired; treat as processing with a safe default stage
-      return NextResponse.json({ status: 'processing', stage: 'queued', progress: 2, message: 'Queued' });
+      return NextResponse.json({
+        status: "processing",
+        stage: "queued",
+        progress: 2,
+        message: "Queued",
+      });
     }
 
     const now = Date.now();
@@ -61,37 +66,40 @@ export async function GET(request: NextRequest) {
       const session = await auth();
       const userId = session?.user?.id;
       if (!userId || userId !== record.ownerId) {
-        return NextResponse.json({ status: 'processing' });
+        return NextResponse.json({ status: "processing" });
       }
     }
-    if (record.status === 'failed') {
-      return NextResponse.json({ status: 'failed', error: record.error });
+    if (record.status === "failed") {
+      return NextResponse.json({ status: "failed", error: record.error });
     }
-    if (record.status === 'completed') {
+    if (record.status === "completed") {
       // Fire-and-forget persistence (only if not yet persisted - naive: rely on DB upsert idempotence)
       if (record.data) {
         saveAuditRun(record.data); // do not await to keep poll fast
       }
-      return NextResponse.json({ status: 'completed', data: record.data });
+      return NextResponse.json({ status: "completed", data: record.data });
     }
 
     if (stalledMs > STALL_TIMEOUT_MS) {
       return NextResponse.json({
-        status: 'failed',
-        error: 'Audit stalled (no progress updates). Please try again.',
+        status: "failed",
+        error: "Audit stalled (no progress updates). Please try again.",
       });
     }
 
     return NextResponse.json({
-      status: 'processing',
-      stage: record.stage || 'queued',
-      progress: typeof record.progress === 'number' ? record.progress : undefined,
+      status: "processing",
+      stage: record.stage || "queued",
+      progress: typeof record.progress === "number" ? record.progress : undefined,
       message: record.message || undefined,
       startedAt: record.startedAt,
       updatedAt: record.updatedAt,
       elapsedMs,
     });
-  } catch (e:any) {
-    return NextResponse.json({ status: 'failed', error: e.message || 'Unexpected error'}, { status: 500 });
+  } catch (e: any) {
+    return NextResponse.json(
+      { status: "failed", error: e.message || "Unexpected error" },
+      { status: 500 }
+    );
   }
 }

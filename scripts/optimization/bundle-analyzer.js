@@ -5,18 +5,18 @@
  * Analyzes Next.js bundle composition and provides optimization recommendations
  */
 
-import fs from 'fs';
-import path from 'path';
-import { execSync } from 'child_process';
-import { fileURLToPath } from 'url';
+import fs from "fs";
+import path from "path";
+import { execSync } from "child_process";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Configuration
 const CONFIG = {
-  buildDir: '.next',
-  outputFile: 'bundle-analysis.json',
+  buildDir: ".next",
+  outputFile: "bundle-analysis.json",
   sizeThresholds: {
     // Size limits in KB
     totalBundle: 500,
@@ -27,10 +27,10 @@ const CONFIG = {
   performanceBudget: {
     // Performance budgets
     jsInitial: 300, // KB
-    jsAsync: 200,   // KB
-    css: 50,        // KB
-    images: 500,    // KB per page
-  }
+    jsAsync: 200, // KB
+    css: 50, // KB
+    images: 500, // KB per page
+  },
 };
 
 class BundleAnalyzer {
@@ -50,7 +50,7 @@ class BundleAnalyzer {
    * Run complete bundle analysis
    */
   async analyze() {
-    console.log('🔍 Starting bundle analysis...\n');
+    console.log("🔍 Starting bundle analysis...\n");
 
     try {
       // Step 1: Build the application if not already built
@@ -72,10 +72,9 @@ class BundleAnalyzer {
       // Step 6: Output results
       this.outputResults();
 
-      console.log('✅ Bundle analysis completed successfully!');
-      
+      console.log("✅ Bundle analysis completed successfully!");
     } catch (error) {
-      console.error('❌ Bundle analysis failed:', error.message);
+      console.error("❌ Bundle analysis failed:", error.message);
       process.exit(1);
     }
   }
@@ -85,17 +84,17 @@ class BundleAnalyzer {
    */
   async ensureBuild() {
     const buildPath = path.join(process.cwd(), CONFIG.buildDir);
-    
+
     if (!fs.existsSync(buildPath)) {
-      console.log('📦 Building application...');
+      console.log("📦 Building application...");
       try {
-        execSync('npm run build', { stdio: 'inherit' });
+        execSync("npm run build", { stdio: "inherit" });
       } catch (error) {
-        console.log('⚠️  Build failed, trying with pnpm...');
-        execSync('pnpm build', { stdio: 'inherit' });
+        console.log("⚠️  Build failed, trying with pnpm...");
+        execSync("pnpm build", { stdio: "inherit" });
       }
     } else {
-      console.log('✅ Using existing build');
+      console.log("✅ Using existing build");
     }
   }
 
@@ -103,16 +102,16 @@ class BundleAnalyzer {
    * Read Next.js build statistics
    */
   async readBuildStats() {
-    const manifestPath = path.join(CONFIG.buildDir, 'build-manifest.json');
-    
+    const manifestPath = path.join(CONFIG.buildDir, "build-manifest.json");
+
     if (fs.existsSync(manifestPath)) {
-      this.buildStats = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+      this.buildStats = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
     }
 
     // Also try to read webpack stats if available
-    const statsPath = path.join(CONFIG.buildDir, 'webpack-stats.json');
+    const statsPath = path.join(CONFIG.buildDir, "webpack-stats.json");
     if (fs.existsSync(statsPath)) {
-      this.webpackStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
+      this.webpackStats = JSON.parse(fs.readFileSync(statsPath, "utf8"));
     }
   }
 
@@ -120,24 +119,24 @@ class BundleAnalyzer {
    * Analyze JavaScript chunks
    */
   async analyzeChunks() {
-    console.log('📊 Analyzing JavaScript chunks...');
+    console.log("📊 Analyzing JavaScript chunks...");
 
-    const staticPath = path.join(CONFIG.buildDir, 'static');
+    const staticPath = path.join(CONFIG.buildDir, "static");
     if (!fs.existsSync(staticPath)) return;
 
     const chunks = [];
-    
+
     // Analyze chunks directory
-    const chunksPath = path.join(staticPath, 'chunks');
+    const chunksPath = path.join(staticPath, "chunks");
     if (fs.existsSync(chunksPath)) {
       const chunkFiles = fs.readdirSync(chunksPath);
-      
+
       for (const file of chunkFiles) {
-        if (file.endsWith('.js')) {
+        if (file.endsWith(".js")) {
           const filePath = path.join(chunksPath, file);
           const stats = fs.statSync(filePath);
           const sizeKB = Math.round(stats.size / 1024);
-          
+
           chunks.push({
             name: file,
             path: filePath,
@@ -162,17 +161,17 @@ class BundleAnalyzer {
    * Analyze static assets
    */
   async analyzeAssets() {
-    console.log('🎨 Analyzing static assets...');
+    console.log("🎨 Analyzing static assets...");
 
     const assets = [];
-    const staticPath = path.join(CONFIG.buildDir, 'static');
-    
+    const staticPath = path.join(CONFIG.buildDir, "static");
+
     if (fs.existsSync(staticPath)) {
       this.walkDirectory(staticPath, (filePath, stats) => {
         const relativePath = path.relative(staticPath, filePath);
         const extension = path.extname(filePath).toLowerCase();
         const sizeKB = Math.round(stats.size / 1024);
-        
+
         assets.push({
           name: path.basename(filePath),
           path: relativePath,
@@ -193,7 +192,7 @@ class BundleAnalyzer {
       return acc;
     }, {});
 
-    console.log('   Asset breakdown:');
+    console.log("   Asset breakdown:");
     Object.entries(totals).forEach(([type, size]) => {
       console.log(`     ${type}: ${Math.round(size / 1024)} KB`);
     });
@@ -204,11 +203,11 @@ class BundleAnalyzer {
    */
   walkDirectory(dir, callback) {
     const files = fs.readdirSync(dir);
-    
+
     for (const file of files) {
       const filePath = path.join(dir, file);
       const stats = fs.statSync(filePath);
-      
+
       if (stats.isDirectory()) {
         this.walkDirectory(filePath, callback);
       } else {
@@ -221,12 +220,12 @@ class BundleAnalyzer {
    * Determine chunk type
    */
   getChunkType(filename) {
-    if (filename.includes('framework')) return 'framework';
-    if (filename.includes('main')) return 'main';
-    if (filename.includes('vendor')) return 'vendor';
-    if (filename.includes('runtime')) return 'runtime';
-    if (filename.match(/^\d+\./)) return 'async';
-    return 'page';
+    if (filename.includes("framework")) return "framework";
+    if (filename.includes("main")) return "main";
+    if (filename.includes("vendor")) return "vendor";
+    if (filename.includes("runtime")) return "runtime";
+    if (filename.match(/^\d+\./)) return "async";
+    return "page";
   }
 
   /**
@@ -234,29 +233,29 @@ class BundleAnalyzer {
    */
   getAssetType(extension) {
     const types = {
-      '.js': 'javascript',
-      '.css': 'stylesheet',
-      '.woff': 'font',
-      '.woff2': 'font',
-      '.ttf': 'font',
-      '.otf': 'font',
-      '.jpg': 'image',
-      '.jpeg': 'image',
-      '.png': 'image',
-      '.webp': 'image',
-      '.avif': 'image',
-      '.svg': 'image',
-      '.ico': 'image',
+      ".js": "javascript",
+      ".css": "stylesheet",
+      ".woff": "font",
+      ".woff2": "font",
+      ".ttf": "font",
+      ".otf": "font",
+      ".jpg": "image",
+      ".jpeg": "image",
+      ".png": "image",
+      ".webp": "image",
+      ".avif": "image",
+      ".svg": "image",
+      ".ico": "image",
     };
-    
-    return types[extension] || 'other';
+
+    return types[extension] || "other";
   }
 
   /**
    * Generate optimization recommendations
    */
   generateRecommendations() {
-    console.log('💡 Generating recommendations...');
+    console.log("💡 Generating recommendations...");
 
     const recommendations = [];
 
@@ -266,53 +265,53 @@ class BundleAnalyzer {
 
     if (totalJSSizeKB > CONFIG.sizeThresholds.totalBundle) {
       recommendations.push({
-        type: 'critical',
-        title: 'Large Bundle Size',
+        type: "critical",
+        title: "Large Bundle Size",
         description: `Total JavaScript bundle is ${totalJSSizeKB} KB (target: <${CONFIG.sizeThresholds.totalBundle} KB)`,
         suggestions: [
-          'Implement code splitting for large components',
-          'Use dynamic imports for non-critical features',
-          'Consider removing unused dependencies',
-          'Enable tree shaking for better dead code elimination'
-        ]
+          "Implement code splitting for large components",
+          "Use dynamic imports for non-critical features",
+          "Consider removing unused dependencies",
+          "Enable tree shaking for better dead code elimination",
+        ],
       });
     }
 
     // Check for large chunks
-    const largeChunks = this.analysis.chunks.filter(chunk => 
-      chunk.sizeKB > CONFIG.sizeThresholds.pageChunk && chunk.type !== 'framework'
+    const largeChunks = this.analysis.chunks.filter(
+      (chunk) => chunk.sizeKB > CONFIG.sizeThresholds.pageChunk && chunk.type !== "framework"
     );
 
     if (largeChunks.length > 0) {
       recommendations.push({
-        type: 'warning',
-        title: 'Large Chunks Detected',
+        type: "warning",
+        title: "Large Chunks Detected",
         description: `Found ${largeChunks.length} chunks larger than ${CONFIG.sizeThresholds.pageChunk} KB`,
-        chunks: largeChunks.map(chunk => `${chunk.name} (${chunk.sizeKB} KB)`),
+        chunks: largeChunks.map((chunk) => `${chunk.name} (${chunk.sizeKB} KB)`),
         suggestions: [
-          'Split large components into smaller chunks',
-          'Use React.lazy() for component-level code splitting',
-          'Move third-party libraries to separate vendor chunks'
-        ]
+          "Split large components into smaller chunks",
+          "Use React.lazy() for component-level code splitting",
+          "Move third-party libraries to separate vendor chunks",
+        ],
       });
     }
 
     // Check CSS size
-    const cssAssets = this.analysis.assets.filter(asset => asset.type === 'stylesheet');
+    const cssAssets = this.analysis.assets.filter((asset) => asset.type === "stylesheet");
     const totalCSSSize = cssAssets.reduce((sum, asset) => sum + asset.size, 0);
     const totalCSSSizeKB = Math.round(totalCSSSize / 1024);
 
     if (totalCSSSizeKB > CONFIG.sizeThresholds.cssFile) {
       recommendations.push({
-        type: 'warning',
-        title: 'Large CSS Bundle',
+        type: "warning",
+        title: "Large CSS Bundle",
         description: `Total CSS size is ${totalCSSSizeKB} KB (target: <${CONFIG.sizeThresholds.cssFile} KB)`,
         suggestions: [
-          'Remove unused CSS with PurgeCSS',
-          'Optimize Tailwind CSS configuration',
-          'Use CSS-in-JS for component-specific styles',
-          'Split CSS by route or component'
-        ]
+          "Remove unused CSS with PurgeCSS",
+          "Optimize Tailwind CSS configuration",
+          "Use CSS-in-JS for component-specific styles",
+          "Split CSS by route or component",
+        ],
       });
     }
 
@@ -320,15 +319,15 @@ class BundleAnalyzer {
     const duplicateCheck = this.checkForDuplicates();
     if (duplicateCheck.length > 0) {
       recommendations.push({
-        type: 'info',
-        title: 'Potential Duplicate Dependencies',
-        description: 'Found potential duplicate or similar dependencies',
+        type: "info",
+        title: "Potential Duplicate Dependencies",
+        description: "Found potential duplicate or similar dependencies",
         duplicates: duplicateCheck,
         suggestions: [
-          'Consolidate similar libraries',
-          'Use webpack-bundle-analyzer for detailed analysis',
-          'Check for multiple versions of the same package'
-        ]
+          "Consolidate similar libraries",
+          "Use webpack-bundle-analyzer for detailed analysis",
+          "Check for multiple versions of the same package",
+        ],
       });
     }
 
@@ -340,22 +339,22 @@ class BundleAnalyzer {
    */
   checkForDuplicates() {
     // This is a simplified check - in a real scenario you'd analyze the actual bundle
-    const chunkNames = this.analysis.chunks.map(chunk => chunk.name);
+    const chunkNames = this.analysis.chunks.map((chunk) => chunk.name);
     const duplicates = [];
-    
+
     // Look for common patterns that might indicate duplicates
-    const patterns = ['react', 'lodash', 'moment', 'axios'];
-    
-    patterns.forEach(pattern => {
-      const matches = chunkNames.filter(name => name.includes(pattern));
+    const patterns = ["react", "lodash", "moment", "axios"];
+
+    patterns.forEach((pattern) => {
+      const matches = chunkNames.filter((name) => name.includes(pattern));
       if (matches.length > 1) {
         duplicates.push({
           pattern,
-          chunks: matches
+          chunks: matches,
         });
       }
     });
-    
+
     return duplicates;
   }
 
@@ -364,28 +363,32 @@ class BundleAnalyzer {
    */
   calculatePerformanceScore() {
     let score = 100;
-    
+
     // Deduct points for bundle size
     const totalJSSize = this.analysis.chunks.reduce((sum, chunk) => sum + chunk.size, 0);
     const totalJSSizeKB = Math.round(totalJSSize / 1024);
-    
+
     if (totalJSSizeKB > CONFIG.performanceBudget.jsInitial) {
       const excess = totalJSSizeKB - CONFIG.performanceBudget.jsInitial;
       score -= Math.min(excess / 10, 30); // Max 30 points deduction
     }
-    
+
     // Deduct points for large chunks
-    const largeChunks = this.analysis.chunks.filter(chunk => chunk.sizeKB > 100);
+    const largeChunks = this.analysis.chunks.filter((chunk) => chunk.sizeKB > 100);
     score -= largeChunks.length * 5;
-    
+
     // Deduct points for critical recommendations
-    const criticalRecommendations = this.analysis.recommendations.filter(r => r.type === 'critical');
+    const criticalRecommendations = this.analysis.recommendations.filter(
+      (r) => r.type === "critical"
+    );
     score -= criticalRecommendations.length * 15;
-    
+
     // Deduct points for warning recommendations
-    const warningRecommendations = this.analysis.recommendations.filter(r => r.type === 'warning');
+    const warningRecommendations = this.analysis.recommendations.filter(
+      (r) => r.type === "warning"
+    );
     score -= warningRecommendations.length * 10;
-    
+
     this.analysis.performanceScore = Math.max(0, Math.round(score));
   }
 
@@ -393,16 +396,16 @@ class BundleAnalyzer {
    * Output analysis results
    */
   outputResults() {
-    console.log('\n📈 Bundle Analysis Results');
-    console.log('========================\n');
+    console.log("\n📈 Bundle Analysis Results");
+    console.log("========================\n");
 
     // Performance Score
     const score = this.analysis.performanceScore;
-    const scoreColor = score >= 80 ? '🟢' : score >= 60 ? '🟡' : '🔴';
+    const scoreColor = score >= 80 ? "🟢" : score >= 60 ? "🟡" : "🔴";
     console.log(`${scoreColor} Performance Score: ${score}/100\n`);
 
     // Top 5 largest chunks
-    console.log('📦 Largest JavaScript Chunks:');
+    console.log("📦 Largest JavaScript Chunks:");
     this.analysis.chunks.slice(0, 5).forEach((chunk, index) => {
       console.log(`   ${index + 1}. ${chunk.name} (${chunk.sizeKB} KB) - ${chunk.type}`);
     });
@@ -413,20 +416,20 @@ class BundleAnalyzer {
       return acc;
     }, {});
 
-    console.log('\n🎨 Asset Summary:');
+    console.log("\n🎨 Asset Summary:");
     Object.entries(assetSummary).forEach(([type, size]) => {
       console.log(`   ${type}: ${Math.round(size / 1024)} KB`);
     });
 
     // Recommendations
     if (this.analysis.recommendations.length > 0) {
-      console.log('\n💡 Recommendations:');
+      console.log("\n💡 Recommendations:");
       this.analysis.recommendations.forEach((rec, index) => {
-        const icon = rec.type === 'critical' ? '🔴' : rec.type === 'warning' ? '🟡' : '🔵';
+        const icon = rec.type === "critical" ? "🔴" : rec.type === "warning" ? "🟡" : "🔵";
         console.log(`\n   ${icon} ${rec.title}`);
         console.log(`      ${rec.description}`);
         if (rec.suggestions) {
-          rec.suggestions.forEach(suggestion => {
+          rec.suggestions.forEach((suggestion) => {
             console.log(`      • ${suggestion}`);
           });
         }
@@ -439,17 +442,19 @@ class BundleAnalyzer {
     console.log(`\n💾 Detailed analysis saved to: ${CONFIG.outputFile}`);
 
     // Performance budget status
-    console.log('\n🎯 Performance Budget Status:');
+    console.log("\n🎯 Performance Budget Status:");
     const totalJSSize = this.analysis.chunks.reduce((sum, chunk) => sum + chunk.size, 0);
     const totalJSSizeKB = Math.round(totalJSSize / 1024);
-    const jsStatus = totalJSSizeKB <= CONFIG.performanceBudget.jsInitial ? '✅' : '❌';
-    console.log(`   ${jsStatus} JavaScript: ${totalJSSizeKB} KB / ${CONFIG.performanceBudget.jsInitial} KB`);
+    const jsStatus = totalJSSizeKB <= CONFIG.performanceBudget.jsInitial ? "✅" : "❌";
+    console.log(
+      `   ${jsStatus} JavaScript: ${totalJSSizeKB} KB / ${CONFIG.performanceBudget.jsInitial} KB`
+    );
 
     const cssSize = this.analysis.assets
-      .filter(asset => asset.type === 'stylesheet')
+      .filter((asset) => asset.type === "stylesheet")
       .reduce((sum, asset) => sum + asset.size, 0);
     const cssSizeKB = Math.round(cssSize / 1024);
-    const cssStatus = cssSizeKB <= CONFIG.performanceBudget.css ? '✅' : '❌';
+    const cssStatus = cssSizeKB <= CONFIG.performanceBudget.css ? "✅" : "❌";
     console.log(`   ${cssStatus} CSS: ${cssSizeKB} KB / ${CONFIG.performanceBudget.css} KB`);
   }
 }

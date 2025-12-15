@@ -45,11 +45,13 @@ app/
 ```
 
 **URLs will be:**
+
 - English: `/en/dashboard`, `/en/login` (or just `/dashboard` with `localePrefix: 'as-needed'`)
 - French: `/fr/dashboard`, `/fr/login`
 - Spanish: `/es/dashboard`, `/es/login`
 
 **Then:**
+
 1. Re-enable middleware in `middleware.ts`
 2. Re-enable LanguageSwitcher in `components/dashboard/DashboardHeader.tsx`
 3. Language switcher will work perfectly
@@ -82,6 +84,7 @@ Keep pages at root level and skip locale-based URLs:
 ## 📋 Quick Reference: What to Do
 
 ### To use your app NOW:
+
 ```
 pnpm dev
 # Visit: http://localhost:3000
@@ -91,6 +94,7 @@ pnpm dev
 ```
 
 ### To enable full i18n LATER:
+
 1. Move pages to `[locale]` folder (big refactor)
 2. Uncomment middleware code
 3. Uncomment LanguageSwitcher in DashboardHeader
@@ -104,4 +108,3 @@ pnpm dev
 2. **components/dashboard/DashboardHeader.tsx** - Commented out LanguageSwitcher
 
 Your app should work now! 🎉
-

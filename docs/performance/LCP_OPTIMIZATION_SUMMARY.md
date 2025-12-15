@@ -11,12 +11,14 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ### Critical Issues Identified
 
 #### 1. **Desktop Hero Mockup Rendering on Mobile** ⚠️ MAJOR
+
 - **Impact:** 300-400ms delay on LCP
 - **Problem:** `DesktopHeroMockup` component uses `hidden lg:block` class but still renders on mobile due to how React hydration works
 - **Solution:** Conditionally render based on device detection with `useIsMobile()` hook
 - **Location:** `components/hero/hero-section.tsx`
 
 #### 2. **Expensive Framer Motion Animations on Mobile** ⚠️ MAJOR
+
 - **Impact:** 250-350ms delay on LCP + 90ms Total Blocking Time
 - **Problem:** Complex floating animations initialize on page load even on mobile
 - **Current:** `containerVariants`, `itemVariants`, `floatingShapeVariants` all calculate on mount
@@ -24,6 +26,7 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 - **Location:** `components/hero/hero-section.tsx`
 
 #### 3. **No Critical CSS Inlining** ⚠️ MEDIUM
+
 - **Impact:** 150-200ms delay on First Paint
 - **Problem:** Generic critical CSS doesn't target above-the-fold hero section styles
 - **Current:** ~50KB CSS loaded before render
@@ -31,24 +34,28 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 - **Location:** `app/layout.tsx` head section
 
 #### 4. **No Image Preloading** ⚠️ MEDIUM
+
 - **Impact:** 200-250ms delay on LCP
 - **Problem:** Hero images (if used) load after page render
 - **Solution:** Add `<link rel="preload">` with `fetchpriority="high"` for hero images
 - **Location:** `app/layout.tsx` head section
 
 #### 5. **318KB Unused JavaScript** ⚠️ MEDIUM
+
 - **Impact:** Slower page load, more main-thread work
 - **Problem:** Dynamic imports on page.tsx not tree-shaking effectively
 - **Solution:** Ensure below-fold components use `ssr: false` in dynamic imports
 - **Location:** `app/page.tsx`
 
 #### 6. **5 Render-Blocking Requests** ⚠️ MEDIUM
+
 - **Impact:** 100-150ms delay on overall load
 - **Problem:** CSS/JS loading synchronously in head
 - **Solution:** Defer non-critical CSS with `rel=preload`
 - **Location:** `app/layout.tsx`
 
 #### 7. **1.5 Seconds Main-Thread Work** ⚠️ MEDIUM
+
 - **Impact:** Slow interaction, janky experience
 - **Problem:** Heavy processing during hydration
 - **Solution:** Use Web Workers for heavy parsing, split code
@@ -59,6 +66,7 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ## 📊 Codebase Findings
 
 ### Current Architecture
+
 ```
 ✅ Good:
   - Next.js 14+ (built-in optimizations)
@@ -79,29 +87,33 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ```
 
 ### Performance Metrics (Current)
-| Metric | Mobile | Desktop | Target |
-|--------|--------|---------|--------|
-| LCP | 5.2s 🔴 | Good ✅ | 2.5s 🟡 |
-| FCP | ~2.1s | Good | 1.5s |
-| CLS | 3.47ms ✅ | Good | 0.1 |
-| TBT | 90ms ⚠️ | Good | 100ms |
-| Unused JS | 318KB | - | <50KB |
-| Unused CSS | 115KB | - | <30KB |
+
+| Metric     | Mobile    | Desktop | Target  |
+| ---------- | --------- | ------- | ------- |
+| LCP        | 5.2s 🔴   | Good ✅ | 2.5s 🟡 |
+| FCP        | ~2.1s     | Good    | 1.5s    |
+| CLS        | 3.47ms ✅ | Good    | 0.1     |
+| TBT        | 90ms ⚠️   | Good    | 100ms   |
+| Unused JS  | 318KB     | -       | <50KB   |
+| Unused CSS | 115KB     | -       | <30KB   |
 
 ---
 
 ## 📋 Solution Strategy: 4 Phases
 
 ### Phase 1: Immediate (1-2 hours) → 25% LCP Improvement
+
 **Goal: 5.2s → 4.0s**
 
 ✅ **Changes:**
+
 1. Create `hooks/use-is-mobile.ts` - Device detection hook
 2. Update `components/hero/hero-section.tsx` - Disable animations on mobile
 3. Update `app/layout.tsx` - Add critical CSS + image preload
 4. Test with `npm run mobile:audit`
 
 **Expected Results:**
+
 - LCP: 5.2s → 4.0s (20% improvement)
 - FCP: < 1.5s
 - Lighthouse Performance: 40 → 55+
@@ -114,14 +126,17 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ---
 
 ### Phase 2: Image Optimization (1 hour) → Additional 15% Improvement
+
 **Goal: 4.0s → 3.3s**
 
 ✅ **Changes:**
+
 1. Create optimized WebP/JPG hero images for mobile (375px) and desktop (1200px)
 2. Ensure all images < 50KB (mobile) and < 80KB (desktop)
 3. Update preload links to use optimized images
 
 **Expected Results:**
+
 - LCP: 4.0s → 3.3s (15% additional improvement)
 - Reduced bandwidth usage
 - Better image quality
@@ -131,14 +146,17 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ---
 
 ### Phase 3: CSS Deferral (1-2 hours) → Additional 20% Improvement
+
 **Goal: 3.3s → 2.6s**
 
 ✅ **Changes:**
+
 1. Split `app/globals.css` into critical (2.8KB) and non-critical (35KB)
 2. Inline critical CSS, preload non-critical with onLoad deferral
 3. Verify all Tailwind utilities move to non-critical
 
 **Expected Results:**
+
 - LCP: 3.3s → 2.6s (20% additional improvement)
 - Initial page load: ~15KB CSS instead of ~50KB
 - Deferred CSS loads in background
@@ -146,15 +164,18 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ---
 
 ### Phase 4: Main-Thread Work (1-2 hours) → Additional 10% Improvement
+
 **Goal: 2.6s → 2.3s**
 
 ✅ **Changes:**
+
 1. Create Web Worker for heavy parsing tasks
 2. Defer non-critical JavaScript execution with `requestIdleCallback`
 3. Break up long tasks with `setTimeout(..., 0)`
 4. Ensure Framer Motion is tree-shaken on mobile
 
 **Expected Results:**
+
 - LCP: 2.6s → 2.3s (10% additional improvement)
 - Main-thread work: 1.5s → 0.5s
 - Faster interactivity
@@ -164,57 +185,96 @@ Your website has **excellent desktop performance (99 Lighthouse score)** but **p
 ## 🚀 Quick Start: Phase 1 Implementation
 
 ### Files Created for You
+
 ✅ `hooks/use-is-mobile.ts` - Mobile detection hook (Ready to use!)
 
 ### Files to Update (3 total)
 
 #### 1. `components/hero/hero-section.tsx` (15 min)
+
 **Add at top:**
+
 ```tsx
-import { useIsMobile } from "@/hooks/use-is-mobile"
+import { useIsMobile } from "@/hooks/use-is-mobile";
 ```
 
 **In component function:**
+
 ```tsx
-const isMobile = useIsMobile()
+const isMobile = useIsMobile();
 
 // Disable animations on mobile
-const containerVariants = isMobile ? {} : { /* animations */ }
-const itemVariants = isMobile ? {} : { /* animations */ }
-const floatingShapeVariants = isMobile ? {} : { /* animations */ }
+const containerVariants = isMobile
+  ? {}
+  : {
+      /* animations */
+    };
+const itemVariants = isMobile
+  ? {}
+  : {
+      /* animations */
+    };
+const floatingShapeVariants = isMobile
+  ? {}
+  : {
+      /* animations */
+    };
 ```
 
 **Wrap desktop mockup:**
+
 ```tsx
-{!isMobile && (
-  <motion.div className="hidden lg:block">
-    <DesktopHeroMockup />
-  </motion.div>
-)}
+{
+  !isMobile && (
+    <motion.div className="hidden lg:block">
+      <DesktopHeroMockup />
+    </motion.div>
+  );
+}
 ```
 
 #### 2. `app/layout.tsx` - Add Preload + Critical CSS (20 min)
-**In `<head>` section:**
-```tsx
-{/* Preload hero images */}
-<link rel="preload" as="image" href="/images/hero/hero-mobile-portrait.webp" 
-  media="(max-width: 1024px)" fetchpriority="high" />
 
-{/* Critical CSS - Hero only */}
-<style dangerouslySetInnerHTML={{
-  __html: `
+**In `<head>` section:**
+
+```tsx
+{
+  /* Preload hero images */
+}
+<link
+  rel="preload"
+  as="image"
+  href="/images/hero/hero-mobile-portrait.webp"
+  media="(max-width: 1024px)"
+  fetchpriority="high"
+/>;
+
+{
+  /* Critical CSS - Hero only */
+}
+<style
+  dangerouslySetInnerHTML={{
+    __html: `
     .hero-section { /* styles */ }
     .hero-cta { /* styles */ }
     @media (max-width: 1023px) { .desktop-only { display: none !important; } }
-  `
-}} />
+  `,
+  }}
+/>;
 
-{/* Defer non-critical CSS */}
-<link rel="preload" as="style" href="/css/non-critical.css" 
-  onLoad="this.onload=null;this.rel='stylesheet'" />
+{
+  /* Defer non-critical CSS */
+}
+<link
+  rel="preload"
+  as="style"
+  href="/css/non-critical.css"
+  onLoad="this.onload=null;this.rel='stylesheet'"
+/>;
 ```
 
 #### 3. Test & Verify (5 min)
+
 ```bash
 npm run type-check    # Verify syntax
 npm run build        # Build succeeds
@@ -261,6 +321,7 @@ npm run mobile:audit # Check LCP improvement
 ## 🎯 Success Metrics
 
 ### Phase 1 Target (Complete in 1-2 hours)
+
 - ✅ LCP: 5.2s → 4.0s (23% improvement)
 - ✅ FCP: < 1.5s
 - ✅ No animations on mobile
@@ -268,7 +329,8 @@ npm run mobile:audit # Check LCP improvement
 - ✅ Mobile mockup hidden
 
 ### Final Goal (After all 4 phases)
-- 🎯 LCP: 5.2s → 2.0s (62% improvement) 
+
+- 🎯 LCP: 5.2s → 2.0s (62% improvement)
 - 🎯 FCP: < 1.0s
 - 🎯 CLS: < 0.05
 - 🎯 TBT: < 50ms
@@ -310,13 +372,13 @@ npm run analyze:build         # Identify unused JS
 
 ## 📊 Impact Summary
 
-| Task | Effort | Impact | Total Time |
-|------|--------|--------|-----------|
-| Phase 1: Mobile hero + animations | 1-2 hrs | 25% ↓ | 1-2 hrs |
-| Phase 2: Image optimization | 1 hr | 15% ↓ | 2-3 hrs |
-| Phase 3: CSS deferral | 1-2 hrs | 20% ↓ | 3-5 hrs |
-| Phase 4: Main-thread work | 1-2 hrs | 10% ↓ | 4-6 hrs |
-| **TOTAL** | **4-6 hrs** | **62% ↓** | **4-6 hrs** |
+| Task                              | Effort      | Impact    | Total Time  |
+| --------------------------------- | ----------- | --------- | ----------- |
+| Phase 1: Mobile hero + animations | 1-2 hrs     | 25% ↓     | 1-2 hrs     |
+| Phase 2: Image optimization       | 1 hr        | 15% ↓     | 2-3 hrs     |
+| Phase 3: CSS deferral             | 1-2 hrs     | 20% ↓     | 3-5 hrs     |
+| Phase 4: Main-thread work         | 1-2 hrs     | 10% ↓     | 4-6 hrs     |
+| **TOTAL**                         | **4-6 hrs** | **62% ↓** | **4-6 hrs** |
 
 **Final Result:** LCP 5.2s → 2.0s (Excellent performance!)
 
@@ -346,6 +408,7 @@ npm run analyze:build         # Identify unused JS
 ## 📞 Questions?
 
 Each section has detailed documentation:
+
 - **Quick answers:** Check `docs/QUICK_START_PHASE_1.md`
 - **Full explanation:** Read `docs/LCP_OPTIMIZATION_COMPREHENSIVE_GUIDE.md`
 - **Code samples:** See `docs/PHASE_1_IMMEDIATE_IMPLEMENTATION.ts`

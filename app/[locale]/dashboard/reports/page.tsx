@@ -9,7 +9,7 @@ export default function ReportsPage() {
           Generate and schedule automated SEO reports
         </p>
       </div>
-      
+
       <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 text-center">
         <div className="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
           <span className="text-2xl">📊</span>

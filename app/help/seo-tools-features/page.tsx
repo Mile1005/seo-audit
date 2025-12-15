@@ -1,67 +1,73 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ArrowLeft, ArrowRight, BarChart, BookOpen, ChevronRight, Clock } from 'lucide-react'
-import { MainLayout } from '@/components/layout/main-layout'
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight, BarChart, BookOpen, ChevronRight, Clock } from "lucide-react";
+import { MainLayout } from "@/components/layout/main-layout";
 
 const categoryArticles = [
   {
-    title: 'Complete SEO Audit Guide',
-    description: 'Master our comprehensive 47-point SEO audit system with detailed explanations of each check and actionable recommendations.',
-    href: '/help/seo-tools-features/seo-audit-guide',
+    title: "Complete SEO Audit Guide",
+    description:
+      "Master our comprehensive 47-point SEO audit system with detailed explanations of each check and actionable recommendations.",
+    href: "/help/seo-tools-features/seo-audit-guide",
     icon: BarChart,
-    time: '8 min'
+    time: "8 min",
   },
   {
-    title: 'Site Crawling & Analysis',
-    description: 'Learn how our AI-powered crawler works and how to interpret crawling reports for maximum SEO impact.',
-    href: '/help/seo-tools-features/site-crawling',
+    title: "Site Crawling & Analysis",
+    description:
+      "Learn how our AI-powered crawler works and how to interpret crawling reports for maximum SEO impact.",
+    href: "/help/seo-tools-features/site-crawling",
     icon: BarChart,
-    time: '6 min'
+    time: "6 min",
   },
   {
-    title: 'Keyword Research Tools',
-    description: 'Discover high-value keywords with our AI-powered research tools and learn to build winning keyword strategies.',
-    href: '/help/seo-tools-features/keyword-research',
+    title: "Keyword Research Tools",
+    description:
+      "Discover high-value keywords with our AI-powered research tools and learn to build winning keyword strategies.",
+    href: "/help/seo-tools-features/keyword-research",
     icon: BarChart,
-    time: '10 min'
+    time: "10 min",
   },
   {
-    title: 'Performance Monitoring',
-    description: 'Set up real-time SEO monitoring and learn to interpret performance data for continuous optimization.',
-    href: '/help/seo-tools-features/performance-monitoring',
+    title: "Performance Monitoring",
+    description:
+      "Set up real-time SEO monitoring and learn to interpret performance data for continuous optimization.",
+    href: "/help/seo-tools-features/performance-monitoring",
     icon: BarChart,
-    time: '7 min'
+    time: "7 min",
   },
   {
-    title: 'Competitor Analysis',
-    description: 'Use our competitor intelligence tools to identify opportunities and stay ahead of the competition.',
-    href: '/help/seo-tools-features/competitor-analysis',
+    title: "Competitor Analysis",
+    description:
+      "Use our competitor intelligence tools to identify opportunities and stay ahead of the competition.",
+    href: "/help/seo-tools-features/competitor-analysis",
     icon: BarChart,
-    time: '9 min'
+    time: "9 min",
   },
   {
-    title: 'Content Optimization',
-    description: 'Optimize your content for search engines with AI-powered recommendations and best practices.',
-    href: '/help/seo-tools-features/content-optimization',
+    title: "Content Optimization",
+    description:
+      "Optimize your content for search engines with AI-powered recommendations and best practices.",
+    href: "/help/seo-tools-features/content-optimization",
     icon: BarChart,
-    time: '11 min'
+    time: "11 min",
   },
   {
-    title: 'Enterprise Reporting',
-    description: 'Create professional SEO reports and collaborate with teams using our enterprise-grade reporting features.',
-    href: '/help/seo-tools-features/enterprise-reporting',
+    title: "Enterprise Reporting",
+    description:
+      "Create professional SEO reports and collaborate with teams using our enterprise-grade reporting features.",
+    href: "/help/seo-tools-features/enterprise-reporting",
     icon: BarChart,
-    time: '5 min'
-  }
-]
+    time: "5 min",
+  },
+];
 
 export default function SEOToolsFeaturesPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -127,50 +133,68 @@ export default function SEOToolsFeaturesPage() {
             <div className="space-y-12">
               {/* Main Intro */}
               <div>
-                <h2 className="text-3xl font-bold text-white mb-4">Master AI-Powered SEO Tools & Features</h2>
+                <h2 className="text-3xl font-bold text-white mb-4">
+                  Master AI-Powered SEO Tools & Features
+                </h2>
                 <p className="text-gray-300 text-lg">
-                  AI SEO Turbo provides a comprehensive suite of AI-powered tools designed to give you a competitive edge
-                  in search engine optimization. Whether you're a beginner or an experienced SEO professional, our platform
-                  offers the features and insights you need to drive organic growth.
+                  AI SEO Turbo provides a comprehensive suite of AI-powered tools designed to give
+                  you a competitive edge in search engine optimization. Whether you're a beginner or
+                  an experienced SEO professional, our platform offers the features and insights you
+                  need to drive organic growth.
                 </p>
               </div>
 
               {/* SEO Audit Suite */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Comprehensive SEO Audit Suite</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Comprehensive SEO Audit Suite
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Our flagship SEO audit tool goes beyond basic checklists, providing AI-driven analysis that identifies
-                  critical issues and opportunities. The 47-point technical audit covers everything from crawlability and
-                  indexation to performance optimization and content gaps.
+                  Our flagship SEO audit tool goes beyond basic checklists, providing AI-driven
+                  analysis that identifies critical issues and opportunities. The 47-point technical
+                  audit covers everything from crawlability and indexation to performance
+                  optimization and content gaps.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
                     <h4 className="text-white font-semibold mb-2">🔍 Technical SEO Analysis</h4>
-                    <p className="text-gray-300 text-sm">Core Web Vitals, mobile optimization, schema markup validation</p>
+                    <p className="text-gray-300 text-sm">
+                      Core Web Vitals, mobile optimization, schema markup validation
+                    </p>
                   </div>
                   <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
                     <h4 className="text-white font-semibold mb-2">📝 Content Optimization</h4>
-                    <p className="text-gray-300 text-sm">Keyword gap analysis, content depth assessment, semantic SEO</p>
+                    <p className="text-gray-300 text-sm">
+                      Keyword gap analysis, content depth assessment, semantic SEO
+                    </p>
                   </div>
                   <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
                     <h4 className="text-white font-semibold mb-2">🔗 Link Profile Audit</h4>
-                    <p className="text-gray-300 text-sm">Backlink quality analysis, toxic link detection, internal linking opportunities</p>
+                    <p className="text-gray-300 text-sm">
+                      Backlink quality analysis, toxic link detection, internal linking
+                      opportunities
+                    </p>
                   </div>
                   <div className="bg-blue-600/10 border border-blue-500/30 rounded-lg p-5">
                     <h4 className="text-white font-semibold mb-2">⚔️ Competitor Intelligence</h4>
-                    <p className="text-gray-300 text-sm">Comparative analysis, opportunity identification, market positioning</p>
+                    <p className="text-gray-300 text-sm">
+                      Comparative analysis, opportunity identification, market positioning
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Site Crawling */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Advanced Site Crawling Technology</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Advanced Site Crawling Technology
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Our intelligent site crawler mimics how search engines discover and analyze your website. Unlike traditional
-                  crawlers, our AI-powered system understands context, identifies patterns, and provides actionable insights
-                  about your site's structure and performance.
+                  Our intelligent site crawler mimics how search engines discover and analyze your
+                  website. Unlike traditional crawlers, our AI-powered system understands context,
+                  identifies patterns, and provides actionable insights about your site's structure
+                  and performance.
                 </p>
 
                 <div className="bg-gradient-to-r from-cyan-600/10 to-blue-600/10 border border-cyan-500/30 rounded-lg p-6">
@@ -204,10 +228,13 @@ export default function SEOToolsFeaturesPage() {
 
               {/* Keyword Research */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">AI-Powered Keyword Research & Tracking</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  AI-Powered Keyword Research & Tracking
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Stay ahead of the competition with our advanced keyword research tools. Our AI analyzes search intent,
-                  competition levels, and historical performance data to identify high-value keywords that drive conversions.
+                  Stay ahead of the competition with our advanced keyword research tools. Our AI
+                  analyzes search intent, competition levels, and historical performance data to
+                  identify high-value keywords that drive conversions.
                 </p>
 
                 <div className="grid grid-cols-1 gap-4">
@@ -215,35 +242,49 @@ export default function SEOToolsFeaturesPage() {
                     <span className="text-2xl">📊</span>
                     <div>
                       <h4 className="text-white font-semibold mb-1">Search Volume & Competition</h4>
-                      <p className="text-gray-300 text-sm">Accurate data on keyword difficulty and search trends</p>
+                      <p className="text-gray-300 text-sm">
+                        Accurate data on keyword difficulty and search trends
+                      </p>
                     </div>
                   </div>
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
                     <span className="text-2xl">🎯</span>
                     <div>
                       <h4 className="text-white font-semibold mb-1">Long-tail Keyword Discovery</h4>
-                      <p className="text-gray-300 text-sm">Find high-converting, low-competition keywords</p>
+                      <p className="text-gray-300 text-sm">
+                        Find high-converting, low-competition keywords
+                      </p>
                     </div>
                   </div>
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
                     <span className="text-2xl">📈</span>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Seasonal Trend Identification</h4>
-                      <p className="text-gray-300 text-sm">Capitalize on seasonal search opportunities</p>
+                      <h4 className="text-white font-semibold mb-1">
+                        Seasonal Trend Identification
+                      </h4>
+                      <p className="text-gray-300 text-sm">
+                        Capitalize on seasonal search opportunities
+                      </p>
                     </div>
                   </div>
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
                     <span className="text-2xl">✨</span>
                     <div>
                       <h4 className="text-white font-semibold mb-1">SERP Feature Opportunities</h4>
-                      <p className="text-gray-300 text-sm">Identify snippets, PAA, and rich results opportunities</p>
+                      <p className="text-gray-300 text-sm">
+                        Identify snippets, PAA, and rich results opportunities
+                      </p>
                     </div>
                   </div>
                   <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-5 flex gap-4">
                     <span className="text-2xl">⚔️</span>
                     <div>
-                      <h4 className="text-white font-semibold mb-1">Competitor Keyword Gap Analysis</h4>
-                      <p className="text-gray-300 text-sm">Find keywords competitors rank for that you don't</p>
+                      <h4 className="text-white font-semibold mb-1">
+                        Competitor Keyword Gap Analysis
+                      </h4>
+                      <p className="text-gray-300 text-sm">
+                        Find keywords competitors rank for that you don't
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -251,10 +292,13 @@ export default function SEOToolsFeaturesPage() {
 
               {/* Performance Monitoring */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Real-Time Performance Monitoring</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Real-Time Performance Monitoring
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Track your SEO progress with comprehensive dashboards and automated reporting. Our platform monitors
-                  ranking changes, traffic fluctuations, and algorithmic updates to keep you informed and proactive.
+                  Track your SEO progress with comprehensive dashboards and automated reporting. Our
+                  platform monitors ranking changes, traffic fluctuations, and algorithmic updates
+                  to keep you informed and proactive.
                 </p>
 
                 <div className="bg-gradient-to-r from-purple-600/10 to-pink-600/10 border border-purple-500/30 rounded-lg p-6">
@@ -264,11 +308,15 @@ export default function SEOToolsFeaturesPage() {
                   <ul className="space-y-3">
                     <li className="flex gap-3">
                       <span className="text-purple-400 font-bold min-w-fit">Daily Tracking</span>
-                      <p className="text-gray-300">Real-time ranking position tracking across all keywords</p>
+                      <p className="text-gray-300">
+                        Real-time ranking position tracking across all keywords
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-purple-400 font-bold min-w-fit">Traffic Analysis</span>
-                      <p className="text-gray-300">Organic traffic trend analysis and anomaly detection</p>
+                      <p className="text-gray-300">
+                        Organic traffic trend analysis and anomaly detection
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-purple-400 font-bold min-w-fit">Core Web Vitals</span>
@@ -276,7 +324,9 @@ export default function SEOToolsFeaturesPage() {
                     </li>
                     <li className="flex gap-3">
                       <span className="text-purple-400 font-bold min-w-fit">Algorithm Updates</span>
-                      <p className="text-gray-300">Impact assessment during Google algorithm updates</p>
+                      <p className="text-gray-300">
+                        Impact assessment during Google algorithm updates
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-purple-400 font-bold min-w-fit">Smart Alerts</span>
@@ -288,42 +338,60 @@ export default function SEOToolsFeaturesPage() {
 
               {/* Competitor Analysis */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Competitor Analysis & Intelligence</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Competitor Analysis & Intelligence
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Understand your competitive landscape with detailed competitor analysis. Our AI identifies their strengths,
-                  weaknesses, and strategies, helping you develop data-driven approaches to gain market share.
+                  Understand your competitive landscape with detailed competitor analysis. Our AI
+                  identifies their strengths, weaknesses, and strategies, helping you develop
+                  data-driven approaches to gain market share.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
                     <h4 className="text-emerald-300 font-semibold mb-2">🔗 Backlink Comparison</h4>
-                    <p className="text-gray-300 text-sm">Analyze competitor backlink profiles and find link opportunities</p>
+                    <p className="text-gray-300 text-sm">
+                      Analyze competitor backlink profiles and find link opportunities
+                    </p>
                   </div>
                   <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
                     <h4 className="text-emerald-300 font-semibold mb-2">📄 Content Strategy</h4>
-                    <p className="text-gray-300 text-sm">Understand what content topics competitors target</p>
+                    <p className="text-gray-300 text-sm">
+                      Understand what content topics competitors target
+                    </p>
                   </div>
                   <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
                     <h4 className="text-emerald-300 font-semibold mb-2">🎯 Keyword Overlap</h4>
-                    <p className="text-gray-300 text-sm">See which keywords you're competing for with rivals</p>
+                    <p className="text-gray-300 text-sm">
+                      See which keywords you're competing for with rivals
+                    </p>
                   </div>
                   <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
-                    <h4 className="text-emerald-300 font-semibold mb-2">⚙️ Technical Benchmarking</h4>
-                    <p className="text-gray-300 text-sm">Compare technical SEO performance against competitors</p>
+                    <h4 className="text-emerald-300 font-semibold mb-2">
+                      ⚙️ Technical Benchmarking
+                    </h4>
+                    <p className="text-gray-300 text-sm">
+                      Compare technical SEO performance against competitors
+                    </p>
                   </div>
                   <div className="bg-emerald-600/10 border border-emerald-500/30 rounded-lg p-5">
                     <h4 className="text-emerald-300 font-semibold mb-2">📍 Market Positioning</h4>
-                    <p className="text-gray-300 text-sm">Understand your position in the competitive landscape</p>
+                    <p className="text-gray-300 text-sm">
+                      Understand your position in the competitive landscape
+                    </p>
                   </div>
                 </div>
               </div>
 
               {/* Content Optimization */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Intelligent Content Optimization</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Intelligent Content Optimization
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Optimize your content for better search performance with AI-powered recommendations. Our platform analyzes
-                  content quality, relevance, and engagement factors to improve your on-page SEO.
+                  Optimize your content for better search performance with AI-powered
+                  recommendations. Our platform analyzes content quality, relevance, and engagement
+                  factors to improve your on-page SEO.
                 </p>
 
                 <div className="bg-gradient-to-r from-orange-600/10 to-red-600/10 border border-orange-500/30 rounded-lg p-6">
@@ -333,23 +401,33 @@ export default function SEOToolsFeaturesPage() {
                   <ul className="space-y-3">
                     <li className="flex gap-3">
                       <span className="text-orange-400">→</span>
-                      <p className="text-gray-300">Readability and engagement analysis for better UX</p>
+                      <p className="text-gray-300">
+                        Readability and engagement analysis for better UX
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-orange-400">→</span>
-                      <p className="text-gray-300">Topic clustering and content gap identification</p>
+                      <p className="text-gray-300">
+                        Topic clustering and content gap identification
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-orange-400">→</span>
-                      <p className="text-gray-300">Title and meta description optimization suggestions</p>
+                      <p className="text-gray-300">
+                        Title and meta description optimization suggestions
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-orange-400">→</span>
-                      <p className="text-gray-300">Internal linking suggestions based on content relevance</p>
+                      <p className="text-gray-300">
+                        Internal linking suggestions based on content relevance
+                      </p>
                     </li>
                     <li className="flex gap-3">
                       <span className="text-orange-400">→</span>
-                      <p className="text-gray-300">Content freshness monitoring and update recommendations</p>
+                      <p className="text-gray-300">
+                        Content freshness monitoring and update recommendations
+                      </p>
                     </li>
                   </ul>
                 </div>
@@ -357,28 +435,39 @@ export default function SEOToolsFeaturesPage() {
 
               {/* Enterprise Reporting */}
               <div>
-                <h3 className="text-2xl font-bold text-white mb-6">Enterprise-Grade Reporting & Collaboration</h3>
+                <h3 className="text-2xl font-bold text-white mb-6">
+                  Enterprise-Grade Reporting & Collaboration
+                </h3>
                 <p className="text-gray-300 mb-6">
-                  Scale your SEO efforts with advanced reporting and team collaboration features. Generate professional
-                  reports, share insights with stakeholders, and coordinate team efforts across large organizations.
+                  Scale your SEO efforts with advanced reporting and team collaboration features.
+                  Generate professional reports, share insights with stakeholders, and coordinate
+                  team efforts across large organizations.
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
                     <h4 className="text-indigo-300 font-semibold mb-2">📋 White-Label Reports</h4>
-                    <p className="text-gray-300 text-sm">Custom branded reports for client delivery</p>
+                    <p className="text-gray-300 text-sm">
+                      Custom branded reports for client delivery
+                    </p>
                   </div>
                   <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
                     <h4 className="text-indigo-300 font-semibold mb-2">📊 Custom Dashboards</h4>
-                    <p className="text-gray-300 text-sm">Create personalized views of your SEO metrics</p>
+                    <p className="text-gray-300 text-sm">
+                      Create personalized views of your SEO metrics
+                    </p>
                   </div>
                   <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
                     <h4 className="text-indigo-300 font-semibold mb-2">👥 Team Collaboration</h4>
-                    <p className="text-gray-300 text-sm">Coordinate efforts and share insights with teams</p>
+                    <p className="text-gray-300 text-sm">
+                      Coordinate efforts and share insights with teams
+                    </p>
                   </div>
                   <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
                     <h4 className="text-indigo-300 font-semibold mb-2">🔗 API Access</h4>
-                    <p className="text-gray-300 text-sm">Integrate with your existing tools and workflows</p>
+                    <p className="text-gray-300 text-sm">
+                      Integrate with your existing tools and workflows
+                    </p>
                   </div>
                   <div className="bg-indigo-600/10 border border-indigo-500/30 rounded-lg p-5">
                     <h4 className="text-indigo-300 font-semibold mb-2">⏰ Automated Reports</h4>
@@ -389,15 +478,19 @@ export default function SEOToolsFeaturesPage() {
 
               {/* Getting Started */}
               <div className="bg-slate-800/50 rounded-lg p-8 border border-slate-700/50">
-                <h3 className="text-2xl font-bold text-white mb-4">Getting Started with AI SEO Turbo</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  Getting Started with AI SEO Turbo
+                </h3>
                 <p className="text-gray-300 mb-4">
-                  Ready to transform your SEO strategy with AI-powered tools? Our platform is designed to be accessible
-                  to users at all skill levels while providing the depth and sophistication that enterprise teams require.
+                  Ready to transform your SEO strategy with AI-powered tools? Our platform is
+                  designed to be accessible to users at all skill levels while providing the depth
+                  and sophistication that enterprise teams require.
                 </p>
                 <p className="text-gray-300">
-                  Start with our comprehensive guides below to master each feature and unlock the full potential of
-                  your SEO efforts. Whether you're optimizing a single website or managing a portfolio of client sites,
-                  AI SEO Turbo provides the tools and insights you need to succeed.
+                  Start with our comprehensive guides below to master each feature and unlock the
+                  full potential of your SEO efforts. Whether you're optimizing a single website or
+                  managing a portfolio of client sites, AI SEO Turbo provides the tools and insights
+                  you need to succeed.
                 </p>
               </div>
             </div>
@@ -431,9 +524,7 @@ export default function SEOToolsFeaturesPage() {
                           <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                             {article.title}
                           </h3>
-                          <p className="text-gray-400 mb-4">
-                            {article.description}
-                          </p>
+                          <p className="text-gray-400 mb-4">{article.description}</p>
                           <div className="flex items-center gap-4 text-sm text-gray-500">
                             <div className="flex items-center gap-2">
                               <Clock className="w-4 h-4" />
@@ -465,8 +556,12 @@ export default function SEOToolsFeaturesPage() {
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
-                    <div className="text-white font-medium group-hover:text-blue-400 transition-colors">Getting Started</div>
-                    <div className="text-gray-400 text-sm">Learn the basics and set up your account</div>
+                    <div className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                      Getting Started
+                    </div>
+                    <div className="text-gray-400 text-sm">
+                      Learn the basics and set up your account
+                    </div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-blue-400 transition-colors" />
                 </Link>
@@ -475,7 +570,9 @@ export default function SEOToolsFeaturesPage() {
                   className="flex items-center justify-between p-4 bg-slate-900/50 rounded-lg hover:bg-slate-900 transition-colors group"
                 >
                   <div>
-                    <div className="text-white font-medium group-hover:text-blue-400 transition-colors">Troubleshooting</div>
+                    <div className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                      Troubleshooting
+                    </div>
                     <div className="text-gray-400 text-sm">Resolve common issues and errors</div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-gray-500 group-hover:text-blue-400 transition-colors" />
@@ -513,5 +610,5 @@ export default function SEOToolsFeaturesPage() {
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

@@ -26,7 +26,12 @@ export function LegalLayout({
     if (!root) return;
     const hs = Array.from(root.querySelectorAll("h2, h3")) as HTMLElement[];
     const parsed: Heading[] = hs.map((el) => ({
-      id: el.id || el.innerText.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+      id:
+        el.id ||
+        el.innerText
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)/g, ""),
       text: el.innerText,
       level: el.tagName === "H2" ? 2 : 3,
     }));
@@ -54,10 +59,7 @@ export function LegalLayout({
             <ul className="space-y-1 text-sm">
               {headings.map((h) => (
                 <li key={h.id} className={h.level === 3 ? "ml-4" : ""}>
-                  <a
-                    href={`#${h.id}`}
-                    className="text-slate-300 hover:text-white hover:underline"
-                  >
+                  <a href={`#${h.id}`} className="text-slate-300 hover:text-white hover:underline">
                     {h.text}
                   </a>
                 </li>

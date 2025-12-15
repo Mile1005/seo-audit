@@ -1,4 +1,5 @@
 # JSON-LD SCHEMA QUICK REFERENCE GUIDE
+
 **Quick lookup for schema implementation status**
 
 ---
@@ -6,29 +7,33 @@
 ## 📊 SCHEMA STATUS BY PAGE
 
 ### ✅ COMPLETE (Global Schemas)
-| Schema Type | Location | Status |
-|-------------|----------|--------|
-| Organization | `/app/layout.tsx` | ✅ Perfect |
-| SoftwareApplication | `/app/layout.tsx` | ✅ Perfect |
+
+| Schema Type            | Location          | Status     |
+| ---------------------- | ----------------- | ---------- |
+| Organization           | `/app/layout.tsx` | ✅ Perfect |
+| SoftwareApplication    | `/app/layout.tsx` | ✅ Perfect |
 | WebSite + SearchAction | `/app/layout.tsx` | ✅ Perfect |
 
 ---
 
 ### ⚠️ PARTIAL (Implemented but needs enhancement)
-| Page | Current Schema | Missing | Priority |
-|------|----------------|---------|----------|
-| All Case Studies (6) | Article | Review/Rating | 🟠 Medium |
-| `/help/troubleshooting/audit-issues` | TroubleshootingGuide + FAQPage | BreadcrumbList | 🟡 Low |
-| `/help/getting-started/quick-start` | HowTo | BreadcrumbList | 🟡 Low |
-| `/help/getting-started/dashboard-setup` | HowTo | BreadcrumbList | 🟡 Low |
-| `/help/getting-started/seo-scores` | Article | BreadcrumbList | 🟡 Low |
+
+| Page                                    | Current Schema                 | Missing        | Priority  |
+| --------------------------------------- | ------------------------------ | -------------- | --------- |
+| All Case Studies (6)                    | Article                        | Review/Rating  | 🟠 Medium |
+| `/help/troubleshooting/audit-issues`    | TroubleshootingGuide + FAQPage | BreadcrumbList | 🟡 Low    |
+| `/help/getting-started/quick-start`     | HowTo                          | BreadcrumbList | 🟡 Low    |
+| `/help/getting-started/dashboard-setup` | HowTo                          | BreadcrumbList | 🟡 Low    |
+| `/help/getting-started/seo-scores`      | Article                        | BreadcrumbList | 🟡 Low    |
 
 ---
 
 ### ❌ MISSING (Critical - Need immediate attention)
 
 #### Blog Posts (6 pages) - 🔴 CRITICAL
+
 All need **BlogPosting** schema:
+
 - `/blog/ai-powered-seo-future`
 - `/blog/complete-seo-audit-checklist-2025`
 - `/blog/content-seo-creating-search-friendly-content`
@@ -37,6 +42,7 @@ All need **BlogPosting** schema:
 - `/blog/technical-seo-best-practices-2025`
 
 **Required Properties:**
+
 - headline, description, image
 - datePublished, dateModified
 - author (Person), publisher (Organization)
@@ -46,22 +52,24 @@ All need **BlogPosting** schema:
 
 #### Marketing Pages - 🔴 HIGH Priority
 
-| Page | Missing Schema | Impact | Priority |
-|------|----------------|--------|----------|
-| `/pricing` | Product/Offer + FAQPage | Very High | 🔴 Critical |
-| `/about` | AboutPage | Medium | 🟠 High |
-| `/features/seo-audit` | Service/SoftwareFeature + FAQPage | Medium | 🟠 High |
-| `/features/site-crawler` | Service/SoftwareFeature + FAQPage | Medium | 🟠 High |
-| `/features/backlink-analysis` | Service/SoftwareFeature + FAQPage | Medium | 🟠 High |
-| `/features/keyword-research` | Service/SoftwareFeature + FAQPage | Medium | 🟠 High |
-| `/features/competitor-analysis` | Service/SoftwareFeature + FAQPage | Medium | 🟠 High |
+| Page                            | Missing Schema                    | Impact    | Priority    |
+| ------------------------------- | --------------------------------- | --------- | ----------- |
+| `/pricing`                      | Product/Offer + FAQPage           | Very High | 🔴 Critical |
+| `/about`                        | AboutPage                         | Medium    | 🟠 High     |
+| `/features/seo-audit`           | Service/SoftwareFeature + FAQPage | Medium    | 🟠 High     |
+| `/features/site-crawler`        | Service/SoftwareFeature + FAQPage | Medium    | 🟠 High     |
+| `/features/backlink-analysis`   | Service/SoftwareFeature + FAQPage | Medium    | 🟠 High     |
+| `/features/keyword-research`    | Service/SoftwareFeature + FAQPage | Medium    | 🟠 High     |
+| `/features/competitor-analysis` | Service/SoftwareFeature + FAQPage | Medium    | 🟠 High     |
 
 ---
 
 #### Help Pages (24 pages) - 🟡 MEDIUM Priority
+
 Most help pages need **HowTo** or **Article** schemas
 
 **Categories:**
+
 - Getting Started: 3 pages (1 has schema, 2 need)
 - Dashboard Guide: 5 pages (0 have schemas)
 - Audit Types: 4 pages (0 have schemas)
@@ -74,6 +82,7 @@ Most help pages need **HowTo** or **Article** schemas
 ## 🎯 IMPLEMENTATION PRIORITIES
 
 ### Week 1 - CRITICAL (Must Do)
+
 1. ✅ Add **BlogPosting** to all 6 blog posts
 2. ✅ Add **Product/Offer** schema to `/pricing`
 3. ✅ Add **FAQPage** schema to `/pricing`
@@ -83,6 +92,7 @@ Most help pages need **HowTo** or **Article** schemas
 ---
 
 ### Week 2 - HIGH (Should Do)
+
 4. ✅ Add **AboutPage** schema to `/about`
 5. ✅ Add **Service** schemas to all 5 feature pages
 6. ✅ Add **FAQPage** schemas to feature pages
@@ -93,6 +103,7 @@ Most help pages need **HowTo** or **Article** schemas
 ---
 
 ### Week 3-4 - MEDIUM (Nice to Have)
+
 8. ✅ Add **BreadcrumbList** to all pages
 9. ✅ Extend **HowTo** schemas to all help tutorials
 10. ✅ Add more **FAQPage** schemas to help section
@@ -104,6 +115,7 @@ Most help pages need **HowTo** or **Article** schemas
 ## 🔧 QUICK IMPLEMENTATION SNIPPETS
 
 ### BlogPosting (for blog posts)
+
 ```tsx
 <script type="application/ld+json">
 {
@@ -129,6 +141,7 @@ Most help pages need **HowTo** or **Article** schemas
 ```
 
 ### FAQPage (for pricing, features, help)
+
 ```tsx
 <script type="application/ld+json">
 {
@@ -149,6 +162,7 @@ Most help pages need **HowTo** or **Article** schemas
 ```
 
 ### Product (for pricing page)
+
 ```tsx
 <script type="application/ld+json">
 {
@@ -165,6 +179,7 @@ Most help pages need **HowTo** or **Article** schemas
 ```
 
 ### BreadcrumbList (for all pages)
+
 ```tsx
 <script type="application/ld+json">
 {
@@ -192,6 +207,7 @@ Most help pages need **HowTo** or **Article** schemas
 ## 📋 TESTING CHECKLIST
 
 Before deploying:
+
 - [ ] Test with Google Rich Results Test
 - [ ] Validate with Schema.org validator
 - [ ] Check all required properties present
@@ -201,6 +217,7 @@ Before deploying:
 - [ ] JSON syntax is valid
 
 **Test URLs:**
+
 - https://search.google.com/test/rich-results
 - https://validator.schema.org/
 
@@ -210,19 +227,20 @@ Before deploying:
 
 Track in Google Search Console:
 
-| Metric | Current | Target | Timeline |
-|--------|---------|--------|----------|
-| Schema Coverage | 26% | 90%+ | 4-6 weeks |
-| Blog CTR | Baseline | +20-30% | 2-4 weeks |
-| Pricing CTR | Baseline | +15-25% | 2-4 weeks |
-| Rich Results | ~13 pages | 45+ pages | 4-6 weeks |
-| Schema Errors | Unknown | 0 critical | Ongoing |
+| Metric          | Current   | Target     | Timeline  |
+| --------------- | --------- | ---------- | --------- |
+| Schema Coverage | 26%       | 90%+       | 4-6 weeks |
+| Blog CTR        | Baseline  | +20-30%    | 2-4 weeks |
+| Pricing CTR     | Baseline  | +15-25%    | 2-4 weeks |
+| Rich Results    | ~13 pages | 45+ pages  | 4-6 weeks |
+| Schema Errors   | Unknown   | 0 critical | Ongoing   |
 
 ---
 
 ## 🚨 COMMON MISTAKES TO AVOID
 
 ❌ **DON'T:**
+
 - Use relative URLs (use absolute: `https://...`)
 - Mix Article + BlogPosting on same page
 - Include content not visible on page
@@ -232,6 +250,7 @@ Track in Google Search Console:
 - Nest JSON-LD scripts (keep separate)
 
 ✅ **DO:**
+
 - Test every schema before deploying
 - Use Schema.org types exactly
 - Include all required properties
@@ -244,11 +263,13 @@ Track in Google Search Console:
 ## 📞 NEED HELP?
 
 **Resources:**
+
 - Full audit: `SCHEMA_AUDIT_AND_PLAN.md`
 - Schema.org docs: https://schema.org/
 - Google guidelines: https://developers.google.com/search/docs/appearance/structured-data
 
 **Testing Tools:**
+
 - Rich Results Test: https://search.google.com/test/rich-results
 - Validator: https://validator.schema.org/
 

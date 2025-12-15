@@ -19,13 +19,13 @@ const connection = new IORedis(process.env.REDIS_URL || "redis://localhost:6379"
 // If needed later, reintroduce a snapshot queue and workers guarded by a feature flag.
 
 async function processJob(job: any) {
-  const { runId, pageUrl, targetKeyword, email, locale = 'en', userId } = job.data;
+  const { runId, pageUrl, targetKeyword, email, locale = "en", userId } = job.data;
 
   console.log(`Starting audit job for run ${runId}, URL: ${pageUrl}, Locale: ${locale}`);
 
   try {
     // Set status to running
-  await prisma.run.update({ where: { id: runId }, data: { status: RunStatus.RUNNING } });
+    await prisma.run.update({ where: { id: runId }, data: { status: RunStatus.RUNNING } });
     console.log(`Run ${runId} status set to running (locale: ${locale})`);
 
     // Fetch HTML, PSI, and GSC in parallel
@@ -33,9 +33,9 @@ async function processJob(job: any) {
     let html: string | null = null;
     let performanceData: any = null;
     let gscData: any = null;
-  let htmlError: unknown = null;
-  let psiError: unknown = null;
-  let gscError: unknown = null;
+    let htmlError: unknown = null;
+    let psiError: unknown = null;
+    let gscError: unknown = null;
 
     await Promise.all([
       (async () => {
@@ -64,7 +64,10 @@ async function processJob(job: any) {
     ]);
 
     if (!html) {
-      const msg = (htmlError && (htmlError as any)?.message) ? (htmlError as any).message : 'Failed to fetch HTML';
+      const msg =
+        htmlError && (htmlError as any)?.message
+          ? (htmlError as any).message
+          : "Failed to fetch HTML";
       throw new Error(msg);
     }
 
@@ -77,7 +80,9 @@ async function processJob(job: any) {
         cls: null,
         inp: null,
         notes: [
-          psiError ? `PSI error: ${(psiError as any)?.message ?? String(psiError)}` : 'Performance data not available',
+          psiError
+            ? `PSI error: ${(psiError as any)?.message ?? String(psiError)}`
+            : "Performance data not available",
         ],
       };
     }
@@ -90,7 +95,9 @@ async function processJob(job: any) {
         ctr: null,
         impressions: null,
         clicks: null,
-        message: gscError ? `GSC error: ${(gscError as any)?.message ?? String(gscError)}` : 'GSC data not available',
+        message: gscError
+          ? `GSC error: ${(gscError as any)?.message ?? String(gscError)}`
+          : "GSC data not available",
       };
     }
 
@@ -116,12 +123,12 @@ async function processJob(job: any) {
         id: auditId,
         runId,
         json: finalResult,
-      }
+      },
     });
     console.log(`Audit ${auditId} saved for run ${runId} (locale: ${locale})`);
 
     // Update run status to ready
-  await prisma.run.update({ where: { id: runId }, data: { status: RunStatus.READY } });
+    await prisma.run.update({ where: { id: runId }, data: { status: RunStatus.READY } });
     console.log(`Run ${runId} completed successfully, status set to ready`);
   } catch (error) {
     console.error(`Error processing job for run ${runId}:`, error);
@@ -134,7 +141,7 @@ async function processJob(job: any) {
       throw error; // This will trigger retry
     } else {
       console.log(`Permanent error for run ${runId}, marking as failed`);
-  await prisma.run.update({ where: { id: runId }, data: { status: RunStatus.FAILED } });
+      await prisma.run.update({ where: { id: runId }, data: { status: RunStatus.FAILED } });
     }
   }
 }

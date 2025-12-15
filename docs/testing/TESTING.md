@@ -11,7 +11,7 @@ The project includes comprehensive unit tests for core functionality, covering t
 ### Test Files
 
 - **`tests/heuristics.title-meta.test.ts`** - Tests for title and meta description scoring
-- **`tests/heuristics.missing-meta.test.ts`** - Tests for missing SEO elements detection  
+- **`tests/heuristics.missing-meta.test.ts`** - Tests for missing SEO elements detection
 - **`tests/heuristics.content-structure.test.ts`** - Tests for content and structure scoring
 - **`tests/parse.test.ts`** - Tests for HTML parsing functionality
 - **`tests/parser.smoke.test.ts`** - Comprehensive parser tests with HTML fixtures
@@ -58,6 +58,7 @@ The following scripts are available in `package.json`:
 ### Covered Functionality
 
 #### Heuristics Module
+
 - ✅ Title length scoring (optimal, too short, too long)
 - ✅ Keyword inclusion in titles
 - ✅ Meta description length validation
@@ -70,6 +71,7 @@ The following scripts are available in `package.json`:
 - ✅ Technical SEO issues (noindex, canonical, viewport)
 
 #### Parse Module
+
 - ✅ HTML element extraction (title, meta, headings, images, links)
 - ✅ JSON-LD schema parsing
 - ✅ Word count calculation
@@ -80,6 +82,7 @@ The following scripts are available in `package.json`:
 - ✅ Canonical URL detection
 
 #### Parser Smoke Tests
+
 - ✅ Comprehensive HTML fixture parsing
 - ✅ Minimal HTML edge cases
 - ✅ Malformed HTML graceful degradation
@@ -91,11 +94,11 @@ The following scripts are available in `package.json`:
 Tests title and meta description scoring logic:
 
 ```typescript
-test("title length scoring - optimal length gets high score")
-test("title length scoring - too short title gets low score") 
-test("title length scoring - too long title gets low score")
-test("keyword inclusion in title improves score")
-test("meta description length scoring")
+test("title length scoring - optimal length gets high score");
+test("title length scoring - too short title gets low score");
+test("title length scoring - too long title gets low score");
+test("keyword inclusion in title improves score");
+test("meta description length scoring");
 ```
 
 ### 2. Missing Elements Tests (`heuristics.missing-meta.test.ts`)
@@ -103,12 +106,12 @@ test("meta description length scoring")
 Tests detection of missing SEO elements:
 
 ```typescript
-test("missing meta description triggers high severity issue with snippet")
-test("missing title triggers high severity issue")
-test("missing H1 triggers high severity issue")
-test("multiple H1s trigger medium severity issue")
-test("missing canonical URL triggers medium severity issue")
-test("noindex directive triggers high severity issue")
+test("missing meta description triggers high severity issue with snippet");
+test("missing title triggers high severity issue");
+test("missing H1 triggers high severity issue");
+test("multiple H1s trigger medium severity issue");
+test("missing canonical URL triggers medium severity issue");
+test("noindex directive triggers high severity issue");
 ```
 
 ### 3. Content and Structure Tests (`heuristics.content-structure.test.ts`)
@@ -116,9 +119,9 @@ test("noindex directive triggers high severity issue")
 Tests content quality and structure analysis:
 
 ```typescript
-test("content scoring - good word count gets high score")
-test("image optimization scoring - images with alt text get high score")
-test("schema markup scoring - presence of schema gets high score")
+test("content scoring - good word count gets high score");
+test("image optimization scoring - images with alt text get high score");
+test("schema markup scoring - presence of schema gets high score");
 ```
 
 ### 4. Parse Module Tests (`parse.test.ts`)
@@ -126,13 +129,13 @@ test("schema markup scoring - presence of schema gets high score")
 Tests HTML parsing functionality:
 
 ```typescript
-test("calculateWordCount counts words correctly")
-test("calculateReadingTime estimates reading time correctly")
-test("parseHtml extracts basic elements")
-test("parseHtml handles JSON-LD schema markup")
-test("parseHtml handles missing elements gracefully")
-test("parseHtml detects noindex and nofollow directives")
-test("parseHtml detects canonical self-reference")
+test("calculateWordCount counts words correctly");
+test("calculateReadingTime estimates reading time correctly");
+test("parseHtml extracts basic elements");
+test("parseHtml handles JSON-LD schema markup");
+test("parseHtml handles missing elements gracefully");
+test("parseHtml detects noindex and nofollow directives");
+test("parseHtml detects canonical self-reference");
 ```
 
 ### 5. Parser Smoke Tests (`parser.smoke.test.ts`)
@@ -140,9 +143,9 @@ test("parseHtml detects canonical self-reference")
 Comprehensive parser tests with real HTML fixtures:
 
 ```typescript
-test("parser extracts all SEO elements from comprehensive HTML")
-test("parser handles minimal HTML with missing elements")
-test("parser handles malformed HTML gracefully")
+test("parser extracts all SEO elements from comprehensive HTML");
+test("parser handles minimal HTML with missing elements");
+test("parser handles malformed HTML gracefully");
 ```
 
 ## Continuous Integration

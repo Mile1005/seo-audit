@@ -1,15 +1,28 @@
-"use client"
+"use client";
 
-import { MainLayout } from '@/components/layout/main-layout'
-import { motion } from 'framer-motion'
-import { ArrowLeft, Clock, User, Webhook, Bell, AlertTriangle, CheckCircle, Code, Settings, Zap, Shield, RefreshCw, Database } from 'lucide-react'
-import Link from 'next/link'
+import { MainLayout } from "@/components/layout/main-layout";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Clock,
+  User,
+  Webhook,
+  Bell,
+  AlertTriangle,
+  CheckCircle,
+  Code,
+  Settings,
+  Zap,
+  Shield,
+  RefreshCw,
+  Database,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function WebhooksPage() {
   return (
     <MainLayout>
       <div className="min-h-screen bg-slate-950">
-
         {/* Breadcrumb */}
         <section className="bg-slate-900/50 py-6">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +31,10 @@ export default function WebhooksPage() {
                 Help Center
               </Link>
               <span className="text-gray-600">/</span>
-              <Link href="/help/api/api-integrations" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="/help/api/api-integrations"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 API
               </Link>
               <span className="text-gray-600">/</span>
@@ -49,9 +65,7 @@ export default function WebhooksPage() {
                 </div>
                 <div>
                   <span className="text-orange-400 text-sm font-medium">API</span>
-                  <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    Webhooks
-                  </h1>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white">Webhooks</h1>
                 </div>
               </div>
 
@@ -78,16 +92,18 @@ export default function WebhooksPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="prose prose-lg prose-invert max-w-none"
             >
-
               {/* Introduction */}
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="flex items-start gap-4">
                   <Bell className="w-6 h-6 text-orange-400 mt-1" />
                   <div>
-                    <h2 className="text-white text-lg font-semibold mb-2">Real-time notifications</h2>
+                    <h2 className="text-white text-lg font-semibold mb-2">
+                      Real-time notifications
+                    </h2>
                     <p className="text-gray-300 mb-0">
-                      Webhooks allow you to receive real-time notifications when events occur in your account.
-                      Get instant updates about audit completions, errors, and other important events.
+                      Webhooks allow you to receive real-time notifications when events occur in
+                      your account. Get instant updates about audit completions, errors, and other
+                      important events.
                     </p>
                   </div>
                 </div>
@@ -99,8 +115,9 @@ export default function WebhooksPage() {
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-4">
                   <p className="text-gray-300">
-                    Webhooks are automated messages sent from our servers to your application when specific events occur.
-                    Unlike traditional APIs where you poll for updates, webhooks push data to you instantly.
+                    Webhooks are automated messages sent from our servers to your application when
+                    specific events occur. Unlike traditional APIs where you poll for updates,
+                    webhooks push data to you instantly.
                   </p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -128,7 +145,8 @@ export default function WebhooksPage() {
                         Reliable
                       </h4>
                       <p className="text-gray-300 text-sm">
-                        Automatic retries ensure delivery even if your endpoint is temporarily unavailable.
+                        Automatic retries ensure delivery even if your endpoint is temporarily
+                        unavailable.
                       </p>
                     </div>
                     <div className="bg-slate-900/50 rounded-lg p-4">
@@ -148,7 +166,6 @@ export default function WebhooksPage() {
               <h3 className="text-2xl font-bold text-white mb-6">Setting up webhooks</h3>
 
               <div className="space-y-6 mb-8">
-
                 {/* Step 1 */}
                 <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6">
                   <div className="flex items-start gap-4">
@@ -159,7 +176,8 @@ export default function WebhooksPage() {
                       <h3 className="text-white text-xl font-semibold mb-3">Create an endpoint</h3>
                       <p className="text-gray-300 mb-4">
                         Set up an HTTPS endpoint in your application that can receive POST requests.
-                        This endpoint should be publicly accessible and able to handle JSON payloads.
+                        This endpoint should be publicly accessible and able to handle JSON
+                        payloads.
                       </p>
 
                       <div className="bg-slate-900/50 rounded-lg p-4">
@@ -182,10 +200,12 @@ export default function WebhooksPage() {
                       2
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-white text-xl font-semibold mb-3">Configure webhook URL</h3>
+                      <h3 className="text-white text-xl font-semibold mb-3">
+                        Configure webhook URL
+                      </h3>
                       <p className="text-gray-300 mb-4">
-                        In your dashboard, go to Settings → API → Webhooks and add your endpoint URL.
-                        You can configure multiple webhooks for different purposes.
+                        In your dashboard, go to Settings → API → Webhooks and add your endpoint
+                        URL. You can configure multiple webhooks for different purposes.
                       </p>
 
                       <div className="bg-slate-900/50 rounded-lg p-4">
@@ -207,17 +227,29 @@ export default function WebhooksPage() {
                     <div className="flex-1">
                       <h3 className="text-white text-xl font-semibold mb-3">Select events</h3>
                       <p className="text-gray-300 mb-4">
-                        Choose which events you want to receive notifications for. You can subscribe to
-                        specific event types or receive all events.
+                        Choose which events you want to receive notifications for. You can subscribe
+                        to specific event types or receive all events.
                       </p>
 
                       <div className="bg-slate-900/50 rounded-lg p-4">
                         <h4 className="text-orange-400 font-medium mb-2">Available events:</h4>
                         <ul className="text-gray-300 text-sm space-y-1">
-                          <li>• <code className="text-green-400">audit.completed</code> - Audit finished successfully</li>
-                          <li>• <code className="text-green-400">audit.failed</code> - Audit encountered an error</li>
-                          <li>• <code className="text-green-400">audit.started</code> - Audit began processing</li>
-                          <li>• <code className="text-green-400">report.generated</code> - Report is ready for download</li>
+                          <li>
+                            • <code className="text-green-400">audit.completed</code> - Audit
+                            finished successfully
+                          </li>
+                          <li>
+                            • <code className="text-green-400">audit.failed</code> - Audit
+                            encountered an error
+                          </li>
+                          <li>
+                            • <code className="text-green-400">audit.started</code> - Audit began
+                            processing
+                          </li>
+                          <li>
+                            • <code className="text-green-400">report.generated</code> - Report is
+                            ready for download
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -233,8 +265,9 @@ export default function WebhooksPage() {
                     <div className="flex-1">
                       <h3 className="text-white text-xl font-semibold mb-3">Test your webhook</h3>
                       <p className="text-gray-300 mb-4">
-                        Use the test button in your dashboard to send a sample webhook payload to your endpoint.
-                        Verify that your application receives and processes the data correctly.
+                        Use the test button in your dashboard to send a sample webhook payload to
+                        your endpoint. Verify that your application receives and processes the data
+                        correctly.
                       </p>
 
                       <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
@@ -243,13 +276,13 @@ export default function WebhooksPage() {
                           <span className="text-blue-400 font-medium">Test before going live</span>
                         </div>
                         <p className="text-gray-300 text-sm">
-                          Always test your webhook endpoint with sample data before enabling it for production use.
+                          Always test your webhook endpoint with sample data before enabling it for
+                          production use.
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* Webhook Payload */}
@@ -257,7 +290,6 @@ export default function WebhooksPage() {
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
-
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Request headers</h3>
                     <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300">
@@ -272,7 +304,7 @@ export default function WebhooksPage() {
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Payload structure</h3>
                     <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300 overflow-x-auto">
-{`{
+                      {`{
   "id": "wh_1234567890",
   "event": "audit.completed",
   "created": 1640995200,
@@ -291,7 +323,6 @@ export default function WebhooksPage() {
 }`}
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -299,7 +330,6 @@ export default function WebhooksPage() {
               <h3 className="text-2xl font-bold text-white mb-6">Available webhook events</h3>
 
               <div className="space-y-4 mb-8">
-
                 <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
@@ -359,7 +389,6 @@ export default function WebhooksPage() {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* Security & Verification */}
@@ -367,19 +396,26 @@ export default function WebhooksPage() {
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
-
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Webhook signatures</h3>
                     <p className="text-gray-300 mb-4">
-                      All webhooks include a cryptographic signature to verify authenticity. You should always
-                      verify the signature before processing webhook data.
+                      All webhooks include a cryptographic signature to verify authenticity. You
+                      should always verify the signature before processing webhook data.
                     </p>
 
                     <div className="bg-slate-900/50 rounded-lg p-4">
-                      <h4 className="text-orange-400 font-medium mb-2">How to verify signatures:</h4>
+                      <h4 className="text-orange-400 font-medium mb-2">
+                        How to verify signatures:
+                      </h4>
                       <ol className="text-gray-300 text-sm space-y-2 list-decimal list-inside">
-                        <li>Get the signature from the <code className="text-green-400">X-Webhook-Signature</code> header</li>
-                        <li>Create a string with <code className="text-green-400">timestamp.payload</code></li>
+                        <li>
+                          Get the signature from the{" "}
+                          <code className="text-green-400">X-Webhook-Signature</code> header
+                        </li>
+                        <li>
+                          Create a string with{" "}
+                          <code className="text-green-400">timestamp.payload</code>
+                        </li>
                         <li>Compute HMAC-SHA256 using your webhook secret</li>
                         <li>Compare the computed signature with the received signature</li>
                       </ol>
@@ -389,18 +425,19 @@ export default function WebhooksPage() {
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Code example</h3>
                     <div className="bg-slate-950 rounded-lg p-4 font-mono text-sm text-gray-300">
-                      <div className="text-gray-500 mb-2">{'// Node.js example'}</div>
+                      <div className="text-gray-500 mb-2">{"// Node.js example"}</div>
                       <div>const crypto = require('crypto');</div>
                       <div>const signature = req.headers['x-webhook-signature'];</div>
                       <div>const timestamp = req.headers['x-webhook-timestamp'];</div>
                       <div>const payload = JSON.stringify(req.body);</div>
                       <div>const expectedSignature = crypto</div>
                       <div className="ml-4">.createHmac('sha256', WEBHOOK_SECRET)</div>
-                      <div className="ml-4">.update(`${'{'}timestamp{'}'}.${'{'}payload{'}'}`)</div>
+                      <div className="ml-4">
+                        .update(`${"{"}timestamp{"}"}.${"{"}payload{"}"}`)
+                      </div>
                       <div className="ml-4">.digest('hex');</div>
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -408,14 +445,14 @@ export default function WebhooksPage() {
               <h3 className="text-2xl font-bold text-white mb-6">Best practices</h3>
 
               <div className="space-y-4 mb-8">
-
                 <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-6">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-400 mt-0.5" />
                     <div>
                       <h4 className="text-white font-medium">Always verify signatures</h4>
                       <p className="text-gray-300 text-sm">
-                        Implement signature verification to ensure webhooks are genuinely from our service.
+                        Implement signature verification to ensure webhooks are genuinely from our
+                        service.
                       </p>
                     </div>
                   </div>
@@ -427,7 +464,8 @@ export default function WebhooksPage() {
                     <div>
                       <h4 className="text-white font-medium">Handle duplicates</h4>
                       <p className="text-gray-300 text-sm">
-                        Webhooks may be delivered multiple times. Use webhook IDs to handle duplicates gracefully.
+                        Webhooks may be delivered multiple times. Use webhook IDs to handle
+                        duplicates gracefully.
                       </p>
                     </div>
                   </div>
@@ -439,7 +477,8 @@ export default function WebhooksPage() {
                     <div>
                       <h4 className="text-white font-medium">Respond quickly</h4>
                       <p className="text-gray-300 text-sm">
-                        Your endpoint should respond within 10 seconds to avoid timeouts and retries.
+                        Your endpoint should respond within 10 seconds to avoid timeouts and
+                        retries.
                       </p>
                     </div>
                   </div>
@@ -456,7 +495,6 @@ export default function WebhooksPage() {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* Troubleshooting */}
@@ -464,11 +502,9 @@ export default function WebhooksPage() {
 
               <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-8">
                 <div className="space-y-6">
-
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Common issues</h3>
                     <div className="space-y-4">
-
                       <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
                         <h4 className="text-red-400 font-medium mb-2">Webhook not received</h4>
                         <ul className="text-gray-300 text-sm space-y-1">
@@ -480,7 +516,9 @@ export default function WebhooksPage() {
                       </div>
 
                       <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-4">
-                        <h4 className="text-yellow-400 font-medium mb-2">Signature verification fails</h4>
+                        <h4 className="text-yellow-400 font-medium mb-2">
+                          Signature verification fails
+                        </h4>
                         <ul className="text-gray-300 text-sm space-y-1">
                           <li>• Ensure you're using the correct webhook secret</li>
                           <li>• Check that you're including the timestamp in the signed payload</li>
@@ -496,26 +534,34 @@ export default function WebhooksPage() {
                           <li>• Return a 2xx status code immediately after validation</li>
                         </ul>
                       </div>
-
                     </div>
                   </div>
 
                   <div>
                     <h3 className="text-white text-lg font-semibold mb-3">Testing webhooks</h3>
                     <p className="text-gray-300 mb-4">
-                      Use tools like ngrok or webhook.site to test your webhook endpoint during development.
+                      Use tools like ngrok or webhook.site to test your webhook endpoint during
+                      development.
                     </p>
                     <div className="bg-slate-900/50 rounded-lg p-4">
                       <h4 className="text-orange-400 font-medium mb-2">Testing tools:</h4>
                       <ul className="text-gray-300 text-sm space-y-1">
-                        <li>• <strong>ngrok:</strong> Expose local servers to the internet</li>
-                        <li>• <strong>webhook.site:</strong> Inspect webhook payloads online</li>
-                        <li>• <strong>Postman:</strong> Test webhook endpoints manually</li>
-                        <li>• <strong>Dashboard test button:</strong> Send test webhooks from your account</li>
+                        <li>
+                          • <strong>ngrok:</strong> Expose local servers to the internet
+                        </li>
+                        <li>
+                          • <strong>webhook.site:</strong> Inspect webhook payloads online
+                        </li>
+                        <li>
+                          • <strong>Postman:</strong> Test webhook endpoints manually
+                        </li>
+                        <li>
+                          • <strong>Dashboard test button:</strong> Send test webhooks from your
+                          account
+                        </li>
                       </ul>
                     </div>
                   </div>
-
                 </div>
               </div>
 
@@ -523,8 +569,8 @@ export default function WebhooksPage() {
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 mt-8">
                 <h3 className="text-white text-lg font-semibold mb-3">Need help with webhooks?</h3>
                 <p className="text-gray-300 mb-4">
-                  Having trouble setting up or troubleshooting webhooks? Our developer support team can help
-                  you get real-time notifications working in your application.
+                  Having trouble setting up or troubleshooting webhooks? Our developer support team
+                  can help you get real-time notifications working in your application.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -547,11 +593,10 @@ export default function WebhooksPage() {
                   </Link>
                 </div>
               </div>
-
             </motion.div>
           </div>
         </section>
       </div>
     </MainLayout>
-  )
+  );
 }

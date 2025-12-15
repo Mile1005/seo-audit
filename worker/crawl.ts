@@ -7,7 +7,7 @@ enum RunStatus {
   queued = "queued",
   running = "running",
   ready = "ready",
-  failed = "failed"
+  failed = "failed",
 }
 
 // Shared Redis connection
@@ -16,7 +16,8 @@ const connection = new IORedis(process.env.REDIS_URL || "redis://localhost:6379"
 });
 
 async function processCrawlJob(job: any) {
-  const { crawlId, startUrl, limit, sameHostOnly, maxDepth, timeout, userAgent, crawlDelay } = job.data;
+  const { crawlId, startUrl, limit, sameHostOnly, maxDepth, timeout, userAgent, crawlDelay } =
+    job.data;
 
   console.log(`Starting crawl job for ${crawlId}, URL: ${startUrl}`);
 
@@ -26,7 +27,14 @@ async function processCrawlJob(job: any) {
     console.log(`Crawl ${crawlId} status set to running`);
 
     // Perform the crawl
-    console.log(`Crawling ${startUrl} with options:`, { limit, sameHostOnly, maxDepth, timeout, userAgent, crawlDelay });
+    console.log(`Crawling ${startUrl} with options:`, {
+      limit,
+      sameHostOnly,
+      maxDepth,
+      timeout,
+      userAgent,
+      crawlDelay,
+    });
     const crawlResult = await miniCrawl(startUrl, {
       limit: limit || 200,
       sameHostOnly: sameHostOnly !== false, // Default to true

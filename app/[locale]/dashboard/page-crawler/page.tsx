@@ -1,22 +1,22 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { 
-  Search, 
-  Globe, 
-  RefreshCw, 
-  Download, 
-  AlertTriangle, 
-  CheckCircle, 
+import React, { useState, useEffect, useRef } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Search,
+  Globe,
+  RefreshCw,
+  Download,
+  AlertTriangle,
+  CheckCircle,
   XCircle,
   ExternalLink,
   Clock,
@@ -29,8 +29,8 @@ import {
   ChevronUp,
   Loader2,
   Play,
-  History
-} from 'lucide-react';
+  History,
+} from "lucide-react";
 
 interface CrawlPage {
   url: string;
@@ -53,7 +53,7 @@ interface CrawlResult {
   projectName?: string;
   projectDomain?: string;
   startUrl: string;
-  status: 'QUEUED' | 'COMPLETED' | 'FAILED';
+  status: "QUEUED" | "COMPLETED" | "FAILED";
   pages: number;
   errors: number;
   settings: {
@@ -77,19 +77,19 @@ interface CrawlResult {
   completedAt?: string;
 }
 
-type FilterType = 'all' | 'issues' | 'no-title' | 'no-h1' | 'no-meta' | 'no-alt';
-type SortField = 'url' | 'wordCount' | 'status' | 'h1Count' | 'images';
-type SortDirection = 'asc' | 'desc';
+type FilterType = "all" | "issues" | "no-title" | "no-h1" | "no-meta" | "no-alt";
+type SortField = "url" | "wordCount" | "status" | "h1Count" | "images";
+type SortDirection = "asc" | "desc";
 
 export default function PageCrawlerPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [projectId, setProjectId] = useState<string>('');
-  const [url, setUrl] = useState('');
+  const [projectId, setProjectId] = useState<string>("");
+  const [url, setUrl] = useState("");
   const [maxPages, setMaxPages] = useState(50);
   const [maxDepth, setMaxDepth] = useState(3);
-  
+
   // Crawl state
   const [activeCrawl, setActiveCrawl] = useState<any>(null);
   const [crawling, setCrawling] = useState(false);
@@ -103,24 +103,24 @@ export default function PageCrawlerPage() {
   const pollIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const pollStopTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const crawlStartedAtRef = useRef<number | null>(null);
-  
+
   // Results state
   const [currentResult, setCurrentResult] = useState<CrawlResult | null>(null);
   const [crawlHistory, setCrawlHistory] = useState<CrawlResult[]>([]);
   const [loadingHistory, setLoadingHistory] = useState(true);
-  
+
   // UI state
-  const [activeTab, setActiveTab] = useState<'new' | 'history'>('new');
-  const [filterType, setFilterType] = useState<FilterType>('all');
-  const [sortField, setSortField] = useState<SortField>('url');
-  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState<"new" | "history">("new");
+  const [filterType, setFilterType] = useState<FilterType>("all");
+  const [sortField, setSortField] = useState<SortField>("url");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  const [searchQuery, setSearchQuery] = useState("");
   const [expandedRow, setExpandedRow] = useState<string | null>(null);
 
   // Handle authentication
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login?callbackUrl=/dashboard/page-crawler');
+    if (status === "unauthenticated") {
+      router.push("/login?callbackUrl=/dashboard/page-crawler");
     }
   }, [status, router]);
 
@@ -134,12 +134,12 @@ export default function PageCrawlerPage() {
         clearTimeout(pollStopTimeoutRef.current);
         pollStopTimeoutRef.current = null;
       }
-    }
+    };
   }, []);
 
   // Load project ID from URL params
   useEffect(() => {
-    const id = searchParams.get('project');
+    const id = searchParams.get("project");
     if (id) {
       setProjectId(id);
     }
@@ -147,7 +147,7 @@ export default function PageCrawlerPage() {
 
   // Load crawl history
   useEffect(() => {
-    if (status === 'authenticated') {
+    if (status === "authenticated") {
       loadHistory();
     }
   }, [projectId, status]);
@@ -156,16 +156,16 @@ export default function PageCrawlerPage() {
     try {
       setLoadingHistory(true);
       const params = new URLSearchParams();
-      if (projectId) params.append('projectId', projectId);
-      params.append('limit', '20');
-      
+      if (projectId) params.append("projectId", projectId);
+      params.append("limit", "20");
+
       const response = await fetch(`/api/dashboard/page-crawler/list?${params}`);
       if (response.ok) {
         const data = await response.json();
         setCrawlHistory(data.crawls || []);
       }
     } catch (err) {
-      console.error('Failed to load history:', err);
+      console.error("Failed to load history:", err);
     } finally {
       setLoadingHistory(false);
     }
@@ -173,7 +173,7 @@ export default function PageCrawlerPage() {
 
   const startCrawl = async () => {
     if (!url.trim()) {
-      setError('Please enter a valid URL');
+      setError("Please enter a valid URL");
       return;
     }
 
@@ -181,8 +181,8 @@ export default function PageCrawlerPage() {
       setCrawling(true);
       setError(null);
       setProgress(0);
-      setCrawlStage('queued');
-      setCrawlMessage('Starting crawl…');
+      setCrawlStage("queued");
+      setCrawlMessage("Starting crawl…");
       setCrawlCurrentUrl(undefined);
       crawlStartedAtRef.current = Date.now();
       setCrawlElapsedMs(0);
@@ -195,28 +195,28 @@ export default function PageCrawlerPage() {
         clearTimeout(pollStopTimeoutRef.current);
         pollStopTimeoutRef.current = null;
       }
-      
-      const response = await fetch('/api/dashboard/page-crawler/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+
+      const response = await fetch("/api/dashboard/page-crawler/start", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           url: url.trim(),
           maxPages,
           maxDepth,
-          projectId: projectId || undefined
-        })
+          projectId: projectId || undefined,
+        }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to start crawl');
+        throw new Error(data.error || "Failed to start crawl");
       }
 
       setActiveCrawl(data);
       pollCrawlStatus(data.crawlId);
     } catch (err: any) {
-      setError(err.message || 'Failed to start crawl');
+      setError(err.message || "Failed to start crawl");
       setCrawling(false);
     }
   };
@@ -229,12 +229,12 @@ export default function PageCrawlerPage() {
         if (response.status === 401) {
           clearInterval(interval);
           setCrawling(false);
-          setError('Authentication required. Please log in again.');
+          setError("Authentication required. Please log in again.");
           return;
         }
 
-        if (!response.ok) throw new Error('Failed to fetch status');
-        
+        if (!response.ok) throw new Error("Failed to fetch status");
+
         const data = await response.json();
         setProgress(data.progress || 0);
         setCrawlStage(data.stage);
@@ -243,23 +243,23 @@ export default function PageCrawlerPage() {
         if (crawlStartedAtRef.current) {
           setCrawlElapsedMs(Date.now() - crawlStartedAtRef.current);
         }
-        
-        if (data.status === 'completed') {
+
+        if (data.status === "completed") {
           clearInterval(interval);
           pollIntervalRef.current = null;
           setCrawling(false);
-          
+
           // Load the completed crawl
           await loadCompletedCrawl(data.id);
           await loadHistory();
-        } else if (data.status === 'failed') {
+        } else if (data.status === "failed") {
           clearInterval(interval);
           pollIntervalRef.current = null;
           setCrawling(false);
-          setError(data.error || 'Crawl failed');
+          setError(data.error || "Crawl failed");
         }
       } catch (err) {
-        console.error('Poll error:', err);
+        console.error("Poll error:", err);
       }
     }, 2000);
 
@@ -282,11 +282,11 @@ export default function PageCrawlerPage() {
         if (data.crawls && data.crawls.length > 0) {
           const latestCrawl = data.crawls[0];
           setCurrentResult(latestCrawl);
-          setActiveTab('history');
+          setActiveTab("history");
         }
       }
     } catch (err) {
-      console.error('Failed to load completed crawl:', err);
+      console.error("Failed to load completed crawl:", err);
     }
   };
 
@@ -298,54 +298,61 @@ export default function PageCrawlerPage() {
     if (!currentResult?.results?.pages) return;
 
     const headers = [
-      'URL',
-      'Status',
-      'Title',
-      'Meta Description',
-      'H1 Count',
-      'H2 Count',
-      'Word Count',
-      'Images',
-      'Images Without Alt',
-      'Internal Links',
-      'Issues'
+      "URL",
+      "Status",
+      "Title",
+      "Meta Description",
+      "H1 Count",
+      "H2 Count",
+      "Word Count",
+      "Images",
+      "Images Without Alt",
+      "Internal Links",
+      "Issues",
     ];
 
-    const csvData = currentResult.results.pages.map(page => {
+    const csvData = currentResult.results.pages.map((page) => {
       const issues = [];
-      if (!page.title) issues.push('No title');
-      if (!page.h1Count) issues.push('No H1');
-      if (!page.metaDescription) issues.push('No meta');
-      if ((page.imagesWithoutAlt || 0) > 0) issues.push(`${page.imagesWithoutAlt} images without alt`);
+      if (!page.title) issues.push("No title");
+      if (!page.h1Count) issues.push("No H1");
+      if (!page.metaDescription) issues.push("No meta");
+      if ((page.imagesWithoutAlt || 0) > 0)
+        issues.push(`${page.imagesWithoutAlt} images without alt`);
 
       return [
-        page.url || '',
-        page.status || '',
-        page.title || 'Missing',
-        page.metaDescription || 'Missing',
+        page.url || "",
+        page.status || "",
+        page.title || "Missing",
+        page.metaDescription || "Missing",
         page.h1Count || 0,
         page.h2Count || 0,
         page.wordCount || 0,
         page.images || 0,
         page.imagesWithoutAlt || 0,
         page.internalLinkCount || 0,
-        issues.join('; ') || 'None'
+        issues.join("; ") || "None",
       ];
     });
 
     const csvContent = [headers, ...csvData]
-      .map(row => row.map(field => {
-        const escapedField = String(field).replace(/"/g, '""');
-        return escapedField.includes(',') || escapedField.includes('"') || escapedField.includes('\n')
-          ? `"${escapedField}"`
-          : escapedField;
-      }).join(','))
-      .join('\n');
+      .map((row) =>
+        row
+          .map((field) => {
+            const escapedField = String(field).replace(/"/g, '""');
+            return escapedField.includes(",") ||
+              escapedField.includes('"') ||
+              escapedField.includes("\n")
+              ? `"${escapedField}"`
+              : escapedField;
+          })
+          .join(",")
+      )
+      .join("\n");
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = `page-crawler-${currentResult.projectDomain || 'export'}-${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `page-crawler-${currentResult.projectDomain || "export"}-${new Date().toISOString().split("T")[0]}.csv`;
     link.click();
   };
 
@@ -357,30 +364,35 @@ export default function PageCrawlerPage() {
 
     // Apply search
     if (searchQuery) {
-      filtered = filtered.filter(page =>
-        page.url?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        page.title?.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter(
+        (page) =>
+          page.url?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          page.title?.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     // Apply filters
     switch (filterType) {
-      case 'issues':
-        filtered = filtered.filter(page =>
-          !page.title || !page.h1Count || !page.metaDescription || (page.imagesWithoutAlt || 0) > 0
+      case "issues":
+        filtered = filtered.filter(
+          (page) =>
+            !page.title ||
+            !page.h1Count ||
+            !page.metaDescription ||
+            (page.imagesWithoutAlt || 0) > 0
         );
         break;
-      case 'no-title':
-        filtered = filtered.filter(page => !page.title);
+      case "no-title":
+        filtered = filtered.filter((page) => !page.title);
         break;
-      case 'no-h1':
-        filtered = filtered.filter(page => !page.h1Count);
+      case "no-h1":
+        filtered = filtered.filter((page) => !page.h1Count);
         break;
-      case 'no-meta':
-        filtered = filtered.filter(page => !page.metaDescription);
+      case "no-meta":
+        filtered = filtered.filter((page) => !page.metaDescription);
         break;
-      case 'no-alt':
-        filtered = filtered.filter(page => (page.imagesWithoutAlt || 0) > 0);
+      case "no-alt":
+        filtered = filtered.filter((page) => (page.imagesWithoutAlt || 0) > 0);
         break;
     }
 
@@ -389,15 +401,15 @@ export default function PageCrawlerPage() {
       let aVal: any = a[sortField];
       let bVal: any = b[sortField];
 
-      if (sortField === 'url') {
-        aVal = aVal || '';
-        bVal = bVal || '';
+      if (sortField === "url") {
+        aVal = aVal || "";
+        bVal = bVal || "";
       } else {
         aVal = aVal || 0;
         bVal = bVal || 0;
       }
 
-      if (sortDirection === 'asc') {
+      if (sortDirection === "asc") {
         return aVal > bVal ? 1 : -1;
       } else {
         return aVal < bVal ? 1 : -1;
@@ -409,10 +421,10 @@ export default function PageCrawlerPage() {
 
   const toggleSort = (field: SortField) => {
     if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
-      setSortDirection('asc');
+      setSortDirection("asc");
     }
   };
 
@@ -428,7 +440,7 @@ export default function PageCrawlerPage() {
   const filteredPages = getFilteredAndSortedPages();
 
   // Show loading state while checking authentication
-  if (status === 'loading') {
+  if (status === "loading") {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -448,7 +460,9 @@ export default function PageCrawlerPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Page Crawler - Deep Website Analysis Tool</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Page Crawler - Deep Website Analysis Tool
+        </h1>
         <p className="mt-2 text-slate-600 dark:text-slate-400">
           Crawl and analyze up to 100 pages of your website with comprehensive SEO insights
         </p>
@@ -458,29 +472,29 @@ export default function PageCrawlerPage() {
       <div className="flex space-x-2 bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 p-1.5 rounded-xl mb-6 shadow-sm">
         <button
           className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
-            activeTab === 'new'
-              ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700'
+            activeTab === "new"
+              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+              : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700"
           }`}
-          onClick={() => setActiveTab('new')}
+          onClick={() => setActiveTab("new")}
         >
           <Play className="h-4 w-4" />
           New Crawl
         </button>
         <button
           className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 ${
-            activeTab === 'history'
-              ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md'
-              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700'
+            activeTab === "history"
+              ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-md"
+              : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-700"
           }`}
-          onClick={() => setActiveTab('history')}
+          onClick={() => setActiveTab("history")}
         >
           <History className="h-4 w-4" />
           Crawl History
         </button>
       </div>
 
-      {activeTab === 'new' && (
+      {activeTab === "new" && (
         <Card className="bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -550,9 +564,7 @@ export default function PageCrawlerPage() {
             {crawling && (
               <div className="space-y-3">
                 <div className="flex justify-between text-sm text-slate-600 dark:text-slate-400">
-                  <span className="truncate">
-                    {crawlMessage || 'Crawling in progress…'}
-                  </span>
+                  <span className="truncate">{crawlMessage || "Crawling in progress…"}</span>
                   <span>{Math.round(progress)}%</span>
                 </div>
                 <Progress value={progress} className="h-2" />
@@ -567,12 +579,14 @@ export default function PageCrawlerPage() {
                     </div>
                     {crawlStage && (
                       <div>
-                        <span className="text-slate-500 dark:text-slate-400">Stage:</span> {crawlStage}
+                        <span className="text-slate-500 dark:text-slate-400">Stage:</span>{" "}
+                        {crawlStage}
                       </div>
                     )}
                     {crawlCurrentUrl && (
                       <div className="truncate">
-                        <span className="text-slate-500 dark:text-slate-400">URL:</span> {crawlCurrentUrl}
+                        <span className="text-slate-500 dark:text-slate-400">URL:</span>{" "}
+                        {crawlCurrentUrl}
                       </div>
                     )}
                   </div>
@@ -605,7 +619,7 @@ export default function PageCrawlerPage() {
         </Card>
       )}
 
-      {activeTab === 'history' && (
+      {activeTab === "history" && (
         <div className="space-y-6">
           {/* Crawl History List */}
           {!currentResult && (
@@ -628,7 +642,9 @@ export default function PageCrawlerPage() {
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Crawl Results</h2>
+                    <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+                      Crawl Results
+                    </h2>
                     {crawlHistory.map((crawl) => (
                       <div
                         key={crawl.id}
@@ -639,15 +655,15 @@ export default function PageCrawlerPage() {
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
                               <h3 className="font-semibold text-slate-900 dark:text-white">
-                                {crawl.projectName || crawl.projectDomain || 'Unknown Project'}
+                                {crawl.projectName || crawl.projectDomain || "Unknown Project"}
                               </h3>
                               <Badge
                                 variant={
-                                  crawl.status === 'COMPLETED'
-                                    ? 'default'
-                                    : crawl.status === 'FAILED'
-                                    ? 'destructive'
-                                    : 'secondary'
+                                  crawl.status === "COMPLETED"
+                                    ? "default"
+                                    : crawl.status === "FAILED"
+                                      ? "destructive"
+                                      : "secondary"
                                 }
                               >
                                 {crawl.status}
@@ -828,20 +844,36 @@ export default function PageCrawlerPage() {
                     <table className="w-full">
                       <thead className="bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
                         <tr>
-                          <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer" onClick={() => toggleSort('url')}>
-                            URL {sortField === 'url' && (sortDirection === 'asc' ? '↑' : '↓')}
+                          <th
+                            className="px-4 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer"
+                            onClick={() => toggleSort("url")}
+                          >
+                            URL {sortField === "url" && (sortDirection === "asc" ? "↑" : "↓")}
                           </th>
-                          <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer" onClick={() => toggleSort('status')}>
-                            Status {sortField === 'status' && (sortDirection === 'asc' ? '↑' : '↓')}
+                          <th
+                            className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer"
+                            onClick={() => toggleSort("status")}
+                          >
+                            Status {sortField === "status" && (sortDirection === "asc" ? "↑" : "↓")}
                           </th>
-                          <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer" onClick={() => toggleSort('h1Count')}>
-                            H1 {sortField === 'h1Count' && (sortDirection === 'asc' ? '↑' : '↓')}
+                          <th
+                            className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer"
+                            onClick={() => toggleSort("h1Count")}
+                          >
+                            H1 {sortField === "h1Count" && (sortDirection === "asc" ? "↑" : "↓")}
                           </th>
-                          <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer" onClick={() => toggleSort('wordCount')}>
-                            Words {sortField === 'wordCount' && (sortDirection === 'asc' ? '↑' : '↓')}
+                          <th
+                            className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer"
+                            onClick={() => toggleSort("wordCount")}
+                          >
+                            Words{" "}
+                            {sortField === "wordCount" && (sortDirection === "asc" ? "↑" : "↓")}
                           </th>
-                          <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer" onClick={() => toggleSort('images')}>
-                            Images {sortField === 'images' && (sortDirection === 'asc' ? '↑' : '↓')}
+                          <th
+                            className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider cursor-pointer"
+                            onClick={() => toggleSort("images")}
+                          >
+                            Images {sortField === "images" && (sortDirection === "asc" ? "↑" : "↓")}
                           </th>
                           <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                             Issues
@@ -864,16 +896,16 @@ export default function PageCrawlerPage() {
                                     className="text-sm text-blue-600 dark:text-blue-400 hover:underline truncate block"
                                     title={page.url}
                                   >
-                                    {page.url?.replace(/^https?:\/\//, '').substring(0, 60)}
-                                    {(page.url?.replace(/^https?:\/\//, '').length || 0) > 60 ? '...' : ''}
+                                    {page.url?.replace(/^https?:\/\//, "").substring(0, 60)}
+                                    {(page.url?.replace(/^https?:\/\//, "").length || 0) > 60
+                                      ? "..."
+                                      : ""}
                                   </a>
                                 </div>
                               </td>
                               <td className="px-4 py-3 text-center">
-                                <Badge
-                                  variant={page.status === 200 ? 'default' : 'destructive'}
-                                >
-                                  {page.status || 'N/A'}
+                                <Badge variant={page.status === 200 ? "default" : "destructive"}>
+                                  {page.status || "N/A"}
                                 </Badge>
                               </td>
                               <td className="px-4 py-3 text-center">
@@ -881,9 +913,7 @@ export default function PageCrawlerPage() {
                                   {page.h1Count ? (
                                     <>
                                       <CheckCircle className="h-4 w-4 text-green-600" />
-                                      <span className="text-sm font-semibold">
-                                        {page.h1Count}
-                                      </span>
+                                      <span className="text-sm font-semibold">{page.h1Count}</span>
                                     </>
                                   ) : (
                                     <>
@@ -902,9 +932,7 @@ export default function PageCrawlerPage() {
                               </td>
                               <td className="px-4 py-3 text-center">
                                 <div className="flex items-center justify-center gap-1">
-                                  <span className="text-sm font-semibold">
-                                    {page.images || 0}
-                                  </span>
+                                  <span className="text-sm font-semibold">{page.images || 0}</span>
                                   {(page.imagesWithoutAlt || 0) > 0 && (
                                     <span className="text-xs font-medium text-red-600 dark:text-red-400">
                                       ({page.imagesWithoutAlt} no alt)
@@ -914,16 +942,16 @@ export default function PageCrawlerPage() {
                               </td>
                               <td className="px-4 py-3 text-center">
                                 {getIssueCount(page) > 0 ? (
-                                  <Badge variant="destructive">
-                                    {getIssueCount(page)}
-                                  </Badge>
+                                  <Badge variant="destructive">{getIssueCount(page)}</Badge>
                                 ) : (
                                   <CheckCircle className="h-4 w-4 text-green-600 mx-auto" />
                                 )}
                               </td>
                               <td className="px-4 py-3 text-center">
                                 <button
-                                  onClick={() => setExpandedRow(expandedRow === page.url ? null : page.url)}
+                                  onClick={() =>
+                                    setExpandedRow(expandedRow === page.url ? null : page.url)
+                                  }
                                   className="text-blue-600 dark:text-blue-400 hover:underline"
                                 >
                                   {expandedRow === page.url ? (
@@ -939,33 +967,57 @@ export default function PageCrawlerPage() {
                                 <td colSpan={7} className="px-4 py-4 bg-slate-50 dark:bg-slate-800">
                                   <div className="space-y-3">
                                     <div>
-                                      <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Title:</span>
+                                      <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                                        Title:
+                                      </span>
                                       <p className="text-sm text-slate-900 dark:text-white mt-1">
-                                        {page.title || <span className="text-red-600">Missing</span>}
+                                        {page.title || (
+                                          <span className="text-red-600">Missing</span>
+                                        )}
                                       </p>
                                     </div>
                                     <div>
-                                      <span className="text-xs font-medium text-slate-600 dark:text-slate-400">Meta Description:</span>
+                                      <span className="text-xs font-medium text-slate-600 dark:text-slate-400">
+                                        Meta Description:
+                                      </span>
                                       <p className="text-sm text-slate-900 dark:text-white mt-1">
-                                        {page.metaDescription || <span className="text-red-600">Missing</span>}
+                                        {page.metaDescription || (
+                                          <span className="text-red-600">Missing</span>
+                                        )}
                                       </p>
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
                                       <div>
-                                        <span className="text-xs font-medium text-muted-foreground uppercase">H1 Count</span>
-                                        <p className="text-lg font-bold mt-1">{page.h1Count || 0}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">
+                                          H1 Count
+                                        </span>
+                                        <p className="text-lg font-bold mt-1">
+                                          {page.h1Count || 0}
+                                        </p>
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-muted-foreground uppercase">H2 Count</span>
-                                        <p className="text-lg font-bold mt-1">{page.h2Count || 0}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">
+                                          H2 Count
+                                        </span>
+                                        <p className="text-lg font-bold mt-1">
+                                          {page.h2Count || 0}
+                                        </p>
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-muted-foreground uppercase">Internal Links</span>
-                                        <p className="text-lg font-bold mt-1">{page.internalLinkCount || 0}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">
+                                          Internal Links
+                                        </span>
+                                        <p className="text-lg font-bold mt-1">
+                                          {page.internalLinkCount || 0}
+                                        </p>
                                       </div>
                                       <div>
-                                        <span className="text-xs font-medium text-muted-foreground uppercase">Crawled</span>
-                                        <p className="text-sm font-semibold mt-1">{new Date(page.fetchedAt).toLocaleString()}</p>
+                                        <span className="text-xs font-medium text-muted-foreground uppercase">
+                                          Crawled
+                                        </span>
+                                        <p className="text-sm font-semibold mt-1">
+                                          {new Date(page.fetchedAt).toLocaleString()}
+                                        </p>
                                       </div>
                                     </div>
                                   </div>

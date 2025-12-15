@@ -34,6 +34,7 @@ This document explains, in simple terms:
 - Added shared types so the feature page and APIs agree on the payload shape.
 
 Files:
+
 - types/keywords.ts
 
 ### 2) Free keyword research implementation (deterministic)
@@ -41,6 +42,7 @@ Files:
 - Implemented free keyword research powered by Google Autocomplete, plus deterministic (stable) heuristics so results don’t “randomly change” between runs.
 
 Files:
+
 - lib/keyword-research/freeKeywordResearch.ts
 
 ### 3) Research API route (works with and without DB)
@@ -53,6 +55,7 @@ Files:
   - fall back to in-memory storage when logged out
 
 Files:
+
 - app/api/keywords/research/route.ts
 
 ### 4) Rate limiting
@@ -60,6 +63,7 @@ Files:
 - Added a free-tier in-memory limiter to prevent abuse.
 
 Files:
+
 - lib/rate-limit.ts
 - app/api/keywords/research/route.ts
 
@@ -68,6 +72,7 @@ Files:
 - Secured CRUD and auxiliary endpoints so they require auth and enforce ownership.
 
 Files:
+
 - app/api/keywords/route.ts
 - app/api/keywords/[id]/route.ts
 - app/api/keywords/analytics/route.ts
@@ -82,6 +87,7 @@ Files:
 - Improved user-facing messaging for `401 Unauthorized`.
 
 Files:
+
 - app/[locale]/dashboard/keywords/page.tsx
 - components/keywords/keyword-research.tsx
 - components/keywords/ranking-dashboard.tsx
@@ -97,6 +103,7 @@ Files:
 - Added localStorage persistence for demo continuity.
 
 Files:
+
 - components/features/keyword-tracking/KeywordTrackingFeaturePage.tsx
 - components/features/keyword-tracking/keyword-tracking-hero.tsx
 - app/layout.tsx
@@ -176,6 +183,7 @@ Important note:
 3. You should see a results table with metrics.
 
 If logged out:
+
 - It still works as a demo.
 
 ### B) Dashboard flow
@@ -186,6 +194,7 @@ If logged out:
 4. Use Keyword Research to add keywords; those keywords will persist to your project.
 
 If logged out:
+
 - Dashboard panels that require auth will show a clear “Sign in…” message.
 
 ## API reference (quick)
