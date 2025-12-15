@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { BellIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
+import { useTranslations } from 'next-intl'
 
 function timeAgo(date: Date): string {
   const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000)
@@ -29,11 +30,30 @@ interface Notification {
 }
 
 export function NotificationDropdown() {
+  const t = useTranslations()
   const [isOpen, setIsOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [unreadCount, setUnreadCount] = useState(0)
   const [loading, setLoading] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  const looksLikeKey = (value: string) => {
+    if (!value) return false
+    if (/\s/.test(value)) return false
+    return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(value)
+  }
+
+  const renderNotificationText = (value: string, type: string) => {
+    if (!looksLikeKey(value)) return value
+
+    // Fix legacy/badly-stored keys (e.g. "server.notifications.audit_complete.title")
+    if (type === 'AUDIT_COMPLETED' && /audit[_\.]complete/i.test(value)) {
+      return t('notifications.auditComplete')
+    }
+
+    // If we can't confidently map it, show the raw string (better than crashing).
+    return value
+  }
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -217,10 +237,10 @@ export function NotificationDropdown() {
                       <span className="text-2xl">{getNotificationIcon(notification.type)}</span>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-slate-900 dark:text-white">
-                          {notification.title}
+                          {renderNotificationText(notification.title, notification.type)}
                         </p>
                         <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                          {notification.message}
+                          {renderNotificationText(notification.message, notification.type)}
                         </p>
                         <p className="text-xs text-slate-500 dark:text-slate-500 mt-2">
                           {timeAgo(notification.createdAt)}

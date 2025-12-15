@@ -42,7 +42,7 @@ export type AuditTranslationKey =
  * @returns Translation function
  */
 export async function getServerTranslations(locale: Locale = 'en') {
-  const load = async (loc: Locale) => getTranslations({ locale: loc, namespace: 'server' })
+  const load = async (loc: Locale) => getTranslations({ locale: loc })
 
   try {
     return await load(locale)
@@ -58,6 +58,29 @@ export async function getServerTranslations(locale: Locale = 'en') {
 
   // Last resort: never crash background/API routes because of missing messages.
   return ((key: string) => key) as any
+}
+
+function looksLikeUntranslatedKey(value: string) {
+  // Heuristic: dot-separated key with no spaces, common when next-intl returns a key instead of text.
+  if (!value) return false
+  if (/\s/.test(value)) return false
+  return /^[a-z0-9_]+(\.[a-z0-9_]+)+$/i.test(value)
+}
+
+function safeTranslate(
+  t: (key: string, values?: any) => string,
+  key: string,
+  values?: Record<string, string | number>
+): string | null {
+  try {
+    const result = t(key as any, values as any)
+    if (!result) return null
+    if (result === key) return null
+    if (looksLikeUntranslatedKey(result)) return null
+    return result
+  } catch {
+    return null
+  }
 }
 
 /**
@@ -122,18 +145,26 @@ export async function translateNotification(
   data?: Record<string, string | number>
 ): Promise<{ title: string; message: string }> {
   const t = await getServerTranslations(locale);
-  
-  try {
-    return {
-      title: t(`notifications.${notificationType}.title` as any, data as any),
-      message: t(`notifications.${notificationType}.message` as any, data as any)
-    };
-  } catch (error) {
-    console.warn(`Translation missing for notification: ${notificationType}`);
-    return {
-      title: 'Notification',
-      message: notificationType
-    };
+
+  // Current message files use a flat `notifications.*` structure (no `.title`/`.message` nesting).
+  // Keep backwards compatibility with existing callsites (e.g. `audit_complete`).
+  const camelType = notificationType.replace(/_([a-z])/g, (_, c) => String(c).toUpperCase())
+
+  if (notificationType === 'audit_complete' || camelType === 'auditComplete') {
+    const text =
+      safeTranslate(t as any, 'notifications.auditComplete', data) ||
+      'Audit completed successfully!'
+    return { title: text, message: text }
+  }
+
+  const titleKey = `notifications.${camelType}`
+  const translated = safeTranslate(t as any, titleKey, data)
+  if (translated) return { title: translated, message: translated }
+
+  console.warn(`Translation missing for notification: ${notificationType}`)
+  return {
+    title: 'Notification',
+    message: notificationType
   }
 }
 
