@@ -52,6 +52,22 @@ export function middleware(req: NextRequest) {
   // Run intl middleware
   const response = intlMiddleware(req);
 
+  // Improve bfcache eligibility: avoid `Cache-Control: no-store` on public pages.
+  // Keep responses non-cacheable in shared caches by using `private`.
+  const withoutLocale = pathname.replace(/^\/(en|fr|it|es|id|de)(?=\/|$)/, "");
+  const isSensitiveRoute =
+    withoutLocale.startsWith("/dashboard") ||
+    withoutLocale.startsWith("/login") ||
+    withoutLocale.startsWith("/signup") ||
+    withoutLocale.startsWith("/reset-password") ||
+    withoutLocale.startsWith("/forgot-password") ||
+    withoutLocale.startsWith("/verify-email") ||
+    withoutLocale.startsWith("/onboarding") ||
+    withoutLocale.startsWith("/share");
+  if (!isSensitiveRoute) {
+    response.headers.set("Cache-Control", "private, no-cache, max-age=0, must-revalidate");
+  }
+
   // Add custom header with detected locale
   response.headers.set("x-detected-locale", detectedLocale);
   response.headers.set("x-current-pathname", pathname);

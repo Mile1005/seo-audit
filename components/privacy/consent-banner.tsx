@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 // and updates Consent Mode v2 accordingly.
 // Keys follow a small namespace to avoid collisions.
 const STORAGE_KEY = "ga_consent_v2";
+const COOKIE_KEY = "ga_consent_v2";
 
 type ConsentChoice = "accepted" | "rejected" | "unset";
 
@@ -94,9 +95,13 @@ export function ConsentBanner() {
               try {
                 localStorage.setItem(STORAGE_KEY, "rejected");
               } catch {}
+              try {
+                document.cookie = `${COOKIE_KEY}=rejected; path=/; max-age=31536000; samesite=lax; secure`;
+              } catch {}
               setChoice("rejected");
               setVisible(false);
               applyConsentFromChoice("rejected");
+              window.dispatchEvent(new Event("ga-consent-changed"));
             }}
           >
             Reject
@@ -108,9 +113,13 @@ export function ConsentBanner() {
               try {
                 localStorage.setItem(STORAGE_KEY, "accepted");
               } catch {}
+              try {
+                document.cookie = `${COOKIE_KEY}=accepted; path=/; max-age=31536000; samesite=lax; secure`;
+              } catch {}
               setChoice("accepted");
               setVisible(false);
               applyConsentFromChoice("accepted");
+              window.dispatchEvent(new Event("ga-consent-changed"));
             }}
           >
             Accept

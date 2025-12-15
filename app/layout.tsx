@@ -7,6 +7,7 @@ import { ThemeProvider } from "../components/ui/theme-provider";
 import dynamicImport from "next/dynamic";
 import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
+import { ConsentControlledScripts } from "@/components/privacy/consent-controlled-scripts";
 import { WebVitals } from "@/components/performance/web-vitals";
 import { headers } from "next/headers";
 import { locales, defaultLocale, type Locale } from "../i18n";
@@ -44,8 +45,6 @@ const inter = Inter({
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export const metadata: Metadata = {
@@ -317,18 +316,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             `,
           }}
         />
-        {/* Google Tag Manager — placed as high in <head> as possible */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-K7SGKVC9');
-            `,
-          }}
-        />
+        <ConsentControlledScripts />
 
         {/* LCP Optimization: Resource hints for critical 3rd-party resources only */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -388,12 +376,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
 
-        {/* Ahrefs Web Analytics */}
-        <script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="0AVrYH2zbA3TJwWbRnMwlg"
-          async
-        ></script>
       </head>
       <body
         className={`${inter.className} font-inter dark`}
