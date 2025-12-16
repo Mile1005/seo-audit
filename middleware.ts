@@ -15,7 +15,8 @@ export function middleware(req: NextRequest) {
   }
 
   // Skip other non-localized pages
-  const nonLocalizedPaths = ["/share", "/onboarding"];
+  // NOTE: keep this list minimal; localized pages live under app/[locale]/*
+  const nonLocalizedPaths = ["/share"];
   if (nonLocalizedPaths.some((path) => pathname.startsWith(path))) {
     return NextResponse.next();
   }

@@ -45,6 +45,10 @@ const SEO_GOALS = [
 ];
 
 export default function OnboardingPage() {
+  const params = useParams();
+  const locale = (params?.locale as string) || "en";
+  const dashboardPath = locale === "en" ? "/dashboard" : `/${locale}/dashboard`;
+
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [websiteData, setWebsiteData] = useState({
@@ -70,7 +74,7 @@ export default function OnboardingPage() {
       try {
         // Save user preferences and run first audit
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        router.push("/dashboard");
+        router.push(dashboardPath);
       } catch (error) {
         console.error("Onboarding completion error:", error);
       } finally {
@@ -82,7 +86,7 @@ export default function OnboardingPage() {
   };
 
   const handleSkip = () => {
-    router.push("/dashboard");
+    router.push(dashboardPath);
   };
 
   const renderStepContent = () => {

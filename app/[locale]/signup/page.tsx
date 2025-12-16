@@ -78,6 +78,8 @@ export default function SignupPage() {
   const params = useParams();
   const locale = params.locale as string;
 
+  const dashboardPath = locale === "en" ? "/dashboard" : `/${locale}/dashboard`;
+
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState("PRO");
   const [showPassword, setShowPassword] = useState(false);
@@ -100,7 +102,7 @@ export default function SignupPage() {
       // For Google OAuth, let NextAuth handle the redirect automatically
       // This will redirect the user to Google's OAuth page
       await signIn("google", {
-        callbackUrl: "/onboarding",
+        callbackUrl: dashboardPath,
       });
     } catch (error) {
       console.error("Google sign-up error:", error);
@@ -144,7 +146,7 @@ export default function SignupPage() {
       if (result?.error) {
         setError("Failed to create account");
       } else {
-        router.push("/onboarding");
+        router.push(dashboardPath);
       }
     } catch (error) {
       setError("Failed to create account");
