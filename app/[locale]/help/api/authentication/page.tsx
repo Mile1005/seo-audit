@@ -2,8 +2,6 @@ import { generateSEOMeta, pageSEO } from "@/lib/seo";
 import { type Locale } from "@/i18n";
 import AuthenticationPage from "@/app/help/api/authentication/page";
 
-export const dynamic = "force-static";
-
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   return generateSEOMeta({
     title: "API Authentication - Developer Guide | AI SEO Turbo",

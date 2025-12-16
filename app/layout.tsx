@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import React from "react";
 import { Inter } from "next/font/google";
+import { headers } from "next/headers";
 import { AuthProvider } from "../components/auth/auth-provider";
 import { ThemeProvider } from "../components/ui/theme-provider";
 import dynamicImport from "next/dynamic";
@@ -9,7 +10,7 @@ import { ClientAnalytics } from "@/components/layout/client-analytics";
 import { ConsentBanner } from "@/components/privacy/consent-banner";
 import { ConsentControlledScripts } from "@/components/privacy/consent-controlled-scripts";
 import { WebVitals } from "@/components/performance/web-vitals";
-import { defaultLocale } from "../i18n";
+import { defaultLocale, locales, type Locale } from "../i18n";
 
 // Lazy load Vercel monitoring scripts (not critical for page render)
 const Analytics = dynamicImport(
@@ -96,8 +97,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Use default locale for html lang; the [locale] layout handles locale-specific content
-  const htmlLang = defaultLocale;
+  // Ahrefs was flagging localized routes (e.g. /fr/*) rendering <html lang="en">.
+  // Middleware resolves the locale and injects it as a request header.
+  const requestHeaders = headers();
+  const fromMiddleware = requestHeaders.get("x-aiseo-locale");
+  const htmlLang: Locale = locales.includes(fromMiddleware as Locale)
+    ? (fromMiddleware as Locale)
+    : defaultLocale;
 
   // GA4 Measurement ID: use env if provided, otherwise fall back to the provided ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-VL8V8L4G7X";

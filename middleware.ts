@@ -50,7 +50,33 @@ export function middleware(req: NextRequest) {
   }
 
   // Run intl middleware
-  const response = intlMiddleware(req);
+  const intlResponse = intlMiddleware(req);
+
+  // CRITICAL: If next-intl returns a redirect (e.g., 307 to locale-prefixed path),
+  // we must return it as-is. Only inject headers for non-redirect responses.
+  const isRedirect = intlResponse.status >= 300 && intlResponse.status < 400;
+  if (isRedirect) {
+    // Still add our custom headers to the redirect response
+    intlResponse.headers.set("x-detected-locale", detectedLocale);
+    intlResponse.headers.set("x-current-pathname", pathname);
+    return intlResponse;
+  }
+
+  // For non-redirect responses, inject locale into request headers for Server Components.
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set("x-aiseo-locale", detectedLocale);
+  requestHeaders.set("x-aiseo-pathname", pathname);
+
+  // Preserve any rewrite performed by next-intl.
+  const rewrite = intlResponse.headers.get("x-middleware-rewrite");
+  const response = rewrite
+    ? NextResponse.rewrite(new URL(rewrite), { request: { headers: requestHeaders } })
+    : NextResponse.next({ request: { headers: requestHeaders } });
+
+  // Preserve cookies set by next-intl (e.g. NEXT_LOCALE).
+  for (const cookie of intlResponse.cookies.getAll()) {
+    response.cookies.set(cookie);
+  }
 
   // Improve bfcache eligibility: avoid `Cache-Control: no-store` on public pages.
   // Keep responses non-cacheable in shared caches by using `private`.

@@ -2,8 +2,6 @@ import { generateSEOMeta, pageSEO } from "@/lib/seo";
 import { type Locale } from "@/i18n";
 import BestPracticesContent from "./best-practices-content";
 
-export const dynamic = "force-static";
-
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   return generateSEOMeta({
     description:

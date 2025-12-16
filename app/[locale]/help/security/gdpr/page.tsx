@@ -2,8 +2,6 @@ import { generateSEOMeta } from "@/lib/seo";
 import { type Locale } from "@/i18n";
 import GdprContent from "./gdpr-content";
 
-export const dynamic = "force-static";
-
 export async function generateMetadata({ params }: { params: { locale: string } }) {
   return generateSEOMeta({
     description:
