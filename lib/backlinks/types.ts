@@ -204,3 +204,60 @@ export interface BacklinkProfile {
   linkTypeDistribution: Record<string, number>;
   linkPositionDistribution: Record<string, number>;
 }
+
+// ---------------------------------------------------------------------------
+// Guide compatibility types (used by /api/backlinks/collect caching + stats)
+// ---------------------------------------------------------------------------
+
+export interface RawBacklink {
+  sourceUrl: string;
+  sourceDomain: string;
+  targetUrl: string;
+  timestamp?: string;
+  title?: string;
+  snippet?: string;
+}
+
+export interface EnrichedBacklink extends RawBacklink {
+  anchorText: string;
+  domainRating: number; // 0-100
+  domainAuthority: number; // 0-10 (approx)
+  pageRank: number; // 0-10 (approx)
+  linkType: "FOLLOW" | "NOFOLLOW";
+  status: "ACTIVE" | "LOST" | "BROKEN" | "REDIRECT";
+}
+
+export interface DomainMetric {
+  domain: string;
+  domainRating: number;
+  domainAuthority: number;
+  pageRank: number;
+  statusCode: number;
+  lastUpdated: Date;
+}
+
+export interface BacklinkStats {
+  totalBacklinks: number;
+  uniqueDomains: number;
+  avgDomainRating: number;
+  checksUsed: number;
+  checksRemaining: number;
+}
+
+export interface CollectionOptions {
+  maxResults?: number;
+  useCommonCrawl?: boolean;
+  useGoogle?: boolean;
+  useSerpApi?: boolean;
+}
+
+export interface CollectionResult {
+  success: boolean;
+  cached: boolean;
+  cacheAge?: number;
+  data: {
+    backlinks: EnrichedBacklink[];
+    stats: BacklinkStats;
+  };
+  error?: string;
+}

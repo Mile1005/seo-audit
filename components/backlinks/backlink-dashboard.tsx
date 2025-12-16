@@ -145,31 +145,40 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
       const response = await fetch("/api/backlinks/collect", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          projectId,
-          targetDomain: "your-domain.com", // TODO: Get from project settings
-          options: {
-            maxResults: 500,
-            includeCommonCrawl: true,
-            includeSearch: true,
-          },
-        }),
+        body: JSON.stringify({ projectId }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        alert(
-          `Successfully collected ${data.data.collected.totalBacklinks} backlinks from ${data.data.collected.totalDomains} domains!`
-        );
+        const { cached, cacheAge, data: responseData } = data;
+        const maxChecks = 4; // Default from guide
+
+        if (cached) {
+          alert(
+            `Showing cached results from ${cacheAge} day(s) ago.\n` +
+              `Found ${responseData.stats.totalBacklinks} backlinks from ${responseData.stats.uniqueDomains} domains.\n` +
+              `Checks remaining today: ${responseData.stats.checksRemaining}/${maxChecks}`
+          );
+        } else {
+          alert(
+            `Successfully collected ${responseData.stats.totalBacklinks} backlinks from ${responseData.stats.uniqueDomains} domains!\n` +
+              `Average Domain Rating: ${responseData.stats.avgDomainRating}\n` +
+              `Checks remaining today: ${responseData.stats.checksRemaining}/${maxChecks}`
+          );
+        }
+
         fetchBacklinks();
       } else {
-        console.error("Failed to collect backlinks:", data.error);
-        alert("Failed to collect backlinks: " + data.error);
+        const errorMessage = data.message || data.error || "Failed to collect backlinks";
+        alert(errorMessage);
+        console.error("Failed to collect backlinks:", data);
       }
     } catch (error) {
       console.error("Error collecting backlinks:", error);
       alert("Error collecting backlinks. Check console for details.");
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -1,222 +1,237 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth";
-import { BacklinkCollector } from "@/lib/backlinks/backlink-collector";
-import { getToxicityAnalyzer } from "@/lib/backlinks/analysis/toxicity-analyzer";
+import { discoverBacklinks } from "@/lib/backlinks/discovery";
+import { enrichWithMetrics } from "@/lib/backlinks/enrichment";
+import { calculateAvgDR } from "@/lib/backlinks/utils";
 
 /**
  * POST /api/backlinks/collect
  *
  * Collect real backlinks from multiple free data sources:
- * - Common Crawl (250B+ pages)
- * - OpenPageRank (domain metrics)
- * - Google Search API + Web Scraping
+ * - Common Crawl (250B+ pages, unlimited FREE)
+ * - Google Custom Search (100/day FREE)
+ * - SerpAPI (100/month FREE)
+ * - OpenPageRank for domain metrics (1,000/day FREE)
  *
- * Performs:
- * - Multi-source data aggregation
- * - Deduplication
- * - Quality scoring
- * - Toxicity analysis
- * - Database persistence
+ * Features:
+ * - Rate limiting: 4 checks per day per project
+ * - Caching: 7-day cache for backlink results
+ * - Domain metrics cached for 30 days
  */
 export async function POST(request: NextRequest) {
   try {
-    const user = await requireUser(request);
+    console.log("[API] Starting backlink collection...");
+
+    await requireUser(request);
 
     const body = await request.json();
-    const { projectId, targetUrl, targetDomain, options = {} } = body;
+    const { projectId } = body;
 
     // Validation
     if (!projectId) {
       return NextResponse.json(
-        {
-          error: "Project ID is required",
-        },
+        { error: "projectId is required" },
         { status: 400 }
       );
     }
 
-    if (!targetUrl && !targetDomain) {
-      return NextResponse.json(
-        {
-          error: "Either targetUrl or targetDomain is required",
-        },
-        { status: 400 }
-      );
-    }
-
-    // Verify project exists and user has access
-    const project = await prisma.project.findFirst({
-      where: {
-        id: projectId,
-      },
+    // 1. Validate project exists and get domain
+    const project = await prisma.project.findUnique({
+      where: { id: projectId },
+      select: { id: true, domain: true },
     });
 
-    if (!project) {
+    if (!project || !project.domain) {
       return NextResponse.json(
-        {
-          error: "Project not found or access denied",
-        },
+        { error: "Project not found or has no domain" },
         { status: 404 }
       );
     }
 
-    // Initialize collector
-    const collector = new BacklinkCollector();
-    const toxicityAnalyzer = getToxicityAnalyzer();
+    const domain = project.domain;
+    console.log(`[API] Collecting backlinks for domain: ${domain}`);
 
-    // Collect backlinks from all sources
-    console.log(`[Backlink Collection] Starting collection for ${targetUrl || targetDomain}`);
+    // 2. Check rate limit (4 checks per day per project)
+    const maxChecks = parseInt(process.env.MAX_BACKLINK_CHECKS_PER_DAY || "4", 10);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const collectionResult = await collector.collectBacklinks(
-      targetUrl || `https://${targetDomain}`,
-      {
-        maxBacklinks: options.maxResults || 500,
-        useCommonCrawl: options.includeCommonCrawl !== false,
-        useSearch: options.includeSearch !== false,
-        useGoogleAPI: true,
-        enrichWithMetrics: true,
-      }
-    );
-
-    console.log(`[Backlink Collection] Found ${collectionResult.backlinks.length} backlinks`);
-
-    // Analyze toxicity for all collected links
-    const backlinkDataArray = collectionResult.backlinks.map((bl: any) => ({
-      ...bl,
-      foundDate: new Date(),
-      firstSeen: new Date(),
-      lastSeen: new Date(),
-    }));
-
-    const toxicityResults = await toxicityAnalyzer.analyzeBatch(backlinkDataArray);
-    const toxicityArray = Array.from(toxicityResults.values());
-
-    // Combine backlink data with toxicity scores
-    const enrichedBacklinks = collectionResult.backlinks.map((link: any, index: number) => ({
-      ...link,
-      isToxic: toxicityArray[index]?.classification !== "safe",
-      toxicScore: toxicityArray[index]?.overall || 0,
-      foundDate: new Date(),
-    }));
-
-    // Prepare data for database insertion
-    const backlinkInsertData = enrichedBacklinks.map((link: any) => ({
-      projectId,
-      sourceUrl: link.sourceUrl,
-      sourceDomain: link.sourceDomain,
-      targetUrl: link.targetUrl,
-      anchorText: link.anchorText,
-      linkType: link.linkType,
-      status: "ACTIVE" as const,
-      domainRating: link.domainRating,
-      pageRating: link.pageRating,
-      traffic: link.traffic,
-      isToxic: link.isToxic,
-      toxicScore: link.toxicScore,
-      linkPosition: link.linkPosition,
-      context: link.context,
-      altText: link.altText,
-      isNofollow: link.isNofollow,
-      isSponsored: link.isSponsored,
-      isUGC: link.isUGC,
-      firstSeen: new Date(),
-      lastSeen: new Date(),
-    }));
-
-    // Extract unique referring domains
-    const uniqueDomains = new Map<string, (typeof backlinkInsertData)[0]>();
-    for (const link of backlinkInsertData) {
-      if (!uniqueDomains.has(link.sourceDomain)) {
-        uniqueDomains.set(link.sourceDomain, link);
-      }
-    }
-
-    const referringDomainInsertData = Array.from(uniqueDomains.values()).map((link: any) => ({
-      projectId,
-      domain: link.sourceDomain,
-      domainRating: link.domainRating,
-      pageRating: link.pageRating,
-      backlinkCount: enrichedBacklinks.filter((bl: any) => bl.sourceDomain === link.sourceDomain)
-        .length,
-      traffic: link.traffic,
-      isToxic: link.isToxic,
-      toxicScore: link.toxicScore,
-      status: "ACTIVE" as const,
-      firstSeen: new Date(),
-      lastSeen: new Date(),
-    }));
-
-    // Save to database using transaction
-    console.log(`[Backlink Collection] Saving to database...`);
-
-    const result = await prisma.$transaction(async (tx: any) => {
-      // Delete existing backlinks for this project to replace with fresh data
-      // (Optional: You can also use upsert logic instead)
-      const deleteCount = await tx.backlink.deleteMany({
-        where: { projectId },
-      });
-      console.log(`[Backlink Collection] Deleted ${deleteCount.count} old backlinks`);
-
-      await tx.referringDomain.deleteMany({
-        where: { projectId },
-      });
-
-      // Insert new backlinks
-      const createdBacklinks = await tx.backlink.createMany({
-        data: backlinkInsertData,
-        skipDuplicates: true,
-      });
-
-      // Insert referring domains
-      const createdDomains = await tx.referringDomain.createMany({
-        data: referringDomainInsertData,
-        skipDuplicates: true,
-      });
-
-      return {
-        backlinks: createdBacklinks.count,
-        domains: createdDomains.count,
-      };
+    const checksToday = await prisma.backlinkCheck.count({
+      where: {
+        projectId,
+        createdAt: { gte: today },
+      },
     });
 
-    console.log(
-      `[Backlink Collection] Saved ${result.backlinks} backlinks and ${result.domains} domains`
-    );
+    if (checksToday >= maxChecks) {
+      console.log(`[API] Rate limit reached: ${checksToday}/${maxChecks}`);
+      return NextResponse.json(
+        {
+          error: "Daily limit reached",
+          message: `You can check backlinks ${maxChecks} times per day. Limit resets at midnight.`,
+          checksUsed: checksToday,
+          checksRemaining: 0,
+        },
+        { status: 429 }
+      );
+    }
 
-    // Calculate summary statistics
-    const totalToxic = enrichedBacklinks.filter((bl: any) => bl.isToxic).length;
-    const avgDomainRating =
-      enrichedBacklinks.reduce((sum: number, bl: any) => sum + (bl.domainRating || 0), 0) /
-      enrichedBacklinks.length;
-    const followLinks = enrichedBacklinks.filter((bl: any) => bl.linkType === "FOLLOW").length;
-    const nofollowLinks = enrichedBacklinks.filter((bl: any) => bl.linkType === "NOFOLLOW").length;
+    // 3. Check for cached results (within BACKLINK_CACHE_DAYS days)
+    const cacheDays = parseInt(process.env.BACKLINK_CACHE_DAYS || "7", 10);
+    const cacheExpiry = new Date(Date.now() - cacheDays * 24 * 60 * 60 * 1000);
 
+    const cachedCheck = await prisma.backlinkCheck.findFirst({
+      where: {
+        projectId,
+        createdAt: { gte: cacheExpiry },
+        status: "COMPLETED",
+      },
+      include: {
+        backlinks: {
+          orderBy: { domainRating: "desc" },
+          take: 100,
+        },
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    if (cachedCheck && cachedCheck.backlinks.length > 0) {
+      const cacheAge = Date.now() - cachedCheck.createdAt.getTime();
+      const cacheAgeDays = Math.floor(cacheAge / (1000 * 60 * 60 * 24));
+
+      console.log(`[API] Returning cached data (${cacheAgeDays} days old)`);
+
+      return NextResponse.json({
+        success: true,
+        cached: true,
+        cacheAge: cacheAgeDays,
+        data: {
+          backlinks: cachedCheck.backlinks,
+          stats: {
+            totalBacklinks: cachedCheck.totalBacklinks,
+            uniqueDomains: cachedCheck.uniqueDomains,
+            avgDomainRating: cachedCheck.avgDomainRating,
+            checksUsed: checksToday,
+            checksRemaining: maxChecks - checksToday,
+          },
+        },
+      });
+    }
+
+    // 4. Discover new backlinks
+    console.log("[API] No cache found, discovering new backlinks...");
+    const rawBacklinks = await discoverBacklinks(domain, { maxResults: 100 });
+
+    if (rawBacklinks.length === 0) {
+      // Still create a check record so we don't hammer APIs on retry
+      await prisma.backlinkCheck.create({
+        data: {
+          projectId,
+          totalBacklinks: 0,
+          uniqueDomains: 0,
+          avgDomainRating: 0,
+          status: "COMPLETED",
+          message: "No backlinks found",
+          completedAt: new Date(),
+        },
+      });
+
+      return NextResponse.json({
+        success: true,
+        cached: false,
+        data: {
+          backlinks: [],
+          stats: {
+            totalBacklinks: 0,
+            uniqueDomains: 0,
+            avgDomainRating: 0,
+            checksUsed: checksToday + 1,
+            checksRemaining: maxChecks - (checksToday + 1),
+          },
+        },
+        message: "No backlinks found for this domain",
+      });
+    }
+
+    // 5. Enrich with domain metrics (uses 30-day cache)
+    console.log("[API] Enriching backlinks with metrics...");
+    const enrichedBacklinks = await enrichWithMetrics(rawBacklinks);
+
+    // 6. Calculate stats
+    const uniqueDomains = new Set(enrichedBacklinks.map((bl) => bl.sourceDomain)).size;
+    const avgDR = calculateAvgDR(enrichedBacklinks);
+
+    // 7. Save to database with BacklinkCheck for caching
+    console.log("[API] Saving to database...");
+
+    const backlinkCheck = await prisma.backlinkCheck.create({
+      data: {
+        projectId,
+        totalBacklinks: enrichedBacklinks.length,
+        uniqueDomains,
+        avgDomainRating: avgDR,
+        status: "COMPLETED",
+        completedAt: new Date(),
+        backlinks: {
+          create: enrichedBacklinks.map((bl) => ({
+            projectId,
+            sourceUrl: bl.sourceUrl,
+            sourceDomain: bl.sourceDomain,
+            targetUrl: bl.targetUrl,
+            anchorText: bl.anchorText || null,
+            domainRating: bl.domainRating,
+            pageRating: bl.domainRating, // Use DR as page rating fallback
+            linkType: bl.linkType,
+            status: bl.status,
+            traffic: 0,
+            isToxic: false,
+            toxicScore: 0,
+            linkStrength:
+              bl.domainRating > 70
+                ? "VERY_STRONG"
+                : bl.domainRating > 50
+                  ? "STRONG"
+                  : bl.domainRating > 30
+                    ? "NORMAL"
+                    : "WEAK",
+            firstSeen: new Date(),
+            lastSeen: new Date(),
+            lastChecked: new Date(),
+          })),
+        },
+      },
+      include: {
+        backlinks: {
+          orderBy: { domainRating: "desc" },
+        },
+      },
+    });
+
+    console.log(`[API] Successfully saved ${backlinkCheck.backlinks.length} backlinks`);
+
+    // 8. Return success response
     return NextResponse.json({
       success: true,
-      message: "Backlinks collected successfully",
+      cached: false,
       data: {
-        collected: {
-          totalBacklinks: enrichedBacklinks.length,
-          totalDomains: uniqueDomains.size,
-          followLinks,
-          nofollowLinks,
-          toxicLinks: totalToxic,
-          avgDomainRating: Math.round(avgDomainRating),
+        backlinks: backlinkCheck.backlinks,
+        stats: {
+          totalBacklinks: backlinkCheck.totalBacklinks,
+          uniqueDomains: backlinkCheck.uniqueDomains,
+          avgDomainRating: backlinkCheck.avgDomainRating,
+          checksUsed: checksToday + 1,
+          checksRemaining: maxChecks - (checksToday + 1),
         },
-        saved: {
-          backlinks: result.backlinks,
-          domains: result.domains,
-        },
-        sources: collectionResult.stats.sources,
-        duration: collectionResult.stats.duration,
       },
     });
   } catch (error) {
-    console.error("[Backlink Collection Error]", error);
+    console.error("[API] Collection error:", error);
+
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : "Failed to collect backlinks",
+        error: "Failed to collect backlinks",
+        message: error instanceof Error ? error.message : "Unknown error",
         details: process.env.NODE_ENV === "development" ? error : undefined,
       },
       { status: 500 }

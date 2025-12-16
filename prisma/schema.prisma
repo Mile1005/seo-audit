@@ -213,6 +213,7 @@ model Project {
 	keywordSuggestions KeywordSuggestion[]
 	rankingAlerts   RankingAlert[]
 	siteAudits      SiteAudit[]
+	backlinkChecks  BacklinkCheck[]
 	backlinks       Backlink[]
 	referringDomains ReferringDomain[]
 	linkProspects   LinkProspect[]
@@ -228,6 +229,43 @@ model Project {
 	@@index([teamId])
 	@@index([domain])
 	@@index([status])
+}
+
+// ============================================
+// BACKLINK CHECK + METRICS CACHE
+// ============================================
+
+model BacklinkCheck {
+	id             String   @id @default(cuid())
+	projectId      String
+	requestedAt    DateTime @default(now())
+	completedAt    DateTime?
+	status         String   @default("COMPLETED") // COMPLETED | FAILED
+	message        String?
+
+	// Summary stats at time of collection
+	totalBacklinks Int      @default(0)
+	uniqueDomains  Int      @default(0)
+	avgDomainRating Float   @default(0)
+
+	createdAt      DateTime @default(now())
+
+	project   Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	backlinks Backlink[]
+
+	@@index([projectId, createdAt])
+}
+
+model DomainMetric {
+	id              String   @id @default(cuid())
+	domain          String   @unique
+	domainRating    Int      @default(0)
+	domainAuthority Float    @default(0)
+	pageRank        Float    @default(0)
+	lastUpdated     DateTime @default(now())
+
+	@@index([domain])
+	@@index([lastUpdated])
 }
 
 model ProjectMember {
@@ -519,34 +557,36 @@ model AuditPage {
 // ============================================
 
 model Backlink {
-	id            String         @id @default(cuid())
-	projectId     String
-	sourceUrl     String
-	sourceDomain  String
-	targetUrl     String
-	anchorText    String?
-	linkType      LinkType       @default(FOLLOW)
-	status        BacklinkStatus @default(ACTIVE)
-	domainRating  Int?
-	pageRating    Int?
-	traffic       Int?
-	isToxic       Boolean        @default(false)
-	toxicScore    Float?         // 0-100 toxicity score
-	linkStrength  LinkStrength   @default(NORMAL)
-	context       String?        // surrounding text context
-	altText       String?        // for image links
-	isInternal    Boolean        @default(false)
-	isNofollow    Boolean        @default(false)
-	isSponsored   Boolean        @default(false)
-	isUGC         Boolean        @default(false)
-	httpStatus    Int?           // HTTP status of source page
-	lastChecked   DateTime?
-	firstSeen     DateTime
-	lastSeen      DateTime
-	createdAt     DateTime       @default(now())
-	updatedAt     DateTime       @updatedAt
+	id              String         @id @default(cuid())
+	projectId       String
+	backlinkCheckId String?
+	sourceUrl       String
+	sourceDomain    String
+	targetUrl       String
+	anchorText      String?
+	linkType        LinkType       @default(FOLLOW)
+	status          BacklinkStatus @default(ACTIVE)
+	domainRating    Int?
+	pageRating      Int?
+	traffic         Int?
+	isToxic         Boolean        @default(false)
+	toxicScore      Float?         // 0-100 toxicity score
+	linkStrength    LinkStrength   @default(NORMAL)
+	context         String?        // surrounding text context
+	altText         String?        // for image links
+	isInternal      Boolean        @default(false)
+	isNofollow      Boolean        @default(false)
+	isSponsored     Boolean        @default(false)
+	isUGC           Boolean        @default(false)
+	httpStatus      Int?           // HTTP status of source page
+	lastChecked     DateTime?
+	firstSeen       DateTime
+	lastSeen        DateTime
+	createdAt       DateTime       @default(now())
+	updatedAt       DateTime       @updatedAt
 
-	project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	project       Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+	backlinkCheck BacklinkCheck? @relation(fields: [backlinkCheckId], references: [id], onDelete: SetNull)
 
 	@@unique([projectId, sourceUrl, targetUrl])
 	@@index([projectId, status])
@@ -554,6 +594,7 @@ model Backlink {
 	@@index([lastSeen])
 	@@index([isToxic])
 	@@index([domainRating])
+	@@index([backlinkCheckId])
 }
 
 model ReferringDomain {
