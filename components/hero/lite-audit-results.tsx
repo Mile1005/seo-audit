@@ -142,10 +142,10 @@ export function LiteAuditResults({ results, onViewFull, onRunAnother }: LiteAudi
               <img
                 src={screenshotUrl}
                 alt=""
-                className="w-full h-full object-cover object-top opacity-30 blur-sm scale-105"
+                className="w-full h-full object-cover object-top opacity-50 blur-[2px] scale-105"
                 onError={() => setScreenshotUrl(null)}
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/80 to-slate-900" />
+              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/60 to-slate-900/80" />
             </div>
           )}
 
