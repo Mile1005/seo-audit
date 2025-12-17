@@ -131,6 +131,175 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
     });
   };
 
+  const parseDateSafe = (value: string | undefined | null) => {
+    if (!value) return null;
+    const d = new Date(value);
+    return Number.isNaN(d.getTime()) ? null : d;
+  };
+
+  const targetDomain = useMemo(() => {
+    const firstTarget = backlinks.find((b) => !!b.targetUrl)?.targetUrl;
+    if (!firstTarget) return "";
+    try {
+      return new URL(firstTarget).hostname.replace(/^www\./, "");
+    } catch {
+      return "";
+    }
+  }, [backlinks]);
+
+  const brandToken = useMemo(() => {
+    if (!targetDomain) return "";
+    return targetDomain.split(".")[0]?.toLowerCase() ?? "";
+  }, [targetDomain]);
+
+  type AnchorCategory = "branded" | "exact" | "partial" | "generic" | "naked";
+
+  const classifyAnchor = useCallback(
+    (anchorTextRaw: string): AnchorCategory => {
+      const anchorText = (anchorTextRaw || "").trim();
+      const lower = anchorText.toLowerCase();
+
+      if (!anchorText) return "generic";
+
+      const looksLikeUrl =
+        /^https?:\/\//i.test(anchorText) ||
+        /^www\./i.test(anchorText) ||
+        (targetDomain && lower.includes(targetDomain.toLowerCase()));
+      if (looksLikeUrl) return "naked";
+
+      const genericAnchors = [
+        "click here",
+        "here",
+        "learn more",
+        "read more",
+        "more",
+        "this",
+        "website",
+        "visit",
+        "visit website",
+        "link",
+      ];
+      if (genericAnchors.includes(lower)) return "generic";
+
+      if (brandToken && lower.includes(brandToken)) return "branded";
+
+      const wordCount = lower.split(/\s+/).filter(Boolean).length;
+      if (wordCount <= 3) return "exact";
+      if (wordCount <= 8) return "partial";
+      return "generic";
+    },
+    [brandToken, targetDomain]
+  );
+
+  const anchorInsights = useMemo(() => {
+    const total = backlinks.length;
+    const counts: Record<AnchorCategory, number> = {
+      branded: 0,
+      exact: 0,
+      partial: 0,
+      generic: 0,
+      naked: 0,
+    };
+
+    const frequency = new Map<string, { text: string; count: number; category: AnchorCategory }>();
+
+    backlinks.forEach((b) => {
+      const category = classifyAnchor(b.anchorText);
+      counts[category] += 1;
+
+      const normalized = (b.anchorText || "").trim().toLowerCase();
+      if (!normalized) return;
+      const existing = frequency.get(normalized);
+      if (!existing) {
+        frequency.set(normalized, { text: (b.anchorText || "").trim(), count: 1, category });
+      } else {
+        existing.count += 1;
+      }
+    });
+
+    const percentage = (value: number) => (total > 0 ? Math.round((value / total) * 100) : 0);
+
+    const topAnchors = Array.from(frequency.values())
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 8)
+      .map((a) => ({
+        ...a,
+        percentage: total > 0 ? Math.round((a.count / total) * 100) : 0,
+      }));
+
+    return {
+      total,
+      counts,
+      percentages: {
+        branded: percentage(counts.branded),
+        exact: percentage(counts.exact),
+        partial: percentage(counts.partial),
+        generic: percentage(counts.generic),
+        naked: percentage(counts.naked),
+      },
+      topAnchors,
+    };
+  }, [backlinks, classifyAnchor]);
+
+  const linkVelocity = useMemo(() => {
+    const now = new Date();
+    const dayMs = 24 * 60 * 60 * 1000;
+    const startOfToday = new Date(now);
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const countBetween = (start: Date, end: Date) =>
+      backlinks.filter((b) => {
+        const d = parseDateSafe(b.firstSeen);
+        if (!d) return false;
+        return d >= start && d < end;
+      }).length;
+
+    const last7Start = new Date(startOfToday.getTime() - 7 * dayMs);
+    const last14Start = new Date(startOfToday.getTime() - 14 * dayMs);
+
+    const thisWeek = countBetween(last7Start, startOfToday);
+    const lastWeek = countBetween(last14Start, last7Start);
+
+    const last30Start = new Date(startOfToday.getTime() - 30 * dayMs);
+    const last60Start = new Date(startOfToday.getTime() - 60 * dayMs);
+
+    const thisMonth = countBetween(last30Start, startOfToday);
+    const lastMonth = countBetween(last60Start, last30Start);
+
+    const weekDeltaPct = lastWeek === 0 ? null : Math.round(((thisWeek - lastWeek) / lastWeek) * 100);
+    const monthDeltaPct = lastMonth === 0 ? null : Math.round(((thisMonth - lastMonth) / lastMonth) * 100);
+
+    // Build monthly data points for the last 7 months (including current month)
+    const monthPoints = 7;
+    const data = Array.from({ length: monthPoints }).map((_, idx) => {
+      const d = new Date(now);
+      d.setMonth(d.getMonth() - (monthPoints - 1 - idx));
+      d.setDate(1);
+      d.setHours(0, 0, 0, 0);
+      const start = new Date(d);
+      const end = new Date(d);
+      end.setMonth(end.getMonth() + 1);
+      const label = d.toLocaleString(undefined, { month: "short" });
+      const count = countBetween(start, end);
+      return { date: label, count };
+    });
+
+    const avgRecent =
+      data.slice(0, Math.max(0, data.length - 1)).reduce((sum, p) => sum + p.count, 0) /
+      Math.max(1, data.length - 1);
+    const suspiciousSpike = avgRecent > 0 && data[data.length - 1].count > avgRecent * 3;
+
+    return {
+      thisWeek,
+      thisMonth,
+      weekDeltaPct,
+      monthDeltaPct,
+      trendLabel: suspiciousSpike ? "Watch" : "Healthy",
+      trendDescription: suspiciousSpike ? "Unusual spike detected" : "Natural growth pattern",
+      data,
+    };
+  }, [backlinks]);
+
   const fetchBacklinks = useCallback(async () => {
     try {
       setLoading(true);
@@ -358,7 +527,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm text-muted-foreground">Referring Domains</p>
-                  <p className="text-2xl font-bold">{stats.referringDomains.toLocaleString()}</p>
+                  <p className="text-2xl font-bold">{groupedBacklinks.length.toLocaleString()}</p>
                 </div>
                 <Globe className="h-8 w-8 text-green-500" />
               </div>
@@ -433,6 +602,21 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
         </div>
 
         <TabsContent value="overview" className="space-y-4">
+          <Card>
+            <CardContent className="p-4">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="h-5 w-5 text-muted-foreground mt-0.5" />
+                <div>
+                  <p className="font-medium">Free plan shows partial backlink data</p>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Backlinks and metrics are collected from free/public data sources and are a
+                    sample of what exists. Upgrade to unlock fuller coverage and richer metrics.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Domain Rating Distribution */}
             <Card>
@@ -838,37 +1022,39 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Branded Anchors</span>
-                      <span className="font-medium">45%</span>
+                      <span className="font-medium">{anchorInsights.percentages.branded}%</span>
                     </div>
-                    <Progress value={45} className="h-2" />
+                    <Progress value={anchorInsights.percentages.branded} className="h-2" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Exact Match</span>
-                      <span className="font-medium text-orange-600">18%</span>
+                      <span className="font-medium text-orange-600">
+                        {anchorInsights.percentages.exact}%
+                      </span>
                     </div>
-                    <Progress value={18} className="h-2 bg-orange-100" />
+                    <Progress value={anchorInsights.percentages.exact} className="h-2 bg-orange-100" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Partial Match</span>
-                      <span className="font-medium">22%</span>
+                      <span className="font-medium">{anchorInsights.percentages.partial}%</span>
                     </div>
-                    <Progress value={22} className="h-2" />
+                    <Progress value={anchorInsights.percentages.partial} className="h-2" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Generic Anchors</span>
-                      <span className="font-medium">12%</span>
+                      <span className="font-medium">{anchorInsights.percentages.generic}%</span>
                     </div>
-                    <Progress value={12} className="h-2" />
+                    <Progress value={anchorInsights.percentages.generic} className="h-2" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Naked URLs</span>
-                      <span className="font-medium">3%</span>
+                      <span className="font-medium">{anchorInsights.percentages.naked}%</span>
                     </div>
-                    <Progress value={3} className="h-2" />
+                    <Progress value={anchorInsights.percentages.naked} className="h-2" />
                   </div>
                 </div>
                 <div className="mt-6 p-4 bg-green-50 rounded-lg">
@@ -877,7 +1063,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <div>
                       <p className="font-medium text-green-900">Natural Profile Detected</p>
                       <p className="text-sm text-green-700 mt-1">
-                        Your anchor text distribution appears natural with good variety.
+                        This analysis is calculated from your discovered backlinks.
                       </p>
                     </div>
                   </div>
@@ -893,16 +1079,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {[
-                    { text: "Your Brand Name", count: 145, type: "branded" },
-                    { text: "click here", count: 89, type: "generic" },
-                    { text: "SEO tool", count: 67, type: "partial" },
-                    { text: "best seo audit tool", count: 52, type: "exact" },
-                    { text: "website", count: 48, type: "generic" },
-                    { text: "https://your-site.com", count: 41, type: "naked" },
-                    { text: "learn more", count: 35, type: "generic" },
-                    { text: "audit platform", count: 28, type: "partial" },
-                  ].map((anchor, idx) => (
+                  {anchorInsights.topAnchors.map((anchor, idx) => (
                     <div
                       key={idx}
                       className="flex items-center justify-between p-3 border rounded-lg"
@@ -914,7 +1091,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                       <div className="text-right">
                         <p className="font-medium">{anchor.count}</p>
                         <p className="text-xs text-muted-foreground">
-                          {Math.round((anchor.count / 500) * 100)}%
+                          {anchor.percentage}%
                         </p>
                       </div>
                     </div>
@@ -970,11 +1147,15 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                 <CardTitle>Weekly Growth</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-green-600">+12</div>
+                <div className="text-3xl font-bold text-green-600">+{linkVelocity.thisWeek}</div>
                 <p className="text-sm text-muted-foreground mt-1">New backlinks this week</p>
                 <div className="flex items-center gap-2 mt-2">
                   <TrendingUp className="h-4 w-4 text-green-600" />
-                  <span className="text-sm text-green-600">+15% from last week</span>
+                  <span className="text-sm text-green-600">
+                    {linkVelocity.weekDeltaPct === null
+                      ? "No prior-week baseline"
+                      : `${linkVelocity.weekDeltaPct > 0 ? "+" : ""}${linkVelocity.weekDeltaPct}% from last week`}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -984,11 +1165,15 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                 <CardTitle>Monthly Growth</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-blue-600">+47</div>
+                <div className="text-3xl font-bold text-blue-600">+{linkVelocity.thisMonth}</div>
                 <p className="text-sm text-muted-foreground mt-1">New backlinks this month</p>
                 <div className="flex items-center gap-2 mt-2">
                   <TrendingUp className="h-4 w-4 text-blue-600" />
-                  <span className="text-sm text-blue-600">Steady growth</span>
+                  <span className="text-sm text-blue-600">
+                    {linkVelocity.monthDeltaPct === null
+                      ? "No prior-month baseline"
+                      : `${linkVelocity.monthDeltaPct > 0 ? "+" : ""}${linkVelocity.monthDeltaPct}% vs last month`}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -998,11 +1183,13 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                 <CardTitle>Growth Trend</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold">Healthy</div>
-                <p className="text-sm text-muted-foreground mt-1">Natural growth pattern</p>
+                <div className="text-3xl font-bold">{linkVelocity.trendLabel}</div>
+                <p className="text-sm text-muted-foreground mt-1">{linkVelocity.trendDescription}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <Shield className="h-4 w-4 text-green-600" />
-                  <span className="text-sm text-green-600">No suspicious spikes</span>
+                  <span className="text-sm text-green-600">
+                    {linkVelocity.trendLabel === "Healthy" ? "No suspicious spikes" : "Review recent links"}
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -1016,17 +1203,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
-                <LineChart
-                  data={[
-                    { date: "Jan", count: 120 },
-                    { date: "Feb", count: 145 },
-                    { date: "Mar", count: 178 },
-                    { date: "Apr", count: 192 },
-                    { date: "May", count: 215 },
-                    { date: "Jun", count: 243 },
-                    { date: "Jul", count: 278 },
-                  ]}
-                >
+                <LineChart data={linkVelocity.data}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis />
@@ -1072,6 +1249,89 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   </div>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="domains" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Referring Domains ({groupedBacklinks.length})</CardTitle>
+              <CardDescription>
+                Domains that link to {targetDomain || "your site"}. Click a domain to expand.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {groupedBacklinks.length === 0 ? (
+                <div className="text-sm text-muted-foreground">No domains found yet.</div>
+              ) : (
+                <div className="space-y-3">
+                  {groupedBacklinks.map((group) => {
+                    const isExpanded = expandedDomains.has(group.domain);
+                    const first = group.backlinks[0];
+                    return (
+                      <div key={group.domain} className="border rounded-lg overflow-hidden">
+                        <div
+                          className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+                          onClick={() => group.count > 1 && toggleDomainExpanded(group.domain)}
+                        >
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="font-medium text-blue-600">{group.domain}</span>
+                              <Badge variant="secondary">{group.count} backlinks</Badge>
+                              <span className="text-xs text-muted-foreground">Max DR: {group.maxDomainRating}</span>
+                              {group.hasToxic && (
+                                <Badge variant="destructive" className="text-xs">
+                                  Toxic
+                                </Badge>
+                              )}
+                              {group.count > 1 && (
+                                <span className="text-xs text-muted-foreground">
+                                  {isExpanded ? "▼" : "▶"}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(first.sourceUrl, "_blank");
+                            }}
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
+                        </div>
+
+                        {isExpanded && group.count > 1 && (
+                          <div className="border-t bg-muted/20 divide-y">
+                            {group.backlinks.map((b) => (
+                              <div key={b.id} className="flex items-center justify-between p-3 pl-8">
+                                <div className="flex-1">
+                                  <p className="text-sm text-muted-foreground truncate max-w-md">{b.sourceUrl}</p>
+                                  <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
+                                    <span>DR: {b.domainRating}</span>
+                                    <span>{b.linkType}</span>
+                                    <span>{new Date(b.lastSeen).toLocaleDateString()}</span>
+                                  </div>
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => window.open(b.sourceUrl, "_blank")}
+                                >
+                                  <ExternalLink className="h-4 w-4" />
+                                </Button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
