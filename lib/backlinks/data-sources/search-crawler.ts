@@ -22,13 +22,30 @@ export interface SearchResult {
 export class SearchCrawler {
   private readonly googleApiKey: string;
   private readonly googleCx: string;
+  private readonly serpApiKey: string;
   private readonly userAgent =
     "Mozilla/5.0 (compatible; SEOAuditBot/1.0; +https://seo-audit.com/bot)";
   private visitedUrls = new Set<string>();
 
   constructor() {
-    this.googleApiKey = process.env.GOOGLE_CUSTOM_SEARCH_API_KEY || "";
-    this.googleCx = process.env.GOOGLE_CUSTOM_SEARCH_CX || "";
+    // Support both naming conventions for env vars
+    this.googleApiKey = process.env.GOOGLE_SEARCH_API_KEY || process.env.GOOGLE_CUSTOM_SEARCH_API_KEY || "";
+    this.googleCx = process.env.GOOGLE_SEARCH_ENGINE_ID || process.env.GOOGLE_CUSTOM_SEARCH_CX || "";
+    this.serpApiKey = process.env.SERPAPI_KEY || "";
+  }
+
+  /**
+   * Check if Google API is configured
+   */
+  isGoogleConfigured(): boolean {
+    return !!(this.googleApiKey && this.googleCx);
+  }
+
+  /**
+   * Check if SerpAPI is configured
+   */
+  isSerpApiConfigured(): boolean {
+    return !!this.serpApiKey;
   }
 
   /**
@@ -101,13 +118,55 @@ export class SearchCrawler {
    */
   private buildSearchQueries(targetDomain: string): string[] {
     return [
-      `"${targetDomain}"`,
-      `link:${targetDomain}`,
-      `intext:"${targetDomain}"`,
-      `site:*.edu "${targetDomain}"`,
-      `site:*.gov "${targetDomain}"`,
-      `site:*.org "${targetDomain}"`,
+      `"${targetDomain}" -site:${targetDomain}`,
+      `intext:"${targetDomain}" -site:${targetDomain}`,
     ];
+  }
+
+  /**
+   * Search via SerpAPI (100 free/month)
+   */
+  async searchViaSerpApi(query: string, numResults: number): Promise<SearchResult[]> {
+    const results: SearchResult[] = [];
+
+    if (!this.serpApiKey) {
+      console.log("⚠️ [SerpAPI] Not configured");
+      return results;
+    }
+
+    try {
+      const url = `https://serpapi.com/search.json?engine=google&q=${encodeURIComponent(query)}&api_key=${this.serpApiKey}&num=${numResults}`;
+
+      const response = await fetch(url, {
+        signal: AbortSignal.timeout(20000),
+      });
+
+      if (!response.ok) {
+        console.warn(`⚠️ [SerpAPI] HTTP ${response.status}`);
+        return results;
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        console.warn(`⚠️ [SerpAPI] Error: ${data.error}`);
+        return results;
+      }
+
+      for (const item of data.organic_results || []) {
+        results.push({
+          title: item.title || "",
+          url: item.link || "",
+          snippet: item.snippet || "",
+        });
+      }
+
+      console.log(`✅ [SerpAPI] Found ${results.length} results for query`);
+    } catch (error) {
+      console.error("❌ [SerpAPI] Error:", error);
+    }
+
+    return results;
   }
 
   /**
