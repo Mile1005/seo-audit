@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -94,6 +94,42 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [expandedDomains, setExpandedDomains] = useState<Set<string>>(new Set());
+
+  // Group backlinks by source domain
+  const groupedBacklinks = useMemo(() => {
+    const groups: Record<string, Backlink[]> = {};
+    backlinks.forEach((backlink) => {
+      const domain = backlink.sourceDomain;
+      if (!groups[domain]) {
+        groups[domain] = [];
+      }
+      groups[domain].push(backlink);
+    });
+    // Sort by count (most backlinks first), then by highest DR
+    return Object.entries(groups)
+      .map(([domain, links]) => ({
+        domain,
+        backlinks: links,
+        count: links.length,
+        maxDomainRating: Math.max(...links.map((l) => l.domainRating)),
+        hasActive: links.some((l) => l.status === "ACTIVE"),
+        hasToxic: links.some((l) => l.isToxic),
+      }))
+      .sort((a, b) => b.count - a.count || b.maxDomainRating - a.maxDomainRating);
+  }, [backlinks]);
+
+  const toggleDomainExpanded = (domain: string) => {
+    setExpandedDomains((prev) => {
+      const next = new Set(prev);
+      if (next.has(domain)) {
+        next.delete(domain);
+      } else {
+        next.add(domain);
+      }
+      return next;
+    });
+  };
 
   const fetchBacklinks = useCallback(async () => {
     try {
@@ -447,42 +483,103 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </Card>
           </div>
 
-          {/* Recent Backlinks */}
+          {/* Recent Backlinks - Grouped by Domain */}
           <Card>
             <CardHeader>
               <CardTitle>Recent Backlinks</CardTitle>
-              <CardDescription>Latest discovered backlinks</CardDescription>
+              <CardDescription>
+                {groupedBacklinks.length} referring domains ({backlinks.length} total backlinks)
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {backlinks.slice(0, 5).map((backlink) => (
-                  <div
-                    key={backlink.id}
-                    className="flex items-center justify-between p-4 border rounded-lg"
-                  >
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="font-medium">{backlink.sourceDomain}</span>
-                        <Badge className={getStatusColor(backlink.status)}>{backlink.status}</Badge>
-                        {backlink.isToxic && (
-                          <Badge variant="destructive">
-                            <AlertTriangle className="h-3 w-3 mr-1" />
-                            Toxic
-                          </Badge>
-                        )}
+                {groupedBacklinks.slice(0, 8).map((group) => {
+                  const isExpanded = expandedDomains.has(group.domain);
+                  const primaryBacklink = group.backlinks[0];
+                  return (
+                    <div key={group.domain} className="border rounded-lg overflow-hidden">
+                      <div
+                        className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+                        onClick={() => group.count > 1 && toggleDomainExpanded(group.domain)}
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-medium text-blue-600">{group.domain}</span>
+                            {group.count > 1 && (
+                              <Badge variant="secondary" className="text-xs">
+                                {group.count} backlinks
+                              </Badge>
+                            )}
+                            {group.hasActive && (
+                              <Badge className={getStatusColor("ACTIVE")}>ACTIVE</Badge>
+                            )}
+                            {group.hasToxic && (
+                              <Badge variant="destructive">
+                                <AlertTriangle className="h-3 w-3 mr-1" />
+                                Toxic
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground mb-1 truncate max-w-md">
+                            "{primaryBacklink.anchorText}"
+                          </p>
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                            <span>DR: {group.maxDomainRating}</span>
+                            <span>{primaryBacklink.linkType}</span>
+                            <span>
+                              Last seen: {new Date(primaryBacklink.lastSeen).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {group.count > 1 && (
+                            <span className="text-xs text-muted-foreground">
+                              {isExpanded ? "▼" : "▶"}
+                            </span>
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(primaryBacklink.sourceUrl, "_blank");
+                            }}
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-1">"{backlink.anchorText}"</p>
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                        <span>DR: {backlink.domainRating}</span>
-                        <span>{backlink.linkType}</span>
-                        <span>Last seen: {new Date(backlink.lastSeen).toLocaleDateString()}</span>
-                      </div>
+                      {isExpanded && group.count > 1 && (
+                        <div className="border-t bg-muted/30 divide-y">
+                          {group.backlinks.map((backlink) => (
+                            <div
+                              key={backlink.id}
+                              className="flex items-center justify-between p-3 pl-8"
+                            >
+                              <div className="flex-1">
+                                <p className="text-sm text-muted-foreground truncate max-w-sm">
+                                  "{backlink.anchorText}"
+                                </p>
+                                <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
+                                  <span>DR: {backlink.domainRating}</span>
+                                  <span>PR: {backlink.pageRating}</span>
+                                  <span>{backlink.linkType}</span>
+                                </div>
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => window.open(backlink.sourceUrl, "_blank")}
+                              >
+                                <ExternalLink className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <Button variant="ghost" size="sm">
-                      <ExternalLink className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
@@ -564,72 +661,140 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </CardContent>
           </Card>
 
-          {/* Backlinks Table */}
+          {/* Backlinks Table - Grouped by Domain */}
           <Card>
             <CardHeader>
-              <CardTitle>Backlinks ({stats?.total || 0})</CardTitle>
+              <CardTitle>
+                {groupedBacklinks.length} Referring Domains ({stats?.total || 0} backlinks)
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {backlinks.map((backlink) => (
-                  <div key={backlink.id} className="border rounded-lg p-4">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="font-medium text-blue-600">{backlink.sourceDomain}</span>
-                          <Badge className={getStatusColor(backlink.status)}>
-                            {backlink.status}
-                          </Badge>
-                          <Badge className={getLinkStrengthColor(backlink.linkStrength)}>
-                            {backlink.linkStrength}
-                          </Badge>
-                          {backlink.isToxic && (
-                            <Badge variant="destructive">
-                              <AlertTriangle className="h-3 w-3 mr-1" />
-                              Toxic ({Math.round(backlink.toxicScore)}%)
+                {groupedBacklinks.map((group) => {
+                  const isExpanded = expandedDomains.has(group.domain);
+                  const primaryBacklink = group.backlinks[0];
+                  return (
+                    <div key={group.domain} className="border rounded-lg overflow-hidden">
+                      {/* Domain Header */}
+                      <div
+                        className={`flex items-start justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors ${
+                          isExpanded ? "bg-muted/30" : ""
+                        }`}
+                        onClick={() => group.count > 1 && toggleDomainExpanded(group.domain)}
+                      >
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
+                            <span className="font-medium text-blue-600">{group.domain}</span>
+                            {group.count > 1 && (
+                              <Badge variant="secondary">
+                                {group.count} backlinks {isExpanded ? "▼" : "▶"}
+                              </Badge>
+                            )}
+                            {group.hasActive && (
+                              <Badge className={getStatusColor("ACTIVE")}>ACTIVE</Badge>
+                            )}
+                            <Badge className={getLinkStrengthColor(primaryBacklink.linkStrength)}>
+                              {primaryBacklink.linkStrength}
                             </Badge>
-                          )}
+                            {group.hasToxic && (
+                              <Badge variant="destructive">
+                                <AlertTriangle className="h-3 w-3 mr-1" />
+                                Toxic
+                              </Badge>
+                            )}
+                          </div>
+
+                          <p className="text-sm mb-2">
+                            <span className="font-medium">Anchor:</span> "{primaryBacklink.anchorText}"
+                          </p>
+
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div>
+                              <span className="text-muted-foreground">Domain Rating:</span>
+                              <span className="ml-1 font-medium">{group.maxDomainRating}</span>
+                            </div>
+                            <div>
+                              <span className="text-muted-foreground">Page Rating:</span>
+                              <span className="ml-1 font-medium">{primaryBacklink.pageRating}</span>
+                            </div>
+                            <div>
+                              <span className="text-muted-foreground">Traffic:</span>
+                              <span className="ml-1 font-medium">
+                                {primaryBacklink.traffic?.toLocaleString() || "N/A"}
+                              </span>
+                            </div>
+                            <div>
+                              <span className="text-muted-foreground">Type:</span>
+                              <span className="ml-1 font-medium">{primaryBacklink.linkType}</span>
+                            </div>
+                          </div>
+
+                          <div className="mt-2 text-xs text-muted-foreground">
+                            First seen: {new Date(primaryBacklink.firstSeen).toLocaleDateString()} •
+                            Last seen: {new Date(primaryBacklink.lastSeen).toLocaleDateString()}
+                          </div>
                         </div>
 
-                        <p className="text-sm mb-2">
-                          <span className="font-medium">Anchor:</span> "{backlink.anchorText}"
-                        </p>
-
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                          <div>
-                            <span className="text-muted-foreground">Domain Rating:</span>
-                            <span className="ml-1 font-medium">{backlink.domainRating}</span>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">Page Rating:</span>
-                            <span className="ml-1 font-medium">{backlink.pageRating}</span>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">Traffic:</span>
-                            <span className="ml-1 font-medium">
-                              {backlink.traffic?.toLocaleString() || "N/A"}
-                            </span>
-                          </div>
-                          <div>
-                            <span className="text-muted-foreground">Type:</span>
-                            <span className="ml-1 font-medium">{backlink.linkType}</span>
-                          </div>
-                        </div>
-
-                        <div className="mt-2 text-xs text-muted-foreground">
-                          First seen: {new Date(backlink.firstSeen).toLocaleDateString()} • Last
-                          seen: {new Date(backlink.lastSeen).toLocaleDateString()}
+                        <div className="flex gap-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(primaryBacklink.sourceUrl, "_blank");
+                            }}
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </Button>
                         </div>
                       </div>
 
-                      <div className="flex gap-2">
-                        <Button variant="ghost" size="sm">
-                          <ExternalLink className="h-4 w-4" />
-                        </Button>
-                      </div>
+                      {/* Expanded backlinks from same domain */}
+                      {isExpanded && group.count > 1 && (
+                        <div className="border-t bg-muted/20 divide-y">
+                          {group.backlinks.map((backlink, idx) => (
+                            <div
+                              key={backlink.id}
+                              className="flex items-start justify-between p-4 pl-8"
+                            >
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2 mb-1">
+                                  <span className="text-xs text-muted-foreground">#{idx + 1}</span>
+                                  <Badge className={getStatusColor(backlink.status)} variant="outline">
+                                    {backlink.status}
+                                  </Badge>
+                                  {backlink.isToxic && (
+                                    <Badge variant="destructive" className="text-xs">
+                                      Toxic ({Math.round(backlink.toxicScore)}%)
+                                    </Badge>
+                                  )}
+                                </div>
+                                <p className="text-sm mb-1">
+                                  <span className="font-medium">Anchor:</span> "{backlink.anchorText}"
+                                </p>
+                                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                  <span>DR: {backlink.domainRating}</span>
+                                  <span>PR: {backlink.pageRating}</span>
+                                  <span>{backlink.linkType}</span>
+                                  <span>
+                                    {new Date(backlink.lastSeen).toLocaleDateString()}
+                                  </span>
+                                </div>
+                              </div>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => window.open(backlink.sourceUrl, "_blank")}
+                              >
+                                <ExternalLink className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               {/* Pagination */}
