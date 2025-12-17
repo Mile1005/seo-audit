@@ -17,8 +17,6 @@ import {
   UserCircleIcon,
   Bars3Icon,
   XMarkIcon,
-  SunIcon,
-  MoonIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +36,6 @@ const navigation = [
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
@@ -62,7 +59,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   }, [userMenuOpen]);
 
   return (
-    <div className={`min-h-screen bg-slate-50 ${darkMode ? "dark" : ""}`}>
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
@@ -199,14 +196,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
             {/* Right side */}
             <div className="flex items-center space-x-4">
-              {/* Dark mode toggle */}
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                {darkMode ? <SunIcon className="w-5 h-5" /> : <MoonIcon className="w-5 h-5" />}
-              </button>
-
               {/* Notifications */}
               <button className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
                 <BellIcon className="w-5 h-5" />

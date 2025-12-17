@@ -13,6 +13,7 @@ import { lightPageAudit } from "../../../../../lib/server/light-page-audit";
 import { performComprehensiveAudit } from "../../../../../lib/comprehensive-audit";
 import { prisma } from "../../../../../lib/prisma";
 import * as cheerio from "cheerio";
+import { createUserNotification } from "@/lib/server/notifications";
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -307,6 +308,18 @@ export async function POST(req: NextRequest) {
         completeCrawl(id);
         if (userId) incrementUsage(userId, "SITE_CRAWL").catch(() => {});
 
+        await createUserNotification({
+          userId,
+          type: "REPORT_READY",
+          title: "Crawl completed",
+          message: `Site crawl finished for ${new URL(url).hostname}.`,
+          data: {
+            crawlId: id,
+            projectId: projectId || null,
+            href: "/dashboard/page-crawler",
+          },
+        });
+
         // Finalize DB record
         if (crawlDbId) {
           try {
@@ -367,6 +380,25 @@ export async function POST(req: NextRequest) {
       } catch (err: any) {
         console.error(`[dashboard-crawl] Crawl job ${id} failed:`, err);
         failCrawl(id, err.message || "crawl failed");
+
+        await createUserNotification({
+          userId,
+          type: "SYSTEM_ALERT",
+          title: "Crawl failed",
+          message: `Site crawl failed for ${(() => {
+            try {
+              return new URL(url).hostname;
+            } catch {
+              return url;
+            }
+          })()}: ${err?.message || "Unknown error"}`,
+          data: {
+            crawlId: id,
+            projectId: projectId || null,
+            href: "/dashboard/page-crawler",
+          },
+        });
+
         if (crawlDbId) {
           try {
             await (prisma as any).crawl.update({

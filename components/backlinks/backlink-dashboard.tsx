@@ -17,6 +17,9 @@ import { Progress } from "@/components/ui/progress";
 import {
   ExternalLink,
   AlertTriangle,
+  ChevronDown,
+  ChevronRight,
+  Lock,
   TrendingUp,
   TrendingDown,
   Shield,
@@ -80,21 +83,40 @@ interface BacklinkDashboardProps {
   projectId: string;
 }
 
+type BacklinkFilter = {
+  status: string;
+  linkType: string;
+  toxic: string;
+  domain: string;
+  minDomainRating: string;
+  maxDomainRating: string;
+};
+
+const DEFAULT_BACKLINK_FILTER: BacklinkFilter = {
+  status: "all",
+  linkType: "all",
+  toxic: "all",
+  domain: "",
+  minDomainRating: "",
+  maxDomainRating: "",
+};
+
 export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps) {
   const [backlinks, setBacklinks] = useState<Backlink[]>([]);
   const [stats, setStats] = useState<BacklinkStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState({
-    status: "all",
-    linkType: "all",
-    toxic: "all",
-    domain: "",
-    minDomainRating: "",
-    maxDomainRating: "",
-  });
+  const [filter, setFilter] = useState({ ...DEFAULT_BACKLINK_FILTER });
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [expandedDomains, setExpandedDomains] = useState<Set<string>>(new Set());
+  const [disavowDomains, setDisavowDomains] = useState<Set<string>>(new Set());
+  const [safeDomains, setSafeDomains] = useState<Set<string>>(new Set());
+  const [showSafeToxic, setShowSafeToxic] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  const resetFilters = useCallback(() => {
+    setFilter({ ...DEFAULT_BACKLINK_FILTER });
+  }, []);
 
   // Group backlinks by source domain
   const groupedBacklinks = useMemo(() => {
@@ -146,6 +168,81 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
       return "";
     }
   }, [backlinks]);
+
+  const normalizedDomain = useCallback((domain: string) => {
+    return (domain || "").trim().toLowerCase();
+  }, []);
+
+  const toxicBacklinks = useMemo(() => {
+    return backlinks.filter((b) => b.isToxic && !safeDomains.has(normalizedDomain(b.sourceDomain)));
+  }, [backlinks, normalizedDomain, safeDomains]);
+
+  const safeToxicBacklinks = useMemo(() => {
+    return backlinks.filter((b) => b.isToxic && safeDomains.has(normalizedDomain(b.sourceDomain)));
+  }, [backlinks, normalizedDomain, safeDomains]);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem(`backlinks:${projectId}:toxicSelections`);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as { safe?: string[]; disavow?: string[] };
+      if (Array.isArray(parsed.safe)) setSafeDomains(new Set(parsed.safe));
+      if (Array.isArray(parsed.disavow)) setDisavowDomains(new Set(parsed.disavow));
+    } catch {
+      // ignore
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId]);
+
+  useEffect(() => {
+    try {
+      const payload = JSON.stringify({
+        safe: Array.from(safeDomains),
+        disavow: Array.from(disavowDomains),
+      });
+      window.localStorage.setItem(`backlinks:${projectId}:toxicSelections`, payload);
+    } catch {
+      // ignore
+    }
+  }, [disavowDomains, projectId, safeDomains]);
+
+  const toggleSafeDomain = useCallback(
+    (domain: string) => {
+      const d = normalizedDomain(domain);
+      if (!d) return;
+      setSafeDomains((prev) => {
+        const next = new Set(prev);
+        if (next.has(d)) next.delete(d);
+        else next.add(d);
+        return next;
+      });
+      setDisavowDomains((prev) => {
+        const next = new Set(prev);
+        next.delete(d);
+        return next;
+      });
+    },
+    [normalizedDomain]
+  );
+
+  const toggleDisavowDomain = useCallback(
+    (domain: string) => {
+      const d = normalizedDomain(domain);
+      if (!d) return;
+      setDisavowDomains((prev) => {
+        const next = new Set(prev);
+        if (next.has(d)) next.delete(d);
+        else next.add(d);
+        return next;
+      });
+      setSafeDomains((prev) => {
+        const next = new Set(prev);
+        next.delete(d);
+        return next;
+      });
+    },
+    [normalizedDomain]
+  );
 
   const brandToken = useMemo(() => {
     if (!targetDomain) return "";
@@ -300,6 +397,33 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
     };
   }, [backlinks]);
 
+  const velocityDisplay = useMemo(() => {
+    const totalDiscovered = stats?.total ?? backlinks.length;
+
+    const weeklyIsComputed = linkVelocity.thisWeek > 0;
+    const monthlyIsComputed = linkVelocity.thisMonth > 0;
+
+    return {
+      weeklyCount: weeklyIsComputed ? linkVelocity.thisWeek : totalDiscovered,
+      weeklyLabel: weeklyIsComputed ? "New backlinks this week" : "Backlinks found (latest check)",
+      weeklyDeltaText:
+        weeklyIsComputed
+          ? linkVelocity.weekDeltaPct === null
+            ? "No prior-week baseline"
+            : `${linkVelocity.weekDeltaPct > 0 ? "+" : ""}${linkVelocity.weekDeltaPct}% from last week`
+          : "Based on latest check",
+
+      monthlyCount: monthlyIsComputed ? linkVelocity.thisMonth : totalDiscovered,
+      monthlyLabel: monthlyIsComputed ? "New backlinks this month" : "Backlinks found (latest check)",
+      monthlyDeltaText:
+        monthlyIsComputed
+          ? linkVelocity.monthDeltaPct === null
+            ? "No prior-month baseline"
+            : `${linkVelocity.monthDeltaPct > 0 ? "+" : ""}${linkVelocity.monthDeltaPct}% vs last month`
+          : "Based on latest check",
+    };
+  }, [stats?.total, backlinks.length, linkVelocity]);
+
   const fetchBacklinks = useCallback(async () => {
     try {
       setLoading(true);
@@ -324,25 +448,6 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
       setLoading(false);
     }
   }, [projectId, currentPage, filter]);
-
-  const generateMockData = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/backlinks/mock-data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ projectId, count: 100 }),
-      });
-
-      if (response.ok) {
-        fetchBacklinks();
-      } else {
-        console.error("Failed to generate mock data");
-      }
-    } catch (error) {
-      console.error("Error generating mock data:", error);
-    }
-  };
 
   const collectRealBacklinks = async () => {
     try {
@@ -394,32 +499,79 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
   const getStatusColor = (status: string) => {
     switch (status) {
       case "ACTIVE":
-        return "bg-green-100 text-green-800";
+        return "bg-emerald-600 text-white";
       case "LOST":
-        return "bg-red-100 text-red-800";
+        return "bg-red-600 text-white";
       case "BROKEN":
-        return "bg-orange-100 text-orange-800";
+        return "bg-orange-600 text-white";
       case "REDIRECT":
-        return "bg-blue-100 text-blue-800";
+        return "bg-blue-600 text-white";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground";
     }
   };
 
   const getLinkStrengthColor = (strength: string) => {
     switch (strength) {
       case "VERY_STRONG":
-        return "bg-emerald-100 text-emerald-800";
+        return "bg-emerald-100 text-emerald-900";
       case "STRONG":
-        return "bg-green-100 text-green-800";
+        return "bg-green-100 text-green-900";
       case "NORMAL":
-        return "bg-yellow-100 text-yellow-800";
+        return "bg-yellow-100 text-yellow-900";
       case "WEAK":
-        return "bg-red-100 text-red-800";
+        return "bg-red-100 text-red-900";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-muted text-foreground";
     }
   };
+
+  const handleGenerateDisavow = useCallback(() => {
+    const selected = Array.from(disavowDomains);
+    const allToxicDomains = Array.from(
+      new Set(toxicBacklinks.map((b) => normalizedDomain(b.sourceDomain)).filter(Boolean))
+    );
+    const domains = (selected.length > 0 ? selected : allToxicDomains).sort();
+
+    if (domains.length === 0) {
+      alert("No toxic backlinks found to include in a disavow file.");
+      return;
+    }
+
+    const safeBase = (targetDomain || projectId)
+      .toLowerCase()
+      .replace(/[^a-z0-9.-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+    const date = new Date().toISOString().slice(0, 10);
+    const filename = `disavow-${safeBase || "project"}-${date}.txt`;
+
+    const content =
+      [
+        `# Disavow file generated by SEO Audit`,
+        `# Project: ${projectId}`,
+        `# Target: ${targetDomain || "(unknown)"}`,
+        `# Generated: ${new Date().toISOString()}`,
+        `# Domains: ${domains.length}`,
+        `# Selection: ${selected.length > 0 ? "manual" : "all-toxic"}`,
+        "#",
+        "# Upload this file to Google Search Console > Links > Disavow Links.",
+        "# Use at your own risk. Disavowing can affect rankings.",
+        "",
+        ...domains.map((d) => `domain:${d}`),
+        "",
+      ].join("\n");
+
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }, [disavowDomains, normalizedDomain, projectId, targetDomain, toxicBacklinks]);
 
   const domainRatingDistribution = stats
     ? [
@@ -458,6 +610,26 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
+  const chartTooltipProps = {
+    wrapperStyle: { outline: "none" },
+    contentStyle: {
+      background: "hsl(var(--background))",
+      border: "1px solid hsl(var(--border))",
+      borderRadius: "12px",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.35)",
+    },
+    labelStyle: {
+      color: "hsl(var(--muted-foreground))",
+      fontSize: "12px",
+      marginBottom: "6px",
+    },
+    itemStyle: {
+      color: "hsl(var(--foreground))",
+      fontSize: "12px",
+    },
+    cursor: { fill: "hsl(var(--muted))", fillOpacity: 0.12 },
+  } as const;
+
   if (loading && backlinks.length === 0) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -485,15 +657,6 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           >
             <Target className="h-4 w-4 mr-2" />
             Collect Real Backlinks
-          </Button>
-          <Button
-            onClick={generateMockData}
-            variant="outline"
-            size="sm"
-            className="whitespace-nowrap"
-          >
-            <RefreshCw className="h-4 w-4 mr-2" />
-            Generate Mock Data
           </Button>
           <Button
             onClick={fetchBacklinks}
@@ -576,36 +739,57 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
 
       <Tabs defaultValue="overview" className="space-y-4">
         <div className="w-full overflow-x-auto pb-2">
-          <TabsList className="inline-flex min-w-full sm:min-w-0">
-            <TabsTrigger value="overview" className="whitespace-nowrap flex-shrink-0">
+          <TabsList className="inline-flex min-w-full sm:min-w-0 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+            <TabsTrigger
+              value="overview"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Overview
             </TabsTrigger>
-            <TabsTrigger value="backlinks" className="whitespace-nowrap flex-shrink-0">
+            <TabsTrigger
+              value="backlinks"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Backlinks
             </TabsTrigger>
-            <TabsTrigger value="anchors" className="whitespace-nowrap flex-shrink-0">
+            <TabsTrigger
+              value="anchors"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Anchor Analysis
             </TabsTrigger>
-            <TabsTrigger value="velocity" className="whitespace-nowrap flex-shrink-0">
+            <TabsTrigger
+              value="velocity"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Link Velocity
             </TabsTrigger>
-            <TabsTrigger value="domains" className="whitespace-nowrap flex-shrink-0">
+            <TabsTrigger
+              value="domains"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Referring Domains
             </TabsTrigger>
-            <TabsTrigger value="toxic" className="whitespace-nowrap flex-shrink-0">
+            <TabsTrigger
+              value="toxic"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Toxic Analysis
             </TabsTrigger>
-            <TabsTrigger value="prospects" className="whitespace-nowrap flex-shrink-0">
+            <TabsTrigger
+              value="prospects"
+              className="whitespace-nowrap flex-shrink-0 data-[state=active]:bg-white dark:data-[state=active]:bg-slate-700"
+            >
               Link Prospects
             </TabsTrigger>
           </TabsList>
         </div>
 
         <TabsContent value="overview" className="space-y-4">
-          <Card>
+          <Card className="border-amber-500/30 bg-amber-500/5">
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
-                <AlertTriangle className="h-5 w-5 text-muted-foreground mt-0.5" />
+                <AlertTriangle className="h-5 w-5 text-amber-400 mt-0.5" />
                 <div>
                   <p className="font-medium">Free plan shows partial backlink data</p>
                   <p className="text-sm text-muted-foreground mt-1">
@@ -630,7 +814,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="range" />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip {...chartTooltipProps} />
                     <Bar dataKey="count" fill="#8884d8" />
                   </BarChart>
                 </ResponsiveContainer>
@@ -660,7 +844,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip />
+                    <Tooltip {...chartTooltipProps} />
                   </PieChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -683,12 +867,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   return (
                     <div key={group.domain} className="border rounded-lg overflow-hidden">
                       <div
-                        className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
+                        className="flex items-start justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
                         onClick={() => group.count > 1 && toggleDomainExpanded(group.domain)}
                       >
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="font-medium text-blue-600">{group.domain}</span>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
+                            <span className="font-semibold text-foreground">{group.domain}</span>
                             {group.count > 1 && (
                               <Badge variant="secondary" className="text-xs">
                                 {group.count} backlinks
@@ -704,22 +888,34 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                               </Badge>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground mb-1 truncate max-w-md">
-                            "{primaryBacklink.anchorText}"
+                          <a
+                            href={primaryBacklink.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-sm font-medium text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-muted-foreground block truncate"
+                            onClick={(e) => e.stopPropagation()}
+                            title={primaryBacklink.sourceUrl}
+                          >
+                            {primaryBacklink.sourceUrl}
+                          </a>
+                          <p className="text-sm text-muted-foreground mt-1 truncate max-w-md">
+                            Anchor: {primaryBacklink.anchorText}
                           </p>
-                          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                            <span>DR: {group.maxDomainRating}</span>
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2">
+                            <span>DR {group.maxDomainRating}</span>
                             <span>{primaryBacklink.linkType}</span>
-                            <span>
-                              Last seen: {new Date(primaryBacklink.lastSeen).toLocaleDateString()}
-                            </span>
+                            <span>{new Date(primaryBacklink.lastSeen).toLocaleDateString()}</span>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           {group.count > 1 && (
-                            <span className="text-xs text-muted-foreground">
-                              {isExpanded ? "▼" : "▶"}
-                            </span>
+                            <div className="text-muted-foreground">
+                              {isExpanded ? (
+                                <ChevronDown className="h-4 w-4" />
+                              ) : (
+                                <ChevronRight className="h-4 w-4" />
+                              )}
+                            </div>
                           )}
                           <Button
                             variant="ghost"
@@ -729,7 +925,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                               window.open(primaryBacklink.sourceUrl, "_blank");
                             }}
                           >
-                            <ExternalLink className="h-4 w-4" />
+                            <ExternalLink className="h-4 w-4 text-sky-400" />
                           </Button>
                         </div>
                       </div>
@@ -738,15 +934,24 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                           {group.backlinks.map((backlink) => (
                             <div
                               key={backlink.id}
-                              className="flex items-center justify-between p-3 pl-8"
+                              className="flex items-start justify-between p-3 pl-8"
                             >
-                              <div className="flex-1">
-                                <p className="text-sm text-muted-foreground truncate max-w-sm">
-                                  "{backlink.anchorText}"
+                              <div className="flex-1 min-w-0">
+                                <a
+                                  href={backlink.sourceUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-sm font-medium text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-muted-foreground block truncate"
+                                  title={backlink.sourceUrl}
+                                >
+                                  {backlink.sourceUrl}
+                                </a>
+                                <p className="text-sm text-muted-foreground mt-1 truncate max-w-sm">
+                                  Anchor: {backlink.anchorText}
                                 </p>
-                                <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
-                                  <span>DR: {backlink.domainRating}</span>
-                                  <span>PR: {backlink.pageRating}</span>
+                                <div className="flex items-center gap-3 text-xs text-muted-foreground mt-2">
+                                  <span>DR {backlink.domainRating}</span>
+                                  <span>PR {backlink.pageRating}</span>
                                   <span>{backlink.linkType}</span>
                                 </div>
                               </div>
@@ -773,7 +978,113 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           {/* Filters */}
           <Card>
             <CardContent className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+              {/* Mobile: compact filter toggle (defaults show everything) */}
+              <div className="md:hidden space-y-3">
+                <div className="flex items-center gap-2">
+                  <Input
+                    placeholder="Search domain..."
+                    value={filter.domain}
+                    onChange={(e) => setFilter((prev) => ({ ...prev, domain: e.target.value }))}
+                  />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="whitespace-nowrap"
+                    onClick={() => setMobileFiltersOpen((v) => !v)}
+                  >
+                    <Filter className="h-4 w-4 mr-2" />
+                    Filters
+                  </Button>
+                </div>
+
+                {mobileFiltersOpen && (
+                  <div className="rounded-lg border bg-muted/20 p-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      <Select
+                        value={filter.status}
+                        onValueChange={(value: string) =>
+                          setFilter((prev) => ({ ...prev, status: value }))
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Status</SelectItem>
+                          <SelectItem value="ACTIVE">Active</SelectItem>
+                          <SelectItem value="LOST">Lost</SelectItem>
+                          <SelectItem value="BROKEN">Broken</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <Select
+                        value={filter.linkType}
+                        onValueChange={(value: string) =>
+                          setFilter((prev) => ({ ...prev, linkType: value }))
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Types</SelectItem>
+                          <SelectItem value="FOLLOW">Follow</SelectItem>
+                          <SelectItem value="NOFOLLOW">NoFollow</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <Select
+                        value={filter.toxic}
+                        onValueChange={(value: string) =>
+                          setFilter((prev) => ({ ...prev, toxic: value }))
+                        }
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Toxic" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="all">All Links</SelectItem>
+                          <SelectItem value="false">Clean</SelectItem>
+                          <SelectItem value="true">Toxic</SelectItem>
+                        </SelectContent>
+                      </Select>
+
+                      <Input
+                        type="number"
+                        placeholder="Min DR"
+                        value={filter.minDomainRating}
+                        onChange={(e) =>
+                          setFilter((prev) => ({ ...prev, minDomainRating: e.target.value }))
+                        }
+                      />
+                      <Input
+                        type="number"
+                        placeholder="Max DR"
+                        value={filter.maxDomainRating}
+                        onChange={(e) =>
+                          setFilter((prev) => ({ ...prev, maxDomainRating: e.target.value }))
+                        }
+                      />
+                    </div>
+
+                    <div className="mt-3 flex items-center justify-between">
+                      <Button variant="ghost" size="sm" onClick={resetFilters}>
+                        Clear
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setMobileFiltersOpen(false)}
+                      >
+                        Done
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Desktop */}
+              <div className="hidden md:grid grid-cols-6 gap-4">
                 <Input
                   placeholder="Search domain..."
                   value={filter.domain}
@@ -866,12 +1177,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                         }`}
                         onClick={() => group.count > 1 && toggleDomainExpanded(group.domain)}
                       >
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-2 flex-wrap">
-                            <span className="font-medium text-blue-600">{group.domain}</span>
+                            <span className="font-semibold text-foreground">{group.domain}</span>
                             {group.count > 1 && (
-                              <Badge variant="secondary">
-                                {group.count} backlinks {isExpanded ? "▼" : "▶"}
+                              <Badge variant="secondary" className="text-xs">
+                                {group.count} backlinks
                               </Badge>
                             )}
                             {group.hasActive && (
@@ -886,11 +1197,32 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                                 Toxic
                               </Badge>
                             )}
+                            {group.count > 1 && (
+                              <div className="ml-1 text-muted-foreground">
+                                {isExpanded ? (
+                                  <ChevronDown className="h-4 w-4" />
+                                ) : (
+                                  <ChevronRight className="h-4 w-4" />
+                                )}
+                              </div>
+                            )}
                           </div>
 
-                          <p className="text-sm mb-2">
-                            <span className="font-medium">Anchor:</span> "{primaryBacklink.anchorText}"
-                          </p>
+                          <div className="space-y-2">
+                            <a
+                              href={primaryBacklink.sourceUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-sm font-medium text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-muted-foreground block truncate"
+                              onClick={(e) => e.stopPropagation()}
+                              title={primaryBacklink.sourceUrl}
+                            >
+                              {primaryBacklink.sourceUrl}
+                            </a>
+                            <p className="text-sm text-muted-foreground">
+                              Anchor: {primaryBacklink.anchorText}
+                            </p>
+                          </div>
 
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div>
@@ -902,9 +1234,11 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                               <span className="ml-1 font-medium">{primaryBacklink.pageRating}</span>
                             </div>
                             <div>
-                              <span className="text-muted-foreground">Traffic:</span>
-                              <span className="ml-1 font-medium">
-                                {primaryBacklink.traffic?.toLocaleString() || "N/A"}
+                              <span className="text-muted-foreground">Traffic Analysis:</span>
+                              <span className="ml-1">
+                                <Badge variant="outline" className="text-xs">
+                                  Upgrade Pro
+                                </Badge>
                               </span>
                             </div>
                             <div>
@@ -913,9 +1247,14 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                             </div>
                           </div>
 
-                          <div className="mt-2 text-xs text-muted-foreground">
-                            First seen: {new Date(primaryBacklink.firstSeen).toLocaleDateString()} •
-                            Last seen: {new Date(primaryBacklink.lastSeen).toLocaleDateString()}
+                          <div className="mt-2 text-xs text-muted-foreground flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                            <span>
+                              First seen: {new Date(primaryBacklink.firstSeen).toLocaleDateString()}
+                            </span>
+                            <span className="hidden sm:inline">•</span>
+                            <span>
+                              Last seen: {new Date(primaryBacklink.lastSeen).toLocaleDateString()}
+                            </span>
                           </div>
                         </div>
 
@@ -928,7 +1267,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                               window.open(primaryBacklink.sourceUrl, "_blank");
                             }}
                           >
-                            <ExternalLink className="h-4 w-4" />
+                            <ExternalLink className="h-4 w-4 text-sky-400" />
                           </Button>
                         </div>
                       </div>
@@ -936,33 +1275,37 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                       {/* Expanded backlinks from same domain */}
                       {isExpanded && group.count > 1 && (
                         <div className="border-t bg-muted/20 divide-y">
-                          {group.backlinks.map((backlink, idx) => (
+                          {group.backlinks.map((backlink) => (
                             <div
                               key={backlink.id}
                               className="flex items-start justify-between p-4 pl-8"
                             >
-                              <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <span className="text-xs text-muted-foreground">#{idx + 1}</span>
-                                  <Badge className={getStatusColor(backlink.status)} variant="outline">
-                                    {backlink.status}
-                                  </Badge>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                                  <Badge className={getStatusColor(backlink.status)}>{backlink.status}</Badge>
                                   {backlink.isToxic && (
                                     <Badge variant="destructive" className="text-xs">
                                       Toxic ({Math.round(backlink.toxicScore)}%)
                                     </Badge>
                                   )}
                                 </div>
-                                <p className="text-sm mb-1">
-                                  <span className="font-medium">Anchor:</span> "{backlink.anchorText}"
+                                <a
+                                  href={backlink.sourceUrl}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-sm font-medium text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-muted-foreground block truncate"
+                                  title={backlink.sourceUrl}
+                                >
+                                  {backlink.sourceUrl}
+                                </a>
+                                <p className="text-sm text-muted-foreground mt-1">
+                                  Anchor: {backlink.anchorText}
                                 </p>
-                                <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                                  <span>DR: {backlink.domainRating}</span>
-                                  <span>PR: {backlink.pageRating}</span>
+                                <div className="flex items-center gap-4 text-xs text-muted-foreground mt-2">
+                                  <span>DR {backlink.domainRating}</span>
+                                  <span>PR {backlink.pageRating}</span>
                                   <span>{backlink.linkType}</span>
-                                  <span>
-                                    {new Date(backlink.lastSeen).toLocaleDateString()}
-                                  </span>
+                                  <span>{new Date(backlink.lastSeen).toLocaleDateString()}</span>
                                 </div>
                               </div>
                               <Button
@@ -1029,11 +1372,11 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Exact Match</span>
-                      <span className="font-medium text-orange-600">
+                      <span className="font-medium text-amber-400">
                         {anchorInsights.percentages.exact}%
                       </span>
                     </div>
-                    <Progress value={anchorInsights.percentages.exact} className="h-2 bg-orange-100" />
+                    <Progress value={anchorInsights.percentages.exact} className="h-2" />
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
@@ -1057,12 +1400,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     <Progress value={anchorInsights.percentages.naked} className="h-2" />
                   </div>
                 </div>
-                <div className="mt-6 p-4 bg-green-50 rounded-lg">
+                <div className="mt-6 p-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10">
                   <div className="flex items-start gap-2">
-                    <Shield className="h-5 w-5 text-green-600 mt-0.5" />
+                    <Shield className="h-5 w-5 text-emerald-400 mt-0.5" />
                     <div>
-                      <p className="font-medium text-green-900">Natural Profile Detected</p>
-                      <p className="text-sm text-green-700 mt-1">
+                      <p className="font-medium text-emerald-300">Natural Profile Detected</p>
+                      <p className="text-sm text-muted-foreground mt-1">
                         This analysis is calculated from your discovered backlinks.
                       </p>
                     </div>
@@ -1086,7 +1429,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                     >
                       <div className="flex-1">
                         <p className="font-medium text-sm">{anchor.text}</p>
-                        <p className="text-xs text-muted-foreground capitalize">{anchor.type}</p>
+                        <p className="text-xs text-muted-foreground capitalize">{anchor.category}</p>
                       </div>
                       <div className="text-right">
                         <p className="font-medium">{anchor.count}</p>
@@ -1108,29 +1451,29 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <div className="flex items-start gap-3 p-4 bg-green-50 rounded-lg">
-                  <div className="text-green-600">✅</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10">
+                  <div className="text-emerald-400">✅</div>
                   <div>
-                    <p className="font-medium text-green-900">Good branded anchor ratio</p>
-                    <p className="text-sm text-green-700">
+                    <p className="font-medium text-foreground">Good branded anchor ratio</p>
+                    <p className="text-sm text-muted-foreground">
                       45% branded anchors is within healthy range (40-60%)
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                  <div className="text-blue-600">ℹ️</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-sky-500/20 bg-sky-500/10">
+                  <div className="text-sky-400">ℹ️</div>
                   <div>
-                    <p className="font-medium text-blue-900">Monitor exact match percentage</p>
-                    <p className="text-sm text-blue-700">
+                    <p className="font-medium text-foreground">Monitor exact match percentage</p>
+                    <p className="text-sm text-muted-foreground">
                       Keep exact match below 20% to avoid over-optimization penalties
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-lg">
-                  <div className="text-purple-600">🎯</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-violet-500/20 bg-violet-500/10">
+                  <div className="text-violet-400">🎯</div>
                   <div>
-                    <p className="font-medium text-purple-900">Continue maintaining diversity</p>
-                    <p className="text-sm text-purple-700">
+                    <p className="font-medium text-foreground">Continue maintaining diversity</p>
+                    <p className="text-sm text-muted-foreground">
                       Your anchor text variety helps maintain a natural link profile
                     </p>
                   </div>
@@ -1147,14 +1490,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                 <CardTitle>Weekly Growth</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-green-600">+{linkVelocity.thisWeek}</div>
-                <p className="text-sm text-muted-foreground mt-1">New backlinks this week</p>
+                <div className="text-3xl font-bold text-green-600">+{velocityDisplay.weeklyCount}</div>
+                <p className="text-sm text-muted-foreground mt-1">{velocityDisplay.weeklyLabel}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <TrendingUp className="h-4 w-4 text-green-600" />
                   <span className="text-sm text-green-600">
-                    {linkVelocity.weekDeltaPct === null
-                      ? "No prior-week baseline"
-                      : `${linkVelocity.weekDeltaPct > 0 ? "+" : ""}${linkVelocity.weekDeltaPct}% from last week`}
+                    {velocityDisplay.weeklyDeltaText}
                   </span>
                 </div>
               </CardContent>
@@ -1165,14 +1506,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                 <CardTitle>Monthly Growth</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-3xl font-bold text-blue-600">+{linkVelocity.thisMonth}</div>
-                <p className="text-sm text-muted-foreground mt-1">New backlinks this month</p>
+                <div className="text-3xl font-bold text-blue-600">+{velocityDisplay.monthlyCount}</div>
+                <p className="text-sm text-muted-foreground mt-1">{velocityDisplay.monthlyLabel}</p>
                 <div className="flex items-center gap-2 mt-2">
                   <TrendingUp className="h-4 w-4 text-blue-600" />
                   <span className="text-sm text-blue-600">
-                    {linkVelocity.monthDeltaPct === null
-                      ? "No prior-month baseline"
-                      : `${linkVelocity.monthDeltaPct > 0 ? "+" : ""}${linkVelocity.monthDeltaPct}% vs last month`}
+                    {velocityDisplay.monthlyDeltaText}
                   </span>
                 </div>
               </CardContent>
@@ -1207,7 +1546,10 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="date" />
                   <YAxis />
-                  <Tooltip />
+                  <Tooltip
+                    {...chartTooltipProps}
+                    cursor={{ stroke: "hsl(var(--border))", strokeDasharray: "3 3" }}
+                  />
                   <Line type="monotone" dataKey="count" stroke="#8884d8" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
@@ -1221,29 +1563,29 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                <div className="flex items-start gap-3 p-4 bg-green-50 rounded-lg">
-                  <div className="text-green-600">✅</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10">
+                  <div className="text-emerald-400">✅</div>
                   <div>
-                    <p className="font-medium text-green-900">Natural growth pattern detected</p>
-                    <p className="text-sm text-green-700">
+                    <p className="font-medium text-foreground">Natural growth pattern detected</p>
+                    <p className="text-sm text-muted-foreground">
                       Your link acquisition rate is consistent and appears organic
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                  <div className="text-blue-600">📊</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-sky-500/20 bg-sky-500/10">
+                  <div className="text-sky-400">📊</div>
                   <div>
-                    <p className="font-medium text-blue-900">Average: 6-8 new backlinks per week</p>
-                    <p className="text-sm text-blue-700">
+                    <p className="font-medium text-foreground">Average: 6-8 new backlinks per week</p>
+                    <p className="text-sm text-muted-foreground">
                       This is a healthy acquisition rate for your domain size
                     </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-lg">
-                  <div className="text-purple-600">🎯</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-violet-500/20 bg-violet-500/10">
+                  <div className="text-violet-400">🎯</div>
                   <div>
-                    <p className="font-medium text-purple-900">No suspicious spikes detected</p>
-                    <p className="text-sm text-purple-700">
+                    <p className="font-medium text-foreground">No suspicious spikes detected</p>
+                    <p className="text-sm text-muted-foreground">
                       Your growth curve shows no signs of artificial link building
                     </p>
                   </div>
@@ -1275,10 +1617,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                           className="flex items-center justify-between p-4 cursor-pointer hover:bg-muted/50 transition-colors"
                           onClick={() => group.count > 1 && toggleDomainExpanded(group.domain)}
                         >
-                          <div className="flex-1">
+                          <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 flex-wrap">
-                              <span className="font-medium text-blue-600">{group.domain}</span>
-                              <Badge variant="secondary">{group.count} backlinks</Badge>
+                              <span className="font-semibold text-foreground">{group.domain}</span>
+                              <Badge variant="secondary" className="text-xs">
+                                {group.count} backlinks
+                              </Badge>
                               <span className="text-xs text-muted-foreground">Max DR: {group.maxDomainRating}</span>
                               {group.hasToxic && (
                                 <Badge variant="destructive" className="text-xs">
@@ -1286,8 +1630,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                                 </Badge>
                               )}
                               {group.count > 1 && (
-                                <span className="text-xs text-muted-foreground">
-                                  {isExpanded ? "▼" : "▶"}
+                                <span className="text-muted-foreground">
+                                  {isExpanded ? (
+                                    <ChevronDown className="h-4 w-4" />
+                                  ) : (
+                                    <ChevronRight className="h-4 w-4" />
+                                  )}
                                 </span>
                               )}
                             </div>
@@ -1309,9 +1657,17 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                             {group.backlinks.map((b) => (
                               <div key={b.id} className="flex items-center justify-between p-3 pl-8">
                                 <div className="flex-1">
-                                  <p className="text-sm text-muted-foreground truncate max-w-md">{b.sourceUrl}</p>
+                                  <a
+                                    href={b.sourceUrl}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="text-sm font-medium text-foreground underline underline-offset-4 decoration-muted-foreground/30 hover:decoration-muted-foreground block truncate"
+                                    title={b.sourceUrl}
+                                  >
+                                    {b.sourceUrl}
+                                  </a>
                                   <div className="flex items-center gap-3 text-xs text-muted-foreground mt-1">
-                                    <span>DR: {b.domainRating}</span>
+                                    <span>DR {b.domainRating}</span>
                                     <span>{b.linkType}</span>
                                     <span>{new Date(b.lastSeen).toLocaleDateString()}</span>
                                   </div>
@@ -1379,7 +1735,12 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   {stats ? Math.floor(stats.toxic * 0.6) : 0}
                 </div>
                 <p className="text-sm text-muted-foreground mt-1">High-risk links</p>
-                <Button className="mt-4 w-full" size="sm">
+                <Button
+                  className="mt-4 w-full"
+                  size="sm"
+                  onClick={handleGenerateDisavow}
+                  disabled={toxicBacklinks.length === 0 && disavowDomains.size === 0}
+                >
                   <Download className="h-4 w-4 mr-2" />
                   Generate Disavow
                 </Button>
@@ -1422,7 +1783,7 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="category" />
                   <YAxis />
-                  <Tooltip />
+                  <Tooltip {...chartTooltipProps} />
                   <Bar dataKey="count" fill="#8884d8">
                     {[
                       {
@@ -1457,50 +1818,81 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
           {/* Toxic Links List */}
           <Card>
             <CardHeader>
-              <CardTitle>High-Risk Backlinks</CardTitle>
-              <CardDescription>Links that may negatively impact your SEO</CardDescription>
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <CardTitle>High-Risk Backlinks</CardTitle>
+                  <CardDescription>Links that may negatively impact your SEO</CardDescription>
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="whitespace-nowrap"
+                  onClick={() => setShowSafeToxic((v) => !v)}
+                >
+                  {showSafeToxic ? "Hide marked safe" : "Show marked safe"}
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {backlinks
-                  .filter((b) => b.isToxic)
+                {[...toxicBacklinks, ...(showSafeToxic ? safeToxicBacklinks : [])]
                   .slice(0, 10)
                   .map((backlink) => (
                     <div
                       key={backlink.id}
-                      className="p-4 border border-red-200 rounded-lg bg-red-50"
+                      className={`p-4 rounded-lg border border-destructive/20 bg-destructive/10 ${
+                        safeDomains.has(normalizedDomain(backlink.sourceDomain)) ? "opacity-70" : ""
+                      }`}
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="font-medium text-red-900">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-2 flex-wrap">
+                            <span className="font-medium text-foreground break-words">
                               {backlink.sourceDomain}
                             </span>
                             <Badge variant="destructive">
                               Score: {Math.round(backlink.toxicScore)}
                             </Badge>
                           </div>
-                          <p className="text-sm text-red-800 mb-1">
+                          <p className="text-sm text-muted-foreground mb-1 break-words">
                             Anchor: "{backlink.anchorText}"
                           </p>
-                          <div className="flex gap-4 text-xs text-red-700">
+                          <div className="flex gap-4 text-xs text-muted-foreground flex-wrap">
                             <span>DR: {backlink.domainRating}</span>
                             <span>{backlink.linkType}</span>
                             <span>{backlink.linkStrength}</span>
                           </div>
                         </div>
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="text-xs">
-                            Mark Safe
+                        <div className="flex gap-2 flex-wrap sm:flex-nowrap sm:justify-end">
+                          <Button
+                            variant={safeDomains.has(normalizedDomain(backlink.sourceDomain)) ? "secondary" : "outline"}
+                            size="sm"
+                            className="text-xs"
+                            onClick={() => toggleSafeDomain(backlink.sourceDomain)}
+                          >
+                            {safeDomains.has(normalizedDomain(backlink.sourceDomain))
+                              ? "Unmark Safe"
+                              : "Mark Safe"}
                           </Button>
-                          <Button variant="destructive" size="sm" className="text-xs">
-                            Disavow
+                          <Button
+                            variant={
+                              disavowDomains.has(normalizedDomain(backlink.sourceDomain))
+                                ? "secondary"
+                                : "destructive"
+                            }
+                            size="sm"
+                            className="text-xs"
+                            onClick={() => toggleDisavowDomain(backlink.sourceDomain)}
+                          >
+                            {disavowDomains.has(normalizedDomain(backlink.sourceDomain))
+                              ? "Disavowed"
+                              : "Disavow"}
                           </Button>
                         </div>
                       </div>
                     </div>
                   ))}
-                {backlinks.filter((b) => b.isToxic).length === 0 && (
+                {toxicBacklinks.length === 0 && (
                   <div className="text-center py-8 text-muted-foreground">
                     <Shield className="h-12 w-12 mx-auto mb-4 text-green-500" />
                     <p className="text-green-600 font-medium">No toxic links detected!</p>
@@ -1520,34 +1912,34 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
               <div className="space-y-3">
                 {stats && stats.toxic > 0 && (
                   <>
-                    <div className="flex items-start gap-3 p-4 bg-red-50 rounded-lg">
-                      <div className="text-red-600">🚨</div>
+                    <div className="flex items-start gap-3 p-4 rounded-lg border border-destructive/20 bg-destructive/10">
+                      <div className="text-destructive">🚨</div>
                       <div>
-                        <p className="font-medium text-red-900">
+                        <p className="font-medium text-foreground">
                           Review toxic backlinks immediately
                         </p>
-                        <p className="text-sm text-red-700">
+                        <p className="text-sm text-muted-foreground">
                           {stats.toxic} potentially harmful links detected. Review and disavow
                           high-risk links.
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3 p-4 bg-orange-50 rounded-lg">
-                      <div className="text-orange-600">⚡</div>
+                    <div className="flex items-start gap-3 p-4 rounded-lg border border-amber-500/20 bg-amber-500/10">
+                      <div className="text-amber-400">⚡</div>
                       <div>
-                        <p className="font-medium text-orange-900">Generate disavow file</p>
-                        <p className="text-sm text-orange-700">
+                        <p className="font-medium text-foreground">Generate disavow file</p>
+                        <p className="text-sm text-muted-foreground">
                           Create a disavow file for Google Search Console to protect your rankings.
                         </p>
                       </div>
                     </div>
                   </>
                 )}
-                <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-                  <div className="text-blue-600">ℹ️</div>
+                <div className="flex items-start gap-3 p-4 rounded-lg border border-sky-500/20 bg-sky-500/10">
+                  <div className="text-sky-400">ℹ️</div>
                   <div>
-                    <p className="font-medium text-blue-900">Monitor regularly</p>
-                    <p className="text-sm text-blue-700">
+                    <p className="font-medium text-foreground">Monitor regularly</p>
+                    <p className="text-sm text-muted-foreground">
                       Check for new toxic backlinks weekly to maintain a healthy link profile.
                     </p>
                   </div>
@@ -1560,28 +1952,42 @@ export default function BacklinkDashboard({ projectId }: BacklinkDashboardProps)
         <TabsContent value="prospects">
           <Card>
             <CardHeader>
-              <CardTitle>Link Building Prospects</CardTitle>
-              <CardDescription>Manage outreach opportunities for link building</CardDescription>
+              <CardTitle>Link Prospects</CardTitle>
+              <CardDescription>Discover outreach targets and manage campaigns</CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-3">
-                  <Button className="whitespace-nowrap">
+              <div className="rounded-lg border bg-muted/30 p-6">
+                <div className="flex items-start gap-3">
+                  <Lock className="h-5 w-5 text-amber-400 mt-0.5" />
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <p className="font-semibold">Link Prospects is a Pro feature</p>
+                      <Badge variant="secondary" className="text-xs">
+                        Pro
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Upgrade to discover outreach targets, build prospect lists, and manage outreach
+                      campaigns.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Button className="whitespace-nowrap" disabled>
                     <Target className="h-4 w-4 mr-2" />
                     Find New Prospects
                   </Button>
-                  <Button variant="outline" className="whitespace-nowrap">
+                  <Button variant="outline" className="whitespace-nowrap" disabled>
                     <Mail className="h-4 w-4 mr-2" />
                     Start Outreach Campaign
                   </Button>
-                </div>
-
-                <div className="text-center py-8 text-muted-foreground">
-                  <Target className="h-12 w-12 mx-auto mb-4" />
-                  <p>Link building prospects will be displayed here</p>
-                  <p className="text-sm">
-                    This feature helps identify and manage outreach opportunities
-                  </p>
+                  <Button
+                    className="whitespace-nowrap"
+                    onClick={() => window.open("/pricing", "_blank")}
+                  >
+                    View Pro Plans
+                  </Button>
                 </div>
               </div>
             </CardContent>

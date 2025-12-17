@@ -4,6 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 import {
   getLocaleFromHeaders,
   getServerTranslations,
@@ -11,6 +12,7 @@ import {
   formatCurrency,
 } from "@/lib/i18n-server";
 import { safeGetWithLocale, safeSetWithLocale } from "@/lib/redis";
+import { createUserNotification } from "@/lib/server/notifications";
 
 /**
  * POST /api/keywords/research-locale
@@ -24,11 +26,27 @@ export async function POST(request: NextRequest) {
 
     console.log(`[Keywords API] Research for "${seedKeyword}" in ${country} (locale: ${locale})`);
 
+    const session = await auth();
+    const userId = session?.user?.id;
+
     // 1. Check cache with locale
     const cacheKey = `keywords:${seedKeyword}:${country}`;
     const cached = await safeGetWithLocale(cacheKey, locale);
 
     if (cached) {
+      await createUserNotification({
+        userId,
+        type: "REPORT_READY",
+        title: "Keyword research ready",
+        message: `Keyword research for "${seedKeyword}" is ready (cached).`,
+        data: {
+          seedKeyword,
+          country,
+          cached: true,
+          href: "/dashboard/keywords",
+        },
+      });
+
       return NextResponse.json({
         cached: true,
         locale,
@@ -73,6 +91,19 @@ export async function POST(request: NextRequest) {
 
     // 5. Cache result with locale
     await safeSetWithLocale(cacheKey, locale, JSON.stringify(result), 3600); // 1 hour
+
+    await createUserNotification({
+      userId,
+      type: "REPORT_READY",
+      title: "Keyword research ready",
+      message: `Generated ${result.totalKeywords} keyword ideas for "${seedKeyword}".`,
+      data: {
+        seedKeyword,
+        country,
+        totalKeywords: result.totalKeywords,
+        href: "/dashboard/keywords",
+      },
+    });
 
     return NextResponse.json(result);
   } catch (error: any) {

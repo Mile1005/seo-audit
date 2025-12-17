@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth";
+import { auth } from "@/auth";
 import { discoverBacklinks } from "@/lib/backlinks/discovery";
 import { enrichWithMetrics } from "@/lib/backlinks/enrichment";
 import { calculateAvgDR } from "@/lib/backlinks/utils";
+import { createUserNotification } from "@/lib/server/notifications";
 
 /**
  * POST /api/backlinks/collect
@@ -23,7 +25,10 @@ export async function POST(request: NextRequest) {
   try {
     console.log("[API] Starting backlink collection...");
 
-    await requireUser(request);
+    const session = await auth();
+    const sessionUserId = session?.user?.id;
+    const headerUser = await requireUser(request);
+    const notifyUserId = sessionUserId || headerUser?.id || null;
 
     const body = await request.json();
     const { projectId } = body;
@@ -102,6 +107,20 @@ export async function POST(request: NextRequest) {
 
       console.log(`[API] Returning cached data (${cacheAgeDays} days old)`);
 
+      await createUserNotification({
+        userId: notifyUserId,
+        type: "NEW_BACKLINK",
+        title: "Backlink check completed",
+        message: `Found ${cachedCheck.totalBacklinks} backlinks from ${cachedCheck.uniqueDomains} domains for ${domain}.`,
+        data: {
+          projectId,
+          backlinkCheckId: cachedCheck.id,
+          domain,
+          cached: true,
+          href: `/dashboard/backlinks?projectId=${encodeURIComponent(projectId)}`,
+        },
+      });
+
       return NextResponse.json({
         success: true,
         cached: true,
@@ -125,7 +144,7 @@ export async function POST(request: NextRequest) {
 
     if (rawBacklinks.length === 0) {
       // Still create a check record so we don't hammer APIs on retry
-      await prisma.backlinkCheck.create({
+      const emptyCheck = await prisma.backlinkCheck.create({
         data: {
           projectId,
           totalBacklinks: 0,
@@ -134,6 +153,19 @@ export async function POST(request: NextRequest) {
           status: "COMPLETED",
           message: "No backlinks found",
           completedAt: new Date(),
+        },
+      });
+
+      await createUserNotification({
+        userId: notifyUserId,
+        type: "NEW_BACKLINK",
+        title: "Backlink check completed",
+        message: `No backlinks found for ${domain}.`,
+        data: {
+          projectId,
+          backlinkCheckId: emptyCheck.id,
+          domain,
+          href: `/dashboard/backlinks?projectId=${encodeURIComponent(projectId)}`,
         },
       });
 
@@ -209,6 +241,19 @@ export async function POST(request: NextRequest) {
     });
 
     console.log(`[API] Successfully saved ${backlinkCheck.backlinks.length} backlinks`);
+
+    await createUserNotification({
+      userId: notifyUserId,
+      type: "NEW_BACKLINK",
+      title: "Backlink check completed",
+      message: `Found ${backlinkCheck.totalBacklinks} backlinks from ${backlinkCheck.uniqueDomains} domains for ${domain}.`,
+      data: {
+        projectId,
+        backlinkCheckId: backlinkCheck.id,
+        domain,
+        href: `/dashboard/backlinks?projectId=${encodeURIComponent(projectId)}`,
+      },
+    });
 
     // 8. Return success response
     return NextResponse.json({

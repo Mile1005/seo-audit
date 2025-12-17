@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { BellIcon } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
@@ -31,11 +32,49 @@ interface Notification {
 
 export function NotificationDropdown() {
   const t = useTranslations();
+  const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const getLocalePrefix = (path: string) => {
+    // next-intl localePrefix: "as-needed". Non-default locales will be prefixed.
+    // e.g. "/de/dashboard" -> "/de". Default locale -> "".
+    const match = path.match(/^\/([a-z]{2}(?:-[A-Z]{2})?)(\/|$)/);
+    return match ? `/${match[1]}` : "";
+  };
+
+  const withLocale = (href: string) => {
+    const prefix = getLocalePrefix(pathname || "");
+    if (!prefix) return href;
+    if (href.startsWith(prefix + "/")) return href;
+    if (href.startsWith("/")) return `${prefix}${href}`;
+    return `${prefix}/${href}`;
+  };
+
+  const getNotificationHref = (n: Notification): string => {
+    const rawHref = typeof n.data?.href === "string" ? n.data.href : "";
+    if (rawHref) return withLocale(rawHref);
+
+    // Fallbacks for older notifications without a stored href
+    switch (n.type) {
+      case "AUDIT_COMPLETED":
+      case "AUDIT_FAILED":
+      case "CRITICAL_ISSUE":
+        return withLocale("/dashboard/audit");
+      case "NEW_BACKLINK":
+      case "LOST_BACKLINK":
+        return withLocale("/dashboard/backlinks");
+      case "KEYWORD_RANK_CHANGE":
+      case "REPORT_READY":
+        return withLocale("/dashboard/keywords");
+      default:
+        return withLocale("/dashboard");
+    }
+  };
 
   const looksLikeKey = (value: string) => {
     if (!value) return false;
@@ -71,8 +110,9 @@ export function NotificationDropdown() {
 
   // Fetch notifications when dropdown opens
   useEffect(() => {
-    if (isOpen && notifications.length === 0) {
+    if (isOpen) {
       fetchNotifications();
+      fetchUnreadCount();
     }
   }, [isOpen]);
 
@@ -124,6 +164,18 @@ export function NotificationDropdown() {
       }
     } catch (error) {
       console.error("Failed to mark as read:", error);
+    }
+  };
+
+  const handleNotificationClick = async (notification: Notification) => {
+    const href = getNotificationHref(notification);
+    try {
+      if (!notification.read) {
+        await markAsRead(notification.id);
+      }
+    } finally {
+      setIsOpen(false);
+      router.push(href);
     }
   };
 
@@ -227,7 +279,7 @@ export function NotificationDropdown() {
                       "p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer",
                       !notification.read && "bg-blue-50/50 dark:bg-blue-900/10"
                     )}
-                    onClick={() => !notification.read && markAsRead(notification.id)}
+                    onClick={() => handleNotificationClick(notification)}
                   >
                     <div className="flex items-start space-x-3">
                       <span className="text-2xl">{getNotificationIcon(notification.type)}</span>
@@ -264,7 +316,7 @@ export function NotificationDropdown() {
               <button
                 onClick={() => {
                   setIsOpen(false);
-                  // Navigate to notifications page if you create one
+                  router.push(withLocale("/dashboard/notifications"));
                 }}
                 className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
               >

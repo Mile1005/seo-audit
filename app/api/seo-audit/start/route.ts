@@ -12,6 +12,7 @@ import {
 import crypto from "crypto";
 import { getLocaleFromHeaders, translateError } from "@/lib/i18n-server";
 import { prisma } from "../../../../lib/prisma";
+import { createUserNotification } from "@/lib/server/notifications";
 
 export async function POST(request: NextRequest) {
   try {
@@ -242,10 +243,48 @@ export async function POST(request: NextRequest) {
         if (userId) {
           incrementUsage(userId, "AUDIT").catch(() => {});
         }
+
+        try {
+          const hostname = new URL(normalizedUrl).hostname;
+          await createUserNotification({
+            userId,
+            type: "AUDIT_COMPLETED",
+            title: "Audit completed",
+            message: `Your audit for ${hostname} is ready (score ${unified.score}).`,
+            data: {
+              auditId,
+              url: normalizedUrl,
+              score: unified.score,
+              href: `/dashboard/audit?domain=${encodeURIComponent(hostname)}`,
+            },
+          });
+        } catch {}
+
         console.log("(Async) Audit completed", { auditId, score: unified.score });
       } catch (err: any) {
         console.error("(Async) Audit failed", auditId, err);
         setAuditFailed(auditId, err?.message || "Unknown error");
+
+        try {
+          const hostname = (() => {
+            try {
+              return new URL(normalizedUrl).hostname;
+            } catch {
+              return normalizedUrl;
+            }
+          })();
+          await createUserNotification({
+            userId,
+            type: "AUDIT_FAILED",
+            title: "Audit failed",
+            message: `Your audit for ${hostname} failed: ${err?.message || "Unknown error"}`,
+            data: {
+              auditId,
+              url: normalizedUrl,
+              href: `/dashboard/audit?domain=${encodeURIComponent(hostname)}`,
+            },
+          });
+        } catch {}
         try {
           const auditRunModel = (prisma as any)["auditRun"];
           if (auditRunModel) {

@@ -17,13 +17,10 @@ import {
   UserCircleIcon,
   Bars3Icon,
   XMarkIcon,
-  SunIcon,
-  MoonIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils";
 import { NotificationDropdown } from "@/components/notifications/NotificationDropdown";
-import { useTheme } from "@/components/ui/theme-provider";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -34,7 +31,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
-  const { mode, setMode } = useTheme();
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   // Translations
@@ -212,18 +208,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
             {/* Right side */}
             <div className="flex items-center space-x-4">
-              {/* Dark mode toggle */}
-              <button
-                onClick={() => setMode(mode === "light" ? "dark" : "light")}
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                {mode === "dark" ? (
-                  <SunIcon className="w-5 h-5" />
-                ) : (
-                  <MoonIcon className="w-5 h-5" />
-                )}
-              </button>
-
               {/* Notifications */}
               <NotificationDropdown />
 

@@ -16,13 +16,10 @@ import {
   UserCircleIcon,
   Bars3Icon,
   XMarkIcon,
-  SunIcon,
-  MoonIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils";
 import { NotificationDropdown } from "@/components/notifications/NotificationDropdown";
-import { useTheme } from "@/components/ui/theme-provider";
 import { LanguageSwitcher } from "@/components/layout/language-switcher";
 
 interface DashboardLayoutProps {
@@ -45,7 +42,6 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
-  const { mode, setMode } = useTheme();
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   // Close user menu when clicking outside
@@ -179,18 +175,6 @@ export default function LocaleDashboardLayout({ children }: DashboardLayoutProps
             <div className="ml-4 flex items-center space-x-4">
               {/* Language Switcher */}
               <LanguageSwitcher />
-
-              {/* Theme toggle */}
-              <button
-                onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-                className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                {mode === "dark" ? (
-                  <SunIcon className="w-5 h-5" />
-                ) : (
-                  <MoonIcon className="w-5 h-5" />
-                )}
-              </button>
 
               {/* Notifications */}
               <NotificationDropdown />
